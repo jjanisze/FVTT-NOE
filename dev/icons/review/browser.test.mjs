@@ -8,6 +8,7 @@ import { buildCatalog, saveStyleFeedback, mergeStyleQueue } from "./catalog.mjs"
 import { createReviewServer } from "./server.mjs";
 import { isGeneratedPlaceholder } from "./placeholders.mjs";
 import { replaceQueueParagraph } from "./queue-paragraph.mjs";
+import { listenOnSafePort } from "../../agent/lib/ports.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRATCH = path.resolve(HERE, "audits");
@@ -124,7 +125,7 @@ test("invalid paths/reasons/empty flags and damaged queue markers do not discard
 
 test("HTTP routes save style flags independently and reject cross-origin or non-JSON writes", async t => {
   const f = fixture(t), server = createReviewServer({ moduleRoot: f.root, reviewRoot: f.review });
-  await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+  await listenOnSafePort(server, "127.0.0.1");
   t.after(() => { server.closeAllConnections(); server.close(); });
   const base = `http://127.0.0.1:${server.address().port}`;
   const catalog = await (await fetch(base + "/api/catalog")).json();

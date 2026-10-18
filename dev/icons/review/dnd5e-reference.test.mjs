@@ -6,6 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { REFERENCE_GROUPS, buildReferenceCatalog } from "./dnd5e-reference.mjs";
 import { createReviewServer } from "./server.mjs";
+import { listenOnSafePort } from "../../agent/lib/ports.mjs";
 
 function fixture(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "noe-style-reference-"));
@@ -46,7 +47,7 @@ test("server exposes allowlisted images from both installations and preserves re
   write(coreImage, "core image fixture");
   const feedback = fs.readFileSync(path.join(reviewRoot, "feedback.json"), "utf8");
   const server = createReviewServer({ moduleRoot, reviewRoot, dnd5eRoots: roots });
-  await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+  await listenOnSafePort(server, "127.0.0.1");
   t.after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); });
   const origin = `http://127.0.0.1:${server.address().port}`;
   const catalog = await (await fetch(`${origin}/api/dnd5e-reference`)).json();

@@ -14,27 +14,16 @@
  */
 
 import fs from "node:fs";
-import net from "node:net";
 import path from "node:path";
 import { MODULE_ID } from "./config.mjs";
 import { CliError, note } from "./output.mjs";
+import { freePort } from "./ports.mjs";
 import { readZip } from "../../release/zip.mjs";
 import { installSystem, packageVersion } from "./systems.mjs";
 
 /** Never junctioned into the sandbox copy of this module. */
 const MODULE_SKIP = new Set([".git", ".github", ".vscode", "node_modules", "dev", "dist", "logs", "packs"]);
 const DEFAULT_MODULES = ["quench", "sequencer", "splatter", "dice-so-nice", "quickscale", "JB2A_DnD5e"];
-
-export function freePort() {
-  return new Promise((resolve, reject) => {
-    const srv = net.createServer();
-    srv.once("error", reject);
-    srv.listen(0, () => {
-      const { port } = srv.address();
-      srv.close(() => resolve(port));
-    });
-  });
-}
 
 function isLink(p) {
   try {

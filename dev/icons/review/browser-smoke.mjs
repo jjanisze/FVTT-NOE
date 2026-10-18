@@ -4,6 +4,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { cdpUrl, loadConfig } from "../../agent/lib/config.mjs";
+import { listenOnSafePort } from "../../agent/lib/ports.mjs";
 import { createReviewServer } from "./server.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -23,7 +24,7 @@ fs.writeFileSync(path.join(review, "feedback.json"), approved);
 fs.writeFileSync(path.join(review, "manifest.json"), JSON.stringify({ items: [] }));
 fs.writeFileSync(path.join(fixture, "dev/icons/MISSING.md"), "# Queue\n\nManual request.\n\n## How an item gets added here\n\nPreserved notes.\n");
 const server = createReviewServer({ moduleRoot: fixture, reviewRoot: review });
-await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+await listenOnSafePort(server, "127.0.0.1");
 const fixtureOrigin = `http://127.0.0.1:${server.address().port}`;
 let target, fixtureSocket, realSocket;
 
