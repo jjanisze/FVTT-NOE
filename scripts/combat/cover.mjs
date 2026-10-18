@@ -364,8 +364,9 @@ function registerAttackCoverIntegration() {
 
   if (!BaseAttackActivity.prototype.getDamageConfig?.[DAMAGE_CONFIG_PATCH_FLAG]) {
     const originalGetDamageConfig = BaseAttackActivity.prototype.getDamageConfig;
-    BaseAttackActivity.prototype.getDamageConfig = function(config = {}) {
-      const rollConfig = originalGetDamageConfig.call(this, config);
+    // `...rest`: dnd5e 6.0 passes `{ formulaOptions, rollData }` (damage labels: modifiers off, given roll data).
+    BaseAttackActivity.prototype.getDamageConfig = function(config = {}, ...rest) {
+      const rollConfig = originalGetDamageConfig.call(this, config, ...rest);
       const decision = getLastAttackCoverDecision(this.item, this.id);
       if (!decision?.applyDamageReduction) return rollConfig;
 

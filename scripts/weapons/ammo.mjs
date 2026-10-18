@@ -175,7 +175,9 @@ function _patchSingleShotDamage() {
   Base.prototype[SINGLE_SHOT_PATCH] = true;
 
   const originalPart = Base.prototype._processDamagePart;
-  Base.prototype._processDamagePart = function (damage, rollConfig, rollData, index = 0) {
+  // `...rest`: dnd5e 6.0 added `{ formulaOptions, rules }` (scaling options, AppliedRules damage bonuses) —
+  // the native path must get them, or every non-caliber attack silently loses its rule bonuses.
+  Base.prototype._processDamagePart = function (damage, rollConfig, rollData, index = 0, ...rest) {
     try {
       if (damage?.base) {
         const item = _getLiveItem(this.item);
@@ -187,7 +189,7 @@ function _patchSingleShotDamage() {
     } catch (err) {
       console.error(`${MODULE_ID} | Obrażenia strzału pojedynczego — wracam do natywnych`, err);
     }
-    return originalPart.call(this, damage, rollConfig, rollData, index);
+    return originalPart.call(this, damage, rollConfig, rollData, index, ...rest);
   };
 
   // Przycisk „Obrażenia” na karcie użycia: kaliber z karty (`magazine.mjs` stempluje `shotCaliber`
