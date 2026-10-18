@@ -215,6 +215,17 @@ export function registerConfigTests(quench) {
         for (const r of rows) expect(r.current, `${r.key}: ${r.why}`).to.equal(r.required);
       });
 
+      // NOE, Eksploracja, „Spadanie”: 1k6 za każde 1,5 m, bez górnej granicy (5e 2024: 1k6 za 3 m, najwyżej 20k6).
+      it("upadek liczony po NOE: 1k6 za każde 1,5 m, bez limitu (E9)", function () {
+        const formula = dnd5e.rules.getFallDamageFormula;
+        expect(game.settings.get("dnd5e", "disableFalling")).to.equal(false);
+        expect(formula(1, "m"), "poniżej 1,5 m").to.equal(null);
+        expect(formula(1.5, "m")).to.equal("1d6");
+        expect(formula(4.5, "m")).to.equal("3d6");
+        expect(formula(60, "m"), "bez limitu 20k6").to.equal("40d6");
+        expect(CONFIG.DND5E.falling.damageType).to.equal("bludgeoning");
+      });
+
       it("koncentracja wyłączona, Wyczerpanie włączone, 0 PW bez automatu (D9, §5)", function () {
         expect(game.settings.get("dnd5e", "disableConcentration")).to.equal(true);
         expect(game.settings.get("dnd5e", "disableExhaustion")).to.equal(false);

@@ -25,6 +25,8 @@ export const ENFORCED_DND5E_SETTINGS = Object.freeze({
   disableExhaustion: { value: false, why: "Wyczerpanie NOE stoi na mechanice wyczerpania dnd5e", reload: true },
   disableConcentration: { value: true, why: "w NOE nie ma koncentracji" },
   autoApplyDowned: { value: "none", why: "0 PW rozstrzyga karta MG „Śmierć” / „BN pada”, nie automat" },
+  disableFalling: { value: false, why: "upadek NOE (s. 43: 1k6 za 1,5 m, Powalenie) liczy dnd5e — karta obrażeń dla MG (`spadanie.mjs`)" },
+  initiativeGroupRoll: { value: true, why: "s. 25: grupa identycznych przeciwników ma jeden rzut na Inicjatywę" },
   senseVisionSync: { value: false, why: "tryby wzroku żetonów (noktowizor, termowizor, kamera drona) ustawia moduł" },
   tokenSizeSync: { value: false, why: "rozmiar i skalę żetonów (Bestiariusz, drony) kalibruje moduł", reload: true },
   metricWeightUnits: { value: true, why: "NOE liczy w kilogramach (Udźwig)" },

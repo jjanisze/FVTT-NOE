@@ -344,16 +344,17 @@ i test warstwy 1 dla tabeli. Plik przejmuje dzisiejsze wymuszenia z §3.14 (jedn
 |---|---|---|---|
 | `disableExhaustion` | `false` | nasze Wyczerpanie stoi na regułach dnd5e | **Wymuś `false`** |
 | `autoApplyDowned` | `none` | 0 PW rozstrzyga nasza karta | **Wymuś `none`** |
-| `disableFalling` | `false` | E9: konfiguracja NOE albo wyłączenie | **Wymuś** wg wyniku E9 |
-| `initiativeGroupCombatants`, `initiativeGroupRoll` | `true` | M3: tura towarzysza po właścicielu | E9: zostaw, jeśli nie psuje M3; inaczej **Wymuś `false`** |
+| `disableFalling` | `false` | Spadanie (s. 43): 1k6 za 1,5 m, Powalenie | **Wymuś `false`** (E9): mechanizm dnd5e z liczbami NOE (`spadanie.mjs`: 5 ft na kość, bez limitu) — karta obrażeń dla MG, Powalenie przy obrażeniach |
+| `initiativeGroupRoll` | `true` | s. 25: grupa identycznych przeciwników — jeden rzut na Inicjatywę | **Wymuś `true`** (E9: dokładnie RAW) |
+| `initiativeGroupCombatants` | `true` | grupowanie tej samej Inicjatywy w trackerze (wygląd) | domyślne; e2e `towarzysz*` zielone (M3 bez zmian) |
 | `tokenSizeSync` | `true` | kalibracja żetonów | **Wymuś `false`** (E3: dron 2×2, skale żetonów — A15) |
 | `senseVisionSync` | `true` | nasze tryby wzroku | **Wymuś `false`** (E3: kamera drona — A16) |
 | `disableConcentration` | `false` | NOE nie ma koncentracji (D9) | **Wymuś `true`** |
 | `rulesVersion` | — | „modern” (Wyczerpanie) | **Wymuś `modern`** (dziś tylko ostrzeżenie, `main.mjs:679`) |
 | `metricWeightUnits`, `metricLengthUnits`, `metricVolumeUnits` | `false` | NOE jest metryczny | **Wymuś `true`** (już dziś, `encumbrance-config.mjs`) |
 | `packSourceConfiguration` | — | paczki fantasy ukryte | jak dziś (`srd-cleanup.mjs`) + decyzja o `dnd5e.effects` w E8 |
-| `defaultDocumentSubtypes` | — | nasze tworzenie przedmiotów i aktorów | E9: sprawdzić, czy nie zmienia domyślnego typu w naszych oknach |
-| `encounterPlacementBehavior` | — | `TokenPlacement` przy towarzyszach i dronach | E9: sprawdzić |
+| `defaultDocumentSubtypes` | — | nasze tworzenie przedmiotów i aktorów | domyślne (E9: ustawienie klienta, pamięta tylko ostatni wybór w oknie tworzenia rdzenia) |
+| `encounterPlacementBehavior` | `none` | `TokenPlacement` przy towarzyszach i dronach | domyślne (E9: dotyczy tylko aktorów spotkań dnd5e; nasze rozmieszczenie to `TokenPlacement` wprost) |
 | `bastionTurns`, `pietyScore` | — | brak w NOE | domyślne |
 | `bloodied` | — | brak w NOE | zostaje (próg 0) |
 | `allowPlayerDamageTray`, `allowPlayerEffectsTray` | `false` | tacki tylko dla MG (D7) | domyślne, nie wymuszamy; PM12 |

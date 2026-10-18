@@ -1372,6 +1372,14 @@
           "DeadOnly": "Dla BN (tylko śmierć)",
           "NPCs": "Dla BN (śmierć i Nieprzytomność)",
           "All": "Zawsze"
+        },
+        "InitiativeGroupRoll": {
+          "Name": "Jeden rzut na istotę",
+          "Hint": "Identyczne istoty mają wspólny rzut na Inicjatywę."
+        },
+        "InitiativeGroupCombatants": {
+          "Name": "Grupuj walczących",
+          "Hint": "Walczący z tą samą Inicjatywą tworzą w trackerze jedną grupę."
         }
       },
       "AUTOMATION": {
@@ -1382,6 +1390,10 @@
         "Autosize": {
           "Name": "Rozmiar żetonu z kategorii rozmiaru",
           "Hint": "Wymiary i skala żetonu ustawiane automatycznie z kategorii rozmiaru istoty."
+        },
+        "Falling": {
+          "Name": "Wyłącz automatykę upadku",
+          "Hint": "Nie śledź stanu Spadanie żetonów."
         }
       },
       "METRIC": {
