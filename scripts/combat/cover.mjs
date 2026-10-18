@@ -660,8 +660,9 @@ function _buildDialogContent({ attackerName, targetName, attackLabel, allowThrou
     .map(option => `<option value="${option.key}">${option.label}</option>`)
     .join("");
 
+  // A <div>, not a <form>: DialogV2 wraps the content in its own form (`this.form` below finds that one).
   return `
-    <form class="neuro-cover-dialog">
+    <div class="neuro-cover-dialog">
       <p><strong>${_escapeHtml(attackerName)}</strong> atakuje <strong>${_escapeHtml(targetName)}</strong> ${_escapeHtml(attackLabel)}.</p>
       <p>Ile osłony ma ${_escapeHtml(targetName)} względem tego konkretnego ataku?</p>
       <div class="form-group">
@@ -678,36 +679,22 @@ function _buildDialogContent({ attackerName, targetName, attackLabel, allowThrou
           </select>
         </div>
       ` : ""}
-    </form>
+    </div>
   `;
 }
 
+/** Okno osłony (DialogV2; core v14 wycofuje V1 `Dialog`). Zamknięcie i „Anuluj” → `null`. */
 async function _showCoverDialog({ title, content }) {
-  return new Promise(resolve => {
-    let settled = false;
-    const finish = value => {
-      if (settled) return;
-      settled = true;
-      resolve(value);
-    };
-
-    new Dialog({
-      title,
-      content,
-      buttons: {
-        confirm: {
-          label: "Zatwierdź",
-          callback: html => finish(_readDialogSelection(html?.[0] ?? html))
-        },
-        cancel: {
-          label: "Anuluj",
-          callback: () => finish(null)
-        }
-      },
-      default: "confirm",
-      close: () => finish(null)
-    }).render(true);
-  });
+  const wynik = await foundry.applications.api.DialogV2.wait({
+    window: { title },
+    content,
+    buttons: [
+      { action: "confirm", label: "Zatwierdź", default: true, callback: (_event, button) => _readDialogSelection(button.form) },
+      { action: "cancel", label: "Anuluj" }
+    ],
+    rejectClose: false
+  }).catch(() => null);
+  return (wynik && typeof wynik === "object") ? wynik : null;
 }
 
 function _readDialogSelection(root) {

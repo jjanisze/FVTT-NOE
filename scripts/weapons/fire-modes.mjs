@@ -429,11 +429,10 @@ function registerLongBurstActivityType() {
         create: true,
         data: {
           flavor: _getLongBurstLabel(this.item, selection),
-          flags: {
-            dnd5e: activity.messageFlags
-          },
+          // dnd5e 6.0's use(): targets on the card (5.3 carried them in the activity's message flags, a getter 6.0
+          // dropped); effects are set by `_finalizeMessageConfig`.
           system: {
-            effects: activity.applicableEffects?.map(effect => `.ActiveEffect.${effect.id}`)
+            targets: dnd5e.dataModels.chatMessage.fields.TargetsField.getDescriptors()
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -599,11 +598,10 @@ function registerSuppressiveFireActivityType() {
         create: true,
         data: {
           flavor: _getSuppressiveFireLabel(this.item, selection),
-          flags: {
-            dnd5e: activity.messageFlags
-          },
+          // dnd5e 6.0's use(): targets on the card (5.3 carried them in the activity's message flags, a getter 6.0
+          // dropped); effects are set by `_finalizeMessageConfig`.
           system: {
-            effects: activity.applicableEffects?.map(effect => `.ActiveEffect.${effect.id}`)
+            targets: dnd5e.dataModels.chatMessage.fields.TargetsField.getDescriptors()
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -792,11 +790,10 @@ function registerCrushingBurstActivityType() {
         create: true,
         data: {
           flavor: _getCrushingBurstLabel(this.item, selection),
-          flags: {
-            dnd5e: activity.messageFlags
-          },
+          // dnd5e 6.0's use(): targets on the card (5.3 carried them in the activity's message flags, a getter 6.0
+          // dropped); effects are set by `_finalizeMessageConfig`.
           system: {
-            effects: activity.applicableEffects?.map(effect => `.ActiveEffect.${effect.id}`)
+            targets: dnd5e.dataModels.chatMessage.fields.TargetsField.getDescriptors()
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -891,14 +888,17 @@ function registerSuppressiveFireHooks() {
   Hooks.on("dnd5e.createMeasuredTemplate", onCreateBurstTemplate);
   Hooks.on("dnd5e.createMeasuredTemplate", onCreateSuppressiveFireTemplate);
   Hooks.on("dnd5e.preUseActivity", onPreUseSuppressiveFireEffect);
+  // These fire on every client; one of them writes — the active GM (expiry deletes the regions and clears actor
+  // flags; a token entering a zone rolls its save). Otherwise each client deleted the same regions, players failed on
+  // actors and regions they do not own, and every connected client rolled the zone save.
   Hooks.on("updateCombat", combat => {
-    void onUpdateCombatSuppressiveFire(combat);
+    if (game.users.activeGM?.isSelf) void onUpdateCombatSuppressiveFire(combat);
   });
   Hooks.on("deleteCombat", combat => {
-    void onDeleteCombatSuppressiveFire(combat);
+    if (game.users.activeGM?.isSelf) void onDeleteCombatSuppressiveFire(combat);
   });
   Hooks.on("updateToken", (tokenDocument, changed) => {
-    void onUpdateTokenSuppressiveFire(tokenDocument, changed);
+    if (game.users.activeGM?.isSelf) void onUpdateTokenSuppressiveFire(tokenDocument, changed);
   });
 }
 
@@ -1816,28 +1816,35 @@ function _getSuppressiveFireTemplateData(selection) {
   };
 }
 
+/**
+ * Wybór z listy opcji w oknie (DialogV2; core v14 wycofuje V1 `Dialog`). Zamknięcie i „Anuluj” → `null`.
+ * @param {string} title
+ * @param {string} content
+ * @param {{action: string, label: string, value: object}[]} options
+ */
+async function _wybierzOpcje(title, content, options) {
+  const wynik = await foundry.applications.api.DialogV2.wait({
+    window: { title },
+    content,
+    buttons: [
+      ...options.map(({ action, label, value }) => ({ action, label, callback: () => value })),
+      { action: "cancel", label: "Anuluj" }
+    ],
+    rejectClose: false
+  }).catch(() => null);
+  return (wynik && typeof wynik === "object") ? wynik : null;
+}
+
 async function _promptLongBurstSelection(item) {
-  return new Promise(resolve => {
-    const buttons = Object.fromEntries(DS_THRESHOLDS.map(option => [
-      `burst-${option.bullets}`,
-      {
-        label: _getLongBurstOptionLabel(item, option),
-        callback: () => resolve(_getLongBurstSelectionOption(item, option))
-      }
-    ]));
-
-    buttons.cancel = {
-      label: "Anuluj",
-      callback: () => resolve(null)
-    };
-
-    new Dialog({
-      title: `${item.name} - Długa seria`,
-      content: `<p>Wybierz liczbę pocisków do długiej serii.</p>${_hasMobileHmgNest(item) ? "<p><strong>Ruchome gniazdo CKM:</strong> Chmura ołowiu podwaja zużycie amunicji i kości obrażeń DS.</p>" : ""}`,
-      buttons,
-      close: () => resolve(null)
-    }).render(true);
-  });
+  return _wybierzOpcje(
+    `${item.name} - Długa seria`,
+    `<p>Wybierz liczbę pocisków do długiej serii.</p>${_hasMobileHmgNest(item) ? "<p><strong>Ruchome gniazdo CKM:</strong> Chmura ołowiu podwaja zużycie amunicji i kości obrażeń DS.</p>" : ""}`,
+    DS_THRESHOLDS.map(option => ({
+      action: `burst-${option.bullets}`,
+      label: _getLongBurstOptionLabel(item, option),
+      value: _getLongBurstSelectionOption(item, option)
+    }))
+  );
 }
 
 function _getLongBurstOptionLabel(item, option) {
@@ -1862,51 +1869,19 @@ function _getLongBurstSelectionOption(item, option) {
 }
 
 async function _promptCrushingBurstSelection(item) {
-  return new Promise(resolve => {
-    const buttons = Object.fromEntries(MS_THRESHOLDS.map(option => [
-      `burst-${option.bullets}`,
-      {
-        label: `${option.bullets} naboi (${option.multiplier}x)`,
-        callback: () => resolve(option)
-      }
-    ]));
-
-    buttons.cancel = {
-      label: "Anuluj",
-      callback: () => resolve(null)
-    };
-
-    new Dialog({
-      title: `${item.name} - Miażdżąca seria`,
-      content: "<p>Wybierz liczbę pocisków do miażdżącej serii.</p>",
-      buttons,
-      close: () => resolve(null)
-    }).render(true);
-  });
+  return _wybierzOpcje(
+    `${item.name} - Miażdżąca seria`,
+    "<p>Wybierz liczbę pocisków do miażdżącej serii.</p>",
+    MS_THRESHOLDS.map(option => ({ action: `burst-${option.bullets}`, label: `${option.bullets} naboi (${option.multiplier}x)`, value: option }))
+  );
 }
 
 async function _promptSuppressiveFireSelection(item) {
-  return new Promise(resolve => {
-    const buttons = Object.fromEntries(OZ_SHAPES.map(selection => [
-      `shape-${selection.key}`,
-      {
-        label: selection.label,
-        callback: () => resolve(selection)
-      }
-    ]));
-
-    buttons.cancel = {
-      label: "Anuluj",
-      callback: () => resolve(null)
-    };
-
-    new Dialog({
-      title: `${item.name} - Ogień zaporowy`,
-      content: "<p>Wybierz kształt obszaru ognia zaporowego.</p>",
-      buttons,
-      close: () => resolve(null)
-    }).render(true);
-  });
+  return _wybierzOpcje(
+    `${item.name} - Ogień zaporowy`,
+    "<p>Wybierz kształt obszaru ognia zaporowego.</p>",
+    OZ_SHAPES.map(selection => ({ action: `shape-${selection.key}`, label: selection.label, value: selection }))
+  );
 }
 
 function _configureLongBurstActivity(activity, selection) {
@@ -2203,9 +2178,18 @@ function onPreUseSuppressiveFireEffect(activity) {
   return false;
 }
 
+/**
+ * Actors who can carry the Ogień zaporowy pin: world actors and the synthetic actors of unlinked tokens on the
+ * viewed scene — most NPCs on a map are the latter, and `game.actors` never lists them (their pin outlived the zone).
+ */
+function _pinnedActors() {
+  const unlinked = (canvas.scene?.tokens ?? []).filter(t => !t.actorLink && t.actor).map(t => t.actor);
+  return [...(game.actors ?? []), ...unlinked];
+}
+
 async function onUpdateCombatSuppressiveFire(combat) {
   if (!combat) return;
-  const actors = Array.from(game.actors ?? []).filter(actor => actor.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG));
+  const actors = _pinnedActors().filter(actor => actor.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG));
   for (const actor of actors) {
     const effect = actor.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG);
     if (!_isSuppressiveFireEffectActive(effect, combat)) await actor.unsetFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG);
@@ -2229,7 +2213,7 @@ async function onUpdateCombatSuppressiveFire(combat) {
 }
 
 async function onDeleteCombatSuppressiveFire(combat) {
-  const actors = Array.from(game.actors ?? []).filter(actor => actor.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG)?.combatId === combat?.id);
+  const actors = _pinnedActors().filter(actor => actor.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG)?.combatId === combat?.id);
   for (const actor of actors) await actor.unsetFlag(MODULE_ID, SUPPRESSIVE_FIRE_FLAG);
 
   if (!canvas.scene) return;

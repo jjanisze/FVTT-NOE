@@ -34,8 +34,8 @@ const SKIP_FILES = new Set(["dev/migration/dnd5e6-scan.mjs", "scripts/config/cha
 /** @type {{id: string, stage: string, what: string, test: RegExp, files?: RegExp}[]} */
 export const RULES = [
   // §3.3 — chat message flags the dnd5e 6 world migration deletes (→ message.system.*, getAssociated*()).
-  { id: "message-flags", stage: "E3", what: "flags.dnd5e.roll|use|messageType|item|activity|targets|originatingMessage on chat messages → scripts/config/chat-message-data.mjs (message.type, message.system.*)",
-    test: /flags\??\.dnd5e\??\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|getFlag\(\s*["']dnd5e["']\s*,\s*["'](roll|use|messageType|item|activity|targets|originatingMessage)\b|["']flags\.dnd5e\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|\bdnd5e:\s*\{\s*(roll|use|messageType|item|activity|targets|originatingMessage)\s*:/ },
+  { id: "message-flags", stage: "E3", what: "flags.dnd5e.roll|use|messageType|item|activity|targets|originatingMessage on chat messages, and Activity#messageFlags that made them (gone in 6.0) → scripts/config/chat-message-data.mjs (message.type, message.system.*)",
+    test: /flags\??\.dnd5e\??\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|getFlag\(\s*["']dnd5e["']\s*,\s*["'](roll|use|messageType|item|activity|targets|originatingMessage)\b|["']flags\.dnd5e\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|\bdnd5e:\s*\{\s*(roll|use|messageType|item|activity|targets|originatingMessage)\s*:|\.messageFlags\b/ },
   // §3.6 — effect origin moves to system.origin.{activity,effect,item,actor,behavior}.
   { id: "effect-origin", stage: "E3", what: "top-level ActiveEffect origin written from a uuid → system.origin",
     test: /^\s*origin:\s*[\w?.]+\.uuid\b/ },
