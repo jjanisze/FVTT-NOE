@@ -82,7 +82,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
     for(const client of [t.gm,player]) await t.waitFor(client,id=>canvas.ready&&canvas.scene?.id===id&&canvas.tokens.placeables.length===8,
       {args:[t.fixture.scene.id],message:"new chase canvas fully drawn after the previous suite"});
     await t.gm.eval(async () => {
-      await game.togglePause(false,true);
+      await game.togglePause(false, { broadcast: true });
       await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme,tempoTla:0});
       await canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false});
     });
@@ -127,7 +127,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
         await t.waitFor(client,()=>canvas.tokens.controlled.some(t=>t.name==="Pojazd 1"),{message:"selection through opaque art"});
         await mouse(client,at,"right");
         await t.waitFor(client,()=>canvas.tokens.hud.object?.name==="Pojazd 1",{message:"HUD through opaque art"});
-        await client.eval(()=>{canvas.tokens.hud.clear();});
+        await client.eval(()=>{canvas.tokens.hud.close();});
         await pause(350);await mouse(client,at,"left",1);await pause(70);await mouse(client,at,"left",2);
         await t.waitFor(client,()=>game.actors.getName("Pojazd 1").sheet.rendered,{message:"sheet opened through opaque art"});
         await client.eval(async()=>{await game.actors.getName("Pojazd 1").sheet.close();});

@@ -647,7 +647,8 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
     });
     const c = summariseCompat(compat);
     return {
-      ok: summary.failed === 0, profile: ctx.profile.name, targetId: p.targetId, reloaded, ...(warnings.length ? { warnings } : {}), ...summary,
+      // A compatibility warning from our code fails Quench too (E10).
+      ok: summary.failed === 0 && !(c.byCaller?.module > 0), profile: ctx.profile.name, targetId: p.targetId, reloaded, ...(warnings.length ? { warnings } : {}), ...summary,
       compat: { total: c.total, byCaller: c.byCaller, module: c.unique.filter(w => w.caller === "module").slice(0, 30) }
     };
   } finally {

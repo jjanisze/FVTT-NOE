@@ -203,7 +203,7 @@ export class Kit {
    * movement), `"low"` (blocks movement only) or nothing (solid).
    */
   async walls(scene, segments) {
-    const S = CONST.WALL_SENSE_TYPES;
+    const S = CONST.EDGE_SENSE_TYPES; // v14: WALL_SENSE_TYPES is deprecated (same values)
     const M = CONST.WALL_MOVEMENT_TYPES;
     const data = segments.map(([x1, y1, x2, y2, kind]) => ({
       c: [x1, y1, x2, y2].map(v => Math.round(v * GRID)),

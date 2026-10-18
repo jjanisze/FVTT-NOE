@@ -557,7 +557,11 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
   }
   const compat = [...(report.boot?.compat ?? []), ...report.suites.flatMap(s => s.compat ?? []), ...(report.quench?.compat ?? [])];
   report.compat = summariseCompat(compat);
-  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true);
+  // A compatibility warning raised by our code — the module or the suites' own page code — fails the run
+  // (PLAN_migracja_dnd5e6.md E10): every one is an API the next core or dnd5e removes. Core's, dnd5e's own and other
+  // packages' warnings stay a note.
+  report.compat.moduleOk = !((report.compat.byCaller?.module ?? 0) + (report.compat.byCaller?.harness ?? 0));
+  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true) && report.compat.moduleOk;
   report.finishedAt = new Date().toISOString();
   report.reportFile = path.relative(MODULE_ROOT, path.join(run.dir, "report.json")).replaceAll("\\", "/");
   fs.writeFileSync(path.join(run.dir, "report.json"), JSON.stringify(report, null, 2));
@@ -596,7 +600,10 @@ export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules
   return {
     ok: report.ok, world: id, kept: !cleanup, report: report.reportFile, quench: quenchSummary,
     boot: report.boot ? { ok: report.boot.ok, consoleErrors: count(report.boot.consoleErrors) } : null,
-    compat: { total: report.compat.total, byCaller: report.compat.byCaller },
+    compat: {
+      total: report.compat.total, byCaller: report.compat.byCaller,
+      ...(report.compat.moduleOk ? {} : { ours: report.compat.unique.filter(w => ["module", "harness"].includes(w.caller)).slice(0, 30) })
+    },
     suites: report.suites.map(x => ({
       name: x.name, ok: x.ok, ms: x.ms, failedStep: x.steps.find(y => !y.ok)?.label ?? null,
       error: x.error?.message ?? (x.ok ? null : "console errors — see the report"), consoleErrors: count(x.consoleErrors),

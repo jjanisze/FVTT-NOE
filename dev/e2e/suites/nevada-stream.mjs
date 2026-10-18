@@ -14,7 +14,7 @@ export function streamedScenerySuite(name, theme) { return {
       game.neuroshima.poscig.tlo.stats().theme===theme&&game.neuroshima.poscig.tlo.stats().ready,
       {args:[theme],message:"requested bitmap theme loaded"});
     await t.gm.front(0);
-    await t.gm.eval(async()=>{await game.togglePause(false,true);document.querySelector('.tour [data-action="exit"]')?.click();canvas.pan({x:1400,y:800,scale:.65});});
+    await t.gm.eval(async()=>{await game.togglePause(false, { broadcast: true });document.querySelector('.tour [data-action="exit"]')?.click();canvas.pan({x:1400,y:800,scale:.65});});
     await t.step("three minutes at speed 2: changing scenery, bounded textures and stable documents",async()=>{
       const before=await t.gm.eval(()=>canvas.scene.tokens.map(d=>({id:d.id,x:d._source.x,y:d._source.y,rotation:d._source.rotation})));
       const samples=[],regions=new Set(),seen=new Set();let peak=0;
