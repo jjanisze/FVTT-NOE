@@ -330,7 +330,7 @@ Kolumna „Kiedy”: **E#** — w migracji; **PM#** — po migracji (§9); **Wym
 | Identyfikatory istot | id w flagach | `identifier` aktora | tak | **PM7** |
 | Szybkość ×2 (Bieganie), spowolnienie (udźwig) | efekty / kod | `attributes.movement.multiplier` | tak | **PM2** |
 | Podział stosu w wymianie | własny | podział stosu z menu | częściowo | **PM9** |
-| Okno powitalne nowego świata | — | `firstRun` | — | **E10** (harness, czysta instalacja B6) |
+| Okno powitalne nowego świata | — | `firstRun` | — | **E10 zrobione**: zostaje (oficjalne moduły, przygody); zamknięte zapisuje jednostki i źródła paczek — MG przywraca nasze (`895d582`) |
 
 ---
 
@@ -352,7 +352,7 @@ i test warstwy 1 dla tabeli. Plik przejmuje dzisiejsze wymuszenia z §3.14 (jedn
 | `disableConcentration` | `false` | NOE nie ma koncentracji (D9) | **Wymuś `true`** |
 | `rulesVersion` | — | „modern” (Wyczerpanie) | **Wymuś `modern`** (dziś tylko ostrzeżenie, `main.mjs:679`) |
 | `metricWeightUnits`, `metricLengthUnits`, `metricVolumeUnits` | `false` | NOE jest metryczny | **Wymuś `true`** (już dziś, `encumbrance-config.mjs`) |
-| `packSourceConfiguration` | — | paczki fantasy ukryte | jak dziś (`srd-cleanup.mjs`) + decyzja o `dnd5e.effects` w E8 |
+| `packSourceConfiguration` | — | paczki fantasy ukryte | jak dziś (`srd-cleanup.mjs`); `dnd5e.effects` **widoczna** (E8: ogólne efekty — przewaga, odporności, szybkości — przydatne MG; podfolder czarów to drobiazg) |
 | `defaultDocumentSubtypes` | — | nasze tworzenie przedmiotów i aktorów | domyślne (E9: ustawienie klienta, pamięta tylko ostatni wybór w oknie tworzenia rdzenia) |
 | `encounterPlacementBehavior` | `none` | `TokenPlacement` przy towarzyszach i dronach | domyślne (E9: dotyczy tylko aktorów spotkań dnd5e; nasze rozmieszczenie to `TokenPlacement` wprost) |
 | `bastionTurns`, `pietyScore` | — | brak w NOE | domyślne |
@@ -454,7 +454,7 @@ wyszło, i warunkiem wejścia. Kolejność — według stosunku zysku do kosztu 
 | PM11 | `fvtt` i skrypty z §3.9: jedno źródło ścieżki instalacji (`cfg.installDir`, `FOUNDRY_APP` w `runNode`), potem instalacja per profil (wersja przenośna obok) | dziś 8 zaszytych ścieżek; przyszłe aktualizacje bez zatrzymywania kampanii | po E12 | S–M |
 | PM12 | Tacki obrażeń i efektów dla graczy (`allowPlayerDamageTray`, `allowPlayerEffectsTray`) | gracz nakłada na własny żeton; mniej klikania MG | po becie, decyzja stołu (D7); testy klienta gracza, ochrona przed podwójnym nałożeniem | S–M |
 | PM13 | Podsumowania kart dnd5e 6 (`chatCardSummary`): pasek Fuksa i Forsowania, adnotacje rzutów (choroby, chemia, dostępność narzędzi) i nasze RO/testy z `system.origin` w podsumowaniu na karcie użycia (2026-10-18, E6) | mniej osobnych wiadomości — cel E6, odłożony, bo dziś podsumowanie chowa kartę rzutu z naszym paskiem | po etapie stylów (D8); testy paska na karcie użycia | M |
-| PM14 | Budowniczy paczek pisze aktywności zestawów jak `createToolkits()`: `nativeCheck` → `NeuroToolCheckActivity` z bramkami (kowal: Naostrzenie, Naprawa) (2026-10-18, E4) | zestaw kowala z kompendium i z Produkcji nie ma bramek | E8 | S |
+| PM14 | Budowniczy paczek pisze aktywności zestawów jak `createToolkits()`: `nativeCheck` → `NeuroToolCheckActivity` z bramkami (kowal: Naostrzenie, Naprawa) (2026-10-18, E4) | zestaw kowala z kompendium i z Produkcji nie ma bramek | **zrobione w E8** (`f855fda`) | S |
 
 ---
 
@@ -754,3 +754,55 @@ Fuksa V1; po poprawce zielona (21/21). **Ostrzeżenia zgodności z naszego kodu:
   duplikaty (`dev/lang-check.mjs`), Quench — klucze `DND5E.*` spoza zainstalowanego `en.json`.
 - Arkusze, okna KO/DO, lalka, pas, Zasoby, karta pojazdu, HUD-y: e2e `postac`, `towarzysz*`, `dron`,
   `rekonwalescencja`, `postoj` zielone; audyt otworzył każdą zakładkę bez błędu. Selektory CSS — bez zmian (D8).
+
+**2026-10-18 — E8 zrobione** (`f855fda`). `validate-packs` zielone; `diff-packs`: świeży build = paczki, które
+Foundry otworzył w piaskownicy — 18 paczek, 0 różnic (B3).
+- dnd5e nie migruje paczek modułów na dysku, tylko w pamięci przy każdym wczytaniu — budowniczy pisze więc kształty
+  źródłowe 6.0: cechy i umiejętności z obiektami `roll` (`check`/`save`/`attack`), `init.roll.bonus`, szybkości jako
+  tekst, KP `{flat, calcs, formulas, override}`, awanse jako obiekt po `_id` z `name`/`img`, pancerze bez
+  `magicalBonus`. Wyrocznia: `new Doc(rekord).toObject()` w przeglądarce wobec rekordu — zostały tylko pola
+  domyślne dopisywane przez schemat.
+- **Znaleziska:** (1) TT towarzyszy: wzór obok domyślnych `calcs` — 6.0 liczyłoby swoje obliczenia obok wzoru; teraz
+  `calcs: []` i jeden wzór. (2) Palcożerca (RAW: −1 do Testów Cech opartych na ZRC) stał na
+  `bonuses.abilities.check` — od zawsze −1 do **każdego** testu cechy; teraz `abilities.dex.check.roll.bonus` (klucz
+  6.0 dla jednej cechy). Test na żywo: −1 do testu ZRC i umiejętności ZRC, nic na SIŁ. Quench pilnuje też, że żaden
+  efekt w paczkach nie stoi na kluczu-podkładce 6.0 (`abilities.*.bonuses.check|save` — ostrzeżenie przy każdym
+  nałożeniu).
+- **PM14 zrobione:** zestawy z `nativeCheck` dostają w budowniczym `NeuroToolCheckActivity` z bramkami (wspólne
+  `buildToolkitCheckActivity` z `createToolkits()`); e2e `aktywnosci` bierze zestaw kowala z paczki.
+- `dnd5e.effects` zostaje widoczna (§5). `towarzysz-tworzenie` w świecie używanym ponownie: stary Lucky z
+  poprzedniego przebiegu (drużyna dawno usunięta) odpowiadał na `getName` — paczka najpierw sprząta swoje.
+- **Dla E11:** towarzysze już w kampanii mają TT jako wzór przy domyślnych `calcs` (ustawić `calcs: []`); efekty w
+  świecie na `abilities.*.bonuses.check|save` i dosłowne klucze `-=riders` — do naszej migracji (§3.12); kopie
+  Palcożercy już w świecie mają stary klucz (−1 do każdego testu) — podmienić albo przenieść z paczki.
+
+**2026-10-18 — E9 zrobione** (`5efd6be`, `72b1284`). Tabela §5 bez „sprawdzić”. MG (2026-10-18): mechanizm dnd5e
+tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
+- **Unikanie:** Ułatwienie RO ZRC (s. 30) — w 5.3 go nie było; teraz `dexteritySaveAdvantage` dnd5e 6, bez
+  własnego kodu. 6.0 samo zdejmuje je przy Niezdolności i stanach bez ruchu (`noMovement`, tam też
+  `udzwigMaksymalny`).
+- **Spadanie (s. 43):** mechanizm dnd5e 6 (stan Spadanie nad niższą powierzchnią; MG klika ikonę stanu → upadek i
+  karta obrażeń z ofiarą na tacce, Powalenie przy obrażeniach) z liczbami NOE — 1k6 za 1,5 m (5 ft w metryce
+  dnd5e), bez limitu 20k6 (`spadanie.mjs`); `disableFalling` wymuszone `false`.
+- **Inicjatywa:** `initiativeGroupRoll` wymuszone `true` (s. 25: grupa identycznych przeciwników — jeden rzut);
+  `initiativeGroupCombatants` domyślne (wygląd trackera), M3 bez zmian (`towarzysz*` zielone).
+- **Ciężkie przeciążenie dnd5e** (utrudnienia ponad Udźwig NOE) — wyłączone: zestawy `physical*` w
+  `conditions.mjs` puste.
+- Testy warstwy 1: upadek (1 m → nic, 1,5 m → 1k6, 60 m → 40k6), Unikanie, wymuszenia z tabeli.
+
+**2026-10-18 — E10 w toku** (`c39020e`, `895d582`). Piaskownica agenta: e2e **21/21** w jednym przebiegu
+(`logs/e2e/2026-10-18T10-23-01`, z `poligon` — Obsada przez prawdziwy AdvancementManager), Quench **1208/1208** w
+świeżym świecie (`logs/e2e/2026-10-18T10-52-04`); **ostrzeżenia zgodności z naszego kodu: 0**.
+- Ostrzeżenie zgodności z kodu modułu albo stron paczek e2e oblewa teraz `fvtt e2e` i `fvtt quench`; trzy z harnessu
+  usunięte (`CONST.EDGE_SENSE_TYPES`, `togglePause(…, {broadcast})`, `hud.close()`). Rdzeń, dnd5e i inne moduły —
+  notatka w raporcie.
+- **Znalezisko:** okno powitalne dnd5e 6 (`firstRun`) otwiera się w świeżym świecie po naszym `ready`, pokazuje
+  jednostki sprzed wymuszenia i **zapisuje formularz przy zamknięciu**, także bez odpowiedzi — kilogramy, metry i
+  litry wracały do funtów, stóp i galonów, a źródła paczek do reguł 2024 (klasy i czary fantasy z powrotem w
+  przeglądarce kompendiów). Zależne od wyścigu: świeży przebieg E7 zielony, ten — 9 czerwonych w Quenchu (każdy
+  Udźwig ×2). Aktywny MG przywraca teraz każde pilnowane ustawienie zmienione na złą wartość (jedno przejście naraz)
+  i ponownie ukrywa paczki fantasy po zapisie źródeł; test Quencha przechodzi przez prawdziwe okno. Dotyczy też B6
+  (czysta instalacja u kogoś innego).
+- Dokumenty tymczasowe w 6.0 działają (postać z klasą przygotowuje się bez błędu) — TESTING.md §5 poprawione.
+- Zostaje: pełna bramka `npm run release:check` (piaskownica wydania z zipa, świat goły i zalecany, Quench) i
+  przejście MG po Poligonie (warstwa 7).
