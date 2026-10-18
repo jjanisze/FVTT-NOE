@@ -225,6 +225,8 @@ export function registerConfigTests(quench) {
         try {
           for (const key of metric) dnd5e.settings[key] = false; // to, co okno pokazałoby przed wymuszeniem
           const app = new dnd5e.applications.WelcomeScreen();
+          // Lista oficjalnych modułów idzie z GitHuba (bez limitu czasu) — w świeżym świecie test czekał na sieć.
+          app.getModules = async () => ({});
           await app.render({ force: true });
           await app.close({ animate: false });
           await waitFor(() => game.settings.get("dnd5e", "firstRun") === false, { label: "okno zapisało ustawienia" });

@@ -807,5 +807,9 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
   i ponownie ukrywa paczki fantasy po zapisie źródeł; test Quencha przechodzi przez prawdziwe okno. Dotyczy też B6
   (czysta instalacja u kogoś innego).
 - Dokumenty tymczasowe w 6.0 działają (postać z klasą przygotowuje się bez błędu) — TESTING.md §5 poprawione.
-- Zostaje: pełna bramka `npm run release:check` (piaskownica wydania z zipa, świat goły i zalecany, Quench) i
-  przejście MG po Poligonie (warstwa 7).
+- **Bramka wydania** (`239d70b`, `logs/release/0.19.1-2026-10-18T11-44-28.json`): static, generatory, zip, paczki,
+  wersje zielone; e2e **21/21 w świecie gołym i 21/21 w zalecanym**, 0 ostrzeżeń zgodności z naszego kodu; Quench
+  1207/1208 — nowy test okna powitalnego przekroczył 10 s: okno pobiera listę oficjalnych modułów z GitHuba bez
+  limitu czasu, a izolowany kontekst przeglądarki nie ma jej w pamięci. Test podstawia tę listę; świeży świat:
+  Quench **1209/1209**. Powtórka bramki na nowym commicie — niżej.
+- Zostaje: przejście MG po Poligonie (warstwa 7).
