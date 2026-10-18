@@ -104,10 +104,22 @@ export async function startServer(ctx, { world, headless = false, timeoutMs = 18
   const proc = launch(ctx.install, { headless, args });
   note(`launched ${proc.kind} pid ${proc.pid}${world ? `, world ${world}` : ""}; waiting`);
   const client = new FoundryClient(ctx.profile);
+  let viaSetup = false;
   const status = await poll(async () => {
     const s = await client.status();
     if (!s.reachable) return null;
-    return world ? (s.active && s.world === world ? s : null) : s;
+    if (!world) return s;
+    if (s.active && s.world === world) return s;
+    // Foundry will not auto-launch a world whose core or system is older than the install — it wants Setup's
+    // migration confirmation (the dnd5e 6 switch-over, PLAN_migracja_dnd5e6.md E11) and leaves the server on the
+    // setup screen. Launch it through Setup once, as the GM clicking "Launch World" would.
+    if (!s.active && !viaSetup && readLog(ctx.profile.logs, { since: t0, level: "warn", limit: 50 })
+      .some(l => l.message?.includes(`World "${world}" is not available to auto-launch`))) {
+      viaSetup = true;
+      note(`world ${world} needs a migration — launching it through Setup`);
+      await client.launchWorld(world);
+    }
+    return null;
   }, { timeoutMs, intervalMs: 1000 });
   if (!status) {
     throw new CliError(`Server did not become ready${world ? ` with world ${world}` : ""} within ${timeoutMs / 1000} s.`, {
@@ -115,5 +127,5 @@ export async function startServer(ctx, { world, headless = false, timeoutMs = 18
       details: { pid: proc.pid, log: readLog(ctx.profile.logs, { since: t0, level: "warn", limit: 20 }) }
     });
   }
-  return { started: true, pid: proc.pid, kind: proc.kind, world: status.world ?? null, ms: Date.now() - t0.getTime() };
+  return { started: true, pid: proc.pid, kind: proc.kind, world: status.world ?? null, ...(viaSetup ? { viaSetup } : {}), ms: Date.now() - t0.getTime() };
 }
