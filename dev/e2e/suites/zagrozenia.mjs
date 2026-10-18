@@ -126,13 +126,9 @@ async function fuks({ messageId, d20 }) {
     }
     if (!btn) return { przycisk: false };
     btn.click();
-    let tak = null;
-    for (let i = 0; i < 40 && !tak; i++) {
-      await new Promise(r => setTimeout(r, 150));
-      tak = document.querySelector('.dialog .dialog-button.yes, .dialog button[data-button="yes"]');
-    }
+    // The Fuks confirmation is a DialogV2 (core v14 deprecates V1 Dialog) — its "yes" is `[data-action="yes"]`.
+    const tak = await window.__e2e.clickDialog({ title: "Fuks" }, "yes");
     if (!tak) return { przycisk: true, potwierdzenie: false };
-    tak.click();
     await new Promise(r => setTimeout(r, 2000));
     const pasek = Boolean(ui.chat.element?.querySelector(`[data-message-id="${messageId}"] .neuroshima-reroll-bar`));
     return { przycisk: true, potwierdzenie: true, pasek };
