@@ -248,6 +248,20 @@ export function registerConfigTests(quench) {
         expect(CONFIG.DND5E.falling.damageType).to.equal("bludgeoning");
       });
 
+      // Karta upadku dnd5e 6 idzie przez tackę — mnożnik Osteoporozy (×2, w stadium krytycznym ×4) jak w `fall()`.
+      it("upadek dnd5e na tacce: Osteoporoza mnoży obrażenia celu, inne obrażenia bez zmian", async function () {
+        const karta = fall => ({ system: {}, getFlag: (scope, key) => (scope === "dnd5e" && key === "context" && fall ? { fall: true } : undefined) });
+        const rzut = () => [{ value: 7, type: "bludgeoning", properties: new Set() }];
+        const zdrowy = await scratchActor();
+        const chory = await scratchActor();
+        await chory.setFlag(MODULE_ID, "choroby", [{ key: "osteoporoza", stage: 2, name: "Osteoporoza" }]);
+        expect(chory.calculateDamage(rzut(), { originatingMessage: karta(true) }).amount, "stadium krytyczne ×4").to.equal(28);
+        expect(chory.calculateDamage(rzut(), { originatingMessage: karta(false) }).amount, "nie upadek").to.equal(7);
+        expect(zdrowy.calculateDamage(rzut(), { originatingMessage: karta(true) }).amount, "bez choroby").to.equal(7);
+        await chory.setFlag(MODULE_ID, "choroby", [{ key: "osteoporoza", stage: 0, name: "Osteoporoza" }]);
+        expect(chory.calculateDamage(rzut(), { origin: karta(true) }).amount, "nakładanie z tacki (`origin`) ×2").to.equal(14);
+      });
+
       it("koncentracja wyłączona, Wyczerpanie włączone, 0 PW bez automatu (D9, §5)", function () {
         expect(game.settings.get("dnd5e", "disableConcentration")).to.equal(true);
         expect(game.settings.get("dnd5e", "disableExhaustion")).to.equal(false);

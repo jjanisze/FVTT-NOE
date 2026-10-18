@@ -1,8 +1,9 @@
 /**
  * Neuroshima 5e — Spadanie [ZAGROŻENIE].
  *
- * dnd5e 5.3 ships a `falling` status icon and nothing else — there is no falling
- * damage anywhere in the system. The rules exist though, so this implements them:
+ * dnd5e 5.3 shipped a `falling` status icon and nothing else. dnd5e 6.0 detects falls on scenes with surfaces and
+ * deals them through a damage card (`config/spadanie.mjs` gives it NOE's numbers; `onFallDamage` below adds
+ * Osteoporoza). This tool stays for every other fall — most scenes have no surfaces — and for falls into liquid:
  *
  *   - 1k6 obrażeń obuchowych za każde 1,5 metra wysokości,
  *   - stan Powalenie po uderzeniu o podłoże, chyba że obrażenia wyniosły 0,
@@ -55,7 +56,21 @@ export function registerFalling() {
       onChange: () => promptFall()
     };
   });
+  Hooks.on("dnd5e.preCalculateDamage", onFallDamage);
   console.log("Neuroshima 5e | Spadanie registered");
+}
+
+/**
+ * dnd5e 6's own falls (`config/spadanie.mjs`: a token left above a lower surface) land as a damage card flagged
+ * `dnd5e.context.fall`; the tray then calculates each target separately. Osteoporoza's multiplier goes on there, per
+ * target, so that path deals the same as `fall()` (the tray's preview shows it too). `damages` is already a copy.
+ */
+function onFallDamage(actor, damages, options) {
+  const message = options?.originatingMessage ?? options?.origin;
+  if (!message?.getFlag?.("dnd5e", "context")?.fall) return;
+  const { value } = fallMultiplier(actor);
+  if (value === 1) return;
+  for (const d of damages) d.value *= value;
 }
 
 export const fallingApi = { fall, promptFall, fallMultiplier };

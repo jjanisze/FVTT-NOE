@@ -783,7 +783,10 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
   `udzwigMaksymalny`).
 - **Spadanie (s. 43):** mechanizm dnd5e 6 (stan Spadanie nad niższą powierzchnią; MG klika ikonę stanu → upadek i
   karta obrażeń z ofiarą na tacce, Powalenie przy obrażeniach) z liczbami NOE — 1k6 za 1,5 m (5 ft w metryce
-  dnd5e), bez limitu 20k6 (`spadanie.mjs`); `disableFalling` wymuszone `false`.
+  dnd5e), bez limitu 20k6 (`spadanie.mjs`); `disableFalling` wymuszone `false`. Dopiero w E10 wyszło, że nasze
+  narzędzie MG „Spadanie” (`combat/falling.mjs`) mnoży upadek przez Osteoporozę (×2/×4) — karta dnd5e tego nie
+  robiła, więc nie była dokładnie RAW; teraz mnożnik idzie na tacce per cel (`dnd5e.preCalculateDamage`, test
+  Quencha). Narzędzie MG zostaje: sceny bez powierzchni (prawie wszystkie) i upadek do cieczy.
 - **Inicjatywa:** `initiativeGroupRoll` wymuszone `true` (s. 25: grupa identycznych przeciwników — jeden rzut);
   `initiativeGroupCombatants` domyślne (wygląd trackera), M3 bez zmian (`towarzysz*` zielone).
 - **Ciężkie przeciążenie dnd5e** (utrudnienia ponad Udźwig NOE) — wyłączone: zestawy `physical*` w

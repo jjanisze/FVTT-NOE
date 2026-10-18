@@ -1190,8 +1190,9 @@ Co zobaczy stół:
   Szybkości 0, także przy Udźwigu maksymalnym. W 5.3 tego Ułatwienia nie było wcale (decyzja MG 2026-10-18).
 - **Spadanie** (s. 43): żeton zostawiony nad niższą powierzchnią dostaje stan Spadanie; MG klika jego ikonę na żetonie
   → żeton spada, a MG dostaje kartę obrażeń 1k6 za każde 1,5 m (bez limitu) z celem na tacce, Powalenie przy
-  obrażeniach. Kto ma szybkość lotu (drony latające), nie spada — chyba
-  że leży albo jest Obezwładniony. Działa tylko na scenach z poziomami i powierzchniami (v14).
+  obrażeniach; Osteoporoza mnoży obrażenia na tacce jak w narzędziu MG. Kto ma szybkość lotu (drony latające), nie
+  spada — chyba że leży albo jest Obezwładniony. Tylko na scenach z poziomami i powierzchniami (v14); wszędzie
+  indziej i przy upadku do cieczy — narzędzie MG „Spadanie” jak dotąd.
 - **Inicjatywa:** grupa identycznych przeciwników ma jeden rzut (s. 25) — wymuszone ustawienie dnd5e.
 - **Palcożerca** (Bit-Boys) daje −1 tylko do Testów Cech na Zręczności, jak w RAW (wcześniej do wszystkich testów).
 - Karty czatu dnd5e są ciemne i bardziej zwarte (wygląd — później, D8). Wyniki RO i testów zostają osobnymi kartami

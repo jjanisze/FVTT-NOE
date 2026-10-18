@@ -69,8 +69,9 @@ Effects, warunki przerwania, karty czatu).
   sposoby zatrzymania zgodne z RAW.
 - **Spadanie** — 1k6 obrażeń za każde 1,5 m, bez górnej granicy, i Powalenie (s. 43). Żeton zostawiony nad
   niższą powierzchnią dostaje stan Spadanie (mechanizm dnd5e 6 z liczbami NOE); MG klika ikonę stanu na żetonie,
-  żeton spada, a MG dostaje kartę obrażeń z celem na tacce. Tylko na scenach z poziomami i powierzchniami.
-  Test przy wejściu do cieczy — jak dotąd.
+  żeton spada, a MG dostaje kartę obrażeń z celem na tacce (Osteoporoza mnoży je jak zawsze). Tylko na scenach z
+  poziomami i powierzchniami; wszędzie indziej i przy upadku do cieczy (test przy wejściu) — narzędzie MG
+  „Spadanie”, jak dotąd.
 - **Głód, odwodnienie, podpalenie** — dzienne zapotrzebowanie z ekwipunku, konsekwencje przy braku
   zaopatrzenia.
 - **Przemarznięcie, brak snu, duszenie się** — narzędzie MG „Zagrożenia” w kontrolkach żetonów.
