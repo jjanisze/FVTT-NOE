@@ -486,6 +486,19 @@ export async function rozstrzygnij(item, { total, st, messageId = null, zrodlo =
 /*  Koniec i porzucenie                         */
 /* -------------------------------------------- */
 
+/**
+ * Rejestr skutków Roboty na innym dokumencie (PLAN_m4_pojazdy §4.11): przepis z `wynik: {typ: "skutek", ref:
+ * "<klucz>", dane}` po udanym teście woła `fn(dane, {robota, holder, kierownik})`, a ta zwraca opis do czatu.
+ * Skutek, który pisze cudzy dokument, sam idzie przez przekaźnik MG. Ten sam rejestr posłuży innym „projektom” MG.
+ * @type {Map<string, (dane: object, ctx: object) => Promise<string>|string>}
+ */
+const _skutki = new Map();
+
+/** Rejestruje skutek Roboty pod kluczem `wynik.ref`. */
+export function zarejestrujSkutek(klucz, fn) {
+  _skutki.set(klucz, fn);
+}
+
 /** Sukces: wynik u posiadacza Roboty, Robota znika. Najpierw tworzymy, potem kasujemy. */
 export async function zakoncz(item, { total = null, st = null, zrodlo = "test" } = {}) {
   const r = daneRoboty(item);
@@ -505,6 +518,12 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
     utworzone = await utworzWynik(holder, w, {
       znacznik: { kierownikId: r.kierownikId, przepisId: r.przepisId, kiedy: game.time.worldTime }
     });
+  } else if (w.typ === "skutek") {
+    const fn = _skutki.get(w.ref);
+    skutekNaprawy = fn ? await fn(w.dane ?? {}, { robota: item, holder, kierownik: kier }) : "skutek nieznany — rozstrzyga MG";
+  } else if (w.typ === "aktor" && String(w.ref).startsWith("pojazd:") && _skutki.has("pojazd.aktor")) {
+    // Pojazd (PLAN_m4_pojazdy E1): aktor z paczki `pojazdy`, tworzony przez MG (przekaźnik).
+    skutekNaprawy = await _skutki.get("pojazd.aktor")({ ref: w.ref }, { robota: item, holder, kierownik: kier });
   } else if (w.typ === "aktor") {
     // Dron (PLAN_m3 §7.9): aktor ze stemplem kierownika i złożony uchwyt u posiadacza Roboty. Dynamiczny
     // import: drony.mjs przez przenoszenie.mjs sięga z powrotem do tego pliku.
@@ -519,7 +538,7 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
   nadZetonem(kier ?? holder, "Gotowe!", "#2ecc71");
 
   const co = skutekNaprawy
-    ? `<strong>Naprawione</strong> — ${foundry.utils.escapeHTML(skutekNaprawy)}`
+    ? `<strong>${w.typ === "skutek" ? "Gotowe" : "Naprawione"}</strong> — ${foundry.utils.escapeHTML(skutekNaprawy)}`
     : w.typ === "item"
     ? `${w.ilosc > 1 ? `${w.ilosc} × ` : ""}<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> → ${foundry.utils.escapeHTML(holder.name)}`
     : dron

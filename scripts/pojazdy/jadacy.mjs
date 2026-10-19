@@ -193,6 +193,8 @@ export async function synchronizujZaloge(pojazdDoc) {
   }
   if (zmianaDostepu) zmiany[`flags.${MODULE_ID}.${FLAGA_DOSTEP}`] = [...dostep];
   if (Object.keys(zmiany).length) await actor.update(zmiany);
+  // Obsada się zmieniła: broń montowana idzie za strzelcem (`bron.mjs`).
+  Hooks.callAll("neuroshima.pojazdZaloga", pojazdDoc);
 }
 
 /** Dostęp z obecności: lista `[userId, poprzedni poziom|null]`. */

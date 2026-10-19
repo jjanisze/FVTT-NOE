@@ -20,3 +20,35 @@
 .neuro-miejsca-info { margin: 0; max-width: 320px; text-align: center; font-size: var(--font-size-13, 13px); }
 .neuro-miejsca-tryb { display: flex; flex-direction: column; gap: 2px; font-size: var(--font-size-12, 12px); }
 .neuro-miejsca-wysiadz { width: auto; }
+
+/* Karta pojazdu (E2) */
+.neuro-karta-pojazdu .neuro-pojazd-zakladka { padding: 6px 10px; overflow-y: auto; }
+.neuro-karta-pojazdu .neuro-pojazd-naglowek { font-size: var(--font-size-14, 14px); margin: 4px 0 8px; border-bottom: 1px solid var(--dnd5e-color-faint, #ccc); }
+.neuro-karta-pojazdu .neuro-pojazd-siatka { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 14px; margin-bottom: 8px; }
+.neuro-karta-pojazdu .neuro-pojazd-wiersz { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; border-bottom: 1px dotted rgba(0, 0, 0, 0.12); }
+.neuro-karta-pojazdu .neuro-pojazd-sekcja { margin: 8px 0; padding: 6px 8px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 6px; }
+.neuro-karta-pojazdu .neuro-pojazd-sekcja h4 { margin: 0 0 4px; font-size: var(--font-size-13, 13px); }
+.neuro-karta-pojazdu .neuro-pojazd-przyciski { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; align-items: center; }
+.neuro-karta-pojazdu .neuro-pojazd-btn { width: auto; flex: 0 0 auto; padding: 2px 8px; line-height: 1.6; }
+.neuro-karta-pojazdu .neuro-pojazd-btn.is-gm { border-style: dashed; }
+.neuro-karta-pojazdu .neuro-pojazd-alarm { color: #b3261e; font-weight: bold; margin: 2px 0; }
+.neuro-karta-pojazdu .neuro-pojazd-uwaga { color: #8a5a00; margin: 2px 0; font-size: var(--font-size-12, 12px); }
+.neuro-karta-pojazdu .neuro-pojazd-ok { color: #2e7d32; }
+.neuro-karta-pojazdu .neuro-pojazd-miejsca,
+.neuro-karta-pojazdu .neuro-pojazd-awarie { list-style: none; margin: 0; padding: 0; }
+.neuro-karta-pojazdu .neuro-pojazd-miejsce,
+.neuro-karta-pojazdu .neuro-pojazd-awaria { display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px dotted rgba(0, 0, 0, 0.12); }
+.neuro-karta-pojazdu .neuro-pojazd-miejsce-opis { flex: 0 0 40%; }
+.neuro-karta-pojazdu .neuro-pojazd-kto { flex: 1; display: flex; align-items: center; gap: 4px; }
+.neuro-karta-pojazdu .neuro-pojazd-kto img { width: 24px; height: 24px; border: none; object-fit: contain; }
+.neuro-karta-pojazdu .neuro-pojazd-awaria { flex-direction: column; align-items: stretch; }
+.neuro-karta-pojazdu .neuro-pojazd-awaria.is-zawieszona { opacity: 0.6; }
+.neuro-karta-pojazdu select.neuro-pojazd-wybor, .neuro-karta-pojazdu select.neuro-pojazd-k20 { width: auto; max-width: 220px; }
+/* Martwe pola dnd5e dla pojazdów lądowych Neuroshimy: progi akcji, jakość, stępka/szerokość, tempa podróży statków. */
+.neuro-karta-pojazdu .sheet-sidebar .pips,
+.neuro-karta-pojazdu .sheet-sidebar [name="system.attributes.actions.stations"],
+.neuro-karta-pojazdu .sheet-sidebar .option:has([name="system.attributes.actions.stations"]),
+.neuro-karta-pojazdu .sheet-sidebar .option:has([name="flags.dnd5e.showVehicleQuality"]),
+.neuro-karta-pojazdu .sheet-sidebar .loyalty-badge { display: none; }
+.neuro-karta-pojazdu .sheet-sidebar .pills-group:has(> h3 > .fa-sailboat),
+.neuro-karta-pojazdu .sheet-sidebar .pills-group:has(> h3 > .fa-sun) { display: none; }

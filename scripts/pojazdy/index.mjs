@@ -14,6 +14,9 @@
  *  - `wrak.mjs`        — 0 PW: wrak, jadący wysadzeni, wybuch baku płonącego wraku
  *  - `naprawy.mjs`     — naprawa tymczasowa i fachowa (Robota M2), karoseria, Odbudowa
  *  - `jazda.mjs`       — tura kierowcy, skręty, teren, potrącenie, bezruch, atak z pojazdu, osłona jadących
+ *  - `bron.mjs`        — broń montowana: montaż (Robota / od ręki), zdjęcie, broń za strzelcem
+ *  - `katalog.mjs`     — aktor z paczki `pojazdy` (wynik produkcji, Poligon, MG)
+ *  - `karta.mjs`       — karta pojazdu: zakładki Pojazd, Załoga, Uzbrojenie, Awarie (podklasa stockowej)
  */
 
 import { registerZetonPojazdu, instrukcjePoRuchu, przeswietlany, mozePrzeswietlic } from "./zeton.mjs";
@@ -35,6 +38,9 @@ import { registerWrak, zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem } from "./w
 import { registerNaprawy, naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote } from "./naprawy.mjs";
 import { danePojazdu, jadacyPojazdu, jestPojazdem, miejscaPojazdu, miejsceOId, pojazdJadacego } from "./stan.mjs";
 import { registerJazda, szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
+import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron } from "./bron.mjs";
+import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
+import { registerKarta, zetonPojazdu } from "./karta.mjs";
 import * as geometria from "./geometria.mjs";
 
 export function registerPojazdy() {
@@ -47,6 +53,9 @@ export function registerPojazdy() {
   registerWrak();
   registerNaprawy();
   registerJazda();
+  registerBron();
+  registerKatalog();
+  registerKarta();
 }
 
 export const pojazdyApi = {
@@ -59,6 +68,7 @@ export const pojazdyApi = {
   kluczykiPodReka, idKluczykow, punktRury, zagraj, ZESTAWY,
   AWARIE_POJAZDOW, efektyAwarii, aktywneAwariePojazdu, zaproponujAwarie, rzucAwarie, zastosujAwarie, kartaObrazen, zegaryPojazdu,
   zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem,
+  bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron, utworzZKatalogu, zetonPojazdu,
   szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
   naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote,
   /** MG: posadzenie od razu, bez kosztów i kart (testy, Poligon). */
