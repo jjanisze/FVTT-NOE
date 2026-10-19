@@ -52,8 +52,9 @@ flowchart LR
    (`data/active-effect/condition.mjs`, nadal na `master`; 6.0.6 to wciąż najnowsze wydanie) — nasza podkładka
    `config/dnd5e-fixes.mjs` do zdjęcia po poprawce.
 4. **M4 Pojazdy — w całości, przed betą; przed M6** (MG, 2026-10-18) — **plan:
-   [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)**: część 1 (pojazdy na mapie taktycznej, jadący, silnik, awarie, naprawy),
-   część 2 (pościg).
+   [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)**: część 1 (pojazdy na mapie taktycznej, jadący, silnik, awarie, naprawy)
+   — **zrobiona 2026-10-19 (E0–E8), do weta MG na Poligonie (Garaż), §10 planu**; część 2 (pościg) — osobna runda
+   pytań. Grafika i dźwięki — atrapy do dostawy (MISSING §P).
 5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
@@ -293,16 +294,14 @@ ze Stopniem Zranienia umierają jak BG, **Emiter EMP** z D27. Szukanie nowego to
 
 Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
 
-- [ ] Tabela Awarii pojazdów k20 (s. 265) + wyzwalacz (krytyk albo ≥ Próg awarii) — wzorzec
-  `MACHINE_FAILURES` z `bestiary-thresholds.mjs`
+- [x] Tabela Awarii pojazdów k20 (s. 265) + wyzwalacz (≥ Próg awarii, porażka kierowcy o 5+) — `pojazdy/awarie.mjs`
+  (M4 część 1, 2026-10-19)
 - [ ] Komplikacje pościgu k20 (s. 267) i ST pościgu na planszy
 - [ ] Paleta manewrów kierowcy (s. 268) z ruchem potwierdzanym kliknięciem (decyzja D4)
-- [ ] Karta pojazdu: TT, Próg obrażeń, Próg awarii, paliwo, załoga; próg obrażeń pojazdu
-  w potoku obrażeń. Spalanie ze statblocków (s. 262–264: autobus 40, motocykl 5, osobówka
-  10 l/100 km — dopisane w październikowym wydaniu) jako pole w `vehicles-data.mjs` (dziś tylko
-  w `uwagi`) i domyślny bak w `party-travel.mjs` zamiast `PALIWO_DOMYSLNE`
-- [ ] Wsiadanie, kierowanie, wypadanie, trudny teren a Szybkość — testy RAW jako akcje na karcie
-- [ ] Atakowanie z pojazdu — podpowiedzi w dialogu ataku (osłona pasażera, Utrudnienie)
+- [x] Karta pojazdu: TT, Próg obrażeń, Próg awarii, paliwo, załoga (`pojazdy/karta.mjs`); spalanie i bak w
+  `KATALOG_POJAZDOW` i we fladze `paliwo` aktorów z paczki (`PALIWO_DOMYSLNE` zostaje dla pojazdów spoza katalogu)
+- [x] Wsiadanie, kierowanie, wypadanie, trudny teren a Szybkość — okno miejsc, karty jazdy z testami (`pojazdy/`)
+- [x] Atakowanie z pojazdu — Utrudnienie w oknie ataku (Akrobatyka ST 10 z HUD-u znosi), domyślna osłona jadącego
 
 **Gotowe gdy:** wiersz Pojazdy i pościgi w macierzy = ✅/🟡.
 

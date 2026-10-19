@@ -1,6 +1,7 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
-> Status: **PROJEKT** (2026-10-18/19, rundy 1–4). Decyzje MG D1–D19 (§1); otwarte — §10. Rozmiar: **L–XL**
+> Status: **część 1 ZROBIONA** (E0–E8, noc 2026-10-19 — do weta MG, §10); **część 2 — PROJEKT** (osobna runda pytań).
+> Decyzje MG D1–D19 (§1). Rozmiar: **L–XL**
 > (część 1: L, część 2: M). Wywołanie: `PLAN_beta.md` §0, krok 6 — przesunięty przed M6 (MG, 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie); plansza pościgu (§2 tamtego planu) zostaje.
 >
@@ -382,10 +383,37 @@ wybuch — z JB2A.
 | Ukrycie lokalne a inne moduły (Splatter, nazwy) | ukrycie przez `isVisible` — rdzeń sam chowa pasek, nazwę, efekty |
 | Wydajność efektów silnika | jeden ticker na scenę, ustawienie klienta |
 
-## 10. Otwarte pytania
+## 10. Otwarte pytania i weto
 
-Brak blokujących. Do weta MG przy wdrożeniu: katalog i własne cechy (§5), ST na krótko i wybuch baku (§4.5, §4.12),
-liczby napraw, PW i odbudowy (§4.9), montaż (§4.11). Część 2 — osobna runda pytań.
+Brak blokujących. **Do weta MG** (wszystko zaimprowizowane tej nocy, każde na Poligonie, stanowisko Garaż):
+
+| Co | Gdzie | Sonda Garażu |
+|---|---|---|
+| Obrys prostokątny (E0 — agent wybrał prostokąt, bo nie był znacząco problematyczny) | §4.3, `pojazdy/zeton.mjs` | `obrys` |
+| Katalog: statystyki 10 pojazdów bez statbloku, obrysy, miejsca, bak i spalanie, własne cechy | §5, `config/vehicles-data.mjs` | `cechy` |
+| ST na krótko (10/15/20 wg klasy), wybuch baku (k4 rund, ogień wg rozmiaru, RO ZRC ST 15) | §4.5, §4.12 | `kluczyki`, `wrak` |
+| Naprawy: cena części 10%, stopnie z ST „postój”, karoseria 2k6 + INT na godzinę, Odbudowa | §4.9 | `naprawy`, `wrak` |
+| Montaż broni: Trochę roboty od ceny broni, CZ/MK po połowie; narzędzia mechanika albo rusznikarza | §4.11 | `bron` |
+| Efekty silnika: gęstość i barwa dymu, siła drgań w trzech zestawach | §4.5, `pojazdy/efekty-silnika.mjs` (`ZESTAWY`) | `silnik`, `drgania` |
+| Kropka jako uchwyt celowania — prawy klik (klawisz T nie celuje w ukrytego jadącego) | D14 | `celowanie` |
+
+Część 2 — osobna runda pytań.
+
+### Znane braki części 1 (oznaczane na kartach albo do zrobienia)
+
+- **Lalka a broń montowana** (D16): broń u strzelca ma wagę 0, ale lalka nie pokazuje rąk na niej i nie blokuje
+  upuszczenia ani schowania; `equipped` zostaje fałszem (lalka go nadpisuje).
+- **Bieg wsteczny**: pojazd zawsze obraca się w kierunku jazdy (D10 wykrywa skręty z obrotu); cofanie z ½ Szybkości
+  i Utrudnieniem — tylko tekst cechy Cofanie.
+- **Akcje bonusowe cech** (Gaz do dechy, Szósty bieg, Przerzutka, Slalom, Syrena, Działko wodne, Lemiesz, Uciąg,
+  Ollie) — karty użycia z opisem; budżet ruchu ich nie dolicza (karta jazdy podaje Przyspieszenie).
+- **Awaria 5 (dym)** — znacznik z tekstem, bez Regionu przesłaniającego wnętrze; **Paka** (Akrobatyka na początku
+  tury stojących) — tekst.
+- **TT w bezruchu** — tylko w walce (zmiana rundy); **spalanie** z jazdy po mapie — nie (podróż liczy karta drużyny).
+- **Dźwięki** — cisza do dostawy plików (MISSING §P); grafika — atrapy.
+- Rozmiar w pasku bocznym karty to etykiety dnd5e modułu (`huge` = „Ogromny”), a NOE mówi „Wielka maszyna” — rozjazd
+  sprzed M4 (`tokens/README.md` też liczy Wielki = `huge`); nagłówek zakładki Pojazd pisze po NOE.
+- GMT400 jeździ na atrapie Hammera — własny żeton z góry (Suburban, 1,5 × 3,5 kratki → 450 × 1050) to grafika kampanii.
 
 ## 11. Postęp
 
@@ -421,3 +449,30 @@ Migracja `migrate-pojazdy.mjs` przebiegła w kampanii: GMT400 (nadpisanie: obrys
 pięć żetonów na scenach) i Hammer Posterunku dostały `pojazd = {podwozie, id}`, obrys i atrapę Hammera; okrągły kadr
 z Roll20 leży we fladze `pojazd.zetonPrzed` (`api.migration.przywrocZetonyPojazdow()` go przywraca). Quench
 `pojazdy` 14/14. GMT400 potrzebuje własnego żetonu z góry (Suburban, 450×1050) — to grafika kampanii, nie modułu.
+
+*E3 — wsiadanie i miejsca.* Okno miejsc (obraz z góry, klikalne miejsca), Wsiądź / Przesiądź się / Wysiądź przez
+przekaźnik MG, koszty RAW na kartach, dostęp z obecności, kropki jako uchwyty celowania (prawy klik), upuszczone w
+pojeździe → ładownia (WKK), wypadanie (3k6 + Powalenie, bez RO — stosowane). Pułapki rdzenia: na aktorze żetonu
+niepowiązanego `_del` nie usuwa klucza, a własność `INHERIT` zapętla `getUserLevel`; na aktorze świata `_del` w mapie
+`ownership` nie przechodzi walidacji — dostęp to lista par, przywracany jawnym poziomem (INHERIT tylko u aktora świata).
+*E4 — silnik.* Uruchom/Zgaś, światła (stożek 60°), kluczyki (id pojazdu, nowy dla aktora i żetonu niepowiązanego,
+kopia wklejona zachowuje), na krótko; blokady: awaria 15/17, pusty bak; oznaczenia: ręce, kluczyki. Dym z
+`ParticleGenerator`, drgania jednym tickerem, dźwięk tylko gdy plik jest.
+*E6 — awarie, naprawy, wrak.* Tabela k20 s. 265 z ST napraw, wyzwalacze (≥ Próg awarii, porażka kierowcy o 5+),
+[Zastosuj], zegary na zegarze świata (wyciek, chłodnica, rozpęd, zawieszenie, wybuch), pożar i błotnik na turze
+kierowcy, karta obrażeń grupowych, naprawy przez Naprawę M2 z aktorem pojazdu jako celem, karoseria, wrak i wybuch
+baku, Odbudowa. dnd5e 6: Szybkość w `movement.speeds.walk`, TT pojazdu przez `ac.flat`.
+*E5 — jazda w walce.* Pojazd poza trackerem, budżet w turze kierowcy, skręty i zawracanie z ruchu (karta z testem),
+trudny teren z Regionów (dnd5e liczy pola z istotami jako trudne, więc nie z kosztu drogi), potrącenie z listą istot
+pod obrysem, bezruch (TT − 5), atak z jadącego pojazdu (Utrudnienie, Akrobatyka z HUD-u), domyślna osłona jadących.
+*E2 — karta.* Podklasa stockowej karty pojazdu dnd5e 6 (zostają pasek boczny, cechy, ładownia, efekty, opis i obie
+wcześniejsze wstawki): zakładki Pojazd, Załoga, Uzbrojenie, Awarie i naprawy; pojemniki — karta stockowa. Rejestr
+skutków Roboty (`zarejestrujSkutek`): montaż broni jako Robota, broń za strzelcem (bez wagi), gotowy pojazd z
+produkcji jako aktor z paczki.
+*E7 — Wojownik autostrady.* Drzwi w drzwi (Rajdowiec, Konwojent, Taranowanie), Kaskader (trik z karty), Pancerna fura
+(OC jako efekt w ruchu, AC [B] przy Uruchom); plakietki pokrycia, paczka `zdolnosci-klasowe` przebudowana.
+*E8 — Poligon, testy.* Stanowisko **Garaż** (7 pojazdów, Osobówka z trzema jadącymi, Hammer z Browningiem na
+wieżyczce, Gruzowisko, manekiny) zasiane na Poligonie — 26 sond, w tym każda decyzja D2–D18. e2e `pojazd` (MG + dwóch
+graczy: wsiadanie, kropki u gracza z zewnątrz, silnik, jazda ze skrętem przez Cywila, awaria, wysiadka) zielone;
+Quench całość 1229/1229 (w tym paczka `pojazdy`). Pełna bramka `release:check` — nie puszczona (Poligon zostaje otwarty:
+straż `poligon:stop` liczy okna stanowisk jako ludzi, `--force` tylko na słowo MG).
