@@ -159,6 +159,7 @@ import { registerGrip } from "./combat/grip.mjs";
 import { registerDropOnFail } from "./combat/drop-on-fail.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
+import { registerPojazdy, pojazdyApi } from "./pojazdy/index.mjs";
 import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
 import { registerPartySheet } from "./actors/party-sheet.mjs";
 import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
@@ -427,6 +428,8 @@ Hooks.once("init", () => {
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
   // portrait/token toggle every other actor sheet type has. Patches the live DOM, not a sheet.
   registerVehiclePortraitToggle();
+  // M4 Pojazdy (PLAN_m4_pojazdy): obrys, jadący, kropki, prześwietlenie. game.neuroshima.pojazdy
+  registerPojazdy();
 
   // Karta drużyny: stan członków, podróż, zapasy.
   registerPartyTravel();
@@ -645,6 +648,7 @@ Hooks.once("ready", () => {
   game.neuroshima.fuksy = fuksyApi;
   game.neuroshima.fanty = fantyApi;
   game.neuroshima.zajecia = restActivitiesApi;
+  game.neuroshima.pojazdy = pojazdyApi;
 
   /* Pasek plakietek stanu na wierszach ekwipunku. **Musi być zarejestrowany jako ostatni
      z warstw dekorujących wiersze** — czyta klasy `neuro-*`, które dopinają `jams.mjs`,

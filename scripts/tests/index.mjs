@@ -56,6 +56,7 @@ import { registerMagazynkiTests } from "./magazynki.test.mjs";
 import { registerWeaponStateTests } from "./stany-broni.test.mjs";
 import { registerPartyTests } from "./party.test.mjs";
 import { registerPoscigTests } from "./poscig.test.mjs";
+import { registerPojazdyTests } from "./pojazdy.test.mjs";
 import { registerUdzwigTests } from "./udzwig.test.mjs";
 import { registerUdzwigAttackDisadvantageTests } from "./udzwig-attack-disadvantage.test.mjs";
 import { registerTokenScaleTests } from "./skala-zetonow.test.mjs";
@@ -74,6 +75,7 @@ export function registerQuenchTests() {
     registerWeaponStateTests(quench);
     registerPartyTests(quench);
     registerPoscigTests(quench);
+    registerPojazdyTests(quench);
     registerUdzwigTests(quench);
     registerUdzwigAttackDisadvantageTests(quench);
     registerTokenScaleTests(quench);

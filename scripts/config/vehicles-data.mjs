@@ -163,6 +163,291 @@ export function ttBezruchu(p) {
 }
 
 /* -------------------------------------------- */
+/*  Katalog M4 (PLAN_m4_pojazdy §5)              */
+/* -------------------------------------------- */
+
+/**
+ * Wszystko, czego tabela s. 262 nie mówi, a karta, jadący i silnik potrzebują. Warstwy (D6):
+ * RAW tam, gdzie podręcznik ma statblok (Autobus, Rower, Motocykl, Osobówka); dla dziesięciu
+ * pozostałych **interpolacja z tych czterech** (RAI) — ciężar i rozmiar → SIŁ, zwrotność → ZRC,
+ * wytrzymałość → KON — plus jedna–dwie własne, tanie cechy (WKK). Liczby są do weta MG (§10).
+ *
+ *  - `obrys` — kratki 1,5 m, szerokość × długość przy obrocie 0 (przodem w dół, jak grafika).
+ *    Grafika żetonu ma dokładnie ten kadr (dev/art/m4, 300 px na kratkę).
+ *  - `strefy` — miejsca rozłożone ogólnie w obrysie (D3); `od`/`do` — ułamek długości od przodu.
+ *    Pierwsze miejsce pierwszej strefy to kierowca. Liczba miejsc = `PODWOZIA[id].zaloga`.
+ *  - `silnik` — zestaw efektów (D8): „benzyna”, „diesel”, „motocykl”; `null` = pojazd mięśniowy.
+ *  - `rura` — wylot spalin w kadrze grafiki (ułamek szerokości od lewej, wysokości od góry); ta sama
+ *    liczba co `exhaust` w `dev/art/m4/gen_catalog.py` — art jest malowany pod nią.
+ *  - `klasa` — ST odpalania na krótko (§4.5): jednoślad 10, osobowy 15, ciężki/pancerny 20.
+ *  - `wrak` — grafika wraku (§4.12): `tokens/wraki/pojazd-<wrak>.webp`.
+ *  - `cechy` — klucze `CECHY_POJAZDOW` z parametrami; `warstwa` mówi, skąd cecha jest.
+ *
+ * @type {Record<string, object>}
+ */
+export const KATALOG_POJAZDOW = {
+  osobowka: {
+    rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "benzyna", rura: [0.30, 0.03],
+    klasa: "osobowy", wrak: "osobowy", cechy: ["cofanie", "potracenie", "skokOsobowki", "gazDoDechy", "slalom"],
+    statystyki: { str: 20, dex: 12, con: 16 }, zrodloStatystyk: "NOE", bak: 60, spalanie: 10,
+    strefy: [{ id: "kabina", nazwa: "Kabina", od: 0.3, do: 0.72, rzedy: [2, 3] }]
+  },
+  autobus: {
+    rozmiar: "grg", obrys: { w: 2, h: 8 }, silnik: "diesel", rura: [0.78, 0.02],
+    klasa: "ciezki", wrak: "ciezki", cechy: [{ id: "cofanie", cwierc: true }, "potracenie", "skokAutobusu"],
+    statystyki: { str: 26, dex: 8, con: 20 }, zrodloStatystyk: "NOE", bak: 300, spalanie: 40,
+    strefy: [{ id: "kabina", nazwa: "Wnętrze", od: 0.06, do: 0.94, rzedy: [1, 4, 4, 4, 4, 4] }]
+  },
+  motocykl: {
+    rozmiar: "lg", obrys: { w: 0.5, h: 1.5 }, silnik: "motocykl", rura: [0.30, 0.05],
+    klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "pojazdy", st: 15 }, "skokMotocykla", "szostyBieg", "slalom"],
+    statystyki: { str: 16, dex: 16, con: 12 }, zrodloStatystyk: "NOE", bak: 18, spalanie: 5,
+    strefy: [{ id: "siodlo", nazwa: "Siodło", od: 0.42, do: 0.68, rzedy: [1, 1] }]
+  },
+  rower: {
+    rozmiar: "med", obrys: { w: 0.5, h: 1 }, silnik: null, rura: null,
+    klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "akrobatyka", st: 10 }, "skokRoweru", "uciazliwyPancerz", "przerzutka", "slalom"],
+    statystyki: { str: 10, dex: 18, con: 10 }, zrodloStatystyk: "NOE", bak: 0, spalanie: 0,
+    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1] }]
+  },
+  buggy: {
+    rozmiar: "lg", obrys: { w: 1, h: 2 }, silnik: "benzyna", rura: [0.50, 0.03],
+    klasa: "osobowy", wrak: "osobowy", cechy: ["terenowka", "skokMotocykla", "potracenie", "slalom", "otwartaRama"],
+    statystyki: { str: 16, dex: 16, con: 12 }, zrodloStatystyk: "RAI", bak: 40, spalanie: 8,
+    strefy: [{ id: "kabina", nazwa: "Fotele", od: 0.45, do: 0.45, rzedy: [2], oslona: "polowa" }]
+  },
+  hammer: {
+    rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "diesel", rura: [0.25, 0.03],
+    klasa: "osobowy", wrak: "osobowy", cechy: ["terenowka", "cofanie", "potracenie", "gazDoDechy", "wiezyczka"],
+    statystyki: { str: 20, dex: 10, con: 18 }, zrodloStatystyk: "RAI", bak: 95, spalanie: 15,
+    strefy: [
+      { id: "kabina", nazwa: "Kabina", od: 0.3, do: 0.68, rzedy: [2, 2] },
+      { id: "wiezyczka", nazwa: "Wieżyczka", od: 0.52, do: 0.52, rzedy: [1], stanowisko: true, oslona: "trzyCzwarte" }
+    ]
+  },
+  ciezarowka: {
+    rozmiar: "grg", obrys: { w: 2, h: 6 }, silnik: "diesel", rura: [0.10, 0.70],
+    klasa: "ciezki", wrak: "ciezki", cechy: [{ id: "cofanie", cwierc: true }, "potracenie", "paka"],
+    statystyki: { str: 24, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 200, spalanie: 30,
+    strefy: [
+      { id: "kabina", nazwa: "Kabina", od: 0.2, do: 0.2, rzedy: [3] },
+      { id: "paka", nazwa: "Paka", od: 0.42, do: 0.92, rzedy: [3, 3, 2], stojace: true, oslona: "polowa" }
+    ]
+  },
+  wozStrazacki: {
+    rozmiar: "grg", obrys: { w: 2, h: 6 }, silnik: "diesel", rura: [0.90, 0.72],
+    klasa: "ciezki", wrak: "ciezki", cechy: ["cofanie", "potracenie", "dzialkoWodne", "syrena"],
+    statystyki: { str: 24, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 200, spalanie: 35,
+    strefy: [
+      { id: "kabina", nazwa: "Kabina", od: 0.1, do: 0.28, rzedy: [3, 2] },
+      { id: "dzialko", nazwa: "Działko wodne", od: 0.5, do: 0.5, rzedy: [1], stanowisko: true, oslona: "polowa" }
+    ]
+  },
+  buldozer: {
+    rozmiar: "grg", obrys: { w: 2.5, h: 4 }, silnik: "diesel", rura: [0.40, 0.62],
+    klasa: "ciezki", wrak: "gasienicowy", cechy: ["gasienice", "lemiesz", "bezGazuDoDechy"],
+    statystyki: { str: 28, dex: 6, con: 22 }, zrodloStatystyk: "RAI", bak: 400, spalanie: 40,
+    strefy: [{ id: "kabina", nazwa: "Kabina", od: 0.6, do: 0.6, rzedy: [2] }]
+  },
+  czolg: {
+    rozmiar: "grg", obrys: { w: 2.5, h: 5 }, silnik: "diesel", rura: [0.50, 0.03],
+    klasa: "pancerny", wrak: "gasienicowy", cechy: ["gasienice", "wieza", "pancerneWnetrze", "miazdzenie"],
+    statystyki: { str: 28, dex: 6, con: 24 }, zrodloStatystyk: "RAI", bak: 500, spalanie: 120,
+    strefy: [
+      { id: "kadlub", nazwa: "Kadłub", od: 0.14, do: 0.14, rzedy: [1], oslona: "calkowita" },
+      { id: "wieza", nazwa: "Wieża", od: 0.48, do: 0.48, rzedy: [2], oslona: "calkowita" },
+      { id: "dzialo", nazwa: "Działonowy", od: 0.6, do: 0.6, rzedy: [1], stanowisko: true, oslona: "calkowita" }
+    ]
+  },
+  bwp: {
+    rozmiar: "grg", obrys: { w: 2, h: 4.5 }, silnik: "diesel", rura: [0.12, 0.70],
+    klasa: "pancerny", wrak: "gasienicowy", cechy: ["gasienice", "pancerneWnetrze", "desant", "strzelnice"],
+    statystyki: { str: 26, dex: 8, con: 22 }, zrodloStatystyk: "RAI", bak: 460, spalanie: 60,
+    strefy: [
+      { id: "kabina", nazwa: "Kierowca i dowódca", od: 0.12, do: 0.12, rzedy: [2], oslona: "calkowita" },
+      { id: "wieza", nazwa: "Wieża", od: 0.32, do: 0.32, rzedy: [1], stanowisko: true, oslona: "calkowita" },
+      { id: "desant", nazwa: "Desant", od: 0.52, do: 0.92, rzedy: [3, 3, 3], oslona: "calkowita" }
+    ]
+  },
+  traktor: {
+    rozmiar: "huge", obrys: { w: 1.5, h: 2.5 }, silnik: "diesel", rura: [0.55, 0.68],
+    klasa: "ciezki", wrak: "ciezki", cechy: ["terenowka", "uciag"],
+    statystyki: { str: 22, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 150, spalanie: 20,
+    strefy: [{ id: "kabina", nazwa: "Siedzisko i błotnik", od: 0.58, do: 0.72, rzedy: [1, 1] }]
+  },
+  motorower: {
+    rozmiar: "med", obrys: { w: 0.5, h: 1 }, silnik: "motocykl", rura: [0.35, 0.06],
+    klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "pojazdy", st: 10 }, "slalom", "oszczedny"],
+    statystyki: { str: 12, dex: 14, con: 10 }, zrodloStatystyk: "RAI", bak: 6, spalanie: 2,
+    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1] }]
+  },
+  deskorolka: {
+    rozmiar: "sm", obrys: { w: 0.5, h: 0.5 }, silnik: null, rura: null,
+    klasa: "jednoslad", wrak: "jednoslad", cechy: ["uciazliwyPancerz", "ollie"],
+    statystyki: { str: 6, dex: 16, con: 8 }, zrodloStatystyk: "RAI", bak: 0, spalanie: 0,
+    strefy: [{ id: "deska", nazwa: "Deska", od: 0.5, do: 0.5, rzedy: [1] }]
+  }
+};
+
+/** Kości Potrącenia wg rozmiaru pojazdu (§5): kotwice RAW — Wielka 3k10 / 4k10, Ogromna 6k10 / 8k10. */
+export const POTRACENIE_WG_ROZMIARU = {
+  lg: { ofiara: "2d10", wieksza: "3d10", ofiaraMaks: "med" },
+  huge: { ofiara: "3d10", wieksza: "4d10", ofiaraMaks: "med" },
+  grg: { ofiara: "6d10", wieksza: "8d10", ofiaraMaks: "lg" }
+};
+
+/** ST odpalania na krótko wg klasy pojazdu (D12, WKK). */
+export const ST_NA_KROTKO = { jednoslad: 10, osobowy: 15, ciezki: 20, pancerny: 20 };
+
+/**
+ * Cechy pojazdów. `opis(p)` — parafraza (repozytorium publiczne), `p` — parametry z katalogu.
+ * `warstwa`: „NOE” (statblok RAW), „RAI” (cecha RAW przeniesiona na pojazd bez statbloku),
+ * „WKK” (nasza). `czas`: null (pasywna), „bonus”, „reakcja”, „akcja”.
+ * @type {Record<string, {nazwa: string, warstwa: string, czas: string|null, opis: (p: object) => string}>}
+ */
+export const CECHY_POJAZDOW = {
+  cofanie: {
+    nazwa: "Cofanie", warstwa: "NOE", czas: null,
+    opis: p => `Jedzie do tyłu z ${p.cwierc ? "jedną czwartą" : "połową"} Szybkości; Testy Mądrości (Pojazdy) w czasie cofania — z Utrudnieniem.`
+  },
+  potracenie: {
+    nazwa: "Potrącenie", warstwa: "NOE", czas: null,
+    opis: p => `Przejazd przez pole z istotą ${p.ofiaraMaks} lub mniejszą: RO na Zręczność ST 15 albo Powalenie i ${p.ofiara} obuchowych (już Powalona — drugi raz tyle). Istota większa: ona, pojazd i jadący dostają ${p.wieksza}.`
+  },
+  skokOsobowki: {
+    nazwa: "Skok", warstwa: "NOE", czas: null,
+    opis: () => "Po co najmniej 72 m prosto w tej turze i Teście Mądrości (Pojazdy) ST 20 — skok do 9 m (18 m przy podwójnym rozbiegu). Porażka: ląduje przewrócony. Lądowanie — obrażenia od upadku dla pojazdu i jadących; rampa wydłuża skok o różnicę wysokości."
+  },
+  skokAutobusu: {
+    nazwa: "Skok", warstwa: "NOE", czas: null,
+    opis: () => "Po co najmniej 72 m prosto w tej turze i Teście Mądrości (Pojazdy) ST 20 — skok do 6 m (12 m przy podwójnym rozbiegu). Porażka: ląduje przewrócony. Lądowanie — obrażenia od upadku dla pojazdu i jadących."
+  },
+  skokMotocykla: {
+    nazwa: "Skok", warstwa: "NOE", czas: null,
+    opis: () => "Po co najmniej 36 m prosto w tej turze i Teście Mądrości (Pojazdy) ST 20 — skok do 9 m (18 m przy podwójnym rozbiegu). Porażka: maszyna i kierowca lądują Powaleni. Lądowanie — obrażenia od upadku."
+  },
+  skokRoweru: {
+    nazwa: "Skok", warstwa: "NOE", czas: null,
+    opis: () => "Po co najmniej 18 m prosto w tej turze i Teście Zręczności (Akrobatyka) ST 15 — skok do 3 m (6 m przy podwójnym rozbiegu). Lądowanie — obrażenia od upadku dla roweru i rowerzysty."
+  },
+  akrobacja: {
+    nazwa: "Akrobacja", warstwa: "NOE", czas: null,
+    opis: p => `Raz w turze, za połowę Szybkości: jazda na jednym kole, bez trzymanki, nawrót w miejscu — Test ${p.test === "pojazdy" ? "Mądrości (Pojazdy)" : "Zręczności (Akrobatyka)"} ST ${p.st}. Porażka: Powalenie i zatrzymanie.`
+  },
+  uciazliwyPancerz: {
+    nazwa: "Uciążliwy pancerz", warstwa: "NOE", czas: null,
+    opis: () => "Jadący w ciężkim pancerzu ma Utrudnienie do Testów Zręczności (Akrobatyka) na tym pojeździe."
+  },
+  przerzutka: {
+    nazwa: "Przerzutka", warstwa: "NOE", czas: "bonus",
+    opis: () => "Zmiana przełożenia: szosowe — Szybkość rowerzysty ×3 (dobra droga), standardowe — ×2, terenowe — ×1 (trudny, stabilny teren)."
+  },
+  szostyBieg: {
+    nazwa: "Szósty bieg", warstwa: "NOE", czas: "bonus",
+    opis: () => "Do początku następnej tury dodatkowy ruch równy Szybkości ×2. Ataki na motocykl i kierowcę — z Utrudnieniem, kierowca też atakuje z Utrudnieniem; ST Testów (Pojazdy) +5 do końca następnej tury. Trudny teren lub przeszkoda: przewrócenie, 6k10 obuchowych maszynie i kierowcy."
+  },
+  gazDoDechy: {
+    nazwa: "Gaz do dechy", warstwa: "NOE", czas: "bonus",
+    opis: () => "Poza trudnym terenem: do początku następnej tury dodatkowy ruch równy Szybkości ×2. Ataki na pojazd i jadących — z Utrudnieniem, jadący też atakują z Utrudnieniem; ST Testów (Pojazdy) +5 do końca następnej tury. Trudny teren lub przeszkoda: przewrócenie, 4k10 obuchowych pojazdowi i jadącym."
+  },
+  slalom: {
+    nazwa: "Slalom", warstwa: "NOE", czas: "reakcja",
+    opis: () => "Ułatwienie do jednego Rzutu Obronnego pojazdu na Zręczność."
+  },
+  terenowka: {
+    nazwa: "Terenówka", warstwa: "RAI", czas: null,
+    opis: () => "Pojazd przystosowany do trudnego terenu (s. 261): jedzie tam z połową Szybkości bez testów kierowcy."
+  },
+  gasienice: {
+    nazwa: "Gąsienice", warstwa: "WKK", czas: null,
+    opis: () => "Gruz i trudny teren bez kary do Szybkości i bez testów."
+  },
+  otwartaRama: {
+    nazwa: "Otwarta rama", warstwa: "WKK", czas: null,
+    opis: () => "Jadący nigdy nie mają więcej niż połowiczną osłonę."
+  },
+  wiezyczka: {
+    nazwa: "Wieżyczka", warstwa: "WKK", czas: null,
+    opis: () => "Stanowisko na dachu: strzelec ma osłonę ¾, broń montowana strzela w każdą stronę."
+  },
+  paka: {
+    nazwa: "Paka", warstwa: "WKK", czas: null,
+    opis: () => "Miejsca stojące z połowiczną osłoną. W jadącej ciężarówce stojący na pace na początku swojej tury zdaje Test Zręczności (Akrobatyka) ST 10 albo jest Powalony."
+  },
+  dzialkoWodne: {
+    nazwa: "Działko wodne", warstwa: "WKK", czas: "akcja",
+    opis: () => "Ze stanowiska: linia 18 m. Gasi Podpalenie i ogień; istoty w linii — RO na Siłę ST 13 albo odepchnięte o 3 m i Powalone. Zbiornik na 10 strzałów."
+  },
+  syrena: {
+    nazwa: "Syrena", warstwa: "WKK", czas: "bonus",
+    opis: () => "Do następnej tury kierowcy Utrudnienie do Testów Mądrości (Percepcja) opartych na słuchu w promieniu 30 m."
+  },
+  lemiesz: {
+    nazwa: "Lemiesz", warstwa: "WKK", czas: "akcja",
+    opis: () => "Spycha przeszkody i mniejsze pojazdy. Istoty przed lemieszem: RO na Siłę ST 15 albo przepchnięte i Powalone. Niszczenie obiektów ×2."
+  },
+  bezGazuDoDechy: {
+    nazwa: "Wolny jak walec", warstwa: "WKK", czas: null,
+    opis: () => "Nie ma Gazu do dechy ani podobnych przyspieszeń."
+  },
+  wieza: {
+    nazwa: "Wieża", warstwa: "WKK", czas: null,
+    opis: () => "Stanowisko działonowego strzela w każdą stronę."
+  },
+  pancerneWnetrze: {
+    nazwa: "Pancerne wnętrze", warstwa: "WKK", czas: null,
+    opis: () => "Jadący mają całkowitą osłonę; ze środka strzelają tylko z broni montowanej."
+  },
+  miazdzenie: {
+    nazwa: "Miażdżenie", warstwa: "WKK", czas: null,
+    opis: () => "Powalona istota nie ma Rzutu Obronnego przeciw Potrąceniu."
+  },
+  desant: {
+    nazwa: "Desant", warstwa: "WKK", czas: null,
+    opis: () => "Rampa: desant wysiada bez kosztu ruchu."
+  },
+  strzelnice: {
+    nazwa: "Strzelnice", warstwa: "WKK", czas: null,
+    opis: () => "Desant strzela ze środka z osłoną ¾."
+  },
+  uciag: {
+    nazwa: "Uciąg", warstwa: "WKK", czas: "akcja",
+    opis: () => "Holuje pojazd do swojego rozmiaru albo przyczepę (Szybkość obu ×½); wyciąga z rowu i gruzu."
+  },
+  oszczedny: {
+    nazwa: "Oszczędny", warstwa: "WKK", czas: null,
+    opis: () => "Spalanie 2 l / 100 km."
+  },
+  ollie: {
+    nazwa: "Ollie", warstwa: "WKK", czas: null,
+    opis: () => "Raz w turze za połowę Szybkości, Test Zręczności (Akrobatyka) ST 10: przeskok przez krawężnik lub przeszkodę do 1 m. Porażka — Powalenie."
+  }
+};
+
+/** Etykiety rozmiarów maszyn (rodzaj żeński, jak w statblokach: „Wielka maszyna”). */
+export const ROZMIAR_MASZYNY = { tiny: "Drobna", sm: "Mała", med: "Średnia", lg: "Duża", huge: "Wielka", grg: "Ogromna" };
+
+/** Cechy pojazdu jako `{id, …parametry}`; Potrącenie dostaje kości wg rozmiaru. */
+export function cechyPojazdu(id) {
+  const k = KATALOG_POJAZDOW[id];
+  if (!k) return [];
+  return k.cechy.map(c => {
+    const wpis = typeof c === "string" ? { id: c } : { ...c };
+    if (wpis.id === "potracenie") {
+      const d = POTRACENIE_WG_ROZMIARU[k.rozmiar] ?? POTRACENIE_WG_ROZMIARU.lg;
+      Object.assign(wpis, { ofiara: d.ofiara.replace("d", "k"), wieksza: d.wieksza.replace("d", "k"),
+        ofiaraMaks: { sm: "małą", med: "średnią", lg: "dużą", huge: "wielką" }[d.ofiaraMaks] ?? d.ofiaraMaks });
+    }
+    return wpis;
+  });
+}
+
+/** Rozmiar pojazdu: statblok RAW, a bez niego katalog (RAI). */
+export function rozmiarPojazdu(id) {
+  return PODWOZIA[id]?.rozmiar ?? KATALOG_POJAZDOW[id]?.rozmiar ?? null;
+}
+
+/* -------------------------------------------- */
 /*  Pościg — środowisko (tabela s. 266)          */
 /* -------------------------------------------- */
 
