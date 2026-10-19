@@ -339,8 +339,15 @@ function _domyslnaOslonaJadacego(token) {
 async function _testKierowcy(_ev, btn) {
   const kier = await fromUuid(btn.dataset.kierowca);
   const pojazd = await fromUuid(btn.dataset.pojazd);
+  return testKierowcy(pojazd, kier, { st: Number(btn.dataset.st) || 0, skutek: btn.dataset.skutek });
+}
+
+/**
+ * Test MDR (Pojazdy) kierowcy ze skutkiem porażki: „polowa” (Szybkość ×½ do końca tury), „przewrocenie”
+ * (awaria 8 — MG stosuje), „teren” (Szybkość 0 w tej turze). `st: 0` — ST podaje MG w oknie.
+ */
+export async function testKierowcy(pojazd, kier, { st = 0, skutek = "przewrocenie" } = {}) {
   if (!kier?.isOwner || !pojazd) return ui.notifications.warn("Test rzuca kierowca.");
-  let st = Number(btn.dataset.st) || 0;
   if (!st) {
     const odp = await foundry.applications.api.DialogV2.prompt({ window: { title: "ST testu (MG)" },
       content: `<label>ST <input type="number" name="st" value="15" min="5" max="30"></label>`,
@@ -351,7 +358,6 @@ async function _testKierowcy(_ev, btn) {
   const rolls = await kier.rollSkill({ skill: "poj", target: st }, {}, { data: { flavor: `${pojazd.name}: Test MDR (Pojazdy) ST ${st}` } });
   const r = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!r || r.total >= st) return;
-  const skutek = btn.dataset.skutek;
   if (skutek === "polowa") {
     await pojazd.actor.createEmbeddedDocuments("ActiveEffect", [{
       name: "Skręt — Szybkość ×½", img: "icons/svg/direction.svg",

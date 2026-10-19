@@ -28,7 +28,7 @@ import { cofnijWrak, jestWrakiem, wybuchBaku } from "./wrak.mjs";
 import { kosztKaroserii, kosztNaprawyAwarii, naprawFachowo, naprawKaroserie, naprawTymczasowo, odbuduj, stopienZST } from "./naprawy.mjs";
 import { bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij } from "./bron.mjs";
 import { kierowcaPojazdu } from "./jadacy.mjs";
-import { szybkoscPojazdu } from "./jazda.mjs";
+import { szybkoscPojazdu, testKierowcy } from "./jazda.mjs";
 import { ZDOLNOSCI, maZdolnosc, trikKaskadera } from "./wojownik.mjs";
 import { NAPRAWA } from "../config/production-rules.mjs";
 
@@ -187,6 +187,8 @@ function htmlAwarie(actor) {
     czesci.push(`<section class="neuro-pojazd-sekcja"><h4><i class="fa-solid fa-triangle-exclamation" inert></i> Awarie (s. 264–265)</h4>
       ${li ? `<ul class="neuro-pojazd-awarie">${li}</ul>` : "<p><em>Brak awarii.</em></p>"}
       ${zeg ? `<h5>Zegary</h5><ul>${zeg}</ul>` : ""}
+      ${ef.some(e => e.flags[MODULE_ID][FLAGA_AWARIA].k20 === 14 && !e.disabled)
+        ? `<div class="neuro-pojazd-przyciski">${btn("hamuj", "Hamuj: Pojazdy ST 15", { ikona: "fa-solid fa-hand", tip: "Awaria 14 — porażka: Przewrócenie (awaria 8)" })}</div>` : ""}
       <div class="neuro-pojazd-przyciski">
         ${btn("rzutAwarii", "Rzuć k20 na Tabelę awarii", { ikona: "fa-solid fa-dice-d20", gm: true })}
         ${game.user.isGM ? `<select class="neuro-pojazd-k20">${Object.entries(AWARIE_POJAZDOW).map(([n, a]) => `<option value="${n}">${n}. ${esc(a.nazwa)}</option>`).join("")}</select>` : ""}
@@ -226,6 +228,7 @@ async function akcja(sheet, el) {
     case "wysadzWszystkich": return tok && wysadzWszystkich(tok);
     case "wypadnij": { const j = await fromUuid(d.jadacy); return j && wypadnij(j); }
     case "kaskader": return tok && trikKaskadera(tok, sheet.element.querySelector(".neuro-pojazd-trik")?.value);
+    case "hamuj": return tok && testKierowcy(tok, kierowcaPojazdu(tok)?.actor, { st: 15, skutek: "przewrocenie" });
     case "rzutAwarii": return rzucAwarie(actor);
     case "zastosujAwarie": return zastosujAwarie(tok ?? actor, Number(sheet.element.querySelector(".neuro-pojazd-k20")?.value) || 1);
     case "usunAwarie": return game.user.isGM && ef(d.efekt)?.delete();

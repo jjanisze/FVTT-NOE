@@ -93,6 +93,13 @@ export function odlegloscOdPojazdu(jadacyDoc, pojazdDoc) {
   return px / kratka * pojazdDoc.parent.grid.distance;
 }
 
+const ZACIETE_DRZWI = "Zacięte drzwi (awaria 6): otwarcie albo zamknięcie — Test SIŁ (Atletyka) albo ZRC (Zwinne dłonie) ST 10.";
+
+/** Awaria 6 aktywna — czytane wprost z efektu (awarie.mjs importuje ten plik, więc nie odwrotnie). */
+function zacieteDrzwi(pojazdDoc) {
+  return !!pojazdDoc?.actor?.effects?.some(e => !e.disabled && e.flags?.[MODULE_ID]?.awariaPojazdu?.k20 === 6);
+}
+
 /** Szybkość chodu postaci w metrach. */
 function szybkoscPostaci(actor) {
   return Math.max(0, Number(actor?.system?.attributes?.movement?.speeds?.walk) || 0);
@@ -290,6 +297,7 @@ async function _wsiadz(_n, dane, user) {
   const ostrz = [];
   if (odl > ZASIEG_WSIADANIA_M + 0.2) ostrz.push(`Postać stała ${odl.toFixed(1)} m od pojazdu (RAW: do 1,5 m) — MG cofa, jeśli to się nie wydarzyło.`);
   if (jedzie(pojazd)) ostrz.push("Pojazd jedzie — wskakiwanie do jadącego pojazdu rozstrzyga MG.");
+  if (zacieteDrzwi(pojazd)) ostrz.push(ZACIETE_DRZWI);
   const pol = polowa(jadacy.actor);
   const linie = [`Wsiada do <strong>${esc(pojazd.name)}</strong> — ${miejsce.kierowca ? "<strong>za kierownicę</strong>" : `miejsce: ${esc(opisMiejsca(pojazd.actor, miejsce))}`}.`];
   if (miejsce.kierowca) {
@@ -317,6 +325,7 @@ async function _wysiadz(_n, dane, user) {
       ? `Koszt (s. 260): połowa Szybkości — <strong>${pol} m</strong>.`
       : `Koszt (s. 261): bez dodatkowego ruchu; zamknięte drzwi — połowa Szybkości (<strong>${pol} m</strong>).`];
   const ostrz = wRuchu ? ["Pojazd jedzie — wyskoczenie z jadącego pojazdu to Wypadanie (3k6, Powalenie). MG: przycisk Wypadnięcie na karcie pojazdu."] : [];
+  if (zacieteDrzwi(pojazd)) ostrz.push(ZACIETE_DRZWI);
   await _karta(jadacy, "Wysiadanie", linie, ostrz);
 }
 
