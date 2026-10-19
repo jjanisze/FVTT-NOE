@@ -518,6 +518,8 @@ export function registerJadacy() {
   // Usunięcie pojazdu: jadący wracają do swojego rozmiaru obok (§9 ryzyka).
   Hooks.on("preDeleteToken", (doc, options) => {
     if (!game.user.isActiveGM || !jestZetonemPojazdu(doc)) return;
+    // Wycięcie i wklejenie na inną scenę: jadący jadą w schowku albo zajmuje się nimi `schowek.mjs`.
+    if (options.replacements?.[doc.id]) return;
     const jadacy = jadacyPojazdu(doc);
     if (!jadacy.length) return;
     const pozycje = jadacy.map(t => [t, poleWysiadki(doc, t, miejsceOId(doc.actor, jazdaZetonu(t).miejsce))]);

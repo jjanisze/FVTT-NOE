@@ -8,6 +8,7 @@
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
  *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności, pamięć obsady (MG)
  *  - `obsada.mjs`      — karta „Posadzić?”: zapamiętana załoga na nowej scenie (§4.15)
+ *  - `schowek.mjs`     — Ctrl+X / Ctrl+V pojazdu z załogą między scenami (§4.16)
  *  - `okno-miejsc.mjs` — okno miejsc i przyciski HUD żetonu
  *  - `silnik.mjs`      — Uruchom/Zgaś, światła, kluczyki, na krótko (oznaczenia i blokady)
  *  - `efekty-silnika.mjs` — dym (ParticleGenerator), drgania (ticker), dźwięk — lokalnie z flagi `silnik`
@@ -28,6 +29,7 @@ import {
 } from "./jadacy.mjs";
 import { registerOknoMiejsc, otworzMiejsca } from "./okno-miejsc.mjs";
 import { registerObsada, brakujacaObsada, posadzObsade } from "./obsada.mjs";
+import { registerSchowek, czekaNaWklejenie } from "./schowek.mjs";
 import {
   registerSilnik, uruchom, zgas, przelaczSwiatla, utworzKluczyki, ustawNaKrotko, naKrotko, stanSilnika,
   warunkiUruchomienia, kluczykiPodReka, idKluczykow
@@ -80,6 +82,7 @@ export function registerPojazdy() {
   registerZetonPojazdu();
   registerJadacy();
   registerObsada();
+  registerSchowek();
   registerOknoMiejsc();
   registerSilnik();
   registerEfektySilnika();
@@ -97,7 +100,7 @@ export const pojazdyApi = {
   geometria,
   danePojazdu, miejscaPojazdu, miejsceOId, jadacyPojazdu, pojazdJadacego, jestPojazdem,
   kratkaPojazdu, skalaPojazdu, trybSceny, wymiaryZetonu, rozmiarMiejsca, niepowiazanyPojazdDruzyny,
-  obsadaPojazdu, pamiecPoUzgodnieniu, brakujacaObsada, posadzObsade,
+  obsadaPojazdu, pamiecPoUzgodnieniu, brakujacaObsada, posadzObsade, czekaNaWklejenie,
   instrukcjePoRuchu, przeswietlany, mozePrzeswietlic,
   zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca,
   wsiadz, wysiadz, przesiadz, wypadnij, wysadzWszystkich, otworzMiejsca,

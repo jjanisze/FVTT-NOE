@@ -703,3 +703,12 @@ albo zapamiętanej postaci; sprawdzenie po całej paczce `createToken` (jeden ta
 kierowca posadzony na A → pamięć i załoga; pojazd na B (siatka 3 m) → karta, [Posadź] dostawia żeton 0,25 i sadza, na A
 dalej siedzi; usunięcie pojazdu z B — pamięć zostaje, ponowny pojazd → karta, istniejący żeton użyty; wysiadka → pamięć
 i załoga puste; postać dostawiona na B do stojącego pojazdu → karta.
+*E11 — Ctrl+X / Ctrl+V z załogą.* `schowek.mjs`: `TokenLayer#_getCopyableObjects` dorzuca jadących zaznaczonego
+pojazdu; `pasteToken` daje pojazdowi klucz `schowek`, a jadącym ten klucz zamiast id i rozmiar miejsca sceny
+docelowej; po paczce aktywny MG przepina ich na nowy żeton i ustawia na miejscach (`instrukcjePoRuchu`). Jadący bez
+swojego pojazdu w schowku wraca do własnego rozmiaru. Mapa-znacznik: jedzie sam pojazd — powiązani znikają ze sceny
+źródłowej (zostają w pamięci), niepowiązani zostają obok z ostrzeżeniem i wypadają z pamięci. Karta „Posadzić?” milczy,
+póki pojazd czeka na przepięcie. Próba w piaskownicy: niepowiązana Osobówka (PW 33) z jadącym powiązanym i bandytą,
+Ctrl+X z mapy 1,5 m → Ctrl+V na 3 m: pojazd 0,75×1,5 z PW 33, obaj na miejscach (0,25, w obrysie), bez karty; Ctrl+C /
+Ctrl+V na tej samej scenie: dwa pojazdy, każdy ze swoimi dwoma jadącymi; Ctrl+X oryginału na mapę w km: na mapie sam
+pojazd, żeton powiązanego zniknął, bandyta stoi obok, w pamięci — tylko powiązany.

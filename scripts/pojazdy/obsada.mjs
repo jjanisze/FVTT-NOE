@@ -15,6 +15,7 @@ import {
   jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, miejsceOId, obrysDziala, obsadaPojazdu, pojazdJadacego
 } from "./stan.mjs";
 import { opisMiejsca, posadzGM, synchronizujZaloge, zajeteMiejsca } from "./jadacy.mjs";
+import { czekaNaWklejenie } from "./schowek.mjs";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 
@@ -97,6 +98,8 @@ function zaplanuj(pojazdDoc) {
 
 async function zaproponuj(pojazdDoc) {
   if (!pojazdDoc.parent?.tokens.has(pojazdDoc.id) || posadzane.has(pojazdDoc.uuid)) return;
+  // Wklejony z załogą: jadący dopiero są przepinani na ten żeton (§4.16) — nic nie brakuje.
+  if (czekaNaWklejenie(pojazdDoc)) return;
   const braki = brakujacaObsada(pojazdDoc);
   if (!braki.length) return;
   const linie = [`<strong>${esc(pojazdDoc.name)}</strong>: posadzić według ostatniego składu?`,
