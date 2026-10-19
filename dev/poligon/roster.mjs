@@ -144,7 +144,9 @@ roster.push({
  * automated ability still without a persona.
  */
 const COVERAGE = [["Medyk", "Farmacja"], ["Zabójca Maszyn", "Empiryk"], ["Monter", "Serwisowanie"], ["Chemik", "Rusznikarstwo"],
-  ["Kowboj", "Pistolero"], ["Szczur", "Truciciel"], ["Gwiazda", "Za garść gambli"], ["Łowca Mutantów", "Mutant na śniadanie"]];
+  ["Kowboj", "Pistolero"], ["Szczur", "Truciciel"], ["Gwiazda", "Za garść gambli"], ["Łowca Mutantów", "Mutant na śniadanie"],
+  // M4 E7 (2026-10-19): all three Wojownik Autostrady picks are automated; the level-5 persona carries Kaskader.
+  ["Wojownik Autostrady", "Drzwi w drzwi"], ["Wojownik Autostrady", "Pancerna fura"]];
 for (const [prof, pick] of COVERAGE) {
   const k = Object.keys(PROFESSIONS).find(c => PROFESSIONS[c].includes(prof));
   roster.push({

@@ -48,6 +48,8 @@ import {
   KONTROLER_REF, TRYB_AKTYWNOSCI
 } from "../items/kontroler.mjs";
 import { sygnalDrona, FLAG_POD_ZIEMIA } from "../actors/drony-zdalne.mjs";
+import { torX } from "../scenes/poscig.mjs";
+import { pxNaMetr } from "../scenes/droga.mjs";
 import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
 import { KAMERA_ID, celObrazu, strojenie, STROJENIE_MS } from "../actors/drony-obraz.mjs";
 import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, ZNAK } from "../config/osd.mjs";
@@ -686,18 +688,42 @@ export function registerDronyTests(quench) {
         }
       });
 
-      it("scena pościgu: odległość z torów (3 tory = 108 m), nie linijką", async function () {
+      it("stara plansza pościgu: odległość z torów (3 tory = 108 m), nie linijką", async function () {
         const [fab] = await operator.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
         const zo = scenaS.tokens.find(t => t.actorId === operator.id);
+        // Flaga bez `wersja` = plansza sprzed złożonej drogi: liczą się same tory. Pozycje z `torX` — szerokość toru
+        // zmieniła się 2026-10-19 (200 → 280 px), a test pisany w pikselach po cichu mierzył dwa tory zamiast trzech.
         await scenaS.setFlag(MODULE_ID, "poscig", { test: true });
+        const pol = d => d.width * scenaS.grid.size / 2;
         try {
-          await zo.update({ x: 250, y: 100 });           // środek 300 → tor 1
-          await zd().update({ x: 850, y: 700, elevation: 30 }); // środek 900 → tor 4; pion i wysokość nie liczą się
+          await zo.update({ x: torX(1) - pol(zo), y: 100 });
+          await zd().update({ x: torX(4) - pol(zd()), y: 700, elevation: 30 }); // pion i wysokość nie liczą się
           const dom = sg();
           expect(dom).to.include({ odleglosc: 108, utracony: true, powod: "zasieg" });
           const s = sygnalDrona(wynik.dron, { operator, kontroler: fab, scene: scenaS });
           expect(s).to.include({ odleglosc: 108, zasieg: 300, utracony: false });
           expect(s.jakosc).to.be.closeTo(20 * Math.log10(300 / 108) / 12, 0.001);
+        } finally {
+          await scenaS.unsetFlag(MODULE_ID, "poscig");
+          await fab.delete();
+          await zo.update({ x: 100, y: 100 });
+          await zd().update({ x: 100, y: 100, elevation: 0 });
+        }
+      });
+
+      it("plansza złożonej drogi: odległość po drodze — tory × 36 m, w poprzek i w górę prawdziwe metry (D27)", async function () {
+        const [fab] = await operator.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
+        const zo = scenaS.tokens.find(t => t.actorId === operator.id);
+        await scenaS.setFlag(MODULE_ID, "poscig", { test: true, wersja: 2 });
+        const pol = d => d.width * scenaS.grid.size / 2;
+        try {
+          await zo.update({ x: torX(1) - pol(zo), y: 100 });
+          await zd().update({ x: torX(4) - pol(zd()), y: 700, elevation: 30 });
+          const a = zo.getCenterPoint(zo._source), b = zd().getCenterPoint(zd()._source);
+          const oczekiwana = Math.hypot(108, (b.y - a.y) / pxNaMetr(scenaS), 30);
+          const s = sygnalDrona(wynik.dron, { operator, kontroler: fab, scene: scenaS });
+          expect(s.odleglosc).to.be.closeTo(oczekiwana, 1e-6);
+          expect(s.odleglosc, "więcej niż same tory").to.be.above(108);
         } finally {
           await scenaS.unsetFlag(MODULE_ID, "poscig");
           await fab.delete();

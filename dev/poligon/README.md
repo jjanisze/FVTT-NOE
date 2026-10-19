@@ -42,7 +42,7 @@ In the GM's window: the flask button in the token controls (or **Ctrl+Shift+P**)
 | Kreator | P2 | empty characters per player, the companion wizard |
 | Droga | P2 | the party sheet, a vehicle, food and water of every quality |
 | Garaż | P2 | M4 vehicles: a sedan with three riders (a Wojownik autostrady driving), motorcycle, bicycle, truck with a bed, fire engine, Hammer with a turret Browning, tank; dummies to run over, rubble (difficult terrain), a mechanic with tools. Probes for every decision D2–D18 of `PLAN_m4_pojazdy.md` and its own traits |
-| Pościg | P3 | the chase board (the `poscig` e2e fixture) |
+| Pościg | P3 | the chase board from the `poscig` e2e fixture (art, sway, performance) and a folded-road board (`PLAN_m4_pojazdy.md` §6.2): catalog vehicles at true scale with crews — the players' sedan (driver, Minimi gunner with grenades), a raider Hammer and bus; a 1.5 m parking lot with a crewed buggy for Ctrl+X/Ctrl+V; a km region map. Probes for D21–D31 |
 | Galeria | P3 | every shipped icon per pack at 64/32/16 px on dark and light, placeholders framed red, status icons |
 
 Each station's **Karta prób** lists what to judge and how, marked NOE / RAI / WKK / VETO; ✅ keeps, ❌

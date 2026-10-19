@@ -1,8 +1,9 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
-> Status: **część 1 ZROBIONA** (E0–E8, noc 2026-10-19 — do weta MG, §10); **część 1b — PROJEKT** (E9–E11, pojazdy
-> między scenami, §4.14–§4.16); **część 2 — PROJEKT planszy** (złożona droga, §6.2), mechanika pościgu — runda pytań
-> przed P5. Decyzje MG D1–D31 (§1). Rozmiar: **XL** (część 1: L, część 1b: M, część 2: L — plansza od nowa).
+> Status: **część 1 ZROBIONA** (E0–E8, noc 2026-10-19 — do weta MG, §10); **część 1b ZROBIONA** (E9–E11, pojazdy
+> między scenami, §4.14–§4.16, 2026-10-19); **część 2: P1–P4 ZROBIONE** (złożona droga, metryka, jadący, serie i
+> obszary, §6.2), **P5 — runda pytań** (§10, 11 pytań), P6 — stanowisko Poligonu przebudowane, bramka w §11.
+> Decyzje MG D1–D31 (§1). Rozmiar: **XL** (część 1: L, część 1b: M, część 2: L — plansza od nowa).
 > Wywołanie: `PLAN_beta.md` §0, krok 4 (przesunięty przed M6, MG 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie), a od 2026-10-19 także geometrię planszy
 > (tamten §2.1, §2.3–§2.6 i D2) — §6.2 tutaj. Grafika planszy (motywy, pustynia, kołysanie — tamten §2.2) zostaje.
@@ -587,8 +588,32 @@ Brak blokujących. **Do weta MG** (wszystko zaimprowizowane tej nocy, każde na 
 | Efekty silnika: gęstość i barwa dymu, siła drgań w trzech zestawach | §4.5, `pojazdy/efekty-silnika.mjs` (`ZESTAWY`) | `silnik`, `drgania` |
 | Kropka jako uchwyt celowania — prawy klik (klawisz T nie celuje w ukrytego jadącego) | D14 | `celowanie` |
 
-Część 1b — bez otwartych pytań. Część 2 — runda pytań o mechanikę pościgu (§6.2.5) przed P5; już wiadomo, że trzeba
-w niej rozstrzygnąć: **pojazd trafiony serią** (D28) — RO pojazdu na połowę czy pełne obrażenia przez Próg obrażeń.
+Część 1b — bez otwartych pytań. Część 2 — runda pytań o mechanikę pościgu (§6.2.5) przed P5 (RAW s. 266–268
+przeczytane 2026-10-19; propozycje agenta w nawiasach):
+
+1. **Ruch po znacznikach** (pkt 3: znacznik za każde 36 m w turze kierowcy, brak ruchu — znacznik w tył). Kierowca
+   przeciąga pojazd po torach, moduł liczy znaczniki z Szybkości (Gazu!, Rajdowiec ×1,5, awarie) i oznacza przekroczenie,
+   koniec tury bez ruchu → karta MG [Cofnij o znacznik] — *czy* ruch tylko przyciskiem z karty (stary D4)?
+   (Przeciąganie z budżetem, jak w części 1.)
+2. **Test Pościgu** (pkt 4): karta z rzutem na początku tury kierowcy czy przy pierwszym ruchu? Nat. 20 — [+1 znacznik],
+   nat. 1 — dwie komplikacje. (Początek tury.)
+3. **Komplikacje k20** (s. 267): rzut z karty po porażce; [Zastosuj] dla mierzalnych (znaczniki, obrażenia, Szybkość ½,
+   trudny teren, stany, awaria z tabeli dla 1–3), testy jako przyciski na karcie, reszta tekst. (Tak.)
+4. **Walka wręcz na planszy** (pkt 5: „na tym samym znaczniku”): metryka drogi liczy rzędy w prawdziwych metrach (4,5 m
+   — poza zasięgiem 1,5 m). Wręcz: ten sam znacznik = zasięg niezależnie od rzędu (RAW) czy prawdziwe metry (burta
+   w burtę)? (RAW: ten sam znacznik.)
+5. **Atakowanie kierowcy** (pkt 5): obrażenia kierowcy na planszy → karta z Testem (Pojazdy) ST max(10, ½ obrażeń);
+   porażka [Cofnij o znacznik], o 5+ [Przewrócenie] (awaria 8). (Tak.)
+6. **Wypadanie w pościgu** (pkt 5): wypadnięty ląduje znacznik za pojazdem i cofa się o 3 znaczniki na rundę — moduł
+   przesuwa go na początku rundy z kartą interakcji, czy tylko pisze? (Przesuwa, karta dla MG.)
+7. **Inicjatywa za kierowcą** (pkt 2): jednorazowe przesunięcie tury pasażera za kierowcę — przycisk na HUD-zie
+   jadącego? (Tak.)
+8. **Koniec pościgu** (pkt 6): przewaga 7 i 10 rund — karta MG (wykrycie); meta — logiczny znacznik ustawiany przez MG,
+   przeżywa recentrowanie? (Tak.)
+9. **Manewry — gdzie**: paleta kierowcy na HUD-zie pojazdu (jak Uruchom/Światła) czy zakładka „Pościg” na karcie
+   pojazdu? Gazu! [A], Hample [B], Obrót 180° [A], Ostrożna jazda [A], Stuknięcie [A], Zajechanie [A]. (HUD.)
+10. **Pojazd trafiony serią** (D28): RO pojazdu na połowę czy pełne obrażenia przez Próg obrażeń?
+11. **Rajdowiec** („podczas walki, wyścigu i pościgu”): na planszy zawsze, także poza walką? (Tak.)
 
 ### Znane braki części 1 (oznaczane na kartach albo do zrobienia)
 
@@ -759,3 +784,12 @@ ją z pojazdem — D29). Quench `poscig` 72/72 (Miażdżąca wzdłuż rzędu: cz
 rzędy; cały rząd siedzeń; wybuch nie sięga sąsiedniego rzędu o znacznik dalej). e2e `poscig-jadacy`: Miażdżąca kierowcy
 na wóz bandytów dwa tory dalej — oba wozy i obaj jadący na karcie, własny pojazd poza listą; granat na Hammerze — tylko
 Hammer; strefa na Hammerze przypięta, po zmianie toru jadący Hammera w strefie, drugi wóz poza nią.
+
+*P6 (część) — Poligon i bramka.* Stanowisko **Pościg** przebudowane (plansza z fixture + Złożona droga z Osobówką graczy,
+Hammerem i Autobusem bandytów z jadącymi, Parking z Buggy, Mapa regionu w km; sondy D21–D31) i zasiane na Poligonie
+(strona MG Poligonu siedziała na starym grafie importów — twarde przeładowanie przez CDP). `release:check` na `88b630b`:
+static, generatory, zip, paczki, wersje — zielone; piaskownica: wszystkie suity e2e w obu światach zielone poza
+niezmiennikiem Obsady w suicie `poligon` (Drzwi w drzwi i Pancerna fura — automatyczne od E7, bez persony; dodane do
+`COVERAGE` w `dev/poligon/roster.mjs`), Quench 1250/1251 (test sygnału drona na planszy pisany w pikselach toru 200 px —
+pozycje z `torX`, plus nowy test złożonej drogi: tory × 36 m, w poprzek i w górę prawdziwe metry). Po poprawkach:
+Quench `drony` 81/81.
