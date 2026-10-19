@@ -95,7 +95,7 @@ export function odlegloscOdPojazdu(jadacyDoc, pojazdDoc) {
 
 /** Szybkość chodu postaci w metrach. */
 function szybkoscPostaci(actor) {
-  return Math.max(0, Number(actor?.system?.attributes?.movement?.walk) || 0);
+  return Math.max(0, Number(actor?.system?.attributes?.movement?.speeds?.walk) || 0);
 }
 
 /** Połowa Szybkości w dół do pełnych metrów (RAW: zaokrąglonej w dół). */
@@ -290,7 +290,7 @@ async function _wsiadz(_n, dane, user) {
   const pol = polowa(jadacy.actor);
   const linie = [`Wsiada do <strong>${esc(pojazd.name)}</strong> — ${miejsce.kierowca ? "<strong>za kierownicę</strong>" : `miejsce: ${esc(opisMiejsca(pojazd.actor, miejsce))}`}.`];
   if (miejsce.kierowca) {
-    const v = Number(pojazd.actor.system.attributes.movement?.walk) || 0;
+    const v = Number(pojazd.actor.system.attributes.movement?.speeds?.walk) || 0;
     linie.push(`Koszt (s. 260): połowa Szybkości — <strong>${pol} m</strong>; reszta ruchu w tej turze przepada. Odtąd jedziesz Szybkością pojazdu${v ? ` (${v} m)` : ""}.`);
     if (danePojazdu(pojazd.actor).katalog.silnik) linie.push("Silnik: uruchomienie to <strong>akcja</strong> (Uruchom na karcie pojazdu). Kierownica wymaga dwóch wolnych rąk.");
     else linie.push("Pojazd mięśniowy: jedzie ruchem kierowcy (Przyspieszenie daje więcej).");

@@ -127,7 +127,7 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
           attributes: {
             ac: { flat: p.tt, calcs: [], formulas: [], override: p.tt },
             hp: { value: p.pw, max: p.pw, temp: 0, tempmax: 0, dt: p.progObrazen, mt: p.progAwarii },
-            movement: { walk: p.szybkosc ?? 0, units: "m" },
+            movement: { speeds: { walk: String(p.szybkosc ?? 0) }, units: "m" },
             actions: { max: 3, spent: 0, stations: false, thresholds: { 0: null, 1: null, 2: null } },
             capacity: { cargo: { value: p.ladownosc, units: "kg" }, creature: "" },
             price: { value: p.cena, denomination: "gb" }

@@ -179,6 +179,7 @@ export function registerPojazdyTests(quench) {
           expect(a.system.attributes.hp.dt ?? null, `${a.name} Próg obrażeń`).to.equal(p.progObrazen);
           expect(a.system.attributes.hp.mt ?? null, `${a.name} Próg awarii`).to.equal(p.progAwarii);
           expect(a.system.attributes.ac.value, `${a.name} TT`).to.equal(p.tt);
+          expect(a.system.attributes.movement.speeds.walk, `${a.name} Szybkość (dnd5e 6: speeds.walk)`).to.equal(p.szybkosc ?? 0);
           expect(a.system.traits.size, `${a.name} rozmiar`).to.equal(rozmiarPojazdu(id));
           expect([a.prototypeToken.width, a.prototypeToken.height], `${a.name} obrys`).to.deep.equal([k.obrys.w, k.obrys.h]);
           expect(a.prototypeToken.lockRotation).to.be.false;
