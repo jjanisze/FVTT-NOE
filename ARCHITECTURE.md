@@ -189,7 +189,8 @@ may be the bug, not the write.
 
 ### 11. Generated Scenes, Custom Canvas Layers and Token Movement Fail Silently in v14
 
-Seven traps found on 2026-09-11/12 building the Pościgi chase board (`scenes/poscig*.mjs`).
+Traps found on 2026-09-11/12 building the Pościgi chase board (`scenes/poscig*.mjs`) and on 2026-10-19 rebuilding
+it as the folded road (`scenes/droga.mjs`).
 Grouped here rather than left in that feature's plan because **none of them is specific to
 chases** — every one bites the next generated scene or the next custom canvas layer.
 The common shape: correct-looking code, correct-looking inspection, **zero console output**.
@@ -264,6 +265,20 @@ The common shape: correct-looking code, correct-looking inspection, **zero conso
   that inference unreliable. Second, independent source of the same artefact: a canvas path
   ending exactly on the tile boundary is antialiased against nothing, so procedural tile art
   must overdraw past both edges.
+
+- **A scene's grid instance is rebuilt on every reset of the scene's data.** `Scene#grid` is a `BaseGrid` made in
+  `#prepareGrids` only when the field is not one yet — and a data reset (an embedded token update is enough) puts the
+  raw config back, so the next preparation builds a fresh `SquareGrid`. A method patched onto the instance
+  (`scene.grid._measurePath = …`) works in the first test and then silently disappears. Patch the class prototype and
+  find the scene from `this` (`canvas.scene.grid === this`, then `game.scenes`).
+
+- **On the chase board, distance comes only from the road metric (PLAN_m4_pojazdy D27).** The board is a folded
+  road: 280 px lanes drawn as 6 m (vehicles at true scale) but measured as 36 m markers between vehicles, true metres
+  across the road and inside a vehicle. `SquareGrid#_measurePath` is patched for board scenes, so `measurePath` (ruler,
+  attack ranges, range perks) already returns road metres; elsewhere use `odlegloscNaDrodze` from `scenes/droga.mjs`.
+  Never compute a board distance from pixels or `grid.distance` — on the board both describe the drawing, not the
+  road. Token movement is measured on the bare road (36 m per lane). Guarded by Quench `poscig` (metric) and the P2
+  consumer probe.
 
 ### 12. NOE vs WKK Content Lives in Physically Separate Files
 `scripts/wkk/` is the exclusive home for content that is not in the *Neuroshima Ostatnia Era*

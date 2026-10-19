@@ -26,6 +26,8 @@
  * relay — see `grenade-inventory.mjs`'s top doc comment.
  */
 
+import { mierzyDroga, odlegloscNaDrodze } from "./droga.mjs";
+
 /** Band colours — same values as `grenade-inventory.mjs`'s `_getThrowBandColor`. */
 const BAND_COLORS = { ok: 0x54c86a, warn: 0xd8b24a, danger: 0xe06666 };
 const NEUTRAL_COLOR = 0xff9f40;
@@ -49,23 +51,16 @@ export function metersToPx(meters, scene = canvas.scene) {
   return (meters * pxPerGrid) / unitsPerGrid;
 }
 
-/** Grid distance in scene units, with the same fallbacks the callers always used. */
+/**
+ * Distance in scene units (metres).
+ *
+ * Chase board: the road metric (PLAN_m4_pojazdy D27) — never pixels. Elsewhere: straight-line distance. That is what
+ * this function has always returned under v14 — the earlier `measurePath([{A, B}])` call was malformed (one waypoint,
+ * distance 0) and `grid.measureDistance` no longer exists, so both fell through to the geometric line below.
+ */
 export function measureMeters(from, to) {
   if (!canvas?.grid) return 0;
-
-  try {
-    if (typeof canvas.grid.measurePath === "function") {
-      const d = Number(canvas.grid.measurePath([{ A: from, B: to }])?.distance ?? 0);
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* fallback below */ }
-
-  try {
-    if (typeof canvas.grid.measureDistance === "function") {
-      const d = Number(canvas.grid.measureDistance(from, to, { gridSpaces: true }));
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* geometric fallback below */ }
+  if (mierzyDroga(canvas.scene)) return odlegloscNaDrodze(canvas.scene, from, to);
 
   const px = Math.hypot((to.x ?? 0) - (from.x ?? 0), (to.y ?? 0) - (from.y ?? 0));
   const unitsPerGrid = Number(canvas.scene?.grid?.distance ?? 1);

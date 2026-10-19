@@ -16,6 +16,8 @@
  *     oddaje go tutaj, zamiast wstrzykiwać tryb rzutu po swojemu (F6).
  */
 
+import { mierzyDroga } from "../scenes/droga.mjs";
+import { METRY_KRATKI_POJAZDU } from "../pojazdy/stan.mjs";
 import { rozstrzygnijOkolicznosci, autoKrytyk, OBOK } from "../config/okolicznosci-ataku.mjs";
 import { isMeleeAttack } from "./trafienie.mjs";
 import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
@@ -84,6 +86,15 @@ export function odlegloscKrawedzi(a, b) {
   const B = b?.document ?? b;
   const grid = canvas?.grid;
   if (!A || !B || !grid) return null;
+  // Plansza pościgu (D27): pola siatki to całe tory — liczy się metryka drogi od środków, minus promienie żetonów
+  // (w prawdziwych metrach rysunku), plus sąsiednie pole 1,5 m jak na mapie taktycznej.
+  if (mierzyDroga(A.parent ?? canvas.scene)) {
+    const ta = a.object ?? a, tb = b.object ?? b;
+    if (!ta?.center || !tb?.center) return null;
+    const d = grid.measurePath([ta.center, tb.center]).distance;
+    const r = t => (Math.max(t.document?.width ?? 1, t.document?.height ?? 1) * grid.distance) / 2;
+    return Math.max(0, d - r(ta) - r(tb) + METRY_KRATKI_POJAZDU);
+  }
   if (!grid.isGridless && typeof A.getOccupiedGridSpaceOffsets === "function") {
     const pa = A.getOccupiedGridSpaceOffsets().map(o => grid.getCenterPoint(o));
     const pb = B.getOccupiedGridSpaceOffsets().map(o => grid.getCenterPoint(o));

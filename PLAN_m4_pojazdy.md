@@ -726,3 +726,15 @@ planszy, a kołysanie pojazdu niesie jego jadących (`poscig-motion.mjs`). Plaki
 pół toru obok → dociągnięcie, recentrowanie z jadącym, plakietka = numer toru z przesunięciem. Quench `poscig` 61/61,
 `pojazdy` 25/25; e2e `poscig` (z nowym krokiem D25 i pomiarami FPS), `nevada-art`, `urban-art` zielone — testy liczą
 pozycje z `torX`/`LANE_W`, kontrola „między torami” to żeton bez roli pościgu (pionków D25 nie wypuszcza z toru).
+
+*P2 — metryka drogi.* `scenes/droga.mjs`: współrzędne drogi (S wzdłuż: 36 m × tor środka wyspy + przesunięcie w
+prawdziwych metrach; T w poprzek: prawdziwe metry), wyspy = prostokąty pionków (+1,5 m), jadący → swój pojazd; łatka na
+**prototypie** `SquareGrid#_measurePath` dla scen planszy (pierwsza wersja łatała instancję — rdzeń buduje siatkę sceny od
+nowa przy każdym resecie danych, łatka ginęła po cichu); ruch żetonu (punkty z `action`/funkcją kosztu) — goła droga.
+Konsumenci: linijka i zasięgi przez `measurePath`, `odlegloscKrawedzi` (gałąź planszy: środki, promienie, sąsiednie pole
+1,5 m), `measureMeters` (plansza — metryka; poza planszą zostaje linia prosta, bo tak liczyło od v14: wywołanie
+`measurePath([{A, B}])` było złe, a `measureDistance` już nie ma), sygnał dronów zdalnych. Reguła D27 w
+`ARCHITECTURE.md` §11. Quench `poscig` 67/67 (przykład MG z dwoma autobusami: 27,4 m do przodu, w jednym autobusie 9 m,
+siatka planszy: linijka po drodze, ruch o dwa tory 72 m). Próba na żywej planszy (autobusy w torach 1 i 2, rzędy 4,5 m,
+strzelec z przodu A, cel z tyłu B, na obrazie cel za strzelcem): linijka 25,8 m, krawędź 26,5 m, rzut 25,8 m (piksele
+dałyby 6,2 m), ruch o tor 36 m, o dwa — 72 m.

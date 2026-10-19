@@ -35,6 +35,7 @@ import {
 import { rodzajKontrolera } from "../items/kontroler.mjs";
 import { isDollActor, inHand } from "./doll.mjs";
 import { isPoscigScene, xNaTor, dystansZnacznikow } from "../scenes/poscig.mjs";
+import { mierzyDroga, odlegloscNaDrodze } from "../scenes/droga.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -124,7 +125,10 @@ export function sygnalDrona(dron, { operator, kontroler = null, scene = canvas?.
   const podZiemia = !!scene.getFlag(MODULE_ID, FLAG_POD_ZIEMIA);
   let odleglosc;
   let sciana = false;
-  if (isPoscigScene(scene)) {
+  if (mierzyDroga(scene)) {
+    // Plansza złożonej drogi (D27): odległość po drodze, z wysokością.
+    odleglosc = odlegloscNaDrodze(scene, a, b);
+  } else if (isPoscigScene(scene)) {
     odleglosc = dystansZnacznikow(xNaTor(a.x), xNaTor(b.x));
   } else {
     const d = scene.dimensions;

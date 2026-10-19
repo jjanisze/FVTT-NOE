@@ -134,6 +134,7 @@ import { registerPoscigCanvas, poscigCanvasApi } from "./scenes/poscig-canvas.mj
 import { registerPoscigUI, poscigUiApi } from "./scenes/poscig-ui.mjs";
 import { registerPoscigSnap, poscigSnapApi } from "./scenes/poscig-snap.mjs";
 import { registerPoscigMotion, poscigMotionApi } from "./scenes/poscig-motion.mjs";
+import { registerDroga, drogaApi } from "./scenes/droga.mjs";
 import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
 import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
@@ -637,9 +638,10 @@ Hooks.once("ready", () => {
   registerPoscigCanvas();
   registerPoscigSnap();
   registerPoscigMotion();
+  registerDroga();
   game.neuroshima.poscig = {
     ...poscigApi, ...poscigUiApi, ...poscigSnapApi, ...poscigMotionApi,
-    tlo: poscigCanvasApi, ruch: poscigMotionApi
+    tlo: poscigCanvasApi, ruch: poscigMotionApi, droga: drogaApi
   };
 
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)

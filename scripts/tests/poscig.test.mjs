@@ -33,6 +33,9 @@ import {
   LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE, METRY_TORU_NA_OBRAZIE, WERSJA_PLANSZY
 } from "../scenes/poscig.mjs";
 import { kratkaPojazdu, trybSceny } from "../pojazdy/stan.mjs";
+import {
+  torCiagly, wyspaPunktuCzysta, naDrodzeCzyste, odlegloscWspolrzednych, podepnijSiatke
+} from "../scenes/droga.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "../scenes/poscig-motion-model.mjs";
@@ -447,6 +450,61 @@ export function registerPoscigTests(quench) {
     });
 
     /* -------------------------------------------- */
+
+    describe("Metryka drogi (D24, D27, PLAN_m4_pojazdy §6.2.2)", function () {
+      const k = 70 / 1.5;                         // px na metr rysunku
+      const busW = 8 * 70, busH = 2 * 70;         // autobus przodem w prawo: 12 m × 3 m
+      const wyspa = (id, tor, y) => ({ id, x: torX(tor) - busW / 2, y, w: busW, h: busH });
+      const A = wyspa("A", 1, 500), B = wyspa("B", 2, 500 + 4.5 * k);
+
+      it("tor ciągły: środek toru n = n, krawędź = n ± 0,5", function () {
+        expect(torCiagly(torX(4))).to.equal(4);
+        expect(torCiagly(torX(4) + LANE_W / 2)).to.equal(4.5);
+      });
+
+      it("przykład MG: przód autobusu A strzela w tył autobusu B o znacznik dalej — ok. 27,4 m do przodu", function () {
+        // Strzelec 4,5 m przed środkiem A, cel 4,5 m za środkiem B; rzędy 4,5 m od siebie. Na obrazie cel jest
+        // ZA strzelcem (smuga do tyłu, D31) — w pomiarze 36 − 9 = 27 m wzdłuż i 4,5 m w poprzek.
+        const strzelec = { x: torX(1) + 4.5 * k, y: A.y + busH / 2 };
+        const cel = { x: torX(2) - 4.5 * k, y: B.y + busH / 2 };
+        expect(cel.x, "na obrazie cel za strzelcem").to.be.below(strzelec.x);
+        const S = p => naDrodzeCzyste(p, wyspaPunktuCzysta(p, [A, B]), k);
+        const d = odlegloscWspolrzednych(S(strzelec), S(cel));
+        expect(Math.abs(d - Math.hypot(27, 4.5))).to.be.below(1e-6);
+        expect(S(cel).s - S(strzelec).s, "cel z przodu").to.be.above(0);
+      });
+
+      it("w jednym pojeździe — prawdziwe metry: przód i tył autobusu są 9 m od siebie", function () {
+        const przod = { x: torX(1) + 4.5 * k, y: A.y + busH / 2 }, tyl = { x: torX(1) - 4.5 * k, y: A.y + busH / 2 };
+        const S = p => naDrodzeCzyste(p, wyspaPunktuCzysta(p, [A, B]), k);
+        expect(Math.abs(odlegloscWspolrzednych(S(przod), S(tyl)) - 9)).to.be.below(1e-6);
+      });
+
+      it("goła droga: tor = 36 m wzdłuż, w poprzek prawdziwe metry", function () {
+        const a = naDrodzeCzyste({ x: torX(3), y: 600 }, null, k), b = naDrodzeCzyste({ x: torX(5), y: 600 + 3 * k }, null, k);
+        expect(Math.abs(odlegloscWspolrzednych(a, b) - Math.hypot(72, 3))).to.be.below(1e-6);
+      });
+
+      it("jadący należy do swojego pojazdu, nawet gdy obrysy na obrazie się nakładają", function () {
+        const nakladka = { id: "C", x: A.x + 100, y: A.y, w: busW, h: busH };
+        const p = { x: A.x + 360, y: A.y + 20 };     // 80 px od środka A, 20 px od środka C
+        expect(wyspaPunktuCzysta(p, [A, nakladka], [{ x: p.x, y: p.y, pojazd: "A" }]).id).to.equal("A");
+        expect(wyspaPunktuCzysta(p, [A, nakladka]).id, "bez jadącego — najbliższy środkiem").to.equal("C");
+      });
+
+      it("siatka planszy: linijka i zasięgi po drodze, ruch żetonu gołą drogą (36 m na tor)", function () {
+        const grid = new foundry.grid.SquareGrid({ size: LANE_W, distance: METRY_TORU_NA_OBRAZIE, units: "m" });
+        const zeton = (id, w) => ({ id, flags: {}, actor: null, _source: { x: w.x, y: w.y, width: w.w / LANE_W, height: w.h / LANE_W },
+          getFlag: (m, kl) => (kl === "poscigRola" ? "scigany" : undefined), getCenterPoint: s => ({ x: s.x + w.w / 2, y: s.y + w.h / 2 }) });
+        const scena = { grid, tokens: [zeton("A", A), zeton("B", B)],
+          getFlag: (m, kl) => (m === MODULE_ID && kl === "poscig" ? { wersja: WERSJA_PLANSZY, tory: 12 } : undefined) };
+        podepnijSiatke(scena);
+        const strzelec = { x: torX(1) + 4.5 * k, y: A.y + busH / 2 }, cel = { x: torX(2) - 4.5 * k, y: B.y + busH / 2 };
+        expect(Math.abs(grid.measurePath([strzelec, cel]).distance - Math.hypot(27, 4.5))).to.be.below(1e-3);
+        const ruch = grid.measurePath([{ x: torX(1), y: 400 }, { x: torX(3), y: 400 }], { cost: () => 1 });
+        expect(Math.abs(ruch.distance - 72)).to.be.below(1e-3);
+      });
+    });
 
     describe("Przyciąganie do torów", function () {
 
