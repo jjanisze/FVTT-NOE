@@ -283,6 +283,16 @@ async function daneTokenu(actor, scene, { tor, rola, zajete = null }) {
   return proto.toObject();
 }
 
+/**
+ * MG: rola pionka w pościgu (`scigany` | `scigajacy`; `null` — poza pościgiem). Pojazd wklejony albo upuszczony na
+ * planszę nie ma roli, więc nie liczy się do przewagi ani recentrowania, póki MG jej nie nada (karta, `poscig-snap.mjs`).
+ */
+export async function ustawRole(tokenDoc, rola) {
+  if (!game.user.isGM || !tokenDoc) return;
+  if (rola === "scigany" || rola === "scigajacy") await tokenDoc.setFlag(MODULE_ID, FLAG_ROLA, rola);
+  else await tokenDoc.unsetFlag(MODULE_ID, FLAG_ROLA);
+}
+
 /** Rozwiązuje aktora z nazwy, id albo samego dokumentu. */
 function _aktor(ref) {
   if (ref instanceof Actor) return ref;
@@ -523,7 +533,7 @@ export function pokazStan(scene = canvas?.scene) {
 }
 
 export const poscigApi = {
-  start, konfiguruj, dodajPojazd, stan, pokazStan,
+  start, konfiguruj, dodajPojazd, ustawRole, stan, pokazStan,
   isPoscigScene, poscigFlag, staraPlansza, pionkiPoscigu, wymiaryPionka,
   torX, xNaTor, dystansZnacznikow,
   LANE_W, METRY_TORU_NA_OBRAZIE, WERSJA_PLANSZY, TORY_DOMYSLNIE, SRODOWISKA, MOTYWY, MOTYW_DOMYSLNY

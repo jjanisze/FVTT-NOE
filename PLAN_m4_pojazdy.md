@@ -738,3 +738,12 @@ Konsumenci: linijka i zasięgi przez `measurePath`, `odlegloscKrawedzi` (gałą�
 siatka planszy: linijka po drodze, ruch o dwa tory 72 m). Próba na żywej planszy (autobusy w torach 1 i 2, rzędy 4,5 m,
 strzelec z przodu A, cel z tyłu B, na obrazie cel za strzelcem): linijka 25,8 m, krawędź 26,5 m, rzut 25,8 m (piksele
 dałyby 6,2 m), ruch o tor 36 m, o dwa — 72 m.
+
+*P3 — jadący na planszy.* Część 1 działa na planszy bez zmian (wyspy w prawdziwej skali, pojazd zawsze „jedzie”,
+domyślna osłona i atak z jadącego pojazdu z części 1). Doszła karta MG „Rola w pościgu?” ([Ścigany] / [Ścigający] /
+[Poza pościgiem], `ustawRole`) dla pojazdu, który stanął na planszy bez roli — wklejony z mapy albo upuszczony z paska
+nie liczyłby się do przewagi i recentrowania. Nowa suita e2e `poscig-jadacy` (MG + dwóch graczy) zielona: Gracz 1
+kierowcą powiązanej Osobówki na mapie → Ctrl+X / Ctrl+V na nową planszę (pojazd 210×105 px przodem w prawo na torze 3,
+jadący 35 px, mapa pusta, karta roli), Gracz 1 prześwietla swój pojazd, Gracz 2 widzi kropkę i nie widzi jadącego,
+przesiadka w rzędzie — karta „Pojazd jedzie”, zasięg do Hammera trzy tory dalej ≈ 108 m (piksele dałyby < 30 m), zmiana
+toru: kierowca w środku, bez obrotu i bez karty jazdy.

@@ -64,6 +64,8 @@ import {
 } from "./poscig.mjs";
 import { PRZEWAGA_KONCZACA } from "../config/vehicles-data.mjs";
 import { jazdaZetonu } from "../pojazdy/stan.mjs";
+import { kartaPostoju, wyslijKarte, zarejestrujAkcje } from "../postoj/karty.mjs";
+import { ustawRole } from "./poscig.mjs";
 
 import { wPasiePoscigu } from "./poscig-motion-model.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -329,9 +331,38 @@ function onMoveToken(doc, movement) {
 /*  Rejestracja                                  */
 /* -------------------------------------------- */
 
+/**
+ * Pojazd na planszy bez roli (wklejony z mapy, upuszczony z paska): aktywny MG dostaje kartę z wyborem roli — bez niej
+ * pionek nie liczy się do przewagi i recentrowania. Nic nie dzieje się samo.
+ */
+function onCreateToken(doc) {
+  if (!game.user.isActiveGM || !poscigFlag(doc.parent) || doc.actor?.type !== "vehicle") return;
+  if (doc.getFlag(MODULE_ID, FLAG_ROLA) || jazdaZetonu(doc)) return;
+  if (!wPasiePoscigu({ poscig: true, y: doc.y, height: doc.height, gridSize: doc.parent.grid.size })) return;
+  const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+  const dane = { token: doc.uuid };
+  wyslijKarte(kartaPostoju({
+    ikona: doc.texture?.src, tytul: "Rola w pościgu?", rodzaj: "info",
+    linie: [`<strong>${esc(doc.name)}</strong> stoi na planszy bez roli — nie liczy się do przewagi ani recentrowania.`],
+    przyciski: [
+      { akcja: "poscig.rola", label: "Ścigany", ikona: "fa-solid fa-person-running", gm: true, dane: { ...dane, rola: "scigany" } },
+      { akcja: "poscig.rola", label: "Ścigający", ikona: "fa-solid fa-crosshairs", gm: true, dane: { ...dane, rola: "scigajacy" } },
+      { akcja: "poscig.rola", label: "Poza pościgiem", ikona: "fa-solid fa-xmark", gm: true, dane: { ...dane, rola: "" } }
+    ]
+  }), { szept: "gm" }).catch(err => console.error(`${MODULE_ID} | pościg: karta roli`, err));
+}
+
 export function registerPoscigSnap() {
   _patchGetSnappedPosition();
   _patchDragSnap();
+  Hooks.on("createToken", onCreateToken);
+  zarejestrujAkcje("poscig.rola", async (_ev, btn, message) => {
+    if (!game.user.isGM) return;
+    const doc = await fromUuid(btn.dataset.token);
+    if (!doc) return message?.delete();
+    await ustawRole(doc, btn.dataset.rola || null);
+    await message?.delete();
+  });
   Hooks.on("preCreateToken", onPreCreateToken);
   Hooks.on("moveToken", onMoveToken);
   Hooks.on("deleteToken", doc => recentruj(doc.parent));
