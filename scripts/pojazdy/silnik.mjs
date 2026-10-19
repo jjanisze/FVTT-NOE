@@ -101,8 +101,15 @@ async function _ustaw(actor, patch) {
   await actor.update({ [`flags.${MODULE_ID}.${FLAGA_SILNIK}`]: { ...stanSilnika(actor), ...patch } });
 }
 
+/** Czas uruchomienia dla kierowcy (Pancerna fura — akcja bonusowa) — podpina `wojownik.mjs`. */
+let _czasUruchomienia = () => "akcja";
+export function ustawCzasUruchomienia(fn) {
+  _czasUruchomienia = fn;
+}
+
 /** Uruchom (akcja; Pancerna fura — akcja bonusowa, E7). */
-export async function uruchom(pojazdDoc, { czas = "akcja" } = {}) {
+export async function uruchom(pojazdDoc, { czas = null } = {}) {
+  czas ??= _czasUruchomienia(pojazdDoc);
   const actor = pojazdDoc.actor;
   if (!maSilnik(actor)) return ui.notifications.info(`${pojazdDoc.name} nie ma silnika — jedzie siłą mięśni.`);
   if (!actor.isOwner) return ui.notifications.warn("Uruchamia kierowca (albo MG).");
@@ -126,7 +133,7 @@ export async function uruchom(pojazdDoc, { czas = "akcja" } = {}) {
   return true;
 }
 
-/** Zgaś — bez kosztu (D7). */
+/** Zgaś — bez kosztu (D7; RAW: zatrzymanie jest częścią jazdy, Pancerna fura daje je w akcji bonusowej). */
 export async function zgas(pojazdDoc) {
   const actor = pojazdDoc.actor;
   if (!actor.isOwner) return ui.notifications.warn("Gasi kierowca (albo MG).");

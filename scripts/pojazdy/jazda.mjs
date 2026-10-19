@@ -31,6 +31,7 @@ import { jedzie, kierowcaPojazdu, zapiszRuch } from "./jadacy.mjs";
 import { maSilnik, stanSilnika } from "./silnik.mjs";
 import { aktywneAwariePojazdu, kartaObrazen } from "./awarie.mjs";
 import { jestWrakiem } from "./wrak.mjs";
+import { ZDOLNOSCI, maZdolnosc, mnoznikSzybkosci } from "./wojownik.mjs";
 
 const FLAGA_TURA = "tura";
 const FLAGA_AKROBATYKA = "akrobatykaPojazdu";
@@ -78,9 +79,9 @@ export function szybkoscPojazdu(pojazdDoc) {
   if (!dane) return 0;
   if (!dane.katalog.silnik) {
     const kier = kierowcaPojazdu(pojazdDoc);
-    return 2 * (Number(kier?.actor?.system?.attributes?.movement?.speeds?.walk) || 0);
+    return Math.round(2 * (Number(kier?.actor?.system?.attributes?.movement?.speeds?.walk) || 0) * mnoznikSzybkosci(pojazdDoc));
   }
-  return Number(actor.system.attributes.movement?.speeds?.walk) || 0;
+  return Math.round((Number(actor.system.attributes.movement?.speeds?.walk) || 0) * mnoznikSzybkosci(pojazdDoc));
 }
 
 /**
@@ -220,7 +221,7 @@ async function _potracenie(doc, pkt) {
   const d = POTRACENIE_WG_ROZMIARU[rozmiar] ?? POTRACENIE_WG_ROZMIARU.lg;
   const miazdzenie = cechy.some(c => c.id === "miazdzenie");
   const kier = kierowcaPojazdu(doc);
-  const taranowanie = !!kier?.actor?.items?.some(i => /taranowanie/i.test(i.name));
+  const taranowanie = maZdolnosc(kier?.actor, ZDOLNOSCI.drzwi);
   const roll = await new Roll(d.ofiara).evaluate();
   const linie = [`<strong>${esc(doc.name)}</strong> przejeżdża przez pola z istotami (s. 262–264). Obrażenia: <strong>${roll.total}</strong> obuchowych (${d.ofiara.replace("d", "k")}).`];
   const przyciski = [];
@@ -308,7 +309,7 @@ function _zrodloAtakuZPojazdu({ attackerToken }) {
   const doc = attackerToken?.document ?? attackerToken;
   const p = doc ? pojazdJadacego(doc) : null;
   if (!p || !jedzie(p) || _zdalAkrobatyke(doc)) return null;
-  if (doc.actor?.items?.some(i => /konwojent/i.test(i.name))) return null;
+  if (maZdolnosc(doc.actor, ZDOLNOSCI.drzwi)) return null; // Konwojent (s. 88)
   return [{ rodzaj: "utrudnienie", label: "Atak z jadącego pojazdu — ZRC (Akrobatyka) ST 10 w tej turze to znosi (s. 261)", strona: "atakujący" }];
 }
 

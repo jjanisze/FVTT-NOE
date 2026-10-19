@@ -268,6 +268,29 @@ COVERAGE = {
         "auto": [("nie łączy się z Drugim atakiem z innej klasy — wyszarzony słabszy", "actors/class-rules.mjs")],
         "manual": "Liczbę ataków w akcji Atakowanie liczy gracz — dnd5e jej nie śledzi.",
     },
+    # Wojownik autostrady (PLAN_m4_pojazdy E7) — poza pościgiem.
+    "drzwi-w-drzwi": {
+        "auto": [
+            ("Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu; Szybkość pojazdu kierowcy +50% w walce "
+             "(budżet ruchu na karcie jazdy)", "pojazdy/wojownik.mjs"),
+            ("Konwojent: bez Utrudnienia za atak z jadącego pojazdu", "pojazdy/jazda.mjs"),
+            ("Taranowanie: karta Potrącenia podaje RO na Zręczność z Utrudnieniem", "pojazdy/jazda.mjs"),
+        ],
+        "manual": "Rajdowiec w pościgu (manewry, Test Pościgu) — część 2 planu pojazdów.",
+    },
+    "kaskader": {
+        "auto": [("karta pojazdu: trik kierowcy — Test MDR (Pojazdy) ST 15 z Ułatwieniem; porażka — 1k10 pojazdowi, "
+                  "o 5+ — karta awarii i 2k6 jadącym (MG klika)", "pojazdy/wojownik.mjs")],
+        "manual": "Czy trik jest w ogóle możliwy (szerokość schodów, długość przepaści, rozbieg) — ocenia MG.",
+    },
+    "pancerna-fura": {
+        "auto": [
+            ("OC: kierowca pojazdu silnikowego w ruchu — efekt +mod. MDR do TT u niego i jadących, zdejmowany, "
+             "gdy pojazd stoi albo ktoś wysiądzie", "pojazdy/wojownik.mjs"),
+            ("AC [B]: uruchomienie silnika w akcji bonusowej (karta)", "pojazdy/silnik.mjs"),
+        ],
+        "manual": "Przyspieszenie, Odstąpienie i Unikanie pojazdem w akcji bonusowej — liczy stół.",
+    },
 
     # ---- Złodziej ----
     "specjalizacja-zlodziej": {"manual": _PICK_ON_SHEET},

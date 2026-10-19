@@ -29,6 +29,7 @@ import { kosztKaroserii, kosztNaprawyAwarii, naprawFachowo, naprawKaroserie, nap
 import { bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij } from "./bron.mjs";
 import { kierowcaPojazdu } from "./jadacy.mjs";
 import { szybkoscPojazdu } from "./jazda.mjs";
+import { ZDOLNOSCI, maZdolnosc, trikKaskadera } from "./wojownik.mjs";
 import { NAPRAWA } from "../config/production-rules.mjs";
 
 const SZABLON = `modules/${MODULE_ID}/templates/pojazdy/zakladka.hbs`;
@@ -97,6 +98,16 @@ function htmlPojazd(actor) {
         ${s.naKrotko ? "" : btn("naKrotko", "Odpal na krótko", { ikona: "fa-solid fa-bolt", tip: "Kierowca, narzędzia mechanika albo elektronika (WKK)" })}
         ${btn("kluczyki", "Utwórz kluczyki", { ikona: "fa-solid fa-key", gm: true, tip: `W stacyjce (ładowni). Id: ${idKluczykow(actor) ?? "—"}` })}
         ${btn("przelaczKrotko", s.naKrotko ? "Przełącz: na kluczyk" : "Przełącz: na krótko", { gm: true })}
+      </div></section>`);
+  }
+
+  // Kaskader (E7, s. 89).
+  const kierowca = tok ? kierowcaPojazdu(tok) : null;
+  if (kierowca && maZdolnosc(kierowca.actor, ZDOLNOSCI.kaskader) && k.silnik) {
+    czesci.push(`<section class="neuro-pojazd-sekcja"><h4><i class="fa-solid fa-person-falling-burst" inert></i> Kaskader — ${esc(kierowca.name)}</h4>
+      <div class="neuro-pojazd-przyciski">
+        <select class="neuro-pojazd-trik"><option value="dwaKola">Na dwóch kółkach</option><option value="schody">Schody to też jezdnia</option><option value="skok">Skoczek</option></select>
+        ${btn("kaskader", "Trik: Pojazdy ST 15 z Ułatwieniem")}
       </div></section>`);
   }
 
@@ -214,6 +225,7 @@ async function akcja(sheet, el) {
     case "miejsca": return tok && otworzMiejsca(tok, zetonUzytkownika(tok.parent));
     case "wysadzWszystkich": return tok && wysadzWszystkich(tok);
     case "wypadnij": { const j = await fromUuid(d.jadacy); return j && wypadnij(j); }
+    case "kaskader": return tok && trikKaskadera(tok, sheet.element.querySelector(".neuro-pojazd-trik")?.value);
     case "rzutAwarii": return rzucAwarie(actor);
     case "zastosujAwarie": return zastosujAwarie(tok ?? actor, Number(sheet.element.querySelector(".neuro-pojazd-k20")?.value) || 1);
     case "usunAwarie": return game.user.isGM && ef(d.efekt)?.delete();

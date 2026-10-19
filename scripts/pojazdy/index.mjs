@@ -17,6 +17,7 @@
  *  - `bron.mjs`        — broń montowana: montaż (Robota / od ręki), zdjęcie, broń za strzelcem
  *  - `katalog.mjs`     — aktor z paczki `pojazdy` (wynik produkcji, Poligon, MG)
  *  - `karta.mjs`       — karta pojazdu: zakładki Pojazd, Załoga, Uzbrojenie, Awarie (podklasa stockowej)
+ *  - `wojownik.mjs`    — Wojownik autostrady: Rajdowiec, Konwojent, Taranowanie, Kaskader, Pancerna fura
  */
 
 import { registerZetonPojazdu, instrukcjePoRuchu, przeswietlany, mozePrzeswietlic } from "./zeton.mjs";
@@ -41,6 +42,7 @@ import { registerJazda, szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akro
 import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron } from "./bron.mjs";
 import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
 import { registerKarta, zetonPojazdu } from "./karta.mjs";
+import { registerWojownik, maZdolnosc, trikKaskadera, synchronizujOC } from "./wojownik.mjs";
 import * as geometria from "./geometria.mjs";
 
 export function registerPojazdy() {
@@ -56,6 +58,7 @@ export function registerPojazdy() {
   registerBron();
   registerKatalog();
   registerKarta();
+  registerWojownik();
 }
 
 export const pojazdyApi = {
@@ -69,6 +72,7 @@ export const pojazdyApi = {
   AWARIE_POJAZDOW, efektyAwarii, aktywneAwariePojazdu, zaproponujAwarie, rzucAwarie, zastosujAwarie, kartaObrazen, zegaryPojazdu,
   zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem,
   bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron, utworzZKatalogu, zetonPojazdu,
+  maZdolnosc, trikKaskadera, synchronizujOC,
   szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
   naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote,
   /** MG: posadzenie od razu, bez kosztów i kart (testy, Poligon). */

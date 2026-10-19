@@ -1149,7 +1149,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Drzwi w drzwi",
     action: null,
-    auto: [],
+    auto: [{ what: "Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu; Szybkość pojazdu kierowcy +50% w walce (budżet ruchu na karcie jazdy)", where: "pojazdy/wojownik.mjs" }, { what: "Konwojent: bez Utrudnienia za atak z jadącego pojazdu", where: "pojazdy/jazda.mjs" }, { what: "Taranowanie: karta Potrącenia podaje RO na Zręczność z Utrudnieniem", where: "pojazdy/jazda.mjs" }],
+    manual: "Rajdowiec w pościgu (manewry, Test Pościgu) — część 2 planu pojazdów.",
     text: "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność."
   },
   "kaskader": {
@@ -1160,7 +1161,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Kaskader",
     action: null,
-    auto: [],
+    auto: [{ what: "karta pojazdu: trik kierowcy — Test MDR (Pojazdy) ST 15 z Ułatwieniem; porażka — 1k10 pojazdowi, o 5+ — karta awarii i 2k6 jadącym (MG klika)", where: "pojazdy/wojownik.mjs" }],
+    manual: "Czy trik jest w ogóle możliwy (szerokość schodów, długość przepaści, rozbieg) — ocenia MG.",
     text: "Twoje wyczyny za kierownicą przerażają twoich pasażerów. Kierując dowolnym pojazdem silnikowym, potrafisz wykonywać triki jak filmowy kaskader. Schody to też jezdnia. Potrafisz jeździć pojazdem po schodach (jeśli się zmieścisz wszerz i na zakrętach) z pełną Szybkością pojazdu. Skoczek. Przeskakujesz pojazdem przez dziury i przepaści o czterokrotnej długości twojego pojazdu, jeśli się rozpędzisz na odległości 60 metrów. Na dwóch kółkach. Umiesz jechać na dwóch bocznych kołach, żeby zmieścić się w wąskiej uliczce lub pomiędzy dwiema ciężarówkami. Każda z tych czynności wymaga Testu Mądrości (Pojazdy) o ST 15, który wykonujesz z Ułatwieniem. Porażka w teście oznacza, że pojazd uległ małym uszkodzeniom. Porażka o 5 i więcej, oznacza awarię pojazdu i obrażenia u pasażerów."
   },
   "pancerna-fura": {
@@ -1171,7 +1173,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Pancerna fura",
     action: null,
-    auto: [],
+    auto: [{ what: "OC: kierowca pojazdu silnikowego w ruchu — efekt +mod. MDR do TT u niego i jadących, zdejmowany, gdy pojazd stoi albo ktoś wysiądzie", where: "pojazdy/wojownik.mjs" }, { what: "AC [B]: uruchomienie silnika w akcji bonusowej (karta)", where: "pojazdy/silnik.mjs" }],
+    manual: "Przyspieszenie, Odstąpienie i Unikanie pojazdem w akcji bonusowej — liczy stół.",
     text: "Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie."
   },
   "jak-dbasz-tak-masz": {
