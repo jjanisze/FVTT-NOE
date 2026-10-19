@@ -204,12 +204,13 @@ export function dostepZObecnosci(actor) {
 }
 
 /**
- * Poziom, który wraca po wysiadce. Aktor świata: brak wpisu → klucz usunięty. Aktor żetonu niepowiązanego
- * (delta): `_del` w delcie nie działa, a `INHERIT` (-1) zapętla `getUserLevel` rdzenia 14 (sprawdzone
- * 2026-10-19) — więc wpisujemy wprost poziom aktora bazowego.
+ * Poziom, który wraca po wysiadce. Aktor świata: brak wpisu → `INHERIT` (-1, „domyślny”) — `_del` w mapie
+ * `ownership` nie przechodzi walidacji („is not a mapping of user IDs…”). Aktor żetonu niepowiązanego (delta):
+ * `_del` w delcie nie działa, a `INHERIT` zapętla `getUserLevel` rdzenia 14 (sprawdzone 2026-10-19) — więc
+ * wpisujemy wprost poziom aktora bazowego.
  */
 function poziomPrzywracany(actor, uid, poprzedni) {
-  if (!actor.isToken) return poprzedni === null ? _del : poprzedni;
+  if (!actor.isToken) return poprzedni === null ? CONST.DOCUMENT_OWNERSHIP_LEVELS.INHERIT : poprzedni;
   if (poprzedni !== null && poprzedni >= 0) return poprzedni;
   const baza = game.actors.get(actor.token?.actorId ?? actor.id);
   return baza?.ownership?.[uid] ?? baza?.ownership?.default ?? 0;

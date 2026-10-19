@@ -104,6 +104,23 @@ the chamber as a separate slot with its own caliber, and the dominant-round rule
 Also WKK: pushing a single round into a removable-magazine weapon against a Zwinne dłonie
 check (author's idea, this table's numbers — `wkk/config/pojedynczy-naboj.mjs`).
 
+### Vehicles (M4) — RAI interpolation and WKK, in the NOE tree
+
+`PLAN_m4_pojazdy.md` D6, D12, D15, D16, D19. Each piece is marked in its data or doc comment; none of it is spliced
+from `wkk/` because it is woven through the vehicle subsystem, not a separable catalogue entry. A RAW-only build
+would drop the rows marked WKK here.
+
+| Mechanic | Layer | Where |
+|---|---|---|
+| Stats, size and footprint of the ten vehicles without a statblock — interpolated from the four RAW statblocks | RAI | `config/vehicles-data.mjs` (`KATALOG_POJAZDOW`, `zrodloStatystyk`) |
+| Own traits: Gąsienice, Otwarta rama, Wieżyczka, Paka, Działko wodne, Syrena, Lemiesz, Wolny jak walec, Wieża, Pancerne wnętrze, Miażdżenie, Desant, Strzelnice, Uciąg, Oszczędny, Ollie; Terenówka and Potrącenie carried to vehicles without a statblock (RAI) | WKK / RAI | `config/vehicles-data.mjs` (`CECHY_POJAZDOW`, `warstwa`) |
+| Keys fit one vehicle; hot-wiring with mechanic or electronics tools, DC by class, alarm / mishap 17 | WKK | `pojazdy/silnik.mjs` |
+| Changing rows in a moving vehicle always takes Acrobatics | WKK | `pojazdy/jadacy.mjs` (`kosztPrzesiadki`) |
+| Dropped inside a vehicle → its cargo | WKK | `pojazdy/jadacy.mjs`, `actors/ground-items.mjs` (`zarejestrujLadownieUpuszczenia`) |
+| Mounting a weapon is a production Robota (Trochę roboty from the weapon's price); the gunner holds it at no weight | WKK | `pojazdy/bron.mjs` |
+| Repairs: part price = 10% of the vehicle's price, DC → repair tier, body repair 2k6 + INT per hour, wreck rebuild | WKK (GM: „improwizuj”, D19) | `pojazdy/naprawy.mjs` |
+| A burning wreck with fuel explodes after k4 rounds (fire by size, DEX save DC 15 for half) | WKK | `pojazdy/wrak.mjs` |
+
 ## What's actually in here
 
 | File | What it holds |

@@ -64,7 +64,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Niszczenie obiektów, broń improwizowana (reguła ogólna), latanie | ❌ | M6 (Pochodnia to jedyny przykład broni improwizowanej) |
 | | Walka na wierzchowcu, pływanie, skakanie | ❌ | M6 — karta referencyjna |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
-| | Karta pojazdu, manewry, awarie k20, komplikacje, wsiadanie/wypadanie | ❌ | M4, `PLAN_poscigi.md` §10 |
+| | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami, wrak i wybuch baku, broń montowana, Wojownik autostrady | ✅ | `scripts/pojazdy/*`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`. Grafika i dźwięki — atrapy do dostawy (MISSING §P) |
+| | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ❌ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2) |
 
 ## Files
 
@@ -200,7 +201,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/surowce-inventory.mjs` | Panel „Surowce" w Ekwipunku — 5 typów (CH/CE/CZ/MK/MO) wyciągnięte z Używek jako osobne pule z paskiem wagi. Żywe, wpięte w `main.mjs`; dopisane do tabeli 2026-08-21, wcześniej brakowało wiersza mimo że kod istniał od dawna |
 | `scripts/actors/zbrojownia-sync.mjs` | Narzędzie GM: jeden NPC jako kanoniczna „Zbrojownia" — przycisk w nagłówku karty synchronizuje broń z jego ekwipunku do folderów w World Items |
 | `scripts/actors/sheet-shell.mjs` | Powłoka arkusza (§1.15) — podklasy `NeuroshimaCharacterSheet`/`NeuroshimaNPCSheet` (tylko `PARTS`/`TABS`), zakładka Zasoby, panel Stan, skrót ZR/WY. Rejestracja w `ready`, hook renderowania rejestrowany jako ostatni w `main.mjs` |
-| `scripts/actors/vehicle-portrait.mjs` | Karta Pojazdu (§1.15a) — przełącznik Portret/Token na żywym DOM stockowego `VehicleActorSheet` dnd5e (brak własnej podklasy Neuroshimy dla pojazdów) |
+| `scripts/actors/vehicle-portrait.mjs` | Karta Pojazdu (§1.15a) — przełącznik Portret/Token na żywym DOM karty pojazdu (stockowej i podklasy M4 — `renderVehicleActorSheet` odpala dla obu) |
+| `scripts/pojazdy/*.mjs` | M4 Pojazdy (`PLAN_m4_pojazdy.md`): `stan` (flagi, obrys, miejsca), `geometria` (czyste funkcje), `zeton` (podklasa żetonu: obrys, jadący w animacji, ukrycie, kropki, prześwietlenie), `jadacy` + `okno-miejsc` (wsiadanie, przesiadka, wysiadka, dostęp z obecności), `silnik` + `efekty-silnika`, `jazda`, `awarie`, `wrak`, `naprawy`, `bron`, `katalog`, `karta`, `wojownik`; API `game.neuroshima.pojazdy` |
 | `scripts/actors/class-resource-dice.mjs` | Zdolności „raz na rundę, N kości" (Phase 3) — Wściekły cios wdrożony i przetestowany, mechanizm generyczny po `resource`/`oncePerTurn`, reszta rodziny czeka na osobny przebieg |
 | `templates/tab-zasoby.hbs` | Pusta skorupa zakładki Zasoby — wypełniana po renderze przez `sheet-shell.mjs` |
 | `scripts/dev/token-sizes.mjs` | Tabela rozmiarów + wzorce dnd5e + `storedScale()` — wspólna dla obu szaf i paczki testowej |
