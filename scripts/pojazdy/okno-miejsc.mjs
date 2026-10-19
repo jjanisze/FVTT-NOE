@@ -13,6 +13,7 @@ import {
   ZASIEG_WSIADANIA_M, ST_PRZESIADKI
 } from "./jadacy.mjs";
 import { maSilnik, przelaczSwiatla, stanSilnika, uruchom, zgas } from "./silnik.mjs";
+import { akrobatykaPrzedAtakiem } from "./jazda.mjs";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 const okna = new Map();
@@ -193,6 +194,7 @@ function _onRenderTokenHUD(hud, html) {
   if (pojazd && doc.isOwner) {
     kol.append(_przycisk("fa-solid fa-chair", `Miejsca w ${pojazd.name} — przesiądź się`, () => otworzMiejsca(pojazd, doc)));
     kol.append(_przycisk("fa-solid fa-door-open", `Wysiądź z ${pojazd.name}`, () => wysiadz(doc)));
+    if (jedzie(pojazd)) kol.append(_przycisk("fa-solid fa-person-falling", "Przed atakiem: ZRC (Akrobatyka) ST 10 (s. 261)", () => akrobatykaPrzedAtakiem(doc)));
   }
 }
 

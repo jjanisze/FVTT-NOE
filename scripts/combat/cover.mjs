@@ -71,6 +71,24 @@ const COVER_SELECTIONS = Object.freeze({
  * @param {{selection: string}|null|undefined} neuroCover
  * @returns {number}
  */
+/** @type {((targetToken: Token|null) => string|null)[]} Domyślna osłona celu w oknie ataku (np. jadący w pojeździe, M4). */
+const _domyslneOslony = [];
+
+/** Rejestruje źródło domyślnej osłony celu: zwraca klucz wyboru („half”, „threeQuarters”) albo null. */
+export function zarejestrujDomyslnaOslone(fn) {
+  _domyslneOslony.push(fn);
+}
+
+function _domyslnaOslona(token) {
+  for (const fn of _domyslneOslony) {
+    try {
+      const k = fn(token);
+      if (k && COVER_SELECTIONS[k]) return k;
+    } catch (err) { console.error(`${MODULE_ID} | domyślna osłona`, err); }
+  }
+  return null;
+}
+
 export function coverAcBonus(neuroCover) {
   if (!neuroCover?.selection) return 0;
   const selection = COVER_SELECTIONS[neuroCover.selection] ?? COVER_SELECTIONS.none;
@@ -294,7 +312,8 @@ function registerAttackCoverIntegration() {
       const coverContext = {
         baseAc: targetContext.baseAc,
         targetName: targetContext.token?.name ?? "cel",
-        allowThrough: _isFirearmItem(this.item)
+        allowThrough: _isFirearmItem(this.item),
+        domyslna: _domyslnaOslona(targetContext.token)
       };
       const nextDialog = foundry.utils.mergeObject(
         foundry.utils.deepClone(dialog),
@@ -453,7 +472,7 @@ function _patchAttackConfigDialog() {
       field: new foundry.data.fields.StringField({ label: "Osłona celu", blank: false, required: true }),
       name: "neuroCoverSelection",
       options: coverOptions,
-      value: "none"
+      value: coverOptions.some(o => o.value === coverCtx.domyslna) ? coverCtx.domyslna : "none"
     };
 
     context.fields = [coverField, ...context.fields];

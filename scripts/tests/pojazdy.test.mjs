@@ -20,6 +20,7 @@ import {
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
 import { kosztPrzesiadki } from "../pojazdy/jadacy.mjs";
+import { skretyNaDrodze } from "../pojazdy/jazda.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
@@ -123,6 +124,22 @@ export function registerPojazdyTests(quench) {
       it("WKK: zmiana rzędu w jadącym pojeździe zawsze z testem; w stojącym nigdy", function () {
         expect(kosztPrzesiadki(kier, tylL, { jedzie: true }).wymagaTestu).to.be.true;
         expect(kosztPrzesiadki(kier, tylL, { jedzie: false }).wymagaTestu).to.be.false;
+      });
+    });
+
+    describe("Skręty z ruchu (D10)", function () {
+      it("prosto: brak skrętów; ruszenie w bok od postoju to skręt", function () {
+        // Pojazd stoi przodem w dół (0°) i jedzie w dół: nic.
+        expect(skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 0, y: 300 }])).to.have.length(0);
+        // Stoi przodem w dół, rusza w prawo (obrót 270°): skręt 90°.
+        const s = skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 300, y: 0 }]);
+        expect(s).to.have.length(1);
+        expect(s[0].rodzaj).to.equal("skret");
+      });
+
+      it("zawrócenie to obrót 180° (ST 20), łagodny łuk < 67,5° — nic", function () {
+        expect(skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 0, y: 300 }, { x: 0, y: 0 }]).map(s => s.rodzaj)).to.deep.equal(["obrot"]);
+        expect(skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 0, y: 300 }, { x: 100, y: 500 }])).to.have.length(0);
       });
     });
 
