@@ -53,8 +53,9 @@ flowchart LR
    `config/dnd5e-fixes.mjs` do zdjęcia po poprawce.
 4. **M4 Pojazdy — w całości, przed betą; przed M6** (MG, 2026-10-18) — **plan:
    [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)**: część 1 (pojazdy na mapie taktycznej, jadący, silnik, awarie, naprawy)
-   — **zrobiona 2026-10-19 (E0–E8), do weta MG na Poligonie (Garaż), §10 planu**; część 2 (pościg) — osobna runda
-   pytań. Grafika i dźwięki — atrapy do dostawy (MISSING §P).
+   — **zrobiona 2026-10-19 (E0–E8), do weta MG na Poligonie (Garaż), §10 planu**; część 1b (pojazdy między scenami,
+   E9–E11) i część 2 (plansza od nowa — złożona droga, P1–P6) zaprojektowane 2026-10-19 (§4.14–§4.16, §6.2 planu),
+   mechanika pościgu — runda pytań przed P5. Grafika i dźwięki — atrapy do dostawy (MISSING §P).
 5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
@@ -292,7 +293,11 @@ ze Stopniem Zranienia umierają jak BG, **Emiter EMP** z D27. Szukanie nowego to
 
 ### M4 — Pojazdy: domknięcie rozdziału (M–L) — przed betą, w całości (MG, 2026-10-18)
 
-Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
+Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_m4_pojazdy.md` §6.2 (plansza od nowa, 2026-10-19),
+grafika planszy — `PLAN_poscigi.md` §2.2.
+
+- [ ] Pojazdy między scenami: skala w metrach, pamięć obsady, Ctrl+X / Ctrl+V z załogą (M4 E9–E11)
+- [ ] Plansza — złożona droga, metryka drogi, jadący na planszy, serie z celowaniem (M4 P1–P4)
 
 - [x] Tabela Awarii pojazdów k20 (s. 265) + wyzwalacz (≥ Próg awarii, porażka kierowcy o 5+) — `pojazdy/awarie.mjs`
   (M4 część 1, 2026-10-19)

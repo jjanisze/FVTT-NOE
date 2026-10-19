@@ -16,7 +16,10 @@ Delete this file when M4 part 2 starts from a fresh plan round or part 1 is veto
 ## For the GM
 
 1. Veto list and known gaps: `PLAN_m4_pojazdy.md` §10. Everything there is judged at Garaż (26 probes).
-2. Decide part 2 (chase) questions — `PLAN_m4_pojazdy.md` §6.2.
+2. Round 5 (2026-10-19) decided vehicles between scenes (D20–D23, part 1b: E9–E11, §4.14–§4.16) and the chase board
+   rewrite (D24–D31, folded road, §6.2). Next step: **E9** — it also fixes the chase board that part 1 breaks.
+3. Chase mechanics (manoeuvres, Test Pościgu, complications, a vehicle hit by a burst) — question round before P5
+   (§6.2.5, §10).
 
 ## For the asset session
 

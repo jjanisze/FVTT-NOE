@@ -6,7 +6,11 @@
 > tabel k20. Stan po punktach — §10.
 >
 > **2026-10-18: karta pojazdu, manewry, awarie i komplikacje (§4–§7) projektuje od nowa
-> [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)** — tamten plan wygrywa przy rozbieżności. Plansza (§2) zostaje tutaj.
+> [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)** — tamten plan wygrywa przy rozbieżności.
+>
+> **2026-10-19: geometria planszy (§2.1, §2.3–§2.6) i D2 („tylko pojazdy na planszy”) są zastąpione** — złożona
+> droga: tory 280 px mierzone jako 36 m, pojazdy w prawdziwej skali, jadący na planszy jako żetony, metryka drogi dla
+> zasięgów i obszarów: [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md) §6.2. Grafika planszy (§2.2) zostaje tutaj.
 >
 > Dokument projektowy — pisz tutaj, implementuj w `scripts/scenes/poscig-*.mjs`,
 > `scripts/actors/vehicle-sheet.mjs`, `scripts/config/vehicles-data.mjs`.
