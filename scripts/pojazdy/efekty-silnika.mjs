@@ -13,7 +13,7 @@
  *    pliku (zamówienie w MISSING §P) = cisza, nie błąd.
  */
 
-import { MODULE_ID, danePojazdu, jadacyPojazdu, jestZetonemPojazdu } from "./stan.mjs";
+import { MODULE_ID, danePojazdu, jadacyPojazdu, jestZetonemPojazdu, kratkaPojazdu, obrysDziala } from "./stan.mjs";
 import { obroc } from "./geometria.mjs";
 import { FLAGA_SILNIK, stanSilnika } from "./silnik.mjs";
 
@@ -47,7 +47,7 @@ export function punktRury(tokenDoc) {
   const dane = danePojazdu(tokenDoc.actor);
   const rura = dane?.katalog.rura;
   if (!rura) return null;
-  const kratka = tokenDoc.parent.grid.size;
+  const kratka = kratkaPojazdu(tokenDoc.parent);
   const { w, h } = dane.obrys;
   // Kadr grafiki przodem w dół: x od lewej, y od góry → układ pojazdu (+x lewa burta = prawo ekranu, +y przód = dół).
   const lok = { x: (rura[0] - 0.5) * w * kratka, y: (rura[1] - 0.5) * h * kratka };
@@ -70,11 +70,10 @@ function _zatrzymajDym(id) {
 function _uruchomDym(token) {
   const doc = token.document;
   const z = zestawPojazdu(doc.actor);
-  if (!z || generatory.has(doc.id)) return;
+  if (!z || generatory.has(doc.id) || !obrysDziala(doc.parent)) return;
   const PG = foundry.canvas.animation?.ParticleGenerator;
   if (!PG) return;
-  const kratka = doc.parent.grid.size;
-  const k = kratka / 100;
+  const k = kratkaPojazdu(doc.parent) / 100;
   let budzet = 0;
   let tyl = { x: 0, y: -1 };
   const gen = new PG({
@@ -147,7 +146,7 @@ function _drgania() {
     if (!t || t.destroyed || !t.mesh) continue;
     const z = zestawPojazdu(t.document.actor);
     if (!z || !wl) continue;
-    const k = t.document.parent.grid.size / 100;
+    const k = kratkaPojazdu(t.document.parent) / 100;
     const faza = (id.charCodeAt(0) % 7) * 0.9;
     const dx = Math.sin(teraz * z.hz * 6.283 + faza) * z.amp * k;
     const dy = Math.sin(teraz * z.hz * 1.37 * 6.283 + faza * 2) * z.amp * 0.7 * k;

@@ -34,10 +34,10 @@ export function obrysPrzyObrocie(naturalny, rotacja) {
   return kwadrant(rotacja) % 2 ? { w: naturalny.h, h: naturalny.w } : { w: naturalny.w, h: naturalny.h };
 }
 
-/** Czy obrys żetonu `{w, h}` jest naturalnym obrysem obróconym o 90°. */
+/** Czy obrys żetonu `{w, h}` (kratki pojazdu) jest naturalnym obrysem obróconym o 90°. */
 export function obrysZamieniony(naturalny, w, h) {
   if (naturalny.w === naturalny.h) return false;
-  return w === naturalny.h && h === naturalny.w;
+  return Math.abs(w - naturalny.h) < 1e-3 && Math.abs(h - naturalny.w) < 1e-3;
 }
 
 /**

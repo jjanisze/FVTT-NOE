@@ -25,7 +25,7 @@ import { freeHands } from "../actors/doll.mjs";
 import { hasToolKit } from "../actors/tool-availability.mjs";
 import { getPaliwo } from "../actors/party-travel.mjs";
 import { ST_NA_KROTKO } from "../config/vehicles-data.mjs";
-import { MODULE_ID, FLAGA_POJAZD, danePojazdu, jestPojazdem } from "./stan.mjs";
+import { MODULE_ID, FLAGA_POJAZD, danePojazdu, jestPojazdem, metryJednostki, obrysDziala } from "./stan.mjs";
 import { kierowcaPojazdu } from "./jadacy.mjs";
 
 export const FLAGA_SILNIK = "silnik";
@@ -152,13 +152,20 @@ export async function przelaczSwiatla(pojazdDoc, wl = null) {
   await ustawSwiatloZetonow(actor, nowy);
 }
 
-/** Światło żetonów pojazdu na scenach: stożek ok. 60° do przodu, jasne 18 m, przyćmione 36 m. */
+/**
+ * Światło żetonów pojazdu na scenach: stożek ok. 60° do przodu, jasne 18 m, przyćmione 36 m — w jednostkach
+ * każdej sceny (na mapie w km to 0,018 km). Na scenie-znaczniku pojazd nie świeci (§4.14).
+ */
 export async function ustawSwiatloZetonow(actor, wl) {
-  const swiatlo = wl
-    ? { angle: 60, bright: 18, dim: 36, color: "#ffe9b0", alpha: 0.45, luminosity: 0.5, attenuation: 0.6 }
-    : { angle: 360, bright: 0, dim: 0 };
   const zetony = actor.isToken ? [actor.token] : game.scenes.contents.flatMap(s => s.tokens.filter(t => t.actorLink && t.actorId === actor.id));
-  for (const t of zetony) if (t.isOwner) await t.update({ light: swiatlo });
+  for (const t of zetony) {
+    if (!t.isOwner) continue;
+    const mj = metryJednostki(t.parent);
+    const swiatlo = wl && obrysDziala(t.parent)
+      ? { angle: 60, bright: 18 / mj, dim: 36 / mj, color: "#ffe9b0", alpha: 0.45, luminosity: 0.5, attenuation: 0.6 }
+      : { angle: 360, bright: 0, dim: 0 };
+    await t.update({ light: swiatlo });
+  }
 }
 
 /* -------------------------------------------- */
@@ -258,6 +265,8 @@ export function registerSilnik() {
   Hooks.on("preCreateToken", (doc, data, options) => {
     if (doc.actorLink || options.isPaste || !jestPojazdem(doc.actor)) return;
     if (foundry.utils.getProperty(data, `delta.flags.${MODULE_ID}.${FLAGA_POJAZD}.id`)) return;
-    doc.updateSource({ [`delta.flags.${MODULE_ID}.${FLAGA_POJAZD}.id`]: foundry.utils.randomID() });
+    // Obiekt, nie ścieżka z kropkami: pusta delta (`{}` z `getTokenDocument().toObject()`) dostaje przy ścieżce
+    // tylko `flags` i nie przechodzi walidacji (`_id`, `system`… „may not be undefined”) — żeton się nie tworzy.
+    doc.updateSource({ delta: { flags: { [MODULE_ID]: { [FLAGA_POJAZD]: { id: foundry.utils.randomID() } } } } });
   });
 }

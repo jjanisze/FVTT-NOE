@@ -24,7 +24,8 @@ import { zarejestrujDomyslnaOslone } from "../combat/cover.mjs";
 import { change, CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { POTRACENIE_WG_ROZMIARU, ROZMIAR_MASZYNY, cechyPojazdu } from "../config/vehicles-data.mjs";
 import {
-  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, miejsceOId, pojazdJadacego
+  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, kratkaPojazdu, miejsceOId,
+  pojazdJadacego, trybSceny
 } from "./stan.mjs";
 import { obroc, roznicaKatow } from "./geometria.mjs";
 import { jedzie, kierowcaPojazdu, zapiszRuch } from "./jadacy.mjs";
@@ -92,14 +93,16 @@ export function szybkoscPojazdu(pojazdDoc) {
  */
 export function potraceniNaDrodze(pojazdDoc, punkty, kandydaci) {
   const dane = danePojazdu(pojazdDoc.actor);
+  const kp = kratkaPojazdu(pojazdDoc.parent);
   const kratka = pojazdDoc.parent.grid.size;
   const trafieni = new Set();
+  if (!kp) return [];
   for (let i = 1; i < punkty.length; i++) {
     const a = punkty[i - 1], b = punkty[i];
     const dl = Math.hypot(b.x - a.x, b.y - a.y);
     if (dl < 1) continue;
     const rot = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI - 90;
-    const n = Math.max(1, Math.ceil(dl / (kratka / 4)));
+    const n = Math.max(1, Math.ceil(dl / (kp / 4)));
     for (let s = 1; s <= n; s++) {
       const p = { x: a.x + (b.x - a.x) * s / n, y: a.y + (b.y - a.y) * s / n };
       for (const t of kandydaci) {
@@ -107,7 +110,7 @@ export function potraceniNaDrodze(pojazdDoc, punkty, kandydaci) {
         const c = t.getCenterPoint(t._source);
         const lok = obroc({ x: c.x - p.x, y: c.y - p.y }, -rot);
         const pol = Math.min(t._source.width, t._source.height) * kratka * 0.25;
-        if (Math.abs(lok.x) <= dane.obrys.w * kratka / 2 + pol && Math.abs(lok.y) <= dane.obrys.h * kratka / 2 + pol) trafieni.add(t);
+        if (Math.abs(lok.x) <= dane.obrys.w * kp / 2 + pol && Math.abs(lok.y) <= dane.obrys.h * kp / 2 + pol) trafieni.add(t);
       }
     }
   }
@@ -124,6 +127,8 @@ function _tura(actor) {
 
 async function _onMoveToken(doc, movement) {
   if (!game.users.activeGM?.isSelf || !jestZetonemPojazdu(doc)) return;
+  // Karty jazdy tylko na mapie taktycznej: plansza pościgu ma własne zasady (PLAN §6.2), znacznik nie jedzie.
+  if (trybSceny(doc.parent) !== "taktyczna") return;
   if (movement.passed.waypoints.every(w => w.action === "displace")) return;
   const actor = doc.actor;
   const startowy = _obrotPrzed.get(doc.id) ?? doc._source.rotation;
@@ -197,7 +202,7 @@ function _regionTrudny(region) {
 function _przezTrudnyTeren(doc, pkt) {
   const regiony = doc.parent.regions.filter(_regionTrudny);
   if (!regiony.length) return false;
-  const krok = doc.parent.grid.size / 2;
+  const krok = kratkaPojazdu(doc.parent) / 2 || doc.parent.grid.size / 2;
   for (let i = 1; i < pkt.length; i++) {
     const a = pkt[i - 1], b = pkt[i];
     const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / krok));

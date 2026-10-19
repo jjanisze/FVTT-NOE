@@ -22,11 +22,11 @@ import { doMG, zarejestrujProsbe } from "../postoj/przekaznik.mjs";
 import { kartaPostoju, wyslijKarte } from "../postoj/karty.mjs";
 import { zarejestrujLadownieUpuszczenia } from "../actors/ground-items.mjs";
 import {
-  MODULE_ID, FLAGA_JAZDA, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, miejscaPojazdu,
-  miejsceOId, pojazdJadacego
+  MODULE_ID, FLAGA_JAZDA, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu, miejscaPojazdu,
+  miejsceOId, obrysDziala, pojazdJadacego, rozmiarMiejsca, skalaPojazdu, trybSceny
 } from "./stan.mjs";
 import {
-  ROZMIAR_MIEJSCA, naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
+  naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
 } from "./geometria.mjs";
 
 const FLAGA_DOSTEP = "dostep";
@@ -64,6 +64,8 @@ export function miejsceJadacego(jadacyDoc) {
  * MG po każdym ruchu pojazdu w walce (`zapiszRuch`); poza walką pojazd nie ma tur — stoi.
  */
 export function jedzie(pojazdDoc) {
+  // Na planszy pościgu pojazd jedzie zawsze (PLAN §6.2.5).
+  if (trybSceny(pojazdDoc?.parent) === "plansza") return true;
   const r = pojazdDoc?.actor?.flags?.[MODULE_ID]?.[FLAGA_RUCH];
   const walka = game.combat;
   if (!r || !walka?.started || r.walka !== walka.id) return false;
@@ -82,15 +84,17 @@ export async function zapiszRuch(pojazdDoc) {
 /** Odległość (m) między krawędzią żetonu a obrysem pojazdu. */
 export function odlegloscOdPojazdu(jadacyDoc, pojazdDoc) {
   const dane = danePojazdu(pojazdDoc.actor);
-  const kratka = pojazdDoc.parent.grid.size;
+  const scena = pojazdDoc.parent;
+  const kp = kratkaPojazdu(scena);
+  if (!kp) return Infinity;
   const sc = pojazdDoc.getCenterPoint(pojazdDoc._source);
   const jc = jadacyDoc.getCenterPoint(jadacyDoc._source);
   const lok = obroc({ x: jc.x - sc.x, y: jc.y - sc.y }, -pojazdDoc._source.rotation);
-  const dx = Math.max(0, Math.abs(lok.x) - dane.obrys.w * kratka / 2);
-  const dy = Math.max(0, Math.abs(lok.y) - dane.obrys.h * kratka / 2);
-  const pol = Math.min(jadacyDoc._source.width, jadacyDoc._source.height) * kratka / 2;
+  const dx = Math.max(0, Math.abs(lok.x) - dane.obrys.w * kp / 2);
+  const dy = Math.max(0, Math.abs(lok.y) - dane.obrys.h * kp / 2);
+  const pol = Math.min(jadacyDoc._source.width, jadacyDoc._source.height) * scena.grid.size / 2;
   const px = Math.max(0, Math.hypot(dx, dy) - pol);
-  return px / kratka * pojazdDoc.parent.grid.distance;
+  return px / kp * 1.5;
 }
 
 const ZACIETE_DRZWI = "Zacięte drzwi (awaria 6): otwarcie albo zamknięcie — Test SIŁ (Atletyka) albo ZRC (Zwinne dłonie) ST 10.";
@@ -133,23 +137,26 @@ const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 function poleWysiadki(pojazdDoc, jadacyDoc, miejsce) {
   const scena = pojazdDoc.parent;
   const kratka = scena.grid.size;
+  const kp = kratkaPojazdu(scena);
   const dane = danePojazdu(pojazdDoc.actor);
   const { w, h } = jazdaZetonu(jadacyDoc)?.rozmiar ?? { w: 1, h: 1 };
+  // Kandydaci w kratkach pojazdu; rozmiar postaci jest w kratkach sceny.
+  const bokPostaci = Math.max(w, h) / (skalaPojazdu(scena) || 1);
   const sc = pojazdDoc.getCenterPoint(pojazdDoc._source);
   const rot = pojazdDoc._source.rotation;
   const bok = (miejsce?.x ?? 1) >= 0 ? 1 : -1;
   const y0 = miejsce?.y ?? 0;
-  const odstep = dane.obrys.w / 2 + Math.max(w, h) / 2 + 0.05;
+  const odstep = dane.obrys.w / 2 + bokPostaci / 2 + 0.05;
   const kandydaci = [];
   for (const s of [bok, -bok]) for (const dy of [0, 0.75, -0.75, 1.5, -1.5]) kandydaci.push({ x: s * odstep, y: y0 + dy });
-  kandydaci.push({ x: 0, y: -(dane.obrys.h / 2 + Math.max(w, h) / 2 + 0.05) }, { x: 0, y: dane.obrys.h / 2 + Math.max(w, h) / 2 + 0.05 });
+  kandydaci.push({ x: 0, y: -(dane.obrys.h / 2 + bokPostaci / 2 + 0.05) }, { x: 0, y: dane.obrys.h / 2 + bokPostaci / 2 + 0.05 });
   const inne = scena.tokens.filter(t => t.id !== jadacyDoc.id && t.id !== pojazdDoc.id && !jazdaZetonu(t));
   const zajete = (x, y) => inne.some(t => {
     const s = t._source;
     return x < s.x + s.width * kratka && x + w * kratka > s.x && y < s.y + s.height * kratka && y + h * kratka > s.y;
   });
   for (const k of kandydaci) {
-    const c = srodekMiejsca(sc, rot, k, kratka);
+    const c = srodekMiejsca(sc, rot, k, kp);
     let { x, y } = naroznikDlaSrodka(c, w, h, kratka);
     const snap = scena.grid.getSnappedPoint({ x, y }, { mode: CONST.GRID_SNAPPING_MODES.TOP_LEFT_VERTEX });
     if (Number.isFinite(snap?.x)) ({ x, y } = snap);
@@ -157,7 +164,7 @@ function poleWysiadki(pojazdDoc, jadacyDoc, miejsce) {
     const sciana = CONFIG.Canvas.polygonBackends.move.testCollision(sc, srodek, { type: "move", mode: "any" });
     if (!sciana && !zajete(x, y)) return { x, y };
   }
-  const c = srodekMiejsca(sc, rot, kandydaci[0], kratka);
+  const c = srodekMiejsca(sc, rot, kandydaci[0], kp);
   return naroznikDlaSrodka(c, w, h, kratka);
 }
 
@@ -228,16 +235,17 @@ export async function posadzGM(pojazdDoc, jadacyDoc, miejsce) {
   const poprzednia = jazdaZetonu(jadacyDoc);
   const rozmiar = poprzednia?.rozmiar ?? { w: jadacyDoc._source.width, h: jadacyDoc._source.height };
   const sort = poprzednia?.sort ?? jadacyDoc._source.sort;
-  const kratka = pojazdDoc.parent.grid.size;
-  const s = srodekMiejsca(pojazdDoc.getCenterPoint(pojazdDoc._source), pojazdDoc._source.rotation, miejsce, kratka);
-  const { x, y } = naroznikDlaSrodka(s, ROZMIAR_MIEJSCA, ROZMIAR_MIEJSCA, kratka);
+  const scena = pojazdDoc.parent;
+  const bok = rozmiarMiejsca(scena);
+  const s = srodekMiejsca(pojazdDoc.getCenterPoint(pojazdDoc._source), pojazdDoc._source.rotation, miejsce, kratkaPojazdu(scena));
+  const { x, y } = naroznikDlaSrodka(s, bok, bok, scena.grid.size);
   const obrot = poprzednia?.pojazd === pojazdDoc.id ? (poprzednia.obrot ?? 0) : 0;
   await jadacyDoc.update({
     [`flags.${MODULE_ID}.${FLAGA_JAZDA}`]: { pojazd: pojazdDoc.id, miejsce: miejsce.id, obrot, rozmiar, sort },
     sort: Math.max(sort, (pojazdDoc._source.sort ?? 0) + 1)
   });
   await pojazdDoc.parent.moveTokens({
-    [jadacyDoc.id]: { destination: { x, y, width: ROZMIAR_MIEJSCA, height: ROZMIAR_MIEJSCA,
+    [jadacyDoc.id]: { destination: { x, y, width: bok, height: bok,
       rotation: normalizujKat(pojazdDoc._source.rotation + obrot), elevation: pojazdDoc._source.elevation, action: "displace" } }
   }, { animate: false, showRuler: false, method: "api" });
 }
@@ -281,6 +289,7 @@ async function _wsiadz(_n, dane, user) {
   const { pojazd, jadacy } = await _docs(dane);
   if (!pojazd || !jadacy || !jestZetonemPojazdu(pojazd) || !_moze(user, jadacy)) return;
   if (jadacy.parent !== pojazd.parent) return ui.notifications.warn("Pojazd i postać są na różnych scenach.");
+  if (!obrysDziala(pojazd.parent)) return ui.notifications.warn(`${pojazd.name}: na tej mapie pojazd jest znacznikiem — wsiada się na mapie taktycznej.`);
   const juz = pojazdJadacego(jadacy);
   if (juz && juz.id !== pojazd.id) return ui.notifications.warn(`${jadacy.name} siedzi w innym pojeździe — najpierw Wysiądź.`);
   if (juz) return _przesiadz(_n, { ...dane, tryb: "ostroznie" }, user);
@@ -339,7 +348,7 @@ async function _przesiadz(_n, dane, user) {
   if (!na || na.id === z?.id) return;
   if (zajeteMiejsca(pojazd).has(na.id)) return ui.notifications.warn(`${pojazd.name}: to miejsce jest zajęte.`);
   const wRuchu = jedzie(pojazd);
-  const k = kosztPrzesiadki(z, na, { jedzie: wRuchu, metryNaKratke: pojazd.parent.grid.distance });
+  const k = kosztPrzesiadki(z, na, { jedzie: wRuchu });
   await posadzGM(pojazd, jadacy, na);
   await synchronizujZaloge(pojazd);
   const test = Number.isFinite(dane.test) ? dane.test : null;
@@ -462,13 +471,17 @@ export function registerJadacy() {
     }, 0);
   });
 
-  // Start świata: jadący bez pojazdu na scenie wracają do rozmiaru (awaria klienta, skopiowana scena).
+  // Start świata: jadący bez pojazdu na scenie wracają do rozmiaru (awaria klienta, skopiowana scena),
+  // a na scenie, na której pojazd jest znacznikiem (np. zmieniona siatka), wysiadają obok niego.
   Hooks.once("ready", async () => {
     if (!game.user.isActiveGM) return;
     for (const scena of game.scenes) {
+      const dziala = obrysDziala(scena);
       for (const t of scena.tokens) {
         const j = jazdaZetonu(t);
-        if (j && !pojazdJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y } });
+        if (!j) continue;
+        if (!pojazdJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y } });
+        else if (!dziala) await wysadzGM(t);
       }
     }
   });

@@ -69,7 +69,7 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
       let tip = opisMiejsca(p.actor, m);
       if (t) tip += widac ? ` — ${t.name}` : " — zajęte";
       else if (z) {
-        const k = kosztPrzesiadki(z, m, { jedzie: wRuchu, metryNaKratke: p.parent.grid.distance });
+        const k = kosztPrzesiadki(z, m, { jedzie: wRuchu });
         tip += wRuchu ? ` — ${k.ostroznie} m ostrożnie / ${k.szybko} m z testem${k.wymagaTestu ? " (zmiana rzędu: test zawsze)" : ""}` : ` — ${k.ostroznie} m`;
       }
       const ikona = m.kierowca ? "fa-solid fa-steering-wheel" : m.stanowisko ? "fa-solid fa-crosshairs" : "";

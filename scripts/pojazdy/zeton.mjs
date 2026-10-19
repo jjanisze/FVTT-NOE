@@ -26,11 +26,11 @@
  */
 
 import {
-  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, miejsceOId, miejscaPojazdu,
-  pojazdJadacego
+  MODULE_ID, bliskie, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu, miejsceOId,
+  miejscaPojazdu, obrysDziala, pojazdJadacego, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "./stan.mjs";
 import {
-  naroznikDlaSrodka, normalizujKat, obrysPrzyObrocie, obrysZamieniony, punktWPojezdzie, srodekMiejsca
+  naroznikDlaSrodka, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
 } from "./geometria.mjs";
 
 /** Krycie nadwozia w prześwietleniu (§4.2: „ok. 35%”). */
@@ -47,11 +47,12 @@ const przeswietlane = new Set();
 function obrysSiatki(token) {
   const doc = token.document;
   const dane = danePojazdu(doc.actor);
-  if (!dane) return null;
-  const { w, h } = dane.obrys;
-  if (!obrysZamieniony(dane.obrys, doc.width, doc.height)) return null;
-  const kratka = doc.parent?.grid.size ?? canvas.grid.size;
-  return { w: w * kratka, h: h * kratka };
+  const scena = doc.parent;
+  if (!dane || !obrysDziala(scena)) return null;
+  const s = skalaPojazdu(scena);
+  if (!obrysZamieniony(dane.obrys, doc.width / s, doc.height / s)) return null;
+  const kp = kratkaPojazdu(scena);
+  return { w: dane.obrys.w * kp, h: dane.obrys.h * kp };
 }
 
 /** Czy ten klient może prześwietlić pojazd: MG, właściciel pojazdu, gracz z postacią w środku (D3). */
@@ -87,7 +88,8 @@ export function przeswietlany(pojazdDoc) {
 export function prowadzJadacych(pojazd, koniec = false) {
   const doc = pojazd.document;
   const jadacy = jadacyPojazdu(doc);
-  if (!jadacy.length) return;
+  if (!jadacy.length || !obrysDziala(doc.parent)) return;
+  const kp = kratkaPojazdu(doc.parent);
   const kratka = doc.parent.grid.size;
   const srodek = doc.getCenterPoint();
   for (const jDoc of jadacy) {
@@ -96,7 +98,7 @@ export function prowadzJadacych(pojazd, koniec = false) {
     const j = jazdaZetonu(jDoc);
     const miejsce = miejsceOId(doc.actor, j.miejsce);
     if (!miejsce) continue;
-    const s = srodekMiejsca(srodek, doc.rotation, miejsce, kratka);
+    const s = srodekMiejsca(srodek, doc.rotation, miejsce, kp);
     const { x, y } = naroznikDlaSrodka(s, jDoc.width, jDoc.height, kratka);
     const rotation = normalizujKat(doc.rotation + (j.obrot ?? 0));
     const changed = {};
@@ -114,13 +116,14 @@ export function prowadzJadacych(pojazd, koniec = false) {
  * @returns {Record<string, object>}
  */
 export function instrukcjePoRuchu(pojazdDoc) {
-  const dane = danePojazdu(pojazdDoc.actor);
-  if (!dane) return {};
+  const scena = pojazdDoc.parent;
+  if (!danePojazdu(pojazdDoc.actor) || !obrysDziala(scena)) return {};
   const src = pojazdDoc._source;
-  const kratka = pojazdDoc.parent.grid.size;
+  const kp = kratkaPojazdu(scena);
+  const kratka = scena.grid.size;
   const instrukcje = {};
-  const docelowy = obrysPrzyObrocie(dane.obrys, src.rotation);
-  if (docelowy.w !== src.width || docelowy.h !== src.height) {
+  const docelowy = wymiaryZetonu(pojazdDoc.actor, scena, src.rotation);
+  if (!bliskie(docelowy.w, src.width) || !bliskie(docelowy.h, src.height)) {
     instrukcje[pojazdDoc.id] = { dimensions: { width: docelowy.w, height: docelowy.h, action: "displace" } };
   }
   const srodek = pojazdDoc.getCenterPoint(src);
@@ -128,7 +131,7 @@ export function instrukcjePoRuchu(pojazdDoc) {
     const j = jazdaZetonu(jDoc);
     const miejsce = miejsceOId(pojazdDoc.actor, j.miejsce);
     if (!miejsce) continue;
-    const s = srodekMiejsca(srodek, src.rotation, miejsce, kratka);
+    const s = srodekMiejsca(srodek, src.rotation, miejsce, kp);
     const { x, y } = naroznikDlaSrodka(s, jDoc._source.width, jDoc._source.height, kratka);
     const rotation = normalizujKat(src.rotation + (j.obrot ?? 0));
     const js = jDoc._source;
@@ -171,10 +174,10 @@ export function odswiezKropki(token) {
     c.eventMode = "passive";
   }
   const jadacy = new Map(jadacyPojazdu(doc).map(t => [jazdaZetonu(t).miejsce, t]));
-  c.visible = jadacy.size > 0 && !przeswietlane.has(doc.id);
+  c.visible = jadacy.size > 0 && !przeswietlane.has(doc.id) && obrysDziala(doc.parent);
   for (const ch of c.removeChildren()) ch.destroy();
   if (!c.visible) return;
-  const kratka = doc.parent.grid.size;
+  const kratka = kratkaPojazdu(doc.parent);
   const srodek = doc.getCenterPoint({ x: 0, y: 0 });
   c.position.set(srodek.x, srodek.y);
   c.angle = doc.rotation;
@@ -227,8 +230,8 @@ function sprawdzKursor() {
     const doc = t.document;
     const dane = danePojazdu(doc.actor);
     if (!dane) continue;
-    const wl = !!mysz && t.visible && mozePrzeswietlic(doc)
-      && punktWPojezdzie(mysz, doc.getCenterPoint(), dane.obrys, doc.rotation, doc.parent.grid.size, 0.15);
+    const wl = !!mysz && t.visible && obrysDziala(doc.parent) && mozePrzeswietlic(doc)
+      && punktWPojezdzie(mysz, doc.getCenterPoint(), dane.obrys, doc.rotation, kratkaPojazdu(doc.parent), 0.15);
     ustawPrzeswietlenie(t, wl);
   }
 }
@@ -342,10 +345,22 @@ export function registerZetonPojazdu() {
   // Pojazd zawsze obraca się w kierunku jazdy (D10 wykrywa skręty z obrotu).
   // Tylko ruch gracza (przeciąganie, klawisze) i nie przestawienie (`displace` — zamiana obrysu,
   // zapis po ruchu): przy nim obrót z kierunku „ruchu” narożnika obróciłby pojazd bez sensu.
+  // Tylko na scenie taktycznej: plansza pościgu sama trzyma pojazdy przodem w prawo, znacznik się nie obraca.
   Hooks.on("preMoveToken", (doc, movement) => {
     if (!jestZetonemPojazdu(doc) || !["dragging", "keyboard"].includes(movement.method)) return;
+    if (trybSceny(doc.parent) !== "taktyczna") return;
     if (movement.passed.waypoints.every(w => w.action === "displace")) return;
     movement.autoRotate = true;
+  });
+
+  // Nowy żeton pojazdu dostaje obrys w skali sceny (§4.14): prototyp niesie obrys dla 1,5 m.
+  // Na scenie-znaczniku rozmiar zostaje, jak go dał prototyp albo MG.
+  Hooks.on("preCreateToken", (doc) => {
+    if (!jestZetonemPojazdu(doc) || !obrysDziala(doc.parent)) return;
+    const w = wymiaryZetonu(doc.actor, doc.parent, doc._source.rotation);
+    if (w && (!bliskie(w.w, doc._source.width) || !bliskie(w.h, doc._source.height))) {
+      doc.updateSource({ width: w.w, height: w.h });
+    }
   });
 
   Hooks.on("updateToken", (doc, changes) => {

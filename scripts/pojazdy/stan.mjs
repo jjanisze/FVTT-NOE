@@ -14,14 +14,71 @@
  *  - **Żeton jadącego**, flaga `jazda`: `{pojazd, miejsce, obrot, rozmiar: {w, h}, sort}` —
  *    `pojazd` = id żetonu pojazdu na tej samej scenie, `obrot` = własny obrót względem pojazdu,
  *    `rozmiar` = oryginalny rozmiar żetonu (przywracany przy wysiadce, D2).
+ *
+ * ## Skala sceny (§4.14, D21)
+ *
+ * Obrys, miejsca i rura są w **kratkach pojazdu** — 1,5 m, niezależnie od sceny. Na scenie liczą się w
+ * pikselach przez `kratkaPojazdu` (px na 1,5 m), a rozmiar żetonu w kratkach sceny przez
+ * `skalaPojazdu`. Na mapach 1,5 m obie równe zwykłej kratce, na siatce 3 m pojazd ma połowę kratek, a gdzie
+ * 1,5 m wychodzi poniżej `PROG_ZNACZNIKA_PX` (mapy w km), pojazd jest **znacznikiem**: bez obrysu,
+ * miejsc i jazdy — stan aktora działa dalej. Plansza pościgu ma własny tryb (`plansza`, PLAN §6.2).
  */
 
 import { KATALOG_POJAZDOW, PODWOZIA } from "../config/vehicles-data.mjs";
-import { ukladMiejsc } from "./geometria.mjs";
+import { isPoscigScene } from "../scenes/poscig.mjs";
+import { ROZMIAR_MIEJSCA, obrysPrzyObrocie, ukladMiejsc } from "./geometria.mjs";
 
 export const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_POJAZD = "pojazd";
 export const FLAGA_JAZDA = "jazda";
+
+/** Metry jednej kratki pojazdu — jednostka obrysu, miejsc i rury. */
+export const METRY_KRATKI_POJAZDU = 1.5;
+
+/** Poniżej tylu pikseli na 1,5 m pojazd na scenie jest znacznikiem. */
+export const PROG_ZNACZNIKA_PX = 20;
+
+const METRY_JEDNOSTKI = { m: 1, km: 1000, cm: 0.01, ft: 0.3048, mi: 1609.344 };
+
+/** Metry na jednostkę odległości sceny (nieznana jednostka — metry, jak w reszcie świata). */
+export function metryJednostki(scena) {
+  const u = String(scena?.grid?.units ?? "m").trim().toLowerCase();
+  return METRY_JEDNOSTKI[u] ?? 1;
+}
+
+/** Piksele na 1,5 m na scenie. */
+export function kratkaPojazdu(scena) {
+  const g = scena?.grid;
+  if (!g?.size) return 0;
+  const metryNaKratke = (Number(g.distance) || 0) * metryJednostki(scena);
+  return metryNaKratke > 0 ? g.size * METRY_KRATKI_POJAZDU / metryNaKratke : 0;
+}
+
+/** Kratki sceny na jedną kratkę pojazdu (1 na mapach 1,5 m). */
+export function skalaPojazdu(scena) {
+  const g = scena?.grid;
+  return g?.size ? kratkaPojazdu(scena) / g.size : 0;
+}
+
+/**
+ * Tryb pojazdów na scenie: `taktyczna` (wszystko), `plansza` (pościg: bez wymuszonego obrotu i kart jazdy)
+ * albo `znacznik` (skala za mała — pojazd to zwykły żeton).
+ */
+export function trybSceny(scena) {
+  if (!scena || kratkaPojazdu(scena) < PROG_ZNACZNIKA_PX) return "znacznik";
+  return isPoscigScene(scena) ? "plansza" : "taktyczna";
+}
+
+/** Czy na scenie pojazd ma obrys, miejsca i jadących (każdy tryb poza znacznikiem). */
+export function obrysDziala(scena) {
+  return trybSceny(scena) !== "znacznik";
+}
+
+/** Równość wymiarów żetonu z tolerancją na ułamki skali. */
+export const bliskie = (a, b) => Math.abs((Number(a) || 0) - (Number(b) || 0)) < 1e-3;
+
+/** Liczba w kratkach sceny zaokrąglona tak, żeby ułamki skali nie zostawiały szumu. */
+export const zaokrKratki = v => Math.round(v * 10000) / 10000;
 
 /** Klucz podwozia prawdziwego pojazdu albo `null` (pojemnik, zwykły aktor). */
 export function podwozieAktora(actor) {
@@ -69,6 +126,20 @@ export function miejscaPojazdu(actor) {
     _cacheMiejsc.set(klucz, wpis);
   }
   return wpis.miejsca;
+}
+
+/** Wymiary żetonu pojazdu w kratkach sceny przy danym obrocie (§4.14) albo `null`. */
+export function wymiaryZetonu(actor, scena, rotacja) {
+  const dane = danePojazdu(actor);
+  if (!dane) return null;
+  const o = obrysPrzyObrocie(dane.obrys, rotacja);
+  const s = skalaPojazdu(scena);
+  return { w: zaokrKratki(o.w * s), h: zaokrKratki(o.h * s) };
+}
+
+/** Rozmiar żetonu jadącego na miejscu, w kratkach sceny. */
+export function rozmiarMiejsca(scena) {
+  return zaokrKratki(ROZMIAR_MIEJSCA * skalaPojazdu(scena));
 }
 
 /** Flaga jazdy żetonu jadącego albo `null`. */

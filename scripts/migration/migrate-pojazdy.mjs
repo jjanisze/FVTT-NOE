@@ -25,6 +25,7 @@
 
 import { PODWOZIA, KATALOG_POJAZDOW } from "../config/vehicles-data.mjs";
 import { obrysPrzyObrocie } from "../pojazdy/geometria.mjs";
+import { obrysDziala, skalaPojazdu, zaokrKratki } from "../pojazdy/stan.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ZROBIONE = "pojazdyMigracja";
@@ -94,9 +95,12 @@ export async function migratePojazdy({ commit = false } = {}) {
     try {
       await actor.update(zmiany);
       for (const t of zetony) {
+        // Obrys w skali sceny (§4.14); na scenie-znaczniku (mapy w km) rozmiar zostaje.
+        if (!obrysDziala(t.parent)) continue;
         const o = obrysPrzyObrocie(obrys, t.rotation);
+        const s = skalaPojazdu(t.parent);
         await t.parent.moveTokens({
-          [t.id]: { dimensions: { width: o.w, height: o.h, action: "displace", lockRotation: false,
+          [t.id]: { dimensions: { width: zaokrKratki(o.w * s), height: zaokrKratki(o.h * s), action: "displace", lockRotation: false,
             ...(nowaGrafika && t.texture.src === tex.src ? { texture: { src: nowaGrafika, scaleX: 1, scaleY: 1, fit: "contain" } } : {}) } }
         }, { animate: false, showRuler: false, method: "api" });
       }

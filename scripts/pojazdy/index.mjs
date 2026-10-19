@@ -2,7 +2,7 @@
  * Neuroshima 5e — M4 Pojazdy (PLAN_m4_pojazdy). Rejestracja i `game.neuroshima.pojazdy`.
  *
  * Mapa plików:
- *  - `stan.mjs`        — co jest pojazdem, obrys, miejsca, kto jedzie (jedyne miejsce czytające flagi)
+ *  - `stan.mjs`        — co jest pojazdem, obrys, miejsca, kto jedzie (jedyne miejsce czytające flagi), skala sceny
  *  - `geometria.mjs`   — czyste funkcje: obrys w czterech kierunkach, układ miejsc, obroty
  *  - `zeton.mjs`       — podklasa żetonu: siatka w obrysie naturalnym, jadący w animacji, ukrycie,
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
@@ -37,7 +37,10 @@ import {
 } from "./awarie.mjs";
 import { registerWrak, zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem } from "./wrak.mjs";
 import { registerNaprawy, naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote } from "./naprawy.mjs";
-import { danePojazdu, jadacyPojazdu, jestPojazdem, miejscaPojazdu, miejsceOId, pojazdJadacego } from "./stan.mjs";
+import {
+  danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, pojazdJadacego, rozmiarMiejsca,
+  skalaPojazdu, trybSceny, wymiaryZetonu
+} from "./stan.mjs";
 import { registerJazda, szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
 import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron } from "./bron.mjs";
 import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
@@ -45,7 +48,33 @@ import { registerKarta, zetonPojazdu } from "./karta.mjs";
 import { registerWojownik, maZdolnosc, trikKaskadera, synchronizujOC } from "./wojownik.mjs";
 import * as geometria from "./geometria.mjs";
 
+/**
+ * D20: wspólny stan (paliwo, PW, awarie, pamięć obsady) ma tylko aktor powiązany, a karta drużyny czyta paliwo z
+ * aktora świata (`primaryVehicle`). Pojazd drużyny z niepowiązanym prototypem albo żetonem — ostrzeżenie dla MG.
+ */
+function niepowiazanyPojazdDruzyny(pojazd) {
+  if (!jestPojazdem(pojazd)) return false;
+  return !pojazd.prototypeToken?.actorLink
+    || game.scenes.some(s => s.tokens.some(t => t.actorId === pojazd.id && !t.actorLink));
+}
+
+function ostrzezNiepowiazane(pojazd = null) {
+  if (!game.user.isActiveGM) return;
+  for (const grupa of game.actors.filter(a => a.type === "group")) {
+    const v = grupa.system?.primaryVehicle;
+    if (!v || (pojazd && v !== pojazd) || !niepowiazanyPojazdDruzyny(v)) continue;
+    ui.notifications.warn(`${grupa.name}: pojazd drużyny ${v.name} ma niepowiązany żeton — paliwo i szkody rozjadą się `
+      + "między mapą a kartą drużyny. Zaznacz „Link Actor Data” w prototypie i na żetonach.");
+  }
+}
+
+function registerOstrzezenia() {
+  Hooks.once("ready", () => ostrzezNiepowiazane());
+  Hooks.on("createToken", doc => { if (!doc.actorLink && jestPojazdem(doc.actor)) ostrzezNiepowiazane(game.actors.get(doc.actorId)); });
+}
+
 export function registerPojazdy() {
+  registerOstrzezenia();
   registerZetonPojazdu();
   registerJadacy();
   registerOknoMiejsc();
@@ -64,6 +93,7 @@ export function registerPojazdy() {
 export const pojazdyApi = {
   geometria,
   danePojazdu, miejscaPojazdu, miejsceOId, jadacyPojazdu, pojazdJadacego, jestPojazdem,
+  kratkaPojazdu, skalaPojazdu, trybSceny, wymiaryZetonu, rozmiarMiejsca, niepowiazanyPojazdDruzyny,
   instrukcjePoRuchu, przeswietlany, mozePrzeswietlic,
   zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca,
   wsiadz, wysiadz, przesiadz, wypadnij, wysadzWszystkich, otworzMiejsca,

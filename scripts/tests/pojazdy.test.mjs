@@ -20,6 +20,9 @@ import {
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
 import { kosztPrzesiadki } from "../pojazdy/jadacy.mjs";
+import {
+  kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
+} from "../pojazdy/stan.mjs";
 import { skretyNaDrodze } from "../pojazdy/jazda.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -124,6 +127,62 @@ export function registerPojazdyTests(quench) {
       it("WKK: zmiana rzędu w jadącym pojeździe zawsze z testem; w stojącym nigdy", function () {
         expect(kosztPrzesiadki(kier, tylL, { jedzie: true }).wymagaTestu).to.be.true;
         expect(kosztPrzesiadki(kier, tylL, { jedzie: false }).wymagaTestu).to.be.false;
+      });
+    });
+
+    describe("Skala sceny (§4.14, D21)", function () {
+      // Scena jako dane: tylko to, co czytają funkcje skali (siatka i flaga planszy pościgu).
+      const scena = (size, distance, units = "m", poscig = false) => ({
+        grid: { size, distance, units },
+        getFlag: (m, k) => (m === MODULE_ID && k === "poscig" && poscig ? { tory: 12 } : undefined)
+      });
+      const osobowka = { type: "vehicle", flags: { [MODULE_ID]: { pojazd: { podwozie: "osobowka" } } } };
+
+      it("mapy kampanii 1,5 m (64 i 70 px): kratka pojazdu = kratka sceny, obrys bez zmian", function () {
+        for (const px of [64, 70]) {
+          const s = scena(px, 1.5);
+          expect(kratkaPojazdu(s)).to.equal(px);
+          expect(skalaPojazdu(s)).to.equal(1);
+          expect(trybSceny(s)).to.equal("taktyczna");
+          expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 1.5, h: 3 });
+        }
+      });
+
+      it("siatka 3 m: pojazd ma połowę kratek, miejsce ćwierć kratki — ta sama wielkość w metrach", function () {
+        const s = scena(70, 3);
+        expect(kratkaPojazdu(s)).to.equal(35);
+        expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 0.75, h: 1.5 });
+        expect(wymiaryZetonu(osobowka, s, 90), "bokiem").to.deep.equal({ w: 1.5, h: 0.75 });
+        expect(rozmiarMiejsca(s)).to.equal(0.25);
+        expect(trybSceny(s)).to.equal("taktyczna");
+      });
+
+      it("mapy w km (1, 5, 140 km na kratkę): znacznik, nie kilometrowy samochód", function () {
+        for (const km of [1, 5, 140]) expect(trybSceny(scena(70, km, "km")), `${km} km`).to.equal("znacznik");
+        expect(blisko(kratkaPojazdu(scena(70, 1, "km")), 0.105)).to.be.true;
+        expect(metryJednostki(scena(70, 1, "km"))).to.equal(1000);
+      });
+
+      it("dzisiejsza plansza pościgu (200 px = 36 m) to znacznik — M4 nie rusza pionków do P1", function () {
+        expect(trybSceny(scena(200, 36, "m", true))).to.equal("znacznik");
+      });
+
+      it("plansza złożonej drogi (280 px = 6 m) to tryb planszy w prawdziwej skali (70 px na 1,5 m)", function () {
+        const s = scena(280, 6, "m", true);
+        expect(kratkaPojazdu(s)).to.equal(70);
+        expect(trybSceny(s)).to.equal("plansza");
+        expect(trybSceny(scena(280, 6, "m", false)), "bez flagi pościgu").to.equal("taktyczna");
+      });
+
+      it("nieznana jednostka liczy się jak metry; brak siatki — znacznik", function () {
+        expect(metryJednostki(scena(70, 1.5, "kroki"))).to.equal(1);
+        expect(trybSceny(null)).to.equal("znacznik");
+        expect(trybSceny({ grid: { size: 70, distance: 0, units: "m" }, getFlag: () => undefined })).to.equal("znacznik");
+      });
+
+      it("koszt przesiadki liczy w kratkach pojazdu (1,5 m), niezależnie od siatki sceny", function () {
+        const ms = ukladMiejsc(KATALOG_POJAZDOW.osobowka.obrys, KATALOG_POJAZDOW.osobowka.strefy);
+        expect(kosztPrzesiadki(ms[0], ms[1]).metry).to.equal(1.5);
       });
     });
 
