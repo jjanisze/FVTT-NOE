@@ -12,6 +12,7 @@ import {
   jedzie, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
   ZASIEG_WSIADANIA_M, ST_PRZESIADKI
 } from "./jadacy.mjs";
+import { maSilnik, przelaczSwiatla, stanSilnika, uruchom, zgas } from "./silnik.mjs";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 const okna = new Map();
@@ -176,6 +177,16 @@ function _onRenderTokenHUD(hud, html) {
   if (!doc || !kol || kol.querySelector(".neuro-pojazd-hud")) return;
   if (danePojazdu(doc.actor)) {
     kol.append(_przycisk("fa-solid fa-chair", "Miejsca — wsiądź, przesiądź się (s. 260–261)", () => otworzMiejsca(doc)));
+    if (doc.actor.isOwner && maSilnik(doc.actor)) {
+      const s = stanSilnika(doc.actor);
+      const b = _przycisk("fa-solid fa-key", s.wl ? "Zgaś silnik (bez kosztu)" : "Uruchom silnik (akcja)",
+        () => (stanSilnika(doc.actor).wl ? zgas(doc) : uruchom(doc)));
+      b.classList.toggle("active", s.wl);
+      kol.append(b);
+      const l = _przycisk("fa-solid fa-lightbulb", s.swiatla ? "Zgaś światła" : "Włącz światła", () => przelaczSwiatla(doc));
+      l.classList.toggle("active", s.swiatla);
+      kol.append(l);
+    }
     return;
   }
   const pojazd = pojazdJadacego(doc);
