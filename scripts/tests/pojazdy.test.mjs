@@ -143,5 +143,29 @@ export function registerPojazdyTests(quench) {
         }
       });
     });
+
+    describe("Paczka `pojazdy` (E1) ↔ dane", function () {
+      it("14 prawdziwych pojazdów: flaga podwozia, progi, obrys żetonu, cechy", async function () {
+        const pack = game.packs.get(`${MODULE_ID}.pojazdy`);
+        expect(pack, "paczka zarejestrowana").to.exist;
+        const docs = await pack.getDocuments();
+        expect(docs).to.have.length(Object.keys(PODWOZIA).length);
+        for (const a of docs) {
+          const id = a.getFlag(MODULE_ID, "pojazd")?.podwozie;
+          expect(PODWOZIA[id], `${a.name}: podwozie`).to.exist;
+          const p = PODWOZIA[id], k = KATALOG_POJAZDOW[id];
+          expect(a.type).to.equal("vehicle");
+          expect(a.name).to.equal(p.nazwa);
+          expect(a.system.attributes.hp.max, `${a.name} PW`).to.equal(p.pw);
+          expect(a.system.attributes.hp.dt ?? null, `${a.name} Próg obrażeń`).to.equal(p.progObrazen);
+          expect(a.system.attributes.hp.mt ?? null, `${a.name} Próg awarii`).to.equal(p.progAwarii);
+          expect(a.system.attributes.ac.value, `${a.name} TT`).to.equal(p.tt);
+          expect(a.system.traits.size, `${a.name} rozmiar`).to.equal(rozmiarPojazdu(id));
+          expect([a.prototypeToken.width, a.prototypeToken.height], `${a.name} obrys`).to.deep.equal([k.obrys.w, k.obrys.h]);
+          expect(a.prototypeToken.lockRotation).to.be.false;
+          expect(a.items.size, `${a.name} cechy`).to.equal(k.cechy.length);
+        }
+      });
+    });
   });
 }

@@ -55,6 +55,7 @@ import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
 import { computeFovAngle } from "../../scripts/config/fov.mjs";
 import { szablonyTowarzyszy, klasaTowarzysza } from "./build-towarzysze.mjs";
+import { szablonyPojazdow } from "./build-pojazdy.mjs";
 import { budujTabele, bledyTabel, zapiszTabele } from "./tabele.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -87,6 +88,7 @@ const PACK = {
   pancerze: "pancerze",
   schematy: "schematy",
   towarzysze: "towarzysze",
+  pojazdy: "pojazdy",
   tabele: "tabele"
 };
 
@@ -1986,6 +1988,12 @@ if (wanted(PACK.bestiariusz)) {
 if (wanted(PACK.towarzysze)) {
   const towarzysze = szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID });
   await writeActorPack(PACK.towarzysze, towarzysze.entries, towarzysze.folders);
+}
+
+// Pojazdy (PLAN_m4_pojazdy §5, E1) — 14 podwozi z s. 262 i katalogu M4.
+if (wanted(PACK.pojazdy)) {
+  const pojazdy = szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT });
+  await writeActorPack(PACK.pojazdy, pojazdy.entries, pojazdy.folders);
 }
 
 // Tabele (PLAN_m5_postoj §7.17, U14) — RollTable z danych szabrowania i Fantów; domknięcia przed zapisem.

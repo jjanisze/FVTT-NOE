@@ -160,6 +160,7 @@ import { registerDropOnFail } from "./combat/drop-on-fail.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
 import { registerPojazdy, pojazdyApi } from "./pojazdy/index.mjs";
+import { registerPojazdyMigration } from "./migration/migrate-pojazdy.mjs";
 import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
 import { registerPartySheet } from "./actors/party-sheet.mjs";
 import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
@@ -281,6 +282,8 @@ Hooks.once("init", () => {
   registerDnd5e6Migration();
   // Dni chorób i dawek na zegar świata (2026-10-07) — raz, sama, u aktywnego MG.
   registerDniSwiataMigration();
+  // Pojazdy świata na model M4: flaga podwozia, obrys, grafika (PLAN_m4_pojazdy E1) — raz, sama, u aktywnego MG.
+  registerPojazdyMigration();
   registerOznaczReakcjeBN();
   registerSrdCleanup();
   registerDnd5eSettings();

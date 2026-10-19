@@ -170,6 +170,14 @@
       "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
     },
     {
+      "name": "pojazdy",
+      "label": "Neuroshima — Pojazdy",
+      "path": "packs/pojazdy",
+      "type": "Actor",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
       "name": "tabele",
       "label": "Neuroshima — Tabele",
       "path": "packs/tabele",
@@ -182,7 +190,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze", "tabele"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze", "pojazdy", "tabele"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],
