@@ -366,11 +366,41 @@ async function _perform(actor, request) {
   return false;
 }
 
+/** @type {((actor: Actor, scene: Scene) => Actor|null)|null} Upuszczone w pojeździe → ładownia (M4, WKK). */
+let _ladowniaUpuszczenia = null;
+
+/** Rejestruje przechwycenie upuszczenia: zwraca aktora, do którego ekwipunku trafia paczka zamiast na ziemię. */
+export function zarejestrujLadownieUpuszczenia(fn) {
+  _ladowniaUpuszczenia = fn;
+}
+
+/** Paczka do ekwipunku innego aktora (ładownia pojazdu): te same powiązania co przy podniesieniu z ziemi. */
+async function _doLadowni(cel, request) {
+  const dane = request.bundle.items.map(i => i.data);
+  const nowe = await cel.createEmbeddedDocuments("Item", dane);
+  const idPo = Object.fromEntries(request.bundle.items.map((i, n) => [i.ref, nowe[n]?.id]));
+  for (const l of request.bundle.links ?? []) {
+    const z = cel.items.get(idPo[l.ref]);
+    if (z && idPo[l.to]) await z.setFlag(MODULE_ID, l.flag, idPo[l.to]);
+  }
+  return nowe.length > 0;
+}
+
 async function _performDrop(actor, request) {
   const scene = game.scenes.get(request.sceneId);
   if (!scene) return false;
   const main = request.bundle.items[0]?.data;
   if (!main) return false;
+  const ladownia = _ladowniaUpuszczenia?.(actor, scene) ?? null;
+  if (ladownia) {
+    if (!(await _doLadowni(ladownia, request))) return false;
+    await _usunZPostaci(actor, request);
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor }), whisper: ChatMessage.getWhisperRecipients("GM").map(u => u.id),
+      content: `<p>${_esc(_bundleName({ items: request.bundle.items }))} — upuszczone w pojeździe, leży w ładowni <strong>${_esc(ladownia.name)}</strong>.</p>`
+    });
+    return true;
+  }
   const size = scene.grid.size * _tileScale(main);
   const sort = Math.max(0, ...scene.tiles.map(t => t.sort ?? 0)) + 1;
   const tileData = {
@@ -395,8 +425,12 @@ async function _performDrop(actor, request) {
   if (request.level) tileData.levels = [request.level];
   const [tile] = await scene.createEmbeddedDocuments("Tile", [tileData]);
   if (!tile) return false;
+  await _usunZPostaci(actor, request);
+  return true;
+}
 
-  // Dopiero gdy ziemia jest — przedmiot opuszcza postać (lalka już zdjęła go ze slotu).
+/** Dopiero gdy ziemia (albo ładownia) jest — przedmiot opuszcza postać (lalka już zdjęła go ze slotu). */
+async function _usunZPostaci(actor, request) {
   const deletes = [];
   const updates = [];
   for (const r of request.removals) {

@@ -19,6 +19,7 @@ import {
   kwadrant, obrysPrzyObrocie, obrysZamieniony, obroc, ukladMiejsc, srodekMiejsca, naroznikDlaSrodka,
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
+import { kosztPrzesiadki } from "../pojazdy/jadacy.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
@@ -104,6 +105,24 @@ export function registerPojazdyTests(quench) {
 
       it("narożnik żetonu jadącego dla środka miejsca", function () {
         expect(naroznikDlaSrodka({ x: 525, y: 525 }, ROZMIAR_MIEJSCA, ROZMIAR_MIEJSCA, 100)).to.deep.equal({ x: 500, y: 500 });
+      });
+    });
+
+    describe("Przesiadka (D15, §4.10)", function () {
+      const ms = ukladMiejsc(KATALOG_POJAZDOW.osobowka.obrys, KATALOG_POJAZDOW.osobowka.strefy);
+      const [kier, pas, tylL] = [ms[0], ms[1], ms[2]];
+
+      it("sąsiednie miejsca ≈ 3 m ostrożnie (odległość ×2), 1,5 m z testem", function () {
+        const k = kosztPrzesiadki(kier, pas, { jedzie: true });
+        expect(k.metry).to.equal(1.5);
+        expect(k.ostroznie).to.equal(3);
+        expect(k.szybko).to.equal(1.5);
+        expect(k.wymagaTestu, "ten sam rząd").to.be.false;
+      });
+
+      it("WKK: zmiana rzędu w jadącym pojeździe zawsze z testem; w stojącym nigdy", function () {
+        expect(kosztPrzesiadki(kier, tylL, { jedzie: true }).wymagaTestu).to.be.true;
+        expect(kosztPrzesiadki(kier, tylL, { jedzie: false }).wymagaTestu).to.be.false;
       });
     });
 

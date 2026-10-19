@@ -1,0 +1,22 @@
+/* Neuroshima 5e — M4 Pojazdy (PLAN_m4_pojazdy): okno miejsc, karta pojazdu. */
+
+/* Okno miejsc (D4) */
+.neuro-okno-miejsc .window-content { padding: 10px 14px; }
+.neuro-miejsca { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 240px; }
+.neuro-miejsca-pojazd { position: relative; margin: 6px auto; border-radius: 6px; background: rgba(0, 0, 0, 0.18); }
+.neuro-miejsca-tlo { position: absolute; inset: 0; object-fit: contain; opacity: 0.85; pointer-events: none; border: none; }
+.neuro-miejsce {
+  position: absolute; transform: translate(-50%, -50%); padding: 0; margin: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  border: 2px solid #f2e6c9; background: rgba(27, 27, 27, 0.8); color: #f2e6c9; line-height: 1; min-height: 0;
+}
+.neuro-miejsce img { width: 100%; height: 100%; object-fit: cover; border: none; }
+.neuro-miejsce i { font-size: 0.85em; }
+.neuro-miejsce.is-wolne { background: rgba(46, 125, 50, 0.65); cursor: pointer; }
+.neuro-miejsce.is-wolne:hover { background: rgba(76, 175, 80, 0.9); box-shadow: 0 0 6px #b7f5ba; }
+.neuro-miejsce.is-zajete { background: rgba(120, 30, 30, 0.75); cursor: default; }
+.neuro-miejsce.is-moje { border-color: #ffd54f; box-shadow: 0 0 6px #ffd54f; }
+.neuro-miejsce.is-kierowca { border-style: double; border-width: 3px; }
+.neuro-miejsca-info { margin: 0; max-width: 320px; text-align: center; font-size: var(--font-size-13, 13px); }
+.neuro-miejsca-tryb { display: flex; flex-direction: column; gap: 2px; font-size: var(--font-size-12, 12px); }
+.neuro-miejsca-wysiadz { width: auto; }

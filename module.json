@@ -194,7 +194,7 @@
     }
   ],
   "esmodules": ["scripts/main.mjs"],
-  "styles": ["styles/neuroshima.css", "styles/postoj.css"],
+  "styles": ["styles/neuroshima.css", "styles/postoj.css", "styles/pojazdy.css"],
   "languages": [
     {
       "lang": "en",

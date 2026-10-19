@@ -155,33 +155,51 @@ async function zapiszPoRuchu(pojazdDoc) {
 /*  Kropki                                       */
 /* -------------------------------------------- */
 
-/** Rysuje kropki zajętych miejsc w układzie żetonu pojazdu (bez tożsamości jadących, D3). */
+/**
+ * Rysuje kropki zajętych miejsc w układzie żetonu pojazdu (bez tożsamości jadących, D3). Kropka jest
+ * uchwytem celowania (D14): prawy klik celuje w ukrytego jadącego (Shift — dokłada do celów).
+ */
 export function odswiezKropki(token) {
   const doc = token.document;
   if (!jestZetonemPojazdu(doc)) {
     if (token.neuroKropki) token.neuroKropki.visible = false;
     return;
   }
-  let g = token.neuroKropki;
-  if (!g || g.destroyed) {
-    g = token.neuroKropki = token.addChild(new PIXI.Graphics());
-    g.eventMode = "none";
+  let c = token.neuroKropki;
+  if (!c || c.destroyed) {
+    c = token.neuroKropki = token.addChild(new PIXI.Container());
+    c.eventMode = "passive";
   }
-  g.clear();
-  const zajete = jadacyPojazdu(doc).map(t => jazdaZetonu(t).miejsce);
-  g.visible = zajete.length > 0 && !przeswietlane.has(doc.id);
-  if (!g.visible) return;
+  const jadacy = new Map(jadacyPojazdu(doc).map(t => [jazdaZetonu(t).miejsce, t]));
+  c.visible = jadacy.size > 0 && !przeswietlane.has(doc.id);
+  for (const ch of c.removeChildren()) ch.destroy();
+  if (!c.visible) return;
   const kratka = doc.parent.grid.size;
   const srodek = doc.getCenterPoint({ x: 0, y: 0 });
-  g.position.set(srodek.x, srodek.y);
-  g.angle = doc.rotation;
+  c.position.set(srodek.x, srodek.y);
+  c.angle = doc.rotation;
   const r = Math.max(4, kratka * 0.11);
   for (const m of miejscaPojazdu(doc.actor)) {
-    if (!zajete.includes(m.id)) continue;
-    g.lineStyle({ width: Math.max(2, r * 0.3), color: 0xf2e6c9, alpha: 0.95 });
+    const jDoc = jadacy.get(m.id);
+    if (!jDoc) continue;
+    const celowany = !!jDoc.object?.isTargeted && game.user.targets.has(jDoc.object);
+    const g = new PIXI.Graphics();
+    g.lineStyle({ width: Math.max(2, r * 0.3), color: celowany ? 0xff3b30 : 0xf2e6c9, alpha: 0.95 });
     g.beginFill(0x1b1b1b, 0.85);
-    g.drawCircle(m.x * kratka, m.y * kratka, r);
+    g.drawCircle(0, 0, r);
     g.endFill();
+    g.position.set(m.x * kratka, m.y * kratka);
+    g.eventMode = "static";
+    g.cursor = "crosshair";
+    g.hitArea = new PIXI.Circle(0, 0, r * 1.4);
+    g.on("rightdown", ev => {
+      ev.stopPropagation();
+      const t = jDoc.object;
+      if (!t) return;
+      const juz = game.user.targets.has(t);
+      t.setTarget(!juz, { releaseOthers: !ev.shiftKey && !juz });
+    });
+    c.addChild(g);
   }
 }
 
@@ -346,6 +364,12 @@ export function registerZetonPojazdu() {
   });
   Hooks.on("createToken", doc => { if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent); });
   Hooks.on("deleteToken", doc => { if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent); });
+  // Kropka celowanego jadącego ma czerwony obwód (D14).
+  Hooks.on("targetToken", (user, token) => {
+    if (user !== game.user) return;
+    const pojazd = pojazdJadacego(token.document)?.object;
+    if (pojazd) odswiezKropki(pojazd);
+  });
   Hooks.on("controlToken", token => {
     if (jazdaZetonu(token.document)) token.renderFlags.set({ refreshVisibility: true });
   });
