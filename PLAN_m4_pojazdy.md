@@ -712,3 +712,17 @@ póki pojazd czeka na przepięcie. Próba w piaskownicy: niepowiązana Osobówka
 Ctrl+X z mapy 1,5 m → Ctrl+V na 3 m: pojazd 0,75×1,5 z PW 33, obaj na miejscach (0,25, w obrysie), bez karty; Ctrl+C /
 Ctrl+V na tej samej scenie: dwa pojazdy, każdy ze swoimi dwoma jadącymi; Ctrl+X oryginału na mapę w km: na mapie sam
 pojazd, żeton powiązanego zniknął, bandyta stoi obok, w pamięci — tylko powiązany.
+
+*P1 — plansza od nowa.* `poscig.mjs`: `LANE_W` 280, `grid.distance` = `METRY_TORU_NA_OBRAZIE` (6 m — 70 px na 1,5 m),
+`wersja: 2` we fladze, `staraPlansza()` (ostrzeżenie MG na starej planszy); pionki w prawdziwej skali przodem w prawo
+(`wymiaryPionka`: pojazd z katalogu z obrysu, inny — prototyp w kratkach 1,5 m) z obrotem już w danych tworzenia
+(inaczej obrys liczył się z obrotu 0 i autobus lądował o tor obok), rzędy wg wysokości (`yWTorze`). Pas zostaje 880 px
+(ok. 19 m jezdni). `poscig-snap.mjs` (D25): łatka na `Token#_updateDragDestination`/`#_addDragWaypoint` wymusza
+przyciąganie na planszy (Shift nie robi połówek), bezpiecznik MG dociąga pionek po ruchu spoza ścieżki,
+recentrowanie przesuwa też kafelki, światła, rysunki i szablony w pasie; jadący wyłączeni z przyciągania i z obrotu
+planszy, a kołysanie pojazdu niesie jego jadących (`poscig-motion.mjs`). Plakietka toru na pojeździe
+(`poscig-canvas.mjs`). M4: bezpiecznik obrysu po utworzeniu żetonu pojazdu. Próba: Osobówka 210×105 px i Hammer na
+środkach torów, autobus 560×140 w rzędzie pod Osobówką; jadący 35 px w obrysie, zmiana toru bez kart jazdy i obrotu,
+pół toru obok → dociągnięcie, recentrowanie z jadącym, plakietka = numer toru z przesunięciem. Quench `poscig` 61/61,
+`pojazdy` 25/25; e2e `poscig` (z nowym krokiem D25 i pomiarami FPS), `nevada-art`, `urban-art` zielone — testy liczą
+pozycje z `torX`/`LANE_W`, kontrola „między torami” to żeton bez roli pościgu (pionków D25 nie wypuszcza z toru).

@@ -1,8 +1,9 @@
 /**
  * Neuroshima 5e — plansza pościgu: generowanie sceny i stan pościgu.
  *
- * Projekt: `PLAN_poscigi.md`. Warstwę graficzną (pustynia + tory) rysuje `poscig-canvas.mjs`,
- * ten plik odpowiada wyłącznie za dokument sceny, flagi i rozstawienie pionków.
+ * Projekt: geometria — `PLAN_m4_pojazdy.md` §6.2 (złożona droga, 2026-10-19), grafika — `PLAN_poscigi.md` §2.2.
+ * Warstwę graficzną (pustynia + tory) rysuje `poscig-canvas.mjs`, ten plik odpowiada wyłącznie za dokument
+ * sceny, flagi i rozstawienie pionków.
  *
  * ## Dlaczego prawdziwa scena, a nie własne okno
  *
@@ -13,14 +14,16 @@
  * Skutek uboczny, który wychodzi za darmo: strefa swobodna na dole planszy to po prostu
  * natywna warstwa Rysunków, bez ani jednej linijki kodu.
  *
- * ## Jedna stała, z której wynika cała geometria
+ * ## Złożona droga (PLAN_m4_pojazdy §6.2, D24)
  *
- *     1 znacznik pościgu = 36 m = LANE_W pikseli = szerokość jednego toru
+ *     1 tor = LANE_W pikseli = 6 m na obrazie = 1 znacznik pościgu (36 m) w pomiarze
  *
- * `grid.distance` jest ustawione tak, żeby linijka Foundry’ego czytała **poziomo** prawdziwe
- * metry. Nie znaczy to jednak, że wolno nią mierzyć zasięgi w pościgu: rozjazd pionowy
- * w torze jest czystą dekoracją (mieści kilka pojazdów jeden pod drugim), a linijka wliczy
- * go do dystansu. Zasięgi liczy się z numerów torów — patrz `dystansZnacznikow()`.
+ * Pojazdy, jadący i szablony rysują się w **prawdziwej skali** — 70 px na 1,5 m, jak mapy kampanii
+ * (`grid.distance` = `METRY_TORU_NA_OBRAZIE`). Każdy pojazd to wyspa w prawdziwej skali przypięta do drogi
+ * środkiem; między wyspami wzdłuż drogi liczą się znaczniki (36 m na tor), w poprzek — prawdziwe metry.
+ * Pojazd dłuższy niż tor (ciężarówka, autobus) zachodzi na obrazie na sąsiedni tor — jego znacznik to tor
+ * środka. Odległości liczy metryka drogi (P2), nie piksele; `dystansZnacznikow()` to jej część wzdłuż drogi.
+ * Stara plansza (tor 200 px = 36 m, bez `wersja`) — `staraPlansza()`, do odtworzenia od nowa.
  *
  * ## Siatka: kwadratowa o szerokości toru, ale niewidoczna
  *
@@ -46,6 +49,7 @@ import {
 } from "../config/vehicles-data.mjs";
 
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "./poscig-themes.mjs";
+import { skalaPojazdu, wymiaryZetonu, zaokrKratki } from "../pojazdy/stan.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Klucz flagi na scenie. Jej obecność = „to jest plansza pościgu”. */
@@ -58,8 +62,17 @@ export const FLAG_ROLA = "poscigRola";
 /*  Geometria planszy                            */
 /* -------------------------------------------- */
 
-/** Szerokość toru w pikselach. Równa jednemu znacznikowi (36 m). */
-export const LANE_W = 200;
+/** Szerokość toru w pikselach — jeden znacznik (36 m w pomiarze), 6 m na obrazie (§6.2.1: ×1,4 starej planszy). */
+export const LANE_W = 280;
+
+/**
+ * Metry toru na obrazie — `grid.distance` planszy. Daje prawdziwą skalę pojazdów (`LANE_W` px na 6 m = 70 px na
+ * 1,5 m) i szablonów; pomiar między pojazdami robi metryka drogi, nie ta liczba.
+ */
+export const METRY_TORU_NA_OBRAZIE = 6;
+
+/** Wersja geometrii w fladze planszy: 2 = złożona droga (2026-10-19). */
+export const WERSJA_PLANSZY = 2;
 
 /**
  * Margines po bokach, w pikselach. **Równy dokładnie jednemu torowi — i to jest istotne.**
@@ -137,6 +150,12 @@ export function isPoscigScene(scene = canvas?.scene) {
   return !!poscigFlag(scene);
 }
 
+/** Plansza sprzed złożonej drogi (tor 200 px = 36 m): pojazdy nie w skali — do utworzenia od nowa. */
+export function staraPlansza(scene = canvas?.scene) {
+  const f = poscigFlag(scene);
+  return !!f && (Number(f.wersja) || 1) < WERSJA_PLANSZY;
+}
+
 /* -------------------------------------------- */
 /*  Tworzenie planszy                            */
 /* -------------------------------------------- */
@@ -170,7 +189,7 @@ export function daneSceny({ nazwa, tory, srodowisko, motyw = MOTYW_DOMYSLNY }) {
       // Kwadratowa, nie GRIDLESS — patrz nagłówek pliku. Bok = tor; `alpha: 0` ją chowa.
       type: CONST.GRID_TYPES.SQUARE,
       size: LANE_W,
-      distance: METRY_NA_ZNACZNIK,
+      distance: METRY_TORU_NA_OBRAZIE,
       units: "m",
       alpha: 0
     },
@@ -187,6 +206,7 @@ export function daneSceny({ nazwa, tory, srodowisko, motyw = MOTYW_DOMYSLNY }) {
     flags: {
       [MODULE_ID]: {
         [FLAG_POSCIG]: {
+          wersja: WERSJA_PLANSZY,
           tory,
           motyw: motywPoscigu({ motyw }).id,
           srodowisko,
@@ -202,26 +222,62 @@ export function daneSceny({ nazwa, tory, srodowisko, motyw = MOTYW_DOMYSLNY }) {
   };
 }
 
+/** Odstęp między pojazdami w jednym torze (rzędy jezdni) i od górnej krawędzi pasa. */
+const ODSTEP_RZEDU = 24;
+
 /**
- * Pionek pościgu z aktora pojazdu.
- *
- * Rozmiar tokenu jest **jawny i niezależny od `prototypeToken`**: GMT400 ma prototyp 2×2,
- * co na planszy zajęłoby dwa tory i kłamało o jego pozycji. Na planszy pościgu każdy pojazd
- * to jeden pionek szerokości toru, dokładnie jak kapsel w podręczniku.
+ * Wymiary pionka w kratkach planszy (= torach). Pojazd z katalogu M4 — obrys w prawdziwej skali przy obrocie
+ * „przodem w prawo” (`poscig-motion.mjs`); inny aktor pojazdu — prototyp w kratkach 1,5 m przeliczony tak samo.
  */
-async function daneTokenu(actor, scene, { tor, rola, rzad = 0 }) {
+/** Obrót „przodem w prawo” (jak `rotationNaPrawo` w `poscig-motion-model.mjs`, z poprawką grafiki aktora). */
+export function obrotPionka(actor) {
+  return ((270 + (Number(actor?.getFlag?.(MODULE_ID, "poscigFacingOffset")) || 0)) % 360 + 360) % 360;
+}
+
+export function wymiaryPionka(actor, scene) {
+  const rotacja = obrotPionka(actor);
+  const w = wymiaryZetonu(actor, scene, rotacja);
+  if (w) return w;
+  const s = skalaPojazdu(scene);
+  const p = actor?.prototypeToken ?? { width: 1, height: 1 };
+  return { w: zaokrKratki((p.width || 1) * s), h: zaokrKratki((p.height || 1) * s) };
+}
+
+/**
+ * Górna krawędź (px) dla nowego pionka o wysokości `h` px w torze: pod ostatnim pojazdem tego toru (D25 —
+ * kolejność w znaczniku to rzędy jezdni). Gdy pas się skończy — od góry; rozsunięcie to robota MG.
+ * @param {{tor: number, y: number, h: number}[]} zajete  pionki już stojące albo przygotowane
+ */
+export function yWTorze(tor, h, zajete = []) {
+  const start = PAS_GORA + ODSTEP_RZEDU;
+  const dno = Math.max(start - ODSTEP_RZEDU, ...zajete.filter(z => z.tor === tor).map(z => z.y + z.h));
+  const y = dno + ODSTEP_RZEDU;
+  return y + h <= FREEFORM_Y - ODSTEP_RZEDU ? Math.round(y) : start;
+}
+
+/**
+ * Pionek pościgu z aktora pojazdu: pojazd w prawdziwej skali (D24), środkiem na środku toru, w wolnym rzędzie.
+ * Rozmiar jest **jawny i niezależny od `prototypeToken`** — prototyp mówi o mapie 1,5 m, nie o planszy.
+ * @param {{tor: number, rola: string, zajete?: {tor: number, y: number, h: number}[]}} opts
+ */
+async function daneTokenu(actor, scene, { tor, rola, zajete = null }) {
+  const g = scene.grid.size;
+  const { w, h } = wymiaryPionka(actor, scene);
+  const stoja = zajete ?? pionkiPoscigu(scene).map(p => ({ tor: p.tor, y: p.token.y, h: p.token.height * g }));
   const proto = await actor.getTokenDocument({
-    width: 1, height: 1,
+    // Obrót w danych, nie tylko z haka planszy: haki tworzenia biegną w swojej kolejności, a obrys pojazdu (M4)
+    // liczy się z obrotu — bez tego autobus powstawał pionowo i po zamianie obrysu lądował o tor obok.
+    width: w, height: h, rotation: obrotPionka(actor), lockRotation: false,
     // Jawnie, a nie licząc na wartość domyślną pola: token bez istniejącego poziomu
     // znika z płótna bez śladu i bez błędu (patrz komentarz przy `daneSceny`).
     level: scene.levels.contents[0]?.id,
-    x: torX(tor) - (LANE_W / 2),
-    y: PAS_GORA + 60 + (rzad * (LANE_W + 40)),
+    x: Math.round(torX(tor) - (w * g / 2)),
+    y: yWTorze(tor, h * g, stoja),
     // Pionki nie mają być źródłem światła ani widzenia — plansza jest jawna dla wszystkich.
     sight: { enabled: false },
     // Numeru toru celowo nie zapisujemy — liczy go `pionkiPoscigu()` z pozycji.
     // Flaga byłaby stanem pochodnym, który rozjeżdża się przy każdym ruchu spoza
-    // naszej ścieżki (Shift, makro, cofnięcie operacji).
+    // naszej ścieżki (makro, cofnięcie operacji).
     flags: { [MODULE_ID]: { [FLAG_ROLA]: rola } }
   });
   return proto.toObject();
@@ -273,12 +329,14 @@ export async function start({
 
   const tokeny = [];
   const braki = [];
+  const zajete = [];
   const dodaj = async (refs, rola, tor) => {
-    let rzad = 0;
     for (const ref of refs) {
       const actor = _aktor(ref);
       if (!actor) { braki.push(String(ref)); continue; }
-      tokeny.push(await daneTokenu(actor, scene, { tor, rola, rzad: rzad++ }));
+      const dane = await daneTokenu(actor, scene, { tor, rola, zajete });
+      zajete.push({ tor, y: dane.y, h: dane.height * scene.grid.size });
+      tokeny.push(dane);
     }
   };
   await dodaj(scigani, "scigany", START_SCIGANI);
@@ -411,8 +469,7 @@ export async function dodajPojazd(scene, ref, { tor, rola }) {
 
   // Nowy pionek wchodzi pod te, które już stoją na tym torze — bez tego lądowałby
   // dokładnie na cudzym i MG musiałby je rozsuwać ręcznie.
-  const wTorze = pionkiPoscigu(scene).filter(p => p.tor === tor).length;
-  const dane = await daneTokenu(actor, scene, { tor, rola, rzad: wTorze });
+  const dane = await daneTokenu(actor, scene, { tor, rola });
   const [token] = await scene.createEmbeddedDocuments("Token", [dane]);
   return token;
 }
@@ -467,7 +524,7 @@ export function pokazStan(scene = canvas?.scene) {
 
 export const poscigApi = {
   start, konfiguruj, dodajPojazd, stan, pokazStan,
-  isPoscigScene, poscigFlag,
+  isPoscigScene, poscigFlag, staraPlansza, pionkiPoscigu, wymiaryPionka,
   torX, xNaTor, dystansZnacznikow,
-  TORY_DOMYSLNIE, SRODOWISKA, MOTYWY, MOTYW_DOMYSLNY
+  LANE_W, METRY_TORU_NA_OBRAZIE, WERSJA_PLANSZY, TORY_DOMYSLNIE, SRODOWISKA, MOTYWY, MOTYW_DOMYSLNY
 };

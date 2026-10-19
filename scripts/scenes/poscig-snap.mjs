@@ -43,11 +43,13 @@
  * (`token.mjs:2735`), strzałki, linijkę, podgląd trasy. Jedna nadpisana metoda obsługuje
  * każdą z tych dróg naraz.
  *
- * ## Shift dostajemy za darmo
+ * ## Twardo w torach (D25, 2026-10-19)
  *
  * Wywołanie jest owinięte w `if (snap) …` (`_updateDragDestination(…, {snap: !event.shiftKey})`),
- * więc przy wciśniętym Shifcie Foundry po prostu nas nie pyta. Nie ma tu żadnego czytania
- * modyfikatorów — i nie ma ryzyka, że nauczymy MG innego skrótu, niż ma w reszcie programu.
+ * więc przy Shifcie Foundry by nas nie zapytał. Na planszy złożonej drogi połówek nie ma: łatka na
+ * `Token#_updateDragDestination` i `#_addDragWaypoint` wymusza `snap` na każdej planszy (strefa swobodna i tak
+ * wraca z `getSnappedPosition` bez zmian), a to, co wyląduje obok toru inną drogą (makro, cofnięcie), aktywny MG
+ * dociąga po ruchu. Jadący (flaga `jazda`) nie są pionkami — ustawia ich pojazd (`pojazdy/zeton.mjs`).
  *
  * ## Numer toru nigdzie nie jest zapisywany
  *
@@ -58,9 +60,10 @@
 
 import {
   poscigFlag, pionkiPoscigu, torX, xNaTor,
-  FLAG_POSCIG, LANE_W
+  FLAG_POSCIG, FLAG_ROLA, FREEFORM_Y, LANE_W
 } from "./poscig.mjs";
 import { PRZEWAGA_KONCZACA } from "../config/vehicles-data.mjs";
+import { jazdaZetonu } from "../pojazdy/stan.mjs";
 
 import { wPasiePoscigu } from "./poscig-motion-model.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -85,7 +88,8 @@ let _ostatnieOstrzezenie = 0;
  */
 export function snapDoToru(x, szerokoscPx) {
   const tor = xNaTor(x + (szerokoscPx / 2));
-  return { tor, x: torX(tor) - (szerokoscPx / 2) };
+  // Całe piksele: pojazd w prawdziwej skali ma nieparzystą szerokość (GMT400 245 px), a `x` żetonu jest całkowite.
+  return { tor, x: Math.round(torX(tor) - (szerokoscPx / 2)) };
 }
 
 /** Czy rozstaw pionków w ogóle mieści się na planszy tej szerokości. */
@@ -134,7 +138,7 @@ function _patchGetSnappedPosition() {
   _origGetSnappedPosition = Cls.prototype.getSnappedPosition;
 
   Cls.prototype.getSnappedPosition = function (data = {}) {
-    if (!poscigFlag(this.parent)) return _origGetSnappedPosition.call(this, data);
+    if (!poscigFlag(this.parent) || jazdaZetonu(this)) return _origGetSnappedPosition.call(this, data);
 
     const x = data.x ?? this.x;
     const y = data.y ?? this.y;
@@ -146,6 +150,77 @@ function _patchGetSnappedPosition() {
     const szerokoscPx = (data.width ?? this.width) * (this.parent?.grid?.size ?? LANE_W);
     return { x: snapDoToru(x, szerokoscPx).x, y, elevation };
   };
+}
+
+/**
+ * D25: na planszy przeciąganie zawsze przyciąga — Shift nie robi połówek. Łatka na klasie bazowej rdzenia, żeby
+ * każda podklasa (Token5e, żeton pojazdów M4) ją dziedziczyła.
+ */
+let _origDrag = null;
+function _patchDragSnap() {
+  const Token = foundry.canvas.placeables.Token;
+  if (_origDrag) return;
+  _origDrag = { dest: Token.prototype._updateDragDestination, waypoint: Token.prototype._addDragWaypoint };
+  Token.prototype._updateDragDestination = function (point, options = {}) {
+    if (poscigFlag(this.document?.parent)) options = { ...options, snap: true };
+    return _origDrag.dest.call(this, point, options);
+  };
+  Token.prototype._addDragWaypoint = function (point, options = {}) {
+    if (poscigFlag(this.document?.parent)) options = { ...options, snap: true };
+    return _origDrag.waypoint.call(this, point, options);
+  };
+}
+
+/**
+ * Bezpiecznik D25: pionek, który skończył ruch obok środka toru (makro, cofnięcie, `update({x})`), aktywny MG
+ * przestawia na środek — po animacji, bez animacji, jak zapis po ruchu pojazdu.
+ */
+async function dociagnijDoToru(doc, cel) {
+  if (!game.user.isActiveGM || !doc.getFlag(MODULE_ID, FLAG_ROLA)) return;
+  const scene = doc.parent;
+  const g = scene.grid.size;
+  if (!wPasiePoscigu({ poscig: true, y: cel.y, height: doc.height, gridSize: g })) return;
+  const szer = doc.width * g;
+  const { x } = snapDoToru(cel.x, szer);
+  if (Math.abs(x - cel.x) <= 1) return;
+  const t = doc.object;
+  if (t && !t.destroyed) await Promise.allSettled([...t.animationContexts.values()].map(c => c.chain.at(-1)?.promise ?? c.promise));
+  if (!scene.tokens.has(doc.id)) return;
+  await scene.moveTokens({ [doc.id]: { destination: { x, y: doc._source.y, action: "displace" } } },
+    { animate: false, showRuler: false, method: "api" });
+}
+
+/** Środek dokumentu, który nie jest żetonem (kafelek ma środek w x/y — v14; rysunek i światło — narożnik/punkt). */
+function wPasie(y) {
+  return Number.isFinite(y) && y < FREEFORM_Y;
+}
+
+/** Przesunięcie kształtu Regionu o `dx`: `x`, wielokąt (`points`), emanacja (`base`), siatka (`origin`). */
+function przesunKsztalt(shape, dx) {
+  const out = { ...shape };
+  if (Number.isFinite(out.x)) out.x += dx;
+  if (Array.isArray(out.points)) out.points = out.points.map((v, i) => (i % 2 ? v : v + dx));
+  if (out.base) out.base = przesunKsztalt(out.base, dx);
+  if (Number.isFinite(out.origin?.x)) out.origin = { ...out.origin, x: out.origin.x + dx };
+  return out;
+}
+
+const yKsztaltu = sh => sh.y ?? sh.base?.y ?? sh.points?.[1] ?? sh.origin?.y;
+
+/**
+ * Rzeczy na drodze jadą z polem (§6.2.1): kafelki (kolczatka, ładunki, przedmioty), światła (flary), rysunki i
+ * szablony w pasie. Strefa swobodna stoi; Region przypięty do żetonu jedzie z żetonem.
+ */
+async function przesunRzeczyNaDrodze(scene, dx) {
+  const tiles = scene.tiles.filter(t => wPasie(t.y)).map(t => ({ _id: t.id, x: t.x + dx }));
+  const lights = scene.lights.filter(l => wPasie(l.y)).map(l => ({ _id: l.id, x: l.x + dx }));
+  const drawings = scene.drawings.filter(d => wPasie(d.y + (d.shape?.height ?? 0) / 2)).map(d => ({ _id: d.id, x: d.x + dx }));
+  const regions = scene.regions.filter(r => !r.attachment?.token && r.shapes.some(sh => wPasie(yKsztaltu(sh))))
+    .map(r => ({ _id: r.id, shapes: r.toObject().shapes.map(sh => przesunKsztalt(sh, dx)) }));
+  if (tiles.length) await scene.updateEmbeddedDocuments("Tile", tiles);
+  if (lights.length) await scene.updateEmbeddedDocuments("AmbientLight", lights);
+  if (drawings.length) await scene.updateEmbeddedDocuments("Drawing", drawings);
+  if (regions.length) await scene.updateEmbeddedDocuments("Region", regions);
 }
 
 function _unpatchGetSnappedPosition() {
@@ -160,7 +235,7 @@ function _unpatchGetSnappedPosition() {
  */
 function onPreCreateToken(doc) {
   const scene = doc.parent;
-  if (!poscigFlag(scene)) return;
+  if (!poscigFlag(scene) || jazdaZetonu(doc)) return;
   if (!wPasiePoscigu({ poscig: true, y: doc.y, height: doc.height, gridSize: scene.grid.size })) return;
   const szerokoscPx = doc.width * scene.grid.size;
   doc.updateSource({ x: snapDoToru(doc.x, szerokoscPx).x });
@@ -217,6 +292,7 @@ export async function recentruj(scene, nadpisania = null) {
       _id: p.token.id,
       x: p.x + (delta * LANE_W)
     })));
+    await przesunRzeczyNaDrodze(scene, delta * LANE_W);
 
     // Numery torów jadą w przeciwną stronę niż pionki: pole przesunięte o −1 znaczy,
     // że tor nr 1 pokazuje teraz to, co przed chwilą było torem nr 2.
@@ -243,8 +319,10 @@ export async function recentruj(scene, nadpisania = null) {
  */
 function onMoveToken(doc, movement) {
   const cel = movement?.destination;
-  if (!cel) return;
-  recentruj(doc.parent, { [doc.id]: { x: cel.x, y: cel.y } });
+  if (!cel || !poscigFlag(doc.parent) || jazdaZetonu(doc)) return;
+  recentruj(doc.parent, { [doc.id]: { x: cel.x, y: cel.y } })
+    .then(przesuniete => (przesuniete ? null : dociagnijDoToru(doc, cel)))
+    .catch(err => console.error(`${MODULE_ID} | pościg: dociągnięcie do toru`, err));
 }
 
 /* -------------------------------------------- */
@@ -253,6 +331,7 @@ function onMoveToken(doc, movement) {
 
 export function registerPoscigSnap() {
   _patchGetSnappedPosition();
+  _patchDragSnap();
   Hooks.on("preCreateToken", onPreCreateToken);
   Hooks.on("moveToken", onMoveToken);
   Hooks.on("deleteToken", doc => recentruj(doc.parent));

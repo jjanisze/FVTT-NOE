@@ -1,5 +1,6 @@
 /** Chase scenery, bitmap foreground and UI guides. Render-only, without masks or documents. */
-import { isPoscigScene, poscigFlag, torX, FLAG_POSCIG, LANE_W, MARGIN_X, FREEFORM_Y, PAS_GORA } from "./poscig.mjs";
+import { isPoscigScene, poscigFlag, staraPlansza, torX, xNaTor, FLAG_POSCIG, FLAG_ROLA, LANE_W, MARGIN_X, FREEFORM_Y, PAS_GORA } from "./poscig.mjs";
+import { wPasiePoscigu } from "./poscig-motion-model.mjs";
 import { motywPoscigu } from "./poscig-themes.mjs";
 import { bakeSky, bakeFar, bakeMid, bakeNear, rng } from "./poscig-art.mjs";
 import { createBitmapScenery } from "./poscig-bitmap.mjs";
@@ -54,7 +55,7 @@ function labels(scene, flag, theme) {
     stroke: theme.labels.stroke, strokeThickness: 3, letterSpacing: 3
   });
   heading.position.set(MARGIN_X, 78); heading.alpha = .85; box.addChild(heading);
-  const caption = new PIXI.Text("STREFA SWOBODNA — schematy, siedzenia, notatki MG", {
+  const caption = new PIXI.Text("STREFA SWOBODNA — schematy, notatki MG", {
     fontFamily: theme.labels.font, fontSize: 32, fontWeight: "600", fill: theme.free.text
   });
   caption.anchor.set(.5, 0); caption.position.set(scene.width / 2, FREEFORM_Y + 30); caption.alpha = .7; box.addChild(caption);
@@ -165,8 +166,49 @@ function refresh() {
   else destroy();
 }
 
+/**
+ * Plakietka toru na pojeździe (D25): pojazd dłuższy niż tor zachodzi na sąsiedni, więc jego znacznik — tor środka —
+ * pisze się na nim. Ten sam numer co etykieta toru (z przesunięciem recentrowania).
+ */
+function plakietkaToru(token) {
+  const doc = token.document;
+  const flag = poscigFlag(doc.parent);
+  const g = doc.parent?.grid?.size ?? LANE_W;
+  const pionek = !!flag && !!doc.getFlag(MODULE_ID, FLAG_ROLA) && wPasiePoscigu({ poscig: true, y: doc.y, height: doc.height, gridSize: g });
+  let b = token.neuroTor;
+  if (!pionek) { if (b && !b.destroyed) b.visible = false; return; }
+  if (!b || b.destroyed) {
+    const theme = motywPoscigu(flag);
+    b = token.neuroTor = token.addChild(new PIXI.Container());
+    b.eventMode = "none";
+    b.tlo = b.addChild(new PIXI.Graphics());
+    b.tekst = b.addChild(new PIXI.Text("", {
+      fontFamily: theme.labels.font, fontSize: 26, fontWeight: "700", fill: theme.labels.fill,
+      stroke: theme.labels.stroke, strokeThickness: 3
+    }));
+    b.tekst.anchor.set(.5);
+  }
+  const tor = xNaTor(doc.x + doc.width * g / 2) + (flag.offset ?? 0);
+  if (b.tekst.text !== String(tor)) {
+    b.tekst.text = String(tor);
+    b.tlo.clear().beginFill(0x000000, .55).drawRoundedRect(-24, -17, 48, 34, 8).endFill();
+  }
+  b.position.set(doc.width * g / 2, -22);
+  b.visible = true;
+}
+
+const _ostrzezone = new Set();
+function ostrzezStara() {
+  const scene = canvas?.scene;
+  if (!game.user.isGM || !scene || !staraPlansza(scene) || _ostrzezone.has(scene.id)) return;
+  _ostrzezone.add(scene.id);
+  ui.notifications.warn(`„${scene.name}” to plansza pościgu sprzed złożonej drogi (tor 200 px = 36 m): pojazdy nie są `
+    + "w skali, a jadący i zasięgi działają tylko na nowej planszy. Utwórz pościg od nowa.");
+}
+
 export function registerPoscigCanvas() {
-  Hooks.on("canvasReady", () => { _scroll = _distance = 0; refresh(); });
+  Hooks.on("canvasReady", () => { _scroll = _distance = 0; refresh(); ostrzezStara(); });
+  Hooks.on("refreshToken", plakietkaToru);
   Hooks.on("canvasTearDown", destroy);
   Hooks.on("updateScene", (scene, changes) => {
     if (scene.id !== canvas.scene?.id) return;

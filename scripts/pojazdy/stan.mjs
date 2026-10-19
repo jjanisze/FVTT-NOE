@@ -28,7 +28,6 @@
  */
 
 import { KATALOG_POJAZDOW, PODWOZIA } from "../config/vehicles-data.mjs";
-import { isPoscigScene } from "../scenes/poscig.mjs";
 import { ROZMIAR_MIEJSCA, obrysPrzyObrocie, ukladMiejsc } from "./geometria.mjs";
 
 export const MODULE_ID = "neuroshima-2026-overrides";
@@ -70,7 +69,8 @@ export function skalaPojazdu(scena) {
  */
 export function trybSceny(scena) {
   if (!scena || kratkaPojazdu(scena) < PROG_ZNACZNIKA_PX) return "znacznik";
-  return isPoscigScene(scena) ? "plansza" : "taktyczna";
+  // Flaga planszy czytana wprost (jak `isPoscigScene`): plansza importuje ten plik, nie odwrotnie.
+  return scena.getFlag?.(MODULE_ID, "poscig") ? "plansza" : "taktyczna";
 }
 
 /** Czy na scenie pojazd ma obrys, miejsca i jadących (każdy tryb poza znacznikiem). */

@@ -32,6 +32,8 @@ import {
 import {
   naroznikDlaSrodka, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
 } from "./geometria.mjs";
+import { obrotPionka } from "../scenes/poscig.mjs";
+import { wPasiePoscigu } from "../scenes/poscig-motion-model.mjs";
 
 /** Krycie nadwozia w prześwietleniu (§4.2: „ok. 35%”). */
 const KRYCIE_PRZESWIETLENIA = 0.35;
@@ -357,7 +359,12 @@ export function registerZetonPojazdu() {
   // Na scenie-znaczniku rozmiar zostaje, jak go dał prototyp albo MG.
   Hooks.on("preCreateToken", (doc) => {
     if (!jestZetonemPojazdu(doc) || !obrysDziala(doc.parent)) return;
-    const w = wymiaryZetonu(doc.actor, doc.parent, doc._source.rotation);
+    // Na planszy pościgu pojazd w pasie stanie przodem w prawo (`poscig-motion.mjs`) — obrys od razu dla tego obrotu,
+    // niezależnie od kolejności haków tworzenia.
+    const scena = doc.parent;
+    const wPasie = trybSceny(scena) === "plansza"
+      && wPasiePoscigu({ poscig: true, y: doc._source.y, height: doc._source.height, gridSize: scena.grid.size });
+    const w = wymiaryZetonu(doc.actor, scena, wPasie ? obrotPionka(doc.actor) : doc._source.rotation);
     if (w && (!bliskie(w.w, doc._source.width) || !bliskie(w.h, doc._source.height))) {
       doc.updateSource({ width: w.w, height: w.h });
     }
@@ -377,7 +384,14 @@ export function registerZetonPojazdu() {
       doc.object?.renderFlags.set({ refreshVisibility: true, refreshState: true });
     }
   });
-  Hooks.on("createToken", doc => { if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent); });
+  Hooks.on("createToken", doc => {
+    if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent);
+    // Bezpiecznik obrysu: haki tworzenia ustawiają obrót w swojej kolejności (plansza pościgu — przodem w prawo),
+    // więc po utworzeniu aktywny MG dopasowuje obrys do ostatecznego obrotu, jak po ruchu.
+    if (game.user.isActiveGM && jestZetonemPojazdu(doc) && obrysDziala(doc.parent)) {
+      zapiszPoRuchu(doc).catch(err => console.error(`${MODULE_ID} | pojazd: obrys po utworzeniu`, err));
+    }
+  });
   Hooks.on("deleteToken", doc => { if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent); });
   // Kropka celowanego jadącego ma czerwony obwód (D14).
   Hooks.on("targetToken", (user, token) => {

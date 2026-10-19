@@ -1,6 +1,7 @@
 /** Reversible mesh-only motion, after Foundry animations and before the same frame renders. */
 import { poscigFlag, LANE_W } from "./poscig.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "./poscig-motion-model.mjs";
+import { jadacyPojazdu, jazdaZetonu } from "../pojazdy/stan.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const SETTING_SWAY = "poscigVehicleSway";
@@ -21,7 +22,8 @@ function geometry(doc, changes = NO_CHANGES, out = {}) {
 }
 
 function facing(doc, changes = {}) {
-  if (!wPasiePoscigu(geometry(doc, changes))) return null;
+  // Jadący obraca się z pojazdem (obrót pojazdu + własny, `pojazdy/zeton.mjs`) — plansza go nie ustawia.
+  if (jazdaZetonu(doc) || !wPasiePoscigu(geometry(doc, changes))) return null;
   return rotationNaPrawo(doc.actor?.getFlag(MODULE_ID, "poscigFacingOffset") ?? 0);
 }
 
@@ -38,7 +40,36 @@ function preUpdate(doc, changes) {
   if (changes.lockRotation || doc.lockRotation) changes.lockRotation = false;
 }
 
+/** Jadący jadą z kołysaniem pojazdu: to samo przesunięcie i obrót wokół środka nadwozia. */
+function restoreRiders(entry) {
+  for (const r of entry.riders ?? []) {
+    const m = r.mesh;
+    if (!m || m.destroyed) continue;
+    if (m.x === r.appliedX) m.x = r.baseX;
+    if (m.y === r.appliedY) m.y = r.baseY;
+    if (m.rotation === r.appliedRotation) m.rotation = r.baseRotation;
+  }
+  entry.riders = null;
+}
+
+function swayRiders(entry, sway) {
+  const cos = Math.cos(sway.rotation), sin = Math.sin(sway.rotation);
+  const riders = [];
+  for (const doc of jadacyPojazdu(entry.token.document)) {
+    const m = doc.object?.mesh;
+    if (!m || m.destroyed) continue;
+    const dx = m.x - entry.baseX, dy = m.y - entry.baseY;
+    const r = { mesh: m, baseX: m.x, baseY: m.y, baseRotation: m.rotation,
+      appliedX: entry.baseX + sway.x + dx * cos - dy * sin, appliedY: entry.baseY + sway.y + dx * sin + dy * cos,
+      appliedRotation: m.rotation + sway.rotation };
+    m.position.set(r.appliedX, r.appliedY); m.rotation = r.appliedRotation;
+    riders.push(r);
+  }
+  entry.riders = riders;
+}
+
 function restore(entry) {
+  restoreRiders(entry);
   const mesh = entry.mesh;
   if (!entry.applied || !mesh || mesh.destroyed) { entry.applied = false; return; }
   // A render flag may have already replaced one component; never subtract from a fresh value.
@@ -72,6 +103,7 @@ function afterFrame() {
     entry.appliedRotation = mesh.rotation + sway.rotation;
     mesh.position.set(entry.appliedX, entry.appliedY); mesh.rotation = entry.appliedRotation;
     entry.applied = true;
+    swayRiders(entry, sway);
   }
   cost += performance.now() - begin; frames++;
 }

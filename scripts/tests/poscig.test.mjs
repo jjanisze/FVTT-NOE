@@ -29,9 +29,10 @@ import {
   METRY_NA_ZNACZNIK, START_SCIGANI, START_SCIGAJACY, PRZEWAGA_KONCZACA, RUND_MAKS
 } from "../config/vehicles-data.mjs";
 import {
-  daneSceny, torX, xNaTor, dystansZnacznikow, wymiary,
-  LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE
+  daneSceny, torX, xNaTor, dystansZnacznikow, wymiary, wymiaryPionka, yWTorze,
+  LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE, METRY_TORU_NA_OBRAZIE, WERSJA_PLANSZY
 } from "../scenes/poscig.mjs";
+import { kratkaPojazdu, trybSceny } from "../pojazdy/stan.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "../scenes/poscig-motion-model.mjs";
@@ -393,8 +394,40 @@ export function registerPoscigTests(quench) {
       it("kolumna siatki pokrywa się z torem, a siatka jest niewidoczna", function () {
         const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
         expect(dane.grid.size, "bok siatki = szerokość toru").to.equal(LANE_W);
-        expect(dane.grid.distance, "jedno pole = jeden znacznik").to.equal(36);
         expect(dane.grid.alpha, "siatki nie widać — tory rysuje warstwa PIXI").to.equal(0);
+      });
+
+      it("złożona droga (D24): tor rysowany jako 6 m — pojazdy w prawdziwej skali, mierzony jako znacznik 36 m", function () {
+        // Pomiar między pojazdami robi metryka drogi (36 m na tor); `grid.distance` to skala rysunku, 70 px na 1,5 m
+        // jak mapy kampanii. Gdyby wróciło 36 m, pojazd w skali miałby 8 px i M4 uznałby planszę za znacznik.
+        const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
+        const scena = { grid: dane.grid, getFlag: (m, k) => dane.flags[m]?.[k] };
+        expect(dane.grid.distance).to.equal(METRY_TORU_NA_OBRAZIE);
+        expect(METRY_NA_ZNACZNIK, "znacznik RAW").to.equal(36);
+        expect(kratkaPojazdu(scena)).to.equal(70);
+        expect(trybSceny(scena)).to.equal("plansza");
+        expect(dane.flags[MODULE_ID].poscig.wersja).to.equal(WERSJA_PLANSZY);
+      });
+
+      it("pionek w prawdziwej skali, przodem w prawo: GMT400 leży poziomo (0,875 × 0,375 toru)", function () {
+        const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
+        const scena = { grid: dane.grid, getFlag: (m, k) => dane.flags[m]?.[k] };
+        const gmt = { type: "vehicle", getFlag: () => undefined,
+          flags: { [MODULE_ID]: { pojazd: { podwozie: "hammer", obrys: { w: 1.5, h: 3.5 } } } } };
+        expect(wymiaryPionka(gmt, scena)).to.deep.equal({ w: 0.875, h: 0.375 });
+        // Pojazd spoza katalogu: prototyp w kratkach 1,5 m przeliczony na skalę planszy.
+        const inny = { type: "vehicle", flags: {}, getFlag: () => undefined, prototypeToken: { width: 2, height: 1 } };
+        expect(wymiaryPionka(inny, scena)).to.deep.equal({ w: 0.5, h: 0.25 });
+      });
+
+      it("rzędy jezdni (D25): następny pojazd w torze staje pod poprzednim, za pasem — od góry", function () {
+        const h = 105;
+        const pierwszy = yWTorze(3, h);
+        const drugi = yWTorze(3, h, [{ tor: 3, y: pierwszy, h }]);
+        expect(drugi).to.be.above(pierwszy + h);
+        expect(yWTorze(4, h, [{ tor: 3, y: pierwszy, h }]), "inny tor nie przeszkadza").to.equal(pierwszy);
+        const pelny = [{ tor: 3, y: PAS_GORA, h: FREEFORM_Y - PAS_GORA - 10 }];
+        expect(yWTorze(3, h, pelny), "pas pełny").to.equal(pierwszy);
       });
 
       it("wymiary i ST wynikają z parametrów", function () {
@@ -437,6 +470,12 @@ export function registerPoscigTests(quench) {
         const szer = LANE_W * 2;
         const lewa = MARGIN_X + (2 * LANE_W);
         expect(snapDoToru(lewa, szer).tor).to.equal(4);
+      });
+
+      it("pojazd o nieparzystej szerokości dostaje całe piksele (GMT400: 245 px)", function () {
+        const { x } = snapDoToru(torX(5) - 100, 245);
+        expect(Number.isInteger(x)).to.be.true;
+        expect(Math.abs(x + 122.5 - torX(5))).to.be.at.most(0.5);
       });
 
       it("przyciąga też poza planszę — to sygnał do recentrowania, nie błąd", function () {

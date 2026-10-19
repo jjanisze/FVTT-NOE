@@ -79,12 +79,15 @@ export function bitmapArtSuite(name, theme, prefix) { return {
   async run(t) {
     const player = t.client("Gracz 1");
     for(const client of [t.gm,player]) await client.eval(({theme,prefix})=>{window.__bitmapArtTheme=theme;window.__bitmapArtPrefix=prefix;},{theme,prefix});
+    // Input fixture: Pojazd 1 centred in lane 2, low in the band under the roadside art (lane width from the board).
+    const geo = await t.gm.eval(()=>{const P=game.neuroshima.poscig;return {lane:P.LANE_W,x:P.torX(2)-P.LANE_W/2,cx:P.torX(2)};});
     for(const client of [t.gm,player]) await t.waitFor(client,id=>canvas.ready&&canvas.scene?.id===id&&canvas.tokens.placeables.length===8,
       {args:[t.fixture.scene.id],message:"new chase canvas fully drawn after the previous suite"});
+    for(const client of [t.gm,player]) await client.eval(x=>{window.__bitmapArtX=x;},geo.x);
     await t.gm.eval(async () => {
       await game.togglePause(false, { broadcast: true });
       await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme,tempoTla:0});
-      await canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false});
+      await canvas.scene.tokens.getName("Pojazd 1").update({x:window.__bitmapArtX,y:970},{animate:false});
     });
     await t.waitFor(t.gm,()=>game.neuroshima.poscig.tlo.stats().theme===window.__bitmapArtTheme&&game.neuroshima.poscig.tlo.stats().ready,
       {message:"requested bitmap theme and authored road edge ready"});
@@ -110,8 +113,8 @@ export function bitmapArtSuite(name, theme, prefix) { return {
       }
     });
     for(const [label,client] of [["gm",t.gm],["Gracz 1",player]]) {
-      await t.waitFor(client,()=>game.neuroshima.poscig.tlo.stats().ready && canvas.scene.tokens.getName("Pojazd 1")?._source.y===970,
-        {message:"loaded bitmap scenery and replicated input test position"});
+      await t.waitFor(client,x=>game.neuroshima.poscig.tlo.stats().ready && canvas.scene.tokens.getName("Pojazd 1")?._source.y===970&&canvas.scene.tokens.getName("Pojazd 1")?._source.x===x,
+        {args:[geo.x],message:"loaded bitmap scenery and replicated input test position"});
       await client.front(0);
       await client.eval(async()=>{document.querySelector('.tour [data-action="exit"]')?.click();canvas.tokens.activate({tool:"select"});await ui.controls.activate({control:"tokens",tool:"select"});canvas.pan({x:1400,y:900,scale:.52});});
       await t.step(`${label}: opaque foreground permits select, HUD, sheet and target`,async()=>{
@@ -120,7 +123,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
         t.equal(coverage.eventMode,"none","foreground event mode");t.equal(coverage.interactiveChildren,false,"foreground child input disabled");
         await t.screenshot(label,"opaque-foreground-setup");
         await client.eval(()=>canvas.tokens.releaseAll());
-        const at = await clickAt(client,{x:700,y:1070});
+        const at = await clickAt(client,{x:geo.cx,y:1070});
         const selection=await client.eval(()=>({controlled:canvas.tokens.controlled.map(t=>t.name),tool:game.activeTool,layer:canvas.activeLayer.constructor.name,
           token:canvas.tokens.placeables.find(t=>t.name==="Pojazd 1").center,pivot:{x:canvas.stage.pivot.x,y:canvas.stage.pivot.y}}));
         if(!selection.controlled.includes("Pojazd 1"))t.log(`${label}: pointer ${JSON.stringify(at)}, state ${JSON.stringify(selection)}`);
@@ -132,7 +135,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
         await t.waitFor(client,()=>game.actors.getName("Pojazd 1").sheet.rendered,{message:"sheet opened through opaque art"});
         await client.eval(async()=>{await game.actors.getName("Pojazd 1").sheet.close();});
         await client.eval(async()=>{await ui.controls.activate({control:"tokens",tool:"target"});});
-        await clickAt(client,{x:700,y:1070});
+        await clickAt(client,{x:geo.cx,y:1070});
         await t.waitFor(client,()=>[...game.user.targets].some(t=>t.name==="Pojazd 1"),{message:"targeting through opaque art"});
         await client.eval(async()=>{for(const token of [...game.user.targets])token.setTarget(false);await ui.controls.activate({control:"tokens",tool:"select"});});
         await t.screenshot(label,"opaque-foreground-input");
@@ -140,25 +143,30 @@ export function bitmapArtSuite(name, theme, prefix) { return {
       await t.step(`${label}: transparent art and real normal/Shift drags preserve movement`,async()=>{
         const clear = await client.eval(overlap,{opaque:false});
         t.assert(clear.alpha<10,"transparent control point is opaque",clear);
-        await client.eval(()=>canvas.tokens.releaseAll());await clickAt(client,{x:700,y:1070});
+        await client.eval(()=>canvas.tokens.releaseAll());await clickAt(client,{x:geo.cx,y:1070});
         await t.waitFor(client,()=>canvas.tokens.controlled.some(t=>t.name==="Pojazd 1"),{message:"selection through transparent art"});
         await client.eval(overlap,{});await pause(350);
-        const before=await drag(client,200,-150);
-        await t.waitFor(client,b=>{const d=canvas.scene.tokens.getName("Pojazd 1");return d._source.x===b.x+200&&Math.abs(d._source.y-(b.y-150))<3;},
-          {args:[before],message:"normal drag through foreground snapped into next column"});
+        const before=await drag(client,geo.lane,-150);
+        await t.waitFor(client,({b,lane})=>{const d=canvas.scene.tokens.getName("Pojazd 1");return d._source.x===b.x+lane&&Math.abs(d._source.y-(b.y-150))<3;},
+          {args:[{b:before,lane:geo.lane}],message:"normal drag through foreground snapped into next column"});
         // Start in the clear and finish under the opaque sign, the inverse input path.
         await client.eval(overlap,{});
-        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");f.children[1].x+=600;});
-        await pause(350);const into=await drag(client,600,0);
-        await t.waitFor(client,b=>canvas.scene.tokens.getName("Pojazd 1")._source.x===b.x+600,
-          {args:[into],message:"drag from clear road into foreground"});
+        await client.eval(dx=>{const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");f.children[1].x+=dx;},2*geo.lane);
+        await pause(350);const into=await drag(client,2*geo.lane,0);
+        await t.waitFor(client,({b,dx})=>canvas.scene.tokens.getName("Pojazd 1")._source.x===b.x+dx,
+          {args:[{b:into,dx:2*geo.lane}],message:"drag from clear road into foreground"});
         await client.eval(overlap,{});await pause(350);
-        const shifted=await drag(client,93,55,true);
-        await t.waitFor(client,b=>{const d=canvas.scene.tokens.getName("Pojazd 1");return Math.abs(d._source.x-(b.x+93))<3&&Math.abs(d._source.y-(b.y+55))<3;},
-          {args:[shifted],message:"Shift drag through foreground retained free position"});
+        // D25 (PLAN_m4_pojazdy): no half-lane positions in the band — Shift no longer turns snapping off there.
+        // Reference from the stored position: `drag()` reads `document.x`, which may still be mid-animation.
+        const stored=await client.eval(()=>{const d=canvas.scene.tokens.getName("Pojazd 1");return {x:d._source.x,y:d._source.y};});
+        await drag(client,93,55,true);
+        await t.waitFor(client,b=>Math.abs(canvas.scene.tokens.getName("Pojazd 1")._source.y-(b.y+55))<3,
+          {args:[stored],message:"Shift drag through foreground moved the token"});
+        const afterShift=await client.eval(()=>{const d=canvas.scene.tokens.getName("Pojazd 1");return {x:d._source.x,y:d._source.y};});
+        t.equal(afterShift.x,stored.x,`Shift drag in the band still snaps to the lane (D25): ${JSON.stringify({before:stored,after:afterShift})}`);
         await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");f.children[0].visible=true;f.children[1].position.set(0,0);delete window.__nevadaOverlapSprite;});
-        await t.gm.eval(()=>canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false}));
-        await t.waitFor(client,()=>canvas.scene.tokens.getName("Pojazd 1")._source.x===600&&canvas.scene.tokens.getName("Pojazd 1")._source.y===970,{message:"restore input fixture"});
+        await t.gm.eval(x=>canvas.scene.tokens.getName("Pojazd 1").update({x,y:970},{animate:false}),geo.x);
+        await t.waitFor(client,x=>canvas.scene.tokens.getName("Pojazd 1")._source.x===x&&canvas.scene.tokens.getName("Pojazd 1")._source.y===970,{args:[geo.x],message:"restore input fixture"});
       });
     }
     await t.step("production cropping, pan/zoom, tempo and bitmap teardown",async()=>{

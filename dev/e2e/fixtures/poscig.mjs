@@ -1,4 +1,7 @@
-/** Isolated chase board: six lane-centred vehicles and two negative controls. */
+/**
+ * Isolated chase board: six lane-centred vehicles and two negative controls — a stray token between lanes (no
+ * chase role, so D25 lane enforcement leaves it alone; it must not sway) and one in the free zone.
+ */
 export default async function poscig({ moduleId }) {
   const flag = { [moduleId]: { fixture: "poscig" } };
   for (const collection of [game.scenes, game.actors]) {
@@ -27,7 +30,7 @@ export default async function poscig({ moduleId }) {
       width: 1, height: 1, level: scene.levels.contents[0].id,
       x: p.torX(i ? 2 + i : 9) - p.LANE_W / 2,
       y: free ? 1550 : between ? 960 : 520 + (i % 2) * 260,
-      flags: { [moduleId]: { fixture: "poscig", poscigRola: i > 3 ? "scigany" : "scigajacy" } },
+      flags: { [moduleId]: { fixture: "poscig", ...(between ? {} : { poscigRola: i > 3 ? "scigany" : "scigajacy" }) } },
       sight: { enabled: false }
     })).toObject());
   }

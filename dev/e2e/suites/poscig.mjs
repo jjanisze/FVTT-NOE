@@ -76,31 +76,51 @@ export default {
       });
     }
 
+    let start1 = null;
     await t.step("player rotates and moves its token: right-facing enforcement shares the same update", async () => {
       const result = await player.eval(async () => {
+        const L = game.neuroshima.poscig.LANE_W;
         const token = canvas.scene.tokens.getName("Pojazd 1");
+        const x0 = token._source.x;
         await token.update({rotation:123}, {animate:false});
         const rotated = token._source.rotation;
         await token.update({y:1500, rotation:42}, {animate:false});
         const free = token._source.rotation;
-        await token.update({x:token.x+200, y:780, rotation:63}, {animate:false});
-        return {rotated, free, band:token._source.rotation, x:token._source.x, y:token._source.y};
+        await token.update({x:x0+L, y:780, rotation:63}, {animate:false});
+        return {rotated, free, band:token._source.rotation, x:token._source.x, y:token._source.y, x0, L};
       });
+      start1 = result.x0;
       t.equal(result.rotated, 270, "manual rotation in band");
       t.equal(result.free, 42, "rotation on exit to free zone");
       t.equal(result.band, 270, "rotation on re-entry");
-      t.equal(result.x, 800, "movement x survived the orientation hook");
+      t.equal(result.x, result.x0 + result.L, "movement x survived the orientation hook");
       t.equal(result.y, 780, "movement y survived the orientation hook");
-      await t.waitFor(t.gm, () => canvas.scene.tokens.getName("Pojazd 1")._source.x === 800, {message:"player movement replicated"});
-      await t.gm.eval(() => canvas.scene.tokens.getName("Pojazd 1").update({x:600}, {animate:false}));
+      await t.waitFor(t.gm, x => canvas.scene.tokens.getName("Pojazd 1")._source.x === x, {args:[result.x0 + result.L], message:"player movement replicated"});
+      await t.gm.eval(x => canvas.scene.tokens.getName("Pojazd 1").update({x}, {animate:false}), start1);
+    });
+
+    await t.step("D25: a piece moved between lanes is pulled back to the lane centre by the GM", async () => {
+      const result = await player.eval(async x0 => {
+        const P = game.neuroshima.poscig;
+        const token = canvas.scene.tokens.getName("Pojazd 1");
+        await token.update({x:x0 + 55}, {animate:false});
+        return {centre:P.torX(P.xNaTor(x0 + P.LANE_W / 2)) - token.width * canvas.grid.size / 2};
+      }, start1);
+      await t.waitFor(t.gm, x => canvas.scene.tokens.getName("Pojazd 1")._source.x === x, {args:[result.centre], message:"piece snapped back to its lane"});
+      const stray = await t.gm.eval(() => {
+        const P = game.neuroshima.poscig, d = canvas.scene.tokens.getName("Między torami");
+        const c = d._source.x + d.width * canvas.grid.size / 2;
+        return Math.abs(c - P.torX(P.xNaTor(c)));
+      });
+      t.assert(stray > 1, "the stray token without a chase role stays between lanes", {stray});
     });
 
     await t.step("setting off restores meshes immediately and is independent on GM/player", async () => {
       await player.front(0);
-      await t.waitFor(player, () => {
+      await t.waitFor(player, x => {
         const tk=canvas.tokens.placeables.find(t=>t.name==='Pojazd 1');
-        return tk.document._source.x===600 && Math.abs(tk.mesh.x-tk.center.x)<2;
-      }, {message:"the preceding replicated move to settle before testing the setting"});
+        return tk.document._source.x===x && Math.abs(tk.mesh.x-tk.center.x)<2;
+      }, {args:[start1], message:"the preceding replicated move to settle before testing the setting"});
       const immediate = await player.eval(async id => {
         await game.settings.set(id, "poscigVehicleSway", false);
         return canvas.tokens.placeables.every(tk => tk.mesh.x === tk.center.x && tk.mesh.y === tk.center.y && Math.abs(tk.mesh.angle - tk.document.rotation) < 1e-6);
@@ -122,28 +142,32 @@ export default {
       t.assert(still.restored && still.motion.every(m => !m.x && !m.y && !m.rotation), "stopped road still sways", still);
       await t.gm.eval(() => game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:1}));
       const move = await t.gm.eval(async () => {
-        const d = canvas.scene.tokens.getName("Pojazd 1");
-        await d.update({x:800}, {animation:{duration:700}});
+        const P = game.neuroshima.poscig, d = canvas.scene.tokens.getName("Pojazd 1");
+        const cel = P.torX(4) - d.width * canvas.grid.size / 2;
+        await d.update({x:cel}, {animation:{duration:700}});
         await new Promise(r => setTimeout(r,1100));
-        return {x:d._source.x, meshX:d.object.mesh.x, rotation:d._source.rotation};
+        return {x:d._source.x, cel, meshX:d.object.mesh.x, centre:P.torX(4), rotation:d._source.rotation};
       });
-      t.equal(move.x, 800, "animated move finishes at destination");
-      t.assert(Math.abs(move.meshX - 900) < 2, "mesh accumulated sway during movement", move);
-      await t.gm.eval(() => canvas.scene.tokens.getName("Pojazd 1").update({x:600}, {animate:false}));
+      t.equal(move.x, move.cel, "animated move finishes at destination");
+      t.assert(Math.abs(move.meshX - move.centre) < 2, "mesh accumulated sway during movement", move);
+      await t.gm.eval(x => canvas.scene.tokens.getName("Pojazd 1").update({x}, {animate:false}), start1);
       const recentered = await t.gm.eval(async () => {
-        const scene = canvas.scene, d = scene.tokens.getName("Pojazd 6");
-        await d.update({x:2600}, {animate:false});
+        const P = game.neuroshima.poscig, scene = canvas.scene, d = scene.tokens.getName("Pojazd 6");
+        const free = scene.tokens.getName("Strefa swobodna")._source.x;
+        const half = d.width * scene.grid.size / 2;
+        await d.update({x:P.torX(13) - half}, {animate:false});
         for (let i=0;i<40 && scene.getFlag("neuroshima-2026-overrides","poscig").offset !== 1;i++) await new Promise(r=>setTimeout(r,100));
-        return {offset:scene.getFlag("neuroshima-2026-overrides","poscig").offset, x:d._source.x, free:scene.tokens.getName("Strefa swobodna")._source.x};
+        return {offset:scene.getFlag("neuroshima-2026-overrides","poscig").offset, x:d._source.x, last:P.torX(12) - half,
+          free, freeAfter:scene.tokens.getName("Strefa swobodna")._source.x};
       });
       t.equal(recentered.offset, 1, "board recentred once");
-      t.equal(recentered.x, 2400, "leader moved into last lane");
-      t.equal(recentered.free, 1800, "free-zone token stays put");
+      t.equal(recentered.x, recentered.last, "leader moved into last lane");
+      t.equal(recentered.freeAfter, recentered.free, "free-zone token stays put");
       // Restore positions by name, never by createEmbeddedDocuments return order.
       await t.gm.eval(async () => {
-        const scene=canvas.scene;
+        const P = game.neuroshima.poscig, scene=canvas.scene, half = scene.grid.size / 2;
         await scene.updateEmbeddedDocuments("Token",scene.tokens.filter(d=>d.name!=='Strefa swobodna').map(d=>({
-          _id:d.id, x:d.name==='Między torami'?1855:400+Number(d.name.match(/\d+/)[0])*200
+          _id:d.id, x:d.name==='Między torami' ? P.torX(9) - half + 55 : P.torX(2 + Number(d.name.match(/\d+/)[0])) - half
         })),{animate:false});
         await game.neuroshima.poscig.konfiguruj(scene,{offset:0});
       });
