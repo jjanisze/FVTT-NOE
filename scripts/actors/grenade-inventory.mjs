@@ -77,6 +77,7 @@
  * list mirroring flara.mjs's own expiry idiom) — a scorch mark is supposed
  * to massively outlive the explosion that made it, not vanish with it.
  */
+import { zglosWybuch } from "../scenes/poscig-serie.mjs";
 import { GRENADE_TYPES, GRENADE_MAP, grenadeDescription } from "../config/ammo-data.mjs";
 import { playExplosiveSoundForSubtype } from "../weapons/sounds.mjs";
 import { seqEffect, seqEndEffect } from "../weapons/sequencer.mjs";
@@ -1138,6 +1139,12 @@ async function _spawnExplosiveMarker(actor, pending) {
       _spawnScorchMark(scene, pending.x, pending.y, targetSquares)
         .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: scorch spawn failed`, e));
       _spawnExplosionVfx(scene, pending.x, pending.y, targetSquares, pending.damageType, markerDoc, label);
+    }
+
+    // Plansza pościgu (PLAN_m4_pojazdy §6.2.3, D31): kto jest w obszarze, liczy droga — karta MG z listą.
+    if (pending.kind !== "mine") {
+      zglosWybuch(scene, { x: pending.x, y: pending.y, area, itemName: pending.itemName, actor })
+        .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: blast hits on the chase board failed`, e));
     }
   } finally {
     try { await actor.unsetFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE); } catch (_e) { /* aktor mógł już zniknąć */ }

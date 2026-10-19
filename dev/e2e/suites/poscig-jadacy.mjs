@@ -9,6 +9,8 @@
  *  - Gracz 1 changes seats in the same row: on the board the car always moves — the card says so (§6.2.5).
  *  - GM: the driver's range to the Hammer is road metres (lanes × 36 m), not drawn pixels (D27).
  *  - Gracz 1 drives one lane on: the driver rides along, no driving card, no turning (D25 board rules).
+ *  - GM: an aimed Miażdżąca seria from the driver hits the riders of two raider cars ahead and both cars; a grenade
+ *    on one car hits only it; suppressive fire laid on the Hammer is pinned to it and rides along (D28, D29, D31).
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -121,6 +123,59 @@ async function zmianaToru({ pojazd, jadacy }) {
     jazda: game.messages.contents.slice(n0).some(m => /Jazda:/.test(m.content)) };
 }
 
+async function seriaIObszary({ plansza, hammer, pcAktor }) {
+  const MOD = "neuroshima-2026-overrides";
+  const P = game.neuroshima.pojazdy, C = game.neuroshima.poscig;
+  const scena = game.scenes.get(plansza), g = scena.grid.size, lvl = scena.levels.contents[0].id;
+  if (canvas.scene?.id !== plansza) { await scena.view(); await window.__e2e.until(() => canvas.ready && canvas.scene?.id === plansza, { message: "board viewed" }); }
+  const h = fromUuidSync(hammer);
+  const pc = scena.tokens.find(t => t.actorId === pcAktor);
+  const nasz = P.pojazdJadacego(pc);
+  // Drugi wóz bandytów tor za Hammerem, w tym samym rzędzie co nasz — konwój przed lufą.
+  const drugi = await P.utworzZKatalogu("osobowka", { nazwa: "Osobówka bandytów" });
+  await drugi.setFlag(MOD, "e2ePoscigJadacy", true);
+  await C.dodajPojazd(scena, drugi.id, { tor: C.xNaTor(h.x + h.width * g / 2) + 1, rola: "scigany" });
+  const d = scena.tokens.find(t => t.actorId === drugi.id);
+  for (const t of [h, d]) await t.update({ y: nasz.y + (nasz.height - t.height) * g / 2 }, { animate: false });
+  const bandyci = [];
+  for (const [n, auto] of [["Bandyta z Hammera", h], ["Bandyta z Osobówki", d]]) {
+    const a = await Actor.implementation.create({ name: n, type: "npc", flags: { [MOD]: { e2ePoscigJadacy: true } }, prototypeToken: { actorLink: true } });
+    const [t] = await scena.createEmbeddedDocuments("Token", [(await a.getTokenDocument({ x: auto.x, y: auto.y, level: lvl })).toObject()]);
+    await P.posadz(auto, t);
+    bandyci.push(t);
+  }
+  await window.__e2e.quiet({ idleMs: 600 });
+  const tekst = m => m.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  // Miażdżąca seria kierowcy (aktywność jak z karty broni: typ, nazwa, aktor, szablon 150 × 3 m).
+  const n0 = game.messages.size;
+  const odwolany = Hooks.call("dnd5e.preCreateMeasuredTemplate",
+    { type: "neuroMs", name: "Miażdżąca seria", actor: pc.actor, target: { template: { size: "150", width: "3" } } }, {}) === false;
+  await window.__e2e.quiet({ idleMs: 300 });
+  const cel = canvas.clientCoordinatesFromCanvas(d.getCenterPoint(d._source));
+  canvas.app.view.dispatchEvent(new PointerEvent("pointerdown", { clientX: cel.x, clientY: cel.y, button: 0, bubbles: true }));
+  await window.__e2e.until(() => game.messages.contents.slice(n0).some(m => /trafieni na drodze/.test(m.content)), { message: "burst hit card" });
+  const seria = tekst(game.messages.contents.slice(n0).find(m => /trafieni na drodze/.test(m.content)));
+  // Granat 3 m na Hammerze.
+  const n1 = game.messages.size;
+  const ch = h.getCenterPoint(h._source);
+  await C.serie.zglosWybuch(scena, { x: ch.x, y: ch.y, area: { kind: "circle", radius: 3, label: "Koło 6 m" }, itemName: "Granat" });
+  const wybuch = tekst(game.messages.contents.slice(n1).find(m => /w obszarze na drodze/.test(m.content)));
+  // Ogień zaporowy położony na Hammerze — przypięty, jedzie z nim (D29).
+  const dane = [{ name: "OZ e2e", shapes: [{ type: "circle", x: Math.round(ch.x), y: Math.round(ch.y), radius: 140, gridBased: false }] }];
+  // Ten sam krok co hak `dnd5e.createMeasuredTemplate` przy prawdziwej aktywności OZ (bez reszty haków ognia zaporowego).
+  C.serie.przypnijStrefe({ type: "neuroOz" }, dane);
+  const [reg] = await scena.createEmbeddedDocuments("Region", dane);
+  const x0 = reg.shapes[0].x;
+  await h.update({ x: h.x - C.LANE_W }, { animate: false });
+  await window.__e2e.until(() => reg.shapes[0].x === x0 - C.LANE_W, { message: "zone rode with the Hammer" });
+  // Jadących przestawia MG po ruchu pojazdu (zapis po ruchu) — dopiero potem pytamy strefę.
+  await window.__e2e.until(() => P.geometria.punktWPojezdzie(bandyci[0].getCenterPoint(bandyci[0]._source), h.getCenterPoint(h._source),
+    P.danePojazdu(h.actor).obrys, h._source.rotation, P.kratkaPojazdu(scena), 0.01), { message: "the Hammer's rider re-seated" });
+  const przypiety = reg.attachment?.token;   // pole dokumentu: rozwiązany TokenDocument, nie id
+  return { odwolany, seria, wybuch, przypieta: (przypiety?.id ?? przypiety) === h.id,
+    wStrefie: C.serie.regionZawieraNaDrodze(reg, bandyci[0]), pozaStrefa: C.serie.regionZawieraNaDrodze(reg, bandyci[1]) };
+}
+
 export default {
   name: "poscig-jadacy",
   clients: ["gm", "Gracz 1", "Gracz 2"],
@@ -182,6 +237,19 @@ export default {
       t.equal(r.wSrodku, true, "driver still inside");
       const jazda = await t.gm.eval(() => game.messages.contents.slice(-5).some(m => /Jazda:/.test(m.content)));
       t.equal(jazda, false, "no driving card on the board");
+    });
+
+    await t.step("GM: aimed Miażdżąca seria rakes two cars ahead; a grenade hits one car; suppressive fire rides along (D28, D29)", async () => {
+      const r = await t.gm.eval(seriaIObszary, { plansza: b.plansza, hammer: b.hammer, pcAktor: s.pcAktor });
+      t.equal(r.odwolany, true, "dnd5e line placement replaced by aiming on the board");
+      t.assert(/Bandyta z Hammera/.test(r.seria) && /Bandyta z Osobówki/.test(r.seria), "burst hits riders of both cars", r.seria);
+      t.assert(/Pojazdy na linii: .*Hammer bandytów.*Osobówka bandytów|Pojazdy na linii: .*Osobówka bandytów.*Hammer bandytów/.test(r.seria), "both cars on the line", r.seria);
+      const listy = (r.seria.match(/Trafieni:[^.]*\.|Pojazdy na linii:[^—]*/g) ?? []).join(" ");
+      t.assert(!/PC Gracz 1|Osobówka pościgu/.test(listy), "the shooter's own car is left out", r.seria);
+      t.assert(/Bandyta z Hammera/.test(r.wybuch) && !/Bandyta z Osobówki/.test(r.wybuch), "grenade: the Hammer only", r.wybuch);
+      t.equal(r.przypieta, true, "zone pinned to the Hammer");
+      t.equal(r.wStrefie, true, "the Hammer's rider is in the zone after the lane change");
+      t.equal(r.pozaStrefa, false, "the other car's rider is not");
     });
   }
 };

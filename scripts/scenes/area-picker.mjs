@@ -89,9 +89,11 @@ export function rangeBand(distance, { short, long } = {}) {
  * @param {PickerShape|null} [options.shape]    Footprint centred on the cursor.
  * @param {{x:number, y:number}|null} [options.origin]  Thrower's centre — draws the range line.
  * @param {{short?: number, long?: number}|null} [options.range]  Metres; colours line + footprint.
+ * @param {((gfx: PIXI.Graphics, pt: {x:number, y:number}) => string|void)|null} [options.onPreview]  Extra drawing on
+ *   its own layer after each preview (burst hit rings on the chase board); a returned string replaces the label.
  * @returns {Promise<{x:number, y:number}|null>}  Canvas coordinates, or null when cancelled.
  */
-export function pickCanvasPoint({ hint, shape = null, origin = null, range = null } = {}) {
+export function pickCanvasPoint({ hint, shape = null, origin = null, range = null, onPreview = null } = {}) {
   if (!canvas?.ready || !canvas.app?.stage || !canvas.controls) {
     ui.notifications.warn("Brak aktywnej sceny.");
     return Promise.resolve(null);
@@ -102,6 +104,7 @@ export function pickCanvasPoint({ hint, shape = null, origin = null, range = nul
   const preview = new PIXI.Container();
   preview.eventMode = "none";
   const gfx = preview.addChild(new PIXI.Graphics());
+  const extra = preview.addChild(new PIXI.Graphics());
   const label = preview.addChild(new foundry.canvas.containers.PreciseText("",
     foundry.canvas.containers.PreciseText.getTextStyle({ fontSize: Math.max(18, canvas.dimensions.size / 4) })));
   label.anchor.set(0.5, 1);
@@ -113,7 +116,13 @@ export function pickCanvasPoint({ hint, shape = null, origin = null, range = nul
   for (const key of Object.keys(cursorStyles)) cursorStyles[key] = "crosshair";
   view.style.cursor = "crosshair";
 
-  const draw = pt => _drawPreview(gfx, label, pt, { shape, origin, range });
+  const draw = pt => {
+    _drawPreview(gfx, label, pt, { shape, origin, range });
+    if (!onPreview) return;
+    extra.clear();
+    const text = onPreview(extra, pt);
+    if (typeof text === "string") { label.visible = true; label.text = text; }
+  };
   draw(canvas.mousePosition ?? { x: 0, y: 0 });
 
   return new Promise(resolve => {

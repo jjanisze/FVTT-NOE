@@ -1,3 +1,5 @@
+import { mierzyDroga } from "../scenes/droga.mjs";
+import { regionZawieraNaDrodze } from "../scenes/poscig-serie.mjs";
 import { firedOneHanded } from "../combat/grip.mjs";
 import { getMag, spendRounds } from "./magazine.mjs";
 import { lastConsumedRounds, dominantCaliber, weaponEntry } from "./magazine-model.mjs";
@@ -2276,6 +2278,8 @@ function _getBurstTemplates(scene) {
 }
 
 function _templateContainsToken(region, tokenDocument) {
+  // Plansza pościgu (D27, D31): kto jest w strefie, liczy droga, nie obraz.
+  if (mierzyDroga(tokenDocument.parent)) return regionZawieraNaDrodze(region, tokenDocument);
   const token = tokenDocument.object ?? canvas.tokens.get(tokenDocument.id);
   const center = token?.center;
   if (!center || typeof region?.testPoint !== "function") return false;

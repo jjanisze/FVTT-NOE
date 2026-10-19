@@ -36,6 +36,7 @@ import { kratkaPojazdu, trybSceny } from "../pojazdy/stan.mjs";
 import {
   torCiagly, wyspaPunktuCzysta, naDrodzeCzyste, odlegloscWspolrzednych, podepnijSiatke
 } from "../scenes/droga.mjs";
+import { trafieniLinia, trafieniObszar } from "../scenes/poscig-serie.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "../scenes/poscig-motion-model.mjs";
@@ -503,6 +504,45 @@ export function registerPoscigTests(quench) {
         expect(Math.abs(grid.measurePath([strzelec, cel]).distance - Math.hypot(27, 4.5))).to.be.below(1e-3);
         const ruch = grid.measurePath([{ x: torX(1), y: 400 }, { x: torX(3), y: 400 }], { cost: () => 1 });
         expect(Math.abs(ruch.distance - 72)).to.be.below(1e-3);
+      });
+    });
+
+    describe("Serie i obszary po drodze (D28, D31, PLAN_m4_pojazdy §6.2.3–§6.2.4)", function () {
+      // Przestrzeń drogi w metrach: S wzdłuż (36 m na znacznik), T w poprzek. GMT400 przodem w prawo: 5,25 × 2,25 m.
+      const auto = (id, znacznik, t) => ({ id, s: 36 * znacznik, t,
+        prostokat: { s0: 36 * znacznik - 2.625, s1: 36 * znacznik + 2.625, t0: t - 1.125, t1: t + 1.125 } });
+      const O = { s: 36 * 1 + 2, t: 10 };            // strzelec z przodu własnego pojazdu na znaczniku 1, rząd T = 10 m
+
+      it("Miażdżąca (150 × 3 m) wzdłuż rzędu rakuje konwój do ok. czterech znaczników", function () {
+        const cele = [2, 3, 4, 5, 6].map(z => auto(`z${z}`, z, 10));
+        const traf = trafieniLinia(O, { s: 1, t: 0 }, 150, 3, cele);
+        expect(traf).to.deep.equal(["z2", "z3", "z4", "z5"]);
+      });
+
+      it("Długa (36 × 1,5 m) sięga następnego znacznika, nie dalej", function () {
+        const cele = [2, 3].map(z => auto(`z${z}`, z, 10));
+        expect(trafieniLinia(O, { s: 1, t: 0 }, 36, 1.5, cele)).to.deep.equal(["z2"]);
+      });
+
+      it("po skosie przez rzędy: z rzędu 1 przez rząd 2 o znacznik dalej w rząd 3 o dwa znaczniki", function () {
+        const cele = [auto("r2", 2, 14.5), auto("r3", 3, 19), auto("obok", 2, 19)];
+        const kier = { s: 36 * 2 - O.s, t: 14.5 - O.t };
+        expect(trafieniLinia(O, kier, 150, 3, cele)).to.deep.equal(["r2", "r3"]);
+      });
+
+      it("wielu jadących w jednym pojeździe: linia wzdłuż auta bierze rząd siedzeń w połowie szerokości", function () {
+        const miejsca = [-0.75, 0, 0.75].map((dt, i) => ({ id: `m${i}`, s: 36 * 2 - 1, t: 10 + dt }));
+        expect(trafieniLinia(O, { s: 1, t: 0 }, 150, 3, miejsca).length, "Miażdżąca — cały rząd").to.equal(3);
+        expect(trafieniLinia(O, { s: 1, t: 0 }, 36, 1.5, miejsca).length, "Długa — środek i brzegi na krawędzi").to.equal(3);
+        expect(trafieniLinia({ ...O, t: 10.6 }, { s: 1, t: 0 }, 36, 1.5, miejsca).length, "Długa przesunięta").to.equal(2);
+      });
+
+      it("wybuch 3 m na aucie nie dosięga auta w sąsiednim rzędzie o znacznik dalej, choć obraz by zachodził", function () {
+        const cel = auto("cel", 2, 10), obok = auto("obok", 3, 14.5);
+        const P = { s: 36 * 2, t: 10 };
+        expect(trafieniObszar(P, { promien: 3 }, [cel, obok])).to.deep.equal(["cel"]);
+        expect(trafieniObszar(P, { bok: 3 }, [{ id: "w", s: 36 * 2 + 1.4, t: 11.4 }, { id: "poza", s: 36 * 2 + 1.6, t: 10 }]))
+          .to.deep.equal(["w"]);
       });
     });
 

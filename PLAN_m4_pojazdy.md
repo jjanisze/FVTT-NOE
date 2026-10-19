@@ -747,3 +747,15 @@ kierowcą powiązanej Osobówki na mapie → Ctrl+X / Ctrl+V na nową planszę (
 jadący 35 px, mapa pusta, karta roli), Gracz 1 prześwietla swój pojazd, Gracz 2 widzi kropkę i nie widzi jadącego,
 przesiadka w rzędzie — karta „Pojazd jedzie”, zasięg do Hammera trzy tory dalej ≈ 108 m (piksele dałyby < 30 m), zmiana
 toru: kierowca w środku, bez obrotu i bez karty jazdy.
+
+*P4 — serie i obszary.* `scenes/poscig-serie.mjs`: czysta geometria w przestrzeni drogi (`trafieniLinia` — pas linii
+przez punkty miejsc i prostokąty pojazdów, `trafieniObszar` — koło / sześcian), cele planszy (jadący, pojazdy, reszta
+w pasie; własny pojazd strzelca pominięty). Serie: `dnd5e.preCreateMeasuredTemplate` → `false` dla Długiej i
+Miażdżącej na planszy, w zamian `pickCanvasPoint` z nowym `onPreview` (obwódki trafionych na żywo, smuga od strzelca do
+kursora, licznik) i karta MG „trafieni na drodze” z [Zaznacz trafionych] / [Zaznacz pojazdy] — dalej zwykły przycisk RO.
+Wybuch ładunku na planszy (`_spawnExplosiveMarker`) → ta sama karta. Ogień zaporowy: `_templateContainsToken` na planszy
+— punkt wirtualny; strefa położona na pojeździe przypięta do jego żetonu (Region `attachment.token`, rdzeń 14 przesuwa
+ją z pojazdem — D29). Quench `poscig` 72/72 (Miażdżąca wzdłuż rzędu: cztery znaczniki; Długa: następny; skos przez
+rzędy; cały rząd siedzeń; wybuch nie sięga sąsiedniego rzędu o znacznik dalej). e2e `poscig-jadacy`: Miażdżąca kierowcy
+na wóz bandytów dwa tory dalej — oba wozy i obaj jadący na karcie, własny pojazd poza listą; granat na Hammerze — tylko
+Hammer; strefa na Hammerze przypięta, po zmianie toru jadący Hammera w strefie, drugi wóz poza nią.
