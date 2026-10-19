@@ -791,5 +791,8 @@ Hammerem i Autobusem bandytów z jadącymi, Parking z Buggy, Mapa regionu w km; 
 static, generatory, zip, paczki, wersje — zielone; piaskownica: wszystkie suity e2e w obu światach zielone poza
 niezmiennikiem Obsady w suicie `poligon` (Drzwi w drzwi i Pancerna fura — automatyczne od E7, bez persony; dodane do
 `COVERAGE` w `dev/poligon/roster.mjs`), Quench 1250/1251 (test sygnału drona na planszy pisany w pikselach toru 200 px —
-pozycje z `torX`, plus nowy test złożonej drogi: tory × 36 m, w poprzek i w górę prawdziwe metry). Po poprawkach:
-Quench `drony` 81/81.
+pozycje z `torX`, plus nowy test złożonej drogi: tory × 36 m, w poprzek i w górę prawdziwe metry). Po poprawkach
+(`490adc1`): **`release:check` zielony** — wszystkie kroki, wszystkie suity e2e w obu światach, Quench 1252/1252
+(`logs/release/0.20.0-2026-10-19T15-49-55.json`). Na żywym Poligonie dobudowane dwie persony pokrycia (Obsada 44); jego
+`coverage()` zgłasza jeszcze „Złomiarz” — stara persona Szczura sprzed `PROF_SZTUCZKA`, poza M4 (`poligon:obsada
+--only=szczur-5 --rebuild`).
