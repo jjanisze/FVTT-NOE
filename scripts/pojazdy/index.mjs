@@ -6,7 +6,8 @@
  *  - `geometria.mjs`   — czyste funkcje: obrys w czterech kierunkach, układ miejsc, obroty
  *  - `zeton.mjs`       — podklasa żetonu: siatka w obrysie naturalnym, jadący w animacji, ukrycie,
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
- *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności (przez MG)
+ *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności, pamięć obsady (MG)
+ *  - `obsada.mjs`      — karta „Posadzić?”: zapamiętana załoga na nowej scenie (§4.15)
  *  - `okno-miejsc.mjs` — okno miejsc i przyciski HUD żetonu
  *  - `silnik.mjs`      — Uruchom/Zgaś, światła, kluczyki, na krótko (oznaczenia i blokady)
  *  - `efekty-silnika.mjs` — dym (ParticleGenerator), drgania (ticker), dźwięk — lokalnie z flagi `silnik`
@@ -23,9 +24,10 @@
 import { registerZetonPojazdu, instrukcjePoRuchu, przeswietlany, mozePrzeswietlic } from "./zeton.mjs";
 import {
   registerJadacy, wsiadz, wysiadz, przesiadz, wypadnij, wysadzWszystkich, posadzGM, wysadzGM, synchronizujZaloge,
-  zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca
+  zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca, pamiecPoUzgodnieniu
 } from "./jadacy.mjs";
 import { registerOknoMiejsc, otworzMiejsca } from "./okno-miejsc.mjs";
+import { registerObsada, brakujacaObsada, posadzObsade } from "./obsada.mjs";
 import {
   registerSilnik, uruchom, zgas, przelaczSwiatla, utworzKluczyki, ustawNaKrotko, naKrotko, stanSilnika,
   warunkiUruchomienia, kluczykiPodReka, idKluczykow
@@ -38,8 +40,8 @@ import {
 import { registerWrak, zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem } from "./wrak.mjs";
 import { registerNaprawy, naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote } from "./naprawy.mjs";
 import {
-  danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, pojazdJadacego, rozmiarMiejsca,
-  skalaPojazdu, trybSceny, wymiaryZetonu
+  danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, obsadaPojazdu, pojazdJadacego,
+  rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "./stan.mjs";
 import { registerJazda, szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
 import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron } from "./bron.mjs";
@@ -77,6 +79,7 @@ export function registerPojazdy() {
   registerOstrzezenia();
   registerZetonPojazdu();
   registerJadacy();
+  registerObsada();
   registerOknoMiejsc();
   registerSilnik();
   registerEfektySilnika();
@@ -94,6 +97,7 @@ export const pojazdyApi = {
   geometria,
   danePojazdu, miejscaPojazdu, miejsceOId, jadacyPojazdu, pojazdJadacego, jestPojazdem,
   kratkaPojazdu, skalaPojazdu, trybSceny, wymiaryZetonu, rozmiarMiejsca, niepowiazanyPojazdDruzyny,
+  obsadaPojazdu, pamiecPoUzgodnieniu, brakujacaObsada, posadzObsade,
   instrukcjePoRuchu, przeswietlany, mozePrzeswietlic,
   zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca,
   wsiadz, wysiadz, przesiadz, wypadnij, wysadzWszystkich, otworzMiejsca,

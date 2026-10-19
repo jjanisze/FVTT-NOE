@@ -14,6 +14,9 @@
  *  - **Żeton jadącego**, flaga `jazda`: `{pojazd, miejsce, obrot, rozmiar: {w, h}, sort}` —
  *    `pojazd` = id żetonu pojazdu na tej samej scenie, `obrot` = własny obrót względem pojazdu,
  *    `rozmiar` = oryginalny rozmiar żetonu (przywracany przy wysiadce, D2).
+ *  - **Aktor pojazdu**, flaga `obsada` (§4.15, D23): `[[uuid aktora, id miejsca], …]` — kto ostatnio
+ *    siedział na którym miejscu, ponad scenami. Lista par, nie obiekt (delta żetonu niepowiązanego nie usuwa
+ *    kluczy). Z niej idą `crew`/`passengers` i dostęp z obecności; flaga `jazda` mówi, kto siedzi **tutaj**.
  *
  * ## Skala sceny (§4.14, D21)
  *
@@ -31,6 +34,7 @@ import { ROZMIAR_MIEJSCA, obrysPrzyObrocie, ukladMiejsc } from "./geometria.mjs"
 export const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_POJAZD = "pojazd";
 export const FLAGA_JAZDA = "jazda";
+export const FLAGA_OBSADA = "obsada";
 
 /** Metry jednej kratki pojazdu — jednostka obrysu, miejsc i rury. */
 export const METRY_KRATKI_POJAZDU = 1.5;
@@ -140,6 +144,12 @@ export function wymiaryZetonu(actor, scena, rotacja) {
 /** Rozmiar żetonu jadącego na miejscu, w kratkach sceny. */
 export function rozmiarMiejsca(scena) {
   return zaokrKratki(ROZMIAR_MIEJSCA * skalaPojazdu(scena));
+}
+
+/** Pamięć obsady pojazdu (§4.15): `[[uuid aktora, id miejsca], …]`, tylko poprawne pary. */
+export function obsadaPojazdu(actor) {
+  const o = actor?.flags?.[MODULE_ID]?.[FLAGA_OBSADA];
+  return Array.isArray(o) ? o.filter(p => Array.isArray(p) && typeof p[0] === "string" && typeof p[1] === "string") : [];
 }
 
 /** Flaga jazdy żetonu jadącego albo `null`. */

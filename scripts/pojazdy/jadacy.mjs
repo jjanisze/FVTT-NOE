@@ -22,8 +22,8 @@ import { doMG, zarejestrujProsbe } from "../postoj/przekaznik.mjs";
 import { kartaPostoju, wyslijKarte } from "../postoj/karty.mjs";
 import { zarejestrujLadownieUpuszczenia } from "../actors/ground-items.mjs";
 import {
-  MODULE_ID, FLAGA_JAZDA, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu, miejscaPojazdu,
-  miejsceOId, obrysDziala, pojazdJadacego, rozmiarMiejsca, skalaPojazdu, trybSceny
+  MODULE_ID, FLAGA_JAZDA, FLAGA_OBSADA, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu,
+  miejscaPojazdu, miejsceOId, obrysDziala, obsadaPojazdu, pojazdJadacego, rozmiarMiejsca, skalaPojazdu, trybSceny
 } from "./stan.mjs";
 import {
   naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
@@ -169,22 +169,40 @@ function poleWysiadki(pojazdDoc, jadacyDoc, miejsce) {
 }
 
 /**
- * Lista `crew`/`passengers` pojazdu (nośnik dnd5e, z którego korzysta pościg) i dostęp z obecności.
- * Kierowca i stanowiska → załoga, reszta → pasażerowie.
+ * Pamięć obsady (§4.15) pogodzona z tym, kto siedzi w tym żetonie: obecni nadpisują swój wpis i miejsce, które
+ * zajmują; `zapomnij` — świadoma wysiadka; wpisy aktorów, których już nie ma, wypadają.
+ * @returns {[string, string][]}
  */
-export async function synchronizujZaloge(pojazdDoc) {
+export function pamiecPoUzgodnieniu(pojazdDoc, { zapomnij = [] } = {}) {
   const actor = pojazdDoc.actor;
-  if (!actor) return;
+  const obecni = jadacyPojazdu(pojazdDoc).map(t => [t.actor?.uuid, jazdaZetonu(t).miejsce]).filter(p => p[0]);
+  const precz = new Set(zapomnij);
+  const uuidy = new Set(obecni.map(p => p[0]));
+  const miejsca = new Set(obecni.map(p => p[1]));
+  const pamiec = [
+    ...obsadaPojazdu(actor).filter(([u, m]) => !precz.has(u) && !uuidy.has(u) && !miejsca.has(m) && fromUuidSync(u)),
+    ...obecni.filter(([u]) => !precz.has(u))
+  ];
+  const kolej = new Map(miejscaPojazdu(actor).map((m, i) => [m.id, i]));
+  return pamiec.sort((a, b) => (kolej.get(a[1]) ?? 999) - (kolej.get(b[1]) ?? 999));
+}
+
+const takieSame = (a, b) => a.length === b.length && a.every((x, i) => (Array.isArray(x) ? takieSame(x, b[i]) : x === b[i]));
+
+/**
+ * Załoga i dostęp z obecności liczone z pamięci obsady (D23 — ponad scenami: gracz, którego postać jedzie, ma
+ * dostęp także wtedy, gdy jej żetonu nie ma na tej scenie). Kierowca i stanowiska → `crew`, reszta → `passengers`.
+ */
+async function zapiszZaloge(actor, pamiec, zmiany = {}) {
   const crew = [], passengers = [];
   const uzytkownicy = new Set();
-  for (const t of jadacyPojazdu(pojazdDoc)) {
-    const m = miejsceOId(actor, jazdaZetonu(t).miejsce);
-    const uuid = t.actor?.uuid;
-    if (uuid) (m?.kierowca || m?.stanowisko ? crew : passengers).push(uuid);
-    for (const u of game.users) if (!u.isGM && t.actor?.testUserPermission(u, "OWNER")) uzytkownicy.add(u.id);
+  for (const [uuid, mid] of pamiec) {
+    const m = miejsceOId(actor, mid);
+    (m?.kierowca || m?.stanowisko ? crew : passengers).push(uuid);
+    const a = fromUuidSync(uuid);
+    if (a) for (const u of game.users) if (!u.isGM && a.testUserPermission(u, "OWNER")) uzytkownicy.add(u.id);
   }
-  const zmiany = {};
-  const same = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+  const same = takieSame;
   if (!same(actor.system.crew?.value ?? [], crew)) zmiany["system.crew.value"] = crew;
   if (!same(actor.system.passengers?.value ?? [], passengers)) zmiany["system.passengers.value"] = passengers;
 
@@ -207,8 +225,41 @@ export async function synchronizujZaloge(pojazdDoc) {
   }
   if (zmianaDostepu) zmiany[`flags.${MODULE_ID}.${FLAGA_DOSTEP}`] = [...dostep];
   if (Object.keys(zmiany).length) await actor.update(zmiany);
+}
+
+/**
+ * MG: po każdej zmianie składu — pamięć obsady, `crew`/`passengers`, dostęp z obecności. Postać, która usiadła
+ * tu pierwszy raz, znika z pamięci innych pojazdów (siedzi się w jednym).
+ * @param {TokenDocument} pojazdDoc
+ * @param {{zapomnij?: string[]}} [opcje]  uuid aktorów, którzy świadomie wysiedli
+ */
+export async function synchronizujZaloge(pojazdDoc, { zapomnij = [] } = {}) {
+  const actor = pojazdDoc.actor;
+  if (!actor) return;
+  const stara = obsadaPojazdu(actor);
+  const pamiec = pamiecPoUzgodnieniu(pojazdDoc, { zapomnij });
+  const zmiany = takieSame(stara, pamiec) ? {} : { [`flags.${MODULE_ID}.${FLAGA_OBSADA}`]: pamiec };
+  await zapiszZaloge(actor, pamiec, zmiany);
+  const nowi = pamiec.map(p => p[0]).filter(u => !stara.some(p => p[0] === u));
+  if (nowi.length) await zapomnijWInnych(actor, nowi);
   // Obsada się zmieniła: broń montowana idzie za strzelcem (`bron.mjs`).
   Hooks.callAll("neuroshima.pojazdZaloga", pojazdDoc);
+}
+
+/** Wszystkie aktory pojazdów: świata i niepowiązanych żetonów na scenach. */
+function wszystkiePojazdy() {
+  const out = new Set(game.actors.filter(a => danePojazdu(a)));
+  for (const s of game.scenes) for (const t of s.tokens) if (!t.actorLink && jestZetonemPojazdu(t)) out.add(t.actor);
+  return [...out];
+}
+
+async function zapomnijWInnych(actor, uuidy) {
+  for (const p of wszystkiePojazdy()) {
+    if (p === actor) continue;
+    const o = obsadaPojazdu(p);
+    const n = o.filter(([u]) => !uuidy.includes(u));
+    if (n.length !== o.length) await zapiszZaloge(p, n, { [`flags.${MODULE_ID}.${FLAGA_OBSADA}`]: n });
+  }
 }
 
 /** Dostęp z obecności: lista `[userId, poprzedni poziom|null]`. */
@@ -250,8 +301,11 @@ export async function posadzGM(pojazdDoc, jadacyDoc, miejsce) {
   }, { animate: false, showRuler: false, method: "api" });
 }
 
-/** MG: zdjęcie z pojazdu — rozmiar i kolejność wracają (D2), żeton na wolnym polu obok. */
-export async function wysadzGM(jadacyDoc, { cel = null } = {}) {
+/**
+ * MG: zdjęcie z pojazdu — rozmiar i kolejność wracają (D2), żeton na wolnym polu obok. `zapomnij: false` —
+ * zdjęcie techniczne (usunięty pojazd, sprzątanie, schowek): pamięć obsady zostaje (§4.15).
+ */
+export async function wysadzGM(jadacyDoc, { cel = null, zapomnij = true } = {}) {
   const j = jazdaZetonu(jadacyDoc);
   if (!j) return null;
   const pojazd = pojazdJadacego(jadacyDoc);
@@ -262,7 +316,8 @@ export async function wysadzGM(jadacyDoc, { cel = null } = {}) {
   await jadacyDoc.parent.moveTokens({
     [jadacyDoc.id]: { destination: { x: pole.x, y: pole.y, width: w, height: h, action: "displace" } }
   }, { animate: false, showRuler: false, method: "api" });
-  if (pojazd) await synchronizujZaloge(pojazd);
+  const uuid = jadacyDoc.actor?.uuid;
+  if (pojazd) await synchronizujZaloge(pojazd, { zapomnij: zapomnij && uuid ? [uuid] : [] });
   return pole;
 }
 
@@ -467,7 +522,7 @@ export function registerJadacy() {
     if (!jadacy.length) return;
     const pozycje = jadacy.map(t => [t, poleWysiadki(doc, t, miejsceOId(doc.actor, jazdaZetonu(t).miejsce))]);
     setTimeout(async () => {
-      for (const [t, pole] of pozycje) if (t.parent?.tokens.has(t.id)) await wysadzGM(t, { cel: pole });
+      for (const [t, pole] of pozycje) if (t.parent?.tokens.has(t.id)) await wysadzGM(t, { cel: pole, zapomnij: false });
     }, 0);
   });
 
@@ -480,8 +535,8 @@ export function registerJadacy() {
       for (const t of scena.tokens) {
         const j = jazdaZetonu(t);
         if (!j) continue;
-        if (!pojazdJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y } });
-        else if (!dziala) await wysadzGM(t);
+        if (!pojazdJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y }, zapomnij: false });
+        else if (!dziala) await wysadzGM(t, { zapomnij: false });
       }
     }
   });
