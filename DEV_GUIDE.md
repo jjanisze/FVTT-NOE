@@ -849,6 +849,7 @@ ma kosztować efekt, nie zasadę. Trwałe efekty nazywaj deterministycznie
 
 ```
 Podrecznik/NOE/13 NOTATNIK ŁOWCY/*/*.md  52 profile — konwersja PDF-a (generowana)
+Podrecznik/Bestiariusz/Własne/*/*.md     istoty MG w tym samym układzie (Kurczak wybuchowy) — `homebrew: true`
 dev/bestiary/lore-extras.json            krew (Splatter) per istota — dane modułu, nie RAW
   ↓  dev/bestiary/extract_bestiary.py    → bestiary.json
   ↓  dev/bestiary/gen_bestiary.py        + RULES/AUTOMATION  → scripts/config/bestiary-data.mjs
@@ -858,6 +859,11 @@ dev/bestiary/lore-extras.json            krew (Splatter) per istota — dane mod
 ⚠️ **`bestiary.json` i `bestiary-data.mjs` są generowane** — nie edytuj ręcznie.
 Treść pochodzi z podręcznika (regeneracja `Podrecznik/tools/pdf2md.py`), automatykę zmieniaj
 w `RULES`/`AUTOMATION` w `gen_bestiary.py`.
+
+**Własne istoty MG** (warianty, o których podręcznik tylko wspomina) piszesz w `Podrecznik/Bestiariusz/Własne/
+<NN KATEGORIA>/<NN NAZWA>.md` — ten sam układ co profil z Notatnika (kategoria z nazwy folderu). Nie w drzewie
+`NOE/`: `pdf2md.py` kasuje je i pisze od nowa przy każdej regeneracji. Rekord dostaje `homebrew: true`; testy
+liczące RAW (np. „osiem maszyn z Autodestrukcją”) je pomijają.
 
 **Parser jest surowy.** Nieznana etykieta nagłówka, sekcja, umiejętność, typ obrażeń,
 stan czy zmysł to **błąd builda**, nie ciche pominięcie — ta sama postawa co

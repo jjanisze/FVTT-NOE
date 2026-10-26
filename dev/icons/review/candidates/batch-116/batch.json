@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-24",
+  "batch": 116,
+  "pass": "player-hotbar-subject-corrections",
+  "subjects": [
+    {
+      "cell": 1,
+      "key": "przyspieszenie-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-przyspieszenie",
+      "name": "Przyspieszenie — człowiek — Długi krok",
+      "target": "icons/actions/przyspieszenie.svg",
+      "current": "icons/abilities/przyspieszenie.svg",
+      "context": "Ogólna akcja gracza: Przyspieszenie [A], dla Złodzieja także [B]. NOE s. 29 i 91. To nie Bieganie. Nowy glif ruchu człowieka zamiast odlatującego owada.",
+      "request": "ONE ordinary adult human RUNNING FORWARD in a long powerful side-profile stride, torso leaning forward, front knee raised, rear leg extended, arms pumping in opposite directions. Whole figure fully visible, natural adult proportions, ordinary close-fitting shirt, trousers and boots, featureless face. Broad clear negative spaces between limbs. No weapon, bird, bee, wings, arrow, dust cloud or environment.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/przyspieszenie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 2,
+      "key": "przyspieszenie-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-przyspieszenie",
+      "name": "Przyspieszenie — człowiek — Wybicie do przodu",
+      "target": "icons/actions/przyspieszenie.svg",
+      "current": "icons/abilities/przyspieszenie.svg",
+      "context": "Ogólna akcja gracza: Przyspieszenie [A], dla Złodzieja także [B]. NOE s. 29 i 91. To nie Bieganie. Nowy glif ruchu człowieka zamiast odlatującego owada.",
+      "request": "ONE ordinary adult human PUSHING OFF INTO A RUN: low forward-leaning torso, front knee driven forward, rear foot pushing off, two distinct naturally bent arms driving the motion. Three-quarter full-body view, all limbs and feet complete. TWO short broad horizontal speed strokes BEHIND the person only. Sober practical athletic motion, no wing, insect, animal, flying or floating human, arrow, gun or cape.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/przyspieszenie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 3,
+      "key": "przyspieszenie-c",
+      "variant": "c",
+      "itemId": "hotbar-2026-przyspieszenie",
+      "name": "Przyspieszenie — człowiek — Szybki marsz do biegu",
+      "target": "icons/actions/przyspieszenie.svg",
+      "current": "icons/abilities/przyspieszenie.svg",
+      "context": "Ogólna akcja gracza: Przyspieszenie [A], dla Złodzieja także [B]. NOE s. 29 i 91. To nie Bieganie. Nowy glif ruchu człowieka zamiast odlatującego owada.",
+      "request": "ONE ordinary adult human accelerating in a broad FORWARD RUNNING STRIDE seen in crisp side profile, chest oriented forward with elbows bent about ninety degrees, one boot extending forward and the other boot lifting behind. Torso slightly more upright than a sprinter's starting lunge. One plain small hip pouch only if needed to suggest a survivor, no loose straps or clothing details. Natural proportions, strong readable silhouette, no wings, bee, animal, vehicle, arrow or weapon.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/przyspieszenie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 4,
+      "key": "ukrywanie-sie-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-ukrywanie-sie",
+      "name": "Ukrywanie się — człowiek — Za niską skrzynią",
+      "target": "icons/actions/ukrywanie-sie.svg",
+      "current": "icons/abilities/ukryty-cel.svg",
+      "context": "Ogólna akcja gracza: Ukrywanie się [A], dla Złodzieja także [B]. NOE s. 21 i 91. Glif ma pokazywać ukrywającą się osobę, nie ostrzał celu przez osłonę.",
+      "request": "ONE ordinary adult human CROUCHING QUIETLY BEHIND ONE LOW SOLID CRATE. The crate occupies the lower-right foreground, and the person's small bent head and rounded shoulder peek just above its LEFT edge; one tucked bent knee remains visible at the left. Person is clearly mostly concealed by the crate and NOT attacking. Simple broad stencil silhouettes and one large separating cut. NO gun, rifle, pistol, shooter, projectile, shooting line, second person or bullet penetration.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/ukrywanie-sie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 5,
+      "key": "ukrywanie-sie-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-ukrywanie-sie",
+      "name": "Ukrywanie się — człowiek — Za narożnikiem",
+      "target": "icons/actions/ukrywanie-sie.svg",
+      "current": "icons/abilities/ukryty-cel.svg",
+      "context": "Ogólna akcja gracza: Ukrywanie się [A], dla Złodzieja także [B]. NOE s. 21 i 91. Glif ma pokazywać ukrywającą się osobę, nie ostrzał celu przez osłonę.",
+      "request": "ONE ordinary adult human HIDING BEHIND A TALL VERTICAL WALL EDGE: one broad upright wall slab at the RIGHT conceals most of the body, with just a small featureless head, one shoulder and one bent knee cautiously visible around the slab's LEFT edge. A quiet compact concealed posture, no weapon in either hand. Large simple shapes, no brick texture, no window, no gun, shooting, attacker, target reticle, bullet or penetration line.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/ukrywanie-sie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 6,
+      "key": "ukrywanie-sie-c",
+      "variant": "c",
+      "itemId": "hotbar-2026-ukrywanie-sie",
+      "name": "Ukrywanie się — człowiek — Nisko za gruzem",
+      "target": "icons/actions/ukrywanie-sie.svg",
+      "current": "icons/abilities/ukryty-cel.svg",
+      "context": "Ogólna akcja gracza: Ukrywanie się [A], dla Złodzieja także [B]. NOE s. 21 i 91. Glif ma pokazywać ukrywającą się osobę, nie ostrzał celu przez osłonę.",
+      "request": "ONE ordinary adult human KNEELING LOW BEHIND ONE BROAD BROKEN CONCRETE BARRIER with a single irregular upper edge. Only the bowed head, curved upper back and one tucked elbow emerge slightly above the near side; the barrier conceals the rest of the figure. The human is staying out of sight, not firing over cover. Very sparse two-element composition, broad black negative-space separation. No gun, aiming, enemy, second figure, bullet, projectile, crosshair, shooting-through-cover diagram, hatching or rubble texture.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/ukrywanie-sie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    7,
+    8,
+    9
+  ]
+}

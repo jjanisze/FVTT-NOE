@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-24",
+  "card": {
+    "id": "hotbar-2026-odstapienie",
+    "name": "Odstąpienie — człowiek",
+    "tier": "Batch 117 · Nowe A / B / C · kontrolowane odstąpienie",
+    "batch": 117,
+    "target": "icons/actions/odstapienie.svg",
+    "deliveryTargets": [
+      {
+        "source": "icons/actions/odstapienie.svg",
+        "sourceSha256": null,
+        "variant": "default"
+      }
+    ],
+    "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+    "request": "Trzy nowe wersje wybranego motywu: dwie osoby w zwarciu, jedna wycofuje się w sposób kontrolowany. Gardą, kontrolą ręki lub przekreślonym ciosem próbujemy pokazać brak okazji do darmowego ataku. Wcześniejsze warianty pozostają niżej do porównania.",
+    "current": {
+      "src": "/icons/abilities/odstapienie.svg",
+      "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+    },
+    "candidates": [
+      {
+        "id": "batch117-odstapienie-a",
+        "label": "Nowe A · Odwrót za gardą",
+        "src": "candidates/batch-117/odstapienie-a.png",
+        "note": "Krok wstecz bez odwracania się od przeciwnika; obie ręce utrzymują gardę."
+      },
+      {
+        "id": "batch117-odstapienie-b",
+        "label": "Nowe B · Kontrola ręki i krok wstecz",
+        "src": "candidates/batch-117/odstapienie-b.png",
+        "note": "Odchodząca osoba kontroluje sięgającą rękę przeciwnika i robi krok wstecz."
+      },
+      {
+        "id": "batch117-odstapienie-c",
+        "label": "Nowe C · Odwrót bez wolnego ciosu",
+        "src": "candidates/batch-117/odstapienie-c.png",
+        "note": "Dwie osoby i kontrolowany odwrót, z dodatkowym znakiem przekreślonego ciosu."
+      },
+      {
+        "id": "batch115-odstapienie-a",
+        "label": "A · Krok wstecz z gardą",
+        "src": "candidates/batch-115/odstapienie-a.png",
+        "note": "Krok wstecz z otwartymi dłońmi, twarzą do zagrożenia."
+      },
+      {
+        "id": "batch115-odstapienie-b",
+        "label": "B · Dystans od przeciwnika",
+        "src": "candidates/batch-115/odstapienie-b.png",
+        "note": "Dwie osoby: cofający się człowiek pozostaje poza zasięgiem wyciągniętej ręki przeciwnika."
+      },
+      {
+        "id": "batch115-odstapienie-c",
+        "label": "C · Kontrolowany odwrót",
+        "src": "candidates/batch-115/odstapienie-c.png",
+        "note": "Kontrolowany odwrót z gardą; człowiek nadal patrzy w stronę przeciwnika."
+      }
+    ]
+  },
+  "feedback": {
+    "itemId": "hotbar-2026-odstapienie",
+    "decision": "revise",
+    "candidateId": "batch115-odstapienie-c",
+    "notes": "Zoom out to fit two people. Add an assailant to the right of the existing figure. Add a arrow indicating rotation of the retreating man. The retreating man is extending his right hand behind.",
+    "updatedAt": "2026-10-24T19:15:26.127Z"
+  },
+  "selectedSource": "candidates/batch-115/odstapienie-c.png",
+  "selectedSha256": "c2c7c3645b3084b51ce53913eb6eadd9cfa2537ac8f7a49f90dc7cc69153ac11",
+  "productionFiles": [
+    {
+      "source": "icons/abilities/odstapienie.svg",
+      "sha256": "67a5b17d1dd40cad605e42921a31e7557fddecf1cd5cde04103dc3977e75b051"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/actions/odstapienie.svg",
+    "icons/actions/odstapienie.webp"
+  ]
+}

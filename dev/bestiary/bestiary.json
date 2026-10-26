@@ -4021,6 +4021,115 @@
   "statName": "KURCZAK",
   "typeNote": "Molocha"
  },
+ "kurczak-wybuchowy": {
+  "abilities": {
+   "cha": {
+    "none": true
+   },
+   "con": {
+    "mod": 1,
+    "value": 12
+   },
+   "dex": {
+    "mod": 3,
+    "value": 16
+   },
+   "int": {
+    "mod": -3,
+    "value": 4
+   },
+   "str": {
+    "mod": -2,
+    "value": 6
+   },
+   "wis": {
+    "mod": 1,
+    "value": 12
+   }
+  },
+  "ac": {
+   "note": null,
+   "value": 16
+  },
+  "attacks": [],
+  "conditionImmunities": [
+   "frightened",
+   "poisoned"
+  ],
+  "creatureType": "maszyna",
+  "features": [
+   {
+    "name": "Algorytm czuwania",
+    "section": "traits",
+    "text": "Kurczak nigdy nie jest Zaskoczony."
+   },
+   {
+    "name": "Pierwsze spotkanie",
+    "section": "traits",
+    "text": "RO na Mądrość o ST 8."
+   },
+   {
+    "name": "Wspinaczka po metalu",
+    "section": "traits",
+    "text": "Kurczak ma elektromagnesy w swoich kurzych nóżkach, dzięki którym chodzi po metalu, niczym pająk po ścianie. Traci tę przyczepność, jeśli otrzyma stan Powalenie lub Obezwładnienie."
+   },
+   {
+    "name": "Autodestrukcja (100%)",
+    "section": "traits",
+    "text": "RO na Zręczność o ST 13, w promieniu 3 m. Porażka: 14 (4k6) obrażeń wybuchowych, Powalenie i Ogłuchnięcie na 1 minutę. Sukces: połowa obrażeń."
+   },
+   {
+    "name": "Detonacja",
+    "section": "actions",
+    "text": "Kurczak odpala swój ładunek od razu, bez odliczania, i ulega zniszczeniu — wybuch jak przy Autodestrukcji: RO na Zręczność o ST 13, w promieniu 3 m. Porażka: 14 (4k6) obrażeń wybuchowych, Powalenie i Ogłuchnięcie na 1 minutę. Sukces: połowa obrażeń."
+   }
+  ],
+  "file": "Własne\\02 MASZYNY\\01 KURCZAK WYBUCHOWY.md",
+  "homebrew": true,
+  "hp": {
+   "avg": 12,
+   "formula": "4k4 + 4"
+  },
+  "id": "kurczak-wybuchowy",
+  "immunities": [
+   "poison",
+   "psychic"
+  ],
+  "initiative": {
+   "mod": 7,
+   "passive": 17
+  },
+  "lore": {
+   "informacje": "Wariant, o którym wspomina opis zwykłego kurczaka: model przenoszący mały ładunek wybuchowy. Nie strzela — dobiega do celu i wybucha. Z daleka łatwo go wziąć za zwykłego kurczaka, dopóki ktoś nie zauważy, że nie ma lufy. Zestrzelony nie przestaje być groźny: jego ładunek uzbraja się sam.",
+   "kategoria": "Maszyny",
+   "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha.",
+   "krewTag": "moloch",
+   "taktyka": "Trzyma się za zwykłymi kurczakami albo na pancerzu matki. Gdy cel podejdzie bliżej — sprint i detonacja w środku grupy. Najlepiej zestrzelić go z daleka, zanim dobiegnie; trafiony obok kogoś zostawia tykającą bombę.",
+   "wyglad": "Ten sam pękaty korpus na dwóch mikrych nóżkach, ale bez lufy. W jej miejscu nitowane płyty, żebra radiatorów i wiązki czerwonych przewodów oplatające cały kadłub. Została antenka i oczko kamery — reszta to ładunek.",
+   "wystepowanie": "Tam, gdzie zwykłe kurczaki — najczęściej w tym samym stadzie, przy tej samej matce."
+  },
+  "name": "KURCZAK WYBUCHOWY",
+  "overlay": false,
+  "randomized": false,
+  "senses": {
+   "darkvision": 90,
+   "passivePerception": 11,
+   "raw": "Noktowizja 90 m, Pasywna Percepcja 11"
+  },
+  "size": "tiny",
+  "skills": {
+   "skr": 5
+  },
+  "sp": {
+   "pb": 2,
+   "value": 6
+  },
+  "speed": {
+   "walk": 12
+  },
+  "statName": "KURCZAK WYBUCHOWY",
+  "typeNote": "Molocha"
+ },
  "lowca": {
   "abilities": {
    "cha": {

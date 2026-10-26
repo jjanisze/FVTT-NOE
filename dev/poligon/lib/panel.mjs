@@ -35,7 +35,8 @@ class PoligonPanel extends foundry.applications.api.ApplicationV2 {
     classes: ["poligon-panel"],
     window: { title: "Poligon", icon: "fa-solid fa-flask-vial", resizable: true },
     position: { width: 500, height: 720, left: 110, top: 70 },
-    actions: { op: PoligonPanel.#op, tab: PoligonPanel.#tab }
+    // Not "tab": ApplicationV2 reserves that action for its own tab groups and never reaches `actions`.
+    actions: { op: PoligonPanel.#op, zakladka: PoligonPanel.#tab }
   };
 
   tab = "stanowiska";
@@ -46,7 +47,7 @@ class PoligonPanel extends foundry.applications.api.ApplicationV2 {
   async _renderHTML() {
     const body = document.createElement("div");
     body.className = "poligon-body";
-    const nav = TABS.map(([id, label]) => `<button type="button" data-action="tab" data-tab="${id}" class="${this.tab === id ? "active" : ""}">${label}</button>`).join("");
+    const nav = TABS.map(([id, label]) => `<button type="button" data-action="zakladka" data-tab="${id}" class="${this.tab === id ? "active" : ""}">${label}</button>`).join("");
     let content;
     try {
       content = await this[`_${this.tab}`]();

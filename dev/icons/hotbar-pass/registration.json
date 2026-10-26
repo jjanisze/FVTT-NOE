@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-24",
+  "cards": 5,
+  "candidates": 15,
+  "existingCardsPreserved": 552,
+  "feedbackUnchanged": true,
+  "productionUnchanged": true,
+  "beforeHashes": {
+    "manifest.json": "971c8439199cf78791fd11b723c4cb9457aef1c6e5dd178f3a6eb82b75d142a4",
+    "feedback.json": "fe4b7515fc62a4fba1888c258ae10382f44a0d0c201eee24b697e4f9ca8649d7",
+    "style-feedback.json": "f779b69589ec11c0d415a4d141ba7428763f7ded8a4f66f80ddbaab1499b964a",
+    "MISSING.md": "23e87d98a4edd86838689e441d86d1225b0216e58783f6ed624c6b937655f467"
+  }
+}

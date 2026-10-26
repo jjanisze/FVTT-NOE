@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Asset review · Batch 114 approved choices delivered; 0 awaiting revision",
-  "updated": "2026-10-18",
+  "title": "Player hotbar · 5 approved icons delivered; 0 awaiting review",
+  "updated": "2026-10-25",
   "items": [
     {
       "id": "batch90-brutal",
@@ -15972,6 +15972,241 @@
           "label": "Batch 112 · Rzuty obronne — nagłówek",
           "src": "candidates/batch-112/rzuty-obronne.png",
           "note": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "hotbar-2026-kafar",
+      "name": "Kafar — ręczne narzędzie kolejowe",
+      "tier": "Player hotbar corrections · A / B / C",
+      "batch": 115,
+      "target": "icons/weapons/kafar_piledriver.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "sourceSha256": "9a2b715cef30b3f1e333c9c58fd39f8cef416b127e6727370f9d2c104077e3b0",
+          "variant": "default"
+        }
+      ],
+      "context": "Broń Kafar, 15 kg, dwuręczna; pierwszy pasek Brutala. NOE s. 116, tabela broni białej. Oceniany przedmiot ma być ręcznym narzędziem udarowym inspirowanym koleją.",
+      "request": "Obecny rysunek wygląda jak wielki młot. Trzy interpretacje ręcznego kafara oparte na ciężarze udarowym i prowadzeniu osiowym, bez poprzecznej głowicy młota. Historyczne kompletne maszyny są odniesieniem mechanizmu, nie rozmiarem broni.",
+      "current": {
+        "src": "/icons/weapons/kafar_piledriver.svg",
+        "note": "Obecny Kafar: odrzucony, ponieważ wygląda jak wielki młot."
+      },
+      "candidates": [
+        {
+          "id": "batch115-kafar-a",
+          "label": "A · Prostokątna baba",
+          "src": "candidates/batch-115/kafar-a.png",
+          "note": "Prostokątny ciężar udarowy z dwoma bocznymi uchwytami. Uderzenie wzdłuż osi narzędzia."
+        },
+        {
+          "id": "batch115-kafar-b",
+          "label": "B · Rurowy kafar",
+          "src": "candidates/batch-115/kafar-b.png",
+          "note": "Rurowy kafar ręczny: zamknięta góra, otwarty dół i dwa uchwyty."
+        },
+        {
+          "id": "batch115-kafar-c",
+          "label": "C · Ciężar z profilu szyny",
+          "src": "candidates/batch-115/kafar-c.png",
+          "note": "Ciężki fragment profilu szyny z dwoma uchwytami. Najbardziej dosłowny motyw kolejowy."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "hotbar-2026-unikanie",
+      "name": "Unikanie — człowiek",
+      "tier": "Player hotbar corrections · A / B / C",
+      "batch": 115,
+      "target": "icons/actions/unikanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/unikanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Unikanie [A], NOE s. 30. Nowy glif dla człowieka; dotychczas pożyczona Pełna obrona zachowuje własne zastosowanie.",
+      "request": "Człowiek unika ciosu ruchem ciała. Nie maszyna, potwór, pancerz ani atak. Sylwetka musi różnić się od sprintu oraz od ostrożnego odwrotu.",
+      "current": {
+        "src": "/icons/abilities/pelna-obrona.svg",
+        "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+      },
+      "candidates": [
+        {
+          "id": "batch115-unikanie-a",
+          "label": "A · Odchylenie tułowia",
+          "src": "candidates/batch-115/unikanie-a.png",
+          "note": "Odchylenie tułowia w tył; cios mija twarz."
+        },
+        {
+          "id": "batch115-unikanie-b",
+          "label": "B · Zejście pod ciosem",
+          "src": "candidates/batch-115/unikanie-b.png",
+          "note": "Zejście nisko pod ciosem, z osłoną głowy rękami."
+        },
+        {
+          "id": "batch115-unikanie-c",
+          "label": "C · Unik w bok",
+          "src": "candidates/batch-115/unikanie-c.png",
+          "note": "Unik tułowiem w bok, bez opuszczania pozycji."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — człowiek",
+      "tier": "Batch 118 · Dwa warianty obrotu · A / B",
+      "batch": 118,
+      "target": "icons/actions/odstapienie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "Dwa warianty wybranej sylwetki: napastnik dodany po prawej, prawa ręka odchodzącej osoby wyciągnięta do tyłu, jedna strzałka pokazująca obrót. Poprzednie opcje zostają do porównania.",
+      "current": {
+        "src": "/icons/abilities/odstapienie.svg",
+        "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+      },
+      "candidates": [
+        {
+          "id": "batch118-odstapienie-a",
+          "label": "118 A · Obrót i otwarta dłoń z tyłu",
+          "src": "candidates/batch-118/odstapienie-a.png",
+          "note": "Półobrót przy odejściu, z prawą dłonią wyciągniętą za siebie w stronę napastnika. Krótka strzałka przy biodrach pokazuje obrót."
+        },
+        {
+          "id": "batch118-odstapienie-b",
+          "label": "118 B · Obrót z osłoną sięgającej ręki",
+          "src": "candidates/batch-118/odstapienie-b.png",
+          "note": "Ćwierćobrót i prawa ręka cofnięta za tułów, kontrolująca sięgającą rękę napastnika. Łuk nad barkiem podkreśla skręt."
+        },
+        {
+          "id": "batch117-odstapienie-a",
+          "label": "Nowe A · Odwrót za gardą",
+          "src": "candidates/batch-117/odstapienie-a.png",
+          "note": "Krok wstecz bez odwracania się od przeciwnika; obie ręce utrzymują gardę."
+        },
+        {
+          "id": "batch117-odstapienie-b",
+          "label": "Nowe B · Kontrola ręki i krok wstecz",
+          "src": "candidates/batch-117/odstapienie-b.png",
+          "note": "Odchodząca osoba kontroluje sięgającą rękę przeciwnika i robi krok wstecz."
+        },
+        {
+          "id": "batch117-odstapienie-c",
+          "label": "Nowe C · Odwrót bez wolnego ciosu",
+          "src": "candidates/batch-117/odstapienie-c.png",
+          "note": "Dwie osoby i kontrolowany odwrót, z dodatkowym znakiem przekreślonego ciosu."
+        },
+        {
+          "id": "batch115-odstapienie-a",
+          "label": "A · Krok wstecz z gardą",
+          "src": "candidates/batch-115/odstapienie-a.png",
+          "note": "Krok wstecz z otwartymi dłońmi, twarzą do zagrożenia."
+        },
+        {
+          "id": "batch115-odstapienie-b",
+          "label": "B · Dystans od przeciwnika",
+          "src": "candidates/batch-115/odstapienie-b.png",
+          "note": "Dwie osoby: cofający się człowiek pozostaje poza zasięgiem wyciągniętej ręki przeciwnika."
+        },
+        {
+          "id": "batch115-odstapienie-c",
+          "label": "C · Kontrolowany odwrót",
+          "src": "candidates/batch-115/odstapienie-c.png",
+          "note": "Kontrolowany odwrót z gardą; człowiek nadal patrzy w stronę przeciwnika."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "hotbar-2026-przyspieszenie",
+      "name": "Przyspieszenie — człowiek",
+      "tier": "Player hotbar corrections · A / B / C",
+      "batch": 116,
+      "target": "icons/actions/przyspieszenie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/przyspieszenie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Przyspieszenie [A], dla Złodzieja także [B]. NOE s. 29 i 91. To nie Bieganie. Nowy glif ruchu człowieka zamiast odlatującego owada.",
+      "request": "Czytelny ludzki ruch naprzód: dynamiczna pozycja na nogach. Bez owada, skrzydeł, lotu, zwierzęcia, pojazdu i szczegółowego portretu.",
+      "current": {
+        "src": "/icons/abilities/przyspieszenie.svg",
+        "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+      },
+      "candidates": [
+        {
+          "id": "batch116-przyspieszenie-a",
+          "label": "A · Długi krok",
+          "src": "candidates/batch-116/przyspieszenie-a.png",
+          "note": "Długi krok biegowy i wyraźna praca ramion."
+        },
+        {
+          "id": "batch116-przyspieszenie-b",
+          "label": "B · Wybicie do przodu",
+          "src": "candidates/batch-116/przyspieszenie-b.png",
+          "note": "Niskie wybicie do przodu, podkreślone dwoma śladami ruchu."
+        },
+        {
+          "id": "batch116-przyspieszenie-c",
+          "label": "C · Szybki marsz do biegu",
+          "src": "candidates/batch-116/przyspieszenie-c.png",
+          "note": "Bardziej wyprostowana sylwetka w szybkim kroku biegowym."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "hotbar-2026-ukrywanie-sie",
+      "name": "Ukrywanie się — człowiek",
+      "tier": "Player hotbar corrections · A / B / C",
+      "batch": 116,
+      "target": "icons/actions/ukrywanie-sie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/ukrywanie-sie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Ukrywanie się [A], dla Złodzieja także [B]. NOE s. 21 i 91. Glif ma pokazywać ukrywającą się osobę, nie ostrzał celu przez osłonę.",
+      "request": "Jedna osoba skrywa się za przeszkodą, z niską lub częściowo zasłoniętą sylwetką. Żadnej broni, strzelca, linii strzału ani penetracji osłony.",
+      "current": {
+        "src": "/icons/abilities/ukryty-cel.svg",
+        "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+      },
+      "candidates": [
+        {
+          "id": "batch116-ukrywanie-sie-a",
+          "label": "A · Za niską skrzynią",
+          "src": "candidates/batch-116/ukrywanie-sie-a.png",
+          "note": "Człowiek kuca za niską skrzynią."
+        },
+        {
+          "id": "batch116-ukrywanie-sie-b",
+          "label": "B · Za narożnikiem",
+          "src": "candidates/batch-116/ukrywanie-sie-b.png",
+          "note": "Człowiek chowa się za pionowym narożnikiem ściany."
+        },
+        {
+          "id": "batch116-ukrywanie-sie-c",
+          "label": "C · Nisko za gruzem",
+          "src": "candidates/batch-116/ukrywanie-sie-c.png",
+          "note": "Niska sylwetka schowana za szeroką, uszkodzoną barierą."
         }
       ],
       "status": "resolved"

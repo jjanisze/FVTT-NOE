@@ -48,6 +48,35 @@ function widokZZewnatrz({ pojazd, jadacy }) {
     jadacyWidoczny: !!me.object?.visible, prześwietlenie: P.mozePrzeswietlic(v), user: game.user.name };
 }
 
+function stanGrafiki(pojazd) {
+  const v = fromUuidSync(pojazd), art = v.actor.getFlag("neuroshima-2026-overrides", "pojazd").grafika;
+  return {
+    wnetrze: v.object.mesh.texture.baseTexture === foundry.canvas.getTexture(art.wnetrze)?.baseTexture,
+    nadwozie: v.object.mesh.texture === v.object.texture,
+    src: v.texture.src, oryginal: art.nadwozie, alpha: v.object.mesh.alpha,
+    przeswietlany: game.neuroshima.pojazdy.przeswietlany(v)
+  };
+}
+
+async function najedz(t, client, pojazd, wnetrze) {
+  await client.front(0);
+  const at = await client.eval(async uuid => {
+    const v = fromUuidSync(uuid);
+    canvas.pan({ ...v.getCenterPoint(), scale: 2 });
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const center = v.getCenterPoint();
+    const p = canvas.stage.toGlobal(new PIXI.Point(center.x, center.y));
+    return { x: p.x, y: p.y };
+  }, pojazd);
+  await client.send("Input.dispatchMouseEvent", { type: "mouseMoved", x: 0, y: 0 });
+  await client.send("Input.dispatchMouseEvent", { type: "mouseMoved", ...at });
+  await t.waitFor(client, (uuid, expected) => {
+    const v = fromUuidSync(uuid), art = v.actor.getFlag("neuroshima-2026-overrides", "pojazd").grafika;
+    return (v.object.mesh.texture.baseTexture === foundry.canvas.getTexture(art.wnetrze)?.baseTexture) === expected;
+  }, { args: [pojazd, wnetrze], message: "matched interior respects local X-ray access" });
+  return client.eval(stanGrafiki, pojazd);
+}
+
 async function uruchomIJedz({ pojazd }) {
   const P = game.neuroshima.pojazdy;
   const v = await fromUuid(pojazd);
@@ -134,6 +163,29 @@ export default {
       await t.screenshot("Gracz 2", "pojazd kropki z zewnątrz");
     });
 
+    await t.step("Matched roof/interior: GM and driver see the cabin, outsider keeps the roof; no document writes", async () => {
+      const gm = await najedz(t, t.gm, s.pojazd, true);
+      t.assert(gm.wnetrze && gm.alpha > 0.9, "opaque cabin replaces faded roof", gm);
+      t.equal(gm.src, gm.oryginal, "document still stores the closed body");
+      await t.screenshot("gm", "osobowka wnetrze");
+      const driver = await najedz(t, p1, s.pojazd, true);
+      t.assert(driver.wnetrze, "driver sees the matching interior");
+      const outside = await najedz(t, p2, s.pojazd, false);
+      t.assert(outside.nadwozie && !outside.przeswietlany, "outsider sees the roof even under the cursor");
+      const gmStillOpen = await t.gm.eval(stanGrafiki, s.pojazd);
+      t.assert(gmStillOpen.wnetrze, "another client's cursor does not close the GM's roof view");
+      await t.gm.send("Input.dispatchMouseEvent", { type: "mouseMoved", x: 0, y: 0 });
+      await t.waitFor(t.gm, uuid => {
+        const v = fromUuidSync(uuid);
+        return !game.neuroshima.pojazdy.przeswietlany(v) && v.object.mesh.texture === v.object.texture;
+      }, {
+        args: [s.pojazd], message: "roof returns on pointer leave"
+      });
+      const closed = await t.gm.eval(stanGrafiki, s.pojazd);
+      t.assert(closed.nadwozie, "original roof texture restored");
+      await t.screenshot("gm", "osobowka dach");
+    });
+
     let n0;
     await t.step("Gracz 1 starts and drives east, then south over the Cywil", async () => {
       n0 = await t.gm.eval(() => game.messages.size);
@@ -164,6 +216,46 @@ export default {
       t.equal(r.w, 1, "original size");
       t.equal(r.owner, false, "presence ownership gone");
       t.assert(r.odl <= 1.5, "next to the car", r.odl);
+    });
+
+    await t.step("GM: five normal-size passenger graphics and the interior seat selector", async () => {
+      const r = await t.gm.eval(async uuid => {
+        const MOD = "neuroshima-2026-overrides", P = game.neuroshima.pojazdy;
+        const v = fromUuidSync(uuid);
+        await P.zgas(v);
+        const pc = canvas.scene.tokens.find(t => t.name === "PC Gracz 1");
+        const seats = P.miejscaPojazdu(v.actor);
+        const art = ["gangus-kapo", "lowca", "kanibal", "gangus-kapo", "lowca"];
+        const riders = [];
+        for (const [i, seat] of seats.entries()) {
+          const data = pc.toObject();
+          delete data._id;
+          data.name = `Podgląd pasażera ${i + 1}`;
+          data.actorLink = false;
+          data.texture.src = `modules/${MOD}/tokens/${art[i]}.webp`;
+          const [doc] = await canvas.scene.createEmbeddedDocuments("Token", [data]);
+          await P.posadz(v, doc, seat.id);
+          riders.push(doc);
+        }
+        canvas.tokens.releaseAll();
+        return { count: riders.length, sizes: riders.map(d => d.width) };
+      }, s.pojazd);
+      t.equal(r.count, 5, "five readable passenger figures");
+      t.assert(r.sizes.every(w => w === 0.5), "normal half-square passenger footprint retained");
+      await najedz(t, t.gm, s.pojazd, true);
+      await t.screenshot("gm", "osobowka pieciu pasazerow");
+      const src = await t.gm.eval(async uuid => {
+        const app = await game.neuroshima.pojazdy.otworzMiejsca(fromUuidSync(uuid));
+        app.setPosition({ left: 80, top: 120 });
+        return document.querySelector(".neuro-miejsca-tlo")?.getAttribute("src");
+      }, s.pojazd);
+      t.assert(src?.endsWith("/wnetrza/osobowka.webp"), "seat selector shows the matching interior");
+      await t.screenshot("gm", "osobowka miejsca");
+      await t.gm.eval(async () => {
+        for (const app of foundry.applications.instances.values()) {
+          if (app.id?.startsWith("neuro-miejsca-")) await app.close();
+        }
+      });
     });
   }
 };

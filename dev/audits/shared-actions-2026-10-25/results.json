@@ -1,0 +1,1303 @@
+{
+  "metadata": {
+    "date": "2026-10-25",
+    "foundry": "14.369",
+    "dnd5e": "6.0.6",
+    "module": "0.20.0",
+    "userRole": "PLAYER",
+    "characterSheet": "NeuroshimaCharacterSheet",
+    "scope": "Agent sandbox; two disposable PCs; native sheet, token HUD, canvas toolbar and native hotbar",
+    "productionCodeChanged": false
+  },
+  "interpretation": {
+    "scope": "Access and workflow audit. Not a blanket assertion of complete rules automation.",
+    "nativeHotbar": "A native UI drag must create an executable Macro; custom-written macros and sheet Favorites are distinct.",
+    "preliminaryAttempts": "Kept separately to avoid mistaking clipped controls, mistaken selectors, incomplete confirmation or asynchronous state for a product failure."
+  },
+  "observations": [
+    {
+      "id": "A01",
+      "state": "no-combat",
+      "conditionTabCount": 0,
+      "hotbar": 0
+    },
+    {
+      "id": "A02",
+      "test": "Drag Skradanie się to hotbar slot 1",
+      "macros": [],
+      "notifications": []
+    },
+    {
+      "id": "A03",
+      "test": "Percepcja/Perswazja/Atletyka drops onto native hotbar",
+      "events": [
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"prc\"}}",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"per\"}}",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"atl\"}}",
+          "plain": ""
+        },
+        {
+          "event": "dragstart",
+          "json": "",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FRWTgmEyhTAmjKk0\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"2\" style=\"\" aria-label=\"AUDYT slot 2\">\n            \n            <span class=\"key\">2</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.BdUl8och0JJ7OEcW\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"3\" style=\"\" aria-label=\"AUDYT reload destination\">\n            \n            <span class=\"key\">3</span>\n        ",
+          "json": "",
+          "plain": "{\"type\":\"Activity\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FhMBZ2uMETS611RR.Activity.tmLhsYX8VCN0eNt5\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"4\" style=\"\" aria-label=\"AUDYT drag destination\">\n            \n            <span class=\"key\">4</span>\n        </",
+          "json": "",
+          "plain": "{\"type\":\"Activity\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.RZe4VJJDjNJsLICn.Activity.u6iLbhdqN192x9xA\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"5\" style=\"\" aria-label=\"AUDYT drag destination\">\n            \n            <span class=\"key\">5</span>\n        </",
+          "json": "",
+          "plain": "{\"type\":\"Activity\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.RZe4VJJDjNJsLICn.Activity.u6iLbhdqN192x9xA\"}"
+        },
+        {
+          "event": "dragstart",
+          "target": "<li class=\"item\" data-item-id=\"KjMuaA2ZHxbE4oUf\" style=\"list-style: none; margin-bottom: 0px;\" data-neuro-draggable=\"1\" draggable=\"true\" role=\"button\" aria-label=\"AUDYT drag source",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.KjMuaA2ZHxbE4oUf\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"6\" style=\"\" aria-label=\"AUDYT drag destination\">\n            \n            <span class=\"key\">6</span>\n        </",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.KjMuaA2ZHxbE4oUf\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot full\" role=\"button\" data-action=\"execute\" data-slot=\"5\" style=\"\" aria-label=\"AUDYT load-one destination\" data-tooltip-text=\"Empepiątka: Wymiana magazynka\" draggable",
+          "json": "",
+          "plain": "{\"type\":\"Activity\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FhMBZ2uMETS611RR.Activity.mjjd8wX9qrT0Qimh\"}"
+        }
+      ],
+      "hotbar": {}
+    },
+    {
+      "id": "A06",
+      "test": "Combat exists but not started",
+      "started": false,
+      "buttons": []
+    },
+    {
+      "id": "A07",
+      "test": "Started combat with participant PC",
+      "started": true,
+      "beforeRender": [
+        {
+          "text": "UNIKANIE",
+          "disabled": false,
+          "draggable": false
+        },
+        {
+          "text": "BIEGANIE",
+          "disabled": false,
+          "draggable": false
+        }
+      ],
+      "afterRender": [
+        {
+          "text": "UNIKANIE",
+          "disabled": false,
+          "draggable": false
+        },
+        {
+          "text": "BIEGANIE",
+          "disabled": false,
+          "draggable": false
+        }
+      ]
+    },
+    {
+      "id": "A08",
+      "test": "NOE investigation, acrobatics, stealth sheet controls",
+      "results": [
+        {
+          "skill": "sle",
+          "label": "Śledztwo",
+          "dialog": "Test: Inteligencja (Śledztwo)",
+          "message": "Test: Inteligencja (Śledztwo)",
+          "total": 19,
+          "statuses": []
+        },
+        {
+          "skill": "akr",
+          "label": "Akrobatyka",
+          "dialog": "Test: Zręczność (Akrobatyka)",
+          "message": "Test: Zręczność (Akrobatyka)",
+          "total": 18,
+          "statuses": []
+        },
+        {
+          "skill": "skr",
+          "label": "Skradanie się",
+          "dialog": "Test: Zręczność (Skradanie się)",
+          "message": "Test: Zręczność (Skradanie się)",
+          "total": 5,
+          "statuses": []
+        }
+      ]
+    },
+    {
+      "id": "A09",
+      "test": "Drag Bieganie button to hotbar",
+      "hotbar": {},
+      "draggable": false,
+      "events": [
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"per\"}}",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"atl\"}}",
+          "plain": ""
+        }
+      ]
+    },
+    {
+      "id": "A10",
+      "test": "Bieganie click result after async update",
+      "statuses": [
+        "bieganie"
+      ],
+      "speed": 9,
+      "effects": [
+        {
+          "id": "dnd5ebieganie000",
+          "name": "Bieganie",
+          "disabled": false,
+          "statuses": [
+            "bieganie"
+          ],
+          "duration": {
+            "value": 1,
+            "units": "turns",
+            "expiry": "turnStart",
+            "expired": false
+          }
+        }
+      ],
+      "effectTabRows": 0
+    },
+    {
+      "id": "A11",
+      "test": "Unikanie sheet click",
+      "statuses": [
+        "bieganie",
+        "dodging"
+      ],
+      "effects": [
+        {
+          "name": "Bieganie",
+          "statuses": [
+            "bieganie"
+          ]
+        },
+        {
+          "name": "Unikanie",
+          "statuses": [
+            "dodging"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A12",
+      "test": "Token HUD status and movement entry points",
+      "statuses": [
+        {
+          "id": "dead",
+          "label": "Martwy",
+          "draggable": true
+        },
+        {
+          "id": "bieganie",
+          "label": "Bieganie",
+          "draggable": true
+        },
+        {
+          "id": "diseased",
+          "label": "Choroba",
+          "draggable": true
+        },
+        {
+          "id": "bleeding",
+          "label": "Krwawienie",
+          "draggable": true
+        },
+        {
+          "id": "malnutrition",
+          "label": "Niedożywienie",
+          "draggable": true
+        },
+        {
+          "id": "unconscious",
+          "label": "Nieprzytomność",
+          "draggable": true
+        },
+        {
+          "id": "ambush",
+          "label": "Niespodziewany atak",
+          "draggable": true
+        },
+        {
+          "id": "invisible",
+          "label": "Niewidoczność",
+          "draggable": true
+        },
+        {
+          "id": "incapacitated",
+          "label": "Obezwładnienie",
+          "draggable": true
+        },
+        {
+          "id": "dehydration",
+          "label": "Odwodnienie",
+          "draggable": true
+        },
+        {
+          "id": "deafened",
+          "label": "Ogłuchnięcie",
+          "draggable": true
+        },
+        {
+          "id": "stunned",
+          "label": "Ogłuszenie",
+          "draggable": true
+        },
+        {
+          "id": "blinded",
+          "label": "Oślepienie",
+          "draggable": true
+        },
+        {
+          "id": "grappled",
+          "label": "Pochwycenie",
+          "draggable": true
+        },
+        {
+          "id": "burning",
+          "label": "Podpalenie",
+          "draggable": true
+        },
+        {
+          "id": "prone",
+          "label": "Powalenie",
+          "draggable": true
+        },
+        {
+          "id": "frightened",
+          "label": "Przerażenie",
+          "draggable": true
+        },
+        {
+          "id": "sleeping",
+          "label": "Sen",
+          "draggable": true
+        },
+        {
+          "id": "skazenie",
+          "label": "Skażenie radioaktywne",
+          "draggable": true
+        },
+        {
+          "id": "falling",
+          "label": "Spadanie",
+          "draggable": true
+        },
+        {
+          "id": "paralyzed",
+          "label": "Sparaliżowanie",
+          "draggable": true
+        },
+        {
+          "id": "stable",
+          "label": "Stabilny",
+          "draggable": true
+        },
+        {
+          "id": "zranienie",
+          "label": "Stopień Zranienia",
+          "draggable": true
+        },
+        {
+          "id": "suffocation",
+          "label": "Uduszenie",
+          "draggable": true
+        },
+        {
+          "id": "hiding",
+          "label": "Ukrywanie się",
+          "draggable": true
+        },
+        {
+          "id": "restrained",
+          "label": "Unieruchomienie",
+          "draggable": true
+        },
+        {
+          "id": "dodging",
+          "label": "Unikanie",
+          "draggable": true
+        },
+        {
+          "id": "upojenie",
+          "label": "Upojenie",
+          "draggable": true
+        },
+        {
+          "id": "exhaustion",
+          "label": "Wyczerpanie",
+          "draggable": true
+        },
+        {
+          "id": "wylaczony",
+          "label": "Wyłączony",
+          "draggable": true
+        },
+        {
+          "id": "surprised",
+          "label": "Zaskoczenie",
+          "draggable": true
+        },
+        {
+          "id": "poisoned",
+          "label": "Zatrucie",
+          "draggable": true
+        },
+        {
+          "id": "charmed",
+          "label": "Zauroczenie",
+          "draggable": true
+        }
+      ],
+      "movementControls": [
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        },
+        {
+          "action": "movementAction",
+          "label": null
+        }
+      ]
+    },
+    {
+      "id": "A14",
+      "test": "HUD Ukrywanie się marker click",
+      "statuses": [
+        "bieganie",
+        "dodging",
+        "hiding"
+      ],
+      "newUserMessages": 0
+    },
+    {
+      "id": "A15",
+      "test": "Drag owned Obrzyn from inventory to native hotbar",
+      "macros": [
+        {
+          "slot": "1",
+          "id": "oeSwRnxPB5MBUaCE",
+          "name": "Obrzyn",
+          "command": "dnd5e.documents.macro.rollItem(\"Obrzyn\", { event })"
+        }
+      ],
+      "events": [
+        {
+          "event": "dragstart",
+          "json": "",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FRWTgmEyhTAmjKk0\"}"
+        }
+      ]
+    },
+    {
+      "id": "A16",
+      "test": "Use hotbar weapon from pack",
+      "location": {
+        "kind": "hand",
+        "slots": [
+          "hand.0"
+        ],
+        "count": 1
+      },
+      "dialogs": [
+        "\n    \n    \n"
+      ]
+    },
+    {
+      "id": "A17b",
+      "test": "Held weapon macro opens activity picker",
+      "apps": [
+        {
+          "id": "NeuroshimaCharacterSheet-Actor-H7xXs62xdTXPvyWP",
+          "cls": "application sheet dnd5e2 actor standard-form hidden-title character vertical-tabs interactable tab-inventory",
+          "title": "",
+          "text": "pośrednia • Akcja\n50\n3\n+1\n1d6\n/\n1\nOgień pojedynczy\nAkcja\n+1\n1d6\nWymiana magazynka\nAkcja\nKrótka seria\nAkcja\n+1\n3d6\nDługa seria\nAkcja\nZRC\n10\n2d6\nKafar\nBroń biała • Akcja\n30\n15\n+2\n2d6 + 2\nAtak\nAkcja\n+2\n2d6 + 2\nUżywki\nCENA\nWAGA\nILOŚĆ\nŁADUNKI\nOPORZĄDZENIE"
+        },
+        {
+          "id": "app-91",
+          "cls": "application dnd5e2 activity-choice",
+          "title": "Obrzyn",
+          "text": "Obrzyn\nOgień pojedynczy\nDoładuj 1 nabój\nDublet\nShift\n+\nthe item to skip this dialog"
+        }
+      ]
+    },
+    {
+      "id": "A18-2",
+      "test": "Drag Kafar to hotbar",
+      "slot": 2,
+      "macro": {
+        "name": "Kafar",
+        "command": "dnd5e.documents.macro.rollItem(\"Kafar\", { event })"
+      }
+    },
+    {
+      "id": "A21",
+      "test": "Expand firearm, then drag visible reload activity to hotbar",
+      "macro": {
+        "name": "Lewar M95: Przeładowanie",
+        "command": "dnd5e.documents.macro.rollItem(\"Lewar M95\", { activityName: \"Przeładowanie\", event });"
+      },
+      "events": [
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"2\" style=\"\" aria-label=\"AUDYT slot 2\">\n            \n            <span class=\"key\">2</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.BdUl8och0JJ7OEcW\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"3\" style=\"\" aria-label=\"AUDYT reload destination\">\n            \n            <span class=\"key\">3</span>\n        ",
+          "json": "",
+          "plain": "{\"type\":\"Activity\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FhMBZ2uMETS611RR.Activity.tmLhsYX8VCN0eNt5\"}"
+        }
+      ]
+    },
+    {
+      "id": "A22-4",
+      "test": "Drag visible Empepiątka: Wymiana magazynka row to hotbar",
+      "macro": {
+        "name": "Empepiątka: Wymiana magazynka",
+        "command": "dnd5e.documents.macro.rollItem(\"Empepiątka\", { activityName: \"Wymiana magazynka\", event });"
+      }
+    },
+    {
+      "id": "A22-6",
+      "test": "Drag visible Medpak row to hotbar",
+      "macro": {
+        "name": "Medpak",
+        "command": "dnd5e.documents.macro.rollItem(\"Medpak\", { event })"
+      }
+    },
+    {
+      "id": "A23",
+      "test": "Verified load-one activity drag, exact source and result",
+      "macro": {
+        "name": "Lewar M95: Doładuj 1 nabój",
+        "command": "dnd5e.documents.macro.rollItem(\"Lewar M95\", { activityName: \"Doładuj 1 nabój\", event });"
+      },
+      "passed": true
+    },
+    {
+      "id": "A24b",
+      "test": "Medpak sheet use completed",
+      "hp": 18,
+      "quantity": 1,
+      "latest": [
+        {
+          "flavor": "",
+          "text": "   \n       \n        Obrzyn : plecak → prawa ręka \n       Akcja \n      \n       "
+        },
+        {
+          "flavor": "",
+          "text": " \n       \n         \n        Medpak\n            z plecaka \n       \n       AUDYT — wspólne czynności opróżnia Medpak jednym ruchem, nie przerywając obserwacji. \n       Przywrócone PW:  8   (2d6 + 2) . \n      \n      \n     "
+        }
+      ]
+    },
+    {
+      "id": "A25b",
+      "test": "Confirm native hotbar Medpak usage",
+      "hp": 18,
+      "medpakQuantity": 0,
+      "latest": [
+        "   \n       \n        Obrzyn : plecak → prawa ręka \n       Akcja \n      \n       ",
+        " \n       \n         \n        Medpak\n            z plecaka \n       \n       AUDYT — wspólne czynności opróżnia Medpak jednym ruchem, nie przerywając obserwacji. \n       Przywrócone PW"
+      ]
+    },
+    {
+      "id": "A26",
+      "test": "Player triggers Pochwycenie from canvas toolbar",
+      "hpAfterMedpak": 25,
+      "latest": "     Pochwycenie  —  AUDYT — wspólne czynności  próbuje wobec  AUDYT — cel .  ST 11 , RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG. ",
+      "targetStatuses": []
+    },
+    {
+      "id": "A27-odepchniecie",
+      "test": "Player uses canvas maneuver odepchniecie",
+      "dialog": "Manewr — AUDYT — wspólne czynności\nManewr\nPochwycenie\nOdepchnięcie\nWytrącenie\nST rzutu obronnego\n\n8 + mod. cechy + Premia Biegłości. Nadpisz dla istot z własnym ST.\n\nSkutek\nPrzewrócenie (Powalenie)\nOdepchnięcie o 1,5 m\nUtrudnienie w RO celu\n\nOdpychasz cel o 1,5 m albo go przewracasz (twój wybór). Możliwe tylko wobec istoty maksymalnie o jeden rozmiar większej.\n\nWykonaj",
+      "result": "     Odepchnięcie  —  AUDYT — wspólne czynności  próbuje wobec  AUDYT — cel .  ST 11 , RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG. "
+    },
+    {
+      "id": "A27-wytracenie",
+      "test": "Player uses canvas maneuver wytracenie",
+      "dialog": "Manewr — AUDYT — wspólne czynności\nManewr\nPochwycenie\nOdepchnięcie\nWytrącenie\nST rzutu obronnego\n\n8 + mod. cechy + Premia Biegłości. Nadpisz dla istot z własnym ST.\n\nCel trzyma oburącz\n\nUłatwienie w RO celu.\n\nUtrudnienie w RO celu\n\nPrzedmiot trzymany przez cel wypada mu z ręki. Zastępuje jeden z ataków akcji Atakowania wręcz. Cel trzymający przedmiot oburącz ma Ułatwienie w RO.\n\nWykonaj",
+      "result": "     Wytrącenie  —  AUDYT — wspólne czynności  próbuje wobec  AUDYT — cel .  ST 11 , RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG. "
+    },
+    {
+      "id": "A28",
+      "test": "Scan all rendered sheet tabs for generic action controls",
+      "hits": {
+        "Atakowanie": [],
+        "Badanie": [],
+        "Bieganie": [
+          {
+            "tag": "BUTTON",
+            "cls": "neuro-akcja-btn active",
+            "draggable": false,
+            "tab": "sidebar"
+          }
+        ],
+        "Odstąpienie": [],
+        "Pomaganie": [],
+        "Przyspieszenie": [],
+        "Szukanie": [],
+        "Unikanie": [
+          {
+            "tag": "BUTTON",
+            "cls": "neuro-akcja-btn active",
+            "draggable": false,
+            "tab": "sidebar"
+          }
+        ],
+        "Ukrywanie się": [],
+        "Używanie": [],
+        "Wpływanie": [],
+        "Wyczekanie": [],
+        "Pochwycenie": [],
+        "Odepchnięcie": [],
+        "Wytrącenie": [],
+        "Wyzwalanie się": [],
+        "Skok": [],
+        "Padnij": [],
+        "Powstań": []
+      },
+      "ownedUnarmedItems": []
+    },
+    {
+      "id": "A29",
+      "test": "Burning PC has sheet Ugaś się button",
+      "present": true,
+      "disabled": false,
+      "draggable": false
+    },
+    {
+      "id": "A30",
+      "test": "Ugaś się sheet workflow reaches roll and Powalenie",
+      "statuses": [
+        "bieganie",
+        "dodging",
+        "hiding",
+        "burning",
+        "prone"
+      ],
+      "messages": [
+        {
+          "flavor": "",
+          "text": "     Odepchnięcie  —  AUDYT — wspólne czynności  próbuje wobec  AUDYT — cel .  ST 11 , RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG. "
+        },
+        {
+          "flavor": "",
+          "text": "     Wytrącenie  —  AUDYT — wspólne czynności  próbuje wobec  AUDYT — cel .  ST 11 , RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG. "
+        }
+      ]
+    },
+    {
+      "id": "A31",
+      "test": "Jammed firearm item-sheet control",
+      "present": true,
+      "draggable": false
+    },
+    {
+      "id": "A32",
+      "test": "Item-sheet clear-jam roll completed",
+      "jammed": false,
+      "damaged": false,
+      "latest": [
+        {
+          "flavor": "",
+          "text": " \n          TURLANIE PO ZIEMI \n       AUDYT — wspólne czynności pada na ziemię i turla się —\n        Test Zręczności (Akrobatyka) ST 10:  10 .\n        Płomienie puszczają. \n     "
+        },
+        {
+          "flavor": "",
+          "text": " \n          OGIEŃ UGASZONY \n       AUDYT — wspólne czynności — zbite płomienie. \n     "
+        },
+        {
+          "flavor": "Obrzyn - Odblokowanie zacięcia (ST 10)",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "A33b",
+      "test": "Actual Effects-tab Powalenie toggle off and on",
+      "results": [
+        {
+          "before": true,
+          "after": false,
+          "speed": 9,
+          "historyLength": 0
+        },
+        {
+          "before": false,
+          "after": true,
+          "speed": 9,
+          "historyLength": 0
+        }
+      ]
+    },
+    {
+      "id": "A34c",
+      "test": "HUD movement choices actually change token movementAction",
+      "results": [
+        {
+          "requested": "walk",
+          "actual": "walk",
+          "draggable": false
+        },
+        {
+          "requested": "crawl",
+          "actual": "crawl",
+          "draggable": false
+        },
+        {
+          "requested": "climb",
+          "actual": "climb",
+          "draggable": false
+        },
+        {
+          "requested": "swim",
+          "actual": "swim",
+          "draggable": false
+        },
+        {
+          "requested": "jump",
+          "actual": "jump",
+          "draggable": false
+        }
+      ],
+      "str": 14,
+      "nativeJumpSpeed": 7
+    },
+    {
+      "id": "A35",
+      "test": "Złap oddech from sidebar Stan",
+      "present": true,
+      "draggable": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "id": "A36",
+      "test": "Cannot start Bieganie while prone",
+      "prone": true,
+      "running": false,
+      "buttonDisabled": true
+    },
+    {
+      "id": "A37",
+      "test": "Stabilization access from dying target chat card",
+      "present": true,
+      "draggable": false,
+      "buttons": [
+        {
+          "text": "STABILIZUJ — MEDYCYNA ST 10",
+          "disabled": false
+        },
+        {
+          "text": "MAŁY MEDYK",
+          "disabled": false
+        },
+        {
+          "text": "STAZA",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "id": "A38",
+      "test": "Player stabilisation chat button executes Medicine workflow",
+      "latest": [
+        {
+          "flavor": "",
+          "text": "  Obrzyn  jest znowu gotowa do strzału. "
+        },
+        {
+          "flavor": "Pomaganie — stabilizacja: AUDYT — cel (Medycyna ST 10)",
+          "text": ""
+        }
+      ],
+      "targetStatus": [
+        "bloodied",
+        "zranienie",
+        "unconscious",
+        "incapacitated",
+        "prone"
+      ]
+    },
+    {
+      "id": "A39",
+      "test": "Dying owned PC death-save sheet control",
+      "present": true,
+      "draggable": false,
+      "hp": 0,
+      "statuses": [
+        "zranienie",
+        "prone",
+        "bloodied",
+        "unconscious",
+        "incapacitated"
+      ]
+    },
+    {
+      "id": "A40",
+      "test": "Death-save sheet click produces actual roll",
+      "message": {
+        "flavor": "Rzut Przeciw Śmierci",
+        "total": 8
+      },
+      "death": {
+        "roll": {
+          "min": null,
+          "max": null,
+          "mode": 0
+        },
+        "success": 0,
+        "failure": 1,
+        "bonuses": {}
+      }
+    },
+    {
+      "id": "A41",
+      "test": "All 18 native sheet skill controls open their actual roll dialogs",
+      "results": [
+        {
+          "key": "akr",
+          "label": "Akrobatyka",
+          "dialog": "Test: Zręczność (Akrobatyka)"
+        },
+        {
+          "key": "atl",
+          "label": "Atletyka",
+          "dialog": "Test: Siła (Atletyka)"
+        },
+        {
+          "key": "his",
+          "label": "Historia",
+          "dialog": "Test: Inteligencja (Historia)"
+        },
+        {
+          "key": "int",
+          "label": "Intuicja",
+          "dialog": "Test: Mądrość (Intuicja)"
+        },
+        {
+          "key": "med",
+          "label": "Medycyna",
+          "dialog": "Test: Inteligencja (Medycyna)"
+        },
+        {
+          "key": "osz",
+          "label": "Oszustwo",
+          "dialog": "Test: Charyzma (Oszustwo)"
+        },
+        {
+          "key": "prc",
+          "label": "Percepcja",
+          "dialog": "Test: Mądrość (Percepcja)"
+        },
+        {
+          "key": "per",
+          "label": "Perswazja",
+          "dialog": "Test: Charyzma (Perswazja)"
+        },
+        {
+          "key": "poj",
+          "label": "Pojazdy",
+          "dialog": "Test: Mądrość (Pojazdy)"
+        },
+        {
+          "key": "prz",
+          "label": "Przyroda",
+          "dialog": "Test: Inteligencja (Przyroda)"
+        },
+        {
+          "key": "skr",
+          "label": "Skradanie się",
+          "dialog": "Test: Zręczność (Skradanie się)"
+        },
+        {
+          "key": "sle",
+          "label": "Śledztwo",
+          "dialog": "Test: Inteligencja (Śledztwo)"
+        },
+        {
+          "key": "sur",
+          "label": "Survival",
+          "dialog": "Test: Mądrość (Survival)"
+        },
+        {
+          "key": "tch",
+          "label": "Technika",
+          "dialog": "Test: Inteligencja (Technika)"
+        },
+        {
+          "key": "tre",
+          "label": "Tresura",
+          "dialog": "Test: Mądrość (Tresura)"
+        },
+        {
+          "key": "wys",
+          "label": "Występy",
+          "dialog": "Test: Charyzma (Występy)"
+        },
+        {
+          "key": "zas",
+          "label": "Zastraszanie",
+          "dialog": "Test: Charyzma (Zastraszanie)"
+        },
+        {
+          "key": "zwi",
+          "label": "Zwinne dłonie",
+          "dialog": "Test: Zręczność (Zwinne dłonie)"
+        }
+      ],
+      "count": 18
+    },
+    {
+      "id": "A42",
+      "test": "Use native reload activity hotbar macro",
+      "before": {
+        "current": 5,
+        "max": 6,
+        "ammoType": "3006"
+      },
+      "after": {
+        "current": 4,
+        "max": 6,
+        "ammoType": "3006"
+      },
+      "apps": [],
+      "messages": [
+        "   AUDYT — wspólne czynności  przeładowuje  Lewar M95   Niezbity nabój (.30-06) wylatuje z komory; następny wchodzi na jego miejsce.  Stan broni: 4/6 — następny:  .30-06      Akcja bonusowa   "
+      ]
+    },
+    {
+      "id": "A43",
+      "test": "Use native magazine-swap activity hotbar macro with no spare magazines",
+      "apps": [],
+      "notifications": [
+        "AUDYT — wspólne czynności: brak pasującego magazynka do Empepiątka. Magazynki są per model broni — kup taki do tej sztuki."
+      ]
+    },
+    {
+      "id": "A44",
+      "test": "Use native load-one activity hotbar macro without loose ammunition",
+      "apps": [],
+      "notifications": [
+        "Brak amunicji (.30-06) w ekwipunku.",
+        "AUDYT — wspólne czynności: brak pasującego magazynka do Empepiątka. Magazynki są per model broni — kup taki do tej sztuki."
+      ]
+    },
+    {
+      "id": "A45",
+      "test": "Click expanded weapon reload activity directly on character sheet",
+      "before": 4,
+      "after": 3
+    },
+    {
+      "id": "A46",
+      "test": "Bieganie/Unikanie sidebar row disappears outside started combat",
+      "combat": null,
+      "buttons": 0
+    },
+    {
+      "id": "A47",
+      "test": "Short-rest sheet control opens its workflow",
+      "present": true,
+      "title": "Krótki odpoczynek"
+    },
+    {
+      "id": "A48",
+      "test": "Long-rest sheet control opens its workflow",
+      "title": "Długi odpoczynek"
+    },
+    {
+      "id": "A49",
+      "test": "Initiative sheet control",
+      "present": true,
+      "draggable": false,
+      "markup": "<div class=\"lozenge rollable\" data-action=\"roll\" data-type=\"initiative\">\n                    <div class=\"value\">\n                        <span>\n                            +1\n                        </span>\n                    </div>\n                    <div class=\"label roboto-c"
+    },
+    {
+      "id": "A49b",
+      "test": "Initiative control opened roll configuration; cancelled",
+      "combatCreated": false
+    },
+    {
+      "id": "A52",
+      "test": "Confirm optional Forsuj workflow from chat",
+      "exhaustion": 1,
+      "latest": [
+        {
+          "flavor": "<div style=\"border-left:4px solid #e67e22;background:rgba(230, 126, 34, 0.08);padding:6px 8px;border-radius:0 4px 4px 0;margin-bottom:4px\">\n        <div style=\"font-weight:bold;color:#e67e22;font-size:13px;margin-bottom:2px\">⚡ FORSOWANIE</div>\n        <div style=\"font-size:11px;color:var(--color-text-secondary, #aaa)\">Test Inteligencja — k20 + 10</div>\n      </div>",
+          "total": 13,
+          "text": "13"
+        }
+      ]
+    },
+    {
+      "id": "A53",
+      "test": "Two held light weapons expose offhand attack mode on sheet attack roll",
+      "hands": [
+        "Maczeta",
+        "Nóż taktyczny"
+      ],
+      "options": [
+        {
+          "value": "oneHanded",
+          "label": "Jednoręczny"
+        },
+        {
+          "value": "offhand",
+          "label": "Ręka wolna"
+        }
+      ],
+      "selected": "offhand"
+    },
+    {
+      "id": "A54",
+      "test": "Shared armor equipment has no executable owned Item activities",
+      "items": [
+        {
+          "name": "Hełm",
+          "activities": []
+        },
+        {
+          "name": "Tarcza",
+          "activities": []
+        }
+      ],
+      "note": "Shield bash and shield area-cover are marked manual in armor-data; parry/helmet protection use attack-chat reaction handling, not sheet activities."
+    }
+  ],
+  "preliminaryAttempts": [
+    {
+      "id": "A04",
+      "test": "Sheet Skradanie się click and normal roll",
+      "message": null,
+      "statuses": [],
+      "exclusionReason": "Intermediate read before the asynchronous skill message arrived; superseded by A08/A41."
+    },
+    {
+      "id": "A05",
+      "test": "Actual sheet skill workflows",
+      "results": [
+        {
+          "skill": "inv",
+          "error": "No control"
+        },
+        {
+          "skill": "prc",
+          "label": "Percepcja",
+          "dialog": "Test: Mądrość (Percepcja)",
+          "message": "Test: Mądrość (Percepcja)",
+          "total": 6,
+          "statuses": []
+        },
+        {
+          "skill": "per",
+          "label": "Perswazja",
+          "dialog": "Test: Charyzma (Perswazja)",
+          "message": "Test: Charyzma (Perswazja)",
+          "total": 17,
+          "statuses": []
+        },
+        {
+          "skill": "atl",
+          "label": "Atletyka",
+          "dialog": "Test: Siła (Atletyka)",
+          "message": "Test: Siła (Atletyka)",
+          "total": 15,
+          "statuses": []
+        },
+        {
+          "skill": "acr",
+          "error": "No control"
+        }
+      ],
+      "exclusionReason": "Initial probe used two D&D skill keys instead of the NOE keys; corrected in A08 and all 18 tested in A41."
+    },
+    {
+      "id": "A13",
+      "test": "Drag HUD Bieganie image to native hotbar",
+      "hotbar": {},
+      "events": [
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "{\"dnd5e\":{\"action\":\"favorite\",\"type\":\"skill\",\"id\":\"atl\"}}",
+          "plain": ""
+        },
+        {
+          "event": "dragstart",
+          "json": "",
+          "plain": ""
+        }
+      ],
+      "exclusionReason": "HUD image drag emitted no usable native action payload; not counted as a complete action drag test."
+    },
+    {
+      "id": "A17",
+      "test": "Use held weapon from hotbar",
+      "dialogs": [
+        {
+          "text": "\n    \n    \n",
+          "buttons": []
+        }
+      ],
+      "exclusionReason": "The activity chooser was not a role=dialog node; superseded by the actual application inspection in A17b."
+    },
+    {
+      "id": "A18-3",
+      "test": "Drag Przeładowanie to hotbar",
+      "slot": 3,
+      "macro": null,
+      "exclusionReason": "Attempted drag from clipped content of a collapsed weapon; superseded by A21."
+    },
+    {
+      "id": "A18-4",
+      "test": "Drag Wymiana magazynka to hotbar",
+      "slot": 4,
+      "macro": null,
+      "exclusionReason": "Attempted drag from clipped content of a collapsed weapon; superseded by A22-4."
+    },
+    {
+      "id": "A18-5",
+      "test": "Drag Doładuj 1 nabój to hotbar",
+      "slot": 5,
+      "macro": null,
+      "exclusionReason": "Attempted drag from clipped content of a collapsed weapon; superseded by A23."
+    },
+    {
+      "id": "A19",
+      "test": "Drag Medpak resource row to hotbar",
+      "macros": [
+        {
+          "slot": "1",
+          "name": "Obrzyn",
+          "command": "dnd5e.documents.macro.rollItem(\"Obrzyn\", { event })"
+        },
+        {
+          "slot": "2",
+          "name": "Kafar",
+          "command": "dnd5e.documents.macro.rollItem(\"Kafar\", { event })"
+        }
+      ],
+      "events": [
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FRWTgmEyhTAmjKk0\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"2\" style=\"\" aria-label=\"AUDYT slot 2\">\n            \n            <span class=\"key\">2</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.BdUl8och0JJ7OEcW\"}"
+        }
+      ],
+      "exclusionReason": "Icon did not supply a usable target to the browser drag tool; actual resource-row drag verified in A22-6."
+    },
+    {
+      "id": "A20",
+      "test": "Actual drag from reload activity row",
+      "macro": null,
+      "events": [
+        {
+          "event": "dragstart",
+          "json": "",
+          "plain": ""
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"1\" style=\"\" aria-label=\"Empty Slot\">\n            \n            <span class=\"key\">1</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.FRWTgmEyhTAmjKk0\"}"
+        },
+        {
+          "event": "drop",
+          "target": "<li class=\"slot open\" role=\"button\" data-action=\"execute\" data-slot=\"2\" style=\"\" aria-label=\"AUDYT slot 2\">\n            \n            <span class=\"key\">2</span>\n        </li>",
+          "json": "",
+          "plain": "{\"type\":\"Item\",\"uuid\":\"Actor.H7xXs62xdTXPvyWP.Item.BdUl8och0JJ7OEcW\"}"
+        }
+      ],
+      "exclusionReason": "Activity content was still clipped; expanded visible-row drag verified in A21."
+    },
+    {
+      "id": "A22-5",
+      "test": "Drag visible Lewar M95: Doładuj 1 nabój row to hotbar",
+      "macro": {
+        "name": "Empepiątka: Wymiana magazynka",
+        "command": "dnd5e.documents.macro.rollItem(\"Empepiątka\", { activityName: \"Wymiana magazynka\", event });"
+      },
+      "exclusionReason": "A stale accessibility label selected the wrong row. Exact source and generated command verified in A23."
+    },
+    {
+      "id": "A24",
+      "test": "Sheet Medpak use",
+      "before": {
+        "hp": 10,
+        "quantity": 2
+      },
+      "exclusionReason": "Before-only observation; completion recorded in A24b and A26."
+    },
+    {
+      "id": "A25",
+      "test": "Medpak hotbar use completed",
+      "hp": 18,
+      "quantity": 1,
+      "exclusionReason": "Native usage confirmation was still open. Confirmed in A25b and final settled healing in A26."
+    },
+    {
+      "id": "A50",
+      "test": "Skill drag succeeds into sheet Favorites, not native hotbar",
+      "favoriteText": "ULUBIONE\nUPUŚĆ TU ULUBIONE",
+      "hotbarSkillMacros": [],
+      "exclusionReason": "A positive physical drop into sheet Favorites was not established. No claim of a successful Favorite drop is made."
+    },
+    {
+      "id": "A51",
+      "test": "Optional Forsuj chat button executes shared forcing workflow",
+      "before": 0,
+      "after": 0,
+      "latest": [
+        {
+          "flavor": "",
+          "text": "   AUDYT — wspólne czynności  przeładowuje  Lewar M95   Niezbity nabój (.30-06) wylatuje z komory; następny wchodzi na jego miejsce.  Stan broni: 4/6 — następny:  .30-06      Akcja bonusowa   "
+        },
+        {
+          "flavor": "",
+          "text": "   AUDYT — wspólne czynności  przeładowuje  Lewar M95   Niezbity nabój (.30-06) wylatuje z komory; następny wchodzi na jego miejsce.  Stan broni: 3/6 — następny:  .30-06      Akcja bonusowa   "
+        }
+      ],
+      "exclusionReason": "Forcing confirmation was still open. Confirmed workflow recorded in A52."
+    }
+  ],
+  "cleanup": {
+    "deleted": {
+      "actors": 2,
+      "scene": 1,
+      "user": 1,
+      "macros": 6,
+      "messages": 28,
+      "remainingAuditCombats": 0
+    },
+    "remaining": {
+      "actors": 0,
+      "scene": false,
+      "user": false
+    },
+    "gmSceneUnchanged": true,
+    "campaignTouched": false
+  },
+  "sourceHashes": {
+    "module:scripts/actors/sheet-shell.mjs": "411874532833b8d914ef1665749bfd678b277a2273fd7dacfdfec2e7beaa9687",
+    "module:scripts/config/conditions.mjs": "abfcadb0fb1df6e419b04510153468be294ed0718198a36e069bc1460f50fb3d",
+    "module:scripts/combat/melee-maneuvers.mjs": "f797c0d5a493248e0261fd99b21c9e0dd7f8b236870535ccce378f0a8be847ee",
+    "module:scripts/combat/grip.mjs": "80c952f7a814aec9d0fbd84de523cb0ac463c6683ff55c8f4be8b4c28f785e50",
+    "module:scripts/weapons/magazine.mjs": "a545165a5c392c081f23782d5e7c2e8d4133c192dd3abdba895959a0cf70cb1a",
+    "module:scripts/weapons/jams.mjs": "5b5e4151c3d172591312d6ec3ab100ad11b4adf12023242537c4a1745d2e3911",
+    "module:scripts/combat/podpalenie.mjs": "b399227f8de4cadc214b4736a8a26643e13c5738d810818d4e69d7040809cc96",
+    "module:scripts/combat/umieranie.mjs": "f7e6d37aa292864283243826b65481ae5c9797febe062ad55558cf9838ae61ad",
+    "module:scripts/actors/zagrozenia.mjs": "643c04258023b7562b8981d35244b1d07e00f35387da6550014cf2b575e60029",
+    "module:scripts/config/armor-data.mjs": "d9339bba7dd0ebfaba29ba624a847d0c912f46e0129b10d435e7692ee055e7f3",
+    "module:scripts/config/defense-rules.mjs": "572b70123b819d8e3e3d282fc24a5dc993d2bc1fc32dc48cdcf76122f931c0d5",
+    "dnd5e:dnd5e.mjs": "700a2d0455d4d959e6d3b35bfef2d04d5dbc6777c2c4556efaeba871aaba9cfe",
+    "dnd5e:module/documents/macro.mjs": "767713add9234180c203f7f055a12ebc60e3db540742e589166876858a859d2d",
+    "dnd5e:module/applications/actor/character-sheet.mjs": "b7ec600785126f549c03d58302eb6938959d6389209fd684b36dbdf13d6ab714",
+    "dnd5e:module/applications/actor/api/base-actor-sheet.mjs": "4ba7d4deb9c445da79d2a60638744c8996e38d96e4d41ea30937b4a2912aba54",
+    "dnd5e:module/applications/components/effects.mjs": "f0ed51c8fcdcab9f5eff5a2eb83579105145b9217642b58c8ab0680bc560c1b8"
+  }
+}

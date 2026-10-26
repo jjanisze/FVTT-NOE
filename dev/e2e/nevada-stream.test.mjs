@@ -1,8 +1,33 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import {setImmediate as turn} from "node:timers/promises";
-import {choose,regionAt,routeAsset,REGION_DISTANCE} from "../../scripts/scenes/poscig-route.mjs";
+import {readFileSync} from "node:fs";
+import {choose,regionAt,routeAsset,REGION_DISTANCE,foregroundPlacement} from "../../scripts/scenes/poscig-route.mjs";
 import {SceneryTextureCache} from "../../scripts/scenes/poscig-textures.mjs";
+
+test("large buildings are sparse, vertically varied and stable after route seeks",()=>{
+  for(const [theme,minimumSeconds] of [["winter",20],["urban",25],["nevada",35]]) {
+    const catalog=JSON.parse(readFileSync(new URL(`../art/poscig-${theme}/catalog.json`,import.meta.url),"utf8"));
+    const config=catalog.foreground.buildings,rows=[];
+    for(let i=0;i<1000;i++) {
+      const at=foregroundPlacement(config,"scene", "buildings",i);
+      assert.deepEqual(at,foregroundPlacement(config,"scene","buildings",i));
+      if(at.enabled) rows.push({i,...at});
+    }
+    assert.ok(rows.length>550&&rows.length<750,`${theme}: sparse eligibility`);
+    const meanSeconds=1000*config.stride/config.rate/520/rows.length;
+    assert.ok(meanSeconds>minimumSeconds,`${theme}: buildings arrive too often (${meanSeconds}s)`);
+    assert.ok(Math.max(...rows.map(r=>r.sink))-Math.min(...rows.map(r=>r.sink))>250,`${theme}: insufficient Y variety`);
+    assert.ok(rows.every(r=>r.sink>=140&&r.sink<=500));
+    assert.ok(catalog.groups.buildings.length>=4);
+  }
+});
+
+test("urban districts use complete alpha silhouettes over a separate common base",()=>{
+  const c=JSON.parse(readFileSync(new URL("../art/poscig-urban/catalog.json",import.meta.url),"utf8"));
+  assert.equal(c.landscapeMode,"opaque-cutouts");assert.equal(c.assets[c.backdrop].role,"backdrop");
+  for(const names of Object.values(c.groups.landscapes)) for(const id of names) assert.equal(c.assets[id].cutout,true,id);
+});
 
 test("route shuffle bags remain stable across seeks and avoid adjacent repeats",()=>{
   const catalog=Array.from({length:1000},(_,i)=>`asset-${i}`);

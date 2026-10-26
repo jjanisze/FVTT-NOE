@@ -71,8 +71,10 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
     const p = PODWOZIA[id];
     const k = KATALOG_POJAZDOW[id];
     const slug = slugPojazdu(id);
-    const zeton = plik(`tokens/pojazdy/${slug}.webp`) ?? plik(`tokens/pojazdy/_placeholder/${slug}.webp`);
+    const grafikaZetonu = plik(`tokens/pojazdy/${slug}.webp`);
+    const zeton = grafikaZetonu ?? plik(`tokens/pojazdy/_placeholder/${slug}.webp`);
     const portret = plik(`tokens/portraits/pojazd-${slug}.webp`) ?? zeton;
+    const wnetrze = plik(`tokens/pojazdy/wnetrza/${slug}.webp`);
     const rozmiar = rozmiarPojazdu(id);
     const bezruch = ttBezruchu(p);
     const actorId = idFor("pojazd", id);
@@ -151,7 +153,10 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
         items: items.map(i => i._id),
         flags: {
           [MODULE_ID]: {
-            pojazd: { podwozie: id },
+            pojazd: { podwozie: id,
+              ...(wnetrze ? { grafika: { nadwozie: zeton, wnetrze } } : {}),
+              ...(grafikaZetonu && k.strefyGrafiki ? { strefy: k.strefyGrafiki } : {})
+            },
             ...(k.bak ? { paliwo: { value: k.bak, max: k.bak, spalanie: k.spalanie } } : {}),
             ...(p.cofanie !== null ? { cofanie: p.cofanie } : {}),
             ttBezruchu: bezruch.wartosc

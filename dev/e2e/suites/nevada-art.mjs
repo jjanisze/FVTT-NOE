@@ -58,7 +58,7 @@ function overlap({opaque = true} = {}) {
   const frame = sign.texture.frame, cv = document.createElement("canvas");
   cv.width = Math.ceil(frame.width); cv.height = Math.ceil(frame.height);
   const ctx = cv.getContext("2d");
-  ctx.drawImage(sign.texture.baseTexture.resource.source,frame.x,frame.y,frame.width,frame.height,0,0,cv.width,cv.height);
+  ctx.drawImage(window.__e2e.textureSource(sign.texture.baseTexture),frame.x,frame.y,frame.width,frame.height,0,0,cv.width,cv.height);
   const data=ctx.getImageData(0,0,cv.width,cv.height).data;
   let point=-1;
   for(let y=1;y<cv.height-1&&point<0;y++)for(let x=1;x<cv.width-1;x++) {
@@ -95,7 +95,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
       const edges=await t.gm.eval(()=>{
         const root=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-ground");
         return root.children[1].children.map(sprite=>{
-          const source=sprite.texture.baseTexture.resource.source;
+          const source=window.__e2e.textureSource(sprite.texture.baseTexture);
           const data=source.getContext("2d").getImageData(256,0,1536,240).data;
           let solid=0,occupied=0,transparent=0;
           for(let i=3;i<data.length;i+=4) {
@@ -183,12 +183,12 @@ export function bitmapArtSuite(name, theme, prefix) { return {
       await t.gm.eval(()=>{
         const roots=canvas.primary.children.filter(c=>c.name?.startsWith(window.__bitmapArtPrefix));const bases=new Set();
         const collect=c=>{for(const base of c.neuroshimaTextureBases?.()??[])bases.add(base);if(c.texture)bases.add(c.texture.baseTexture);for(const child of c.children??[])collect(child);};roots.forEach(collect);
-        window.__nevadaArtBases=[...bases];return game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"zima"});
+        window.__nevadaArtBases=[...bases];return game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme==="zima"?"pustynia":"zima"});
       });
       const freed=await t.gm.eval(()=>{const r=window.__nevadaArtBases.every(b=>b.destroyed)&&!canvas.primary.children.some(c=>c.name?.startsWith(window.__bitmapArtPrefix));delete window.__nevadaArtBases;return r;});
       t.assert(freed,"Bitmap resources survived a theme switch");
       // Race an asynchronous build against a second theme change: stale art must never attach.
-      await t.gm.eval(async()=>{await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme});await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"zima"});});
+      await t.gm.eval(async()=>{await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme});await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme==="zima"?"pustynia":"zima"});});
       await pause(1200);
       t.assert(await t.gm.eval(()=>!canvas.primary.children.some(c=>c.name?.startsWith(window.__bitmapArtPrefix))),"stale asynchronous bitmap build attached over winter");
       await t.gm.eval(()=>game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme}));

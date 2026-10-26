@@ -1,0 +1,44 @@
+[
+  {
+    "key": "przyspieszenie-a",
+    "source": "raw/batch-116-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "przyspieszenie-b",
+    "source": "raw/batch-116-atlas-a.png, cell 2",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "przyspieszenie-c",
+    "source": "raw/batch-116-atlas-a.png, cell 3",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "ukrywanie-sie-a",
+    "source": "raw/batch-116-atlas-a.png, cell 4",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "ukrywanie-sie-b",
+    "source": "raw/batch-116-atlas-a.png, cell 5",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "ukrywanie-sie-c",
+    "source": "raw/batch-116-atlas-a.png, cell 6",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

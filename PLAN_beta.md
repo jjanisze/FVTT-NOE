@@ -297,6 +297,8 @@ Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_m4_pojazdy.md` §6
 grafika planszy — `PLAN_poscigi.md` §2.2.
 
 - [x] Pojazdy między scenami: skala w metrach, pamięć obsady, Ctrl+X / Ctrl+V z załogą (M4 E9–E11, 2026-10-19)
+- [ ] **Wierzchowce jako nośniki** (z M6, MG 2026-10-25): ten sam kod dla pickupa, roweru, konia i czołgu; Inicjatywa
+  jeźdźca razem z „turą pasażera za kierowcą”, spadanie z siodła, atak z grzbietu — `PLAN_m4_pojazdy.md` §6.3 (W0–W5)
 - [x] Plansza — złożona droga, metryka drogi, jadący na planszy, serie z celowaniem (M4 P1–P4, 2026-10-19)
 
 - [x] Tabela Awarii pojazdów k20 (s. 265) + wyzwalacz (≥ Próg awarii, porażka kierowcy o 5+) — `pojazdy/awarie.mjs`
@@ -341,7 +343,12 @@ plan.
 Zostaje: dźwięki i część ilustracji (zamówienia w `dev/icons/MISSING.md`), test przy stole (B7). Stanowiska Bazar
 i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 
-### M6 — Drobne zasady RAW (S każda)
+### M6 — Drobne zasady RAW (S każda → L po decyzjach MG 2026-10-25)
+
+> **Plan: [PLAN_m6_drobne_zasady.md](PLAN_m6_drobne_zasady.md)** (projekt 2026-10-25, decyzje MG D1–D12). Zakres urósł:
+> broń improwizowana z dowolnego przedmiotu w ręce, fizyczność obiektów na żądanie, Regiony wody z eksportu map.
+> **Walka na wierzchowcu przeniesiona do M4** (część 3, `PLAN_m4_pojazdy.md` §6.3), **skakanie** — do
+> `HANDOFF_movement_hotbar.md`. Tam, gdzie lista niżej się z nim rozjeżdża, wygrywa tamten plik.
 
 - [ ] **Biegłości profesji** (s. 69–101, „BIEGŁOŚCI <PROFESJI>”) — znalezione przy migracji Evie (M3 E5,
   2026-10-10): profesja nie nadaje swoich biegłości (umiejętności, zestaw narzędzi, kategoria broni), choć
@@ -360,10 +367,14 @@ i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 - [ ] Właściwości broni: `dluga`, `ciezka`, `jednorazowa` (blokada przeładowania) —
   `PLAN_weapon_properties.md` §3.3
 - [ ] Latanie: Nieprzytomność lub Szybkość 0 → upadek (`falling.mjs`); Powalenie → opadnięcie bez obrażeń
-- [ ] Walka na wierzchowcu (s. 257), pływanie, skakanie — karta referencyjna / akcje z ST, bez
-  głębszej automatyki
+- [ ] Pływanie i woda (Regiony z eksportu map), wspinaczka (s. 255–257) — `PLAN_m6_drobne_zasady.md` §5.6. Walka na
+  wierzchowcu → M4 część 3; skakanie → `HANDOFF_movement_hotbar.md`
 
 ### M7 — Automatyka zdolności posiadanych przez drużynę (ciągłe)
+
+> **Plan: [PLAN_m7_zdolnosci.md](PLAN_m7_zdolnosci.md)** (projekt 2026-10-25, decyzje MG D1–D5). Przed betą (D2):
+> wszystkie zdolności poziomów 1–3 klas i profesji + Sztuczki i Pochodzenia drużyny i pregenów; kolejność wg drużyny
+> kampanii; dziesięć rodzin mechanizmów zamiast zdolności po jednej.
 
 - [ ] Z rejestru z M0: lista zdolności, Sztuczek i zdolności Pochodzeń na kartach aktywnych BG,
   posortowana według częstotliwości użycia przy stole — automatyzujemy od góry

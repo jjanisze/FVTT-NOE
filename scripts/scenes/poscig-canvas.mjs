@@ -4,6 +4,8 @@ import { wPasiePoscigu } from "./poscig-motion-model.mjs";
 import { motywPoscigu } from "./poscig-themes.mjs";
 import { bakeSky, bakeFar, bakeMid, bakeNear, rng } from "./poscig-art.mjs";
 import { createBitmapScenery } from "./poscig-bitmap.mjs";
+import { createSnowEffects } from "./poscig-snow.mjs";
+import { durableCanvasBase, watchChaseTextures } from "./poscig-texture-source.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const BASE_SPEED = 260;
@@ -14,6 +16,8 @@ let _cost = 0, _frames = 0, _maxCost = 0;
 let _bitmap = null, _labels = null, _generation = 0, _error = null;
 let _distance = 0;
 let _loadController = null;
+let _snow = null;
+let _textureRecovery = null;
 
 function remember(texture) { _textures.push(texture); return texture; }
 
@@ -65,10 +69,9 @@ function labels(scene, flag, theme) {
 function particles(scene, theme) {
   if (!theme.ambient) return;
   const cv = document.createElement("canvas"); cv.width = cv.height = 8;
-  const ctx = cv.getContext("2d");
+  const ctx = cv.getContext("2d", { willReadFrequently: true });
   ctx.fillStyle = "white"; ctx.beginPath(); ctx.ellipse(4, 4, 2, 3, -.4, 0, Math.PI * 2); ctx.fill();
-  const tex = remember(PIXI.Texture.from(cv));
-  tex.baseTexture.mipmap = PIXI.MIPMAP_MODES.OFF;
+  const tex = remember(new PIXI.Texture(durableCanvasBase(cv)));
   const random = rng(theme.seed ^ 0x777);
   for (let i = 0; i < theme.ambient.count; i++) {
     const sprite = new PIXI.Sprite(tex);
@@ -85,6 +88,7 @@ function build() {
   const generation = _generation;
   const scene = canvas.scene, flag = poscigFlag(scene);
   if (!flag) return;
+  _textureRecovery = watchChaseTextures(canvas.app.renderer);
   _theme = motywPoscigu(flag);
   _layer = new PIXI.Container(); _layer.eventMode = "none"; _layer.interactiveChildren = false;
   _layer.neuroshimaPoscig = true;
@@ -100,6 +104,10 @@ function build() {
       if (generation !== _generation) { art.destroy(); return; }
       _bitmap = art;
       canvas.primary.addChild(art.ground, art.front); canvas.primary.sortChildren();
+      if (_theme.snow) {
+        _snow = createSnowEffects(scene, _theme.seed);
+        canvas.primary.addChild(_snow.tracks, _snow.snow); canvas.primary.sortChildren();
+      }
     }).catch(error => {
       if (generation !== _generation) return;
       _error = error.message; console.error("[Neuroshima] Chase artwork failed to load", error);
@@ -126,7 +134,9 @@ function build() {
 
 function destroy() {
   _generation++; _error = null;
+  _textureRecovery?.destroy(); _textureRecovery = null;
   _ticker?.remove(tick, null); _ticker = null;
+  _snow?.destroy(); _snow = null;
   _bitmap?.destroy(); _bitmap = null;
   _loadController?.abort(); _loadController = null;
   _labels?.destroy({children:true}); _labels = null;
@@ -137,13 +147,17 @@ function destroy() {
 }
 
 function tick() {
+  _textureRecovery?.tick();
   if (!_sprites && !_bitmap) return;
+  // Keep camera cropping and texture recovery live, but freeze all chase clocks.
+  if (game.paused) { _bitmap?.tick(0); return; }
   const begin = performance.now(), flag = poscigFlag();
   const speed = Math.max(0, Number(flag?.tempoTla ?? 2) || 0);
   const dt = Math.min(canvas.app.ticker.deltaMS, 50) / 1000;
   const requested = BASE_SPEED * speed * dt;
   const delta = _bitmap ? _bitmap.tick(requested) : requested;
   _distance += delta;
+  _snow?.tick(delta, dt, speed);
   _scroll = (_scroll + delta) % 8192;
   if (_sprites) {
     _sprites.far.tilePosition.x = -_scroll * _theme.far.parallax;
@@ -228,7 +242,8 @@ export const poscigCanvasApi = {
   __destroy: destroy,
   stats(reset = false) {
     const stats = { theme: _theme?.id ?? null, ready:!!(_bitmap || _sprites), error:_error,
-      frames: _frames, averageMs: _frames ? _cost / _frames : 0, maxMs: _maxCost, ..._bitmap?.stats() };
+      frames: _frames, averageMs: _frames ? _cost / _frames : 0, maxMs: _maxCost,
+      ..._bitmap?.stats(), ..._snow?.stats(), ..._textureRecovery?.stats() };
     if (reset) _cost = _frames = _maxCost = 0;
     return stats;
   }

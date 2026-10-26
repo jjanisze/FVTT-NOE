@@ -15,8 +15,9 @@
 
 import { PODWOZIA, ROZMIAR_MASZYNY } from "../config/vehicles-data.mjs";
 import { getPaliwo } from "../actors/party-travel.mjs";
-import { MODULE_ID, danePojazdu, jestPojazdem, miejscaPojazdu } from "./stan.mjs";
+import { MODULE_ID, danePojazdu, jestPojazdem, miejscaPojazdu, pojazdJadacego } from "./stan.mjs";
 import { mozePrzeswietlic } from "./zeton.mjs";
+import { rozpoznawalnyJadacy } from "./prezentacja.mjs";
 import { dostepZObecnosci, opisMiejsca, wypadnij, wysadzWszystkich, zajeteMiejsca, jedzie } from "./jadacy.mjs";
 import { otworzMiejsca, zetonUzytkownika } from "./okno-miejsc.mjs";
 import {
@@ -131,14 +132,15 @@ function htmlZaloga(actor) {
     const ms = miejscaPojazdu(actor).filter(m => m.strefa === s.id);
     const li = ms.map(m => {
       const t = zajete.get(m.id);
-      const kto = t ? (widac ? `<img src="${esc(t.texture.src)}" alt=""> ${esc(t.name)}` : "zajęte") : `<em>wolne</em>`;
+      const rozpoznany = rozpoznawalnyJadacy(m, t, widac);
+      const kto = t ? (rozpoznany ? `<img src="${esc(t.texture.src)}" alt=""> ${esc(t.name)}` : "zajęte") : `<em>wolne</em>`;
       const akcje = t && widac ? btn("wypadnij", "Wypadnięcie", { gm: true, dane: { jadacy: t.uuid }, tip: "3k6 obuchowych i Powalenie (s. 261)" }) : "";
       return `<li class="neuro-pojazd-miejsce${t ? " is-zajete" : ""}"><span class="neuro-pojazd-miejsce-opis">${esc(opisMiejsca(actor, m))}</span><span class="neuro-pojazd-kto">${kto}</span>${akcje}</li>`;
     }).join("");
     return `<section class="neuro-pojazd-sekcja"><h4>${esc(s.nazwa ?? s.id)}${s.oslona ? ` · osłona ${({ polowa: "½", trzyCzwarte: "¾", calkowita: "całkowita" })[s.oslona] ?? esc(s.oslona)}` : ""}${s.stojace ? " · stojące" : ""}</h4><ul class="neuro-pojazd-miejsca">${li}</ul></section>`;
   }).join("");
   return `<div class="neuro-pojazd-przyciski">
-      ${btn("miejsca", "Okno miejsc", { ikona: "fa-solid fa-chair", tip: "Wsiądź / przesiądź się — zaznaczonym żetonem" })}
+      ${btn("miejsca", "Okno miejsc", { ikona: "fa-solid fa-chair", tip: "Otwórz, zaznacz jeden żeton postaci na mapie i kliknij wolne miejsce" })}
       ${btn("wysadzWszystkich", "Wysadź wszystkich", { ikona: "fa-solid fa-door-open", gm: true })}
     </div>${rows}`;
 }
@@ -325,6 +327,9 @@ export function registerKarta() {
   });
   // Zmiany obsady i flag pojazdu → odśwież karty.
   Hooks.on("neuroshima.pojazdZaloga", () => odswiezKartyPojazdow());
+  Hooks.on("updateToken", (doc, changes) => {
+    if ("hidden" in changes && pojazdJadacego(doc)) odswiezKartyPojazdow();
+  });
   for (const h of ["createActiveEffect", "deleteActiveEffect", "updateActiveEffect"]) {
     Hooks.on(h, e => { if (jestPojazdem(e.parent)) odswiezKartyPojazdow(); });
   }

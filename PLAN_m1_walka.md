@@ -585,7 +585,7 @@ auto-krytyk wspiera umieranie; reguły Wyczerpania przed kalendarzykiem).
 - Krwawienie wg Kolorów Neuroshimy (ten sam wzorzec „Pomaganie + Medycyna ST 10”, s. 201–202) —
   po becie, z Kolorami.
 - Linia widzenia przez ściany dla „widzi cię” / Unikania (U7).
-- Pilnowanie budżetu ruchu (Bieganie, Przyspieszenie, Stopień Lekki).
+- Pilnowanie budżetu ruchu (Bieganie, Przyspieszenie, Stopień Lekki) — odrębny plan przekazania z 2026-10-25: [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md); nadal poza implementacją M1.
 - Automatyczne zakłócenie odpoczynku (F9) — świadomie notatka.
 - Kalendarzyk dla chorób (przebieg chorób ma własne zasady).
 

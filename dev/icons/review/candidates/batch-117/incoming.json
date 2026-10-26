@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-24",
+  "card": {
+    "id": "hotbar-2026-odstapienie",
+    "name": "Odstąpienie — człowiek",
+    "tier": "Player hotbar corrections · A / B / C",
+    "batch": 115,
+    "target": "icons/actions/odstapienie.svg",
+    "deliveryTargets": [
+      {
+        "source": "icons/actions/odstapienie.svg",
+        "sourceSha256": null,
+        "variant": "default"
+      }
+    ],
+    "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+    "request": "Ostrożne wycofywanie się z walki, twarzą do zagrożenia, na nogach. Bez harpii, skrzydeł, ucieczki sprintem i trafienia przeciwnika.",
+    "current": {
+      "src": "/icons/abilities/odstapienie.svg",
+      "note": "Obecny / pożyczony rysunek z makiety, do porównania. Oryginalna grafika istoty zachowuje własne zastosowanie; nowe akcje człowieka dostaną osobne pliki."
+    },
+    "candidates": [
+      {
+        "id": "batch115-odstapienie-a",
+        "label": "A · Krok wstecz z gardą",
+        "src": "candidates/batch-115/odstapienie-a.png",
+        "note": "Krok wstecz z otwartymi dłońmi, twarzą do zagrożenia."
+      },
+      {
+        "id": "batch115-odstapienie-b",
+        "label": "B · Dystans od przeciwnika",
+        "src": "candidates/batch-115/odstapienie-b.png",
+        "note": "Dwie osoby: cofający się człowiek pozostaje poza zasięgiem wyciągniętej ręki przeciwnika."
+      },
+      {
+        "id": "batch115-odstapienie-c",
+        "label": "C · Kontrolowany odwrót",
+        "src": "candidates/batch-115/odstapienie-c.png",
+        "note": "Kontrolowany odwrót z gardą; człowiek nadal patrzy w stronę przeciwnika."
+      }
+    ]
+  },
+  "feedback": {
+    "itemId": "hotbar-2026-odstapienie",
+    "decision": "revise",
+    "candidateId": "batch115-odstapienie-b",
+    "notes": "Create more versions of the same concept. Two people in close combat, with one retreating. Think up of some way to show that this won't trigger an attack of opportunity. That is - this is a controlled disengage rather than a flee.",
+    "updatedAt": "2026-10-24T14:21:44.583Z"
+  },
+  "selectedSource": "candidates/batch-115/odstapienie-b.png",
+  "selectedSha256": "b16f6953f24a39679898c10408413ab58acf2aca716691c5bd018f054d6a0377",
+  "productionFiles": [
+    {
+      "source": "icons/abilities/odstapienie.svg",
+      "sha256": "67a5b17d1dd40cad605e42921a31e7557fddecf1cd5cde04103dc3977e75b051"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/actions/odstapienie.svg",
+    "icons/actions/odstapienie.webp"
+  ]
+}

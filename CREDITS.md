@@ -79,6 +79,16 @@ Per-source metadata, exact trims and reproducible conversion are in
 The public HQ previews were used for initial audition only; every shipped cue was
 rebuilt from its authenticated original. No audio is copied from a game soundtrack.
 
+### ElevenLabs Sound Effects (AI-generated; attribution, non-commercial)
+
+| Shipped file | Source | Processing / use |
+|---|---|---|
+| `sounds/fx/machine-overload.ogg` | Generated with [ElevenLabs](https://elevenlabs.io) Sound Effects (free plan), 2025-09-22 | Converted from the original MP3 to Vorbis OGG, metadata stripped, ~8 s. The machine spinning up to overload before a scene-marker explosion (`scripts/scenes/fx-markers.mjs`). |
+
+ElevenLabs' free-plan terms require **attribution to elevenlabs.io** and limit the output to
+**non-commercial use**. This module is free and non-commercial; anyone redistributing the file
+must keep this attribution and the non-commercial restriction.
+
 ### Fallout 2 decoded sound library
 
 A subset of the shipped firearm sounds (`sounds/firearms/`) is decoded from the original
@@ -293,6 +303,13 @@ AI-generated with OpenAI's built-in image tool; the approved mask is unchanged.
 Exact selection and hashes:
 `dev/icons/review/candidates/batch-114/reviewed-installed.json`.
 
+<!-- player-hotbar-credits:start -->
+5 GM-approved player-hotbar glyphs from Batches 115, 116, 118 were delivered
+in an approval pass completed on 2026-10-25, as exact SVG/WEBP masks generated
+with OpenAI's built-in image tool. Approved artwork is not redrawn. Native SVGs: `icons/weapons/kafar_piledriver.svg`, `icons/actions/unikanie.svg`, `icons/actions/przyspieszenie.svg`, `icons/actions/ukrywanie-sie.svg`, `icons/actions/odstapienie.svg`.
+Exact decisions, source and delivery hashes: `dev/icons/hotbar-pass/reviewed-installed.json`.
+<!-- player-hotbar-credits:end -->
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only
@@ -324,6 +341,18 @@ Seven GM-supplied camp sources were center-cropped, resized and converted to
 - `ui/oboz/ruiny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 - `ui/oboz/podziemia.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 
+### Looting banners — 2026-10-20
+
+Five GM-supplied ruin interiors were center-cropped, resized and converted to
+1200×400 RGB WEBP. Source/output hashes and validation:
+`dev/art/m5/delivered-2026-10-20.json`.
+
+- `ui/ruiny/apteka.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/ruiny/biuro.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/ruiny/piwnica.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/ruiny/sklepik.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/ruiny/warsztat.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
@@ -353,7 +382,8 @@ holder who wants them gone: open an issue and they will be removed.
 Gemini; some image-to-image from pencil reference drawings, the rest from text prompts.
 
 `bit-boy-przewodnik`, `bit-boys`, `cyngiel`, `cywil`, `gangus-zolnierz`, `kitchin`, `kurczak`,
-`mobsprzet`, `pajak`, `spawacz`, `techmorwa-srednia`.
+`kurczak-wybuchowy`, `mobsprzet`, `pajak`, `spawacz`, `techmorwa-srednia`. The two Kurczak portraits and their
+top-down tokens (`tokens/kurczak.webp`, `tokens/kurczak-wybuchowy.webp`) are a newer set by the GM (2026-10-25).
 
 Two creatures have no portrait yet (Generacja II – genotyp wilczy, Gigantyczny pająk); their token
 art stands in. Any new portrait needs a known source recorded here.
@@ -380,10 +410,56 @@ four ruined districts, twenty foreground cutouts, four pavement overlays and fou
 Prompts and catalog metadata are in `dev/art/poscig-urban/`. The shared bitmap compositor blends
 existing pixels and applies boundary clipping; it draws no scenery.
 
-Winter remains an original procedural canvas drawing in `scripts/scenes/poscig-art.mjs`.
+Nuclear Winter adds twelve original WEBPs under `ui/poscig/themes/zima/`, generated with OpenAI's
+built-in image tool on 2026-10-20. Two snow/ice roads, three ruined districts, a shared sky,
+four vegetation crowns, four small street props, eight large hollow ruins, four snow/ice
+decals and four powder wisps use cold diffuse daylight.
+Foreground structures use a near-eye-level landscape view with transparent openings.
+`dev/art/poscig-winter/prompts.json` and `revision-prompts.json` preserve the full prompt set.
+The revised skyline silhouettes and shared sky/snow loop replace rectangular district plates
+so architecture stays opaque at joins. Foreground tint and baked blur distinguish its two depths.
+`catalog.json` and the shared
+packer record the runtime frames. Snow particles and scrolling tyre impressions are original
+procedural VFX in `scripts/scenes/poscig-snow.mjs`.
+
+The sparse-foreground revision adds eight generated sources, recorded in
+`dev/art/poscig-sparse/prompts.json`: winter street props; four complete urban skyline
+silhouettes replacing the rectangular district plates; a common urban sky/ash base;
+four rare hollow urban ruins; and four rare Nevada roadside buildings. All were generated
+with OpenAI's built-in image tool on 2026-10-20, with genuine alpha for cutouts. Small winter
+props retain the oblique camera; large building frames use a near-landscape view. The editable
+catalogs control sparse placement and vertical variation. The canonical files ship under
+`ui/poscig/themes/zima/`, `przedmiescia/` and `pustynia/`; the packer only converts selected
+pixels and records sprite bounds.
 The three transparent WEBP vehicle fixtures in `ui/poscig/vehicles/` are original geometric
 drawings generated by `dev/e2e/gen_poscig_art.py` (Pillow). They contain no campaign artwork or
 third-party images and are covered by this repository's MIT license.
+
+## Vehicle artwork
+
+`tokens/portraits/pojazd-osobowka.webp`, `tokens/pojazdy/osobowka.webp` and
+`tokens/pojazdy/wnetrza/osobowka.webp` are original AI-generated artwork made with
+OpenAI's built-in image-generation tool on 2026-10-21–22. The GM approved the portrait direction
+and the matched cabin/exterior geometry. The final pair starts with an original measured SVG,
+then a painted empty cabin, then a roof added over that cabin; separate wheel edits remove an
+extra axle while preserving the furniture. The existing gang-leader portrait was a style reference.
+Full prompts and source roles: `dev/art/m4/osobowka-prompts.json`,
+`dev/art/m4/geometry-first/prompts.json`, and `dev/art/m4/final-prompts.json`.
+The packer only crops, resizes and converts the generated pixels to WEBP, preserving their alpha.
+
+`tokens/portraits/pojazd-hammer.webp`, `tokens/pojazdy/hammer.webp` and
+`tokens/pojazdy/wnetrza/hammer.webp` were made with OpenAI's built-in image-generation tool
+on 2026-10-25. An original SVG establishes four wheels, four seats, a central hatch station and
+rear cargo space. The sedan portrait is a rendering-style reference; the new Hammer portrait
+establishes the vehicle's appearance. The roof was added to the established interior and the
+hatch was moved to match its standing pad. Sources and full prompts: `dev/art/m4/hammer/`.
+The packer only frames, resizes and converts the supplied pixels, retaining genuine alpha.
+
+`tokens/portraits/pojazd-motocykl.webp` and `tokens/pojazdy/motocykl.webp` were made with
+OpenAI's built-in image-generation tool on 2026-10-26. The Hammer portrait supplies the rendering
+style; an original SVG supplies the overhead layout. Two targeted edits shorten the front assembly
+and remove an extra saddle pad. Sources and full prompts: `dev/art/m4/motocykl/`.
+The packer only crops, resizes and converts the generated pixels, preserving genuine alpha.
 
 ## AI-assisted development
 

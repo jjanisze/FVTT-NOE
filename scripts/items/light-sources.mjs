@@ -73,6 +73,8 @@
  * large enough to show it."
  */
 
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const COMPANION_FLAG = "companionLightId";
 
@@ -164,12 +166,12 @@ export function registerLightChangeListener(fn) {
   _changeListeners.push(fn);
 }
 
-function _bestLight(actor) {
+function _bestLight(actor, tokenDoc = null) {
   let best = null;
   for (const provider of _providers) {
     let candidate;
     try {
-      candidate = provider(actor);
+      candidate = provider(actor, tokenDoc);
     } catch (e) {
       console.warn(`${MODULE_ID} | light-sources: provider threw`, e);
       continue;
@@ -188,8 +190,7 @@ function _bestLight(actor) {
  */
 const _chains = new Map();
 
-async function _doSyncActorLight(actor) {
-  const desired = _bestLight(actor);
+function tokenLightData(desired) {
   const hasNarrow = desired?.narrowAngle != null;
 
   // Always a *complete* light object, every field explicit — never a partial one. `update()`
@@ -215,7 +216,15 @@ async function _doSyncActorLight(actor) {
       }
     : { bright: 0, dim: 0, angle: 360, color: null, alpha: 0.5, luminosity: 0.5, attenuation: 0.5, animation: { type: "", speed: 0, intensity: 0 } };
 
+  return wideLight;
+}
+
+async function _doSyncActorLight(actor) {
   for (const token of actor.getActiveTokens?.(true) ?? []) {
+    // Providers may use the token's scene units (vehicle headlights on tactical vs. marker maps).
+    const desired = _bestLight(actor, token.document);
+    const hasNarrow = desired?.narrowAngle != null;
+    const wideLight = tokenLightData(desired);
     if (game.user.isGM || token.isOwner) {
       const cur = token.document.light;
       // alpha/luminosity/attenuation included here too — a provider-only tuning change (no
@@ -226,7 +235,7 @@ async function _doSyncActorLight(actor) {
         || cur.alpha !== wideLight.alpha || cur.luminosity !== wideLight.luminosity || cur.attenuation !== wideLight.attenuation;
       if (changed) {
         try {
-          await token.document.update({ light: wideLight });
+          await token.document.update({ light: wideLight }, { [DERIVED_UPDATE]: true });
         } catch (e) {
           console.warn(`${MODULE_ID} | light-sources: nie udało się zsynchronizować światła tokena`, e);
         }
@@ -263,8 +272,8 @@ async function _syncCompanionLight(token, desired) {
   const existing = existingId ? scene.lights.get(existingId) : null;
 
   if (!desired) {
-    if (existing) { try { await existing.delete(); } catch (e) { console.warn(`${MODULE_ID} | light-sources: companion delete failed`, e); } }
-    if (existingId) { try { await doc.unsetFlag(MODULE_ID, COMPANION_FLAG); } catch (e) { /* token may already be gone */ } }
+    if (existing) { try { await existing.delete({ [DERIVED_UPDATE]: true }); } catch (e) { console.warn(`${MODULE_ID} | light-sources: companion delete failed`, e); } }
+    if (existingId) { try { await doc.update({ [`flags.${MODULE_ID}.${COMPANION_FLAG}`]: _del }, { [DERIVED_UPDATE]: true }); } catch (e) { /* token may already be gone */ } }
     return;
   }
 
@@ -305,12 +314,12 @@ async function _syncCompanionLight(token, desired) {
       || c.color !== cfg.config.color || c.alpha !== cfg.config.alpha
       || c.luminosity !== cfg.config.luminosity || c.attenuation !== cfg.config.attenuation;
     if (changed) {
-      try { await existing.update(cfg); } catch (e) { console.warn(`${MODULE_ID} | light-sources: companion update failed`, e); }
+      try { await existing.update(cfg, { [DERIVED_UPDATE]: true }); } catch (e) { console.warn(`${MODULE_ID} | light-sources: companion update failed`, e); }
     }
   } else {
     try {
-      const [created] = await scene.createEmbeddedDocuments("AmbientLight", [cfg]);
-      await doc.setFlag(MODULE_ID, COMPANION_FLAG, created.id);
+      const [created] = await scene.createEmbeddedDocuments("AmbientLight", [cfg], { [DERIVED_UPDATE]: true });
+      await doc.update({ [`flags.${MODULE_ID}.${COMPANION_FLAG}`]: created.id }, { [DERIVED_UPDATE]: true });
     } catch (e) {
       console.warn(`${MODULE_ID} | light-sources: companion create failed`, e);
     }
@@ -407,7 +416,7 @@ export function registerLightSources() {
     const lightId = tokenDoc.getFlag(MODULE_ID, COMPANION_FLAG);
     if (!lightId) return;
     const light = tokenDoc.parent?.lights.get(lightId);
-    if (light) { try { await light.delete(); } catch (e) { console.warn(`${MODULE_ID} | light-sources: orphaned companion cleanup failed`, e); } }
+    if (light) { try { await light.delete({ [DERIVED_UPDATE]: true }); } catch (e) { console.warn(`${MODULE_ID} | light-sources: orphaned companion cleanup failed`, e); } }
   });
 
   console.log(`${MODULE_ID} | Light-source resolver registered`);

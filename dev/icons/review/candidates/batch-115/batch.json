@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-24",
+  "batch": 115,
+  "pass": "player-hotbar-subject-corrections",
+  "subjects": [
+    {
+      "cell": 1,
+      "key": "kafar-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-kafar",
+      "name": "Kafar — ręczne narzędzie kolejowe — Prostokątna baba",
+      "target": "icons/weapons/kafar_piledriver.svg",
+      "current": "icons/weapons/kafar_piledriver.svg",
+      "context": "Broń Kafar, 15 kg, dwuręczna; pierwszy pasek Brutala. NOE s. 116, tabela broni białej. Oceniany przedmiot ma być ręcznym narzędziem udarowym inspirowanym koleją.",
+      "request": "ONE detached hand-held DROP RAM inspired by an old railway pile driver's iron monkey weight: a long massive rectangular iron body with a flat blunt axial striking end, TWO stout loop handles mounted lengthwise on opposite sides of its upper half, and a short solid closed top. Show the complete heavy implement diagonally, three-quarter view with only one broad black plane cut. The rectangular body is the ram itself, not a transverse hammer head. A practical two-handed 15 kg hand tool, no crane or track vehicle, no slender stick, no sledgehammer or mallet silhouette.",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "sourceSha256": "9a2b715cef30b3f1e333c9c58fd39f8cef416b127e6727370f9d2c104077e3b0",
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 2,
+      "key": "kafar-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-kafar",
+      "name": "Kafar — ręczne narzędzie kolejowe — Rurowy kafar",
+      "target": "icons/weapons/kafar_piledriver.svg",
+      "current": "icons/weapons/kafar_piledriver.svg",
+      "context": "Broń Kafar, 15 kg, dwuręczna; pierwszy pasek Brutala. NOE s. 116, tabela broni białej. Oceniany przedmiot ma być ręcznym narzędziem udarowym inspirowanym koleją.",
+      "request": "ONE complete heavy MANUAL POST / PILE DRIVER: a stout elongated closed-top STEEL TUBE with TWO large D-shaped loop handles attached along opposite sides. A broad black oval at the lower axial mouth makes its hollow sliding-over-a-post function legible. Upright three-quarter diagonal view, compact all-metal two-handed tool, heavy industrial proportions. No long wooden shaft, no transverse hammer head, no gun barrel or trigger, no surrounding post, railway car, derrick, person or scenery.",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "sourceSha256": "9a2b715cef30b3f1e333c9c58fd39f8cef416b127e6727370f9d2c104077e3b0",
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 3,
+      "key": "kafar-c",
+      "variant": "c",
+      "itemId": "hotbar-2026-kafar",
+      "name": "Kafar — ręczne narzędzie kolejowe — Ciężar z profilu szyny",
+      "target": "icons/weapons/kafar_piledriver.svg",
+      "current": "icons/weapons/kafar_piledriver.svg",
+      "context": "Broń Kafar, 15 kg, dwuręczna; pierwszy pasek Brutala. NOE s. 116, tabela broni białej. Oceniany przedmiot ma być ręcznym narzędziem udarowym inspirowanym koleją.",
+      "request": "ONE complete improvised RAIL-SECTION HAND RAM: a short massive length of old I-profile railway rail used as an axial blunt driving weight. Its length is about four times its wide end, with one broad black longitudinal web cut and TWO sturdy squared loop grips welded lengthwise near its upper half. Show the complete tool diagonally with its broad blunt rail-profile striking end clearly visible at lower left. Railway iron, practical 15 kg two-handed industrial implement. No perpendicular hammer head, wooden handle, sharp blade, spear, fantasy ornament or complete railway machine.",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "sourceSha256": "9a2b715cef30b3f1e333c9c58fd39f8cef416b127e6727370f9d2c104077e3b0",
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 4,
+      "key": "unikanie-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-unikanie",
+      "name": "Unikanie — człowiek — Odchylenie tułowia",
+      "target": "icons/actions/unikanie.svg",
+      "current": "icons/abilities/pelna-obrona.svg",
+      "context": "Ogólna akcja gracza: Unikanie [A], NOE s. 30. Nowy glif dla człowieka; dotychczas pożyczona Pełna obrona zachowuje własne zastosowanie.",
+      "request": "ONE ordinary adult human in side view DODGING a close incoming blow by bending the upper torso backward, feet firmly planted apart, arms held close in a protective guard. ONE short thick horizontal strike streak passes through the empty space in front of the face, visibly missing it; it never touches the person. Whole body, natural proportions, clear torso bend, ordinary trousers and boots. No running stride, shield, wings, machine parts or attacker body.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/unikanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 5,
+      "key": "unikanie-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-unikanie",
+      "name": "Unikanie — człowiek — Zejście pod ciosem",
+      "target": "icons/actions/unikanie.svg",
+      "current": "icons/abilities/pelna-obrona.svg",
+      "context": "Ogólna akcja gracza: Unikanie [A], NOE s. 30. Nowy glif dla człowieka; dotychczas pożyczona Pełna obrona zachowuje własne zastosowanie.",
+      "request": "ONE ordinary adult human in three-quarter view DUCKING LOW under a close blow: bent knees, lowered head and shoulders, forearms protecting the face, both feet planted. ONE broad short horizontal strike mark passes well ABOVE the head with a generous black gap. The compact evasive crouch is the subject; complete body, calm featureless face, natural limbs. No second person, running, diving into cover, gun, wings or machinery.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/unikanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 6,
+      "key": "unikanie-c",
+      "variant": "c",
+      "itemId": "hotbar-2026-unikanie",
+      "name": "Unikanie — człowiek — Unik w bok",
+      "target": "icons/actions/unikanie.svg",
+      "current": "icons/abilities/pelna-obrona.svg",
+      "context": "Ogólna akcja gracza: Unikanie [A], NOE s. 30. Nowy glif dla człowieka; dotychczas pożyczona Pełna obrona zachowuje własne zastosowanie.",
+      "request": "ONE ordinary adult human making a compact SIDE-SLIP DODGE in place: head and shoulders shifted sharply sideways over one bent supporting leg, the other foot braced, both elbows tucked in a defensive guard. ONE short diagonal incoming-strike streak passes through the vacated space beside the shoulder, missing the body. Front three-quarter full-body pose, no sprinting or retreating, no shield, weapon held by the human, monster anatomy or wings.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/unikanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 7,
+      "key": "odstapienie-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — człowiek — Krok wstecz z gardą",
+      "target": "icons/actions/odstapienie.svg",
+      "current": "icons/abilities/odstapienie.svg",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "ONE ordinary adult human carefully DISENGAGING from melee: body and head FACING RIGHT toward the threat, BOTH open hands raised defensively to the RIGHT, while the trailing foot takes a deliberate step BACK TO THE LEFT. Clearly bent guarding arms and a short balanced backward step, not a running stride. One short blunt threat-stroke at far right stops before the hands with a wide black gap. Full body, natural proportions, no contact, no wings, no sprinting, no arrows.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 8,
+      "key": "odstapienie-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — człowiek — Dystans od przeciwnika",
+      "target": "icons/actions/odstapienie.svg",
+      "current": "icons/abilities/odstapienie.svg",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "TWO small ordinary adult human silhouettes in a sober melee DISENGAGE diagram, separated by a very broad clear black gap. The LEFT person steps BACK LEFT while still FACING RIGHT with forearms in guard. The RIGHT person's one extended empty arm reaches toward the retreating person but CANNOT REACH them. Neither attacks successfully, neither falls. Simple complete anatomically natural bodies, no weapons, no arrow, shield, wings, animal or running posture.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 9,
+      "key": "odstapienie-c",
+      "variant": "c",
+      "itemId": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — człowiek — Kontrolowany odwrót",
+      "target": "icons/actions/odstapienie.svg",
+      "current": "icons/abilities/odstapienie.svg",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "ONE ordinary adult human in side profile making a CONTROLLED BACKWARD STEP: face and chest oriented LEFT toward danger, forearms held in a compact boxing guard on the LEFT, weight over a bent rear leg stepping RIGHT away from danger. The person looks toward the threat instead of toward their direction of travel. Whole figure in plain shirt, trousers and boots; generous negative space between arms, torso and legs. No headlong sprint, arrows, weapon, bird, wings, insect or machine.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    }
+  ]
+}

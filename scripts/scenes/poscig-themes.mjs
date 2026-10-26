@@ -25,7 +25,7 @@ export const MOTYWY = Object.freeze({
     ambient: null
   },
   zima: {
-    id: "zima", nazwa: "Nuklearna zima", seed: 0x1ce55, bitmap: false,
+    id: "zima", nazwa: "Nuklearna zima", seed: 0x1ce55, bitmap: true,
     sky: ["#444f60", "#929caa", "#c8cbce"],
     far: { colors: ["#a8afb7", "#87919a", "#626e7b"], parallax: .25 },
     mid: { colors: ["#b3bac0", "#d4d7d6", "#7c8890"], parallax: 1 },
@@ -33,7 +33,7 @@ export const MOTYWY = Object.freeze({
     lanes: { line: 0x374b59, fillA: 0x000000, fillB: 0xffffff, alpha: .30 },
     labels: { fill: 0xe9f1f5, stroke: 0x253645, font: "Signika, sans-serif" },
     free: { background: 0x1b2530, line: 0x778a9b, text: 0xa9bccd },
-    ambient: { count: 96, color: 0xf0f3f4, alpha: .48 }
+    ambient: null, snow: true
   }
 });
 

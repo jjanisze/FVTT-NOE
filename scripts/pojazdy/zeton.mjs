@@ -21,8 +21,8 @@
  * 3. **Ukrycie, kropki, prześwietlenie (§4.2, D3, D14).** Ukrycie jest lokalne — nadpisany
  *    `isVisible`, nie `hidden` dokumentu, bo ukryty dokument odebrałby graczowi własny żeton.
  *    Rdzeń nie wiąże wizji z widocznością (`_isVisionSource` nie czyta `isVisible`), więc ukryty
- *    jadący dalej patrzy z wnętrza. Pojazd rysuje kropkę na każde zajęte miejsce; prześwietlenie
- *    (kursor nad pojazdem, u MG, właścicieli i jadących) przygasza nadwozie i pokazuje jadących.
+ *    jadący dalej patrzy z wnętrza. Zakryte miejsca mają kropki; otwarte pokazują zwykły żeton
+ *    (D32). Prześwietlenie u uprawnionych odkrywa wnętrze albo przygasza nadwozie i pokazuje jadących.
  */
 
 import {
@@ -34,6 +34,9 @@ import {
 } from "./geometria.mjs";
 import { obrotPionka } from "../scenes/poscig.mjs";
 import { wPasiePoscigu } from "../scenes/poscig-motion-model.mjs";
+import { grafikaWnetrza } from "./grafika.mjs";
+import { OPCJA_SYNCHRONIZACJI } from "./historia.mjs";
+import { otwarteMiejsce, prezentacjaJadacego, sortJadacego } from "./prezentacja.mjs";
 
 /** Krycie nadwozia w prześwietleniu (§4.2: „ok. 35%”). */
 const KRYCIE_PRZESWIETLENIA = 0.35;
@@ -67,9 +70,9 @@ export function mozePrzeswietlic(pojazdDoc) {
 /** Czy jadący ma być ukryty u tego klienta. */
 function ukrytyJadacy(token) {
   if (token.controlled || token.isPreview) return false;
-  const pojazd = pojazdJadacego(token.document);
-  if (!pojazd) return false;
-  return !przeswietlane.has(pojazd.id);
+  const p = prezentacjaJadacego(token.document);
+  if (!p || p.widocznosc === "otwarta") return false;
+  return !przeswietlane.has(p.pojazd.id);
 }
 
 /** Czy pojazd jest teraz prześwietlany przez ten klient. */
@@ -153,7 +156,9 @@ async function zapiszPoRuchu(pojazdDoc) {
   if (!pojazdDoc.parent?.tokens.has(pojazdDoc.id)) return;
   const instrukcje = instrukcjePoRuchu(pojazdDoc);
   if (!Object.keys(instrukcje).length) return;
-  await pojazdDoc.parent.moveTokens(instrukcje, { animate: false, showRuler: false, method: "api" });
+  await pojazdDoc.parent.moveTokens(instrukcje, {
+    animate: false, showRuler: false, method: "api", [OPCJA_SYNCHRONIZACJI]: true
+  });
 }
 
 /* -------------------------------------------- */
@@ -176,7 +181,8 @@ export function odswiezKropki(token) {
     c.eventMode = "passive";
   }
   const jadacy = new Map(jadacyPojazdu(doc).map(t => [jazdaZetonu(t).miejsce, t]));
-  c.visible = jadacy.size > 0 && !przeswietlane.has(doc.id) && obrysDziala(doc.parent);
+  const miejsca = miejscaPojazdu(doc.actor).filter(m => jadacy.has(m.id) && !otwarteMiejsce(m));
+  c.visible = miejsca.length > 0 && !przeswietlane.has(doc.id) && obrysDziala(doc.parent);
   for (const ch of c.removeChildren()) ch.destroy();
   if (!c.visible) return;
   const kratka = kratkaPojazdu(doc.parent);
@@ -184,7 +190,7 @@ export function odswiezKropki(token) {
   c.position.set(srodek.x, srodek.y);
   c.angle = doc.rotation;
   const r = Math.max(4, kratka * 0.11);
-  for (const m of miejscaPojazdu(doc.actor)) {
+  for (const m of miejsca) {
     const jDoc = jadacy.get(m.id);
     if (!jDoc) continue;
     const celowany = !!jDoc.object?.isTargeted && game.user.targets.has(jDoc.object);
@@ -232,7 +238,8 @@ function sprawdzKursor() {
     const doc = t.document;
     const dane = danePojazdu(doc.actor);
     if (!dane) continue;
-    const wl = !!mysz && t.visible && obrysDziala(doc.parent) && mozePrzeswietlic(doc)
+    const wl = dane.strefy.some(s => !otwarteMiejsce(s))
+      && !!mysz && t.visible && obrysDziala(doc.parent) && mozePrzeswietlic(doc)
       && punktWPojezdzie(mysz, doc.getCenterPoint(), dane.obrys, doc.rotation, kratkaPojazdu(doc.parent), 0.15);
     ustawPrzeswietlenie(t, wl);
   }
@@ -254,6 +261,15 @@ function poRuchuMyszy() {
 function podklasa(Baza) {
   return class TokenNeuroPojazdy extends Baza {
 
+    /** Local texture only: hovering never changes the TokenDocument or another client's view. */
+    _neuroGrafikaWnetrza() {
+      if (!this.mesh || !jestZetonemPojazdu(this.document)) return false;
+      const src = przeswietlane.has(this.document.id) ? grafikaWnetrza(this.document) : null;
+      const wnetrze = src && this.neuroWnetrze?.src === src ? this.neuroWnetrze.texture : null;
+      this.mesh.texture = wnetrze ?? this.texture;
+      return !!wnetrze;
+    }
+
     /** @override — ukrycie jadącego (lokalne). */
     get isVisible() {
       if (ukrytyJadacy(this)) {
@@ -274,14 +290,18 @@ function podklasa(Baza) {
 
     /** @override — przygaszenie w prześwietleniu. */
     _refreshMesh() {
+      const wnetrze = this._neuroGrafikaWnetrza();
       super._refreshMesh();
-      if (przeswietlane.has(this.document.id)) this.mesh.alpha *= KRYCIE_PRZESWIETLENIA;
+      if (przeswietlane.has(this.document.id) && !wnetrze) this.mesh.alpha *= KRYCIE_PRZESWIETLENIA;
     }
 
     /** @override — `_refreshState` też ustawia `mesh.alpha` (najechanie, zaznaczenie). */
     _refreshState() {
       super._refreshState();
-      if (przeswietlane.has(this.document.id)) this.mesh.alpha *= KRYCIE_PRZESWIETLENIA;
+      const wnetrze = this._neuroGrafikaWnetrza();
+      if (przeswietlane.has(this.document.id) && !wnetrze) this.mesh.alpha *= KRYCIE_PRZESWIETLENIA;
+      const p = prezentacjaJadacego(this.document);
+      if (p) this.mesh.sort = sortJadacego(this.document.sort, p.pojazd.sort, p);
     }
 
     /** @override */
@@ -326,6 +346,8 @@ function podklasa(Baza) {
     /** @override */
     _destroy(options) {
       przeswietlane.delete(this.document?.id);
+      this.neuroWnetrze?.texture?.destroy(false);
+      this.neuroWnetrze = null;
       return super._destroy(options);
     }
   };
@@ -342,6 +364,16 @@ function jestRuchem(changes) {
 export function registerZetonPojazdu() {
   Hooks.once("setup", () => {
     CONFIG.Token.objectClass = podklasa(CONFIG.Token.objectClass);
+  });
+
+  Hooks.on("drawToken", async token => {
+    const src = grafikaWnetrza(token.document);
+    if (!src) return;
+    const texture = await foundry.canvas.loadTexture(src);
+    if (token.destroyed || grafikaWnetrza(token.document) !== src) return texture?.destroy(false);
+    token.neuroWnetrze?.texture?.destroy(false);
+    token.neuroWnetrze = { src, texture };
+    token.renderFlags.set({ refreshMesh: true, refreshState: true });
   });
 
   // Pojazd zawsze obraca się w kierunku jazdy (D10 wykrywa skręty z obrotu).
@@ -375,6 +407,7 @@ export function registerZetonPojazdu() {
       if (jestRuchem(changes) && game.user.isActiveGM) {
         zapiszPoRuchu(doc).catch(err => console.error(`${MODULE_ID} | pojazd: zapis po ruchu`, err));
       }
+      if ("sort" in changes) odswiezPrezentacje(doc);
       return;
     }
     // Zmiana flagi jazdy: odśwież kropki pojazdu i widoczność.
@@ -393,6 +426,14 @@ export function registerZetonPojazdu() {
     }
   });
   Hooks.on("deleteToken", doc => { if (jazdaZetonu(doc)) odswiezPojazdySceny(doc.parent); });
+  Hooks.on("updateActor", (actor, changes) => {
+    if (!canvas.ready || !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.pojazd`)) return;
+    for (const token of canvas.tokens.placeables) {
+      if (token.actor === actor || (!actor.isToken && token.document.actorId === actor.id)) {
+        odswiezPrezentacje(token.document);
+      }
+    }
+  });
   // Kropka celowanego jadącego ma czerwony obwód (D14).
   Hooks.on("targetToken", (user, token) => {
     if (user !== game.user) return;
@@ -415,5 +456,14 @@ export function odswiezPojazdySceny(scena) {
   if (!canvas.ready || scena !== canvas.scene) return;
   for (const t of canvas.tokens.placeables) {
     if (jestZetonemPojazdu(t.document)) odswiezKropki(t);
+  }
+}
+
+/** A changed seat profile or carrier order must refresh occupants on every client. */
+function odswiezPrezentacje(pojazd) {
+  if (!canvas.ready || pojazd.parent !== canvas.scene) return;
+  if (pojazd.object) odswiezKropki(pojazd.object);
+  for (const j of jadacyPojazdu(pojazd)) {
+    j.object?.renderFlags.set({ refreshVisibility: true, refreshState: true });
   }
 }

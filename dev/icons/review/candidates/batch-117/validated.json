@@ -1,0 +1,10 @@
+{
+  "batch": 117,
+  "validatedMasks": 3,
+  "prospectiveDeliveryTargets": 3,
+  "candidateHashes": {
+    "odstapienie-a": "e48318a577290215dbb67b3f0a9b8ee181822bd39269a5d1cb5aa8ea8c709da1",
+    "odstapienie-b": "d94d736d370720e05a1c19d45b5f5a838eaf86a071ff4b5ffd8761acdc5e1530",
+    "odstapienie-c": "d1756ab5b3f2d283f9d685c6bee294c668ca12686f8f5b9e0e87763e6ca4a494"
+  }
+}

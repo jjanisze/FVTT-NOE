@@ -128,6 +128,8 @@ import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
 import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
 import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
 import { registerMapWatch, mapWatchApi } from "./scenes/map-watch.mjs";
+import { registerTransitions, transitionsApi } from "./scenes/transitions.mjs";
+import { registerFxMarkers, fxMarkersApi } from "./scenes/fx-markers.mjs";
 import { registerDifficultTerrainHint, difficultTerrainHintApi } from "./scenes/difficult-terrain-hint.mjs";
 import { poscigApi } from "./scenes/poscig.mjs";
 import { registerPoscigCanvas, poscigCanvasApi } from "./scenes/poscig-canvas.mjs";
@@ -162,6 +164,7 @@ import { registerDropOnFail } from "./combat/drop-on-fail.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
 import { registerPojazdy, pojazdyApi } from "./pojazdy/index.mjs";
+import { registerCanvasHistory } from "./canvas-history.mjs";
 import { registerPojazdyMigration } from "./migration/migrate-pojazdy.mjs";
 import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
 import { registerPartySheet } from "./actors/party-sheet.mjs";
@@ -217,6 +220,7 @@ const MODULE_ID = "neuroshima-2026-overrides";
  */
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing Neuroshima 5e overrides`);
+  registerCanvasHistory();
 
   // Registered at init (not ready) so it's in place before the Token scene-controls
   // toolbar's first render — getSceneControlButtons can fire as early as canvasReady.
@@ -398,6 +402,9 @@ Hooks.once("init", () => {
 
   // Nasłuch map wypchniętych z Tiled. W init, bo rejestruje ustawienia świata.
   registerMapWatch();
+  // Przejścia między poziomami (trudne przejście, „Opuść bezpiecznie”). W init: typ zachowania regionu.
+  registerTransitions();
+  registerFxMarkers();
 
   // Trudny teren zapalany razem z miarką ruchu (ustawienie klienta).
   registerDifficultTerrainHint();
@@ -630,7 +637,7 @@ Hooks.once("ready", () => {
   // Aktualizacja sceny po ponownym eksporcie mapy z Tiled —
   // game.neuroshima.maps.update("UPSIDE")
   registerMapSync();
-  game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi };
+  game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi, ...transitionsApi, ...fxMarkersApi };
   game.neuroshima.trudnyTeren = difficultTerrainHintApi;
 
   // Plansza pościgu — game.neuroshima.poscig.start({ scigani: ["GMT400"], ... })

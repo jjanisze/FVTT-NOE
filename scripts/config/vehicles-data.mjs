@@ -190,6 +190,11 @@ export const KATALOG_POJAZDOW = {
     rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "benzyna", rura: [0.30, 0.03],
     klasa: "osobowy", wrak: "osobowy", cechy: ["cofanie", "potracenie", "skokOsobowki", "gazDoDechy", "slalom"],
     statystyki: { str: 20, dex: 12, con: 16 }, zrodloStatystyk: "NOE", bak: 60, spalanie: 10,
+    // Only actors built with the matched interior use these seats; older/custom art keeps its layout.
+    strefyGrafiki: [{
+      id: "kabina", nazwa: "Kabina", od: 0.485, do: 0.65, rzedy: [2, 3],
+      kolumny: [[0.63, 0.37], [0.67, 0.5, 0.33]]
+    }],
     strefy: [{ id: "kabina", nazwa: "Kabina", od: 0.3, do: 0.72, rzedy: [2, 3] }]
   },
   autobus: {
@@ -202,7 +207,10 @@ export const KATALOG_POJAZDOW = {
     rozmiar: "lg", obrys: { w: 0.5, h: 1.5 }, silnik: "motocykl", rura: [0.30, 0.05],
     klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "pojazdy", st: 15 }, "skokMotocykla", "szostyBieg", "slalom"],
     statystyki: { str: 16, dex: 16, con: 12 }, zrodloStatystyk: "NOE", bak: 18, spalanie: 5,
-    strefy: [{ id: "siodlo", nazwa: "Siodło", od: 0.42, do: 0.68, rzedy: [1, 1] }]
+    strefyGrafiki: [{ id: "siodlo", nazwa: "Siodło", od: 0.54, do: 0.735, rzedy: [1, 1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "siodlo", nazwa: "Siodło", od: 0.42, do: 0.68, rzedy: [1, 1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   rower: {
     rozmiar: "med", obrys: { w: 0.5, h: 1 }, silnik: null, rura: null,
@@ -220,9 +228,17 @@ export const KATALOG_POJAZDOW = {
     rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "diesel", rura: [0.25, 0.03],
     klasa: "osobowy", wrak: "osobowy", cechy: ["terenowka", "cofanie", "potracenie", "gazDoDechy", "wiezyczka"],
     statystyki: { str: 20, dex: 10, con: 18 }, zrodloStatystyk: "RAI", bak: 95, spalanie: 15,
+    strefyGrafiki: [
+      { id: "kabina", nazwa: "Kabina", od: 0.47, do: 0.64, rzedy: [2, 2],
+        kolumny: [[0.67, 0.33], [0.67, 0.33]] },
+      { id: "wiezyczka", nazwa: "Wieżyczka", od: 0.565, do: 0.565, rzedy: [1],
+        kolumny: [[0.5]], stanowisko: true, oslona: "trzyCzwarte",
+        prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
+    ],
     strefy: [
       { id: "kabina", nazwa: "Kabina", od: 0.3, do: 0.68, rzedy: [2, 2] },
-      { id: "wiezyczka", nazwa: "Wieżyczka", od: 0.52, do: 0.52, rzedy: [1], stanowisko: true, oslona: "trzyCzwarte" }
+      { id: "wiezyczka", nazwa: "Wieżyczka", od: 0.52, do: 0.52, rzedy: [1], stanowisko: true, oslona: "trzyCzwarte",
+        prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
     ]
   },
   ciezarowka: {

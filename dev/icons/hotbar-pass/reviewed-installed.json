@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-24",
+  "installed": [
+    {
+      "itemId": "hotbar-2026-kafar",
+      "candidateId": "batch115-kafar-a",
+      "source": "candidates/batch-115/kafar-a.png",
+      "sourceSha256": "a53e721937e39e78e2d24010e45354a54c80d1fe7dd26c581122993363d3d41b",
+      "feedback": {
+        "itemId": "hotbar-2026-kafar",
+        "decision": "approve",
+        "candidateId": "batch115-kafar-a",
+        "notes": "",
+        "updatedAt": "2026-10-24T14:20:20.667Z"
+      },
+      "files": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "sha256": "da87ffc6eb0edbc77a1506de373acb6550df4be1fed5f61faffc1930f8ff5517"
+        },
+        {
+          "source": "icons/weapons/kafar_piledriver.webp",
+          "sha256": "9842adf2732684a00b60b26d0be8df423417e6e27dd0e121bec2e522678f2d8b"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/weapons/kafar_piledriver.svg",
+          "archive": "dev/icons/hotbar-pass/archive/icons/weapons/kafar_piledriver.svg",
+          "sha256": "9a2b715cef30b3f1e333c9c58fd39f8cef416b127e6727370f9d2c104077e3b0"
+        }
+      ]
+    },
+    {
+      "itemId": "hotbar-2026-unikanie",
+      "candidateId": "batch115-unikanie-b",
+      "source": "candidates/batch-115/unikanie-b.png",
+      "sourceSha256": "babd4db0a17d70d521109a84c990074f4a93f27e068556d5945ece798c5b8439",
+      "feedback": {
+        "itemId": "hotbar-2026-unikanie",
+        "decision": "approve",
+        "candidateId": "batch115-unikanie-b",
+        "notes": "",
+        "updatedAt": "2026-10-24T14:20:37.968Z"
+      },
+      "files": [
+        {
+          "source": "icons/actions/unikanie.svg",
+          "sha256": "d935e2f0b43706eca2808f7a24b562684f05929810072e21ec663c0bd5d71e14"
+        },
+        {
+          "source": "icons/actions/unikanie.webp",
+          "sha256": "6c95556073789368cd2c98ceb32959a4261dcf649aab096a89e2aae9fe98de4d"
+        }
+      ],
+      "archived": []
+    },
+    {
+      "itemId": "hotbar-2026-przyspieszenie",
+      "candidateId": "batch116-przyspieszenie-b",
+      "source": "candidates/batch-116/przyspieszenie-b.png",
+      "sourceSha256": "a9368c1c499c2fa7af92fed1dbe4860628a3782d216957eed14ec5586a53d19c",
+      "feedback": {
+        "itemId": "hotbar-2026-przyspieszenie",
+        "decision": "approve",
+        "candidateId": "batch116-przyspieszenie-b",
+        "notes": "",
+        "updatedAt": "2026-10-24T14:21:53.187Z"
+      },
+      "files": [
+        {
+          "source": "icons/actions/przyspieszenie.svg",
+          "sha256": "7f2cc2156fa086223ee10f254f83d8b1f2f64d64501120e30c5000c7b7f7263d"
+        },
+        {
+          "source": "icons/actions/przyspieszenie.webp",
+          "sha256": "30dabd73bfc8ee01f571aa152944c4c6b816c3ae08bae82bb7db14bef7268c28"
+        }
+      ],
+      "archived": []
+    },
+    {
+      "itemId": "hotbar-2026-ukrywanie-sie",
+      "candidateId": "batch116-ukrywanie-sie-b",
+      "source": "candidates/batch-116/ukrywanie-sie-b.png",
+      "sourceSha256": "54cb2c083e0c10110a51560fefb0a59cfc3d3b872f91ce2bc74a758d521b6169",
+      "feedback": {
+        "itemId": "hotbar-2026-ukrywanie-sie",
+        "decision": "approve",
+        "candidateId": "batch116-ukrywanie-sie-b",
+        "notes": "",
+        "updatedAt": "2026-10-24T14:21:59.815Z"
+      },
+      "files": [
+        {
+          "source": "icons/actions/ukrywanie-sie.svg",
+          "sha256": "2de8468435aa877223e4992a678514a489f0bc43c63b31ea715fb4cfe148a330"
+        },
+        {
+          "source": "icons/actions/ukrywanie-sie.webp",
+          "sha256": "f6b1b95b1b91bd78a27814a6da787ff70bf7bda1debdb1b18913b0e89968cd78"
+        }
+      ],
+      "archived": []
+    },
+    {
+      "itemId": "hotbar-2026-odstapienie",
+      "candidateId": "batch118-odstapienie-a",
+      "installedOn": "2026-10-25",
+      "source": "candidates/batch-118/odstapienie-a.png",
+      "sourceSha256": "d07f69dcd39252291ea42dec57643dc5d54a8223eb96f11dc433a4dcb104d4e2",
+      "feedback": {
+        "itemId": "hotbar-2026-odstapienie",
+        "decision": "approve",
+        "candidateId": "batch118-odstapienie-a",
+        "notes": "Zoom out to fit two people. Add an assailant to the right of the existing figure. Add a arrow indicating rotation of the retreating man. The retreating man is extending his right hand behind.",
+        "updatedAt": "2026-10-25T00:13:13.843Z"
+      },
+      "files": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sha256": "1aa641b2fabb465749be352e05bbab4e959e3945250bfbcac053c034b0caef92"
+        },
+        {
+          "source": "icons/actions/odstapienie.webp",
+          "sha256": "46dbc7f6c2145c156f9669e9938a5226f9be743ae4995ea6fcde362797b25abe"
+        }
+      ],
+      "archived": []
+    }
+  ],
+  "approvedSubjects": 5,
+  "remainingSubjects": 0,
+  "updated": "2026-10-25"
+}

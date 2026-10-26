@@ -4,6 +4,11 @@
   },
 
   "TYPES": {
+    "RegionBehavior": {
+      "neuroshima-2026-overrides.trudnePrzejscie": "Trudne przejście",
+      "neuroshima-2026-overrides.strefaSkazenia": "Strefa skażenia",
+      "neuroshima-2026-overrides.skok": "Skok"
+    },
     "Actor": {
       "character": "Bohater Gracza",
       "characterPl": "Bohaterowie Graczy",

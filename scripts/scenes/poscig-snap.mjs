@@ -64,6 +64,7 @@ import {
 } from "./poscig.mjs";
 import { PRZEWAGA_KONCZACA } from "../config/vehicles-data.mjs";
 import { jazdaZetonu } from "../pojazdy/stan.mjs";
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
 import { kartaPostoju, wyslijKarte, zarejestrujAkcje } from "../postoj/karty.mjs";
 import { ustawRole } from "./poscig.mjs";
 
@@ -177,19 +178,20 @@ function _patchDragSnap() {
  * Bezpiecznik D25: pionek, który skończył ruch obok środka toru (makro, cofnięcie, `update({x})`), aktywny MG
  * przestawia na środek — po animacji, bez animacji, jak zapis po ruchu pojazdu.
  */
-async function dociagnijDoToru(doc, cel) {
+async function dociagnijDoToru(doc) {
   if (!game.user.isActiveGM || !doc.getFlag(MODULE_ID, FLAG_ROLA)) return;
   const scene = doc.parent;
-  const g = scene.grid.size;
-  if (!wPasiePoscigu({ poscig: true, y: cel.y, height: doc.height, gridSize: g })) return;
-  const szer = doc.width * g;
-  const { x } = snapDoToru(cel.x, szer);
-  if (Math.abs(x - cel.x) <= 1) return;
   const t = doc.object;
   if (t && !t.destroyed) await Promise.allSettled([...t.animationContexts.values()].map(c => c.chain.at(-1)?.promise ?? c.promise));
   if (!scene.tokens.has(doc.id)) return;
+  // A newer move or undo can commit while the animation is awaited. Correct the current source,
+  // never the destination captured by an earlier movement hook.
+  const src = doc._source, g = scene.grid.size;
+  if (!wPasiePoscigu({ poscig: true, y: src.y, height: src.height, gridSize: g })) return;
+  const { x } = snapDoToru(src.x, src.width * g);
+  if (Math.abs(x - src.x) <= 1) return;
   await scene.moveTokens({ [doc.id]: { destination: { x, y: doc._source.y, action: "displace" } } },
-    { animate: false, showRuler: false, method: "api" });
+    { animate: false, showRuler: false, method: "api", [DERIVED_UPDATE]: true });
 }
 
 /** Środek dokumentu, który nie jest żetonem (kafelek ma środek w x/y — v14; rysunek i światło — narożnik/punkt). */
@@ -323,7 +325,7 @@ function onMoveToken(doc, movement) {
   const cel = movement?.destination;
   if (!cel || !poscigFlag(doc.parent) || jazdaZetonu(doc)) return;
   recentruj(doc.parent, { [doc.id]: { x: cel.x, y: cel.y } })
-    .then(przesuniete => (przesuniete ? null : dociagnijDoToru(doc, cel)))
+    .then(przesuniete => (przesuniete ? null : dociagnijDoToru(doc)))
     .catch(err => console.error(`${MODULE_ID} | pościg: dociągnięcie do toru`, err));
 }
 

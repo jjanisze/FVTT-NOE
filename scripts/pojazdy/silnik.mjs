@@ -22,6 +22,8 @@
 import { kartaPostoju, wyslijKarte } from "../postoj/karty.mjs";
 import { doMG, zarejestrujProsbe } from "../postoj/przekaznik.mjs";
 import { freeHands } from "../actors/doll.mjs";
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
+import { registerLightProvider } from "../items/light-sources.mjs";
 import { hasToolKit } from "../actors/tool-availability.mjs";
 import { getPaliwo } from "../actors/party-travel.mjs";
 import { ST_NA_KROTKO } from "../config/vehicles-data.mjs";
@@ -160,12 +162,16 @@ export async function ustawSwiatloZetonow(actor, wl) {
   const zetony = actor.isToken ? [actor.token] : game.scenes.contents.flatMap(s => s.tokens.filter(t => t.actorLink && t.actorId === actor.id));
   for (const t of zetony) {
     if (!t.isOwner) continue;
-    const mj = metryJednostki(t.parent);
-    const swiatlo = wl && obrysDziala(t.parent)
-      ? { angle: 60, bright: 18 / mj, dim: 36 / mj, color: "#ffe9b0", alpha: 0.45, luminosity: 0.5, attenuation: 0.6 }
-      : { angle: 360, bright: 0, dim: 0 };
-    await t.update({ light: swiatlo });
+    const swiatlo = swiatloReflektorow(t.parent, wl) ?? { angle: 360, bright: 0, dim: 0 };
+    await t.update({ light: swiatlo }, { [DERIVED_UPDATE]: true });
   }
+}
+
+/** Same projection for the switch and the shared light resolver; otherwise movement extinguishes it. */
+export function swiatloReflektorow(scena, wl) {
+  if (!wl || (scena && !obrysDziala(scena))) return null;
+  const mj = scena ? metryJednostki(scena) : 1;
+  return { angle: 60, bright: 18 / mj, dim: 36 / mj, color: "#ffe9b0", alpha: 0.45, luminosity: 0.5, attenuation: 0.6 };
 }
 
 /* -------------------------------------------- */
@@ -253,6 +259,8 @@ async function _naKrotkoMG(_n, { pojazd, wynik, st }) {
 /* -------------------------------------------- */
 
 export function registerSilnik() {
+  registerLightProvider((actor, doc) => jestPojazdem(actor)
+    ? swiatloReflektorow(doc?.parent, stanSilnika(actor).swiatla) : null);
   zarejestrujProsbe("pojazd.naKrotko", _naKrotkoMG);
 
   // Identyfikator kluczyków: nowy dla każdego nowego aktora pojazdu (duplikat też), a żeton niepowiązany

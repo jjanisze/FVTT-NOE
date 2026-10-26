@@ -3,11 +3,13 @@
  *
  * Małe okno z obrazem pojazdu z góry (przodem w dół, jak grafika żetonu) i klikalnymi miejscami. To samo
  * okno dla „Wsiądź” (postać spoza pojazdu) i „Przesiądź się” (postać w środku). Kto siedzi gdzie, widać
- * tylko z prawem prześwietlenia (MG, właściciel, jadący — D3); reszta widzi „zajęte”.
+ * z prawem prześwietlenia albo dla widocznego jadącego na otwartym miejscu (D3, D32).
  */
 
 import { danePojazdu, jazdaZetonu, miejscaPojazdu, pojazdJadacego, MODULE_ID } from "./stan.mjs";
 import { mozePrzeswietlic } from "./zeton.mjs";
+import { grafikaWnetrza } from "./grafika.mjs";
+import { rozpoznawalnyJadacy } from "./prezentacja.mjs";
 import {
   jedzie, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
   ZASIEG_WSIADANIA_M, ST_PRZESIADKI
@@ -33,6 +35,7 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     this.pojazd = pojazd;
     this.jadacy = jadacy;
     this.tryb = "ostroznie";
+    this.wTrakcie = false;
   }
 
   get title() {
@@ -53,7 +56,8 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     const H = Math.round(dane.obrys.h * skala);
     const widac = mozePrzeswietlic(p);
     const zajete = zajeteMiejsca(p);
-    const j = this.jadacy;
+    // Żeton mógł zostać usunięty lub utracić własność, gdy okno było otwarte.
+    const j = this.jadacy = p.parent.tokens.find(t => t === this.jadacy && t.actor && t.isOwner) ?? null;
     const wTym = j && pojazdJadacego(j)?.id === p.id;
     const moje = wTym ? jazdaZetonu(j).miejsce : null;
     const z = moje ? miejscaPojazdu(p.actor).find(m => m.id === moje) : null;
@@ -62,24 +66,25 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
 
     const miejsca = miejscaPojazdu(p.actor).map(m => {
       const t = zajete.get(m.id);
+      const rozpoznany = rozpoznawalnyJadacy(m, t, widac);
       const left = 50 + m.x / dane.obrys.w * 100;
       const top = 50 + m.y / dane.obrys.h * 100;
       const klasy = ["neuro-miejsce", t ? "is-zajete" : "is-wolne", m.kierowca ? "is-kierowca" : "", m.stanowisko ? "is-stanowisko" : "",
         t && t.id === j?.id ? "is-moje" : ""].filter(Boolean).join(" ");
       let tip = opisMiejsca(p.actor, m);
-      if (t) tip += widac ? ` — ${t.name}` : " — zajęte";
+      if (t) tip += rozpoznany ? ` — ${t.name}` : " — zajęte";
       else if (z) {
         const k = kosztPrzesiadki(z, m, { jedzie: wRuchu });
         tip += wRuchu ? ` — ${k.ostroznie} m ostrożnie / ${k.szybko} m z testem${k.wymagaTestu ? " (zmiana rzędu: test zawsze)" : ""}` : ` — ${k.ostroznie} m`;
       }
       const ikona = m.kierowca ? "fa-solid fa-steering-wheel" : m.stanowisko ? "fa-solid fa-crosshairs" : "";
-      const obraz = t && widac ? `<img src="${esc(t.texture.src)}" alt="">` : (ikona ? `<i class="${ikona}" inert></i>` : "");
-      return `<button type="button" class="${klasy}" data-miejsce="${esc(m.id)}" ${t && t.id !== j?.id ? "disabled" : ""}
+      const obraz = rozpoznany ? `<img src="${esc(t.texture.src)}" alt="">` : (ikona ? `<i class="${ikona}" inert></i>` : "");
+      return `<button type="button" class="${klasy}" data-miejsce="${esc(m.id)}" ${this.wTrakcie || (t && t.id !== j?.id) ? "disabled" : ""}
         style="left:${left}%;top:${top}%;width:${rozmiarKropki}px;height:${rozmiarKropki}px" data-tooltip="${esc(tip)}">${obraz}</button>`;
     }).join("");
 
     let stopka = "";
-    if (!j) stopka = `<p class="neuro-miejsca-info">Zaznacz swój żeton na mapie, żeby wsiąść.</p>`;
+    if (!j) stopka = `<p class="neuro-miejsca-info">Zaznacz dokładnie jeden żeton postaci na mapie, żeby wsiąść. Okno śledzi zaznaczenie. Celowanie nie wybiera postaci.</p>`;
     else if (wTym) {
       stopka = `<p class="neuro-miejsca-info">${esc(j.name)}: ${esc(opisMiejsca(p.actor, z))}. Kliknij wolne miejsce, żeby się przesiąść.</p>`;
       if (wRuchu) {
@@ -88,13 +93,13 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
           <label><input type="radio" name="tryb" value="szybko" ${this.tryb === "szybko" ? "checked" : ""}> Szybko — ×1, ZRC (Akrobatyka) ST ${ST_PRZESIADKI}</label>
         </div>`;
       } else stopka += `<p class="neuro-miejsca-info">Pojazd stoi — odległość ×2, bez testu.</p>`;
-      stopka += `<button type="button" class="neuro-miejsca-wysiadz"><i class="fa-solid fa-door-open" inert></i> Wysiądź</button>`;
+      stopka += `<button type="button" class="neuro-miejsca-wysiadz" ${this.wTrakcie ? "disabled" : ""}><i class="fa-solid fa-door-open" inert></i> Wysiądź</button>`;
     } else {
       const odl = odlegloscOdPojazdu(j, p);
       stopka = `<p class="neuro-miejsca-info">Wsiada: <strong>${esc(j.name)}</strong> (${odl.toFixed(1)} m od pojazdu${odl > ZASIEG_WSIADANIA_M + 0.2 ? " — za daleko, RAW 1,5 m" : ""}). Kliknij wolne miejsce.</p>`;
     }
 
-    const src = p.texture?.src;
+    const src = (widac && grafikaWnetrza(p)) || p.texture?.src;
     div.innerHTML = `
       <div class="neuro-miejsca-pojazd" style="width:${W}px;height:${H}px">
         ${src ? `<img class="neuro-miejsca-tlo" src="${esc(src)}" alt="" style="width:${W}px;height:${H}px">` : ""}
@@ -114,39 +119,56 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     el.querySelectorAll(".neuro-miejsce.is-wolne").forEach(b => b.addEventListener("click", ev => this.#wybierz(ev)));
     el.querySelectorAll("input[name=tryb]").forEach(r => r.addEventListener("change", ev => { this.tryb = ev.target.value; }));
     el.querySelector(".neuro-miejsca-wysiadz")?.addEventListener("click", async () => {
-      await wysiadz(this.jadacy);
+      const j = this.jadacy;
+      if (this.wTrakcie || !j?.isOwner || !j.parent.tokens.has(j.id)) return;
+      this.wTrakcie = true;
+      try { await wysiadz(j); }
+      finally { this.wTrakcie = false; }
       this.close();
     });
   }
 
   async #wybierz(ev) {
+    if (this.wTrakcie) return;
     const id = ev.currentTarget.dataset.miejsce;
     const j = this.jadacy;
-    if (!j) return ui.notifications.warn("Zaznacz swój żeton na mapie.");
+    if (!j || !j.parent.tokens.has(j.id)) return ui.notifications.warn("Zaznacz dokładnie jeden żeton postaci na mapie. Celowanie nie wystarczy.");
     if (!j.isOwner) return ui.notifications.warn("To nie twój żeton.");
-    if (pojazdJadacego(j)?.id === this.pojazd.id) await przesiadz(j, id, { tryb: this.tryb });
-    else await wsiadz(this.pojazd, j, id);
-    this.close();
+    this.wTrakcie = true;
+    try {
+      if (pojazdJadacego(j)?.id === this.pojazd.id) await przesiadz(j, id, { tryb: this.tryb });
+      else await wsiadz(this.pojazd, j, id);
+      if (pojazdJadacego(j)?.id === this.pojazd.id && jazdaZetonu(j)?.miejsce === id) await this.close();
+    } finally {
+      this.wTrakcie = false;
+      if (this.rendered) {
+        this.jadacy = zetonUzytkownika(this.pojazd.parent);
+        this.render();
+      }
+    }
   }
 
   _onClose(options) {
     super._onClose?.(options);
-    okna.delete(this.pojazd.id);
+    if (okna.get(this.pojazd.id) === this) okna.delete(this.pojazd.id);
   }
 }
 
-/** Żeton, którym ten użytkownik wsiada: zaznaczony (nie pojazd), inaczej żeton jego postaci na scenie. */
+/** Jeden zaznaczony własny żeton postaci; bez zaznaczenia — jednoznaczny żeton postaci użytkownika. */
 export function zetonUzytkownika(scena) {
-  const zazn = canvas.tokens?.controlled.map(t => t.document).filter(d => d.parent === scena && !danePojazdu(d.actor));
-  if (zazn?.length) return zazn[0];
+  const mozeWsiadac = d => d.actor && d.isOwner && !danePojazdu(d.actor);
+  const zazn = canvas.tokens?.controlled.map(t => t.document).filter(d => d.parent === scena && mozeWsiadac(d)) ?? [];
+  if (zazn.length) return zazn.length === 1 ? zazn[0] : null;
   const postac = game.user.character;
-  return postac ? scena.tokens.find(t => t.actorId === postac.id && t.isOwner) ?? null : null;
+  const tokeny = postac ? scena.tokens.filter(t => t.actorId === postac.id && mozeWsiadac(t)) : [];
+  return tokeny.length === 1 ? tokeny[0] : null;
 }
 
 /** Otwiera okno miejsc pojazdu dla żetonu (domyślnie: żeton użytkownika). */
-export function otworzMiejsca(pojazdDoc, jadacyDoc = null) {
+export async function otworzMiejsca(pojazdDoc, jadacyDoc = null) {
+  // Zamknięcie usuwa instancję także z rejestru rdzenia pod tym samym id.
+  await okna.get(pojazdDoc.id)?.close();
   const j = jadacyDoc ?? zetonUzytkownika(pojazdDoc.parent);
-  okna.get(pojazdDoc.id)?.close();
   const app = new OknoMiejsc(pojazdDoc, j);
   okna.set(pojazdDoc.id, app);
   return app.render({ force: true });
@@ -154,7 +176,10 @@ export function otworzMiejsca(pojazdDoc, jadacyDoc = null) {
 
 /** Odświeża otwarte okna (zmiana składu). */
 export function odswiezOknaMiejsc() {
-  for (const app of okna.values()) if (app.rendered) app.render();
+  for (const app of okna.values()) {
+    if (!app.pojazd.parent.tokens.has(app.pojazd.id)) app.close();
+    else app.render();
+  }
 }
 
 /* -------------------------------------------- */
@@ -200,8 +225,21 @@ function _onRenderTokenHUD(hud, html) {
 
 export function registerOknoMiejsc() {
   Hooks.on("renderTokenHUD", _onRenderTokenHUD);
+  // Rdzeń najpierw zwalnia stare zaznaczenie, potem zaznacza nowe. Stan zmieniamy od razu,
+  // ale rysujemy dopiero po całej operacji, żeby dwa hooki nie ścigały się o render okna.
+  let odswiezenieZaznaczenia = false;
+  Hooks.on("controlToken", () => {
+    for (const app of okna.values()) if (!app.wTrakcie) app.jadacy = zetonUzytkownika(app.pojazd.parent);
+    if (odswiezenieZaznaczenia) return;
+    odswiezenieZaznaczenia = true;
+    queueMicrotask(() => {
+      odswiezenieZaznaczenia = false;
+      odswiezOknaMiejsc();
+    });
+  });
+  Hooks.on("canvasTearDown", () => { for (const app of okna.values()) app.close(); });
   for (const hook of ["createToken", "deleteToken"]) Hooks.on(hook, odswiezOknaMiejsc);
   Hooks.on("updateToken", (doc, changes) => {
-    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`)) odswiezOknaMiejsc();
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}`) || "hidden" in changes) odswiezOknaMiejsc();
   });
 }

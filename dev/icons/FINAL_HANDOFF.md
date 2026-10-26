@@ -41,6 +41,28 @@ Foundry remains closed; no campaign repoint was run.
 <!-- gm-remaining:start -->
 ## Do podpięcia — przez MG
 
+- **Motocykl — trzeci komplet, 2026-10-26:** portret i otwarty żeton cruisera z sakwami.
+  Dwa miejsca pokazują pełne postacie nad siodłem, bez kropek i przygaszania po najechaniu.
+  Poligon: **Garaż · Motocykl — grafika i obsada**, pusty, z kierowcą i z pasażerem;
+  pojazd 120%, grafiki postaci w pierwotnej skali (85% cofnięto 2026-10-26). Sonda `grafika-motocykl`.
+  Quench 36/36; E2E `motocykl-art` oraz regresja `pojazd-prezentacja` zielone.
+  [Pliki i prompty](../art/m4/motocykl/README.md).
+
+- **Hammer — drugi komplet, 2026-10-25:** portret, dach i wnętrze dostarczone. Cztery koła,
+  cztery fotele i centralny właz; para ma 99,62% pokrycia sylwetek. Poligon: osobna scena
+  **Garaż · Hammer — grafika i wnętrze**, pojazd 120%, grafika pasażerów w pierwotnej skali.
+  Podgląd dodano przez API działającego świata; przebudowę aktywnego kompendium wstrzymała
+  ochrona sesji użytkowników. Szablon pobierze nowe pliki i strefy przy kolejnym `fvtt packs`.
+  Quench pojazdów 31/31; sonda `grafika-hammer`. [Pliki i prompty](../art/m4/hammer/README.md).
+
+- **Osobówka — pierwszy komplet, 2026-10-22:** MG zaakceptował portret oraz zgodność wnętrza
+  z nadwoziem. Poprawiono dodatkowe koła, uwydatniono właściwe cztery i zbliżono przednie kotwice.
+  Para jest podpięta w kompendium; Quench 26/26, E2E 9 kroków. Poligon ma osobną scenę
+  **Garaż · Osobówka — grafika i skala**: A/C auto 100%, B/D auto 120%; postacie w pierwotnych
+  skalach po cofnięciu eksperymentu 85% (2026-10-26). Każda kolumna pokazuje też grafiki BG obok.
+  MG ocenia wynik w FVTT i wybiera skalę przed kolejnym pojazdem. Nie migrowano aktorów kampanii.
+  [Pliki, prompty i testy](../art/m4/OSOBOWKA.md). Sondy Garażu: `grafika`, `skala-grafiki`.
+
 - **Biegłości / umiejętności — podpięte, 2026-10-18:** 51 wierszy i sześć
   nagłówków korzysta z zatwierdzonych glifów modułu. Batch 112: Historia,
   Pojazdy i dwa nagłówki dostarczone; Akrobatyka zachowuje obecny glif zgodnie
@@ -65,10 +87,18 @@ Foundry remains closed; no campaign repoint was run.
 - **Starsze dźwięki produkcji (§C 1–9):** gotowe pliki są w
   `sounds/produkcja/`; pozostałe podpięcia slotów `PRACA` i `ZDARZENIA`
   w `scripts/production/oprawa.mjs` są osobnym zadaniem.
-- **Malowane obrazy (§B/§E/§G/§H):** handlarze, utrzymanie i siedem obozów są dostarczone;
-  reszta czeka na źródła MG w `dev/art/m5/in/<zestaw>/<klucz>.png`.
+- **Malowane obrazy (§B/§E/§G/§H):** handlarze, utrzymanie, siedem obozów oraz pięć ruin
+  (apteka, biuro, piwnica, sklepik, warsztat; 2026-10-20) są dostarczone.
+  Magazyn i wrak oraz pozostałe grafiki czekają na źródła MG
+  w `dev/art/m5/in/<zestaw>/<klucz>.png`.
   Packer → kontrola WEBP → oznaczenie wiersza → CREDITS: AI-generated with
   OpenAI DALL-E, hand-edited by the GM. M5 używa dokładnych nazw plików.
+  Pięć ruin sprawdzono w oknie Szabrowania na sandboxie: obrazy 1200×400,
+  wyświetlane w proporcji 3:1; magazyn i wrak poprawnie bez obrazu.
+  Poligon: Złomowisko → ilustracje-ruin (bez ponownego zasiewania stacji).
+  Dowody: `dev/art/m5/delivered-2026-10-20.json`; lokalny podgląd
+  `dev/art/m5/out/ruiny-delivery-2026-10-20.png` i zrzut
+  `logs/recording-prep/loot-banners-2026-10-20-sandbox.png`.
 
 Kolejka glifów jest zamknięta; Batch 112 pozostaje wolny dla nowych zadań.
 <!-- gm-remaining:end -->

@@ -23,7 +23,8 @@
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
-const PLIK_MANIFESTU = "worlds/output/scenes/_push.json";
+/** Manifest bieżącego świata (kampania: `worlds/output/scenes/_push.json`). */
+const plikManifestu = () => `worlds/${game.world.id}/scenes/_push.json`;
 const USTAWIENIE_ZNACZNIKI = "mapyOstatnioWidziane";
 const USTAWIENIE_WLACZONE = "mapyNasluch";
 const USTAWIENIE_ODSTEP = "mapyOdstepSek";
@@ -32,7 +33,7 @@ let uchwytTimera = null;
 
 async function pobierzManifest() {
   try {
-    const res = await fetch(`${PLIK_MANIFESTU}?v=${Date.now()}`);
+    const res = await fetch(`${plikManifestu()}?v=${Date.now()}`);
     if (!res.ok) return null;           // brak pliku = nikt jeszcze nie pchał
     return await res.json();
   } catch {

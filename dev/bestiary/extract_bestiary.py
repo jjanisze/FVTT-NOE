@@ -13,6 +13,10 @@ per creature, generated from the PDF by `Podrecznik/tools/pdf2md.py`:
     **ZDOLNOŚCI**                <- one of exactly 5 section headers
     ***Nazwa.*** treść
 
+GM-made creatures (variants the rulebook only mentions, e.g. the explosive Kurczak) live in the same layout
+under `Podrecznik/Bestiariusz/Własne/<NN KATEGORIA>/` — outside the PDF tree, because `pdf2md.py` wipes and
+rewrites `13 NOTATNIK ŁOWCY/` on every run. Their records carry `homebrew: true`.
+
 `legacy_text()` rewrites that into the one-field-per-line layout the parser below was
 written for (the hand transcription it used to read), so the strict field parsers stay
 untouched. Blood tags (Splatter) are module data, not rulebook text: `lore-extras.json`.
@@ -34,6 +38,8 @@ import argparse, re, json, io, os, glob, sys, unicodedata
 
 NOE = os.environ.get("NOE_DIR", r"c:\Git\Neuroshima\neuro5e\Neuro 5e\Podrecznik\NOE")
 BESTIARY_DIR = os.path.join(NOE, "13 NOTATNIK ŁOWCY")
+HOMEBREW_DIR = os.environ.get("BESTIARY_HOMEBREW_DIR",
+                              os.path.join(os.path.dirname(NOE), "Bestiariusz", "Własne"))
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "bestiary.json")
 EXTRAS = os.path.join(HERE, "lore-extras.json")
@@ -624,7 +630,10 @@ def legacy_text(md, kategoria, extras):
 # ------------------------------------------------------------------ #
 
 def parse_file(path, extras_all):
-    f = os.path.relpath(path, BESTIARY_DIR)
+    wlasne = os.path.normcase(os.path.abspath(path)).startswith(os.path.normcase(os.path.abspath(HOMEBREW_DIR)))
+    f = os.path.relpath(path, HOMEBREW_DIR if wlasne else BESTIARY_DIR)
+    if wlasne:
+        f = os.path.join("Własne", f)
     md = io.open(path, encoding="utf-8-sig").read()
     lore_title = re.search(r"^####\s+(.+)$", md, re.M)
     if not lore_title:
@@ -637,6 +646,8 @@ def parse_file(path, extras_all):
     rec = parse_text(f, text)
     if rec:
         rec["id"] = cid
+        if wlasne:
+            rec["homebrew"] = True
     return rec
 
 
@@ -812,11 +823,11 @@ def main():
     args = ap.parse_args()
     extras_all = json.load(io.open(EXTRAS, encoding="utf-8")) if os.path.exists(EXTRAS) else {}
     files = sorted(
-        p for p in glob.glob(os.path.join(BESTIARY_DIR, "*", "*.md"))
+        p for d in (BESTIARY_DIR, HOMEBREW_DIR) for p in glob.glob(os.path.join(d, "*", "*.md"))
         if not os.path.basename(p).startswith("00 ")
         and re.search(r"^#####\s", io.open(p, encoding="utf-8-sig").read(), re.M)
     )
-    print(f"Bestiariusz — parsing {len(files)} profiles from {BESTIARY_DIR}\n")
+    print(f"Bestiariusz — parsing {len(files)} profiles from {BESTIARY_DIR} (+ {HOMEBREW_DIR})\n")
 
     result = {}
     for p in files:

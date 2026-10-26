@@ -3864,6 +3864,41 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-18T15:35:31.921Z"
+    },
+    "hotbar-2026-kafar": {
+      "itemId": "hotbar-2026-kafar",
+      "decision": "approve",
+      "candidateId": "batch115-kafar-a",
+      "notes": "",
+      "updatedAt": "2026-10-24T14:20:20.667Z"
+    },
+    "hotbar-2026-unikanie": {
+      "itemId": "hotbar-2026-unikanie",
+      "decision": "approve",
+      "candidateId": "batch115-unikanie-b",
+      "notes": "",
+      "updatedAt": "2026-10-24T14:20:37.968Z"
+    },
+    "hotbar-2026-odstapienie": {
+      "itemId": "hotbar-2026-odstapienie",
+      "decision": "approve",
+      "candidateId": "batch118-odstapienie-a",
+      "notes": "Zoom out to fit two people. Add an assailant to the right of the existing figure. Add a arrow indicating rotation of the retreating man. The retreating man is extending his right hand behind.",
+      "updatedAt": "2026-10-25T00:13:13.843Z"
+    },
+    "hotbar-2026-przyspieszenie": {
+      "itemId": "hotbar-2026-przyspieszenie",
+      "decision": "approve",
+      "candidateId": "batch116-przyspieszenie-b",
+      "notes": "",
+      "updatedAt": "2026-10-24T14:21:53.187Z"
+    },
+    "hotbar-2026-ukrywanie-sie": {
+      "itemId": "hotbar-2026-ukrywanie-sie",
+      "decision": "approve",
+      "candidateId": "batch116-ukrywanie-sie-b",
+      "notes": "",
+      "updatedAt": "2026-10-24T14:21:59.815Z"
     }
   }
 }

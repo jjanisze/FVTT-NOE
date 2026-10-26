@@ -73,10 +73,12 @@ export function roznicaKatow(a, b) {
  * @property {number} od          początek strefy od przodu, ułamek długości (0 = zderzak)
  * @property {number} do          koniec strefy od przodu, ułamek długości
  * @property {number[]} rzedy     liczba miejsc w kolejnych rzędach, od przodu
+ * @property {number[][]} [kolumny] środki miejsc w każdym rzędzie: ułamek szerokości od lewej obrazu
  * @property {boolean} [kierowca] pierwsze miejsce pierwszego rzędu to kierowca (domyślnie: pierwsza strefa)
  * @property {boolean} [stanowisko] miejsca strefy są stanowiskami broni montowanej
  * @property {string} [oslona]    „polowa”, „trzyCzwarte”, „calkowita” — podpowiedź dla okna osłony (§4.6)
  * @property {boolean} [stojace]  miejsca stojące (paka ciężarówki)
+ * @property {{widocznosc?: "zakryta"|"otwarta", warstwa?: "nad"|"pod"}} [prezentacja] widok jadącego, niezależny od osłony
  */
 
 /**
@@ -90,6 +92,7 @@ export function roznicaKatow(a, b) {
  * @property {boolean} stanowisko
  * @property {string|null} oslona
  * @property {boolean} stojace
+ * @property {{widocznosc?: "zakryta"|"otwarta", warstwa?: "nad"|"pod"}} [prezentacja]
  */
 
 /** Rozmiar żetonu jadącego w kratkach (D2: „zmniejszone do miejsca”). */
@@ -117,12 +120,15 @@ export function ukladMiejsc(obrys, strefy) {
       const szer = Math.max(0, obrys.w * 0.8 - ROZMIAR_MIEJSCA);
       for (let i = 0; i < ile; i++) {
         const u = ile === 1 ? 0.5 : i / (ile - 1);
-        const x = ile === 1 ? 0 : szer / 2 - u * szer;
+        const kolumna = strefa.kolumny?.[ri]?.[i];
+        const maKolumne = Number.isFinite(kolumna);
+        const x = maKolumne ? (kolumna - 0.5) * obrys.w : ile === 1 ? 0 : szer / 2 - u * szer;
         const kierowca = ri === 0 && i === 0 && (zKierowca >= 0 ? si === zKierowca : si === 0);
         miejsca.push({
           id: `${strefa.id}-${ri}-${i}`, strefa: strefa.id, rzad: rzadGlobalny,
-          x: zaokr(kierowca && ile === 1 && obrys.w > 1 ? Math.min(szer / 2, 0.35) : x), y: zaokr(y),
-          kierowca, stanowisko: !!strefa.stanowisko, oslona: strefa.oslona ?? null, stojace: !!strefa.stojace
+          x: zaokr(!maKolumne && kierowca && ile === 1 && obrys.w > 1 ? Math.min(szer / 2, 0.35) : x), y: zaokr(y),
+          kierowca, stanowisko: !!strefa.stanowisko, oslona: strefa.oslona ?? null, stojace: !!strefa.stojace,
+          ...(strefa.prezentacja ? { prezentacja: { ...strefa.prezentacja } } : {})
         });
       }
       rzadGlobalny += 1;

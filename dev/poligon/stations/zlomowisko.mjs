@@ -36,6 +36,7 @@ export default {
     return { trupy: 2, autodestrukcja: game.neuroshima.postoj.autodestrukcja?.dane?.(s.tokens.find(t => t.actorId === gladiator?.id)?.actor) ?? null };
   },
   proby: [
+    p("ilustracje-ruin", "Ilustracje ruin", "Apteka, biuro, piwnica, sklepik i warsztat: baner 3:1 nad formularzem i na karcie prośby, czytelny także przy szerokości 360 px; magazyn i wrak bez obrazu do dostawy", "Postój → [Szabrowanie] → wybierz kolejno pięć dostarczonych ruin; po dostawie grafik odśwież klienta. Wyślij prośbę i sprawdź obraz na karcie gracza."),
     p("szabrowanie", "Szabrowanie", "Szabrowanie: okno MG, komplikacja tylko dla MG, karta prośby dla poszukiwaczy, czas; Złomiarz Szczura — Ułatwienie do Percepcji i Śledztwa, Łowca bez", "Postój → [Szabrowanie] → Niewielki magazyn."),
     p("bebeszenie", "Bebeszenie", "Bebeszenie celu (zwierzę) z menu narzędzi rzeźnika; człowiek przez HUD — komunikat publiczny przed rzutem", "Gracz 1 celuje w Psa; MG → HUD Cywila."),
     p("rozbiorka", "Rozbiórka", "Rozbierz na surowce: propozycja do MG → [Zatwierdź…] → surowce", "Gracz 1: Bat → Rozbierz."),

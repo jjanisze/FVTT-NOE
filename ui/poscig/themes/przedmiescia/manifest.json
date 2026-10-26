@@ -33,30 +33,6 @@
       "height": 887,
       "role": "road"
     },
-    "district-suburb": {
-      "file": "district-suburb.webp",
-      "width": 1774,
-      "height": 887,
-      "role": "hill"
-    },
-    "district-mall": {
-      "file": "district-mall.webp",
-      "width": 1774,
-      "height": 887,
-      "role": "hill"
-    },
-    "district-commercial": {
-      "file": "district-commercial.webp",
-      "width": 1774,
-      "height": 887,
-      "role": "hill"
-    },
-    "district-city": {
-      "file": "district-city.webp",
-      "width": 1774,
-      "height": 887,
-      "role": "hill"
-    },
     "plants-a": {
       "file": "plants-a.webp",
       "width": 1254,
@@ -280,6 +256,72 @@
           208
         ]
       }
+    },
+    "skyline-suburb-v3": {
+      "file": "skyline-suburb-v3.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill",
+      "cutout": true
+    },
+    "skyline-mall-v3": {
+      "file": "skyline-mall-v3.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill",
+      "cutout": true
+    },
+    "skyline-commercial-v3": {
+      "file": "skyline-commercial-v3.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill",
+      "cutout": true
+    },
+    "skyline-city-v3": {
+      "file": "skyline-city-v3.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill",
+      "cutout": true
+    },
+    "sky-ash-v3": {
+      "file": "sky-ash-v3.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "backdrop"
+    },
+    "large-ruins-v3": {
+      "file": "large-ruins-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "role": "atlas",
+      "frames": {
+        "large-brick-windows": [
+          2,
+          23,
+          766,
+          498
+        ],
+        "large-concrete-portal": [
+          783,
+          10,
+          748,
+          510
+        ],
+        "large-diner": [
+          7,
+          578,
+          810,
+          410
+        ],
+        "large-loading-bay": [
+          822,
+          526,
+          711,
+          472
+        ]
+      }
     }
   },
   "groups": {
@@ -291,23 +333,23 @@
     ],
     "landscapes": {
       "suburb": [
-        "district-suburb",
-        "district-commercial"
+        "skyline-suburb-v3",
+        "skyline-commercial-v3"
       ],
       "mall": [
-        "district-mall",
-        "district-suburb",
-        "district-commercial"
+        "skyline-mall-v3",
+        "skyline-suburb-v3",
+        "skyline-commercial-v3"
       ],
       "commercial": [
-        "district-commercial",
-        "district-mall",
-        "district-suburb"
+        "skyline-commercial-v3",
+        "skyline-mall-v3",
+        "skyline-suburb-v3"
       ],
       "city": [
-        "district-city",
-        "district-commercial",
-        "district-mall"
+        "skyline-city-v3",
+        "skyline-commercial-v3",
+        "skyline-mall-v3"
       ]
     },
     "plants": [
@@ -345,6 +387,12 @@
       "dust-2",
       "dust-3",
       "dust-4"
+    ],
+    "buildings": [
+      "large-brick-windows",
+      "large-concrete-portal",
+      "large-diner",
+      "large-loading-bay"
     ]
   },
   "props": {
@@ -543,6 +591,61 @@
       "height": 210,
       "crop": 1,
       "alpha": 0.1
+    },
+    "large-brick-windows": {
+      "atlas": "large-ruins-v3",
+      "frame": "large-brick-windows",
+      "height": 650,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "large-concrete-portal": {
+      "atlas": "large-ruins-v3",
+      "frame": "large-concrete-portal",
+      "height": 700,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "large-diner": {
+      "atlas": "large-ruins-v3",
+      "frame": "large-diner",
+      "height": 640,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "large-loading-bay": {
+      "atlas": "large-ruins-v3",
+      "frame": "large-loading-bay",
+      "height": 680,
+      "crop": 0.92,
+      "alpha": 1
+    }
+  },
+  "backdrop": "sky-ash-v3",
+  "landscapeMode": "opaque-cutouts",
+  "foreground": {
+    "plants": {
+      "rate": 1.28,
+      "stride": 2600,
+      "tint": 11777969,
+      "blur": 0.35
+    },
+    "structures": {
+      "rate": 1.9,
+      "stride": 3600,
+      "tint": 10001302,
+      "blur": 0.8
+    },
+    "buildings": {
+      "rate": 2.6,
+      "stride": 26000,
+      "chance": 0.65,
+      "yOffset": [
+        170,
+        470
+      ],
+      "tint": 7633271,
+      "blur": 2.3
     }
   }
 }

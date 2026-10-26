@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-24",
+  "batch": 118,
+  "pass": "pivoting-disengage-pair",
+  "partialAtlas": true,
+  "emptyCells": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "cell": 1,
+      "key": "odstapienie-a",
+      "variant": "a",
+      "itemId": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — Obrót i otwarta dłoń z tyłu",
+      "caption": "Półobrót przy odejściu, z prawą dłonią wyciągniętą za siebie w stronę napastnika. Krótka strzałka przy biodrach pokazuje obrót.",
+      "target": "icons/actions/odstapienie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "Keep the reference's ordinary adult man as the LEFT figure, but zoom out enough to fit TWO COMPLETE adult figures within one icon. Add ONE assailant at the RIGHT, facing LEFT and reaching toward the withdrawing man. The LEFT man's torso turns to face LEFT, one foot stepping LEFT to withdraw, while his head turns BACK RIGHT to watch the assailant. His RIGHT ARM EXTENDS BEHIND HIM TO THE RIGHT, open palm outward toward the assailant, maintaining a guarded separation; his left arm remains near the front of his body. The assailant's reaching hand stops short of that rearward palm, no blow lands. Show ONE stout short CURVED ROTATION ARROW beside the withdrawing man's hips, indicating his torso pivot to the left, not travel and not an arrow between people. Two naturally proportioned full bodies, sober unarmed controlled withdrawal, not a sprint or blind flight. Both right-hand fingers and palm are grouped as a simple anatomically coherent hand. No added weapon, prohibition circle, crossed-fist badge, impact star, wings or third person."
+    },
+    {
+      "cell": 2,
+      "key": "odstapienie-b",
+      "variant": "b",
+      "itemId": "hotbar-2026-odstapienie",
+      "name": "Odstąpienie — Obrót z osłoną sięgającej ręki",
+      "caption": "Ćwierćobrót i prawa ręka cofnięta za tułów, kontrolująca sięgającą rękę napastnika. Łuk nad barkiem podkreśla skręt.",
+      "target": "icons/actions/odstapienie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "request": "Develop the reference into TWO COMPLETE ordinary adult humans, retreating man at LEFT and assailant at RIGHT. In a front-three-quarter view the LEFT man makes a controlled QUARTER-TURN TOWARD LEFT, body already angled to step away LEFT, HEAD still LOOKING BACK RIGHT at the assailant. His RIGHT ARM is clearly EXTENDED BEHIND HIS TORSO toward the RIGHT, with its OPEN PALM checking the outside of the assailant's reaching left WRIST. His left hand stays in a compact protective position in front of his chest. The RIGHT assailant leans slightly LEFT with one arm reaching, but cannot strike the withdrawing man's body. Preserve a broad black gap between their torsos and one clean hand-to-wrist contact, never fused anatomy. Draw ONE simple bold CURVED ROTATION ARROW just above and beside the retreating man's shoulder to indicate the quarter-turn, with a single arrowhead. Deliberate short backward/sideways steps, no running stride, fleeing turned back, successful hit, weapon, extra detached hand, prohibition symbol, circle badge, third figure or fine clothing detail."
+    }
+  ]
+}

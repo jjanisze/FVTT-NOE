@@ -1,4 +1,5 @@
 /** Original, deterministic canvas artwork. Textures bake once; the ticker only scrolls them. */
+import { durableCanvasBase } from "./poscig-texture-source.mjs";
 export const TILE_W = 2048;
 
 export function rng(seed) {
@@ -14,14 +15,11 @@ export function rng(seed) {
 function surface(w, h) {
   const cv = document.createElement("canvas");
   cv.width = w; cv.height = h;
-  return [cv, cv.getContext("2d")];
+  return [cv, cv.getContext("2d", { willReadFrequently: true })];
 }
 
 function texture(cv) {
-  const tex = PIXI.Texture.from(cv);
-  tex.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-  tex.baseTexture.mipmap = PIXI.MIPMAP_MODES.OFF;
-  return tex;
+  return new PIXI.Texture(durableCanvasBase(cv, { wrapMode: PIXI.WRAP_MODES.REPEAT }));
 }
 
 function wrapped(ctx, x, draw) {

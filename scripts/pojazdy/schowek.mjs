@@ -22,6 +22,7 @@ import {
 } from "./stan.mjs";
 import { instrukcjePoRuchu } from "./zeton.mjs";
 import { synchronizujZaloge, wysadzGM } from "./jadacy.mjs";
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
 
 const FLAGA_SCHOWEK = "schowek";
 
@@ -111,11 +112,13 @@ async function dokonczWklejenie(pojazdDoc) {
   if (jadacy.length) {
     await scena.updateEmbeddedDocuments("Token", jadacy.map(t => ({
       _id: t.id, [`flags.${MODULE_ID}.${FLAGA_JAZDA}.pojazd`]: pojazdDoc.id, [`flags.${MODULE_ID}.${FLAGA_JAZDA}.schowek`]: _del
-    })));
+    })), { [DERIVED_UPDATE]: true });
   }
-  await pojazdDoc.update({ [`flags.${MODULE_ID}.${FLAGA_SCHOWEK}`]: _del });
+  await pojazdDoc.update({ [`flags.${MODULE_ID}.${FLAGA_SCHOWEK}`]: _del }, { [DERIVED_UPDATE]: true });
   const instrukcje = instrukcjePoRuchu(pojazdDoc);
-  if (Object.keys(instrukcje).length) await scena.moveTokens(instrukcje, { animate: false, showRuler: false, method: "api" });
+  if (Object.keys(instrukcje).length) await scena.moveTokens(instrukcje, {
+    animate: false, showRuler: false, method: "api", [DERIVED_UPDATE]: true
+  });
   await synchronizujZaloge(pojazdDoc);
 }
 

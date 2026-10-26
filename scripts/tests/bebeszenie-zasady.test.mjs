@@ -58,7 +58,8 @@ export function registerBebeszenieZasadyTests(quench) {
       });
 
       it("autodestrukcja: 8 maszyn z cechą (Notatnik łowcy), szanse z nazw statblocku", function () {
-        const z = Object.values(BESTIARY).flatMap(c => (c.features ?? []).map(f => ({ id: c.id, s: szansaZNazwy(f.name) }))).filter(x => x.s !== null);
+        const z = Object.values(BESTIARY).filter(c => !c.homebrew)
+          .flatMap(c => (c.features ?? []).map(f => ({ id: c.id, s: szansaZNazwy(f.name) }))).filter(x => x.s !== null);
         expect(z.length, z.map(x => `${x.id} ${x.s}%`).join(", ")).to.equal(8);
         for (const x of z) {
           expect(BESTIARY[x.id].creatureType, x.id).to.equal("maszyna");

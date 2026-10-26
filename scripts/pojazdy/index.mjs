@@ -4,8 +4,10 @@
  * Mapa plików:
  *  - `stan.mjs`        — co jest pojazdem, obrys, miejsca, kto jedzie (jedyne miejsce czytające flagi), skala sceny
  *  - `geometria.mjs`   — czyste funkcje: obrys w czterech kierunkach, układ miejsc, obroty
+ *  - `prezentacja.mjs` — otwarte/zakryte miejsca, rozpoznawanie jadących i lokalna kolejność grafiki
  *  - `zeton.mjs`       — podklasa żetonu: siatka w obrysie naturalnym, jadący w animacji, ukrycie,
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
+ *  - `historia.mjs`    — historia rdzenia pomija pochodne zapisy miejsc i obrysu (jedno Ctrl+Z na ruch)
  *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności, pamięć obsady (MG)
  *  - `obsada.mjs`      — karta „Posadzić?”: zapamiętana załoga na nowej scenie (§4.15)
  *  - `schowek.mjs`     — Ctrl+X / Ctrl+V pojazdu z załogą między scenami (§4.16)

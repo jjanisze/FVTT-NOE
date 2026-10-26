@@ -84,6 +84,7 @@
  */
 
 import { registerLightChangeListener } from "./light-sources.mjs";
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const VISION_DETECTION_FLAG = "visionDetectionId"; // id of the detectionModes entry we last wrote
@@ -248,11 +249,10 @@ async function _doSyncActorVision(actor) {
     if (Object.keys(update).length === 0 && !flagStale) continue;
 
     try {
-      if (Object.keys(update).length) await doc.update(update);
       if (flagStale) {
-        if (nextId) await doc.setFlag(MODULE_ID, VISION_DETECTION_FLAG, nextId);
-        else await doc.unsetFlag(MODULE_ID, VISION_DETECTION_FLAG);
+        update[`flags.${MODULE_ID}.${VISION_DETECTION_FLAG}`] = nextId ?? _del;
       }
+      await doc.update(update, { [DERIVED_UPDATE]: true });
     } catch (e) {
       console.warn(`${MODULE_ID} | vision-sources: nie udało się zsynchronizować widzenia tokena`, e);
     }

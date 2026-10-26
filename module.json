@@ -193,6 +193,13 @@
       "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze", "pojazdy", "tabele"]
     }
   ],
+  "documentTypes": {
+    "RegionBehavior": {
+      "trudnePrzejscie": {},
+      "strefaSkazenia": {},
+      "skok": {}
+    }
+  },
   "esmodules": ["scripts/main.mjs"],
   "styles": ["styles/neuroshima.css", "styles/postoj.css", "styles/pojazdy.css"],
   "languages": [

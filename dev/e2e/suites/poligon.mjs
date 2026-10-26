@@ -68,6 +68,22 @@ async function panel() {
   return document.querySelectorAll("#poligon-panel .poligon-row").length;
 }
 
+/** Clicks every tab; one that never turns active or renders an error is reported. */
+async function zakladki() {
+  const root = document.querySelector("#poligon-panel");
+  const ids = [...root.querySelectorAll("nav.poligon-tabs button")].map(b => b.dataset.tab);
+  const failed = [];
+  for (const id of [...ids.slice(1), ids[0]]) {
+    root.querySelector(`nav.poligon-tabs button[data-tab="${id}"]`).click();
+    const t = Date.now();
+    while (root.querySelector("nav.poligon-tabs button.active")?.dataset.tab !== id && Date.now() - t < 5000) await new Promise(r => setTimeout(r, 100));
+    const active = root.querySelector("nav.poligon-tabs button.active")?.dataset.tab;
+    const err = root.querySelector(".poligon-tab > .poligon-bad")?.textContent;
+    if (active !== id || err) failed.push(`${id}: ${err ?? `active is ${active}`}`);
+  }
+  return { ids, failed };
+}
+
 export default {
   name: "poligon",
   clients: ["gm"],
@@ -127,6 +143,12 @@ export default {
       const rows = await t.gm.eval(panel);
       t.assert(rows >= ids.length, `panel rows ${rows} < ${ids.length}`);
       await t.screenshot("gm", "panel");
+    });
+
+    await t.step("panel: every tab opens", async () => {
+      const r = await t.gm.eval(zakladki);
+      t.assert(r.ids.length >= 10, `only ${r.ids.length} tabs`, r);
+      t.assert(!r.failed.length, `tabs: ${r.failed.join(" | ")}`, r);
     });
 
     await t.step("server log: no errors since the run started", async () => {

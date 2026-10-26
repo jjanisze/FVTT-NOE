@@ -1,0 +1,13 @@
+{
+  "batch": 116,
+  "validatedMasks": 6,
+  "prospectiveDeliveryTargets": 6,
+  "candidateHashes": {
+    "przyspieszenie-a": "4c0834673b56c59dac06455c37a378e6850dea5b6c1006005880fcd23c5e2b4b",
+    "przyspieszenie-b": "a9368c1c499c2fa7af92fed1dbe4860628a3782d216957eed14ec5586a53d19c",
+    "przyspieszenie-c": "347387679fa38bb839f20bb3cacc876d9aeb8382d1de9ded11edb0b9c275c71e",
+    "ukrywanie-sie-a": "4bfa0ee8e4490a43bc58293be06361836cdc2907b2b7706461852caa6a572ce0",
+    "ukrywanie-sie-b": "54cb2c083e0c10110a51560fefb0a59cfc3d3b872f91ce2bc74a758d521b6169",
+    "ukrywanie-sie-c": "18a3173b839635735d47c949752f2042627c9d06cd3ebf27222f60ff3573b912"
+  }
+}

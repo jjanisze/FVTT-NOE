@@ -87,6 +87,41 @@ async function syncCover(scene, propId, otwarte) {
 }
 
 /**
+ * Podłoga pod propem w scenie z poziomami (wrota silosu nad szybem): region `defineSurface`
+ * z flagą `role: "hatch-floor"` i tym samym `propId`. Płyta zasunięta → podłoga jest i chodzi
+ * się po niej; odjechana → podłogi nie ma, a otwór jest otwartym spadkiem w głąb stosu.
+ *
+ * dnd5e ocenia spadanie tylko po ruchu tokena, więc ktoś stojący na płycie w chwili otwarcia
+ * wisiałby nad szybem. Po przełączeniu prosimy system o ponowną ocenę każdego tokenu nad
+ * włazem (`TokenDocument5e#updateFalling`) — w obie strony: zamknięcie pod spadającym też
+ * zdejmuje Spadanie. Szukamy ich po położeniu, nie po `region.tokens`: region podłogi jest
+ * płaski (dół = góra), a taki nie „zawiera” tokenu stojącego dokładnie na tej wysokości.
+ * @param {Scene} scene
+ * @param {string} propId
+ * @param {boolean} otwarte czy płyta jest odjechana
+ * @returns {Promise<number>} ile zachowań podłogi przełączono
+ */
+async function syncFloor(scene, propId, otwarte) {
+  let zmienione = 0;
+  for (const region of scene.regions) {
+    if (region.getFlag(FLAG, "propId") !== propId) continue;
+    if (region.getFlag(FLAG, "role") !== "hatch-floor") continue;
+    const updates = region.behaviors
+      .filter(b => b.type === "defineSurface" && b.disabled !== otwarte)
+      .map(b => ({ _id: b.id, disabled: otwarte }));
+    if (!updates.length) continue;
+    await region.updateEmbeddedDocuments("RegionBehavior", updates);
+    zmienione += updates.length;
+    for (const token of scene.tokens) {
+      if (!region.includedInLevel(token._source.level)) continue;
+      if (!region.polygonTree.testPoint(token.getCenterPoint(token._source))) continue;
+      await token.updateFalling?.();
+    }
+  }
+  return zmienione;
+}
+
+/**
  * Przełącza propa z poziomu makra lub konsoli, bez klikania w klamkę.
  * Przydatne, gdy wrota otwiera fabuła (panel sterowania, karta dostępu),
  * a nie ktoś stojący obok. Animację i dźwięk i tak zrobi Foundry.
@@ -126,7 +161,9 @@ async function syncAll(scene) {
   for (const wall of scene.walls) {
     if (wall.getFlag(FLAG, "role") !== "door") continue;
     const propId = wall.getFlag(FLAG, "propId");
-    if (propId) zmienione += await syncCover(scene, propId, wall.ds === DOOR_OPEN);
+    if (!propId) continue;
+    zmienione += await syncCover(scene, propId, wall.ds === DOOR_OPEN);
+    zmienione += await syncFloor(scene, propId, wall.ds === DOOR_OPEN);
   }
   return zmienione;
 }
@@ -157,6 +194,7 @@ export function registerMapProps() {
     const propId = wall.getFlag(FLAG, "propId");
     if (!propId) return;
     syncCover(wall.parent, propId, changes.ds === DOOR_OPEN);
+    syncFloor(wall.parent, propId, changes.ds === DOOR_OPEN);
   });
 
   // Scena mogła zostać zapisana z drzwiami w jednym stanie, a obrysem w drugim.
@@ -170,4 +208,4 @@ export function registerMapProps() {
   console.log(`${MODULE_ID} | Propy map gotowe`);
 }
 
-export const mapPropsApi = { toggleProp, syncCover, syncAll, listProps };
+export const mapPropsApi = { toggleProp, syncCover, syncFloor, syncAll, listProps };

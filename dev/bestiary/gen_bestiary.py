@@ -205,6 +205,11 @@ AUTOMATION = {
     },
     "bit-boys.skok": {"kind": "descriptive"},
 
+    # ---- Kurczak wybuchowy (własny, Podrecznik/Bestiariusz/Własne) ----
+    # Akcja MG: wybuch od razu, bez k100 i odliczania — ta sama ścieżka co Autodestrukcja przy awarii 20
+    # (scripts/combat/autodestrukcja.mjs `wybuch()`, parametry z cechy „Autodestrukcja (100%)” tej istoty).
+    "kurczak-wybuchowy.detonacja": {"kind": "detonacja", "activation": "action"},
+
     # ---- Reakcje TT (PLAN_tt D13, scripts/combat/obrona.mjs) ----
     # „Gladiator może podnieść swoją TT o +3 wobec jednego ataku wręcz" — przycisk MG w oknie
     # „Reakcje celu" na karcie ataku; `scope: attack` = tylko ten atak.
@@ -325,6 +330,7 @@ def build_creature(cid, r):
         "carry": r.get("carry"),
         "overlay": r.get("overlay", False),
         "randomized": r.get("randomized", False),
+        "homebrew": r.get("homebrew", False),
         "features": [],
         "attacks": [],
     }

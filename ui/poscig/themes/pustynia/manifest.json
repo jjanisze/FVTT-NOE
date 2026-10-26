@@ -280,6 +280,38 @@
           451
         ]
       }
+    },
+    "desert-buildings-v3": {
+      "file": "desert-buildings-v3.webp",
+      "width": 1536,
+      "height": 1024,
+      "role": "atlas",
+      "frames": {
+        "desert-garage": [
+          8,
+          13,
+          829,
+          472
+        ],
+        "desert-shack": [
+          874,
+          33,
+          653,
+          462
+        ],
+        "desert-gas-canopy": [
+          26,
+          545,
+          780,
+          435
+        ],
+        "desert-motel": [
+          806,
+          546,
+          718,
+          440
+        ]
+      }
     }
   },
   "groups": {
@@ -345,6 +377,12 @@
       "dust-2",
       "dust-3",
       "dust-4"
+    ],
+    "buildings": [
+      "desert-garage",
+      "desert-shack",
+      "desert-gas-canopy",
+      "desert-motel"
     ]
   },
   "props": {
@@ -543,6 +581,47 @@
       "height": 180,
       "crop": 1,
       "alpha": 0.45
+    },
+    "desert-garage": {
+      "atlas": "desert-buildings-v3",
+      "frame": "desert-garage",
+      "height": 620,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "desert-shack": {
+      "atlas": "desert-buildings-v3",
+      "frame": "desert-shack",
+      "height": 580,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "desert-gas-canopy": {
+      "atlas": "desert-buildings-v3",
+      "frame": "desert-gas-canopy",
+      "height": 620,
+      "crop": 0.92,
+      "alpha": 1
+    },
+    "desert-motel": {
+      "atlas": "desert-buildings-v3",
+      "frame": "desert-motel",
+      "height": 580,
+      "crop": 0.92,
+      "alpha": 1
+    }
+  },
+  "foreground": {
+    "buildings": {
+      "rate": 2.5,
+      "stride": 36000,
+      "chance": 0.65,
+      "yOffset": [
+        160,
+        430
+      ],
+      "tint": 11049604,
+      "blur": 2.0
     }
   }
 }

@@ -2,6 +2,7 @@
 import { poscigFlag, LANE_W } from "./poscig.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "./poscig-motion-model.mjs";
 import { jadacyPojazdu, jazdaZetonu } from "../pojazdy/stan.mjs";
+import { DERIVED_UPDATE } from "../canvas-history.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const SETTING_SWAY = "poscigVehicleSway";
@@ -79,9 +80,12 @@ function restore(entry) {
   entry.applied = false;
 }
 
-function beforeFrame() { for (let i = 0; i < active.length; i++) restore(active[i]); }
+function restoreAll() { for (let i = 0; i < active.length; i++) restore(active[i]); }
+function beforeFrame() { if (!game.paused) restoreAll(); }
 
 function afterFrame() {
+  // Retain the last applied pose and phase while time is stopped.
+  if (game.paused) return;
   const begin = performance.now();
   const tempo = poscigFlag()?.tempoTla ?? 2;
   const dt = Math.min(ticker.deltaMS, 50) / 1000, ease = 1 - Math.exp(-dt / SIZE_EASE_S);
@@ -117,7 +121,7 @@ function remember(token) {
 }
 
 function stop() {
-  beforeFrame(); entries.clear(); active = [];
+  restoreAll(); entries.clear(); active = [];
   ticker?.remove(beforeFrame, null); ticker?.remove(afterFrame, null); ticker = null;
 }
 
@@ -135,7 +139,7 @@ async function start() {
     const updates = canvas.scene.tokens.map(doc => ({ doc, rotation: facing(doc) }))
       .filter(({doc, rotation}) => rotation !== null && (doc.rotation !== rotation || doc.lockRotation))
       .map(({doc, rotation}) => ({ _id: doc.id, rotation, lockRotation: false }));
-    if (updates.length) await canvas.scene.updateEmbeddedDocuments("Token", updates, { animate: false });
+    if (updates.length) await canvas.scene.updateEmbeddedDocuments("Token", updates, { animate: false, [DERIVED_UPDATE]: true });
   }
 }
 
@@ -143,7 +147,7 @@ export function resetPoscigSway() {
   // v14 broadcasts user Setting documents to every client and runs onChange there too.
   // Read this user's value rather than adopting the other user's callback argument.
   enabled = game.settings.get(MODULE_ID, SETTING_SWAY);
-  beforeFrame();
+  restoreAll();
 }
 
 export function registerPoscigMotion() {
@@ -159,7 +163,7 @@ export function registerPoscigMotion() {
     // Deleted: the v14 operator under the key, or (older callers) a `-=` key.
     if (changed?.["-=poscig"] !== undefined || changed?.poscig instanceof foundry.data.operators.ForcedDeletion) stop();
     else if (changed?.poscig && !ticker && canvas.ready) start();
-    if (changed?.poscig?.tempoTla === 0) beforeFrame();
+    if (changed?.poscig?.tempoTla === 0) restoreAll();
   });
   start();
 }

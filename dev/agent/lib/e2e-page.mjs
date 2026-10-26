@@ -19,7 +19,7 @@
 
 /* Runs in the page: no references to anything outside this function. */
 export function installE2E({ trace = false } = {}) {
-  const VERSION = 2;
+  const VERSION = 3;
   if (window.__e2e?.version === VERSION) {
     window.__e2e.trace = trace;
     return { installed: false, trace };
@@ -32,6 +32,19 @@ export function installE2E({ trace = false } = {}) {
   const e = {
     version: VERSION, trace, pending: 0, writes: [], lastActivity: Date.now(), originalUniform: null,
     sleep,
+
+    /** Pixel inspection for either image/canvas sources or durable PIXI RGBA buffers. */
+    textureSource(base) {
+      if (base.resource.source) return base.resource.source;
+      const pixels = new Uint8ClampedArray(base.resource.data);
+      if (base.alphaMode === PIXI.ALPHA_MODES.PMA) for (let i = 0; i < pixels.length; i += 4) {
+        const alpha = pixels[i + 3];
+        if (alpha) for (let c = 0; c < 3; c++) pixels[i + c] = Math.round(pixels[i + c] * 255 / alpha);
+      }
+      const cv = document.createElement("canvas"); cv.width = base.realWidth; cv.height = base.realHeight;
+      cv.getContext("2d", { willReadFrequently: true }).putImageData(new ImageData(pixels, cv.width, cv.height), 0, 0);
+      return cv;
+    },
 
     async until(fn, { timeoutMs = 10_000, intervalMs = 100, message = "condition" } = {}) {
       const end = Date.now() + timeoutMs;

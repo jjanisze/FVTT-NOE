@@ -10,7 +10,8 @@
  * „(wrak)” w nazwie, oryginał w fladze żetonu i [Przywróć grafikę] u MG. Poza szansą — „bez wybuchu”.
  *
  * Awaria 20 drona (karta „Śmierć — autodestrukcja” potwierdzona przez MG) → od razu ta sama ścieżka, bez k100 i
- * odliczania; bez parametrów wybuchu w statblocku — tylko wrak i linia dla MG.
+ * odliczania; bez parametrów wybuchu w statblocku — tylko wrak i linia dla MG. Tak samo akcja „Detonacja”
+ * (automatyka `detonacja`, Kurczak wybuchowy): użycie akcji przez MG to decyzja — wybuch od razu.
  *
  * Flaga na aktorze żetonu: `autodestrukcja = { stan: "czeka"|"odlicza"|"wybuch"|"bez"|"anulowane", rundy, wynik,
  * poza, zniszczone }` — bebeszenie czyta `stan === "wybuch"` (po wybuchu zostaje tylko MK, s. 204).
@@ -234,7 +235,8 @@ export async function wybuch(actor, { powod = "autodestrukcja" } = {}) {
       save: X.parseSaveSpec(ro), damage: X.parseDamageSpec(`${wzory} obrażeń wybuchowych`), ignite: null, isMine: false,
       areaLabel: `promień ${d.promien} m`, saveText: ro,
       effectText: `${wzory} obrażeń wybuchowych${stany.length ? `, ${stany.join(" i ")}${d.czasStanow ? ` na ${d.czasStanow}` : ""}` : ""}${d.polowa ? "; sukces — połowa obrażeń" : ""}.`
-    }, { detonated: true, note: `<strong>Autodestrukcja</strong> (s. 204)${powod === "awaria" ? " — awaria 20" : ""}.` });
+    }, { detonated: true, note: `<strong>Autodestrukcja</strong> (s. 204)${
+      powod === "awaria" ? " — awaria 20" : powod === "detonacja" ? " — Detonacja (akcja)" : ""}.` });
   } else {
     linie.push(d ? "Brak żetonu na scenie — wybuch rozstrzyga MG." : "Statblock bez parametrów wybuchu — wybuch rozstrzyga MG.");
   }
@@ -252,6 +254,17 @@ export async function wybuch(actor, { powod = "autodestrukcja" } = {}) {
   return { token };
 }
 
+/**
+ * Akcja „Detonacja” (automatyka `detonacja`): MG użył akcji istoty — wybuch od razu, bez k100 i odliczania.
+ * @param {{item?: Item, actor?: Actor}} activity  aktywność z `dnd5e.postUseActivity`
+ * @returns {Promise<object|null>}
+ */
+export async function detonacjaZAkcji(activity) {
+  const a = activity?.item?.flags?.[MODULE_ID]?.bestiary?.automation;
+  if (a?.kind !== "detonacja" || !game.user.isGM || !activity.actor) return null;
+  return wybuch(activity.actor, { powod: "detonacja" });
+}
+
 /* -------------------------------------------- */
 /*  Rejestracja                                  */
 /* -------------------------------------------- */
@@ -259,6 +272,7 @@ export async function wybuch(actor, { powod = "autodestrukcja" } = {}) {
 export function registerAutodestrukcja() {
   Hooks.on("updateCombat", _onUpdateCombat);
   Hooks.on("neuroshima.bnPada", actor => { void zaproponujAutodestrukcje(actor); });
+  Hooks.on("dnd5e.postUseActivity", activity => { void detonacjaZAkcji(activity); });
   Hooks.on("neuroshima.smiercPotwierdzona", (actor, karta) => {
     if (karta?.przyczyna === "autodestrukcja" && game.user.isGM) void wybuch(actor, { powod: "awaria" });
   });
@@ -292,5 +306,5 @@ export function registerAutodestrukcja() {
 
 export const autodestrukcjaApi = Object.freeze({
   dane: daneAutodestrukcji, stan: stanAutodestrukcji, zaproponuj: zaproponujAutodestrukcje, rzut: rzutAutodestrukcji,
-  wybuch, wrak, przywroc: przywrocZeton
+  wybuch, wrak, przywroc: przywrocZeton, detonacja: detonacjaZAkcji
 });

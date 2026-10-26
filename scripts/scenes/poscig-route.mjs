@@ -7,6 +7,15 @@ export function hash(seed, stream, index = 0) {
 }
 export const randomAt = (seed, stream, index) => hash(seed, stream, index) / 4294967296;
 
+/** Sparse foreground placement remains identical after a seek, rebuild or recenter. */
+export function foregroundPlacement(config, seed, role, index) {
+  const [lo, hi] = config?.yOffset ?? [0, 0];
+  return {
+    enabled: randomAt(seed, `${role}-spawn`, index) < (config?.chance ?? 1),
+    sink: lo + (hi - lo) * randomAt(seed, `${role}-depth`, index)
+  };
+}
+
 const permutationCache = new WeakMap();
 function permutation(items, seed, stream, block) {
   let cache = permutationCache.get(items);

@@ -54,6 +54,7 @@ export class SceneryTextureCache {
   stats() {
     return {catalogLoads:this.loads, textureEvictions:this.evictions, residentTextures:this.bases().length,
       residentTextureBytes:this.bytes(), peakTextureBytes:this.peakBytes, pendingTextures:this.entries.size-this.bases().length,
+      residentBufferBytes:this.bases().reduce((n,b)=>n+(b.resource?.data?.byteLength??0),0),
       textureError:this.error};
   }
   destroy() {

@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 52 creatures, 260 features (100 automated), 1 attack riders.
+ * 53 creatures, 265 features (104 automated), 1 attack riders.
  */
 
 export const BESTIARY = {
@@ -121,6 +121,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 102,
       "formula": "16d10 + 32"
@@ -309,6 +310,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 72,
       "formula": "12d8 + 24"
@@ -447,6 +449,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 60,
       "formula": "12d8 + 12"
@@ -636,6 +639,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 24,
       "formula": "8d6"
@@ -795,6 +799,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "20 papierosów, medpak, 5k6 naboi .44 Mag, talia kart, wizytówki",
+    "homebrew": false,
     "hp": {
       "avg": 88,
       "formula": "12d8 + 24"
@@ -919,6 +924,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "1k4 papierosów, 6 (2k6) naboi .38 SPL",
+    "homebrew": false,
     "hp": {
       "avg": 9,
       "formula": "1d4 + 1"
@@ -1058,6 +1064,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "4k6 papierosów, medpak, granat odłamkowy",
+    "homebrew": false,
     "hp": {
       "avg": 108,
       "formula": "12d8 + 48"
@@ -1189,6 +1196,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "2k6 papierosów, medpak, 30 naboi 9 mm",
+    "homebrew": false,
     "hp": {
       "avg": 60,
       "formula": "8d8 + 16"
@@ -1298,6 +1306,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "1k6 papierosów, 1k4 painkillerów, 12 (4k6) naboi .45 ACP",
+    "homebrew": false,
     "hp": {
       "avg": 18,
       "formula": "1d8 + 2"
@@ -1420,6 +1429,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 36,
       "formula": "6d8 + 12"
@@ -1556,6 +1566,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 30,
       "formula": "6d8 + 6"
@@ -1713,6 +1724,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 64,
       "formula": "8d10 + 24"
@@ -1870,6 +1882,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "3 x oszczep, łańcuch, narzędzia małego kowala",
+    "homebrew": false,
     "hp": {
       "avg": 72,
       "formula": "8d10 + 32"
@@ -2008,6 +2021,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "zestaw małego ślusarza, 2k6 papierosów, środek usypiający.",
+    "homebrew": false,
     "hp": {
       "avg": 38,
       "formula": "6d8 +14"
@@ -2118,6 +2132,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "zestaw narzędzi, granat dymny, granat odłamkowy",
+    "homebrew": false,
     "hp": {
       "avg": 30,
       "formula": "6d8 + 6"
@@ -2272,6 +2287,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "narzędzia małego charakteryzatora, granat odłamkowy, granat dymny, medpak",
+    "homebrew": false,
     "hp": {
       "avg": 112,
       "formula": "16d8 + 48"
@@ -2394,6 +2410,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 192,
       "formula": "16d12 + 96"
@@ -2536,6 +2553,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 64,
       "formula": "8d10 + 24"
@@ -2716,6 +2734,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 108,
       "formula": "12d8 + 60"
@@ -2872,6 +2891,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 48,
       "formula": "12d8"
@@ -3116,6 +3136,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 320,
       "formula": "20d12 + 200"
@@ -3271,6 +3292,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "1 kg suszonego mięsa, 1 l wody, 2k10 strzał, tarcza, oszczep x 2",
+    "homebrew": false,
     "hp": {
       "avg": 26,
       "formula": "2d8 + 6"
@@ -3451,6 +3473,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 84,
       "formula": "12d10 + 24"
@@ -3563,6 +3586,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 8,
       "formula": "4d4"
@@ -3653,6 +3677,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 18,
       "formula": "2d10 + 8"
@@ -3739,6 +3764,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 32,
       "formula": "4d10 + 12"
@@ -3825,6 +3851,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 32,
       "formula": "4d10 + 12"
@@ -3925,6 +3952,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "1k6 papierosów, 1k4 painkillerów, 15 (5k6) naboi .45 ACP",
+    "homebrew": false,
     "hp": {
       "avg": 24,
       "formula": "2d8 + 2"
@@ -4055,6 +4083,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 144,
       "formula": "16d10 + 64"
@@ -4171,6 +4200,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 12,
       "formula": "4d4 + 4"
@@ -4206,6 +4236,141 @@ export const BESTIARY = {
       "skr": 5
     },
     "sp": 5,
+    "speed": {
+      "walk": 12
+    },
+    "tools": null,
+    "typeNote": "Molocha",
+    "usesZranienie": false,
+    "vulnerabilities": []
+  },
+  "kurczak-wybuchowy": {
+    "abilities": {
+      "cha": 1,
+      "con": 12,
+      "dex": 16,
+      "int": 4,
+      "str": 6,
+      "wis": 12
+    },
+    "ac": 16,
+    "acNote": null,
+    "attacks": [],
+    "blood": "moloch",
+    "carry": null,
+    "conditionImmunities": [
+      "frightened",
+      "poisoned"
+    ],
+    "creatureType": "maszyna",
+    "damageThreshold": null,
+    "failureThreshold": null,
+    "features": [
+      {
+        "automation": {
+          "condition": "surprised",
+          "kind": "conditionImmunity"
+        },
+        "id": "algorytm-czuwania",
+        "name": "Algorytm czuwania",
+        "section": "traits",
+        "text": "Kurczak nigdy nie jest Zaskoczony."
+      },
+      {
+        "automation": {
+          "ability": "wis",
+          "activation": "special",
+          "dc": 8,
+          "kind": "save"
+        },
+        "id": "pierwsze-spotkanie",
+        "name": "Pierwsze spotkanie",
+        "section": "traits",
+        "text": "RO na Mądrość o ST 8."
+      },
+      {
+        "automation": null,
+        "id": "wspinaczka-po-metalu",
+        "name": "Wspinaczka po metalu",
+        "section": "traits",
+        "text": "Kurczak ma elektromagnesy w swoich kurzych nóżkach, dzięki którym chodzi po metalu, niczym pająk po ścianie. Traci tę przyczepność, jeśli otrzyma stan Powalenie lub Obezwładnienie."
+      },
+      {
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 14,
+              "typ": "explosive",
+              "wzor": "4d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 13
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 100
+        },
+        "id": "autodestrukcja-100",
+        "name": "Autodestrukcja (100%)",
+        "section": "traits",
+        "text": "RO na Zręczność o ST 13, w promieniu 3 m. Porażka: 14 (4k6) obrażeń wybuchowych, Powalenie i Ogłuchnięcie na 1 minutę. Sukces: połowa obrażeń."
+      },
+      {
+        "automation": {
+          "activation": "action",
+          "kind": "detonacja"
+        },
+        "id": "detonacja",
+        "name": "Detonacja",
+        "section": "actions",
+        "text": "Kurczak odpala swój ładunek od razu, bez odliczania, i ulega zniszczeniu — wybuch jak przy Autodestrukcji: RO na Zręczność o ST 13, w promieniu 3 m. Porażka: 14 (4k6) obrażeń wybuchowych, Powalenie i Ogłuchnięcie na 1 minutę. Sukces: połowa obrażeń."
+      }
+    ],
+    "gear": null,
+    "homebrew": true,
+    "hp": {
+      "avg": 12,
+      "formula": "4d4 + 4"
+    },
+    "id": "kurczak-wybuchowy",
+    "immunities": [
+      "poison",
+      "psychic"
+    ],
+    "initiative": 7,
+    "lore": {
+      "informacje": "Wariant, o którym wspomina opis zwykłego kurczaka: model przenoszący mały ładunek wybuchowy. Nie strzela — dobiega do celu i wybucha. Z daleka łatwo go wziąć za zwykłego kurczaka, dopóki ktoś nie zauważy, że nie ma lufy. Zestrzelony nie przestaje być groźny: jego ładunek uzbraja się sam.",
+      "kategoria": "Maszyny",
+      "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha.",
+      "taktyka": "Trzyma się za zwykłymi kurczakami albo na pancerzu matki. Gdy cel podejdzie bliżej — sprint i detonacja w środku grupy. Najlepiej zestrzelić go z daleka, zanim dobiegnie; trafiony obok kogoś zostawia tykającą bombę.",
+      "wyglad": "Ten sam pękaty korpus na dwóch mikrych nóżkach, ale bez lufy. W jej miejscu nitowane płyty, żebra radiatorów i wiązki czerwonych przewodów oplatające cały kadłub. Została antenka i oczko kamery — reszta to ładunek.",
+      "wystepowanie": "Tam, gdzie zwykłe kurczaki — najczęściej w tym samym stadzie, przy tej samej matce."
+    },
+    "morale": null,
+    "name": "KURCZAK WYBUCHOWY",
+    "overlay": false,
+    "pb": 2,
+    "randomized": false,
+    "resistances": [],
+    "saves": {},
+    "senseQualifiers": null,
+    "senses": {
+      "darkvision": 90,
+      "passivePerception": 11
+    },
+    "size": "tiny",
+    "skills": {
+      "skr": 5
+    },
+    "sp": 6,
     "speed": {
       "walk": 12
     },
@@ -4346,6 +4511,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 40,
       "formula": "8d6 + 16"
@@ -4514,6 +4680,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 240,
       "formula": "16d20 + 80"
@@ -4643,6 +4810,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 48,
       "formula": "12d8"
@@ -4775,6 +4943,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 15,
       "formula": "3d6 + 6"
@@ -4903,6 +5072,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "granat improwizowany, granat dymny, 2k6 zatrutych strzał, 1k4 słabe narkotyki",
+    "homebrew": false,
     "hp": {
       "avg": 12,
       "formula": "4d6 + 4"
@@ -5048,6 +5218,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 72,
       "formula": "8d10 + 32"
@@ -5150,6 +5321,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 8,
       "formula": "2d4 + 4"
@@ -5283,6 +5455,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 120,
       "formula": "12d12 + 48"
@@ -5458,6 +5631,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 144,
       "formula": "16d10 + 64"
@@ -5597,6 +5771,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 16,
       "formula": "4d4 + 8"
@@ -5709,6 +5884,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 20,
       "formula": "2d8 + 8"
@@ -5834,6 +6010,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 28,
       "formula": "4d8 + 12"
@@ -5963,6 +6140,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 56,
       "formula": "8d6 + 32"
@@ -6118,6 +6296,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 32,
       "formula": "4d10 + 12"
@@ -6210,6 +6389,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 32,
       "formula": "8d6 + 8"
@@ -6372,6 +6552,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 96,
       "formula": "16d10 + 16"
@@ -6536,6 +6717,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "1l mocnego alkoholu, 3k6 naboi .44 Mag, 2k6 naboi .30-06, odznaka, kapelusz szeryfa",
+    "homebrew": false,
     "hp": {
       "avg": 93,
       "formula": "12d8 + 33"
@@ -6670,6 +6852,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 104,
       "formula": "16d10 + 24"
@@ -6805,6 +6988,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 16,
       "formula": "4d4 + 8"
@@ -6945,6 +7129,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": 84,
       "formula": "12d8 + 36"
@@ -7087,6 +7272,7 @@ export const BESTIARY = {
       }
     ],
     "gear": "2k6 papierosów, medpak, 5k6 naboi 5.56 mm, granat hukowy, granat odłamkowy, granat dymny, radio",
+    "homebrew": false,
     "hp": {
       "avg": 52,
       "formula": "6d8 + 12"
@@ -7213,6 +7399,7 @@ export const BESTIARY = {
       }
     ],
     "gear": null,
+    "homebrew": false,
     "hp": {
       "avg": null,
       "formula": null

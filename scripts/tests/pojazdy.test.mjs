@@ -24,6 +24,8 @@ import {
   kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "../pojazdy/stan.mjs";
 import { skretyNaDrodze } from "../pojazdy/jazda.mjs";
+import { OPCJA_SYNCHRONIZACJI } from "../pojazdy/historia.mjs";
+import { otwarteMiejsce, prezentacjaMiejsca, rozpoznawalnyJadacy, sortJadacego } from "../pojazdy/prezentacja.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
@@ -31,6 +33,125 @@ const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
 export function registerPojazdyTests(quench) {
   quench.registerBatch(`${MODULE_ID}.pojazdy`, context => {
     const { describe, it, expect } = context;
+
+    describe("Prezentacja miejsc — kabina, otwarty właz i motocykl", function () {
+      it("domyślnie zakryta; stanowisko broni i osłona nie ujawniają jadącego", function () {
+        expect(prezentacjaMiejsca(null)).to.deep.equal({ widocznosc: "zakryta", warstwa: "nad" });
+        expect(otwarteMiejsce({ stanowisko: true, oslona: "trzyCzwarte" })).to.equal(false);
+        expect(prezentacjaMiejsca({ prezentacja: { widocznosc: "otwarta", warstwa: "pod" } }))
+          .to.deep.equal({ widocznosc: "otwarta", warstwa: "pod" });
+      });
+
+      it("Hammer ujawnia tylko właz w obu układach; zostawia cztery fotele i osłonę stanowiska", function () {
+        const h = KATALOG_POJAZDOW.hammer;
+        for (const strefy of [h.strefy, h.strefyGrafiki]) {
+          const miejsca = ukladMiejsc(h.obrys, strefy);
+          const otwarte = miejsca.filter(otwarteMiejsce);
+          expect(miejsca).to.have.length(5);
+          expect(otwarte.map(m => m.id)).to.deep.equal(["wiezyczka-0-0"]);
+          expect(otwarte[0].oslona).to.equal("trzyCzwarte");
+          expect(otwarte[0].stanowisko).to.equal(true);
+          expect(prezentacjaMiejsca(otwarte[0]).warstwa).to.equal("nad");
+        }
+      });
+
+      it("motocykl pokazuje kierowcę i pasażera nad siodłem, także bez wariantu wnętrza", function () {
+        const k = KATALOG_POJAZDOW.motocykl;
+        for (const strefy of [k.strefy, k.strefyGrafiki]) {
+          const miejsca = ukladMiejsc(k.obrys, strefy);
+          expect(miejsca).to.have.length(2);
+          expect(miejsca.every(m => otwarteMiejsce(m) && prezentacjaMiejsca(m).warstwa === "nad")).to.equal(true);
+        }
+        const miejsca = ukladMiejsc(k.obrys, k.strefyGrafiki);
+        expect(miejsca[0].kierowca).to.equal(true);
+        expect(0.5 + miejsca[0].y / k.obrys.h).to.be.closeTo(0.46, 1e-6);
+        expect(0.5 + miejsca[1].y / k.obrys.h).to.be.closeTo(0.265, 0.0004);
+      });
+
+      it("otwarte miejsce ujawnia tożsamość tylko widocznej postaci, bez dostępu do reszty kabiny", function () {
+        const otwarte = { prezentacja: { widocznosc: "otwarta" } };
+        const widoczny = { object: { isVisible: true } }, ukryty = { object: { isVisible: false } };
+        expect(rozpoznawalnyJadacy(otwarte, widoczny, false)).to.equal(true);
+        expect(rozpoznawalnyJadacy({}, widoczny, false)).to.equal(false);
+        expect(rozpoznawalnyJadacy(otwarte, ukryty, false)).to.equal(false);
+        expect(rozpoznawalnyJadacy(otwarte, {}, false)).to.equal(false);
+        expect(rozpoznawalnyJadacy({}, ukryty, true)).to.equal(true);
+        expect(rozpoznawalnyJadacy(otwarte, null, true)).to.equal(false);
+      });
+
+      it("kolejność grafiki pozostaje nad nośnikiem także po zmianie jego sortowania", function () {
+        const p = { warstwa: "nad" };
+        expect(sortJadacego(1, 0, p)).to.equal(1);
+        expect(sortJadacego(1, 100, p)).to.equal(101);
+        expect(sortJadacego(200, 100, p)).to.equal(200);
+        expect(sortJadacego(200, 100, { warstwa: "pod" })).to.equal(99);
+      });
+    });
+
+    describe("Undo — historia pojazdu i zapis po ruchu", function () {
+      // Exercise the configured layer's real storeHistory without changing the user's history.
+      function historia() {
+        const layer = Object.create(canvas.tokens);
+        layer.history = [];
+        return layer;
+      }
+
+      it("synchronizacja miejsc i obrysu nie dokłada wpisu ani nie usuwa starszych", function () {
+        const layer = historia();
+        layer.storeHistory("update", [{ _id: "vehicle", rotation: 270 }], {});
+        const original = layer.history[0];
+        const data = [{ _id: "rider", x: 10, y: 20 }, { _id: "vehicle", width: 3, height: 1.5 }];
+        layer.storeHistory("update", data, { [OPCJA_SYNCHRONIZACJI]: true });
+        expect(layer.history).to.have.length(1);
+        expect(layer.history[0]).to.equal(original);
+        expect(data[0]).to.deep.equal({ _id: "rider", x: 10, y: 20 });
+      });
+
+      it("zwykły obrót zachowuje natywną historię (pojazd i zwykły żeton)", function () {
+        const layer = historia();
+        for (const id of ["vehicle", "ordinary"]) {
+          layer.storeHistory("update", [{ _id: id, rotation: 45 }], {});
+        }
+        expect(layer.history.map(h => h.data)).to.deep.equal([
+          [{ _id: "vehicle", rotation: 45 }], [{ _id: "ordinary", rotation: 45 }]
+        ]);
+      });
+
+      it("ruch zachowuje pozycję, obrys i historię drogi sprzed ruchu w opcjach undo rdzenia", function () {
+        const layer = historia();
+        const origin = { x: 100, y: 200, elevation: 0, width: 3, height: 1.5, depth: 1, shape: 4, level: "default" };
+        const waypoints = [{ ...origin, cost: 0 }];
+        layer.storeHistory("update", [{ _id: "vehicle", x: 600, y: 500, rotation: 270 }], {
+          _movement: { vehicle: { origin, passed: { waypoints: [{ ...origin, x: 700 }] },
+            recorded: true, history: { recorded: { waypoints } } } }
+        });
+        const h = layer.history[0];
+        expect(h.data).to.deep.equal([{ _id: "vehicle", rotation: 270, _movementHistory: waypoints }]);
+        expect(h.options).to.deep.equal({
+          movement: { vehicle: { waypoints: [{ ...origin, action: "displace" }], method: "undo" } },
+          diff: false, animate: false
+        });
+      });
+
+      it("tworzenie i usuwanie żetonów dalej zapisuje historię", function () {
+        const layer = historia();
+        for (const type of ["create", "delete"]) {
+          layer.storeHistory(type, [{ _id: "vehicle" }], {});
+        }
+        expect(layer.history.map(h => h.type)).to.deep.equal(["create", "delete"]);
+      });
+
+      it("pochodne tworzenie, zmiana i usunięcie światła nie mają niezależnego undo", function () {
+        const layer = Object.create(canvas.lighting);
+        layer.history = [];
+        for (const type of ["create", "update", "delete"]) {
+          layer.storeHistory(type, [{ _id: "companion", x: 10 }], { [OPCJA_SYNCHRONIZACJI]: true });
+        }
+        expect(layer.history).to.have.length(0);
+        layer.storeHistory("create", [{ _id: "manual" }], {});
+        expect(layer.history).to.have.length(1);
+      });
+    });
 
     describe("Geometria — obrys w czterech kierunkach (§4.3)", function () {
       it("kwadrant: 0 w dół, 90 w lewo, 180 w górę, 270 w prawo; skosy do najbliższego", function () {
@@ -92,6 +213,21 @@ export function registerPojazdyTests(quench) {
             expect(Math.abs(m.x), `${id} ${m.id} x`).to.be.at.most(kat.obrys.w / 2);
             expect(Math.abs(m.y), `${id} ${m.id} y`).to.be.at.most(kat.obrys.h / 2);
           }
+        }
+      });
+
+      it("fotele dostarczonej Osobówki: przód na siedziskach, trzy miejsca na kanapie; zachowane po powiększeniu auta", function () {
+        for (const skala of [1, 1.2]) {
+          const obrys = { w: osobowka.obrys.w * skala, h: osobowka.obrys.h * skala };
+          const ms = ukladMiejsc(obrys, osobowka.strefyGrafiki);
+          expect(ms).to.have.length(5);
+          const ulamki = ms.map(m => [0.5 + m.x / obrys.w, 0.5 + m.y / obrys.h]);
+          const oczekiwane = [[0.63, 0.515], [0.37, 0.515], [0.67, 0.35], [0.5, 0.35], [0.33, 0.35]];
+          for (let i = 0; i < ms.length; i++) {
+            expect(ulamki[i][0]).to.be.closeTo(oczekiwane[i][0], 0.001);
+            expect(ulamki[i][1]).to.be.closeTo(oczekiwane[i][1], 0.001);
+          }
+          expect(ms[0].kierowca).to.equal(true);
         }
       });
 

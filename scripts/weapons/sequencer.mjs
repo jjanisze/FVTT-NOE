@@ -263,6 +263,13 @@ export function seqStopLoop(origin) {
  * @param {number}  [opts.fadeIn=0]
  * @param {number}  [opts.fadeOut=400]
  * @param {number}  [opts.delay=0]
+ * @param {number}  [opts.elevation]    Absolute elevation of a raw-point effect. Sequencer (v14) shows
+ *   an effect only on the scene level that contains its elevation; a raw point without one sits at 0
+ *   and lands on whatever level starts there (the roof, not the basement where it happened).
+ * @param {string|string[]} [opts.levels] Pin to these scene levels (`.onLevels()`), regardless of elevation.
+ * @param {boolean} [opts.aboveLighting=false] Emissive: not darkened by the scene's darkness (fire, sparks).
+ * @param {{x?: number, y?: number}} [opts.spriteOffset] Shift the sprite in grid units, e.g. to centre
+ *   artwork whose visible mass is off-centre in its frame.
  * @returns {boolean} true = Sequencer played it.
  */
 export function seqEffect(file, source, {
@@ -270,7 +277,8 @@ export function seqEffect(file, source, {
   sizeSquares, tieTo, belowTokens = false, randomRotation = false,
   blendMode, zIndex,
   label, labelStyle,
-  fadeIn = 0, fadeOut = 400, delay = 0
+  fadeIn = 0, fadeOut = 400, delay = 0,
+  elevation, levels, aboveLighting = false, spriteOffset
 } = {}) {
   const Seq = _getSequencer();
   if (!Seq) return false;
@@ -332,6 +340,10 @@ export function seqEffect(file, source, {
   if (fadeOut) fx = fx.fadeOut(fadeOut);
   if (delay) fx = fx.delay(delay);
   if (tieTo) fx = fx.tieToDocuments(tieTo);
+  if (Number.isFinite(elevation)) fx = fx.elevation(elevation, { absolute: true });
+  if (levels && typeof fx.onLevels === "function") fx = fx.onLevels(levels);
+  if (aboveLighting) fx = fx.aboveLighting();
+  if (spriteOffset) fx = fx.spriteOffset(spriteOffset, { gridUnits: true });
   fx.play();
   return true;
 }

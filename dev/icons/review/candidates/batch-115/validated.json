@@ -1,0 +1,16 @@
+{
+  "batch": 115,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "kafar-a": "a53e721937e39e78e2d24010e45354a54c80d1fe7dd26c581122993363d3d41b",
+    "kafar-b": "bac5e7fabc02a18d9a3181827e0a6b511bd11dcb39846d4d88193fa0de6fb9ac",
+    "kafar-c": "70c8492d9eddc5fdb3c2e3ea8e35851a8527362c219dc2d1f51548aec986e027",
+    "unikanie-a": "607e202a5fa66e3e23a3787e5eecaf4b47fceee85b55b053077e00a38dcc3e9d",
+    "unikanie-b": "babd4db0a17d70d521109a84c990074f4a93f27e068556d5945ece798c5b8439",
+    "unikanie-c": "a4d9f712844165c310896f62c5b1e789bd718fb54d601f12c106d47cf462387f",
+    "odstapienie-a": "776d2b65f2090a2e0655607d130b9dd2e3e83d4d771a393268a15f4aab35d181",
+    "odstapienie-b": "b16f6953f24a39679898c10408413ab58acf2aca716691c5bd018f054d6a0377",
+    "odstapienie-c": "c2c7c3645b3084b51ce53913eb6eadd9cfa2537ac8f7a49f90dc7cc69153ac11"
+  }
+}

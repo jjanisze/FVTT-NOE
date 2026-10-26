@@ -11,7 +11,7 @@ import { MODULE_ID, scratchActor, scratchCleanup, walkaTestowa, waitFor } from "
 import { BESTIARY } from "../config/bestiary-data.mjs";
 import { szansaZNazwy } from "../config/autodestrukcja-rules.mjs";
 import {
-  daneAutodestrukcji, stanAutodestrukcji, rzutAutodestrukcji, wybuch, wrak, przywrocZeton
+  daneAutodestrukcji, stanAutodestrukcji, rzutAutodestrukcji, wybuch, wrak, przywrocZeton, detonacjaZAkcji
 } from "../combat/autodestrukcja.mjs";
 import { zaproponujSmierc, potwierdzSmierc } from "../combat/umieranie.mjs";
 
@@ -38,7 +38,8 @@ export function registerAutodestrukcjaTests(quench) {
 
     describe("Dane (U21)", function () {
       it("każda maszyna z cechą „Autodestrukcja (N%)” ma strukturę z generatora zgodną z nazwą", function () {
-        const z = Object.values(BESTIARY).flatMap(c => c.features.filter(f => szansaZNazwy(f.name) !== null).map(f => ({ c, f })));
+        const z = Object.values(BESTIARY).filter(c => !c.homebrew)
+          .flatMap(c => c.features.filter(f => szansaZNazwy(f.name) !== null).map(f => ({ c, f })));
         expect(z.length, "osiem maszyn (RAW)").to.equal(8);
         for (const { c, f } of z) {
           const a = f.automation;
@@ -50,6 +51,21 @@ export function registerAutodestrukcjaTests(quench) {
           expect(a.stany).to.deep.equal(["prone", "deafened"]);
         }
         expect(BESTIARY.juggernaut.features.find(f => f.automation?.kind === "autodestrukcja").automation).to.include({ szansa: 100, promien: 9 });
+      });
+
+      it("Kurczak wybuchowy (własny MG): Autodestrukcja 100% z jego statblocku; akcja Detonacja wysadza od razu", async function () {
+        const k = BESTIARY["kurczak-wybuchowy"];
+        expect(k?.homebrew, "z Podrecznik/Bestiariusz/Własne").to.be.true;
+        expect(k.features.find(f => f.automation?.kind === "autodestrukcja").automation)
+          .to.include({ szansa: 100, promien: 3 }).and.deep.include({ rzut: { cecha: "dex", st: 13 } });
+        const det = k.features.find(f => f.automation?.kind === "detonacja");
+        expect(det?.section).to.equal("actions");
+        const actor = await maszyna("kurczak-wybuchowy", { system: { attributes: { hp: { value: 12, max: 12 } } } });
+        lap();
+        const item = { flags: { [MODULE_ID]: { bestiary: { automation: det.automation } } } };
+        await detonacjaZAkcji({ item, actor });
+        expect(stanAutodestrukcji(actor)?.stan, "bez k100 i odliczania").to.equal("wybuch");
+        expect(await detonacjaZAkcji({ item: { flags: {} }, actor }), "inna akcja — nic").to.equal(null);
       });
 
       it("maszyna z Bestiariusza po id; maszyna MG — z nazwy i opisu cechy; bez cechy — null", async function () {

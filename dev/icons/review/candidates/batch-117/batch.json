@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-24",
+  "batch": 117,
+  "pass": "guarded-disengage-variations",
+  "partialAtlas": true,
+  "emptyCells": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "cell": 1,
+      "key": "odstapienie-a",
+      "variant": "a",
+      "name": "Odstąpienie — Odwrót za gardą",
+      "itemId": "hotbar-2026-odstapienie",
+      "target": "icons/actions/odstapienie.svg",
+      "request": "TWO ordinary adult humans in a CONTROLLED MELEE DISENGAGE, full-body side view. LEFT person FACES RIGHT at their opponent and takes a short balanced BACKWARD STEP LEFT. Their front forearm stays upright between their face and the opponent, the other hand protects the ribs. RIGHT opponent extends one bent arm toward them, but its hand stops SHORT OF THE GUARD with a clear black gap. Both people remain calm and balanced. Retreating person's face NEVER turns away; no running posture. The maintained guard closes the opening for a free strike. No successful hit, no weapon, shield or extra symbol. Preserve the selected reference's two-person concept with a more clearly backward-stepping and guarded defender.",
+      "caption": "Retreating person steps backward with both arms protecting head and torso; the opponent cannot reach past the guard.",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 2,
+      "key": "odstapienie-b",
+      "variant": "b",
+      "name": "Odstąpienie — Kontrola ręki i krok wstecz",
+      "itemId": "hotbar-2026-odstapienie",
+      "target": "icons/actions/odstapienie.svg",
+      "request": "TWO ordinary adult humans in CLOSE MELEE, a CONTROLLED DISENGAGE. LEFT person FACES RIGHT while stepping BACK LEFT. Their lead OPEN PALM gently CHECKS the opponent's reaching WRIST, guiding that arm to the OUTSIDE and AWAY from their torso; their other hand remains raised in guard. The RIGHT opponent faces LEFT, arm extended but not striking the retreating person's body. One clear hand-to-wrist contact only; keep both arms anatomically distinct using a wide black notch at the contact. Head and torso of the withdrawing person stay behind their own guard. No grabbing contest, throw, punch, running away, fleeing turned back, successful hit, weapon or shield. Show safe withdrawal through maintained defensive control, not an attack by the retreating person.",
+      "caption": "One person keeps the opponent's reaching wrist aside while taking a guarded backward step.",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 3,
+      "key": "odstapienie-c",
+      "variant": "c",
+      "name": "Odstąpienie — Odwrót bez wolnego ciosu",
+      "itemId": "hotbar-2026-odstapienie",
+      "target": "icons/actions/odstapienie.svg",
+      "request": "TWO ordinary adult humans in CLOSE MELEE, LEFT person FACING RIGHT at the opponent while taking a measured BACKWARD STEP LEFT, both hands in protective guard. RIGHT opponent FACES LEFT with one arm ready, no blow landing. Both are standing with natural short steps, never running or turning their back. ABOVE THE BLACK GAP BETWEEN THE TWO FIGURES place ONE SMALL SIMPLE PROHIBITED-STRIKE pictogram: a plain white circular ring containing one short attack stroke, crossed by ONE stout diagonal bar. This is a sober functional no-free-strike notation, not a physical shield, magic barrier or third character. Keep the symbol smaller than the two heads together but bold enough to read. The two human figures and their controlled retreat remain the main subject. No letters, numbers, arrows, fists floating separately, weapons, impact star or successful hit.",
+      "caption": "Guarded withdrawal by two people, with a small barred-strike sign to test a direct no-free-attack cue.",
+      "context": "Ogólna akcja gracza: Odstąpienie [A], dla Złodzieja także [B]. NOE s. 30 i 91. Odrębny glif człowieka; rysunek odlatującej istoty zostaje przy swoim oryginalnym zastosowaniu.",
+      "deliveryTargets": [
+        {
+          "source": "icons/actions/odstapienie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    }
+  ]
+}

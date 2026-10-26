@@ -2,7 +2,8 @@
 
 > Status: **część 1 ZROBIONA** (E0–E8, noc 2026-10-19 — do weta MG, §10); **część 1b ZROBIONA** (E9–E11, pojazdy
 > między scenami, §4.14–§4.16, 2026-10-19); **część 2: P1–P4 ZROBIONE** (złożona droga, metryka, jadący, serie i
-> obszary, §6.2), **P5 — runda pytań** (§10, 11 pytań), P6 — stanowisko Poligonu przebudowane, bramka w §11.
+> obszary, §6.2), **P5 — runda pytań** (§10, 11 pytań), P6 — stanowisko Poligonu przebudowane, bramka w §11;
+> **część 3 — wierzchowce, PROJEKT** (§6.3, przeniesione z M6 2026-10-25).
 > Decyzje MG D1–D31 (§1). Rozmiar: **XL** (część 1: L, część 1b: M, część 2: L — plansza od nowa).
 > Wywołanie: `PLAN_beta.md` §0, krok 4 (przesunięty przed M6, MG 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie), a od 2026-10-19 także geometrię planszy
@@ -25,6 +26,7 @@
 | **1. Pojazdy** | katalog 14 pojazdów (paczka), karta pojazdu, wsiadanie na miejsca z żetonami jadącymi razem z pojazdem, prześwietlenie i kropki, silnik (uruchom/zgaś, dym, drgania, dźwięk), jazda w turze kierowcy, skręty, potrącenia, awarie k20 ze skutkami i naprawami, Wojownik autostrady, stanowisko Poligonu | §4–§6 |
 | **1b. Między scenami** | jedna reguła skali (obrys w metrach, znacznik na mapach w km), pamięć obsady i karta „Posadzić?”, Ctrl+X / Ctrl+V z załogą | §4.14–§4.16 |
 | **2. Pościgi** | plansza od nowa — złożona droga (pojazdy w prawdziwej skali, tor = 36 m), metryka drogi dla zasięgów i obszarów, serie z celowaniem, jadący na planszy; paleta manewrów, Test Pościgu, komplikacje k20, ataki, wypadanie, koniec pościgu | §6.2 |
+| **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu | §6.3 |
 
 ```mermaid
 flowchart LR
@@ -59,7 +61,7 @@ flowchart LR
 |---|---|
 | D1 | **Podział.** Część 1 — pojazdy poza pościgiem (s. 260–265) z awariami i naprawami, bo RAW wyzwala awarie także poza pościgiem; komplikacje 1–3 pościgu losują z tej samej tabeli. Część 2 — tylko tryb pościgu (s. 266–268). |
 | D2 | **Jadący na mapie (wariant b).** Żetony postaci zostają na mapie, zmniejszone do miejsca i poza siatką, i jadą z pojazdem: pozycja, obrót (kierowca patrzący do przodu dalej patrzy do przodu po obrocie o 180°) i drgania silnika. |
-| D3 | **Widok.** Jadący są ukryci w każdym pojeździe; pojazd pokazuje **kropki** — „widzę trzy sylwetki w środku”. **Prześwietlenie** (nadwozie przygasa, jadący widoczni i klikalni) mają MG, właściciele pojazdu i gracze, których postacie siedzą w środku. Bez osobnego dachu i bez dokładnych foteli — miejsca rozkładają się ogólnie w obrysie. |
+| D3 | **Widok (doprecyzowanie D32, 2026-10-25).** Zakryte miejsca ukrywają jadących i pokazują kropki. Prześwietlenie mają MG, właściciele i jadący; sparowana grafika pokazuje wnętrze, pozostałe nadwozia przygasają. Otwarte miejsca ujawniają pełny żeton zamiast kropki. Układ miejsc może być dopasowany do grafiki. |
 | D4 | **Wybór miejsca** w małym oknie z obrazem pojazdu z góry i klikalnymi miejscami; to samo okno dla „Przesiądź się”. |
 | D5 | **Awarie: [Zastosuj] stosuje skutki mierzalne** (Szybkość, TT, pożar, wyciek paliwa, dym, zegary); fabularne — tekst na karcie. Zegary: **2k10 rund** wg RAW (w walce rundy, poza walką zegar świata, runda = 6 s). Płonący pojazd: **2k6 od ognia** na końcu tury kierowcy, jak jadący. |
 | D6 | **10 pojazdów bez statbloku: improwizujemy.** Interpolacja z czterech statbloków jako podstawa plus własne, tanie i pewne cechy (§5), oznaczone jako RAI/WKK. |
@@ -93,6 +95,8 @@ flowchart LR
 | D29 | **Ogień zaporowy na planszy przykleja się do pojazdu**, na którym go położono — łapie jego jadących także przy przesiadce. |
 | D30 | **Rzeczy na drodze** (kolczatka, flara, mina) — wg znacznika, wyzwalane wjazdem pojazdu w ten znacznik (wynika z D25). |
 | D31 | **Obraz między pojazdami nie musi zgadzać się z geometrią:** smuga może iść w bok albo do tyłu, obowiązuje lista trafionych. Rysunek wybuchu przycięty do pojazdów, których dosięga — **po pierwszej grze** (§10). |
+| D32 | **Prezentacja miejsc, MG 2026-10-25.** Wspólny model rozdziela otwarte/zakryte miejsce i kolejność grafiki. Właz Hammera: pełny żeton zawsze widoczny zgodnie ze zwykłą widocznością Foundry, **nad dachem**, bez kropki. Kabina nadal zakryta. Grafiki Hammera bez zmian; rysowanie pod osobnym dachem odłożone. To fundament W1, bez uruchamiania całej części 3. |
+| D33 | **Obsługa wieżyczek po becie, MG 2026-10-26.** Rozbudowane zasady stanowisk i wieżyczek odkładamy. Wstępne założenie: użycie broni na odpowiednim stanowisku ma niwelować wymogi/kary właściwości **Ciężka** oraz **Utrudnienie za atak z jadącego pojazdu**. To kierunek do doprecyzowania po becie, nie bieżąca zmiana mechaniki. |
 
 ---
 
@@ -147,6 +151,12 @@ narzędzia małego mechanika (M6).
 
 ### 4.1 Jadący — żetony, które jadą z pojazdem (D2)
 
+**Diagnoza 2026-10-26 — skala do poprawy.** Dotychczasowy rozmiar miejsca 0,5 pomniejsza także
+grafikę jadącego o połowę, dodatkowo do ustawionych 85%. Potwierdzone na 14/14 podwozi.
+Rozmiar miejsca trzeba oddzielić od prezentacji postaci; sama zmiana stałej przesunęłaby także
+domyślne kotwice. [Pomiary i zakres poprawki](dev/audits/vehicle-occupant-scale-2026-10-26.md).
+Poniżej opis dotychczasowego zachowania; w tej diagnozie nie zmieniano mechanizmu.
+
 Rdzeń 14 ma już ten wzorzec dla Regionów przypiętych do żetonu: zmiany Regionu idą w tej samej operacji co ruch
 żetonu, a w animacji Region odświeża się co klatkę (`client/documents/token.mjs` — `#computeAttachedRegionUpdates`,
 `client/canvas/placeables/token.mjs` — `#animateAttachments`). Jadący robią to samo — **bez przepinania obiektów
@@ -164,16 +174,28 @@ PIXI**:
 - **Wizja:** rdzeń nie wiąże wizji z widocznością żetonu (`Token#_isVisionSource` nie czyta `isVisible`), więc ukryty
   jadący dalej widzi — gracz patrzy z wnętrza pojazdu.
 
-### 4.2 Kropki i prześwietlenie (D3)
+### 4.2 Prezentacja miejsc, kropki i prześwietlenie (D3, D32)
 
 - **Ukrycie lokalne**, nie `hidden` dokumentu (ukryty dokument odebrałby graczowi własny żeton): nadpisanie
-  `Token#isVisible` dla jadących — `false`, chyba że ten klient prześwietla ten pojazd albo kontroluje tego jadącego.
-- **Kropki:** nakładka pojazdu, jedna kropka na postać w środku (bez tożsamości), widoczna dla wszystkich, którzy
+  `Token#isVisible` dla zakrytych miejsc — `false`, chyba że klient prześwietla pojazd albo kontroluje jadącego.
+  Otwarte miejsce przechodzi zwykłą widoczność Foundry: mgła, ściany i ręczne `hidden` nadal obowiązują.
+- **Kropki:** nakładka pojazdu, jedna kropka na postać na zakrytym miejscu (bez tożsamości), widoczna dla tych, którzy
   widzą pojazd. **Kropka jest uchwytem celowania (D14):** wycelowanie w nią ustawia cel na ukrytym jeźdźcu.
 - **Prześwietlenie:** po najechaniu na pojazd — nadwozie do ok. 35% krycia, jadący widoczni i klikalni. Mają je MG,
   właściciele pojazdu i gracze z postacią w środku. Pozostali widzą kropki.
 - **Zaznaczanie pojazdu:** ukryci jadący nie przyjmują kliknięć, więc klik w pojazd zaznacza pojazd; w
   prześwietleniu klik w jadącego zaznacza jadącego, Alt+klik przechodzi do pojazdu.
+
+**Model D32.** Strefa może zawierać `prezentacja: { widocznosc: "otwarta", warstwa: "nad" }`;
+`geometria.mjs` przenosi te dane na miejsca. Brak ustawienia oznacza `zakryta` i `nad`.
+`prezentacja.mjs` rozstrzyga wspólnie widoczność, rozpoznawanie jadącego i kolejność rysowania.
+`warstwa` jest względna wobec całej grafiki nośnika (`nad`/`pod`); osobny dach i maska włazu nie są wdrażane.
+Hammer używa wyłącznie `nad`: pełny żeton strzelca pozostaje nad zamkniętym nadwoziem oraz odsłoniętym wnętrzem.
+Względny porządek siatek liczony jest lokalnie po odświeżeniu rdzenia; nie zapisuje zmian sortowania przy najazdach.
+Otwarte miejsce nie nadaje własności, dostępu do ładowni ani prawa prześwietlenia reszty kabiny. Okno Miejsca
+i lista Załogi mogą rozpoznać widoczną postać na otwartym miejscu, pozostawiając pozostałe miejsca jako „zajęte”.
+Prezentacja jest niezależna od `stanowisko` i `oslona`; właz zachowuje osłonę ¾ oraz mechanikę broni.
+Istniejące własne strefy wymagają jawnego dodania prezentacji; podgląd Hammera w Poligonie aktualizujemy punktowo.
 
 ### 4.3 Obrys pojazdu (D13 — próba E0)
 
@@ -299,6 +321,12 @@ testu. **WKK:** w jadącym pojeździe zmiana rzędu (przód↔tył, kabina↔pak
 pojazd = ruszył się w tej albo poprzedniej turze kierowcy.
 
 ### 4.11 Broń montowana (D16)
+
+**D33, 2026-10-26 — po becie.** Rozbudowa obsługi wieżyczek i reguły stabilizacji są odłożone.
+Wstępnie stanowisko ma niwelować wymogi/kary właściwości **Ciężka** i Utrudnienie wynikające
+ze strzelania z jadącego pojazdu. Zakres stanowisk, sektory ostrzału, obracanie i szczegóły akcji
+pozostają do ustalenia po becie. Poniższa dotychczasowa obsługa montażu i przekazywania broni
+nie wprowadza jeszcze tych wyjątków.
 
 **Montaż i demontaż to Roboty produkcji.** Produkcja już dziś ma Robotę ad hoc MG (dowolny przedmiot, cena i
 narzędzia od MG — `production/okna.mjs` `oknoAdHoc`) i wyniki trzech rodzajów: przedmiot, aktor (dron), naprawa z
@@ -538,6 +566,77 @@ planszy pojazd zawsze „jedzie”: przesiadka zawsze z kosztem RAW, atak z jad�
 | **P5** | **Mechanika pościgu** (§6.2.5) — po rundzie pytań. | M–L | pościg od startu do mety bez notatek MG (`PLAN_beta.md`, M4) |
 | **P6** | **Poligon i bramka**: stanowiska `poscig` i `droga` od nowa, sondy D24–D31, `release:check`. | M | bramka zielona |
 
+### 6.3 Część 3 — nośniki: wierzchowce (z M6, MG 2026-10-25)
+
+> Przeniesione z `PLAN_m6_drobne_zasady.md` (tamten §5.7, decyzje D7 i D10, ustalenia U17–U21, otwarte P4 i P6).
+> Powód: to refaktor kodu części 1 (`pojazdy/stan.mjs`, jadący, żeton) pod te same testy (e2e `pojazd`, Garaż), a dwie
+> niedokończone sprawy tego planu to ten sam problem dla pojazdu i konia — **Inicjatywa za kierowcą** (§10, pytanie 7)
+> i **budżet ruchu nośnika z deklarowanymi akcjami** (znany brak „Akcje bonusowe cech” w §10; `HANDOFF_movement_hotbar.md`
+> §3 zostawia ruch pojazdów temu planowi). Rozmiar: **L**. Nie blokuje M6 ani M7.
+
+**RAW (s. 257).** Wierzchowiec ≥ 1 rozmiar większy od jeźdźca, z siodłem; wsiadanie i zsiadanie za ½ Szybkości, w
+zasięgu 1,5 m. Wyszkolony: Inicjatywa jeźdźca, rusza się w jego turze, ma tylko Bieganie, Przyspieszenie, Odstąpienie,
+Unikanie; niewyszkolony robi, co chce; po zsiadaniu w walce zachowuje Inicjatywę i dba o siebie. Przemieszczenie
+wierzchowca wbrew woli albo Powalenie jeźdźca lub wierzchowca → RO ZRC ST 10, porażka — spadasz 1,5 m obok z
+Powaleniem. Atak z grzbietu jadącego wierzchowca bez biegłości w Tresurze — Utrudnienie. Zdolności: Jeździec (Wyjadacz
+Zwiadowcy), Rodeo (Sztuczka), Zawsze w siodle (Kowboj). Stock dnd5e i rdzeń: brak wierzchowców.
+
+**Decyzje MG (2026-10-25).** **W-D1:** kierunek pełny, z generycyzacją mechaniki pojazdów — ten sam kod obsługuje
+pickupy, rowery, konie i czołgi. **W-D2:** gotowe przed betą („drużyna graczy jest absolutnie nieprzewidywalna”).
+
+**Pojęcie.** *Nośnik* = aktor, którego żeton wiezie żetony jadących na miejscach. Dziś: pojazd (`vehicle` z flagą
+`pojazd`). Po części 3: także istota z flagą `wierzchowiec`. Profil nośnika decyduje o reszcie:
+
+| Cecha | `pojazd` | `wierzchowiec` |
+|---|---|---|
+| Aktor | `vehicle` | `npc` (Bestiariusz: koń zdrowy, skażony, teksańczyk; ujeżdżone Rodeo) |
+| Miejsca, obrys, ruch jadących w animacji, wsiadanie/wysiadanie, wypadanie, pamięć obsady, Ctrl+X/V | wspólne (`stan.mjs`, `jadacy.mjs`, `zeton.mjs`, `schowek.mjs`) | wspólne |
+| Jadący | ukryci + kropki + prześwietlenie (dziś) albo widoczni (W-U1) | **widoczni**, nad nośnikiem |
+| Sterowanie | kierowca, test Pojazdów, karty jazdy, silnik, paliwo, kluczyki, awarie, wrak | jeździec; wyszkolony — w turze jeźdźca, tylko Bieganie / Przyspieszenie / Odstąpienie / Unikanie; niewyszkolony — MG |
+| Inicjatywa | tura kierowcy; przesunięcie tury pasażera (§10, pytanie 7) | Inicjatywa wierzchowca = jeźdźca — **ten sam mechanizm co pytanie 7** (W-U6); po zsiadaniu zachowuje wartość |
+| Budżet ruchu | Szybkość pojazdu, Gazu! / Gaz do dechy | Szybkość wierzchowca + jego Przyspieszenie / Bieganie deklarowane przez jeźdźca — model przydziału z `HANDOFF_movement_hotbar.md` §5, przydział należy do żetonu nośnika (W-P3) |
+| Wsiadanie | koszty z części 1 | ½ Szybkości w zasięgu 1,5 m; Jeździec — 1,5 m (M7) |
+| Wypadanie | część 1 | przemieszczenie wbrew woli albo Powalenie jeźdźca/wierzchowca → karta RO ZRC ST 10; porażka — 1,5 m obok, Powalenie (ścieżka wypadania części 1) |
+| Atak z grzbietu | Utrudnienie z jadącego pojazdu, Akrobatyka znosi | Utrudnienie z jadącego wierzchowca bez biegłości w Tresurze; Jeździec znosi dla dystansowych (M7) — wiersz silnika okoliczności, „jedzie” jak `jedzie()` pojazdu |
+| Cel | pojazd albo jadący przez kropkę | wierzchowiec albo jeździec — zwykłe celowanie |
+| Utrzymanie | paliwo | jedzenie i woda (M5 — jak towarzysze); Zawsze w siodle (M7, karta) |
+
+**Kod.** Warstwa w `pojazdy/stan.mjs`: `profilNosnika(actor)` (`pojazd` | `wierzchowiec` | `null`), `jestNosnikiem`,
+`daneNosnika`, `miejscaNosnika` — stare nazwy (`jestPojazdem`, `danePojazdu`…) zostają jako aliasy o węższym
+znaczeniu (tylko pojazd). Każdy moduł `pojazdy/*` dostaje jawną decyzję: wspólny (jadący, okno miejsc, schowek,
+obsada, geometria, żeton) albo pojazdowy (silnik, efekty silnika, awarie, naprawy, wrak, kluczyki, broń montowana,
+pościg). Katalog z wpisem `kon` (Duża, obrys 1 × 2 kratki, miejsca: jeździec + pasażer, profil `wierzchowiec`);
+Bestiariusz (`dev/bestiary/gen_bestiary.py`, `AUTOMATION`) nadaje koniom flagę. `crew`/`passengers` dnd5e piszemy
+tylko dla `vehicle`; wierzchowiec trzyma obsadę we fladze `obsada` (już istnieje).
+
+**Wykonalność:** wysoka złożoność, średnie ryzyko — część 1 jest świeża i każda zmiana idzie pod e2e `pojazd` i
+Garaż. Spike W0 przed refaktorem.
+
+**Ustalenia — do weta MG.**
+
+| # | Ustalenie | Warstwa |
+|---|---|---|
+| W-U1 | Otwarte miejsca dostają też motocykl, motorower, rower, deskorolka, buggy (otwarta rama). Korzystają ze wspólnego modelu D32; wdrożone: właz Hammera i oba miejsca motocykla (grafika 2026-10-26), pozostałe profile w W1. Widoczność określamy per miejsce, aby nośnik mógł mieć jednocześnie zakrytą kabinę i otwarte stanowisko. | RAI |
+| W-U2 | Wierzchowiec zawsze ≥ 1 rozmiar większy od jeźdźca — sprawdzane przy wsiadaniu (oznaczane) | NOE |
+| W-U3 | Wyszkolenie: flaga `wyszkolony` na aktorze (domyślnie tak dla koni z katalogu; Rodeo — wyszkolony tylko dla ujeżdżającego) | NOE |
+| W-U4 | Niewyszkolony wierzchowiec: jeździec jedzie, ruchem steruje MG (żeton bez prawa ruchu dla gracza) | NOE |
+| W-U5 | Obsada konia przechodzi Ctrl+X / Ctrl+V jak pojazdu (E9–E11) | — |
+| W-U6 | Inicjatywa wierzchowca i „tura pasażera za kierowcą” (pytanie 7) — jedno narzędzie: kombatant nośnika dostaje Inicjatywę jeźdźca/kierowcy i wspólną grupę (wzorzec towarzyszy M3, `combat/towarzysze-walka.mjs`) | NOE |
+
+**Otwarte.** **W-P1** pościg konny — po becie (plansza zostaje pojazdowa). **W-P2** wierzchowce poza koniem (muł,
+neogator z Rodeo, gigamut) — katalog otwarty; na betę koń + „dowolna istota z flagą”. **W-P3** budżet ruchu nośnika:
+wspólny model z handoffu ruchu (przydział na żetonie nośnika, deklaruje jeździec/kierowca) czy zostaje dzisiejszy
+budżet jazdy z E5 — propozycja: wspólny, razem z kartami jazdy, gdy handoff dojdzie do kroku 2.
+
+| Etap | Zakres | Rozmiar | Gotowe gdy |
+|---|---|---|---|
+| **W0** | Spike: koń z widocznym jeźdźcem przez animację jadących na scenie taktycznej (dwóch klientów); wspólna Inicjatywa nośnika i jeźdźca | S | notatka tak/nie w §11 |
+| **W1** | Warstwa profilu w `stan.mjs`, aliasy, klasyfikacja `pojazdy/*`; otwarte miejsca W-U1 na fundamencie D32 (`prezentacja.mjs`, już używany przez właz Hammera) | M | e2e `pojazd` zielone bez zmian; sonda Garażu „motocykl” |
+| **W2** | Katalog `kon`, flaga z Bestiariusza, wsiadanie (½ Szybkości, rozmiar, wyszkolenie) | S–M | Quench profilu; e2e: wsiadanie na konia |
+| **W3** | Walka: Inicjatywa (W-U6, razem z pytaniem 7), ruch wierzchowca w turze jeźdźca z jego akcjami (W-P3), niewyszkolony i po zsiadaniu | M | e2e `wierzchowiec`: jazda w walce dwóch rund |
+| **W4** | Spadanie z siodła, atak z grzbietu (silnik okoliczności), utrzymanie (M5) | S–M | e2e: Powalenie konia → karta RO jeźdźca |
+| **W5** | Poligon — stanowisko **Stajnia** obok Garażu, plakietki Jeźdźca, Rodeo, Zawsze w siodle (z M7) | S–M | sondy dla W-U1–W-U6 |
+
 ---
 
 ## 7. Testy i Poligon
@@ -552,6 +651,8 @@ planszy pojazd zawsze „jedzie”: przesiadka zawsze z kosztem RAW, atak z jad�
   „Posadzić?”, Ctrl+X / Ctrl+V pojazdu z trzema jadącymi na scenę o innej siatce.
 - **Część 2:** Quench metryki drogi (przykład MG z dwoma autobusami) i strażnik konsumentów (D27); e2e `poscig` —
   rozstawienie, serie przez dwa pojazdy, ogień zaporowy jadący z pojazdem; stanowiska Poligonu `poscig` i `droga`.
+- **Część 3:** Quench profilu nośnika i wspólnej Inicjatywy; e2e `wierzchowiec` i regresja `pojazd`; stanowisko
+  Poligonu **Stajnia** (§6.3).
 
 ## 8. Grafika i dźwięk
 
@@ -607,7 +708,7 @@ przeczytane 2026-10-19; propozycje agenta w nawiasach):
 6. **Wypadanie w pościgu** (pkt 5): wypadnięty ląduje znacznik za pojazdem i cofa się o 3 znaczniki na rundę — moduł
    przesuwa go na początku rundy z kartą interakcji, czy tylko pisze? (Przesuwa, karta dla MG.)
 7. **Inicjatywa za kierowcą** (pkt 2): jednorazowe przesunięcie tury pasażera za kierowcę — przycisk na HUD-zie
-   jadącego? (Tak.)
+   jadącego? (Tak.) *Od 2026-10-25 to samo narzędzie służy Inicjatywie wierzchowca — §6.3, W-U6.*
 8. **Koniec pościgu** (pkt 6): przewaga 7 i 10 rund — karta MG (wykrycie); meta — logiczny znacznik ustawiany przez MG,
    przeżywa recentrowanie? (Tak.)
 9. **Manewry — gdzie**: paleta kierowcy na HUD-zie pojazdu (jak Uruchom/Światła) czy zakładka „Pościg” na karcie
@@ -638,6 +739,27 @@ przeczytane 2026-10-19; propozycje agenta w nawiasach):
 - **Smugi między pojazdami** idą po obrazie (w bok, do tyłu) — zgodnie z D31, nie do naprawy.
 
 ## 11. Postęp
+
+**2026-10-26 — koniec eksperymentu 85%.** Na polecenie MG przywrócono pierwotne skale
+postaci we wszystkich podglądach pojazdów: 39 żetonów i prototypów, 63 postacie zweryfikowane.
+Podpisy i generatory podglądów poprawione. Zachowane indywidualne powiększenia postaci;
+globalnego 0,85 nie wdrożono. Mechaniczne zmniejszanie jadących do 0,5 kratki pozostaje bez zmian.
+
+**2026-10-26 — grafika motocykla i otwarte siodło.** Portret oraz żeton cruisera z dwoma miejscami.
+Kotwice dopasowane do finalnej grafiki, kierowca i pasażer stale nad siodłem bez kropek.
+Pojazd z wyłącznie otwartymi miejscami nie przygasa po najechaniu. Generator kompendium wybiera
+`strefyGrafiki` także dla otwartej grafiki bez wnętrza. Poligon: osobna scena motocykla, sonda
+`grafika-motocykl`, podgląd 120% / 85%. Quench 36/36; E2E `motocykl-art` i regresja
+`pojazd-prezentacja` zielone, raport `logs/e2e/2026-10-25T23-18-10/`. Pełna W1 pozostaje odłożona.
+Obsługa wieżyczek po becie zgodnie z D33; wyjątki od Ciężkiej i Utrudnienia są założeniem, nie implementacją.
+
+**2026-10-25 — D32, otwarty właz Hammera.** Wdrożony wspólny model prezentacji miejsc:
+zakryte/otwarte oraz lokalna warstwa grafiki względem nośnika. Właz pokazuje pełny żeton nad dachem,
+bez kropki; kabina zachowuje dotychczasowy widok. Okno Miejsca i lista Załogi rozpoznają tylko
+widocznego jadącego na otwartym miejscu. Osłona, broń montowana, własność i mechanika jazdy pozostają
+niezależne. Grafiki Hammera bez zmian, osobny dach/maska odłożone. Quench pojazdów 35/35;
+e2e `pojazd-prezentacja` i `pojazd` zielone, raport `logs/e2e/2026-10-25T20-33-50/`.
+Poligon: istniejąca scena Hammera, sonda `wlaz-widoczny`. Fundament W1 gotowy; pełna część 3 pozostaje otwarta.
 
 **2026-10-18 — projekt, runda 1.** Decyzje D1–D10; RAW s. 260–268 i s. 88–89 przeczytane; wykonalność jadących
 sprawdzona w źródłach rdzenia 14.369 (wzorzec Regionów przypiętych do żetonu, wizja niezależna od widoczności).

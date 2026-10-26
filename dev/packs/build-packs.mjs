@@ -1011,6 +1011,32 @@ function saveActivity(c, feat, auto) {
   };
 }
 
+/**
+ * An action with nothing to roll on its own (Detonacja): just an activity, so the GM can use it from the
+ * sheet. The effect is the module's hook (`dnd5e.postUseActivity` → scripts/combat/autodestrukcja.mjs).
+ */
+function utilityActivity(c, feat, auto) {
+  return {
+    _id: idFor("activity", `${c.id}.${feat.id}`),
+    type: "utility",
+    name: feat.name,
+    activation: { type: auto.activation ?? "action", value: null, condition: "", override: false },
+    consumption: { targets: [], scaling: { allowed: false, max: "" }, spellSlot: false },
+    description: { chatFlavor: "" },
+    duration: { concentration: false, value: "", units: "inst", special: "", override: false },
+    effects: [],
+    range: { value: "", units: "self", special: "", override: false },
+    target: {
+      template: { count: "", contiguous: false, type: "", size: "", width: "", height: "", units: "" },
+      affects: { count: "", type: "", choice: false, special: "" },
+      prompt: false, override: false
+    },
+    uses: { spent: 0, max: "", recovery: [] },
+    roll: { formula: "", name: "", prompt: false, visible: false },
+    sort: 0
+  };
+}
+
 /** Polish condition names, mirroring scripts/config/conditions.mjs. */
 const CONDITION_LABEL = {
   grappled: "Pochwycenie", restrained: "Unieruchomienie", prone: "Powalenie",
@@ -1391,6 +1417,9 @@ function buildBestiaryItem(c, entry, kind) {
       effects.push(eff);
       act.effects = [{ _id: eff._id }];
     }
+    activities[act._id] = act;
+  } else if (entry.automation?.kind === "detonacja") {
+    const act = utilityActivity(c, entry, entry.automation);
     activities[act._id] = act;
   } else if (entry.automation?.kind === "save") {
     const act = saveActivity(c, entry, entry.automation);

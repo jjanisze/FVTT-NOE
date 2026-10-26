@@ -1,0 +1,23 @@
+[
+  {
+    "key": "odstapienie-a",
+    "source": "raw/batch-117-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "odstapienie-b",
+    "source": "raw/batch-117-atlas-a.png, cell 2",
+    "removedTinyPixels": 4,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "odstapienie-c",
+    "source": "raw/batch-117-atlas-a.png, cell 3",
+    "removedTinyPixels": 1,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]
