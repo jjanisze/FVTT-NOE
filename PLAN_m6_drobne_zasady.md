@@ -1,12 +1,13 @@
 # PLAN — M6: Biegłości profesji, broń improwizowana, obiekty i woda
 
-> Status: **PROJEKT** (2026-10-25). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia projektu U1–U24 do weta MG
-> (§6); otwarte P1–P8 (§7). Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał
+> Status: **W REALIZACJI** (od 2026-10-26). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia U1–U24 przeszły
+> weto MG 2026-10-26 (kolumna „Decyzja MG” w §6, poprawki w §5); P1–P8 rozstrzygnięte tego samego dnia (§7); Łyżeczka
+> WKK zaprojektowana z MG (§5.2.1). Spiki E0 — §11. Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał
 > „S każda”; urosło o improwizację z dowolnego przedmiotu w ręce (D6), fizyczność obiektów na żądanie (D5) i Regiony
 > wody (D9). **Przeniesione 2026-10-25 (MG):** wierzchowce (D7, D10) → `PLAN_m4_pojazdy.md` §6.3, część 3 — ten sam
 > kod co pojazdy i niedokończona logika M4 (Inicjatywa za kierowcą, budżet ruchu nośnika); skok → `HANDOFF_movement_hotbar.md`
 > (Skok jako operacja ruchu z wzorami NOE). Numeracja D/U/P zostaje, przeniesione pozycje mają odsyłacz.
-> Nie implementować przed przejściem MG przez §4–§7.
+> Materiał przegród z encji CDDA (P5) — przeniesiony do [`PLAN_1_0.md`](PLAN_1_0.md).
 >
 > **Metoda (jak w M5).** Dla każdej reguły: *RAW* → *co robi stock dnd5e 6.0.6 (system i karta) i dlaczego* →
 > *czy ten powód dotyczy nas* → *ile automatyki i za jaką cenę*. Gwiazda przewodnia z `PLAN_beta.md` §2: oznaczać,
@@ -113,6 +114,8 @@ oznaczamy, nie blokujemy.
 | Z11 | Eksporter map oznacza ściany klasą przegrody (`Maps/tools/wall_rules.py`: `door`, `window`, `fence`, `gate`, `railing`…) bez materiału; aktualizacja sceny (`scenes/map-sync.mjs`) kasuje i odtwarza wszystko z flagą `source`, zachowując tylko stan drzwi | Zniszczona ściana wróciłaby po ponownym eksporcie — potrzebna pamięć zniszczeń (U11) |
 | Z12 | Silnik okoliczności ma rejestr źródeł spoza tabeli (`combat/okolicznosci.mjs` `zarejestrujZrodloOkolicznosci`) i czystą tabelę RAW (`config/okolicznosci-ataku.mjs`) | `długa`, `ciężka`, woda — nowe wiersze, nie nowe `if` |
 | Z13 | Komentarz w `config/spadanie.mjs` mówi, że „na scenach bez powierzchni nic się nie dzieje”; `TokenDocument5e#_findSupportingSurface` w 6.0.6 traktuje podstawę poziomu jako podłogę, gdy powierzchni brak | Do sprawdzenia w spike'u E0e; poprawić komentarz albo zachowanie |
+| Z14 | Awans `Trait` klasy (`buildClass`) nie ma `classRestriction`: **druga klasa daje pełny zestaw startowy** — rzuty obronne, wszystkie kategorie broni i pancerzy, pełną pulę umiejętności. RAW s. 59 („Biegłości”) i akapity „Jako postać wieloklasowa” każdej klasy dają tylko część; dane są w `CLASSES[c].multiclass`, ale nikt ich nie czyta | Trzecia dziura B6 (znaleziona przy U2). Naprawa w E1: dwa awanse `Trait` — `primary` i `secondary` (mechanizm dnd5e, `Advancement#appliesToClass`) |
+| Z15 | `CLASSES.zlodziej.multiclass.tools.fixed` = `"slusarz"`, a klucz narzędzia to `slusarza` | Martwy klucz — poprawka razem z Z14 |
 
 ---
 
@@ -166,7 +169,9 @@ narzędzie i kategoria występuje w danych).
 **Ostrzeżenie (D1).** Tryb `upgrade` przy wartości 2 zostawia 2 (`TraitAdvancement#apply`). Hak
 `dnd5e.preAdvancementManagerComplete` porównuje oryginał z klonem: każde nadanie `upgrade`, które zastało
 Specjalizację, daje szept do gracza i MG („Medycyna: masz już Specjalizację — profesja nic tu nie dodaje”) i
-sygnał naruszenia (D11). Bez blokady.
+sygnał naruszenia (D11). Bez blokady. Tryb `upgrade` dnd5e obsługuje tylko cechy z ekspercką biegłością (umiejętności,
+narzędzia — `TraitAdvancement#actorSelected`); broń i pancerze idą osobnym awansem `default`, a nadanie, które zastało
+biegłość, dostaje to samo ostrzeżenie („Broń palna długa: masz już biegłość”) — D1 „nic nie przepada po cichu”.
 
 **Instrumenty (D2).** 12 kluczy narzędzi (`akordeon`, `banjo`, …) z cechą rządzącą wg P1. Dwie drogi:
 1. **Przedmioty bazowe (zalecane, spike E0b):** 22 zestawy + 12 instrumentów jako przedmioty `tool` w paczce
@@ -179,6 +184,25 @@ sygnał naruszenia (D11). Bez blokady.
 Przy okazji: Cwaniak (`instruments: 2, any: 1`), Kowboj (1 instrument) i Sztuczka Muzyk (dziś „dopisuje gracz”)
 dostają awanse. Instrumenty jako przedmioty trafiają do katalogu handlu i szabrowania (tabela k12 wskazuje
 przedmiot zamiast nazwy).
+
+**Cecha instrumentów (U22, P1).** RAW s. 132: „Cecha: Charyzma lub Zręczność”. Domyślna cecha klucza to CHA; okno
+rzutu dnd5e pozwala wybrać inną cechę, więc ZRC jest o jeden klik — dokładnie „lub” z RAW, bez osobnego kodu.
+Używanie wg RAW: „Zagraj znany kawałek” ST 10, „Improwizacja” ST 15 — dwie aktywności testu, jak w zestawach narzędzi.
+Instrumenty elektryczne (gitara elektryczna i basowa, keyboard, kontrabas, mikser, skrzypce) — w opisie wymóg
+wzmacniacza i zasilania (s. 132); bez automatyki.
+
+**Identyfikatory przedmiotów bazowych.** `CONFIG.DND5E.tools[k].id` musi być znany synchronicznie przy `init`, a
+id w paczce to SHA-1 (`idFor`) — w przeglądarce tylko asynchroniczne. Zamiast tego tabela literałów obok konfiguracji
+narzędzi, a `validate-packs` sprawdza, że każdy wpis wskazuje przedmiot `tool` z tym `baseItem` (rozjazd = błąd budowania).
+
+**Wieloklasowość (U2, Z14).** RAW s. 59 ogranicza przy wieloklasowości **tylko startowe biegłości klasy** („otrzymujesz
+jedynie część startowych biegłości klasowych, co jest wyszczególnione w opisie każdej z klas”); profesji nie wymienia, a
+„kiedy awansujesz na nowy poziom w danej klasie, otrzymujesz jej wszystkie zdolności dla danego poziomu”. Profesja
+nadaje więc pełne biegłości także postaci wieloklasowej (U2 bez zmian, teraz z odsyłaczem). Klasy dostają dwa awanse
+`Trait` na 1. poziomie: `classRestriction: "primary"` (dzisiejszy zestaw) i `"secondary"` (akapit „Jako postać
+wieloklasowa”: KW zostaje w awansie HitPoints, bez rzutów obronnych). Cwaniak i Zwiadowca: „jednej wybranej
+umiejętności” — bez listy klasy, w odróżnieniu od Speca, Twardziela i Złodzieja („z listy …”); czytamy dosłownie.
+Istniejące postacie wieloklasowe z nadmiarem biegłości — audyt (D4) je wypisuje, nic nie zdejmuje sam.
 
 **Weryfikacja.** `validate-packs`: każda profesja ma co najmniej jeden awans `Trait` na swoim pierwszym poziomie,
 każdy klucz istnieje w `CONFIG`. e2e `postac`: nowa postać do 3. poziomu z profesją, w tym przypadek D1 (biegłość →
@@ -195,26 +219,30 @@ już być bronią.
 **Projekt.**
 1. **Lalka — nowa rodzina `wRece`** (jawna, nie zgadywana): każdy przedmiot fizyczny (`weight > 0`, typy `loot`,
    `tool`, `consumable`, `equipment` bez rodziny, `container` do P2) można **wziąć do ręki** akcją z Oporządzenia
-   i menu przedmiotu — tym samym lejkiem (`game.neuroshima.lalka.place`), z tymi samymi kosztami ruchu. Chwyt:
-   jednoręczny do progu wagi, powyżej oburęczny (U3).
-2. **Bliźniak.** Lejek lalki, gdy w ręce ląduje przedmiot bez własnego ataku, **tworzy na aktorze ukrytą broń**
-   z flagą `improwizacja: {zrodlo: itemId, reka}`: nazwa „<przedmiot> (improwizowana)”, ikona przedmiotu, typ
+   i menu przedmiotu — tym samym lejkiem (`game.neuroshima.lalka.place`), z tymi samymi kosztami ruchu. Chwyt
+   (U3, MG): **poniżej 2 kg jednoręczny, od 2 kg oburęczny**; maks. waga do walki = SIŁ kg (cięższe — oznaczone, MG).
+2. **Bliźniak.** Przy **pierwszym ataku improwizowanym z danej ręki** (nie przy samym wzięciu do ręki — mniej zapisów,
+   bliźniak tylko dla tego, czym ktoś naprawdę bije) lejek **tworzy na aktorze ukrytą broń** z flagą
+   `improwizacja: {zrodlo: itemId, reka}`: nazwa „<przedmiot> (improwizowana)”, ikona przedmiotu, typ
    `improwizowana` (nowy typ broni w `NEURO_WEAPON_TYPES`, istniejący **tylko** na bliźniakach), 1k4, waga 0 (waży
-   źródło), aktywność ataku wręcz i rzutu 3/9 m. Gdy źródło opuszcza rękę — lejek kasuje bliźniaka. Jeden bliźniak
-   na rękę, aktualizowany w miejscu przy zamianie przedmiotu (mniej zapisów niż tworzenie i kasowanie).
+   źródło), aktywność ataku wręcz i rzutu 3/9 m. Jeden bliźniak na rękę (najwyżej dwa na aktora), **przepinany w
+   miejscu** przy następnym ataku z tej ręki innym przedmiotem. **Nie kasujemy go, gdy źródło opuszcza rękę** (korekta
+   E0c): po rzucie źródło jest już na ziemi, a przycisk „Obrażenia” i przerzut Fuksem na karcie ataku nadal szukają
+   bliźniaka po UUID — skasowany psułby każdy rzut przedmiotem.
 3. **Biegłość.** `weapon:improwizowana` w `weaponProficiencies` + mapa typów → natywne `proficiencyMultiplier`
    dnd5e daje PB tylko biegłym (Gladiator, §5.1). Bez nowego kodu w potoku ataku.
 4. **Kolbą i rękojeścią.** Broń w ręce dostaje w Oporządzeniu i w oknie ataku akcję „Atak improwizowany” — ten sam
    bliźniak (1k4 obuchowe), źródłem jest broń.
-5. **Typ obrażeń.** Domyślnie obuchowe; selektor typu w oknie obrażeń (wzorzec kart `class-resource-dice.mjs`); MG
-   poprawia, gracz proponuje.
+5. **Typ obrażeń (U5, MG: każdy przedmiot dostaje typ).** Czysta funkcja `typObrazenImprowizowanych(item)`: flaga
+   katalogu `obrazeniaImprowizowane` (ostre: nóż w zestawie, szkło, piła — cięte; szpikulec, śrubokręt — kłute),
+   inaczej obuchowe. Selektor typu w oknie obrażeń (wzorzec kart `class-resource-dice.mjs`); MG poprawia, gracz proponuje.
 6. **„Działa jak…”** (s. 253): MG na bliźniaku wybiera broń białą z katalogu — bliźniak kopiuje jej kość, właściwości
    i kategorię (wtedy biegłość w tej kategorii się liczy). Noga od stołu = bejsbol.
-7. **Rzut.** Po rzucie źródło ląduje na ziemi ścieżką upuszczania (`actors/ground-items.mjs`), bliźniak znika;
-   `powracajaca` nie dotyczy.
-8. **Łyżeczka (Gladiator, M7):** ten sam bliźniak, inne liczby z tabeli wagi (kość, chwyt), rzut 6 m, maks. waga =
-   SIŁ kg, naturalna 1 → przedmiot dzielony na dwa o połowie wagi. Czysta funkcja `improwizacjaZ(item, opcje)` z
-   tabelą w danych.
+7. **Rzut.** Po rzucie źródło ląduje na ziemi ścieżką upuszczania (`actors/ground-items.mjs`); bliźniak zostaje
+   (pkt 2); `powracajaca` nie dotyczy.
+8. **Łyżeczka (Gladiator):** ten sam bliźniak, liczby z tabeli wagi (kość, chwyt), maks. waga = SIŁ kg, naturalna 1 →
+   przedmiot dzielony na dwa o połowie wagi. Czysta funkcja `improwizacjaZ(item, opcje)` z tabelą w danych. Wariant
+   Kobaltu — §5.2.1.
 9. **Ukrycie wszędzie:** karta (ekwipunek, Oporządzenie), udźwig, handel, stół wymiany, szabrowanie, rozbiórka,
    eksport postaci, `validate-packs` (żaden bliźniak w paczkach), audyt ekwipunku.
 
@@ -225,8 +253,33 @@ obrażeń, przerzuty — szuka przedmiotu przez UUID z wiadomości. Przedmiot ni
 **Pochodnia (WKK)** zostaje własną bronią. **Broń palna rzucona** — to też bliźniak (źródło: broń).
 
 **Wykonalność:** średnia. Ryzyka: wyciek bliźniaków do list (mitygacja: jeden predykat `jestBliźniakiem` i test
-każdego widoku), uprawnienia gracza do tworzenia przedmiotów na własnym aktorze (są), kopiowanie aktora (bliźniak
-jedzie z nim — kasujemy osierocone przy przygotowaniu danych).
+każdego widoku; karta dnd5e 6 ma hak `dnd5e.filterItem` — `false` chowa przedmiot we wszystkich listach karty),
+uprawnienia gracza do tworzenia przedmiotów na własnym aktorze (są), kopiowanie aktora (bliźniak jedzie z nim —
+nieszkodliwy, ukryty i bez wagi; przepina go pierwszy atak).
+
+#### 5.2.1 Łyżeczka — wariant Kobaltu (WKK, MG 2026-10-26)
+
+**Diagnoza.** RAW (s. 69–70): biegłość w „łyżeczce” — zbędna, bo profesja Gladiatora już daje biegłość w broni
+improwizowanej; rzut do 6 m — ledwie lepiej niż 3/9 m; jedyny realny zysk to tabela wagi (1k6 do 5 kg, 2k6/3k6/4k6
+oburęcznie do 20 kg, zamiast 1k4). **Odrzucone (MG):** Specjalizacja w broni (PB ×2 w Teście Ataku) — rozbija wąskie
+pasmo TT na wyższych poziomach („Gladiator zestruga Juggernauta łyżeczką”); D&D nie ma eksperckiej biegłości w broni z
+tego powodu. Kierunek MG: *weapon master*, *tavern brawler* — dopiski przy trafieniu i w ekonomii akcji, nie premia do
+trafienia.
+
+**Kobalt (za przełącznikiem, `scripts/wkk/`), na RAW-owej tabeli wagi:**
+
+| Dopisek | Działanie |
+|---|---|
+| **Zawsze coś pod ręką** | Raz na turę, Darmowa Interakcja: łapiesz przedmiot z otoczenia, którego nie masz w ekwipunku — wybierasz klasę wagi do SIŁ kg (i nazwę). MG może zawetować na pustej scenie (karta z przyciskiem). Bliźniak bez źródła (`zrodlo: null`, `zOtoczenia: true`); naturalna 1 — przedmiot pęka, jak w RAW |
+| **Dalszy rzut** | Rzut łyżeczką 6/18 m (normalny/daleki) zamiast płaskich 6 m; tabela wagi działa także dla rzutu |
+| **Właściwość z rodzaju** (*weapon master*) | RAW: „kość i typ obrażeń zależne są od wagi i **rodzaju** przedmiotu (ustal to z MG)”. Gdy łyżeczka trafia do ręki, gracz wybiera **jedną** właściwość NOE, do której pasuje rodzaj przedmiotu; lista bramkowana wagą: ≤ 5 kg Lekka · Obalająca · Unieruchamiająca; 6–11 kg Obalająca · Powalająca · Unieruchamiająca; 12–17 i 18–20 kg Powalająca · Burząca. MG może zawetować na karcie. Same istniejące właściwości z istniejącą automatyką (`combat/obalajaca.mjs`, `wkk/combat/weapon-save-properties.mjs`, §5.4 dla Burzącej) |
+| **Przerzut jedynek** (*tavern brawler*) | Kości obrażeń łyżeczki, które wypadną 1, przerzucasz raz — modyfikator kości rdzenia `r1` (`3d6r1`; `rr` przerzucałby do skutku) |
+
+Przykłady: wąż ogrodowy 3 kg — Unieruchamiająca; hydrant 18 kg — Burząca; felga 8 kg — Powalająca; dwa medpaki po
+0,5 kg — Lekka (drugi atak w [B]).
+
+Bez zmian w RAW: biegłość (zbędna, zostaje), maks. waga = SIŁ, naturalna 1 → dwie połówki. Plakietka pokrycia w M7
+(`PLAN_m7_zdolnosci.md` §3, Łyżeczka) wskazuje ten akapit.
 
 ### 5.3 Właściwości broni: `długa`, `ciężka`, `jednorazowa`
 
@@ -246,8 +299,10 @@ Zamyka `PLAN_weapon_properties.md` §3.3 i §5 (z §5.4 niżej).
 
 **Model.** Jeden aktor bazowy „Obiekt” (`npc` z flagą `obiekt`, w paczce modułu, importowany do świata raz) i
 **żetony niepowiązane** z deltą na sztukę: TT (`ac.flat`), PW, Próg obrażeń (natywny `hp.dt`, §1), materiał,
-rozmiar, kruchość, kotwica. Rozmiar żetonu z rozmiaru obiektu. Grafika: półprzezroczysta ramka z ikoną materiału
-(widać, że to „uchwyt” do celowania, nie rekwizyt).
+rozmiar, kruchość, kotwica. Rozmiar żetonu z rozmiaru obiektu. **Bez grafiki (P8, MG):** obiekt to tylko licznik PW i
+odporności nałożony na coś, co już jest w świecie (drzwi, kafel, drzewo z tła) — przezroczysta tekstura i sama ramka
+(obrys pola żetonu), widoczna dla wszystkich, żeby gracze mogli go wskazać jako cel. MG tworzy go na żądanie, tylko dla
+tego, co gracze chcą zaatakować — żeby nie mnożyć tysięcy obiektów na scenie.
 
 **Narzędzie MG „Ufizycznij”** (kontrolki żetonów, tylko MG) — kotwice:
 - **przegroda z eksportu** (drzwi, okno, płot, brama, balustrada; zaznaczenie odcinka ściany): domyślny rozmiar i
@@ -274,11 +329,13 @@ Szablony szybkie: „drzwi drewniane”, „drzwi stalowe”, „okno”, „kł
 [Usuń przedmiot] / [Zostaw]; zawsze: żeton obiektu znika, na warstwie rysunku powstaje **X** (rysunek bez flagi
 eksportera — przeżyje aktualizację mapy) i notka „podmień w Tiled przy następnym eksporcie”. Pamięć zniszczeń (U11):
 flaga sceny z identyfikatorami zniszczonych przegród i kafli eksportera — `map-sync.mjs` ich nie odtwarza i mówi o tym
-w raporcie, dopóki MG nie podmieni mapy.
+w raporcie, dopóki MG nie podmieni mapy. **Przycisk „Zniszczenia” (U11, MG)** w kontrolkach MG: okno z listą zniszczeń
+sceny (co, kiedy, kotwica) i opcjami na wpis — pokaż na mapie, przywróć (odtwórz przegrodę/kafel, skasuj X),
+zapomnij (podmienione w Tiled — `map-sync` znów odtwarza z eksportu) — oraz „zapomnij wszystkie”.
 
 **Wykonalność:** średnia. Natywny `hp.dt` i delta żetonu usuwają większość kodu. Ryzyka: RO w ścieżkach zbiorczych
 (inwentarz wywołań `rollSavingThrow` — kilkanaście miejsc), silnik TT dla `npc` bez Cech (TT podana wprost — metoda
-„stała”). Materiał z eksportera (encje CDDA) — świadomie poza M6 (P5).
+„stała”). Materiał z eksportera (encje CDDA) — świadomie poza M6, w `PLAN_1_0.md` (P5).
 
 ### 5.5 Latanie (s. 253)
 
@@ -286,11 +343,14 @@ w raporcie, dopóki MG nie podmieni mapy.
 zwalnia. NOE: spada przy **Nieprzytomności albo Szybkości 0** (Pochwycenie, Unieruchomienie, Sparaliżowanie…,
 Szybkość ruchu 0), z obrażeniami; przy **Powaleniu opada bez obrażeń**.
 
-**Projekt:** podklasa `TokenDocument5e` (albo opakowanie metody — spike E0e wybiera) z nadpisanym `_isFalling`
+**Projekt:** opakowanie metod na prototypie `CONFIG.Token.documentClass` (E0e: wzorzec modułu — `actors/drony.mjs`
+`_inferMovementAction`; podklasa dokumentu niczego by nie dodała) — `_isFalling`
 (warunki NOE, predykat Szybkości 0 wspólny z silnikiem okoliczności — `BEZ_RUCHU`) i `plummet()` — gdy jedynym
 powodem jest Powalenie, opadnięcie ruchem `fall` bez karty obrażeń. Reszta zostaje stockowa: status Spadanie, klik MG,
 karta, Osteoporoza (`combat/falling.mjs`), Kocie kości „Cztery łapy” (M7) na tej samej karcie. Drony latające (M3):
-Wyłączenie przy 0 PW = spadanie.
+Wyłączenie przy 0 PW = spadanie. Samo Obezwładnienie lotnika **nie** strąca (stock tak; NOE wymienia tylko
+Nieprzytomność i Szybkość 0). Z13 (E0e): w 6.0.6 scena bez powierzchni ma podłogi w podstawach poziomów, więc spadanie
+działa na każdej scenie — poprawiamy komentarze w `config/spadanie.mjs` i `combat/falling.mjs`, zachowanie zostaje.
 
 **Wykonalność:** niska. Ryzyko: `_isFalling` jest `@internal` — wersja dnd5e i tak przypięta na betę; test warstwy 2
 pilnuje kontraktu.
@@ -303,10 +363,14 @@ włączone w świecie zalecanym (bramka wydania, krok `boot`).
 **Regiony wody.** Nowe zachowanie `neuroshima-2026-overrides.woda` obok `strefaSkazenia` (`scenes/transitions.mjs`):
 pola `glebokosc` (płytka — tylko trudny teren i Osłona ½ dla stojących; głęboka — pływanie), `nurt` (spokojna ST 10,
 rwąca 15, wzburzona 20, wir 25), `grzaska` (koszt ×3 — trudny teren dnd5e na tym samym Regionie).
-- `TOKEN_MOVE_IN` do głębokiej wody: karta MG „wejście w sprzęcie” (SIŁ (Atletyka) ST 10, Utrudnienia z pancerza
-  liczy już `actors/armor-rules.mjs`) — oznaczane, MG może pominąć;
+- **Tylko w walce (U15, MG: „poza walką nie liczymy wody — mistrz musi sam kazać”).** Poza walką Region niczego sam nie
+  wystawia; MG ma w HUD żetonu stojącego w wodzie przycisk „Test pływania” (karta z ST nurtu) — ten sam, którym
+  w walce może poprosić o test poza kolejką;
+- `TOKEN_MOVE_IN` do głębokiej wody, w walce: karta MG „wejście w sprzęcie” (SIŁ (Atletyka) ST 10, Utrudnienia z
+  pancerza liczy już `actors/armor-rules.mjs`) — RAW „MG może wymagać”, więc karta z przyciskiem, nie rzut;
 - `TOKEN_TURN_START` w głębokiej wodzie bez Szybkości pływania: karta testu Atletyki ze ST nurtu; porażka → status
-  „Tonie” (Szybkość 0, opada) do następnego testu;
+  „Tonie” (Szybkość 0, opada) do następnego testu. Zdarzenie przychodzi **tylko u aktywnego MG** (`Combat#onStartTurn`
+  woła regiony u jednego MG — E0f), więc karta wychodzi od MG: szept do MG i właścicieli z przyciskiem rzutu dla gracza;
 - status „Pod wodą” (z porażki albo z HUD — „Nurkuj”): licznik oddechu 1 + mod. KON minut w rundach; obrażenia →
   RO KON ST 10 albo Uduszenie — narzędzie z `actors/zagrozenia.mjs` (faza Uduszenia już istnieje).
 
@@ -319,7 +383,13 @@ wodzie — domyślna Osłona ½ w oknie (`combat/cover.mjs`).
 **Eksporter map (repo Map, osobny commit):** encje wody CDDA (`t_water_sh` → płytka, `t_water_dp` → głęboka,
 `t_water_moving_*` → rwąca, słona → wzburzona) → Regiony z flagą `source: "water"` i zachowaniem `woda`; ręczne
 nadpisanie w Tiled (warstwa obiektów „woda” z właściwościami `glebokosc`, `nurt`). `map-sync.mjs` odtwarza je jak
-podłogi. Mapy do sprawdzenia: Zasadzka, Arena.
+podłogi. Mapy do sprawdzenia: Zasadzka, Arena. MG (U14): Tiled eksportuje kafle wody — pod pływanie i pod status
+zanurzenia.
+
+**Grafika (U14, pytanie MG „czy jest grafika zanurzenia?”) — nie ma.** dnd5e ma tylko `suffocation.svg` (Uduszenie);
+rdzeń — `icons/svg/waterfall.svg`. Do czasu dostawy: „Pod wodą” = `waterfall.svg`, „Tonie” = jej wariant z ikoną FA;
+wiersze w `dev/icons/MISSING.md` (klasa A: dwie białe ikony statusu; klasa B: nakładka żetonu „zanurzony” —
+falująca tafla na dolnej połowie żetonu).
 
 **Skok** — `HANDOFF_movement_hotbar.md` (Skok jako operacja ruchu z wzorami NOE, krok 3 tamtej kolejności): limit
 dal/wzwyż, rozbieg, lądowanie w trudnym terenie, Zwinność szczura, Skok Gladiatora. Region `skok` (zaprojektowane
@@ -343,37 +413,65 @@ grzbietu, katalog `kon`, spike, etapy) — **`PLAN_m4_pojazdy.md` §6.3, częś�
 
 ---
 
-## 6. Ustalenia projektu — do weta MG
+## 6. Ustalenia projektu — po wecie MG (2026-10-26)
 
-| # | Ustalenie | Warstwa |
-|---|---|---|
-| U1 | Specjalizacja bez biegłości nie istnieje: `forcedExpertise` tylko Gwiazda (RAW wprost) | NOE |
-| U2 | Biegłości profesji przy wieloklasowości — zawsze (RAW nie wyłącza) | NOE |
-| U3 | Chwyt bliźniaka: do 5 kg jednoręczny, powyżej oburęczny; maks. waga do walki = SIŁ kg — oba progi z tabeli Łyżeczki, stosowane do wszystkich (Łyżeczka zmienia tylko kość obrażeń i daje biegłość); cięższe — MG | RAI |
-| U4 | Bliźniak nie dodaje PB bez biegłości `improwizowana`; „Działa jak…” przenosi kategorię i właściwości wzorca | NOE |
-| U5 | Typ obrażeń bliźniaka: domyślnie obuchowe, ostre narzędzia (nóż w zestawie, szkło) — cięte z flagi katalogu `obrazeniaImprowizowane` | RAI |
-| U6 | Broń w ręce jako improwizowana: 1k4 obuchowe, bez właściwości broni | NOE |
-| U7 | Zużyta wyrzutnia: waga 50% LAW, rozbiórka na surowce wg M5 | RAI |
-| U8 | `długa`: liczy się odległość od krawędzi żetonów (jak reszta silnika); `ciężka`: „oparcie” to ręczny przełącznik | NOE |
-| U9 | Rozmiar obiektu z wagi przedmiotu: ≤ 1 kg Malutki, ≤ 10 kg Mały, ≤ 100 kg Średni, więcej Duży | RAI |
-| U10 | Domyślne szablony przegród: drzwi — Średni, drewno, wytrzymały; drzwi stalowe — Średni, cienka blacha, twardy; okno — Duży, szkło, kruchy; płot — Duży, cienka blacha, wytrzymały; balustrada — Średni, drewno, wytrzymały | RAI |
-| U11 | Pamięć zniszczeń na scenie chroni przed odtworzeniem przy ponownym eksporcie; MG czyści ją przyciskiem po podmianie w Tiled | — |
-| U12 | X po zniszczeniu widzą wszyscy; notka o Tiled — tylko MG | — |
-| U13 | Lotnik Powalony opada tym samym ruchem `fall`, ale bez karty; Szybkość 0 = status z `BEZ_RUCHU` albo zerowa Szybkość ruchu po efektach | NOE |
-| U14 | „Pod wodą” to status (HUD i Region), nie wysokość żetonu | — |
-| U15 | Test wody na początku tury tylko w walce; poza walką — karta przy wejściu i co minutę zegara świata na żądanie MG | RAI |
-| U16 | ~~Limit skoku~~ — `HANDOFF_movement_hotbar.md` (podpowiedź czy blokada: tamten §10) | — |
-| U17–U21 | ~~Wierzchowce~~ — `PLAN_m4_pojazdy.md` §6.3 (W-U1–W-U5) | — |
-| U22 | Instrumenty: cecha rządząca CHA dla wszystkich (Występy), do potwierdzenia — P1 | RAI |
-| U23 | Gwiazda „dwie umiejętności albo umiejętność i zestaw” = dwa wybory po 1 (drugi: umiejętność albo zestaw) | NOE |
-| U24 | Zabójca „wszystkie bronie” = stałe nadanie 7 kategorii broni; `improwizowana` nie wchodzi — tę biegłość RAW nadaje jawnie (Gladiator) | RAI |
+Kolumna „Decyzja MG” jest wpisana przez MG; tam, gdzie zmienia projekt, poprawka stoi w §5 (U2 — §5.1, U3 i U5 —
+§5.2, U11 — §5.4, U14 i U15 — §5.6, U22 — §5.1).
+
+| # | Ustalenie | Warstwa | Decyzja MG | 
+|---|---|---|---|
+| U1 | Specjalizacja bez biegłości nie istnieje: `forcedExpertise` tylko Gwiazda (RAW wprost) | NOE | Zgadza się. Najpierw Biegłość, później Specjalizacja. |
+| U2 | Biegłości profesji przy wieloklasowości — zawsze (RAW nie wyłącza) | NOE | Wymaga sprecyzowania, niejasne. RAW powinno już definiować co multiklasowe postacie dostają a czego nie |
+| U3 | Chwyt bliźniaka: do 5 kg jednoręczny, powyżej oburęczny; maks. waga do walki = SIŁ kg — oba progi z tabeli Łyżeczki, stosowane do wszystkich (Łyżeczka zmienia tylko kość obrażeń i daje biegłość); cięższe — MG | RAI | Bliźniaka przedmiotu, w postaci broni improwizowanej? Nie, 2+kg oburęczna. |
+| U4 | Bliźniak nie dodaje PB bez biegłości `improwizowana`; „Działa jak…” przenosi kategorię i właściwości wzorca | NOE | Tak |
+| U5 | Typ obrażeń bliźniaka: domyślnie obuchowe, ostre narzędzia (nóż w zestawie, szkło) — cięte z flagi katalogu `obrazeniaImprowizowane` | RAI | Tak jest. Każdy przedmiot dostaje typ obrażeń gdy użyty jako broń improwizowana. |
+| U6 | Broń w ręce jako improwizowana: 1k4 obuchowe, bez właściwości broni | NOE | Tak jest, zgodnie z RAW |
+| U7 | Zużyta wyrzutnia: waga 50% LAW, rozbiórka na surowce wg M5 | RAI | Tak |
+| U8 | `długa`: liczy się odległość od krawędzi żetonów (jak reszta silnika); `ciężka`: „oparcie” to ręczny przełącznik | NOE | Tak |
+| U9 | Rozmiar obiektu z wagi przedmiotu: ≤ 1 kg Malutki, ≤ 10 kg Mały, ≤ 100 kg Średni, więcej Duży | RAI | Tak |
+| U10 | Domyślne szablony przegród: drzwi — Średni, drewno, wytrzymały; drzwi stalowe — Średni, cienka blacha, twardy; okno — Duży, szkło, kruchy; płot — Duży, cienka blacha, wytrzymały; balustrada — Średni, drewno, wytrzymały | RAI | Tak |
+| U11 | Pamięć zniszczeń na scenie chroni przed odtworzeniem przy ponownym eksporcie; MG czyści ją przyciskiem po podmianie w Tiled | — | Tak, wydaje się że zaczyna być potrzeba guzika z odpowiednimi opcjami interakcji |
+| U12 | X po zniszczeniu widzą wszyscy; notka o Tiled — tylko MG | — | Tak |
+| U13 | Lotnik Powalony opada tym samym ruchem `fall`, ale bez karty; Szybkość 0 = status z `BEZ_RUCHU` albo zerowa Szybkość ruchu po efektach | NOE | Tak |
+| U14 | „Pod wodą” to status (HUD i Region), nie wysokość żetonu | — | Tak. Tiled powinno eksportować kafelki wody, na potrzeby pływania i ewentualnego statusu zanurzenia. Czy jest grafika zanurzenia? |
+| U15 | Test wody na początku tury tylko w walce; poza walką — karta przy wejściu i co minutę zegara świata na żądanie MG | RAI | Poza walką nie liczymy wody - mistrz musi sam kazać |
+| U16 | ~~Limit skoku~~ — `HANDOFF_movement_hotbar.md` (podpowiedź czy blokada: tamten §10) | — | N/A |
+| U17–U21 | ~~Wierzchowce~~ — `PLAN_m4_pojazdy.md` §6.3 (W-U1–W-U5) | — | N/A |
+| U22 | Instrumenty: cecha rządząca CHA dla wszystkich (Występy), do potwierdzenia — P1 | RAI | No.. tak, zgodnie z RAW. Jak inaczej? Dlaczego miałoby być inaczej? |
+| U23 | Gwiazda „dwie umiejętności albo umiejętność i zestaw” = dwa wybory po 1 (drugi: umiejętność albo zestaw) | NOE | Tak |
+| U24 | Zabójca „wszystkie bronie” = stałe nadanie 7 kategorii broni; `improwizowana` nie wchodzi — tę biegłość RAW nadaje jawnie (Gladiator) | RAI | Nie. Wszystkie to Wszystkie. | 
 
 ---
 
-## 7. Otwarte
+## 7. Otwarte → rozstrzygnięte (MG, 2026-10-26)
 
-| # | Pytanie | Propozycja |
-|---|---|---|
+| # | Pytanie | Propozycja | Decyzja MG |
+|---|---|---|---|
+| P1 | Cecha rządząca instrumentów | CHA dla wszystkich (U22) | Wg RAW — s. 132 mówi „Charyzma lub Zręczność”: CHA domyślnie, ZRC w oknie rzutu (§5.1) |
+| P2 | `container` (plecak, skrzynia) jako broń improwizowana z zawartością | Tak, waga z zawartością; zawartość zostaje | Tak |
+| P3 | Akcja bonusowa jako drugi znacznik obok Reakcji | Rozstrzyga `PLAN_m7_zdolnosci.md` P1 | Bez zmian — M7 |
+| P4 | ~~Pościg konny~~ | `PLAN_m4_pojazdy.md` §6.3, W-P1 | — |
+| P5 | Materiał przegród z encji CDDA (opcja C) | Po becie; pole `material` w fladze ściany i tak zarezerwowane | **Jawny plan wydania 1.0 — [`PLAN_1_0.md`](PLAN_1_0.md) §2** |
+| P6 | ~~Wierzchowce poza koniem~~ | `PLAN_m4_pojazdy.md` §6.3, W-P2 | — |
+| P7 | Bestiariusz na natywny `hp.dt` zamiast flagi | PM — razem z PM1 (TT), bo zmienia dane | MG poprosił o wyjaśnienie — niżej; bez zmiany kolejności |
+| P8 | Obiekt widoczny dla graczy przed zniszczeniem (ramka) czy tylko po wycelowaniu | Widoczny — gracze muszą móc go wskazać | **Licznik PW/odporności bez grafiki, tylko ramka na czymś, co już jest w świecie; MG tworzy go na żądanie, dla tego, co gracze chcą zaatakować** (§5.4) |
+
+**P7 — co to jest `hp.dt`.** dnd5e 6.0 dał każdemu typowi aktora pole `system.attributes.hp.dt` — Próg obrażeń (5.3
+miał je tylko na pojazdach). `Actor5e#calculateDamage` liczy najpierw niewrażliwości, modyfikacje, mnożnik
+(`options.multiplier`), odporność i podatność, sumuje i dopiero wtedy, gdy suma jest dodatnia, a mniejsza niż `dt`,
+zeruje całość (chyba że `options.ignore.threshold` — tak już działa `ppanc` i `przebijająca`). To dokładnie NOE s. 254:
+„najpierw RO, następnie odporność, a na końcu Próg”, liczony od obrażeń jednego ataku. Dziś 6 istot Bestiariusza trzyma
+Próg we fladze `bestiary.damageThreshold`, a nasz hak `dnd5e.preCalculateDamage` (`combat/bestiary-thresholds.mjs`)
+zeruje obrażenia poniżej niego — napisany, kiedy dnd5e nie miał progu poza pojazdami. **I odbiega od RAW:** `pre…` widzi
+obrażenia przed odpornością, więc 8 obrażeń w istotę z odpornością i Progiem 5 przechodzi (8 ≥ 5), a potem odporność
+zostawia 4 — RAW daje 0 (8 → 4 → poniżej progu). Kolejność poprawiamy w E4 bez zmiany danych (hak na
+`dnd5e.calculateDamage`, po odporności — tam, gdzie liczy dnd5e). Przeniesienie = generator Bestiariusza wpisuje
+`hp.dt`, hak znika, taca obrażeń sama pokazuje „próg” (dziś pokazuje pełne obrażenia, a potem dostaje 0). Obiekty z M6
+od razu używają `hp.dt`, więc po P7 jest jedna implementacja zamiast dwóch. Czemu nie teraz: zmienia zapisane dane
+aktorów Bestiariusza (paczka i kopie w świecie) — tak jak PM1 (TT jako obliczenie KP dnd5e), więc obie zmiany idą
+razem jednym przebudowaniem i jedną migracją, przed zamrożeniem modeli (B2).
+
+---|---|---|
 | P1 | Cecha rządząca instrumentów | CHA dla wszystkich (U22) |
 | P2 | `container` (plecak, skrzynia) jako broń improwizowana z zawartością | Tak, waga z zawartością; zawartość zostaje |
 | P3 | Akcja bonusowa jako drugi znacznik obok Reakcji | Rozstrzyga `PLAN_m7_zdolnosci.md` P1 |
@@ -392,10 +490,10 @@ Kolejność: E1 najpierw (dziura B6), potem od najtańszych. Wierzchowce (dawne 
 | Etap | Zakres | Rozmiar | Zależy od | Gotowe gdy |
 |---|---|---|---|---|
 | **E0** | Spiki: (a) `Trait` `upgrade` na subklasie + ostrzeżenie w `preAdvancementManagerComplete`; (b) przedmioty bazowe narzędzi → natywne kategorie; (c) bliźniak w lejku lalki u gracza (tworzenie, ukrycie, kasowanie, kopia aktora); (e) `_isFalling`/`plummet` — podklasa czy opakowanie, sceny bez powierzchni (Z13); (f) Region wody: `TOKEN_TURN_START` u właściwego klienta. ~~(d)~~ — W0 w M4 | S | — | Notatka tak/nie per spike w §11; korekta planu |
-| **E1** | Biegłości profesji (§5.1): dane 18 profesji, instrumenty (droga z E0b), Cwaniak/Kowboj/Muzyk, `weapon:improwizowana`, `armor:hvy`, ostrzeżenie D1, `validate-packs`, e2e `postac` do 3. poziomu, `bieglosci.audyt()`. Na koniec: **`HANDOFF_bieglosci_retro.md`** dla LLM (D4) — lista postaci, wynik audytu, zasady uzupełniania, co pytać MG | M | E0a, E0b | Postać od zera ma komplet; audyt zwraca braki BG kampanii i pregenów |
+| **E1** | Biegłości profesji (§5.1): dane 18 profesji, instrumenty (droga z E0b), Cwaniak/Kowboj/Muzyk, `weapon:improwizowana`, `armor:hvy`, ostrzeżenie D1, biegłości wieloklasowe (Z14, Z15), `validate-packs`, e2e `postac` do 3. poziomu, `bieglosci.audyt()`. Na koniec: **`HANDOFF_bieglosci_retro.md`** dla LLM (D4) — lista postaci, wynik audytu, zasady uzupełniania, co pytać MG | M | E0a, E0b | Postać od zera ma komplet; audyt zwraca braki BG kampanii i pregenów |
 | **E2** | Właściwości broni (§5.3): `długa`, `ciężka` (+ RO serii), `jednorazowa` → zużyta wyrzutnia | S–M | — | Testy warstwy 1 wierszy; e2e `combat` krok LAW |
-| **E3** | Improwizacja (§5.2): rodzina `wRece`, bliźniak, kolba, „Działa jak…”, rzut na ziemię, ukrycie wszędzie, Łyżeczka (liczby) | M–L | E0c, E1 (biegłość) | e2e `improwizacja` (gracz bije medpakiem, rzuca łomem, Gladiator z PB); stanowisko Poligonu |
-| **E4** | Obiekty (§5.4): aktor bazowy, okno z tabelami, Ufizycznij z kotwicami, auto-porażka RO (inwentarz ścieżek), ×2, zniszczenie z kartą, X, pamięć zniszczeń w `map-sync` | M–L | — | e2e `obiekt` (drzwi z eksportu: strzał, granat, `burząca`, otwarcie); stanowisko Poligonu |
+| **E3** | Improwizacja (§5.2): rodzina `wRece`, bliźniak, kolba, „Działa jak…”, rzut na ziemię, ukrycie wszędzie, Łyżeczka (liczby RAW + wariant Kobaltu, §5.2.1) | M–L | E0c, E1 (biegłość) | e2e `improwizacja` (gracz bije medpakiem, rzuca łomem, Gladiator z PB); stanowisko Poligonu |
+| **E4** | Obiekty (§5.4): aktor bazowy, okno z tabelami, Ufizycznij z kotwicami, auto-porażka RO (inwentarz ścieżek), ×2, zniszczenie z kartą, X, pamięć zniszczeń w `map-sync`, przycisk „Zniszczenia” (U11), kolejność Progu Bestiariusza po odporności (§7, P7) | M–L | — | e2e `obiekt` (drzwi z eksportu: strzał, granat, `burząca`, otwarcie); stanowisko Poligonu |
 | **E5** | Latanie (§5.5) | S | E0e | Testy warstwy 2: lotnik Nieprzytomny/Pochwycony spada z kartą, Powalony opada bez |
 | **E6** | Woda i wspinaczka (§5.6) + eksporter map (repo Map) + karta referencyjna | M | E0f | e2e `woda` na scenie z Regionem; Zasadzka/Arena przeeksportowane |
 | **E8** | Domknięcie: macierz w `IMPLEMENTATION.md`, `docs/` (Ruch-i-teren, Broń improwizowana w Walce, Obiekty dla MG), tabela RAI w `scripts/wkk/README.md` (D1, U3, U5, U7, U9, U10, U15), `PLAN_weapon_properties.md` §3.3/§5 zamknięte | S | wszystkie | Bramki B1, B4, B7 dla wierszy M6 |
@@ -427,4 +525,20 @@ paczek `profesje`, `klasy`, `sprzet`). Flaga `wierzchowiec` i katalog nośników
 
 ## 11. Postęp
 
-*(pusto — wpisy po etapach)*
+### E0 — spiki (2026-10-26)
+
+Z kodu dnd5e 6.0.6 i rdzenia 14.369; każde „tak” sprawdza na żywo test etapu, który z niego korzysta.
+
+| Spike | Wynik | Notatka |
+|---|---|---|
+| **a** `Trait` `upgrade` na subklasie + ostrzeżenie | **Tak** | `TraitAdvancement#apply`: `upgrade` 0→1, 1→2, 2→2 (bez zmiany). `actorSelected` w trybie innym niż `default` bierze tylko cechy z `expertise` (umiejętności, narzędzia) — broń i pancerz w osobnym awansie `default` (§5.1). Awanse subklasy stosują się przy poziomie klasy rodzica (wzorzec 2024). Ostrzeżenie: `dnd5e.preAdvancementManagerComplete(manager, actorUpdates, …)` — porównanie `manager.actor` z klonem. Przy okazji Z14: `classRestriction` + `Advancement#appliesToClass` to gotowy mechanizm dla biegłości wieloklasowych. Na żywo: e2e `postac` (E1) |
+| **b** Przedmioty bazowe narzędzi → natywne kategorie | **Tak, droga 1** | Indeks paczek przychodzi z danymi świata (konstruktor `CompendiumCollection` czyta `metadata.index`), więc `Trait.keyLabel` znajduje nazwę przedmiotu bazowego synchronicznie od `setup`; `categories()` dociąga `system.type.value` sam. **22 zestawy już są przedmiotami bazowymi** w paczce `narzedzia` (`idFor("toolkit", id)`, `type.value: "tool"`) — dochodzi tylko 12 instrumentów (`music`). Lustro etykiet w `toolProficiencies` znika (dublowałoby wpisy w kategoriach). Id literałami + `validate-packs` (§5.1). Do poprawy przy okazji: `tool-expr.mjs` (`TOOL_KEYS` vs `CONFIG.DND5E.tools` — test w obie strony), lista narzędzi w `postoj/zajecia.mjs`, ikony biegłości (12 nowych — MISSING), `config.test.mjs` |
+| **c** Bliźniak w lejku lalki | **Tak, z korektą** | Karta dnd5e 6 filtruje każdą listę przez `_filterItem` → hak `dnd5e.filterItem` (`false` = ukryj). Lalka pomija bliźniaka (`dollSlot: "none"`; typ `improwizowana` poza `MELEE_TYPES`/`RANGED_TYPES`). Właściciel tworzy przedmioty na swoim aktorze. **Korekta §5.2:** bliźniak powstaje przy pierwszym ataku, nie przy wzięciu do ręki, i nie znika z ręką (rzut → przycisk „Obrażenia” po UUID). Na żywo: e2e `improwizacja` (E3) |
+| ~~d~~ | — | W0 w M4 |
+| **e** `_isFalling`/`plummet` | **Opakowanie prototypu** | Wzorzec modułu (`actors/drony.mjs` `_inferMovementAction`); podklasa nic nie daje. Z13: scena bez powierzchni ma podłogę w podstawie każdego poziomu — spadanie działa wszędzie; komentarze do poprawy. Stock strąca lotnika także przy Obezwładnieniu — NOE nie (§5.5) |
+| **f** Region wody: `TOKEN_TURN_START` | **U aktywnego MG** | `Combat#onStartTurn` (tylko jeden MG) → `#triggerRegionEvents`; `event.user` to ten MG. Zachowanie `woda` nie filtruje po `isSelf` poruszającego (jak `TOKEN_MOVE_IN` w `transitions.mjs`), tylko po `game.user.isActiveGM`, i wystawia kartę od MG (§5.6) |
+
+**Korekty planu z E0 i z weta:** §3 Z14–Z15; §5.1 (wieloklasowość, cecha instrumentów, id literałami, ostrzeżenie
+dla broni i pancerzy); §5.2 (bliźniak leniwy i trwały, chwyt 2 kg, typ obrażeń każdego przedmiotu, §5.2.1 Łyżeczka
+WKK); §5.4 (P8 bez grafiki, przycisk „Zniszczenia”); §5.5 (opakowanie, Obezwładnienie); §5.6 (woda tylko w walce,
+karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4); `PLAN_1_0.md` (P5).

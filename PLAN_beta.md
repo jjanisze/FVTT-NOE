@@ -386,6 +386,9 @@ i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 
 ## 4. Świadomie po becie
 
+Pozycje z projektem albo opisem zakresu mieszkają w [PLAN_1_0.md](PLAN_1_0.md) (od 2026-10-26; pierwsza: materiał
+przegród z encji CDDA, M6 P5); tu zostaje krótka lista bez projektu.
+
 | Pozycja | Dlaczego później |
 |---|---|
 | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem. Brać wersję z października: krwawienie tamuje Pomaganie + INT (Medycyna) ST 10 |
