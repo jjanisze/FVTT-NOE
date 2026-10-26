@@ -23,6 +23,10 @@ const NEURO_WEAPON_TYPES = {
   palnaDluga:   "Broń palna długa",
   palnaCiezka:  "Broń palna ciężka",
   specjalna:    "Broń specjalna",
+  // Broń improwizowana (s. 253) — typ tylko „bliźniaków” przedmiotów w ręce (PLAN_m6 §5.2) i klucz biegłości
+  // Gladiatora (`weapon:improwizowana`). Nie jest kategorią broni z tabel: „wszystkie bronie” i „kategoria broni”
+  // w biegłościach profesji to siedem kategorii wyżej (`KATEGORIE_BRONI` w `classes-data.mjs`).
+  improwizowana: "Broń improwizowana",
 };
 
 const NEURO_WEAPON_TYPE_MAP = {
@@ -33,6 +37,7 @@ const NEURO_WEAPON_TYPE_MAP = {
   palnaDluga:   "ranged",
   palnaCiezka:  "ranged",
   specjalna:    "ranged",
+  improwizowana: "melee",
 };
 
 /* -------------------------------------------- */
@@ -202,6 +207,13 @@ const WEAPON_TYPE_PROPERTIES = {
     "amm", "wmag", "beb", "tryb_p",
     "burzaca", "ciezka", "dluga", "ladowanie", "obalajaca", "ppanc", "przeladowanie", "sm", "zasilana", "spalinowa",
     "emp",
+  ]),
+
+  // Broń improwizowana — bliźniak przedmiotu w ręce: rzucana zawsze (3/9 m, s. 253), reszta tylko z „Działa jak…”
+  // albo z Łyżeczki Kobaltu (właściwość z rodzaju przedmiotu, PLAN_m6 §5.2.1).
+  improwizowana: new Set([
+    "thr", "lgt", "two",
+    "burzaca", "obalajaca", "powalajaca", "unieruchamiajaca",
   ]),
 };
 

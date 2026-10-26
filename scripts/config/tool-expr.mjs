@@ -15,10 +15,10 @@
  * („chemika & rusznikarza & chemika” → „chemika & rusznikarza”).
  *
  * Plik jest czysty: bez `game`/`CONFIG`, bo importuje go też `dev/validate-recipes.mjs`
- * w Node. Zgodność `TOOL_KEYS` z `CONFIG.DND5E.tools` sprawdza paczka Quench `produkcja`.
+ * w Node. Zgodność `TOOL_KEYS` z zestawami w `CONFIG.DND5E.tools` sprawdza paczka Quench `produkcja`.
  */
 
-/** Klucze narzędzi (= `CONFIG.DND5E.tools`) → krótka etykieta w dopełniaczu, do komunikatów. */
+/** Klucze zestawów narzędzi (= `TOOLKIT_KEYS` z `config/tools.mjs`; instrumenty nie są wymogiem przepisu) → krótka etykieta w dopełniaczu, do komunikatów. */
 export const TOOL_KEYS = Object.freeze({
   aptekarza: "aptekarza",
   charakteryzatora: "charakteryzatora",

@@ -163,6 +163,29 @@ clear margins, no ring or base. These are outside the M5 packer catalog.
 | `tokens/szeryf.webp` | 400×400 / 90% | Szeryf pustkowi |
 | `tokens/taran.webp` | 800×800 / 90% | Duża niska bestia z płytami pancerza i podłużnym łbem |
 
+## M. M6 — instrumenty muzyczne (12 ikon, klasa A)
+
+Requested 2026-10-27 for `PLAN_m6_drobne_zasady.md` §5.1: the 12 instruments of NOE s. 132 are now tool base items
+(category „Instrumenty muzyczne”) in the `narzedzia` pack. Until a glyph exists they show a core Foundry painting
+(`placeholder` in `scripts/config/toolkits-data.mjs` `INSTRUMENTS`); on delivery set `iconReady: true` there and run
+`fvtt packs --only=narzedzia`. Same style and size as the 22 kit glyphs in `icons/tools/` (white glyph, transparent
+background, [Pipeline.md](Pipeline.md)); the proficiency pills on the sheet read the same file.
+
+| Missing final file | Subject |
+|---|---|
+| `icons/tools/akordeon.svg` | Akordeon, miech rozciągnięty, klawisze z boku |
+| `icons/tools/banjo.svg` | Banjo, okrągłe pudło, długi gryf |
+| `icons/tools/gitaraAkustyczna.svg` | Gitara akustyczna, otwór rezonansowy |
+| `icons/tools/gitaraBasowa.svg` | Gitara basowa, cztery struny, długi gryf, wtyk kabla |
+| `icons/tools/gitaraElektryczna.svg` | Gitara elektryczna, wycięte ciało, przetworniki, kabel |
+| `icons/tools/harmonijka.svg` | Harmonijka ustna, z boku, rząd otworów |
+| `icons/tools/keyboard.svg` | Keyboard, klawiatura z góry, gałki |
+| `icons/tools/kontrabas.svg` | Kontrabas elektryczny, smukły korpus, nóżka |
+| `icons/tools/mikser.svg` | Mikser audio z suwakami i głośnik |
+| `icons/tools/perkusja.svg` | Perkusja: bęben, talerz, pałeczki |
+| `icons/tools/saksofon.svg` | Saksofon |
+| `icons/tools/skrzypce.svg` | Skrzypce elektryczne, szkieletowy korpus, smyczek |
+
 ## How an item gets added here
 
 Add only a confirmed missing asset: final path, purpose, spec and prompt/brief link.

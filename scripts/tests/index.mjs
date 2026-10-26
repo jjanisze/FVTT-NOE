@@ -48,6 +48,7 @@ import { registerBebeszenieTests } from "./bebeszenie.test.mjs";
 import { registerKartyCzatuTests } from "./karty-czatu.test.mjs";
 import { registerFuksyTests } from "./fuksy.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
+import { registerBieglosciTests } from "./bieglosci.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
@@ -68,6 +69,7 @@ import { runTests, listBatches } from "./runner.mjs";
 export function registerQuenchTests() {
   Hooks.on("quenchReady", quench => {
     registerConfigTests(quench);
+    registerBieglosciTests(quench);
     registerEquipmentDataTests(quench);
     registerDiseaseTests(quench);
     registerEffectChangesTests(quench);

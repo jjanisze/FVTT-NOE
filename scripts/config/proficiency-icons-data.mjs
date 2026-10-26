@@ -13,7 +13,7 @@ export const WEAPON_PROFICIENCY_ICONS = Object.fromEntries(Object.entries({
   biala: "machete", miotana: "javelin", palnaKrotka: "semi_auto_pistol",
   palnaPosr: "submachinegun", palnaDluga: "bolt_action_rifle",
   palnaCiezka: "heavy_machine_gun", specjalna: "flamethrower"
-}).map(([key, file]) => [key, `${ROOT}/weapons/${file}.svg`]));
+}).map(([key, file]) => [key, `${ROOT}/weapons/${file}.svg`]).concat([["improwizowana", ability("lyzeczka")]]));
 
 export const SKILL_ICONS = {
   akr: ability("sportowiec"),

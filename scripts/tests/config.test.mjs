@@ -181,11 +181,11 @@ export function registerConfigTests(quench) {
         expect(CONFIG.DND5E.skills, "brak Skradania się — sprawdź armor-rules.mjs").to.have.property("skr");
       });
 
-      it("każde narzędzie ma puste `id` (inaczej `Trait.keyLabel` wywala się)", function () {
-        // `getBaseItemUUID` robi `id.startsWith(...)`; brak pola = TypeError w dialogu rzutu.
+      it("każde narzędzie wskazuje swój przedmiot bazowy (inaczej `Trait.keyLabel` wywala się)", function () {
+        // `getBaseItemUUID` robi `id.startsWith(...)`; brak pola = TypeError w dialogu rzutu. Od M6 (PLAN_m6 §5.1)
+        // id to UUID przedmiotu w paczce `narzedzia` — kategoria i etykieta biorą się z niego.
         for (const [key, def] of Object.entries(CONFIG.DND5E.tools)) {
-          expect(def, `tools.${key}.id`).to.have.property("id");
-          expect(def.id, `tools.${key}.id`).to.be.a("string");
+          expect(def.id, `tools.${key}.id`).to.be.a("string").that.matches(/^Compendium\.neuroshima-2026-overrides\.narzedzia\.Item\./);
         }
       });
 
@@ -197,10 +197,9 @@ export function registerConfigTests(quench) {
         }
       });
 
-      it("etykiety biegłości narzędziowych są zsynchronizowane z `tools`", function () {
-        for (const key of Object.keys(CONFIG.DND5E.tools)) {
-          expect(CONFIG.DND5E.toolProficiencies, key).to.have.property(key);
-        }
+      it("biegłości narzędziowe mają dwie kategorie, bez lustra etykiet", function () {
+        // Lustro (`toolProficiencies[klucz] = etykieta`) sprzed M6 dublowało każde narzędzie w oknie biegłości.
+        expect(Object.keys(CONFIG.DND5E.toolProficiencies).sort()).to.deep.equal(["music", "tool"]);
       });
     });
 

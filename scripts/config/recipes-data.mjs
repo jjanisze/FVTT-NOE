@@ -36,7 +36,7 @@ import { AMMO_CALIBERS, GRENADE_TYPES } from "./ammo-data.mjs";
 import { CHEMIA } from "./chemia-data.mjs";
 import { ADDON_DEFS, rodzajUlepszenia, dostepnoscNasadki } from "./addons-data.mjs";
 import { PROWIANT_CATALOG } from "./prowiant-data.mjs";
-import { TOOLKITS } from "./toolkits-data.mjs";
+import { TOOLKITS, INSTRUMENTS } from "./toolkits-data.mjs";
 import { REAL_GEAR, GEAR_PLACEHOLDERS } from "./gear-data.mjs";
 import { MAGAZINES, magClass } from "./magazines-data.mjs";
 import { PODWOZIA } from "./vehicles-data.mjs";
@@ -272,6 +272,9 @@ export const KATEGORIE = Object.freeze({
   "prowiant": { label: "Prowiant", narzedzia: "kucharza", profil: "1 MO", jednorazowy: true },
   "woda": { label: "Woda", narzedzia: "gorzelnika", profil: "1 MO", jednorazowy: true },
   "zestawy": { label: "Zestawy narzędzi", narzedzia: "kowala", profil: "3 MK, 2 CZ" },
+  // Instrumenty (s. 132): RAW nie daje przepisu — „Produkcja: komponowanie muzyki” to użycie, nie wytworzenie;
+  // każdy wpis ma `produkcja: false`, kategoria jest dla handlu i szabrowania (PLAN_m6 §5.1).
+  "instrumenty": { label: "Instrumenty muzyczne", narzedzia: "", profil: "1 CZ" },
   "sprzet": { label: "Sprzęt", narzedzia: "kowala", profil: "4 MK, 1 CZ" },
   "magazynki": { label: "Magazynki", narzedzia: "rusznikarza", profil: "3 CZ, 2 MK" },
   "pojazdy": { label: "Pojazdy", narzedzia: "mechanika", profil: "1 CZ, 4 MK" },
@@ -558,6 +561,7 @@ function _surowyKatalog() {
   }
   for (const p of PROWIANT_CATALOG) add(`prowiant:${p.id}`, p.label, p.price, p.weight, p.category === "woda" ? "woda" : "prowiant", dost(p));
   for (const t of TOOLKITS) add(`toolkit:${t.id}`, t.label, t.price, t.weight, "zestawy", dost(t));
+  for (const t of INSTRUMENTS) add(`toolkit:${t.id}`, t.label, t.price, t.weight, "instrumenty", { ...dost(t), produkcja: false, schemat: false });
   for (const g of REAL_GEAR) add(`gear:${g.id}`, g.label, g.price, g.weight, "sprzet", dost(g));
   for (const m of MAGAZINES) {
     const cls = magClass(m);

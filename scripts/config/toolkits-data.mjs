@@ -312,6 +312,40 @@ export const TOOLKITS = [
   }
 ];
 
+/**
+ * Instrumenty muzyczne (s. 132) — ten sam kształt co zestaw, `typ: "music"`: przedmiot bazowy kategorii „Instrumenty
+ * muzyczne” w `config/tools.mjs`, biegłość nadawana awansem (Cwaniak, Kowboj, Gwiazda, Sztuczka Muzyk — PLAN_m6
+ * §5.1). „Cecha: Charyzma lub Zręczność”, „Używanie: zagraj znany kawałek (ST 10), improwizacja (ST 15)”,
+ * „Produkcja: komponowanie muzyki” — w opisie, nie przepis. Elektryczne potrzebują wzmacniacza (50 gb) i zasilania.
+ * Ikony — do dostawy (`dev/icons/MISSING.md`); do tego czasu `placeholder` z ikon rdzenia.
+ */
+const INSTRUMENT_ACTIONS = Object.freeze([
+  Object.freeze({ name: "Zagraj znany kawałek", dc: 10 }),
+  Object.freeze({ name: "Improwizacja", dc: 15 })
+]);
+const ELECTRIC = "Wymaga prądu: wzmacniacz (50 gb) i źródło energii — gniazdko elektryczne albo akumulator.";
+const I = (id, label, weight, price, avail, placeholder, electric = false) => ({
+  id, label, typ: "music", ability: "cha", altAbility: "dex", weight, price, avail, iconReady: false, placeholder,
+  actions: INSTRUMENT_ACTIONS, produkcja: "komponowanie muzyki.", ...(electric ? { special: ELECTRIC } : {})
+});
+const CORE_INSTR = "icons/tools/instruments";
+
+/** @type {Toolkit[]} */
+export const INSTRUMENTS = [
+  I("akordeon", "Akordeon", 10, 50, 40, `${CORE_INSTR}/horn-flared-wood.webp`),
+  I("banjo", "Banjo", 3, 40, 50, `${CORE_INSTR}/lute-gold-brown.webp`),
+  I("gitaraAkustyczna", "Gitara akustyczna", 2, 50, 50, `${CORE_INSTR}/lute-gold-brown.webp`),
+  I("gitaraBasowa", "Gitara basowa", 4, 100, 40, `${CORE_INSTR}/lute-gold-brown.webp`, true),
+  I("gitaraElektryczna", "Gitara elektryczna", 4, 130, 20, `${CORE_INSTR}/lute-gold-brown.webp`, true),
+  I("harmonijka", "Harmonijka ustna", 0.1, 20, 90, `${CORE_INSTR}/pipe-flute-tan.webp`),
+  I("keyboard", "Keyboard", 7, 150, 20, `${CORE_INSTR}/chimes-wood-brown.webp`, true),
+  I("kontrabas", "Kontrabas elektryczny", 10, 150, 10, `${CORE_INSTR}/harp-lap-brown.webp`, true),
+  I("mikser", "Mikser audio + głośniki", 5, 110, 20, `${CORE_INSTR}/microphone-stand-tall.webp`, true),
+  I("perkusja", "Perkusja", 20, 150, 10, `${CORE_INSTR}/drum-snare-red.webp`),
+  I("saksofon", "Saksofon", 6, 100, 20, `${CORE_INSTR}/saxophone.webp`),
+  I("skrzypce", "Skrzypce elektryczne", 0.5, 120, 10, `${CORE_INSTR}/harp-white.webp`, true)
+];
+
 /** Core fallback icon for kits without a dedicated icon yet. */
 const FALLBACK_ICON = "icons/svg/item-bag.svg";
 
@@ -319,7 +353,7 @@ const FALLBACK_ICON = "icons/svg/item-bag.svg";
 function _toolkitImg(kit) {
   return kit.iconReady
     ? `modules/${MODULE_ID}/icons/tools/${kit.id}.svg`
-    : FALLBACK_ICON;
+    : (kit.placeholder ?? FALLBACK_ICON);
 }
 
 /**
@@ -419,7 +453,7 @@ export function buildToolkitItemData(kit, links) {
     type: "tool",
     img: _toolkitImg(kit),
     system: {
-      type: { value: "tool", baseItem: kit.id },
+      type: { value: kit.typ ?? "tool", baseItem: kit.id },
       ability: kit.ability,
       proficient: null,
       description: {

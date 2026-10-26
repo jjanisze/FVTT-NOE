@@ -100,16 +100,31 @@ async function advance({ picks = {} }) {
         chosen.add(row);
         await __e2e.sleep(250);
       }
+    } else if (type === "HitPointsAdvancement") {
+      // Above a first level dnd5e wants a roll or "Take average"; the module's PW are flat anyway (actors/pw.mjs).
+      const avg = el.querySelector('dnd5e-checkbox[name="useAverage"]');
+      if (avg && !avg.checked) {
+        avg.checked = true;
+        avg.dispatchEvent(new Event("change", { bubbles: true }));
+        await __e2e.sleep(250);
+      }
+    } else if (type === "SubclassAdvancement") {
+      // The profession by name (`picks.Profesja`), as the player drops it on the step.
+      const index = await game.packs.get("neuroshima-2026-overrides.profesje").getIndex({ fields: ["system.classIdentifier"] });
+      const cls = flow.item ?? flow.advancement.item;
+      const own = index.filter(e => e.system?.classIdentifier === cls.system.identifier);
+      const hit = own.find(e => e.name === [want].flat()[0]) ?? own[0];
+      await flow.advancement.apply(flow.level, { uuid: hit.uuid });
+      await flow.render();
+      await __e2e.sleep(250);
     }
     const btn = mgr.element.querySelector('button[data-action="complete"]') ?? mgr.element.querySelector('button[data-action="next"]');
     if (!btn) throw new Error(`no Next/Complete on step ${type}:${title}`);
-    const done = btn.dataset.action === "complete";
     btn.click();
-    if (done) {
-      await __e2e.until(() => !mgr.rendered, { timeoutMs: 15_000, message: "the manager to close" });
-      return seen;
-    }
-    await __e2e.until(() => mgr.step?.flow && mgr.step.flow !== flow, { timeoutMs: 8000, message: `the step after ${title}` });
+    // "Complete" is not always the end: a profession's own steps appear only after its Subclass step is applied.
+    await __e2e.until(() => !mgr.rendered || (mgr.step?.flow && mgr.step.flow !== flow),
+      { timeoutMs: 15_000, message: `the step after ${title}` });
+    if (!mgr.rendered) return seen;
     await __e2e.sleep(200);
   }
   throw new Error(`advancement did not finish: ${seen.join(" → ")}`);
@@ -131,6 +146,37 @@ function snapshot({ name }) {
     speed: `${a.system.attributes.movement.speeds.walk} ${a.system.attributes.movement.units}`,
     level: a.system.details.level, statuses: [...a.statuses]
   };
+}
+
+/** Player: open dnd5e's level-up manager for the first class, as the sheet's level control does (`advance` walks it). */
+function openLevelUp({ name, delta }) {
+  const a = game.actors.getName(name);
+  const cls = a.items.find(i => i.type === "class" && i.isOriginalClass);
+  const mgr = dnd5e.applications.advancement.AdvancementManager.forLevelChange(a, cls.id, delta);
+  mgr.render(true);
+  return mgr.steps.length;
+}
+
+/** Proficiency state the M6 checks read (PLAN_m6 §5.1): skills, tools, weapons, armour, saves. */
+function proficiencies({ name }) {
+  const a = game.actors.getName(name);
+  return {
+    skills: Object.fromEntries(Object.entries(a.system.skills).filter(([, s]) => s.value > 0).map(([k, s]) => [k, s.value])),
+    tools: Object.fromEntries(Object.entries(a.system.tools ?? {}).filter(([, t]) => t.value > 0).map(([k, t]) => [k, t.value])),
+    weapons: [...a.system.traits.weaponProf.value].sort(),
+    armor: [...a.system.traits.armorProf.value].sort(),
+    saves: Object.entries(a.system.abilities).filter(([, s]) => s.proficient).map(([k]) => k).sort(),
+    subclass: a.items.find(i => i.type === "subclass")?.system.identifier ?? null,
+    classes: a.items.filter(i => i.type === "class").map(i => `${i.system.identifier} ${i.system.levels}`)
+  };
+}
+
+
+/** Anyone: the D1 warnings this user can see (whispered "nic nie przepada po cichu" cards); null while none. */
+function warnings({ includes }) {
+  const ws = game.messages.filter(m => m.getFlag("neuroshima-2026-overrides", "naruszenie") && m.visible)
+    .map(m => m.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+  return ws.some(x => x.includes(includes)) ? ws : null;
 }
 
 /** Player: one skill check from the new character, rolled as the sheet would (dialog pressed). */
@@ -237,6 +283,51 @@ export default {
       // NOE, Tworzenie postaci: every hero starts at 9 m. dnd5e takes speed from a species, which NOE
       // has none of — a character built from zero walked 0 m until 2026-10-08.
       t.equal(s.speed, "9 m", "GM: Szybkość");
+    });
+
+    await t.step("GM: Pojazdy already at Specjalizacja, the mechanic's kit at proficiency (setup for D1, PLAN_m6 §5.1)", async () => {
+      await t.gm.eval(async n => {
+        await game.actors.getName(n).update({
+          "system.skills.poj.value": 2,
+          "system.tools.mechanika": { value: 1, ability: "dex" },
+          "system.abilities.int.value": 15
+        });
+      }, ACTOR);
+      await t.waitFor(p, n => game.actors.getName(n).system.tools?.mechanika?.value === 1 || null,
+        { args: [ACTOR], message: "the player to see the setup" });
+    });
+
+    await t.step("player levels Twardziel 1 → 3 and takes Wojownik autostrady: upgrade, and a warning instead of a silent loss", async () => {
+      const n = await p.eval(openLevelUp, { name: ACTOR, delta: 2 });
+      t.assert(n > 0, "the level-up opened no steps", n);
+      const seen = await p.eval(advance, { picks: { "Profesja": "Wojownik Autostrady" } });
+      t.log(seen.join(" → "));
+      t.assert(seen.some(s => s.startsWith("Subclass:")), "no profession step", seen);
+      const s = await t.waitFor(p, n => game.actors.getName(n).items.some(i => i.type === "subclass") || null,
+        { args: [ACTOR], message: "the profession on the actor" }).then(() => p.eval(proficiencies, { name: ACTOR }));
+      t.equal(s.classes.join(","), "twardziel 3", "class level");
+      t.equal(s.subclass, "wojownik-autostrady", "profession");
+      t.equal(s.tools.mechanika, 2, "mechanic's kit: proficiency → Specjalizacja (D1)");
+      t.equal(s.skills.poj, 2, "Pojazdy stays at Specjalizacja");
+      const w = await t.waitFor(p, warnings, { args: [{ includes: "Pojazdy" }], message: "the D1 warning whispered to the player" });
+      t.assert(w.some(x => /Pojazdy: masz już Specjalizację/.test(x)), "warning text", w);
+      t.assert(!w.some(x => /mechanika/.test(x)), "no warning for the kit that did go up", w);
+    });
+
+    await t.step("player adds Spec as a second class: the multiclass kit only — no saves, one skill, one kit (s. 59, Z14)", async () => {
+      const before = await p.eval(proficiencies, { name: ACTOR });
+      const d = await p.eval(dropOnSheet, { name: ACTOR, pack: "klasy", entry: "Spec" });
+      t.assert(d.manager, "dropping the second class opened no AdvancementManager", d);
+      const seen = await p.eval(advance, { picks: {} });
+      t.log(seen.join(" → "));
+      t.assert(seen.some(x => x === "Trait:Biegłości (postać wieloklasowa)"), "the multiclass Trait step", seen);
+      t.assert(!seen.some(x => x === "Trait:Biegłości"), "the full starting kit ran for a second class", seen);
+      const s = await t.waitFor(p, n => game.actors.getName(n).items.filter(i => i.type === "class").length === 2 || null,
+        { args: [ACTOR], message: "the second class" }).then(() => p.eval(proficiencies, { name: ACTOR }));
+      t.equal(s.saves.join(","), before.saves.join(","), "saves unchanged");
+      t.equal(s.weapons.join(","), before.weapons.join(","), "weapons unchanged");
+      t.equal(Object.keys(s.skills).length, Object.keys(before.skills).length + 1, "one skill from the Spec list");
+      t.equal(Object.keys(s.tools).length, Object.keys(before.tools).length + 1, "one kit of choice");
     });
 
     await t.step("Cichy krok: the active GM creates one terrain effect with players connected, for owned and unowned characters", async () => {

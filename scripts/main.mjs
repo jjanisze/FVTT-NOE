@@ -71,6 +71,7 @@ import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerDnd5eSettings, dnd5eSettingsApi } from "./config/dnd5e-settings.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerKobaltAdvancement } from "./actors/kobalt-advancement.mjs";
+import { registerBieglosci, bieglosciApi } from "./actors/bieglosci.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
 import { registerBezDna } from "./actors/bez-dna.mjs";
 import { registerSamuraj } from "./actors/samuraj.mjs";
@@ -294,6 +295,7 @@ Hooks.once("init", () => {
   registerSrdCleanup();
   registerDnd5eSettings();
   registerClassRules();
+  registerBieglosci();
   registerKobaltAdvancement();
   registerCichyKrok();
   registerBezDna();
@@ -558,6 +560,8 @@ Hooks.once("ready", () => {
   game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
   game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, ...dronyZdalneApi, ...dronyObrazApi, ...dronyOsdApi, ...dronyNaprawaApi, premiaAtakuDrona };
   game.neuroshima.maszyny = maszynyApi;
+  // Biegłości z awansów (PLAN_m6 §5.1) — game.neuroshima.bieglosci.audyt(actor): czego brakuje względem kompendium.
+  game.neuroshima.bieglosci = bieglosciApi;
   game.neuroshima.emiterEmp = emiterEmpApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;

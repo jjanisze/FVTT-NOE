@@ -256,10 +256,11 @@ export const TABELE_K100 = Object.freeze({
 export const TABELE_K12 = Object.freeze({
   instrumenty: Object.freeze({
     label: "Instrumenty muzyczne", s: 132, wiersze: Object.freeze([
-      W(1, 1, "Akordeon", null, 50, 10), W(2, 2, "Banjo", null, 40, 3), W(3, 3, "Gitara akustyczna", null, 50, 2),
-      W(4, 4, "Gitara basowa", null, 100, 4), W(5, 5, "Gitara elektryczna", null, 130, 4), W(6, 6, "Harmonijka ustna", null, 20, 0.1),
-      W(7, 7, "Keyboard", null, 150, 7), W(8, 8, "Kontrabas elektryczny", null, 150, 10), W(9, 9, "Mikser audio + głośniki", null, 110, 5),
-      W(10, 10, "Perkusja", null, 150, 20), W(11, 11, "Saksofon", null, 100, 6), W(12, 12, "Skrzypce elektryczne", null, 120, 0.5)
+      // Przedmioty z paczki `narzedzia` (PLAN_m6 §5.1) — biegłość w instrumencie liczy się od razu.
+      W(1, 1, "Akordeon", "toolkit:akordeon"), W(2, 2, "Banjo", "toolkit:banjo"), W(3, 3, "Gitara akustyczna", "toolkit:gitaraAkustyczna"),
+      W(4, 4, "Gitara basowa", "toolkit:gitaraBasowa"), W(5, 5, "Gitara elektryczna", "toolkit:gitaraElektryczna"), W(6, 6, "Harmonijka ustna", "toolkit:harmonijka"),
+      W(7, 7, "Keyboard", "toolkit:keyboard"), W(8, 8, "Kontrabas elektryczny", "toolkit:kontrabas"), W(9, 9, "Mikser audio + głośniki", "toolkit:mikser"),
+      W(10, 10, "Perkusja", "toolkit:perkusja"), W(11, 11, "Saksofon", "toolkit:saksofon"), W(12, 12, "Skrzypce elektryczne", "toolkit:skrzypce")
     ])
   }),
   zywe: Object.freeze({

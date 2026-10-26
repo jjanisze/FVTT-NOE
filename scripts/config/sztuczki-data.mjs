@@ -316,12 +316,18 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 CHA; biegłość w 2 instrumentach; Pieśń otuchy (1×/Długi Odpoczynek) — "
       + "Fuks dla 1 + mod. CHA sojuszników.",
     category: "wsparcie",
+    // Two instruments, chosen in dnd5e's advancement window when the Sztuczka lands (PLAN_m6 §5.1).
+    bieglosci: [{ wybory: [{ ile: 2, pula: ["tool:music:*"] }], tryb: "default", tytul: "Instrumenty" }],
     auto: [{
       what: "Pieśń otuchy — aktywność na Sztuczce, 1×/Długi odpoczynek: wybór 1 + mod. CHA sojuszników, każdy dostaje "
         + "Fuksa (u cudzych postaci przez przekaźnik MG).",
       where: "actors/fuksy.mjs"
+    }, {
+      what: "Biegłość w 2 instrumentach — awans przy wzięciu Sztuczki (wybór z kategorii „Instrumenty muzyczne”; "
+        + "awans buduje `dev/packs/build-packs.mjs`).",
+      where: "actors/bieglosci.mjs"
     }],
-    manual: "+1 CHA i biegłości w dwóch instrumentach dopisuje gracz."
+    manual: "+1 CHA dopisuje gracz."
   },
   neo: {
     label: "Neo",

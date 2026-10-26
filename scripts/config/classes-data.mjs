@@ -37,6 +37,17 @@ export const PROFESJA_LUB_SZTUCZKA = "@profesja|sztuczka";
 export const POCHODZENIE = "@pochodzenie";
 
 /**
+ * Siedem kategorii broni z tabel (`config/weapons.mjs`). „Wszystkie bronie” i „kategoria broni” w biegłościach
+ * profesji to te siedem — broń improwizowana nie jest kategorią z tabel, jej biegłość RAW nadaje jawnie (Gladiator,
+ * PLAN_m6 U24).
+ */
+export const KATEGORIE_BRONI = Object.freeze(["biala", "miotana", "palnaKrotka", "palnaPosr", "palnaDluga", "palnaCiezka", "specjalna"]);
+const BRON = KATEGORIE_BRONI.map(k => `weapon:${k}`);
+/** Pule wyborów narzędzi — kategorie dnd5e z przedmiotów bazowych (`config/tools.mjs`). */
+const ZESTAW = "tool:tool:*";
+const INSTRUMENT = "tool:music:*";
+
+/**
  * PW (hit points) groups. Neuroshima uses flat per-level values, which dnd5e's
  * HitPoints advancement cannot express — see PLAN_classes.md §4.1 and `actors/pw.mjs`.
  */
@@ -112,7 +123,8 @@ export const CLASSES = {
     tools: { instruments: 2, any: 1 },
     weapons: ["biala", "palnaKrotka"],
     armor: ["lgt"],
-    multiclass: { weapons: [], armor: [], skills: { count: 1, fromClassPool: true } },
+    // RAW: KW, jedna umiejętność, jeden instrument, lekkie pancerze.
+    multiclass: { weapons: [], armor: ["lgt"], skills: { count: 1, fromClassPool: true }, tools: { instruments: 1 } },
     startingEquipment: {
       always: ["Plecak oszusta", "instrument muzyczny (do 50 gb)"],
       choice: {
@@ -272,7 +284,7 @@ export const CLASSES = {
     armor: ["lgt"],
     multiclass: {
       weapons: [], armor: ["lgt"],
-      skills: { count: 1, fromClassPool: true }, tools: { fixed: ["slusarz"] }
+      skills: { count: 1, fromClassPool: true }, tools: { fixed: ["slusarza"] }
     },
     startingEquipment: {
       always: ["Plecak włamywacza", "narzędzia małego ślusarza"],
@@ -371,58 +383,142 @@ export const CLASSES = {
 /* -------------------------------------------- */
 
 /**
- * Each profession lists the abilities its parent class may choose from at its
- * profession levels. `proficiencies` is granted on taking the profession.
+ * Each profession lists the abilities its parent class may choose from at its profession levels, and
+ * `bieglosci` — its proficiencies ("BIEGŁOŚCI <PROFESJI>", NOE s. 69–101; text in `dev/classes/professions.json`).
+ * Every group becomes one dnd5e `Trait` advancement at the profession's first level (`dev/packs/build-packs.mjs`):
+ *
+ *   nadania  fixed grants;  wybory  `[{ile, pula}]` choices;  tryb  dnd5e trait mode;  tytul  step title
+ *
+ * Modes (PLAN_m6 §5.1, GM D1/D3): fixed skill and tool grants are `upgrade` — proficiency, or Specjalizacja if the
+ * character already has it; a grant that finds Specjalizacja adds nothing and warns (`actors/bieglosci.mjs`). Free
+ * choices are `default` — only from what the character lacks — except where RAW itself says "if you already have it"
+ * (Gladiator). Gwiazda's instrument Specjalizacja is the one `forcedExpertise` (U1). dnd5e upgrades only traits with
+ * expertise (skills, tools), so weapons and armour sit in their own `default` group.
  */
 export const PROFESSIONS = {
   /* Brutal */
   ganger:    { klasa: "brutal", label: "Ganger",
-               abilities: ["dwoch-na-jednego", "ja-i-moj-gang", "jeden-z-nich", "odwazny-czy-glupi"] },
+               abilities: ["dwoch-na-jednego", "ja-i-moj-gang", "jeden-z-nich", "odwazny-czy-glupi"],
+               bieglosci: [
+                 { nadania: ["skills:poj"], tryb: "upgrade" },
+                 { nadania: ["weapon:palnaPosr"], tryb: "default" }
+               ] },
   gladiator: { klasa: "brutal", label: "Gladiator",
-               abilities: ["nie-do-zdarcia", "lyzeczka", "zew-areny", "zawolajcie-kolegow"] },
+               abilities: ["nie-do-zdarcia", "lyzeczka", "zew-areny", "zawolajcie-kolegow"],
+               bieglosci: [
+                 // „Atletyka lub Akrobatyka, lub jeśli którąś już posiadasz — Specjalizacja w jednej z nich”.
+                 { wybory: [{ ile: 1, pula: ["skills:atl", "skills:akr"] }], tryb: "upgrade",
+                   tytul: "Biegłość albo Specjalizacja" },
+                 { nadania: ["weapon:improwizowana"], tryb: "default" }
+               ] },
   najemnik:  { klasa: "brutal", label: "Najemnik",
-               abilities: ["maszyna-do-zabijania", "reputacja", "skuteczny-cios"] },
+               abilities: ["maszyna-do-zabijania", "reputacja", "skuteczny-cios"],
+               bieglosci: [
+                 { wybory: [{ ile: 2, pula: BRON }, { ile: 1, pula: [ZESTAW] }], tryb: "default" }
+               ] },
 
   /* Cwaniak */
   gwiazda:     { klasa: "cwaniak", label: "Gwiazda",
-                 abilities: ["kakofonia", "lets-rock", "stylowa", "za-garsc-gambli"] },
+                 abilities: ["kakofonia", "lets-rock", "stylowa", "za-garsc-gambli"],
+                 bieglosci: [
+                   { nadania: ["skills:wys"], tryb: "upgrade" },
+                   // „dwie inne umiejętności albo umiejętność i zestaw” = dwa wybory po 1 (U23).
+                   { wybory: [{ ile: 1, pula: ["skills:*"] }, { ile: 1, pula: ["skills:*", ZESTAW] }], tryb: "default" },
+                   { wybory: [{ ile: 1, pula: [INSTRUMENT] }], tryb: "forcedExpertise", tytul: "Specjalizacja w instrumencie" }
+                 ] },
   kaznodzieja: { klasa: "cwaniak", label: "Kaznodzieja Nowej Ery",
-                 abilities: ["amen", "laska-boza", "moj-bog-kule-nosi", "tarcza-wiary"] },
+                 abilities: ["amen", "laska-boza", "moj-bog-kule-nosi", "tarcza-wiary"],
+                 bieglosci: [
+                   { nadania: ["weapon:palnaDluga"], tryb: "default" },
+                   { wybory: [{ ile: 1, pula: ["skills:*"] }, { ile: 1, pula: [ZESTAW] }], tryb: "default" }
+                 ] },
   mafiozo:     { klasa: "cwaniak", label: "Mafiozo",
-                 abilities: ["bezlitosny-przywodca", "renoma", "moja-prawa-reka"] },
+                 abilities: ["bezlitosny-przywodca", "renoma", "moja-prawa-reka"],
+                 bieglosci: [
+                   { nadania: ["tool:tatuazysty"], tryb: "upgrade" },
+                   { wybory: [{ ile: 2, pula: BRON }], tryb: "default" }
+                 ] },
 
   /* Spec */
   chemik: { klasa: "spec", label: "Chemik",
-            abilities: ["smakuje-jak-arszenik", "pirotechnika", "rusznikarstwo"] },
+            abilities: ["smakuje-jak-arszenik", "pirotechnika", "rusznikarstwo"],
+            bieglosci: [
+              { nadania: ["tool:chemika", "tool:rusznikarza"], tryb: "upgrade" }
+            ] },
   medyk:  { klasa: "spec", label: "Medyk",
-            abilities: ["doktor-brain", "krwawy-aniol", "lapiduch", "farmacja"] },
+            abilities: ["doktor-brain", "krwawy-aniol", "lapiduch", "farmacja"],
+            bieglosci: [
+              { nadania: ["skills:med"], tryb: "upgrade" },
+              { wybory: [{ ile: 1, pula: ["tool:chemika", "tool:medyka"] }], tryb: "default" }
+            ] },
   monter: { klasa: "spec", label: "Monter",
-            abilities: ["mechanika", "hakerstwo", "serwisowanie"] },
+            abilities: ["mechanika", "hakerstwo", "serwisowanie"],
+            bieglosci: [
+              { nadania: ["skills:tch"], tryb: "upgrade" },
+              { wybory: [{ ile: 2, pula: [ZESTAW] }], tryb: "default" }
+            ] },
 
   /* Twardziel */
   kowboj:                { klasa: "twardziel", label: "Kowboj",
                            abilities: ["clint", "rewolwerowiec", "zawsze-w-siodle",
-                                       ...kobaltAbilitiesOf("kowboj")] },
+                                       ...kobaltAbilitiesOf("kowboj")],
+                           bieglosci: [
+                             { nadania: ["tool:kowala"], tryb: "upgrade" },
+                             { wybory: [{ ile: 1, pula: ["skills:poj", "skills:tre"] }, { ile: 1, pula: [INSTRUMENT] }],
+                               tryb: "default" }
+                           ] },
   "wojownik-autostrady": { klasa: "twardziel", label: "Wojownik Autostrady",
-                           abilities: ["drzwi-w-drzwi", "kaskader", "pancerna-fura"] },
+                           abilities: ["drzwi-w-drzwi", "kaskader", "pancerna-fura"],
+                           bieglosci: [
+                             { nadania: ["skills:poj", "tool:mechanika"], tryb: "upgrade" }
+                           ] },
   zolnierz:              { klasa: "twardziel", label: "Żołnierz",
-                           abilities: ["jak-dbasz-tak-masz", "rutyna", "trening-w-zbroi"] },
+                           abilities: ["jak-dbasz-tak-masz", "rutyna", "trening-w-zbroi"],
+                           bieglosci: [
+                             { nadania: ["skills:tch"], tryb: "upgrade" },
+                             { wybory: [{ ile: 1, pula: ["tool:rusznikarza", "tool:kowala"] }], tryb: "default" }
+                           ] },
 
   /* Złodziej */
   kurier:  { klasa: "zlodziej", label: "Kurier",
-             abilities: ["skrytka", "slang", "znajomosci"] },
+             abilities: ["skrytka", "slang", "znajomosci"],
+             bieglosci: [
+               { nadania: ["tool:mechanika", "skills:poj"], tryb: "upgrade" }
+             ] },
   szczur:  { klasa: "zlodziej", label: "Szczur",
-             abilities: ["a-co-mi-tam", "szary", "truciciel", "zwinnosc-szczura"] },
+             abilities: ["a-co-mi-tam", "szary", "truciciel", "zwinnosc-szczura"],
+             bieglosci: [
+               { nadania: ["tool:chemika"], tryb: "upgrade" },
+               { wybory: [{ ile: 1, pula: ["skills:akr", "skills:zwi"] }], tryb: "default" }
+             ] },
   zabojca: { klasa: "zlodziej", label: "Zabójca",
-             abilities: ["jeden-strzal", "kamuflaz", "strzelec"] },
+             abilities: ["jeden-strzal", "kamuflaz", "strzelec"],
+             bieglosci: [
+               { nadania: ["tool:charakteryzatora"], tryb: "upgrade" },
+               // „biegłość we wszystkich broniach” — siedem kategorii z tabel (U24).
+               { nadania: BRON, tryb: "default" }
+             ] },
 
   /* Zwiadowca */
   "lowca-mutantow": { klasa: "zwiadowca", label: "Łowca Mutantów",
-                      abilities: ["bez-tajemnic", "mutant-na-sniadanie", "pogromca", "oswajanie-zwierzat"] },
+                      abilities: ["bez-tajemnic", "mutant-na-sniadanie", "pogromca", "oswajanie-zwierzat"],
+                      bieglosci: [
+                        { wybory: [{ ile: 1, pula: ["skills:prz", "skills:tre"] }, { ile: 1, pula: [ZESTAW] },
+                                   { ile: 1, pula: BRON }], tryb: "default" }
+                      ] },
   sedzia:           { klasa: "zwiadowca", label: "Sędzia",
-                      abilities: ["jeden-z-nas", "rzuc-bron-i-gleba", "partner"] },
+                      abilities: ["jeden-z-nas", "rzuc-bron-i-gleba", "partner"],
+                      bieglosci: [
+                        { nadania: ["skills:sle", "skills:zas"], tryb: "upgrade" },
+                        { wybory: [{ ile: 1, pula: [ZESTAW] }, { ile: 1, pula: BRON }], tryb: "default" }
+                      ] },
   "zabojca-maszyn": { klasa: "zwiadowca", label: "Zabójca Maszyn",
-                      abilities: ["emiter-emp", "empiryk", "slaby-punkt"] }
+                      abilities: ["emiter-emp", "empiryk", "slaby-punkt"],
+                      bieglosci: [
+                        { nadania: ["skills:tch"], tryb: "upgrade" },
+                        { wybory: [{ ile: 1, pula: [ZESTAW] }, { ile: 1, pula: BRON }], tryb: "default" },
+                        { nadania: ["armor:hvy"], tryb: "default" }
+                      ] }
 };
 
 /* -------------------------------------------- */

@@ -103,7 +103,7 @@ oznaczamy, nie blokujemy.
 | # | Znalezisko | Skutek |
 |---|---|---|
 | Z1 | `buildProfession` (`dev/packs/build-packs.mjs`) nadaje tylko wybory zdolności; `PROFESSIONS` (`config/classes-data.mjs`) nie ma pola biegłości, choć komentarz mówi, że „`proficiencies` jest nadawane”. Tekst jest w `dev/classes/professions.json` | Dziura B6 z `PLAN_beta.md` — potwierdzona dla 18/18 profesji |
-| Z2 | `buildClass` czyta tylko `tools.fixed` i `tools.choice`; Cwaniak ma `tools: { instruments: 2, any: 1 }` | **Cwaniak od zera też nie dostaje narzędzi ani instrumentów** — druga dziura B6, nieznana dotąd |
+| Z2 | `buildClass` czyta tylko `tools.fixed` i `tools.choice`; Cwaniak ma `tools: { instruments: 2, any: 1 }`, Spec `tools: { any: 2 }` | **Cwaniak i Spec od zera też nie dostają narzędzi ani instrumentów** — druga dziura B6, nieznana dotąd |
 | Z3 | `config/tools.mjs`: 22 zestawy, jedna kategoria, `id: ""` (bez przedmiotów bazowych); instrumenty istnieją tylko jako wiersze tabeli szabrowania (`config/szabrowanie-data.mjs`) | Instrumentów nie da się dziś nadać ani wybrać |
 | Z4 | `config/weapons.mjs` wycina typ `improv` (`NEURO_WEAPON_TYPES`); jedyna broń improwizowana to Pochodnia (WKK) | Brak klucza biegłości dla Gladiatora |
 | Z5 | Lalka (`actors/doll-model.mjs` `classifyItem`) rozpoznaje tylko broń, tarcze, pancerze, latarki, gogle; „nieznane nigdy nie jest zgadywane” | Medpaku nie da się wziąć do ręki — potrzebna jawna nowa rodzina |
@@ -200,8 +200,11 @@ jedynie część startowych biegłości klasowych, co jest wyszczególnione w op
 „kiedy awansujesz na nowy poziom w danej klasie, otrzymujesz jej wszystkie zdolności dla danego poziomu”. Profesja
 nadaje więc pełne biegłości także postaci wieloklasowej (U2 bez zmian, teraz z odsyłaczem). Klasy dostają dwa awanse
 `Trait` na 1. poziomie: `classRestriction: "primary"` (dzisiejszy zestaw) i `"secondary"` (akapit „Jako postać
-wieloklasowa”: KW zostaje w awansie HitPoints, bez rzutów obronnych). Cwaniak i Zwiadowca: „jednej wybranej
-umiejętności” — bez listy klasy, w odróżnieniu od Speca, Twardziela i Złodzieja („z listy …”); czytamy dosłownie.
+wieloklasowa”: KW zostaje w awansie HitPoints, bez rzutów obronnych). Cwaniak i Zwiadowca piszą „jednej wybranej
+umiejętności” bez „z listy”, ale s. 59 definiuje cały zestaw wieloklasowy jako „część startowych biegłości klasowych”,
+więc wybór idzie z listy klasy (tak już stoi w `CLASSES[c].multiclass`); „dwie kategorie broni” Twardziela i Zwiadowcy —
+z ich startowych kategorii. Dane wieloklasowe Cwaniaka gubią instrument i lekkie pancerze z RAW — poprawka w E1.
+Speca „2 dowolne zestawy” (`tools: {any: 2}`) `buildClass` też pomija, jak Cwaniaka (Z2).
 Istniejące postacie wieloklasowe z nadmiarem biegłości — audyt (D4) je wypisuje, nic nie zdejmuje sam.
 
 **Weryfikacja.** `validate-packs`: każda profesja ma co najmniej jeden awans `Trait` na swoim pierwszym poziomie,
@@ -542,3 +545,28 @@ Z kodu dnd5e 6.0.6 i rdzenia 14.369; każde „tak” sprawdza na żywo test eta
 dla broni i pancerzy); §5.2 (bliźniak leniwy i trwały, chwyt 2 kg, typ obrażeń każdego przedmiotu, §5.2.1 Łyżeczka
 WKK); §5.4 (P8 bez grafiki, przycisk „Zniszczenia”); §5.5 (opakowanie, Obezwładnienie); §5.6 (woda tylko w walce,
 karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4); `PLAN_1_0.md` (P5).
+
+### E1 — biegłości profesji (2026-10-27)
+
+- **Dane:** `PROFESSIONS[pid].bieglosci` dla 18/18 profesji (`config/classes-data.mjs`), `KATEGORIE_BRONI` (7, bez
+  improwizowanej — U24); typ broni `improwizowana` (klucz Gladiatora; ikona Łyżeczki). Wieloklasowość: Cwaniak dostał
+  instrument i lekkie pancerze (Z14), Złodziej `slusarza` (Z15).
+- **Narzędzia (E0b, droga 1):** `config/tools.mjs` — 22 zestawy + 12 instrumentów z przedmiotami bazowymi w `narzedzia`
+  (literały id, `validate-packs`), kategorie „Zestawy narzędzi” / „Instrumenty muzyczne”, bez lustra etykiet.
+  Instrumenty (`INSTRUMENTS` w `toolkits-data.mjs`): CHA (ZRC w oknie), dwie aktywności (ST 10/15), ikony rdzenia do
+  dostawy (`MISSING.md` §M); w katalogu handlu (kategoria `instrumenty`, `produkcja: false`), w tabeli k12 szabrowania.
+- **Paczki:** profesja — jeden `Trait` na grupę na pierwszym poziomie profesji; klasa — `primary` + `secondary`
+  (Spec i Cwaniak wreszcie dostają swoje zestawy/instrumenty — Z2); Sztuczka Muzyk — `Trait` poziomu 0 (2 instrumenty).
+  **Znalezisko e2e:** z przedmiotami bazowymi pełny klucz narzędzia to `tool:<kategoria>:<klucz>`; krótki `tool:<klucz>`
+  zapisuje się przy `apply`, ale nie pasuje do żadnego wyboru (`SelectChoices#filter`) — `upgrade` i `default` nic nie
+  nadawały. Builder normalizuje (`traitKey`), `validate-packs` odrzuca krótkie.
+- **D1:** `actors/bieglosci.mjs` — po `dnd5e.advancementManagerComplete` szept do gracza i MG z tym, co nadanie
+  pominęło (Specjalizacja już była, biegłość w broni już była, wybór bez puli) + sygnał naruszenia
+  (`combat/sygnal-naruszenia.mjs`, wspólny z M7; dźwięk `produkcja/porazka.ogg`).
+- **Audyt (D4):** `game.neuroshima.bieglosci.audyt(actor)` — także biegłości pod kluczami stock dnd5e (`ath`, `itm`,
+  `ins`…), których NOE nie zna. Wynik dla kampanii: **każda postać ma martwe biegłości** z importu, kilka nie ma rzutów
+  obronnych ani broni klasy — `HANDOFF_bieglosci_retro.md`.
+- **Testy:** Quench `bieglosci` (20, w tym kontrakt dnd5e: `upgrade` 1→2, przy 2 nic) — pełny Quench 1296/1297 w
+  piaskownicy (jedyna porażka: `poscig` motyw `zima` — z HEAD, nie M6); e2e `postac` rozszerzone: poziom 1→3 z profesją
+  (Wojownik autostrady: zestaw mechanika 1→2, Pojazdy przy Specjalizacji — ostrzeżenie u gracza) i druga klasa (Spec:
+  tylko zestaw wieloklasowy, bez rzutów obronnych) — zielone.

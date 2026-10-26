@@ -83,7 +83,9 @@ export const KATEGORIA_CENOWA = Object.freeze({
   "paliwo": "paliwo",
   // Różności z s. 139 (kwas, trucizna, środki) — tabela Różności, nie Prochów: bez mnożnika jak sprzęt (D8).
   "chemia-uzytkowa": null,
-  "sprzet": null
+  "sprzet": null,
+  // Instrumenty (s. 132) — w tabeli Sprzętu, bez kolumny regionalnej, jak sprzęt.
+  "instrumenty": null
 });
 
 /** Surowce (s. 144) — kolumna cen (D8): CH — Prochy, CE — Elektronika, CZ i MK — Mechanika, MO — Żywność. */
@@ -137,7 +139,7 @@ export const GRUPY_TOWARU = Object.freeze({
   elektronika: Object.freeze({ label: "Elektronika", kat: Object.freeze(["elektronika", "komputery", "optyka"]), obraz: "warsztat" }),
   narzedzia: Object.freeze({ label: "Narzędzia", kat: Object.freeze(["zestawy"]), obraz: "warsztat" }),
   zywnosc: Object.freeze({ label: "Żywność i woda", kat: Object.freeze(["prowiant", "woda"]), obraz: "stragan" }),
-  rozne: Object.freeze({ label: "Różności", kat: Object.freeze(["sprzet", "paliwo"]), obraz: "wielobranzowy" })
+  rozne: Object.freeze({ label: "Różności", kat: Object.freeze(["sprzet", "paliwo", "instrumenty"]), obraz: "wielobranzowy" })
 });
 
 /**

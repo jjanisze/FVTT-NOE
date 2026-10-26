@@ -48,7 +48,8 @@ import { KONTROLERY } from "../../scripts/config/towarzysze-data.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
 import { FANTY, fantItemData, ikonaFantu, idFantu } from "../../scripts/config/fanty-data.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
-import { TOOLKITS, buildToolkitItemData, buildToolkitCheckActivity } from "../../scripts/config/toolkits-data.mjs";
+import { TOOLKITS, INSTRUMENTS, buildToolkitItemData, buildToolkitCheckActivity } from "../../scripts/config/toolkits-data.mjs";
+import { TOOL_DEFS } from "../../scripts/config/tools.mjs";
 import { TOOLKIT_CHECK_ACTIVITY_TYPE } from "../../scripts/items/toolkit-check-activity.mjs";
 import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scripts/config/schematy-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
@@ -165,7 +166,7 @@ function advancementById(list) {
   return Object.fromEntries(list.map(a => [a._id, a]));
 }
 
-function advancement(type, level, title, configuration, seed) {
+function advancement(type, level, title, configuration, seed, { classRestriction, flags } = {}) {
   return {
     _id: idFor("adv", seed),
     type,
@@ -176,8 +177,56 @@ function advancement(type, level, title, configuration, seed) {
     name: title,
     img: null,
     hint: "",
-    flags: {}
+    // `primary` / `secondary` — first class only / later classes only (`Advancement#appliesToClass`). Set only where
+    // it means something, so every other record stays byte-identical.
+    ...(classRestriction ? { classRestriction } : {}),
+    flags: flags ?? {}
   };
+}
+
+/** dnd5e upgrades only traits with expertise (`TraitAdvancement#actorSelected`) — skills and tools. */
+const UPGRADABLE = new Set(["skills", "tool"]);
+
+/**
+ * `tool:chemika` → `tool:tool:chemika`, `tool:akordeon` → `tool:music:akordeon`. With base items dnd5e files every
+ * tool under its category (`config/tools.mjs`), and `SelectChoices#filter` matches only the full key: a short one still
+ * writes the value on `apply`, but never matches a choice — so `upgrade` and `default` silently grant nothing
+ * (found by e2e `postac`, PLAN_m6 E1). Data stays short; the packs carry dnd5e's key.
+ */
+function traitKey(k) {
+  const parts = k.split(":");
+  if (parts[0] !== "tool" || parts.length !== 2 || parts[1] === "*") return k;
+  const def = TOOL_DEFS[parts[1]];
+  if (!def) throw new Error(`unknown tool key "${k}"`);
+  return `tool:${def.type}:${parts[1]}`;
+}
+
+/**
+ * One proficiency group (`PROFESSIONS[pid].bieglosci`, `SZTUCZKI[key].bieglosci`) as a `Trait` advancement. The
+ * flag names the source for the D1 warning (`actors/bieglosci.mjs`) and the audit.
+ */
+function traitGroup(level, group, seed, source) {
+  const keys = [...(group.nadania ?? []), ...(group.wybory ?? []).flatMap(w => w.pula)];
+  if (group.tryb !== "default" && keys.some(k => !UPGRADABLE.has(k.split(":")[0]))) {
+    throw new Error(`${seed}: mode ${group.tryb} on a trait without expertise (${keys.join(", ")})`);
+  }
+  const title = group.tytul ?? (group.tryb === "upgrade" ? "Biegłości (albo Specjalizacja)" : "Biegłości");
+  return advancement("Trait", level, title, {
+    allowReplacements: false,
+    grants: (group.nadania ?? []).map(traitKey),
+    choices: (group.wybory ?? []).map(w => ({ count: w.ile, pool: w.pula.map(traitKey) })),
+    mode: group.tryb
+  }, seed, { flags: { [MODULE_ID]: { bieglosci: source } } });
+}
+
+/** Class tool data → Trait grants and choices: fixed keys, a named pool, any N instruments, any N kits. */
+function toolTraits(tools) {
+  const grants = (tools?.fixed ?? []).map(t => traitKey(`tool:${t}`));
+  const choices = [];
+  if (tools?.choice) choices.push({ count: tools.choice.count, pool: tools.choice.pool.map(t => traitKey(`tool:${t}`)) });
+  if (tools?.instruments) choices.push({ count: tools.instruments, pool: ["tool:music:*"] });
+  if (tools?.any) choices.push({ count: tools.any, pool: ["tool:tool:*"] });
+  return { grants, choices };
 }
 
 /* -------------------------------------------- */
@@ -295,6 +344,12 @@ function buildProfession(pid, p) {
       }, `${pid}-choice-${lvl}`));
   }
 
+  // "BIEGŁOŚCI <PROFESJI>" — granted on taking the profession (PLAN_m6 §5.1). A subclass applies its advancement at
+  // the parent class's level, so the first profession level is "when you take it".
+  (p.bieglosci ?? []).forEach((group, i) => {
+    advancements.push(traitGroup(parent.professionLevels[0], group, `${pid}-traits-${i}`, "profesja"));
+  });
+
   return {
     _id: idFor("profession", pid),
     name: p.label,
@@ -327,21 +382,39 @@ function buildClass(cid, c) {
   // Hit dice — PW itself is overridden in actors/pw.mjs, but HD drives KW spending.
   adv.push(advancement("HitPoints", 1, "Kość Wytrzymałości", {}, `${cid}-hp`));
 
-  // Level 1 proficiencies.
-  const grants = [
-    ...c.saves.map(s => `saves:${s}`),
-    ...c.weapons.map(w => `weapon:${w}`),
-    ...c.armor.map(a => `armor:${a}`)
-  ];
-  if (c.tools?.fixed) grants.push(...c.tools.fixed.map(t => `tool:${t}`));
-
-  const traitChoices = [{ count: c.skills.count, pool: c.skills.pool.map(s => `skills:${s}`) }];
-  if (c.tools?.choice) {
-    traitChoices.push({ count: c.tools.choice.count, pool: c.tools.choice.pool.map(t => `tool:${t}`) });
-  }
+  // Level 1 proficiencies: the starting kit for the first class, the multiclass part for every later one (s. 59,
+  // "Jako postać wieloklasowa" in each class — PLAN_m6 Z14). Hit dice stay in HitPoints; a later class gives no saves.
+  const tools = toolTraits(c.tools);
   adv.push(advancement("Trait", 1, "Biegłości", {
-    allowReplacements: false, grants, choices: traitChoices, mode: "default"
-  }, `${cid}-traits`));
+    allowReplacements: false,
+    grants: [
+      ...c.saves.map(s => `saves:${s}`),
+      ...c.weapons.map(w => `weapon:${w}`),
+      ...c.armor.map(a => `armor:${a}`),
+      ...tools.grants
+    ],
+    choices: [{ count: c.skills.count, pool: c.skills.pool.map(s => `skills:${s}`) }, ...tools.choices],
+    mode: "default"
+  }, `${cid}-traits`, { classRestriction: "primary" }));
+
+  const m = c.multiclass ?? {};
+  const mTools = toolTraits(m.tools);
+  const mWeaponChoice = /^choice:(\d+)$/.exec(String(m.weapons ?? ""))?.[1];
+  adv.push(advancement("Trait", 1, "Biegłości (postać wieloklasowa)", {
+    allowReplacements: false,
+    grants: [
+      ...(Array.isArray(m.weapons) ? m.weapons : []).map(w => `weapon:${w}`),
+      ...(m.armor ?? []).map(a => `armor:${a}`),
+      ...mTools.grants
+    ],
+    choices: [
+      ...(m.skills ? [{ count: m.skills.count, pool: c.skills.pool.map(s => `skills:${s}`) }] : []),
+      // "dwie kategorie broni" — a part of the class's own starting categories (s. 59).
+      ...(mWeaponChoice ? [{ count: Number(mWeaponChoice), pool: c.weapons.map(w => `weapon:${w}`) }] : []),
+      ...mTools.choices
+    ],
+    mode: "default"
+  }, `${cid}-traits-multiclass`, { classRestriction: "secondary" }));
 
   // Scale values.
   for (const [key, sv] of Object.entries(c.scale ?? {})) {
@@ -515,7 +588,14 @@ function buildChemia(key) {
  * system cokolwiek z nich egzekwuje (patrz `sztuczki-data.mjs`).
  */
 function buildSztuczka(key) {
-  return { ...sztuczkaItemData(key, { _id: idFor("sztuczka", key) }), _key: null };
+  const doc = sztuczkaItemData(key, { _id: idFor("sztuczka", key) });
+  // Proficiencies the Sztuczka grants (Muzyk: two instruments — PLAN_m6 §5.1). Level 0: a feat has no level, dnd5e
+  // runs it when the feat lands on the character, from a class's Sztuczka pick or a drop.
+  const groups = SZTUCZKI[key].bieglosci ?? [];
+  if (groups.length) {
+    doc.system.advancement = advancementById(groups.map((g, i) => traitGroup(0, g, `sztuczka-${key}-traits-${i}`, "sztuczka")));
+  }
+  return { ...doc, _key: null };
 }
 
 /* -------------------------------------------- */
@@ -1879,7 +1959,8 @@ const originAbilityDocs = Object.keys(ORIGIN_ABILITIES).map(buildOriginAbility);
 const originDocs = Object.keys(POCHODZENIA).map(buildPochodzenie);
 const ammoDocs = AMMO_CALIBERS.map(buildAmmo);
 const grenadeDocs = GRENADE_TYPES.map(buildGrenade);
-const toolkitDocs = TOOLKITS.filter(k => !k.skip).map(buildToolkit);
+// Instruments are base items of the "music" tool category, in the same pack and id space ("toolkit:<id>").
+const toolkitDocs = [...TOOLKITS.filter(k => !k.skip), ...INSTRUMENTS].map(buildToolkit);
 const weaponDocs = [
   ...WEAPONS.map(buildWeapon),
   ...Object.keys(POCHODNIA_VARIANTS).map(buildPochodnia),

@@ -43,7 +43,7 @@ const _refy = new Map();
 function _kategoriaZTypu(item) {
   if (item.type === "weapon") return item.system?.type?.value === "biala" ? "bron-biala" : "bron-palna";
   if (item.type === "equipment" && ["light", "medium", "heavy", "shield"].includes(item.system?.type?.value)) return "pancerz";
-  if (item.type === "tool") return "zestawy";
+  if (item.type === "tool") return item.system?.type?.value === "music" ? "instrumenty" : "zestawy";
   if (item.type === "consumable") {
     const t = item.system?.type?.value;
     if (t === "ammo") return "amunicja";

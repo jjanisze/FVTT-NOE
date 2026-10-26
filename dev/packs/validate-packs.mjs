@@ -22,6 +22,7 @@ import { CLASS_FEATURES, resolveGrant } from "../../scripts/config/class-feature
 import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { STATBLOKI, RODZAJE } from "../../scripts/config/towarzysze-data.mjs";
+import { TOOL_DEFS } from "../../scripts/config/tools.mjs";
 import { bledyTabel } from "./tabele.mjs";
 
 /** Advancement as a list — dnd5e 6.0 stores it as an object keyed by id (5.3: an array). */
@@ -37,6 +38,18 @@ const ClassicLevel = classicLevel(FOUNDRY_APP);
 const failures = [];
 const notes = [];
 const fail = m => failures.push(m);
+
+/**
+ * Tool keys in a Trait must be dnd5e's full `tool:<category>:<key>` — a short `tool:<key>` writes on `apply` but never
+ * matches a choice (`SelectChoices#filter`), so the advancement silently grants nothing (PLAN_m6 E1).
+ */
+function checkTraitKeys(label, adv) {
+  for (const k of [...(adv.configuration.grants ?? []), ...(adv.configuration.choices ?? []).flatMap(c => c.pool)]) {
+    const [trait, cat, key] = k.split(":");
+    if (trait !== "tool" || cat === "*" || key === "*") continue;
+    if (!TOOL_DEFS[key] || TOOL_DEFS[key].type !== cat) fail(`${label}: tool key ${k} is not tool:<category>:<key>`);
+  }
+}
 
 // `--out=<dir>` validates a build written with `build-packs.mjs --out=<dir>`.
 const OUT = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice("--out=".length);
@@ -136,6 +149,15 @@ for (const doc of klasy) {
   if (!types.Subclass) fail(`${cid}: missing Subclass advancement`);
   if (!types.Trait) fail(`${cid}: missing Trait advancement`);
 
+  // Starting kit for the first class, the multiclass part for later ones (s. 59, PLAN_m6 Z14).
+  const kits = advOf(doc).filter(a => a.type === "Trait" && a.level === 1);
+  for (const r of ["primary", "secondary"]) {
+    if (kits.filter(a => a.classRestriction === r).length !== 1) fail(`${cid}: L1 needs one "${r}" Trait (multiclass, s. 59)`);
+  }
+  for (const a of kits) checkTraitKeys(`${cid} L1`, a);
+  const secondary = kits.find(a => a.classRestriction === "secondary");
+  if (secondary?.configuration.grants.some(k => k.startsWith("saves:"))) fail(`${cid}: a later class grants no saves (s. 59)`);
+
   const sub = advOf(doc).find(a => a.type === "Subclass");
   if (sub && sub.level !== def.professionLevels[0]) {
     fail(`${cid}: Subclass at L${sub.level}, expected L${def.professionLevels[0]}`);
@@ -204,12 +226,23 @@ for (const doc of profesje) {
   if (doc.system.classIdentifier !== def.klasa) {
     fail(`${pid}: classIdentifier ${doc.system.classIdentifier} != ${def.klasa}`);
   }
-  const levels = advOf(doc).map(a => a.level).sort((a, b) => a - b);
+  const choices = advOf(doc).filter(a => a.type === "ItemChoice");
+  const levels = choices.map(a => a.level).sort((a, b) => a - b);
   const want = CLASSES[def.klasa].professionLevels;
   if (levels.join(",") !== want.join(",")) {
     fail(`${pid}: choices at ${levels.join("/")}, expected ${want.join("/")}`);
   }
-  for (const a of advOf(doc)) {
+
+  // "BIEGŁOŚCI <PROFESJI>" (PLAN_m6 §5.1): one Trait per data group, at the profession's first level.
+  const traits = advOf(doc).filter(a => a.type === "Trait");
+  if (!def.bieglosci?.length) fail(`${pid}: no proficiency groups (B6)`);
+  if (traits.length !== (def.bieglosci?.length ?? 0)) fail(`${pid}: ${traits.length} Trait(s), data has ${def.bieglosci?.length ?? 0}`);
+  for (const a of traits) {
+    if (a.level !== want[0]) fail(`${pid}: Trait at L${a.level}, expected L${want[0]}`);
+    if (a.flags?.[MODULE_ID]?.bieglosci !== "profesja") fail(`${pid}: Trait without the "profesja" source flag`);
+    checkTraitKeys(pid, a);
+  }
+  for (const a of choices) {
     // "Zdolność z profesji / Sztuczka" is one either/or pick, so its pool is the
     // profession's own abilities plus every Sztuczka.
     const entry = CLASSES[def.klasa].levels[a.level] ?? [];
@@ -219,6 +252,30 @@ for (const doc of profesje) {
       fail(`${pid} L${a.level}: pool ${a.configuration.pool.length}, expected ${want}`);
     }
   }
+}
+
+/* ---- tools: every CONFIG.DND5E.tools id points at its base item (config/tools.mjs, PLAN_m6 §5.1) ---- */
+{
+  const narzedzia = await load("narzedzia");
+  const byDocId = new Map(narzedzia.map(d => [d._id, d]));
+  for (const [key, def] of Object.entries(TOOL_DEFS)) {
+    const doc = byDocId.get(def.id);
+    if (!doc) { fail(`tools.${key}: id ${def.id} not in narzedzia`); continue; }
+    if (doc.type !== "tool" || doc.system?.type?.baseItem !== key || doc.system?.type?.value !== def.type) {
+      fail(`tools.${key}: ${doc.name} is ${doc.type} ${doc.system?.type?.value}/${doc.system?.type?.baseItem}, expected tool ${def.type}/${key}`);
+    }
+  }
+  for (const doc of narzedzia.filter(d => d.type === "tool")) {
+    if (!TOOL_DEFS[doc.system?.type?.baseItem]) fail(`narzedzia: ${doc.name} (${doc.system?.type?.baseItem}) not in TOOL_DEFS`);
+  }
+}
+
+/* ---- Sztuczki with proficiencies: a level-0 Trait (Muzyk) ---- */
+for (const [key, def] of Object.entries(SZTUCZKI).filter(([, d]) => d.bieglosci?.length)) {
+  const doc = sztuczki.find(d => d.flags?.[MODULE_ID]?.sztuczka === key);
+  const traits = advOf(doc).filter(a => a.type === "Trait" && a.level === 0);
+  if (traits.length !== def.bieglosci.length) fail(`sztuczka ${key}: ${traits.length} Trait(s), data has ${def.bieglosci.length}`);
+  for (const a of traits) checkTraitKeys(`sztuczka ${key}`, a);
 }
 
 /* ---- features ---- */

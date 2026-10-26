@@ -23,6 +23,7 @@ import { MODULE_ID, scratchActor, scratchCleanup, captureWarnings } from "./help
 import { robotaApi as ROBOTA } from "../production/robota.mjs";
 import { zrodlaDostepu } from "../production/zp.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
+import { INSTRUMENT_KEYS } from "../config/tools.mjs";
 import { maSchemat, przepisySchematow, schematItemData } from "../config/schematy-data.mjs";
 import { PRZEPISY_ZDOLNOSCI } from "../config/recipes-data.mjs";
 import { stanNaprawy, przepisNaprawy, doNaprawy, rozpocznijNaprawe } from "../production/naprawa.mjs";
@@ -306,8 +307,9 @@ export function registerProdukcjaTests(quench) {
 
     /* ------------------------------------------------------------ */
     describe("Wyrażenia narzędzi (§5.1a)", function () {
-      it("TOOL_KEYS pokrywa CONFIG.DND5E.tools w obie strony", function () {
-        expect(Object.keys(TOOL_KEYS).sort()).to.deep.equal(Object.keys(CONFIG.DND5E.tools).sort());
+      it("TOOL_KEYS pokrywa zestawy narzędzi z CONFIG.DND5E.tools w obie strony (instrumenty to nie wymóg przepisu)", function () {
+        const zestawy = Object.entries(CONFIG.DND5E.tools).filter(([k]) => !INSTRUMENT_KEYS.includes(k)).map(([k]) => k);
+        expect(Object.keys(TOOL_KEYS).sort()).to.deep.equal(zestawy.sort());
       });
 
       it("parser: I / LUB / nawiasy, słowa i znaki, polskie litery", function () {
