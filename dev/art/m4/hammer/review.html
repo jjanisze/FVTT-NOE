@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<title>Hammer — dach i wnętrze</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:24px;background:#202325;color:#eee;font:16px system-ui,sans-serif}
+h1{font-size:25px;margin:0 0 12px}h2{font-size:17px}p{color:#c8ceca;max-width:1200px;line-height:1.5}a{color:#9bced1}
+.controls{display:flex;gap:26px;flex-wrap:wrap;align-items:center;margin:22px 0}label{display:flex;gap:10px;align-items:center}button{padding:8px 16px;cursor:pointer}
+main{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:32px;max-width:1400px}
+.frame{position:relative;width:min(100%,340px);aspect-ratio:1/2;background:#727b75}.frame>img{position:absolute;inset:0;width:100%;height:100%}
+#roof{opacity:0}.portrait{width:100%;max-width:440px}.anchors{position:absolute;inset:0;pointer-events:none;display:none}
+.anchors i{position:absolute;width:12px;height:12px;transform:translate(-50%,-50%);border:2px solid #fff5ba;border-radius:50%;background:#151b19a0}
+@media(max-width:850px){main{grid-template-columns:1fr 1fr}.portrait-panel{grid-column:1/-1}}
+</style>
+<h1>Hammer · dach zgodny z wnętrzem</h1>
+<p>Cztery koła, cztery fotele i centralne stanowisko pod włazem. Przód auta jest skierowany w dół.
+W wersji otwartej usunięte są szyby, górne słupki i dach tylnego przedziału.</p>
+<div class="controls">
+  <button id="toggle">Pokaż dach</button>
+  <label>Dach <input id="opacity" type="range" min="0" max="100" value="0"></label>
+  <label><input id="points" type="checkbox"> Kotwice pięciu miejsc</label>
+</div>
+<main>
+  <section><h2>ROOF_ON · odniesienie</h2><div class="frame"><img src="../../../../tokens/pojazdy/hammer.webp" alt="Hammer z dachem"></div></section>
+  <section><h2>ROOF_OFF · przełączany dach</h2><div class="frame">
+    <img src="../../../../tokens/pojazdy/wnetrza/hammer.webp" alt="Odsłonięte wnętrze Hammera">
+    <img id="roof" src="../../../../tokens/pojazdy/hammer.webp" alt="Nakładany dach">
+    <div class="anchors" id="anchors">
+      <i style="left:67%;top:53%"></i><i style="left:33%;top:53%"></i>
+      <i style="left:67%;top:36%"></i><i style="left:33%;top:36%"></i>
+      <i style="left:50%;top:43.5%"></i>
+    </div>
+  </div></section>
+  <section class="portrait-panel"><h2>Portret</h2><img class="portrait" src="../../../../tokens/portraits/pojazd-hammer.webp" alt="Portret piaskowej terenówki"></section>
+</main>
+<p><a href="README.md">Pliki, metoda i testy</a> · <a href="prompts.json">Pełne prompty</a> · <a href="layout.svg">Rzut SVG</a></p>
+<script>
+const opacity=document.querySelector('#opacity'),roof=document.querySelector('#roof'),points=document.querySelector('#points');
+function render(){roof.style.opacity=Number(opacity.value)/100;document.querySelector('#anchors').style.display=points.checked?'block':'none';document.querySelector('#toggle').textContent=Number(opacity.value)<50?'Pokaż dach':'Odsłoń wnętrze';}
+document.querySelector('#toggle').onclick=()=>{opacity.value=Number(opacity.value)<50?100:0;render();};
+opacity.oninput=points.onchange=render;render();
+</script>
+</html>

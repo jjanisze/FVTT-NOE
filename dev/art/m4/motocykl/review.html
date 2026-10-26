@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motocykl — portret i żeton</title>
+<style>
+body{margin:0;background:#292d2b;color:#eee;font:17px system-ui;padding:24px}
+main{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}figure{margin:0}
+figcaption{margin-bottom:14px}img{display:block;max-width:100%}.portrait{width:560px}
+.token{position:relative;width:240px;background:repeating-conic-gradient(#555c57 0 25%,#4c534e 0 50%) 0/40px 40px}
+.token img{width:100%}.anchor{position:absolute;left:50%;transform:translate(-50%,-50%);border:2px solid #fff;border-radius:50%;width:42px;height:42px;box-shadow:0 0 0 2px #000;background:#8ec4d666;pointer-events:none}
+.anchor span{position:absolute;left:54px;top:8px;white-space:nowrap;color:#fff;text-shadow:1px 1px #000}.hide .anchor{display:none}button{font:inherit;padding:8px;margin-bottom:18px}
+</style>
+<h1>Motocykl · cruiser z sakwami</h1>
+<p>Przód w dół. Dwa miejsca: kierowca (0,50; 0,46), pasażer (0,50; 0,265).</p>
+<button onclick="document.querySelector('.token').classList.toggle('hide')">Pokaż / ukryj kotwice</button>
+<main>
+<figure><figcaption>Portret</figcaption><img class="portrait" src="../../../../tokens/portraits/pojazd-motocykl.webp" alt="Bordowy cruiser na poboczu"></figure>
+<figure><figcaption>Żeton · otwarte siodło</figcaption><div class="token"><img src="../../../../tokens/pojazdy/motocykl.webp" alt="Motocykl z góry"><div class="anchor" style="top:46%"><span>Kierowca</span></div><div class="anchor" style="top:26.5%"><span>Pasażer</span></div></div></figure>
+</main>
+</html>

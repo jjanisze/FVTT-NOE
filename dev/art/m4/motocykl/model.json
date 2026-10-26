@@ -1,0 +1,10 @@
+{
+  "vehicle": "motocykl",
+  "front": "down",
+  "referenceCanvas": [450, 1350],
+  "footprintSquares": [0.5, 1.5],
+  "referenceSeats": {"driver": [0.5, 0.5], "pillion": [0.5, 0.28]},
+  "finalSeats": {"driver": [0.5, 0.46], "pillion": [0.5, 0.265]},
+  "presentation": {"widocznosc": "otwarta", "warstwa": "nad"},
+  "notes": "Final anchors measured against the selected painting, not assumed from the guide. Two wheels in tandem; no interior/roof variant. Conceptual proportions, not an engineering blueprint."
+}

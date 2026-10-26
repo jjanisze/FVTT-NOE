@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="1350" viewBox="0 0 450 1350">
+  <!-- Orthographic geometry reference. Front points DOWN; two wheels in tandem. -->
+  <g stroke="#282727" stroke-width="8" stroke-linejoin="round">
+    <!-- Rear wheel and rear fender. -->
+    <rect x="190" y="42" width="70" height="275" rx="32" fill="#252527"/>
+    <path d="M180 75 Q225 42 270 75 L272 359 L178 359 Z" fill="#713d42"/>
+    <rect x="202" y="65" width="46" height="20" rx="5" fill="#9c3432"/>
+    <!-- Paired panniers, rear suspension and frame. -->
+    <rect x="77" y="173" width="91" height="282" rx="25" fill="#775b3f"/>
+    <rect x="282" y="173" width="91" height="282" rx="25" fill="#775b3f"/>
+    <path d="M106 196 V426 M139 196 V426 M311 196 V426 M344 196 V426" stroke="#483829"/>
+    <path d="M173 263 L156 641 L181 828 M277 263 L294 641 L269 828" fill="none" stroke="#8b8980" stroke-width="17"/>
+    <!-- Pillion anchor at normalized (0.5,0.28), driver at (0.5,0.50). -->
+    <rect x="176" y="285" width="98" height="186" rx="38" fill="#302f2f"/>
+    <path d="M183 558 Q225 524 267 558 L287 698 Q225 776 163 698 Z" fill="#302f2f"/>
+    <path d="M188 480 L262 480 L271 552 L179 552 Z" fill="#373736"/>
+    <!-- Engine and footboards flank the tank. -->
+    <path d="M166 683 L124 735 L134 899 L186 921 M284 683 L326 735 L316 899 L264 921" fill="#88877c"/>
+    <rect x="84" y="744" width="54" height="108" rx="10" fill="#42433f"/>
+    <rect x="312" y="744" width="54" height="108" rx="10" fill="#42433f"/>
+    <!-- Tank, wide at rear and narrowing toward steering stem. -->
+    <path d="M225 715 C130 714 151 851 186 943 Q225 975 264 943 C299 851 320 714 225 715 Z" fill="#713d42"/>
+    <circle cx="225" cy="852" r="18" fill="#a5a294"/>
+    <!-- Straight front fork, front tyre, fender. -->
+    <rect x="193" y="1010" width="64" height="298" rx="30" fill="#242426"/>
+    <path d="M185 1026 Q225 996 265 1026 L269 1204 Q225 1242 181 1204 Z" fill="#713d42"/>
+    <path d="M177 955 L177 1133 M273 955 L273 1133" stroke="#a4a294" stroke-width="17"/>
+    <ellipse cx="225" cy="978" rx="48" ry="34" fill="#aaa69a"/>
+    <!-- Handlebar/mirrors set behind the front wheel. -->
+    <path d="M53 883 L112 900 L161 940 Q225 962 289 940 L338 900 L397 883" fill="none" stroke="#99988e" stroke-width="14"/>
+    <path d="M53 883 L91 894 M397 883 L359 894" stroke="#262929" stroke-width="22"/>
+    <path d="M91 891 L70 833 M359 891 L380 833" stroke="#aaa59b" stroke-width="7"/>
+    <ellipse cx="62" cy="816" rx="30" ry="21" fill="#9d9b92"/>
+    <ellipse cx="388" cy="816" rx="30" ry="21" fill="#9d9b92"/>
+    <circle cx="210" cy="936" r="16" fill="#161c1d"/>
+    <circle cx="246" cy="936" r="12" fill="#161c1d"/>
+  </g>
+</svg>

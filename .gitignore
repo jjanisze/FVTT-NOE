@@ -30,6 +30,13 @@ dev/icons/review/candidates/**/*.webp
 dev/icons/review/candidates/**/*.jpg
 dev/icons/review/audits/
 dev/icons/review/review-preview.png
+# Art pipelines (dev/art/<set>/): every set keeps the same layout. `in/` holds the source
+# images the packer reads (GM edits, AI generations, downloaded audio) and `out/` holds
+# intermediate renders and contact sheets; both stay local. Prompts, catalogs, briefs,
+# READMEs and small review WEBPs are tracked; the shipped art lives under tokens/, ui/, icons/.
+dev/art/**/in/
+dev/art/**/out/
+
 # NOT a bare `*.log` — LevelDB names its write-ahead log `NNNNNN.log`, and that
 # is where a freshly built pack's documents live until a later open compacts
 # them into a `.ldb`. Ignoring it committed `lekarstwa` and `sztuczki` as empty

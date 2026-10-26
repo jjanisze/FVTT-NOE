@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-20",
+  "mode": "OpenAI built-in image generation",
+  "method": "Opaque complete architecture cutouts over a common sky and snow loop. Never crossfade or edge-trim buildings.",
+  "jobs": [
+    {
+      "id": "sky-snow",
+      "prompt": "Use case: stylized-concept. Asset type: opaque seamless horizontally tiling 2:1 panorama base layer for a realistic nuclear-winter game. Empty North American frozen wasteland under dense cold slate-blue overcast cloud. Top 60 percent is subtly mottled uniformly lit storm-cloud sky, no bright sun patch or directional hotspot; bottom 40 percent is a broad low snowy horizon of distant soft snow-covered low hills and a nearly flat snow field. Very low contrast atmospheric distance, cold grey blue, dirty white, muted charcoal. Absolutely no buildings, trees, poles, silhouettes, roads, people, vehicles or objects. Same horizon height, colour and cloud density at both horizontal ends; perfectly matching seamless left and right tile edges. No vignette, border, text or UI. Realistic gritty painterly game background.",
+      "output": "ui/poscig/themes/zima/sky-snow.webp"
+    },
+    {
+      "id": "skyline-city-v2",
+      "prompt": "Use case: stylized-concept. Input image is a reference for material realism, palette and ruined American architecture. Generate a replacement 2:1 wide TRANSPARENT skyline module for Nuclear Winter. A cohesive cluster of COMPLETE snow-covered ruined American concrete office blocks and brick buildings, layered from small distant silhouettes to medium-distance skeletal buildings. The entire cluster is fully contained inside the central 82 percent of the canvas width. Every outermost building, wall, rooftop and tree ends naturally before the left and right 9 percent TRANSPARENT margins: no structure is sliced off at an image edge. Buildings and their snow must be completely opaque internally; no fades, fog alpha or ghost buildings. REAL alpha transparency above and between outer roof silhouettes and outside objects, including lower corners; only a low natural irregular snow/rubble base beneath the cluster. No sky, cloud backdrop or large rectangular ground plate. Lower base lies at 88 percent of image height. Highest building tops around 12 percent. Cold diffuse upper-left overcast light, steel blue grey, dirty white snow, charcoal shadows; same gritty realism as reference. Near landscape camera. No foreground frames, text, cars, people or checkerboard. Windows show dark interiors; transparency only through genuinely open skeletal frames.",
+      "reference": "district-city.webp",
+      "referenceRole": "Existing district art, palette and materials only",
+      "output": "ui/poscig/themes/zima/skyline-city-v2.webp"
+    },
+    {
+      "id": "skyline-suburb-v2",
+      "prompt": "Use case: stylized-concept. Input image is a style/material reference only. Generate a replacement 2:1 wide TRANSPARENT skyline module: a compact ruined snow-covered American suburban neighborhood, broken timber houses, bare trees, one distant water tower and snapped utility poles. Complete architectural silhouettes and whole trees all contained inside central 82 percent of canvas width, leaving the left and right 9 percent FULLY TRANSPARENT. No cropped buildings or branches intersecting the image edge. Opaque wood, masonry and snow, with dark interiors. Absolutely no fading buildings or semitransparent object cores. Real transparency replaces the entire sky and all external ground; retain only a low irregular snowy rubble base connecting the neighborhood at 88 percent image height, highest tree crowns around 12 percent. Not a rectangular landscape painting; isolated complete neighborhood cluster on genuine alpha. Cold blue-grey, dirty white, charcoal and subtle worn brown; diffuse upper-left winter daylight and realistic gritty painted game art matching reference. No text, people, cars or checkerboard.",
+      "reference": "district-suburb.webp",
+      "referenceRole": "Existing district art, palette and materials only",
+      "output": "ui/poscig/themes/zima/skyline-suburb-v2.webp"
+    },
+    {
+      "id": "skyline-industrial-v2",
+      "prompt": "Use case: stylized-concept. Input image is a style/material reference only. Generate a replacement 2:1 wide TRANSPARENT skyline module: a cohesive cluster of complete snow-covered American ruined brick factories, broken sawtooth roofs, steel conveyors and chimneys. ALL buildings and chimneys are whole silhouettes completely inside the canvas with at least 8 percent FULLY TRANSPARENT empty margins at BOTH left and right. No cut-off factory wall or roof at either image edge. Completely opaque snow, brick and steel interiors, dark hollow window bays; never fade an object away. Real alpha replaces all sky and external ground; retain only low irregular snow-and-rubble plinth beneath the complex around y=88 percent, tallest chimney tops around y=12 percent. Transparent above roofs, around the entire complex, and between outer truss members. Cold diffuse upper-left winter daylight, steel blue-grey, dirty white, charcoal and subtle rust. Realistic gritty game art matching reference. No backdrop, ground rectangle, people, vehicles, text, foreground frames or checkerboard.",
+      "reference": "district-industrial.webp",
+      "referenceRole": "Existing district art, palette and materials only",
+      "output": "ui/poscig/themes/zima/skyline-industrial-v2.webp"
+    }
+  ]
+}
+

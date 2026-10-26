@@ -1,0 +1,54 @@
+{
+  "tool": "OpenAI built-in image generation",
+  "date": "2026-10-26",
+  "steps": [
+    {
+      "output": "../in/portrety/motocykl.png",
+      "references": [
+        {
+          "file": "../../../../tokens/portraits/pojazd-hammer.webp",
+          "role": "rendering style only"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset: square illustrated vehicle portrait for a post-apocalyptic tabletop RPG. Input image is ONLY the established rendering style and world reference, not the requested vehicle. Generate one unoccupied heavy American cruiser motorcycle, parked on a cracked highway shoulder, seen fully in three-quarter front view at a slightly elevated human viewpoint. Grounded mechanically plausible stock cruiser, exactly two wheels in tandem, broad handlebars, round headlamp, teardrop petrol tank, low two-part tandem saddle with clearly separate driver and pillion pads, V-twin engine, worn brown leather saddlebags on both sides of the rear wheel. Dusty faded burgundy paint on tank and fenders, dull chrome and black steel, scuffed black leather saddle, modest repairs and use, still serviceable. Same detailed painterly realism, restrained earthy colors, soft dry daylight, textured brushwork and sharp readable mechanical silhouette as reference. Entire motorcycle including wheels and handlebars visible with margin, main subject occupies most of square, front wheel toward lower left. Only sparse broken asphalt, gravel, dry grass behind it. No riders, humans, weapons, lettering, logos, brand emblems or watermark. Opaque background."
+    },
+    {
+      "output": "out/token-v1.png",
+      "references": [
+        {
+          "file": "out/layout.png",
+          "role": "authoritative geometry"
+        },
+        {
+          "file": "../in/portrety/motocykl.png",
+          "role": "vehicle appearance"
+        }
+      ],
+      "prompt": "Use case: sketch-to-render. Asset: transparent virtual tabletop vehicle token, one motorcycle, portrait 1:3 aspect. Input 1 is the AUTHORITATIVE orthographic geometry/layout (front DOWN); input 2 is the motorcycle's identity, materials and painting style. Turn input 1 into a detailed painted TRUE TOP DOWN / NADIR ORTHOGRAPHIC view of the exact unoccupied burgundy cruiser in input 2. Camera directly vertically above: do not show sidewalls, slanted perspective or isometric front. Preserve input 1's centered vertical axis, layout, silhouette and padding: rear wheel at top, front wheel at bottom, just TWO wheels in tandem on the centre line, wide chrome swept handlebars across lower third, two brown leather saddlebags flanking rear saddle at upper third. Tank in lower middle, driver's black leather seating pad centered x50% y50%, pillion pad centered x50% y28%. Driver seat ends immediately behind the burgundy teardrop tank; pillion pad is behind driver. Exact two padded seats, no bench extending forward onto tank. Wheels aligned straight, clearly readable black rubber and burgundy fenders, mechanical chrome forks, round headlight, V-twin engine peeking on either side, subtle weathered stitching, dust and paint chips. Stylized detailed painterly realism for a post-apocalyptic tabletop, restrained dark burgundy, brown leather, gunmetal and dull chrome. Readable at small scale with firm outlines. Fully contain motorcycle, mirrors, handlebars, panniers, footboards and BOTH tyres inside canvas; leave clear transparent outer padding on every edge, approximately 3% at top/bottom. Actual transparent alpha background, no floor, no cast ground shadow, no labels, no logos, no grid, no humans, no riders, no weapons, no third wheel, no additional wheel pair. Use layout measurements rather than 3/4 portrait perspective."
+    },
+    {
+      "output": "out/token-v2.png",
+      "references": [
+        {
+          "file": "out/token-v1.png",
+          "role": "edit target"
+        },
+        {
+          "file": "out/layout.png",
+          "role": "geometry target"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit / sketch-to-render. Image 1 is the EDIT TARGET, a painted top-down cruiser; image 2 is the authoritative GEOMETRY TARGET. Correct the edit target to match image 2's component positions strictly. Keep exactly the same faded burgundy paint, brown worn panniers, black stitched leather, detailed weathered chrome and transparent background. Keep canvas 1:3, straight aligned centre axis, rear at TOP, front at BOTTOM. Crucial correction: the first image has a grossly too-long front wheel/fork area and overly rearward saddle. Compress the entire fork/front wheel assembly into bottom quarter of canvas, y76% to97%. Shift handlebars DOWN to y70%, fuel tank DOWN to y61%, driver seat DOWN to y50%, pillion seat DOWN to y28%. Enlarge space occupied by tandem seats accordingly. The driver's sitting pad must be centered exactly (50%,50%) and pillion pad (50%,28%). Rear wheel/fender y3%-25%; leather panniers y14%-35% alongside pillion. Match input2's geometry much more strictly than the inaccurate proportions of input1. Render from true straight overhead camera, no perspective: show top of headlamp housing, NOT the circular front lens; no full side view of front fork or front wheel. Preserve single rear wheel and single front wheel in tandem, no extra wheels. Two separate leather pads with modest connecting saddle spine, no humans, no riders, no letters, no ground, no shadow outside motorcycle. Leave margins. Produce one polished matching token corrected to input2."
+    },
+    {
+      "output": "out/token-final.png",
+      "references": [
+        {
+          "file": "out/token-v2.png",
+          "role": "edit target"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. Edit only the saddle assembly in this existing top-down motorcycle token. The motorcycle must have exactly TWO seating pads: one large rounded triangular DRIVER saddle nearest fuel tank (lower seat), and one rectangular PILLION pad further back (upper seat beside saddlebags). There is currently an erroneous little THIRD black padded rectangle between those two real seats: REMOVE that middle pad completely, exposing a narrow dull metal frame spine there, without padding or stitching. Enlarge the lower driver saddle slightly toward the fuel tank so its centre sits at normalized x50%, y48%; retain the upper pillion pad at x50%, y26%. Leave every other part of the motorcycle unchanged: same silhouette, size, top-down view, front down, burgundy paint, leather bags, wheels, controls, fenders, background transparency. Exactly two seats, no additional seat or pad. No riders. Actual transparent alpha."
+    }
+  ]
+}

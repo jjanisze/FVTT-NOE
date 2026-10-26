@@ -1,0 +1,58 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/motocykl/out/token-final.png",
+      "size": [
+        724,
+        2172
+      ],
+      "mode": "RGBA",
+      "bytes": 1785991,
+      "sha256": "3c758bfd044af05cc02ff1367fd91666f993239a5227f4df844eacc953d7ab85",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        31,
+        77,
+        694,
+        2119
+      ],
+      "heightFillPercent": 94.01,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/pojazdy/motocykl.webp",
+      "size": [
+        150,
+        450
+      ],
+      "mode": "RGBA",
+      "bytes": 26090,
+      "sha256": "aac8e38365856e1f14060dfd54bce35cf7f6bf5ee456d7f99864e2b11d6ac758",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        6,
+        16,
+        144,
+        439
+      ],
+      "heightFillPercent": 94.0,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "tokens/portraits/pojazd-motocykl.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 414990,
+      "sha256": "436919be5e8f652823e807ddd67042c37a6a112dda101d76fde4a7427cbb0e33"
+    }
+  ]
+}

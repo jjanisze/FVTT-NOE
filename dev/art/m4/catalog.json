@@ -390,6 +390,44 @@
    "purpose": "Replaces the token art of a destroyed vehicle (tanks, infantry fighting vehicles and bulldozers); front toward the bottom. Fitted inside the original footprint, so other aspect ratios get transparent margins."
   },
   {
+   "id": "wnetrza/osobowka",
+   "set": "wnetrza",
+   "key": "osobowka",
+   "kind": "token",
+   "output": "tokens/pojazdy/wnetrza/osobowka.webp",
+   "size": [
+    450,
+    900
+   ],
+   "fill": 94,
+   "vehicle": "osobowka",
+   "cells": [
+    1.5,
+    3
+   ],
+   "subject": "The matching roof-hidden sedan: empty two-seat front row and three-seat rear bench.",
+   "purpose": "Client-local interior view; identical frame and orientation to the closed token."
+  },
+  {
+   "id": "wnetrza/hammer",
+   "set": "wnetrza",
+   "key": "hammer",
+   "kind": "token",
+   "output": "tokens/pojazdy/wnetrza/hammer.webp",
+   "size": [
+    450,
+    900
+   ],
+   "fill": 94,
+   "vehicle": "hammer",
+   "cells": [
+    1.5,
+    3
+   ],
+   "subject": "The matching roof-hidden military utility truck: four seats, a central hatch station and an empty rear cargo floor.",
+   "purpose": "Client-local interior view; identical frame and orientation to the closed token."
+  },
+  {
    "id": "portrety/osobowka",
    "set": "portrety",
    "key": "osobowka",

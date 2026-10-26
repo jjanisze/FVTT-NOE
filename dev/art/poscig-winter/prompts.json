@@ -1,0 +1,75 @@
+{
+  "mode": "built-in",
+  "date": "2026-10-20",
+  "jobs": [
+    {
+      "id": "ground",
+      "prompt": "Use case: lighting-weather. Asset type: horizontal scrolling road plate for a realistic post-apocalyptic chase game, Nuklearna Zima. Input image: edit target, existing Ruins of America ground strip. Keep the exact 2:1 landscape framing, horizontal road direction, road width and upper shoulder geometry. Transform to harsh nuclear winter in North America: thick wind-scoured dirty white snow and blue-grey ice covering the road, occasional exposed fractured asphalt, snow capped curb and rubble, skeletal frozen weeds, dark broken masonry. Cold diffuse upper-left overcast daylight, realistic gritty painted game art, restrained steel blue and charcoal palette. The road is broad, flat and horizontal, never receding to a vanishing point. Preserve the real transparent exterior above the irregular rubble/weed/snowbank silhouette along the top edge. Snowbanks, stones and weeds must be opaque internally, with crisp natural contour antialiasing, absolutely no broad alpha fade or gradient band between road and background. Bottom half and sides remain fully opaque. No cars, people, lane numbers, writing, logos, uniform rectangular upper boundary, falling snow or foreground buildings. Genuine transparent background outside upper silhouette; do not bake a checkerboard.",
+      "referenceRole": "Existing urban ground plate; preserve road and alpha shoulder geometry",
+      "output": "ui/poscig/themes/zima/ground.webp"
+    },
+    {
+      "id": "district-city",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: 2:1 wide landscape background plate for a scrolling post-apocalyptic road chase called Nuclear Winter. Realistic gritty raster game art, North American city in deep winter. Ruined skeletal concrete office blocks, broken brick storefronts and exposed steel frames under thick windblown snow, distant rooflines softened by cold atmospheric depth; dark open window bays, bare frost-covered trees, snow-buried streets and debris. Steel blue, lead grey, dirty white, restrained rusty metal. Cold diffuse upper-left daylight. Landscape camera looking across the city with shallow downward pitch, no isometric or 45 degree aerial view. Continuous scenic detail over full width, no central hero object; entire lower third is snowy rubble terrain that will sit behind a separate road. Opaque full image, no vignette, no borders, no people, cars, text, logos, falling snow or large foreground objects. Detailed material realism, desolate and readable.",
+      "output": "ui/poscig/themes/zima/district-city.webp"
+    },
+    {
+      "id": "structures-a",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent sprite atlas, 2 by 2 grid, four separate snow-covered ruined building foreground cutouts for a realistic North American nuclear winter chase game. Landscape eye-level frontal camera, almost no roof tops visible, no 45 degree aerial view, no isometric projection. Top left: broken brick facade with two huge empty rectangular window bays and a torn lintel. Top right: ruined concrete portal frame with snapped upper floor, exposed rebar and a vast clear opening beneath. Bottom left: shattered storefront facade frame with a broken awning and wide empty shop window opening. Bottom right: collapsed industrial steel bay with bent overhead truss and slender uprights. These are hollow skeletons: real transparent holes through the windows and doors, with no back wall, no interior backdrop, no ground plane filling the openings; cars must be seen through them. Opaque crumbling masonry, white snow caps and icicles on ledges; cold grey blue and charcoal with subtle rust, diffuse upper-left winter daylight. Realistic gritty painted game art. Each asset fully inside its own quadrant, clear wide transparent gutters and outside margins, no contact between objects, no pedestal, no labels, no text, no vehicles, people, scenery or checkerboard. Genuine alpha transparency outside each object AND through all open bays.",
+      "output": "ui/poscig/themes/zima/structures-a.webp"
+    },
+    {
+      "id": "plants-a",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 sprite atlas of four separate winter vegetation crowns for near-camera parallax in a realistic nuclear winter game. Top left: broad forked dead oak branches capped with heavy white snow. Top right: broken dark pine crown with sparse frozen needles and snow clumps. Bottom left: tangled bare icy birch branches with papery bark. Bottom right: broken leafless hedge with frosted twigs. Low landscape camera, mostly frontal rather than overhead. Each isolated object fully within its quadrant with wide transparent margins and cross gutters; no ground, landscape, sky, background, pedestals, text or people. Trunks end in short cut stubs; mostly upper branches. Gritty photorealistic painted game sprites, cold blue grey charcoal and chalk white, subtle brown wood, diffuse upper-left overcast light. Preserve fine branching alpha holes and opaque snow/wood cores. Genuine transparent background.",
+      "output": "ui/poscig/themes/zima/plants-a.webp"
+    },
+    {
+      "id": "structures-a",
+      "transparent": true,
+      "prompt": "Use case: background-extraction. Edit target: the four ruined winter building frames. Preserve exactly the four objects, grid, framing, frontal landscape perspective, snow, icicles and textures. Remove ALL the grey gradient backdrop throughout the entire sheet, including inside every window, doorway, between columns, under lintels, between truss members and in the cross gutters. Those are holes that must be truly completely transparent (alpha zero), no grey haze, no ground or shadow backdrop. Keep every solid piece of brick, concrete, steel and snow internally fully opaque (alpha 255), with antialiasing only at its contour. Preserve material colours; no semitransparent solid buildings. Nothing else changes.",
+      "referenceRole": "Generated winter structure sheet, alpha extraction edit",
+      "output": "ui/poscig/themes/zima/structures-a.webp"
+    },
+    {
+      "id": "district-suburb",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: 2:1 wide opaque landscape background plate for a scrolling nuclear winter chase game. A deserted North American suburban district destroyed decades ago, collapsed timber houses, snow-laden skeletal roofs, a small distant water tower, bare black trees, overturned unbranded utility poles, rubble buried in deep dirty white snow. Gritty realistic painted game scenery, cold muted steel blue and charcoal palette with subtle brown weathered wood, diffuse upper-left overcast daylight. Landscape view across the ruined neighborhood with shallow downward pitch; avoid isometric aerial camera. Broad continuous scenery across the full width, lower third entirely snowbanks and rubble terrain behind a separately composited road. No central hero, no foreground frames, no road perspective or vanishing point, no people, moving cars, text, logos, UI, falling snow, borders or vignettes. Clear desolate material detail.",
+      "output": "ui/poscig/themes/zima/district-suburb.webp"
+    },
+    {
+      "id": "road-drift",
+      "transparent": true,
+      "prompt": "Use case: precise-object-edit. Edit target: winter horizontal road plate. Keep 2:1 framing, camera, upper 23 percent roadside silhouette, opaque material cores, alpha exterior and lighting. Change only the road surface: much deeper thick chalk-white snow with wind-sculpted low drifts, fine powder crust, patches of compressed bluish ice, occasional small dark exposed asphalt. No long existing tire tracks: these will be added dynamically by cars. Preserve road horizontally across the full width; no vanishing point. Bottom half and left and right ends fully opaque snow surface. Realistic gritty painted winter game scenery. Actual transparency only outside the jagged top shoulder, never fading road or rubble into the backdrop. No vehicles, people, text, snowfall particles.",
+      "referenceRole": "Generated winter ground, snow surface variant",
+      "output": "ui/poscig/themes/zima/road-drift.webp"
+    },
+    {
+      "id": "district-industrial",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: 2:1 wide opaque landscape background plate. Gritty realistic raster game art for North American Nuclear Winter chase scenery, cold steel blue, dirty chalk white, charcoal and muted rust; diffuse upper-left winter daylight. No text, logos, numbers, people, vehicles or UI. An abandoned American industrial district in deep snow: collapsed sawtooth factory roofs, fractured brick mills, bent corrugated warehouses, skeletal conveyor bridge and distant chimneys fading into lead-grey winter clouds. Landscape camera looking across the district, shallow downward pitch, no 45-degree aerial perspective. Continuous scenery across full width with layered depth; lower third snow-covered rubble and frost grass that goes behind a separate road. Opaque to all four edges. No foreground portal, no road receding to a vanishing point, no falling snow, no vignette or borders.",
+      "output": "ui/poscig/themes/zima/district-industrial.webp"
+    },
+    {
+      "id": "structures-b",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 sprite atlas, four separate near-camera foreground ruins. Gritty realistic raster game art for North American Nuclear Winter chase scenery, cold steel blue, dirty chalk white, charcoal and muted rust; diffuse upper-left winter daylight. No text, logos, numbers, people, vehicles or UI. Frontal landscape eye-level view, minimal roof tops, no isometric or 45-degree overhead camera. Top left: skeletal gas-station canopy, snow piled on broken roof and two thin columns, enormous transparent open space under it. Top right: snow-covered fire escape landing and stairs attached to one narrow jagged brick edge, open gaps between railing and steps. Bottom left: long fractured reinforced concrete floor slab on two broken columns, icicles, wide open bay below. Bottom right: ruined timber house wall frame with snow-covered roof remnants and three large empty windows. Real transparency through all openings, no back walls, no interior or exterior landscape, no backdrop, no ground plane filling openings. All solid materials fully opaque. Keep each asset fully inside its quadrant with wide transparent gutters and margins; real cutout alpha outside and inside holes. No floating rectangular shadow or checkerboard.",
+      "output": "ui/poscig/themes/zima/structures-b.webp"
+    },
+    {
+      "id": "decals",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 atlas of four distinct flat ground decals for horizontal snowy road game. Gritty realistic raster game art for North American Nuclear Winter chase scenery, cold steel blue, dirty chalk white, charcoal and muted rust; diffuse upper-left winter daylight. No text, logos, numbers, people, vehicles or UI. Shallow elevated view matching a road running left to right. Top left: two short parallel horizontal compressed snow tire ruts, dark blue-grey grooves with regular tread-block impressions and pale raised snow ridges, irregular granular feathered ends. Top right: gently curving paired horizontal skid tracks in dirty snow. Bottom left: crusty irregular broken blue ice patch with a few dark asphalt cracks. Bottom right: low elongated windblown powder drift with ragged sparkling edges and subtle blue-grey creases. Isolated decals ONLY, genuine transparent outside contours and between marks; no square floor patches, no background snow sheet, no shadows cast off a plane, no border. Four separate decals fully within quadrant margins with wide clear gutters.",
+      "output": "ui/poscig/themes/zima/decals.webp"
+    },
+    {
+      "id": "dust",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 atlas, four distinct windblown powder-snow wisps for a nuclear winter road chase. Realistic cold white snow crystals and faint pale blue fine powder, very low horizontally stretched shapes with ragged granular ends, fine airborne granules; wind moves leftward, wisps mostly horizontal. Top left thin trailing veil, top right short low powder puff, bottom left split wind ribbon, bottom right broader loose powder sheet. These are semitransparent VFX sprites, no solid grey backdrop, no ground, sky, shadows, rectangle or checkerboard. Each wisp fully within its quadrant with clear wide transparent outer margins and cross gutters, do not overlap neighboring sprites. Gritty natural game VFX, no smoke, fire, sparks, text, symbols or objects. Genuine transparent background and subtle semitransparent powder.",
+      "output": "ui/poscig/themes/zima/dust.webp"
+    }
+  ]
+}
+

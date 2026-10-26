@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-20",
+  "mode": "OpenAI built-in image generation",
+  "purpose": "Sparse foreground props and buildings; opaque urban background cutouts",
+  "jobs": [
+    {
+      "id": "winter-street-props",
+      "theme": "zima",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 sprite atlas of FOUR small roadside foreground props for a Nuclear Winter chase game. Top left: tall bent American cobrahead streetlight. Top right: two unlettered faded green American highway direction sign plates on a narrow steel post. Bottom left: damaged horizontal traffic-signal crossarm with dark broken signal housings and a narrow post. Bottom right: rusty skeletal small roadside advertising sign frame, broken blank panel and a narrow support. Snow caps, icicles and frost on exposed edges. Approximately 45-degree downward oblique camera, realistic gritty raster game art, diffuse upper-left cold winter daylight, steel blue-grey charcoal and dirty white snow with muted green/rust. Slender unobtrusive silhouettes, no buildings or large ground patches. Four separate whole props entirely within their own equal quadrants, very generous TRANSPARENT cross gutters and outer margins. No writing, logos, people, vehicles, sky, scenery or checkerboard. Genuine transparent exterior and holes between bars. Keep solid metal and snow opaque.",
+      "output": "ui/poscig/themes/zima/winter-street-props.webp"
+    },
+    {
+      "id": "skyline-suburb-v3",
+      "theme": "przedmiescia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Input image is a MATERIAL AND PALETTE reference only. Generate a replacement 2:1 wide transparent skyline module for Ruins of America: a coherent cluster of COMPLETE ruined North American suburban timber houses, broken shingle roofs, masonry chimneys, dead trees and fences, faint bleached mint house paint. LANDSCAPE camera with shallow downward angle, rather than an aerial shot. All exterior buildings and branches end naturally inside the canvas: leave at least 8 percent fully TRANSPARENT empty margins at both horizontal ends. Tallest roofs and trees near y=15 percent, low irregular rubble base around y=88 percent. Real alpha sky/exterior, no opaque cloud backdrop or rectangular floor plate. Interiors of buildings, wood, concrete and rubble fully opaque, dark open window bays; do not fade buildings into haze. Gritty realistic American post-apocalypse, ash grey, charcoal, bone white and subtle worn brown; diffuse upper-left daylight. NO SNOW, no people, vehicles, text, logos or checkerboard.",
+      "reference": "district-suburb.webp",
+      "referenceRole": "Existing artwork style/material reference",
+      "output": "ui/poscig/themes/przedmiescia/skyline-suburb-v3.webp"
+    },
+    {
+      "id": "skyline-city-v3",
+      "theme": "przedmiescia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Input image is a MATERIAL AND PALETTE reference only. Generate a replacement 2:1 wide transparent skyline module for Ruins of America: a cohesive cluster of COMPLETE ruined North American concrete office blocks, skeletal towers and broken brick buildings. Landscape view across the city with a shallow downward camera. Entire buildings including outermost side walls and rooftops fit completely inside the canvas; at least 8 percent FULLY TRANSPARENT margins at both ends. Tallest building tops near y=12 percent, connected irregular low rubble base around y=88 percent. Genuine alpha outside and above the roof silhouettes, no sky or cloud backdrop, no large rectangular ground painting. Buildings fully opaque internally, black broken window bays, no alpha haze or dissolving architecture. Steel rebar, charcoal ash, bone-white concrete and faint bleached mint/pink facade remnants; same realistic gritty materials as reference, diffuse upper-left daylight. NO SNOW, no foreground portal frame, people, cars, labels, text, logos or checkerboard.",
+      "reference": "district-city.webp",
+      "referenceRole": "Existing artwork style/material reference",
+      "output": "ui/poscig/themes/przedmiescia/skyline-city-v3.webp"
+    },
+    {
+      "id": "skyline-mall-v3",
+      "theme": "przedmiescia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Reference image supplies materials, architecture and palette. Generate a 2:1 wide TRANSPARENT skyline module of a complete ruined North American shopping mall: broken central atrium trusses, department store fronts, empty annexes, fractured concrete slabs and a few distant skeletal office blocks. Whole outer buildings must end naturally INSIDE the frame; leave at least 8 percent FULLY TRANSPARENT side margins at both ends. Low landscape camera, slightly above street level, highest roofs near y=15 percent, low irregular rubble base at y=88 percent. No sky, opaque fog backdrop, rectangular terrain painting or edge-cropped architecture. Opaque concrete, brick and steel material cores with dark open interior bays; real alpha around and above the complete silhouettes. Grey ash, bone-white concrete, worn dusty pink and pale turquoise trims. Realistic gritty post-apocalyptic American game scenery, upper-left diffuse daylight. NO SNOW, no text, people, cars, logos or checkerboard.",
+      "reference": "district-mall.webp",
+      "referenceRole": "Existing artwork style/material reference",
+      "output": "ui/poscig/themes/przedmiescia/skyline-mall-v3.webp"
+    },
+    {
+      "id": "skyline-commercial-v3",
+      "theme": "przedmiescia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Reference image supplies architecture, materials and palette only. Generate a 2:1 wide TRANSPARENT skyline module, a complete abandoned American commercial strip: ruined midcentury diner, two-story roadside motel and broken gas station canopy, a skeletal unlettered roadside sign and dead trees. Landscape view with shallow downward pitch. Every outer building, sign and branch fully contained inside the central 84 percent of canvas, leaving CLEAR fully transparent side gutters at both ends. Low irregular connected rubble/scrub base around y=88 percent; highest features near y=15 percent. Real alpha sky and exterior, no cloud backdrop or rectangular ground plate. Metal, wood, cracked concrete and brick opaque internally with dark empty window bays; absolutely no fading buildings. Charcoal, bone white, ash grey and restrained bleached mint, dusty pink and turquoise. Gritty realistic game art, diffuse upper-left daylight. NO SNOW, no cars, people, text, logos, readable lettering or checkerboard.",
+      "reference": "district-commercial.webp",
+      "referenceRole": "Existing artwork style/material reference",
+      "output": "ui/poscig/themes/przedmiescia/skyline-commercial-v3.webp"
+    },
+    {
+      "id": "sky-ash-v3",
+      "theme": "przedmiescia",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: 2:1 wide opaque seamless horizontally tiling background base for a realistic Ruins of America road chase. Empty grey-brown ash wasteland under muted blue-grey overcast clouds. Upper 65 percent sky with subtle low-contrast cloud mottling and no bright hotspot. Lower 35 percent distant low grey rubble hills and a gently rolling ash-covered barren plain, no large individual boulders. Grey ash, desaturated olive-grey haze, bone white and subdued brown, neutral diffuse upper-left daylight. Similar tone, horizon height and cloud density at both horizontal edges; designed as a seamless left/right loop. Absolutely no buildings, towers, poles, trees, roads, vehicles, people, snow, text, UI, borders or vignette. Gritty realistic painted game background; atmospheric distance.",
+      "output": "ui/poscig/themes/przedmiescia/sky-ash-v3.webp"
+    },
+    {
+      "id": "large-ruins-v3",
+      "theme": "przedmiescia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 sprite atlas, FOUR large occasional foreground building ruins for a North American post-apocalyptic chase game. Near landscape eye-level camera, almost frontal, not isometric or overhead. Top left: a crumbling red-brick facade with two large open window bays and a broken lintel. Top right: tall reinforced-concrete building portal with fractured floor slab and exposed rebar, giant empty opening under it. Bottom left: ruined midcentury American diner storefront with shattered awning, faded turquoise and pink trim and large open shop windows. Bottom right: skeletal industrial loading bay of rusty steel girders, bent upper truss and two narrow supports. Hollow frames ONLY: genuine transparency through every window and bay, no back wall or landscape filling the holes. Grey ash, bone-white concrete, charcoal and subtle rust, gritty realistic painted game art, diffuse upper-left daylight. Complete individual ruins with low rubble feet fully inside separate equal quadrants, wide clear transparent outer margins and cross gutters, no overlap. NO SNOW, no cars, people, writing, logos, labels or checkerboard.",
+      "output": "ui/poscig/themes/przedmiescia/large-ruins-v3.webp"
+    },
+    {
+      "id": "desert-buildings-v3",
+      "theme": "pustynia",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2 by 2 sprite atlas, FOUR occasional near-foreground desert buildings for a Nevada post-apocalyptic road chase. Low landscape frontal camera, not aerial or isometric. Top left: hollow ruined cinderblock roadside garage front with broken corrugated canopy and one very large open service bay. Top right: abandoned small wooden desert shack frame, bleached boards, broken pitched roof and empty windows. Bottom left: old gas station canopy shell with weathered faded red fascia, broken underside and two slender supporting columns, wide empty space below. Bottom right: crumbling adobe roadside motel facade segment with two large open door/window bays and broken parapet. Opaque sun-bleached material cores, genuine transparency through all openings with no back walls or scenery. Gritty realistic raster game art, warm upper-left sunlight, ochre dust, muted sand stone, rusty steel and faded wood, restrained paint. Each COMPLETE object fully within its own equal quadrant with generous transparent gutters and margins, no touching neighboring assets. Minimal low rubble feet, no large ground patch, people, cars, readable text, logos, labels, plants, sky or checkerboard. Genuine alpha exterior.",
+      "output": "ui/poscig/themes/pustynia/desert-buildings-v3.webp"
+    }
+  ]
+}
+

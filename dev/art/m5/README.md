@@ -3,8 +3,8 @@
 The GM generates and hand-edits the painted artwork. Ready-to-paste English prompts,
 crop instructions, purposes and exact source/drop paths are split by delivery status:
 
-- [BRIEFS_MISSING.md](BRIEFS_MISSING.md) — 24 undelivered catalog images.
-- [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md) — 17 delivered images, retained for reference.
+- [BRIEFS_MISSING.md](BRIEFS_MISSING.md) — 19 undelivered catalog images.
+- [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md) — 22 delivered images, retained for reference.
 
 All subjects are generic and suitable for this public repository. After a delivery,
 move its full brief to BRIEFS_DELIVERED and remove its row from the asset queue.
@@ -24,7 +24,10 @@ under their canonical `in/postoj/` drop paths, preserving the original drops.
 Future upkeep edits should use the canonical drop paths recorded in the briefs.
 Seven camp banners were packaged from new GM sources on 2026-10-18; hashes and
 validation are in `delivered-2026-10-18.json`. The GM approved the subway source
-with its existing graffiti retained.
+with its existing graffiti retained. Five looting banners (pharmacy, office,
+basement, convenience store and workshop) were packaged on 2026-10-20;
+hashes and validation are in `delivered-2026-10-20.json`. Warehouse and aircraft
+wreck banners still await sources.
 
 Current prompt direction follows the GM's 2026-10-18 feedback: grounded American
 post-apocalyptic survival art, without fantasy styling or Eastern European
@@ -61,5 +64,5 @@ assets that need a compendium rebuild or live update go in the
 
 `record_delivery.py` validates outputs with present edited sources, records their
 provenance/hashes and produces a local `out/delivery-preview.png` contact sheet.
-It does not alter source art or final images. Ruins, wrecks and older
-object/companion images remain queued until usable edited sources arrive.
+It does not alter source art or final images. The remaining two ruins, wrecks and
+older object/companion images stay queued until usable edited sources arrive.

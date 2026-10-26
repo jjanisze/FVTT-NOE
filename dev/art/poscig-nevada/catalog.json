@@ -64,6 +64,12 @@
       "dust-2",
       "dust-3",
       "dust-4"
+    ],
+    "buildings": [
+      "desert-garage",
+      "desert-shack",
+      "desert-gas-canopy",
+      "desert-motel"
     ]
   },
   "assets": {
@@ -476,6 +482,73 @@
           ]
         }
       ]
+    },
+    "desert-buildings-v3": {
+      "file": "desert-buildings-v3.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "desert-garage",
+          "height": 620,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.545,
+            0.5
+          ]
+        },
+        {
+          "name": "desert-shack",
+          "height": 580,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.565,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "desert-gas-canopy",
+          "height": 620,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.525,
+            1
+          ]
+        },
+        {
+          "name": "desert-motel",
+          "height": 580,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.525,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "foreground": {
+    "buildings": {
+      "rate": 2.5,
+      "stride": 36000,
+      "chance": 0.65,
+      "yOffset": [
+        160,
+        430
+      ],
+      "tint": 11049604,
+      "blur": 2.0
     }
   }
 }

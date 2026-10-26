@@ -72,6 +72,21 @@ for slug, cells, used_for, subject in WRECKS:
                    "Fitted inside the original footprint, so other aspect ratios get transparent margins.",
     })
 for vid, slug, cells, rura, subject in VEHICLES:
+    # Interior variants are delivered per vehicle; keep undelivered requests out of the catalog.
+    interiors = {
+        "osobowka": "The matching roof-hidden sedan: empty two-seat front row and three-seat rear bench.",
+        "hammer": "The matching roof-hidden military utility truck: four seats, a central hatch station and an empty rear cargo floor.",
+    }
+    if vid not in interiors:
+        continue
+    assets.append({
+        "id": f"wnetrza/{slug}", "set": "wnetrza", "key": slug, "kind": "token",
+        "output": f"tokens/pojazdy/wnetrza/{slug}.webp", "size": frame(cells), "fill": 94,
+        "vehicle": vid, "cells": list(cells),
+        "subject": interiors[vid],
+        "purpose": "Client-local interior view; identical frame and orientation to the closed token.",
+    })
+for vid, slug, cells, rura, subject in VEHICLES:
     assets.append({
         "id": f"portrety/{slug}", "set": "portrety", "key": slug, "kind": "portrait",
         "output": f"tokens/portraits/pojazd-{slug}.webp", "size": [1024, 1024], "vehicle": vid,

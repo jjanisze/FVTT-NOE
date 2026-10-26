@@ -39,7 +39,8 @@ def prepare(source: Image.Image, spec: dict) -> Image.Image:
         (0, 0, cropped.width, 1), (0, cropped.height - 1, cropped.width, cropped.height),
         (0, 0, 1, cropped.height), (cropped.width - 1, 0, cropped.width, cropped.height),
     )]
-    if any(border):
+    # Use the same visible-alpha threshold as validate(); generated cutouts can carry 1/255 noise.
+    if any(value > 8 for value in border):
         raise ValueError("token crop touches the frame; hand-edit clear transparent margins")
     if not cropped.getchannel("A").getbbox():
         raise ValueError("the centered crop contains no token; move the subject before packaging")

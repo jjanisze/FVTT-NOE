@@ -20,6 +20,9 @@ DEST.mkdir(parents=True, exist_ok=True)
 manifest = {"version":3, "cameraDegrees":catalog["cameraDegrees"], "generator":catalog["generator"],
             "regions":catalog.get("regions", ["open", "foothills", "mesas", "broken"]),
             "images":{}, "groups":catalog["groups"], "props":{}}
+for key in ["backdrop", "landscapeMode", "foreground"]:
+    if key in catalog:
+        manifest[key] = catalog[key]
 for key, asset in catalog["assets"].items():
     target = DEST / asset["file"]
     source = getattr(args, key.replace("-", "_"))
@@ -31,10 +34,21 @@ for key, asset in catalog["assets"].items():
         sprites = asset.get("sprites", [])
         if sprites:
             assert im.mode == "RGBA" and im.getchannel("A").getextrema()[0] == 0, f"Real alpha required: {key}"
+        if asset.get("cutout"):
+            assert im.mode == "RGBA", f"RGBA architecture cutout required: {key}"
+            alpha = im.getchannel("A")
+            assert alpha.getextrema()[0] == 0, f"Transparent skyline exterior required: {key}"
+            # Transparent gutters stop a tile boundary from cutting through a building.
+            # A low irregular snow base can reach the edge; it sits behind the opaque road.
+            roof_height = round(im.height * .85)
+            for edge in [(0, 0, 2, roof_height), (im.width-2, 0, im.width, roof_height)]:
+                assert max(alpha.crop(edge).getdata()) <= 8, f"Architecture touches horizontal tile edge: {key}"
         # Canonical WEBPs are inspected without another lossy encoding pass.
         if source.resolve() != target.resolve():
             im.save(target, "WEBP", quality=96, method=6, exact=True)
         entry = {"file":asset["file"], "width":im.width, "height":im.height, "role":asset["role"]}
+        if asset.get("cutout"):
+            entry["cutout"] = True
         if sprites:
             entry["frames"] = {}
             for sprite in sprites:
@@ -56,10 +70,10 @@ for key in manifest["groups"]["roads"]:
 for names in manifest["groups"]["landscapes"].values():
     for key in names:
         assert manifest["images"][key]["role"] == "hill", key
-for group in ["plants", "structures", "decals", "dust"]:
+for group in ["plants", "structures", "decals", "dust"] + (["buildings"] if "buildings" in manifest["groups"] else []):
     for key in manifest["groups"][group]:
         assert key in manifest["props"], key
 (DEST / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf8")
 print(json.dumps({"assets":len(manifest["images"]),
-                  "foreground":len(manifest["groups"]["plants"])+len(manifest["groups"]["structures"]),
+                  "foreground":sum(len(manifest["groups"].get(g, [])) for g in ["plants", "structures", "buildings"]),
                   "bytes":sum(p.stat().st_size for p in DEST.glob("*.webp"))}))

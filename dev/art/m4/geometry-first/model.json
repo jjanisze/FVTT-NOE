@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "canvas": [
+    450,
+    900
+  ],
+  "orientation": "front-down",
+  "reference": "Concept dimensions for consistent proportions; no production make/model claimed.",
+  "units": "m",
+  "length": 5.15,
+  "bodyWidth": 1.9,
+  "wheelbase": 2.9,
+  "rearAxle": 1.03,
+  "frontAxle": 3.93,
+  "cabin": {
+    "rear": 1.45,
+    "front": 3.75,
+    "clearWidth": 1.48,
+    "dashboardRear": 3.52
+  },
+  "frontSeats": {
+    "back": 2.56,
+    "front": 3.06,
+    "width": 0.52,
+    "centresX": [
+      -0.36,
+      0.36
+    ],
+    "iconCentre": 2.82
+  },
+  "rearBench": {
+    "back": 1.63,
+    "front": 2.2,
+    "width": 1.44,
+    "iconCentre": 1.98
+  },
+  "steering": {
+    "x": 0.36,
+    "y": 3.42,
+    "radius": 0.145
+  },
+  "pixelsPerMetre": 164.27184466019418,
+  "rearBumperPixel": 27,
+  "projectedIconRows": {
+    "front": 0.5447184466019417,
+    "rear": 0.39139805825242713
+  }
+}

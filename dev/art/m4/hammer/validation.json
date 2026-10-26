@@ -1,0 +1,22 @@
+{
+  "sourceSize": [
+    887,
+    1774
+  ],
+  "silhouetteIoU": 0.9961839626868306,
+  "sourceBounds": [
+    [
+      41,
+      48,
+      848,
+      1702
+    ],
+    [
+      41,
+      48,
+      848,
+      1704
+    ]
+  ],
+  "check": "Four tyres on two axles; four seats; hatch centred over standing pad. Visually inspected."
+}

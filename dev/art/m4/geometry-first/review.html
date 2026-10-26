@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<title>Osobówka v4 — geometria i dach</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: #202325; color: #eee; font: 16px system-ui,sans-serif; }
+  h1 { margin: 0 0 12px; font-size: 24px; } h2 { font-size: 16px; }
+  p { max-width: 1400px; color: #c7cccc; line-height: 1.5; }
+  .controls { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin: 22px 0; }
+  label { display: flex; align-items: center; gap: 8px; } button { padding: 8px 14px; cursor: pointer; }
+  main { display: grid; grid-template-columns: repeat(3,minmax(260px,1fr)); gap: 34px; max-width: 1400px; }
+  .frame { position: relative; width: min(100%,340px); aspect-ratio: 1/2; background: #727b75; }
+  .frame > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #roof { opacity: 0; }
+  .riders { position: absolute; inset: 0; pointer-events: none; display: none; }
+  .riders img { position: absolute; width: 33.333%; aspect-ratio: 1; object-fit: contain; transform: translate(-50%,-50%); }
+  a { color: #99cbd4; } small { color: #c7cccc; }
+  @media(max-width:800px) { main { grid-template-columns: 1fr; } }
+</style>
+<h1>Osobówka v4 · od geometrii do wnętrza i dachu</h1>
+<p>Najpierw rzut SVG, następnie malarskie wnętrze, potem dach nałożony na istniejącą kabinę.
+  Geometria została zaakceptowana; końcowa para po poprawieniu kół jest podpięta w module. SVG pozostaje kontrolą kompozycji.</p>
+<div class="controls">
+  <button id="toggle">Pokaż dach na wnętrzu</button>
+  <label>Dach <input id="opacity" type="range" min="0" max="100" value="0"></label>
+  <label><input id="people" type="checkbox"> Pięciu pasażerów</label>
+  <label>Rozmiar postaci <input id="size" type="range" min="35" max="70" value="50"><output id="sizeLabel">0,50 kratki</output></label>
+</div>
+<main>
+  <section><h2>1 · SVG — jedna skala wszystkich elementów</h2><div class="frame"><img src="layout.svg"></div>
+    <p><small>Robocze proporcje: 5,15 × 1,90 m. Odstęp rzędów: 0,84 m.</small></p></section>
+  <section><h2>2 · ROOF_OFF — wnętrze i porównanie dachu</h2><div class="frame">
+    <img src="roof-off-final.webp"><img id="roof" src="roof-on-final.webp">
+    <div class="riders" id="riders">
+      <img src="../../../../tokens/gangus-kapo.webp" style="left:63%;top:51.5%">
+      <img src="../../../../tokens/gangus-kapo.webp" style="left:37%;top:51.5%">
+      <img src="../../../../tokens/kanibal.webp" style="left:67%;top:35%">
+      <img src="../../../../tokens/gangus-kapo.webp" style="left:50%;top:35%">
+      <img src="../../../../tokens/gangus-kapo.webp" style="left:33%;top:35%">
+    </div>
+  </div></section>
+  <section><h2>3 · ROOF_ON — dach dodany do tego wnętrza</h2><div class="frame"><img src="roof-on-final.webp"></div>
+    <p><small>Widoczne przez szyby siedziska pochodzą z ROOF_OFF. Suwak pozwala sprawdzić ich zgodność.</small></p></section>
+</main>
+<p><a href="README.md">Opis próby</a> · <a href="model.json">Wymiary planu</a> · <a href="../final-prompts.json">Końcowe prompty</a> ·
+  <a href="../review.html">Aktualne pliki i portret</a> · <a href="../../../../tokens/portraits/pojazd-osobowka.webp">Zaakceptowany portret — referencja stylu</a></p>
+<script>
+  const alpha=document.querySelector('#opacity'), roof=document.querySelector('#roof'), people=document.querySelector('#people');
+  const size=document.querySelector('#size'), riders=document.querySelector('#riders'), toggle=document.querySelector('#toggle');
+  function render() {
+    const a=Number(alpha.value)/100; roof.style.opacity=a;
+    riders.style.display=people.checked?'block':'none'; riders.style.opacity=1-a;
+    for(const i of riders.children)i.style.width=`${Number(size.value)/1.5}%`;
+    document.querySelector('#sizeLabel').textContent=`${(Number(size.value)/100).toFixed(2).replace('.',',')} kratki`;
+    toggle.textContent=a<.5?'Pokaż dach na wnętrzu':'Odsłoń wnętrze';
+  }
+  toggle.onclick=()=>{alpha.value=Number(alpha.value)<50?100:0;render();};
+  alpha.oninput=people.onchange=size.oninput=render;render();
+</script>
+</html>

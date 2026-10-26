@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "canvas": [
+    450,
+    900
+  ],
+  "orientation": "front-down",
+  "units": "m",
+  "reference": "Original concept geometry; not a production vehicle specification.",
+  "length": 5.05,
+  "bodyWidth": 2.2,
+  "pixelsPerMetre": 167.13,
+  "axleCentresY": [
+    202,
+    730
+  ],
+  "seatCentres": {
+    "front": [
+      [
+        320,
+        512
+      ],
+      [
+        130,
+        512
+      ]
+    ],
+    "rear": [
+      [
+        320,
+        352
+      ],
+      [
+        130,
+        352
+      ]
+    ],
+    "hatch": [
+      225,
+      420
+    ]
+  },
+  "seatWidthPixels": 86,
+  "dashboardY": 596,
+  "cargoBounds": [
+    70,
+    65,
+    380,
+    252
+  ],
+  "invariants": [
+    "exactly four tyres on two axles",
+    "four individual seats",
+    "central standing station, no fifth chair",
+    "front points down",
+    "image-right steering wheel",
+    "roof-off removes glazing and upper pillars"
+  ],
+  "renderAnchorFractions": {
+    "front": [
+      [
+        0.67,
+        0.53
+      ],
+      [
+        0.33,
+        0.53
+      ]
+    ],
+    "rear": [
+      [
+        0.67,
+        0.36
+      ],
+      [
+        0.33,
+        0.36
+      ]
+    ],
+    "hatch": [
+      0.5,
+      0.435
+    ]
+  }
+}

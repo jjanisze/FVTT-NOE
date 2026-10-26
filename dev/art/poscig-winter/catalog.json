@@ -1,0 +1,444 @@
+{
+  "cameraDegrees": 12,
+  "foregroundPerspective": "landscape, near eye-level; hollow facade cutouts",
+  "generator": "OpenAI built-in image generation",
+  "regions": [
+    "suburb",
+    "city",
+    "industrial"
+  ],
+  "groups": {
+    "roads": [
+      "ground",
+      "road-drift"
+    ],
+    "landscapes": {
+      "suburb": [
+        "skyline-suburb-v2",
+        "skyline-city-v2"
+      ],
+      "city": [
+        "skyline-city-v2",
+        "skyline-industrial-v2"
+      ],
+      "industrial": [
+        "skyline-industrial-v2",
+        "skyline-suburb-v2"
+      ]
+    },
+    "plants": [
+      "snow-oak",
+      "snow-pine",
+      "icy-birch",
+      "frozen-hedge"
+    ],
+    "structures": [
+      "winter-streetlight",
+      "winter-directions",
+      "winter-traffic-light",
+      "winter-sign-frame"
+    ],
+    "decals": [
+      "snow-ruts",
+      "snow-skid",
+      "broken-ice",
+      "powder-drift"
+    ],
+    "dust": [
+      "powder-1",
+      "powder-2",
+      "powder-3",
+      "powder-4"
+    ],
+    "buildings": [
+      "brick-windows",
+      "concrete-portal",
+      "shopfront",
+      "steel-bay",
+      "gas-canopy",
+      "fire-escape",
+      "broken-floor",
+      "timber-windows"
+    ]
+  },
+  "assets": {
+    "ground": {
+      "file": "ground.webp",
+      "role": "road"
+    },
+    "road-drift": {
+      "file": "road-drift.webp",
+      "role": "road"
+    },
+    "plants-a": {
+      "file": "plants-a.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "snow-oak",
+          "height": 390,
+          "crop": 0.84,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.59,
+            0.5
+          ]
+        },
+        {
+          "name": "snow-pine",
+          "height": 430,
+          "crop": 0.84,
+          "alpha": 1,
+          "region": [
+            0.59,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "icy-birch",
+          "height": 410,
+          "crop": 0.84,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.55,
+            1
+          ]
+        },
+        {
+          "name": "frozen-hedge",
+          "height": 290,
+          "crop": 0.84,
+          "alpha": 1,
+          "region": [
+            0.56,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "structures-a": {
+      "file": "structures-a.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "brick-windows",
+          "height": 660,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.51,
+            0.5
+          ]
+        },
+        {
+          "name": "concrete-portal",
+          "height": 720,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.51,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "shopfront",
+          "height": 660,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.51,
+            1
+          ]
+        },
+        {
+          "name": "steel-bay",
+          "height": 710,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.51,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "structures-b": {
+      "file": "structures-b.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "gas-canopy",
+          "height": 640,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.635,
+            0.5
+          ]
+        },
+        {
+          "name": "fire-escape",
+          "height": 650,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.635,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "broken-floor",
+          "height": 690,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.585,
+            1
+          ]
+        },
+        {
+          "name": "timber-windows",
+          "height": 650,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.59,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "decals": {
+      "file": "decals.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "snow-ruts",
+          "height": 140,
+          "crop": 1,
+          "alpha": 0.7,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "snow-skid",
+          "height": 150,
+          "crop": 1,
+          "alpha": 0.7,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "broken-ice",
+          "height": 120,
+          "crop": 1,
+          "alpha": 0.7,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "powder-drift",
+          "height": 100,
+          "crop": 1,
+          "alpha": 0.7,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "dust": {
+      "file": "dust.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "powder-1",
+          "height": 125,
+          "crop": 1,
+          "alpha": 0.2,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "powder-2",
+          "height": 145,
+          "crop": 1,
+          "alpha": 0.2,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "powder-3",
+          "height": 120,
+          "crop": 1,
+          "alpha": 0.2,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "powder-4",
+          "height": 135,
+          "crop": 1,
+          "alpha": 0.2,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "sky-snow": {
+      "file": "sky-snow.webp",
+      "role": "backdrop"
+    },
+    "skyline-suburb-v2": {
+      "file": "skyline-suburb-v2.webp",
+      "role": "hill",
+      "cutout": true
+    },
+    "skyline-city-v2": {
+      "file": "skyline-city-v2.webp",
+      "role": "hill",
+      "cutout": true
+    },
+    "skyline-industrial-v2": {
+      "file": "skyline-industrial-v2.webp",
+      "role": "hill",
+      "cutout": true
+    },
+    "winter-street-props": {
+      "file": "winter-street-props.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "winter-streetlight",
+          "height": 330,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "winter-directions",
+          "height": 280,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "winter-traffic-light",
+          "height": 260,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "winter-sign-frame",
+          "height": 260,
+          "crop": 0.92,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "backdrop": "sky-snow",
+  "landscapeMode": "opaque-cutouts",
+  "foreground": {
+    "plants": {
+      "rate": 1.45,
+      "tint": 10991044,
+      "blur": 0.6,
+      "stride": 2800
+    },
+    "structures": {
+      "rate": 2.2,
+      "stride": 4200,
+      "tint": 9082531,
+      "blur": 1.1
+    },
+    "buildings": {
+      "rate": 2.9,
+      "stride": 24000,
+      "chance": 0.65,
+      "yOffset": [
+        160,
+        480
+      ],
+      "tint": 6910333,
+      "blur": 2.3
+    }
+  }
+}

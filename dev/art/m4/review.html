@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<title>Osobówka — ocena grafiki</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: #202325; color: #eee; font: 16px system-ui, sans-serif; }
+  h1 { margin: 0 0 12px; font-size: 24px; }
+  p { color: #c9cccd; }
+  .controls { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; padding: 14px 0 22px; }
+  label { display: flex; align-items: center; gap: 10px; }
+  button { padding: 7px 14px; cursor: pointer; }
+  main { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr) minmax(280px, 1fr); gap: 28px; max-width: 1450px; }
+  h2 { font-size: 15px; font-weight: 600; }
+  .token { position: relative; width: min(100%, 340px); aspect-ratio: 1 / 2; background: #737b76; overflow: visible; }
+  .vehicle { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #roof { opacity: 0; }
+  .riders { position: absolute; inset: 0; pointer-events: none; }
+  .riders img { position: absolute; width: 33.333%; aspect-ratio: 1; object-fit: contain; transform: translate(-50%, -50%); }
+  .portrait { width: 100%; max-width: 420px; }
+  .hint { max-width: 1200px; font-size: 14px; }
+  a { color: #99cbd4; }
+  @media(max-width: 800px) { main { grid-template-columns: 1fr 1fr; } .portrait-panel { grid-column: 1 / -1; } }
+</style>
+<h1>Osobówka · poprawione koła i miejsca v4</h1>
+<p><a href="geometry-first/review.html">Metoda: geometria SVG → wnętrze → dach</a></p>
+<p>Przełącz dach, żeby porównać położenie foteli. Postacie mogą lekko wystawać poza nadwozie.</p>
+<div class="controls">
+  <button id="toggle">Pokaż dach</button>
+  <label>Dach <input id="opacity" type="range" min="0" max="100" value="0"></label>
+  <label><input id="people" type="checkbox" checked> Pięciu pasażerów</label>
+  <label>Rozmiar postaci <input id="size" type="range" min="35" max="70" value="50"><output id="sizeLabel">0,50 kratki</output></label>
+</div>
+<main>
+  <section><h2>ROOF_ON · odniesienie</h2><div class="token"><img class="vehicle" src="../../../tokens/pojazdy/osobowka.webp"></div></section>
+  <section><h2>ROOF_OFF · podgląd z przełączanym dachem</h2><div class="token">
+    <img class="vehicle" src="../../../tokens/pojazdy/wnetrza/osobowka.webp">
+    <img class="vehicle" id="roof" src="../../../tokens/pojazdy/osobowka.webp">
+    <div class="riders" id="riders">
+      <img src="../../../tokens/gangus-kapo.webp" style="left:63%;top:51.5%">
+      <img src="../../../tokens/gangus-kapo.webp" style="left:37%;top:51.5%">
+      <img src="../../../tokens/kanibal.webp" style="left:67%;top:35%">
+      <img src="../../../tokens/gangus-kapo.webp" style="left:50%;top:35%">
+      <img src="../../../tokens/gangus-kapo.webp" style="left:33%;top:35%">
+    </div>
+  </div></section>
+  <section class="portrait-panel"><h2>Portret</h2><img class="portrait" src="../../../tokens/portraits/pojazd-osobowka.webp"></section>
+</main>
+<p class="hint">Przód auta jest skierowany w dół. Domyślnie postacie mają zwykły rozmiar pasażera 0,5 kratki.
+  <a href="OSOBOWKA.md">Stan oceny i pliki</a> · <a href="final-prompts.json">Końcowe prompty</a></p>
+<script>
+  const opacity = document.querySelector('#opacity'), roof = document.querySelector('#roof');
+  const riders = document.querySelector('#riders'), people = document.querySelector('#people');
+  const size = document.querySelector('#size'), button = document.querySelector('#toggle');
+  function render() {
+    const alpha = Number(opacity.value) / 100;
+    roof.style.opacity = alpha;
+    riders.style.display = people.checked ? '' : 'none';
+    riders.style.opacity = 1 - alpha;
+    for (const image of riders.children) image.style.width = `${Number(size.value) / 1.5}%`;
+    document.querySelector('#sizeLabel').textContent = `${(Number(size.value) / 100).toFixed(2).replace('.', ',')} kratki`;
+    button.textContent = alpha < 0.5 ? 'Pokaż dach' : 'Odsłoń wnętrze';
+  }
+  opacity.oninput = people.onchange = size.oninput = render;
+  button.onclick = () => { opacity.value = Number(opacity.value) < 50 ? 100 : 0; render(); };
+  render();
+</script>
+</html>

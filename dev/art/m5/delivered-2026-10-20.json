@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-20",
+  "provenance": "AI-generated with OpenAI DALL-E, hand-edited by the GM",
+  "processing": "Existing pack.py: centered crop, resize, WEBP conversion only",
+  "review": {
+    "sources": "All five match their deserted search-location briefs; cold daylight and neutral-white flashlight light, no occupants, gore or readable text.",
+    "framing": "Four sources are already 3:1. The store is center-cropped from 1659x948; storefront, counter, retail shelves and overturned refrigerator remain visible.",
+    "display": "Packaged pixels inspected at 600x200 and 360x120 in the local contact sheet.",
+    "imageBudget": "Workshop is 155838 bytes (152.2 KiB), just above the soft 150 KiB target; retained at the standard quality to preserve the detailed scene."
+  },
+  "delivered": [
+    {
+      "id": "ruiny/apteka",
+      "source": "dev/art/m5/in/ruiny/apteka.png",
+      "output": "ui/ruiny/apteka.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "3d54d79deea57e9d906bf78fa0892e8db6a5427c50393693c78052796065ae45",
+      "outputSha256": "0047a518003de4021dda4436888e93fe315e216350c22291c3282bcffacdc5f8",
+      "validation": {
+        "asset": "ruiny/apteka",
+        "file": "ui/ruiny/apteka.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 109492
+      }
+    },
+    {
+      "id": "ruiny/biuro",
+      "source": "dev/art/m5/in/ruiny/biuro.png",
+      "output": "ui/ruiny/biuro.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "c37c6c6b96b373bb5bbba45b8e4c1c1aa0626ec1d54077366a2f3584a22c8149",
+      "outputSha256": "bf206d3ad12963427df0092f33dcad50c42d3885471ec829b072c884d0aed470",
+      "validation": {
+        "asset": "ruiny/biuro",
+        "file": "ui/ruiny/biuro.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 134722
+      }
+    },
+    {
+      "id": "ruiny/piwnica",
+      "source": "dev/art/m5/in/ruiny/piwnica.png",
+      "output": "ui/ruiny/piwnica.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "577589ad35c7e22e22098fd4bad20547c594abb9a87f85d5058aa30f34222c47",
+      "outputSha256": "0f7d67da56c084d589afc4a9cd6859a525a68c3a5d3e84dbd35eb43fb2ba32f8",
+      "validation": {
+        "asset": "ruiny/piwnica",
+        "file": "ui/ruiny/piwnica.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 88018
+      }
+    },
+    {
+      "id": "ruiny/sklepik",
+      "source": "dev/art/m5/in/ruiny/sklepik.png",
+      "output": "ui/ruiny/sklepik.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "daf55b98e0227e704089b6e3932b7222f59cd6adea46746f989f64a96a929621",
+      "outputSha256": "8c2d76b3a1ca2fbe509574315f3c9c5a6a419a82941670718a0ab334180ca922",
+      "validation": {
+        "asset": "ruiny/sklepik",
+        "file": "ui/ruiny/sklepik.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 106952
+      }
+    },
+    {
+      "id": "ruiny/warsztat",
+      "source": "dev/art/m5/in/ruiny/warsztat.png",
+      "output": "ui/ruiny/warsztat.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "4d8eabd6ca3e7ce967cf2ab795706b725cb2c24d3db6e36ab4e075f541c6438f",
+      "outputSha256": "4e8edcd8e985a070bc119d93ffe66fe36fd76b3a4aedcb464aa5194fcbb6fa2c",
+      "validation": {
+        "asset": "ruiny/warsztat",
+        "file": "ui/ruiny/warsztat.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 155838
+      }
+    }
+  ],
+  "awaitingRuinSources": [
+    "ruiny/magazyn",
+    "ruiny/wrak"
+  ]
+}

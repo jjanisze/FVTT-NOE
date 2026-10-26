@@ -74,3 +74,12 @@ samples actual loaded pixels to catch a returning broad fade.
 
 Preview videos were removed at the GM's request; live preview and screenshots are used instead.
 Urban artwork and its sibling catalog are documented in `../poscig-urban/README.md`.
+
+## Occasional buildings
+
+The sparse foreground revision adds `desert-buildings-v3.webp`: four original transparent
+garage/shack/gas-canopy/motel frames generated with the built-in image tool. Full prompts and
+selected sources are in `../poscig-sparse/`. Nevada's existing road and landscape pixels are
+preserved. A separate 36,000-unit building stream uses 65% slot eligibility, 2.5 times road
+speed, darkening, baked blur and 160-430 px of downward variation. The mean interval is about
+43 seconds at tempo 2. UV cropping keeps every fragment above the free zone.

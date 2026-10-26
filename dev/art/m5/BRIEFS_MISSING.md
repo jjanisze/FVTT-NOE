@@ -1,6 +1,6 @@
 # Missing artwork briefs — M5 and carried requests
 
-24 undelivered catalog images, updated 2026-10-18: seven ruin interiors,
+19 undelivered catalog images, updated 2026-10-20: two ruin interiors,
 four wrecks, nine map objects and four animal companions.
 Delivered briefs: [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md).
 The [asset queue](../../icons/MISSING.md) also lists outstanding bestiary tokens.
@@ -33,50 +33,6 @@ Keep medical packaging unlabelled and wreck craters in separate scene effects.
 Final filenames, sizes and alpha rules stay
 as specified below.
 
-## ruiny/apteka
-
-**Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-The interior of a looted American strip-mall pharmacy: fallen metal retail shelving, a glass dispensing counter, empty storage cabinets, scattered unlabelled blister packs, beige vinyl floor tiles and broken fluorescent fixtures. Cold grey daylight enters a cracked storefront window; a narrow neutral-white flashlight picks out the fallen shelves. Modern disposable medicine packaging only, no apothecary jars, potion bottles, shop signs, crosses, emblems or readable packaging.
-
-An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
-
-Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/ruiny/apteka.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/ruiny/apteka.png` — the GM's edited source; `dev/` is not shipped.
-
-## ruiny/biuro
-
-**Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-An abandoned modest American apartment used as a small office: damaged drywall, a cheap laminate desk, a knocked-over steel filing cabinet, dusty shelves, faded picture frames with indistinct scenery and vines through a broken rectangular window. Cold overcast daylight and a tight neutral-white flashlight beam expose dust and water damage. Ordinary mass-produced furniture, no ornate woodwork, cosy study or recognizable faces.
-
-An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
-
-Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/ruiny/biuro.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/ruiny/biuro.png` — the GM's edited source; `dev/` is not shipped.
-
 ## ruiny/magazyn
 
 **Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
@@ -98,72 +54,6 @@ Landscape scene. Compose the decisive room features, debris and practical lighti
 **Final spec and name:** **`ui/ruiny/magazyn.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
 
 **Drop point:** `dev/art/m5/in/ruiny/magazyn.png` — the GM's edited source; `dev/` is not shipped.
-
-## ruiny/piwnica
-
-**Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-A cramped utility basement beneath an ordinary American house: poured-concrete walls, exposed pipes, timber ceiling joists, a dead water heater and cheap steel shelves holding dusty unlabelled preserving jars. A thin grey shaft from a small high window and a narrow neutral-white flashlight reveal damp stains and debris. No candles, torch sconces, medieval cellar masonry, alchemist equipment or labels.
-
-An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
-
-Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/ruiny/piwnica.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/ruiny/piwnica.png` — the GM's edited source; `dev/` is not shipped.
-
-## ruiny/sklepik
-
-**Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-A ruined American convenience store: smashed plate-glass storefront, low metal retail shelves, a laminate checkout counter and an overturned glass-door drinks refrigerator with plain unlabelled bottles. Cold daylight enters from the street; a narrow neutral-white flashlight catches dust and broken floor tiles. No advertising, price tags, logos, tavern bar or inviting display of supplies.
-
-An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
-
-Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/ruiny/sklepik.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/ruiny/sklepik.png` — the GM's edited source; `dev/` is not shipped.
-
-## ruiny/warsztat
-
-**Purpose:** Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-A derelict American roadside auto-repair garage: raised roll-up bay door, an inspection pit, a hydraulic floor jack, broad tools on pegboard and a battered pickup supported without wheels. Cracked concrete, dirty engine parts and corroded steel. Cold overcast light through the open bay and a neutral-white inspection flashlight; no licence plate, badges, shop lettering or blacksmith forge.
-
-An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
-
-Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/ruiny/warsztat.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/ruiny/warsztat.png` — the GM's edited source; `dev/` is not shipped.
 
 ## ruiny/wrak
 
