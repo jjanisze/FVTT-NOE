@@ -11,8 +11,9 @@
  */
 
 import {
-  ZRODLA_OKOLICZNOSCI, rozstrzygnijOkolicznosci, trybRzutu, autoKrytyk, przeszkadzaWZwarciu
+  ZRODLA_OKOLICZNOSCI, rozstrzygnijOkolicznosci, trybRzutu, autoKrytyk, przeszkadzaWZwarciu, ciezkaBezOparcia
 } from "../config/okolicznosci-ataku.mjs";
+import { zuzytaWyrzutniaDane } from "../weapons/wlasciwosci.mjs";
 import { resolveHit } from "../config/defense-rules.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
@@ -30,6 +31,7 @@ function m(o = {}) {
     wrogowieObok: o.wrogowieObok ?? [],
     celPochwytuje: "celPochwytuje" in o ? o.celPochwytuje : null,
     turaCelu: o.turaCelu ?? false,
+    bron: o.bron ?? null,
     zewnetrzne: o.zewnetrzne ?? []
   };
 }
@@ -172,6 +174,52 @@ export function registerOkolicznosciTests(quench) {
         expect(ids(rozstrzygnijOkolicznosci(m({ cel: U(["bieganie"]), turaCelu: true })).utrudnienia)).to.deep.equal(["celBiegnie"]);
         expect(rozstrzygnijOkolicznosci(m({ cel: U(["bieganie"]), turaCelu: false })).utrudnienia).to.deep.equal([]);
         expect(rozstrzygnijOkolicznosci(m({ cel: U(["bieganie"]), turaCelu: true, wrecz: true, odleglosc: 1.5 })).utrudnienia).to.deep.equal([]);
+      });
+    });
+
+    describe("Właściwości broni: długa, ciężka (s. 117, PLAN_m6 §5.3)", function () {
+      const DLUGA = { wlasciwosci: ["dluga"], oparta: false, sila: 10 };
+      it("długa: cel ≤ 3 m (od krawędzi) — Utrudnienie; dalej, wręcz albo cel z Szybkością 0 — nie", function () {
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: 3 })).utrudnienia)).to.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: 1.5 })).utrudnienia)).to.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: 4.5 })).utrudnienia)).to.not.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: 1.5, wrecz: true })).utrudnienia), "wręcz").to.not.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: 1.5, cel: U(["restrained"], { szybkosc0: true }) })).utrudnienia),
+          "cel z Szybkością 0").to.not.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: DLUGA, odleglosc: null })).utrudnienia), "nieznana odległość").to.not.include("dluga");
+        expect(ids(rozstrzygnijOkolicznosci(m({ bron: { wlasciwosci: [] }, odleglosc: 1.5 })).utrudnienia), "bez właściwości").to.not.include("dluga");
+      });
+      it("ciężka: bez oparcia i SIŁ < 15 — Utrudnienie; dwójnóg, stanowisko, „Oprzyj broń” albo SIŁ 15+ znoszą", function () {
+        const w = o => ids(rozstrzygnijOkolicznosci(m({ bron: { wlasciwosci: ["ciezka"], oparta: false, sila: 10, ...o } })).utrudnienia);
+        expect(w({})).to.include("ciezka");
+        expect(w({ oparta: true })).to.not.include("ciezka");
+        expect(w({ sila: 15 })).to.not.include("ciezka");
+        expect(w({ sila: 14 })).to.include("ciezka");
+        expect(w({ sila: null }), "nieznana SIŁ = brak SIŁ 15+").to.include("ciezka");
+        expect(ciezkaBezOparcia({ wlasciwosci: ["ciezka"], oparta: false, sila: 10 })).to.equal(true);
+        expect(ciezkaBezOparcia({ wlasciwosci: ["dluga"], oparta: false, sila: 10 })).to.equal(false);
+        expect(ciezkaBezOparcia(null)).to.equal(false);
+      });
+    });
+
+    describe("Jednorazowa: Zużyta wyrzutnia (D8, U7)", function () {
+      const LAW = {
+        name: "LAW", img: "modules/neuroshima-2026-overrides/icons/weapons/law_launcher.svg", type: "weapon",
+        system: { weight: { value: 5, units: "kg" }, price: { value: 300, denomination: "gb" } },
+        flags: { [MODULE_ID]: { weaponId: "law" } }
+      };
+      it("loot, połowa wagi, bez ceny, ta sama ikona; pamięta wyrzutnię dla rozbiórki", function () {
+        const d = zuzytaWyrzutniaDane(LAW);
+        expect(d.type).to.equal("loot");
+        expect(d.system.weight.value).to.equal(2.5);
+        expect(d.system.price.value).to.equal(0);
+        expect(d.img).to.equal(LAW.img);
+        expect(d.flags[MODULE_ID].zuzytaWyrzutnia).to.deep.equal({ bron: "law", nazwa: "LAW" });
+      });
+      it("zostaje w ręce, z której strzelano", function () {
+        expect(zuzytaWyrzutniaDane(LAW, { slot: "hand.1" }).flags[MODULE_ID].slots).to.deep.equal(["hand.1"]);
+        expect(zuzytaWyrzutniaDane(LAW).flags[MODULE_ID]).to.not.have.property("slots");
+        expect(zuzytaWyrzutniaDane(LAW).flags[MODULE_ID].dollSlot).to.equal("handOnly");
       });
     });
 

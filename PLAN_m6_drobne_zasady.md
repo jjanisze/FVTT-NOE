@@ -570,3 +570,20 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   piaskownicy (jedyna porażka: `poscig` motyw `zima` — z HEAD, nie M6); e2e `postac` rozszerzone: poziom 1→3 z profesją
   (Wojownik autostrady: zestaw mechanika 1→2, Pojazdy przy Specjalizacji — ostrzeżenie u gracza) i druga klasa (Spec:
   tylko zestaw wieloklasowy, bez rzutów obronnych) — zielone.
+
+### E2 — `długa`, `ciężka`, `jednorazowa` (2026-10-27)
+
+- **`długa`, `ciężka`** — dwa wiersze RAW silnika okoliczności (`config/okolicznosci-ataku.mjs`), migawka dostaje
+  `bron` (`weapons/wlasciwosci.mjs` `stanBroni`): właściwości, oparcie, SIŁ. Oparcie: rozłożony dwójnóg/trójnóg,
+  stanowisko pojazdu, „Oprzyj broń” z menu przedmiotu (U8) — **znika po ruchu żetonu** (oparcie jest w miejscu, nie w
+  broni). RO celów przeciw DS i MS z ciężkiej bez oparcia — Ułatwienie (obok strzału jedną ręką, `fire-modes.mjs`).
+  D11: przy strzale ciężką bez oparcia sam dźwięk naruszenia (powód stoi na plakietce).
+- **`jednorazowa` (D8, U7)** — korekta wykonania: zamiast „zamiany w ręce” przedmiot broni idzie jak zużyta amunicja
+  dnd5e — kopia do `system.deltas.deleted` karty ataku (bez niej przycisk „Obrażenia” i przerzut Fuksem szukałyby
+  skasowanej broni; `ChatMessage5e#getAssociatedItem` bierze kopię), potem kasacja i „Zużyta wyrzutnia (LAW)” (`loot`,
+  ½ wagi, cena 0, ta sama ikona) **w tej samej ręce** (`dollSlot: "handOnly"`). Rozbiórka (`postoj/rozbiorka.mjs`):
+  zużyta wyrzutnia liczy się jak zepsuta, surowce z przepisu wyrzutni. Atak nią — bliźniakiem (E3).
+- **Testy:** Quench `okolicznosci` 27 (nowe: `długa` z odległością/wręcz/Szybkością 0, `ciężka` z oparciem i SIŁ,
+  dane zużytej wyrzutni); e2e `combat` — krok LAW (wyrzutnia znika, złom w tej samej ręce, kopia na karcie, obrażenia z
+  karty) i krok `ciężka` (Utrudnienie → „Oprzyj broń” → ruch przywraca) — zielone. `PLAN_weapon_properties.md` §1 —
+  trzy wiersze na ✅.

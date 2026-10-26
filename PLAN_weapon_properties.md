@@ -2,8 +2,8 @@
 
 > Status (2026-10-03): `poreczna`, `powracajaca`, dwuręczna/oburęczna i lekka — ✅ przez lalkę
 > (`PLAN_paper_doll.md`). Wcześniej (2026-09-26): tabela w §1 zaktualizowana do stanu kodu. Otwarte pozycje są zaplanowane
-> w `PLAN_beta.md`: `ppanc`/`przebijajaca` przeciw pancerzowi BG — M1; `dluga`/`ciezka`/`jednorazowa`
-> oraz `burzaca`/`karczujaca` na aktorze-obiekcie — M6.
+> w `PLAN_beta.md`: `ppanc`/`przebijajaca` przeciw pancerzowi BG — M1; `dluga`/`ciezka`/`jednorazowa` — ✅ M6 E2
+> (2026-10-27); `burzaca`/`karczujaca` na aktorze-obiekcie — M6 E4.
 >
 > Plik projektowy. Źródło zasad: `Tabele/Bronie/` + podręcznik.
 > Definicje i filtrowanie właściwości: `scripts/config/weapons.mjs`.
@@ -40,7 +40,7 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `tryb_p/ks/ds/ms/oz` | Tryby ognia | ✅ | `fire-modes.mjs` — aktywności, koszty amunicji, RO, szablony |
 | `wmag` / `beb` | Magazynek wewn. / bębenek | ✅ | `magazine.mjs` — model przeładowania (load-one, speedloader) |
 | `ladowanie` / `przeladowanie` | Akcja/BA na załadowanie | ✅ | `magazine.mjs` — aktywności neuroLoadOne/neuroReload |
-| `jednorazowa` | Strzał jednorazowy | 🟡 | `magazine.mjs` traktuje jako nietrackowaną; brak twardej blokady reloadu |
+| `jednorazowa` | Strzał jednorazowy | ✅ | `weapons/wlasciwosci.mjs` (M6 E2, D8): po strzale wyrzutnia → „Zużyta wyrzutnia” (`loot`, ½ wagi) w tej samej ręce; kopia broni na karcie ataku (`system.deltas.deleted`), więc obrażenia i przerzuty działają; rozbiórka wg przepisu wyrzutni |
 | `sm` | Szyna montażowa | ✅ | `addons.mjs` — sloty SM (max 3) |
 | `burzaca` | Podwójne obrażenia obiektom | 🟡 | tylko detekcja **dźwięku** (`sounds.mjs`); obrażenia ręcznie (×2 w Apply Damage) |
 | `ppanc` | Ignoruje Odporności i Próg obrażeń | 🟡 | `bestiary-thresholds.mjs` omija próg obrażeń istot Bestiariusza; próg i odporność kinetyczna pancerza BG (`armor-rules.mjs`) — **nie** (M1) |
@@ -48,8 +48,8 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `porazajaca` | RO Kondycja ST10 albo Powalenie | ✅ | `weapon-save-properties.mjs` — przycisk + save `con` ST10 + prone |
 | `powalajaca` | obuchowe, cel ≤ Duży, RO Siła (ST 8+SIŁ+PB) albo Powalenie | ✅ | `weapon-save-properties.mjs` — save `str` ST 8+SIŁ+PB + prone + limit rozmiaru |
 | `unieruchamiajaca` | RO Zręczność albo Unieruchomienie | ✅ | `weapon-save-properties.mjs` — save `dex` ST 8+SIŁ+PB + restrained + limit rozmiaru |
-| `dluga` | Utrudnienie do celów w 3m | ⚙️(opc.) | brak; addony manipulują flagą, ale nie ma kary za bliski dystans |
-| `ciezka` | Wymaga dwójnogu/SIŁ15, inaczej Utrudnienie | ⚙️(opc.) | brak; możliwy check przy rzucie ataku |
+| `dluga` | Utrudnienie do celów w 3m | ✅ | wiersz silnika okoliczności `dluga` (M6 E2): cel ≤ 3 m od krawędzi, bez Szybkości 0; złożona kolba zdejmuje właściwość |
+| `ciezka` | Wymaga dwójnogu/SIŁ15, inaczej Utrudnienie | ✅ | wiersz silnika okoliczności `ciezka` (M6 E2): dwójnóg/trójnóg rozłożony, stanowisko pojazdu, „Oprzyj broń” (menu, znika po ruchu) albo SIŁ 15+; RO przeciw DS/MS z Ułatwieniem; sygnał naruszenia (D11) |
 | `dublet` | 2 pociski, 1 test, podwójne kości | ✅ | `fire-modes.mjs` — osobny tryb, koszt 2 nabojów, bramkowany właściwością |
 | `karczujaca` | Podwójne obrażenia roślinom/drewnu | 🚫 | jak `burzaca`, ale węższe — brak natywnego typu "obiekt/roślina" |
 | `cicha` | Nie zdradza pozycji / Niewidoczność | 🚫 | brak systemu skradania/widoczności w module — ręcznie |

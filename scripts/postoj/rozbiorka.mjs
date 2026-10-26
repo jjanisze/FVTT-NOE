@@ -31,10 +31,13 @@ function _wrakDrona(item) {
   return dron && jestWrakiem(dron) ? dron : null;
 }
 
-/** Czy przedmiot jest zepsuty (U52): zacięty, wymaga naprawy, albo wrak drona. */
+/** „Zużyta wyrzutnia” po broni `jednorazowej` (`weapons/wlasciwosci.mjs`, M6 U7): `{bron, nazwa}` albo null. */
+const _zuzyta = item => item?.flags?.[MODULE_ID]?.zuzytaWyrzutnia ?? null;
+
+/** Czy przedmiot jest zepsuty (U52): zacięty, wymaga naprawy, wrak drona albo zużyta wyrzutnia. */
 export function zepsuty(item) {
   try {
-    return isJammed(item) || stanNaprawy(item).potrzebna || !!_wrakDrona(item);
+    return isJammed(item) || stanNaprawy(item).potrzebna || !!_wrakDrona(item) || !!_zuzyta(item);
   } catch { return false; }
 }
 
@@ -56,7 +59,10 @@ function _przepisDla(ref) {
  */
 export async function propozycjaRozbiorki(item) {
   const dron = _wrakDrona(item);
-  const ref = dron ? `tabela:${RODZAJE[towarzysz(dron)?.rodzaj]?.przepis ?? ""}` : await refDlaPrzedmiotu(item);
+  const zuzyta = _zuzyta(item);
+  // Zużyta wyrzutnia rozbiera się jak wyrzutnia, z której została (U7) — sama ma cenę 0 i nie ma przepisu.
+  const ref = dron ? `tabela:${RODZAJE[towarzysz(dron)?.rodzaj]?.przepis ?? ""}`
+    : zuzyta?.bron ? `weapon:${zuzyta.bron}` : await refDlaPrzedmiotu(item);
   const p = _przepisDla(ref);
   const surowce = {};
   if (p) {

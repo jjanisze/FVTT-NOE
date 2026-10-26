@@ -165,6 +165,78 @@ async function burst({ targetName }) {
   }
 }
 
+/** GM: catalog weapons for `actorName` from the `bron` pack, by catalog id (M6 E2: LAW, The Pig). */
+async function armCatalog({ actorName, ids }) {
+  const MOD = "neuroshima-2026-overrides";
+  const actor = game.actors.getName(actorName);
+  const docs = (await game.packs.get(`${MOD}.bron`).getDocuments()).filter(i => ids.includes(i.getFlag(MOD, "weaponId")));
+  await actor.createEmbeddedDocuments("Item", docs.map(d => game.items.fromCompendium(d)));
+  return actor.items.filter(i => ids.includes(i.getFlag(MOD, "weaponId"))).map(i => i.getFlag(MOD, "weaponId"));
+}
+
+/**
+ * Player: one LAW shot at `targetName` (jednorazowa, PLAN_m6 D8): in hand first, attack and the card's damage. After the
+ * roll the launcher is gone, a „Zużyta wyrzutnia” sits in the same hand, and the card still finds the weapon.
+ */
+async function fireLaw({ targetName }) {
+  const MOD = "neuroshima-2026-overrides";
+  const actor = game.user.character;
+  const law = actor.items.find(i => i.getFlag(MOD, "weaponId") === "law");
+  const lalka = game.neuroshima.lalka;
+  // Both hands are full (B 92, B 93R): the B 93R goes to a holster first, as at the table — otherwise the doll
+  // asks which hand gives way.
+  const b93r = actor.items.find(i => i.getFlag(MOD, "weaponId") === "b93r");
+  if (b93r && lalka.handOf(b93r)) await lalka.place(actor, b93r, "ranged");
+  for (let i = 0; i < 3 && !lalka.handOf(law); i++) {
+    const gate = lalka.useGate(law);
+    if (gate === "equip") await lalka.equip(law);
+    else if (gate === "draw") await lalka.draw(law);
+    await __e2e.until(() => lalka.useGate(law) !== gate || lalka.handOf(law), { message: `the LAW past ${gate}` }).catch(() => {});
+  }
+  await __e2e.until(() => lalka.handOf(law), { message: "the LAW in hand" });
+  const hand = lalka.handOf(law);
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  const attack = law.system.activities.find(a => a.type === "attack");
+  __e2e.forceD20([15], { fallback: 3 });
+  try {
+    const usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
+    const link = { data: { system: { origin: usage.message.id } } };
+    await attack.rollAttack({}, { configure: false }, link);
+    const scrap = await __e2e.until(() => actor.items.find(i => i.getFlag(MOD, "zuzytaWyrzutnia")), { message: "the spent launcher" });
+    const msg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.type === "attack");
+    const activity = msg?.getAssociatedActivity();
+    const before = game.messages.size;
+    await activity?.rollDamage({}, { configure: false }, link);
+    await __e2e.quiet();
+    return {
+      hand, lawLeft: actor.items.some(i => i.getFlag(MOD, "weaponId") === "law"),
+      scrap: { name: scrap.name, type: scrap.type, weight: scrap.system.weight.value, slots: scrap.getFlag(MOD, "slots") ?? [] },
+      snapshot: (msg?.system?.deltas?.deleted ?? []).map(d => d.name),
+      cardFindsWeapon: Boolean(activity), damageCards: game.messages.size - before
+    };
+  } finally {
+    __e2e.restoreDice();
+    canvas.tokens.setTargets([]);
+  }
+}
+
+/** Player: what the engine says about The Pig (ciężka, długa) at `targetName`, without firing — then after a toggle. */
+async function heavyPreview({ targetName }) {
+  const MOD = "neuroshima-2026-overrides";
+  const actor = game.user.character;
+  const pig = actor.items.find(i => i.getFlag(MOD, "weaponId") === "the-pig");
+  // Fire modes are built live (`weapons/fire-modes.mjs`) — a gun handed out a moment ago may not have them yet.
+  const attack = await __e2e.until(() => pig.system.activities.find(a => a.type === "attack"), { message: "The Pig's attack" });
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  const r = game.neuroshima.okolicznosci.rozstrzygnij(attack);
+  canvas.tokens.setTargets([]);
+  return { utrudnienia: r.utrudnienia.map(w => w.id), oparta: Boolean(pig.getFlag(MOD, "setup")?.oparcie) };
+}
+
 /** GM: apply a damage card to a target exactly like dnd5e's tray (chat-message.mjs / damage-application.mjs). */
 async function applyLikeTray({ messageId, targetUuid }) {
   const z = await import("/modules/neuroshima-2026-overrides/scripts/combat/zranienie.mjs");
@@ -466,6 +538,44 @@ export default {
       t.equal(r.spentAgain, 0, "rounds spent by the refused second KS");
       await t.quiet();
     });
+    await t.step("player: LAW (jednorazowa) — one shot, a spent launcher in the same hand, the card's damage still rolls (M6 D8)", async () => {
+      const armed = await t.gm.eval(armCatalog, { actorName: "PC Gracz 1", ids: ["law", "the-pig"] });
+      t.equal(armed.sort().join(","), "law,the-pig", "catalog weapons handed out");
+      await t.waitFor(p1, () => game.user.character.items.some(i => i.getFlag("neuroshima-2026-overrides", "weaponId") === "law") || null,
+        { message: "the player to see the LAW" });
+      const r = await p1.eval(fireLaw, { targetName: "CYWIL" });
+      t.equal(r.lawLeft, false, "the launcher is gone after the shot");
+      t.equal(r.scrap.type, "loot", "the spent launcher is junk");
+      t.equal(r.scrap.weight, 2.5, "half the LAW's weight (U7)");
+      t.equal(r.scrap.slots.join(","), r.hand, "the spent launcher stays in the hand that fired");
+      t.assert(r.snapshot.includes("LAW"), "no snapshot of the LAW on the attack card", r);
+      t.equal(r.cardFindsWeapon, true, "the attack card still resolves its activity");
+      t.assert(r.damageCards >= 1, "the damage roll from the card made no card", r);
+      await t.quiet();
+    });
+
+    await t.step("ciężka (The Pig): Utrudnienie without support; „Oprzyj broń” removes it, a move puts it back (U8)", async () => {
+      const a = await p1.eval(heavyPreview, { targetName: "CYWIL" });
+      t.assert(a.utrudnienia.includes("ciezka"), "no ciężka Utrudnienie for a STR-10 shooter without support", a);
+      await p1.eval(async () => {
+        const pig = game.user.character.items.find(i => i.getFlag("neuroshima-2026-overrides", "weaponId") === "the-pig");
+        await game.neuroshima.wlasciwosci.ustawOparcie(pig, true);
+      });
+      const b = await p1.eval(heavyPreview, { targetName: "CYWIL" });
+      t.equal(b.oparta, true, "the support switch");
+      t.assert(!b.utrudnienia.includes("ciezka"), "ciężka Utrudnienie with the weapon supported", b);
+      await p1.eval(async () => {
+        const tok = canvas.scene.tokens.find(tk => tk.actor?.id === game.user.character.id);
+        await tok.move({ x: tok.x, y: tok.y + canvas.grid.size, action: "displace" }, { animate: false });
+      });
+      const c = await t.waitFor(p1, n => {
+        const pig = game.user.character.items.find(i => i.getFlag("neuroshima-2026-overrides", "weaponId") === "the-pig");
+        return pig.getFlag("neuroshima-2026-overrides", "setup")?.oparcie === false ? true : null;
+      }, { args: [null], message: "the support to drop after the move" }).then(() => p1.eval(heavyPreview, { targetName: "CYWIL" }));
+      t.assert(c.utrudnienia.includes("ciezka"), "ciężka Utrudnienie back after moving", c);
+      await t.quiet();
+    });
+
     await t.step("Emiter EMP: ability proficiency, Naładuj (230 V), TT 10 + DEX vs armour (D27), tray ×0 for the living, Porażenie on the machine", async () => {
       const prep = await t.gm.eval(przygotujEmp);
       t.equal(prep.ac, 20, "Obrońca's statblock TT");

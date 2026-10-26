@@ -27,18 +27,19 @@ export function adresaciNaruszenia(actor) {
  * @param {string} opts.tytul         Nagłówek karty.
  * @param {string[]} opts.linie       Powody, po jednym w wierszu.
  * @param {boolean} [opts.dzwiek=true]
+ * @param {boolean} [opts.karta=true]  `false` — sam dźwięk, gdy powód stoi już na innej karcie (plakietka ataku).
  * @returns {Promise<ChatMessage|null>}
  */
-export async function sygnalNaruszenia(actor, { tytul, linie = [], dzwiek = true } = {}) {
+export async function sygnalNaruszenia(actor, { tytul, linie = [], dzwiek = true, karta = true } = {}) {
   if (!linie.length) return null;
   const whisper = adresaciNaruszenia(actor);
   const content = `<div class="neuro-naruszenie"><p><strong>${esc(tytul)}</strong></p>`
     + `<ul>${linie.map(l => `<li>${esc(l)}</li>`).join("")}</ul></div>`;
-  const msg = await ChatMessage.implementation.create({
+  const msg = karta ? await ChatMessage.implementation.create({
     content, whisper,
     speaker: actor ? ChatMessage.getSpeaker({ actor }) : ChatMessage.getSpeaker(),
     flags: { [MODULE_ID]: { naruszenie: true } }
-  });
+  }) : null;
   if (dzwiek && globalThis.quench?._currentRunner?.state !== "running") {
     // `play` gra zawsze lokalnie (wywołujący jest MG albo właścicielem — adresatem), reszcie wysyła gniazdem.
     const inni = whisper.filter(id => id !== game.user.id && game.users.get(id)?.active);

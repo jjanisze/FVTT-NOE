@@ -110,6 +110,7 @@ import { registerWeaponJams } from "./weapons/jams.mjs";
 import { registerMeleeDegradation } from "./weapons/melee-degradation.mjs";
 import { registerFireModes } from "./weapons/fire-modes.mjs";
 import { registerThrownWeapons } from "./weapons/thrown.mjs";
+import { registerWlasciwosciBroni, wlasciwosciApi } from "./weapons/wlasciwosci.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
@@ -386,6 +387,7 @@ Hooks.once("init", () => {
   registerKowalActions();
   registerInventoryToggleFix();
   registerThrownWeapons();
+  registerWlasciwosciBroni();
   registerAmmoSystem();
   registerWeaponAddons();
   registerAddonInventoryUI();
@@ -562,6 +564,8 @@ Hooks.once("ready", () => {
   game.neuroshima.maszyny = maszynyApi;
   // Biegłości z awansów (PLAN_m6 §5.1) — game.neuroshima.bieglosci.audyt(actor): czego brakuje względem kompendium.
   game.neuroshima.bieglosci = bieglosciApi;
+  // Właściwości broni długa / ciężka / jednorazowa (PLAN_m6 §5.3) — game.neuroshima.wlasciwosci.stanBroni(item)
+  game.neuroshima.wlasciwosci = wlasciwosciApi;
   game.neuroshima.emiterEmp = emiterEmpApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;

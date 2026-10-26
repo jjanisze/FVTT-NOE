@@ -24,6 +24,11 @@
  *     z Utrudnieniem do końca jego bieżącej tury (U8: „cel biegnie i trwa jego tura”).
  *   - **Unikanie** (s. 30): ataki przeciw tobie z Utrudnieniem, jeśli widzisz napastnika; przepada
  *     przy Obezwładnieniu i Szybkości 0.
+ *   - **Broń `długa`** (s. 117): strzał do istoty ≤ 3 m — Utrudnienie, chyba że jej Szybkość to 0 (złożona
+ *     kolba składana zdejmuje właściwość — `weapons/addons.mjs`). Odległość od krawędzi żetonów (U8).
+ *   - **Broń `ciężka`** (s. 117): bez oparcia na dwójnogu, trójnogu albo SIŁ 15+ — Utrudnienie (RO przeciw serii z
+ *     Ułatwieniem — `weapons/fire-modes.mjs`). Oparciem jest też stanowisko pojazdu i ręczne „Oprzyj broń” (murek,
+ *     parapet, leżenie — U8, `weapons/wlasciwosci.mjs`).
  *
  * ## Tabela
  *
@@ -56,11 +61,29 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  * @property {Uczestnik[]} [wrogowieObok]  przeciwnicy ≤ 1,5 m od atakującego (filtr U7 robi silnik)
  * @property {boolean|null} [celPochwytuje] czy cel trzyma atakującego; null — nie wiadomo
  * @property {boolean} [turaCelu]          trwa tura celu
+ * @property {StanBroni} [bron]            właściwości i oparcie broni (s. 117)
  * @property {{id: string, rodzaj: string, label: string, strona?: string}[]} [zewnetrzne]
+ *
+ * @typedef {object} StanBroni
+ * @property {Iterable<string>} wlasciwosci  klucze właściwości (z broni, amunicji i ulepszeń)
+ * @property {boolean} [oparta]              dwójnóg/trójnóg rozłożony, stanowisko pojazdu albo „Oprzyj broń”
+ * @property {number|null} [sila]            wartość SIŁ strzelca
  */
 
 const ma = (u, id) => !!u?.stany?.has?.(id);
 const _dist = s => _num(s.odleglosc);
+const _wl = (s, id) => new Set(s.bron?.wlasciwosci ?? []).has(id);
+
+/** `długa` (s. 117): Utrudnienie do celu w odległości do 3 m. */
+export const DLUGA_DO = 3;
+/** `ciężka` (s. 117): SIŁ, od której broń nie potrzebuje oparcia. */
+export const CIEZKA_SILA = 15;
+
+/** Broń `ciężka` strzela bez oparcia — Utrudnienie do ataku, Ułatwienie celów w RO przeciw serii (s. 117). */
+export function ciezkaBezOparcia(bron) {
+  if (!new Set(bron?.wlasciwosci ?? []).has("ciezka")) return false;
+  return !bron.oparta && !((_num(bron.sila) ?? 0) >= CIEZKA_SILA);
+}
 
 /** Ten przeciwnik widzi atakującego i może przeszkadzać (s. 28, U7). */
 export function przeszkadzaWZwarciu(wrog, atakujacy) {
@@ -114,6 +137,12 @@ export const ZRODLA_OKOLICZNOSCI = _f([
   _f({ id: "powalenieWrecz", rodzaj: "utrudnienie", label: "Powalenie — atak wręcz", strona: "s. 35", gdy: s => s.wrecz && ma(s.atakujacy, "prone") }),
   _f({ id: "niewidocznosc", rodzaj: "ulatwienie", label: "Niewidoczność (chyba że cel cię widzi)", strona: "s. 35", gdy: s => ma(s.atakujacy, "invisible") }),
   _f({ id: "bieganie", rodzaj: "utrudnienie", label: "Bieganie", strona: "s. 30", gdy: s => ma(s.atakujacy, "bieganie") }),
+
+  // Właściwości broni (s. 117; PLAN_m6 §5.3)
+  _f({ id: "dluga", rodzaj: "utrudnienie", label: "Broń długa — cel ≤ 3 m", strona: "s. 117", cel: true,
+    gdy: s => !s.wrecz && _wl(s, "dluga") && _dist(s) !== null && _dist(s) <= DLUGA_DO && !s.cel?.szybkosc0 }),
+  _f({ id: "ciezka", rodzaj: "utrudnienie", label: "Broń ciężka bez oparcia (dwójnóg, trójnóg, SIŁ 15+)", strona: "s. 117",
+    gdy: s => !s.wrecz && ciezkaBezOparcia(s.bron) }),
 
   // Stany celu (s. 35) — tylko przy jednym celu
   _f({ id: "celNieprzytomny", rodzaj: "ulatwienie", label: "Cel Nieprzytomny", strona: "s. 35", cel: true, gdy: s => ma(s.cel, "unconscious") }),

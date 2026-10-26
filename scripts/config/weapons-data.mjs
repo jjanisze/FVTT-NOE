@@ -618,8 +618,8 @@ const BRON_PALNA_CIEZKA = [
     range: { value: 100, long: 200 },
     props: ["tryb_p", "jednorazowa", "ppanc"],
     weight: 5, price: 300, avail: 10,
-    note: "Rakieta na stały załadunek — nie ma osobnego kalibru w kartotece amunicji.",
-    manual: ["Po strzale wyrzutnia jest bezużyteczna. Moduł jej nie kasuje."]
+    note: "Rakieta na stały załadunek — nie ma osobnego kalibru w kartotece amunicji. Po strzale wyrzutnia zamienia się w "
+      + "„Zużytą wyrzutnię” — złom do rozbiórki albo broń improwizowana."
   },
   {
     id: "light-fifty", name: "Light Fifty", type: "palnaCiezka", icon: "light_fifty.svg",

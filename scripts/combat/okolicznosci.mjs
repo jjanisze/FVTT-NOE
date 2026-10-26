@@ -23,6 +23,7 @@ import { isMeleeAttack } from "./trafienie.mjs";
 import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
+import { stanBroni } from "../weapons/wlasciwosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -173,7 +174,9 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     zasieg: _zasieg(activity),
     wrogowieObok,
     celPochwytuje: jeden?.actor && actor?.statuses?.has("grappled") ? _celPochwytuje(actor, jeden.actor, zetony) : null,
-    turaCelu: !!(jeden && game.combat?.started && game.combat.combatant?.tokenId === jeden.id)
+    turaCelu: !!(jeden && game.combat?.started && game.combat.combatant?.tokenId === jeden.id),
+    // `długa`, `ciężka` (s. 117) — właściwości i oparcie broni (PLAN_m6 §5.3).
+    bron: item?.type === "weapon" ? stanBroni(item, actor) : null
   };
   const ctx = {
     activity, item, actor, attackerToken, targets, wrecz, attackMode,

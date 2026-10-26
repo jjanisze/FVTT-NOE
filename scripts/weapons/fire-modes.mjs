@@ -1,6 +1,7 @@
 import { mierzyDroga } from "../scenes/droga.mjs";
 import { regionZawieraNaDrodze } from "../scenes/poscig-serie.mjs";
 import { firedOneHanded } from "../combat/grip.mjs";
+import { bezOparcia } from "./wlasciwosci.mjs";
 import { getMag, spendRounds } from "./magazine.mjs";
 import { lastConsumedRounds, dominantCaliber, weaponEntry } from "./magazine-model.mjs";
 import { effectiveDamageFor, caliberDamageProperties } from "./ammo.mjs";
@@ -366,13 +367,16 @@ function registerLongBurstActivityType() {
         // RAW (Broń, Długa seria): strzał jedną ręką daje celom Ułatwienie w RO. Domyślne
         // w oknie, do zmiany (PLAN_paper_doll §5) — ręce czyta lalka.
         const oneHanded = firedOneHanded(this.item);
-        const flavorParts = [coverSummary, oneHanded ? "strzał jedną ręką: Ułatwienie" : null].filter(Boolean);
+        // RAW (Ciężka, s. 117): bez oparcia przeciwnicy mają Ułatwienie w RO przeciw serii (PLAN_m6 §5.3).
+        const heavy = bezOparcia(this.item);
+        const flavorParts = [coverSummary, oneHanded ? "strzał jedną ręką: Ułatwienie" : null,
+          heavy ? "broń ciężka bez oparcia: Ułatwienie" : null].filter(Boolean);
 
         await actor.rollSavingThrow({
           event,
           ability,
           target: adjustedDc,
-          ...(oneHanded ? { advantage: true } : {})
+          ...(oneHanded || heavy ? { advantage: true } : {})
         }, {}, {
           data: {
             flavor: flavorParts.length ? `Długa seria (${flavorParts.join("; ")})` : "Długa seria",
@@ -706,14 +710,18 @@ function registerCrushingBurstActivityType() {
 
         const adjustedDexDc = Math.max(0, baseDc - coverDecision.adjustedDexSaveBonus);
         const coverSummary = describeCoverDecision(coverDecision);
+        // RAW (Ciężka, s. 117): bez oparcia oba RO przeciw serii z Ułatwieniem (PLAN_m6 §5.3).
+        const heavy = bezOparcia(this.item);
+        const msFlavor = [coverSummary, heavy ? "broń ciężka bez oparcia: Ułatwienie" : null].filter(Boolean).join("; ");
 
         await actor.rollSavingThrow({
           event,
           ability: "dex",
-          target: adjustedDexDc
+          target: adjustedDexDc,
+          ...(heavy ? { advantage: true } : {})
         }, {}, {
           data: {
-            flavor: coverSummary ? `Miażdżąca seria - obrażenia (${coverSummary})` : "Miażdżąca seria - obrażenia",
+            flavor: msFlavor ? `Miażdżąca seria - obrażenia (${msFlavor})` : "Miażdżąca seria - obrażenia",
             speaker
           }
         });
@@ -721,10 +729,11 @@ function registerCrushingBurstActivityType() {
         const strengthRolls = await actor.rollSavingThrow({
           event,
           ability: "str",
-          target: baseDc
+          target: baseDc,
+          ...(heavy ? { advantage: true } : {})
         }, {}, {
           data: {
-            flavor: "Miażdżąca seria - uniknięcie obalenia",
+            flavor: heavy ? "Miażdżąca seria - uniknięcie obalenia (broń ciężka bez oparcia: Ułatwienie)" : "Miażdżąca seria - uniknięcie obalenia",
             speaker
           }
         });
