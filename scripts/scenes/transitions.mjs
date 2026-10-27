@@ -598,7 +598,8 @@ export async function opuscBezpiecznie(tokenDoc) {
   }
   const cel = { x: tokenDoc._source.x, y: tokenDoc._source.y, elevation: powierzchnia.elevation, action: "climb" };
   if (powierzchnia.level && powierzchnia.level.id !== tokenDoc._source.level) cel.level = powierzchnia.level.id;
-  await tokenDoc.move(cel, { constrainOptions: { ignoreWalls: true } });
+  // `neuroBezWspinaczki`: kontrolowane zejście, nie wspinaczka z testem (`scenes/wspinaczka.mjs`).
+  await tokenDoc.move(cel, { constrainOptions: { ignoreWalls: true }, neuroBezWspinaczki: true });
   return true;
 }
 

@@ -8,6 +8,7 @@ import { handgunPerkFor } from "../actors/rewolwerowiec.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
+import { POD_WODA, progZaciecia } from "../config/woda-rules.mjs";
 
 export function registerWeaponJams() {
   Hooks.on("dnd5e.postRollAttack", onPostRollAttack);
@@ -365,7 +366,10 @@ export async function setPamperedWeapon(item, active = true, { chat = true } = {
 async function onPostRollAttack(rolls, { subject } = {}) {
   const liveItem = _getLiveItem(subject?.item);
   if (!_isFirearmItem(liveItem)) return;
-  if (!rolls?.some(roll => roll?.isFumble)) return;
+  // Zanurzona broń zacina się przy wyniku 5 i mniej (s. 255, PLAN_m6 §5.6), inaczej pechowa jedynka.
+  const prog = progZaciecia(!!liveItem.actor?.statuses?.has(POD_WODA));
+  const pech = rolls?.some(roll => roll?.isFumble);
+  if (!pech && !rolls?.some(roll => (roll?.d20?.total ?? Infinity) <= prog)) return;
   // Zestaw sprężyn: broń nigdy się nie zacina
   if (hasAddon(liveItem, "zestaw-sprezyn")) return;
   const immunityAbilityKey = _getJamImmunityAbilityKey(liveItem);
@@ -373,7 +377,7 @@ async function onPostRollAttack(rolls, { subject } = {}) {
     await _announcePreventedFumbleJam(liveItem, immunityAbilityKey);
     return;
   }
-  await setJammed(liveItem, { reason: "Pechowa jedynka", chat: true });
+  await setJammed(liveItem, { reason: pech ? "Pechowa jedynka" : "Zanurzona broń — wynik 5 i mniej", chat: true });
 }
 
 function onPreUseActivity(activity) {

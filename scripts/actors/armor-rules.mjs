@@ -33,7 +33,8 @@
  *
  * ┌ Nie automatyzujemy ────────────────────────────────────────────────────────┐
  * │ Szczelność, Cios tarczą i Osłona tarczą, odpoczynek w pancerzu,            │
- * │ Utrudnienie do pływania, czas zakładania (tylko pokazany w Oporządzeniu).  │
+ * │ czas zakładania (tylko pokazany w Oporządzeniu). Utrudnienie do pływania   │
+ * │ dokłada karta testu pływania (`scenes/woda.mjs`), nie każda Atletyka.      │
  * └────────────────────────────────────────────────────────────────────────────┘
  */
 

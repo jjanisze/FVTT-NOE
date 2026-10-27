@@ -134,6 +134,8 @@ import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
 import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
 import { registerMapWatch, mapWatchApi } from "./scenes/map-watch.mjs";
 import { registerTransitions, transitionsApi } from "./scenes/transitions.mjs";
+import { registerWoda, wodaApi } from "./scenes/woda.mjs";
+import { registerWspinaczka, wspinaczkaApi } from "./scenes/wspinaczka.mjs";
 import { registerFxMarkers, fxMarkersApi } from "./scenes/fx-markers.mjs";
 import { registerDifficultTerrainHint, difficultTerrainHintApi } from "./scenes/difficult-terrain-hint.mjs";
 import { poscigApi } from "./scenes/poscig.mjs";
@@ -415,6 +417,9 @@ Hooks.once("init", () => {
   registerMapWatch();
   // Przejścia między poziomami (trudne przejście, „Opuść bezpiecznie”). W init: typ zachowania regionu.
   registerTransitions();
+  // Woda (PLAN_m6 §5.6) — Region `woda`, test pływania, Pod wodą / Tonie, walka pod wodą.
+  registerWoda();
+  registerWspinaczka();
   registerFxMarkers();
 
   // Trudny teren zapalany razem z miarką ruchu (ustawienie klienta).
@@ -587,6 +592,9 @@ Hooks.once("ready", () => {
   game.neuroshima.falling = fallingApi;
   // Latanie (PLAN_m6 §5.5) — game.neuroshima.latanie.stanLotnika(actor)
   game.neuroshima.latanie = latanieApi;
+  // Woda (PLAN_m6 §5.6) — game.neuroshima.woda.kartaTestu(token, {st}), .wodaZetonu(token)
+  game.neuroshima.woda = wodaApi;
+  game.neuroshima.wspinaczka = wspinaczkaApi;
 
   // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.
   // `.get/.set/.adjust` cover all three tracks, whoever owns the store.

@@ -303,6 +303,23 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     description: "<p>Maszyna nie działa: nie wykonuje akcji ani reakcji i nie porusza się. Wraca, gdy zniknie przyczyna — "
       + "naprawa ponad 0 PW, naprawa awarii 19 albo nowy akumulator.</p>",
     statuses: ["incapacitated"]
+  },
+  // Woda (PLAN_m6 §5.6, s. 255–256) — nakłada Region `woda` i karta testu pływania (`scenes/woda.mjs`), MG albo
+  // właściciel z HUD. Ikony rdzenia do czasu dostawy (`dev/icons/MISSING.md` §N).
+  podWoda: {
+    name: "Pod wodą",
+    img: "icons/svg/waterfall.svg",
+    description: "<p>Zanurzony. <strong>Oddech:</strong> wstrzymujesz go 1 + mod. Kondycji minut; obrażenia w tym czasie — "
+      + "RO na Kondycję ST 10 albo Uduszenie. <strong>Broń palna:</strong> Utrudnienie, pocisk leci 30 cm, zacina się "
+      + "przy 5 i mniej, połowa obrażeń. <strong>Przeciw tobie:</strong> wręcz — Utrudnienie (chyba że atakujący ma "
+      + "Szybkość pływania); broń miotana i rzucana — Utrudnienie, 1,5 m, połowa obrażeń; strzał znad wody — Utrudnienie "
+      + "(głębiej niż 30 cm pocisk zawsze chybia).</p>"
+  },
+  tonie: {
+    name: "Tonie",
+    img: "icons/svg/anchor.svg",
+    description: "<p>Nie utrzymujesz się na powierzchni: Szybkość 0, opadasz na dno. Na początku następnej tury "
+      + "ponowny Test Siły (Atletyka) — sukces: wypływasz (s. 255).</p>"
   }
 });
 
@@ -369,7 +386,8 @@ function buildConditionEffects() {
   return {
     // `udzwigMaksymalny`: the status of Udźwig's Unieruchomienie effect (`actors/udzwig-slowdown.mjs`) — Szybkość 0
     // (s. 258), so dnd5e also ends Unikanie's Ułatwienie there (it drops `dodging` under any noMovement condition).
-    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious", "wylaczony", "udzwigMaksymalny"]),
+    // `tonie`: porażka testu pływania — „utrata całej Szybkości” (s. 255, `scenes/woda.mjs`).
+    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious", "wylaczony", "udzwigMaksymalny", "tonie"]),
     halfMovement: new Set(),
     crawl: new Set(["prone", "exceedingCarryingCapacity"]),
     petrification: new Set(),

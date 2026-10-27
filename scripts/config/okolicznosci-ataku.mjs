@@ -29,6 +29,10 @@
  *   - **Broń `ciężka`** (s. 117): bez oparcia na dwójnogu, trójnogu albo SIŁ 15+ — Utrudnienie (RO przeciw serii z
  *     Ułatwieniem — `weapons/fire-modes.mjs`). Oparciem jest też stanowisko pojazdu i ręczne „Oprzyj broń” (murek,
  *     parapet, leżenie — U8, `weapons/wlasciwosci.mjs`).
+ *   - **Pod wodą** (s. 255–256; status `podWoda`, PLAN_m6 §5.6): strzał spod wody — Utrudnienie, dalej niż 30 cm chybia;
+ *     znad wody w zanurzony cel — Utrudnienie, głębiej niż 30 cm chybia (uwaga — głębokości silnik nie zna); broń
+ *     miotana i rzucana w zanurzony cel — Utrudnienie, 1,5 m; wręcz w zanurzony cel — Utrudnienie, chyba że atakujący
+ *     ma Szybkość pływania. Połowa obrażeń — `scenes/woda.mjs`, zacięcie przy ≤ 5 — `weapons/jams.mjs`.
  *
  * ## Tabela
  *
@@ -41,14 +45,17 @@
 /** Zasięg „obok ciebie” w metrach (s. 28, 35). */
 export const OBOK = 1.5;
 
+import { POD_WODA, ZASIEG_POD_WODA } from "./woda-rules.mjs";
+
 const _f = Object.freeze;
 /** Liczba albo null — `null`, `undefined` i "" to „nieznane”, nie 0 (`Number(null) === 0`). */
 const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite(Number(v)) ? null : Number(v));
 
 /**
  * @typedef {object} Uczestnik
- * @property {Set<string>} stany   id statusów dnd5e + markery modułu (`dodging`, `bieganie`)
+ * @property {Set<string>} stany   id statusów dnd5e + markery modułu (`dodging`, `bieganie`, `podWoda`)
  * @property {boolean} [szybkosc0] Szybkość 0 (stan albo ruch)
+ * @property {boolean} [plywa]     ma Szybkość pływania
  * @property {string} [nazwa]
  *
  * @typedef {object} MigawkaAtaku
@@ -66,6 +73,8 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  *
  * @typedef {object} StanBroni
  * @property {Iterable<string>} wlasciwosci  klucze właściwości (z broni, amunicji i ulepszeń)
+ * @property {string|null} [typ]             typ broni modułu (`palnaKrotka`, `miotana`, `biala`…)
+ * @property {boolean} [rzut]                atak rzutem (tryb `thrown`)
  * @property {boolean} [oparta]              dwójnóg/trójnóg rozłożony, stanowisko pojazdu albo „Oprzyj broń”
  * @property {number|null} [sila]            wartość SIŁ strzelca
  */
@@ -73,6 +82,10 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
 const ma = (u, id) => !!u?.stany?.has?.(id);
 const _dist = s => _num(s.odleglosc);
 const _wl = (s, id) => new Set(s.bron?.wlasciwosci ?? []).has(id);
+
+/** Broń palna i broń miotana albo rzucana — dla wierszy „pod wodą” (s. 255–256). */
+export const jestPalna = bron => String(bron?.typ ?? "").startsWith("palna");
+export const jestMiotana = bron => bron?.typ === "miotana" || !!bron?.rzut;
 
 /** `długa` (s. 117): Utrudnienie do celu w odległości do 3 m. */
 export const DLUGA_DO = 3;
@@ -143,6 +156,22 @@ export const ZRODLA_OKOLICZNOSCI = _f([
     gdy: s => !s.wrecz && _wl(s, "dluga") && _dist(s) !== null && _dist(s) <= DLUGA_DO && !s.cel?.szybkosc0 }),
   _f({ id: "ciezka", rodzaj: "utrudnienie", label: "Broń ciężka bez oparcia (dwójnóg, trójnóg, SIŁ 15+)", strona: "s. 117",
     gdy: s => !s.wrecz && ciezkaBezOparcia(s.bron) }),
+
+  // Pod wodą (s. 255–256; PLAN_m6 §5.6)
+  _f({ id: "podWodaPalna", rodzaj: "utrudnienie", label: "Strzał spod wody", strona: "s. 255",
+    gdy: s => !s.wrecz && jestPalna(s.bron) && ma(s.atakujacy, POD_WODA) }),
+  _f({ id: "podWodaPalnaZasieg", rodzaj: "uwaga", label: "Pod wodą pocisk leci 30 cm — dalej chybia", strona: "s. 255", cel: true,
+    gdy: s => !s.wrecz && jestPalna(s.bron) && ma(s.atakujacy, POD_WODA) && _dist(s) !== null && _dist(s) > ZASIEG_POD_WODA.palna }),
+  _f({ id: "znadWodyPalna", rodzaj: "utrudnienie", label: "Cel pod wodą (strzał znad wody)", strona: "s. 255", cel: true,
+    gdy: s => !s.wrecz && jestPalna(s.bron) && !ma(s.atakujacy, POD_WODA) && ma(s.cel, POD_WODA) }),
+  _f({ id: "znadWodyGleboko", rodzaj: "uwaga", label: "Cel głębiej niż 30 cm — pocisk zawsze chybia (MG)", strona: "s. 255", cel: true,
+    gdy: s => !s.wrecz && jestPalna(s.bron) && !ma(s.atakujacy, POD_WODA) && ma(s.cel, POD_WODA) }),
+  _f({ id: "podWodaMiotana", rodzaj: "utrudnienie", label: "Broń miotana albo rzucana w cel pod wodą", strona: "s. 255", cel: true,
+    gdy: s => !s.wrecz && jestMiotana(s.bron) && !jestPalna(s.bron) && ma(s.cel, POD_WODA) }),
+  _f({ id: "podWodaMiotanaZasieg", rodzaj: "uwaga", label: "Pod wodą najwyżej 1,5 m; cel głębiej niż 1,5 m — chybia (MG)", strona: "s. 255", cel: true,
+    gdy: s => !s.wrecz && jestMiotana(s.bron) && !jestPalna(s.bron) && ma(s.cel, POD_WODA) }),
+  _f({ id: "podWodaWrecz", rodzaj: "utrudnienie", label: "Atak wręcz w cel pod wodą (bez Szybkości pływania)", strona: "s. 256", cel: true,
+    gdy: s => s.wrecz && ma(s.cel, POD_WODA) && !s.atakujacy?.plywa }),
 
   // Stany celu (s. 35) — tylko przy jednym celu
   _f({ id: "celNieprzytomny", rodzaj: "ulatwienie", label: "Cel Nieprzytomny", strona: "s. 35", cel: true, gdy: s => ma(s.cel, "unconscious") }),

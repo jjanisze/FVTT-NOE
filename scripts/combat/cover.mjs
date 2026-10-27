@@ -79,7 +79,8 @@ export function zarejestrujDomyslnaOslone(fn) {
   _domyslneOslony.push(fn);
 }
 
-function _domyslnaOslona(token) {
+/** Domyślna osłona celu z zarejestrowanych źródeł (klucz wyboru albo null) — też dla testów. */
+export function domyslnaOslona(token) {
   for (const fn of _domyslneOslony) {
     try {
       const k = fn(token);
@@ -313,7 +314,7 @@ function registerAttackCoverIntegration() {
         baseAc: targetContext.baseAc,
         targetName: targetContext.token?.name ?? "cel",
         allowThrough: _isFirearmItem(this.item),
-        domyslna: _domyslnaOslona(targetContext.token)
+        domyslna: domyslnaOslona(targetContext.token)
       };
       const nextDialog = foundry.utils.mergeObject(
         foundry.utils.deepClone(dialog),

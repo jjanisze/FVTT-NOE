@@ -46,12 +46,16 @@ export function spadanieLotnika({ lotBazowy = 0, lot = 0, statusy = new Set(), b
   return { lotnik: true, powod };
 }
 
-const KLUCZ_LOTU = "system.attributes.movement.speeds.fly";
-
-/** Szybkość lotu przed stanami: nadpisanie efektu, inaczej źródło; formuła liczona danymi rzutu aktora. */
-function _lotBazowy(actor) {
-  const o = actor.overrides ?? {};
-  const f = foundry.utils.getProperty(o, KLUCZ_LOTU) ?? o[KLUCZ_LOTU] ?? foundry.utils.getProperty(actor._source ?? {}, KLUCZ_LOTU);
+/**
+ * Szybkość danego rodzaju przed stanami (Powalenie i `noMovement` zerują pochodną): nadpisanie efektu, inaczej źródło;
+ * formuła liczona danymi rzutu aktora. Też dla pływania (`scenes/woda.mjs`).
+ * @param {Actor} actor
+ * @param {string} typ  `fly`, `swim`…
+ */
+export function szybkoscPrzedStanami(actor, typ) {
+  const klucz = `system.attributes.movement.speeds.${typ}`;
+  const o = actor?.overrides ?? {};
+  const f = foundry.utils.getProperty(o, klucz) ?? o[klucz] ?? foundry.utils.getProperty(actor?._source ?? {}, klucz);
   if (f === null || f === undefined || f === "") return 0;
   if (Number.isNumeric(f)) return Number(f);
   try { return dnd5e.utils.simplifyBonus(f, actor.getRollData()); } catch { return 0; }
@@ -61,7 +65,7 @@ function _lotBazowy(actor) {
 export function stanLotnika(actor) {
   if (!actor?.system?.attributes?.movement) return { lotnik: false, powod: null };
   return spadanieLotnika({
-    lotBazowy: _lotBazowy(actor),
+    lotBazowy: szybkoscPrzedStanami(actor, "fly"),
     lot: actor.system.attributes.movement.speeds?.fly,
     statusy: actor.statuses ?? new Set(),
     bezRuchu: !!actor.hasConditionEffect?.("noMovement")

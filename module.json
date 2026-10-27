@@ -197,7 +197,8 @@
     "RegionBehavior": {
       "trudnePrzejscie": {},
       "strefaSkazenia": {},
-      "skok": {}
+      "skok": {},
+      "woda": {}
     }
   },
   "esmodules": ["scripts/main.mjs"],

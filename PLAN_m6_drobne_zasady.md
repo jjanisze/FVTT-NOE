@@ -380,8 +380,9 @@ rwąca 15, wzburzona 20, wir 25), `grzaska` (koszt ×3 — trudny teren dnd5e na
 - **Tylko w walce (U15, MG: „poza walką nie liczymy wody — mistrz musi sam kazać”).** Poza walką Region niczego sam nie
   wystawia; MG ma w HUD żetonu stojącego w wodzie przycisk „Test pływania” (karta z ST nurtu) — ten sam, którym
   w walce może poprosić o test poza kolejką;
-- `TOKEN_MOVE_IN` do głębokiej wody, w walce: karta MG „wejście w sprzęcie” (SIŁ (Atletyka) ST 10, Utrudnienia z
-  pancerza liczy już `actors/armor-rules.mjs`) — RAW „MG może wymagać”, więc karta z przyciskiem, nie rzut;
+- `TOKEN_MOVE_IN` do głębokiej wody, w walce: karta MG „wejście w sprzęcie” (SIŁ (Atletyka) ST 10; Utrudnienie z
+  pancerza dokłada karta testu — `actors/armor-rules.mjs` go **nie** liczy, korekta E6) — RAW „MG może wymagać”, więc
+  karta z przyciskiem, nie rzut;
 - `TOKEN_TURN_START` w głębokiej wodzie bez Szybkości pływania: karta testu Atletyki ze ST nurtu; porażka → status
   „Tonie” (Szybkość 0, opada) do następnego testu. Zdarzenie przychodzi **tylko u aktywnego MG** (`Combat#onStartTurn`
   woła regiony u jednego MG — E0f), więc karta wychodzi od MG: szept do MG i właścicieli z przyciskiem rzutu dla gracza;
@@ -394,7 +395,8 @@ połowa obrażeń (`preCalculateDamage`); znad wody w zanurzony cel — Utrudnie
 rzucana — Utrudnienie, 1,5 m, połowa; wręcz w zanurzony cel — Utrudnienie, chyba że Szybkość pływania; cel w płytkiej
 wodzie — domyślna Osłona ½ w oknie (`combat/cover.mjs`).
 
-**Eksporter map (repo Map, osobny commit):** encje wody CDDA (`t_water_sh` → płytka, `t_water_dp` → głęboka,
+**Eksporter map (repo Map) — odłożony (MG, 2026-10-27):** `tools/export_fvtt.py` ma niezacommitowaną pracę innej
+sesji; specyfikacja niżej przeszła do `TODO.md` repo Map („Woda: kafle CDDA → Regiony `woda`”). Encje wody CDDA (`t_water_sh` → płytka, `t_water_dp` → głęboka,
 `t_water_moving_*` → rwąca, słona → wzburzona) → Regiony z flagą `source: "water"` i zachowaniem `woda`; ręczne
 nadpisanie w Tiled (warstwa obiektów „woda” z właściwościami `glebokosc`, `nurt`). `map-sync.mjs` odtwarza je jak
 podłogi. Mapy do sprawdzenia: Zasadzka, Arena. MG (U14): Tiled eksportuje kafle wody — pod pływanie i pod status
@@ -413,8 +415,8 @@ wyrwy) zostaje bez zmian i korzysta z tej samej czystej funkcji.
 do 15+); **lalka sprawdza dwie wolne ręce** (inaczej sygnał naruszenia), udźwig ponad próg albo ciężki plecak →
 Utrudnienie w karcie.
 
-**Karta referencyjna** — strona w dzienniku zasad modułu i `docs/Ruch-i-teren.md`: pływanie, pod wodą, wspinanie,
-latanie (skok — handoff ruchu, wierzchowiec — M4 §6.3, dopisują swoje strony).
+**Karta referencyjna** — `docs/Ruch-i-teren.md`: spadanie, latanie, pływanie, pod wodą, wspinanie (skok — handoff
+ruchu, wierzchowiec — M4 §6.3, dopisują swoje strony). Dziennika zasad moduł nie ma (korekta E6).
 
 **Wykonalność:** średnia. Zdarzenia `TOKEN_TURN_START`/`TOKEN_MOVE_IN` są w rdzeniu (`CONST.REGION_EVENTS`); wzorzec
 zachowań już działa w module. Ryzyko: interakcja „Pod wodą” z wysokością żetonu i spadaniem — status, nie wysokość
@@ -680,3 +682,43 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   vs Nieprzytomność, lot z efektu); e2e `latanie` (lotnik na 9: Obezwładniony zostaje w powietrzu; Powalony — status
   Spadanie, `plummet` na podłogę bez karty i bez obrażeń, status zdjęty; Pochwycony i Nieprzytomny — karta obrażeń
   dnd5e z lotnikiem na tacce) — zielone; regresja e2e `dron`; pełny Quench 1335/1337 (te same dwie porażki spoza M6).
+- **Znana nakładka (sprzed E5):** drony latające M3 mają własną kartę upadku (D29, `actors/drony-stan.mjs`
+  `upadekDrona` — [Spada] i opadnięcie przy Powaleniu) obok statusu Spadanie dnd5e; MG ma dwie drogi do tego samego
+  wyniku. E5 tego nie zmienia — do scalenia w M7 albo przy dronach.
+
+### E6 — woda i wspinaczka (2026-10-27)
+
+- **Zasady** (`config/woda-rules.mjs`, czyste): ST nurtu 10/15/20/25, test na początku tury tylko w głębokiej wodzie,
+  w walce i bez Szybkości pływania (U15), skutek testu (porażka — Tonie i Pod wodą; sukces — Tonie schodzi, wypływa
+  ten, kogo wciągnęło tonięcie), zacięcie ≤ 5 pod wodą, połowa obrażeń, test wspinaczki.
+- **Statusy** (`config/conditions.mjs`): **Pod wodą** (`podWoda`) i **Tonie** (`tonie`, w `noMovement` — Szybkość 0,
+  także w silniku okoliczności); ikony rdzenia (`waterfall`, `anchor`) do dostawy — `dev/icons/MISSING.md` §N (2 × A,
+  nakładka „zanurzony” × B).
+- **Region `woda`** (`scenes/woda.mjs`; `module.json` `documentTypes`, `lang/pl.json`): głębokość, nurt, grząska.
+  W walce: wejście w głęboką wodę — szept MG z [Wymagaj testu]; `TOKEN_TURN_START` u aktywnego MG (E0f), raz na turę
+  (`tiki`) — karta testu dla właściciela; wyjście z wody zdejmuje Tonie i Pod wodą. Karta testu: rzut właściciela,
+  Utrudnienie z pancerza `stealthDisadvantage` (s. 53 — ta sama kolumna Skradanie się/Pływanie), Fuks cofa porażkę.
+  HUD MG żetonu w wodzie — „Test pływania”. Pod wodą zaczyna wstrzymany oddech (`actors/zagrozenia.mjs`), wynurzenie
+  go kończy — tylko Uduszenie zaczęte przez wodę (gaz zostaje); maszyny nie oddychają.
+- **Walka pod wodą:** siedem wierszy silnika okoliczności (strzał spod wody + uwaga 30 cm, znad wody + uwaga o
+  głębokości, miotana i rzucana + uwaga 1,5 m, wręcz bez Szybkości pływania); migawka dostaje typ broni, tryb rzutu
+  i Szybkość pływania. Połowa obrażeń w `dnd5e.preCalculateDamage` (mnożnik ½, dnd5e obcina sumę w dół — RAW);
+  ze strzału znad wody połowy nie ma (RAW mówi o niej tylko przy pocisku spod wody). Zacięcie przy ≤ 5 —
+  `weapons/jams.mjs`. Cel stojący w płytkiej wodzie — domyślna Osłona ½ (`combat/cover.mjs` `domyslnaOslona`,
+  rejestr źródeł).
+- **Wspinaczka** (`scenes/wspinaczka.mjs`): hak `moveToken`, pierwszy odcinek `climb` w turze w walce (`tiki`) —
+  karta z [ST 10] [ST 15], uwagi: dwie wolne ręce (lalka; bez nich dźwięk naruszenia), Udźwig ponad próg — Utrudnienie,
+  Szybkość wspinania. Pomija przejścia między poziomami i „Opuść bezpiecznie” (opcja ruchu `neuroBezWspinaczki`).
+- **Bramka:** krok `boot` sprawdza `movementAutomation` dnd5e (koszt ruchu — stock).
+- **Dokumentacja:** `docs/Ruch-i-teren.md` (w spisie `docs/README.md`).
+- **Eksporter map** — odłożony decyzją MG: `TODO.md` repo Map (mapa encji CDDA → głębokość i nurt, scalanie w
+  prostokąty, flaga `source: "water"`, warstwa ręczna „woda”). Wodę ma dziś tylko Town; Zasadzka (AMBUSH) jej nie ma,
+  mapy Arena nie ma.
+- **Testy:** Quench `woda` 14 (zasady, wiersze okoliczności, statusy i oddech, nurkowanie z własnej woli, gaz zostaje,
+  Szybkość pływania); e2e `woda` (wejście w rwącą wodę → szept MG → [Wymagaj testu] → porażka gracza: Tonie, Pod wodą,
+  Szybkość 0, wstrzymany oddech; tura gracza → karta ST 15 → sukces: wynurzony, oddycha; strzał B 92 spod wody —
+  plakietka i połowa z tacki; Osłona ½ w płytkiej wodzie, nie dla Powalonego; wyjście z wody; wspinaczka — jedna karta
+  na turę) — zielone; regresja e2e `combat`, `umieranie`, `obiekt`, `latanie`, `improwizacja`, `postac`, `boot`; pełny
+  Quench 1349/1351 (te same dwie porażki spoza M6). Stanowisko Poligonu „Arena” — E8 (README Poligonu ma dziś
+  niezacommitowane zmiany drugiego agenta).
+- **Do wiedzy MG:** nowy typ zachowania Regionu wymaga restartu serwera Foundry, żeby kampania go znała.

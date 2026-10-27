@@ -67,7 +67,7 @@ function _zewnetrzne(ctx) {
 /*  Migawka                                      */
 /* -------------------------------------------- */
 
-const BEZ_RUCHU = new Set(["grappled", "paralyzed", "restrained", "unconscious"]);
+const BEZ_RUCHU = new Set(["grappled", "paralyzed", "restrained", "unconscious", "tonie"]);
 
 /** Uczestnik ataku dla silnika. */
 export function uczestnik(actor, nazwa = null) {
@@ -75,7 +75,7 @@ export function uczestnik(actor, nazwa = null) {
   const ruch = actor?.system?.attributes?.movement ?? {};
   const predkosci = ["walk", "fly", "swim", "climb", "burrow"].map(k => _num(ruch[k]) ?? 0);
   const szybkosc0 = [...BEZ_RUCHU].some(id => stany.has(id)) || predkosci.every(v => v <= 0);
-  return { stany, szybkosc0, nazwa: nazwa ?? actor?.name ?? null };
+  return { stany, szybkosc0, plywa: (_num(ruch.swim) ?? 0) > 0, nazwa: nazwa ?? actor?.name ?? null };
 }
 
 /**
@@ -175,8 +175,10 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     wrogowieObok,
     celPochwytuje: jeden?.actor && actor?.statuses?.has("grappled") ? _celPochwytuje(actor, jeden.actor, zetony) : null,
     turaCelu: !!(jeden && game.combat?.started && game.combat.combatant?.tokenId === jeden.id),
-    // `długa`, `ciężka` (s. 117) — właściwości i oparcie broni (PLAN_m6 §5.3).
-    bron: item?.type === "weapon" ? stanBroni(item, actor) : null
+    // `długa`, `ciężka` (s. 117) — właściwości i oparcie broni (PLAN_m6 §5.3); typ i rzut — wiersze „pod wodą” (§5.6).
+    bron: item?.type === "weapon"
+      ? { ...stanBroni(item, actor), typ: item.system.type?.value ?? null, rzut: String(attackMode ?? "").startsWith("thrown") }
+      : null
   };
   const ctx = {
     activity, item, actor, attackerToken, targets, wrecz, attackMode,

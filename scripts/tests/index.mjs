@@ -52,6 +52,7 @@ import { registerBieglosciTests } from "./bieglosci.test.mjs";
 import { registerImprowizacjaTests } from "./improwizacja.test.mjs";
 import { registerObiektyTests } from "./obiekty.test.mjs";
 import { registerLatanieTests } from "./latanie.test.mjs";
+import { registerWodaTests } from "./woda.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
@@ -76,6 +77,7 @@ export function registerQuenchTests() {
     registerImprowizacjaTests(quench);
     registerObiektyTests(quench);
     registerLatanieTests(quench);
+    registerWodaTests(quench);
     registerEquipmentDataTests(quench);
     registerDiseaseTests(quench);
     registerEffectChangesTests(quench);

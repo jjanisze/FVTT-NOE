@@ -31,6 +31,12 @@ export default {
       t.equal(v.systemVersion, verified, "dnd5e version = module.json verified");
     });
 
+    // Koszt ruchu w wodzie, wspinaczki i trudnego terenu liczy dnd5e (PLAN_m6 §5.6: RAW = stock) — tylko z tym włączonym.
+    await t.step("dnd5e movement automation on (water, climbing and difficult terrain cost)", async () => {
+      const m = await t.gm.eval(() => game.settings.get("dnd5e", "movementAutomation"));
+      t.assert(m && m !== "none", `dnd5e movementAutomation is "${m}"`, { m });
+    });
+
     await t.step("every pack opens with the on-disk record count", async () => {
       const packsRoot = path.join(t.profile.data, "modules", MODULE_ID, "packs");
       const disk = await countAllPacks(manifest, packsRoot, t.ctx.install.app);

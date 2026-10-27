@@ -7,7 +7,8 @@
     "RegionBehavior": {
       "neuroshima-2026-overrides.trudnePrzejscie": "Trudne przejście",
       "neuroshima-2026-overrides.strefaSkazenia": "Strefa skażenia",
-      "neuroshima-2026-overrides.skok": "Skok"
+      "neuroshima-2026-overrides.skok": "Skok",
+      "neuroshima-2026-overrides.woda": "Woda"
     },
     "Actor": {
       "character": "Bohater Gracza",

@@ -186,6 +186,20 @@ background, [Pipeline.md](Pipeline.md)); the proficiency pills on the sheet read
 | `icons/tools/saksofon.svg` | Saksofon |
 | `icons/tools/skrzypce.svg` | Skrzypce elektryczne, szkieletowy korpus, smyczek |
 
+## N. M6 — woda (2 ikony statusu, klasa A; 1 nakładka żetonu, klasa B)
+
+Requested 2026-10-27 for `PLAN_m6_drobne_zasady.md` §5.6 (U14 — the GM asked whether submersion art exists: it does
+not). The statuses „Pod wodą” and „Tonie” show core Foundry icons until delivery (`icons/svg/waterfall.svg`,
+`icons/svg/anchor.svg` in `scripts/config/conditions.mjs` `NEUROSHIMA_MARKERS`); on delivery point `img` at the new
+files. Same style as the module's own status glyphs (`icons/statuses/wylaczony.svg`, [Pipeline.md](Pipeline.md)).
+The overlay is not wired yet — it is for a later token effect while „Pod wodą” is on.
+
+| Missing final file | Class | Subject |
+|---|---|---|
+| `icons/statuses/pod-woda.svg` | A | Pod wodą: sylwetka głowy pod falującą linią tafli, dwa bąbelki |
+| `icons/statuses/tonie.svg` | A | Tonie: dłoń nad linią tafli, strzałka w dół |
+| `tokens/nakladki/zanurzony.webp` | B | Nakładka żetonu „zanurzony”, widok z góry: półprzezroczysta falująca tafla na dolnej połowie okrągłego żetonu, chłodny turkus, bez tła |
+
 ## How an item gets added here
 
 Add only a confirmed missing asset: final path, purpose, spec and prompt/brief link.

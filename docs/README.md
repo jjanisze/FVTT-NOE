@@ -23,10 +23,11 @@
    doba w osadzie (sen, utrzymanie, praca, rachunek), przeskok, Fuksy i Fanty.
 10. [Wyprawy](Wyprawy.md) — szabrowanie ruin, losowe przedmioty, bebeszenie, autodestrukcja maszyn,
     rozbiórka na surowce.
-11. [FAQ](FAQ.md) — najczęstsze pytania.
-12. [Errata](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od przepisu standardowego;
+11. [Ruch i teren](Ruch-i-teren.md) — spadanie, latanie, woda i walka pod wodą, wspinaczka.
+12. [FAQ](FAQ.md) — najczęstsze pytania.
+13. [Errata](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od przepisu standardowego;
     wynik 85 Tabeli Fantów.
-13. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
+14. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
     przeciwników; handel, sen, szabrowanie, bebeszenie, Fanty.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
