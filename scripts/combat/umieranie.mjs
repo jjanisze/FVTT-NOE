@@ -47,6 +47,7 @@ import {
 import { applyZranienie, getZranienieLvl, ZRANIENIE_LEVELS } from "./zranienie.mjs";
 import { obronaOf, attackMessageFor, isMeleeAttack } from "./trafienie.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { jestObiektem } from "../config/obiekty-rules.mjs";
 import { maStopnieZranienia, rodzajTowarzysza } from "../actors/towarzysze.mjs";
 import { wylacz, wlacz } from "./maszyny.mjs";
 import { rollInfo } from "../config/chat-message-data.mjs";
@@ -162,6 +163,8 @@ function _onPreUpdateActor(actor, changes, options) {
 async function _onUpdateActor(actor, changes, options) {
   if (!_jestWykonawca()) return;
   if (!["character", "npc"].includes(actor.type)) return;
+  // Obiekt (PLAN_m6 §5.4) przy 0 PW jest zniszczony, nie umiera — kartę wystawia `scenes/obiekty.mjs`.
+  if (jestObiektem(actor)) return;
 
   const prosba = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.${PROSBA}`);
   if (prosba?.nonce) await _wykonajProsbe(actor, prosba);

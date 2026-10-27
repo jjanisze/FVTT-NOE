@@ -11,10 +11,10 @@
  * > cel. PRZYKŁAD: Próg obrażeń 5 oznacza, że obrażenia wynoszące mniej niż 5,
  * > nie wpływają w żaden sposób na cel."
  *
- * Mechanically identical to 5e's vehicle damage threshold, which dnd5e models
- * only on vehicles (`module/data/actor/vehicle.mjs`) — never on NPCs. Applied
- * here at `dnd5e.preCalculateDamage` by zeroing every component, so downstream
- * consumers see a clean 0 rather than a partially-applied hit.
+ * Mechanically identical to dnd5e 6's native `hp.dt` (every actor type since 6.0 — moving these six to it is
+ * PLAN_m6 P7, together with PM1). Applied at `dnd5e.calculateDamage`, i.e. **after** resistance, like the native
+ * threshold and like RAW s. 254 ("najpierw RO, następnie odporność, a na końcu Próg"); until 2026-10 it ran at
+ * `preCalculateDamage` and let a resisted hit through (8 vs Próg 5 with resistance dealt 4 — RAW: 0).
  *
  * Weapons and rounds with `ppanc` or `przebijajaca` bypass it: "Przeciwpancerna. Ignoruje
  * Odporności na obrażenia i Progi obrażeń." — one shared check, `combat/armour-piercing.mjs`.
@@ -72,22 +72,23 @@ const bestiaryFlags = actor => actor?.flags?.[MODULE_ID]?.bestiary ?? null;
 /*  Próg obrażeń                                 */
 /* -------------------------------------------- */
 
-function onPreCalculateDamage(actor, damages, options) {
+function onDamageThreshold(actor, damages, options) {
   const flags = bestiaryFlags(actor);
   const threshold = flags?.damageThreshold;
   if (!threshold) return;
 
-  const total = (damages ?? [])
-    .filter(d => d.type !== "healing" && d.type !== "temphp")
-    .reduce((sum, d) => sum + (d.value ?? 0), 0);
-  if (total <= 0 || total >= threshold) return;
+  // After resistance: `damages.amount` is what dnd5e would take off (RAW order, s. 254).
+  const total = Number(damages?.amount ?? 0);
+  if (!(total > 0) || total >= threshold) return;
 
-  // ppanc / przebijająca ignore Progi obrażeń — also when the flag was set earlier this hook.
+  // ppanc / przebijająca ignore Progi obrażeń.
   if (options?.ignore === true || options?.ignore?.threshold || isArmourPiercing(damages, options)) return;
 
+  damages.amount = 0;
   for (const d of damages) {
     if (d.type === "healing" || d.type === "temphp") continue;
     d.value = 0;
+    (d.active ??= {}).threshold = true;
   }
 
   if (game.user.isGM) {
@@ -208,7 +209,7 @@ function onUpdateActor(actor, changes) {
 
 export function registerBestiaryThresholds() {
   ustawTekstyAwarii(MACHINE_FAILURES);
-  Hooks.on("dnd5e.preCalculateDamage", onPreCalculateDamage);
+  Hooks.on("dnd5e.calculateDamage", onDamageThreshold);
   Hooks.on("dnd5e.calculateDamage", onCalculateDamage);
   Hooks.on("updateActor", onUpdateActor);
 

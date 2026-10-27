@@ -112,6 +112,7 @@ import { registerFireModes } from "./weapons/fire-modes.mjs";
 import { registerThrownWeapons } from "./weapons/thrown.mjs";
 import { registerWlasciwosciBroni, wlasciwosciApi } from "./weapons/wlasciwosci.mjs";
 import { registerImprowizacja, improwizacjaApi } from "./actors/improwizacja.mjs";
+import { registerObiekty, obiektyApi } from "./scenes/obiekty.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
@@ -390,6 +391,7 @@ Hooks.once("init", () => {
   registerThrownWeapons();
   registerWlasciwosciBroni();
   registerImprowizacja();
+  registerObiekty();
   registerAmmoSystem();
   registerWeaponAddons();
   registerAddonInventoryUI();
@@ -570,6 +572,8 @@ Hooks.once("ready", () => {
   game.neuroshima.wlasciwosci = wlasciwosciApi;
   // Broń improwizowana (PLAN_m6 §5.2) — game.neuroshima.improwizacja.atakImprowizowany(actor, item)
   game.neuroshima.improwizacja = improwizacjaApi;
+  // Obiekty (PLAN_m6 §5.4) — game.neuroshima.obiekty.ufizycznij(), .oknoZniszczen()
+  game.neuroshima.obiekty = obiektyApi;
   game.neuroshima.emiterEmp = emiterEmpApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;

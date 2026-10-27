@@ -310,14 +310,15 @@ Zamyka `PLAN_weapon_properties.md` §3.3 i §5 (z §5.4 niżej).
 
 ### 5.4 Niszczenie obiektów — fizyczność na żądanie (D5)
 
-**Model.** Jeden aktor bazowy „Obiekt” (`npc` z flagą `obiekt`, w paczce modułu, importowany do świata raz) i
+**Model.** Jeden aktor bazowy „Obiekt” (`npc` z flagą `obiekt`, tworzony w świecie przy pierwszym „Ufizycznij” — E4) i
 **żetony niepowiązane** z deltą na sztukę: TT (`ac.flat`), PW, Próg obrażeń (natywny `hp.dt`, §1), materiał,
 rozmiar, kruchość, kotwica. Rozmiar żetonu z rozmiaru obiektu. **Bez grafiki (P8, MG):** obiekt to tylko licznik PW i
 odporności nałożony na coś, co już jest w świecie (drzwi, kafel, drzewo z tła) — przezroczysta tekstura i sama ramka
 (obrys pola żetonu), widoczna dla wszystkich, żeby gracze mogli go wskazać jako cel. MG tworzy go na żądanie, tylko dla
 tego, co gracze chcą zaatakować — żeby nie mnożyć tysięcy obiektów na scenie.
 
-**Narzędzie MG „Ufizycznij”** (kontrolki żetonów, tylko MG) — kotwice:
+**Narzędzie MG „Ufizycznij”** (kontrolki żetonów, ścian, kafli i rysunków — zaznaczenie na tej warstwie jest
+kotwicą; tylko MG) — kotwice:
 - **przegroda z eksportu** (drzwi, okno, płot, brama, balustrada; zaznaczenie odcinka ściany): domyślny rozmiar i
   materiał z klasy przegrody (drzwi → Średni, drewno; płot → Duży, cienka blacha) — MG poprawia w oknie;
 - **kafel** (rekwizyt z eksportu, `propId`) i **rysunek**;
@@ -329,8 +330,8 @@ Okno: materiał (tabela TT), rozmiar × kruchość (tabela PW: wartość stała 
 Szablony szybkie: „drzwi drewniane”, „drzwi stalowe”, „okno”, „kłódka”, „beczka”, „drzewo”.
 
 **Zasady obiektu.**
-- RO: automatyczna porażka — hak `dnd5e.preRollSavingThrow` zwraca `false` i wystawia kartę „automatyczna porażka”;
-  ścieżki zbiorcze (granaty, serie, autodestrukcja, wybuch baku) pytają `jestObiektem()` i liczą pełne obrażenia.
+- RO: automatyczna porażka — hak `dnd5e.preRollSavingThrow` dokłada do rzutu `-99` (korekta E4: prawdziwy, przegrany
+  rzut zamiast `false`, więc ścieżki zbiorcze — granaty, serie, autodestrukcja, wybuch baku — nie potrzebują wyjątków).
 - Niewrażliwość: `traits.di` = trucizna, psychiczne (w delcie).
 - `burząca` ×2, `karczująca` ×2 (cięte, cel drewno/roślina): `dnd5e.preCalculateDamage` → `options.multiplier`,
   właściwość czytana z broni i amunicji tym samym czytnikiem co `combat/armour-piercing.mjs`. **Pojazd jest obiektem**
@@ -626,3 +627,36 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   pasa — ten sam bliźniak; Gladiator: Łyżeczka 2k6 z PB bez dopisków → ta sama felga jako zwykła 1k4 z PB Gladiatora →
   MG „działa jak…” z listą bez Kafara, Crasha, Piłomiecza, Katany, Maczety, felga jak bejsbol 1k6) — zielone; regresja
   `combat`, `postac`, pełny Quench 1316/1317 (jak wyżej). Stanowisko Poligonu — wspólne „Arena” w E6/E8.
+
+### E4 — obiekty (2026-10-27)
+
+- **Zasady** (`config/obiekty-rules.mjs`, czyste): TT z materiału i PW z rozmiaru × kruchości (s. 253; wartość stała
+  albo rzut), rozmiar z wagi (U9), szablony przegród z klasą eksportera (U10, plus mur, kłódka, beczka, drzewo),
+  mnożnik `burząca`/`karczująca`, niewrażliwość na trucizny i psychiczne.
+- **Obiekt** (`scenes/obiekty.mjs`): aktor bazowy w świecie (folder „Obiekty (fizyczność)”, ramka `icons/obiekty/ramka.svg`,
+  przezroczysta krew Splattera), żeton niepowiązany z deltą (TT, PW, `hp.dt`, rozmiar, materiał, kotwica), środek na
+  kotwicy. **Znalezisko:** dnd5e 6 nie ma już `ac.calc: "flat"` — migracja 5.3 robi z niego `override`, a zapis
+  `calc` jest nietrwały; `override` pomija osłonę i premie, więc stała TT to `calcs: ["natural"]` + `flat`
+  (`@attributes.ac.flat`). „Ufizycznij” na warstwach
+  żetonów, ścian, kafli i rysunków (zaznaczenie = kotwica, inaczej punkt z kliknięcia), okno z szablonem z klasy
+  przegrody i „Kruchy — zniszcz od razu” (od razu karta, bez żetonu).
+- **Zasady w potoku:** RO `-99` (s. 254); `burząca` ×2 (`options.multiplier`), `karczująca` ×2 cięte w drewno/rośliny —
+  także pojazdom; właściwość z amunicji albo broni wiadomości jednym czytnikiem (`trafienieMaWlasciwosc` w
+  `combat/armour-piercing.mjs`). Żeton obiektu nie blokuje ruchu i nie jest trudnym terenem (dnd5e liczy każdego `npc`
+  jako istotę — haki `determineOccupiedGridSpace*`); `combat/umieranie.mjs` pomija obiekty.
+- **Próg Bestiariusza po odporności** (P7, s. 254): `combat/bestiary-thresholds.mjs` przeniesiony z
+  `preCalculateDamage` na `dnd5e.calculateDamage` (`damages.amount`) — 8 ciętych przy odporności i Progu 5 dawało 4,
+  teraz 0, jak natywny `hp.dt`.
+- **Zniszczenie (0 PW):** szept do MG (u aktywnego MG, raz na żeton) z przyciskami według kotwicy i notką o Tiled dla
+  eksportu; po wyborze żeton znika, X z dwóch odcinków (widzą wszyscy — U12), przyciski gasną. Pamięć zniszczeń (U11):
+  flaga sceny `zniszczenia` tylko dla przegród i kafli eksportera; `map-sync.mjs` pomija je (`zniszczonePominiete` w
+  raporcie i w powiadomieniu). „Zniszczenia” (MG, kontrolki żetonów): pokaż, przywróć (ten sam `_id`, z flagą
+  eksportera; kasuje X), zapomnij, zapomnij wszystkie.
+- **Testy:** Quench `obiekty` 12 (tabele, szablony, rozmiary dnd5e, mnożnik; aktor: TT `natural`, Próg `hp.dt`, ×2,
+  RO, brak blokady ruchu, Próg Bestiariusza po odporności); e2e `obiekt` (drzwi szopy jako przegroda z eksportu →
+  szablon „drzwi”, TT 15, 18 PW, środek na drzwiach; RO −99; strzał gracza B 92 widzącego obiekt i obrażenia jak z
+  tacki; `burząca` 6 → 12; 0 PW → szept z [Otwórz drzwi] [Usuń przegrodę] [Zostaw] i notką Tiled; „Usuń przegrodę” →
+  bez ściany i żetonu, X u gracza, pamięć; podgląd aktualizacji mapy pomija drzwi; „Zniszczenia” → Przywróć; rysunek
+  „kruchy” → [Usuń rysunek], bez pamięci) — zielone; regresja e2e `combat`, `umieranie`, `improwizacja`; pełny Quench
+  1327/1329 (porażki spoza M6: `poscig` motyw `zima` z HEAD i obrys wozu strażackiego z niezacommitowanych danych
+  pojazdów). Granat na obiekcie — ta sama auto-porażka RO, bez osobnego kroku e2e. Stanowisko Poligonu — „Arena” w E6/E8.

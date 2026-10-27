@@ -26,7 +26,26 @@ const MODULE_ID = "neuroshima-2026-overrides";
 /** Właściwości broni i amunicji, które przebijają odporności i progi. */
 export const ARMOUR_PIERCING_PROPS = Object.freeze(["ppanc", "przebijajaca"]);
 
-const _piercing = props => ARMOUR_PIERCING_PROPS.some(p => props?.has?.(p) || (Array.isArray(props) && props.includes(p)));
+const _ma = (props, lista) => lista.some(p => props?.has?.(p) || (Array.isArray(props) && props.includes(p)));
+
+/**
+ * Czy trafienie niesie którąś z właściwości — z amunicji (na samych obrażeniach) albo z broni aktywności, z której
+ * wyszła wiadomość. Ten sam czytnik dla `ppanc`/`przebijajaca` i dla `burząca`/`karczująca` (obiekty, PLAN_m6 §5.4).
+ * @param {Array<{properties?: Set<string>}>} damages  wpisy z `calculateDamage`
+ * @param {object} options                             opcje `calculateDamage`
+ * @param {string[]} lista                             klucze właściwości
+ * @returns {boolean}
+ */
+export function trafienieMaWlasciwosc(damages, options = {}, lista = []) {
+  if ((damages ?? []).some(d => _ma(d?.properties, lista))) return true;
+  const uuid = activityRefOf(options?.origin ?? options?.originatingMessage)?.uuid;
+  if (!uuid) return false;
+  try {
+    return _ma(fromUuidSync(uuid)?.item?.system?.properties, lista);
+  } catch {
+    return false;
+  }
+}
 
 /**
  * Czy to trafienie przebija odporności i progi?
@@ -35,14 +54,7 @@ const _piercing = props => ARMOUR_PIERCING_PROPS.some(p => props?.has?.(p) || (A
  * @returns {boolean}
  */
 export function isArmourPiercing(damages, options = {}) {
-  if ((damages ?? []).some(d => _piercing(d?.properties))) return true;
-  const uuid = activityRefOf(options?.origin ?? options?.originatingMessage)?.uuid;
-  if (!uuid) return false;
-  try {
-    return _piercing(fromUuidSync(uuid)?.item?.system?.properties);
-  } catch {
-    return false;
-  }
+  return trafienieMaWlasciwosc(damages, options, ARMOUR_PIERCING_PROPS);
 }
 
 function onPreCalculateDamage(_actor, damages, options) {

@@ -50,6 +50,7 @@ import { registerFuksyTests } from "./fuksy.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerBieglosciTests } from "./bieglosci.test.mjs";
 import { registerImprowizacjaTests } from "./improwizacja.test.mjs";
+import { registerObiektyTests } from "./obiekty.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
@@ -72,6 +73,7 @@ export function registerQuenchTests() {
     registerConfigTests(quench);
     registerBieglosciTests(quench);
     registerImprowizacjaTests(quench);
+    registerObiektyTests(quench);
     registerEquipmentDataTests(quench);
     registerDiseaseTests(quench);
     registerEffectChangesTests(quench);

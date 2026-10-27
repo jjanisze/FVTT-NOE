@@ -71,6 +71,7 @@
 
 import { mapPropsApi } from "./map-props.mjs";
 import { sprzatnijFx } from "./fx-markers.mjs";
+import { zniszczoneIds } from "./obiekty.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = MODULE_ID;
@@ -298,6 +299,14 @@ async function update(mapId, { podglad = false, dane: daneZRaki = null, resetDrz
     return null;
   }
   const dane = daneZRaki ?? await pobierzOpis(mapId);
+  // Pamięć zniszczeń (PLAN_m6 U11): przegrody i kafle zniszczone w grze nie wracają, dopóki MG ich nie zapomni.
+  const zniszczone = zniszczoneIds(scene);
+  const pominiete = (dane.walls ?? []).filter(w => zniszczone.sciany.has(w._id)).length
+    + (dane.tiles ?? []).filter(t => zniszczone.kafle.has(t._id)).length;
+  if (pominiete) {
+    dane.walls = (dane.walls ?? []).filter(w => !zniszczone.sciany.has(w._id));
+    dane.tiles = (dane.tiles ?? []).filter(t => !zniszczone.kafle.has(t._id));
+  }
 
   const scianyDoUsuniecia = scene.walls.filter(odEksportera).map(w => w.id);
   const kafleDoUsuniecia = scene.tiles.filter(odEksportera).map(t => t.id);
@@ -321,6 +330,7 @@ async function update(mapId, { podglad = false, dane: daneZRaki = null, resetDrz
     regionyZachowane: scene.regions.size - regionyDoUsuniecia.length,
     swiatlaUsuwane: swiatlaDoUsuniecia.length,
     swiatlaWstawiane: dane.lights?.length ?? 0,
+    zniszczonePominiete: pominiete,
     nietkniete: {
       tokeny: scene.tokens.size, swiatla: scene.lights.size - swiatlaDoUsuniecia.length,
       notatki: scene.notes.size, dzwieki: scene.sounds.size,
@@ -413,7 +423,8 @@ async function update(mapId, { podglad = false, dane: daneZRaki = null, resetDrz
     `${scene.name}: ${raport.scianyWstawiane} ścian, ${raport.kafleWstawiane} kafli` +
     (stos ? `, ${dane.levels.length} poziomów` : "") + `. ` +
     `Zachowano ${raport.nietkniete.tokeny} tokenów i ${raport.scianyZachowane} ` +
-    `ścian dorysowanych ręcznie.`);
+    `ścian dorysowanych ręcznie.` +
+    (pominiete ? ` Pominięto ${pominiete} zniszczonych w grze (przycisk „Zniszczenia”).` : ""));
   return raport;
 }
 
