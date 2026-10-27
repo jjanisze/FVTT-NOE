@@ -3,7 +3,8 @@
 > Status (2026-10-03): `poreczna`, `powracajaca`, dwuręczna/oburęczna i lekka — ✅ przez lalkę
 > (`PLAN_paper_doll.md`). Wcześniej (2026-09-26): tabela w §1 zaktualizowana do stanu kodu. Otwarte pozycje są zaplanowane
 > w `PLAN_beta.md`: `ppanc`/`przebijajaca` przeciw pancerzowi BG — M1; `dluga`/`ciezka`/`jednorazowa` — ✅ M6 E2
-> (2026-10-27); `burzaca`/`karczujaca` na aktorze-obiekcie — M6 E4.
+> (2026-10-27); `burzaca`/`karczujaca` na aktorze-obiekcie — ✅ M6 E4 (2026-10-27, `scenes/obiekty.mjs`). §3.3 i §5
+> zamknięte (M6 E8).
 >
 > Plik projektowy. Źródło zasad: `Tabele/Bronie/` + podręcznik.
 > Definicje i filtrowanie właściwości: `scripts/config/weapons.mjs`.
@@ -42,7 +43,7 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `ladowanie` / `przeladowanie` | Akcja/BA na załadowanie | ✅ | `magazine.mjs` — aktywności neuroLoadOne/neuroReload |
 | `jednorazowa` | Strzał jednorazowy | ✅ | `weapons/wlasciwosci.mjs` (M6 E2, D8): po strzale wyrzutnia → „Zużyta wyrzutnia” (`loot`, ½ wagi) w tej samej ręce; kopia broni na karcie ataku (`system.deltas.deleted`), więc obrażenia i przerzuty działają; rozbiórka wg przepisu wyrzutni |
 | `sm` | Szyna montażowa | ✅ | `addons.mjs` — sloty SM (max 3) |
-| `burzaca` | Podwójne obrażenia obiektom | 🟡 | tylko detekcja **dźwięku** (`sounds.mjs`); obrażenia ręcznie (×2 w Apply Damage) |
+| `burzaca` | Podwójne obrażenia obiektom | ✅ | `scenes/obiekty.mjs` (M6 E4): ×2 w `dnd5e.preCalculateDamage` na aktorze-obiekcie („Ufizycznij”) i na pojazdach i wrakach (s. 254: pojazd jest obiektem); właściwość z broni albo amunicji (`trafienieMaWlasciwosc`); dźwięk — `sounds.mjs` |
 | `ppanc` | Ignoruje Odporności i Próg obrażeń | 🟡 | `bestiary-thresholds.mjs` omija próg obrażeń istot Bestiariusza; próg i odporność kinetyczna pancerza BG (`armor-rules.mjs`) — **nie** (M1) |
 | `przebijajaca` | jw. (wersja biała) | ⚙️ | jak `ppanc` (M1) |
 | `porazajaca` | RO Kondycja ST10 albo Powalenie | ✅ | `weapon-save-properties.mjs` — przycisk + save `con` ST10 + prone |
@@ -51,7 +52,7 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `dluga` | Utrudnienie do celów w 3m | ✅ | wiersz silnika okoliczności `dluga` (M6 E2): cel ≤ 3 m od krawędzi, bez Szybkości 0; złożona kolba zdejmuje właściwość |
 | `ciezka` | Wymaga dwójnogu/SIŁ15, inaczej Utrudnienie | ✅ | wiersz silnika okoliczności `ciezka` (M6 E2): dwójnóg/trójnóg rozłożony, stanowisko pojazdu, „Oprzyj broń” (menu, znika po ruchu) albo SIŁ 15+; RO przeciw DS/MS z Ułatwieniem; sygnał naruszenia (D11) |
 | `dublet` | 2 pociski, 1 test, podwójne kości | ✅ | `fire-modes.mjs` — osobny tryb, koszt 2 nabojów, bramkowany właściwością |
-| `karczujaca` | Podwójne obrażenia roślinom/drewnu | 🚫 | jak `burzaca`, ale węższe — brak natywnego typu "obiekt/roślina" |
+| `karczujaca` | Podwójne obrażenia roślinom/drewnu | ✅ | `scenes/obiekty.mjs` (M6 E4): obrażenia cięte ×2 w obiekt z flagą „drewno/roślina” (materiał drewno albo szablon drzewa) |
 | `cicha` | Nie zdradza pozycji / Niewidoczność | 🚫 | brak systemu skradania/widoczności w module — ręcznie |
 | `poreczna` | Strzał jedną ręką bez Utrudnienia | ✅ | `combat/grip.mjs` — lalka zna ręce; strzał jedną ręką ma domyślne Utrudnienie, `poreczna` je znosi (2026-10-03) |
 | `powracajaca` | Broń wraca na końcu tury | ✅ | `weapons/thrown.mjs` — po rzucie nic nie znika, karta przypomina o wolnej ręce do złapania (2026-10-03) |
@@ -123,7 +124,11 @@ Plan:
 > Zależność: zweryfikować, jak `damage-reduction.mjs` wstrzykuje redukcję i czy da się ją
 > warunkowo wyłączyć per-wiadomość. To jedyny realny "koszt" tej właściwości.
 
-### 3.3 Opcjonalne — kontekst rzutu ataku (średni zysk)
+### 3.3 Opcjonalne — kontekst rzutu ataku (średni zysk) — ✅ ZROBIONE (M6 E2, 2026-10-27)
+
+Zrobione inaczej, niż tu zaplanowano: oba to wiersze silnika okoliczności (`config/okolicznosci-ataku.mjs`), migawka
+dostaje stan broni (`weapons/wlasciwosci.mjs` `stanBroni`); odległość od krawędzi żetonów (U8); RO celów przeciw
+serii z ciężkiej bez oparcia — z Ułatwieniem (`fire-modes.mjs`). Szkic z czasów planu:
 
 - **`dluga`** — przy `dnd5e.preRollAttack`/`postBuildAttackRollConfig` zmierz dystans do celu
   (`token.center` ↔ `target.center`, `canvas.grid.measureDistance`); ≤ 3 m i cel ma Szybkość > 0
@@ -137,9 +142,9 @@ Plan:
 
 ## 4. Poza zakresem (dlaczego)
 
-- **`burzaca` / `karczujaca` — podwójne obrażenia obiektom/roślinom.** Patrz §5 — brak natywnego
-  rozróżnienia obiekt/istota w dnd5e 5.3. Pozostaje ręczny mnożnik ×2 w panelu Apply Damage
-  (już istnieje). `karczujaca` dodatkowo wymaga rozpoznania "drewno/rośliny" — jeszcze węższe.
+- ~~**`burzaca` / `karczujaca`**~~ — przeniesione do ✅ (M6 E4, 2026-10-27): aktor-obiekt powstaje na żądanie MG
+  („Ufizycznij”, `PLAN_m6_drobne_zasady.md` §5.4), więc „to jest obiekt” i „drewno/roślina” są flagami — §5 niżej to
+  historia.
 - **`cicha`.** Moduł nie ma systemu skradania/widoczności (Niewidoczność, detekcja pozycji).
   Bez tego nie ma czego automatyzować — MG stosuje opisowo. Do rozważenia dopiero gdyby powstał
   podsystem stealth.
@@ -155,7 +160,11 @@ Plan:
 
 ---
 
-## 5. Burząca — analiza wykonalności automatyzacji
+## 5. Burząca — analiza wykonalności automatyzacji — ✅ ZAMKNIĘTE (M6 E4, 2026-10-27)
+
+> Analiza z 2026-09 zakładała brak „obiektu” w dnd5e. M6 zrobił go flagą: jeden aktor bazowy „Obiekt” i żetony z
+> deltą na to, co gracze chcą zniszczyć (P8), a pojazdy i wraki to obiekty z definicji (s. 254). Mnożnik ×2 nakłada
+> `dnd5e.preCalculateDamage` (`scenes/obiekty.mjs`), bez notki-podpowiedzi. Tekst niżej — historia decyzji.
 
 **Wniosek: minimalna automatyzacja. Podwójne obrażenia obiektom zostają ręczne (mnożnik ×2 w
 panelu Apply Damage, który już istnieje).**

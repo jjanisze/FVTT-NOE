@@ -38,7 +38,10 @@ domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
 3. Przeciągnij klasę z kompendium **Neuroshima — Klasy** na kartę. Okno awansu przeprowadzi cię
    przez Kość Wytrzymałości, wybór umiejętności i zdolności klasy (np. Wyjadacz Twardziela).
    Postać startuje z pełnymi PW wg Neuroshimy (np. Twardziel 16 + mod. KON). Profesję wybierasz w tym
-   samym oknie, gdy klasa ją daje (3. poziom) — nie przeciągasz jej osobno.
+   samym oknie, gdy klasa ją daje (3. poziom) — nie przeciągasz jej osobno. Biegłości klasy i profesji
+   (umiejętności, zestawy narzędzi, instrumenty, kategorie broni) okno nadaje samo — stałe i do wyboru;
+   jeśli któraś nic nie dodała (już ją miałeś), gracz i MG dostają szept z listą. Druga klasa daje tylko
+   to, co podręcznik przewiduje przy wieloklasowości.
 4. Przeciągnij **Pochodzenie** z **Neuroshima — Pochodzenia**: +1/+1 do cech i jedna z trzech
    zdolności regionu.
 5. Startowa **Sztuczka** (albo 50 gambli — podręcznik, *Sztuczki*): przeciągnij ją z **Neuroshima —

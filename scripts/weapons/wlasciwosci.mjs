@@ -21,6 +21,7 @@ import { hasAddon } from "../config/addons-data.mjs";
 import { ciezkaBezOparcia } from "../config/okolicznosci-ataku.mjs";
 import { handOf, isDollActor, SLOTS_FLAG } from "../actors/doll.mjs";
 import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
+import { activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Flaga przełączników broni (`weapons/addons.mjs` `SETUP_FLAG`) — tam też leży stan rozłożenia dwójnogu. */
@@ -134,8 +135,7 @@ export function zuzytaWyrzutniaDane(bron, { slot = null } = {}) {
 /** Karta ataku tej aktywności (najnowsza, mojego autorstwa). */
 function _kartaAtaku(activity) {
   const uuid = activity?.uuid;
-  return game.messages.contents.findLast(m => m.type === "attack" && m.isAuthor
-    && (m.system?.activity?.uuid ?? m.getFlag("dnd5e", "activity.uuid")) === uuid) ?? null;
+  return game.messages.contents.findLast(m => m.type === "attack" && m.isAuthor && activityRefOf(m)?.uuid === uuid) ?? null;
 }
 
 async function _zuzyj(item, activity) {

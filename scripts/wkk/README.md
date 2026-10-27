@@ -95,6 +95,22 @@ book and stay in the NOE tree; the questions for the author are in `docs/Pytania
 | Dismantling gives half the recipe's materials, rounded down (D22) | `postoj/rozbiorka.mjs` |
 | Self-destruct countdown ticks at the start of each combat round (a dead machine leaves the turn order) | `combat/autodestrukcja.mjs` |
 
+### GM readings of RAW gaps and the author's rulings (M6)
+
+Profession proficiencies, improvised weapons, objects and water (`PLAN_m6_drobne_zasady.md` §6, §5.2.1). Same status
+as the tables above; the Łyżeczka row is the author's ruling (RAI), the rest are the GM's readings.
+
+| Reading | Where |
+|---|---|
+| A proficiency grant that adds nothing (already proficient, Specjalizacja already there) gets no substitute: the owner and the GM get a whisper with the list and a violation sound (D1) | `actors/bieglosci.mjs`, `combat/sygnal-naruszenia.mjs` |
+| An improvised weapon is one-handed under 2 kg and two-handed from 2 kg (U3) | `config/improwizacja-rules.mjs` (`PROG_OBURECZNEJ_KG`) |
+| Every item used as an improvised weapon has a damage type: bludgeoning by default, sharp items slashing or piercing (catalogue flag `obrazeniaImprowizowane`); the player picks in the damage window (U5) | `config/improwizacja-rules.mjs` (`typyObrazen`), `actors/improwizacja.mjs` |
+| **Author (RAI, 2026-10-27):** Łyżeczka's weight table is for its holder only; an improvised weapon's melee equivalent ("działa jak…") is at most a low or mid tier weapon (1k6) and only for weapon-like items; Łyżeczka and the improvised-weapon rules are mutually exclusive | `config/improwizacja-rules.mjs` (`dozwolonyOdpowiednik`, `improwizacjaZ`), `actors/improwizacja.mjs` (`technikaLyzeczki`) |
+| A spent launcher weighs half the LAW and dismantles like a broken one, materials from the launcher's recipe (U7) | `weapons/wlasciwosci.mjs`, `postoj/rozbiorka.mjs` |
+| Object size from item weight: ≤ 1 kg Malutki, ≤ 10 kg Mały, ≤ 100 kg Średni, more Duży (U9) | `config/obiekty-rules.mjs` (`rozmiarZWagi`) |
+| Wall templates: door Średni/wood/wytrzymały, steel door Średni/thin steel/twardy, window Duży/glass/kruchy, fence Duży/thin steel/wytrzymały, railing Średni/wood/wytrzymały (U10) | `config/obiekty-rules.mjs` (`SZABLONY`) |
+| Water is only counted in combat — turn-start swim tests and the entry card; outside combat the GM asks (U15) | `config/woda-rules.mjs` (`testNaPoczatkuTury`), `scenes/woda.mjs` |
+
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
 the system" / RAI and state the mechanic and its reasoning — they do not repeat the name.

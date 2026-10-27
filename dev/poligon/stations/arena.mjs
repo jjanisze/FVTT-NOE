@@ -2,13 +2,16 @@
  * Arena (§5.5, P2): combat at table scale — Drużyna Poligonu (five, a dog, a drone, Prawa ręka) against
  * ten from the Bestiariusz (armed humans with reactions, a machine, a swarm, something big). The combat
  * is prepared, not started: the GM rolls initiative as at the table.
+ *
+ * M6 (PLAN_m6_drobne_zasady.md): the room's door is flagged like an exported door (for „Ufizycznij”), a pond
+ * (deep, fast) inside a ford (shallow) at the bottom, a crowbar on the Najemnik for improvised attacks.
  */
 
-import { p } from "./_wspolne.mjs";
+import { p, MOD } from "./_wspolne.mjs";
 
 export default {
   id: "arena", name: "Arena", prio: "P2", icon: "fa-solid fa-khanda",
-  opis: "Średnia mapa z osłonami. Drużyna (Najemnik, Kaznodzieja, Medyk, Żołnierz, Szczur — Gracz 1–5) z psem, dronem i Prawą ręką kontra 10 z Bestiariusza (Gangusy, Cyngle, Kanibale, Spawacz, Rój szczurów, Gigamut). Walka przygotowana, nierozpoczęta.",
+  opis: "Średnia mapa z osłonami. Drużyna (Najemnik, Kaznodzieja, Medyk, Żołnierz, Szczur — Gracz 1–5) z psem, dronem i Prawą ręką kontra 10 z Bestiariusza (Gangusy, Cyngle, Kanibale, Spawacz, Rój szczurów, Gigamut). Walka przygotowana, nierozpoczęta. M6: drzwi pokoju do „Ufizycznij”, staw (głęboki, rwący) w brodzie (płytkim), łom u Najemnika.",
   gracze: 5,
   async build(k) {
     const s = await k.scene("arena", { name: "Arena", w: 44, h: 32, color: "#5b5039", main: true });
@@ -17,6 +20,19 @@ export default {
       [8, 6, 12, 6], [8, 24, 12, 24], [28, 4, 28, 9], [30, 20, 34, 20], [24, 26, 24, 30],
       [12, 15, 12, 18, "window"], [32, 12, 34, 12, "window"]
     ]);
+    // M6 §5.4: drzwi jak z eksportu mapy — „Ufizycznij” podsunie szablon drzwi i pamięć zniszczeń.
+    for (const w of s.walls.filter(x => x.door > 0)) await w.update({ [`flags.${MOD}.source`]: "door" });
+    // M6 §5.6: bród (płytki — Osłona ½) wokół stawu (głęboki, rwący — ST 15).
+    try {
+      const woda = (name, x, y, w, h, system) => ({
+        name, color: "#2f6f8f", shapes: [{ type: "rectangle", x: x * 100, y: y * 100, width: w * 100, height: h * 100 }],
+        behaviors: [{ type: `${MOD}.woda`, name: "Woda", system }]
+      });
+      await s.createEmbeddedDocuments("Region", [
+        woda("Bród", 14, 22, 10, 7, { glebokosc: "plytka", nurt: "spokojna" }),
+        woda("Staw", 16, 23, 6, 5, { glebokosc: "gleboka", nurt: "rwaca" })
+      ]);
+    } catch (err) { k.miss(`woda: ${err.message}`); }
     const ids = [["najemnik", "najemnik-5"], ["kaznodzieja", "kaznodzieja-nowej-ery-5"], ["medyk", "medyk-5"], ["zolnierz", "zolnierz-5"], ["szczur", "szczur-5"]];
     const party = [];
     for (const [i, [key, id]] of ids.entries()) {
@@ -25,6 +41,9 @@ export default {
       await k.seat(`Gracz ${i + 1}`, a);
     }
     await k.party(party);
+    // M6 §5.2: łom w plecaku Najemnika — „Weź do ręki”, „Atak improwizowany”, rzut.
+    await party[0]?.createEmbeddedDocuments("Item", [{ name: "Łom", type: "loot", img: "icons/tools/hand/pickaxe-steel-grey.webp",
+      system: { weight: { value: 3, units: "kg" }, quantity: 1 } }]);
     const T = game.neuroshima.towarzysze;
     await k.adopt("pies", await T.utworz(party[3], { rodzaj: "psi-partner", nazwa: "Reks", zrodlo: "partner" }));
     await k.adopt("prawa-reka", await T.utworz(party[1], { rodzaj: "prawa-reka", nazwa: "Brat Tomasz", zrodlo: "moja-prawa-reka" }));
@@ -48,6 +67,10 @@ export default {
     p("czat", "Skala", "Czat po trzech rundach: da się czytać? co jest zbędne?", "Trzy rundy, potem przewiń czat."),
     p("reakcje", "BN", "Reakcje BN, upuszczona broń i przedmioty na ziemi, „BN pada”", "Walka do upadku kilku Gangusów."),
     p("klatki", "Wydajność", "Czas klatki przy 15 żetonach w walce", "Liczniki → klatki wł."),
-    p("towarzysze", "Towarzysze", "Pies, dron i Prawa ręka w walce drużyny — tylko w skali stołu; szczegóły w Hangarze", "Komendy w turach właścicieli.")
+    p("towarzysze", "Towarzysze", "Pies, dron i Prawa ręka w walce drużyny — tylko w skali stołu; szczegóły w Hangarze", "Komendy w turach właścicieli."),
+    p("improwizacja", "M6", "Broń improwizowana: łom w ręce, atak z menu, typ obrażeń w oknie, rzut na ziemię; kolbą / rękojeścią", "Najemnik: łom → Weź do ręki → Atak improwizowany.", "NOE"),
+    p("obiekt", "M6", "Drzwi pokoju: Ufizycznij (szablon drzwi), strzał, 0 PW → szept z przyciskami, X, Zniszczenia → Przywróć", "Warstwa ścian: zaznacz drzwi → kostka „Ufizycznij”.", "NOE"),
+    p("woda", "M6", "Staw w walce: szept MG przy wejściu, test, Tonie i Pod wodą z oddechem, test na początku tury, strzał spod wody; bród — Osłona ½", "Wejdź żetonem do stawu w walce.", "NOE"),
+    p("wspinaczka", "M6", "Ruch „wspinaczka” w turze: karta ST 10 / 15, wolne ręce, ciężki plecak", "Paleta ruchu → Wspinaczka, w swojej turze.", "NOE")
   ]
 };

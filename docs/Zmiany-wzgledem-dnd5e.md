@@ -13,8 +13,8 @@ honor/rozsądek (HON/SAN) i inne elementy niezwiązane z Neuroshimą są usunię
 
 ## Umiejętności i narzędzia
 
-18 umiejętności Neuroshimy (z poprawnie przypisanymi cechami, np. Medycyna=INT, Pojazdy=MDR) i 22
-zestawy narzędzi zastępują standardową listę dnd5e.
+18 umiejętności Neuroshimy (z poprawnie przypisanymi cechami, np. Medycyna=INT, Pojazdy=MDR), 22
+zestawy narzędzi i 12 instrumentów muzycznych zastępują standardową listę dnd5e.
 
 ## Obrażenia i walka
 
@@ -45,7 +45,8 @@ z siebie po Teście Ataku — między trafieniem a obrażeniami jest miejsce na 
 ## Klasy i profesje
 
 6 klas z własnymi tabelami progresji, 18 profesji (subklas), 133 zdolności klasowe/profesji z
-tekstem przeniesionym z podręcznika. Punkty Wytrzymałości liczone wg wzoru Neuroshimy, nie
+tekstem przeniesionym z podręcznika. Klasa i profesja nadają swoje biegłości w oknie awansu, druga klasa —
+tylko te z wieloklasowości. Punkty Wytrzymałości liczone wg wzoru Neuroshimy, nie
 standardowego Hit Dice dnd5e. Zdolności stanowe jak Berserk mają pełną automatykę (Active
 Effects, warunki przerwania, karty czatu).
 
@@ -56,6 +57,9 @@ Effects, warunki przerwania, karty czatu).
 - **Pancerze** — lekki/średni/ciężki + wspomagany, próg obrażeń, odporność kinetyczna, kary za
   brak wyszkolenia i za zbyt niską Siłę.
 - **Ulepszenia broni (addony)** — system wpinany na przedmiot broni.
+- **Broń improwizowana** — każdy przedmiot w ręce (1k4, rzut 3/9 m), kolbą i rękojeścią, Łyżeczka
+  Gladiatora; właściwości `długa`, `ciężka`, `jednorazowa` działają same; MG nadaje fizyczność drzwiom
+  i przedmiotom, które gracze chcą zniszczyć — [Broń improwizowana i obiekty](Bron-improwizowana-i-obiekty.md).
 - **Surowce** — 5 typów materiałów (CH/CE/CZ/MK/MO) z panelem w Ekwipunku.
 - **Lekarstwa** — osobna kategoria Używek z tabelą cen/dostępności z podręcznika i mechaniką
   dawkowania.
@@ -67,6 +71,9 @@ Effects, warunki przerwania, karty czatu).
   podręcznika da się jednoznacznie przełożyć na regułę.
 - **Krwawienie** (Hemofilia) — wyzwalane obrażeniami ciętymi/kłutymi, rzuty obronne co turę, trzy
   sposoby zatrzymania zgodne z RAW.
+- **Spadanie, latanie, woda, wspinaczka** — upadek z kartą obrażeń, lotnik wg NOE (Powalony opada bez
+  obrażeń), Regiony wody z testami pływania w walce, Tonie i Pod wodą z oddechem, walka pod wodą, karta
+  wspinaczki — [Ruch i teren](Ruch-i-teren.md).
 - **Spadanie** — 1k6 obrażeń za każde 1,5 m, bez górnej granicy, i Powalenie (s. 43). Żeton zostawiony nad
   niższą powierzchnią dostaje stan Spadanie (mechanizm dnd5e 6 z liczbami NOE); MG klika ikonę stanu na żetonie,
   żeton spada, a MG dostaje kartę obrażeń z celem na tacce (Osteoporoza mnoży je jak zawsze). Tylko na scenach z

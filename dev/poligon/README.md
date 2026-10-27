@@ -36,7 +36,7 @@ In the GM's window: the flask button in the token controls (or **Ctrl+Shift+P**)
 | Lazaret | P1 | beds preset through the module's funnels: dying, stable, Zranienie 1–4, exhaustion from several sources, diseases, a phobia, Upojenie, Skażenie, bleeding, burning, held breath, Przemarznięcie; a Medyk and Aspiryna i Miętusy |
 | Bazar | P1 | M5: a town, two merchants from the module's merchant funnel, a party with money and goods, a Fant, a chronic disease |
 | Złomowisko | P1 | M5: corpses to butcher, a Gladiator with self-destruct, the party at a scavenging place, a jammed Bat to dismantle |
-| Arena | P2 | five plus a dog, a drone and a Prawa ręka against ten from the Bestiariusz; combat prepared |
+| Arena | P2 | five plus a dog, a drone and a Prawa ręka against ten from the Bestiariusz; combat prepared. M6: the room's door for „Ufizycznij”, a pond in a ford (`woda` Regions), a crowbar for improvised attacks |
 | Bestiariusz | P2 | the monster closet (`monsterCloset.regenerate()`), calibration pass and statblock walk |
 | Kuźnia | P2 | production and repair: a workshop Miejsce, schematics, jammed / damaged / blunted weapons, a Robota |
 | Kreator | P2 | empty characters per player, the companion wizard |

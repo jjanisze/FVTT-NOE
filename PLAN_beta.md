@@ -4,7 +4,7 @@
 > M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją; **v0.20.0
 > 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**). Etap bieżący: **alfa** — późna
 > dla walki, ekwipunku, przetrwania, produkcji, towarzyszy i postoju (handel, szabrowanie, doba), wczesna dla
-> pojazdów. Bramki spełnione: B3, B5, B6 (z dziurą: biegłości profesji — M6); bramka wydania v0.20.0 zielona (e2e
+> pojazdów. Bramki spełnione: B3, B5, B6 (dziura — biegłości profesji — zamknięta w M6 E1, 2026-10-27); bramka wydania v0.20.0 zielona (e2e
 > 21/21 w świecie gołym i zalecanym, Quench 1211/1211). B2 (zmieniona 2026-10-18) — zamrożenie modeli od kandydata
 > do wydania; sesje przy stole to styczniowa kampania testowa na becie. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
 > weto M3 i M5: MG przeszedł je slice po slice'ie przy wdrażaniu, formalne przejście sond odłożone.
@@ -56,7 +56,8 @@ flowchart LR
    — **zrobiona 2026-10-19 (E0–E8), do weta MG na Poligonie (Garaż), §10 planu**; część 1b (pojazdy między scenami,
    E9–E11) i część 2 P1–P4 (plansza od nowa — złożona droga, metryka drogi, jadący, serie i obszary) **zrobione
    2026-10-19**; mechanika pościgu (P5) — runda pytań w §10 planu. Grafika i dźwięki — atrapy do dostawy (MISSING §P).
-5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
+5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3) — **zrobione 2026-10-27 (E0–E8)**,
+   bez wydania; notatki etapów — `PLAN_m6_drobne_zasady.md` §11.
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
 7. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
@@ -350,7 +351,7 @@ i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 > **Walka na wierzchowcu przeniesiona do M4** (część 3, `PLAN_m4_pojazdy.md` §6.3), **skakanie** — do
 > `HANDOFF_movement_hotbar.md`. Tam, gdzie lista niżej się z nim rozjeżdża, wygrywa tamten plik.
 
-- [ ] **Biegłości profesji** (s. 69–101, „BIEGŁOŚCI <PROFESJI>”) — znalezione przy migracji Evie (M3 E5,
+- [x] **Biegłości profesji** (s. 69–101, „BIEGŁOŚCI <PROFESJI>”) — M6 E1; przegląd BG — `HANDOFF_bieglosci_retro.md` — znalezione przy migracji Evie (M3 E5,
   2026-10-10): profesja nie nadaje swoich biegłości (umiejętności, zestaw narzędzi, kategoria broni), choć
   `dev/classes/professions.json` ma ich tekst (`proficiencies`). Dotyczy wszystkich 18 profesji i każdej
   postaci zbudowanej przez awans — **dziura w B6**, której lista kontrolna nie łapała. Do zrobienia: awans
@@ -359,15 +360,15 @@ i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
   potem przegląd MG istniejących BG (co który wybrał). Victor: kategoria broni (palna pośrednia) zrobiona w M3
   E5 (D14 planu M3); brak mu jeszcze Śledztwa, Zastraszania i zestawu narzędzi z biegłości Sędziego.
 
-- [ ] **Niszczenie obiektów** (s. 253): tabele TT (materiał) i PW (rozmiar × kruchość); szablon aktora
+- [x] **Niszczenie obiektów** (s. 253) — M6 E4 (fizyczność na żądanie MG, P8): tabele TT (materiał) i PW (rozmiar × kruchość); szablon aktora
   „Obiekt" (niewrażliwy na truciznę i psychiczne, automatyczna porażka RO); `burząca` ×2
   i `karczująca` automatycznie na takim celu — zamyka `PLAN_weapon_properties.md` §5
-- [ ] **Broń improwizowana** (s. 253) jako reguła ogólna: 1k4, bez PB, rzut 3/9 m — przełącznik
+- [x] **Broń improwizowana** (s. 253) jako reguła ogólna — M6 E3 (bliźniak przedmiotu w ręce, Łyżeczka): 1k4, bez PB, rzut 3/9 m — przełącznik
   w dialogu ataku / szablon przedmiotu (dziś jedyny przykład to Pochodnia)
-- [ ] Właściwości broni: `dluga`, `ciezka`, `jednorazowa` (blokada przeładowania) —
+- [x] Właściwości broni: `dluga`, `ciezka`, `jednorazowa` — M6 E2; (blokada przeładowania) —
   `PLAN_weapon_properties.md` §3.3
-- [ ] Latanie: Nieprzytomność lub Szybkość 0 → upadek (`falling.mjs`); Powalenie → opadnięcie bez obrażeń
-- [ ] Pływanie i woda (Regiony z eksportu map), wspinaczka (s. 255–257) — `PLAN_m6_drobne_zasady.md` §5.6. Walka na
+- [x] Latanie (M6 E5): Nieprzytomność lub Szybkość 0 → upadek (`falling.mjs`); Powalenie → opadnięcie bez obrażeń
+- [x] Pływanie i woda, wspinaczka (s. 255–257) — M6 E6; Regiony wody z eksportu map — `TODO.md` repo map — `PLAN_m6_drobne_zasady.md` §5.6. Walka na
   wierzchowcu → M4 część 3; skakanie → `HANDOFF_movement_hotbar.md`
 
 ### M7 — Automatyka zdolności posiadanych przez drużynę (ciągłe)

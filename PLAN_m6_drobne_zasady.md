@@ -1,6 +1,6 @@
 # PLAN — M6: Biegłości profesji, broń improwizowana, obiekty i woda
 
-> Status: **W REALIZACJI** (od 2026-10-26). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia U1–U24 przeszły
+> Status: **ZREALIZOWANY** (2026-10-26 → 2026-10-27, E0–E8; bez wydania — notatki etapów w §11). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia U1–U24 przeszły
 > weto MG 2026-10-26 (kolumna „Decyzja MG” w §6, poprawki w §5); P1–P8 rozstrzygnięte tego samego dnia (§7); Łyżeczka
 > — RAW z wyjaśnieniem autora NOE, wariant WKK wycofany (§5.2.1, 2026-10-27). Spiki E0 — §11. Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał
 > „S każda”; urosło o improwizację z dowolnego przedmiotu w ręce (D6), fizyczność obiektów na żądanie (D5) i Regiony
@@ -722,3 +722,26 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   Quench 1349/1351 (te same dwie porażki spoza M6). Stanowisko Poligonu „Arena” — E8 (README Poligonu ma dziś
   niezacommitowane zmiany drugiego agenta).
 - **Do wiedzy MG:** nowy typ zachowania Regionu wymaga restartu serwera Foundry, żeby kampania go znała.
+
+### E8 — domknięcie (2026-10-27)
+
+- **B1 (macierz w `IMPLEMENTATION.md`):** nowe wiersze — biegłości profesji i klas ✅, właściwości broni ✅, broń
+  improwizowana i Łyżeczka ✅, latanie ✅, niszczenie obiektów 🟡 (MG ufizycznia na żądanie — P8; materiał z
+  eksportu — `PLAN_1_0.md`), pływanie, walka pod wodą i wspinaczka 🟡 (poza walką na żądanie MG — U15; Regiony z
+  eksportu — `TODO.md` repo map). Wierzchowiec i skok zostają ❌ ze wskazaniem na M4 część 3 i handoff ruchu.
+- **B7 (dokumentacja):** tabela plików (11 nowych plików M6, `tools.mjs`), wpis changelogu M6;
+  `docs/Bron-improwizowana-i-obiekty.md` (nowa: broń improwizowana, Łyżeczka, `długa`/`ciężka`/`jednorazowa`,
+  obiekty dla MG), `docs/Ruch-i-teren.md` (E6), biegłości w `docs/Pierwsze-kroki.md`, przegląd w
+  `docs/Zmiany-wzgledem-dnd5e.md`, spis `docs/README.md`.
+- **RAI:** `scripts/wkk/README.md` — tabela „GM readings … (M6)”: D1, U3, U5, U7, U9, U10, U15 i orzeczenie autora
+  o Łyżeczce.
+- **`PLAN_weapon_properties.md`:** `burząca` i `karczująca` ✅, §3.3 i §5 zamknięte. **`PLAN_beta.md`:** M6 odhaczony,
+  dziura B6 zamknięta.
+- **Poligon — „Arena”:** drzwi pokoju z flagą przegrody z eksportu (do „Ufizycznij”), bród i staw (Regiony `woda`),
+  łom u Najemnika; cztery próby M6 (improwizacja, obiekt, woda, wspinaczka). Kod stanowiska — na Poligonie MG
+  odświeża go sam (`poligon:init`, za jego zgodą).
+- **B4 — znalezisko:** `npm test` padał na skanerze dnd5e 6 — `weapons/wlasciwosci.mjs` (E2) czytał kartę ataku
+  zapasowo po fladze 5.3 `dnd5e.activity.uuid`; teraz `activityRefOf`. Skaner: 10 reguł na zero.
+- **Testy:** `npm test` zielone; e2e `poligon` (cała Obsada i każde stanowisko, Arena z nową wodą) i `combat` (krok
+  LAW po poprawce) — zielone; pełny Quench z E6 1349/1351 (dwie porażki spoza M6: `poscig` motyw `zima` z HEAD i obrys
+  wozu strażackiego z niezacommitowanych danych pojazdów). `TESTING.md` §9 — pięć paczek M6.

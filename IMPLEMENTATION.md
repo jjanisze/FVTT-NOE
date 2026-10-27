@@ -6,8 +6,9 @@
 (walka i powrót do zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5 (handel,
 szabrowanie, postój) — v0.19.0; migracja na dnd5e 6 — v0.20.0. Walka, ekwipunek, stany i przetrwanie grały się przy
 żywym stole; produkcja, towarzysze, drony, handel i postój czekają na pierwsze sesje (kampania testowa w styczniu).
-Czysta instalacja (B6) sprawdzana przy każdym wydaniu. Przed betą: M6 (z biegłościami profesji), M4 (większość
-pojazdów nie istnieje), style. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+Czysta instalacja (B6) sprawdzana przy każdym wydaniu. M6 (drobne zasady RAW z biegłościami profesji) zamknięty
+2026-10-27, bez wydania. Przed betą: M4 (większość pojazdów nie istnieje), M7, style. Droga do bety, bramki
+i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -45,13 +46,14 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
 | | Automatyka zdolności | 🟡 | 4/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
+| | Biegłości profesji i klas: umiejętności, zestawy, instrumenty, broń, wieloklasowość (s. 69–101) | ✅ | awanse `Trait` w paczkach (`dev/packs/build-packs.mjs`, `validate-packs`), ostrzeżenie po awansie i audyt postaci — `actors/bieglosci.mjs` (M6 E1, e2e `postac`); przegląd istniejących BG — `HANDOFF_bieglosci_retro.md` |
 | | Automatyka zdolności | 🟡 | 33/133 — 10 pełnych, 23 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
 | | Automatyka | 🟡 | 19/53 — 5 pełnych, 14 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
-| | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
+| | Właściwości broni | ✅ | `dluga`, `ciezka`, `jednorazowa` — `weapons/wlasciwosci.mjs`, wiersze silnika okoliczności (M6 E2); `ppanc`/`przebijająca` — `combat/armour-piercing.mjs`; `burząca`/`karczująca` na obiektach i pojazdach — `scenes/obiekty.mjs`; `PLAN_weapon_properties.md` |
 | | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); TT z pancerza — silnik TT; Parowanie tarczą i Krytyczna ochrona hełmu — okno „Reakcje celu” (`combat/obrona.mjs`); Cios i Osłona tarczą, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
 | | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; Fanty (51, folder w `sprzet`) z aktywnością dającą Fuksa (M5); część Różności tylko jako przedmioty bez akcji |
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; drony — aktor i uchwyt (M3); pojazdy to karta dla MG — M4 |
@@ -61,8 +63,11 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
 | | Uduszenie, Przemarznięcie | ✅ | `actors/zagrozenia.mjs` — to samo narzędzie MG: mróz (ST z temperatury co godzinę; ciepło ubrany, śpiwór, koc), Uduszenie (faza na statusie, koniec tury w walce, karta RO przy obrażeniach, „Złap oddech” w panelu Stan); „W cieple” w oknie DO — `PLAN_m1_walka.md` E7 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
-| | Niszczenie obiektów, broń improwizowana (reguła ogólna), latanie | ❌ | M6 (Pochodnia to jedyny przykład broni improwizowanej) |
-| | Walka na wierzchowcu, pływanie, skakanie | ❌ | M6 — karta referencyjna |
+| | Niszczenie obiektów | 🟡 | `scenes/obiekty.mjs` (M6 E4, e2e `obiekt`): MG ufizycznia to, co gracze chcą zniszczyć (P8 — nie każdy obiekt sceny); materiał przegród z eksportu — `PLAN_1_0.md` |
+| | Broń improwizowana (reguła ogólna), Łyżeczka | ✅ | `actors/improwizacja.mjs` (M6 E3, e2e `improwizacja`); typ obrażeń wybiera gracz w oknie, „działa jak…” — MG |
+| | Latanie | ✅ | `actors/latanie.mjs` (M6 E5, e2e `latanie`) |
+| | Pływanie, walka pod wodą, wspinaczka | 🟡 | `scenes/woda.mjs`, `wspinaczka.mjs` (M6 E6, e2e `woda`), `docs/Ruch-i-teren.md`; w walce karty same, poza walką na żądanie MG (U15); Regiony wody z eksportu map — `TODO.md` repo map, dziś MG rysuje je ręcznie |
+| | Walka na wierzchowcu, skakanie | ❌ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3); skok — `HANDOFF_movement_hotbar.md` (Region `skok` już działa) |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
 | | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami, wrak i wybuch baku, broń montowana, Wojownik autostrady | ✅ | `scripts/pojazdy/*`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`. Grafika i dźwięki — atrapy do dostawy (MISSING §P) |
 | | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ❌ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2) |
@@ -74,7 +79,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `module.json` | Manifest modułu |
 | `scripts/main.mjs` | Entry point — hooki init/i18nInit/ready |
 | `scripts/config/skills.mjs` | 18 skilli Neuroshimy |
-| `scripts/config/tools.mjs` | 22 narzędzia |
+| `scripts/config/tools.mjs` | 22 zestawy narzędzi + 12 instrumentów (kategorie dnd5e, przedmioty bazowe w `narzedzia` — id literałami) |
 | `scripts/config/damage-types.mjs` | 11 typów obrażeń + leczenie |
 | `scripts/config/terminology.mjs` | Polskie cechy, waluta, jednostki |
 | `scripts/config/spellcasting.mjs` | Usunięcie spellcastingu |
@@ -119,6 +124,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/disease-effects.mjs` | Egzekwowanie: sync Active Effects, Utrudnienie do ataków, przycisk Szału |
 | `scripts/combat/bleeding.mjs` | Krwawienie (Hemofilia) — wyzwalacz, RO na koniec tury, trzy drogi zatrzymania |
 | `scripts/combat/falling.mjs` | Spadanie [ZAGROŻENIE] — 1k6/1,5 m, Powalenie, upadek do cieczy, mnożnik Osteoporozy |
+| `scripts/actors/latanie.mjs` | Latanie (s. 253, M6 E5): lotnik spada przy Nieprzytomności i Szybkości 0, Powalony opada bez karty, samo Obezwładnienie nie strąca — opakowania `_isFalling`/`plummet` dnd5e; `szybkoscPrzedStanami` |
 | `scripts/actors/fuks-pips.mjs` | Trzy piki Fuksa w nagłówku karty (zastępują gwiazdkę Inspiration) |
 | ~~`scripts/migration/migrate-health.mjs`~~ | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi — **usunięta** (`62dfd4c`, dane graczy poza publicznym repo); wykonana, opis w §4.3 |
 | `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4); zejście z Krytycznego zdejmuje Wyczerpanie ze Zranienia (RAI) |
@@ -148,10 +154,14 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/items/staza.mjs` | Staza — przedmiot z kompendium `sprzet`, stabilizacja przez lejek umierania |
 | `scripts/config/okolicznosci-ataku.mjs` | Okoliczności Testu Ataku — czysty silnik: tabela źródeł RAW, tryb rzutu, automatyczne TK ≤ 1,5 m |
 | `scripts/combat/okolicznosci.mjs` | Okoliczności Testu Ataku — migawka sceny, jeden hak `dnd5e.preRollAttack`, plakietki na karcie, rejestr źródeł spoza RAW |
+| `scripts/combat/sygnal-naruszenia.mjs` | Sygnał naruszenia „oznaczać, nie zakazywać”: szept do MG i właścicieli z powodami + dźwięk porażki (M6 D1, D11; M7) |
 | `scripts/config/rekonwalescencja-rules.mjs` | Powrót do zdrowia — czyste zasady: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, widok pipek, licznik Regeneracji, szansa RO, prognoza kalendarzyka |
 | `scripts/actors/rekonwalescencja.mjs` | Neutralizacja Stopnia Zranienia po DO (Gojenie, Pomoc medyczna, samoleczenie WKK), sekcja w oknie DO, karty RO, przekaźnik ładunku, kalendarzyk zdrowia |
 | `scripts/migration/migrate-dni-swiata.mjs` | Jednorazowo: dni chorób, dawek i limitów chemii ze starego licznika `dayCounter` na dzień kalendarza świata; blokada odpoczynku → doba gry |
 | `scripts/actors/zagrozenia.mjs` | Zagrożenia: Przemarznięcie, doba bez snu, Uduszenie — narzędzie MG, faza oddechu, karty RO, wiersz w panelu Stan |
+| `scripts/config/woda-rules.mjs` | Woda i wspinaczka — czyste zasady (s. 255–256): ST nurtu, test na początku tury (tylko w walce, U15), skutek testu, zacięcie ≤ 5, połowa obrażeń, wspinaczka |
+| `scripts/scenes/woda.mjs` | Region `woda` (głębokość, nurt, grząska): karty wejścia i testu pływania, Tonie / Pod wodą z oddechem, HUD „Test pływania”, połowa obrażeń, Osłona ½ w płytkiej wodzie (M6 E6) |
+| `scripts/scenes/wspinaczka.mjs` | Wspinaczka w walce: karta Atletyki ST 10/15 przy pierwszym odcinku `climb` w turze, dwie wolne ręce, ciężki plecak (M6 E6) |
 | `scripts/wkk/config/rekonwalescencja-kobalt.mjs` | WKK: Wyczerpanie z Krytycznego uporczywe; Pomoc medyczna — ładunek, cały DO, jeden pacjent; samoleczenie (gospodarz `config/rekonwalescencja-rules.mjs`, `actors/rekonwalescencja.mjs`) |
 | `scripts/combat/rerolls.mjs` | Przerzuty: Forsowanie + Fuks (reroll mechanics) |
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
@@ -189,6 +199,9 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/weapons/melee-degradation.mjs` | Degradacja kości obrażeń broni białej (k12→…→1) + naprawa; Naostrzenie niszczone przy uszkodzeniu (RAW) |
 | `scripts/weapons/dozownik.mjs` | Ulepszenie Dozownik — zasób dawek (np. trucizna na ostrzu) |
 | `scripts/weapons/thrown.mjs` | Broń rzucana — sztuka ląduje u celu jako przedmiot na ziemi; Powracająca wraca |
+| `scripts/weapons/wlasciwosci.mjs` | Właściwości `długa`, `ciężka`, `jednorazowa` (s. 117, M6 E2): stan broni dla silnika okoliczności, „Oprzyj broń”, zużyta wyrzutnia w tej samej ręce |
+| `scripts/config/improwizacja-rules.mjs` | Broń improwizowana — czyste zasady (s. 253, Łyżeczka s. 70): 1k4 i 3/9 m, chwyt od 2 kg, typ obrażeń, odpowiednik broni białej do 1k6, tabela Łyżeczki rozłączna z improwizowaną |
+| `scripts/actors/improwizacja.mjs` | Bliźniak przedmiotu w ręce (M6 E3): ukryta broń improwizowana, kolbą/rękojeścią, „Działa jak…” (MG), rzut na ziemię, Łyżeczka i jej pękanie |
 | `scripts/actors/addons-inventory.mjs` | UI Ulepszeń — context menu na loot, panel na arkuszu broni, chat tagi, przyciski toggle setup |
 | `scripts/config/addons-data.mjs` | Statyczny słownik ADDON_DEFS (definicje wszystkich ulepszeń) |
 | `scripts/config/weapons.mjs` | Override kategorii broni D&D 5e na kategorie Neuroshimy |
@@ -218,6 +231,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/bez-dna.mjs` | Bez dna (klauzula Sztuczki Pakowanie) — Udźwig ×2, plakietka w Ekwipunku, blokada duplikatów |
 | `scripts/actors/cichy-krok.mjs` | Cichy krok (Zwiadowca 3) — trudny teren, Skradanie w pancerzu, Ukrywanie bez ciężkiego pancerza |
 | `scripts/actors/class-rules.mjs` | Wieloklasowość — niekumulowanie TT bez pancerza (Goła klata, Tarcza wiary…) i Drugiego/Trzeciego ataku |
+| `scripts/actors/bieglosci.mjs` | Biegłości profesji i klas (M6 E1): ostrzeżenie D1 po awansie, audyt postaci (`game.neuroshima.bieglosci.audyt`), stare klucze umiejętności |
 | `scripts/actors/class-state.mjs` | Zdolności stanowe (Berserk, Kondycha) — AE, czas trwania, przerwania, karta czatu przy każdym zejściu |
 | `scripts/actors/encumbrance-breakdown.mjs` | Pasek udźwigu podzielony na kategorie, legenda, linijka progów RAW (Normalna / Przeciążenie / Unieruchomienie) |
 | `scripts/actors/handy-belt.mjs` | Pas przedmiotów podręcznych w nagłówku karty — widok i gesty (model w `handy-items.mjs`, `PLAN_przedmioty_podreczne_v2.md`) |
@@ -239,6 +253,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/tool-availability.mjs` | Notka „masz zestaw / brak zestawu" na karcie testu narzędzi |
 | `scripts/actors/udzwig-slowdown.mjs` | Przeciążenie / Unieruchomienie — kara Szybkości z Udźwigu |
 | `scripts/combat/bestiary-thresholds.mjs` | Próg obrażeń (`ppanc` go ignoruje), Próg awarii + tabela awarii maszyn, Tchórzliwość |
+| `scripts/config/obiekty-rules.mjs` | Obiekty — czyste tabele (s. 253): TT z materiału, PW z rozmiaru × kruchości, rozmiar z wagi, szablony przegród, mnożnik `burząca`/`karczująca` |
+| `scripts/scenes/obiekty.mjs` | Fizyczność na żądanie (M6 E4): „Ufizycznij” (żeton-licznik na drzwiach, kaflu, rysunku, przedmiocie, punkcie), RO −99, ×2, karta zniszczenia z X, pamięć zniszczeń dla `map-sync`, okno „Zniszczenia” |
 | `scripts/combat/crit-riders.mjs` | Skutki trafień krytycznych istot Bestiariusza (np. Palcożerca) — wykrycie, klik MG |
 | `scripts/combat/pack-tactics.mjs` | Współpraca — Ułatwienie, gdy sojusznik stoi ≤ 1,5 m od celu |
 | `scripts/combat/podpalenie.mjs` | Podpalenie [ZAGROŻENIE] — 1k4 ognia na początku tury, `igniteFor()`, akcja „Ugaś się" (v0.14.5) |
@@ -1180,6 +1196,26 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M6 E0–E8 — biegłości profesji, broń improwizowana, obiekty, latanie, woda (2026-10-27)
+
+Plan: `PLAN_m6_drobne_zasady.md` (§11 — notatki etapów). Bez wydania.
+
+- **E1 — biegłości profesji:** wszystkie 18 profesji nadaje swoje biegłości awansem `Trait` (stałe + wybory), klasy
+  — `primary`/`secondary` (wieloklasowość wg RAW); 12 instrumentów jako narzędzia; ostrzeżenie po awansie, gdy
+  nadanie nic nie dało (D1, sygnał naruszenia), i audyt postaci. Kampania: `HANDOFF_bieglosci_retro.md`.
+- **E2 — `długa`, `ciężka`, `jednorazowa`:** wiersze silnika okoliczności, „Oprzyj broń”, Ułatwienie RO przeciw serii
+  z ciężkiej bez oparcia, LAW zostawia zużytą wyrzutnię w ręce.
+- **E3 — broń improwizowana:** każdy przedmiot w ręce (rodzina lalki `wRece`) bije przez ukrytego bliźniaka (1k4,
+  3/9 m, oburęczny od 2 kg, typ obrażeń do wyboru); kolbą i rękojeścią; „Działa jak…” MG do 1k6; Łyżeczka wg RAW
+  i wyjaśnienia autora systemu — rozłączna z bronią improwizowaną.
+- **E4 — obiekty:** „Ufizycznij” stawia licznik PW i TT na tym, co gracze chcą zniszczyć; RO −99, `burząca` ×2,
+  `karczująca` ×2 w drewno; karta zniszczenia z X i pamięcią dla aktualizacji map; Próg Bestiariusza po odporności.
+- **E5 — latanie:** lotnik spada przy Nieprzytomności i Szybkości 0, Powalony opada bez obrażeń, samo
+  Obezwładnienie go nie strąca.
+- **E6 — woda i wspinaczka:** Region `woda`, testy pływania w walce, Tonie i Pod wodą z oddechem, walka pod wodą
+  (Utrudnienia, połowa obrażeń, zacięcie ≤ 5, Osłona ½ w płytkiej), karta wspinaczki; `docs/Ruch-i-teren.md`.
+  Nowy typ zachowania Regionu — po restarcie serwera Foundry.
 
 ### v0.20.0 — dnd5e 6.0.6 i Foundry 14.369 (2026-10-18)
 
