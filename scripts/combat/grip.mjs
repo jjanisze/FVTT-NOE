@@ -41,7 +41,7 @@ import { WEAPONS } from "../config/weapons-data.mjs";
 import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
-import { zrodloBlizniaka, blizniakPrzedmiotu, FLAGA_ZRODLA } from "../config/improwizacja-rules.mjs";
+import { zrodloBlizniaka, blizniakPrzedmiotu } from "../config/improwizacja-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -211,10 +211,8 @@ function onPreRollAttack(config, dialog) {
     if (exempt) notes.push({ level: "info", text: `Jedną ręką bez Utrudnienia — ${exempt}` });
   }
 
-  // Atak drugą ręką (lekka, s. 117): dozwolony, gdy obie ręce trzymają broń lekką. Przedmiot, któremu Łyżeczka
-  // Kobaltu dała Lekką, liczy się, zanim powstanie jego bliźniak.
-  const otherLight = h.otherItem && (isLightFor(actor, h.otherItem)
-    || h.otherItem.flags?.[MODULE_ID]?.[FLAGA_ZRODLA]?.wlasciwosc === "lgt");
+  // Atak drugą ręką (lekka, s. 117): dozwolony, gdy obie ręce trzymają broń lekką (też bliźniak „działa jak” noża).
+  const otherLight = h.otherItem && isLightFor(actor, h.otherItem);
   const selfLight = isLightFor(actor, item);
   if (selfLight && otherLight) {
     const opts = modeOptions();

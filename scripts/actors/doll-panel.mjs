@@ -131,11 +131,6 @@ function _tile(actor, state, slot) {
   return tile;
 }
 
-function _withExtras(list, extras) {
-  if (!extras.length) return list;
-  return [...extras, ...(list ?? [])];
-}
-
 function _viewModel(actor) {
   const state = dollState(actor);
   const cap = state.layout.capacity;
@@ -151,7 +146,7 @@ function _viewModel(actor) {
     left: LEFT.map(s => _tile(actor, state, s)),
     right: RIGHT.map(s => _tile(actor, state, s)),
     racks,
-    ground: _withExtras(_groundList?.(actor) ?? null, _extras(actor))
+    ground: _groundList?.(actor) ?? null
   };
 }
 
@@ -165,24 +160,6 @@ let _groundList = null;
 /** `ground-items.mjs` podaje listę „Na ziemi obok" i odświeża panele, gdy się zmieni. */
 export function registerGroundList(fn) {
   _groundList = fn;
-}
-
-/**
- * Dodatkowe pozycje listy „Na ziemi obok”, których nie ma na ziemi — przedmiot z otoczenia (Kobalt: Łyżeczka
- * „Zawsze coś pod ręką”, `actors/improwizacja.mjs`). `fn(actor)` → `[{id, name, img, distance, tooltip, label, pick}]`.
- * @type {Set<Function>}
- */
-const _groundExtras = new Set();
-export function registerGroundExtra(fn) {
-  _groundExtras.add(fn);
-}
-
-function _extras(actor) {
-  const out = [];
-  for (const fn of _groundExtras) {
-    try { out.push(...(fn(actor) ?? [])); } catch (err) { console.error(`${MODULE_ID} | ground extra`, err); }
-  }
-  return out;
 }
 
 /* -------------------------------------------- */
@@ -245,7 +222,7 @@ function _groundHtml(list, editable) {
         <img src="${_esc(g.img)}" alt="" inert>
         <span class="neuro-doll-ground-name">${_esc(g.name)}</span>
         <span class="neuro-doll-ground-dist">${_esc(g.distance)}</span>
-        ${editable ? `<button type="button" class="neuro-doll-pick" data-ground-id="${_esc(g.id)}">${_esc(g.label ?? "Podnieś [I]")}</button>` : ""}
+        ${editable ? `<button type="button" class="neuro-doll-pick" data-ground-id="${_esc(g.id)}">Podnieś [I]</button>` : ""}
       </li>`).join("")
     : `<li class="neuro-doll-ground-none">Nic w zasięgu 1,5 m.</li>`;
   return `<section class="neuro-doll-ground">
@@ -630,11 +607,7 @@ function _bindPanel(panel) {
 
   el.addEventListener("click", async ev => {
     const pick = ev.target.closest(".neuro-doll-pick");
-    if (pick) {
-      ev.preventDefault();
-      const extra = _extras(actor()).find(e => e.id === pick.dataset.groundId);
-      return extra ? extra.pick() : _groundPick?.(actor(), pick.dataset.groundId);
-    }
+    if (pick) { ev.preventDefault(); return _groundPick?.(actor(), pick.dataset.groundId); }
     const tile = ev.target.closest(".neuro-doll-slot");
     if (!tile || !actor().isOwner) return;
     ev.preventDefault();

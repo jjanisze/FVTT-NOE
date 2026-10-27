@@ -6,8 +6,8 @@
  *  - throws it: the crowbar lands on the ground at the target, the twin stays and the card still rolls damage;
  *  - a medpak from the belt goes to the same hand and the same twin is re-pointed to it;
  *  - PC Gracz 2 (Gladiator: proficiency in improvised weapons + Łyżeczka) gets PB and the weight table (8 kg → 2k6);
- *    with Kobalt on — reroll of 1s and the property chosen for the item; „Zawsze coś pod ręką” puts an item from the
- *    surroundings in a free hand and the GM vetoes it from the whispered card.
+ *    the two rule sets are exclusive (the author, 2026-10-27): toggled to an ordinary improvised weapon the rim is
+ *    1k4 again, and the GM's „działa jak…” offers melee patterns up to 1k6 only.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -34,7 +34,7 @@ async function przygotuj() {
   const prof = new Set(g2.system.traits.weaponProf.value);
   prof.add("improwizowana");
   await g2.update({ "system.abilities.str.value": 16, "system.traits.weaponProf.value": [...prof] });
-  return { kobalt: game.settings.get(MOD, "kobaltEnabled"), medpak: !!medpak };
+  return { medpak: !!medpak };
 }
 
 /** Player: the item by name into a hand, through the doll's funnel (what „Weź do ręki” does). */
@@ -81,7 +81,7 @@ async function uderz({ name, targetName }) {
         formula: twin.system.damage.base.custom?.formula ?? "", props: [...twin.system.properties].sort(),
         prof: twin.system.proficiencyMultiplier, hand: twin.flags[MOD].improwizacja.reka } : null,
       damage: !!damage, damageTypes: damage?.rolls?.[0]?.options?.types ?? null, onSheet,
-      debug: { usage: !!usage, clicked, dmgDialog, types: game.messages.contents.slice(since).map(m => m.type) }
+      clicked, dmgDialog
     };
   } finally {
     __e2e.restoreDice();
@@ -130,26 +130,23 @@ async function przepnij({ name }) {
     twins: actor.items.filter(i => i.flags?.[MOD]?.improwizacja).length };
 }
 
-/** Player (Kobalt): grab something from the surroundings through the dialog. */
-async function zlap() {
-  const actor = game.user.character;
-  const known = new Set(actor.items.map(i => i.id));
-  const run = game.neuroshima.improwizacja.zlapZOtoczenia(actor);
-  const app = await __e2e.until(() => __e2e.findApps({ title: "Zawsze coś pod ręką", action: "ok" })[0], { message: "the grab dialog" });
-  app.element.querySelector('input[name="n"]').value = "Kij od szczotki";
-  app.element.querySelector('input[name="w"]').value = "1.5";
-  await __e2e.clickDialog({ title: "Zawsze coś pod ręką" }, "ok");
-  await run;
-  const fresh = actor.items.find(i => !known.has(i.id));
-  return { name: fresh?.name ?? null, hand: fresh ? game.neuroshima.lalka.handOf(fresh) : null, uuid: fresh?.uuid ?? null };
+/** Player (Łyżeczka holder): this item as an ordinary improvised weapon — the item menu's toggle. */
+async function zwykla({ name }) {
+  const item = game.user.character.items.getName(name);
+  return game.neuroshima.improwizacja.przelaczLyzeczke(item);
 }
 
-/** GM: veto the grab from the whispered card. */
-async function weto({ uuid }) {
-  const msg = game.messages.contents.findLast(m => m.content.includes(`data-item="${uuid}"`) && m.content.includes("wetoPodReka"));
-  const clicked = msg ? await __e2e.clickChat(msg.id, 'button[data-neuro-improw="wetoPodReka"]') : false;
-  await __e2e.until(() => !fromUuidSync(uuid), { timeoutMs: 6000, message: "the vetoed item gone" }).catch(() => {});
-  return { clicked, gone: !fromUuidSync(uuid) };
+/** GM: „Działa jak…” on a player's item through the dialog; reports the offered patterns. */
+async function dzialaJak({ actorName, name, jak }) {
+  const item = game.actors.getName(actorName).items.getName(name);
+  const title = `Działa jak…: ${name}`;
+  const run = game.neuroshima.improwizacja.dzialaJak(item);
+  const app = await __e2e.until(() => __e2e.findApps({ title, action: "ok" })[0], { message: "the „działa jak…” dialog" });
+  const select = app.element.querySelector('select[name="w"]');
+  const offered = [...select.options].map(o => o.value).filter(Boolean);
+  select.value = jak;
+  await __e2e.clickDialog({ title }, "ok");
+  return { set: await run, offered };
 }
 
 export default {
@@ -160,12 +157,10 @@ export default {
     const p1 = t.client("Gracz 1");
     const p2 = t.client("Gracz 2");
     await t.waitFor(p1, () => Boolean(game.user.character && ui.chat?.element), { message: "Gracz 1 to see the fixture" });
-    let kobalt = false;
 
     await t.step("GM: a crowbar and a medpak for PC Gracz 1, the Gladiator kit for PC Gracz 2", async () => {
       const r = await t.gm.eval(przygotuj);
       t.equal(r.medpak, true, "Medpak in the lekarstwa pack");
-      kobalt = r.kobalt;
       await t.waitFor(p1, () => game.user.character.items.getName("Łom") ? true : null, { message: "the crowbar on Gracz 1" });
     });
 
@@ -181,7 +176,6 @@ export default {
       t.assert(r.twin.props.includes("two") && r.twin.props.includes("thr"), "3 kg → two-handed and throwable (U3)", r.twin);
       t.equal(r.twin.prof, 0, "no PB without improvised-weapon proficiency (s. 253)");
       t.equal(r.onSheet, false, "the twin is not on the sheet");
-      t.log(JSON.stringify(r.debug));
       t.equal(r.damage, true, "damage card from the usage card's button");
       twinId = r.twin.id;
       await t.quiet();
@@ -205,33 +199,37 @@ export default {
       t.assert(/^Medpak/.test(r.name), "twin name", r);
     });
 
-    await t.step("Gracz 2 (Gladiator, Łyżeczka): PB and the weight table — 8 kg → 2k6; Kobalt: r1 and the item's property", async () => {
+    await t.step("Gracz 2 (Gladiator, Łyżeczka): PB and the weight table — 8 kg → 2k6, no house buffs", async () => {
       await t.waitFor(p2, () => game.user.character.items.getName("Felga") ? true : null, { message: "the rim on Gracz 2" });
       await p2.eval(doReki, { name: "Felga" });
-      // The Kobalt property is chosen in a dialog at the first attack — answered up front, as the player would.
-      await p2.eval(async () => {
-        const felga = game.user.character.items.getName("Felga");
-        await felga.setFlag("neuroshima-2026-overrides", "improwizacjaZrodlo", { wlasciwosc: "obalajaca" });
-      });
       const r = await p2.eval(uderz, { name: "Felga", targetName: "CYWIL" });
       t.equal(r.twin?.dice, "2d6", "Łyżeczka weight table");
-      t.equal(r.twin.prof, 1, "proficient (Łyżeczka / Gladiator)");
-      if (kobalt) {
-        t.equal(r.twin.formula, "2d6r1", "Kobalt: reroll 1s once");
-        t.assert(r.twin.props.includes("obalajaca"), "Kobalt: the chosen property on the twin", r.twin);
-      }
+      t.equal(r.twin.formula, "", "plain dice — no reroll, no custom formula");
+      t.equal(r.twin.prof, 1, "proficient (Łyżeczka)");
+      t.assert(/\(łyżeczka\)$/.test(r.twin.name), "twin named for the technique", r.twin);
       await t.quiet();
     });
 
-    if (kobalt) {
-      await t.step("Gracz 2 (Kobalt): „Zawsze coś pod ręką” — an item from the surroundings in the free hand; the GM vetoes it", async () => {
-        const g = await p2.eval(zlap);
-        t.equal(g.name, "Kij od szczotki", "grabbed item");
-        t.assert(String(g.hand).startsWith("hand."), "in a free hand", g);
-        const v = await t.gm.eval(weto, { uuid: g.uuid });
-        t.equal(v.clicked, true, "veto button on the GM's whispered card");
-        t.equal(v.gone, true, "vetoed item removed");
-      });
-    }
+    await t.step("Gracz 2: the same rim as an ordinary improvised weapon — 1k4, two-handed; the Gladiator's PB stays", async () => {
+      t.equal(await p2.eval(zwykla, { name: "Felga" }), true, "toggled to ordinary");
+      const r = await p2.eval(uderz, { name: "Felga", targetName: "CYWIL" });
+      t.equal(r.twin?.dice, "1d4", "RAW improvised damage — not the Łyżeczka table");
+      t.assert(r.twin.props.includes("two"), "8 kg → two-handed (U3)", r.twin);
+      t.equal(r.twin.prof, 1, "proficient through the improvised-weapon proficiency (Gladiator)");
+      t.assert(/\(improwizowana\)$/.test(r.twin.name), "twin name", r.twin);
+      await t.quiet();
+    });
+
+    await t.step("GM: „działa jak…” offers melee patterns up to 1k6 only; the rim as a baseball bat", async () => {
+      const g = await t.gm.eval(dzialaJak, { actorName: "PC Gracz 2", name: "Felga", jak: "bejsbol-rurka" });
+      t.equal(g.set, "bejsbol-rurka", "pattern set");
+      t.assert(g.offered.includes("palka-policyjna") && g.offered.includes("lancuch"), "low-tier patterns offered", g);
+      for (const nie of ["kafar", "crash", "pilomiecz", "katana", "maczeta"]) t.assert(!g.offered.includes(nie), `${nie} not offered`, g);
+      const r = await p2.eval(uderz, { name: "Felga", targetName: "CYWIL" });
+      t.equal(r.twin?.type, "biala", "the pattern's category");
+      t.equal(r.twin.dice, "1d6", "the pattern's die");
+      t.assert(/\(jak /.test(r.twin.name), "twin name", r.twin);
+      await t.quiet();
+    });
   }
 };

@@ -209,12 +209,9 @@ const WEAPON_TYPE_PROPERTIES = {
     "emp",
   ]),
 
-  // Broń improwizowana — bliźniak przedmiotu w ręce: rzucana zawsze (3/9 m, s. 253), reszta tylko z „Działa jak…”
-  // albo z Łyżeczki Kobaltu (właściwość z rodzaju przedmiotu, PLAN_m6 §5.2.1).
-  improwizowana: new Set([
-    "thr", "lgt", "two",
-    "burzaca", "obalajaca", "powalajaca", "unieruchamiajaca",
-  ]),
+  // Broń improwizowana — bliźniak przedmiotu w ręce: rzucana zawsze (3/9 m, s. 253), oburęczna od 2 kg (U3).
+  // „Działa jak…” przestawia bliźniaka na typ `biala` z właściwościami wzorca (PLAN_m6 §5.2.1).
+  improwizowana: new Set(["thr", "two"]),
 };
 
 /** Union of all per-type sets — master validProperties.weapon set. */

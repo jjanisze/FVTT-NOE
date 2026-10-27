@@ -2,7 +2,7 @@
 
 > Status: **W REALIZACJI** (od 2026-10-26). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia U1–U24 przeszły
 > weto MG 2026-10-26 (kolumna „Decyzja MG” w §6, poprawki w §5); P1–P8 rozstrzygnięte tego samego dnia (§7); Łyżeczka
-> WKK zaprojektowana z MG (§5.2.1). Spiki E0 — §11. Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał
+> — RAW z wyjaśnieniem autora NOE, wariant WKK wycofany (§5.2.1, 2026-10-27). Spiki E0 — §11. Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał
 > „S każda”; urosło o improwizację z dowolnego przedmiotu w ręce (D6), fizyczność obiektów na żądanie (D5) i Regiony
 > wody (D9). **Przeniesione 2026-10-25 (MG):** wierzchowce (D7, D10) → `PLAN_m4_pojazdy.md` §6.3, część 3 — ten sam
 > kod co pojazdy i niedokończona logika M4 (Inicjatywa za kierowcą, budżet ruchu nośnika); skok → `HANDOFF_movement_hotbar.md`
@@ -72,7 +72,8 @@ oznaczamy, nie blokujemy.
 - **Broń improwizowana** (s. 253): każdy przedmiot użyty jako broń, także broń biała i palna użyta niezgodnie z
   przeznaczeniem (kolba, rękojeść); bez PB w Teście Ataku; 1k4 obrażeń typu wg MG; rzut 3/9 m; MG może uznać, że
   działa jak podobna broń biała. Łyżeczka (Gladiator): biegłość, rzut do 6 m, maks. waga = SIŁ kg, kość i chwyt z
-  wagi, naturalna 1 — przedmiot pęka na dwie części.
+  wagi, naturalna 1 — przedmiot pęka na dwie części. Tabela wagi i maks. SIŁ są **tylko** dla posiadacza Łyżeczki
+  (autor NOE, 2026-10-27 — §5.2.1).
 - **Właściwości broni** (s. 117–118): `długa` — Utrudnienie do celu ≤ 3 m, chyba że ma Szybkość 0; `ciężka` — bez
   dwójnogu/trójnogu albo SIŁ 15+ Utrudnienie, a cele mają Ułatwienie do RO przeciw serii; `jednorazowa` — jeden
   strzał, bez ponownego ładowania; `burząca` — ×2 obiektom; `karczująca` — ×2 (cięte) roślinom i drewnu. Kolba
@@ -223,7 +224,8 @@ już być bronią.
 1. **Lalka — nowa rodzina `wRece`** (jawna, nie zgadywana): każdy przedmiot fizyczny (`weight > 0`, typy `loot`,
    `tool`, `consumable`, `equipment` bez rodziny, `container` do P2) można **wziąć do ręki** akcją z Oporządzenia
    i menu przedmiotu — tym samym lejkiem (`game.neuroshima.lalka.place`), z tymi samymi kosztami ruchu. Chwyt
-   (U3, MG): **poniżej 2 kg jednoręczny, od 2 kg oburęczny**; maks. waga do walki = SIŁ kg (cięższe — oznaczone, MG).
+   (U3, MG): **poniżej 2 kg jednoręczny, od 2 kg oburęczny**. Maks. waga = SIŁ kg to zasada Łyżeczki — zwykłej broni
+   improwizowanej nie dotyczy (§5.2.1).
 2. **Bliźniak.** Przy **pierwszym ataku improwizowanym z danej ręki** (nie przy samym wzięciu do ręki — mniej zapisów,
    bliźniak tylko dla tego, czym ktoś naprawdę bije) lejek **tworzy na aktorze ukrytą broń** z flagą
    `improwizacja: {zrodlo: itemId, reka}`: nazwa „<przedmiot> (improwizowana)”, ikona przedmiotu, typ
@@ -240,12 +242,13 @@ już być bronią.
    katalogu `obrazeniaImprowizowane` (ostre: nóż w zestawie, szkło, piła — cięte; szpikulec, śrubokręt — kłute),
    inaczej obuchowe. Selektor typu w oknie obrażeń (wzorzec kart `class-resource-dice.mjs`); MG poprawia, gracz proponuje.
 6. **„Działa jak…”** (s. 253): MG na bliźniaku wybiera broń białą z katalogu — bliźniak kopiuje jej kość, właściwości
-   i kategorię (wtedy biegłość w tej kategorii się liczy). Noga od stołu = bejsbol.
+   i kategorię (wtedy biegłość w tej kategorii się liczy). Noga od stołu = bejsbol. **Tylko wzorce do 1k6**, bez broni z
+   silnikiem i zasilaniem, i tylko dla przedmiotu, który szczególnie przypomina broń (autor NOE — §5.2.1).
 7. **Rzut.** Po rzucie źródło ląduje na ziemi ścieżką upuszczania (`actors/ground-items.mjs`); bliźniak zostaje
    (pkt 2); `powracajaca` nie dotyczy.
 8. **Łyżeczka (Gladiator):** ten sam bliźniak, liczby z tabeli wagi (kość, chwyt), maks. waga = SIŁ kg, naturalna 1 →
-   przedmiot dzielony na dwa o połowie wagi. Czysta funkcja `improwizacjaZ(item, opcje)` z tabelą w danych. Wariant
-   Kobaltu — §5.2.1.
+   przedmiot dzielony na dwa o połowie wagi. Czysta funkcja `improwizacjaZ(item, opcje)` z tabelą w danych. Zasady
+   Łyżeczki i broni improwizowanej są rozłączne — §5.2.1.
 9. **Ukrycie wszędzie:** karta (ekwipunek, Oporządzenie), udźwig, handel, stół wymiany, szabrowanie, rozbiórka,
    eksport postaci, `validate-packs` (żaden bliźniak w paczkach), audyt ekwipunku.
 
@@ -260,29 +263,36 @@ każdego widoku; karta dnd5e 6 ma hak `dnd5e.filterItem` — `false` chowa przed
 uprawnienia gracza do tworzenia przedmiotów na własnym aktorze (są), kopiowanie aktora (bliźniak jedzie z nim —
 nieszkodliwy, ukryty i bez wagi; przepina go pierwszy atak).
 
-#### 5.2.1 Łyżeczka — wariant Kobaltu (WKK, MG 2026-10-26)
+#### 5.2.1 Łyżeczka — RAW z wyjaśnieniem autora NOE (2026-10-27); wariant Kobaltu wycofany
 
-**Diagnoza.** RAW (s. 69–70): biegłość w „łyżeczce” — zbędna, bo profesja Gladiatora już daje biegłość w broni
-improwizowanej; rzut do 6 m — ledwie lepiej niż 3/9 m; jedyny realny zysk to tabela wagi (1k6 do 5 kg, 2k6/3k6/4k6
-oburęcznie do 20 kg, zamiast 1k4). **Odrzucone (MG):** Specjalizacja w broni (PB ×2 w Teście Ataku) — rozbija wąskie
-pasmo TT na wyższych poziomach („Gladiator zestruga Juggernauta łyżeczką”); D&D nie ma eksperckiej biegłości w broni z
-tego powodu. Kierunek MG: *weapon master*, *tavern brawler* — dopiski przy trafieniu i w ekonomii akcji, nie premia do
-trafienia.
+**Pierwsza diagnoza była błędna.** 2026-10-26 uznaliśmy, że Łyżeczka (s. 69–70) nic nie daje: biegłość zbędna (ma ją
+już Gladiator), rzut do 6 m ledwie lepszy niż 3/9 m — i z MG zaprojektowaliśmy wariant Kobaltu (przedmiot z otoczenia,
+rzut 6/18 m, właściwość z rodzaju, przerzut jedynek). Specjalizację w broni MG odrzucił wcześniej: rozbija wąskie pasmo
+TT na wyższych poziomach. Błąd: tabela wagi ze strony 70 nie jest tabelą broni improwizowanej w ogóle.
 
-**Kobalt (za przełącznikiem, `scripts/wkk/`), na RAW-owej tabeli wagi:**
+**Wyjaśnienie autora NOE (przekazane przez MG, 2026-10-27):**
 
-| Dopisek | Działanie |
-|---|---|
-| **Zawsze coś pod ręką** | Raz na turę, Darmowa Interakcja: łapiesz przedmiot z otoczenia, którego nie masz w ekwipunku — wybierasz klasę wagi do SIŁ kg (i nazwę). MG może zawetować na pustej scenie (karta z przyciskiem). Bliźniak bez źródła (`zrodlo: null`, `zOtoczenia: true`); naturalna 1 — przedmiot pęka, jak w RAW |
-| **Dalszy rzut** | Rzut łyżeczką 6/18 m (normalny/daleki) zamiast płaskich 6 m; tabela wagi działa także dla rzutu |
-| **Właściwość z rodzaju** (*weapon master*) | RAW: „kość i typ obrażeń zależne są od wagi i **rodzaju** przedmiotu (ustal to z MG)”. Gdy łyżeczka trafia do ręki, gracz wybiera **jedną** właściwość NOE, do której pasuje rodzaj przedmiotu; lista bramkowana wagą: ≤ 5 kg Lekka · Obalająca · Unieruchamiająca; 6–11 kg Obalająca · Powalająca · Unieruchamiająca; 12–17 i 18–20 kg Powalająca · Burząca. MG może zawetować na karcie. Same istniejące właściwości z istniejącą automatyką (`combat/obalajaca.mjs`, `wkk/combat/weapon-save-properties.mjs`, §5.4 dla Burzącej) |
-| **Przerzut jedynek** (*tavern brawler*) | Kości obrażeń łyżeczki, które wypadną 1, przerzucasz raz — modyfikator kości rdzenia `r1` (`3d6r1`; `rr` przerzucałby do skutku) |
+1. **Tabela wagi (1k6 … 4k6) jest tylko dla posiadacza Łyżeczki.** Zwykła broń improwizowana to 1k4; MG może dać jej
+   najwyżej liczby niskiej albo średniej broni białej (pałka, gazrurka) — nic, co daje 1k8 i więcej. Łyżeczka już robi z
+   przedmiotu najmocniejszą broń wręcz w grze, więc **wszystkie wzmocnienia Kobaltu znikają** (kod usunięty, nie
+   wyłączony).
+2. **„Działa jak…” ma pułap:** odpowiednik broni białej tylko z dolnej i środkowej półki (do 1k6) — nie Kafar, nie Crash,
+   nie Piłomiecz — i tylko dla przedmiotu, który szczególnie przypomina broń (to ocena MG; opcja jest w menu MG).
+3. **Zasady Łyżeczki i broni improwizowanej są rozłączne.** Atak przedmiotem idzie jedną z dwóch dróg, nigdy mieszanką:
+   tabela Łyżeczki z jej maks. wagą = SIŁ i pękaniem przy naturalnej 1 **albo** reguły broni improwizowanej (1k4, chwyt
+   U3, „działa jak…”, biegłość z profesji).
 
-Przykłady: wąż ogrodowy 3 kg — Unieruchamiająca; hydrant 18 kg — Burząca; felga 8 kg — Powalająca; dwa medpaki po
-0,5 kg — Lekka (drugi atak w [B]).
+**Wykonanie.** `technikaLyzeczki(actor, przedmiot)` — posiadacz Łyżeczki, przedmiot bez „działa jak…” i bez przełącznika
+`zwykla`. Bliźniak Łyżeczki: kość i chwyt z tabeli, biegłość, rzut 6 m, nazwa „(łyżeczka)”, sygnał ponad SIŁ, karta
+pęknięcia przy 1. Bliźniak improwizowany: 1k4, `two` od 2 kg, natywna biegłość dnd5e (`improwizowana` — Gladiator),
+bez limitu SIŁ i bez pękania. Posiadacz Łyżeczki przełącza przedmiot menu „Łyżeczka: atakuj tym jak zwykłą bronią
+improwizowaną” — np. medpak, którego nie chce rozłupać przy jedynce. „Działa jak…” zawsze wyłącza Łyżeczkę dla tego
+przedmiotu. Pułap: `dozwolonyOdpowiednik` (`config/improwizacja-rules.mjs`) — broń biała, kość wzorca najwyżej 6,
+bez `spalinowa` i `zasilana`: bat, bejsbol/rurka, kastet, laska, łańcuch, nóż taktyczny, oszczep, siekierka,
+maczuga, pałka policyjna, kamienny nóż, sztylet, młotek. Wzorzec spoza listy zapisany wcześniej we fladze bliźniak
+pomija.
 
-Bez zmian w RAW: biegłość (zbędna, zostaje), maks. waga = SIŁ, naturalna 1 → dwie połówki. Plakietka pokrycia w M7
-(`PLAN_m7_zdolnosci.md` §3, Łyżeczka) wskazuje ten akapit.
+Plakietka pokrycia w M7 (`PLAN_m7_zdolnosci.md` §3, Łyżeczka) wskazuje ten akapit.
 
 ### 5.3 Właściwości broni: `długa`, `ciężka`, `jednorazowa`
 
@@ -419,7 +429,8 @@ grzbietu, katalog `kon`, spike, etapy) — **`PLAN_m4_pojazdy.md` §6.3, częś�
 ## 6. Ustalenia projektu — po wecie MG (2026-10-26)
 
 Kolumna „Decyzja MG” jest wpisana przez MG; tam, gdzie zmienia projekt, poprawka stoi w §5 (U2 — §5.1, U3 i U5 —
-§5.2, U11 — §5.4, U14 i U15 — §5.6, U22 — §5.1).
+§5.2, U11 — §5.4, U14 i U15 — §5.6, U22 — §5.1). U3 po wyjaśnieniu autora NOE (2026-10-27): maks. waga = SIŁ kg i
+tabela wagi zostają przy Łyżeczce, nie przy każdej broni improwizowanej (§5.2.1).
 
 | # | Ustalenie | Warstwa | Decyzja MG | 
 |---|---|---|---|
@@ -495,7 +506,7 @@ Kolejność: E1 najpierw (dziura B6), potem od najtańszych. Wierzchowce (dawne 
 | **E0** | Spiki: (a) `Trait` `upgrade` na subklasie + ostrzeżenie w `preAdvancementManagerComplete`; (b) przedmioty bazowe narzędzi → natywne kategorie; (c) bliźniak w lejku lalki u gracza (tworzenie, ukrycie, kasowanie, kopia aktora); (e) `_isFalling`/`plummet` — podklasa czy opakowanie, sceny bez powierzchni (Z13); (f) Region wody: `TOKEN_TURN_START` u właściwego klienta. ~~(d)~~ — W0 w M4 | S | — | Notatka tak/nie per spike w §11; korekta planu |
 | **E1** | Biegłości profesji (§5.1): dane 18 profesji, instrumenty (droga z E0b), Cwaniak/Kowboj/Muzyk, `weapon:improwizowana`, `armor:hvy`, ostrzeżenie D1, biegłości wieloklasowe (Z14, Z15), `validate-packs`, e2e `postac` do 3. poziomu, `bieglosci.audyt()`. Na koniec: **`HANDOFF_bieglosci_retro.md`** dla LLM (D4) — lista postaci, wynik audytu, zasady uzupełniania, co pytać MG | M | E0a, E0b | Postać od zera ma komplet; audyt zwraca braki BG kampanii i pregenów |
 | **E2** | Właściwości broni (§5.3): `długa`, `ciężka` (+ RO serii), `jednorazowa` → zużyta wyrzutnia | S–M | — | Testy warstwy 1 wierszy; e2e `combat` krok LAW |
-| **E3** | Improwizacja (§5.2): rodzina `wRece`, bliźniak, kolba, „Działa jak…”, rzut na ziemię, ukrycie wszędzie, Łyżeczka (liczby RAW + wariant Kobaltu, §5.2.1) | M–L | E0c, E1 (biegłość) | e2e `improwizacja` (gracz bije medpakiem, rzuca łomem, Gladiator z PB); stanowisko Poligonu |
+| **E3** | Improwizacja (§5.2): rodzina `wRece`, bliźniak, kolba, „Działa jak…”, rzut na ziemię, ukrycie wszędzie, Łyżeczka (RAW, rozłączna z bronią improwizowaną, §5.2.1) | M–L | E0c, E1 (biegłość) | e2e `improwizacja` (gracz bije medpakiem, rzuca łomem, Gladiator z PB); stanowisko Poligonu |
 | **E4** | Obiekty (§5.4): aktor bazowy, okno z tabelami, Ufizycznij z kotwicami, auto-porażka RO (inwentarz ścieżek), ×2, zniszczenie z kartą, X, pamięć zniszczeń w `map-sync`, przycisk „Zniszczenia” (U11), kolejność Progu Bestiariusza po odporności (§7, P7) | M–L | — | e2e `obiekt` (drzwi z eksportu: strzał, granat, `burząca`, otwarcie); stanowisko Poligonu |
 | **E5** | Latanie (§5.5) | S | E0e | Testy warstwy 2: lotnik Nieprzytomny/Pochwycony spada z kartą, Powalony opada bez |
 | **E6** | Woda i wspinaczka (§5.6) + eksporter map (repo Map) + karta referencyjna | M | E0f | e2e `woda` na scenie z Regionem; Zasadzka/Arena przeeksportowane |
@@ -594,21 +605,24 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   zawartości pojemników) i przedmiot podręczny także w ręce; obie **nie** rządzą `equipped` ani bramką użycia (medpak z
   plecaka dalej się „Zażywa”). `migrateDoll` pomija rodziny bez `equipped`.
 - **Bliźniak** (`actors/improwizacja.mjs`, zasady `config/improwizacja-rules.mjs`): leniwy, jeden na rękę, przepinany
-  w miejscu; 1k4 + typy do wyboru w oknie obrażeń (natywny wybór dnd5e przy kilku typach), rzut 3/9 m, `two` od 2 kg,
-  maks. SIŁ kg — sygnał. Kolbą/rękojeścią — źródłem broń. „Działa jak…” (MG, menu przedmiotu) — kość, typy, właściwości
-  i kategoria broni białej z katalogu. Rzut — źródło na ziemię u celu, bliźniak zostaje (`weapons/thrown.mjs` go
+  w miejscu; 1k4 + typy do wyboru w oknie obrażeń (natywny wybór dnd5e przy kilku typach), rzut 3/9 m, `two` od 2 kg.
+  Kolbą/rękojeścią — źródłem broń. „Działa jak…” (MG, menu przedmiotu) — kość, typy, właściwości i kategoria broni
+  białej z katalogu, tylko wzorce do 1k6 (§5.2.1). Rzut — źródło na ziemię u celu, bliźniak zostaje (`weapons/thrown.mjs` go
   pomija). Wejścia: menu przedmiotu („Weź do ręki”, „Atak improwizowany”, „Uderz kolbą / rękojeścią”), menu kafelka
   ręki, klik w kafelek przedmiotu bez własnego użycia.
-- **Łyżeczka:** tabela wagi + biegłość + 6 m (RAW); naturalna 1 — karta z przyciskiem „Rozpada się na dwie części”
-  (nie automat — Fuks może jedynkę zmienić). **Kobalt** (`wkk/config/lyzeczka-kobalt.mjs`): rzut 6/18 m, `r1` w kości,
-  właściwość z rodzaju (wybór przy pierwszym ataku, karta MG z wetem, zmiana z menu), „Zawsze coś pod ręką” — pozycja
-  „Coś z otoczenia” na liście „Na ziemi obok” (raz na turę w walce, wolna ręka; prawdziwy przedmiot, MG wetuje kartą).
+- **Łyżeczka:** tabela wagi + biegłość + 6 m + maks. SIŁ kg — sygnał (RAW); naturalna 1 — karta z przyciskiem
+  „Rozpada się na dwie części” (nie automat — Fuks może jedynkę zmienić). **Korekta tego samego dnia** (wyjaśnienie
+  autora NOE, §5.2.1): wariant Kobaltu z pierwszego commitu E3 (rzut 6/18 m, `r1`, właściwość z rodzaju, „Zawsze coś pod
+  ręką”) usunięty razem z `wkk/config/lyzeczka-kobalt.mjs` i rejestrem dodatkowych pozycji „Na ziemi obok”; Łyżeczka i
+  broń improwizowana rozłączne (`technikaLyzeczki`, przełącznik `zwykla` w menu), pułap „działa jak…” do 1k6.
 - **Ukrycie:** `BaseActorSheet#_isItemVisible` (karta nie buduje wiersza) — **nie** `Actor5e#hiddenItems`, bo ukryty
   tak przedmiot dnd5e uznaje za nieużywalny (`Item5e#canUse`); walidacja użycia (`config/validation.mjs`) przepuszcza
   bliźniaka bez `equipped`; lista broni w oknie ulepszeń i stół wymiany go pomijają; audyt broni nie dopasuje nazwy.
-  Chwyt (`combat/grip.mjs`): bliźniak trzyma się ręką źródła, druga ręka — jej bliźniak albo Lekka z Kobaltu
-  (atak drugą ręką dwiema łyżeczkami).
-- **Testy:** Quench `improwizacja` 15 (liczby, tabela, Kobalt, lalka, dane bliźniaka, ukrycie), `lalka` 60 bez zmian;
-  e2e `improwizacja` (łom: atak z menu, okno, ukryty bliźniak, obrażenia z karty; rzut na ziemię; medpak z pasa — ten sam
-  bliźniak; Gladiator z PB, 2k6, Kobalt `r1` i Obalająca; „Zawsze coś pod ręką” z wetem MG) — zielone; regresja
+  Chwyt (`combat/grip.mjs`): bliźniak trzyma się ręką źródła, druga ręka — jej bliźniak (atak drugą ręką dwoma
+  bliźniakami „jak” broni lekkiej).
+- **Testy:** Quench `improwizacja` 15 (liczby, pułap odpowiednika, tabela i SIŁ tylko dla Łyżeczki, lalka, dane
+  bliźniaka z rozłącznością: tabela → „jak” bejsbol 1k6 → „jak” Kafar pominięty → `zwykla` 1k4 bez PB; ukrycie), `lalka`
+  60 bez zmian; e2e `improwizacja` (łom: atak z menu, okno, ukryty bliźniak, obrażenia z karty; rzut na ziemię; medpak z
+  pasa — ten sam bliźniak; Gladiator: Łyżeczka 2k6 z PB bez dopisków → ta sama felga jako zwykła 1k4 z PB Gladiatora →
+  MG „działa jak…” z listą bez Kafara, Crasha, Piłomiecza, Katany, Maczety, felga jak bejsbol 1k6) — zielone; regresja
   `combat`, `postac`, pełny Quench 1316/1317 (jak wyżej). Stanowisko Poligonu — wspólne „Arena” w E6/E8.

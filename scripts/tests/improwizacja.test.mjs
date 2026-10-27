@@ -2,17 +2,15 @@
  * Neuroshima 5e — broń improwizowana (PLAN_m6_drobne_zasady.md §5.2, §5.2.1, E3).
  *
  * Warstwa 1: liczby bliźniaka (`config/improwizacja-rules.mjs`) — RAW 1k4 i 3/9 m, chwyt od 2 kg (U3), typ obrażeń
- * (U5), tabela Łyżeczki, maks. waga = SIŁ, połowy; Kobalt (`wkk/config/lyzeczka-kobalt.mjs`) — rzut 6/18, przerzut
- * jedynek, właściwość z rodzaju. Warstwa 4: lalka — rodzina `wRece`, przedmiot podręczny w ręce, `equipped` nietknięty.
- * Warstwa 2: dane bliźniaka na aktorze testowym (biegłość Łyżeczki, „działa jak…”), ukrycie w karcie.
+ * (U5), odpowiednik broni białej do 1k6 (autor), tabela Łyżeczki z maks. wagą = SIŁ tylko dla łyżeczki (zasady
+ * rozłączne), połowy. Warstwa 4: lalka — rodzina `wRece`, przedmiot podręczny w ręce, `equipped` nietknięty.
+ * Warstwa 2: dane bliźniaka na aktorze testowym (Łyżeczka albo zwykła improwizowana, „działa jak…”), ukrycie w karcie.
  */
 
 import {
-  improwizacjaZ, wierszLyzeczki, typyObrazen, polowaWagi, jestBlizniakiem, LYZECZKA_ZASIEG, IMPROWIZOWANA
+  improwizacjaZ, wierszLyzeczki, typyObrazen, polowaWagi, jestBlizniakiem, dozwolonyOdpowiednik, LYZECZKA_ZASIEG
 } from "../config/improwizacja-rules.mjs";
-import {
-  LYZECZKA_ZASIEG_KOBALT, koscLyzeczkiKobalt, wlasciwoscDozwolona, WLASCIWOSCI_LYZECZKI
-} from "../wkk/config/lyzeczka-kobalt.mjs";
+import { WEAPONS } from "../config/weapons-data.mjs";
 import { classifyItem, governsEquipped, accepts, resolve } from "../actors/doll-model.mjs";
 import { daneBlizniaka, doReki, AKTYWNOSC_ATAKU } from "../actors/improwizacja.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
@@ -38,14 +36,24 @@ export function registerImprowizacjaTests(quench) {
         expect(typyObrazen()).to.deep.equal(["bludgeoning", "slashing", "piercing"]);
         expect(typyObrazen("fire"), "spoza listy — obuchowe").to.deep.equal(["bludgeoning", "slashing", "piercing"]);
       });
-      it("ponad SIŁ kg — oznaczone, nie zablokowane", function () {
-        expect(improwizacjaZ({ waga: 13 }, { sila: 12 }).ponadSile).to.equal(true);
-        expect(improwizacjaZ({ waga: 12 }, { sila: 12 }).ponadSile).to.equal(false);
-        expect(improwizacjaZ({ waga: 13 }).ponadSile, "bez SIŁ — nie wiadomo").to.equal(false);
+      it("odpowiednik broni białej: tylko do 1k6, bez silnika i zasilania (autor, 2026-10-27)", function () {
+        const id = w => w.id;
+        const dozwolone = WEAPONS.filter(dozwolonyOdpowiednik).map(id);
+        expect(dozwolone).to.include("bejsbol-rurka").and.include("palka-policyjna").and.include("lancuch");
+        for (const nie of ["kafar", "crash", "pilomiecz", "pila-spalinowa", "katana", "maczeta", "widly", "szoker"]) {
+          expect(dozwolone, nie).to.not.include(nie);
+        }
+        expect(dozwolonyOdpowiednik({ type: "palnaKrotka", damage: { number: 1, denomination: 4 } }), "tylko biała").to.equal(false);
       });
     });
 
-    describe("Łyżeczka (s. 70) i Kobalt (§5.2.1)", function () {
+    describe("Łyżeczka (s. 70) — zasady rozłączne z bronią improwizowaną", function () {
+      it("maks. waga = SIŁ to zasada łyżeczki — zwykła improwizowana jej nie zna", function () {
+        expect(improwizacjaZ({ waga: 13 }, { lyzeczka: true, sila: 12 }).ponadSile).to.equal(true);
+        expect(improwizacjaZ({ waga: 12 }, { lyzeczka: true, sila: 12 }).ponadSile).to.equal(false);
+        expect(improwizacjaZ({ waga: 13 }, { lyzeczka: true }).ponadSile, "bez SIŁ — nie wiadomo").to.equal(false);
+        expect(improwizacjaZ({ waga: 13 }, { sila: 12 }).ponadSile, "zwykła improwizowana").to.equal(false);
+      });
       it("tabela wagi: 1k6/1 ręka do 5 kg, 2k6, 3k6, 4k6 oburęcznie", function () {
         const k = w => improwizacjaZ({ waga: w }, { lyzeczka: true });
         expect([k(5).kosc, k(5).chwyt]).to.deep.equal([{ number: 1, faces: 6 }, 1]);
@@ -55,23 +63,12 @@ export function registerImprowizacjaTests(quench) {
         expect(k(18).kosc.number).to.equal(4);
         expect(wierszLyzeczki(40), "ponad tabelę — ostatni wiersz").to.equal(3);
       });
-      it("rzut: RAW 6 m bez dalekiego, Kobalt 6/18 m", function () {
+      it("rzut łyżeczką do 6 m, bez dalekiego", function () {
         expect(improwizacjaZ({ waga: 1 }, { lyzeczka: true }).zasieg).to.deep.equal(LYZECZKA_ZASIEG);
-        expect(improwizacjaZ({ waga: 1 }, { lyzeczka: true, zasiegLyzeczki: LYZECZKA_ZASIEG_KOBALT }).zasieg)
-          .to.deep.equal({ value: 6, long: 18 });
       });
       it("naturalna 1: dwie równe części", function () {
         expect(polowaWagi(5)).to.equal(2.5);
         expect(polowaWagi(0.1)).to.equal(0.05);
-      });
-      it("Kobalt: przerzut jedynek raz (r1), właściwość tylko z listy wagi", function () {
-        expect(koscLyzeczkiKobalt({ number: 3, faces: 6 })).to.equal("3d6r1");
-        expect(wlasciwoscDozwolona(0, "lgt")).to.equal(true);
-        expect(wlasciwoscDozwolona(2, "lgt"), "12–17 kg nie bywa Lekka").to.equal(false);
-        expect(wlasciwoscDozwolona(3, "burzaca")).to.equal(true);
-        for (const lista of WLASCIWOSCI_LYZECZKI) for (const k of lista) {
-          expect(CONFIG.DND5E.itemProperties, k).to.have.property(k);
-        }
       });
     });
 
@@ -125,18 +122,32 @@ export function registerImprowizacjaTests(quench) {
         expect(jestBlizniakiem(d)).to.equal(true);
       });
 
-      it("Łyżeczka: tabela wagi i biegłość; „działa jak…” — kategoria i kość wzorca", async function () {
+      it("Łyżeczka: tabela wagi i biegłość; „działa jak…” i tryb zwykły ją wyłączają (zasady rozłączne)", async function () {
         const actor = await scratchActor({ type: "character", system: { abilities: { str: { value: 16 } } } });
         const lyzeczka = (await game.packs.get(`${MODULE_ID}.zdolnosci-klasowe`).getDocuments()).find(i => i.getFlag(MODULE_ID, "abilityId") === "lyzeczka");
         await actor.createEmbeddedDocuments("Item", [game.items.fromCompendium(lyzeczka)]);
         const [felga] = await actor.createEmbeddedDocuments("Item", [{ name: "Felga", type: "loot", system: { weight: { value: 8 } } }]);
-        const d = daneBlizniaka(actor, felga, "hand.1");
+        const dane = () => daneBlizniaka(actor, actor.items.get(felga.id), "hand.1");
+        const d = dane();
         expect(d.system.damage.base).to.deep.include({ number: 2, denomination: 6 });
         expect(d.system.proficient).to.equal(1);
+        expect(d.flags[MODULE_ID].improwizacja.lyzeczka).to.equal(true);
+
         await felga.setFlag(MODULE_ID, "improwizacjaZrodlo", { jak: "bejsbol-rurka" });
-        const j = daneBlizniaka(actor, actor.items.get(felga.id), "hand.1");
+        const j = dane();
         expect(j.system.type.value).to.equal("biala");
         expect(j.name).to.match(/jak /);
+        expect(j.system.damage.base).to.deep.include({ number: 1, denomination: 6 });
+        expect(j.flags[MODULE_ID].improwizacja.lyzeczka, "„działa jak…” to nie łyżeczka").to.equal(false);
+
+        await felga.setFlag(MODULE_ID, "improwizacjaZrodlo", { jak: "kafar" });
+        expect(dane().system.damage.base, "wzorzec ponad 1k6 pominięty — wraca tabela").to.deep.include({ number: 2, denomination: 6 });
+
+        await felga.setFlag(MODULE_ID, "improwizacjaZrodlo", { jak: null, zwykla: true });
+        const z = dane();
+        expect(z.system.damage.base).to.deep.include({ number: 1, denomination: 4 });
+        expect(z.system.proficient, "bez Gladiatora — bez PB").to.equal(null);
+        expect(z.flags[MODULE_ID].improwizacja.lyzeczka).to.equal(false);
       });
 
       it("karta postaci nie pokazuje bliźniaka (`dnd5e.filterItem`)", async function () {
