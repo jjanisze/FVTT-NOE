@@ -1,9 +1,11 @@
 /**
  * Neuroshima 5e — Spadanie [ZAGROŻENIE].
  *
- * dnd5e 5.3 shipped a `falling` status icon and nothing else. dnd5e 6.0 detects falls on scenes with surfaces and
- * deals them through a damage card (`config/spadanie.mjs` gives it NOE's numbers; `onFallDamage` below adds
- * Osteoporoza). This tool stays for every other fall — most scenes have no surfaces — and for falls into liquid:
+ * dnd5e 5.3 shipped a `falling` status icon and nothing else. dnd5e 6.0 detects a token left above a lower surface —
+ * on a scene without movement surfaces, above the base of its level — and deals the fall through a damage card
+ * (`config/spadanie.mjs` gives it NOE's numbers; `onFallDamage` below adds Osteoporoza; fliers: `actors/latanie.mjs`).
+ * This tool stays for falls the canvas cannot see — a drop painted on the map, a height from the story — and for falls
+ * into liquid:
  *
  *   - 1k6 obrażeń obuchowych za każde 1,5 metra wysokości,
  *   - stan Powalenie po uderzeniu o podłoże, chyba że obrażenia wyniosły 0,

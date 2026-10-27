@@ -25,6 +25,7 @@ import { registerTerminology } from "./config/terminology.mjs";
 import { removeSpellcasting } from "./config/spellcasting.mjs";
 import { registerConditions } from "./config/conditions.mjs";
 import { registerSpadanie } from "./config/spadanie.mjs";
+import { registerLatanie, latanieApi } from "./actors/latanie.mjs";
 import { registerStateColors } from "./config/state-colors.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
 import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
@@ -253,6 +254,8 @@ Hooks.once("init", () => {
   // exhaustion.mjs then tunes the entry it leaves behind.
   registerConditions();
   registerSpadanie();
+  // Latanie (PLAN_m6 §5.5) — NOE: Powalony lotnik opada bez obrażeń, samo Obezwładnienie nie strąca.
+  registerLatanie();
   // Przed pierwszym renderem czegokolwiek, bo arkusz czyta te zmienne bez wartosci zapasowych.
   registerStateColors();
   registerExhaustion();
@@ -582,6 +585,8 @@ Hooks.once("ready", () => {
   // Zagrożenia (PLAN_m1_walka E7) — .okno() (narzędzie MG), .wstrzymajOddech(actor), .stanOddechu(actor)
   game.neuroshima.zagrozenia = zagrozeniaApi;
   game.neuroshima.falling = fallingApi;
+  // Latanie (PLAN_m6 §5.5) — game.neuroshima.latanie.stanLotnika(actor)
+  game.neuroshima.latanie = latanieApi;
 
   // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.
   // `.get/.set/.adjust` cover all three tracks, whoever owns the store.

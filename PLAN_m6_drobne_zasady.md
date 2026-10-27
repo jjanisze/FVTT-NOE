@@ -660,3 +660,23 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   „kruchy” → [Usuń rysunek], bez pamięci) — zielone; regresja e2e `combat`, `umieranie`, `improwizacja`; pełny Quench
   1327/1329 (porażki spoza M6: `poscig` motyw `zima` z HEAD i obrys wozu strażackiego z niezacommitowanych danych
   pojazdów). Granat na obiekcie — ta sama auto-porażka RO, bez osobnego kroku e2e. Stanowisko Poligonu — „Arena” w E6/E8.
+
+### E5 — latanie (2026-10-27)
+
+- **Reguła** (`actors/latanie.mjs`, `spadanieLotnika`): lotnik spada z obrażeniami przy Nieprzytomności (i śmierci)
+  albo Szybkości 0 — warunek dnd5e `noMovement` (Pochwycenie, Sparaliżowanie, Unieruchomienie, Wyłączenie drona,
+  Udźwig maksymalny — tabela z `config/conditions.mjs`) albo lot zbity karami do 0; przy samym Powaleniu opada bez
+  obrażeń; samo Obezwładnienie i Ogłuszenie go nie strącają.
+- **Znalezisko:** dnd5e zeruje pochodny lot przy Powaleniu (`crawl`) i każdym `noMovement`, więc „czy to lotnik”
+  czytamy przed stanami — z nadpisań efektów (`actor.overrides`, lot z plecaka na efekcie też się liczy) albo ze
+  źródła. Unoszenie się (`hover`) i niewrażliwość na Spadanie zostają jak w dnd5e.
+- **Opakowania** (prototyp `TokenDocument5e`, przy `init`): `_isFalling` — lotnik w powietrzu, chyba że ma powód,
+  wtedy ten sam test powierzchni; nie-lotnik — stock. `plummet` — Powalony lotnik: ruch `fall` bez karty i bez efektu
+  lądowania (powiadomienie dla MG); reszta — stock (karta obrażeń, tacka, Osteoporoza z `combat/falling.mjs`).
+- **Z13:** komentarze `config/spadanie.mjs` i `combat/falling.mjs` poprawione — na scenie bez powierzchni dnd5e bierze
+  podstawę poziomu za podłogę, więc spadanie działa wszędzie; narzędzie MG zostaje dla upadków, których płótno nie
+  widzi (urwisko namalowane na mapie, ciecz, wysokość z fabuły).
+- **Testy:** Quench `latanie` 8 (reguła; aktor: lot wyzerowany Powaleniem dalej rozpoznany, Pochwycenie, Obezwładnienie
+  vs Nieprzytomność, lot z efektu); e2e `latanie` (lotnik na 9: Obezwładniony zostaje w powietrzu; Powalony — status
+  Spadanie, `plummet` na podłogę bez karty i bez obrażeń, status zdjęty; Pochwycony i Nieprzytomny — karta obrażeń
+  dnd5e z lotnikiem na tacce) — zielone; regresja e2e `dron`; pełny Quench 1335/1337 (te same dwie porażki spoza M6).
