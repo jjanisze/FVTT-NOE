@@ -17,6 +17,7 @@ import {
   getCompatibleAddonsForWeapon, toggleSetup, getSetup,
 } from "../weapons/addons.mjs";
 import { hasDose, refillDose, applyDose } from "../weapons/dozownik.mjs";
+import { jestBlizniakiem } from "../config/improwizacja-rules.mjs";
 import { rollTypeOf, activityRefOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 
@@ -70,7 +71,7 @@ async function _openInstallDialog(addonItem) {
   if (!def) return;
 
   // Gather compatible weapons from actor inventory
-  const weapons = actor.items.filter(i => i.type === "weapon");
+  const weapons = actor.items.filter(i => i.type === "weapon" && !jestBlizniakiem(i));
   const compatible = weapons.filter(w => isAddonCompatible(w, def) === null);
   const incompatible = weapons.filter(w => isAddonCompatible(w, def) !== null);
 

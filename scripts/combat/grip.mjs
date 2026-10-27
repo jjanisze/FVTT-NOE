@@ -41,6 +41,7 @@ import { WEAPONS } from "../config/weapons-data.mjs";
 import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
+import { zrodloBlizniaka, blizniakPrzedmiotu, FLAGA_ZRODLA } from "../config/improwizacja-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -103,9 +104,12 @@ export function isLightFor(actor, item) {
 export function handContext(item) {
   const actor = item?.actor;
   if (!actor || !isDollActor(actor)) return null;
-  const g = gripFor(item);
+  // Bliźniak broni improwizowanej (PLAN_m6 §5.2) trzyma się ręką swojego źródła; w drugiej ręce liczy się
+  // bliźniak tamtego przedmiotu, gdy już jest (lekkość, chwyt).
+  const g = gripFor(zrodloBlizniaka(item) ?? item);
   if (!g?.held) return { held: false, hand: null, otherBusy: false, otherItem: null, otherLabel: null };
-  const otherItem = g.otherItemId ? actor.items.get(g.otherItemId) ?? null : null;
+  const otherSrc = g.otherItemId ? actor.items.get(g.otherItemId) ?? null : null;
+  const otherItem = blizniakPrzedmiotu(otherSrc) ?? otherSrc;
   return {
     held: true,
     hand: g.hand,
@@ -207,8 +211,10 @@ function onPreRollAttack(config, dialog) {
     if (exempt) notes.push({ level: "info", text: `Jedną ręką bez Utrudnienia — ${exempt}` });
   }
 
-  // Atak drugą ręką (lekka, s. 117): dozwolony, gdy obie ręce trzymają broń lekką.
-  const otherLight = h.otherItem && isLightFor(actor, h.otherItem);
+  // Atak drugą ręką (lekka, s. 117): dozwolony, gdy obie ręce trzymają broń lekką. Przedmiot, któremu Łyżeczka
+  // Kobaltu dała Lekką, liczy się, zanim powstanie jego bliźniak.
+  const otherLight = h.otherItem && (isLightFor(actor, h.otherItem)
+    || h.otherItem.flags?.[MODULE_ID]?.[FLAGA_ZRODLA]?.wlasciwosc === "lgt");
   const selfLight = isLightFor(actor, item);
   if (selfLight && otherLight) {
     const opts = modeOptions();

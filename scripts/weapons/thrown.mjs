@@ -20,6 +20,7 @@ import { drop, handOf, isDollActor } from "../actors/doll.mjs";
 import { canDrop } from "../actors/ground-items.mjs";
 import { hasWeaponProperty } from "../config/weapons.mjs";
 import { freeHandPill } from "../combat/grip.mjs";
+import { jestBlizniakiem } from "../config/improwizacja-rules.mjs";
 
 export function registerThrownWeapons() {
   Hooks.on("dnd5e.rollAttack", onRollAttack);
@@ -29,7 +30,8 @@ export function registerThrownWeapons() {
 function onRollAttack(rolls, { subject, ammoUpdate } = {}) {
   const item = subject?.item;
   const actor = item?.actor;
-  if (item?.type !== "weapon" || !actor) return;
+  // Bliźniak broni improwizowanej: leci przedmiot, który reprezentuje (`actors/improwizacja.mjs`).
+  if (item?.type !== "weapon" || !actor || jestBlizniakiem(item)) return;
   const mode = String(rolls?.[0]?.options?.attackMode ?? "");
   if (!mode.startsWith("thrown")) return;
   if (!ammoUpdate || ammoUpdate.id !== item.id) return;

@@ -122,16 +122,24 @@ export const DOLL_FAMILIES = Object.freeze({
   face:         { label: "maska", groups: ["faceGear"], auto: ["faceGear"] },
   armGuards:    { label: "ochraniacze rąk", groups: ["arms"], auto: ["arms"] },
   legGuards:    { label: "ochraniacze nóg", groups: ["legs"], auto: ["legs"] },
-  belt:         { label: "przedmiot podręczny", groups: ["belt"], auto: ["belt"] }
+  // Przedmiot podręczny można też wziąć do ręki (PLAN_m6 §5.2: „bije medpakiem”); „Załóż” dalej kładzie go na pas.
+  belt:         { label: "przedmiot podręczny", groups: ["belt", "hand"], auto: ["belt"] },
+  // Każdy inny przedmiot fizyczny do ręki — jako broń improwizowana (PLAN_m6 D6). Jawna rodzina: o tym, co do niej
+  // należy, decyduje predykat warstwy Foundry (`classifyItem` opcja `wRece`), nie zgadywanie po nazwie.
+  wRece:        { label: "przedmiot w ręce", groups: ["hand"], auto: ["hand"] }
 });
+
+/** Rodziny, którym lalka nie wyprowadza `system.equipped` (patrz `governsEquipped`). */
+const NIE_RZADZI_EQUIPPED = new Set(["belt", "wRece"]);
 
 /**
  * Rodziny, którym lalka **wyprowadza** `system.equipped`. Pas ma własną semantykę (przedmioty
  * podręczne to amunicja, granaty, leki, zestawy narzędzi — „założony" nic dla nich nie znaczy
- * w dnd5e) i jego `equipped` zostaje nietknięty.
+ * w dnd5e) i jego `equipped` zostaje nietknięty. Tak samo „przedmiot w ręce” (`wRece`): ekwipunek bez
+ * rodziny zachowuje natywny przełącznik dnd5e — trzymanie go w ręce niczego nie zakłada.
  */
 export function governsEquipped(family) {
-  return !!DOLL_FAMILIES[family] && family !== "belt";
+  return !!DOLL_FAMILIES[family] && !NIE_RZADZI_EQUIPPED.has(family);
 }
 
 export function accepts(family, group) {
@@ -182,9 +190,11 @@ export function armorIdOf(item) {
  * @param {object} item            Przedmiot (dokument albo `toObject()`).
  * @param {object} [options]
  * @param {(item: object) => string|null} [options.handyFamily]  `handyFamilyOf` z modelu pasa.
+ * @param {(item: object) => boolean} [options.wRece]  przedmiot fizyczny, który bez innej rodziny można wziąć do
+ *   ręki (broń improwizowana, PLAN_m6 §5.2) — warstwa Foundry: `actors/improwizacja.mjs` `doReki`.
  * @returns {string|null}
  */
-export function classifyItem(item, { handyFamily = null } = {}) {
+export function classifyItem(item, { handyFamily = null, wRece = null } = {}) {
   if (!item) return null;
   const f = _flags(item);
 
@@ -218,6 +228,7 @@ export function classifyItem(item, { handyFamily = null } = {}) {
     if (armorId === "ochraniacze-rak") return "armGuards";
     if (armorId === "ochraniacze-nog") return "legGuards";
   }
+  if (wRece?.(item)) return "wRece";
   return null;
 }
 

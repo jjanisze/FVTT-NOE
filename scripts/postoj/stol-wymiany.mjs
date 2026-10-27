@@ -9,6 +9,7 @@
  */
 
 import { KATALOG } from "../config/recipes-data.mjs";
+import { jestBlizniakiem } from "../config/improwizacja-rules.mjs";
 import { ADDON_DEFS, rodzajUlepszenia } from "../config/addons-data.mjs";
 import { FACHOWCY, WPLYWANIE, REGIONY } from "../config/handel-data.mjs";
 import { cenaTutaj, fmtGb, fachowiecRobi, towarHandlu } from "../config/handel-rules.mjs";
@@ -160,7 +161,7 @@ export class StolWymiany extends HandlebarsApplicationMixin(ApplicationV2) {
       context.przerobki = Object.values(ADDON_DEFS)
         .filter(d => rodzajUlepszenia(d, { kobalt }) === "przerobka" && (!fach || fachowiecRobi(fach, d)))
         .map(d => ({ id: d.id, label: `${d.label} (${fmtGb(cenaPrzerobki(d.id, region))})` }));
-      context.bronie = this.actor.items.filter(i => i.type === "weapon").map(i => ({ uuid: i.uuid, name: i.name }));
+      context.bronie = this.actor.items.filter(i => i.type === "weapon" && !jestBlizniakiem(i)).map(i => ({ uuid: i.uuid, name: i.name }));
       const q = _bezOgonkow(this.szukajKatalog).trim();
       context.szukajKatalog = this.szukajKatalog;
       context.katalog = q.length < 2 ? [] : [...KATALOG.values()]

@@ -69,9 +69,15 @@ export function isDollActor(actor) {
   return actor.getFlag?.(MODULE_ID, "doll") === true;
 }
 
+/** Przedmiot fizyczny bez innej rodziny, który można wziąć do ręki (PLAN_m6 §5.2) — wstrzykuje `improwizacja.mjs`. */
+let _doReki = null;
+export function registerDoReki(fn) {
+  _doReki = fn;
+}
+
 /** Rodzina przedmiotu albo `null` (furtka — natywny przełącznik dnd5e). */
 export function familyOf(item) {
-  return classifyItem(item, { handyFamily: handyFamilyOf });
+  return classifyItem(item, { handyFamily: handyFamilyOf, wRece: _doReki });
 }
 
 /** Przedmiot rządzony przez lalkę: aktor ma lalkę, a przedmiot rodzinę. */
@@ -662,7 +668,8 @@ async function _postLines(actor, lines, options) {
 export function useGate(item) {
   if (!isGoverned(item)) return null;
   const family = familyOf(item);
-  if (family === "belt") return "proceed";
+  // Pas i „przedmiot w ręce”: używa się ich skądkolwiek (medpak z plecaka dalej się „Zażywa”) — lalka ich tylko trzyma.
+  if (family === "belt" || family === "wRece") return "proceed";
   const loc = locationOf(item);
   if (!loc) return null;
   if (loc.kind === "pack") return "equip";
@@ -836,6 +843,8 @@ export async function migrateDoll({ commit = false, actors = null } = {}) {
         rows.push(`${item.name}: pas ${JSON.stringify(f[LEGACY_BELT_FLAG])} → ${slots.join(", ") || "(plecak)"}`);
         continue;
       }
+      // Rodzina bez `equipped` z lalki („przedmiot w ręce”) — natywny przełącznik zostaje.
+      if (!governsEquipped(family)) continue;
       // Sloty = stan już z lalki (ktoś coś położył po wdrożeniu) — nie ruszamy; czyścimy tylko
       // stare `equipped` bez slotów. Dzięki temu migracja jest bezpieczna do powtórzenia.
       const hasSlots = Array.isArray(f[SLOTS_FLAG]) && f[SLOTS_FLAG].length;

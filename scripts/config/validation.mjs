@@ -1,5 +1,6 @@
 import { useGate, redirectUse } from "../actors/doll.mjs";
 import { activityRefOf } from "./chat-message-data.mjs";
+import { jestBlizniakiem } from "./improwizacja-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -20,7 +21,8 @@ export function registerValidation() {
     }
     if (this.type === "weapon" && !this.pack) { // nie sprawdzamy z kompendiów
       const qty = this.system?.quantity ?? 0;
-      const equipped = gate === "proceed" || (this.system?.equipped ?? false);
+      // Bliźniak broni improwizowanej nie jest „założony” — w ręce trzyma się jego źródło (`actors/improwizacja.mjs`).
+      const equipped = gate === "proceed" || jestBlizniakiem(this) || (this.system?.equipped ?? false);
 
       if (qty <= 0 || !equipped) {
         ui.notifications?.warn(`Sięgasz po ${this.name}, a tam nic!`);
@@ -38,7 +40,7 @@ export function registerValidation() {
     // nie-ataki działają też z kabury i plecaka.
     if (item && item.type === "weapon") {
       const qty = item.system?.quantity ?? 0;
-      const equipped = useGate(item) ? true : (item.system?.equipped ?? false);
+      const equipped = useGate(item) || jestBlizniakiem(item) ? true : (item.system?.equipped ?? false);
       
       if (qty <= 0 || !equipped) {
         ui.notifications?.warn(`Sięgasz po ${item.name}, a tam nic!`);

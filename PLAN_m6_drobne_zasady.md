@@ -587,3 +587,28 @@ karta od MG, grafika — MISSING); §7 (decyzje, `hp.dt`, kolejność Progu w E4
   dane zużytej wyrzutni); e2e `combat` — krok LAW (wyrzutnia znika, złom w tej samej ręce, kopia na karcie, obrażenia z
   karty) i krok `ciężka` (Utrudnienie → „Oprzyj broń” → ruch przywraca) — zielone. `PLAN_weapon_properties.md` §1 —
   trzy wiersze na ✅.
+
+### E3 — broń improwizowana (2026-10-27)
+
+- **Lalka:** rodzina `wRece` (ręka; jawny predykat `doReki` — przedmiot fizyczny bez innej rodziny, bez surowców i
+  zawartości pojemników) i przedmiot podręczny także w ręce; obie **nie** rządzą `equipped` ani bramką użycia (medpak z
+  plecaka dalej się „Zażywa”). `migrateDoll` pomija rodziny bez `equipped`.
+- **Bliźniak** (`actors/improwizacja.mjs`, zasady `config/improwizacja-rules.mjs`): leniwy, jeden na rękę, przepinany
+  w miejscu; 1k4 + typy do wyboru w oknie obrażeń (natywny wybór dnd5e przy kilku typach), rzut 3/9 m, `two` od 2 kg,
+  maks. SIŁ kg — sygnał. Kolbą/rękojeścią — źródłem broń. „Działa jak…” (MG, menu przedmiotu) — kość, typy, właściwości
+  i kategoria broni białej z katalogu. Rzut — źródło na ziemię u celu, bliźniak zostaje (`weapons/thrown.mjs` go
+  pomija). Wejścia: menu przedmiotu („Weź do ręki”, „Atak improwizowany”, „Uderz kolbą / rękojeścią”), menu kafelka
+  ręki, klik w kafelek przedmiotu bez własnego użycia.
+- **Łyżeczka:** tabela wagi + biegłość + 6 m (RAW); naturalna 1 — karta z przyciskiem „Rozpada się na dwie części”
+  (nie automat — Fuks może jedynkę zmienić). **Kobalt** (`wkk/config/lyzeczka-kobalt.mjs`): rzut 6/18 m, `r1` w kości,
+  właściwość z rodzaju (wybór przy pierwszym ataku, karta MG z wetem, zmiana z menu), „Zawsze coś pod ręką” — pozycja
+  „Coś z otoczenia” na liście „Na ziemi obok” (raz na turę w walce, wolna ręka; prawdziwy przedmiot, MG wetuje kartą).
+- **Ukrycie:** `BaseActorSheet#_isItemVisible` (karta nie buduje wiersza) — **nie** `Actor5e#hiddenItems`, bo ukryty
+  tak przedmiot dnd5e uznaje za nieużywalny (`Item5e#canUse`); walidacja użycia (`config/validation.mjs`) przepuszcza
+  bliźniaka bez `equipped`; lista broni w oknie ulepszeń i stół wymiany go pomijają; audyt broni nie dopasuje nazwy.
+  Chwyt (`combat/grip.mjs`): bliźniak trzyma się ręką źródła, druga ręka — jej bliźniak albo Lekka z Kobaltu
+  (atak drugą ręką dwiema łyżeczkami).
+- **Testy:** Quench `improwizacja` 15 (liczby, tabela, Kobalt, lalka, dane bliźniaka, ukrycie), `lalka` 60 bez zmian;
+  e2e `improwizacja` (łom: atak z menu, okno, ukryty bliźniak, obrażenia z karty; rzut na ziemię; medpak z pasa — ten sam
+  bliźniak; Gladiator z PB, 2k6, Kobalt `r1` i Obalająca; „Zawsze coś pod ręką” z wetem MG) — zielone; regresja
+  `combat`, `postac`, pełny Quench 1316/1317 (jak wyżej). Stanowisko Poligonu — wspólne „Arena” w E6/E8.

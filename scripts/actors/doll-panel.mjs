@@ -131,6 +131,11 @@ function _tile(actor, state, slot) {
   return tile;
 }
 
+function _withExtras(list, extras) {
+  if (!extras.length) return list;
+  return [...extras, ...(list ?? [])];
+}
+
 function _viewModel(actor) {
   const state = dollState(actor);
   const cap = state.layout.capacity;
@@ -146,7 +151,7 @@ function _viewModel(actor) {
     left: LEFT.map(s => _tile(actor, state, s)),
     right: RIGHT.map(s => _tile(actor, state, s)),
     racks,
-    ground: _groundList?.(actor) ?? null
+    ground: _withExtras(_groundList?.(actor) ?? null, _extras(actor))
   };
 }
 
@@ -160,6 +165,24 @@ let _groundList = null;
 /** `ground-items.mjs` podaje listę „Na ziemi obok" i odświeża panele, gdy się zmieni. */
 export function registerGroundList(fn) {
   _groundList = fn;
+}
+
+/**
+ * Dodatkowe pozycje listy „Na ziemi obok”, których nie ma na ziemi — przedmiot z otoczenia (Kobalt: Łyżeczka
+ * „Zawsze coś pod ręką”, `actors/improwizacja.mjs`). `fn(actor)` → `[{id, name, img, distance, tooltip, label, pick}]`.
+ * @type {Set<Function>}
+ */
+const _groundExtras = new Set();
+export function registerGroundExtra(fn) {
+  _groundExtras.add(fn);
+}
+
+function _extras(actor) {
+  const out = [];
+  for (const fn of _groundExtras) {
+    try { out.push(...(fn(actor) ?? [])); } catch (err) { console.error(`${MODULE_ID} | ground extra`, err); }
+  }
+  return out;
 }
 
 /* -------------------------------------------- */
@@ -222,7 +245,7 @@ function _groundHtml(list, editable) {
         <img src="${_esc(g.img)}" alt="" inert>
         <span class="neuro-doll-ground-name">${_esc(g.name)}</span>
         <span class="neuro-doll-ground-dist">${_esc(g.distance)}</span>
-        ${editable ? `<button type="button" class="neuro-doll-pick" data-ground-id="${_esc(g.id)}">Podnieś [I]</button>` : ""}
+        ${editable ? `<button type="button" class="neuro-doll-pick" data-ground-id="${_esc(g.id)}">${_esc(g.label ?? "Podnieś [I]")}</button>` : ""}
       </li>`).join("")
     : `<li class="neuro-doll-ground-none">Nic w zasięgu 1,5 m.</li>`;
   return `<section class="neuro-doll-ground">
@@ -607,7 +630,11 @@ function _bindPanel(panel) {
 
   el.addEventListener("click", async ev => {
     const pick = ev.target.closest(".neuro-doll-pick");
-    if (pick) { ev.preventDefault(); return _groundPick?.(actor(), pick.dataset.groundId); }
+    if (pick) {
+      ev.preventDefault();
+      const extra = _extras(actor()).find(e => e.id === pick.dataset.groundId);
+      return extra ? extra.pick() : _groundPick?.(actor(), pick.dataset.groundId);
+    }
     const tile = ev.target.closest(".neuro-doll-slot");
     if (!tile || !actor().isOwner) return;
     ev.preventDefault();
@@ -696,10 +723,32 @@ function _bindPanel(panel) {
 export async function primaryAction(actor, item, slot, event = null) {
   const group = groupOf(slot);
   if (group === "belt") return handyUse(item, { slot: parseSlot(slot).index, event });
+  // Przedmiot podręczny wzięty do ręki — to samo działanie co z pasa (PLAN_m6 §5.2).
+  if (familyOf(item) === "belt") return handyUse(item, { event });
   if (tierOf(slot) === "stowed") return draw(item, { from: slot });
   const activities = [...(item.system?.activities?.values?.() ?? [])];
   if (activities.length || item.type === "weapon") return item.use({ event });
+  // Przedmiot bez własnego użycia w ręce — atak nim jako bronią improwizowaną (`actors/improwizacja.mjs`).
+  for (const fn of _primaries) {
+    const r = fn(actor, item, slot, event);
+    if (r) return r;
+  }
   return item.sheet.render(true);
+}
+
+/** Domyślne działanie dla przedmiotu bez aktywności (`fn(actor, item, slot, event)` → Promise albo null). */
+const _primaries = new Set();
+export function registerPrimaryAction(fn) {
+  _primaries.add(fn);
+}
+
+/**
+ * Dodatkowe pozycje menu kafelka (PPM). `fn({actor, ctx})` → wpisy ContextMenu (`name`, `icon`, `condition(el)`,
+ * `callback(el)`); `ctx(el)` → `{item, slot, family}`.
+ */
+const _slotMenus = new Set();
+export function registerSlotMenu(fn) {
+  _slotMenus.add(fn);
 }
 
 /** PPM na kafelku: jawne cele (§7). */
@@ -730,6 +779,7 @@ function _menuItems(panel) {
       condition: el => isDollActor(actor()) && ctx(el).family !== "belt",
       callback: el => { const { item, slot } = ctx(el); if (item) drop(actor(), item, { from: slot }); } },
     { name: "Do plecaka", icon: '<i class="fas fa-boxes-packing"></i>', callback: to("pack") },
+    ...[..._slotMenus].flatMap(fn => fn({ actor, ctx }) ?? []),
     { name: "Otwórz kartę", icon: '<i class="fas fa-file-lines"></i>', callback: el => ctx(el).item?.sheet.render(true) }
   ];
 }

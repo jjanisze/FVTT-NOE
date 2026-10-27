@@ -111,6 +111,7 @@ import { registerMeleeDegradation } from "./weapons/melee-degradation.mjs";
 import { registerFireModes } from "./weapons/fire-modes.mjs";
 import { registerThrownWeapons } from "./weapons/thrown.mjs";
 import { registerWlasciwosciBroni, wlasciwosciApi } from "./weapons/wlasciwosci.mjs";
+import { registerImprowizacja, improwizacjaApi } from "./actors/improwizacja.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
@@ -388,6 +389,7 @@ Hooks.once("init", () => {
   registerInventoryToggleFix();
   registerThrownWeapons();
   registerWlasciwosciBroni();
+  registerImprowizacja();
   registerAmmoSystem();
   registerWeaponAddons();
   registerAddonInventoryUI();
@@ -566,6 +568,8 @@ Hooks.once("ready", () => {
   game.neuroshima.bieglosci = bieglosciApi;
   // Właściwości broni długa / ciężka / jednorazowa (PLAN_m6 §5.3) — game.neuroshima.wlasciwosci.stanBroni(item)
   game.neuroshima.wlasciwosci = wlasciwosciApi;
+  // Broń improwizowana (PLAN_m6 §5.2) — game.neuroshima.improwizacja.atakImprowizowany(actor, item)
+  game.neuroshima.improwizacja = improwizacjaApi;
   game.neuroshima.emiterEmp = emiterEmpApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
