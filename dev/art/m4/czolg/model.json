@@ -1,0 +1,11 @@
+{
+ "vehicle":"czolg", "identity":"M1A1 Abrams", "canvas":[780,2100], "footprint":[2.6,5.6],
+ "viewport":[780,1680],"texture":{"fit":"width","anchorX":0.5,"anchorY":0.4},
+ "front":"down", "crew":4, "turretCrew":3, "referenceBearingPixels":[390,955],
+ "referenceSeatsPixels":{"driver":[390,1405],"commander":[270,845],"gunner":[265,1065],"loader":[525,955]},
+ "referenceHullBounds":[25,72,755,1658],"referenceBarrelTipPixels":[390,2038],
+ "paintedBearingPixels":[389,884],
+ "paintedSeatsPixels":{"driver":[390,1310],"commander":[285,770],"gunner":[276,980],"loader":[517,875]},
+ "review":"approved-2026-10-27","date":"2026-10-27",
+ "notes":"Four-person gameplay cutaway: driver hull-center front, commander behind gunner on vehicle-right/image-left, loader vehicle-left/image-right. Rear turbine deck stays covered. Full frame includes the forward barrel overhang. Measure final painting before setting anchors."
+}

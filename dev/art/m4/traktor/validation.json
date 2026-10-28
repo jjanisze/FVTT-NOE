@@ -1,0 +1,89 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/traktor/token-v1.png",
+      "size": [
+        971,
+        1620
+      ],
+      "mode": "RGBA",
+      "bytes": 1957850,
+      "sha256": "ff49f217b8e750762270a7af70102e602cc1bd617fbc24561fbc5760e56e675b",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        38,
+        116,
+        935,
+        1528
+      ],
+      "heightFillPercent": 87.16,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/pojazdy/traktor.webp",
+      "size": [
+        450,
+        750
+      ],
+      "mode": "RGBA",
+      "bytes": 112000,
+      "sha256": "fe63b844cdad9f30f3694bc639a83fd9e72a90e75cb663d7c7434b5448d4a902",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        17,
+        54,
+        433,
+        708
+      ],
+      "heightFillPercent": 87.2,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/portraits/pojazd-traktor.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 372394,
+      "sha256": "1a87654495b22456e3f0f5c3643efb4165f4753330e27cbfd317c3ad0f270781"
+    }
+  ],
+  "finalSeats": [
+    [
+      0.5,
+      0.32
+    ],
+    [
+      0.704444,
+      0.293333
+    ]
+  ],
+  "finalExhaust": [
+    0.567,
+    0.499
+  ],
+  "frameMeters": [
+    2.25,
+    3.75
+  ],
+  "visibleBoundsMeters": [
+    2.08,
+    3.27
+  ],
+  "visualReview": {
+    "tyrePositions": 4,
+    "axles": 2,
+    "front": "down",
+    "driver": "central seat",
+    "passenger": "image-right mudguard cushion",
+    "roof": false,
+    "ridersInArt": false
+  }
+}

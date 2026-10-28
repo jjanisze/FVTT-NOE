@@ -1,0 +1,33 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "mode": "reference-guided portrait and transparent token generation",
+  "model": "Not exposed by the tool",
+  "steps": [
+    {
+      "output": "portrait-v1.png",
+      "prompt": "Use case: stylized-concept. Asset type: square RPG vehicle portrait.\nCreate a worn, fully human-powered steel commuter bicycle of the sort found in a small American town. The supplied moped image is ONLY the reference for realistic detailed hand-painted finish, material texture and quiet roadside setting. Do not borrow its motor, body panels, lights or crate.\nA slender traditional diamond frame with straight top tube, faded mustard-yellow enamel chipped down to dark steel, rusty silver fork and narrow full fenders, two ordinary narrow spoked road wheels with black tyres, a small black leather saddle with visible springs, modest swept-back flat handlebars with two black grips and exposed brake cables. Simple chain-driven pedals, no engine or electric motor, no battery, no headlight, no mirrors. ONE empty black rectangular WIRE BASKET on the rear cargo rack directly behind the saddle, not a front basket and not a plastic crate. Ordinary matching frame geometry, no cargo-bike extension. Unoccupied, mechanically intact, kickstand down, no bags or weapons.\nElevated front-left three-quarter view, front toward lower left. Fit the entire bicycle, both complete wheels, handlebar and rear basket inside the square with a clear margin. Parked on cracked asphalt shoulder with dry weeds and scattered gravel. Same grounded, finely painted post-apocalyptic tabletop style as reference; dusty, faded, mildly rusty, muted neutral daylight. No people, rider, text, branding, logo, letters, numbers, watermark, fantasy or spikes. Opaque roadside background.",
+      "references": [
+        {
+          "path": "../../../../tokens/portraits/pojazd-motorower.webp",
+          "role": "painting style and roadside setting only"
+        }
+      ],
+      "transparent_background": false
+    },
+    {
+      "output": "token-v1.png",
+      "prompt": "Use case: sketch-to-render. Asset type: transparent orthographic top-down bicycle token for a tabletop RPG.\nImage 1 is the proportional plan to follow; image 2 supplies the exact bicycle design, colors and detailed hand-painted materials. FRONT DOWN, rear at top.\nRender a HUMAN-POWERED steel commuter bicycle with the portrait's faded mustard-yellow diamond frame, silver narrow full fenders, skinny black road tyres, chrome modest swept-back flat handlebar with two black grips and brake levers/cables, ONE small black sprung saddle and ONE empty black WIRE basket on the rear rack behind the saddle. Two ordinary pedals and chain drive only; no motor, no fuel tank, no body panels, no headlight, no mirror, no passenger seat, no plastic crate. Precisely TWO wheels in tandem on the centerline. The wheels stand upright, so from overhead they appear as long skinny tyre strips, not circular wheels lying flat.\nThe plan defines the compact proportions: rear wheel at top; wire basket above the rear tyre in the top quarter; saddle at approximately x50%, y40%; frame tubes extend forward below the saddle; pedals around y58%; handlebar at approximately y67%; short front fork, front wheel ending near the bottom. Keep the bicycle slender and the handlebars clearly visible; exaggerate thin frame tubes and brake cables slightly for readability without adding body mass. The basket's wire floor is open mesh, with dark empty openings and genuine transparency through the mesh where no bicycle lies underneath it.\nSTRICT orthographic camera directly above. No perspective, no visible sides of the frame, front wheel straight, both wheels aligned vertically, no rider. Side stand folded away. Detailed realistic hand-painted worn metal, dusty rubber, fine scratches and mild rust; same finish as the portrait. Vertical framing aspect 2:5, complete bicycle and handlebar inside frame with clear transparent margins on all sides; fill roughly 93% of image height. TRUE transparent background. No ground, scenery, cast ground shadow, bases, rings, border, labels, text, numbers, lettering, logo or watermark.",
+      "references": [
+        {
+          "path": "layout.png",
+          "role": "proportional plan; front down"
+        },
+        {
+          "path": "portrait-v1.png",
+          "role": "vehicle identity, colors and materials"
+        }
+      ],
+      "transparent_background": true
+    }
+  ]
+}

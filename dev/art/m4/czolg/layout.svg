@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="2100" viewBox="0 0 780 2100">
+<!-- M1A1 gameplay cutaway. Front down. Overall reference including forward barrel: 9.83 m. -->
+<defs>
+ <pattern id="tracks" width="116" height="28" patternUnits="userSpaceOnUse"><rect width="116" height="28" fill="#34362e"/><path d="M0 5H116M0 23H116M15 0V28M101 0V28" stroke="#76705b" stroke-width="5"/></pattern>
+ <pattern id="floor" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#b0b4a0"/><path d="M2 6L7 1M12 17L17 12" stroke="#d0d0b9" stroke-width="2"/></pattern>
+ <pattern id="grille" width="15" height="20" patternUnits="userSpaceOnUse"><rect width="15" height="20" fill="#34392e"/><path d="M0 6H15M0 14H15" stroke="#7b7c5f" stroke-width="5"/></pattern>
+ <g id="seat" stroke="#3a4032" stroke-width="4"><rect x="-48" y="-34" width="96" height="86" rx="8" fill="#586044"/><rect x="-48" y="-56" width="96" height="24" rx="5" fill="#7b8260"/></g>
+</defs>
+<g stroke="#5f624b" stroke-width="5" stroke-linejoin="round">
+ <!-- Hull 3.65 x 7.93 m; the lower empty margin reserves the forward gun overhang. -->
+ <rect x="25" y="102" width="122" height="1500" rx="42" fill="url(#tracks)"/>
+ <rect x="633" y="102" width="122" height="1500" rx="42" fill="url(#tracks)"/>
+ <path d="M93 72H687L710 1490L641 1658H139L70 1490Z" fill="#a99d75"/>
+ <path d="M88 135V1480M692 135V1480" stroke="#c5b58d" stroke-width="32"/>
+ <path d="M145 650H635V1480H145Z" fill="url(#floor)"/>
+ <!-- Covered rear turbine deck and longitudinal rear exhaust, no passenger space. -->
+ <rect x="145" y="125" width="490" height="470" fill="url(#grille)"/>
+ <rect x="225" y="86" width="330" height="27" fill="#292f26"/>
+ <path d="M170 620H610V725H170Z" fill="#989a7e"/>
+ <!-- Three crew around the central breech, commander BEHIND gunner on vehicle-right/image-left. -->
+ <circle cx="390" cy="955" r="211" fill="#767e63"/>
+ <circle cx="390" cy="955" r="194" fill="url(#floor)" stroke="#dddcc2"/>
+ <use href="#seat" transform="translate(270 845)"/>
+ <use href="#seat" transform="translate(265 1065)"/>
+ <use href="#seat" transform="translate(525 955)"/>
+ <path d="M344 940H436V1145H344Z" fill="#606956"/>
+ <rect x="354" y="970" width="72" height="115" rx="8" fill="#9b9f84"/>
+ <path d="M360 1124H420V1170H360Z" fill="#464f3d"/>
+ <path d="M200 1125H306M505 1031H568" stroke="#343f30" stroke-width="10"/>
+ <!-- Driver centered in front hull, with reclined seat and handlebars. -->
+ <path d="M304 1290H476V1524H304Z" fill="#b4b7a0"/>
+ <use href="#seat" transform="translate(390 1405)"/>
+ <path d="M342 1490H438M342 1474V1506M438 1474V1506" stroke="#2b372a" stroke-width="9"/>
+ <path d="M154 1190H290V1480H154M490 1190H626V1480H490" fill="#ab9f7c"/>
+ <path d="M128 1517H652L613 1630H167Z" fill="#b3a67d"/>
+ <path d="M170 1546H610M183 1573H597" stroke="#8c8665" stroke-width="8"/>
+ <path d="M105 1480L167 1490M613 1490L675 1480" stroke="#dbd1ac" stroke-width="13"/>
+</g>
+</svg>

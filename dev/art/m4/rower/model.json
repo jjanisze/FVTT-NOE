@@ -1,0 +1,18 @@
+{
+  "vehicle":"rower",
+  "identity":"Unbranded steel commuter bicycle, mustard frame, silver fenders, rear wire basket",
+  "front":"down",
+  "referenceCanvas":[450,1125],
+  "referenceRaster":[150,375],
+  "finalCanvas":[180,450],
+  "footprintSquares":[0.6,1.5],
+  "footprintMetres":[0.9,2.25],
+  "referenceSeat":[0.5,0.4],
+  "finalSeat":[0.5,0.31],
+  "presentation":{"widocznosc":"otwarta","warstwa":"nad"},
+  "wheels":2,
+  "crew":1,
+  "engine":false,
+  "review":"art-retained-2026-10-28; rider-size-adjustment-deferred-by-gm",
+  "notes":"Same display-width frame as the approved enlarged moped, slightly shorter. Final saddle anchor measured from painting, not assumed from SVG. Basket is not a passenger position. Design proportions for tabletop use, not a manufactured-model specification."
+}

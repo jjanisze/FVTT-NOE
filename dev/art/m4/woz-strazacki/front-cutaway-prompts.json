@@ -1,0 +1,16 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "revision": "2026-10-27 roof-off cab front only",
+  "references": [
+    {
+      "path": "tokens/pojazdy/wnetrza/woz-strazacki.webp before this revision",
+      "role": "edit target"
+    },
+    {
+      "path": "tokens/pojazdy/woz-strazacki.webp",
+      "role": "context for beacons attached to roof"
+    }
+  ],
+  "prompt": "TARGETED EDIT to reference1, the ROOF-OFF fire truck. Reference2 is the matching ROOF-ON version for context only. The vehicle body, proportions, narrow pump waist, short rear ladder and protruding wheels are APPROVED. Preserve them exactly. Change ONLY the southern/bottom FRONT EDGE of the open cab, below the existing front seats. Two specific defects to repair: (1) REMOVE BOTH circular RED ROOF BEACONS currently incorrectly sitting at the very bottom front corners of the cutaway near y87%. They are mounted on the roof in reference2, so they must DISAPPEAR COMPLETELY with the roof. Remove their bases and the misplaced cream roof ledge they sit on, do not move them anywhere. Leave rear equipment's two red lamps at TOP untouched. (2) The cutaway front currently looks like a wooden storage CRATE because a tall flat red rectangular inner wall and thick raised cream rim form a box across the bottom. Remove that tall front wall and all residual windshield base/roof pillars ABOVE the cutaway plane. Instead show a realistic low-cut open crew cab: dark functional DASHBOARD and forward footwell, a narrow low rounded red sheet-metal sill/front body lip, sensible cab-over mechanical detail and trim viewed directly DOWN. No tall inner vertical wall, no square hollow box, no broad cream slab or roof fragments. The wheel, dashboard and seats must keep their EXACT positions; keep ALL FIVE seats and steering wheel intact. No extra seats. Keep existing silver lower bumper, towing hooks, true exterior outline, mirrors and all four tyres EXACTLY unchanged. Do not shorten or reshape the vehicle. Strict90degree overhead, front down, same600x1650frame and alpha. Keep rear hose body, ladder, recessed pump, cannon, pipe fittings and exhaust unchanged pixel-for-pixel; keep all weathered painted materials. No text, people, ground, checkerboard or shadow outside vehicle. Output one roof-off token, not a comparison.",
+  "postprocessing": "Register edited full frame to canonical alpha bounds; compose only finite FRONT mask (80,1390,523,1523). Preserve original complete alpha, approved roof-on pixels, all seat anchors and every cutaway pixel outside FRONT."
+}

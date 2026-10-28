@@ -1,0 +1,45 @@
+{
+  "vehicle": "motorower",
+  "frame": [
+    180,
+    468
+  ],
+  "footprintSquares": [
+    0.6,
+    1.56
+  ],
+  "frameMetres": [
+    0.9,
+    2.34
+  ],
+  "sizeAdjustment": 1.2,
+  "visibleBounds": [
+    4,
+    8,
+    176,
+    458
+  ],
+  "visibleMetres": [
+    0.86,
+    2.25
+  ],
+  "driverAnchor": [
+    0.5,
+    0.36
+  ],
+  "driverAnchorPixel": [
+    90,
+    168.48
+  ],
+  "anchorAlpha": 252,
+  "exhaust": [
+    0.25,
+    0.18
+  ],
+  "presentation": {
+    "widocznosc": "otwarta",
+    "warstwa": "nad"
+  },
+  "portrait": "approved-2026-10-27",
+  "tokenAndIntegration": "approved-2026-10-28"
+}

@@ -1,0 +1,18 @@
+{
+  "vehicle":"wozStrazacki",
+  "slug":"woz-strazacki",
+  "canvas":[600,1650],
+  "footprintSquares":[2,5.5],
+  "front":"down",
+  "tyrePositions":4,
+  "axleY":[0.2485,0.788],
+  "referenceSeats":[[0.691667,0.818182],[0.5,0.818182],[0.308333,0.818182],[0.675,0.666667],[0.325,0.666667]],
+  "referenceDeckOperator":[0.62,0.478788],
+  "referenceExhaust":[0.205,0.579394],
+  "finalSeats":[[0.685,0.802],[0.5,0.802],[0.335,0.802],[0.683,0.695],[0.341,0.695]],
+  "finalDeckOperator":[0.64,0.473],
+  "finalExhaust":[0.242,0.43],
+  "calibration":{"sectionBoundariesY":[55,750,975,1595],"rearPumpCabFractions":[0.4513,0.1461,0.4026],"rearBodySampleY":650,"waistSampleY":850,"rearTyreSampleY":400,"frontTyreSampleY":1300,"ladderExtentY":[100,690]},
+  "review":{"status":"approved","date":"2026-10-27","scope":"portrait and matched token pair, silhouette, proportions and corrected roof-off front without misplaced roof beacons"},
+  "notes":"Revised geometric guide derived from portrait after GM rejection of original elongated rectangular token: stepped narrow pump waist, rear-only short ladder, wider visible tyres, shorter catalog length. Five cab seats (3+2), sixth operator behind/right of water monitor. Portrait unchanged."
+}

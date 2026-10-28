@@ -1,0 +1,236 @@
+[
+  {
+    "vehicle": "hammer",
+    "source": "dev/art/m4/wraki/variants/hammer-v1.png",
+    "generatedFrame": [
+      887,
+      1774
+    ],
+    "nativeFrame": [
+      450,
+      900
+    ],
+    "visibleBounds": [
+      18,
+      20,
+      433,
+      868
+    ]
+  },
+  {
+    "vehicle": "motocykl",
+    "source": "dev/art/m4/wraki/variants/motocykl-v1.png",
+    "generatedFrame": [
+      724,
+      2172
+    ],
+    "nativeFrame": [
+      150,
+      450
+    ],
+    "visibleBounds": [
+      6,
+      8,
+      144,
+      436
+    ]
+  },
+  {
+    "vehicle": "rower",
+    "source": "dev/art/m4/wraki/variants/rower-v1.png",
+    "generatedFrame": [
+      793,
+      1983
+    ],
+    "nativeFrame": [
+      180,
+      450
+    ],
+    "visibleBounds": [
+      17,
+      6,
+      163,
+      443
+    ]
+  },
+  {
+    "vehicle": "buggy",
+    "source": "dev/art/m4/wraki/variants/buggy-v1.png",
+    "generatedFrame": [
+      887,
+      1774
+    ],
+    "nativeFrame": [
+      420,
+      840
+    ],
+    "visibleBounds": [
+      5,
+      24,
+      415,
+      797
+    ]
+  },
+  {
+    "vehicle": "ciezarowka",
+    "source": "dev/art/m4/wraki/variants/ciezarowka-v1.png",
+    "generatedFrame": [
+      724,
+      2172
+    ],
+    "nativeFrame": [
+      600,
+      1800
+    ],
+    "visibleBounds": [
+      11,
+      41,
+      590,
+      1720
+    ]
+  },
+  {
+    "vehicle": "autobus",
+    "source": "dev/art/m4/wraki/variants/autobus-v1.png",
+    "generatedFrame": [
+      724,
+      2172
+    ],
+    "nativeFrame": [
+      600,
+      2400
+    ],
+    "visibleBounds": [
+      78,
+      44,
+      522,
+      2350
+    ]
+  },
+  {
+    "vehicle": "traktor",
+    "source": "dev/art/m4/wraki/variants/traktor-v1.png",
+    "generatedFrame": [
+      971,
+      1620
+    ],
+    "nativeFrame": [
+      450,
+      750
+    ],
+    "visibleBounds": [
+      12,
+      32,
+      441,
+      714
+    ]
+  },
+  {
+    "vehicle": "wozStrazacki",
+    "source": "dev/art/m4/wraki/variants/woz-strazacki-v1.png",
+    "generatedFrame": [
+      756,
+      2079
+    ],
+    "nativeFrame": [
+      600,
+      1650
+    ],
+    "visibleBounds": [
+      13,
+      54,
+      587,
+      1597
+    ]
+  },
+  {
+    "vehicle": "buldozer",
+    "source": "dev/art/m4/wraki/variants/buldozer-v1.png",
+    "generatedFrame": [
+      992,
+      1586
+    ],
+    "nativeFrame": [
+      750,
+      1200
+    ],
+    "visibleBounds": [
+      18,
+      18,
+      732,
+      1181
+    ]
+  },
+  {
+    "vehicle": "bwp",
+    "source": "dev/art/m4/wraki/variants/bwp-v1.png",
+    "generatedFrame": [
+      916,
+      1717
+    ],
+    "nativeFrame": [
+      720,
+      1350
+    ],
+    "visibleBounds": [
+      39,
+      20,
+      683,
+      1259
+    ]
+  },
+  {
+    "vehicle": "czolg",
+    "source": "dev/art/m4/wraki/variants/czolg-v1.png",
+    "generatedFrame": [
+      764,
+      2057
+    ],
+    "nativeFrame": [
+      780,
+      2100
+    ],
+    "visibleBounds": [
+      20,
+      67,
+      760,
+      2049
+    ]
+  },
+  {
+    "vehicle": "motorower",
+    "source": "dev/art/m4/wraki/variants/motorower-v1.png",
+    "generatedFrame": [
+      778,
+      2022
+    ],
+    "nativeFrame": [
+      180,
+      468
+    ],
+    "visibleBounds": [
+      5,
+      6,
+      174,
+      453
+    ]
+  },
+  {
+    "vehicle": "deskorolka",
+    "source": "dev/art/m4/wraki/variants/deskorolka-v1.png",
+    "generatedFrame": [
+      1145,
+      1374
+    ],
+    "nativeFrame": [
+      180,
+      216
+    ],
+    "visibleBounds": [
+      54,
+      5,
+      126,
+      205
+    ]
+  }
+]

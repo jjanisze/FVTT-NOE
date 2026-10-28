@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="1125" viewBox="0 0 450 1125">
+<!-- Bicycle plan. Front down. Authored frame 0.9 x 2.25 m, narrow two-wheel silhouette. -->
+<g stroke="#30312c" stroke-width="4" stroke-linejoin="round">
+<rect x="212" y="40" width="26" height="350" rx="12" fill="#242725"/>
+<rect x="212" y="735" width="26" height="350" rx="12" fill="#242725"/>
+<path d="M225 80 V310 M225 770 V980" fill="none" stroke="#aaaca1" stroke-width="21"/>
+<path d="M214 300 L214 650 L216 779 M236 300 L236 650 L234 779" fill="none" stroke="#b18a31" stroke-width="9"/>
+<path d="M225 470 V780" stroke="#c69c35" stroke-width="15"/>
+<path d="M225 652 L158 608 M225 652 L292 696" fill="none" stroke="#989c92" stroke-width="9"/>
+<rect x="137" y="593" width="43" height="29" rx="4" fill="#313a34"/>
+<rect x="270" y="683" width="43" height="29" rx="4" fill="#313a34"/>
+<path d="M208 565 V712 M240 577 V712" stroke="#454942" stroke-width="6"/>
+<path d="M193 396 Q225 378 257 396 Q279 410 258 437 L240 501 Q225 523 210 501 L192 437 Q171 410 193 396Z" fill="#333a33"/>
+<rect x="144" y="108" width="162" height="186" rx="7" fill="#665f40" fill-opacity="0.16"/>
+<path d="M144 125H306 M144 165H306 M144 205H306 M144 245H306 M144 282H306 M155 108V294 M190 108V294 M225 108V294 M260 108V294 M295 108V294" fill="none" stroke="#54594c" stroke-width="5"/>
+<path d="M149 300 H301 M165 310 V338 M285 310 V338" fill="none" stroke="#93988a" stroke-width="7"/>
+<path d="M72 763 L142 731 Q225 755 308 731 L378 763" fill="none" stroke="#a4a89b" stroke-width="13"/>
+<path d="M68 764 L121 742 M329 742 L382 764" stroke="#303931" stroke-width="19"/>
+<path d="M92 781L138 759 M312 759L358 781" stroke="#999e92" stroke-width="5"/>
+<path d="M172 742Q182 700 220 731 M278 742Q268 696 230 731" fill="none" stroke="#41483c" stroke-width="3"/>
+<path d="M211 788 V885 M239 788 V885" fill="none" stroke="#9eaa9d" stroke-width="8"/>
+</g></svg>

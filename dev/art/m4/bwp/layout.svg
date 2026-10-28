@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1350" viewBox="0 0 720 1350">
+<!-- M2A2 Bradley gameplay cutaway: front DOWN. Vehicle-left = image-right. 3 crew + 6 troops. -->
+<defs>
+ <pattern id="tracks" width="112" height="26" patternUnits="userSpaceOnUse"><rect width="112" height="26" fill="#30352d"/><path d="M0 5H112M0 21H112M14 0V26M98 0V26" stroke="#626453" stroke-width="5"/></pattern>
+ <pattern id="floor" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#a5aea0"/><path d="M2 6L7 1M11 16L16 11" stroke="#c0c7b8" stroke-width="2"/></pattern>
+ <pattern id="grille" width="12" height="16" patternUnits="userSpaceOnUse"><rect width="12" height="16" fill="#354030"/><path d="M0 5H12M0 12H12" stroke="#687253" stroke-width="4"/></pattern>
+ <g id="seat" stroke="#303829" stroke-width="3"><rect x="-46" y="-32" width="92" height="76" rx="8" fill="#566346"/><rect x="-46" y="-50" width="92" height="22" rx="5" fill="#7d8660"/><path d="M0 -24V37" stroke="#657254" stroke-width="2"/></g>
+</defs>
+<g stroke="#374331" stroke-width="5" stroke-linejoin="round">
+ <rect x="20" y="104" width="116" height="1198" rx="40" fill="url(#tracks)"/>
+ <rect x="584" y="104" width="116" height="1198" rx="40" fill="url(#tracks)"/>
+ <path d="M93 22H627L643 1180L556 1328H164L77 1180Z" fill="#68734f"/>
+ <path d="M96 70V1182M624 70V1182" stroke="#8a9270" stroke-width="25"/>
+ <path d="M142 98H578V1176H142Z" fill="url(#floor)"/>
+ <rect x="157" y="34" width="406" height="38" rx="5" fill="#434e36"/>
+ <path d="M145 104V644M575 104V644" stroke="#c3cbb9" stroke-width="7"/>
+ <!-- Two inward-facing benches, three cushions apiece, center aisle entirely empty. -->
+ <use href="#seat" transform="translate(194 200) rotate(270)"/><use href="#seat" transform="translate(526 200) rotate(90)"/>
+ <use href="#seat" transform="translate(194 380) rotate(270)"/><use href="#seat" transform="translate(526 380) rotate(90)"/>
+ <use href="#seat" transform="translate(194 560) rotate(270)"/><use href="#seat" transform="translate(526 560) rotate(90)"/>
+ <path d="M244 110V635M476 110V635" stroke="#4e5b42" stroke-width="5" stroke-dasharray="12 8"/>
+ <!-- Turret basket offset toward vehicle-right / image-left: two crew seats. -->
+ <circle cx="290" cy="820" r="166" fill="#57614b"/>
+ <circle cx="290" cy="820" r="151" fill="url(#floor)" stroke="#d0d6c6"/>
+ <use href="#seat" transform="translate(213 820)"/><use href="#seat" transform="translate(366 820)"/>
+ <path d="M178 905H247V939M332 905H401V939" fill="none" stroke="#36402f" stroke-width="9"/>
+ <!-- One driver, front-left of vehicle (image-right); engine is opposite, NOT a second seat. -->
+ <path d="M451 990V1178H578V987" fill="#b4beac"/>
+ <use href="#seat" transform="translate(514 1055)"/>
+ <path d="M473 1142H555V1170M486 1142V1167M542 1142V1167" fill="none" stroke="#233324" stroke-width="9"/>
+ <rect x="145" y="1007" width="286" height="173" rx="8" fill="url(#grille)"/>
+ <path d="M151 1192H569L536 1292H184Z" fill="#69744d"/>
+ <path d="M181 1220H539M193 1240H527M204 1260H516" stroke="#4c573b" stroke-width="7"/>
+ <path d="M173 1310H547" stroke="#929676"/>
+ <path d="M88 1203L133 1207M587 1207L632 1203" stroke="#b8b18b" stroke-width="12"/>
+ <path d="M105 975H132V1055H105Z" fill="#232f25"/>
+</g>
+</svg>

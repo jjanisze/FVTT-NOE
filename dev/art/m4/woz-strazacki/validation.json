@@ -1,0 +1,131 @@
+{
+  "files": [
+    {
+      "path": "tokens/pojazdy/woz-strazacki.webp",
+      "size": [
+        600,
+        1650
+      ],
+      "mode": "RGBA",
+      "bytes": 1216832,
+      "sha256": "ecb24c0e1a779649f17f5ae3b34e1821edbf0250ee5813e358bb086a234421f6",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "visibleBounds": [
+        10,
+        55,
+        590,
+        1595
+      ],
+      "borderAlphaMax": 0
+    },
+    {
+      "path": "tokens/pojazdy/wnetrza/woz-strazacki.webp",
+      "size": [
+        600,
+        1650
+      ],
+      "mode": "RGBA",
+      "bytes": 1204940,
+      "sha256": "b47662595099c6ac6b449471cccea1a72502f6ba34575f4f4abb7799982c80aa",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "visibleBounds": [
+        10,
+        55,
+        590,
+        1595
+      ],
+      "borderAlphaMax": 0
+    },
+    {
+      "path": "tokens/portraits/pojazd-woz-strazacki.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 418786,
+      "sha256": "2ef267330c2dd267906297f88301335bd2ef7a3f548337f2d865b9082d6a480e"
+    }
+  ],
+  "sharedExteriorSamples": 495537,
+  "differentExteriorPixels": 0,
+  "differentAlphaPixels": 0,
+  "differentRecipePixels": {
+    "on": 0,
+    "off": 0
+  },
+  "differentApprovedRoofPixels": 0,
+  "differentCutawayPixelsOutsideFront": 0,
+  "frameMeters": [
+    3.0,
+    8.25
+  ],
+  "visibleBoundsMeters": [
+    2.9,
+    7.7
+  ],
+  "outlineSamples": {
+    "body": [
+      67,
+      534
+    ],
+    "waist": [
+      114,
+      488
+    ],
+    "tyres": [
+      [
+        12,
+        586
+      ],
+      [
+        10,
+        589
+      ]
+    ],
+    "waistToBodyRatio": 0.801
+  },
+  "anchors": [
+    [
+      0.685,
+      0.802
+    ],
+    [
+      0.5,
+      0.802
+    ],
+    [
+      0.335,
+      0.802
+    ],
+    [
+      0.683,
+      0.695
+    ],
+    [
+      0.341,
+      0.695
+    ],
+    [
+      0.64,
+      0.473
+    ]
+  ],
+  "visualReview": {
+    "tyres": 4,
+    "axles": 2,
+    "cabRows": [
+      3,
+      2
+    ],
+    "openDeckStations": 1,
+    "rakedWindshieldVisible": true,
+    "ridersInArt": false
+  }
+}

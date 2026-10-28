@@ -1,0 +1,243 @@
+{
+  "count": 14,
+  "assets": [
+    {
+      "vehicle": "osobowka",
+      "file": "tokens/wraki/pojazd-osobowy.webp",
+      "frame": [
+        450,
+        900
+      ],
+      "visibleBounds": [
+        37,
+        7,
+        413,
+        885
+      ],
+      "bytes": 197560,
+      "front": "down",
+      "review": "approved"
+    },
+    {
+      "vehicle": "autobus",
+      "file": "tokens/wraki/pojazd-autobus.webp",
+      "frame": [
+        600,
+        2400
+      ],
+      "visibleBounds": [
+        78,
+        44,
+        522,
+        2350
+      ],
+      "bytes": 531926,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "motocykl",
+      "file": "tokens/wraki/pojazd-motocykl.webp",
+      "frame": [
+        150,
+        450
+      ],
+      "visibleBounds": [
+        6,
+        8,
+        144,
+        436
+      ],
+      "bytes": 28884,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "rower",
+      "file": "tokens/wraki/pojazd-rower.webp",
+      "frame": [
+        180,
+        450
+      ],
+      "visibleBounds": [
+        17,
+        6,
+        163,
+        443
+      ],
+      "bytes": 24708,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "buggy",
+      "file": "tokens/wraki/pojazd-buggy.webp",
+      "frame": [
+        420,
+        840
+      ],
+      "visibleBounds": [
+        5,
+        24,
+        415,
+        797
+      ],
+      "bytes": 169248,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "hammer",
+      "file": "tokens/wraki/pojazd-hammer.webp",
+      "frame": [
+        450,
+        900
+      ],
+      "visibleBounds": [
+        18,
+        20,
+        433,
+        868
+      ],
+      "bytes": 203142,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "ciezarowka",
+      "file": "tokens/wraki/pojazd-ciezarowka.webp",
+      "frame": [
+        600,
+        1800
+      ],
+      "visibleBounds": [
+        11,
+        41,
+        590,
+        1720
+      ],
+      "bytes": 529132,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "wozStrazacki",
+      "file": "tokens/wraki/pojazd-woz-strazacki.webp",
+      "frame": [
+        600,
+        1650
+      ],
+      "visibleBounds": [
+        13,
+        54,
+        587,
+        1597
+      ],
+      "bytes": 484112,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "buldozer",
+      "file": "tokens/wraki/pojazd-buldozer.webp",
+      "frame": [
+        750,
+        1200
+      ],
+      "visibleBounds": [
+        18,
+        18,
+        732,
+        1181
+      ],
+      "bytes": 359244,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "czolg",
+      "file": "tokens/wraki/pojazd-czolg.webp",
+      "frame": [
+        780,
+        2100
+      ],
+      "visibleBounds": [
+        20,
+        67,
+        760,
+        2049
+      ],
+      "bytes": 631650,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "bwp",
+      "file": "tokens/wraki/pojazd-bwp.webp",
+      "frame": [
+        720,
+        1350
+      ],
+      "visibleBounds": [
+        39,
+        20,
+        683,
+        1259
+      ],
+      "bytes": 536002,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "traktor",
+      "file": "tokens/wraki/pojazd-traktor.webp",
+      "frame": [
+        450,
+        750
+      ],
+      "visibleBounds": [
+        12,
+        32,
+        441,
+        714
+      ],
+      "bytes": 139466,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "motorower",
+      "file": "tokens/wraki/pojazd-motorower.webp",
+      "frame": [
+        180,
+        468
+      ],
+      "visibleBounds": [
+        5,
+        6,
+        174,
+        453
+      ],
+      "bytes": 36232,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "vehicle": "deskorolka",
+      "file": "tokens/wraki/pojazd-deskorolka.webp",
+      "frame": [
+        180,
+        216
+      ],
+      "visibleBounds": [
+        54,
+        5,
+        126,
+        205
+      ],
+      "bytes": 11576,
+      "front": "down",
+      "review": "awaiting-gm-review"
+    }
+  ]
+}

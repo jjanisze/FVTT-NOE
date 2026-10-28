@@ -1,0 +1,16 @@
+{
+ "vehicle":"buldozer",
+ "canvas":[750,1200],
+ "footprintSquares":[2.5,4],
+ "front":"down",
+ "tracks":2,
+ "blade":"front, wider than tracks",
+ "ripperTeeth":1,
+ "referenceSeats":[[0.42,0.385],[0.58,0.385]],
+ "referenceExhaust":[0.436,0.586667],
+ "finalSeats":[[0.4387,0.3867],[0.5747,0.3867]],
+ "finalExhaust":[0.451,0.538],
+ "presentation":{"widocznosc":"otwarta","warstwa":"nad"},
+ "review":{"status":"approved","date":"2026-10-27","scope":"portrait, token, proportions and both occupant anchors"},
+ "notes":"Original geometry guide. Operator on image-left main seat, helper on smaller image-right perch, matching portrait. Open roll frame without canopy or glass. Final anchors measured from finished token."
+}

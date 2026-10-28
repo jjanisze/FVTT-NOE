@@ -1,0 +1,82 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "steps": [
+    {
+      "id": "portrait-v1",
+      "references": [
+        {
+          "path": "tokens/portraits/pojazd-hammer.webp",
+          "role": "painting style only"
+        }
+      ],
+      "prompt": "Create a square actor portrait for a gritty post-apocalyptic tabletop RPG. Reference image is PAINTING STYLE ONLY: its finely detailed painterly realism, restrained natural colors, worn materials and believable practical vehicle construction. Subject is a generic older American cab-over fire engine PUMPER, faded dark red paint, dull off-white cab roof stripe, modest rust, dusty aluminium diamond plate, functional salvage maintained in service. Medium two-axle truck about 8.5m long, 2.5m body wide, exactly FOUR wheel positions with dual rear tyres permissible, front steering axle and rear drive axle, no middle axle. Extended CREW CAB at the FRONT: two seating rows, 3 people front and2 rear but EMPTY seats, noticeably raked two-piece front windshield whose lower portion can be seen in overhead view, black rubber seals, visible wipers, two small unlit red beacon lights, simple grille and broad bumper. Rear pump body behind crew cab: side metal equipment lockers, an empty central standing platform immediately behind the cab with a red manually operated WATER MONITOR, curved pipe and chunky unarmed nozzle pointing FRONT; operator stands behind this monitor. Rear open hose bed holding neatly folded tan hose lengths, one secured silver aluminium ladder running lengthwise along vehicle right side, coiled hose reel and ordinary fittings. No extended ladder boom. A vertical dark exhaust at vehicle right rear corner of the cab beside pump body. Use this exact coherent layout suitable for a corresponding top-down miniature. Three-quarter FRONT view slightly elevated; ENTIRE vehicle visible with margins, no cropping. Parked on cracked tarmac of abandoned dry rural highway, sparse dry grass, old rusty roadside guardrail. No fire, water spraying, smoke, people, zombies, weapon, machine gun, fantasy ornament, text, lettering, logos, fire department emblems, badges or watermark."
+    },
+    {
+      "id": "roof-off-v1",
+      "references": [
+        {
+          "path": "layout.png",
+          "role": "original geometric guide"
+        },
+        {
+          "path": "portrait-v1.png",
+          "role": "vehicle and material design"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "Create ONE finished painted top-down VTT FIRE ENGINE CUTAWAY token on genuine transparent background. Reference1 is my original geometric plan: HIGHEST authority for layout, strict orthographic overhead camera, silhouette and dimensions. Reference2 is the vehicle portrait: match its red/off-white crew cab, weathered but working pumper body, silver equipment, tan hose and finely detailed realistic painted rendering. Render reference1 as beautiful finished miniature artwork, not as a diagram. Canvas aspect1:3 (600 wide1800 high proportions). FRONT STRAIGHT DOWN, back at TOP, no perspective tilt. Whole vehicle with small transparent margin. Body approximately2.5m wide8.5m long. Two axles and FOUR visible tyre positions ONLY, rear axle y22%,front axle y84%; dark rubber edges just outside body. No extra middle wheels. Rear half of body at top: open tan neatly accordion-folded fire hoses, silver aluminium LADDER down image-right rail from y5% to y61%; empty silver diamond-plate standing platform from y41% to y61%. One RED WATER MONITOR mounted on front part of this platform center(x50%,y56%), elbow pipe with dark chunky nozzle pointing straight DOWN toward truck front, manual handles, not a firearm. Empty operator standing area centered(x50%,y48%), behind monitor, with ample legible floor. The bottom third is ROOF-OFF CREW CAB, from y63% to y93%: remove the WHOLE cab roof, ALL windshield glass, ALL side/rear glazing and ALL upper pillars; keep only low red side walls and dashboard. EXACTLY FIVE empty cab seats, forward-facing toward BOTTOM: front row THREE seat cushions centers(x33%,y85%),(x50%,y85%),(x67%,y85%); rear row TWO cushion centers(x33%,y71%),(x67%,y71%). Driver is image-RIGHT front seat, steering wheel directly ahead centered(x67%,y90%). Enough realistic knee space between rows, no giant empty cab or seats moved to edges. Exactly this3+2 layout, no extra seats. Dashboard along bottom, visible controls, red nose and silver front bumper y96%-98%. Side mirrors at image-left/right near y90%; vertical exhaust outlet beside rear corner of cab image-right(x89%,y64%). No windshield or roof left on cutaway. Realistic worn red paint, subdued cream trim, dust, restrained rust, no destroyed parts. Materials at consistent detail scale across cab and rear equipment. All six stations EMPTY, no riders, people, dots, writing, text, logos, markings, watermark, ground, background, checkerboard or shadow outside truck. Preserve transparent margins."
+    },
+    {
+      "id": "roof-off-v2",
+      "references": [
+        {
+          "path": "roof-off-v1.png",
+          "role": "edit target"
+        },
+        {
+          "path": "layout.png",
+          "role": "wheel and camera correction guide"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "EDIT the first reference, the painted fire-engine cutaway token. Second reference is the original geometric guide for correction of camera/wheels. Retain the fine painted materials and EXACT five-seat3+2 cab layout, tan hose bed, image-right ladder, central water monitor, red cream paint, and genuine transparent background. Two targeted corrections: (1) STRICT ORTHOGRAPHIC directly overhead, looking90degrees DOWN. The huge FRONT VERTICAL GRILLE and front headlights must become a thin strip at the bottom, not a large visible front elevation. Keep cab and seats visible from above, no roof or glazing. (2) SHOW THE TWO MISSING FRONT TYRES prominently, sticking out just beyond the low cab's left and right walls, at the axle level of the FRONT SEAT ROW, y84% of the vehicle length. Rear tyres remain at y23%. Exactly FOUR visible large black truck tyre positions on exactly TWO axles, no middle axle. Slightly exaggerate protruding tyre tread for top-down tabletop readability. Lengthen the rear equipment body, keep cab five-seat geometry realistic. The result should be a LONG NARROW topdown truck with length THREE TIMES its overall width, 1:3 aspect ratio, equivalent to2.6m wide8.5m long. Front DOWN. All four wheels, bumpers and mirrors fully in frame with transparent margin. No people, text or labels. Do not add any seat or change3front+2rear layout. Do not remove or cover the open standing area behind the monitor."
+    },
+    {
+      "id": "roof-on-v1",
+      "references": [
+        {
+          "path": "roof-off-native.png",
+          "role": "calibrated cutaway edit target"
+        },
+        {
+          "path": "portrait-v1.png",
+          "role": "cab roof appearance"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "EDIT reference1, the calibrated600x1800 painted overhead fire-pumper cutaway. Reference2 is the vehicle portrait for cab roof shape and color only. Produce matching ROOF-ON vehicle token. Keep reference1's EXACT frame, scale, orientation, complete exterior silhouette, BOTH axles and ALL FOUR visible tyres, mirrors, ladder, hoses, water monitor, platform, exhaust and every non-cab pixel. Front is DOWN. Only change the CREW CAB at bottom, x9%-91%, y67%-94%: add one weathered dull off-white painted sheet-metal roof, red pillars and side windows over the existing five-seat cabin. The cabin starts just below the open water monitor deck at y67%, roof extends down to y89%, a clearly visible dark RAKED FRONT WINDSHIELD band across x13%-87%,y89%-93%, with two wipers and a black center divider. This dark panoramic windshield MUST be visibly readable from strict overhead, because front glass slopes backwards. Do not make a vertical invisible windshield. Glass should be dark smoked dusty blue-gray, mostly opaque from reflection, no different invented seats or second steering wheel. Any glimpses inside must match existing3front+2rear seats, driver image-right. The existing front cab beacons at y93% stay on cream band. Do NOT move any seat, driver wheel or dashboard underneath the roof. Do NOT cover the open deck or water monitor at y51%-66%, NO canopy over it. The sixth operator position behind that monitor stays EMPTY and OPEN. The entire rear equipment body stays PIXEL-IDENTICAL to reference1. Strict90degree overhead orthographic camera, long narrow1:3frame. Genuine transparent background with the same alpha margins; no ground, people, water spray, smoke, text, emblems, logos, labels, new wheels, extra machinery or border."
+    },
+    {
+      "id": "portrait-v2",
+      "references": [
+        {
+          "path": "portrait-v1.png",
+          "role": "reframing edit target"
+        }
+      ],
+      "prompt": "Edit this fire-engine portrait ONLY to reframe the same entire truck slightly smaller, by about15percent, so its complete rear right corner and rear bumper are visible with a clear margin. Keep the SAME weathered red and cream two-axle American crew-cab pumper, cab, sloped windshield, open rear hose bed, silver ladder, manually operated red water monitor and exact painted realistic style. Keep three-quarter FRONT camera, road and dry guardrail setting, natural daylight. Extend the roadside surroundings as needed. Vehicle fully in frame with visible empty space at all edges. No people, text, lettering, insignia, logos, weapons, water spray or smoke. Do not change the vehicle design or add wheels."
+    },
+    {
+      "id": "roof-on-glass-v2",
+      "references": [
+        {
+          "path": "roof-on-registered.png",
+          "role": "opaque reflected glass edit target"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "Edit this overhead fire truck token ONLY inside the front windshield panes near the bottom. Make the two dusty smoked blue-gray panes opaque from soft sky reflection, so NO seats and NO steering wheel can be seen through them. Keep the same windshield outline, black rubber center divider, wipers and fine dusty glass material. Subtle muted gray sky reflection, not bright white, no landscape reflected. Preserve ALL other parts of the truck pixel-for-pixel: cab roof, beacons, wheels, mirrors, front bumper, red/cream paint, ladder, water monitor, hoses, rear equipment. Same strict overhead camera, front down, exact long narrow1:3frame, scale and transparent alpha. No new parts, shapes, writing, logos or people. Only eliminate the visible interior ghosts in the windshield."
+    }
+  ],
+  "postprocessing": "frame.py crops/resamples to the catalog frame and restores body width. compose.py registers the roof cab locally, copies only the revised glass panes, and composites a finite cab mask over the canonical cutaway. The entire exterior and alpha map are shared. No manual painting."
+}

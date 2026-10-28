@@ -1,0 +1,18 @@
+{
+ "vehicle": "bwp", "identity": "M2A2 Bradley", "canvas": [720,1350], "footprint": [2.4,4.5],
+ "front": "down", "tracks": 2, "crew": 3, "passengers": 6,
+ "referenceDriver": [0.713889,0.781481],
+ "referenceTurretSeats": [[0.295833,0.607407],[0.508333,0.607407]],
+ "referenceTroopRows": [
+  [[0.730556,0.414815],[0.269444,0.414815]],
+  [[0.730556,0.281481],[0.269444,0.281481]],
+  [[0.730556,0.148148],[0.269444,0.148148]]
+ ],
+ "referenceTroopRotations": [90,270], "referenceExhaust": [0.165278,0.751852],
+ "paintedAnchorsPixels": {"driver":[509,1009],"gunner":[370,785],"commander":[233,785],
+  "troopsFrontToRear":[[[507,548],[211,548]],[[507,383],[211,383]],[[507,220],[211,220]]]},
+ "roofTurretTranslationPixels": [-25,115],
+ "separateTurret": {"frame":[720,1350],"pivot":[300,790],"crop":[81,586,495,627],"pivotInCrop":[219,204]},
+ "review": "approved-2026-10-27", "date": "2026-10-27",
+ "notes": "M2A2 gameplay cutaway, 3 crew + 6 dismounts, opposite inward-facing benches. Rear ramp at top; driver hull-left, engine hull-right; two-person turret basket offset hull-right. Guide positions must be checked against painted output."
+}

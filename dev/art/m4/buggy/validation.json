@@ -1,0 +1,90 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/buggy/token-v1.png",
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "bytes": 2442808,
+      "sha256": "1458c69c30458657688f8385090f2951470a309bf37ffd300c90b90c5d1558a9",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        10,
+        51,
+        877,
+        1669
+      ],
+      "heightFillPercent": 91.21,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/pojazdy/buggy.webp",
+      "size": [
+        420,
+        840
+      ],
+      "mode": "RGBA",
+      "bytes": 148688,
+      "sha256": "b150092b1f60bfae2e384ce694b634124aadbee5fe7fcbc0628d71a1cb39bda1",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        5,
+        24,
+        416,
+        791
+      ],
+      "heightFillPercent": 91.31,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/portraits/pojazd-buggy.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 399610,
+      "sha256": "8bc82fa127306f8640b3eab4f8000b1fbb3fde3dc105c35c4723edb644b2f8e3"
+    }
+  ],
+  "finalSeats": [
+    [
+      0.635,
+      0.475
+    ],
+    [
+      0.365,
+      0.475
+    ]
+  ],
+  "finalExhaust": [
+    0.5,
+    0.035
+  ],
+  "frameMeters": [
+    2.1,
+    4.2
+  ],
+  "visibleBoundsMeters": [
+    2.055,
+    3.835
+  ],
+  "visualReview": {
+    "tyrePositions": 4,
+    "axles": 2,
+    "openSeatsSideBySide": 2,
+    "front": "down",
+    "driver": "image-right",
+    "rearEngine": true,
+    "roofPanel": false,
+    "ridersInArt": false
+  }
+}

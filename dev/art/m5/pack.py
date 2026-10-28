@@ -85,7 +85,8 @@ def convert(source: Path, destination: Path, spec: dict) -> dict:
             print(f"Upscaling {spec['id']}; resizing cannot add detail")
     destination.parent.mkdir(parents=True, exist_ok=True)
     quality = 85 if spec["kind"] in ("banner", "portrait") else 92
-    result.save(destination, "WEBP", quality=quality, method=6, exact=True)
+    result.save(destination, "WEBP", quality=quality, method=6, exact=True,
+                lossless=spec.get("lossless", False))
     report = validate(destination, spec)
     if spec["kind"] in ("banner", "portrait") and report["bytes"] > 150 * 1024:
         print(f"Review image budget for {spec['id']}: {report['bytes']} bytes (target 100–150 KB)")

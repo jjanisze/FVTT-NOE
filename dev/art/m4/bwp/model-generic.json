@@ -1,0 +1,13 @@
+{
+ "vehicle":"bwp",
+ "canvas":[600,1350],
+ "footprintSquares":[2,4.5],
+ "front":"down",
+ "tracks":2,
+ "referenceFrontCrew":[[0.666667,0.777778],[0.333333,0.777778]],
+ "referenceTurretSeat":[0.5,0.620741],
+ "referenceTroopRows":[[[0.683333,0.437037],[0.5,0.437037],[0.316667,0.437037]],[[0.683333,0.303704],[0.5,0.303704],[0.316667,0.303704]],[[0.683333,0.17037],[0.5,0.17037],[0.316667,0.17037]]],
+ "referenceExhaust":[0.82,0.716296],
+ "review":{"status":"awaiting-gm-review","date":"2026-10-27"},
+ "notes":"Original geometric layout, not an engineering blueprint: fictional compact IFV with two front crew, one turret operator and nine troops in3x3rows. All hatches closed in roof-on version; roof-off removes upper hull, hatches, turret and cannon above the cut plane. Final anchors measured from generated art."
+}

@@ -1,0 +1,15 @@
+{
+  "vehicle": "traktor",
+  "canvas": [450,750],
+  "front": "down",
+  "footprintSquares": [1.5,2.5],
+  "axleY": [0.32,0.842667],
+  "tyrePositions": 4,
+  "referenceSeats": [[0.5,0.313333],[0.713333,0.302667]],
+  "referenceExhaust": [0.584444,0.554667],
+  "finalSeats": [[0.5,0.32],[0.704444,0.293333]],
+  "finalExhaust": [0.567,0.499],
+  "presentation": {"widocznosc":"otwarta","warstwa":"nad"},
+  "review": {"status":"approved","date":"2026-10-27","scope":"portrait, token, proportions and both occupant anchors"},
+  "notes": "Original geometry guide, not an engineering blueprint. Large rear tyres at top; small front tyres at bottom. Driver central, passenger on vehicle-left mudguard (image right). Rollover hoop without canopy. Final anchors measured against rendered pixels."
+}

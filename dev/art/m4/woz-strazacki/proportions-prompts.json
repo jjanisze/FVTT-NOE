@@ -1,0 +1,46 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "revision": "2026-10-27, portrait proportions after GM rejection",
+  "requirements": {
+    "shorter": true,
+    "sectionFractions": {
+      "cab": 0.4,
+      "pump": 0.15,
+      "rear": 0.45
+    },
+    "narrowPumpWaist": true,
+    "ladderOnlyOnRearBody": true,
+    "moreProtrudingTyres": true,
+    "portraitUnchanged": true
+  },
+  "steps": [
+    {
+      "id": "roof-off-v3",
+      "references": [
+        {
+          "path": "layout-v2.svg and layout.png",
+          "role": "corrected geometric proportions and silhouette"
+        },
+        {
+          "path": "tokens/portraits/pojazd-woz-strazacki.webp",
+          "role": "authoritative vehicle portrait"
+        }
+      ],
+      "prompt": "Generate a revised painted ROOF-OFF top-down VTT token of the EXACT FIRE ENGINE in reference2 (portrait). Reference1 is a newly corrected geometric guide and is the HIGHEST authority for silhouette, section lengths, wheel locations, seats and ladder. Strict orthographic90degree overhead, front DOWN, full truck isolated with genuine transparent alpha, long narrow600x1650frame. Match portrait's weathered red/cream cab-over pumper, silver metalwork and restrained realistic painted style. CRITICAL CORRECTIONS: this is NOT one continuous rectangular bus body. It has THREE distinct sections: bottom FRONT crew CAB approximately40% of visible length, middle RECESSED NARROWER PUMP/PANEL section15%, top REAR storage/hose body45%. Main cab and rear body equal wide2.4m, middle pump section narrower2.0m: OUTLINE MUST STEP IN on BOTH sides immediately behind cab and step OUT again at rear storage body, with true transparent notches outside this narrow waist. Keep the short recessed pump section clearly readable, not an enormous full-width deck. Overall truck less elongated than previous tokens, about7.6m visible length and2.9m total width including protrusions. Exactly FOUR prominent black tyres on TWO axles, rear near y23%, front near y83%. Tyres protrude conspicuously beyond main body on both sides, like geometric guide, roughly20cm visible each side, for readability. NO middle wheels. Top rear body: neatly folded tan hoses; ONE secured aluminium ladder ONLY along image-RIGHT REAR STORAGE BODY from y6% to y44%. Ladder ends at the rear body's FRONT edge, NEVER crosses middle pump section and NEVER reaches cab. On narrow middle section y45%-59%: small central red manual WATER MONITOR, nozzle pointing DOWN, operators empty standing patch BEHIND it toward top, small hose reel at image-left, dark vertical exhaust outlet at IMAGE-LEFT FRONT corner of narrow pump section by back of cab. Cabin cutaway bottom y60%-91%: EXACTLY FIVE empty forward-facing seats; THREE front row at(x31%,82%),(x50%,82%),(x69%,82%); TWO rear at(x32.5%,67%),(x67.5%,67%). Driver image-RIGHT, steering wheel directly ahead of driver. Realistic seat and legroom scale, no extra seats. REMOVE entire cab roof, ALL glazing and ALL upper pillars; only low red walls and dashboard stay. Thin red nose and silver bumper near y95%, NO large vertical grille front face in this overhead view. No riders, labels, arrows, writing, logos, checkerboard, ground, external cast shadow, smoke or water spray. Faithfully preserve corrected guide's stepped silhouette, proportions and short ladder; portrait is exact vehicle identity and materials."
+    },
+    {
+      "id": "roof-on-proportions-v2",
+      "references": [
+        {
+          "path": "roof-off-native.png",
+          "role": "calibrated cutaway edit target"
+        },
+        {
+          "path": "tokens/portraits/pojazd-woz-strazacki.webp",
+          "role": "roof material and vehicle identity"
+        }
+      ],
+      "prompt": "EDIT reference1 only by adding a matching CAB ROOF to the bottom FRONT crew cab. It is a calibrated strict orthographic overhead fire truck with corrected portrait proportions. Reference2 gives the exact red and off-white cab roof material/design. Preserve exact vehicle geometry, scale,600x1650frame, FRONT DOWN, transparency and all existing exterior pixels. Critical invariants: keep the clearly NARROWER MIDDLE PUMP section, notches on BOTH sides behind cab, SHORT aluminium ladder that exists ONLY on image-right REAR hose body and ends before pump section; FOUR protruding tyres on two axles. NO extension of ladder toward cab, NO filling in narrow waist, NO extra wheels. Cabin occupies bottom40percent of visible truck, from y59% to y90%. Add aged off-white roof and red upper pillars ONLY over its existing five-seat cabin, x13%-87%, y59%-89%. Roof rear wall aligns exactly with existing rear wall at y59%; the same five seats3+2 remain underneath, do not reposition them. A broad RAKED FRONT WINDSHIELD visible overhead near y84%-89%, two dusty blue-gray opaque reflected panes, two black wipers and center divider. Reflected cloudy sky means NO visible steering wheel or invented seats through glass. Keep original red nose, bumper, wheels and mirrors at bottom unchanged. Roof beacons on roof corners just behind front windshield. Keep whole recessed pump section OPEN, water monitor, hose reel, left-side exhaust, right-side fittings and operator standing floor unchanged. The whole back hose bed and its short ladder unchanged. This is one vehicle, no people, water spraying, smoke, ground, text, logos, markings or labels. Keep1:2.75canvas ratio and fully transparent background."
+    }
+  ]
+}

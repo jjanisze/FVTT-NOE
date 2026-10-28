@@ -1,0 +1,20 @@
+<!doctype html><html lang="pl"><meta charset="utf-8"><title>Abrams — warstwy grafiki</title>
+<style>body{margin:20px;background:#202724;color:#ece8da;font:16px system-ui}main{display:flex;gap:24px;flex-wrap:wrap}canvas{width:min(650px,90vw);background:#424c45}aside{max-width:360px}label{display:block;margin:20px 0}input{width:100%}a{color:#bcd2f0}</style>
+<main><canvas id="art" width="2800" height="2800"></canvas><aside><h1>M1A1 Abrams — warstwy</h1>
+<p>W FVTT wieża na razie obraca się razem z kadłubem. Ten podgląd pozwala sprawdzić także przyszły niezależny obrót grafiki.</p>
+<label>Obrót pojazdu <output id="hullValue">0°</output><input id="hullAngle" type="range" min="0" max="360" value="0"></label>
+<label>Obrót samej wieży <output id="turretValue">0°</output><input id="turretAngle" type="range" min="-180" max="180" value="0"></label>
+<label><input id="axis" type="checkbox" checked style="width:auto"> Oś pierścienia i obrys kadłuba</label>
+<p>Oś: <b>389, 884</b> px w źródle 780×2100; <b>319, 426</b> px w wycinku 638×1588.</p>
+<p>Obrys zajmowanego pola: 780×1680 px (3,9×8,4 m). Lufa wystaje przed kadłub. Grafika ma dopasowanie do szerokości i kotwicę 50% / 40%.</p>
+<p><a href="README.md">Źródła, prompty i integracja</a></p></aside></main>
+<script>
+const hull=new Image(),turret=new Image();hull.src='../../../../tokens/pojazdy/kadluby/czolg.webp';turret.src='../../../../tokens/pojazdy/wieze/czolg.webp';
+const canvas=document.getElementById('art'),ctx=canvas.getContext('2d'),h=document.getElementById('hullAngle'),t=document.getElementById('turretAngle'),axis=document.getElementById('axis');
+function draw(){ctx.clearRect(0,0,2800,2800);ctx.save();ctx.translate(1400,1400);ctx.rotate(Number(h.value)*Math.PI/180);ctx.drawImage(hull,-390,-840);
+ if(axis.checked){ctx.strokeStyle='#a4c5e0';ctx.lineWidth=3;ctx.strokeRect(-390,-840,780,1680);}
+ ctx.translate(-1,44);ctx.rotate(Number(t.value)*Math.PI/180);ctx.drawImage(turret,-319,-426);
+ if(axis.checked){ctx.strokeStyle='#f0d454';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-24,0);ctx.lineTo(24,0);ctx.moveTo(0,-24);ctx.lineTo(0,24);ctx.stroke();}
+ ctx.restore();document.getElementById('hullValue').value=h.value+'°';document.getElementById('turretValue').value=t.value+'°';}
+Promise.all([hull.decode(),turret.decode()]).then(draw);[h,t,axis].forEach(el=>el.addEventListener('input',draw));
+</script></html>

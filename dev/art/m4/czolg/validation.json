@@ -1,0 +1,78 @@
+{
+  "identity": "M1A1 Abrams",
+  "size": [
+    780,
+    2100
+  ],
+  "hullViewport": [
+    780,
+    1680
+  ],
+  "footprintSquares": [
+    2.6,
+    5.6
+  ],
+  "footprintMetres": [
+    3.9,
+    8.4
+  ],
+  "texture": {
+    "fit": "width",
+    "anchorX": 0.5,
+    "anchorY": 0.4
+  },
+  "visibleHullBounds": [
+    25,
+    72,
+    755,
+    1658
+  ],
+  "visibleHullMetres": [
+    3.65,
+    7.93
+  ],
+  "visibleOverallMetres": 9.83,
+  "commonExteriorDifferences": 0,
+  "decodedNativeDifferences": 0,
+  "hullSilhouetteDifferences": 0,
+  "opaqueSeatAnchors": [
+    {
+      "role": "driver",
+      "x": 390,
+      "y": 1310
+    },
+    {
+      "role": "commander",
+      "x": 285,
+      "y": 770
+    },
+    {
+      "role": "loader",
+      "x": 517,
+      "y": 875
+    },
+    {
+      "role": "gunner",
+      "x": 276,
+      "y": 980
+    }
+  ],
+  "separateTurret": {
+    "crop": [
+      70,
+      458,
+      638,
+      1588
+    ],
+    "pivotInCrop": [
+      319,
+      426
+    ],
+    "pivotInSource": [
+      389,
+      884
+    ],
+    "reassembledPixelDifferences": 0
+  },
+  "review": "approved-2026-10-27"
+}

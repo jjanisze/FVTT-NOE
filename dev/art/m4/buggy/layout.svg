@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1200" viewBox="0 0 600 1200">
+<!-- Original mechanical layout, front down. Geometry guide, not shipped art. -->
+<g stroke="#242622" stroke-width="5" stroke-linejoin="round">
+ <g fill="#292c29">
+  <rect x="21" y="160" width="120" height="255" rx="35"/>
+  <rect x="459" y="160" width="120" height="255" rx="35"/>
+  <rect x="25" y="887" width="110" height="215" rx="30"/>
+  <rect x="465" y="887" width="110" height="215" rx="30"/>
+ </g>
+ <g stroke="#77776b" stroke-width="12" fill="none">
+  <path d="M80 280H520M80 995L180 930M520 995L420 930"/>
+ </g>
+ <path d="M140 420H460V875L440 1070H160L140 875Z" fill="#57584c"/>
+ <g fill="#77766a">
+  <rect x="187" y="145" width="226" height="257" rx="26"/>
+  <rect x="155" y="205" width="65" height="125" rx="10"/>
+  <rect x="380" y="205" width="65" height="125" rx="10"/>
+  <circle cx="300" cy="248" r="72" fill="#42463f"/>
+ </g>
+ <path d="M300 145V49" stroke="#858577" stroke-width="22" fill="none"/>
+ <g fill="#333733">
+  <rect x="155" y="542" width="126" height="226" rx="30"/>
+  <rect x="319" y="542" width="126" height="226" rx="30"/>
+  <path d="M162 684H274M326 684H438" fill="none" stroke="#171b17" stroke-width="7"/>
+ </g>
+ <rect x="278" y="680" width="44" height="180" fill="#6c6c5c"/>
+ <path d="M140 839H460" stroke="#42473e" stroke-width="45"/>
+ <g fill="none" stroke="#202520" stroke-width="12">
+  <ellipse cx="382" cy="796" rx="49" ry="40"/>
+  <path d="M338 782L382 805L426 782M382 805V832" stroke-width="7"/>
+ </g>
+ <path d="M181 902H419L439 1052H161Z" fill="#bb9943"/>
+ <g fill="none" stroke="#b89945" stroke-width="19">
+  <path d="M129 431H471V868L442 1113H158L129 868Z"/>
+  <path d="M129 431L471 520M471 431L129 520M140 865H460"/>
+  <path d="M161 99H439M161 99L129 431M439 99L471 431"/>
+ </g>
+ <path d="M145 1128H455" stroke="#626251" stroke-width="20"/>
+ <circle cx="178" cy="1037" r="26" fill="#e1dab2"/>
+ <circle cx="422" cy="1037" r="26" fill="#e1dab2"/>
+</g>
+</svg>

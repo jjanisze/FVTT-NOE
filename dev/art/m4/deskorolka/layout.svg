@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="540" viewBox="0 0 450 540">
+<!-- Board plan. Front down; four wheels under two transverse trucks. Frame 0.75 x 0.90 m. -->
+<g stroke="#4b4c43" stroke-width="3">
+<rect x="130" y="97" width="25" height="37" rx="8" fill="#dad0b2"/>
+<rect x="295" y="97" width="25" height="37" rx="8" fill="#dad0b2"/>
+<rect x="130" y="406" width="25" height="37" rx="8" fill="#dad0b2"/>
+<rect x="295" y="406" width="25" height="37" rx="8" fill="#dad0b2"/>
+<path d="M144 115 H306 M144 424 H306" stroke="#9b9e91" stroke-width="9"/>
+<path d="M225 16 C280 16 297 48 298 92 L301 431 C300 491 280 524 225 524 C170 524 150 491 149 431 L152 92 C153 48 170 16 225 16Z" fill="#292e2c" stroke="#b6965c" stroke-width="8"/>
+<path d="M209 100 H241 M209 117 H241 M209 418 H241 M209 435 H241" stroke="none"/>
+<g fill="#8f8c73" stroke="#303832" stroke-width="2">
+<circle cx="209" cy="100" r="4"/><circle cx="241" cy="100" r="4"/>
+<circle cx="209" cy="117" r="4"/><circle cx="241" cy="117" r="4"/>
+<circle cx="209" cy="418" r="4"/><circle cx="241" cy="418" r="4"/>
+<circle cx="209" cy="435" r="4"/><circle cx="241" cy="435" r="4"/>
+</g>
+<path d="M190 466 L252 444 L264 472 L201 493Z" fill="#aaa99d" stroke="#757d72" stroke-width="2"/>
+</g></svg>

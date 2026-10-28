@@ -1,0 +1,30 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "steps": [
+    {
+      "id": "portrait-v1",
+      "references": [
+        {
+          "path": "tokens/portraits/pojazd-hammer.webp",
+          "role": "painting style only"
+        }
+      ],
+      "prompt": "Create a square illustrated actor portrait for a gritty post-apocalyptic tabletop RPG. Reference image 1 is STYLE ONLY: use its finely detailed painterly realism, weathered materials, muted natural colors and practical believable machinery. Do NOT draw the vehicle in the reference. Subject: one old generic American two-wheel-drive farm tractor, chalky faded oxblood-red paint, rust around panels, long narrow enclosed engine bonnet, vertical black exhaust stack on bonnet, two huge chevron-tread REAR tyres and two considerably smaller FRONT tyres. Exactly four wheels, two axles, correct working farm-tractor proportions. Open driver station behind the bonnet: one worn black sprung driver's seat centered between the big rear wheels, steering wheel in front of it; simple squared rollover hoop behind the seat, NO roof or canopy, NO enclosed glass cab. The vehicle's left rear mudguard has a broad flat metal passenger perch with a small worn dark cushion and a grab handle, visibly separate and beside the central driver's seat. No second steering wheel. Rear three-point towing hitch. Modest old utility tractor approximately 2m wide and 3.4m long; functional, not a toy, not a monster truck. Three-quarter FRONT view, slightly elevated so the open operator area can be seen. Parked on cracked tarmac at an abandoned rural road with dry grass and rusty roadside barrier. Entire tractor in frame, no cropping. Empty vehicle, no people, no figures, no text, logos, insignia, watermarks, weapons or extra machinery."
+    },
+    {
+      "id": "token-v1",
+      "references": [
+        {
+          "path": "dev/art/m4/traktor/layout.png",
+          "role": "original geometric layout"
+        },
+        {
+          "path": "dev/art/m4/traktor/portrait-v1.png",
+          "role": "vehicle design and materials"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "Create ONE painted top-down VTT vehicle token on a genuinely transparent background. Reference1 is the original geometry guide and has the highest authority for camera, silhouette, proportions and layout. Reference2 is the tractor's portrait: match its worn rust-red paint, black upholstery, rusty rollover hoop, working parts and finely detailed gritty painterly style. Translate the flat diagram into finished painterly token art, NOT a diagram. Strict orthographic directly overhead camera, no perspective lean, vehicle length vertical, FRONT POINTING STRAIGHT DOWN. Entire vehicle visible with a small transparent margin. EXACTLY FOUR tyres in TWO axles: two HUGE wide chevron-tread rear tyres near the TOP at y32%; two much smaller narrow ribbed front tyres near the BOTTOM at y84%. Preserve the axle spacing and keep each wheel on its designated axle, no middle or duplicate wheels. Overall tractor about 2.0m wide and3.4m long. Central red engine bonnet extends downward from y45% to y91%, width26% of image. Central single black sprung DRIVER seat center(x50%,y31%), steering wheel ahead of it at(x50%,y41%), footwell between. One SECOND small black cushion on the broad image-RIGHT rear red mudguard center(x71%,y30%), a passenger perch with grab handle, side-by-side with driver, not in tandem. Both empty seats are clearly readable from above; driver center and fender passenger offset to image right. Simple squared rollover hoop goes across BEHIND the driver's seat near y19%; no roof, canopy, glazing or enclosed cab. Stack on hood at(x58%,y55%), seen from above as a small dark round outlet, not a long horizontal pipe; no smoke. Visible rear towing hitch at TOP. Big tyres stand outside narrow red mudguards; clear chevron tread, dust, chipped paint, restrained rust, readable heavy machinery. Single continuous isolated vehicle with true alpha also in gaps between the axles, engine and front wheels; no ground, backdrop, checkerboard, shadows outside vehicle, people, labels, arrows, lines, emblems or watermark. Keep the exact geometric guide layout while enriching materials."
+    }
+  ]
+}

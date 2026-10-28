@@ -1,0 +1,88 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/buldozer/token-v1.png",
+      "size": [
+        992,
+        1586
+      ],
+      "mode": "RGBA",
+      "bytes": 2493172,
+      "sha256": "602b8149c12f5ed749b163486d44759ccc932e7b653c3598e1588086de7d170e",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "visibleBounds": [
+        15,
+        11,
+        977,
+        1577
+      ],
+      "borderAlphaMax": 4
+    },
+    {
+      "file": "tokens/pojazdy/buldozer.webp",
+      "size": [
+        750,
+        1200
+      ],
+      "mode": "RGBA",
+      "bytes": 347214,
+      "sha256": "228d4ac1fa3b637ca7bbf4195ca552a09c59928464de3d4b46da21449b30efaa",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "visibleBounds": [
+        20,
+        22,
+        730,
+        1178
+      ],
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "tokens/portraits/pojazd-buldozer.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 435584,
+      "sha256": "b1292f5159b6ecb069bb5320c04c293999c1b37ef760bede7c0f6b95f908f0e3"
+    }
+  ],
+  "frameMeters": [
+    3.75,
+    6.0
+  ],
+  "visibleBoundsMeters": [
+    3.55,
+    5.78
+  ],
+  "finalSeats": [
+    [
+      0.4387,
+      0.3867
+    ],
+    [
+      0.5747,
+      0.3867
+    ]
+  ],
+  "finalExhaust": [
+    0.451,
+    0.538
+  ],
+  "visualReview": {
+    "tracks": 2,
+    "frontBlade": true,
+    "rearRipperTeeth": 1,
+    "openSeats": 2,
+    "operator": "image-left",
+    "helper": "image-right",
+    "roof": false,
+    "ridersInArt": false
+  }
+}

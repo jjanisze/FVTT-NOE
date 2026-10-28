@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1800" viewBox="0 0 600 1800">
+  <!-- Orthographic cutaway, front DOWN. Four tyre positions on exactly two axles. -->
+  <g stroke="#292d29" stroke-width="7" stroke-linejoin="round">
+    <rect x="72" y="55" width="456" height="1688" rx="18" fill="#424641"/>
+    <rect x="14" y="354" width="65" height="203" rx="24" fill="#242625"/>
+    <rect x="521" y="354" width="65" height="203" rx="24" fill="#242625"/>
+    <rect x="14" y="1455" width="65" height="203" rx="24" fill="#242625"/>
+    <rect x="521" y="1455" width="65" height="203" rx="24" fill="#242625"/>
+    <!-- Empty open bed: floor between low wooden sideboards. -->
+    <rect x="77" y="69" width="446" height="1000" fill="#6c5945"/>
+    <path d="M113 93 V1045 M157 93 V1045 M201 93 V1045 M245 93 V1045 M289 93 V1045 M333 93 V1045 M377 93 V1045 M421 93 V1045 M465 93 V1045 M501 93 V1045" stroke="#473e33" stroke-width="3"/>
+    <path d="M91 305 H511 M91 615 H511 M91 915 H511" stroke="#8e7454" stroke-width="3"/>
+    <rect x="73" y="66" width="26" height="1008" fill="#715b42"/>
+    <rect x="501" y="66" width="26" height="1008" fill="#715b42"/>
+    <rect x="78" y="61" width="445" height="30" fill="#715b42"/>
+    <rect x="78" y="1041" width="445" height="30" fill="#715b42"/>
+    <path d="M85 107 V1038 M515 107 V1038" stroke="#333934" stroke-width="12"/>
+    <path d="M76 200 H102 M76 470 H102 M76 740 H102 M76 1015 H102 M498 200 H525 M498 470 H525 M498 740 H525 M498 1015 H525" stroke="#303630" stroke-width="15"/>
+    <rect x="111" y="1078" width="111" height="29" rx="7" fill="#87897c"/>
+    <!-- Cabin opening includes all roof, pillars and glazing. Lower doors remain. -->
+    <rect x="78" y="1116" width="444" height="335" rx="27" fill="#959f86"/>
+    <rect x="102" y="1140" width="396" height="275" rx="12" fill="#666b62"/>
+    <path d="M515 1141 V1417" stroke="#c9bea0" stroke-width="28"/>
+    <path d="M85 1141 V1417" stroke="#929e83" stroke-width="16"/>
+    <!-- Three equal seats centered at x=.33/.50/.67, y=.711. -->
+    <rect x="151" y="1210" width="94" height="138" rx="17" fill="#555955"/>
+    <rect x="253" y="1210" width="94" height="138" rx="17" fill="#555955"/>
+    <rect x="355" y="1210" width="94" height="138" rx="17" fill="#555955"/>
+    <path d="M158 1260 H239 M260 1260 H341 M362 1260 H443" stroke="#808077" stroke-width="5"/>
+    <rect x="121" y="1377" width="358" height="45" rx="9" fill="#414943"/>
+    <circle cx="402" cy="1367" r="27" fill="none" stroke="#262b28" stroke-width="9"/>
+    <path d="M402 1340 V1394 M376 1367 H428" stroke="#262b28" stroke-width="5"/>
+    <circle cx="300" cy="1373" r="7" fill="#252927"/>
+    <!-- Hood, fenders and bumper. -->
+    <path d="M86 1433 Q300 1453 514 1433 L501 1666 Q300 1717 99 1666 Z" fill="#929e83"/>
+    <path d="M177 1444 L162 1671 M423 1444 L438 1671" stroke="#6a7667" stroke-width="4"/>
+    <rect x="94" y="1694" width="412" height="50" rx="10" fill="#686d65"/>
+    <rect x="98" y="1670" width="62" height="24" rx="5" fill="#c0bc9f"/>
+    <rect x="440" y="1670" width="62" height="24" rx="5" fill="#c0bc9f"/>
+    <!-- Mirrors and the single exhaust behind the cab, image-left. -->
+    <path d="M83 1236 H35 M517 1236 H565" stroke="#626b61" stroke-width="10"/>
+    <rect x="21" y="1195" width="27" height="90" rx="8" fill="#6e756b"/>
+    <rect x="552" y="1195" width="27" height="90" rx="8" fill="#6e756b"/>
+    <path d="M58 1169 V1104 L70 1089" fill="none" stroke="#5d655e" stroke-width="18"/>
+    <ellipse cx="70" cy="1089" rx="15" ry="12" fill="#232925"/>
+  </g>
+</svg>

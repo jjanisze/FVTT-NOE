@@ -1,0 +1,40 @@
+{
+  "tool": "OpenAI built-in image generation",
+  "date": "2026-10-26",
+  "steps": [
+    {
+      "output": "../in/portrety/ciezarowka.png",
+      "references": [
+        {
+          "file": "../../../../tokens/portraits/pojazd-hammer.webp",
+          "role": "painting style/world only"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: square actor portrait for a post-apocalyptic tabletop vehicle catalog. Input image is ONLY the established painting style/world reference, not the vehicle to depict. Generate one mechanically plausible late-1980s North American medium-duty conventional-cab stake-bed cargo truck, full vehicle seen in three-quarter front view from slightly above on a cracked highway shoulder. Exactly TWO axles, a single front axle and a single rear axle, no middle axle; four visibly substantial tyre positions. Long empty open cargo bed behind a compact three-person cab, low weathered brown wooden plank sides with dark steel corner stakes, clearly visible empty timber bed floor, NO tarp, NO box van body. Long conventional bonnet in front of cab. Faded pale sage-green cab and bonnet with one old dull cream replacement door, chipped paint and restrained surface rust; dark gray steel chassis, battered utilitarian bumper, rounded rectangular headlamps, tall narrow exhaust stack immediately behind cab on the truck's driver side. Realistic workhorse proportions: overall approximately 8.5 m long, 2.6 m wide; cab plus hood front third, flat cargo bed rear two thirds. Grounded detailed painterly realism matching the reference, dry neutral daylight, worn materials, muted American wasteland palette, no stylized spikes or fantasy. Fit entire truck, both axles, front bumper and rear bed corners with clear margins. Sparse gravel and dry grass background, opaque image. No people, riders, animals, weapons, text, numbers, logos, emblems, license plate lettering or watermark."
+    },
+    {
+      "output": "roof-off.png",
+      "references": [
+        {
+          "file": "layout.png",
+          "role": "authoritative overhead geometry"
+        },
+        {
+          "file": "../in/portrety/ciezarowka.png",
+          "role": "truck appearance"
+        }
+      ],
+      "prompt": "Use case: sketch-to-render. Asset: transparent 1:3 portrait-format virtual tabletop truck token, roof-off cutaway. Input 1 is authoritative ORTHOGRAPHIC GEOMETRY: match its exact component positions and proportions. Input 2 supplies this truck's appearance and painterly rendering style, not its perspective. Paint input1 as that same faded sage-green conventional-cab American stake-bed truck, cream replacement driver door on IMAGE RIGHT, weathered brown wooden empty cargo bed. Strict straight-down NADIR view, front DOWN, rear at TOP. Keep silhouette, exactly TWO axles and FOUR large visible tyre positions: rear pair centered y25.3%, front pair y86.5%, each side; absolutely no middle wheels or extra axle. Empty open wood bed occupies x13%-87%, y4%-59%, with low plank sideboards and dark metal stakes; show its floor. Exposed cab occupies y62%-80%, hood y80%-94%, front bumper ends y97%. Cabin roof, ALL windshield glass, side windows and upper pillars are removed completely, including the whole cabin's upper rim. Keep only lower doors and dashboard. Exactly THREE equal forward-facing dark gray vinyl seats in ONE row, centers x67%,50%,33%, y71.1%; steering wheel at image RIGHT x67% y76%, dashboard at y78%. Seats sit naturally immediately behind dashboard with a little foot space, no empty cavern or extra row. No cargo, no people, no boxes, no fourth seat. Lower IMAGE RIGHT door remains cream-painted. A dark vertical exhaust top immediately behind cab on IMAGE LEFT around x10% y61%; chrome mirrors visible. Realistic worn materials and fine but readable painted detail, same grounded neutral daylight style as portrait. Do not render a roof, glazing, shadows of a roof or opaque roof pillars over seats. Actual transparent alpha background outside truck, transparent gaps beside chassis, no ground or ground shadow. Entire bumper, tyres, mirrors and bed inside frame with clear margin; long-side fill approximately94%. No grid, text, logos, labels, insignia or weapons. One truck only, centred, no perspective, do not rotate it."
+    },
+    {
+      "output": "roof-on.png",
+      "references": [
+        {
+          "file": "roof-off.png",
+          "role": "edit target; preserve all geometry outside cabin"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: the finished roof-off top-down truck token. Produce the matching ROOF-ON version by adding ONLY the cabin roof, windshield, side windows and upper pillars over the exposed cabin. The cabin is between normalized y61% and78% of the existing canvas; add faded pale sage-green stamped steel roof above its three established seats, roof panel approximately y61.5%-71%, windshield y71%-78%. Preserve the exact existing positions of the three seats and steering wheel under the glass, so visible fragments align with the roof-off target. Dark dusty but partially transparent glass, believable narrow pillars, same cream replacement driver door at IMAGE RIGHT. Do not move or invent seats. Crucial: the entire LARGE WOODEN CARGO BED at y3%-59% stays OPEN and EMPTY, with precisely the existing floor planks and low wooden sideboards. Do NOT put any roof, tarp or cargo over the bed. Preserve ALL existing pixels/geometry outside the cab: wheels, both axle positions, bonnet, grille, bumper, exhaust stack, mirrors, chassis, weathering, padding and overall silhouette; exactly four tyre positions, no new wheels. Same straight-overhead orthographic view, front DOWN, same full 1:3 canvas, same actual transparent alpha outside truck, no background or ground shadow. One matching vehicle only. No people, text, logos, weapons or new decorations."
+    }
+  ]
+}

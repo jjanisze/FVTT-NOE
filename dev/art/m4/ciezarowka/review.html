@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ciężarówka — kabina i paka</title>
+<style>
+body{margin:0;padding:24px;background:#292e2b;color:#eee;font:17px system-ui}main{display:flex;align-items:flex-start;gap:45px;flex-wrap:wrap}figure{margin:0}figcaption{margin:0 0 14px}.portrait{width:490px;max-width:100%}.pair{position:relative;width:280px;max-width:90vw;background:repeating-conic-gradient(#555c57 0 25%,#4b524d 0 50%) 0/32px 32px}.pair img{display:block;width:100%}.roof{position:absolute;inset:0}.anchors{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.hide .anchors{display:none}label{display:block;margin:15px 0}button{font:inherit;margin-bottom:20px;padding:7px 12px}input{width:260px;vertical-align:middle}
+</style>
+<h1>Ciężarówka · kabina i otwarta paka</h1>
+<label>Dach kabiny <input type="range" min="0" max="100" value="100" oninput="document.querySelector('.roof').style.opacity=this.value/100"></label>
+<button onclick="document.querySelector('.pair').classList.toggle('hide')">Pokaż / ukryj kotwice</button>
+<main><figure><figcaption>Portret</figcaption><img class="portrait" src="../../../../tokens/portraits/pojazd-ciezarowka.webp" alt="Zielona ciężarówka z drewnianą paką"></figure>
+<figure><figcaption>Rzut z góry · 3 miejsca w kabinie + 8 na pace</figcaption><div class="pair"><img src="../../../../tokens/pojazdy/wnetrza/ciezarowka.webp" alt="Odsłonięta kabina i paka"><img class="roof" src="../../../../tokens/pojazdy/ciezarowka.webp" alt="Dach kabiny"><svg class="anchors" viewBox="0 0 600 1800" aria-label="Miejsca załogi"></svg></div></figure></main>
+<script>
+const points=[[.675,.709444],[.5,.709444],[.325,.709444],[.72,.48],[.5,.48],[.28,.48],[.72,.32],[.5,.32],[.28,.32],[.66,.16],[.34,.16]];
+document.querySelector('.anchors').innerHTML=points.map(([x,y],i)=>`<circle cx="${x*600}" cy="${y*1800}" r="30" fill="${i<3?'#73adff':'#8ddc9a'}" fill-opacity=".5" stroke="white" stroke-width="3"/>`).join('');
+</script></html>

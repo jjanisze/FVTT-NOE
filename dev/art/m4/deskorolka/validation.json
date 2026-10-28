@@ -1,0 +1,43 @@
+{
+  "vehicle": "deskorolka",
+  "frame": [
+    180,
+    216
+  ],
+  "footprintSquares": [
+    0.6,
+    0.72
+  ],
+  "frameMetres": [
+    0.9,
+    1.08
+  ],
+  "sizeAdjustment": 1.2,
+  "visibleBounds": [
+    54,
+    3,
+    126,
+    209
+  ],
+  "visibleMetres": [
+    0.36,
+    1.03
+  ],
+  "riderAnchor": [
+    0.5,
+    0.5
+  ],
+  "riderAnchorPixel": [
+    90,
+    108
+  ],
+  "anchorAlpha": 252,
+  "standing": true,
+  "engine": false,
+  "presentation": {
+    "widocznosc": "otwarta",
+    "warstwa": "nad"
+  },
+  "occupantSizeTuning": "deferred-by-gm-2026-10-28",
+  "review": "art-retained-2026-10-28; resized-to-120-percent-by-gm-request"
+}

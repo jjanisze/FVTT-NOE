@@ -1,0 +1,44 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "mode": "reference-guided generation and a targeted portrait edit",
+  "model": "Not exposed by the tool",
+  "steps": [
+    {
+      "output": "portrait-v1.png",
+      "prompt": "Use case: stylized-concept. Asset type: square RPG vehicle portrait.\nCreate a small late-1970s Japanese step-through 50cc commuter moped of the type sold in the United States, with a Super Cub-like silhouette. The reference image supplies ONLY the existing illustration style and quiet roadside setting, NOT its heavy motorcycle design.\nThe moped has a slender faded turquoise pressed-steel frame, scuffed ivory leg shield, narrow spoked wheels with slim black road tyres, short simple fork, small round headlight, modest straight handlebar with two small mirrors, a tiny air-cooled engine, ONE short separate black saddle and a faded rust-red plastic milk crate securely strapped to the flat rear rack behind the saddle. The crate is empty and open at the top. No passenger pad. Compact, lightweight utilitarian machine; readable thin wheels, modest body width; no cruiser tank, no V-twin engine, no broad scooter floorboard.\nElevated front-left three-quarter view, front toward lower left; entire moped, both wheels, mirrors, rear crate fit comfortably inside the square. Stationary unoccupied on a quiet cracked asphalt shoulder, sparse dry weeds and gravel. Side stand down, engine off. Detailed realistic hand-painted post-apocalyptic tabletop artwork, fine material texture, restrained rust, chipped paint, dusty chrome. Muted neutral daylight and natural colors, same finish as the reference. Mechanically intact. No rider, people, weapons, text, logos, letters, numbers, insignia or watermark. Opaque background.",
+      "references": [
+        {
+          "path": "../../../../tokens/portraits/pojazd-motocykl.webp",
+          "role": "painting style and roadside setting only"
+        }
+      ],
+      "transparent_background": false
+    },
+    {
+      "output": "portrait-v2.png",
+      "prompt": "Precise object edit. Keep this moped portrait exactly as it is: same composition, vehicle, color, materials, lighting and road. Remove only the tiny engraved letter-like manufacturer's mark on the round silver engine cover near the lower center. That round metal cover should be blank worn metal with its existing bolts and scratches. No other changes.",
+      "references": [
+        {
+          "path": "portrait-v1.png",
+          "role": "edit target; remove tiny engine-cover mark"
+        }
+      ],
+      "transparent_background": false
+    },
+    {
+      "output": "token-v1.png",
+      "prompt": "Use case: sketch-to-render. Asset type: transparent top-down tabletop vehicle token.\nImage 1 is the authoritative proportional guide, FRONT DOWN, rear at top. Image 2 is the exact vehicle identity, finish and materials to depict. Render the guide as a finely detailed hand-painted orthographic overhead token of that small vintage step-through moped: faded turquoise steel frame, ivory leg shield, single short black saddle, narrow road tyres, chrome handlebars and mirrors, empty rust-red milk crate strapped behind the saddle. No text or branding.\nFollow the guide's longitudinal spacing: rear wheel at top largely hidden by rack/crate; rectangular open crate behind ONE oval saddle; saddle centered near 37% of image height; open step-through well and ivory leg shield forward of saddle; handlebar across near 65% of height; short fork and front fender, front tyre at bottom. Keep the front assembly compact, no extended cruiser fork. Exactly TWO wheels in tandem on the centerline. Thin road tyres, no extra side wheels, no passenger cushion, no huge tank. Small engine between footpegs; slim exhaust along image-left side with rear outlet near crate, approximately x28%, y22%.\nSTRICT orthographic view directly above: visible top surfaces only, no visible sides of upright panels, no angled camera, no diagonal vehicle. Front wheel straight. Both mirrors seen from above. Side stand folded away. Preserve the guide's full silhouette and clear margins; allow about 6% total longitudinal empty space. Vertical frame aspect 5:13. Whole moped and mirrors contained. Genuine TRANSPARENT background, no road, cast ground shadow, base, ring, tracks, border, rider, person, writing, logo, letters or numbers. Same realistic painted detail, worn materials and muted natural colors as the portrait.",
+      "references": [
+        {
+          "path": "layout.png",
+          "role": "proportional layout; front down"
+        },
+        {
+          "path": "portrait-v2.png",
+          "role": "vehicle identity and finish"
+        }
+      ],
+      "transparent_background": true
+    }
+  ]
+}

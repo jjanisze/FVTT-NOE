@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="1200" viewBox="0 0 750 1200">
+<!-- Original plan matched to portrait. Front down: blade, hood, open two-seat platform, rear ripper. -->
+<defs>
+ <pattern id="track" width="155" height="28" patternUnits="userSpaceOnUse"><rect width="155" height="28" fill="#444b44"/><path d="M0 5H155M0 22H155M15 2V25M140 2V25" stroke="#7f8270" stroke-width="6"/></pattern>
+ <pattern id="plate" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#7d7d66"/><path d="M2 5L7 1M12 17L17 12" stroke="#a6a68b" stroke-width="3"/></pattern>
+</defs>
+<g stroke="#4d492f" stroke-width="5" stroke-linejoin="round">
+ <path d="M300 280V230H450V280M375 230V115L398 74H365L342 115V230" fill="#aa822a"/>
+ <path d="M295 268L350 190M455 268L400 190" stroke="#7c806c" stroke-width="20"/>
+ <rect x="90" y="260" width="155" height="740" rx="70" fill="url(#track)"/>
+ <rect x="505" y="260" width="155" height="740" rx="70" fill="url(#track)"/>
+ <rect x="236" y="300" width="278" height="667" rx="15" fill="#ad862a"/>
+ <rect x="252" y="345" width="246" height="264" fill="url(#plate)"/>
+ <rect x="268" y="411" width="94" height="103" rx="12" fill="#31372d"/>
+ <rect x="268" y="393" width="94" height="28" rx="7" fill="#3d4135"/>
+ <rect x="393" y="420" width="84" height="84" rx="7" fill="#383e32"/>
+ <rect x="393" y="405" width="84" height="22" rx="5" fill="#4b4e3b"/>
+ <path d="M266 370V350H483V370M266 590V615H483V590" fill="none" stroke="#b58b2c" stroke-width="13"/>
+ <path d="M268 370V590M483 370V590" fill="none" stroke="#a08239" stroke-width="8"/>
+ <path d="M273 539V574M357 539V574" stroke="#282f24" stroke-width="9"/>
+ <circle cx="273" cy="539" r="9" fill="#232b22"/><circle cx="357" cy="539" r="9" fill="#232b22"/>
+ <rect x="247" y="615" width="256" height="319" rx="18" fill="#c39831"/>
+ <path d="M375 630V919M265 630H486" stroke="#d3ac52"/>
+ <circle cx="327" cy="704" r="22" fill="#292f25"/><path d="M312 691L341 716" stroke="#6e725c" stroke-width="9"/>
+ <circle cx="442" cy="728" r="18" fill="#464d37"/>
+ <path d="M269 947H484M269 961H484" stroke="#4f563e"/>
+ <path d="M112 841L97 1062M638 841L653 1062" stroke="#a8852f" stroke-width="30"/>
+ <path d="M256 760L176 1055M494 760L574 1055" stroke="#b79236" stroke-width="26"/>
+ <path d="M233 837L180 1030M517 837L570 1030" stroke="#b5b8a2" stroke-width="14"/>
+ <path d="M28 1043Q375 1090 722 1043L730 1122Q375 1186 20 1122Z" fill="#aa842c"/>
+ <path d="M24 1118Q375 1176 726 1118" fill="none" stroke="#a5a892" stroke-width="19"/>
+</g>
+</svg>

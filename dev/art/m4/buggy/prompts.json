@@ -1,0 +1,31 @@
+{
+  "tool": "OpenAI built-in image generation",
+  "date": "2026-10-26",
+  "steps": [
+    {
+      "output": "../in/portrety/buggy.png",
+      "references": [
+        {
+          "file": "../../../../tokens/portraits/pojazd-hammer.webp",
+          "role": "rendering style only"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset: square opaque illustrated vehicle portrait for a post-apocalyptic tabletop RPG. Input image is a reference for painting style, palette restraint and level of detail only, not for vehicle design. Create one small unoccupied, mechanically plausible two-seat open-frame American dune buggy, a scavenged 1970s kit-built sandrail. Welded tubular steel roll cage with chipped faded mustard-yellow paint and rusty joints; exactly two worn charcoal-black bucket seats side by side; driver seat on the vehicle's LEFT; open cockpit with absolutely no roof panel or canopy, no enclosed bodywork, no windshield glass. Two front and two rear fat knobbly off-road tyres, rear tyres a little larger; a visible air-cooled flat-four engine mounted BEHIND the seats, exposed rear suspension and a modest central rear exhaust outlet. Small battered dull yellow nose panel and open side rails, bare metal floor pan, black steering wheel, utilitarian salvage repairs, serviceable rather than wrecked. No spare wheel, luggage, roof cargo, weapons or oversized fantasy spikes. Entire vehicle including all four wheels visible with generous margin, three-quarter front view from slightly above, nose toward lower left. Parked on cracked asphalt with sandy gravel and sparse dead grass, indistinct dry wasteland behind. Same detailed painterly realism, soft dry daylight, textured brushwork and readable mechanical silhouette as reference. Subject dominates a square composition. No people, riders, figures, lettering, numerals, logos, brand emblems or watermark. Opaque background."
+    },
+    {
+      "output": "token-v1.png",
+      "references": [
+        {
+          "file": "layout.png",
+          "role": "authoritative orthographic geometry"
+        },
+        {
+          "file": "../in/portrety/buggy.png",
+          "role": "same vehicle appearance"
+        }
+      ],
+      "prompt": "Use case: sketch-to-render. Asset: transparent top-down vehicle token for a tabletop virtual map, one empty open-frame dune buggy. Image 1 is the AUTHORITATIVE authored orthographic geometry and framing guide. Image 2 is the SAME vehicle's portrait, controlling paint, wear, construction and painterly rendering style. Render Image 1 into finished detailed art consistent with Image 2; do not convert it into a perspective view. Strict 90-degree vertical overhead orthographic camera, centered long axis vertical, vehicle FRONT points straight DOWN. Tall canvas aspect ratio exactly 1:2, e.g. 768 by 1536, full vehicle inside clear transparent margins, occupies about 94% of long axis. Keep the layout's exactly FOUR tyre contact positions on exactly TWO axles: larger rear pair near y=24%, front pair near y=83%; both left tyres and both right tyres clearly visible, sufficiently pronounced for miniature readability. No middle wheels, no spare wheel. Exposed rear flat-four engine and air filter at TOP behind the cockpit, rear exhaust points out at top center x=50%,y=4%. Two EMPTY worn black bucket seats SIDE BY SIDE, not tandem, centered approximately (x=36%,y=55%) and (x=64%,y=55%), backs toward top and footwells below; steering wheel ahead of image-RIGHT seat, around x=64%,y=66%, facing bottom. Correct proportions: snug seat backs, cushions, a small central tunnel, legroom toward bottom; no huge empty void inside. Entire interior visible directly from above, no roof panel, no fabric roof, no glass, no driver, no passengers. Slender mustard-yellow tubular roll cage: perimeter rails on the sides, transverse rear hoop and bracing BEHIND the seats, front hoop at the lower edge of the cockpit. Do not put crossbars or X braces across either seat. Small dull mustard-yellow nose panel at bottom, two modest round lamps, exposed front suspension, scuffed steel floor pan, rusty welded joints, worn dark rubber chunky tread. Painted realistic illustration matching the established RPG art, restrained dusty earthy palette, soft even lighting, excellent readable contours and sharp details. Preserve the geometry guide's practical two-seat scale and symmetric straight wheel alignment. No dramatic shadows, no ground plane, no scenery, no circular token base, no text, logos or watermark. Genuine transparent background including any spaces through the tubular frame.",
+      "transparent_background": true
+    }
+  ]
+}

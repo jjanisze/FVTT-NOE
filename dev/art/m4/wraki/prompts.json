@@ -1,0 +1,22 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "mode": "reference edit; transparent wreck token",
+  "model": "Not exposed by the tool",
+  "steps": [
+    {
+      "output": "osobowy-v1.png",
+      "prompt": "Precise vehicle-state edit for a transparent top-down tabletop token. Image 1 is the exact overhead geometry and orientation to preserve. Image 2 provides the matching vehicle identity and painterly material style.\nTurn the empty four-door sedan into a burned-out, permanently wrecked shell. FRONT DOWN, rear at top, strict straight overhead view. Keep the same outer hull dimensions, same short front bonnet and long rear trunk, same four wheel positions, same full 1:2 framing with transparent margins. Crumpled and heat-buckled bodywork, caved-in torn roof, every window empty with NO glass, interior gutted to scorched seat frames and bare metal floor, four charred tyres collapsed around exposed steel rims. Black charcoal, oxidized dark reddish rust and faint surviving dusty blue paint. Remove the roof luggage and intact rack: only a couple of warped burned rack bars may remain. Broken lamps, bent bumpers and missing trim; clearly destroyed rather than merely dirty. No giant cartoon explosion hole and no extra wheels. No detached debris outside the original footprint.\nDetailed realistic hand-painted worn industrial materials, consistent with the source token. Neutral overhead light, readable black and rust silhouette, fine self-shading only. TRUE transparent background. No ground, road, crater, cast ground shadow, base, border, ring, lettering, insignia, logo, numbers, watermark, people, bodies, blood, fire, flames, sparks, smoke or active action. An inert abandoned mechanical wreck.",
+      "references": [
+        {
+          "path": "../../../../tokens/pojazdy/osobowka.webp",
+          "role": "geometry and framing edit target"
+        },
+        {
+          "path": "../../../../tokens/portraits/pojazd-osobowka.webp",
+          "role": "vehicle identity and materials"
+        }
+      ],
+      "transparent_background": true
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/autobus/roof-off-v1.png",
+      "size": [
+        819,
+        1920
+      ],
+      "mode": "RGBA",
+      "bytes": 1940144,
+      "sha256": "94c89c82c48852bd77f272f0888f1135768d31fcb8cad60894faf600857b850e",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        135,
+        22,
+        684,
+        1891
+      ],
+      "longSideFillPercent": 97.34,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/autobus/roof-off-v2.png",
+      "size": [
+        819,
+        1920
+      ],
+      "mode": "RGBA",
+      "bytes": 1707607,
+      "sha256": "6a00402810125c0bfeb1840c38306ce62808c167844ceee00545ce93b1dcb5d5",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        130,
+        19,
+        690,
+        1893
+      ],
+      "longSideFillPercent": 97.6,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/autobus/roof-on-v1.png",
+      "size": [
+        724,
+        2172
+      ],
+      "mode": "RGBA",
+      "bytes": 1760673,
+      "sha256": "fab87b33fb9445d0a0ea4a04343e1881ed910d7dfbfc0b156446bc3eb2aaa923",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        98,
+        41,
+        625,
+        2114
+      ],
+      "longSideFillPercent": 95.44,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "dev/art/m4/autobus/roof-off-native.png",
+      "size": [
+        600,
+        2400
+      ],
+      "mode": "RGBA",
+      "bytes": 2042851,
+      "sha256": "cd9e592b86e6bd88c0d481d24ca18eff1a024cd92a16252a0bdf85bfed8fb9f0",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        8,
+        48,
+        591,
+        2351
+      ],
+      "longSideFillPercent": 95.96,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "dev/art/m4/autobus/roof-on-native.png",
+      "size": [
+        600,
+        2400
+      ],
+      "mode": "RGBA",
+      "bytes": 2114596,
+      "sha256": "32b90b0ba313fbc7df530b8093c9fcf51cc517f0a49dc4316205df11b44dcf7d",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        8,
+        48,
+        591,
+        2351
+      ],
+      "longSideFillPercent": 95.96,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "tokens/pojazdy/autobus.webp",
+      "size": [
+        600,
+        2400
+      ],
+      "mode": "RGBA",
+      "bytes": 1467846,
+      "sha256": "c831d887ed2bcb29a572e89f801884b3fe74d331e8ad785896860311547d8687",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        8,
+        48,
+        591,
+        2351
+      ],
+      "longSideFillPercent": 95.96,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "tokens/pojazdy/wnetrza/autobus.webp",
+      "size": [
+        600,
+        2400
+      ],
+      "mode": "RGBA",
+      "bytes": 1458956,
+      "sha256": "fcd172dd6c552670a55f6594aa4a11365e26448d08589be091203dd55c8992bd",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        8,
+        48,
+        591,
+        2351
+      ],
+      "longSideFillPercent": 95.96,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "tokens/portraits/pojazd-autobus.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 333914,
+      "sha256": "c43c9032e28b28e6ecafc1349ea85ee264ee770b21beede9ae30a9d7ff7eac9b"
+    },
+    {
+      "file": "dev/art/m4/autobus/roof-on-windshield-v2.png",
+      "size": [
+        724,
+        2172
+      ],
+      "mode": "RGBA",
+      "bytes": 1704040,
+      "sha256": "4e53897dadfcab8054cbb2e2f6719221be9efa366563f63dec1559c9579ee0b7",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        98,
+        44,
+        623,
+        2108
+      ],
+      "longSideFillPercent": 95.03,
+      "borderAlphaMax": 0
+    },
+    {
+      "file": "dev/art/m4/autobus/portrait-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3720448,
+      "sha256": "4a6ee7111dcde8fd4e159bcc5b45b1d40b3fdb87775ba89f1e7980a6b2aabfad"
+    },
+    {
+      "file": "dev/art/m4/autobus/portrait-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3467537,
+      "sha256": "88e58661db422e2de295f7b7d2166af9cf874ee19e230e29a70bc1866dcb0b55"
+    }
+  ],
+  "pixelChecks": {
+    "encoding": "lossless WEBP with exact RGBA preservation",
+    "roofBoundsExclusive": [
+      62,
+      112,
+      538,
+      2260
+    ],
+    "sharedExteriorComparedPixels": 434896,
+    "sharedExteriorDifferentPixels": 0,
+    "alphaDifferentPixels": 0,
+    "compositorToClosedDifferentPixels": 0,
+    "compositorToOpenDifferentPixels": 0,
+    "pairDifferenceBounds": [
+      63,
+      113,
+      537,
+      2259
+    ],
+    "pairChangedPixels": 1004892,
+    "previousRoofDifferentPixelsOutsideFront": 0,
+    "previousInteriorDifferentPixels": 0,
+    "windshieldInspectionBox": [
+      90,
+      2060,
+      510,
+      2225
+    ],
+    "windshieldGlassFraction": 0.578,
+    "windshieldInspectionDepthMeters": 0.825
+  },
+  "geometry": {
+    "frameMeters": [
+      3,
+      12
+    ],
+    "allVisibleBoundsMeters": [
+      2.915,
+      11.515
+    ],
+    "bodyWidthInMidsectionMeters": 2.575,
+    "seatCount": 21,
+    "driver": [
+      0.737,
+      0.833
+    ],
+    "passengerColumns": [
+      0.788,
+      0.64,
+      0.365,
+      0.217
+    ],
+    "passengerRowsFrontToRear": [
+      0.728,
+      0.64525,
+      0.5625,
+      0.47975,
+      0.397
+    ]
+  }
+}

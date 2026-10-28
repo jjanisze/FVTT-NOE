@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="1170" viewBox="0 0 450 1170">
+<!-- Orthographic design guide. Front down. Frame 0.75 x 1.95 m; no ground. -->
+<g stroke="#292c29" stroke-width="6" stroke-linejoin="round">
+<rect x="201" y="35" width="48" height="220" rx="22" fill="#242424"/>
+<rect x="198" y="925" width="54" height="210" rx="24" fill="#242424"/>
+<path d="M204 140 H246 V555 H204 Z" fill="#548c89"/>
+<path d="M160 555 Q225 620 290 555 L310 738 Q225 810 140 738Z" fill="#e3dac0"/>
+<rect x="168" y="890" width="114" height="150" rx="45" fill="#558f8a"/>
+<path d="M188 725 L198 975 M262 725 L252 975" fill="none" stroke="#9c9d8c" stroke-width="12"/>
+<rect x="133" y="320" width="184" height="225" rx="65" fill="#2e302a"/>
+<rect x="116" y="80" width="218" height="215" rx="12" fill="#a04731"/>
+<rect x="135" y="100" width="180" height="176" rx="4" fill="#522f25"/>
+<path d="M144 108 L304 267 M304 108 L144 267 M150 108 V266 M195 108 V266 M240 108 V266 M285 108 V266 M141 145 H307 M141 190 H307 M141 235 H307" stroke="#ad5940" fill="none" stroke-width="6"/>
+<path d="M134 78 V299 M315 78 V299" stroke="#292922" stroke-width="10"/>
+<path d="M88 761 L160 736 L225 756 L290 736 L362 761" fill="none" stroke="#989b8c" stroke-width="17"/>
+<path d="M70 771 L113 755 M337 755 L380 771" stroke="#272a27" stroke-width="22"/>
+<path d="M122 740 L58 640 M328 740 L392 640" fill="none" stroke="#9d9f90" stroke-width="6"/>
+<ellipse cx="55" cy="629" rx="27" ry="37" fill="#7a807b"/><ellipse cx="395" cy="629" rx="27" ry="37" fill="#7a807b"/>
+<ellipse cx="225" cy="799" rx="46" ry="37" fill="#5e9390"/>
+<rect x="215" y="740" width="20" height="25" rx="5" fill="#30352f"/>
+<path d="M151 610 L119 444 L126 250" fill="none" stroke="#797c70" stroke-width="21"/>
+<path d="M160 568 H290" stroke="#777a70" stroke-width="10"/>
+</g></svg>

@@ -1,0 +1,15 @@
+{
+  "vehicle": "ciezarowka",
+  "canvas": [600, 1800],
+  "front": "down",
+  "footprintSquares": [2, 6],
+  "axleY": [0.253, 0.865],
+  "tyrePositions": 4,
+  "cargoFloorBounds": [0.17, 0.06, 0.83, 0.575],
+  "referenceSeats": {"cabin": [[0.67, 0.711], [0.5, 0.711], [0.33, 0.711]]},
+  "referenceCargoAnchors": [[0.72, 0.48], [0.5, 0.48], [0.28, 0.48], [0.72, 0.32], [0.5, 0.32], [0.28, 0.32], [0.66, 0.16], [0.34, 0.16]],
+  "finalCabinAnchors": [[0.675, 0.709444], [0.5, 0.709444], [0.325, 0.709444]],
+  "finalCargoAnchors": [[0.72, 0.48], [0.5, 0.48], [0.28, 0.48], [0.72, 0.32], [0.5, 0.32], [0.28, 0.32], [0.66, 0.16], [0.34, 0.16]],
+  "finalExhaust": [0.115, 0.60],
+  "notes": "Original conceptual layout, not a production vehicle blueprint. Final anchors must be checked against generated pixels. Both token variants keep the open bed unchanged."
+}

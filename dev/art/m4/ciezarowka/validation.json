@@ -1,0 +1,223 @@
+{
+  "files": [
+    {
+      "file": "dev/art/m4/ciezarowka/roof-on.png",
+      "size": [
+        724,
+        2172
+      ],
+      "mode": "RGBA",
+      "bytes": 2439752,
+      "sha256": "8de486cac8a5a7086ec3f0c5f583f6c33ee04808cd7a52f1fea0f04222996405",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        16,
+        59,
+        708,
+        2106
+      ],
+      "heightFillPercent": 94.24,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/ciezarowka/roof-off.png",
+      "size": [
+        724,
+        2172
+      ],
+      "mode": "RGBA",
+      "bytes": 2750161,
+      "sha256": "207cb1bb97c7a34f59b7ff710dfce0e6a7025cdb5069a544d28ab334a774d562",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        16,
+        60,
+        708,
+        2107
+      ],
+      "heightFillPercent": 94.24,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/ciezarowka/roof-on-native-v1.png",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1502768,
+      "sha256": "df37b79e6c4756e3f770276987c52f76561412eb18a7c5c616292cf1807e1c95",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        13,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/ciezarowka/roof-off-native-v1.png",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1654089,
+      "sha256": "bdffdcea801014e5f949c97236e757a73742039fc58cbf1a3c6d895d0a6ddc95",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        14,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/ciezarowka/roof-on-v2.png",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1502768,
+      "sha256": "df37b79e6c4756e3f770276987c52f76561412eb18a7c5c616292cf1807e1c95",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        13,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "dev/art/m4/ciezarowka/roof-off-v2.png",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1502820,
+      "sha256": "7efd18a432c1279aa93b1fb3e6f1e4ef998bb1c1380c4f8e8d7897bc1703deb2",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        13,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/pojazdy/ciezarowka.webp",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1009448,
+      "sha256": "ed0106fca1056709a7d238b2da99afb74ce120bdabbc41c639fd7b383ce9cba2",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        13,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/pojazdy/wnetrza/ciezarowka.webp",
+      "size": [
+        600,
+        1800
+      ],
+      "mode": "RGBA",
+      "bytes": 1005658,
+      "sha256": "41245f1d38e297b259cf5d8e42f2782701e502a5fff67fc7b94ec8e7c78ba59f",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "bboxAlphaAbove8": [
+        13,
+        49,
+        587,
+        1746
+      ],
+      "heightFillPercent": 94.28,
+      "borderAlphaMax": 1
+    },
+    {
+      "file": "tokens/portraits/pojazd-ciezarowka.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 385618,
+      "sha256": "94f1cc2652b043797a652afcebebf727d525be53d39c32dd3bd3520d0361d873"
+    }
+  ],
+  "pixelChecks": {
+    "cabBoundsExclusive": [
+      78,
+      1060,
+      532,
+      1410
+    ],
+    "cabContentsTranslationPx": [
+      0,
+      26
+    ],
+    "sharedExteriorComparedPixels": 921100,
+    "sharedExteriorDifferentPixels": 0,
+    "cargoBedDifferentPixels": 0,
+    "acceptedClosedDifferentPixels": 0,
+    "compositorToShippedDifferentPixels": 0,
+    "translatedSeatsAndWheelDifferentPixels": 0,
+    "pairDifferenceBounds": [
+      79,
+      1061,
+      531,
+      1409
+    ],
+    "pairChangedPixels": 157107,
+    "encoding": "lossless WEBP with exact RGBA preservation",
+    "registrationBefore": {
+      "leftSeatDy": 25,
+      "middleSeatDy": 26,
+      "steeringWheelDy": 28,
+      "dashboardDy": 25,
+      "method": "Vertical Sobel template cross-correlation on first shipped pair; glass changes shading."
+    }
+  }
+}

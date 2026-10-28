@@ -1,0 +1,95 @@
+{
+  "tool": "OpenAI built-in image generation",
+  "date": "2026-10-26",
+  "steps": [
+    {
+      "output": "../in/portrety/autobus.png",
+      "references": [
+        {
+          "file": "../../../../tokens/portraits/pojazd-hammer.webp",
+          "role": "painting style only"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset: square opaque illustrated vehicle portrait for a post-apocalyptic tabletop RPG actor catalog. Reference image supplies ONLY the established realistic painterly rendering style, worn materials and restrained American wasteland palette; depict a different vehicle. Create one unoccupied late-1980s North American flat-front city transit bus, approximately 35-40 feet long and 8.5 feet wide, exactly two axles, conventional single rigid body (NOT articulated), rear engine, no projecting school-bus bonnet. A serviceable salvaged workhorse: sun-faded dusty pale cream body with a broad desaturated petrol-teal horizontal lower-side band, restrained chipped paint and surface rust, two rear side windows boarded neatly with old plywood, a few utilitarian sheet-metal repair plates on the roof and two shut roof hatches. Large flat-front windshield made of two panels, plain broad front bumper, modest rectangular lamps, wide front passenger entrance on vehicle RIGHT just behind front corner, small dark rear exhaust outlet at the rear right corner. Spare, believable surviving transit bus; no spikes, weapons, luggage or people on roof, no roof cargo, no oversized accessories. Fit the entire bus including mirrors and both axles comfortably inside square margins, three-quarter FRONT view from modestly above, front toward lower left, whole long side visible. Parked on cracked highway shoulder with gravel, dry grass and quiet indistinct dry terrain behind. Same detailed painterly realism, soft neutral daylight, fine textured brushwork, clear practical mechanical silhouette as reference. No humans, passengers, creatures, lettering, route numbers, logos, license-plate text, emblems or watermark. Opaque background.",
+      "archivedOutput": "portrait-v1.png"
+    },
+    {
+      "output": "roof-off-v1.png",
+      "references": [
+        {
+          "file": "layout.png",
+          "role": "authoritative geometry"
+        },
+        {
+          "file": "../in/portrety/autobus.png",
+          "role": "same vehicle appearance"
+        }
+      ],
+      "prompt": "Use case: sketch-to-render. Asset: ONE transparent top-down roof-off cutaway token of an American city bus for a virtual tabletop. Input 1 is the AUTHORITATIVE orthographic geometry, framing and exact 21-seat layout. Input 2 is this SAME bus's portrait and controls appearance, paint and painterly materials, NOT camera perspective. Render the geometric plan into finished detailed painted art of that cream-and-desaturated-petrol-teal salvaged flat-front city transit bus. STRICT straight-down 90-degree nadir orthographic camera, FRONT DOWN, rear TOP, long centerline exactly vertical, no perspective. Tall narrow canvas aspect ratio exactly 1:4, preserve the input plan's complete frame (600 by 2400 proportions). Entire bus and both mirrors must fit within genuine transparent margins. Do not shorten, widen, taper or foreshorten the bus. Outer body about x7%-93%, y3%-97%, mirrors almost full frame width near y90%. Exactly TWO AXLES, four tyre positions visible as readable dark slivers at the sides near y23% and y81%, no middle or extra wheels. Remove the ENTIRE roof, ALL front and side glazing, upper window pillars and upper roof rim, revealing the full interior floor. Only low side panels, floor, wheel housings, engine cover and dashboard remain. EXACTLY TWENTY passenger seats, in EXACTLY FIVE ROWS of FOUR individual forward-facing blue-gray vinyl seats: two pairs separated by a clear central aisle. Follow the drawn geometry precisely: column centers x20%,35%,65%,80%; row centers y44%,53%,62%,71%,80%. Seat backs toward TOP, cushions/feet toward BOTTOM. Do not add or omit seats, do not insert a rear bench, extra driver or sixth passenger row. Seats have plausible approximately 45 cm width and 55 cm depth; row pitch about 1.08 m, center aisle about 45 cm; no huge foot-space gaps. ONE separate charcoal driver seat centered x75%,y90%, with steering wheel immediately ahead at x75%,y93.3% and dashboard at y95%. Entry steps are on IMAGE LEFT at x14%-43%,y87.5%-95% opposite driver. At rear/TOP keep a closed dark utilitarian engine service deck y5%-14%; below it an empty stripped utility/cargo floor y15%-35% with a few recessed tie-down rails/eyes, NO seats or cargo there. No people, silhouettes, bags, boxes, tools or markings. Worn ridged charcoal-gray bus floor, aged blue-gray vinyl chairs, chipped pale cream low walls, teal lower-side paint, realistic rust and repair details. Rear-right small exhaust end at x78%,y2% points up/out, do not make a huge vertical stack. Match the established detailed painterly realism, neutral dry lighting, crisp readable contours and plausible mechanics. No dramatic ground shadow, no scenery, no circular token base, no ground plane, lettering, numbers, emblems, logo or watermark. Genuine transparent background including exterior margin. Preserve ALL seat centers and both axles exactly as the geometric drawing; artistic detailing must follow the layout.",
+      "review": "Rejected: 16 passenger seats instead of 20."
+    },
+    {
+      "output": "roof-off-v2.png",
+      "references": [
+        {
+          "file": "roof-off-v1.png",
+          "role": "edit target"
+        },
+        {
+          "file": "layout.png",
+          "role": "seat-count correction"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. Image 1 is the edit target, a roofless cream-and-teal bus with an empty rear utility floor. Image 2 is its authoritative seat layout drawing. CORRECT THE NUMBER OF SEATS in Image 1. It currently has ONLY FOUR rows of four passenger seats (16). It MUST have EXACTLY FIVE separate rows of FOUR seats (20 passenger seats), PLUS the ONE existing separate driver seat, total 21 seats. Change the passenger seating zone only. Preserve the same four column positions: two blue-gray seats next to each sidewall with a clear central aisle. Make the passenger seats a little shorter in their front-to-back depth and tighten the row pitch slightly, so FIVE full rows fit comfortably between the empty rear utility bay and the front driver's platform. In bus-body coordinates from rear to front, five passenger row centers should be around 42%,52%,62%,72%,82%; use the layout drawing to count all five groups. Each row must visibly contain four distinct seat backs/cushions. All seat backs face the rear/top, all seats face the front/bottom. Keep all twenty passenger seats identical in size and direction. Keep the driver seat and steering wheel at the lower right and entrance steps at lower left. Keep the entire rear utility floor empty; no seats there. Preserve the bus's overall body, size, strict overhead orthographic camera, rear engine cover, tie-down rails, all four wheel positions, mirrors, bumper, paint and wear. No roof or glazing or pillars, no people, no cargo, text or watermark. Genuine transparent exterior. Retain all edges of the entire bus in frame. The only requested change is to replace the four-row passenger zone with FIVE rows, twenty passenger seats, without changing the driver."
+    },
+    {
+      "output": "roof-on-v1.png",
+      "references": [
+        {
+          "file": "roof-off-native.png",
+          "role": "edit target, framed canonical cutaway"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. Edit this exact empty salvaged city bus token by ADDING THE COMPLETE ROOF back over the existing interior. Keep this exact cream-and-petrol-teal bus, every wheel, mirror, bumper, exhaust end, body contour, position, overhead orientation and frame unchanged. Strict vertical 90-degree top-down nadir orthographic view, front DOWN, rear TOP. Same very tall narrow 1:4 canvas, entire bus fits with the same transparent margin. Cover ALL interior seats, driver's station, entry steps, aisle, rear utility floor and engine service floor with one continuous gently rounded dusty pale cream metal bus roof. A serviceable but sun-faded roof with modest rust at panel seams, a few believable rectangular gray sheet-metal repair patches and exactly TWO CLOSED rectangular roof escape hatches spaced along its length, matching the established bus portrait. No new equipment or luggage. Exterior side walls retain the same faded teal lower trim. Because the camera is truly straight down and this is a FLAT FRONT transit bus, its vertical front windshield is visible only as a THIN dark/glare strip right at the bottom/front end; do not draw a broad angled car windshield or expose seats through it. Side window glazing is a narrow dark side-edge detail below the roof, not a second horizontal roof surface. Restore upper glazing/pillars only as needed to close the body naturally. Do NOT relocate the cabin, axles, mirrors or exhaust, enlarge the body, add wheels or change the source's framing and silhouette. The roof occupies the existing body interior from rounded rear end to front, without spilling over the body or covering the exterior mirrors. No people, passengers, animals, cargo, weapons, symbols, words, route numbers, logos or watermark. Match the same realistic painterly rendering, restrained weathering and soft neutral lighting. Genuine transparent background outside exactly the original vehicle, no ground plane or dramatic shadow."
+    }
+  ],
+  "revisions": [
+    {
+      "date": "2026-10-27",
+      "reason": "Front windshield must remain visible from strict overhead view.",
+      "designResearch": {
+        "url": "https://collections.trolleymuseum.org/items/343",
+        "role": "GMC New Look / Fishbowl angled-windshield design reference; no photo used as generation input"
+      },
+      "steps": [
+        {
+          "output": "portrait-v2.png",
+          "references": [
+            {
+              "file": "../../../../tokens/portraits/pojazd-autobus.webp",
+              "version": "before windshield revision",
+              "archivedMaster": "portrait-v1.png",
+              "role": "edit target"
+            }
+          ],
+          "prompt": "Use case: precise-object-edit. Edit this existing post-apocalyptic bus portrait. Keep the same cream-and-muted-teal bus, long rigid body, two axles, two rear plywood-boarded side windows, roof repair patches and two roof hatches, weathering, painterly realism, camera angle, cracked asphalt shoulder and background. Redesign ONLY its upper FRONT architecture, inspired by 1960s-1970s North American GMC New Look / Fishbowl buses. Replace the nearly vertical flat front windshield with a broad rounded panoramic windshield that curves around the front corners and is distinctly RAKED BACK: its upper edge and the front roof edge sit clearly BEHIND the lower windshield edge, creating a sloping glass plane with appreciable horizontal depth visible from directly above. The front of the roof must end roughly 0.8 m behind the windshield base in plan, so the windshield will be a clearly visible band in a later strict overhead token. Give it a characteristic shallow rounded front, slim dark divided glazing frames and two or three modest wipers; use a believable vintage city-bus design, no projecting school-bus bonnet, no modern sports coach. Keep the entry door on the bus's right side, same front bumper and small rectangular headlights; retain overall width and length. An old blank destination display can sit above the windshield on the raked upper front. Glass should read as dark dusty blue-gray reflective glass with subtle sky reflections; no people or recognizable occupants. Keep the entire bus inside the square image and preserve all the rear body and surrounding scene. No lettering, brand emblem, GMC logo, route numbers, watermark or new accessories. This is a salvaged bus inspired by the design, not a branded museum replica. Opaque background."
+        },
+        {
+          "output": "roof-on-windshield-v2.png",
+          "references": [
+            {
+              "file": "roof-on-before-windshield.png",
+              "role": "edit target, calibrated roof-on frame"
+            },
+            {
+              "file": "portrait-v2.png",
+              "role": "same bus's new upper-front architecture"
+            }
+          ],
+          "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET: a strict top-down roof-on cream-and-teal city bus token. Image 2 is the newly approved same vehicle's front-design reference: a vintage New Look / Fishbowl-inspired bus with a rounded, raked panoramic windshield. Modify ONLY THE FRONT UPPER BODY of Image 1 to match that front architecture. Keep the bus in EXACTLY the same STRICT 90-degree overhead orthographic camera, front toward BOTTOM, long centerline vertical. Do not tilt the camera, show the front elevation, shorten the vehicle or enlarge it. Maintain every original wheel, axle, mirror, bumper, light, side panel, rear exhaust and silhouette pixel position. Preserve the rear 80 percent of the long cream roof including both hatches and its existing patches. The required change: end the front of the metal roof noticeably farther BACK, revealing a broad, unmistakable DARK BLUE-GRAY GLASS WINDSHIELD across most of the bus width at the BOTTOM/front. This windshield is RAKED and rounded in real geometry, so viewed from vertically above it occupies a visible band about 0.8-1.0 m deep in plan (around 7-8 percent of bus length), approximately y85%-93% of the whole frame, x12%-88%, with rounded wraparound outer corners, slim black dividing frames, and two clear modest wiper arms resting at its base. There must be a clear transition from cream roof -> blue-gray glass -> narrow cream front sill -> teal front body/bumper. Not merely a thin black seam! The GLASS BAND must be clearly readable at miniature scale. Remove or relocate only a front repair patch if it would cover this glass. Keep all glass dark, dusty and reflective with muted sky highlights, opaque enough that no passenger seats, steering wheel or new interior layout are painted through it. No humans or reflected people. Do not invent another driver or expose a row of seats. This windshield will disappear completely in the matching existing roof-off cutaway. Preserve the rest of the bus, original transparent exterior margins and the same realistic painted weathering style. The whole bus fits in the original tall narrow 1:4 framing, with original clear margins. No lettering, route number, brand logo, watermark, ground plane or new accessories.",
+          "transparent_background": true
+        }
+      ]
+    }
+  ]
+}

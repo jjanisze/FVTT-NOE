@@ -1,0 +1,19 @@
+{
+  "vehicle":"deskorolka",
+  "identity":"Worn maple street skateboard, black grip, ivory wheels, gray tape patch at front",
+  "front":"down",
+  "referenceCanvas":[450,540],
+  "referenceRaster":[150,180],
+  "finalCanvas":[180,216],
+  "footprintSquares":[0.6,0.72],
+  "footprintMetres":[0.9,1.08],
+  "sizeAdjustment":{"factor":1.2,"baseFootprint":[0.5,0.6],"requestedBy":"GM","date":"2026-10-28"},
+  "riderAnchor":[0.5,0.5],
+  "presentation":{"widocznosc":"otwarta","warstwa":"nad"},
+  "standing":true,
+  "wheels":4,
+  "crew":1,
+  "engine":false,
+  "review":"art-retained-2026-10-28; resized-to-120-percent-by-gm-request",
+  "notes":"Four wheel ends visible from overhead; front identified by tape. Existing rider size and texture scales retained. GM deferred occupant-size tuning for all vehicles on 2026-10-28."
+}

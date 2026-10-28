@@ -1,0 +1,19 @@
+{
+  "vehicle":"motorower",
+  "identity":"Small vintage step-through moped; Super Cub-inspired, generic unbranded illustration",
+  "front":"down",
+  "referenceCanvas":[450,1170],
+  "referenceRaster":[150,390],
+  "finalCanvas":[180,468],
+  "footprintSquares":[0.6,1.56],
+  "footprintMetres":[0.9,2.34],
+  "sizeAdjustment":{"factor":1.2,"baseFootprint":[0.5,1.3],"requestedBy":"GM","date":"2026-10-28"},
+  "referenceSeat":[0.5,0.37],
+  "finalSeat":[0.5,0.36],
+  "finalExhaust":[0.25,0.18],
+  "presentation":{"widocznosc":"otwarta","warstwa":"nad"},
+  "wheels":2,
+  "crew":1,
+  "review":{"portrait":"approved-2026-10-27","tokenAndIntegration":"approved-2026-10-28"},
+  "notes":"One black saddle, open rust-red crate behind it, turquoise frame and ivory leg shield. Final anchor measured against painting. Design dimensions are tabletop proportions, not an exact manufactured-model specification. No roof variant."
+}

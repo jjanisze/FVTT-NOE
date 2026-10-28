@@ -1,0 +1,31 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "steps": [
+    {
+      "id": "portrait-v1",
+      "references": [
+        {
+          "path": "tokens/portraits/pojazd-hammer.webp",
+          "role": "painting style only"
+        }
+      ],
+      "prompt": "Create a square vehicle actor portrait for a gritty post-apocalyptic tabletop RPG. Reference is PAINTING STYLE ONLY: finely detailed realistic painterly machinery, natural muted colors, dusty worn but practical materials. Do NOT draw the reference vehicle. Subject: one medium old American tracked crawler BULLDOZER in chalky worn construction yellow paint, exposed steel on edges, restrained rust, dirt caught in steel crawler links. EXACTLY TWO continuous long steel TRACKS, left and right; NO road wheels or rubber tyres outside tracks. Broad slightly curved STEEL PUSH BLADE across FRONT, approximately3.5m wide, dull polished cutting edge, two credible push arms and hydraulic cylinders linking blade to tractor chassis. Overall machine roughly5.6m long including rear ripper and blade, body width over tracks2.8m, blade3.5m. Compact central engine housing ahead of operator position, front grille, vertical dark exhaust pipe and small air intake on bonnet. Open operator platform at REAR of engine hood: TWO EMPTY black seats side-by-side, main operator bucket seat on the vehicle-left and a visibly smaller field-added padded helper perch on vehicle-right; controls for main operator are two levers, not a steering wheel. Open simple protective roll frame around platform, NO roof panel, NO canopy, NO glass cab or windows; both seats must be readable. Small rear hydraulically mounted SINGLE RIPPER TOOTH, clear but compact. No loader bucket, excavator arm, turret or weapon. Three-quarter FRONT view slightly elevated showing blade, engine hood, two tracks and open seats. Entire machine in frame, clear empty margins all around, do NOT crop blade or rear ripper. Parked on cracked tarmac and gravel at abandoned rural worksite, sparse dry grass and rusty roadside guardrail. No people, occupants, writing, logos, branding, lettering, insignia or watermark. Believable coherent proportions suitable for matching an orthographic VTT token, not an enormous mining machine or a toy."
+    },
+    {
+      "id": "token-v1",
+      "references": [
+        {
+          "path": "layout.png",
+          "role": "original geometric guide"
+        },
+        {
+          "path": "portrait-v1.png",
+          "role": "authoritative vehicle appearance"
+        }
+      ],
+      "transparent_background": true,
+      "prompt": "Create ONE finished painted transparent TOP-DOWN VTT BULLDOZER token. Reference1 is original geometric layout, HIGHEST authority for camera, silhouette, orientation, proportions and where components sit. Reference2 is the exact vehicle PORTRAIT: preserve its weathered construction-yellow crawler design, steel tracks, black seats, protective open frame, two lever controls, broad steel blade and single rear ripper. Match finely detailed realistic painterly materials. STRICT ORTHOGRAPHIC camera DIRECTLY OVERHEAD90degrees, front points DOWN, long axis vertical. Canvas proportions750x1200. Keep entire machine in frame with small transparent margin. Exactly TWO continuous steel tracks, one on each side, spanning y22%-83%, about77% of total machine width over BOTH tracks; no rubber wheels or extra treads. At very BOTTOM a broad slightly curved bulldozer push blade from x3%-97%,y87%-96%, wider than tracks, worn silver cutting edge; show its shallow curved top-plan profile, not a huge front elevation. Twin push arms and hydraulic cylinders connect blade to chassis. Engine hood ahead of operator platform at center x33%-67%,y52%-78%, front grille only a narrow overhead strip. Dark exhaust outlet on hood near x44%,y59%, second small air intake to its right; vertical stacks seen as short top openings, NOT long horizontal pipes. Open operator platform BEHIND engine, x33%-67%,y29%-50%: EXACTLY TWO empty seats SIDE-BY-SIDE, larger main operator bucket seat IMAGE-LEFT centered(x42%,y39%) with two levers in front; smaller improvised helper seat IMAGE-RIGHT centered(x58%,y39%). Their arrangement must match the portrait; no steering wheel and no extra seats. Protective yellow roll frame with rear upper hoop behind the seats, no roof panel, no canopy, no glass or windshield; fully expose both seat cushions from overhead. Keep bars away from seat centers for readable occupant placement. At TOP, compact rear single ripper tooth and two hydraulic linkages; ONE tooth, not multiple excavator arms. Approximately3.5m blade wide and5.5m overall visible length, body over tracks about2.8m wide. Gritty worn yellow paint, rusty edges, steel track shoes, dirt in joints, restrained scuffs. Genuine transparent alpha background, including gaps around blade arms and ripper. No people, rider tokens, dots, text, writing, labels, logos, markings, ground, checkerboard, cast shadow outside vehicle, perspective tilt, loader bucket, excavator boom, gun or extra machinery."
+    }
+  ],
+  "postprocessing": "frame.py crops the generated alpha bounds and fits uniformly into750x1200 with transparent margins. Packer only resizes/converts to WEBP. No repainting or independent roof variant."
+}

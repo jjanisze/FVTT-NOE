@@ -1,0 +1,94 @@
+{
+  "identity": "M2A2 Bradley",
+  "size": [
+    720,
+    1350
+  ],
+  "frameMetres": [
+    3.6,
+    6.75
+  ],
+  "visibleBounds": [
+    21,
+    20,
+    698,
+    1330
+  ],
+  "visibleMetres": [
+    3.385,
+    6.55
+  ],
+  "sharedAlphaDifferences": 0,
+  "exteriorDifferencesOutsideRoofMask": 0,
+  "decodedNativeDifferences": 0,
+  "opaqueSeatAnchors": [
+    {
+      "name": "driver",
+      "x": 509,
+      "y": 1009
+    },
+    {
+      "name": "gunner",
+      "x": 370,
+      "y": 785
+    },
+    {
+      "name": "commander",
+      "x": 233,
+      "y": 785
+    },
+    {
+      "name": "troop-0-right",
+      "x": 507,
+      "y": 548
+    },
+    {
+      "name": "troop-0-left",
+      "x": 211,
+      "y": 548
+    },
+    {
+      "name": "troop-1-right",
+      "x": 507,
+      "y": 383
+    },
+    {
+      "name": "troop-1-left",
+      "x": 211,
+      "y": 383
+    },
+    {
+      "name": "troop-2-right",
+      "x": 507,
+      "y": 220
+    },
+    {
+      "name": "troop-2-left",
+      "x": 211,
+      "y": 220
+    }
+  ],
+  "roofTurretTranslation": [
+    -25,
+    115
+  ],
+  "review": "approved-2026-10-27",
+  "separateTurret": {
+    "crop": [
+      81,
+      586,
+      495,
+      627
+    ],
+    "pivotInCrop": [
+      219,
+      204
+    ],
+    "pivotInHull": [
+      300,
+      790
+    ],
+    "reassembledPixelDifferences": 0,
+    "review": "awaiting-layer-review"
+  }
+}

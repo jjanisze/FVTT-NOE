@@ -1,0 +1,33 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "mode": "reference-guided portrait and transparent token generation",
+  "model": "Not exposed by the tool",
+  "steps": [
+    {
+      "output": "portrait-v1.png",
+      "prompt": "Use case: stylized-concept. Asset type: square RPG vehicle portrait.\nCreate one ordinary human-powered street skateboard, unoccupied, resting upright on its FOUR wheels on a quiet cracked asphalt shoulder. The supplied bicycle portrait is ONLY a reference for detailed hand-painted materials, muted daylight and dusty roadside atmosphere; do not include any bicycle components.\nA classic modest popsicle-shaped laminated maple deck, rounded nose and tail slightly turned up, black worn grip tape with scratched/scuffed edges, exposed pale wood laminate around the perimeter, two plain silver metal trucks, four small dirty ivory polyurethane wheels. A small short dull-gray duct-tape repair lies diagonally across the grip near the FRONT nose, identifying the front. Two sets of four dark mounting bolts are visible on top, eight bolts total. No lettering, graphics, brands, numbers, stickers or painted slogans. Mechanically intact and usable; no engine, motor, battery, steering column, brake handle, seat, bags or weapons.\nElevated close three-quarter front-left view so the black top, pale wood edge, silver trucks and all four small wheels are readable. Front nose toward the lower-left; entire skateboard fits comfortably inside the square with clear margins. No extreme fisheye. Worn realistic materials, restrained rust on metal, dusty rubber, fine brush detail, grounded American post-apocalyptic tabletop illustration, neutral daylight. Sparse dry weeds and gravel around cracked road. No people, rider, text, watermark, fantasy, spikes or glow. Opaque background.",
+      "references": [
+        {
+          "path": "../../../../tokens/portraits/pojazd-rower.webp",
+          "role": "painting style and roadside atmosphere only"
+        }
+      ],
+      "transparent_background": false
+    },
+    {
+      "output": "token-v1.png",
+      "prompt": "Use case: sketch-to-render. Asset type: transparent orthographic top-down skateboard token for a tabletop RPG.\nImage 1 is the strict geometry and proportions guide; image 2 is the matching board portrait and material finish. Paint the guide as the same worn ordinary street skateboard: classic narrow elongated popsicle-shaped laminated maple deck, black scratched grip tape, pale wood perimeter, two sets of FOUR mounting bolts (eight total), two silver trucks tucked underneath, and FOUR small dirty ivory polyurethane wheels. The wheels may protrude a little beyond the deck edges for readability: one symmetric pair near the top, one pair near the bottom, no other wheels.\nFront NOSE points toward the BOTTOM. Keep the little dull-gray diagonal duct-tape patch near that lower nose, matching the portrait. The rear end is at the top. Only top surfaces seen; no perspective or visible vertical side faces. Straight, perfectly vertical centerline. One deck only, no person, shoes or rider. Preserve the guide's narrow deck width and the whole 5:6 framing; do not expand the deck into a wide snowboard. The board itself is about 3.3 times as long as it is wide. All components contained within clear transparent margins. About 94% frame-height fill. The trucks are below the deck and must not be painted across the top. Four distinct cream wheel ends read at small scale.\nDetailed realistic hand-painted tabletop style matching the portrait, modest wear and dirt, sharp material detail. Genuine fully TRANSPARENT background, no ground, scenery, cast shadow on the ground, halo, base, border, ring, text, logos, letters, numbers or stickers. This is a simple human-powered board, no engine or electric components.",
+      "references": [
+        {
+          "path": "layout.png",
+          "role": "geometry guide; front down"
+        },
+        {
+          "path": "portrait-v1.png",
+          "role": "matching appearance and materials"
+        }
+      ],
+      "transparent_background": true
+    }
+  ]
+}

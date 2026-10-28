@@ -1,0 +1,16 @@
+{
+  "vehicle": "buggy",
+  "canvas": [600,1200],
+  "finalCanvas": [420,840],
+  "front": "down",
+  "footprintSquares": [1.4,2.8],
+  "scaleCalibration": {"previousFootprintSquares":[1,2],"previousVisibleWidthMeters":1.47,"linearFactor":1.4,"targetVisibleWidthMeters":2.06,"gmReferenceWidthMeters":[2.03,2.13]},
+  "axleY": [0.24,0.83],
+  "tyrePositions": 4,
+  "referenceSeats": [[0.637,0.546],[0.363,0.546]],
+  "referenceExhaust": [0.5,0.041],
+  "finalSeats": [[0.635,0.475],[0.365,0.475]],
+  "finalExhaust": [0.5,0.035],
+  "presentation": {"widocznosc":"otwarta","warstwa":"nad"},
+  "notes": "Original geometric guide, not an engineering blueprint. Open cockpit without a roof panel; final anchors require inspection against rendered pixels. Driver on image right."
+}

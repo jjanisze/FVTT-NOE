@@ -1,0 +1,130 @@
+{
+  "vehicle": "autobus",
+  "review": {"status":"approved","date":"2026-10-27","scope":"portrait and matched tokens after the raked-windshield revision"},
+  "canvas": [
+    600,
+    2400
+  ],
+  "finalCanvas": [
+    600,
+    2400
+  ],
+  "front": "down",
+  "finalDriver": [0.737,0.833],
+  "finalPassengerColumns": [0.788,0.64,0.365,0.217],
+  "finalPassengerRowsFrontToRear": [0.728,0.64525,0.5625,0.47975,0.397],
+  "finalExhaust": [0.78,0.02],
+  "framing": {"destinationBeforeWidthCalibration":[12,48,588,2352],"bodyXMap":[[0,0],[60,42],[540,558],[600,600]],"roofBoundsExclusive":[62,112,538,2260],"frontEditBoundsExclusive":[62,1930,538,2260],"roofFeatherPixels":6},
+  "windshield": {"design":"New Look / Fishbowl-inspired raked panoramic front","inspectionBox":[90,2060,510,2225],"research":"https://collections.trolleymuseum.org/items/343"},
+  "footprintSquares": [
+    2,
+    8
+  ],
+  "referenceBodyBounds": [
+    42,
+    78,
+    558,
+    2322
+  ],
+  "referenceDriver": [
+    0.75,
+    0.9
+  ],
+  "referencePassengerSeats": [
+    [
+      0.8,
+      0.8
+    ],
+    [
+      0.65,
+      0.8
+    ],
+    [
+      0.35,
+      0.8
+    ],
+    [
+      0.2,
+      0.8
+    ],
+    [
+      0.8,
+      0.71
+    ],
+    [
+      0.65,
+      0.71
+    ],
+    [
+      0.35,
+      0.71
+    ],
+    [
+      0.2,
+      0.71
+    ],
+    [
+      0.8,
+      0.62
+    ],
+    [
+      0.65,
+      0.62
+    ],
+    [
+      0.35,
+      0.62
+    ],
+    [
+      0.2,
+      0.62
+    ],
+    [
+      0.8,
+      0.53
+    ],
+    [
+      0.65,
+      0.53
+    ],
+    [
+      0.35,
+      0.53
+    ],
+    [
+      0.2,
+      0.53
+    ],
+    [
+      0.8,
+      0.44
+    ],
+    [
+      0.65,
+      0.44
+    ],
+    [
+      0.35,
+      0.44
+    ],
+    [
+      0.2,
+      0.44
+    ]
+  ],
+  "referenceRearUtilityBounds": [
+    0.125,
+    0.146,
+    0.875,
+    0.35
+  ],
+  "referenceAxlesY": [
+    0.228,
+    0.807
+  ],
+  "referenceExhaust": [
+    0.78,
+    0.02
+  ],
+  "notes": "Original geometry for a salvaged North American city bus, not a factory drawing. Rear utility floor replaces removed seats. Exactly 20 passenger seats plus one driver; final anchors require pixel inspection."
+}

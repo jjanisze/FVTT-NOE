@@ -41,6 +41,97 @@ Foundry remains closed; no campaign repoint was run.
 <!-- gm-remaining:start -->
 ## Do podpięcia — przez MG
 
+**Pojazdy, 2026-10-28:** wszystkie czternaście podglądów pojazdów oraz porównanie wraków są częścią Garażu. Karta prób
+ma Parking, przyciski Grafika czternastu pojazdów oraz Grafika: Wraki — wszystkie pojazdy. Reset odtwarza wszystkie szesnaście
+scen z rozmiarami katalogowymi i stockowymi postaciami dnd5e; Parking też używa nowych grafik.
+E2E `garaz-grafika` 20/20, Quench pojazdów 42/42, pełny `npm test` zielony.
+Szczegóły starszych porównań skali poniżej są historyczne.
+
+- **14 indywidualnych wraków, 2026-10-28:** zatwierdzony sedan zachowany bez zmian;
+  13 nowych wraków z własnych żetonów bazowych do wspólnej oceny MG. Sonda `grafika-wraki`,
+  28 pojazdów w parach sprawny/wrak na jednej scenie. Runtime wybiera grafikę po podwoziu,
+  zachowuje transformację tekstury i przy cofnięciu odtwarza pełny oryginał.
+  [Pliki i prompty](../art/m4/wraki/README.md). Kolejka M4: tylko 7 dźwięków.
+
+- **Deskorolka — czternasty komplet, 2026-10-28:** portret i otwarty żeton, na życzenie MG
+  powiększony do 120%: 180×216, obrys 0,6×0,72, widoczny 0,36×1,03 m. Jedno miejsce stojące,
+  pełna postać nad deską. Rozmiar postaci bez zmian; jego regulacja odłożona przez MG.
+  [Pliki i prompty](../art/m4/deskorolka/README.md).
+
+- **Rower — trzynasty komplet, 2026-10-28, grafika zachowana, wielkość postaci do późniejszej regulacji:** portret 1024×1024 i żeton 180×450,
+  musztardowa rama, srebrne błotniki i druciany tylny koszyk. Jedno otwarte siodło, kotwica
+  50% / 31%, obrys 0,6×1,5, widoczny 0,72×2,19 m. **Grafika: Rower**, sonda `grafika-rower`.
+  Zachowano 13 scen i 190 innych żetonów; rower na Parkingu zaktualizowany w miejscu.
+  [Pliki i pełne prompty](../art/m4/rower/README.md). Kolejka: 6 obrazów + 7 dźwięków.
+
+- **Motorower — dwunasty komplet, zatwierdzony przez MG 2026-10-28:** zaakceptowany kierunek
+  portretu, żeton 180×468, turkusowy lakier, kremowa osłona i czerwona skrzynka. Jedno
+  otwarte siodło, kierowca stale nad pojazdem. Na życzenie MG powiększony do 120%:
+  obrys 0,6×1,56, widoczna sylwetka 0,86×2,25 m; rozmiar kierowcy bez zmian,
+  kotwica 50% / 36%. **Grafika: Motorower**, sonda `grafika-motorower`. Zachowano 12 starych
+  scen i 186 żetonów, dodano motorower na Parkingu. [Pliki i pełne prompty](../art/m4/motorower/README.md).
+  Kolejka: 8 obrazów + 7 dźwięków.
+
+- **M1A1 Abrams — jedenasty komplet, zatwierdzony przez MG 2026-10-27:** portret i para dach/wnętrze
+  780×2100, osobny kadłub i wieża 638×1588, cztery miejsca. Obrys 2,6×5,6 obejmuje kadłub;
+  lufa wystaje poza pole. Oś 389,884 w źródle / 319,426 w wycinku, złożenie warstw bez
+  różnic pikselowych. **Grafika: M1A1 Abrams**, sonda `grafika-czolg`. Wieża podąża za
+  kadłubem; niezależne celowanie po becie. Oryginalne skale postaci. Instalacja bez resetu,
+  zachowano 11 starych scen i 175 innych żetonów; czołg na Parkingu podmieniony w miejscu.
+  [Pliki, pełne prompty i podgląd osi](../art/m4/czolg/README.md). Kolejka: 10 obrazów + 7 dźwięków.
+
+- **M2A2 Bradley — dziesiąty komplet, 2026-10-27:** portret i para dach/wnętrze 720×1350,
+  kierowca + dwóch członków załogi w wieży + sześciu żołnierzy na ławkach przy burtach,
+  twarzami do siebie. Obrys 2,4×4,5; wspólny kadłub i alfa, 0 różnic pikseli poza maską
+  górnej zabudowy. **Grafika: M2 Bradley**, sonda `grafika-bwp`. Bryła i układ zatwierdzone.
+  Na życzenie MG wycięto osobną wieżę 495×627 i kadłub bez wieży; złożenie daje ten sam
+  żeton pikselowo. Oś 300,790 w kadłubie / 219,204 w wycinku. Wieża dziedziczy obrót,
+  skalę, widoczność i drgania pojazdu; celowanie pozostaje po becie.
+  [Pliki, model, referencje i pełne prompty](../art/m4/bwp/README.md). Dodany bez resetu,
+  zachowano 10 wcześniejszych scen i 155 żetonów. Kolejka: 12 obrazów + 7 dźwięków.
+
+- **Buldożer — dziewiąty komplet, 2026-10-27:** portret i otwarty żeton 750×1200, dwie
+  gąsienice, szeroki lemiesz i pojedynczy zrywak. Operator i pomocnik stale widoczni nad
+  odkrytymi fotelami. **Grafika: Buldożer**, sonda `grafika-buldozer`; E2E 12/12.
+  [Pliki, model i pełne prompty](../art/m4/buldozer/README.md). Zatwierdzony przez MG 2026-10-27.
+  Dodany bez resetu, dziewięć wcześniejszych scen i 146 żetonów zachowanych.
+
+- **Wóz strażacki — ósmy komplet, 2026-10-27:** portret i zgodna para 600×1650, pięć miejsc
+  kabiny 3+2 i stale widoczny operator działka wodnego. Węże, drabina, działko i reszta
+  nadwozia wspólne pikselowo. **Grafika: Wóz strażacki**, sonda `grafika-woz-strazacki`;
+  E2E 11/11, bez błędów modułu. [Pliki i pełne prompty](../art/m4/woz-strazacki/README.md).
+  Po uwagach MG: krótszy obrys 2×5,5, przewężenie pompy, proporcje kabina/pompa/tył 40/15/45,
+  krótsza drabina i wystające opony. Poprawiona para zatwierdzona; trzy wozy zaktualizowane bez resetu,
+  środki i skale postaci zachowane, 137 pozostałych żetonów bez zmian.
+  Bryła i proporcje zatwierdzone przez MG. Ostatnia poprawka usuwa koguty i skrzynkowy rant
+  przodu wersji bez dachu; ten fragment również zatwierdzony 2026-10-27. Dach zachowany pikselowo.
+
+- **Traktor — siódmy komplet, 2026-10-27:** portret i otwarty żeton 450×750, czerwony,
+  z dużymi tylnymi oponami. Kierowca na centralnym siodle, pasażer na błotniku; obaj stale
+  widoczni. Obrys 1,5×2,5, widoczna grafika 2,08×3,27 m. **Grafika: Traktor**, sonda
+  `grafika-traktor`; E2E 10/10. [Pliki, model i prompty](../art/m4/traktor/README.md).
+  Zatwierdzony przez MG 2026-10-27. Dodany bez resetu siedmiu wcześniejszych scen i 123 żetonów.
+
+- **Autobus — szósty komplet, ukończony 2026-10-27:** portret, dach i wnętrze z kierowcą,
+  20 fotelami pasażerów i wolnym tyłem. Nadwozie 2,575 m szerokości, obrys katalogowy 2×8.
+  Po korekcie MG przód New Look/Fishbowl z pochyloną szybą widoczną z góry; wnętrze bez zmian pikselowych.
+  Bezstratny WEBP, 0 różnic pikseli poza dachem; wspólna alfa. Poligon: **Grafika: Autobus**,
+  sonda `grafika-autobus`, 21 grafik odniesienia w czterech rzędach. Quench 37/37, E2E 9/9.
+  [Pliki, model i prompty](../art/m4/autobus/README.md). Zatwierdzony przez MG 2026-10-27 po korekcie szyby.
+
+- **Buggy — piąty komplet, 2026-10-26:** portret i otwarty żeton, żółta rama, dwa fotele,
+  po ocenie MG obrys 1,4×2,8 i żeton 420×840: widoczna szerokość ok. 2,06 m (wcześniej 1,47 m).
+  cztery terenowe koła, silnik z tyłu. Oba pełne pionki stale nad ramą, kierowca po prawej
+  stronie obrazu. Poligon: **Grafika: Buggy**, sonda `grafika-buggy`. Quench 37/37, E2E 8/8.
+  [Pliki, model i prompty](../art/m4/buggy/README.md). Ocena wyglądu MG otwarta.
+
+- **Ciężarówka — czwarty komplet, 2026-10-26:** portret, dach kabiny i wnętrze z trzema miejscami;
+  otwarta drewniana paka pozostaje taka sama. Osiem pełnych postaci paki widocznych przy zamkniętej
+  kabinie; kotwice 3+8 dopasowane do grafiki. Korekta v2 po uwagach MG: wnętrze przesunięte
+  o 26 px; paka i reszta nadwozia poza kabiną identyczne pikselowo w bezstratnym WEBP. Poligon: **Garaż ·
+  Ciężarówka — kabina i paka**, sonda `grafika-ciezarowka`. Quench 37/37, E2E 7/7.
+  [Pliki, źródła i prompty](../art/m4/ciezarowka/README.md). Ocena estetyki przez MG otwarta.
+
 - **Motocykl — trzeci komplet, 2026-10-26:** portret i otwarty żeton cruisera z sakwami.
   Dwa miejsca pokazują pełne postacie nad siodłem, bez kropek i przygaszania po najechaniu.
   Poligon: **Garaż · Motocykl — grafika i obsada**, pusty, z kierowcą i z pasażerem;
