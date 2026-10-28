@@ -74,6 +74,7 @@ export function roznicaKatow(a, b) {
  * @property {number} do          koniec strefy od przodu, ułamek długości
  * @property {number[]} rzedy     liczba miejsc w kolejnych rzędach, od przodu
  * @property {number[][]} [kolumny] środki miejsc w każdym rzędzie: ułamek szerokości od lewej obrazu
+ * @property {number[][]} [obroty] początkowy obrót postaci na każdym miejscu względem pojazdu (stopnie)
  * @property {boolean} [kierowca] pierwsze miejsce pierwszego rzędu to kierowca (domyślnie: pierwsza strefa)
  * @property {boolean} [stanowisko] miejsca strefy są stanowiskami broni montowanej
  * @property {string} [oslona]    „polowa”, „trzyCzwarte”, „calkowita” — podpowiedź dla okna osłony (§4.6)
@@ -92,6 +93,7 @@ export function roznicaKatow(a, b) {
  * @property {boolean} stanowisko
  * @property {string|null} oslona
  * @property {boolean} stojace
+ * @property {number} [obrot] początkowy obrót względem pojazdu; później postać może obrócić się sama
  * @property {{widocznosc?: "zakryta"|"otwarta", warstwa?: "nad"|"pod"}} [prezentacja]
  */
 
@@ -128,7 +130,8 @@ export function ukladMiejsc(obrys, strefy) {
           id: `${strefa.id}-${ri}-${i}`, strefa: strefa.id, rzad: rzadGlobalny,
           x: zaokr(!maKolumne && kierowca && ile === 1 && obrys.w > 1 ? Math.min(szer / 2, 0.35) : x), y: zaokr(y),
           kierowca, stanowisko: !!strefa.stanowisko, oslona: strefa.oslona ?? null, stojace: !!strefa.stojace,
-          ...(strefa.prezentacja ? { prezentacja: { ...strefa.prezentacja } } : {})
+          ...(strefa.prezentacja ? { prezentacja: { ...strefa.prezentacja } } : {}),
+          ...(Number.isFinite(strefa.obroty?.[ri]?.[i]) ? { obrot: normalizujKat(strefa.obroty[ri][i]) } : {})
         });
       }
       rzadGlobalny += 1;

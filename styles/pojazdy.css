@@ -4,6 +4,7 @@
 .neuro-okno-miejsc .window-content { padding: 10px 14px; }
 .neuro-miejsca { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 240px; }
 .neuro-miejsca-pojazd { position: relative; margin: 6px auto; border-radius: 6px; background: rgba(0, 0, 0, 0.18); }
+.neuro-miejsca-kadr { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
 .neuro-miejsca-tlo { position: absolute; inset: 0; object-fit: contain; opacity: 0.85; pointer-events: none; border: none; }
 .neuro-miejsce {
   position: absolute; transform: translate(-50%, -50%); padding: 0; margin: 0; border-radius: 50%;

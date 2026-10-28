@@ -59,6 +59,82 @@ and 💬 open an Uwaga with the probe attached. A verdict remembers the commit i
 messages, document writes, frame time p50/p95 since Zeruj) · **Świeżość** (commit, dirty files, scripts
 changed since the page loaded, stale packs or personas) · **Uwagi**.
 
+## Grafika pojazdów w Garażu
+
+**Ctrl+Shift+P → Stanowiska → Garaż / Idź → Karta prób**. Przyciski **Parking** oraz
+**Grafika: Osobówka / Hammer / Motocykl / Ciężarówka / Buggy / Autobus / Traktor / Wóz strażacki / Buldożer / M2 Bradley / M1A1 Abrams / Motorower / Rower / Deskorolka / Wraki — wszystkie pojazdy** otwierają sceny dla MG i graczy.
+Parking używa dostarczonych grafik wszystkich czternastu pojazdów. Podglądy mają portret, pusty pojazd,
+pełną obsadę i odpowiedniki postaci obok; pojazdy z dachem także pusty wzorzec wnętrza,
+motocykl, buggy, traktor i buldożer osobno wariant z jednym kierowcą. To rzeczywiste pojazdy z oknem Miejsc, kluczykami i silnikiem.
+
+`stations/garaz-grafika.mjs` tworzy podglądy jako część zwykłego generatora Garażu. **Reset Garażu
+odtwarza Parking, czternaście podglądów pojazdów i porównanie wraków (16 scen)**. Nowe sceny używają rozmiarów katalogowych i
+źródłowych skal Commoner/Guard/Bandit z dnd5e, bez kampanijnych danych ani eksperymentu 85%.
+Pojazdy dostają bieżące pliki i kotwice także przy starszej paczce otwartego Poligonu.
+Podpinanie już istniejących podglądów zachowuje ich pozycje, obsadę i skale; reset buduje je od nowa.
+
+Sprawdzenie: `fvtt e2e --suites=garaz-grafika` — panel, widok gracza, Miejsca, ruch i obrót,
+wnętrze i właz Hammera, zachowanie istniejących podglądów oraz ponowne odtworzenie bez duplikatów.
+Ciężarówka ma trzy zakryte miejsca kabiny i osiem otwartych miejsc paki; osoby na pace pozostają
+widoczne przy zamkniętej kabinie. Jedenaście grafik odniesienia mieści się w dwóch rzędach.
+Buggy ma dwa sąsiednie otwarte fotele: pełne pionki nad ramą także bez najechania, bez osobnego
+wariantu wnętrza. Próba `grafika-buggy` obejmuje grafikę, miejsca, celowanie oraz ruch i obrót.
+Autobus ma kierowcę, 20 foteli pasażerów i wolny tył, zgodnie z wyborem MG. Dłuższy żeton
+i cztery rzędy 21 grafik odniesienia mieszczą się na scenie 28×25. Wysokość podglądu zależy
+od długości pojazdu i liczby miejsc; układ mniejszych podglądów pozostaje dotychczasowy.
+Próba `grafika-autobus` obejmuje zgodność dachu/wnętrza, 21 kotwic, manewr na wolnym miejscu
+oraz okno Miejsc.
+Traktor ma centralne siodło kierowcy i poduszkę pasażera na bocznym błotniku; obaj stale nad
+pojazdem. Próba `grafika-traktor`: cztery koła, dwa miejsca, celowanie, ruch, obrót i okno Miejsc.
+Widoczna grafika ma 2,08×3,27 m przy ramce katalogowej 1,5×2,5 kratki.
+Wóz strażacki ma pięć zakrytych miejsc kabiny (3+2) i jednego stale widocznego operatora
+działka wodnego na pomoście. Para 600×1650 dzieli identyczne piksele poza maską dachu kabiny.
+Po korekcie MG proporcje odpowiadają portretowi: krótszy obrys 2×5,5, węższy środek pompy,
+drabina tylko na tylnej zabudowie i bardziej wysunięte opony. Widoczny obrys 2,90×7,70 m.
+Próba `grafika-woz-strazacki` obejmuje oba widoki, sześć miejsc, celowanie oraz ruch i obrót.
+Buldożer ma dwa otwarte siedzenia: operator po lewej obrazu i pomocnik po prawej, bez dachu.
+Obaj stale widoczni nad ramą. Próba `grafika-buldozer`: gąsienice, lemiesz, zrywak, dwa miejsca,
+celowanie, ruch, obrót oraz wsiadanie i wysiadanie pomocnika. Widoczny obrys 3,55×5,78 m,
+ramka katalogowa 2,5×4 kratki. E2E `garaz-grafika` **12/12**, bez błędów konsoli modułu.
+
+Bradley ma układ M2A2: kierowca, działonowy i dowódca w koszu wieży oraz sześciu żołnierzy
+przy burtach. Dwie ławki po trzy miejsca są zwrócone do środka; `obroty` miejsc ustawia
+kierunek przy wsiadaniu i przesiadce. Próba `grafika-bwp`: dziewięć zakrytych osób,
+prześwietlenie, ruch i obrót, przesiadki między ławkami a kierowcą. Obrys 2,4×4,5 kratki;
+widoczna bryła 3,385×6,55 m. Osobna grafika wieży ma oś w pierścieniu i dziedziczy obrót,
+skalę oraz drgania kadłuba; znika przy prześwietleniu i ukryciu. Próba obejmuje również
+odrysowanie i własny obraz pojazdu. Celowanie wieżą pozostaje po becie.
+M1A1 Abrams ma cztery zakryte miejsca: kierowca w osi przodu, dowódca za działonowym po
+prawej pojazdu, ładowniczy po lewej. Osobna wieża używa tego samego renderera i zachowania
+prześwietlenia co Bradley. Obrys kadłuba 2,6×5,6 kratki (3,9×8,4 m), widoczny kadłub
+3,65×7,93 m; pełna długość z lufą 9,83 m. Grafika 780×2100 jest dopasowana do szerokości
+viewportu 780×1680 z kotwicą 50% / 40%; lufa wystaje poza pole. Tło okna Miejsc jest
+przycinane do kadłuba, więc kotwice pozostają przy siedziskach. Próba `grafika-czolg`
+obejmuje cztery miejsca, wsiadanie/wysiadanie, ruch, prześwietlenie i warstwy wieży.
+Motorower ma jedno otwarte siodło przed czerwoną skrzynką. Pełny pionek kierowcy stale nad
+grafiką, bez kropek i przygaszania; obrys 0,6×1,56 kratki (0,90×2,34 m), widoczna sylwetka
+0,86×2,25 m po powiększeniu pojazdu do 120% na życzenie MG. Kierowca zachowuje rozmiar.
+Podgląd jednomiejscowy pokazuje pusty i obsadzony pojazd, bez zdublowanej pełnej
+obsady. Próba `grafika-motorower`: portret, proporcje, kotwica, celowanie, ruch z obrotem,
+wsiadanie/wysiadanie przez Miejsca. Odpowiednik postaci obok ma źródłową skalę.
+Rower ma musztardową stalową ramę i tylny druciany koszyk z prześwitami, jedno otwarte
+siodło z kotwicą 50% / 31%. Obrys 0,6×1,5 kratki (0,90×2,25 m), widoczny 0,72×2,19 m,
+dobrany względem zaakceptowanego motoroweru. Próba `grafika-rower`: portret, pusty i obsadzony
+pojazd, zwykłe celowanie w rowerzystę, ruch, obrót i Miejsca. Bez silnika i wydechu.
+Deskorolka ma cztery jasne kółka i łatkę wskazującą przód, jedno otwarte miejsce stojące.
+Po korekcie MG obrys 0,6×0,72 kratki (120% pierwszego podglądu), źródłowa skala postaci.
+Próba `grafika-deskorolka`: grafika, wejście/zejście, ruch, obrót i widoczność jadącego.
+Regulacja wielkości postaci na jednośladach odłożona przez MG na później.
+
+`stations/garaz-wraki.mjs` dodaje **Grafika: Wraki — wszystkie pojazdy**, próbę `grafika-wraki`.
+Jedna scena `wraki-art-review-v1`: 14 par, sprawny po lewej i indywidualny wrak przy 0 PW
+po prawej. Wszystkie grafiki mają natywne ramki i przezroczyste tło. Abrams zachowuje nawis
+lufy; uszkodzone wieże są częścią wraku, bez nakładania sprawnej wieży. Najechanie nie
+prześwietla wraku. Test obejmuje 0 PW i cofnięcie z odtworzeniem pełnej tekstury wszystkich
+14 typów u MG i gracza. Stara scena trzech porównań jest aktualizowana w miejscu; pozostałe
+podglądy nie są resetowane. Kolejne przyjęcie gotowej galerii zachowuje ręczne ustawienia.
+Wyniki i aktualny raport: [wraki](../art/m4/wraki/README.md).
+
 ## Klon kampanii
 
 For what personas cannot answer — real legacy data, real inventories, a migration rehearsed before it touches the

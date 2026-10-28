@@ -1,7 +1,7 @@
 /**
  * Neuroshima 5e — pojazd przy 0 PW: wrak i wybuch baku (PLAN_m4_pojazdy §4.12, D17, E6).
  *
- * Wzorzec wraku z M5 (`combat/autodestrukcja.mjs`): grafika `tokens/wraki/pojazd-<klasa>.webp` (gdy plik jest;
+ * Osobna grafika wraku dla każdego podwozia (gdy plik jest;
  * inaczej przyciemnienie), „(wrak)” w nazwie, oryginał we fladze żetonu, [Przywróć] u MG. Do tego to, co jest
  * tylko pojazdowe: jadący wysadzeni na wolne pola obok, silnik zgaszony, Uruchom i ruch oznaczane (flaga `wrak`).
  *
@@ -18,6 +18,7 @@ import { MODULE_ID, danePojazdu, jadacyPojazdu, jestPojazdem } from "./stan.mjs"
 import { wysadzGM } from "./jadacy.mjs";
 import { FLAGA_SILNIK } from "./silnik.mjs";
 import { aktywneAwariePojazdu, odliczWybuch } from "./awarie.mjs";
+import { GRAFIKI_WRAKOW } from "../config/vehicles-data.mjs";
 
 export const FLAGA_WRAK = "wrakPojazdu";
 const FLAGA_STAN_WRAKU = "wrak";
@@ -48,12 +49,14 @@ async function _istnieje(src) {
 /** Grafika wraku na żetonie (oryginał we fladze). */
 async function _grafikaWraku(tokenDoc) {
   if (tokenDoc.flags?.[MODULE_ID]?.[FLAGA_WRAK]) return;
-  const klasa = danePojazdu(tokenDoc.actor)?.katalog.wrak ?? "osobowy";
-  const src = `modules/${MODULE_ID}/tokens/wraki/pojazd-${klasa}.webp`;
-  const jest = await _istnieje(src);
-  const orig = { src: tokenDoc.texture.src, tint: tokenDoc.texture.tint ?? null, name: tokenDoc.name };
+  const plik = GRAFIKI_WRAKOW[danePojazdu(tokenDoc.actor)?.podwozie];
+  const src = plik ? `modules/${MODULE_ID}/${plik}` : null;
+  const jest = src && await _istnieje(src);
+  const orig = { src: tokenDoc.texture.src, tint: tokenDoc.texture.tint ?? null, name: tokenDoc.name,
+    texture: foundry.utils.deepClone(tokenDoc._source.texture) };
   await tokenDoc.update({
-    ...(jest ? { "texture.src": src, "texture.fit": "contain" } : { "texture.tint": "#4a4a4a" }),
+    // Native wrecks retain the source frame, including the Abrams barrel overhang.
+    ...(jest ? { "texture.src": src } : { "texture.tint": "#4a4a4a" }),
     name: `${orig.name} (wrak)`, light: { bright: 0, dim: 0 },
     [`flags.${MODULE_ID}.${FLAGA_WRAK}`]: orig
   });
@@ -64,7 +67,9 @@ export async function przywrocGrafike(actor) {
   for (const t of _zetony(actor)) {
     const orig = t.flags?.[MODULE_ID]?.[FLAGA_WRAK];
     if (!orig) continue;
-    await t.update({ "texture.src": orig.src, "texture.tint": orig.tint ?? "#ffffff", name: orig.name, [`flags.${MODULE_ID}.${FLAGA_WRAK}`]: _del });
+    await t.update({ ...(orig.texture ? { texture: orig.texture } :
+      { "texture.src": orig.src, "texture.tint": orig.tint ?? "#ffffff" }),
+      name: orig.name, [`flags.${MODULE_ID}.${FLAGA_WRAK}`]: _del });
   }
 }
 

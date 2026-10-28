@@ -5,6 +5,8 @@
  *  - `stan.mjs`        — co jest pojazdem, obrys, miejsca, kto jedzie (jedyne miejsce czytające flagi), skala sceny
  *  - `geometria.mjs`   — czyste funkcje: obrys w czterech kierunkach, układ miejsc, obroty
  *  - `prezentacja.mjs` — otwarte/zakryte miejsca, rozpoznawanie jadących i lokalna kolejność grafiki
+ *  - `grafika.mjs`     — dopasowanie wnętrza i metadanych warstw do własnego obrazu żetonu
+ *  - `wieza.mjs`       — osobna grafika wieży: oś, transformacja kadłuba, widoczność i sprzątanie
  *  - `zeton.mjs`       — podklasa żetonu: siatka w obrysie naturalnym, jadący w animacji, ukrycie,
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
  *  - `historia.mjs`    — historia rdzenia pomija pochodne zapisy miejsc i obrysu (jedno Ctrl+Z na ruch)

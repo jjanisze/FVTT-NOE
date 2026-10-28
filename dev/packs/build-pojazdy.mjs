@@ -75,6 +75,8 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
     const zeton = grafikaZetonu ?? plik(`tokens/pojazdy/_placeholder/${slug}.webp`);
     const portret = plik(`tokens/portraits/pojazd-${slug}.webp`) ?? zeton;
     const wnetrze = plik(`tokens/pojazdy/wnetrza/${slug}.webp`);
+    const kadlub = k.wiezaGrafiki && plik(`tokens/pojazdy/kadluby/${slug}.webp`);
+    const wieza = k.wiezaGrafiki && plik(`tokens/pojazdy/wieze/${slug}.webp`);
     const rozmiar = rozmiarPojazdu(id);
     const bezruch = ttBezruchu(p);
     const actorId = idFor("pojazd", id);
@@ -147,14 +149,16 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
         },
         prototypeToken: {
           name: p.nazwa, width: k.obrys.w, height: k.obrys.h, actorLink: false, disposition: 0, lockRotation: false,
-          rotation: 0, displayName: 20, texture: { src: zeton, fit: "contain", scaleX: 1, scaleY: 1, anchorX: 0.5, anchorY: 0.5 },
+          rotation: 0, displayName: 20, texture: { src: zeton, fit: "contain", scaleX: 1, scaleY: 1, anchorX: 0.5, anchorY: 0.5,
+            ...(grafikaZetonu ? k.teksturaGrafiki : {}) },
           sight: { enabled: false, range: 0, angle: 360, visionMode: "basic" }, ring: { enabled: false }
         },
         items: items.map(i => i._id),
         flags: {
           [MODULE_ID]: {
             pojazd: { podwozie: id,
-              ...(wnetrze ? { grafika: { nadwozie: zeton, wnetrze } } : {}),
+              ...(wnetrze ? { grafika: { nadwozie: zeton, wnetrze,
+                ...(kadlub && wieza && grafikaZetonu ? { kadlub, wieza: { src: wieza, ...k.wiezaGrafiki } } : {}) } } : {}),
               ...(grafikaZetonu && k.strefyGrafiki ? { strefy: k.strefyGrafiki } : {})
             },
             ...(k.bak ? { paliwo: { value: k.bak, max: k.bak, spalanie: k.spalanie } } : {}),

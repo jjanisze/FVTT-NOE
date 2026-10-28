@@ -20,6 +20,7 @@ import {
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
 import { kosztPrzesiadki } from "../pojazdy/jadacy.mjs";
+import { grafikaWiezy, kadrGrafikiMiejsc } from "../pojazdy/grafika.mjs";
 import {
   kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "../pojazdy/stan.mjs";
@@ -33,6 +34,31 @@ const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
 export function registerPojazdyTests(quench) {
   quench.registerBatch(`${MODULE_ID}.pojazdy`, context => {
     const { describe, it, expect } = context;
+
+    describe("Osobna grafika wieży", function () {
+      const native=()=>({texture:{src:'body.webp'},actor:{flags:{[MODULE_ID]:{pojazd:{grafika:{
+        nadwozie:'body.webp',kadlub:'hull.webp',wieza:{src:'turret.webp',...KATALOG_POJAZDOW.bwp.wiezaGrafiki}
+      }}}}}});
+      it("dopuszcza zarejestrowany wycinek tylko nad odpowiadającym mu nadwoziem", function () {
+        const doc=native();
+        expect(grafikaWiezy(doc)?.os).to.deep.equal([300,790]);
+        doc.texture.src='custom.webp';expect(grafikaWiezy(doc)).to.equal(null);
+        doc.texture.src='wreck.webp';expect(grafikaWiezy(doc)).to.equal(null);
+        expect(grafikaWiezy({})).to.equal(null);
+      });
+      it("odrzuca niepełną geometrię i oś poza wycinkiem zamiast rysować błędną warstwę", function () {
+        for(const bad of [{os:[NaN,790]},{kadr:[0,1350]},{wycinek:[0,0,20,20]},{wycinek:[81,586,-1,627]}]){
+          const doc=native();Object.assign(doc.actor.flags[MODULE_ID].pojazd.grafika.wieza,bad);
+          expect(grafikaWiezy(doc)).to.equal(null);
+        }
+      });
+      it("lufa Abramsa wystaje poza obrys, a okno Miejsc zachowuje skalę i początek kadłuba", function () {
+        const doc=native();doc.texture={src:'body.webp',...KATALOG_POJAZDOW.czolg.teksturaGrafiki};
+        doc.actor.flags[MODULE_ID].pojazd.grafika.wieza={src:'turret.webp',...KATALOG_POJAZDOW.czolg.wiezaGrafiki};
+        expect(kadrGrafikiMiejsc(doc,260,560)).to.deep.equal({width:260,height:700,x:0,y:0});
+        doc.texture.src='custom.webp';expect(kadrGrafikiMiejsc(doc,260,560)).to.deep.equal({width:260,height:560,x:0,y:0});
+      });
+    });
 
     describe("Prezentacja miejsc — kabina, otwarty właz i motocykl", function () {
       it("domyślnie zakryta; stanowisko broni i osłona nie ujawniają jadącego", function () {
@@ -66,6 +92,44 @@ export function registerPojazdyTests(quench) {
         expect(miejsca[0].kierowca).to.equal(true);
         expect(0.5 + miejsca[0].y / k.obrys.h).to.be.closeTo(0.46, 1e-6);
         expect(0.5 + miejsca[1].y / k.obrys.h).to.be.closeTo(0.265, 0.0004);
+      });
+
+      it("ciężarówka ma trzy zakryte miejsca w kabinie i osiem otwartych na pace", function () {
+        const k = KATALOG_POJAZDOW.ciezarowka;
+        for (const strefy of [k.strefy, k.strefyGrafiki]) {
+          const miejsca = ukladMiejsc(k.obrys, strefy), paka = miejsca.filter(m => m.strefa === "paka");
+          expect(miejsca).to.have.length(11);
+          expect(miejsca.filter(m => !otwarteMiejsce(m))).to.have.length(3);
+          expect(paka).to.have.length(8);
+          expect(paka.every(m => otwarteMiejsce(m) && m.stojace && m.oslona === "polowa"
+            && prezentacjaMiejsca(m).warstwa === "nad")).to.equal(true);
+        }
+        const miejsca = ukladMiejsc(k.obrys, k.strefyGrafiki);
+        expect(miejsca[0].kierowca).to.equal(true);
+        // Geometry rounds to 0.001 square, so compare the normalized art anchor within that precision.
+        expect(miejsca.slice(0, 3).every(m => blisko(0.5 + m.y / k.obrys.h, 0.709444, 0.0001))).to.equal(true);
+      });
+
+      it("Bradley: kierowca, dwóch w wieży i sześciu przy burtach, twarzami do środka", function () {
+        const k = KATALOG_POJAZDOW.bwp, ms = ukladMiejsc(k.obrys,k.strefy);
+        expect(ms).to.have.length(PODWOZIA.bwp.zaloga);
+        expect(ms.filter(m=>m.kierowca)).to.have.length(1);
+        expect(ms.filter(m=>m.strefa==='wieza')).to.have.length(2);
+        const desant=ms.filter(m=>m.strefa==='desant');
+        expect(desant).to.have.length(6);
+        for(const m of desant){
+          const facing=obroc({x:0,y:1},m.obrot);
+          expect(facing.x*m.x).to.be.below(0);
+          expect(Math.abs(facing.y)).to.be.below(1e-6);
+        }
+      });
+      it("Abrams: kierowca pośrodku, dowódca za działonowym, ładowniczy po drugiej stronie", function () {
+        const k=KATALOG_POJAZDOW.czolg,ms=ukladMiejsc(k.obrys,k.strefyGrafiki);
+        expect(ms).to.have.length(4);
+        const driver=ms.find(m=>m.kierowca),commander=ms.find(m=>m.id==='wieza-0-0'),loader=ms.find(m=>m.id==='wieza-1-0'),gunner=ms.find(m=>m.strefa==='dzialo');
+        expect(driver.x).to.equal(0);expect(driver.y).to.be.above(gunner.y);
+        expect(commander.x).to.be.below(0);expect(gunner.x).to.be.below(0);
+        expect(commander.y).to.be.below(gunner.y);expect(loader.x).to.be.above(0);
       });
 
       it("otwarte miejsce ujawnia tożsamość tylko widocznej postaci, bez dostępu do reszty kabiny", function () {
@@ -346,7 +410,9 @@ export function registerPojazdyTests(quench) {
       it("liczba miejsc = Załoga (Autobus: 20 + kierowca; paka ciężarówki ponad Załogą)", function () {
         for (const [id, kat] of Object.entries(KATALOG_POJAZDOW)) {
           const ms = ukladMiejsc(kat.obrys, kat.strefy);
-          const bezPaki = ms.filter(m => !m.stojace).length;
+          // Only the truck's extra cargo deck is outside the tabulated crew count.
+          // A standing skateboard driver is still its one crew member.
+          const bezPaki = id === "ciezarowka" ? ms.filter(m => m.strefa !== "paka").length : ms.length;
           const oczekiwane = id === "autobus" ? PODWOZIA[id].zaloga + 1 : PODWOZIA[id].zaloga;
           expect(bezPaki, id).to.equal(oczekiwane);
         }

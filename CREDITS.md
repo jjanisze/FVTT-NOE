@@ -461,7 +461,137 @@ style; an original SVG supplies the overhead layout. Two targeted edits shorten 
 and remove an extra saddle pad. Sources and full prompts: `dev/art/m4/motocykl/`.
 The packer only crops, resizes and converts the generated pixels, preserving genuine alpha.
 
+`tokens/portraits/pojazd-autobus.webp`, `tokens/pojazdy/autobus.webp` and
+`tokens/pojazdy/wnetrza/autobus.webp` were made with OpenAI's built-in image-generation tool
+on 2026-10-26. The Hammer portrait supplies painting style, and an original orthographic SVG
+establishes twenty passenger seats, the driver's station and the rear utility floor.
+Generated framing is calibrated to the authored dimensions; a deterministic composite adds
+the roof to the canonical cutaway while retaining shared exterior and alpha pixels.
+Both tokens use lossless WEBP. Sources, complete prompts, recipes and decoded-pixel checks:
+`dev/art/m4/autobus/`.
+The portrait and closed token's front were revised on 2026-10-27 with the same built-in tool,
+adding a raked panoramic windshield visible overhead. The design is inspired by New Look /
+Fishbowl buses, described by [Seashore Trolley Museum](https://collections.trolleymuseum.org/items/343).
+No museum photograph was used as generation input. The canonical interior and the remaining
+roof pixels were preserved; revision prompts and compositing checks are retained with the art.
+
+`tokens/portraits/pojazd-buggy.webp` and `tokens/pojazdy/buggy.webp` were made with OpenAI's
+built-in image-generation tool on 2026-10-26. The Hammer portrait supplies the painting style;
+an original orthographic SVG establishes the two axles, side-by-side seats and rear engine.
+The generated buggy portrait supplies the vehicle appearance for its transparent overhead token.
+Sources, model, full prompts and measurements: `dev/art/m4/buggy/`. The packer only resizes
+and converts the generated art, retaining its genuine alpha.
+
+`tokens/portraits/pojazd-ciezarowka.webp`, `tokens/pojazdy/ciezarowka.webp` and
+`tokens/pojazdy/wnetrza/ciezarowka.webp` were made with OpenAI's built-in image-generation tool
+on 2026-10-26. The Hammer portrait supplies the rendering style. An original SVG establishes
+two axles, three cab seats and the open wooden cargo bed; the cab roof is added over the
+established cutaway. At the GM's request, a deterministic composite then registered the cab
+contents and copied the closed token's exterior into the cutaway. Both truck tokens use lossless
+WEBP to retain identical cargo-bed pixels. Sources, full prompts, the compositing recipe and
+decoded-pixel checks: `dev/art/m4/ciezarowka/`. The packer preserves genuine alpha.
+
+`tokens/portraits/pojazd-traktor.webp` and `tokens/pojazdy/traktor.webp` were made with OpenAI's
+built-in image-generation tool on 2026-10-27. The Hammer portrait supplies the painting style;
+an original SVG establishes two axles, the central driver seat and a passenger cushion on the
+vehicle-left mudguard. The generated tractor portrait supplies appearance and materials for its
+transparent overhead token. Sources, full prompts and measurements: `dev/art/m4/traktor/`.
+The standard packer only resizes and converts, preserving the generated alpha.
+
+`tokens/portraits/pojazd-woz-strazacki.webp`, `tokens/pojazdy/woz-strazacki.webp` and
+`tokens/pojazdy/wnetrza/woz-strazacki.webp` were made with OpenAI's built-in image-generation
+tool on 2026-10-27. The Hammer portrait supplies painting style; an original SVG establishes
+two axles, five crew-cab seats and an open water-monitor station. Generated edits correct
+the front wheels/camera, add the cab roof and replace invented windshield interior with reflection.
+A deterministic calibrated composite retains identical equipment/exterior pixels and alpha
+in lossless WEBP. Full prompts, source variants, recipes and pixel checks: `dev/art/m4/woz-strazacki/`.
+Following the GM's geometry review, the token pair was regenerated from the unchanged portrait
+and a corrected SVG: shorter cab/pump/rear proportions, recessed pump waist, rear-only ladder
+and protruding tyres. The revised pair is 600×1650; prompts are in `proportions-prompts.json`.
+A further generated edit removes misplaced roof beacons and the box-like front rim from the
+cutaway. Only a finite front mask is composited; the approved closed token and every cutaway
+pixel outside that mask are retained verbatim. Prompt: `front-cutaway-prompts.json`.
+
+`tokens/portraits/pojazd-buldozer.webp` and `tokens/pojazdy/buldozer.webp` were made with
+OpenAI's built-in image-generation tool on 2026-10-27. The Hammer portrait supplies painting
+style; an original SVG establishes two steel tracks, front blade, rear single ripper and an
+open two-seat platform. The generated bulldozer portrait supplies vehicle appearance. A uniform
+alpha-bounds crop/resize fits the token into its catalog frame; no repainting or roof variant.
+Sources, full prompts, model and measurements: `dev/art/m4/buldozer/`.
+
+The M2A2 Bradley set, `tokens/portraits/pojazd-bwp.webp`, `tokens/pojazdy/bwp.webp` and
+`tokens/pojazdy/wnetrza/bwp.webp`, was generated with OpenAI's built-in image tool on 2026-10-27.
+The Hammer portrait supplies painting style; original SVG/roof guides establish three crew and
+six inward-facing rear seats. The generated roof turret is registered over the painted basket,
+and a deterministic finite mask shares the exterior and alpha between roof variants.
+Vehicle-shape reference: [US Army / DVIDS photo 5840047](https://www.dvidshub.net/image/5840047/6-8-cav-executes-halo-focus),
+VIRIN 100919-A-PG531-003, public domain; the caption credits Spc. Christian Davis. The source
+photo is retained as `dev/art/m4/bwp/reference-usarmy.jpg`. Primary manual references, full
+prompts, source roles and measurements: `dev/art/m4/bwp/README.md` and `prompts.json`.
+
+Bradley layers `tokens/pojazdy/kadluby/bwp.webp` and `tokens/pojazdy/wieze/bwp.webp`
+were separated from that approved set on 2026-10-27 using the deterministic Pillow compositor
+in `dev/art/m4/bwp/compose.py`. The turret retains the approved pixels; its crop records the
+bearing pivot. The underlying hull reuses the original roof paint, working layers and bearing rim.
+Full reassembly is pixel-identical to the approved complete token.
+
+The M1A1 Abrams assets `tokens/portraits/pojazd-czolg.webp`, `tokens/pojazdy/czolg.webp`,
+`tokens/pojazdy/wnetrza/czolg.webp`, `tokens/pojazdy/kadluby/czolg.webp` and
+`tokens/pojazdy/wieze/czolg.webp` were created with OpenAI's built-in image-generation tool
+and a deterministic Pillow compositor on 2026-10-27. The Hammer portrait supplies painting
+style. Original SVG guides establish four crew
+positions, hull proportions and a separate turret with its bearing. Generated exterior paint and
+hatch fittings close the cutaway hull; the turret is extracted without repainting its retained
+pixels. Full layer reassembly matches the closed token exactly. The service does not expose a
+model name. Full prompts, reference roles, measurements and processing scripts: `dev/art/m4/czolg/`.
+Visual reference: public-domain USMC [11th MEU tank operations photo 5698255](https://www.dvidshub.net/image/5698255/11th-meu-tank-operations),
+VIRIN 190814-M-ET529-1019, 2019-08-14, caption credit Cpl. Israel Chincio. Retained as
+`dev/art/m4/czolg/reference-usmc.jpg`. Geometry references: GDLS and Australian Army M1A1
+specifications, USMC tank employment manual; links in the art README. Interior details are
+simplified tabletop illustration rather than engineering documentation.
+
+Moped assets `tokens/portraits/pojazd-motorower.webp` and `tokens/pojazdy/motorower.webp`
+were generated using OpenAI's built-in image-generation tool, completed 2026-10-28. The generated
+motorcycle portrait supplies painting style; an original SVG establishes the moped's two wheels,
+single saddle and rear crate. A targeted portrait edit removes a tiny letter-like engine-cover mark.
+The final portrait and rasterized layout guide the overhead token. Normal catalog packaging crops,
+resizes and converts without painting, preserving generated alpha. The tool does not expose its
+model name. Sources, complete prompts, input roles and measurements: `dev/art/m4/motorower/`.
+
+Bicycle assets `tokens/portraits/pojazd-rower.webp` and `tokens/pojazdy/rower.webp` were generated
+with OpenAI's built-in image-generation tool on 2026-10-28. The generated moped portrait supplies
+painting style and roadside setting. An original SVG establishes the bicycle's two narrow wheels,
+saddle, pedals, handlebars and rear wire basket. The generated bicycle portrait supplies identity
+for the overhead token. Catalog packaging only crops, resizes and converts, retaining generated
+alpha and basket openings. The tool does not expose a model name. Sources, complete prompts,
+reference roles and measurements: `dev/art/m4/rower/`.
+
+Skateboard assets `tokens/portraits/pojazd-deskorolka.webp` and `tokens/pojazdy/deskorolka.webp`
+were generated with OpenAI's built-in image-generation tool on 2026-10-28. The bicycle portrait
+supplies painting style; an original SVG fixes the deck, four wheels, bolt groups and front tape
+patch. The new portrait supplies materials for the top-down token. At the GM's request the token
+was repackaged at 120% of its first preview. Sources and full prompts: `dev/art/m4/deskorolka/`.
+
+Passenger-car wreck `tokens/wraki/pojazd-osobowy.webp` was generated with the same built-in tool
+on 2026-10-28 by editing the approved sedan token, with its portrait as a material reference.
+The GM approved it for the sedan only; that exact file is retained unchanged. No scenery or
+active fire/smoke. Catalog packaging only crops, resizes and converts. Sources, full prompt and
+input roles: `dev/art/m4/wraki/`. The tool does not expose its model name.
+
+Thirteen additional individual wrecks were generated with OpenAI's built-in image tool on
+2026-10-28: `tokens/wraki/pojazd-hammer.webp`, `pojazd-motocykl.webp`, `pojazd-rower.webp`,
+`pojazd-buggy.webp`, `pojazd-ciezarowka.webp`, `pojazd-autobus.webp`, `pojazd-traktor.webp`,
+`pojazd-woz-strazacki.webp`, `pojazd-buldozer.webp`, `pojazd-bwp.webp`, `pojazd-czolg.webp`,
+`pojazd-motorower.webp` and `pojazd-deskorolka.webp` (all in the same directory).
+Each edit uses its accepted vehicle token as the identity/geometry reference, and the approved
+sedan wreck solely for style and damage severity. Full prompts, reference roles and source
+PNGs: `dev/art/m4/wraki/batch.json` and `variants/`. Deterministic processing restores native
+canvas proportions and packages transparent WEBP; it does not paint. Model name not exposed.
+
 ## AI-assisted development
+
+
+
 
 Significant parts of this module's code, documentation, and some art/audio-processing tooling
 were produced with AI assistance (primarily Claude Code for code and docs; Gemini/ChatGPT for

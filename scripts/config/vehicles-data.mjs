@@ -55,6 +55,24 @@
  * @property {string} [uwagi]
  */
 
+/** Individual wreck images; legacy `wrak` categories remain classification metadata. */
+export const GRAFIKI_WRAKOW = {
+  "osobowka": "tokens/wraki/pojazd-osobowy.webp",
+  "hammer": "tokens/wraki/pojazd-hammer.webp",
+  "motocykl": "tokens/wraki/pojazd-motocykl.webp",
+  "rower": "tokens/wraki/pojazd-rower.webp",
+  "buggy": "tokens/wraki/pojazd-buggy.webp",
+  "ciezarowka": "tokens/wraki/pojazd-ciezarowka.webp",
+  "autobus": "tokens/wraki/pojazd-autobus.webp",
+  "traktor": "tokens/wraki/pojazd-traktor.webp",
+  "wozStrazacki": "tokens/wraki/pojazd-woz-strazacki.webp",
+  "buldozer": "tokens/wraki/pojazd-buldozer.webp",
+  "bwp": "tokens/wraki/pojazd-bwp.webp",
+  "czolg": "tokens/wraki/pojazd-czolg.webp",
+  "motorower": "tokens/wraki/pojazd-motorower.webp",
+  "deskorolka": "tokens/wraki/pojazd-deskorolka.webp"
+};
+
 /** @type {Record<string, Podwozie>} */
 export const PODWOZIA = {
   autobus: {
@@ -66,9 +84,10 @@ export const PODWOZIA = {
   },
   bwp: {
     id: "bwp", nazwa: "Bojowy wóz piechoty",
-    szybkosc: 18, cofanie: 9, zaloga: 12, ladownosc: 5000,
+    szybkosc: 18, cofanie: 9, zaloga: 9, ladownosc: 5000,
     tt: 15, ttBezruchu: null, pw: 200, progObrazen: 12, progAwarii: 25,
-    cena: 1500, dostepnosc: 5, rozmiar: null, silnikowy: true
+    cena: 1500, dostepnosc: 5, rozmiar: null, silnikowy: true,
+    uwagi: "M2A2 Bradley: 3 członków załogi i 6 żołnierzy desantu na ławkach przy burtach (WKK, wybór MG; zamiast ogólnej załogi 12 z NOE)."
   },
   buggy: {
     id: "buggy", nazwa: "Buggy",
@@ -180,7 +199,7 @@ export function ttBezruchu(p) {
  *  - `rura` — wylot spalin w kadrze grafiki (ułamek szerokości od lewej, wysokości od góry); ta sama
  *    liczba co `exhaust` w `dev/art/m4/gen_catalog.py` — art jest malowany pod nią.
  *  - `klasa` — ST odpalania na krótko (§4.5): jednoślad 10, osobowy 15, ciężki/pancerny 20.
- *  - `wrak` — grafika wraku (§4.12): `tokens/wraki/pojazd-<wrak>.webp`.
+ *  - `wrak` — dawna klasa wraku; grafiki indywidualne wybiera `GRAFIKI_WRAKOW` (§4.12).
  *  - `cechy` — klucze `CECHY_POJAZDOW` z parametrami; `warstwa` mówi, skąd cecha jest.
  *
  * @type {Record<string, object>}
@@ -201,6 +220,11 @@ export const KATALOG_POJAZDOW = {
     rozmiar: "grg", obrys: { w: 2, h: 8 }, silnik: "diesel", rura: [0.78, 0.02],
     klasa: "ciezki", wrak: "ciezki", cechy: [{ id: "cofanie", cwierc: true }, "potracenie", "skokAutobusu"],
     statystyki: { str: 26, dex: 8, con: 20 }, zrodloStatystyk: "NOE", bak: 300, spalanie: 40,
+    strefyGrafiki: [
+      { id: "kabina", nazwa: "Kierowca", od: 0.167, do: 0.167, rzedy: [1], kolumny: [[0.737]], kierowca: true },
+      { id: "pasazerowie", nazwa: "Pasażerowie", od: 0.272, do: 0.603, rzedy: [4,4,4,4,4],
+        kolumny: Array.from({ length: 5 }, () => [0.788,0.64,0.365,0.217]) }
+    ],
     strefy: [{ id: "kabina", nazwa: "Wnętrze", od: 0.06, do: 0.94, rzedy: [1, 4, 4, 4, 4, 4] }]
   },
   motocykl: {
@@ -213,16 +237,22 @@ export const KATALOG_POJAZDOW = {
       prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   rower: {
-    rozmiar: "med", obrys: { w: 0.5, h: 1 }, silnik: null, rura: null,
+    rozmiar: "med", obrys: { w: 0.6, h: 1.5 }, silnik: null, rura: null,
     klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "akrobatyka", st: 10 }, "skokRoweru", "uciazliwyPancerz", "przerzutka", "slalom"],
     statystyki: { str: 10, dex: 18, con: 10 }, zrodloStatystyk: "NOE", bak: 0, spalanie: 0,
-    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1] }]
+    strefyGrafiki: [{ id: "siodlo", nazwa: "Siodełko", od: 0.69, do: 0.69, rzedy: [1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   buggy: {
-    rozmiar: "lg", obrys: { w: 1, h: 2 }, silnik: "benzyna", rura: [0.50, 0.03],
+    rozmiar: "lg", obrys: { w: 1.4, h: 2.8 }, silnik: "benzyna", rura: [0.50, 0.035],
     klasa: "osobowy", wrak: "osobowy", cechy: ["terenowka", "skokMotocykla", "potracenie", "slalom", "otwartaRama"],
     statystyki: { str: 16, dex: 16, con: 12 }, zrodloStatystyk: "RAI", bak: 40, spalanie: 8,
-    strefy: [{ id: "kabina", nazwa: "Fotele", od: 0.45, do: 0.45, rzedy: [2], oslona: "polowa" }]
+    strefyGrafiki: [{ id: "kabina", nazwa: "Fotele", od: 0.525, do: 0.525, rzedy: [2],
+      kolumny: [[0.635, 0.365]], oslona: "polowa", prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "kabina", nazwa: "Fotele", od: 0.45, do: 0.45, rzedy: [2], oslona: "polowa",
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   hammer: {
     rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "diesel", rura: [0.25, 0.03],
@@ -242,33 +272,60 @@ export const KATALOG_POJAZDOW = {
     ]
   },
   ciezarowka: {
-    rozmiar: "grg", obrys: { w: 2, h: 6 }, silnik: "diesel", rura: [0.10, 0.70],
+    rozmiar: "grg", obrys: { w: 2, h: 6 }, silnik: "diesel", rura: [0.115, 0.60],
     klasa: "ciezki", wrak: "ciezki", cechy: [{ id: "cofanie", cwierc: true }, "potracenie", "paka"],
     statystyki: { str: 24, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 200, spalanie: 30,
+    strefyGrafiki: [
+      { id: "kabina", nazwa: "Kabina", od: 0.290556, do: 0.290556, rzedy: [3],
+        kolumny: [[0.675, 0.5, 0.325]] },
+      { id: "paka", nazwa: "Paka", od: 0.52, do: 0.84, rzedy: [3, 3, 2],
+        kolumny: [[0.72, 0.5, 0.28], [0.72, 0.5, 0.28], [0.66, 0.34]],
+        stojace: true, oslona: "polowa", prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
+    ],
     strefy: [
       { id: "kabina", nazwa: "Kabina", od: 0.2, do: 0.2, rzedy: [3] },
-      { id: "paka", nazwa: "Paka", od: 0.42, do: 0.92, rzedy: [3, 3, 2], stojace: true, oslona: "polowa" }
+      { id: "paka", nazwa: "Paka", od: 0.42, do: 0.92, rzedy: [3, 3, 2], stojace: true, oslona: "polowa",
+        prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
     ]
   },
   wozStrazacki: {
-    rozmiar: "grg", obrys: { w: 2, h: 6 }, silnik: "diesel", rura: [0.90, 0.72],
+    rozmiar: "grg", obrys: { w: 2, h: 5.5 }, silnik: "diesel", rura: [0.242, 0.43],
     klasa: "ciezki", wrak: "ciezki", cechy: ["cofanie", "potracenie", "dzialkoWodne", "syrena"],
     statystyki: { str: 24, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 200, spalanie: 35,
+    strefyGrafiki: [
+      { id: "kabina", nazwa: "Kabina", od: 0.198, do: 0.305, rzedy: [3, 2],
+        kolumny: [[0.685, 0.5, 0.335], [0.683, 0.341]] },
+      { id: "dzialko", nazwa: "Działko wodne", od: 0.527, do: 0.527, rzedy: [1], kolumny: [[0.64]],
+        stanowisko: true, oslona: "polowa", prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
+    ],
     strefy: [
       { id: "kabina", nazwa: "Kabina", od: 0.1, do: 0.28, rzedy: [3, 2] },
-      { id: "dzialko", nazwa: "Działko wodne", od: 0.5, do: 0.5, rzedy: [1], stanowisko: true, oslona: "polowa" }
+      { id: "dzialko", nazwa: "Działko wodne", od: 0.5, do: 0.5, rzedy: [1], stanowisko: true, oslona: "polowa",
+        prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }
     ]
   },
   buldozer: {
-    rozmiar: "grg", obrys: { w: 2.5, h: 4 }, silnik: "diesel", rura: [0.40, 0.62],
+    rozmiar: "grg", obrys: { w: 2.5, h: 4 }, silnik: "diesel", rura: [0.451, 0.538],
     klasa: "ciezki", wrak: "gasienicowy", cechy: ["gasienice", "lemiesz", "bezGazuDoDechy"],
     statystyki: { str: 28, dex: 6, con: 22 }, zrodloStatystyk: "RAI", bak: 400, spalanie: 40,
-    strefy: [{ id: "kabina", nazwa: "Kabina", od: 0.6, do: 0.6, rzedy: [2] }]
+    strefyGrafiki: [{ id: "kabina", nazwa: "Operator i pomocnik", od: 0.6133, do: 0.6133, rzedy: [2],
+      kolumny: [[0.4387, 0.5747]], prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "kabina", nazwa: "Kabina", od: 0.6, do: 0.6, rzedy: [2],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   czolg: {
-    rozmiar: "grg", obrys: { w: 2.5, h: 5 }, silnik: "diesel", rura: [0.50, 0.03],
+    rozmiar: "grg", obrys: { w: 2.6, h: 5.6 }, silnik: "diesel", rura: [0.50, 0.059524],
+    teksturaGrafiki: { fit: "width", anchorX: 0.5, anchorY: 0.4 },
+    wiezaGrafiki: { kadr: [780,2100], os: [389,884], wycinek: [70,458,638,1588] },
     klasa: "pancerny", wrak: "gasienicowy", cechy: ["gasienice", "wieza", "pancerneWnetrze", "miazdzenie"],
     statystyki: { str: 28, dex: 6, con: 24 }, zrodloStatystyk: "RAI", bak: 500, spalanie: 120,
+    strefyGrafiki: [
+      { id: "kadlub", nazwa: "Kierowca", od: 0.220238, do: 0.220238, rzedy: [1], kolumny: [[0.5]], oslona: "calkowita" },
+      { id: "wieza", nazwa: "Dowódca i ładowniczy", od: 0.541667, do: 0.479167, rzedy: [1,1],
+        kolumny: [[0.365385],[0.662821]], oslona: "calkowita" },
+      { id: "dzialo", nazwa: "Działonowy", od: 0.416667, do: 0.416667, rzedy: [1],
+        kolumny: [[0.353846]], stanowisko: true, oslona: "calkowita" }
+    ],
     strefy: [
       { id: "kadlub", nazwa: "Kadłub", od: 0.14, do: 0.14, rzedy: [1], oslona: "calkowita" },
       { id: "wieza", nazwa: "Wieża", od: 0.48, do: 0.48, rzedy: [2], oslona: "calkowita" },
@@ -276,32 +333,43 @@ export const KATALOG_POJAZDOW = {
     ]
   },
   bwp: {
-    rozmiar: "grg", obrys: { w: 2, h: 4.5 }, silnik: "diesel", rura: [0.12, 0.70],
+    rozmiar: "grg", obrys: { w: 2.4, h: 4.5 }, silnik: "diesel", rura: [0.165278, 0.731852],
+    wiezaGrafiki: { kadr: [720,1350], os: [300,790], wycinek: [81,586,495,627] },
     klasa: "pancerny", wrak: "gasienicowy", cechy: ["gasienice", "pancerneWnetrze", "desant", "strzelnice"],
     statystyki: { str: 26, dex: 8, con: 22 }, zrodloStatystyk: "RAI", bak: 460, spalanie: 60,
     strefy: [
-      { id: "kabina", nazwa: "Kierowca i dowódca", od: 0.12, do: 0.12, rzedy: [2], oslona: "calkowita" },
-      { id: "wieza", nazwa: "Wieża", od: 0.32, do: 0.32, rzedy: [1], stanowisko: true, oslona: "calkowita" },
-      { id: "desant", nazwa: "Desant", od: 0.52, do: 0.92, rzedy: [3, 3, 3], oslona: "calkowita" }
+      { id: "kabina", nazwa: "Kierowca", od: 0.252593, do: 0.252593, rzedy: [1], kolumny: [[0.706944]], obroty: [[0]], oslona: "calkowita" },
+      { id: "wieza", nazwa: "Działonowy i dowódca", od: 0.418519, do: 0.418519, rzedy: [2],
+        kolumny: [[0.513889, 0.323611]], obroty: [[0, 0]], stanowisko: true, oslona: "calkowita" },
+      { id: "desant", nazwa: "Desant — ławki przy burtach", od: 0.594074, do: 0.837037, rzedy: [2, 2, 2],
+        kolumny: [[0.704167, 0.293056], [0.704167, 0.293056], [0.704167, 0.293056]],
+        obroty: [[90, 270], [90, 270], [90, 270]], oslona: "calkowita" }
     ]
   },
   traktor: {
-    rozmiar: "huge", obrys: { w: 1.5, h: 2.5 }, silnik: "diesel", rura: [0.55, 0.68],
+    rozmiar: "huge", obrys: { w: 1.5, h: 2.5 }, silnik: "diesel", rura: [0.567, 0.499],
     klasa: "ciezki", wrak: "ciezki", cechy: ["terenowka", "uciag"],
     statystyki: { str: 22, dex: 8, con: 18 }, zrodloStatystyk: "RAI", bak: 150, spalanie: 20,
-    strefy: [{ id: "kabina", nazwa: "Siedzisko i błotnik", od: 0.58, do: 0.72, rzedy: [1, 1] }]
+    strefyGrafiki: [{ id: "kabina", nazwa: "Siedzisko i błotnik", od: 0.68, do: 0.706667, rzedy: [1, 1],
+      kolumny: [[0.5], [0.704444]], prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "kabina", nazwa: "Siedzisko i błotnik", od: 0.58, do: 0.72, rzedy: [1, 1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   motorower: {
-    rozmiar: "med", obrys: { w: 0.5, h: 1 }, silnik: "motocykl", rura: [0.35, 0.06],
+    rozmiar: "med", obrys: { w: 0.6, h: 1.56 }, silnik: "motocykl", rura: [0.25, 0.18],
     klasa: "jednoslad", wrak: "jednoslad", cechy: [{ id: "akrobacja", test: "pojazdy", st: 10 }, "slalom", "oszczedny"],
     statystyki: { str: 12, dex: 14, con: 10 }, zrodloStatystyk: "RAI", bak: 6, spalanie: 2,
-    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1] }]
+    strefyGrafiki: [{ id: "siodlo", nazwa: "Siodełko", od: 0.64, do: 0.64, rzedy: [1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }],
+    strefy: [{ id: "siodlo", nazwa: "Siodełko", od: 0.55, do: 0.55, rzedy: [1],
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   },
   deskorolka: {
-    rozmiar: "sm", obrys: { w: 0.5, h: 0.5 }, silnik: null, rura: null,
+    rozmiar: "sm", obrys: { w: 0.6, h: 0.72 }, silnik: null, rura: null,
     klasa: "jednoslad", wrak: "jednoslad", cechy: ["uciazliwyPancerz", "ollie"],
     statystyki: { str: 6, dex: 16, con: 8 }, zrodloStatystyk: "RAI", bak: 0, spalanie: 0,
-    strefy: [{ id: "deska", nazwa: "Deska", od: 0.5, do: 0.5, rzedy: [1] }]
+    strefy: [{ id: "deska", nazwa: "Deska", od: 0.5, do: 0.5, rzedy: [1], stojace: true,
+      prezentacja: { widocznosc: "otwarta", warstwa: "nad" } }]
   }
 };
 

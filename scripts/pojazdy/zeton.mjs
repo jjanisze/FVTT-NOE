@@ -35,6 +35,7 @@ import {
 import { obrotPionka } from "../scenes/poscig.mjs";
 import { wPasiePoscigu } from "../scenes/poscig-motion-model.mjs";
 import { grafikaWnetrza } from "./grafika.mjs";
+import { grafikaKadluba, odswiezWieze, usunWieze, wczytajWieze } from "./wieza.mjs";
 import { OPCJA_SYNCHRONIZACJI } from "./historia.mjs";
 import { otwarteMiejsce, prezentacjaJadacego, sortJadacego } from "./prezentacja.mjs";
 
@@ -62,6 +63,7 @@ function obrysSiatki(token) {
 
 /** Czy ten klient może prześwietlić pojazd: MG, właściciel pojazdu, gracz z postacią w środku (D3). */
 export function mozePrzeswietlic(pojazdDoc) {
+  if (pojazdDoc.flags?.[MODULE_ID]?.wrakPojazdu) return false;
   if (game.user.isGM) return true;
   if (pojazdDoc.actor?.isOwner) return true;
   return jadacyPojazdu(pojazdDoc).some(t => t.actor?.isOwner);
@@ -266,8 +268,20 @@ function podklasa(Baza) {
       if (!this.mesh || !jestZetonemPojazdu(this.document)) return false;
       const src = przeswietlane.has(this.document.id) ? grafikaWnetrza(this.document) : null;
       const wnetrze = src && this.neuroWnetrze?.src === src ? this.neuroWnetrze.texture : null;
-      this.mesh.texture = wnetrze ?? this.texture;
+      this.mesh.texture = wnetrze ?? grafikaKadluba(this) ?? this.texture;
       return !!wnetrze;
+    }
+
+    /** @override — the upper assembly follows the same refresh cycle as its hull. */
+    _applyRenderFlags(flags) {
+      super._applyRenderFlags(flags);
+      odswiezWieze(this,przeswietlane.has(this.document.id));
+    }
+
+    /** @override — redraw/texture changes cannot leave an orphan upper assembly. */
+    _clear() {
+      usunWieze(this);
+      return super._clear();
     }
 
     /** @override — ukrycie jadącego (lokalne). */
@@ -345,6 +359,7 @@ function podklasa(Baza) {
 
     /** @override */
     _destroy(options) {
+      usunWieze(this);
       przeswietlane.delete(this.document?.id);
       this.neuroWnetrze?.texture?.destroy(false);
       this.neuroWnetrze = null;
@@ -367,6 +382,7 @@ export function registerZetonPojazdu() {
   });
 
   Hooks.on("drawToken", async token => {
+    void wczytajWieze(token);
     const src = grafikaWnetrza(token.document);
     if (!src) return;
     const texture = await foundry.canvas.loadTexture(src);

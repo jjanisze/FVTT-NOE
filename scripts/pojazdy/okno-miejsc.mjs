@@ -8,7 +8,7 @@
 
 import { danePojazdu, jazdaZetonu, miejscaPojazdu, pojazdJadacego, MODULE_ID } from "./stan.mjs";
 import { mozePrzeswietlic } from "./zeton.mjs";
-import { grafikaWnetrza } from "./grafika.mjs";
+import { grafikaWnetrza, kadrGrafikiMiejsc } from "./grafika.mjs";
 import { rozpoznawalnyJadacy } from "./prezentacja.mjs";
 import {
   jedzie, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
@@ -100,9 +100,10 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     }
 
     const src = (widac && grafikaWnetrza(p)) || p.texture?.src;
+    const obraz = kadrGrafikiMiejsc(p,W,H);
     div.innerHTML = `
       <div class="neuro-miejsca-pojazd" style="width:${W}px;height:${H}px">
-        ${src ? `<img class="neuro-miejsca-tlo" src="${esc(src)}" alt="" style="width:${W}px;height:${H}px">` : ""}
+        ${src ? `<div class="neuro-miejsca-kadr"><img class="neuro-miejsca-tlo" src="${esc(src)}" alt="" style="width:${obraz.width}px;height:${obraz.height}px;left:${obraz.x}px;top:${obraz.y}px"></div>` : ""}
         ${miejsca}
       </div>
       ${stopka}`;

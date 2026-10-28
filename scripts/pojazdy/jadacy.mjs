@@ -290,7 +290,7 @@ export async function posadzGM(pojazdDoc, jadacyDoc, miejsce) {
   const bok = rozmiarMiejsca(scena);
   const s = srodekMiejsca(pojazdDoc.getCenterPoint(pojazdDoc._source), pojazdDoc._source.rotation, miejsce, kratkaPojazdu(scena));
   const { x, y } = naroznikDlaSrodka(s, bok, bok, scena.grid.size);
-  const obrot = poprzednia?.pojazd === pojazdDoc.id ? (poprzednia.obrot ?? 0) : 0;
+  const obrot = miejsce.obrot ?? (poprzednia?.pojazd === pojazdDoc.id ? (poprzednia.obrot ?? 0) : 0);
   await jadacyDoc.update({
     [`flags.${MODULE_ID}.${FLAGA_JAZDA}`]: { pojazd: pojazdDoc.id, miejsce: miejsce.id, obrot, rozmiar, sort },
     sort: Math.max(sort, (pojazdDoc._source.sort ?? 0) + 1)

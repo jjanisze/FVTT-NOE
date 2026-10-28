@@ -16,6 +16,7 @@
 import { MODULE_ID, danePojazdu, jadacyPojazdu, jestZetonemPojazdu, kratkaPojazdu, obrysDziala } from "./stan.mjs";
 import { obroc } from "./geometria.mjs";
 import { FLAGA_SILNIK, stanSilnika } from "./silnik.mjs";
+import { odswiezWieze } from "./wieza.mjs";
 
 const USTAWIENIE_DRGAN = "drganiaPojazdow";
 const TEKSTURA = `modules/${MODULE_ID}/vfx/pojazdy/dym.webp`;
@@ -153,6 +154,7 @@ function _drgania() {
     const ruszaj = (tok) => {
       const c = tok.document.getCenterPoint();
       tok.mesh.position.set(c.x + dx, c.y + dy);
+      odswiezWieze(tok);
     };
     ruszaj(t);
     zostaly.add(id);
@@ -168,6 +170,7 @@ function _drgania() {
     if (t?.mesh && !t.destroyed) {
       const c = t.document.getCenterPoint();
       t.mesh.position.set(c.x, c.y);
+      odswiezWieze(t);
     }
   }
   _drgajace = zostaly;

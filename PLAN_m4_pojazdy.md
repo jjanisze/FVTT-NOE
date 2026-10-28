@@ -328,6 +328,19 @@ ze strzelania z jadącego pojazdu. Zakres stanowisk, sektory ostrzału, obracani
 pozostają do ustalenia po becie. Poniższa dotychczasowa obsługa montażu i przekazywania broni
 nie wprowadza jeszcze tych wyjątków.
 
+**Grafika D33, MG 2026-10-27:** Bradley ma osobny kadłub i wyciętą z zatwierdzonego żetonu
+wieżę. Oś to środek pierścienia kosza: (300,790) px w kadrze 720×1350, czyli (219,204)
+w wycinku 495×627 zaczynającym się w (81,586). Teraz wieża dziedziczy obrót, skalę,
+widoczność i drgania kadłuba, znika przy prześwietleniu. To warstwa grafiki bez stanu
+niezależnego obrotu. **Docelowo po becie** ma obrócić się w kierunku celu przed strzałem;
+ten sam obrót musi wtedy prowadzić dwa miejsca załogi wieży i ich znaczniki wokół osi.
+
+**M1A1 Abrams, 2026-10-27:** ten sam renderer obsługuje osobną wieżę czołgu. Kadr 780×2100,
+oś (389,884), wycinek (70,458,638,1588), oś w wycinku (319,426). Obrys kadłuba 2,6×5,6
+kratki odpowiada viewportowi 780×1680; tekstura `fit: width`, kotwica (0,5; 0,4). Lufa
+wystaje przed zajmowane pole. Celowanie po becie musi prowadzić **trzy** miejsca wieży
+(dowódca, działonowy, ładowniczy); kierowca pozostaje związany z kadłubem.
+
 **Montaż i demontaż to Roboty produkcji.** Produkcja już dziś ma Robotę ad hoc MG (dowolny przedmiot, cena i
 narzędzia od MG — `production/okna.mjs` `oknoAdHoc`) i wyniki trzech rodzajów: przedmiot, aktor (dron), naprawa z
 wtyczkami (`zarejestrujNaprawe` — tak naprawia się dron). Brakuje wyniku, który jest **skutkiem na innym
@@ -348,8 +361,9 @@ stanowiska, wysiadka, wypadnięcie, śmierć strzelca i przycisk MG oddają ją 
 
 ### 4.12 Wrak i wybuch (D17)
 
-Przy 0 PW: wzorzec wraku z M5 (`combat/autodestrukcja.mjs` — grafika wg rozmiaru, oryginał we fladze, [Przywróć]
-u MG), jadący wysadzeni na wolne pola obok, silnik zgaszony, Uruchom i ruch oznaczane. Płonący pojazd z paliwem:
+Przy 0 PW: osobna grafika każdego z 14 podwozi (`GRAFIKI_WRAKOW` w `vehicles-data.mjs`),
+oryginalna pełna tekstura we fladze i [Przywróć]
+u MG; jadący wysadzeni na wolne pola obok, silnik zgaszony, Uruchom i ruch oznaczane. Płonący pojazd z paliwem:
 odliczanie k4 rund i wybuch tym samym kodem co autodestrukcja — ogień wg rozmiaru (Duża 3k6 / 3 m, Wielka 4k6 /
 4,5 m, Ogromna 6k6 / 6 m; RO ZRC ST 15 — połowa); wrak zostaje. Odbudowa wraku — §4.9.
 
@@ -425,17 +439,17 @@ jak w statblokach RAW.
 | Osobówka | Wielka | 1,5×3 | 1+4 | benzyna | 20/12/16 | Cofanie, Potrącenie, Skok, Gaz do dechy [B], Slalom [R] |
 | Autobus | Ogromna | 2×8 | 1+20 | diesel | 26/8/20 | Cofanie (¼, Utrudnienie), Potrącenie, Skok |
 | Motocykl | Duża | 0,5×1,5 | 1+1 | motocykl | 16/16/12 | Akrobacja, Skok, Szósty bieg [B], Slalom [R] |
-| Rower | Średnia | 0,5×1 | 1 | — | 10/18/10 | Akrobacja, Skok, Uciążliwy pancerz, Przerzutka [B], Slalom [R] |
-| Buggy | Duża | 1×2 | 1+1 | benzyna | 16/16/12 | *Terenówka* (trudny teren ×½ bez testów — s. 261), *Skok* jak motocykl, *Potrącenie*, Slalom [R]; **Otwarta rama** — jadący nigdy nie mają więcej niż ½ osłony |
+| Rower | Średnia | 0,6×1,5 | 1 | — | 10/18/10 | Akrobacja, Skok, Uciążliwy pancerz, Przerzutka [B], Slalom [R] |
+| Buggy | Duża | 1,4×2,8 | 1+1 | benzyna | 16/16/12 | *Terenówka* (trudny teren ×½ bez testów — s. 261), *Skok* jak motocykl, *Potrącenie*, Slalom [R]; **Otwarta rama** — jadący nigdy nie mają więcej niż ½ osłony |
 | Hammer | Wielka | 1,5×3 | 1+4 | diesel | 20/10/18 | *Terenówka*, *Cofanie*, *Potrącenie*, *Gaz do dechy* [B]; **Wieżyczka** — stanowisko na dachu: ¾ osłony, broń montowana strzela w każdą stronę |
 | Ciężarówka | Ogromna | 2×6 | 3 + paka 8 | diesel | 24/8/18 | *Cofanie* jak Autobus, *Potrącenie*; **Paka** — miejsca stojące: ½ osłony, w jadącej ciężarówce ZRC (Akrobatyka) ST 10 na początku tury albo Powalenie |
-| Wóz strażacki | Ogromna | 2×6 | 1+5 | diesel | 24/8/18 | *Cofanie*, *Potrącenie*; **Działko wodne** [A, stanowisko] — linia 18 m: gasi Podpalenie i ogień, istoty RO SIŁ ST 13 albo odepchnięte o 3 m i Powalone, zbiornik na 10 strzałów; **Syrena** [B] — Utrudnienie do Testów MDR (Percepcja) opartych na słuchu w promieniu 30 m do następnej tury |
+| Wóz strażacki | Ogromna | 2×5,5 | 1+5 | diesel | 24/8/18 | *Cofanie*, *Potrącenie*; **Działko wodne** [A, stanowisko] — linia 18 m: gasi Podpalenie i ogień, istoty RO SIŁ ST 13 albo odepchnięte o 3 m i Powalone, zbiornik na 10 strzałów; **Syrena** [B] — Utrudnienie do Testów MDR (Percepcja) opartych na słuchu w promieniu 30 m do następnej tury |
 | Buldożer | Ogromna | 2,5×4 | 1+1 | diesel | 28/6/22 | **Gąsienice** — gruz i trudny teren bez kary; **Lemiesz** [A] — spycha przeszkody i mniejsze pojazdy, istoty przed lemieszem RO SIŁ ST 15 albo przepchnięte i Powalone; Niszczenie obiektów ×2 (M6); bez Gazu do dechy |
-| Czołg | Ogromna | 2,5×5 | 4 | diesel | 28/6/24 | *Gąsienice*; **Wieża** — stanowisko działonowego strzela w każdą stronę; **Pancerne wnętrze** — jadący mają całkowitą osłonę, strzelają tylko z broni montowanej; **Miażdżenie** — Powalona istota nie ma RO przeciw Potrąceniu |
-| Bojowy wóz piechoty | Ogromna | 2×4,5 | 3 + desant 9 | diesel | 26/8/22 | *Gąsienice*, *Pancerne wnętrze*; **Desant** — rampa: desant wysiada bez kosztu ruchu; **Strzelnice** — desant strzela ze środka z ¾ osłony |
+| Czołg — M1A1 Abrams | Ogromna | 2,6×5,6 kadłub; lufa poza obrysem | 4: kierowca, dowódca, działonowy, ładowniczy | diesel | 28/6/24 | *Gąsienice*; **Wieża** — stanowisko działonowego strzela w każdą stronę; **Pancerne wnętrze** — jadący mają całkowitą osłonę, strzelają tylko z broni montowanej; **Miażdżenie** — Powalona istota nie ma RO przeciw Potrąceniu |
+| Bojowy wóz piechoty — M2A2 Bradley | Ogromna | 2,4×4,5 | 3 + desant 6 (WKK, wybór MG) | diesel | 26/8/22 | *Gąsienice*, *Pancerne wnętrze*; **Desant** — rampa: desant wysiada bez kosztu ruchu; **Strzelnice** — desant strzela ze środka z ¾ osłony |
 | Traktor | Wielka | 1,5×2,5 | 1+1 | diesel | 22/8/18 | *Terenówka*; **Uciąg** [A] — holuje pojazd do swojego rozmiaru albo przyczepę (Szybkość obu ×½), wyciąga z rowu i gruzu |
-| Motorower | Średnia | 0,5×1 | 1 | motocykl | 12/14/10 | *Akrobacja* (ST 10), Slalom [R]; **Oszczędny** — 2 l/100 km |
-| Deskorolka | Mała | 0,5×0,5 | 1 | — | 6/16/8 | *Uciążliwy pancerz*; **Ollie** — raz w turze za ½ Szybkości ZRC (Akrobatyka) ST 10: przeskok przez krawężnik lub przeszkodę do 1 m, porażka — Powalenie |
+| Motorower | Średnia | 0,6×1,56 | 1 | motocykl | 12/14/10 | *Akrobacja* (ST 10), Slalom [R]; **Oszczędny** — 2 l/100 km |
+| Deskorolka | Mała | 0,6×0,72 | 1 | — | 6/16/8 | *Uciążliwy pancerz*; **Ollie** — raz w turze za ½ Szybkości ZRC (Akrobatyka) ST 10: przeskok przez krawężnik lub przeszkodę do 1 m, porażka — Powalenie |
 
 Zasada doboru własnych cech: jedna–dwie na pojazd, każda to tekst na karcie plus co najwyżej jedna flaga albo jedna
 karta z RO — nic, co wymaga nowej geometrii. Cechy pościgowe (Rajdowiec, Stuknięcie większym pojazdem) — część 2.
@@ -616,7 +630,7 @@ Garaż. Spike W0 przed refaktorem.
 
 | # | Ustalenie | Warstwa |
 |---|---|---|
-| W-U1 | Otwarte miejsca dostają też motocykl, motorower, rower, deskorolka, buggy (otwarta rama). Korzystają ze wspólnego modelu D32; wdrożone: właz Hammera i oba miejsca motocykla (grafika 2026-10-26), pozostałe profile w W1. Widoczność określamy per miejsce, aby nośnik mógł mieć jednocześnie zakrytą kabinę i otwarte stanowisko. | RAI |
+| W-U1 | Otwarte miejsca dostają też motocykl, motorower, rower, deskorolka, buggy (otwarta rama). Korzystają ze wspólnego modelu D32; wdrożone: właz Hammera, oba miejsca motocykla, osiem miejsc otwartej paki ciężarówki i oba fotele buggy (grafika 2026-10-26), pozostałe profile w W1. Widoczność określamy per miejsce, aby nośnik mógł mieć jednocześnie zakrytą kabinę i otwarte stanowisko. | RAI |
 | W-U2 | Wierzchowiec zawsze ≥ 1 rozmiar większy od jeźdźca — sprawdzane przy wsiadaniu (oznaczane) | NOE |
 | W-U3 | Wyszkolenie: flaga `wyszkolony` na aktorze (domyślnie tak dla koni z katalogu; Rodeo — wyszkolony tylko dla ujeżdżającego) | NOE |
 | W-U4 | Niewyszkolony wierzchowiec: jeździec jedzie, ruchem steruje MG (żeton bez prawa ruchu dla gracza) | NOE |
@@ -657,7 +671,7 @@ budżet jazdy z E5 — propozycja: wspólny, razem z kartami jazdy, gdy handoff 
 ## 8. Grafika i dźwięk
 
 Do `dev/icons/MISSING.md`: 14 żetonów z góry (jeden obraz, prostokąt zgodny z obrysem, przezroczyste tło, rura
-wydechowa w stałym miejscu), 14 portretów, 4 wraki pojazdów (jednoślad, osobowy, ciężki, gąsienicowy — wraki z M5
+wydechowa w stałym miejscu), 14 portretów, 14 indywidualnych wraków pojazdów (decyzja MG 2026-10-28; wraki z M5
 to drony i maszyny), dźwięki: uruchomienie benzyna/diesel/motocykl, zgaszenie, nieudane odpalenie, alarm. Dym i
 wybuch — z JB2A.
 
@@ -739,6 +753,231 @@ przeczytane 2026-10-19; propozycje agenta w nawiasach):
 - **Smugi między pojazdami** idą po obrazie (w bok, do tyłu) — zgodnie z D31, nie do naprawy.
 
 ## 11. Postęp
+
+**2026-10-28 — komplet 14 indywidualnych wraków.** Wszystkie grafiki zapisane i
+sprawdzone, w tym zaakceptowany sedan bez zmiany pliku. 13 nowych wraków czeka na ocenę MG.
+`GRAFIKI_WRAKOW` wybiera obraz po podwoziu; zachowuje transformację i pełną kopię tekstury
+do cofnięcia. Najechanie nie prześwietla wraku; uszkodzone wieże są częścią grafiki wraku.
+**Garaż → Karta prób → Grafika: Wraki — wszystkie pojazdy**: 14 par sprawny/wrak na jednej
+scenie, stały generator, sonda `grafika-wraki`. Katalog 53/53 obrazów, kolejka M4: tylko
+7 dźwięków. `npm test` zielony, Quench **42/42**, E2E **20/20**, brak błędów konsoli.
+Raport `logs/e2e/2026-10-28T01-55-11/`, 26 zrzutów (wraki 25–26).
+Źródła, pełne prompty i pomiary: `dev/art/m4/wraki/`.
+Poligon: rozbudowano dotychczasową scenę, zachowano jej 6 żetonów/aktorów i pełne
+dokumenty 15 innych scen / 200 żetonów. Garaż: 16 scen / 228 żetonów. MG i Gracz 1
+mają otwartą galerię, wszystkie 28 tekstur załadowane; 13 nowych grafik do oceny rano.
+
+**2026-10-28 — zmiana decyzji MG: osobny wrak każdego pojazdu.** Zatwierdzony
+`pojazd-osobowy.webp` zostaje wyłącznie wrakiem Osobówki. Zamiast czterech wspólnych
+kategorii powstaje 14 osobnych grafik: Osobówka, Hammer, Motocykl, Rower, Buggy,
+Ciężarówka, Autobus, Traktor, Wóz strażacki, Buldożer, M2 Bradley, M1A1 Abrams,
+Motorower i Deskorolka. Pozostałe 13 wraków generowane z bazowych żetonów, z zachowaniem
+bryły, skali i charakterystycznych elementów. MG zlecił autonomiczne wykonanie całej serii
+i wspólny przegląd wszystkich wariantów w Poligonie rano. Wcześniejsze wpisy o wspólnych
+wrakach kategorii są historyczne. Wielkość jadących nadal do osobnej rundy, bez zmian teraz.
+
+**2026-10-28 — deskorolka i pierwszy wrak.** Ostatni z 14 pojazdów ma portret i żeton:
+czarny grip, jasne kółka i przednia łatka. MG polecił powiększenie do 120%: 180×216,
+obrys 0,6×0,72 kratki, widoczny 0,36×1,03 m. Trzy kopie powiększono z zachowaniem środka,
+obrotu i rozmiaru jadącego; 196 innych żetonów bez zmian. Otwarte miejsce stojące nadal
+jest jednym miejscem prowadzącego; test Załogi wyłącza tylko dodatkową pakę ciężarówki.
+Po ocenie roweru MG odłożył regulację wielkości jadących (w aucie dobrze, na rowerze za mały).
+Tego problemu nie korygowano grafiką ani zmianą skali postaci.
+
+Wrak `tokens/wraki/pojazd-osobowy.webp`, 450×900, wspólny dla Osobówki/Hammera/Buggy,
+do oceny MG. **Garaż → Karta prób → Grafika: Wrak auta osobowego**, `grafika-wrak-osobowy`:
+trzy sprawne i trzy zniszczone pojazdy. `garaz-wraki.mjs` odtwarza porównanie w generatorze.
+Zachowano 15 wcześniejszych scen i 200 żetonów. Garaż: Parking + 14 podglądów pojazdów
+oraz porównanie wraków, razem 16 scen. Runtime bez zmian; natywny wrak pojawia się przy 0 PW,
+cofnięcie przywraca oryginał. Quench **42/42**, `npm test` zielony, E2E Garażu **20/20**,
+`logs/e2e/2026-10-28T01-12-07/` (25 zrzutów; wraki nr 25). Źródła: `dev/art/m4/deskorolka/`
+i `dev/art/m4/wraki/`. Kolejka: 3 obrazy wraków + 7 dźwięków.
+
+**2026-10-28 — motorower zaakceptowany; rower jako trzynasty komplet, do oceny MG.**
+Stalowy rower z musztardową ramą, srebrnymi błotnikami i tylnym drucianym koszykiem.
+Portret 1024×1024, żeton 180×450, obrys 0,6×1,5 (0,90×2,25 m), widoczny 0,72×2,19 m.
+Wielkość względem zatwierdzonego motoroweru, kotwica zmierzona na siodle (0,50; 0,31).
+Siodło `otwarta/nad`, rowerzysta stale widoczny; bez silnika i wydechu. Układ i skale postaci
+jak w pozostałych podglądach. **Garaż → Karta prób → Grafika: Rower**, sonda `grafika-rower`.
+Generator: Parking + 13 podglądów. Instalacja bez resetu: zachowano 13 wcześniejszych scen
+i 190 innych żetonów, istniejący rower na Parkingu zaktualizowano z zachowaniem środka.
+Quench **42/42**, E2E Garażu **18/18**, `npm test` zielony. Raport i 23 zrzuty:
+`logs/e2e/2026-10-28T00-26-06/`, rower nr 12. Źródła: `dev/art/m4/rower/README.md`.
+Kolejka: 6 obrazów + 7 dźwięków; z pojazdów została deskorolka.
+
+**2026-10-28 — korekta wielkości motoroweru na życzenie MG.** Powiększenie do 120%:
+obrys 0,6×1,56 kratki (0,90×2,34 m), żeton 180×468. Widoczna sylwetka 0,86×2,25 m.
+Względna kotwica i wydech bez zmian; pionek kierowcy nie został powiększony.
+Zaktualizowano katalog, generator i trzy istniejące kopie w Garażu, zachowując ich środki,
+obroty i 187 innych żetonów. Bieżący podgląd zachowuje ręcznie ustawiony obrót 45°.
+E2E Garażu **17/17**, `npm test` zielony; nowy rozmiar sprawdzany także po świeżym resecie.
+Raport i 22 zrzuty: `logs/e2e/2026-10-28T00-15-54/`, motorower nr 11.
+
+**2026-10-28 — motorower: dwunasty komplet grafiki, do oceny MG.** Turkusowy motorower
+z kremową osłoną nóg, jednym czarnym siodłem i czerwoną skrzynką za kierowcą. Kierunek
+portretu zatwierdzony. Portret 1024×1024, żeton 150×390. SVG → malowany rzut; obrys
+wydłużono z 0,5×1 do 0,5×1,3, aby zachować proporcje, bez zmiany innych statystyk.
+Widoczna sylwetka 0,72×1,87 m, kotwica (0,50; 0,36), wydech (0,25; 0,18).
+Siodło `otwarta/nad`, pełny pionek stale nad pojazdem, bez kropek/prześwietlenia.
+**Garaż → Karta prób → Grafika: Motorower**, sonda `grafika-motorower`: pusty, kierowca,
+portret i odpowiednik postaci przy źródłowej skali. Jednomiejscowy podgląd ma dwa pojazdy,
+bez powielania pełnej obsady. Generator: Parking + 12 podglądów. Instalacja bez resetu,
+zachowano 12 wcześniejszych scen i 186 żetonów; motorower dodany na Parkingu.
+Quench **42/42**, E2E `garaz-grafika` **17/17**, `npm test` zielony. Raport i 22 zrzuty:
+`logs/e2e/2026-10-28T00-03-54/`, motorower zrzut 11. Źródła i pełne prompty:
+`dev/art/m4/motorower/README.md`. Kolejka: 8 obrazów + 7 dźwięków.
+
+**2026-10-27 — M1A1 Abrams: jedenasty komplet grafiki, zatwierdzony przez MG.** Portret 1024×1024,
+pełny żeton i wnętrze 780×2100, osobny kadłub oraz wieża 638×1588. Geometria SVG →
+malowane wnętrze → dach nad ustaloną kabiną; wspólny zewnętrzny kadłub i złożenie warstw
+bez różnic pikselowych. Widoczny kadłub 3,65×7,93 m, z lufą 9,83 m; viewport 780×1680,
+obrys 3,9×8,4 m, lufa wystaje poza pole. Cztery kotwice, oryginalne skale postaci.
+**Garaż → Karta prób → Grafika: M1A1 Abrams**, sonda `grafika-czolg`; Parking + 11
+podglądów. Instalacja bez resetu: zachowano 11 wcześniejszych scen i 175 innych żetonów,
+istniejący czołg na Parkingu zaktualizowano z zachowaniem środka. Renderer wieży wspólny
+z Bradleyem; niezależne celowanie nadal po becie. Quench **42/42**, E2E `garaz-grafika`
+**16/16**, `npm test` zielony. Raport i 21 zrzutów: `logs/e2e/2026-10-27T22-35-25/`,
+Abrams zrzuty 15–17 i 20–21. Źródła/prompty: `dev/art/m4/czolg/README.md`.
+Kolejka: 10 obrazów + 7 dźwięków. Profil „diesel” jest dotychczasową kategorią mechaniki,
+nie deklaracją rzeczywistego napędu Abramsa (turbina); parametrów gry nie zmieniono.
+
+**2026-10-27 — Bradley zatwierdzony; osobna grafika wieży.** MG zaakceptował bryłę i układ
+3+6, poprosił o wycięcie wieży i poprawną oś pod przyszłe celowanie. Bezstratne warstwy:
+`tokens/pojazdy/kadluby/bwp.webp` (720×1350) i `tokens/pojazdy/wieze/bwp.webp` (495×627).
+Złożenie daje 0 różnic pikseli względem zatwierdzonego kompletnego żetonu. `wiezaGrafiki`
+przechowuje kadr, oś i wycinek; generator zapisuje je we fladze `pojazd.grafika.wieza`.
+`pojazdy/wieza.mjs` rysuje górną warstwę w primary i prowadzi ją razem z kadłubem; D33
+celowania i reguł pozostaje po becie. Prześwietlenie ukrywa wieżę. Własna grafika i wrak
+nie dziedziczą nakładki. Brak nowych dokumentów żetonów i niezależnego kąta.
+`npm test` zielony, Quench **40/40**, E2E **garaz-grafika 14/14**, brak błędów modułu;
+`logs/e2e/2026-10-27T21-20-59/` (16 zrzutów). Próby: animowany skręt, wspólne drgania,
+odbicie/skala, krycie/barwa/wysokość, ukrycie, własna grafika, odrysowanie i usunięcie bez
+pozostawionych warstw. Garaż: `grafika-bwp`. [Podgląd osi](dev/art/m4/bwp/layers-review.html).
+
+**2026-10-27 — M2A2 Bradley: dziesiąty komplet grafiki, według korekty MG.** Zamiast
+ogólnego BWP: charakterystyczna kanciasta wieża dwuosobowa, boczny podwójny zasobnik,
+pojedynczy kierowca po lewej pojazdu i przedział silnika po prawej. Załoga 3 + desant 6:
+usunięto środkową trójkę siedzeń, boczne ławki po trzy zwrócone do siebie. Pojemność 9
+jest świadomym WKK dla wybranego M2A2, zamiast ogólnej załogi 12 z tabeli NOE.
+Portret 1024×1024 i para 720×1350, obrys 2,4×4,5 (3,6×6,75 m); widoczna bryła 3,385×6,55 m.
+SVG → wnętrze → dach; cała wieża zarejestrowana nad koszem, wspólna alfa i 0 różnic pikseli
+poza maską górnej zabudowy. Opcjonalne `obroty` w strefie określają początkowy kierunek
+postaci na danym miejscu; później własny obrót działa dotychczasowo. D33 nadal po becie.
+**Garaż → Karta prób → Grafika: M2 Bradley**, sonda `grafika-bwp`. Generator: Parking + 10 podglądów.
+Dodany do żywego Poligonu bez resetu: zachowano 10 wcześniejszych scen i 155 żetonów.
+`npm test` zielony, Quench **38/38**, E2E **garaz-grafika 13/13**, bez błędów modułu:
+`logs/e2e/2026-10-27T20-44-08/`, zrzuty Bradleya 13–14. Źródła i pełne prompty:
+`dev/art/m4/bwp/README.md`. Ocena MG otwarta. Kolejka: 12 obrazów + 7 dźwięków.
+
+**2026-10-27 — buldożer: dziewiąty komplet grafiki.** Portret 1024×1024 i otwarty żeton
+750×1200: dwie stalowe gąsienice, szeroki lemiesz, pojedynczy zrywak oraz fotel operatora
+i mniejsze siedzenie pomocnika. Rama bez daszka i szyb, oba miejsca `otwarta/nad`.
+Katalog 2,5×4, widoczny obrys 3,55×5,78 m. Kotwice i wydech dopasowane do obrazu,
+skale postaci zachowane. Portret + SVG → żeton; kadrowanie i skalowanie równomierne.
+**Grafika: Buldożer**, sonda `grafika-buldozer`; generator odtwarza dziesięć scen z Parkingiem.
+Dodano nowy podgląd i pojazd bez resetu, zachowując 146 starych żetonów na dziewięciu scenach.
+Packer, pomiary, świeży szablon i E2E **12/12**, bez błędów konsoli modułu:
+`logs/e2e/2026-10-27T19-08-07/`, buldożer zrzut 10. Pełny `npm test` nadal zatrzymuje
+niezwiązany skan flag w pliku broni. Źródła i prompty: `dev/art/m4/buldozer/README.md`.
+MG zatwierdził portret, żeton, proporcje i oba miejsca 2026-10-27; kolejka 14 obrazów + 7 dźwięków.
+
+**2026-10-27 — akceptacja bryły/proporcji wozu i poprawka przodu bez dachu.** MG zaakceptował
+nową sylwetkę. Wskazał dwa koguty przesuwające się na przód przy zdjęciu dachu i nienaturalny
+skrzynkowy rant. Edycja generatora usuwa lampy z dachem, zastępuje półkę niskim zaokrąglonym
+brzegiem przy desce; lokalna maska zmienia wyłącznie przód cutaway. Cały dach i wnętrze poza
+maską zachowane pikselowo, wspólna alfa, bez zmian obrysu, kotwic i dokumentów Poligonu.
+495 537 wspólnych pikseli poza łączną maską; 0 różnic. E2E 11/11, brak błędów modułu:
+`logs/e2e/2026-10-27T00-51-21/`, zrzuty 04–05. Źródła i prompt:
+`dev/art/m4/woz-strazacki/front-cutaway-prompts.json`. MG zatwierdził poprawiony przód 2026-10-27;
+cały komplet wozu strażackiego zaakceptowany.
+
+**2026-10-27 — korekta bryły wozu strażackiego po odrzuceniu pierwszej pary przez MG.**
+Nowy szkic z niezmienionego portretu: kabina/pompa/tył około 40/15/45% długości, węższa
+sekcja panelu pompy, krótka drabina tylko na tylnej zabudowie, cztery opony wystające o 25–28 cm.
+Para 600×1650, katalog 2×5,5 kratki; widoczna długość 7,70 m zamiast 8,64 m.
+515 059 wspólnych pikseli poza kabiną, zero różnic i wspólna alfa. Nowe kotwice sześciu miejsc.
+Trzy istniejące wozy w Garażu i wzorzec wnętrza poprawione bez resetu; środki pojazdów i skale
+postaci zachowane, 137 innych żetonów bez zmian. E2E 11/11, brak błędów modułu:
+`logs/e2e/2026-10-27T00-37-17/`, zrzuty 04–05. Pełny `npm test` nadal zatrzymuje niezwiązany
+odczyt flagi w pliku broni. Źródła, pomiary i prompty: `dev/art/m4/woz-strazacki/README.md`.
+Ocena nowej pary MG otwarta; kolejka bez zmian.
+
+**2026-10-27 — wóz strażacki: ósmy komplet grafiki.** Portret 1024×1024 i para bezstratnych
+żetonów 600×1800. Czerwono-kremowa kabina nad silnikiem, widoczna z góry pochylona szyba,
+pięć foteli 3+2; szósty operator działka wodnego stale widoczny nad otwartym pomostem.
+Geometria SVG → wnętrze → dach; korekta przednich kół i odbicia szyby. Wspólne 668 917 pikseli
+poza maską kabiny, zero różnic; wspólna alfa. Obrys 2×6, widoczna grafika z lusterkami 2,94×8,64 m.
+Skale postaci zachowane, reguły działka i odłożonych wieżyczek bez zmian.
+**Grafika: Wóz strażacki**, sonda `grafika-woz-strazacki`; dziewięć scen Garażu z Parkingiem.
+Instalacja bez resetu: osiem starych scen i 131 pozostałych żetonów zachowane, stojący wóz
+otrzymał grafikę bez zmiany geometrii. E2E `garaz-grafika` **11/11**, bez błędów modułu:
+`logs/e2e/2026-10-27T00-14-04/`, zrzuty 04–05. Packer i walidacja obrazu poprawne;
+pełny `npm test` blokuje niezwiązany skan `message-flags` w `scripts/weapons/wlasciwosci.mjs:138`.
+Źródła i prompty: `dev/art/m4/woz-strazacki/README.md`. Ocena MG otwarta; kolejka 16 obrazów + 7 dźwięków.
+
+**2026-10-27 — traktor: siódmy komplet grafiki.** Portret 1024×1024 i otwarty żeton
+450×750: wyblakła czerwień, cztery koła na dwóch osiach, centralne siodło i poduszka na
+błotniku. Oryginalny SVG wyznacza geometrię, portret wygląd, kotwice dopasowane do wyniku.
+Widoczny obrys 2,08×3,27 m w katalogowej ramce 1,5×2,5 kratki. Obie postacie `otwarta/nad`;
+bez zmian skal tekstur postaci ani dotychczasowego rozmiaru miejsca 0,5 kratki. Stały przycisk
+**Grafika: Traktor**, sonda `grafika-traktor`; generator tworzy Parking i siedem podglądów.
+W działającym Poligonie dodano nową scenę i Parking bez resetu, zachowując 123 stare żetony.
+`npm test`, packer i E2E `garaz-grafika` **10/10**, bez błędów konsoli modułu:
+`logs/e2e/2026-10-26T23-44-08/` (traktor: zrzut 07). MG zatwierdził wygląd, proporcje i oba miejsca 2026-10-27.
+Źródła i pełne prompty: `dev/art/m4/traktor/README.md`. Kolejka: 18 obrazów + 7 dźwięków.
+
+**2026-10-27 — widoczna szyba autobusu.** Po uwadze MG przód portretu i zamkniętego żetonu
+zmieniony na zaokrąglony, pochylony wariant inspirowany New Look/Fishbowl. Pas szkła i
+wycieraczki widoczne w pionowym rzucie; prześwietlenie usuwa szybę razem z dachem.
+Wnętrze zachowane pikselowo, 21 kotwic i skale bez zmian. Nowy przód komponowany lokalnie,
+pozostały dach i zewnętrzne nadwozie zachowane. Walidacja pikseli, `npm test`, E2E Garażu 9/9;
+`logs/e2e/2026-10-26T23-23-09/`. Obie karty Poligonu odświeżone bez resetu scen.
+MG zatwierdził ostateczny komplet po korekcie szyby 2026-10-27.
+
+**2026-10-27 — autobus: szósty komplet grafiki ukończony.** Portret 1024×1024 i zgodna para
+600×2400. Zatwierdzony układ: kierowca + 20 pasażerów, pięć rzędów i wolna podłoga z tyłu.
+Sylwetka/alfa wspólna, 0 różnic pikseli zewnętrznych poza dachem; bezstratny WEBP.
+Nadwozie 2,575 m szerokości, grafika z lusterkami 2,915×11,515 m przy ramce 3×12 m.
+Kotwice dopasowane do foteli; brak zmian skal postaci. Generator Garażu odtwarza siedem scen,
+podgląd autobusu 28×25 mieści 21 grafik odniesienia w czterech rzędach. Zainstalowano na
+Poligonie bez resetu sześciu wcześniejszych scen i bez zmian 78 istniejących żetonów.
+`npm test`, Quench pojazdów 37/37 po przebudowie wyłącznie piaskownicowej paczki, E2E
+`garaz-grafika` 9/9 bez błędów modułu; raport `logs/e2e/2026-10-26T21-13-27/`.
+Źródła, prompty i kompozytor: `dev/art/m4/autobus/README.md`. Kolejka: 20 obrazów + 7 dźwięków.
+Ocena estetyki MG: zatwierdzony 2026-10-27 po korekcie szyby.
+
+**2026-10-26 — korekta skali buggy po ocenie MG.** Pierwotne 1×2 kratki dawało 1,47 m
+szerokości grafiki. Dla szerokiej ramy pustynnej MG wskazał 2,03–2,13 m. Obrys katalogowy
+1,4×2,8, żeton 420×840; widoczna grafika 2,055×3,835 m (alfa >8), ramka 2,10×4,20 m.
+Kotwice rosną z pojazdem; skale postaci bez zmian. Spójność katalogu i podglądu zamiast
+lokalnego mnożnika. Rozmiar mechaniczny Duża i pozostałe parametry zachowane.
+
+**2026-10-26 — grafika buggy.** Piąty komplet: portret 1024×1024 i otwarty żeton 420×840,
+żółta rama rurowa, dwa fotele obok siebie i silnik z tyłu. Geometria SVG → grafika; końcowe
+kotwice dopasowane do foteli. Obaj jadący stale jako pełne pionki nad ramą, bez kropek;
+zachowana osłona 1/2 i dotychczasowy rozmiar jadących. Podgląd pusty / kierowca / pełna obsada
+w Garażu oraz pojazd na Parkingu; reset odtwarza teraz sześć scen. Starsze sceny Poligonu
+zachowane bez zmian skal i pozycji. `npm test`, Quench pojazdów 37/37, E2E `garaz-grafika`
+8/8 (widoczność bez najechania, celowanie, obrót i ruch obu kotwic, odtwarzanie).
+Źródła i prompty: `dev/art/m4/buggy/README.md`. Ocena estetyki MG otwarta; kolejka 22 obrazy + 7 dźwięków.
+
+**2026-10-26 — grafika ciężarówki.** Portret oraz para 600×1800: dach kabiny i wnętrze z trzema
+miejscami; otwarta drewniana paka w obu wariantach. Po uwagach MG korekta v2: wnętrze
+przesunięte o 26 px do zgodności z dachem; wspólna paka i reszta nadwozia skopiowane pikselowo.
+Bezstratny WEBP; walidacja odkodowanych plików potwierdza 0 różniących się pikseli poza kabiną.
+Kotwice kabiny i ośmiu miejsc paki dopasowane do obrazu; paka ma pełne widoczne postacie
+nad podłogą, kabina pozostaje zakryta. Generator Garażu odtwarza czwarty podgląd i używa grafiki
+na Parkingu. Odniesienia 11 osób układane w dwóch rzędach; bez eksperymentu 85%.
+Sonda `grafika-ciezarowka`. Walidacja WEBP, `npm test`, Quench 37/37 i E2E `garaz-grafika` 7/7
+zielone; raport `logs/e2e/2026-10-26T19-19-25/`. Ocena estetyki przez MG otwarta.
+
+**2026-10-26 — podglądy grafiki częścią Garażu.** Generator odtwarza Parking i trzy sceny
+Osobówki, Hammera oraz motocykla. Karta prób ma cztery skróty; Parking używa nowych grafik
+i kotwic również przy starszej paczce działającego Poligonu. Nowe podglądy: rozmiary katalogowe,
+stockowe postacie dnd5e ze źródłowymi skalami, portrety, puste pojazdy i pełna obsada.
+Wdrożenie może zachować istniejące sceny i ręczne zmiany; Reset odtwarza wszystko ze źródeł.
+Sonda `podglady-reset`. `npm test` i E2E `garaz-grafika` (6 kroków) zielone, bez błędów konsoli;
+raport `logs/e2e/2026-10-26T18-52-05/`. Skrypt generatora: `dev/poligon/stations/garaz-grafika.mjs`.
 
 **2026-10-26 — koniec eksperymentu 85%.** Na polecenie MG przywrócono pierwotne skale
 postaci we wszystkich podglądach pojazdów: 39 żetonów i prototypów, 63 postacie zweryfikowane.
