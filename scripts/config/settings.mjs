@@ -45,8 +45,9 @@ export function registerSettings() {
   });
   game.settings.register(MODULE_ID, "kobaltEnabled", {
     name: "Kolor Kobaltu",
-    hint: "Włącza zestaw domowych poprawek zasad (zob. docs/Kobalt.md) — zasięgi latarek, "
-      + "doładowanie pochodni itp. Można łączyć z dowolnym innym Kolorem.",
+    hint: "Włącza zasady domowe WKK — m.in. zasięgi latarek, koszt Pomocy medycznej, skup po połowie ceny. "
+      + "Można łączyć z dowolnym innym Kolorem. Pełna lista — co włącza, a co działa zawsze: "
+      + "github.com/jjanisze/FVTT-NOE/blob/master/docs/Kobalt.md",
     scope: "world",
     config: true,
     type: Boolean,

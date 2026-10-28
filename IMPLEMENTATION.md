@@ -1197,6 +1197,21 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### Dokumentacja: pełna lista zasad WKK (2026-10-28)
+
+Bez wydania. `docs/Kobalt.md` znał 22 zasady, a WKK w kodzie było prawie dwa razy tyle — Laska, Miecz, Złoty Desert
+Eagle, dum-dum z Rozrywającą, Granat sygnałowy, Kamizelka taktyczna, Pistolero, Schizofrenia paranoidalna,
+Mizoofobia, światło Mołotowa, Dziurawy hełm, nabój do wpiętego magazynka, kolejka naboi i nabój dominujący, naprawa
+awarii drona, fabryczny kontroler, sześć zasad pojazdów, Żeton Luxor i gadżety.
+
+- **`docs/Kobalt.md`** — zasady 23–42; nowe sekcje: trzy warstwy (NOE / RAI / WKK), przełączniki, **spis** (z
+  Kobaltem / bez Kobaltu / który przełącznik — także „zawsze” dla treści bez odpowiednika w podręczniku) i „Czego
+  Kobalt nie obejmuje” (rozstrzygnięcia autora i odczytania luk przez MG). README ma o tym osobną sekcję.
+- **Podpowiedź ustawienia „Kolor Kobaltu”** wskazuje stronę na GitHubie zamiast ścieżki `docs/Kobalt.md`.
+- **`dev/kobalt-doc-check.mjs`** w `npm test` i w bramce wydania: numeracja nagłówków i spisu, każdy plik
+  `scripts/wkk/` i każda nazwa WKK z kodu (przedmioty, choroba, fobia, zdolność, cechy pojazdów, ustawienia) muszą
+  być na stronie.
+
 ### M6 E0–E8 — biegłości profesji, broń improwizowana, obiekty, latanie, woda (2026-10-27)
 
 Plan: `PLAN_m6_drobne_zasady.md` (§11 — notatki etapów). Bez wydania.

@@ -4,6 +4,13 @@ This folder is the exclusive home for content that is **not** in the *Neuroshima
 rulebook. Everything else in `scripts/` is NOE: a straight translation of the book, reusable by
 any table running this module regardless of house rules.
 
+**Every WKK piece is also a numbered rule in [`docs/Kobalt.md`](../../docs/Kobalt.md)** — the public,
+player-facing list of what the *Kolor Kobaltu* setting does, what happens without it, and which switch
+controls it (or that it always applies). Adding WKK content means adding its `### N.` rule and its row in
+the summary table there, with a `<!-- kod: scripts/wkk/… -->` marker naming the file. `npm test`
+(`dev/kobalt-doc-check.mjs`) fails when a file in this folder, a WKK item/disease/phobia/feature/vehicle-trait
+name or a WKK setting is missing from that page.
+
 ## The classification rule
 
 > If it's in the RAW textbook, it's NOE. If it's not, it's WKK — no exceptions, including for

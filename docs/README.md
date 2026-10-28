@@ -8,7 +8,8 @@
 1. [Instalacja](Instalacja.md) — jak zainstalować moduł i moduły towarzyszące.
 2. [Pierwsze kroki](Pierwsze-kroki.md) — od zera do gotowej sesji.
 3. [Czym różni się od dnd5e](Zmiany-wzgledem-dnd5e.md) — przegląd mechaniczny dla graczy i MG.
-4. [Kolor Kobaltu](Kobalt.md) — domowe poprawki zasad, domyślnie włączone, do połączenia z
+4. [Kolor Kobaltu](Kobalt.md) — **pełna lista zasad domowych (WKK)**: co każda zmienia, co jest bez niej,
+   który przełącznik nią steruje i czego Kobalt nie obejmuje. Domyślnie włączone, do połączenia z
    każdym innym Kolorem.
 5. [Produkcja i naprawa](Produkcja.md) — zakładka Produkcja, Roboty, Schematy i Wprawa,
    odpoczynki, Szybka produkcja, naprawa broni i pancerzy.

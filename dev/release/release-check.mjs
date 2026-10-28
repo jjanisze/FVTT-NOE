@@ -70,6 +70,8 @@ await step("static", async () => {
   const testFiles = fs.readdirSync(path.join(MODULE_ROOT, "dev", "agent", "test")).filter(f => f.endsWith(".test.mjs")).map(f => path.join("dev", "agent", "test", f));
   const runs = [
     node("dev/validate-tests.mjs"),
+    // docs/Kobalt.md — the public list of WKK rules — against scripts/wkk/ and the WKK names in the code.
+    node("dev/kobalt-doc-check.mjs"),
     node("--test", "dev/e2e/nevada-stream.test.mjs"),
     node("--test", "dev/icons/review/browser.test.mjs"),
     node("--test", ...testFiles),

@@ -56,6 +56,18 @@ spodziewać zmian w danych między wersjami. Co jest zrobione — macierz w
 
 Od wersji 0.20.0 moduł wymaga `dnd5e` 6.0.6. Na `dnd5e` 5.3.x zostań przy wersji 0.19.1 (ostatnia dla 5.3).
 
+## Zasady domowe — Kolor Kobaltu (WKK)
+
+Moduł gra według podręcznika, ale ma też zestaw **zasad domowych** — „W Kolorze Kobaltu” (WKK): inne liczby
+tam, gdzie zasada słabo działa na wirtualnym stole, kilka nowych kosztów i przedmioty spoza podręcznika. Są
+**domyślnie włączone** i da się je wyłączyć jednym przełącznikiem: **Configure Settings → Neuroshima →
+Kolor Kobaltu** (plus trzy podustawienia). Część treści WKK — przedmioty, których podręcznik nie zna — działa
+także po wyłączeniu, bo nie ma do czego wracać.
+
+**Pełna lista: [`docs/Kobalt.md`](docs/Kobalt.md)** — każda zasada WKK, co robi z Kobaltem, co jest bez niego
+i który przełącznik nią steruje, a do tego to, co *nie jest* WKK, choć w podręczniku tego nie ma
+(rozstrzygnięcia autora systemu i odczytania luk przez MG).
+
 ## Instalacja w jednym kroku
 
 1. W FoundryVTT: **Add-on Modules → Install Module**.
@@ -89,7 +101,7 @@ Początek podręcznika użytkownika (po polsku) — [`docs/`](docs/README.md):
 - [Instalacja](docs/Instalacja.md)
 - [Pierwsze kroki](docs/Pierwsze-kroki.md)
 - [Czym różni się od dnd5e](docs/Zmiany-wzgledem-dnd5e.md)
-- [Kolor Kobaltu](docs/Kobalt.md)
+- [Kolor Kobaltu](docs/Kobalt.md) — pełna lista zasad domowych (WKK) i ich przełączników
 - [FAQ](docs/FAQ.md)
 
 To dopiero początek — pełny, gęsty opis każdej mechaniki na razie mieszka w

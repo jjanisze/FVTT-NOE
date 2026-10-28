@@ -69,4 +69,4 @@ nie trzeba nic zmieniać, żeby zacząć grać.
 
 Z postoju i handlu warto znać trzy: **Ilustracje postoju** (malowane obrazy w oknach postoju, handlu i szabrowania;
 ustawienie każdego gracza osobno) oraz dwa podustawienia Koloru Kobaltu — **Kobalt: sen** i **Kobalt: jakość wody**
-([Kobalt](Kobalt.md)).
+([Kobalt — przełączniki](Kobalt.md#przełączniki); co dokładnie robi każda zasada domowa — [spis WKK](Kobalt.md#spis-zasad-wkk)).

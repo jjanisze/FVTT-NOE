@@ -377,6 +377,12 @@ Drugi argument `expect` to komunikat porażki. **Zawsze wskazuj winowajcę po na
 
 Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 
+`npm test` uruchamia też dwa sprawdzenia spoza warstwy testowej: `dev/lang-check.mjs` (zdublowane klucze w
+`lang/*.json`) i `dev/kobalt-doc-check.mjs` — publiczna lista zasad domowych `docs/Kobalt.md` kontra kod: każda
+zasada `### N.` ma wiersz w spisie (i odwrotnie), każdy plik `scripts/wkk/` jest na stronie wskazany, a każda
+nazwa WKK z kodu (przedmioty, amunicja, pancerz, choroba, fobia, zdolność, cechy pojazdów, ustawienia) na niej
+pada. Ten drugi chodzi też w statycznym kroku bramki wydania.
+
 ---
 
 ## 8. Pułapki Quencha
