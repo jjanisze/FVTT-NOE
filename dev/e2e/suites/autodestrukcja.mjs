@@ -83,11 +83,12 @@ async function runda({ token, scena }) {
   const stan = t.actor.getFlag(MOD, "autodestrukcja");
   const wynik = {
     karta: kartaWybuchu?.id ?? null, kartaPubliczna: kartaWybuchu ? !kartaWybuchu.whisper.length : null,
-    nazwa: t.name, martwy: t.actor.statuses.has("dead"), zniszczone: stan.zniszczone, wrakFlaga: !!t.getFlag(MOD, "wrak"),
+    nazwa: t.name, wrakSrc:t.texture.src, martwy: t.actor.statuses.has("dead"), zniszczone: stan.zniszczone, wrakFlaga: !!t.getFlag(MOD, "wrak"),
     slady: scene.drawings.filter(d => d.flags?.[MOD]?.explosive).length - rysunki0, szablony: scene.regions.size - szablony0
   };
   await window.__e2e.clickChat(mg.id, '[data-neuro-postoj="autodestrukcjaPrzywroc"]');
-  await window.__e2e.until(() => !/wrak/.test(t.name), { message: "restored" });
+  await window.__e2e.until(() => !/wrak/.test(t.name) && t.texture.src === t.actor.prototypeToken.texture.src
+    && !t.getFlag(MOD, "wrak"), { message: "name texture and flag restored" });
   return { ...wynik, poPrzywroceniu: { nazwa: t.name, src: t.texture.src } };
 }
 
@@ -129,6 +130,7 @@ export default {
       t.equal(r.kartaPubliczna, true, "explosive card for the table");
       t.assert(/\(wrak\)$/.test(r.nazwa), "token renamed (wrak)", r.nazwa);
       t.equal(r.wrakFlaga, true, "original kept on the token");
+      t.assert(r.wrakSrc.endsWith('/tokens/wraki/sredni.webp'),'actual self-destruction uses delivered Medium wreck art',r.wrakSrc);
       t.equal(r.martwy, true, "machine dead");
       t.equal(r.slady, 1, "one blast marker");
       t.equal(r.szablony, 0, "no stray template (flag cleared on a synthetic actor is not a second blast)");

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-29",
+  "banners": [
+    {
+      "id": "ruiny/magazyn",
+      "source": "dev/art/m5/in/ruiny/magazyn.png",
+      "output": "ui/ruiny/magazyn.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "90ea56cad64e55f8feb4e54fcc9405ed9ac4d919e154fa6159df097071fd52b5",
+      "outputSha256": "dd0666943ac850ffb96e27679b8eb00370a3acf7b030cd38d3b3bba9f66690ce",
+      "validation": {
+        "asset": "ruiny/magazyn",
+        "file": "ui/ruiny/magazyn.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 116962
+      },
+      "provenance": "Existing GM-supplied PNG, present since 2026-10-20; generator metadata unknown"
+    },
+    {
+      "id": "ruiny/wrak",
+      "source": "dev/art/m5/in/ruiny/wrak.png",
+      "output": "ui/ruiny/wrak.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "690d9fbcd7babfb4ae6bea3d99bbb6655e873709b619ac133f8eeed1076c68a9",
+      "outputSha256": "c2ebf0e412eafbaefb386780da3980fad06f668198e1fb946051b4f21f2a93c8",
+      "validation": {
+        "asset": "ruiny/wrak",
+        "file": "ui/ruiny/wrak.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 123560
+      },
+      "provenance": "Existing GM-supplied PNG, present since 2026-10-20; generator metadata unknown"
+    }
+  ],
+  "explosiveArt": "explosives/delivery.json"
+}

@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "intent": "Targeted readability correction after inspecting the atlas at 16 px",
+  "reference": "kontrabas.png",
+  "prompt": "Use case: precise-object-edit. Improve ONLY this white monochrome ELECTRIC UPRIGHT DOUBLE BASS glyph for a 16–64 pixel RPG interface. Keep the same upright instrument identity, long neck with tuning pegs, open skeletal bass body and bottom endpin. The current body is much too thin at icon size. Make the two curved sides of its body MUCH BROADER AND THICKER, together occupying about 55 percent of the instrument's full height in width, with two large clean black open spaces. Shorten the neck slightly so the broad bass body dominates, keep one complete stout bottom endpin. All stems and side rails must remain thick and clearly visible at 16 pixels. Pure flat solid WHITE silhouette on clean solid BLACK, sparse broad negative space only. No strings, shading, texture, labels, bow, stand, player, decorative symbols or hairline strokes. One complete centered glyph, generous margin."
+}

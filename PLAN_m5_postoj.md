@@ -417,6 +417,12 @@ skromna izba / wygodna komnata) i inna karta czatu.
 **D14 — Autodestrukcja:** karta MG przy 0 PW, odliczanie, automatyczny wybuch, ślad wybuchu i podmiana
 grafiki tej instancji żetonu na wrak (mały / średni / duży / gigantyczny). To samo przy autodestrukcji z
 Tabeli awarii (20). Na mapie ma być widać, że maszyna się zniszczyła — żeby nikt nie pytał „a czy z tego mogę?”.
+Grafiki (decyzja MG 2026-10-28/29): cztery anonimowe stosy zlanej, stopionej i zwęglonej robotyki,
+wspólne dla wielu modeli. Bez rozpoznawalnych sylwetek maszyn. Większe stosy mają więcej części
+i warstw. Korekta MG 2026-10-29: spójność stylu przestaje być wymogiem. Mały dobry, średni
+akceptowalny; duży i gigantyczny mają powstać niezależnie, z dominującymi wielkimi fragmentami
+konstrukcji i mniejszymi resztkami, nieregularną bryłą i wyraźnymi wyrwami. Okrągłe placki
+równomiernie drobnych części są odrzucone. Runtime zachowuje pole i skalę pierwotnego żetonu.
 
 **D15 — Fanty i Fuksy w M5.** Fanty wchodzą razem z terminami Fuksów i ich źródłami. Fuksy dzielą się na
 **trwałe** i **ulotne** — jak Wyczerpanie na uporczywe i przejściowe (7 dni z Rozrywki, bezterminowy z Nagrody
@@ -1242,6 +1248,60 @@ etapu.
 - `PLAN_human_testing.md` §5 — stanowiska Bazar i Złomowisko (wskazanie dodane 2026-10-11).
 
 ## 11. Postęp
+
+**2026-10-29 — domknięcie ilustracji ruin i dziewięciu grafik ładunków.**
+Magazyn i wnętrze wraku były już w `dev/art/m5/in/ruiny/` od 20 października,
+w poprawnym RGB 1659×948; audyt plików końcowych przeoczył gotowe źródła.
+Zapakowano je do WEBP 1200×400 bez przemalowania. Wszystkie siedem ruin ma banery;
+sprawdzone także nowe obrazy w oknie Szabrowania i na kartach próśb gracza.
+Dowody: `dev/art/m5/delivered-2026-10-29.json`.
+Wbudowany generator dostarczył dynamit oraz granaty dymny, hukowy i zapalający.
+Na polecenie MG kontynuowano generację i ukończono także Mołotow, C4, oba IED i improwizowany.
+Wszystkie dziewięć ma RGBA WEBP, dłuższy bok 128 px. Mołotow to źródło bez płomienia;
+animowany ogień dodaje istniejący moduł. Podgląd Strzelnicy:
+**Karta prób → Grafika: Granaty i ładunki**, sonda `grafika-granaty`.
+Próbki w powiększeniu i przy dłuższym boku 0,3/0,5 kratki na dwóch tłach;
+przedmioty podglądu nie są uzbrojone. Wariant radiowy wraca do grafiki bazowej,
+jeśli osobnej brak; IED ma własną grafikę radiową. Galeria uzupełnia pięć nowych grup
+w istniejącej scenie, zachowując wcześniejsze próbki i ręczne zmiany.
+[Pochodzenie i prompty](dev/art/m5/explosives/README.md).
+Pierwsza częściowa dostawa: E2E `explosive-art` 5/5, bez błędów konsoli:
+`logs/e2e/2026-10-29T00-02-54/report.json`, dwa zrzuty w tym samym katalogu.
+Końcowy komplet: E2E `explosive-art` **6/6**, z Sequencer/JB2A, bez błędów konsoli,
+`logs/e2e/2026-10-29T00-32-09/report.json` i trzy zrzuty. Przejście starej galerii 4→9
+zachowało wszystkie 20 próbek; na Poligonie dodano 25 nowych, bez resetu stacji,
+przy identycznych pozostałych 37 scenach i 424 żetonach. Walidacja M5: 37 dostarczonych
+obrazów, cztery brakujące żetony towarzyszy. `npm test` przechodzi.
+
+**2026-10-29 — korekta dużych wraków po ocenie MG.** Mały zachowany bez zmian, średni
+uznany za akceptowalny. Pierwsze duży/gigantyczny odrzucone jako okrągłe placki powtarzających
+się drobnych części. Nowa generacja obu bez referencji, bez wymagania spójnego stylu; priorytetem
+jest hierarchia wielkości elementów, dominujące zerwane konstrukcje ciężkiej maszyny, nieregularne
+obrysy i puste wyrwy. Źródła `duzy-v2.png`, `gigantyczny-v2.png`, aktualny wybór `selection.json`,
+prompty `revision-v2-prompts.json` w `dev/art/m5/wraki/`. Skale i dokumenty podglądu bez zmian.
+Dalsza wskazówka MG: więcej stopienia i zwęglenia. Edycja materiałów obu nowych konstrukcji,
+z zachowaniem asymetrii i hierarchii brył: `duzy-v3.png`, `gigantyczny-v3.png`,
+`revision-v3-prompts.json`. Mały i średni nadal zachowane bitowo.
+Następna wskazówka MG: ostre, poszarpane mniejsze wraki, szczególnie średni. Dziury przez
+stos, wyrwy w obrysie i wystające odłamki mają przerwać okrągły placek części. Ta prośba
+zastępuje wcześniejsze zachowanie małego/średniego bez zmian: nowe źródła `maly-v2.png`,
+`sredni-v2.png`, edycje własnych v1; `revision-jagged-prompts.json`.
+Wgrany aktualny zestaw `maly-v2 / sredni-v2 / duzy-v3 / gigantyczny-v3`, walidacja czterech
+WEBP poprawna. E2E `wraki-maszyn` **7/7**, bez błędów konsoli;
+`logs/e2e/2026-10-28T23-34-40/report.json`. MG i Gracz 1 mają odświeżony podgląd.
+Pełne dokumenty wszystkich 37 scen / 424 żetonów zachowane (identyczny hash zestawu).
+
+**2026-10-28/29 — cztery grafiki wraków maszyn.** `tokens/wraki/maly.webp`, `sredni.webp`,
+`duzy.webp`, `gigantyczny.webp`: stopione i zwęglone anonimowe stosy części, bez całych korpusów.
+Rozdzielczości 400/400/800/1600 px, wypełnienie 70/90/90/92%, prawdziwa alfa. Średni stos
+ustala materiały, pozostałe trzy mają coraz mniej/więcej elementów i warstw. Prompty, źródła
+i walidacja: `dev/art/m5/wraki/`. Runtime działa po dokładnych nazwach, bez zmiany mechaniki
+i przebudowy kompendiów. **Złomowisko → Karta prób → Grafika: Wraki maszyn**, sonda
+`grafika-wraki-maszyn`: cztery pary ze Spawaczem, Gladiatorem, Obrońcą i Juggernautem, człowiek
+do skali, przyciski Przywróć/Pokaż wrak. Stały generator zachowuje istniejący podgląd i odtwarza
+go przy resecie. `npm test` zielony, E2E `wraki-maszyn` **7/7** i `autodestrukcja` **4/4**,
+bez błędów konsoli; `logs/e2e/2026-10-28T23-01-42/report.json`, dwa zrzuty.
+Grafiki do oceny MG. Magazyn i wnętrze wraku w Szabrowaniu wykonuje MG w web UI.
 
 **2026-10-11 — projekt, rundy 1–2.** Inwentarz RAW (§3), dnd5e (§2) i kodu (§4); dwie rundy pytań do MG →
 D1–D27. Trzy korekty do weta: punkty handlowe są w RAW (P1), ulepszenia to usługa (P2), sen RAW to 6 h (D7).

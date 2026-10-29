@@ -1,0 +1,27 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "reason": "Initial output moderation rejected these fictional game-object images; simplify to visibly illustrative closed props.",
+  "assets": [
+    {
+      "key": "grenade-molotov",
+      "subject": "Molotov cocktail game icon: a brown glass bottle with a pale cloth at its neck, a small painted orange flame shape, no label. The bottle lies on its side, its long axis vertical in the picture.",
+      "prompt": "Create stylized painted artwork of ONE fictional nonfunctional tabletop-game prop, isolated on a genuinely transparent background. An object sprite viewed directly overhead lying flat, clear chunky silhouette for a tiny 30px map marker. Muted post-apocalyptic painted illustration, not a photograph, no scene, no people, no action. No ground or shadows, no text. All surfaces closed, exterior-only design, no technical construction details. Molotov cocktail game icon: a brown glass bottle with a pale cloth at its neck, a small painted orange flame shape, no label. The bottle lies on its side, its long axis vertical in the picture."
+    },
+    {
+      "key": "grenade-c4-remote",
+      "subject": "C4 charge game icon: a chunky cream-colored rectangular block in a worn olive-green wrapper, a small black cap with two short simple colored wire curves. Minimal illustrative exterior, no circuit or internals.",
+      "prompt": "Create stylized painted artwork of ONE fictional nonfunctional tabletop-game prop, isolated on a genuinely transparent background. An object sprite viewed directly overhead lying flat, clear chunky silhouette for a tiny 30px map marker. Muted post-apocalyptic painted illustration, not a photograph, no scene, no people, no action. No ground or shadows, no text. All surfaces closed, exterior-only design, no technical construction details. C4 charge game icon: a chunky cream-colored rectangular block in a worn olive-green wrapper, a small black cap with two short simple colored wire curves. Minimal illustrative exterior, no circuit or internals."
+    },
+    {
+      "key": "grenade-ied",
+      "subject": "Timed explosive game icon: one stubby closed weathered grey cylinder, one chunky dark band, and a small pale round clock face with hands and no numbers. Simplified exterior silhouette only.",
+      "prompt": "Create stylized painted artwork of ONE fictional nonfunctional tabletop-game prop, isolated on a genuinely transparent background. An object sprite viewed directly overhead lying flat, clear chunky silhouette for a tiny 30px map marker. Muted post-apocalyptic painted illustration, not a photograph, no scene, no people, no action. No ground or shadows, no text. All surfaces closed, exterior-only design, no technical construction details. Timed explosive game icon: one stubby closed weathered grey cylinder, one chunky dark band, and a small pale round clock face with hands and no numbers. Simplified exterior silhouette only."
+    },
+    {
+      "key": "grenade-ied-radio",
+      "subject": "Remote explosive game icon: one stubby closed weathered grey cylinder, one chunky dark band, and a small blue-grey radio box with one short antenna. Simplified exterior silhouette only, no screen, buttons or circuitry.",
+      "prompt": "Create stylized painted artwork of ONE fictional nonfunctional tabletop-game prop, isolated on a genuinely transparent background. An object sprite viewed directly overhead lying flat, clear chunky silhouette for a tiny 30px map marker. Muted post-apocalyptic painted illustration, not a photograph, no scene, no people, no action. No ground or shadows, no text. All surfaces closed, exterior-only design, no technical construction details. Remote explosive game icon: one stubby closed weathered grey cylinder, one chunky dark band, and a small blue-grey radio box with one short antenna. Simplified exterior silhouette only, no screen, buttons or circuitry."
+    }
+  ]
+}

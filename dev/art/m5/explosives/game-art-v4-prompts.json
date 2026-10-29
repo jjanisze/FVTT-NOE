@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "assets": [
+    {
+      "key": "grenade-molotov",
+      "prompt": "Use case: stylized-concept. Draw ONE Molotov cocktail as a painted object sprite for a post-apocalyptic VIDEO GAME virtual tabletop. Pure decorative game artwork of the exterior, not a technical illustration. A brown glass bottle with a pale rag at its neck and one very small stylized orange flame, no labels. It is lying on its side and viewed straight down, its long axis vertical in the image. Chunky hand-painted game-art style, broad amber highlights, clear silhouette at 30 pixels. Fully transparent background with true alpha, no floor, shadow, smoke cloud, people, scenery, text, diagrams, internal parts, or action."
+    },
+    {
+      "key": "grenade-c4-remote",
+      "prompt": "Use case: stylized-concept. Draw ONE C4 charge as a painted object sprite for a post-apocalyptic VIDEO GAME virtual tabletop. Pure decorative game artwork showing only the closed exterior: a squat cream rectangular block partly wrapped in scuffed olive-green material, with a small dark attachment and two short generic curved wires. Simple chunky hand-painted game-art style, broad shapes readable at 30 pixels. Directly overhead view of the object lying flat. Fully transparent background with true alpha, no floor, shadow, people, scenery, labels, diagrams, cutaway, internal mechanism, or action."
+    }
+  ]
+}

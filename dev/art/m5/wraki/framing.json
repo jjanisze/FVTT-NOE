@@ -1,0 +1,86 @@
+[
+  {
+    "asset": "wraki/duzy",
+    "source": "dev/art/m5/wraki/duzy-v3.png",
+    "sourceFrame": [
+      1254,
+      1254
+    ],
+    "sourceBounds": [
+      30,
+      11,
+      1223,
+      1239
+    ],
+    "outputFrame": [
+      800,
+      800
+    ],
+    "targetFill": 90,
+    "resampleFactor": 0.5863192182410424,
+    "drop": "dev/art/m5/in/wraki/duzy.png"
+  },
+  {
+    "asset": "wraki/gigantyczny",
+    "source": "dev/art/m5/wraki/gigantyczny-v3.png",
+    "sourceFrame": [
+      1254,
+      1254
+    ],
+    "sourceBounds": [
+      12,
+      27,
+      1243,
+      1232
+    ],
+    "outputFrame": [
+      1600,
+      1600
+    ],
+    "targetFill": 92,
+    "resampleFactor": 1.1957757920389926,
+    "drop": "dev/art/m5/in/wraki/gigantyczny.png"
+  },
+  {
+    "asset": "wraki/maly",
+    "source": "dev/art/m5/wraki/maly-v2.png",
+    "sourceFrame": [
+      1254,
+      1254
+    ],
+    "sourceBounds": [
+      87,
+      83,
+      1174,
+      1171
+    ],
+    "outputFrame": [
+      400,
+      400
+    ],
+    "targetFill": 70,
+    "resampleFactor": 0.25735294117647056,
+    "drop": "dev/art/m5/in/wraki/maly.png"
+  },
+  {
+    "asset": "wraki/sredni",
+    "source": "dev/art/m5/wraki/sredni-v2.png",
+    "sourceFrame": [
+      1254,
+      1254
+    ],
+    "sourceBounds": [
+      93,
+      48,
+      1206,
+      1210
+    ],
+    "outputFrame": [
+      400,
+      400
+    ],
+    "targetFill": 90,
+    "resampleFactor": 0.3098106712564544,
+    "drop": "dev/art/m5/in/wraki/sredni.png"
+  }
+]

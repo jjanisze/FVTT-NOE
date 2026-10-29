@@ -1,0 +1,22 @@
+[
+  {
+    "key": "grenade-molotov",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID aa70c2bf-2af0-44fc-b9bc-ca5402cb87f5. safety_violations=[violence].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"violence\\\"\\n      ]\\n    }\\n  }\\n}\")"
+  },
+  {
+    "key": "grenade-c4-remote",
+    "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID feff1a11-0df9-4c52-a8ff-fa6be19445f0. safety_violations=[violence].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"violence\\\"\\n      ]\\n    }\\n  }\\n}\")"
+  },
+  {
+    "key": "grenade-ied",
+    "source": "grenade-ied-v3.png"
+  },
+  {
+    "key": "grenade-ied-radio",
+    "source": "grenade-ied-radio-v3.png"
+  },
+  {
+    "key": "grenade-improvised",
+    "source": "grenade-improvised-v3.png"
+  }
+]

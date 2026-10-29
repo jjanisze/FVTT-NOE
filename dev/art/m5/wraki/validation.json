@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-29",
+  "tool": "built-in image_gen",
+  "model": "not exposed by tool",
+  "processing": "Frame fill, centering and scale only; existing M5 packer WEBP conversion",
+  "assets": [
+    {
+      "id": "wraki/maly",
+      "output": "tokens/wraki/maly.webp",
+      "size": [
+        400,
+        400
+      ],
+      "visibleBounds": [
+        60,
+        60,
+        340,
+        340
+      ],
+      "fillPercent": 70.0,
+      "sampleFootprintCells": 1,
+      "visibleMetresAtTextureScale1": 1.05,
+      "bytes": 43494,
+      "outputSha256": "0a65833923cd0afd389adfafe4563efe32a3415f9e1ddfdb1f6d0408a07c15a2",
+      "source": "dev/art/m5/wraki/maly-v2.png",
+      "sourceSha256": "7e8b41ee8f00c193698027a7ba19fe6479658c23a12bdbf049bf7f16a0ee91e4",
+      "drop": "dev/art/m5/in/wraki/maly.png",
+      "dropSha256": "0e3a2e38461ba899f6e12685dcd8ee2455b7027efc11647f95565ca6937ebcf5",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "id": "wraki/sredni",
+      "output": "tokens/wraki/sredni.webp",
+      "size": [
+        400,
+        400
+      ],
+      "visibleBounds": [
+        27,
+        20,
+        372,
+        380
+      ],
+      "fillPercent": 90.0,
+      "sampleFootprintCells": 1,
+      "visibleMetresAtTextureScale1": 1.35,
+      "bytes": 70624,
+      "outputSha256": "caf99b3932d6ec5e269699fab3c695bce0b760471295b0113c2f9c9e74986594",
+      "source": "dev/art/m5/wraki/sredni-v2.png",
+      "sourceSha256": "74e4a54873ff06560f562f2656699d6b21c4bed6f0a0841ebb29665ffcad11e3",
+      "drop": "dev/art/m5/in/wraki/sredni.png",
+      "dropSha256": "343e1f81f8977079f5e1028bc3e04ccd922a686c9133a15477d9843279f383b1",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "id": "wraki/duzy",
+      "output": "tokens/wraki/duzy.webp",
+      "size": [
+        800,
+        800
+      ],
+      "visibleBounds": [
+        50,
+        40,
+        749,
+        760
+      ],
+      "fillPercent": 90.0,
+      "sampleFootprintCells": 2,
+      "visibleMetresAtTextureScale1": 2.7,
+      "bytes": 205308,
+      "outputSha256": "aefffd9204e79de95ef20971f00f8d65859e852195f4389f73184a3c92ea96b8",
+      "source": "dev/art/m5/wraki/duzy-v3.png",
+      "sourceSha256": "6a8bcd5ecd890f188e017b294276dc16ff591ae40c29d8909f50959358365445",
+      "drop": "dev/art/m5/in/wraki/duzy.png",
+      "dropSha256": "a4dceef8edb74b82bbbe4df3d3cac4189a5861487314ca39488d424ff81e2376",
+      "review": "awaiting-gm-review"
+    },
+    {
+      "id": "wraki/gigantyczny",
+      "output": "tokens/wraki/gigantyczny.webp",
+      "size": [
+        1600,
+        1600
+      ],
+      "visibleBounds": [
+        64,
+        79,
+        1536,
+        1520
+      ],
+      "fillPercent": 92.0,
+      "sampleFootprintCells": 3,
+      "visibleMetresAtTextureScale1": 4.14,
+      "bytes": 658590,
+      "outputSha256": "8a23ef7b434f67c25d933c4d6d306f5b1a784848bcd15a54749f1b0228636905",
+      "source": "dev/art/m5/wraki/gigantyczny-v3.png",
+      "sourceSha256": "8e231efa81a94da6e4d0f97ff920d662f47f49fdb7e48efe2fc3cf3da226abc1",
+      "drop": "dev/art/m5/in/wraki/gigantyczny.png",
+      "dropSha256": "a3f656859afc7d7c09c8cd8325f586ef7eb2b11ec72433ec3e524da92d960a4d",
+      "review": "awaiting-gm-review"
+    }
+  ]
+}

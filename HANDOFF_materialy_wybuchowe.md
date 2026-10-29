@@ -44,9 +44,12 @@ Testy: **468/468**.
    dnia, sprzed poprawki), nowe `.log` każdej paczki mają 0 B. Pliki w `packs/` i tak się
    zmieniły — to sprzątanie samego LevelDB przy otwarciu (log → `.ldb`, rotacja MANIFEST/LOG),
    nie treść. Czy kolejne starty są już bez zmian — sprawdź `git status packs/` po następnym.
-2. **Grafika leżącej butelki** — w kolejce `dev/icons/MISSING.md`, klasa B (nowa klasa: kolorowe
-   obiekty z góry). Kod już gotowy: Tile bierze `vfx/<subtype>.webp`, jeśli istnieje
-   (`_pendingTileTexture()`), proporcje z obrazu. Obróbka: `dev/icons/normalize_world_assets.py`.
+2. **Grafiki leżących ładunków — komplet 2026-10-29.** Dostarczono wszystkie dziewięć:
+   Mołotow, dynamit, C4, oba IED oraz granaty improwizowany, dymny, hukowy i zapalający.
+   Dalsze generacje ukończyły początkową częściową dostawę. Tile bierze `vfx/<subtype>.webp`,
+   proporcje z obrazu; wariant radiowy wraca do grafiki bazowej, jeśli osobnej brak.
+   Obróbka: `dev/art/m5/pack.py`. [Źródła i podgląd](dev/art/m5/explosives/README.md).
+   Mołotow ma źródło bez płomienia — animowany ogień dodaje istniejący moduł.
 3. **Detonacja inna niż „koniec tury".** RAW (*Sprzęt*, `8 SZTUCZKI/czesc-01.md`):
    - **Dynamit (laska)** — rzucany jak granat, ale najpierw **podpalany** (Używanie / Akcja
      Bonusowa + źródło ognia). Uogólnić `molotov.mjs` do „wymaga podpalenia", bez pęknięcia.

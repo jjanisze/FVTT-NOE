@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "reviewCards": 15,
+  "glyphs": 14,
+  "overlay": 1,
+  "previousCardsPreserved": 557,
+  "sourceCodeUnchanged": true,
+  "productionTargetsStillAbsent": true,
+  "candidateValidation": "921 PNG/SVG pairs pass; batches 119 and 120 validate 9 and 5 white RGBA masks with matching WEBP/SVG",
+  "browserChecks": {
+    "reviewImages": 60,
+    "brokenImages": 0,
+    "overlayCanvases": 6,
+    "zeroStrengthMatchesOriginal": true,
+    "variantsDiffer": true,
+    "size70Works": true
+  },
+  "observedDecisions": {
+    "pending": 8,
+    "approve": 7,
+    "revise": 0,
+    "reject": 0
+  },
+  "feedbackWasNotWrittenByPreparation": true
+}

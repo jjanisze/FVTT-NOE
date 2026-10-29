@@ -134,11 +134,13 @@ async function _pendingTileTexture(subtype, fallback = null) {
  * Grafika podłożonego ładunku: `vfx/<podtyp>[-radio].webp` z kolejki MISSING.md (B); do tego czasu
  * ikona samego przedmiotu — granat z `grenade-thrown.webp` udawałby minę albo IED.
  */
-function _placedTexture(charge) {
-  const key = `${charge.subtype}${charge.anchor?.via === "radio" ? "-radio" : ""}`;
-  return _pendingTileTexture(key, { src: charge.card?.itemImg ?? PENDING_TILE_TEXTURE, aspect: 1 });
+async function _placedTexture(charge) {
+  const fallback = { src: charge.card?.itemImg ?? PENDING_TILE_TEXTURE, aspect: 1 };
+  const base = await _pendingTileTexture(charge.subtype, fallback);
+  if (charge.anchor?.via !== "radio") return base;
+  return _pendingTileTexture(`${charge.subtype}-radio`, base);
 }
-// Podłożony ładunek leży długo i ma ikonę zamiast zdjęcia — trochę większy niż rzucony granat.
+// Podłożony ładunek leży długo — trochę większy niż rzucony granat.
 const PLACED_TILE_SQUARES = 0.5;
 
 // How long a non-mine blast marker (+ its tied VFX) sticks around before the

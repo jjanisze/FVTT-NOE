@@ -3899,6 +3899,55 @@
       "candidateId": "batch116-ukrywanie-sie-b",
       "notes": "",
       "updatedAt": "2026-10-24T14:21:59.815Z"
+    },
+    "instrument-akordeon": {
+      "itemId": "instrument-akordeon",
+      "decision": "approve",
+      "candidateId": "batch119-akordeon",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:03:42.739Z"
+    },
+    "instrument-banjo": {
+      "itemId": "instrument-banjo",
+      "decision": "approve",
+      "candidateId": "batch119-banjo",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:03:47.331Z"
+    },
+    "instrument-gitaraAkustyczna": {
+      "itemId": "instrument-gitaraAkustyczna",
+      "decision": "approve",
+      "candidateId": "batch119-gitaraAkustyczna",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:03:50.518Z"
+    },
+    "instrument-gitaraBasowa": {
+      "itemId": "instrument-gitaraBasowa",
+      "decision": "approve",
+      "candidateId": "batch119-gitaraBasowa",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:03:54.838Z"
+    },
+    "instrument-gitaraElektryczna": {
+      "itemId": "instrument-gitaraElektryczna",
+      "decision": "approve",
+      "candidateId": "batch119-gitaraElektryczna",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:03:58.094Z"
+    },
+    "instrument-harmonijka": {
+      "itemId": "instrument-harmonijka",
+      "decision": "approve",
+      "candidateId": "batch119-harmonijka",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:04:01.970Z"
+    },
+    "instrument-keyboard": {
+      "itemId": "instrument-keyboard",
+      "decision": "approve",
+      "candidateId": "batch119-keyboard",
+      "notes": "",
+      "updatedAt": "2026-10-29T01:04:55.163Z"
     }
   }
 }

@@ -1,0 +1,11 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "design": "Illustrated unlit Molotov map sprite; animated fire already supplied by runtime.",
+  "assets": [
+    {
+      "key": "grenade-molotov",
+      "prompt": "Use case: stylized-concept. A small hand-drawn 2D RPG map sprite of a Molotov cocktail, for the Neuroshima VIDEO GAME virtual tabletop. Show the unlit version: one plain brown bottle with a conspicuous cream cloth rag at the neck. The game adds animated fire separately. Strong ink contours, simple opaque watercolor color blocks and a few broad amber highlights, visibly illustrated rather than photographic. Straight-down orthographic view of the bottle lying flat, neck pointing up. One object only, complete uncropped silhouette, real transparent background. No technical illustration, no cutaway, no text, no people, scenery, floor, shadow or flame."
+    }
+  ]
+}

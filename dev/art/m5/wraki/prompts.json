@@ -1,0 +1,52 @@
+{
+  "tool": "built-in image_gen",
+  "model": "not exposed by tool",
+  "jobs": [
+    {
+      "key": "sredni",
+      "prompt": "Use case: stylized-concept.\nAsset: reusable transparent top-down VTT wreck token, MEDIUM size.\nInput image 1 is STYLE ONLY: match the grounded painterly post-apocalyptic token rendering, clear surface shading and muted materials of this approved car wreck. Do NOT copy any car shape, bodywork or identifiable unit.\n\nPrimary subject: a compact irregular low mound of fused, melted, charred ROBOTICS PARTS after a machine has self-destructed. It must be anonymous remains usable for many unrelated robots and drones. A few crumpled charcoal-steel plates have sagged into bubbled dull-silver molten metal and soot-black fused lumps, trapping broken servo housings, short bent actuator rods, flattened motor windings and tangled partly melted copper wiring. The material is cooled solid, with heat discoloration and a few small oxidized brown edges. Charcoal, ash grey, dull steel, restrained burnt copper. Broad readable masses with a few sharp metal highlights, painterly realism consistent with the reference rather than a glossy 3D render.\nThe heap came from a human-sized machine and has an approximately 1.3 metre spread. Show a modest quantity of parts, several fist-sized servo remnants and bent thin sheet metal. No intact silhouette, torso, robot head, face, complete limbs, complete wheels, tank tracks, rotor, cannon, vehicle frame or identifiable franchise machine. It is a fused mound, not an assembly of separate functioning objects, and not scrap neatly sorted for sale.\n\nStrict orthographic view directly overhead, no horizon or visible vertical side faces. One single irregular roughly round mound centered in a SQUARE canvas. Its longest dimension fills about 90% of the canvas, with clear transparent margins on all four sides. Soft neutral upper-left light only on the parts. Preserve deep readable crevices while letting metal edges distinguish the pile from the map.\nReal transparent alpha background, including holes through the heap. Absolutely no ground, floor, circular base, ring, scenery, cast shadow outside the parts, ash carpet, crater, loose debris field, smoke, steam, flames, glowing embers, magical light, lettering, symbols, labels, scale ruler, people, gore or watermark.",
+      "referenceRoles": [
+        {
+          "path": "tokens/wraki/pojazd-osobowy.webp",
+          "role": "style only; never identity or geometry"
+        }
+      ]
+    },
+    {
+      "key": "maly",
+      "fill": 70,
+      "size": 400,
+      "prompt": "Use case: stylized-concept. Asset: transparent top-down VTT token of generic destroyed robotics.\nInput image 1 is the approved-in-this-workflow MEDIUM STYLE AND MATERIAL REFERENCE, not a specific robot to preserve. Match its painterly post-apocalyptic rendering exactly: cooled bubbled charcoal slag, sagging dull grey/silver steel, a few scorched copper windings, oxidized brown seams, soft neutral upper-left highlights, dark crevices. Anonymous parts fused together by catastrophic heat, no intact robot shape.\nCreate a DIFFERENT SMALLER HEAP, the melted remnants of a compact small drone. A few bent thin metal fragments, one tiny ruined servo and a crushed motor casing fused into a small blackened porous lump, short tangled wires and dripped dull metal. A sparse flat cluster, far fewer parts than the reference. No visible drone airframe or identifiable propulsion type. Its real spread is about 0.7–1 metre, compared with the reference's 1.3 metre spread. Keep the few visible servo scraps small and physically plausible. Fills only 70% of the square at its longest extent, with broad empty transparent margins. Do not simply shrink or crop the medium picture; construct a smaller amount of wreckage.\nStrict orthographic overhead view, square canvas, a single centered irregular roughly rounded low mound with readable asymmetric edges, genuine transparent alpha background and clear transparent margins. Uniform overhead focus, no horizon or vertical side view. No ground, floor, base, ring, cast shadow outside the parts, ash carpet, crater, debris field, smoke, flames, steam, glowing embers, active lights, magical effects, intact chassis, torso, face, head, full robotic limb, complete wheel, recognizable tracks, rotors, gun barrel, symbols, labels, text, watermark, ruler, people or gore. Separate shadows and explosions belong to the VTT, never bake them into the sprite.",
+      "referenceRoles": [
+        {
+          "path": "dev/art/m5/wraki/sredni-v1.png",
+          "role": "style/material/relative part scale reference"
+        }
+      ]
+    },
+    {
+      "key": "duzy",
+      "fill": 90,
+      "size": 800,
+      "prompt": "Use case: stylized-concept. Asset: transparent top-down VTT token of generic destroyed robotics.\nInput image 1 is the approved-in-this-workflow MEDIUM STYLE AND MATERIAL REFERENCE, not a specific robot to preserve. Match its painterly post-apocalyptic rendering exactly: cooled bubbled charcoal slag, sagging dull grey/silver steel, a few scorched copper windings, oxidized brown seams, soft neutral upper-left highlights, dark crevices. Anonymous parts fused together by catastrophic heat, no intact robot shape.\nCreate a new LARGE HEAP with roughly 2.7 metre spread, about twice the diameter of the reference. This is considerably more debris, several overlapping fused layers: a collapsed nest of heat-warped sheet-metal armor fragments, ruined servo blocks, sheared bearings, short bent actuator rods and crumpled support braces embedded in porous cooled metal. Include a few heavier crumpled plates around half a metre wide, but many repeated small fist-sized motor and joint scraps and wire strands must remain a physically believable size. Roughly 3–4 times the visible quantity of parts of the reference, with more overlapping layers rather than a magnified version of its same parts. One interconnected mound, no intact machine anatomy and no readable silhouette of a particular unit. Dull metallic edges maintain readability at map-token size. Longest visible extent fills about 90% of the square.\nStrict orthographic overhead view, square canvas, a single centered irregular roughly rounded low mound with readable asymmetric edges, genuine transparent alpha background and clear transparent margins. Uniform overhead focus, no horizon or vertical side view. No ground, floor, base, ring, cast shadow outside the parts, ash carpet, crater, debris field, smoke, flames, steam, glowing embers, active lights, magical effects, intact chassis, torso, face, head, full robotic limb, complete wheel, recognizable tracks, rotors, gun barrel, symbols, labels, text, watermark, ruler, people or gore. Separate shadows and explosions belong to the VTT, never bake them into the sprite.",
+      "referenceRoles": [
+        {
+          "path": "dev/art/m5/wraki/sredni-v1.png",
+          "role": "style/material/relative part scale reference"
+        }
+      ]
+    },
+    {
+      "key": "gigantyczny",
+      "fill": 92,
+      "size": 1600,
+      "prompt": "Use case: stylized-concept. Asset: transparent top-down VTT token of generic destroyed robotics.\nInput image 1 is the approved-in-this-workflow MEDIUM STYLE AND MATERIAL REFERENCE, not a specific robot to preserve. Match its painterly post-apocalyptic rendering exactly: cooled bubbled charcoal slag, sagging dull grey/silver steel, a few scorched copper windings, oxidized brown seams, soft neutral upper-left highlights, dark crevices. Anonymous parts fused together by catastrophic heat, no intact robot shape.\nCreate a new GIGANTIC HEAP, approximately 5.5 metres across, four times the diameter of the medium reference. A broad, densely layered, cooled and fused mass of destroyed robotics: overlapping warped thick armor fragments, a few collapsed heavy support girders and twisted short hydraulic rods, dozens of smaller burned motor housings and servo-joint fragments partially entombed in porous blackened slag, charred wire nests and dull solidified silver metal rivulets. More layers and vastly more material than the medium and large versions. Some large bent plates may span a metre but keep a scattering of small 10–20 cm motor remnants and fine wires visible as scale cues; do NOT simply enlarge the reference's same few components. It must stay completely generic, a huge irregular anonymous fused rubble pile, no intact heavy vehicle hull, complete tracks, wheels, humanoid anatomy or recognizable war machine. Render intricate grounded painterly detail for a final 1600x1600 sprite. Longest extent fills about 92% of the square, preserving clear margins on every side.\nStrict orthographic overhead view, square canvas, a single centered irregular roughly rounded low mound with readable asymmetric edges, genuine transparent alpha background and clear transparent margins. Uniform overhead focus, no horizon or vertical side view. No ground, floor, base, ring, cast shadow outside the parts, ash carpet, crater, debris field, smoke, flames, steam, glowing embers, active lights, magical effects, intact chassis, torso, face, head, full robotic limb, complete wheel, recognizable tracks, rotors, gun barrel, symbols, labels, text, watermark, ruler, people or gore. Separate shadows and explosions belong to the VTT, never bake them into the sprite.",
+      "referenceRoles": [
+        {
+          "path": "dev/art/m5/wraki/sredni-v1.png",
+          "role": "style/material/relative part scale reference"
+        }
+      ]
+    }
+  ]
+}

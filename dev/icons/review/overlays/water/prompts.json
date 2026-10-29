@@ -1,0 +1,7 @@
+{
+  "date": "2026-10-29",
+  "tool": "OpenAI built-in image_gen",
+  "model": "not exposed",
+  "intendedTarget": "tokens/nakladki/zanurzony.webp",
+  "prompt": "Use case: stylized-concept. Asset type: transparent raster OVERLAY placed over an existing circular creature token in a virtual tabletop game, indicating the token is submerged. Generate ONLY the overlay, not a creature or a complete token. Square canvas, true RGBA transparent background. The upper half of the canvas is entirely transparent. In the lower half, a faint cool turquoise water glaze follows the BOTTOM SEMICIRCLE of an imaginary circle with generous transparent outer margin. A gentle wavy waterline crosses near the horizontal center; two or three sparse soft cyan ripple strokes below it. The water must be translucent so underlying token artwork remains clearly visible, about 20 to 35 percent opacity; ripple accents at most 50 percent opacity. Top-down view, subtle restrained painted water texture, no perspective or horizon. NO visible circle outline, ring, frame, bevel, border, object, basin, floor, landscape, creature, hand, text, emblem, bubbles or opaque background. The final asset is just a soft translucent lower-half water mask and restrained ripples, smoothly clipped to a rounded bottom edge."
+}

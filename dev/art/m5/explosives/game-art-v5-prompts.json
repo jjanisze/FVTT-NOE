@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "reference": {
+    "path": "grenade-incendiary-v1.png",
+    "role": "painting/material style only"
+  },
+  "design": "Unlit Molotov source: existing runtime renders the lit flame separately. C4 simplified exterior for tiny map display.",
+  "assets": [
+    {
+      "key": "grenade-molotov",
+      "prompt": "Use case: stylized-concept. Create one decorative item sprite for the fictional Neuroshima virtual-tabletop VIDEO GAME. Image 1 is a painting/material-style reference only; generate a different object. Exterior-only game art with simple broad painterly shapes, direct orthographic overhead view, isolated on real transparent alpha, no ground, cast shadow, labels, diagrams, internals or people. Keep the object easy to recognize at 30 pixels. Subject: an UNLIT Molotov cocktail game token, a worn brown glass bottle lying flat with a pale cloth tucked at its neck. Show the whole bottle. The game's renderer supplies animated fire separately, so there is no flame or smoke in this source sprite. Vertical long axis, warm amber highlights, cloth clearly distinct from glass."
+    },
+    {
+      "key": "grenade-c4-remote",
+      "prompt": "Use case: stylized-concept. Create one decorative item sprite for the fictional Neuroshima virtual-tabletop VIDEO GAME. Image 1 is a painting/material-style reference only; generate a different object. Exterior-only game art with simple broad painterly shapes, direct orthographic overhead view, isolated on real transparent alpha, no ground, cast shadow, labels, diagrams, internals or people. Keep the object easy to recognize at 30 pixels. Subject: a fictional C4 explosive charge game token represented by one simple squat cream-colored rectangular block in a scuffed olive-green wrapper, with a small dark sealed fitting. A closed outside view only; no loose wires or electronic detail. Broad cream end and olive wrapper are the identifying visual cues."
+    }
+  ]
+}

@@ -103,6 +103,16 @@ be pulled without argument.
 
 ## Icons
 
+### Animated submerged-token material (AI-generated)
+
+`vfx/water-surface.webp` reuses the original transparent water painting generated with OpenAI's
+built-in image tool on 2026-10-29; the model name was not exposed. It is an unchanged copy of
+`dev/icons/review/overlays/water/zanurzony.webp` (512×512 RGBA), whose prompt and raw source
+remain beside it. The shader samples an interior strip, retains the painted ripple/alpha detail,
+and applies muddy or sewage palettes; clean water retains the painting's cyan with stronger contrast.
+The earlier muted grayscale material and its prompt are archived under `dev/art/m6/water/`.
+No third-party water texture or creature artwork was used to generate either painting.
+
 Most item/ability/status icons are AI-generated (Google Gemini and OpenAI ChatGPT image models),
 prompted for a flat, minimal, single-color silhouette style matching the base `dnd5e` icon set,
 then normalized by a local script. Pipeline and prompt details:
@@ -353,6 +363,24 @@ Five GM-supplied ruin interiors were center-cropped, resized and converted to
 - `ui/ruiny/sklepik.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 - `ui/ruiny/warsztat.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 
+## Grenade map sprites and remaining ruin banners
+
+`vfx/grenade-molotov.webp`, `vfx/grenade-dynamite.webp`, `vfx/grenade-c4-remote.webp`,
+`vfx/grenade-ied.webp`, `vfx/grenade-ied-radio.webp`, `vfx/grenade-improvised.webp`,
+`vfx/grenade-smoke.webp`, `vfx/grenade-flashbang.webp` and `vfx/grenade-incendiary.webp` were generated with
+OpenAI's built-in image tool on 2026-10-29. The tool does not expose its model identifier.
+Only transparent-bound trimming, resampling and WEBP conversion were applied.
+Full prompts, selected original PNGs, source/output hashes and dimensions:
+`dev/art/m5/explosives/`. All nine requested sprites are delivered. C4 used the earlier
+incendiary sprite only as a painting/material reference. Molotov is an unlit illustrated
+bottle; its existing runtime flame is a separate effect.
+
+`ui/ruiny/magazyn.webp` and `ui/ruiny/wrak.webp` were packaged on 2026-10-29 from the GM's
+existing PNGs, present since 2026-10-20. Their original generation metadata was not
+supplied; no model attribution is inferred. Processing was centered cropping,
+resizing and WEBP conversion without repainting. Source/output hashes:
+`dev/art/m5/delivered-2026-10-29.json`.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
@@ -587,6 +615,33 @@ Each edit uses its accepted vehicle token as the identity/geometry reference, an
 sedan wreck solely for style and damage severity. Full prompts, reference roles and source
 PNGs: `dev/art/m4/wraki/batch.json` and `variants/`. Deterministic processing restores native
 canvas proportions and packages transparent WEBP; it does not paint. Model name not exposed.
+
+Generic machine/drone wreck tokens `tokens/wraki/maly.webp`, `tokens/wraki/sredni.webp`,
+`tokens/wraki/duzy.webp` and `tokens/wraki/gigantyczny.webp` were generated with OpenAI's
+built-in image tool on 2026-10-28/29 at the GM's request. These are anonymous fused piles
+of melted, charred robotics parts. The approved sedan wreck supplies painting/material style
+for the first Medium pile only; the Medium pile then supplies style and material references
+for the other three sizes. No recognizable vehicle or robot silhouette is copied. The tool
+does not expose its model name. Sources and full prompts: `dev/art/m5/wraki/`; frame-fill
+normalization and M5 packer conversion are deterministic and do not paint. Native RGBA WEBP
+paths, source/output hashes and measurements are recorded in `wraki/validation.json` there.
+
+On 2026-10-29 the GM retained the Small and Medium sprites and rejected the first Large and
+Gigantic derivatives as circular beds of repeated small components. Both larger sprites were
+regenerated independently with the built-in image tool, without input references or a style
+matching requirement. The new images emphasize torn heavy structural masses, unequal part
+sizes, missing chunks and irregular outlines. Versioned sources and full prompts:
+`dev/art/m5/wraki/{duzy-v2,gigantyczny-v2}.png` and `revision-v2-prompts.json`; active sources
+in `selection.json`. The Small/Medium WEBP bytes were preserved during that larger-only revision.
+Following a further request for more melting and charring, the two independent v2
+structures were edited separately with the same built-in tool, each using only its own
+v2 image. The edits preserve the irregular structural composition while adding cooled
+molten edges, blistering, dark soot and fused mechanisms. Sources `duzy-v3.png` and
+`gigantyczny-v3.png`, full instructions in `revision-v3-prompts.json` in the same folder.
+The GM then requested jaggedness for both smaller sizes, especially Medium: torn-through
+holes, jutting fragments and a broken irregular contour. Their own v1 images were edited
+with the same built-in tool; sources `maly-v2.png` and `sredni-v2.png`, full instructions in
+`revision-jagged-prompts.json`. Earlier accepted versions remain as historical sources.
 
 ## AI-assisted development
 

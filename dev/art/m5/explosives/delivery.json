@@ -1,0 +1,245 @@
+{
+  "date": "2026-10-29",
+  "tool": "OpenAI built-in image_gen; model identifier not exposed",
+  "processing": "Original alpha preserved; trim transparent bounds, resize, existing M5 WEBP conversion.",
+  "delivered": [
+    {
+      "id": "objekty/grenade-molotov",
+      "source": "dev/art/m5/explosives/grenade-molotov-v6.png",
+      "drop": "dev/art/m5/in/objekty/grenade-molotov.png",
+      "output": "vfx/grenade-molotov.webp",
+      "prompt": "game-art-v6-prompts.json",
+      "sourceSize": [
+        1024,
+        1536
+      ],
+      "framing": {
+        "alphaThreshold": 8,
+        "crop": [
+          285,
+          49,
+          901,
+          1486
+        ]
+      },
+      "sourceSha256": "e7922cd01dcca66e992f39ab1022111f8059952931e5715ff900c6dcca25a983",
+      "outputSha256": "ef9962a5715d2e27a5b32e42b2e95a606718819e5d33c41bf81077a6d9672bc5",
+      "validation": {
+        "asset": "objekty/grenade-molotov",
+        "file": "vfx/grenade-molotov.webp",
+        "width": 55,
+        "height": 128,
+        "mode": "RGBA",
+        "bytes": 4756
+      }
+    },
+    {
+      "id": "objekty/grenade-dynamite",
+      "source": "dev/art/m5/explosives/grenade-dynamite-v1.png",
+      "drop": "dev/art/m5/in/objekty/grenade-dynamite.png",
+      "output": "vfx/grenade-dynamite.webp",
+      "prompt": "prompts.json",
+      "sourceSize": [
+        1024,
+        1536
+      ],
+      "framing": null,
+      "sourceSha256": "b79fc806ed58a6d23ef70f32ebad0b9e7b7141d25fe9b4d4f453f30f9a1fdfae",
+      "outputSha256": "25917d4a0ea73a1ecee64cbf9da78a0356b0df2ca9916a4efc1baadbca1827fb",
+      "validation": {
+        "asset": "objekty/grenade-dynamite",
+        "file": "vfx/grenade-dynamite.webp",
+        "width": 73,
+        "height": 128,
+        "mode": "RGBA",
+        "bytes": 3026
+      }
+    },
+    {
+      "id": "objekty/grenade-c4-remote",
+      "source": "dev/art/m5/explosives/grenade-c4-remote-v5.png",
+      "drop": "dev/art/m5/in/objekty/grenade-c4-remote.png",
+      "output": "vfx/grenade-c4-remote.webp",
+      "prompt": "game-art-v5-prompts.json",
+      "sourceSize": [
+        1323,
+        1189
+      ],
+      "framing": {
+        "alphaThreshold": 8,
+        "crop": [
+          104,
+          299,
+          1282,
+          931
+        ]
+      },
+      "sourceSha256": "0bee3d31d77eea38b2b69db7f84aa84b5d5cf3806890b42c987a498d21bee6f1",
+      "outputSha256": "8c2467885ecb49132176a1956e3abc5c9398f72a8bf5b21fa5fbfcdaf4489174",
+      "validation": {
+        "asset": "objekty/grenade-c4-remote",
+        "file": "vfx/grenade-c4-remote.webp",
+        "width": 128,
+        "height": 69,
+        "mode": "RGBA",
+        "bytes": 6370
+      }
+    },
+    {
+      "id": "objekty/grenade-ied",
+      "source": "dev/art/m5/explosives/grenade-ied-v3.png",
+      "drop": "dev/art/m5/in/objekty/grenade-ied.png",
+      "output": "vfx/grenade-ied.webp",
+      "prompt": "game-art-v3-prompts.json",
+      "sourceSize": [
+        1275,
+        1233
+      ],
+      "framing": {
+        "alphaThreshold": 8,
+        "crop": [
+          79,
+          56,
+          1196,
+          1178
+        ]
+      },
+      "sourceSha256": "cd9d29fbb622fba7ca92a2c67a0ddbb70b29169ea68711244af8520dd138f048",
+      "outputSha256": "e7f8be6d4fe86ecb2c0245edef1adb226cad7d0798b23725a9b1b74b566f52e6",
+      "validation": {
+        "asset": "objekty/grenade-ied",
+        "file": "vfx/grenade-ied.webp",
+        "width": 127,
+        "height": 128,
+        "mode": "RGBA",
+        "bytes": 11108
+      }
+    },
+    {
+      "id": "objekty/grenade-ied-radio",
+      "source": "dev/art/m5/explosives/grenade-ied-radio-v3.png",
+      "drop": "dev/art/m5/in/objekty/grenade-ied-radio.png",
+      "output": "vfx/grenade-ied-radio.webp",
+      "prompt": "game-art-v3-prompts.json",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "framing": {
+        "alphaThreshold": 8,
+        "crop": [
+          208,
+          83,
+          1046,
+          1102
+        ]
+      },
+      "sourceSha256": "95b47ee9df150874c58e5514ad19c84f0b74a169074b9fca43cf718b04087392",
+      "outputSha256": "45f906f4b249ec819c5d7e8c63df861ee91e4b74bd1f628eb60011797097a4c5",
+      "validation": {
+        "asset": "objekty/grenade-ied-radio",
+        "file": "vfx/grenade-ied-radio.webp",
+        "width": 105,
+        "height": 128,
+        "mode": "RGBA",
+        "bytes": 8640
+      }
+    },
+    {
+      "id": "objekty/grenade-improvised",
+      "source": "dev/art/m5/explosives/grenade-improvised-v3.png",
+      "drop": "dev/art/m5/in/objekty/grenade-improvised.png",
+      "output": "vfx/grenade-improvised.webp",
+      "prompt": "game-art-v3-prompts.json",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "framing": {
+        "alphaThreshold": 8,
+        "crop": [
+          292,
+          60,
+          969,
+          1123
+        ]
+      },
+      "sourceSha256": "f5d0da48fd6d33d2081a2c082d4be53d5efcbc78ac91e4a5d01d10505f707763",
+      "outputSha256": "b941372b63c4362b275095fb07e73b797f39f63eb7cf3d271edd6031d83f8a6f",
+      "validation": {
+        "asset": "objekty/grenade-improvised",
+        "file": "vfx/grenade-improvised.webp",
+        "width": 82,
+        "height": 128,
+        "mode": "RGBA",
+        "bytes": 8772
+      }
+    },
+    {
+      "id": "objekty/grenade-smoke",
+      "source": "dev/art/m5/explosives/grenade-smoke-v1.png",
+      "drop": "dev/art/m5/in/objekty/grenade-smoke.png",
+      "output": "vfx/grenade-smoke.webp",
+      "prompt": "prompts.json",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "framing": null,
+      "sourceSha256": "4ce4a8023fcc9948ddccf5c5a2f5dac7aa7c7fdbae5b45f6730e941eddbaa3f8",
+      "outputSha256": "67a424b8ace058ce5eee936abcc6061fd7343411ca6e1111746334791e86eb9b",
+      "validation": {
+        "asset": "objekty/grenade-smoke",
+        "file": "vfx/grenade-smoke.webp",
+        "width": 128,
+        "height": 84,
+        "mode": "RGBA",
+        "bytes": 5400
+      }
+    },
+    {
+      "id": "objekty/grenade-flashbang",
+      "source": "dev/art/m5/explosives/grenade-flashbang-v1.png",
+      "drop": "dev/art/m5/in/objekty/grenade-flashbang.png",
+      "output": "vfx/grenade-flashbang.webp",
+      "prompt": "prompts.json",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "framing": null,
+      "sourceSha256": "c090db0a35b43144ca78325f909b1e1f1cb78ed4af3418a66a703f96d43a4f13",
+      "outputSha256": "afff253aade4883ede61eda64bfc42336fcec7425c533361172dc14f9edcf8f5",
+      "validation": {
+        "asset": "objekty/grenade-flashbang",
+        "file": "vfx/grenade-flashbang.webp",
+        "width": 128,
+        "height": 84,
+        "mode": "RGBA",
+        "bytes": 5184
+      }
+    },
+    {
+      "id": "objekty/grenade-incendiary",
+      "source": "dev/art/m5/explosives/grenade-incendiary-v1.png",
+      "drop": "dev/art/m5/in/objekty/grenade-incendiary.png",
+      "output": "vfx/grenade-incendiary.webp",
+      "prompt": "prompts.json",
+      "sourceSize": [
+        1323,
+        1189
+      ],
+      "framing": null,
+      "sourceSha256": "ead608f5b57703eb639ed077228408dea30bd0d7ea9661ffd2014dff570507cc",
+      "outputSha256": "9b85bf174f4fce85abc365f213a49d2526dd17f2b58b24445f16f8873b3849d0",
+      "validation": {
+        "asset": "objekty/grenade-incendiary",
+        "file": "vfx/grenade-incendiary.webp",
+        "width": 128,
+        "height": 116,
+        "mode": "RGBA",
+        "bytes": 7464
+      }
+    }
+  ]
+}

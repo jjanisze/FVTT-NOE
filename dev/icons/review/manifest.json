@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Player hotbar · 5 approved icons delivered; 0 awaiting review",
-  "updated": "2026-10-25",
+  "title": "M6 · 14 ikon + nakładka zanurzenia · 15 do oceny",
+  "updated": "2026-10-29",
   "items": [
     {
       "id": "batch90-brutal",
@@ -16210,6 +16210,426 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "instrument-akordeon",
+      "name": "Akordeon",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/akordeon.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/akordeon.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "A single accordion with expanded broad bellows, a short piano-key board at the right side, two solid end blocks. Only four broad bellows folds and three black keys; no decorative pattern.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/horn-flared-wood.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-akordeon",
+          "label": "Biały glif · Akordeon",
+          "src": "candidates/batch-119/akordeon.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-banjo",
+      "name": "Banjo",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/banjo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/banjo.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One banjo: unmistakable round soundbox, long narrow neck with a few stout tuning pegs. One broad circular negative-space inset and a simple neck slit; no fine strings.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/lute-gold-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-banjo",
+          "label": "Biały glif · Banjo",
+          "src": "candidates/batch-119/banjo.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-gitaraAkustyczna",
+      "name": "Gitara akustyczna",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/gitaraAkustyczna.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/gitaraAkustyczna.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One acoustic guitar, rounded double-waisted body with a single large black round soundhole and a complete long neck. No cable or pickups; broad simple silhouette.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/lute-gold-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-gitaraAkustyczna",
+          "label": "Biały glif · Gitara akustyczna",
+          "src": "candidates/batch-119/gitaraAkustyczna.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-gitaraBasowa",
+      "name": "Gitara basowa",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/gitaraBasowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/gitaraBasowa.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One electric BASS guitar with an especially long neck, small slim asymmetric double-cutaway body and four broad tuning pegs on one side, plus one short stout cable tail. No acoustic soundhole, no tiny strings.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/lute-gold-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-gitaraBasowa",
+          "label": "Biały glif · Gitara basowa",
+          "src": "candidates/batch-119/gitaraBasowa.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-gitaraElektryczna",
+      "name": "Gitara elektryczna",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/gitaraElektryczna.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/gitaraElektryczna.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One electric guitar with a broad double-cutaway solid body, shorter neck than the bass, one broad black rectangular pickup cutout and a short thick curled cable tail. No acoustic soundhole.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/lute-gold-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-gitaraElektryczna",
+          "label": "Biały glif · Gitara elektryczna",
+          "src": "candidates/batch-119/gitaraElektryczna.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-harmonijka",
+      "name": "Harmonijka ustna",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/harmonijka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/harmonijka.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One harmonica in a slightly angled side view: a stout compact oblong rectangle with one row of FIVE large square black air holes. No writing, texture or fine grille.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/pipe-flute-tan.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-harmonijka",
+          "label": "Biały glif · Harmonijka ustna",
+          "src": "candidates/batch-119/harmonijka.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-keyboard",
+      "name": "Keyboard",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/keyboard.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/keyboard.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One compact electronic keyboard viewed slightly from above: a wide rectangular slab, a row of seven broad white piano keys separated by large black cuts, and two solid round knobs. No labels or stand.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/chimes-wood-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-keyboard",
+          "label": "Biały glif · Keyboard",
+          "src": "candidates/batch-119/keyboard.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-kontrabas",
+      "name": "Kontrabas elektryczny",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/kontrabas.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/kontrabas.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One electric UPRIGHT DOUBLE BASS: very tall vertical neck, a slim skeletal curved body frame, and one stout endpin at the bottom. Clear upright bass silhouette, no player or stand and no acoustic guitar body.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/harp-lap-brown.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-kontrabas",
+          "label": "Biały glif · Kontrabas elektryczny",
+          "src": "candidates/batch-119/kontrabas.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-mikser",
+      "name": "Mikser audio + głośniki",
+      "tier": "Batch 119 · M6",
+      "batch": 119,
+      "target": "icons/tools/mikser.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/mikser.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One audio mixing console WITH ONE small speaker beside it: a squat rectangular mixer with three broad vertical fader slots and stout slider knobs, speaker with one large black circular cone. Two clear main masses; no lettering or tiny control grid.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/microphone-stand-tall.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch119-mikser",
+          "label": "Biały glif · Mikser audio + głośniki",
+          "src": "candidates/batch-119/mikser.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-perkusja",
+      "name": "Perkusja",
+      "tier": "Batch 120 · M6",
+      "batch": 120,
+      "target": "icons/tools/perkusja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/perkusja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "A compact drum motif: one broad drum, one cymbal on a short stout stand and two thick crossed drumsticks. Sparse black cuts; no complete sprawling kit, player or fine hardware.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/drum-snare-red.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch120-perkusja",
+          "label": "Biały glif · Perkusja",
+          "src": "candidates/batch-120/perkusja.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-saksofon",
+      "name": "Saksofon",
+      "tier": "Batch 120 · M6",
+      "batch": 120,
+      "target": "icons/tools/saksofon.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/saksofon.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One saxophone with an unmistakable curved J-shaped tube and wide upturned bell, short bent mouthpiece and three broad key bumps. No player, tiny keys or engraving.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/saxophone.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch120-saksofon",
+          "label": "Biały glif · Saksofon",
+          "src": "candidates/batch-120/saksofon.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "instrument-skrzypce",
+      "name": "Skrzypce elektryczne",
+      "tier": "Batch 120 · M6",
+      "batch": 120,
+      "target": "icons/tools/skrzypce.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/skrzypce.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "request": "One electric violin with a narrow open skeletal violin-shaped frame and a short neck, plus one separate stout diagonal bow. Distinct small violin waist and complete bow, no player or fine strings.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/tools/instruments/harp-white.webp"
+      },
+      "candidates": [
+        {
+          "id": "batch120-skrzypce",
+          "label": "Biały glif · Skrzypce elektryczne",
+          "src": "candidates/batch-120/skrzypce.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "status-pod-woda",
+      "name": "Pod wodą",
+      "tier": "Batch 120 · M6",
+      "batch": 120,
+      "target": "icons/statuses/pod-woda.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/pod-woda.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Status Pod wodą (podWoda), HUD i efekty żetonu, 16–32 px. Głowa pod taflą i bąbelki.",
+      "request": "Submerged status: a simple adult HEAD silhouette fully BELOW one stout WAVY WATER SURFACE LINE, with TWO large round bubbles rising beside the head. Clear black gaps between head, line and bubbles. No face detail, scenery or text.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/svg/waterfall.svg"
+      },
+      "candidates": [
+        {
+          "id": "batch120-pod-woda",
+          "label": "Biały glif · Pod wodą",
+          "src": "candidates/batch-120/pod-woda.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "status-tonie",
+      "name": "Tonie",
+      "tier": "Batch 120 · M6",
+      "batch": 120,
+      "target": "icons/statuses/tonie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/tonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Status Tonie (tonie), HUD i efekty żetonu, 16–32 px. Dłoń nad taflą i strzałka w dół.",
+      "request": "Drowning status for a game: ONE anatomically coherent raised adult HAND protruding ABOVE a single stout wavy WATER SURFACE LINE, with ONE broad DOWNWARD ARROW beside it. Exactly four fingers and one thumb, grouped simply, intact wrist below the waterline. No person, face, extra hand, tiny droplets or text.",
+      "current": {
+        "emptyLabel": "Brak osobnego glifu",
+        "note": "Obecna grafika zastępcza: icons/svg/anchor.svg"
+      },
+      "candidates": [
+        {
+          "id": "batch120-tonie",
+          "label": "Biały glif · Tonie",
+          "src": "candidates/batch-120/tonie.png",
+          "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
+        }
+      ]
+    },
+    {
+      "id": "water-submerged-overlay",
+      "name": "Nakładka zanurzenia",
+      "tier": "M6 · grafika kolorowa z przezroczystością",
+      "assetKind": "overlay",
+      "target": "tokens/nakladki/zanurzony.webp",
+      "deliveryTargets": [
+        {
+          "source": "tokens/nakladki/zanurzony.webp",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Nakładka na dolną połowę żetonu: turkusowa tafla. Podgląd na istniejących żetonach: zakładka Zanurzenie.",
+      "request": "Oceń kolor, fale i czytelność sylwetki. Suwak w podglądzie dobiera intensywność; ta karta zapisuje decyzję o samej grafice.",
+      "current": {
+        "emptyLabel": "Brak nakładki",
+        "note": "Nowy efekt graficzny przewidziany w PLAN_m6_drobne_zasady.md §5.6."
+      },
+      "candidates": [
+        {
+          "id": "water-overlay-v1",
+          "label": "Turkusowa tafla · RGBA",
+          "src": "overlays/water/zanurzony.webp",
+          "note": "Źródło ma własną przezroczystość. Zalecana początkowa intensywność rysowania: 60%. Podgląd pokazuje taflę na żetonach."
+        }
+      ]
     }
   ]
 }

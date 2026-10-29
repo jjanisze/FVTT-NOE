@@ -7,6 +7,7 @@
  */
 
 import { manekin, p } from "./_wspolne.mjs";
+import {zbudujGrafikeGranatow,narzedzieGrafikiGranatow} from './strzelnica-granaty.mjs';
 
 export default {
   id: "strzelnica", name: "Strzelnica", prio: "P1", icon: "fa-solid fa-bullseye",
@@ -68,14 +69,17 @@ export default {
       [obronca, fx + m(25), 10], [gangus, fx + m(35), 12], [spawacz, fx + m(30), 22], [gigamut, fx + m(50), 18],
       [await manekin(k, "manekin-wrecz", { name: "Manekin (wręcz)" }), fx + 3, 30]
     ]);
-    return { strzelcy: [zol, kow, zab, che, gla].filter(Boolean).map(a => `${a.name}: ${a.items.filter(i => i.type === "weapon").length} broni`), cele: s.tokens.size - 5 };
+    const grafika=await zbudujGrafikeGranatow(k);
+    return { grafika, strzelcy: [zol, kow, zab, che, gla].filter(Boolean).map(a => `${a.name}: ${a.items.filter(i => i.type === "weapon").length} broni`), cele: s.tokens.size - 5 };
   },
   narzedzia: [
     { label: "Panel smugaczy", icon: "fa-solid fa-wand-sparkles", run: () => game.neuroshima.vfx.panel() },
     { label: "Panel dźwięków", icon: "fa-solid fa-volume-high", run: () => game.neuroshima.sounds.panel() },
-    { label: "Sprzątnij ziemię", icon: "fa-solid fa-broom", run: () => game.neuroshima.ziemia.sweep() }
+    { label: "Sprzątnij ziemię", icon: "fa-solid fa-broom", run: () => game.neuroshima.ziemia.sweep() },
+    narzedzieGrafikiGranatow
   ],
   proby: [
+    p('grafika-granaty','Grafika ładunków','Wszystkie dziewięć przedmiotów: rozpoznawalność, przezroczystość i czytelność małych próbek','Grafika: Granaty i ładunki. Porównaj powiększenia z próbkami 0,3 i 0,5 kratki na dwóch tłach. IED radiowe ma antenę; C4 radiowe zachowuje grafikę C4. Ogień zapalonego Mołotowa dodaje moduł.'),
     p("smugacz", "VFX i dźwięk", "Na kaliber: długość, szybkość i kolor smugacza oraz dźwięk — pasują do broni? Seria wygląda jak seria?", "Każdy strzelec po kolei, P / KS / DS / MS; panel smugaczy i dźwięków pod ręką."),
     p("koszt", "Przepływ ataku", "Jeden strzał = ile kart i kliknięć (Liczniki)? Werdykt czytelny bez otwierania czegokolwiek?", "Liczniki → Zeruj; jeden strzał; odczyt."),
     p("okolicznosci", "Przepływ ataku", "Plakietki okoliczności przy strzale w zwarciu, na daleki zasięg, w biegu — tłumaczą Utrudnienie?", "Gangus obok strzelca; manekin 100 m; Bieganie."),

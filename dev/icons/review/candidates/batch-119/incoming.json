@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-29",
+  "expectedAbsent": [
+    "icons/tools/akordeon.svg",
+    "icons/tools/akordeon.webp",
+    "icons/tools/banjo.svg",
+    "icons/tools/banjo.webp",
+    "icons/tools/gitaraAkustyczna.svg",
+    "icons/tools/gitaraAkustyczna.webp",
+    "icons/tools/gitaraBasowa.svg",
+    "icons/tools/gitaraBasowa.webp",
+    "icons/tools/gitaraElektryczna.svg",
+    "icons/tools/gitaraElektryczna.webp",
+    "icons/tools/harmonijka.svg",
+    "icons/tools/harmonijka.webp",
+    "icons/tools/keyboard.svg",
+    "icons/tools/keyboard.webp",
+    "icons/tools/kontrabas.svg",
+    "icons/tools/kontrabas.webp",
+    "icons/tools/mikser.svg",
+    "icons/tools/mikser.webp"
+  ],
+  "sourceCode": {
+    "scripts/config/toolkits-data.mjs": "3a8e552badb28bff7405507e8ddeeb1bce94074c7147959ea27e93548a0be458",
+    "scripts/config/conditions.mjs": "abce0139bc796efcddd6aeff4c7e0b16f9ca367d0bb8598200e6799cdc3db22b"
+  },
+  "reference": {
+    "path": "raw/style-reference.png",
+    "sha256": "dde6b2e8894aaae32d0d186d91582889cf297cf72143604035bcca744f0a869b"
+  }
+}

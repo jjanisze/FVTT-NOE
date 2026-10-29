@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-29",
+  "target": "tokens/nakladki/zanurzony.webp",
+  "candidate": "overlays/water/zanurzony.webp",
+  "tool": "OpenAI built-in image_gen; model not exposed",
+  "processing": "Preserve RGBA, resize full square frame to 512, lossless WEBP",
+  "sourceSha256": "bf5620a5cf2f363eb4757973426e6ddceb1db1433a7d94f1bdde45be3071b7b5",
+  "candidateSha256": "cc9a069ce491314be586de13772f4377f71cb82939e2dc727e94a20322e26696",
+  "size": [
+    512,
+    512
+  ],
+  "alphaRange": [
+    0,
+    232
+  ],
+  "upper40PercentAlphaRange": [
+    0,
+    1
+  ],
+  "recommendedRenderOpacity": 0.6,
+  "previewReferences": [
+    {
+      "source": "tokens/bit-boys.webp",
+      "preview": "references/humanoid.webp"
+    },
+    {
+      "source": "tokens/pies-bojowy.webp",
+      "preview": "references/animal.webp"
+    }
+  ]
+}

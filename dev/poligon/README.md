@@ -135,6 +135,38 @@ prześwietla wraku. Test obejmuje 0 PW i cofnięcie z odtworzeniem pełnej tekst
 podglądy nie są resetowane. Kolejne przyjęcie gotowej galerii zachowuje ręczne ustawienia.
 Wyniki i aktualny raport: [wraki](../art/m4/wraki/README.md).
 
+## Wraki maszyn na Złomowisku
+
+**Złomowisko → Karta prób → Grafika: Wraki maszyn**, sonda `grafika-wraki-maszyn`.
+Scena `machine-wreck-art-review-v1`: cztery pary sprawna maszyna/wrak (Spawacz, Gladiator,
+Obrońca, Juggernaut) i człowiek w źródłowej skali. Cztery anonimowe stosy stopionych części,
+mały i średni zachowane po ocenie MG. Większe powstały niezależnie: dominujące zerwane
+konstrukcje i nieregularne obrysy, z mocnym stopieniem i zwęgleniem. Spójność stylu nie jest
+już wymogiem. Wspólna siatka 1,5 m; pola przykładów 1×1, 1×1,
+2×2 i 3×3. Runtime nie zmienia skal ani pól żetonów. Przyciski Karty prób przywracają grafikę
+i pokazują wrak zaznaczonych egzemplarzy podglądu. Generator `stations/zlomowisko-wraki.mjs`
+odtwarza galerię przy resecie Złomowiska; przy ponownym podpięciu zachowuje ręczne zmiany.
+E2E `wraki-maszyn` 7/7 i pełny przebieg `autodestrukcja` 4/4, bez błędów konsoli;
+raport i dwa zrzuty `logs/e2e/2026-10-28T23-01-42/`. [Dokumentacja](../art/m5/wraki/README.md).
+
+## Grafiki granatów i ładunków
+
+**Strzelnica → Karta prób → Grafika: Granaty i ładunki**, sonda `grafika-granaty`.
+Generator `stations/strzelnica-granaty.mjs` dodaje scenę `explosive-art-review-v1`:
+dynamit, Mołotow, C4, oba IED oraz granaty improwizowany, dymny, hukowy i zapalający
+w powiększeniu oraz przy 0,3/0,5 kratki na jasnym i ciemnym tle. Komplet dziewięciu:
+45 próbek. Podgląd nie tworzy uzbrojonych ładunków.
+Zwykłe rzuty i podkładanie: Chemik na Torze. Ponowne podpięcie galerii zachowuje
+wszystkie ręczne zmiany; uzupełnienie pierwszej dostawy czterech grafik dodaje pięć grup
+w tej samej scenie. Nie wymaga resetu stacji.
+Pierwsza częściowa dostawa: E2E `explosive-art` 5/5 bez błędów konsoli, raport i dwa zrzuty:
+`logs/e2e/2026-10-29T00-02-54/`. [Pliki i prompty](../art/m5/explosives/README.md).
+Końcowy komplet: E2E **6/6** z Sequencer/JB2A, bez błędów konsoli,
+`logs/e2e/2026-10-29T00-32-09/` (trzy zrzuty). Na Poligonie zachowano 20 wcześniejszych
+próbek i dodano 25 w tej samej scenie; pozostałe 37 scen i 424 żetony bez zmian.
+Złomowisko: sonda `ilustracje-ruin` obejmuje teraz wszystkie siedem ruin,
+w tym magazyn i wrak zapakowane z istniejących źródeł MG.
+
 ## Klon kampanii
 
 For what personas cannot answer — real legacy data, real inventories, a migration rehearsed before it touches the

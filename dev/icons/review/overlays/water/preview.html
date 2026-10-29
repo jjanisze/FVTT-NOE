@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neuroshima · podgląd zanurzenia</title>
+<style>
+:root{font:16px/1.5 system-ui,sans-serif;color:#ece9dd;background:#171c1b;color-scheme:dark}
+body{margin:0;padding:24px}main{max-width:1100px;margin:auto}a{color:#aee1d6}h1{font-size:1.8rem;margin:12px 0}
+p{color:#c0c9c4;max-width:78ch}.controls{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding:18px;background:#25302d;border-radius:8px}
+label{display:flex;gap:8px;align-items:center}input{max-width:160px}select{font:inherit;padding:4px}output{min-width:3ch}
+.row{margin-top:24px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.sample{padding:12px;border:1px solid #45504a;border-radius:8px;text-align:center;overflow:hidden}
+.floor{height:280px;display:grid;place-items:center;background:#535b54}.floor.light{background:#adb2a2}
+canvas{display:block;width:140px;height:140px;max-width:100%;object-fit:contain}.caption{font-weight:600;margin:0 0 10px}
+.raw{margin-top:28px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}.raw img{width:160px;height:160px;background:repeating-conic-gradient(#35403b 0% 25%,#46524b 0% 50%) 50%/20px 20px}
+small{color:#aab5ae}@media(max-width:650px){body{padding:14px}.grid{grid-template-columns:1fr}.floor{height:200px}}
+</style></head><body><main>
+<a href="/">← Ikony i zapisywanie oceny</a>
+<h1>Nakładka zanurzenia</h1>
+<p>Porównaj czytelność postaci i kształt tafli. Ocenę i uwagi zapisz w karcie „Nakładka zanurzenia” w panelu ikon.</p>
+<div class="controls">
+<label>Siła efektu <input id="strength" type="range" min="0" max="100" value="60"><output id="value">60%</output></label>
+<label>Rozmiar <select id="size"><option value="70">70 px</option><option value="140" selected>140 px</option><option value="256">256 px</option></select></label>
+<label>Tło <select id="floor"><option value="dark">Ciemne</option><option value="light">Jasne</option></select></label>
+</div>
+<section class="row"><h2>Żeton humanoida</h2><div class="grid" data-reference="humanoid"></div></section>
+<section class="row"><h2>Żeton zwierzęcia</h2><div class="grid" data-reference="animal"></div></section>
+<div class="raw"><img src="zanurzony.webp" alt="Sama przezroczysta turkusowa tafla"><div><b>Sama nakładka</b><p>Górna część pozostaje przezroczysta. Suwak mnoży przezroczystość zapisaną w grafice.</p><a href="/">Przejdź do zapisania oceny</a></div></div>
+<p><small>Grafika kandydacka. Przykłady używają istniejących żetonów modułu: Bit-Boys i pies bojowy. Podgląd nie zmienia świata Foundry.</small></p>
+</main><script type="module">
+const load=src=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error(src));im.src=src;});
+const [water,human,animal]=await Promise.all(['zanurzony.webp','references/humanoid.webp','references/animal.webp'].map(load));
+const variants=[['none','Bez efektu'],['full','Pełna tafla'],['clipped','Tylko na sylwetce']];
+for(const grid of document.querySelectorAll('.grid'))for(const [variant,label]of variants){
+ const sample=document.createElement('div');sample.className='sample';
+ const caption=document.createElement('p');caption.className='caption';caption.textContent=label;
+ const floor=document.createElement('div');floor.className='floor';
+ const canvas=document.createElement('canvas');canvas.width=canvas.height=512;canvas.dataset.variant=variant;canvas.dataset.reference=grid.dataset.reference;canvas.setAttribute('aria-label',grid.dataset.reference+' · '+label);
+ floor.append(canvas);sample.append(caption,floor);grid.append(sample);
+}
+function draw(){
+ const strength=Number(document.querySelector('#strength').value)/100,size=document.querySelector('#size').value;
+ document.querySelector('#value').value=Math.round(strength*100)+'%';
+ for(const canvas of document.querySelectorAll('canvas')){
+  const ctx=canvas.getContext('2d'),base=canvas.dataset.reference==='humanoid'?human:animal;
+  ctx.clearRect(0,0,512,512);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';ctx.drawImage(base,0,0,512,512);
+  if(canvas.dataset.variant!=='none'){
+   ctx.globalCompositeOperation=canvas.dataset.variant==='clipped'?'source-atop':'source-over';ctx.globalAlpha=strength;ctx.drawImage(water,0,0,512,512);
+  }
+  ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';canvas.style.width=canvas.style.height=size+'px';
+ }
+ for(const floor of document.querySelectorAll('.floor'))floor.classList.toggle('light',document.querySelector('#floor').value==='light');
+}
+for(const control of document.querySelectorAll('input,select'))control.addEventListener('input',draw);
+draw();document.body.dataset.ready='true';
+</script></body></html>

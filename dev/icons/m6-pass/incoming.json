@@ -1,0 +1,2269 @@
+{
+  "date": "2026-10-29",
+  "expectedAbsent": [
+    "icons/tools/akordeon.svg",
+    "icons/tools/akordeon.webp",
+    "icons/tools/banjo.svg",
+    "icons/tools/banjo.webp",
+    "icons/tools/gitaraAkustyczna.svg",
+    "icons/tools/gitaraAkustyczna.webp",
+    "icons/tools/gitaraBasowa.svg",
+    "icons/tools/gitaraBasowa.webp",
+    "icons/tools/gitaraElektryczna.svg",
+    "icons/tools/gitaraElektryczna.webp",
+    "icons/tools/harmonijka.svg",
+    "icons/tools/harmonijka.webp",
+    "icons/tools/keyboard.svg",
+    "icons/tools/keyboard.webp",
+    "icons/tools/kontrabas.svg",
+    "icons/tools/kontrabas.webp",
+    "icons/tools/mikser.svg",
+    "icons/tools/mikser.webp",
+    "icons/tools/perkusja.svg",
+    "icons/tools/perkusja.webp",
+    "icons/tools/saksofon.svg",
+    "icons/tools/saksofon.webp",
+    "icons/tools/skrzypce.svg",
+    "icons/tools/skrzypce.webp",
+    "icons/statuses/pod-woda.svg",
+    "icons/statuses/pod-woda.webp",
+    "icons/statuses/tonie.svg",
+    "icons/statuses/tonie.webp",
+    "tokens/nakladki/zanurzony.webp"
+  ],
+  "sourceCode": {
+    "scripts/config/toolkits-data.mjs": "3a8e552badb28bff7405507e8ddeeb1bce94074c7147959ea27e93548a0be458",
+    "scripts/config/conditions.mjs": "abce0139bc796efcddd6aeff4c7e0b16f9ca367d0bb8598200e6799cdc3db22b"
+  },
+  "previousCards": [
+    {
+      "id": "batch90-brutal",
+      "sha256": "367154f330a4d29cf6c9904276b8367e89aa9396e3bab860aee59195ad332437"
+    },
+    {
+      "id": "batch91-cwaniak",
+      "sha256": "e48922efe43719be619c51ad1c35632b7c8e597a4c08a314c0c9bf4883b0a953"
+    },
+    {
+      "id": "batch91-twardziel",
+      "sha256": "424faf290b51460e22782768e6e362176a3a0e684f924723a2e83a98fbab2049"
+    },
+    {
+      "id": "batch91-zwiadowca",
+      "sha256": "ca9b248ee2ad60c300667b0ab418956eb9e29fab3596d31ec15c4b3fc0e3ddef"
+    },
+    {
+      "id": "batch91-spec",
+      "sha256": "eae14b9c4e3dc93e14475d3e6830f2ad64836db5cf369ac288409ed80b4c220e"
+    },
+    {
+      "id": "batch91-zlodziej",
+      "sha256": "a3472b8af3504d1b5e4312f846e6dcacb392f119098fce86355a7b60349c02a8"
+    },
+    {
+      "id": "batch41-schemat-notatka",
+      "sha256": "961f1bd473da31404e448a41f4814dc2200baabe2cfa75c320e660b9101e4b3c"
+    },
+    {
+      "id": "batch41-schemat-instrukcja",
+      "sha256": "c85879d2f3ee38f8f91419d1e0df2d2d33fb18cca7b0fd8b554699f58878c0ba"
+    },
+    {
+      "id": "batch42-maczuga",
+      "sha256": "9eb97bc56c4dd5f6b3dba7baec34011c39ace0693b73552e481149ca76e928e4"
+    },
+    {
+      "id": "batch42-palka-policyjna",
+      "sha256": "b51c115a039e53259132a31f056d24fc47f0a93880d4a80efe3ac58c24c93dda"
+    },
+    {
+      "id": "batch42-kamienny-noz",
+      "sha256": "dfe2d45c95fd5f5374db26e752432c85efba60b0d1d3a1584e3d531ef2794c98"
+    },
+    {
+      "id": "batch42-sztylet",
+      "sha256": "986f91091b1080174ef38501af72ad982dff3e367f895d6e503b36217866d212"
+    },
+    {
+      "id": "batch42-mlotek",
+      "sha256": "228766cab066492ae178fb983e4fa1ed8e2501c7ce7196ca94293dbf3e386569"
+    },
+    {
+      "id": "batch42-agregat",
+      "sha256": "dfdbf868a0d97cb36f49e20c9307fa28837443b329a218e70c30c2580da95aa6"
+    },
+    {
+      "id": "batch42-akumulator",
+      "sha256": "c4e615e18ee34acef941f6519717e8e261c733aa60b39078f22a60cf0355f303"
+    },
+    {
+      "id": "batch42-alternator",
+      "sha256": "94d385085828eac889e016c6c7b552cde1f926493b96135b6d8582815f3ba507"
+    },
+    {
+      "id": "batch42-defibrylator",
+      "sha256": "002bf75b911033fe698df7219162114f4bc897102a9eb0ede4434b93556a9fa9"
+    },
+    {
+      "id": "batch43-detektor-ruchu",
+      "sha256": "e28ff099aad2b4daac198576736005c851a7e3349b8f7f61cc7c59acaa548d78"
+    },
+    {
+      "id": "batch43-komputer-osobisty",
+      "sha256": "efb3fb0024379ed7357160eaa86709fc37ba2cc95df952a34dbcfad4e07981ae"
+    },
+    {
+      "id": "batch43-komputer-gamingowy",
+      "sha256": "4747c34423b48198e4bf55203163e3403a2ea676db9b3ab9545fc5d61a14ec60"
+    },
+    {
+      "id": "batch43-laptop",
+      "sha256": "834a4542a9b4566e3eb59993f9696afbb706b2e2509d2f7969e108b656865ce9"
+    },
+    {
+      "id": "batch43-kontroler",
+      "sha256": "9018207816773b5b339421efc4d53c47008b8bf6b04f2433c9f9940176e58774"
+    },
+    {
+      "id": "batch43-miernik-skazenia",
+      "sha256": "85c083b93a4e49d109e6d66eff77582900781f28376018007d8933f0ec85e09b"
+    },
+    {
+      "id": "batch43-odtwarzacz-cd",
+      "sha256": "004a8d72b27d1d919558e9e8b917de2f34cb493450b7e1094d83181d806723a4"
+    },
+    {
+      "id": "batch43-wykrywacz-metalu",
+      "sha256": "f67ceeef2fb8655df6c026c9dc450a26d2dd6cf85de9a3d5ba3884c6f7fa548e"
+    },
+    {
+      "id": "batch43-wytrychy-elektroniczne",
+      "sha256": "c815589c5e0253bb8ca3d7e22a8b0710a7ca3917ea62b2179005e7c278d1f4cb"
+    },
+    {
+      "id": "batch44-kompas",
+      "sha256": "5983624b0eacdb10dc0dc21ce855c0babcaa40294e0331d23891b3ddae54bb8e"
+    },
+    {
+      "id": "batch44-palnik",
+      "sha256": "5d08f0c863b074cf1cc453d7c1739a4563f1935ce5aba02669d8081e9b11f25e"
+    },
+    {
+      "id": "batch44-srodek-usypiajacy",
+      "sha256": "3c1b3f9c17c113b1f17f963cb403f2a4d0713f3a7326d781489e1fd8a251806c"
+    },
+    {
+      "id": "batch44-srodki-dezynfekujace",
+      "sha256": "46c0965a05a9f478067556e38a3c7fcf124ec5fdb23ecb536855fc40493abb5f"
+    },
+    {
+      "id": "batch44-trucizna",
+      "sha256": "e792759b47a7e5e70b793b060c3921c74fd4fd4d36726259167d7e46e40efe68"
+    },
+    {
+      "id": "batch44-paralotnia",
+      "sha256": "1093d90c218b29bff1205c90c9ef4225de12545f1346f244cb5f2cd3f8ff92b5"
+    },
+    {
+      "id": "batch44-adapter-wifi",
+      "sha256": "84eb1180ad7cb96f9ba69d5eb4fecd177b32d0d93d47925fe3d07b254afa0089"
+    },
+    {
+      "id": "batch44-monitorek",
+      "sha256": "37b416246851872bab8cccdd8abeb73d4904ac106d4c08b490cfe991eae1d4c4"
+    },
+    {
+      "id": "batch44-router",
+      "sha256": "254adb08d17f7ef01c608b5b02b9b4cd781ff87f64d1e4dddaa7e6f82af8a63e"
+    },
+    {
+      "id": "batch45-turbina",
+      "sha256": "58542f5b40fca2154b18178c996a69fa0ee0dc17da7fe248bb4741fbdcf3d499"
+    },
+    {
+      "id": "batch45-zegarek",
+      "sha256": "3945375eb76f67f1ae6b9762f7d706b1138bc6c0dd128784b8a3408e0579a70e"
+    },
+    {
+      "id": "batch45-berdysz",
+      "sha256": "25e7863c59f0b94315d650ced5602f9909be0a4ecd2887b8e8d3a7423da8126c"
+    },
+    {
+      "id": "batch45-scyzoryk",
+      "sha256": "685b5e48a0ee967c446835e1e167f1d77514d67a970fa53142624c1114bdc501"
+    },
+    {
+      "id": "batch45-skalpel",
+      "sha256": "24bc4057d9c9dd51cfa1b1c4941399a77fe294cff7de7afc63f2b3617dda33dc"
+    },
+    {
+      "id": "batch46-buzdygan-smieciowy",
+      "sha256": "7339135c7b56bdb5ef9bacc1dcf9e6173cddbfb0235aabbdabe0dc83632e5abd"
+    },
+    {
+      "id": "batch46-walther-ppk",
+      "sha256": "5cf62cd900df849d2fa6aade536b918a1607d5690912e7573ff4d3bacbc92213"
+    },
+    {
+      "id": "batch46-ruger-lcp-ii",
+      "sha256": "9ce090c02602fafb72c499fe9dc5bf74d68bde9d6d29a366b7381811c566431e"
+    },
+    {
+      "id": "batch46-tulipan",
+      "sha256": "53e9b73a1eda960e364a7836699ccc59c3ec8158986f5cdd3ac71684987bb9e6"
+    },
+    {
+      "id": "batch46-piesc-hydrauliczna",
+      "sha256": "845354f45136cde27fdbf587b9d72a8a1e456870162373e977d3a1c012a25968"
+    },
+    {
+      "id": "batch46-klucz-francuski",
+      "sha256": "807c556cd3165d7e641dd1e54aa6da23a1fca3652b8469129815f8911c65e3ba"
+    },
+    {
+      "id": "batch46-lopatka-kuchenna",
+      "sha256": "f0fa1e836986146801de2ab1565b0823a964f779bee6e5d1efba94c3925b3d3a"
+    },
+    {
+      "id": "batch47-atak-bez-broni",
+      "sha256": "2515c86f363999fe5f0b23b4336a4dc4f8758516b79ccceadb4f357aa71659a4"
+    },
+    {
+      "id": "batch47-pazury",
+      "sha256": "afa6c130c0a4a4f0852f9c6a9f61d0933d454b562ed732cd43facea160fe2a2e"
+    },
+    {
+      "id": "batch47-ugryzienie",
+      "sha256": "5260970f0955994d6e9006fb3ed5cbb7ee0ee12f4fcf20e9dc215ae9594790ae"
+    },
+    {
+      "id": "batch47-zeby",
+      "sha256": "cd83b7178f0f3d5fe83ce621a46cd048f5577de22ca427b87d060383896d02bc"
+    },
+    {
+      "id": "batch47-zadlo",
+      "sha256": "ff16dc4bb9ef9701c6da848ca7a7158d316a650e3930025077c3a79cdfee52d0"
+    },
+    {
+      "id": "batch47-macka",
+      "sha256": "510952f99470686b102bb0c60e1d307b4ec23a0bd1770a61102c0cfa0f9796fc"
+    },
+    {
+      "id": "batch48-list-gordon-samantha",
+      "sha256": "e0964972015b47891da3d6e987cf46bbae14501b5f0b49a093c56192433ab919"
+    },
+    {
+      "id": "batch48-palka",
+      "sha256": "e5296436b3fdcb7a0e398df12e16bbceb96016cd6e3ee78de4b6e4873bb15caf"
+    },
+    {
+      "id": "batch48-atak-ogonem",
+      "sha256": "b29bcc6a82191bc4aa1d357a3a2e71359f3f9ac5606e0a8cd6d9aaa6a3973f22"
+    },
+    {
+      "id": "batch48-atak-glowa",
+      "sha256": "419aeae6a519f0349316eea5311f5cfce3d9f5b91b7f2da99ddfa8858c43ed98"
+    },
+    {
+      "id": "batch49-atak-taca",
+      "sha256": "3214aefdcc3be7702eb155ce3641d2a484ef8493afb293c386287b8e3376ce60"
+    },
+    {
+      "id": "batch49-atak-wielokrotny-ostrzem",
+      "sha256": "b48196d17e4c0664e1c322f71adbd3c482758376addc3f5e723b2845c7662006"
+    },
+    {
+      "id": "batch49-atak-wrecz-pajaczek",
+      "sha256": "accb1a8065767ec13364711d75e2ec5f3c1ecfe15e90026d94ab0b52a59039a2"
+    },
+    {
+      "id": "batch49-atak-odnogiem-spawacz",
+      "sha256": "c0d9819fcadc884d3cb997312f5bbb5abcbec57a11242e4c5ee0fb40a0e73ba6"
+    },
+    {
+      "id": "batch49-odnoze-gigantyczny-pajak",
+      "sha256": "8086e4352b545046581ee26d3da8af9eac5d1e668b9c11f2de9b42237f17bc4d"
+    },
+    {
+      "id": "batch49-pokwitowanie-luxor",
+      "sha256": "13cd8ac12dd24eaffb14e8b336beea8e2019317fd5e6df7ee8ae95305a7afc57"
+    },
+    {
+      "id": "batch50-kiel-jadowy",
+      "sha256": "d2db7ef728fb9273d784ce6c7d7403031c5c14da461b4d3f9b637667cc1f1c2f"
+    },
+    {
+      "id": "batch50-paliwo",
+      "sha256": "d1dc41717391d86b35e3b19ee6f9ee5730adce474d05c6881959bad703db6a65"
+    },
+    {
+      "id": "batch50-uzupelnienie-medyka",
+      "sha256": "a0659ce50c00b32344f9b44208261d063d779983be6fbcd1580a4b5c80faac2e"
+    },
+    {
+      "id": "batch50-metalowa-walizka",
+      "sha256": "75ccc7ed616e84f263a3968fed51b417a3364999f6a070f86852d94219009b35"
+    },
+    {
+      "id": "batch50-komponenty-amunicji",
+      "sha256": "bfbb626e84f5885ff67c6fbc8edc4ffd74c200e4874c42a225e18555d4e4d95e"
+    },
+    {
+      "id": "batch50-czesci-ciezkiego-karabinu",
+      "sha256": "7ebe4eca0ea8fca1b94d9192922d8df989348138ba0134f93c6821f370917db5"
+    },
+    {
+      "id": "batch50-pogromca",
+      "sha256": "3f4eeb4d83a2c9d226a628e03208f6e92de7591d2773b7e59c63b1b5e70330cc"
+    },
+    {
+      "id": "batch50-odnoze-kon-skazony",
+      "sha256": "f28d328f2fc7ec9edaee4c665409b56315c6307bcbbf49b3591bf73b2a94eafb"
+    },
+    {
+      "id": "batch51-cola-light",
+      "sha256": "189ce46e39e57897eb9a2d193efb42d37c5051757f9771ae48b836024ecb068a"
+    },
+    {
+      "id": "batch51-noz-do-rzucania",
+      "sha256": "486199e367cfa1b18e865f2d36092674fd419f38c452de5be0f832cb5bd9d7c4"
+    },
+    {
+      "id": "batch51-luk-bloczkowy",
+      "sha256": "a214e24fa5f3d7a8f678a11af75576beaa348f9ea40f2f150187428af18e5291"
+    },
+    {
+      "id": "batch51-kusza-pistoletowa",
+      "sha256": "22bb14c9356582361492fbe276271771b784366a83eb0243488e5bcfc8a9099e"
+    },
+    {
+      "id": "batch51-kusza-bloczkowa",
+      "sha256": "f77606db53ae857f9f1d8f7690fe1e842cbea101b05c8d27a2c5dcf633643516"
+    },
+    {
+      "id": "batch51-wyciszony-pistolet-10mm",
+      "sha256": "d8af69f3cab72bc1d0189f5a547f17ad32e6ab83d4e4ecc9c4091b6cad0b3cbc"
+    },
+    {
+      "id": "batch51-atak-ogonem",
+      "sha256": "73701c2df066e2cc61bda1ed4f5e677d4dca825296de17a611abf817b1665e4c"
+    },
+    {
+      "id": "batch51-atak-psychiczny",
+      "sha256": "5063fdf41f83ae8be6ca9c873eee12cd59d49cd94ea914f53bf413fb1a37be42"
+    },
+    {
+      "id": "batch51-autodestrukcja",
+      "sha256": "a3ccd517223f7db33260553a7e730cafe045b6276e91ecb168f0dd2f38e34b68"
+    },
+    {
+      "id": "batch51-eksplodujace-czyraki",
+      "sha256": "0e01ab029611878e473656281a2fb5d9f1f2c564cd1dd3f584f984cca40989ed"
+    },
+    {
+      "id": "batch51-jadowite-zeby",
+      "sha256": "6cac384ebe07b21a12f1963f19ed2b6257fb1a5bf4313684ddaa00fa5745be7f"
+    },
+    {
+      "id": "batch51-kolec-jadowy",
+      "sha256": "fd27565e346d2fed853cd3d9f85f77ce1571b198597a3587654f07bd4aca4cf4"
+    },
+    {
+      "id": "batch51-konar",
+      "sha256": "ba2bb3359da2c63cbef1fbc1f00fc8babf0b333f88d0aeacbfd50f5391288050"
+    },
+    {
+      "id": "batch51-korzen",
+      "sha256": "fdf28e2724757ec2e6ba19bf46feb84ce77f38524d7c92d6afa0cc2b905f855a"
+    },
+    {
+      "id": "batch51-lapa",
+      "sha256": "81e10a7e000abaefb371bb3f91145a0aa5f79d4353aec810d619d65620a45ad9"
+    },
+    {
+      "id": "batch51-macki",
+      "sha256": "5f3bee4050e5c5a6a4c03605cd2d5a1401d3221060d1707eeb5d172719df53df"
+    },
+    {
+      "id": "batch51-pily",
+      "sha256": "c52758d3b62b03a59a4667fa7a38e093a996bd738063648c6a1230c5ee3ea363"
+    },
+    {
+      "id": "batch51-ryjossawka",
+      "sha256": "a5add9d06d1d657b2583fa43f9f1ba5ac281f9cb1f92788149496e8dd8e1aa8d"
+    },
+    {
+      "id": "batch51-spluniecie-kwasem",
+      "sha256": "8ddd6c734060281c3354ff9c0d9055a212c59f5f07a3ecc8849670685429da3a"
+    },
+    {
+      "id": "batch51-stalowe-maczugi",
+      "sha256": "c3724981df3c27f9b392e8b806d30ec04b7ad15a0b78e54301d056b0028cfb75"
+    },
+    {
+      "id": "batch51-stalowe-piesci",
+      "sha256": "b8135e6a9ed798262f922e4e88a8d54c61bfe30aafffb204e4e76155b227f7e5"
+    },
+    {
+      "id": "batch51-szczeki",
+      "sha256": "789957e98e8eb6c2b1e503fe8a60684ec3957eb5f57a4bc67ece865b95129e0a"
+    },
+    {
+      "id": "batch51-szczurze-nozki",
+      "sha256": "d1123be7351a2da7981a080b8589de8c7d1afe7b0df4836491532759090f5406"
+    },
+    {
+      "id": "batch51-zioniecie",
+      "sha256": "d5e8a4f98b722e35b37a5689c4e9c7e316783cf6ed446c8037d26830f61c1df7"
+    },
+    {
+      "id": "batch52-staza",
+      "sha256": "bc53c5fbb966882c4ebce746d6f0a6cf977b0c6769568d9fa0fae959468ed171"
+    },
+    {
+      "id": "batch52-miazdzenie",
+      "sha256": "8c23bcc7bd0cabc561c1656ba37b305888f52419c86b6f101228f350430d460c"
+    },
+    {
+      "id": "batch52-polkniecie",
+      "sha256": "5edba24b89a4f0bb268423337e7479418522f47016aafc9c1dbf327b69736812"
+    },
+    {
+      "id": "batch52-rozszarpanie",
+      "sha256": "9b403a3dfdf2a27b95f834684b0493f2efeca0476943dc499bcec449e8357cb4"
+    },
+    {
+      "id": "batch52-taranowanie",
+      "sha256": "bbb0a8b9be1bbc69ecd011a90c0ae1a65f3db15164c23b2a52897dcfd59e6f68"
+    },
+    {
+      "id": "batch52-pochwycenie",
+      "sha256": "4fe9636c72331ceb64d6421e7c535cbdc86f3e69171010895c25c0f5164846b0"
+    },
+    {
+      "id": "batch52-zakazenie",
+      "sha256": "5561e5db5279af38cc66f73647eaf31d4b16eaf7ffee8a6c58b55bd6e34f0ba0"
+    },
+    {
+      "id": "batch52-poswiata",
+      "sha256": "a98633ae4b9047a3b0c679f057ea3fe8495c12fb0480e32bb127700e4bc1142f"
+    },
+    {
+      "id": "batch52-czuly-wech",
+      "sha256": "0580316d891f3b8356f1f3c99635362f0c48285a02e86c26886a3e25f635e3b2"
+    },
+    {
+      "id": "batch52-wiele-twarzy",
+      "sha256": "bc345d96058f3429a365d10118f0ad65e78927bc57c7cce7e6607e6fdb1b240d"
+    },
+    {
+      "id": "batch52-wspinaczka-po-metalu",
+      "sha256": "064850d086bd6832820546e875df7d9671444e990ce48b163be6aabe9e6acde9"
+    },
+    {
+      "id": "batch52-natarcie",
+      "sha256": "8d7caa4e7a9b50fd1d0cfd96265dd9bd85c8d0d2f60ca5fb9cf472e9088b9fc1"
+    },
+    {
+      "id": "batch52-miotacz-ognia",
+      "sha256": "0291ed15ce48ae6d05f6f23c2b0ec148e89e24bf9a8e003a93aba145dccc2207"
+    },
+    {
+      "id": "batch52-miotacz-strzalek",
+      "sha256": "b797b86736d7f28b72f3aa8dea2f390be4702e38dd1a7f8b40ff71aee5ae4cb5"
+    },
+    {
+      "id": "batch53-regeneracja",
+      "sha256": "d72a097ef527bfcad1907a26097bc709cf031d3aa2424d60aaaf54209849f1f6"
+    },
+    {
+      "id": "batch53-pierwsze-spotkanie",
+      "sha256": "2aa9c83453958dc8f3713af5cccf44b0deea1f8c844e2bb0c40992ddb36039d4"
+    },
+    {
+      "id": "batch53-atak-wielokrotny",
+      "sha256": "ba1edbdb7bbf405ee58792949c2e193248f1aad85575da8b35e7ab1a36d37aed"
+    },
+    {
+      "id": "batch53-algorytm-czuwania",
+      "sha256": "7afad05c9647050ba6a21f1ad7fcf5b179d9bfd8a980fdefad7965c90e8b8c8c"
+    },
+    {
+      "id": "batch53-wspolpraca",
+      "sha256": "f7eee347bd6be8d386c698cb36afa21e53f5204454d3af2f8891b3b59e6093d4"
+    },
+    {
+      "id": "batch53-kamuflaz",
+      "sha256": "30fd20087e3798dc4a1da980f934d61ae23c80d8aa86cbcf02c177b04d31b0c0"
+    },
+    {
+      "id": "batch53-swiatlowstret",
+      "sha256": "eb48690ed8a52482c2d854af765cb47e1ca8ff0e777df51bb3f42bf12d719dad"
+    },
+    {
+      "id": "batch53-wstrzymanie-oddechu",
+      "sha256": "bf3423f80ef42ece491fecd632dbd551568652c462aaee0fb5762fba36b4a887"
+    },
+    {
+      "id": "batch53-nadludzki-refleks",
+      "sha256": "9fe19241263405f497f92c50056402aa20a2ac00eb069556ade4af23d60b226c"
+    },
+    {
+      "id": "batch53-szarza",
+      "sha256": "54ae700ba130eb7fcad120be1247021f8151445f3703e726d2cc57a928dc96e0"
+    },
+    {
+      "id": "batch53-nie-do-zabicia",
+      "sha256": "987c99889a5f289d52b32da6c4b39596b183d51894529d36081a77ee0d5f2045"
+    },
+    {
+      "id": "batch53-brak-glowy",
+      "sha256": "d9e4049a6b4d3f5416948ee4bf03cdd49efc7b672b1ccd3fe978669028b8f9c6"
+    },
+    {
+      "id": "batch53-niewykrywalnosc",
+      "sha256": "7c7244fcccf42b74e2821eab0590bb59715bce87966faeb8f9fe2f342bc4a7b2"
+    },
+    {
+      "id": "batch53-telepatia",
+      "sha256": "6519a406f7b51cf9f1a4ac58669bb5f3685245c83dc7e57ba8cabe8b91eb8874"
+    },
+    {
+      "id": "batch53-neozmysly",
+      "sha256": "aace930a9e1f3a23f0bbd8b066b6cd20844e4be411cd4bacc9c85b55d1b4341c"
+    },
+    {
+      "id": "batch53-pajecza-wspinaczka",
+      "sha256": "b4937bd423be8bfa541bba9286f7aa25db0c5d65f213acd91f437cbbe54de140"
+    },
+    {
+      "id": "batch53-tkacz-sieci",
+      "sha256": "b0fce19a04a1369c5faf3488dfcded1b21e9ee280b3772633a9253bfdabfd44d"
+    },
+    {
+      "id": "batch53-oplatanie",
+      "sha256": "8e4374c5f5afcaf6e1016899fa0d735555c4a4e84d3927f9902fac867d037cc8"
+    },
+    {
+      "id": "batch53-groza",
+      "sha256": "a93421ede2187c3ce9cb43d31284b8e4fda4cf73858905e4fa78bd248895c916"
+    },
+    {
+      "id": "batch54-manewry",
+      "sha256": "145a51a2d6519aa7dfd77b3250a62c63a4470a176e8fb12688f47aeed716c95c"
+    },
+    {
+      "id": "batch54-ucieczka",
+      "sha256": "cc9237f0a4f7d0b4bd084bb122cc94a1c3fb1311bdea7efb0c16260155e2a0d0"
+    },
+    {
+      "id": "batch54-agresja",
+      "sha256": "6f3960c3db7855a40f81d874a80c827c5394db31d655d62cc2eef6aa5aa5556d"
+    },
+    {
+      "id": "batch54-burzyciel",
+      "sha256": "e8e802032547ada58ef16358a7156e1cac2aa65e9e14c401a7585258bdccf250"
+    },
+    {
+      "id": "batch54-chwytak",
+      "sha256": "5b0aa8b105d27d5e5ec6cff20bbb90d8ef93db4db0ed5845eb152d55bf9fd2d6"
+    },
+    {
+      "id": "batch54-czaszkohelm",
+      "sha256": "ded2ad4df19313606c88ef04de8ef39c397de667e3272e50cf224367b30fa043"
+    },
+    {
+      "id": "batch54-druga-linia",
+      "sha256": "f93f08fb1308c67a21dc212890ed0f158e4796ed898b4bfe69c700ac8bb0fec4"
+    },
+    {
+      "id": "batch54-iluzoryczna-niewidzialnosc",
+      "sha256": "7989a5ee432fbd1bf902364664d3ea0b62aaebe673acfd04f2e92242c6bdab1f"
+    },
+    {
+      "id": "batch54-iluzoryczny-cel",
+      "sha256": "3148e2f3b1a19713206cdfd1c69fb0b786676e01d925502bad819cdf9d663237"
+    },
+    {
+      "id": "batch54-kontakt-molocha",
+      "sha256": "d862e8f1391976d064245e5db0de65dfe659b9d23cefebbe5c12278dc0a38669"
+    },
+    {
+      "id": "batch54-kuloodporny",
+      "sha256": "23bd3c928fb586e305dc3b7a411eb12536cd17dbdfe6363f4cb5a1e5bbfb738a"
+    },
+    {
+      "id": "batch54-legendarna-odpornosc",
+      "sha256": "d7a441e379b70dcd6db5b54b2e6dea1dd6c780bdf33d477227d963bbd6a391d6"
+    },
+    {
+      "id": "batch54-malutki",
+      "sha256": "a7ae80bd8d42907f5b815314780a1f5a5c15a20beacc111ebb2089c1d6cd4b12"
+    },
+    {
+      "id": "batch54-malo-zwrotny",
+      "sha256": "10d7d5bee0c2b1b3a19f9bdb17321ad96b497589e9d4777c2eabcaef622f5451"
+    },
+    {
+      "id": "batch54-najechanie",
+      "sha256": "68a185d66cecb24e0d149b65cb1ba6e59c0ba448875079f8b203fed28971fa07"
+    },
+    {
+      "id": "batch54-niezniszczalnosc",
+      "sha256": "9ef88090baed4311cf0addf5d6aac4ac0e4859695bd288ba85353d232d5bee38"
+    },
+    {
+      "id": "batch54-oblazenie",
+      "sha256": "a957a16cc93b5d7c438a2925cc68f304971dc1547771ab320a47b72c35ab108a"
+    },
+    {
+      "id": "batch54-ofiara",
+      "sha256": "69757d4ef26f832a1c110253bb1e775d631ebd227573450212a9404f0832c5c9"
+    },
+    {
+      "id": "batch54-przejechanie",
+      "sha256": "22888358ebd508aa8994c56475fc549b743728dfb8c316a9ec4cd80b9b51389e"
+    },
+    {
+      "id": "batch54-przewidywanie",
+      "sha256": "27afcfd1338660ad70747ca7ace0d42947b585e1f4c0876dd52f1cc2ad7caf9b"
+    },
+    {
+      "id": "batch54-psychiczny-krzyk",
+      "sha256": "a2f364a2a76feecc955986bd3d1bfaaf8d9c5c563f09fb1e61874c984f23c9f6"
+    },
+    {
+      "id": "batch54-szum-mentalny",
+      "sha256": "493562318be7fc479da34f1f384121461831d54550d8477aff4c65dd4c98b380"
+    },
+    {
+      "id": "batch54-sciana-zaru",
+      "sha256": "34ed8d97cc6da81b812aa2ea599ec1d4d40bb8a432b8125364644f76167b2968"
+    },
+    {
+      "id": "batch55-porywacz",
+      "sha256": "724562a59e79514e9e64a83f765adf2a55c10d9f32483c7bb5b6f1ef8bd981b8"
+    },
+    {
+      "id": "batch55-zauroczenie",
+      "sha256": "0d494c12ceff8efa6f7f1e0662596367d6126f46c6e35db2d41f5f2c8fab317c"
+    },
+    {
+      "id": "batch55-paraliz-umyslu",
+      "sha256": "553fabfe424101edafeea23f22c634424137b6cd98460b66f7a1773375ef30c9"
+    },
+    {
+      "id": "batch55-tarcza-umyslu",
+      "sha256": "b10e214e54bbf061a31871f197f9ca68e48d8e5d12f9ab083bea2e810350a455"
+    },
+    {
+      "id": "batch55-sluga-molocha",
+      "sha256": "0653ebf8f00726234ed98c22dba648e91c9f8f6765abf9258698e502bf589333"
+    },
+    {
+      "id": "batch55-stoj",
+      "sha256": "c090d35021f36ecbbe14a7f96ca957c8ae4e8ea069d838042ae8511d1ccbd49c"
+    },
+    {
+      "id": "batch55-strach-przed-ogniem",
+      "sha256": "7000d5023bd526c861fff69dacdd3f9bb7507bc368b375a4e58120968968d781"
+    },
+    {
+      "id": "batch55-stratowanie",
+      "sha256": "60bbde34288093cf2d90df9b86ba69b6382d040419f8ef4f5fd00d0dae0a37eb"
+    },
+    {
+      "id": "batch55-wszedolaz",
+      "sha256": "7bbaa2c4bdaafe6dd2775c189cf060fb6308e94e12b5ff7c3b175d3947914951"
+    },
+    {
+      "id": "batch55-wytrwaly",
+      "sha256": "6508799daf62af0ee6f3bdec5a993b240a22f82dbbfb42647e565f61b13f7cb0"
+    },
+    {
+      "id": "batch55-zacieklosc",
+      "sha256": "0c39218434626c580312afecc1f5341c379a38479878821083f91128c541131e"
+    },
+    {
+      "id": "batch55-zadymienie",
+      "sha256": "01e0c98d547f4586ec309a907f7c59319ff378d6ae6f6b4b6c96b1ed05dca3d7"
+    },
+    {
+      "id": "batch55-zamarcie",
+      "sha256": "da7b6cc185ce28a93fc469a54095061a46d969dd4e524603c8bdcf0ba00dc3a9"
+    },
+    {
+      "id": "batch55-zamaszysty-atak",
+      "sha256": "08a8f88e089f3553be8c91d6b8cca445f276beaa9c678d6c4249db9b16b84105"
+    },
+    {
+      "id": "batch55-zastepcy-szeryfa",
+      "sha256": "d01643b54e7afd82e05c81fcd3d128c35a6cb19acc3a789db83ea0264c13cbb7"
+    },
+    {
+      "id": "batch55-upiorne-wycie",
+      "sha256": "c7bf4d45c2bc2a6f839b4a41ba3bc5617ebc57059539a219b1d3a1f85d84911b"
+    },
+    {
+      "id": "batch55-skora-gekona",
+      "sha256": "d484f74e74182d306ff9358c98780a85739c6785608cd26e4e668858964e878d"
+    },
+    {
+      "id": "batch56-paralizujacy-bol",
+      "sha256": "74d5a88bf3bf63cb42a823c003b7de72cc06bc72f37da74ee4bbb96041092759"
+    },
+    {
+      "id": "batch56-parowanie",
+      "sha256": "267bb8fcd3d2dc7a935bcf04e173f2855f0f8aaed8da85ff2a8298454c8723f9"
+    },
+    {
+      "id": "batch56-pikowanie",
+      "sha256": "ca74ff52ab214aac3be8520ea405a8aff938dc9e1a9fbb2eeee1ccf5bfb7ec63"
+    },
+    {
+      "id": "batch56-poddaj-sie",
+      "sha256": "a98b7863df6d7a8739b339de1aa2a2995827b0c2e36b4388937bfb6bdb4b4fef"
+    },
+    {
+      "id": "batch56-poklon-sie",
+      "sha256": "c9710f72107c0002af2a1b24d6d6d04e87e97759f59c77c9c6253ffdc91f7780"
+    },
+    {
+      "id": "batch56-pokrycie-maskujace",
+      "sha256": "6476afc0a014277d9349bea0caf607ea5fb84ffc2cc300fe70a52daa98c118d8"
+    },
+    {
+      "id": "batch56-posilki",
+      "sha256": "cb2778d3711c6ad91d251d3c71b9f2e4ce086593ea009fb409bed0e21ff32e84"
+    },
+    {
+      "id": "batch56-potega-tlumu",
+      "sha256": "f31a5fd70f3692149c4894b809a1e6f7a42753e348ffe0f9444a6c45c1b413ee"
+    },
+    {
+      "id": "batch56-pulp-fiction",
+      "sha256": "41d293f71adb1892d9de163adab83fbe337b02479618cb3d0b50664266b8ea38"
+    },
+    {
+      "id": "batch56-rzut",
+      "sha256": "8ed61e829f5273d158bd78a74ee8c7bdcd1a257da763d2993651efc06cd95d10"
+    },
+    {
+      "id": "batch56-slaby-punkt",
+      "sha256": "6d0f356f11e712a383821b2f06eae74623b40f162c93349a4526e66b36c36fbf"
+    },
+    {
+      "id": "batch56-spawanie",
+      "sha256": "e48d1377781de8dc8713300a1c2fab21720901b971809825be66f472253ba295"
+    },
+    {
+      "id": "batch56-stabilizator",
+      "sha256": "1c7cf8b2e7e66977fcde0ce3a4b2d1f20495822f8bbc53ce38ced6c81a3c5659"
+    },
+    {
+      "id": "batch56-szosty-zmysl",
+      "sha256": "9dea46ec36748112161ad53d33bfd1552e130dc4c7429d344bf9137b5e39b33c"
+    },
+    {
+      "id": "batch56-szybkie-palce",
+      "sha256": "098217f6aeb1a50f7e1d164a1bc6b6a80cd82998cdde26cee931464c0e2d9b9c"
+    },
+    {
+      "id": "batch56-taktyka",
+      "sha256": "f60a20de5a926e765e74384f12bfd8b8258c36f6cdff01e5f2bfbb9be04e60ba"
+    },
+    {
+      "id": "batch56-tylko-drasniecie",
+      "sha256": "ed513655e0e4184e5822020f684971927fd4b34ed1cb6dde7ae733caaf65da74"
+    },
+    {
+      "id": "batch57-celowanie",
+      "sha256": "684ae9771ba8f2c5b5bfd9735b6d42ae06b2dd8b512c94ffb9f216930ad19fbe"
+    },
+    {
+      "id": "batch57-doskonale-zmysly",
+      "sha256": "3c5b27df963dff51c365c9f0f396b8fcc221713780c081da84989619efcd3507"
+    },
+    {
+      "id": "batch57-furia",
+      "sha256": "5ce504687b2c0d79309ec7e2510a8eb458962aa15b6f919404568b0d96cabb4f"
+    },
+    {
+      "id": "batch57-gunfight",
+      "sha256": "a4205680aabd2277d860779fcb63f2284c7abc8897cfcdb59465980356f5bbe5"
+    },
+    {
+      "id": "batch57-naprawianie",
+      "sha256": "9a9594a5a6ac6da8caf6e62908c092ebd8ff9952bd40e8a410076c56fff165e9"
+    },
+    {
+      "id": "batch57-owipozycja",
+      "sha256": "5986c67e56e217ee991770d9c0369402230a34b89da8c4cb21b1385143d2b58d"
+    },
+    {
+      "id": "batch57-palcozerca",
+      "sha256": "ce5d8b301aeb60b1d6bdb1ef67165b6bb612b4f1f3845f0a39a291a58cb02cee"
+    },
+    {
+      "id": "batch57-pelna-obrona",
+      "sha256": "0f00cfbe747e79ecfb8a62c5b2ce0bbc98edfc78404eb0626a6c0594ef3a72de"
+    },
+    {
+      "id": "batch57-roznorodne-ataki",
+      "sha256": "022fd04da47c9538ee8c81fa84cf521a53a464092181f3c94d7cd2b882654fd6"
+    },
+    {
+      "id": "batch57-skok-lowcy",
+      "sha256": "3022461c29c1b2a11821fb9532e255b712f022d0c0f0647ba4f42803790c777b"
+    },
+    {
+      "id": "batch57-tanczace-pily",
+      "sha256": "c1872027e7238bfdf47f478d27afe5985ea842ec9c9524e6763b63ac75cdd79a"
+    },
+    {
+      "id": "batch57-to-moje-miasto",
+      "sha256": "305a86584f36ffac3c7c70e8bc6ebd7145ba8c87565e920fc11c5de7c8f7ceb2"
+    },
+    {
+      "id": "batch57-tropiciel",
+      "sha256": "5a95510e2367dcb3a754a0aa70b0dfbb8790167737f4e55c27cd4535b4645ce5"
+    },
+    {
+      "id": "batch57-trzeba-dobic",
+      "sha256": "f7734b058da4c897643bf3b5b8502ede4be8d5101a6a0f8c96ccf9252367c616"
+    },
+    {
+      "id": "batch57-wataha",
+      "sha256": "066dc864d5beeef11fb424bae55c7d668cf7a4a991beca56b45002155d7d1298"
+    },
+    {
+      "id": "batch57-wrog-molocha",
+      "sha256": "03beb14825317280f07bbd1056eea8cf8948960a8e5b4e0f15e302109316626b"
+    },
+    {
+      "id": "batch58-bolesny-atak",
+      "sha256": "f573983068dfb89012099e252a7da4110cc0df5a8f8dde5d7fd9ec50da04a74b"
+    },
+    {
+      "id": "batch58-odporny",
+      "sha256": "b0a6ff577e8eff673879fcd7c0b9b823e88c0b89a60aadc078336513553929b0"
+    },
+    {
+      "id": "batch58-odstapienie",
+      "sha256": "a2e36b9b110b02c32ab4dcb4371bf075634864aeb0a9b18a46421191e88dfad7"
+    },
+    {
+      "id": "batch58-przyspieszenie",
+      "sha256": "bb985ab327f36546cb123fdad84f762bcc6721dbe59f0cc1b0ac5be8429932a4"
+    },
+    {
+      "id": "batch58-skakun",
+      "sha256": "97e5306e5c4f0b424da80760209f28ba6206dfd6d31cf659871f781240dee7c2"
+    },
+    {
+      "id": "batch58-skoczek",
+      "sha256": "aa388fdb2baf7a92b074bd039ebd87d35da90795241b8aae8d0935101f598382"
+    },
+    {
+      "id": "batch58-skok",
+      "sha256": "8992b306601f126735734375c8666bc377b93c1e62952f8cada4943c5f69650f"
+    },
+    {
+      "id": "batch58-szarpanie",
+      "sha256": "f3098ffc205397ed3771a823c44fe5c17b62ad7bea03182b6f6d3d6c6c245dfa"
+    },
+    {
+      "id": "batch58-tchorzliwosc",
+      "sha256": "01272a2b15984344aaad8591809587583fefd7b552fe6f6e170f084171227d60"
+    },
+    {
+      "id": "batch58-udzwig",
+      "sha256": "6435faab4df8d2762a4c580b2525a72bc53d84e294d6a28e963f23347a39855a"
+    },
+    {
+      "id": "batch58-unieruchomienie",
+      "sha256": "8402fcf20c026c1d24dc2b536dcff98883ed1814c78223c25390f0ccc17e409d"
+    },
+    {
+      "id": "batch58-wirujace-kiscienie",
+      "sha256": "8b8159fa863913d227aaab921bfb331757c1d5df77e96b5529d6a08e0588e516"
+    },
+    {
+      "id": "batch58-wycofanie-sie",
+      "sha256": "4abfcff1685b534de2db1edad03a8d297848d2c8f76e8975800fbbcb2aa91119"
+    },
+    {
+      "id": "batch58-zmysly",
+      "sha256": "7761322196d5328ef4e7ec2f17e7d453de315c0e59c9e68fcfff798e43e85702"
+    },
+    {
+      "id": "batch58-zasadzka",
+      "sha256": "037f34d028d3f0e5bc33a50b73c32e797b47cd48752ec6794e51ee52fad2b43b"
+    },
+    {
+      "id": "batch59-aktywny-system-obrony",
+      "sha256": "a7e21c0367af367ec15b1bb881da7e51a16239f29b33e431de8285805f67fdda"
+    },
+    {
+      "id": "batch59-aura-pogardy",
+      "sha256": "71fafb1f67cad4708881296481728dafe61539b397a0bcfd4f6f8ee835e857b4"
+    },
+    {
+      "id": "batch59-mistrz-taktyki",
+      "sha256": "3061b5cbf4b13aee80700700a90300116a8efa3566bbfd60e542480ec7d2108c"
+    },
+    {
+      "id": "batch59-zasloniecie-helmu",
+      "sha256": "716f0dda051d984b74092fafe87d0ff140c92038ad54f24b24b835da87599826"
+    },
+    {
+      "id": "batch59-atak-mobsprzet",
+      "sha256": "d5b512fcf4aca7825b869720dd66d508fd51cbac2eee0d2c6cb2652e44847816"
+    },
+    {
+      "id": "batch59-wrazliwosc-na-swiatlo",
+      "sha256": "5d3f77c9a8576cee4fc3b6ceaa0ee2ef6ffdea1488a982296f1b9cf5b1356096"
+    },
+    {
+      "id": "batch59-prog-awarii",
+      "sha256": "7ad8ea12ff91f226c91b84ba23e088b6c269bdc87b08d1dfe7765935f5e48b28"
+    },
+    {
+      "id": "batch59-tryb-turbo",
+      "sha256": "16e4d12fafd9be3c871ee49f1f7d4468587d5e1ee4387f58a6296cd40538195c"
+    },
+    {
+      "id": "batch59-wielonozny",
+      "sha256": "cfd86a822bb63c929b68e1947d50132bbb02828a6187b36e5f23ee4fc513e419"
+    },
+    {
+      "id": "batch59-rozkaz-likwidacji",
+      "sha256": "1437392b3d07c9171752e161e1d3f50031bce358b13728a118d540fa8235975b"
+    },
+    {
+      "id": "batch59-szara-eminencja",
+      "sha256": "8d000350889357cd9d1a338dba05cf378c37cb99768ccd90fdf8e06e9b123a6c"
+    },
+    {
+      "id": "batch59-zimna-krew",
+      "sha256": "b70447d597a14df1a6b452e880b69bbc56066e23de6b599c4bf75f8d75be2f12"
+    },
+    {
+      "id": "batch59-zywa-tarcza",
+      "sha256": "42670825e587b41f3ef27d4045d5ed99adbdd6f6a530e17ace328b8765e713bf"
+    },
+    {
+      "id": "batch59-twierdzenie-kata-prostego",
+      "sha256": "d54adda4de8e79478bc3841ea45bed6070af8dfec19ad8b8f061099b89ef7da2"
+    },
+    {
+      "id": "batch59-taca-i-w-nogi",
+      "sha256": "c17573e4d28f9d23b53ae32c2bc9a6a595f5eceeacfb04d30b600c68ed5e0e44"
+    },
+    {
+      "id": "batch59-tylko-jedno-w-glowie-mam",
+      "sha256": "1a8c1c1af5ba70955ee619b0f0ea35f421213c6588f9b1bae55bc67952de51a6"
+    },
+    {
+      "id": "batch59-dmuchawka",
+      "sha256": "6c59908dd7675394c6286e1d7b136d5856238a5b88b93c164fa97ff4f4ea855e"
+    },
+    {
+      "id": "batch59-dzialo-ppanc",
+      "sha256": "97ad19ce6c4c5e6d188c170a6ef4c99d6b9aab14af2481c0060f8c321b1ccaff"
+    },
+    {
+      "id": "batch60-wymagania",
+      "sha256": "7986f0c5c7b259fade8aae273927a5d7b960f6755b636af63b12b0d445deb350"
+    },
+    {
+      "id": "batch60-tylko-zwarcie",
+      "sha256": "518dac226a201ab511cef59ee748670c11ab1ca71b597488d1723a426ab46b71"
+    },
+    {
+      "id": "batch60-siodme-poty",
+      "sha256": "8edab79524fda6831b3aa9837e3f51dbfe8736f308d88713ae7d158f26cb01f3"
+    },
+    {
+      "id": "batch60-fart",
+      "sha256": "a552864bf744a88aaefbb8da92d2f23f88c58b2096ce1480507ab1a353f56735"
+    },
+    {
+      "id": "batch60-cos-mi-tu-smierdzi",
+      "sha256": "fc72a82849c521193993825854ac55173926ee5a5a83f87c13d696eca6c6fce6"
+    },
+    {
+      "id": "batch60-czas-patriotow",
+      "sha256": "06930f2533df907781b4d8263a9a8462caf11b8a48ebed12085cdd647722928d"
+    },
+    {
+      "id": "batch60-doktor-quinn",
+      "sha256": "af08dd83028ba2709ae543c2da776864b4b15a16990229c97e7edce3b3dc6c82"
+    },
+    {
+      "id": "batch60-wierze",
+      "sha256": "3b8418cde60a531c44b853ebda006b775796456b8c177f2a124c465c09acc318"
+    },
+    {
+      "id": "batch60-mlynek",
+      "sha256": "ce99d0d7bea9d68fc453f651761607e11cb44bc1f28f4e5d67385373687c9cdd"
+    },
+    {
+      "id": "batch60-kuchenny-terror",
+      "sha256": "a9a07c79370a670e00e610c5e634bac64bdf8d1de759a9e10f8dc346e9370fce"
+    },
+    {
+      "id": "batch60-logika-roznoboczna",
+      "sha256": "d46b1828c3ebbf38108307b326aa2c23acf8736eb6282ac5cf0923dd96e148fc"
+    },
+    {
+      "id": "batch59-ruch",
+      "sha256": "3629e98c6f28434482070498a838c0ef7eaf518686e3b5dc9edf556777ea4f83"
+    },
+    {
+      "id": "batch59-karabin-laserowy",
+      "sha256": "37efafae259049404e85185063464636e3c5fc85f8f145611e37dbd31277a683"
+    },
+    {
+      "id": "batch60-cwiczenie-czyni-mistrza",
+      "sha256": "6e06e505a36ac9df70e911aca928bb3e948aa8916234a02a48068684b4239b2d"
+    },
+    {
+      "id": "batch60-grad-olowiu",
+      "sha256": "ec556a2d5a6fe3c8ceba299c03585ec9434cc3136ab65f019e2424cead0a81fd"
+    },
+    {
+      "id": "batch60-ja-juz-swoje-odchorowalem",
+      "sha256": "68b5cb4ae4e4fa9616041d73d561a61f80e04b622421afe6828e4f04f858a275"
+    },
+    {
+      "id": "batch60-jesli-ma-silnik-to-ruszy",
+      "sha256": "fe64dfaca6f78cb16b658cef0c632de5527371832f41906c78a3d9794242a8d2"
+    },
+    {
+      "id": "batch60-pakowanie",
+      "sha256": "2dffa8ce992e0184d0e941b6159b7887dec7ef11b54a0beee96bddba5c0635b6"
+    },
+    {
+      "id": "batch60-paszcza",
+      "sha256": "86fd031967d99535bcb4d4dd1d687caf310a137021ae4bd17a0e04fa7cdf070b"
+    },
+    {
+      "id": "batch60-patriota",
+      "sha256": "bc8c5b767d5a5f394842bc920929b897802fe7c533801bf1e843928c3a1e1fd9"
+    },
+    {
+      "id": "batch60-urodzony-morderca",
+      "sha256": "9d2aaefbab30b0ad81e44d8fc7cccfc6de7dc30a0ba69d490696e60526049a42"
+    },
+    {
+      "id": "batch60-wychuchana-spluwa",
+      "sha256": "989335fb0dabf1f2b41660adcad8ed8b94f0dfeefe162895eaf05d7bafc04ce3"
+    },
+    {
+      "id": "batch60-zawziety-sukinkot",
+      "sha256": "17035efe16180a84a0ef207167692b7d063b19a063631c43a48157314a315c9d"
+    },
+    {
+      "id": "batch61-na-symulatorach-to-dzialalo",
+      "sha256": "bef26ea46a673d06e108229419f375ea481d7f54363027a5fccdd7d32daa100c"
+    },
+    {
+      "id": "batch61-telepata",
+      "sha256": "b24bfc39b41fef0ba0c3dc02cd53df12268a0545960e8fd499fa157a3179eac8"
+    },
+    {
+      "id": "batch61-przycelowanie",
+      "sha256": "1767aec2e628964b40c25a72c9e8b3abf0ccb3635944d85e17e4d5b8a4264bd6"
+    },
+    {
+      "id": "batch61-samuraj",
+      "sha256": "d5a4ec39aa88a1daa3f2306d865fd4abcc6436505518d45dfa333470c04fbf95"
+    },
+    {
+      "id": "batch61-nowka-sztuka",
+      "sha256": "92dde5562eff5712d237107729bae6571cace7d5f0cd9accf6561711bcaca54e"
+    },
+    {
+      "id": "batch61-przedwojenna-edukacja",
+      "sha256": "34d68d6eeff1e18797e01263820db15b9ad0ad64e43f5a980bcda90cd36b311a"
+    },
+    {
+      "id": "batch61-nano-tech",
+      "sha256": "cd3f0d21fac4f43a066495c7250c5782296b375e69ef14c82e931c45b3de8321"
+    },
+    {
+      "id": "batch61-dieta-cud",
+      "sha256": "c0084e05302bea85868e7be392589e4d714cf6ae62313026106c74283d5fe277"
+    },
+    {
+      "id": "batch61-duch-pustyni",
+      "sha256": "535f04c35b29d76bc49c9eabf5c34988ec6befd11b207a68f6c41360ea3c5173"
+    },
+    {
+      "id": "batch61-polegam-tylko-na-sobie",
+      "sha256": "06f4bbb4dcd064253c192bf53e4e245bfea727b6c0a7ee727fb5a0d6d188d439"
+    },
+    {
+      "id": "batch61-ale-jazda",
+      "sha256": "95043d20f65083b966e55149e293f4ea3e9be424f33f5797adb7ebe286ee083f"
+    },
+    {
+      "id": "batch61-gornik-z-dziada-pradziada",
+      "sha256": "a234126c8baec88ceaffa1b4395a24746a37a66570958855f2ca3c5dec6c3cee"
+    },
+    {
+      "id": "batch61-szlachetne-urodzenie",
+      "sha256": "183a7c2fda725b7851c2298f05a63f4a196eff71769a26702e2e92db937f2d45"
+    },
+    {
+      "id": "batch61-czlowiek-aligator",
+      "sha256": "6b2eb98bf8af80d7014a5d58e39c84055cdb8eee97fcbb56d8cd5335e25ffe12"
+    },
+    {
+      "id": "batch61-wloczykij",
+      "sha256": "a7b02820b74d19c0dac456d2edff89d8b5ccbe4131de1b39b87241a5fbd10b7f"
+    },
+    {
+      "id": "batch62-handel",
+      "sha256": "9da6dfe333f23794db3f93c9a7aed89c9601b2fd8012087a5b13d8a8fc4e6073"
+    },
+    {
+      "id": "batch62-doba",
+      "sha256": "7ec887c25267c697311b09a2cd8b4db4d2290b0dc635cf7b08aa17a88a33ad70"
+    },
+    {
+      "id": "batch62-bebeszenie",
+      "sha256": "e521d4180cbfdbae427caf0e5893e1f25b53cc57bbf75fc10935bcd3e38d38b2"
+    },
+    {
+      "id": "batch62-szabrowanie",
+      "sha256": "620dba24e9abfa0f9c91fe52bf449bcc6ded3e08144e702be7a0682027077267"
+    },
+    {
+      "id": "batch62-rozbiorka",
+      "sha256": "ca555168a160c6e517815fa010b4ba0727b611a97a3b7f0ec1ec603297c5cb93"
+    },
+    {
+      "id": "batch62-wylaczony",
+      "sha256": "d37763350e6b507255e5722f9d801759953d95764990cf4c6b534cc0f11ce7a3"
+    },
+    {
+      "id": "batch62-emiter-emp",
+      "sha256": "9e5fb38c645b68b9e02fc720d49fadeb12a6b6d4e735c74fa4873897aa24d782"
+    },
+    {
+      "id": "batch62-slodycze",
+      "sha256": "1be2d9e61e3c8b458abe8b8434a63fb49f1abc7feb2223d36489c562a29f4932"
+    },
+    {
+      "id": "batch62-cygaro",
+      "sha256": "704a142704e2be38bfe3eb7f6c48e1666f89ef86573618e15e45f094be0ca769"
+    },
+    {
+      "id": "batch62-prasa",
+      "sha256": "f68b3ce8102fe771ce265e14e9fe9722ca62ace44bf0ef21040f27a8cc4253c0"
+    },
+    {
+      "id": "batch62-gra",
+      "sha256": "706d651deb4283372ccd501bc852fabca44fe7aa04447c2dce7162863a581d4d"
+    },
+    {
+      "id": "batch62-kaseta",
+      "sha256": "0426094ff55cf9f44c78ef191a265435e7f680face6e09f831265291c955779a"
+    },
+    {
+      "id": "batch62-plyta-cd",
+      "sha256": "f89a817aa973fb711eb5562244676ecaa2d8541a5180d9bd6a42874abd367532"
+    },
+    {
+      "id": "batch62-konsola",
+      "sha256": "3466c0654f59996e70d7e030debfe189ba1ca6fccf334c10a667a448982f063f"
+    },
+    {
+      "id": "batch62-alkohol",
+      "sha256": "eb2845080115d2d2ed1283819420f77bd79d4fc2824ee3294d3eac4432b5b025"
+    },
+    {
+      "id": "batch62-zabawka",
+      "sha256": "b055520cc29697ec6be1792beca4297f672bce15021f21b1a4d60b0310f0bdad"
+    },
+    {
+      "id": "batch62-papier-toaletowy",
+      "sha256": "62cef19e2f8d4e93f74d3521c545b64a3a64610d31007923986c8cca152c747e"
+    },
+    {
+      "id": "batch63-kwas-w-zylach",
+      "sha256": "2ca9e47fe82338ded3677f4a63894e479ccc9d5b0338e0b11f6339392374b7f3"
+    },
+    {
+      "id": "batch63-chodzmy-na-pewno-juz-utonal",
+      "sha256": "21641f48a85e2538d9faf4a44b6a91b38737399a6f321cb15a599a4fc85f2705"
+    },
+    {
+      "id": "batch63-edukacja",
+      "sha256": "afe41b503482273ffcc3ca270d4cc634a2d91b2c69fbd5517d4d82717cf41eea"
+    },
+    {
+      "id": "batch63-gambling-we-krwi",
+      "sha256": "128e5f900d01c0cd22cd7d45f0f8559b1af06d64b919b05495d2c2bd23347cb9"
+    },
+    {
+      "id": "batch63-zjadlem-wlasnego-psa",
+      "sha256": "9329bd0a30592dbb38133dbb13b97d27aa29284e19d8705660d37a393410b8a6"
+    },
+    {
+      "id": "batch63-hi-tech",
+      "sha256": "1a84fcfcf975724e3d69832e0b997ed7644f0a65778208c49a7ee65f93e0cd1c"
+    },
+    {
+      "id": "batch63-moloch-cos-slyszalem",
+      "sha256": "455273ba529ea0156f6e2505eba64247f7ed99f6346463549b87e5483d75f65f"
+    },
+    {
+      "id": "batch63-cholerny-kaznodzieja",
+      "sha256": "43ccffc2e9609b26783f64a4ff3181743cd97aff57380d8bca1946fb5b4e5dcc"
+    },
+    {
+      "id": "batch63-przed-wojna-wszystko-bylo-lepiej",
+      "sha256": "0eaebc4f606b76ed5e8000e0e085b7bcdaa3400394dfe51b4f0f0c362d7bd272"
+    },
+    {
+      "id": "batch63-czlowiek-zwany-koniem",
+      "sha256": "7405d3a55fde160e95bff7f38fe99cdbaf64f08d39dca03bd513d927a3f477ca"
+    },
+    {
+      "id": "batch63-zdrowa-okolica",
+      "sha256": "3febd48864f11e5c2225da0dd1d4d7c8265e16c533ebb1787644633a0e007ec2"
+    },
+    {
+      "id": "batch63-hazardzista",
+      "sha256": "6a303344e994de3f88ea38393439505f59c0711765c505c358fe5a8504bfcecb"
+    },
+    {
+      "id": "batch63-aramis",
+      "sha256": "980bdae478283dc957b07952d7928e7555e404dc488b78592d586edcf6f22178"
+    },
+    {
+      "id": "batch63-aspiryna-i-mietusy",
+      "sha256": "54ab44bd4bff94017799b462ac73dfe7b0976dc02238762d5814194566b5d3d8"
+    },
+    {
+      "id": "batch64-barbarka",
+      "sha256": "76d2c03127ca948511af54ce2272d618bc14bde804368518d1559ff77590ac51"
+    },
+    {
+      "id": "batch64-bez-trzymanki",
+      "sha256": "7392cf180caef13d5c8966cf0fffdd0174a9cbb243a673667e9c6ebf5f0d5fdf"
+    },
+    {
+      "id": "batch64-benzyna-zamiast-krwi",
+      "sha256": "89344d4123d4a8d263fecb6def504d715e3130419022498eba67c64ab9af6a45"
+    },
+    {
+      "id": "batch64-ciszej-niz-cien",
+      "sha256": "60db53d44a25aeef64462b5c788d63191387e43fafcee7a5df7315bb58c6ef2f"
+    },
+    {
+      "id": "batch64-czlowiek-pajak",
+      "sha256": "cba6031fc5a9b97d1726bd5b5c25bb8f8010a12e6d5e488838d7805103b23b04"
+    },
+    {
+      "id": "batch64-fabrykator",
+      "sha256": "2e68ffc861330a1631c73093e4cce1ad7d4bdda674e6d793e8595289f3e78503"
+    },
+    {
+      "id": "batch64-fachowiec",
+      "sha256": "e994f617d30a2b06656bc5cd236800a37506b83d0dc7e5373a7b3f2dbc510847"
+    },
+    {
+      "id": "batch64-grenadier",
+      "sha256": "eea40ad7452804437560271db6a86d3be3fcfbd478c04f9d815f73f6b264b925"
+    },
+    {
+      "id": "batch64-immunitet",
+      "sha256": "84949fc059fbebdde21dc532d8623ba570680e1badb7149d2ec1b2b69143b2a9"
+    },
+    {
+      "id": "batch64-jest-zajebiscie",
+      "sha256": "fadbe2f4f630c5a1552b3f210797edc01afc322a5e8551524e6eb9675fc04438"
+    },
+    {
+      "id": "batch64-karateka",
+      "sha256": "034fcae4c61c62205c0c2869906d821c21d41cc22c5e7c943606dffd8219edbc"
+    },
+    {
+      "id": "batch64-kuloodpornosc",
+      "sha256": "ddd23a81571d9be6b84120efe4c547d5d22b2b55d5dcce8c12005592e504b62a"
+    },
+    {
+      "id": "batch64-lawnik",
+      "sha256": "fc71d06e0664f8785de0e81817371361d46ae6345f5978160aac793b181913ee"
+    },
+    {
+      "id": "batch64-miotacz",
+      "sha256": "bd70d06c6c8854fbc1497ee7d4f4f243aa5985b7888f8b05ed2eeb019942cf5f"
+    },
+    {
+      "id": "batch64-mistrz-broni-bialej",
+      "sha256": "882b4e20608ae1e0cf6650482535ce4790e53c5a3f27363e2d3b948d022dd909"
+    },
+    {
+      "id": "batch64-mistrz-walki-wrecz",
+      "sha256": "14a1e93a8399f0a72aebedfffaa26c0c314ef6a939006ac87d6663f4a119cce3"
+    },
+    {
+      "id": "batch64-muzyk",
+      "sha256": "505200f1408a7302a2a840a798210529e3b8238c02cc3fabe5bf6abc3724bea4"
+    },
+    {
+      "id": "batch64-neo",
+      "sha256": "f60f77622d66c0ba501fdcd85927926d11354ed971a404ba7ef5a4d441895204"
+    },
+    {
+      "id": "batch64-nozownik",
+      "sha256": "0797464b8b34dc34978dd9bddfba45c6d0d3619bb7f9d98c5d8bb05863f20d17"
+    },
+    {
+      "id": "batch65-padnij-powstan",
+      "sha256": "d6dc60e4ec81ae2163f9f55bbd7451469a984454f8f61d0c0981651bc0f1ba23"
+    },
+    {
+      "id": "batch65-pancerny",
+      "sha256": "e27f0b08fc4018b24e080941dc60703f94b46a44edb3f50af4d5492eb0c7417c"
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "sha256": "e0edb4e3d6d25d8b55158395523ccc4d015445802c1754a57db841be14a785a9"
+    },
+    {
+      "id": "batch65-pewna-reka",
+      "sha256": "1937c6fbe5b43ec136975466e27d6d5b4376b3a2a7b06f0f8ba737dd80da52e0"
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "sha256": "f5f663f094657699e0e861e2c8f60e2ebec858e7874bfcd44eeefcff806611ab"
+    },
+    {
+      "id": "batch65-plug-and-play",
+      "sha256": "7fd7981aed57ceb1af4953045759f03fa454aa8e779a889312c22f546ed7add1"
+    },
+    {
+      "id": "batch65-przydasie",
+      "sha256": "969b149f1d71d995afdbb70f90e6b24d933751891a7176d1054c1b3b706bd471"
+    },
+    {
+      "id": "batch65-robin-hood",
+      "sha256": "a56ecbb8409098a5f51137f9ea6bb8245a4689f97c4150326b70bdd4ce8c6076"
+    },
+    {
+      "id": "batch65-rodeo",
+      "sha256": "cc261a6d96e9f6b989eb65eb15b1e9b94664ff2cdc342bf4411d618046fddc50"
+    },
+    {
+      "id": "batch65-rozroba",
+      "sha256": "11a2a75358946b328c390a2f8ea2ec027ea70c3fc3651d61c78cd46e80316e4c"
+    },
+    {
+      "id": "batch65-ruchome-gniazdo-ckm",
+      "sha256": "5e7374535720f6a3cfc40d322325694cf8c9881fbd017af69e3908145faf9a8d"
+    },
+    {
+      "id": "batch65-siekierezada",
+      "sha256": "3328c16086c235374f9e6a585b8f2b60a4393378d14edc628a7826de8afb41df"
+    },
+    {
+      "id": "batch65-snajper",
+      "sha256": "3c8d0fa3f99036b3d7915b9986439a7f6baae93c310b17f64cb52dfdff3f7b61"
+    },
+    {
+      "id": "batch65-szachista",
+      "sha256": "ee79c9ade6fef5b65a09b601dd63ceb5cc5bccf8d63525100b3ffee678262079"
+    },
+    {
+      "id": "batch65-szkolenie-w-broni",
+      "sha256": "b0fb32862224904d0ce56828ff77d04f823073c4a22c24e2d8275e274a5e5a0a"
+    },
+    {
+      "id": "batch65-szkolenie-w-ciezkim-pancerzu",
+      "sha256": "7444b5aff71575aa4e96ae8f21d060b1ef98713b0f663f5306170b050da47da5"
+    },
+    {
+      "id": "batch66-szkolenie-w-srednim-pancerzu",
+      "sha256": "8ee59d9a0e451e6ffd0cd13f29288ca1a93f20f61834ed38df5c11d2ca398298"
+    },
+    {
+      "id": "batch66-szturmowiec",
+      "sha256": "c971d4f210e6507ab691821fbec5df52d61eb9947e2b9330279838afba0fbafb"
+    },
+    {
+      "id": "batch66-szybki-bill",
+      "sha256": "dba985a3217a3e9a2fc7bc5abef82895a2f5f4be52035719920e35c429fbe5f1"
+    },
+    {
+      "id": "batch66-ucz-sie-ucz",
+      "sha256": "8ae4d7114f129ded765ab8cb0c9a47471fc457ded2c8a22383709712589dec6a"
+    },
+    {
+      "id": "batch66-ukryty-cel",
+      "sha256": "8c3fb28fb931df76b1f9e702de1027a43b14bdf562c88b825079506dfb104068"
+    },
+    {
+      "id": "batch66-wrestler",
+      "sha256": "33cd0a2a7e7af3726b5feb327b420d5c1bb3cbf52a7484afa0abddfbe439a85c"
+    },
+    {
+      "id": "batch66-zlomiarz",
+      "sha256": "f1d915877d47acfa170f1a4659c58fb749452111ac6dd3fcc58851f1bf84c05e"
+    },
+    {
+      "id": "batch67-paliwo-dobre",
+      "sha256": "d27356fcad4f06048b61351ee93feb267471283ed7cb1677b5a586553d875893"
+    },
+    {
+      "id": "batch67-paliwo-przecietne",
+      "sha256": "3595db80391d8292128267b612816fcaf01ab9e6171063657705b7476262ff93"
+    },
+    {
+      "id": "batch67-paliwo-chrzczone",
+      "sha256": "f73b647b9ef662ed8cb5948980cb919230169b4327031514544ab31be9bba098"
+    },
+    {
+      "id": "batch69-a-co-mi-tam",
+      "sha256": "5adf134c6e2b1f1722989fa76efb00d89f4cd9b83d902ab97db1c90c45281333"
+    },
+    {
+      "id": "batch69-amen",
+      "sha256": "719eee98728ecb11597205f8bbd9be5e6fd55ef98bfb9fad51bce4741f56e019"
+    },
+    {
+      "id": "batch69-berserk",
+      "sha256": "dbf63a76e23486eb0d8f06886791c5a1784a1efc1d016e944ae8ad16047055f6"
+    },
+    {
+      "id": "batch69-bez-tajemnic",
+      "sha256": "b78961b96567604e083cf46b9a7fd4686779cd4c5e533ca4f751b34d171a85d7"
+    },
+    {
+      "id": "batch69-bezlitosny-przywodca",
+      "sha256": "48751e27ebb419545980d197767aa954d6fffbaf706d737dd4077f0b9efa1ea0"
+    },
+    {
+      "id": "batch69-brutalny-cios",
+      "sha256": "1f52910e07b35470d41eff3d68e9aa4d9be3cc3fe251a00aeb0bf6f2737b9a87"
+    },
+    {
+      "id": "batch69-bystrzacha",
+      "sha256": "337522b623f7a61e2ca44c0c1daa855ef8136e8099b40e2a97a3748efdb088fe"
+    },
+    {
+      "id": "batch69-cichy-krok",
+      "sha256": "8d91c5b20a3af069a624c7e1d52593a11008b53c8898b0aa6c8c215e0377b5f1"
+    },
+    {
+      "id": "batch69-clint",
+      "sha256": "e3c1699d937ca4fe79fc74dd7fc902498dae0160771f3a92f21f5542aebec772"
+    },
+    {
+      "id": "batch70-cwaniacki-zwod",
+      "sha256": "723802081c60025b3d203ed46a28f0c330a0caf1d502ee8acbd49290bf3343d2"
+    },
+    {
+      "id": "batch70-dobra-rada",
+      "sha256": "0e2487725edd785db5b184ab6185935cec8e95d024cba63e90f50d1d68e4bec3"
+    },
+    {
+      "id": "batch70-doktor-brain",
+      "sha256": "5d9ec968c927b31d9d036b1e36677e38c0003fda904a5f6f45a83385293f576d"
+    },
+    {
+      "id": "batch70-drugi-atak",
+      "sha256": "dfcf1b64ab77bf721664f2d200a5595869af69a0c91dbd89e8baa1eb19930f7b"
+    },
+    {
+      "id": "batch70-drzwi-w-drzwi",
+      "sha256": "9f20fad847f401c67d61f0eb2e02c28340e842d46f7a0bb410b1f6906d9f8ec0"
+    },
+    {
+      "id": "batch71-dwoch-na-jednego",
+      "sha256": "6024e396b4bfffc2f0a01944068e3a794b5fa808313d33e5fc6a876975cf86b3"
+    },
+    {
+      "id": "batch71-dziewiec-zyc",
+      "sha256": "72ba0185435a4aebcfc5f77ef5a654aeca762f86267af387e36ef183671a0db3"
+    },
+    {
+      "id": "batch71-ekspert",
+      "sha256": "623ed0eecd4499c9ba47c3a6f09431a6ef8e6879ec4cd1ecdda31a53be35e6c6"
+    },
+    {
+      "id": "batch71-elektronik",
+      "sha256": "bf7b15d98a9f8087babf5304f520425ab04ef45b6e820a653751dc8f376df609"
+    },
+    {
+      "id": "batch71-emiter-emp",
+      "sha256": "791a3a4f59ca59886bac1e4b2fb2917fed1fe7cfbe230c0341b8fb7083aa3766"
+    },
+    {
+      "id": "batch71-empiryk",
+      "sha256": "423641338b85ca2416ab30a0ee140e856e3285e12438a3d74d889eb84feb53a6"
+    },
+    {
+      "id": "batch71-farmacja",
+      "sha256": "2895a5ad13169cc7c95b6b3afcfe1c5ed9b71989a2fe29a865ed2fca1a7c5f4e"
+    },
+    {
+      "id": "batch71-glowa-do-gory",
+      "sha256": "59f1ecb583f8ff054199816e786dc5706f66a14896bc2104f4766c90af4b219f"
+    },
+    {
+      "id": "batch71-gola-klata",
+      "sha256": "5155c53d3554af9504a70c8d1635d5b7387183aa42a99fba0f07cbbbe27aa9f4"
+    },
+    {
+      "id": "batch72-hakerstwo",
+      "sha256": "f477b85a33fdb9fed4990085ffe8bb60b2c19048ea61f7ff48690cdcbb075de6"
+    },
+    {
+      "id": "batch72-inteligentna-obrona",
+      "sha256": "a55ffbdb74170b7e302d5ee83c442d33b4e1ef1b5134621df9c12c01304837d7"
+    },
+    {
+      "id": "batch72-ja-i-moj-gang",
+      "sha256": "0775a12f2560b9b3b99f1bfa0061c966d87261f95d414325c8c89b89136deaaa"
+    },
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "sha256": "250e5cd7419c8b05310ff54e5ed99c1929aef2b7ab4a9c3672b46d13e2d36a32"
+    },
+    {
+      "id": "batch73-jeden-strzal",
+      "sha256": "000fee3512417e852cda9e259ce42ed8dcc8229f2556242fd343f939d82dc001"
+    },
+    {
+      "id": "batch73-jeden-z-nas",
+      "sha256": "a05f511a2fe44045e1f88d46d88adf60aa4a5bd65b73763f9f76cc1c32663725"
+    },
+    {
+      "id": "batch73-jeden-z-nich",
+      "sha256": "456a30dc3fb9105769dcdd561895de7feb6a8acda3fc63a373e7ebc0102090c2"
+    },
+    {
+      "id": "batch73-jezdziec",
+      "sha256": "786b699192d5e788299c66a347868fce07e18b7604b1476674a4ccd30c11b933"
+    },
+    {
+      "id": "batch73-kakofonia",
+      "sha256": "47d9a5ab0a225fa69523755c5af76ede433d67ed950a68e0cc0f4c9484f0c1d5"
+    },
+    {
+      "id": "batch73-kamuflaz",
+      "sha256": "7fcafd76ea66797f05dba90c1b07016adfdfd3f6b890a3d0edaeca81c21e8f0e"
+    },
+    {
+      "id": "batch73-kaskader",
+      "sha256": "626dd1f6e968625c3f16552070d6d19f1ef0b94c946f0e50995fdffde6aecc0a"
+    },
+    {
+      "id": "batch73-klusownik",
+      "sha256": "8cbc383098b7e334a6d3375295b09b30b2514cc49eb675873170016027b8baeb"
+    },
+    {
+      "id": "batch73-kocie-kosci",
+      "sha256": "e622c7e5f0fa49bd9d1a6fc0d7eef9a592c7ee44ce5e89403a1a39a5d243cee5"
+    },
+    {
+      "id": "batch74-kolejka",
+      "sha256": "40895975fc0c7fb435e1bcf598f092b37a4303c5a27c00f25f2a317adfebe51a"
+    },
+    {
+      "id": "batch74-kondycha",
+      "sha256": "decc67b512f45983356d9795a5282b792da531a430743ca936c81fae5d22775e"
+    },
+    {
+      "id": "batch74-krwawy-aniol",
+      "sha256": "d7e2a48c6850037607f43c940f719e519fde93968851064bafdbcae303686fd1"
+    },
+    {
+      "id": "batch75-lets-rock",
+      "sha256": "9a02972f773734bd1ee0e11c0cb087a2e0079745267bdcf1c83e4db367652c91"
+    },
+    {
+      "id": "batch75-lapiduch",
+      "sha256": "f6d95279b1c081db36829a169eaa4d42f14c1c91daa23c930163b32e3ea430c9"
+    },
+    {
+      "id": "batch75-laska-boza",
+      "sha256": "b91bca6b3c708b5a80c007234dd5d2c0ec779c85021e5a213ad6220157f455fb"
+    },
+    {
+      "id": "batch75-leb-jak-sklep",
+      "sha256": "a29c81afbc911aa24ac64a886b6f53faec1eeed4e70a05471d5ae16d9df46713"
+    },
+    {
+      "id": "batch75-lyzeczka",
+      "sha256": "6059df674009db2d2db9d4e01d4fadcfe3c552b9f67fd938300aaddb6780d115"
+    },
+    {
+      "id": "batch75-maszyna-do-zabijania",
+      "sha256": "4a91077297a3bb8fa8f62b918bea9c9171032fa8c9f36fbf21e98ff8e3d32c73"
+    },
+    {
+      "id": "batch75-matrix",
+      "sha256": "40a061ec137246dd6816daf270ea808c4aed1e25aad2397908cb2247b2fe667f"
+    },
+    {
+      "id": "batch75-mechanika",
+      "sha256": "8da82874d03b5014eb5509becde0081802aadf7bb74ebcbcd224a5f3323bf518"
+    },
+    {
+      "id": "batch75-moja-prawa-reka",
+      "sha256": "a55595283b1faf77c8c5b87eb9fe59ae1bbc73f47836c6dfed25aab1add39182"
+    },
+    {
+      "id": "batch77-motywacja",
+      "sha256": "958da7e3d5a964db1583b45321dc20fb61406aa4b8f482b96ede370f6dc3e434"
+    },
+    {
+      "id": "batch77-moj-biom",
+      "sha256": "336a62038b829af630362fab6c52fee0613d41a9c98284b151faa110ad77baad"
+    },
+    {
+      "id": "batch77-moj-bog-kule-nosi",
+      "sha256": "af5ec2aefd04a01df22800ef0ce6f96412810f645075d912a170c79f89e8549e"
+    },
+    {
+      "id": "batch77-moj-wrog",
+      "sha256": "dc8d646e761f14455caf623b64141147f0092b714b5a61fd8327085af1b73497"
+    },
+    {
+      "id": "batch77-moj-wrog-ludzie",
+      "sha256": "e892a4482f9222f87e5662d38b4a3280e791a11c9fc8645bc89612454dec8bd9"
+    },
+    {
+      "id": "batch77-moj-wrog-maszyny",
+      "sha256": "bde6a44508edf8afe488516f7e732704e81aeac0c6ff09ff8a152923e7d9be0a"
+    },
+    {
+      "id": "batch77-moj-wrog-mutanty",
+      "sha256": "0bbab3993c7e51c9ce9aac47acae8dfb4909704afe19cdf8a846e98225ff67aa"
+    },
+    {
+      "id": "batch77-moj-wrog-potwory",
+      "sha256": "7f1437d32cadf5b13715af26ee52e14cdd13ad75a08ee3821dc58f9fc123d520"
+    },
+    {
+      "id": "batch77-moj-wrog-zwierzeta",
+      "sha256": "cd3b479e31098fc8fda3d9738903b2c6b70979743444b03ce6a90194a595f4a2"
+    },
+    {
+      "id": "batch78-mutant-na-sniadanie",
+      "sha256": "04c0fbe7d2327c6ca7085aa3fea76b161561cd4b8b516ede61f5458ae121680d"
+    },
+    {
+      "id": "batch78-nie-do-zdarcia",
+      "sha256": "550bd6ceb42345aaaeabafa32215dacb7c5b9a7b993bcb0604c8be1d38883a33"
+    },
+    {
+      "id": "batch78-nie-klekam",
+      "sha256": "fddce74a23142a71cb1061b807554887f14c579dfbf7514440d910ab46bfd514"
+    },
+    {
+      "id": "batch78-obelga",
+      "sha256": "983c9d0cae52e69a369cd1715ff4a9fa951105160869d8dd7c5c5895bdaea072"
+    },
+    {
+      "id": "batch78-obsluga-pancerza",
+      "sha256": "26104c0fac261cb267ead82a47bf6e8b38d7928854d20fa60fe59fc709238f37"
+    },
+    {
+      "id": "batch78-odwazny-czy-glupi",
+      "sha256": "b81595a02362dfbfea9782963df3da6203beb659053491228ced6f87f10374ce"
+    },
+    {
+      "id": "batch79-oswajanie-zwierzat",
+      "sha256": "422f7d0ccb84c95b1610f0fac99c7cbfe6673a2a492fd84fdcad421fdb7bf8b7"
+    },
+    {
+      "id": "batch79-pancerna-fura",
+      "sha256": "2363eae4b3317709d5686c848b49f19682796037cd33957a4cf516215414d431"
+    },
+    {
+      "id": "batch79-paranoja",
+      "sha256": "14fa8c7cd68c2687a8202a803152e773fbcafcd4f82d40553228e93759776909"
+    },
+    {
+      "id": "batch79-partner",
+      "sha256": "f10ef4f7346a9c3397aa1472feddf56447bdc909b3921085a964cca17ce786f4"
+    },
+    {
+      "id": "batch79-pirotechnika",
+      "sha256": "7c0922030c83877a04bd345012104c4fa906e387cd420a9eb906c83ffc10d79a"
+    },
+    {
+      "id": "batch79-pistolero",
+      "sha256": "bb4f53b903e4ca3c88d61c941fc32f7a054604612ab677d070e0136f80ef110b"
+    },
+    {
+      "id": "batch79-podstepny-atak",
+      "sha256": "2551e9d05543da13a9dd5b28dc172e34e375cda7ac27e3df994dc46cdef675d2"
+    },
+    {
+      "id": "batch79-pogon",
+      "sha256": "3c662e424205724925bc260f412217894e2b77e68e8c2b882d699ecce2e261ff"
+    },
+    {
+      "id": "batch79-pogromca",
+      "sha256": "023c44ef805b64ccd9dfb4742ef971552852e1497f22fb681654f9d227632eb3"
+    },
+    {
+      "id": "batch80-renoma",
+      "sha256": "7799e4c1dc7c4f3227100b69a7c9e05a288944b8ba25975266db0f06e7713fbb"
+    },
+    {
+      "id": "batch80-reputacja",
+      "sha256": "47fd565e14efec35a444266f8c868600eb91858c5d1af1b90a5cbf4d2682f333"
+    },
+    {
+      "id": "batch81-rewolwerowiec",
+      "sha256": "f871e97e27575930b1b1df0c88a8829787f72c89282994a6dad8537dcda0ffe2"
+    },
+    {
+      "id": "batch81-rusznikarstwo",
+      "sha256": "464e7881593faea48a3476de1ca2a31a2971867e4f2914908aab12ceb260f7e0"
+    },
+    {
+      "id": "batch81-rutyna",
+      "sha256": "39440b07e603aba94e2a847371115346d76edb63c03023dd2fbcb3a280f2e2b0"
+    },
+    {
+      "id": "batch81-rzeznik",
+      "sha256": "d96bf7b8e2f440b5d2212274169c013d08044ec5669e64c8633d3b126da0c4db"
+    },
+    {
+      "id": "batch81-rzuc-bron-i-gleba",
+      "sha256": "0a83e122fe9f518ca851d005919cc27312a4f6c565db3dcab1bd17f1a3b2416f"
+    },
+    {
+      "id": "batch81-samouk",
+      "sha256": "7676162b9a23dc2c5a1e85798d0e6ff07dee7ec73286145a13dceb7c50070276"
+    },
+    {
+      "id": "batch81-saper",
+      "sha256": "e29e62d9be62ca293442b3a71e659067f39ebcc3474674ecf9fee1339465c8d6"
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "sha256": "43c4e011ecbd6438f693369da77fd0fe9b9577f33a15943a2316e07e8d68d526"
+    },
+    {
+      "id": "batch81-skrytka",
+      "sha256": "e0889ffe929fc26a43de7406462c5f9843423943f82bdbbc4b6c6c3904744ff1"
+    },
+    {
+      "id": "batch82-skuteczny-cios",
+      "sha256": "7b46959d704a266d6adac535078557dcfd9c4d78c6b6d378beeb48f3f1d0052f"
+    },
+    {
+      "id": "batch83-slang",
+      "sha256": "945a82ad8bf339d9d1be3f9df16eda66ef135197a6f050084f0bc357358d5ac2"
+    },
+    {
+      "id": "batch83-smakuje-jak-arszenik",
+      "sha256": "f67158cd3ec3a00dac8a99694b96928021907a97e27811f51fc328d309c5a696"
+    },
+    {
+      "id": "batch83-sokole-oko",
+      "sha256": "732e3d8bae48e1ffbb6bdfc7f6692b948fd010511cef0e90dd4c88f6257d6f8f"
+    },
+    {
+      "id": "batch83-solowa",
+      "sha256": "136538dd2415f912c7ae1a93172c28f20fd84f1ce8de827bf86e3965d740fe56"
+    },
+    {
+      "id": "batch83-specjalizacja-spec",
+      "sha256": "fddf9dee486f07cdad5d4c7b2794ab047d2a9521b472045dd8309360075064f9"
+    },
+    {
+      "id": "batch83-specjalizacja-zlodziej",
+      "sha256": "97fd4b939bafeb4b691141528c7a0d7ce962e82f11680f9bd3bd354031722cad"
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "sha256": "122dcfb74240e01f6f4c0f18ec33cca500fdf551f33874d3e4354020a9a7c255"
+    },
+    {
+      "id": "batch83-sportowiec",
+      "sha256": "6e9130eae345b907935182ea6f93d6f43c6956cef9f30d46bdc0f7cae7af5673"
+    },
+    {
+      "id": "batch83-stalowy-nadgarstek",
+      "sha256": "299af73638e93bf5983983320ef121ec04a93df88d79f95ca4467a2cd658dce3"
+    },
+    {
+      "id": "batch84-strzelec",
+      "sha256": "1923c6a9714955d6e9501b5e1865f3103d999c5018db03d123b9d1f2e4837e08"
+    },
+    {
+      "id": "batch84-stylowa",
+      "sha256": "acf3135192624ef0e9475c52f638794ab8bc3c29c189d88524e169ac76799a16"
+    },
+    {
+      "id": "batch85-szalencza-szarza",
+      "sha256": "4c22f3eb501d99b1b4dfa0e051bad6001198edc1e1bbb759c2e13d9862681671"
+    },
+    {
+      "id": "batch85-szary",
+      "sha256": "9f2c7693ce960b3efc409c48ba6664f8c2c529ce96ae14ae516940571b4f54c0"
+    },
+    {
+      "id": "batch85-szczescie",
+      "sha256": "8d8bced1b23ab3a57d09b2dfb29f49725770bda90568efb27e9682108867f12f"
+    },
+    {
+      "id": "batch85-szybka-gadka",
+      "sha256": "96722feeecc8930bad3566661c8f8332baeb8f773d85bbbb75b007643234df6c"
+    },
+    {
+      "id": "batch85-szybka-produkcja",
+      "sha256": "d41c57b8d7e098d49cf141f7eb4c6407ee4c07ce2b22b211e16fac44bb9b6d34"
+    },
+    {
+      "id": "batch85-szybkie-badanie",
+      "sha256": "998e288786da2350d8c18bde4a4f7974ce9ffc9a092d16254978164bc804f49b"
+    },
+    {
+      "id": "batch85-szybkie-nogi",
+      "sha256": "c9954c3ac7f59fa4ff3c7bf3f6be24a154c2a4c6670006bcc24ead56800bb86e"
+    },
+    {
+      "id": "batch85-szybkie-rece",
+      "sha256": "f77f9fcca4f683025b2646a75f05459cf238e67139b7542f3fc3a3482fe6d5cc"
+    },
+    {
+      "id": "batch85-szybkosc-kota",
+      "sha256": "afedd82db2699d99d5f66cbd2bf85ddd8a5ddd5fdb0c1dd03e932be84752ec0d"
+    },
+    {
+      "id": "batch87-smiertelna-obelga",
+      "sha256": "2664a55767b2f76eef439b7c7fc29f4e3fc12fb4aa86a16f90d9e664da844254"
+    },
+    {
+      "id": "batch87-tarcza-wiary",
+      "sha256": "6314f894dd93be5fd61c5a126f60718c5cc473347088fd46a73c0faa41b4fc08"
+    },
+    {
+      "id": "batch87-trajektoria",
+      "sha256": "cf763c4e7b1d5014cff0c4a94a472339d9fc84991fc378bc11adaf4eb2787df5"
+    },
+    {
+      "id": "batch87-trening-w-zbroi",
+      "sha256": "007e0f20857789cda95dd06f3a7cd2c2abe2fbb153a79138c8371e80a54b999d"
+    },
+    {
+      "id": "batch87-truciciel",
+      "sha256": "9764d542d78024f2dc7b50f8883881cc14a3aca47ba2a81f7911f07de118be7c"
+    },
+    {
+      "id": "batch87-trzeci-atak",
+      "sha256": "d17d13dfe9bd9743c054b337c65a1a348dc3304485edd056b960c7afe38cac68"
+    },
+    {
+      "id": "batch87-twardosc",
+      "sha256": "99c6a81a6cb8e4288748ab06aaa6734d754d74d846df825d6db7df8b86cec016"
+    },
+    {
+      "id": "batch87-ulubiona-bron-twardziel",
+      "sha256": "fa174dc9b2a23a1adbc3c269123887eb7467a2bc1717385cf2353ebe6c757a72"
+    },
+    {
+      "id": "batch87-ulubiona-bron-zlodziej",
+      "sha256": "c29c50a279e3edbd1da3595dd561b28bc27e813e6bb3386bb97c236f19da787f"
+    },
+    {
+      "id": "batch88-ulubiona-bron-zwiadowca",
+      "sha256": "cd94dfe81320a3fc91becf4ceca0b1005643f8e90ca89a6b06d01c94182a084d"
+    },
+    {
+      "id": "batch88-w-czuly-punkt",
+      "sha256": "86543d65020a6d89efb2d331907121413945492bfbc3083c0b140c9d440c3004"
+    },
+    {
+      "id": "batch88-wsciekly-cios",
+      "sha256": "fe42519fa18986a2a8ee6cd5f838454a94c72b169a65e94709fcba81c64bc006"
+    },
+    {
+      "id": "batch88-wyczulone-zmysly",
+      "sha256": "3dcb2472b1c4dee2e0d91203ef9bcf57e9ec2bbe0f615f28dfb89e6aca57ef4c"
+    },
+    {
+      "id": "batch88-wyjadacz-zwiadowca",
+      "sha256": "6db60d7a4f6ecfa398f410fedb8f45acfebf0634e11491092110aa437924a913"
+    },
+    {
+      "id": "batch89-wyjadacz",
+      "sha256": "22dfe827dc3453bc0680c1318cd80e33324fd054fc5e43b59a93f028afaa64f4"
+    },
+    {
+      "id": "batch89-wyksztalciuch",
+      "sha256": "e53c2b31258de30de0f9d43c19b89ab67f9fbbdcfbbaa94f27fa785f568911b0"
+    },
+    {
+      "id": "batch89-z-bara",
+      "sha256": "4323017cf9e1db37a964131e8fdde6b8ed20371a1daa722d43640a26fb9fa1dc"
+    },
+    {
+      "id": "batch89-za-garsc-gambli",
+      "sha256": "ca1f381e30e84ae546cc4a3bad760271fc49cf3c213aa83a1ef9898807dc832e"
+    },
+    {
+      "id": "batch89-zabojczy-cios",
+      "sha256": "b947b7531523f5205afd89ccf3814b2adb4588b94b0a9e3d376d0ff3ae76a610"
+    },
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "sha256": "2c597f7ac250d0df8efec48805db8aafa0fe7168704e9b8627bdc90844321632"
+    },
+    {
+      "id": "batch89-zawsze-w-siodle",
+      "sha256": "632f370e694d75a046edafef6d7d781aa7b686d26ec71cf712c2a0f0e23cf90a"
+    },
+    {
+      "id": "batch89-zew-areny",
+      "sha256": "369289717406160259f69a9f328a430d82dda039cb7b661b9337825b48600d49"
+    },
+    {
+      "id": "batch89-znajomosci",
+      "sha256": "03460b6e3016624864b89343e879b5a1998477d2c1076318341949bb712a3376"
+    },
+    {
+      "id": "batch90-zryw",
+      "sha256": "2173201100abc2f79316feda45622ecf2579da5702f811a7b8cef0747f581108"
+    },
+    {
+      "id": "batch90-zwinnosc-szczura",
+      "sha256": "e5ce7818ad34a3311520fed2f422b11413724107fa57c1657209e02488cc30a5"
+    },
+    {
+      "id": "batch91-chemik",
+      "sha256": "bcb12f31da3c2bacf511c15f3b1f66dae7f903baf75549b2cedd8ba8d176c4a0"
+    },
+    {
+      "id": "batch91-ganger",
+      "sha256": "f4e003d5d176aa48533fdc966501c9051495ce0fdea53a268c1d94b288c229d3"
+    },
+    {
+      "id": "batch91-gladiator",
+      "sha256": "2dc83a931da9346dddafe3e9bd5cfc6fe868cab415b89ce494ebc18fcbfb4bb3"
+    },
+    {
+      "id": "batch91-gwiazda",
+      "sha256": "a50589d2e7938bfa729fc7652084c33d2b9de275acb6f2119ac67a226b16f7b8"
+    },
+    {
+      "id": "batch94-kaznodzieja",
+      "sha256": "914af042d7adc94c0021cf508ac29cd368688b80e470338917c10410e76a7ed7"
+    },
+    {
+      "id": "batch94-kowboj",
+      "sha256": "ba9581b56db1a7052e271836e8da99980c0f8b48ef197ace844985fbf2fc09f5"
+    },
+    {
+      "id": "batch94-kurier",
+      "sha256": "24e1027efbdb0fdc7f6fdb8f1b03d02b40fc35f88d49b74a0a279e8bc0647a1c"
+    },
+    {
+      "id": "batch94-lowca-mutantow",
+      "sha256": "fbc74cc6e5ab96c688954dd30286251a714703d5cf5ff90bbcbd32d77f62eeb9"
+    },
+    {
+      "id": "batch94-mafiozo",
+      "sha256": "7ded75d12881a3b7b82971331d09b180d0838afe60f920328ff7ef3e644c7b78"
+    },
+    {
+      "id": "batch95-medyk",
+      "sha256": "6531714916a811938252f2442c6f2f8cd66f9a0e3f463acc88a0943f3a79e65f"
+    },
+    {
+      "id": "batch95-monter",
+      "sha256": "a4234681e734863f5423ac7759f80a32d8a475904745e2acc52f873d438ed4ec"
+    },
+    {
+      "id": "batch95-najemnik",
+      "sha256": "c55c3101e1ba50f604909061c2c77a8df5c860247da9804e0d787d8356230b0e"
+    },
+    {
+      "id": "batch95-sedzia",
+      "sha256": "f35762056d42d7497ae9ccc7768428c00842cd9c297b62012dd05d2f1de9a366"
+    },
+    {
+      "id": "batch95-szczur",
+      "sha256": "6f14beedace09d8e30a38f435bed16edfe4e0d2f2011b8729196b3c543152155"
+    },
+    {
+      "id": "batch95-wojownik-autostrady",
+      "sha256": "e216bd6a31a896eedc97ca4447c81f4c6148434b74b5a4745365e8d6935e4086"
+    },
+    {
+      "id": "batch95-zabojca",
+      "sha256": "c766aa80fe62051c99b240cf21f087763ebecd024f48d2ef2d6e15a545ada67a"
+    },
+    {
+      "id": "batch95-zabojca-maszyn",
+      "sha256": "3f579ee7e370fc0e10724adad77330d6c375ae8f5963198428b7ac41c6d4a751"
+    },
+    {
+      "id": "batch95-zolnierz",
+      "sha256": "8293f216cc9d8de882fb895cb8d469121ea9b51aeef5106333e72be16e4bf7a1"
+    },
+    {
+      "id": "style102-logika-roznoboczna",
+      "sha256": "56d0b263c8eaa4a30eeb94e8a160a45652fdc435757c972c18896c81e62ea1bf"
+    },
+    {
+      "id": "style102-doktor-quinn",
+      "sha256": "5e354260e3f2b45251e0e4d4d7a39cd1fe425f3ae333d7fd72be4991787b7978"
+    },
+    {
+      "id": "style102-fart",
+      "sha256": "d63ca7b9842d593b69b9f5582ca275e2ad9e63f4e09a7c497c90211012fd2215"
+    },
+    {
+      "id": "style102-ja-juz-swoje-odchorowalem",
+      "sha256": "03c37f941575c6493f9757202677b4a4d30a3d9f39d69f259011ff92a99e4f0a"
+    },
+    {
+      "id": "style102-kuchenny-terror",
+      "sha256": "be582fc2669914e3aac9769ae68e8f5200258b753c6df637702391101e6c441c"
+    },
+    {
+      "id": "style102-mlynek",
+      "sha256": "a96c7c6f537dbfe1f4e923b063d8973e47e1c4535abe0640456a7704eb26b9b6"
+    },
+    {
+      "id": "style102-naprawianie",
+      "sha256": "4ce41f6131d62643b46127d12767c71923326a135dc9b40da57a38c79d5b8aff"
+    },
+    {
+      "id": "style102-odporny",
+      "sha256": "30dc76676458bb8a609b7b66761f3e93a065f2d9f92ab159f160c18843c7fc96"
+    },
+    {
+      "id": "style102-patriota",
+      "sha256": "46bf6ef08b20272c5cd457075f81bf44aa12d8c0c9bc63e8eb6d9514d30977e7"
+    },
+    {
+      "id": "style103-prog-awarii",
+      "sha256": "518c59fc7537b5499f10242fe4498b7438d3bbf2f147494662f7f53005cff45f"
+    },
+    {
+      "id": "style103-przyspieszenie",
+      "sha256": "ad1777305bc24832a3ba0c91c574811990b2c25b7237f1b8f590bd97b6824527"
+    },
+    {
+      "id": "style103-rozkaz-likwidacji",
+      "sha256": "cc20cce529376cfd515a09dfa47685e25632f0204bf8cca424ceff0a7a89bc66"
+    },
+    {
+      "id": "style103-roznorodne-ataki",
+      "sha256": "ef1542973233a578584988d05be202578600461aebf191c660abddb51277a2cc"
+    },
+    {
+      "id": "style103-siodme-poty",
+      "sha256": "0887ed8e5e72f7aa2cc856672654e460de888b64f9fee255a340a78be00ca3e1"
+    },
+    {
+      "id": "style103-skakun",
+      "sha256": "b0d99c460fd76789bdc5ae67f2dd25d69d124113956aec118eaca1e66cd86997"
+    },
+    {
+      "id": "style103-szara-eminencja",
+      "sha256": "ba2dd2ae19ddeff58b4cc45a4a8eb5083ecac24488674a104f7c0fd4ab630806"
+    },
+    {
+      "id": "style103-szarpanie",
+      "sha256": "3adfd285ecbe700a24614a1e9f14854313f58568b9b4e683592ab011803c791b"
+    },
+    {
+      "id": "style103-taca-i-w-nogi",
+      "sha256": "c50a519a1ab567889decce53ce6e44dc09fb3a3a653c2a3b82daa7eaa262c0e9"
+    },
+    {
+      "id": "style104-tanczace-pily",
+      "sha256": "4caa2d7cd9ecf0c67fe9e2d52dd1cb72afff4706036b3b3667b4c2dc81f1a8b1"
+    },
+    {
+      "id": "style104-tryb-turbo",
+      "sha256": "ab8aa8c0dd0d3153b1b8bb4de4021210d3100dea6c3500a4f184295ffa6b5897"
+    },
+    {
+      "id": "style104-twierdzenie-kata-prostego",
+      "sha256": "332dd84dca3e196a4f5ccc9fe9666a42cf65ff3226a9c4b900f441f7ef130054"
+    },
+    {
+      "id": "style104-tylko-zwarcie",
+      "sha256": "7883c4a878c8a27b94181f8ac1ad192d4d9b2ab490710c6a3f509ba2e8bfca60"
+    },
+    {
+      "id": "style104-wierze",
+      "sha256": "dbb6ec43dc007ed2d295643a84ecb2617735fa95b47e55a5fdb15e0c9539b693"
+    },
+    {
+      "id": "style104-wielonozny",
+      "sha256": "ead8453748076dc986ce6d24463c28358178d92c10ebc096c585ab9b4f27dc6e"
+    },
+    {
+      "id": "style104-wirujace-kiscienie",
+      "sha256": "94443507fe952912e6213a1bd51581877368a9eb09e49a6fe7590e9c91acc890"
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "sha256": "1382c359a5f84310b82d0499043b04f7da180350b7514dd24507233071838047"
+    },
+    {
+      "id": "style104-wymagania",
+      "sha256": "1a0a92a56226d5d89ac2cd52b9ae488d4e1d9e3b65d366952b9094c4da23fd39"
+    },
+    {
+      "id": "style105-zasloniecie-helmu",
+      "sha256": "2c1866ab5f3eb0f4f499ac299cc381e5f646ccee0e4954766a85978f4eae9a5b"
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "sha256": "7f5605303282b11e576ce407bad7afef014f853ddd3a7367ae713a7c0f5da242"
+    },
+    {
+      "id": "style108-bolesny-atak",
+      "sha256": "21e5a0d541443e105eb770094d20a8d4b304e824591fb73072e282c682e171ae"
+    },
+    {
+      "id": "style108-czas-patriotow",
+      "sha256": "48b5f9ceb13a5a3f84840055ffd13bfc8fef4f5805505c0983e5777abd5e0ec0"
+    },
+    {
+      "id": "style108-pajecza-wspinaczka",
+      "sha256": "63950754d14fb6d9672f1a29ea9ede345d17c12972f42644fe2169e0993144fb"
+    },
+    {
+      "id": "origin-asgard",
+      "sha256": "8551a3f531199733c2cac7bc06be0e810136c91d4b6225cbe047b8d20ae92c7f"
+    },
+    {
+      "id": "origin-czlowiek-pustyni",
+      "sha256": "69c2be38b5c2969416a79856e870ba9a036667b0cd6f4246b762fbfd7196d1d0"
+    },
+    {
+      "id": "origin-detroit",
+      "sha256": "a71378e1037a05be24e6414004f3890e668135ce665bc8e7f1e9e3fff111e631"
+    },
+    {
+      "id": "origin-appalachy",
+      "sha256": "6eef64cf9218e583f0455afcb472a3f173c26ea9c47be353952ae83efccb22c6"
+    },
+    {
+      "id": "origin-miami",
+      "sha256": "07b691474d398d1126bc4b301af3e6998dba64b6a1f57708433e3cfe9117f6ab"
+    },
+    {
+      "id": "origin-missisipi",
+      "sha256": "f860cdcc1a17d5639ff43dd83acce47f2eaff6f749afe7989a83ee0727b9069e"
+    },
+    {
+      "id": "origin-nowy-jork",
+      "sha256": "fe722560e58a78a926f875f0cb864204fc7cf1e654ea76742c79fb3337171449"
+    },
+    {
+      "id": "origin-hegemonia",
+      "sha256": "baf94dd5ee6eb5f4ae69baeb3347e75cd4b341df2996f5f081da0acce5d44129"
+    },
+    {
+      "id": "origin-posterunek",
+      "sha256": "057513e24d559e760ce506c2b3b00353348229fc862852011bba92f130f8198a"
+    },
+    {
+      "id": "origin-salt-lake-city",
+      "sha256": "a709e781e3b80f08e3fc12f559679ae96b5b0ad00831fafc02435a936404eea1"
+    },
+    {
+      "id": "origin-teksas",
+      "sha256": "be9a43f6b196b857171bfa34e393bc9643cf3051fdec21dd8e94a8d03bafec4c"
+    },
+    {
+      "id": "origin-vegas",
+      "sha256": "529b5d60a7fbc79c8a72a164789e650126f853899bc369c721e2991f441edf03"
+    },
+    {
+      "id": "coverage111-kopacz",
+      "sha256": "38c8ef0d911db5ca337cfd6f4cc9c1861e7dbe9985c6781968992b54e05684be"
+    },
+    {
+      "id": "coverage111-ziemnowodny",
+      "sha256": "7d499acf2cd6419341cf1896a42cc2a6661c84144f3e6087f174588554aab9c9"
+    },
+    {
+      "id": "coverage111-psi-bohater",
+      "sha256": "e79bbbd33a516bee57682cc140f332d763ee9a4bd3bd9127f7522b6dc2441b57"
+    },
+    {
+      "id": "coverage111-modyfikacje-drona",
+      "sha256": "66f47a8ef1b12c1c33c059765d6d0a931af0d598ee67005b2718ed5739f38716"
+    },
+    {
+      "id": "coverage111-atak-drona",
+      "sha256": "301a1240222c286eac0a7e9c5e0f7f539a6d7866495b1b36f2f690ecbe1e01e4"
+    },
+    {
+      "id": "proficiency-akrobatyka",
+      "sha256": "d2f19c174cd33dce4aa4315feee5959f8a9db51debb9c446120971e2dc899001"
+    },
+    {
+      "id": "proficiency-historia",
+      "sha256": "36b5f2c818c1b852b1a4e0e0c8b281849c8d95e4b3edb8ad636997d4060a7b62"
+    },
+    {
+      "id": "proficiency-intuicja",
+      "sha256": "fb32ba3781096232099ffa389fc2c68badb1639ded903f8da9a505f14bcfabd8"
+    },
+    {
+      "id": "proficiency-pojazdy",
+      "sha256": "87b54f2a7e13e3119d09204c4dcc9b826c522d3d087003200c894ebe171b3828"
+    },
+    {
+      "id": "proficiency-zastraszanie",
+      "sha256": "0d30bc67660a1ad5ddb521ae057c5512110ea72e8f9abb405d2bff75a863faf6"
+    },
+    {
+      "id": "proficiency-zwinne-dlonie",
+      "sha256": "3a965727b739b88b863a31bd948c58553288f020d095adcc12d5d03fc80b0a39"
+    },
+    {
+      "id": "proficiency-umiejetnosci",
+      "sha256": "98881d2ce2a13dd6d82fea466b776f936d433c3e17ea84822abd94bffd0c839f"
+    },
+    {
+      "id": "proficiency-rzuty-obronne",
+      "sha256": "d20fe0b6053a22717562ead47d051e4f9708099f752971701ca78238a3b044eb"
+    },
+    {
+      "id": "hotbar-2026-kafar",
+      "sha256": "c09bbd8de299f6dcb2a073f2b3bb08d4c3d7edadd3e43a3cfc556806d0444780"
+    },
+    {
+      "id": "hotbar-2026-unikanie",
+      "sha256": "4171705718da77e25131dc573c8e9e1dfd59ef87757cafb0443192986909437a"
+    },
+    {
+      "id": "hotbar-2026-odstapienie",
+      "sha256": "32c312e3ff850247f1b77163d0a00ea0a9858d9fc97290d3a46c95bdc21ef64b"
+    },
+    {
+      "id": "hotbar-2026-przyspieszenie",
+      "sha256": "e9b4d69de32b7d4bb3c38fae4ee188d68562579fd8f9d2b3e4ae386f5016ee5b"
+    },
+    {
+      "id": "hotbar-2026-ukrywanie-sie",
+      "sha256": "eb0b8c20c96f2341c73abdfb9f7ab6998fb53eaeec0a255ba034f0d5192ee111"
+    }
+  ],
+  "feedbackSha256": "7130c5ae881592acd4d4d541de3c6decca4af8c6595ba06284cfac0c34710aba"
+}

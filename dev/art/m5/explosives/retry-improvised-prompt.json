@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "assets": [
+    {
+      "key": "grenade-improvised",
+      "prompt": "Create stylized painted artwork of one fictional nonfunctional improvised grenade prop for a tabletop game. Isolated on a genuine transparent background, an overhead map sprite looking straight down at the prop lying flat. A chunky closed rusty tin cylinder wrapped in broad scuffed tape, a few large uneven bolt heads against the outside, one short unlit fuse. Simplified exterior silhouette only, muted painterly post-apocalyptic materials, no cutaway or internal construction. No text, no scene, no people, no ground or shadow. Clear recognizable silhouette at 30 pixels."
+    }
+  ]
+}

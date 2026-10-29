@@ -1,0 +1,43 @@
+{
+  "grenade-molotov": {
+    "source": "grenade-molotov-v6.png",
+    "prompt": "game-art-v6-prompts.json",
+    "trimAlphaThreshold": 8
+  },
+  "grenade-dynamite": {
+    "source": "grenade-dynamite-v1.png",
+    "prompt": "prompts.json"
+  },
+  "grenade-c4-remote": {
+    "source": "grenade-c4-remote-v5.png",
+    "prompt": "game-art-v5-prompts.json",
+    "trimAlphaThreshold": 8
+  },
+  "grenade-ied": {
+    "source": "grenade-ied-v3.png",
+    "prompt": "game-art-v3-prompts.json",
+    "trimAlphaThreshold": 8
+  },
+  "grenade-ied-radio": {
+    "source": "grenade-ied-radio-v3.png",
+    "prompt": "game-art-v3-prompts.json",
+    "trimAlphaThreshold": 8
+  },
+  "grenade-improvised": {
+    "source": "grenade-improvised-v3.png",
+    "prompt": "game-art-v3-prompts.json",
+    "trimAlphaThreshold": 8
+  },
+  "grenade-smoke": {
+    "source": "grenade-smoke-v1.png",
+    "prompt": "prompts.json"
+  },
+  "grenade-flashbang": {
+    "source": "grenade-flashbang-v1.png",
+    "prompt": "prompts.json"
+  },
+  "grenade-incendiary": {
+    "source": "grenade-incendiary-v1.png",
+    "prompt": "prompts.json"
+  }
+}

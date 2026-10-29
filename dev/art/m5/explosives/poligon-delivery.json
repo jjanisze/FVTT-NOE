@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-29",
+  "station": "strzelnica",
+  "sceneKey": "explosive-art-review-v1",
+  "delivery": "Completed the existing four-image gallery in place without resetting the station",
+  "unchangedOtherScenes": 37,
+  "previousPreviewTilesPreserved": 20,
+  "addedPreviewTiles": 25,
+  "totalPreviewTiles": 45,
+  "tokensBefore": 424,
+  "tokensAfter": 424,
+  "armedPreviewCharges": 0,
+  "deliveredKeys": [
+    "grenade-dynamite",
+    "grenade-smoke",
+    "grenade-flashbang",
+    "grenade-incendiary",
+    "grenade-molotov",
+    "grenade-c4-remote",
+    "grenade-ied",
+    "grenade-ied-radio",
+    "grenade-improvised"
+  ],
+  "sandbox": {
+    "report": "logs/e2e/2026-10-29T00-32-09/report.json",
+    "steps": 6,
+    "passed": 6,
+    "consoleErrors": 0,
+    "vfxModules": [
+      "sequencer",
+      "JB2A_DnD5e"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "batch": 120,
+  "validatedMasks": 5,
+  "prospectiveDeliveryTargets": 5,
+  "candidateHashes": {
+    "perkusja": "b22ef9b997c754e5ac951dd9145a82e8105e76f93df5d8dbc8aeb43fed66b49d",
+    "saksofon": "c3f6a49ceed2dc4ba250218bc485cc88f17b9da64cb004f54945bfbf3828050b",
+    "skrzypce": "3f2b04afa697d5d1942b7bb4e50093bc62147e22bc2d88a67f008567f99f4710",
+    "pod-woda": "3bb4b4d94448ec443240e17ea24d62cd562a0c610396cd1ca5a975ebea4ed419",
+    "tonie": "a813d186788f36abbc2b5514ade683a157334f1c72e14a6bfd2465a8582aa889"
+  }
+}

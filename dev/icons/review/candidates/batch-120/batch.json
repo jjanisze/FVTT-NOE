@@ -1,0 +1,104 @@
+{
+  "batch": 120,
+  "subjects": [
+    {
+      "key": "perkusja",
+      "name": "Perkusja",
+      "request": "A compact drum motif: one broad drum, one cymbal on a short stout stand and two thick crossed drumsticks. Sparse black cuts; no complete sprawling kit, player or fine hardware.",
+      "fallback": "icons/tools/instruments/drum-snare-red.webp",
+      "kind": "instrument",
+      "target": "icons/tools/perkusja.svg",
+      "itemId": "instrument-perkusja",
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "cell": 1,
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/perkusja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "key": "saksofon",
+      "name": "Saksofon",
+      "request": "One saxophone with an unmistakable curved J-shaped tube and wide upturned bell, short bent mouthpiece and three broad key bumps. No player, tiny keys or engraving.",
+      "fallback": "icons/tools/instruments/saxophone.webp",
+      "kind": "instrument",
+      "target": "icons/tools/saksofon.svg",
+      "itemId": "instrument-saksofon",
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "cell": 2,
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/saksofon.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "key": "skrzypce",
+      "name": "Skrzypce elektryczne",
+      "request": "One electric violin with a narrow open skeletal violin-shaped frame and a short neck, plus one separate stout diagonal bow. Distinct small violin waist and complete bow, no player or fine strings.",
+      "fallback": "icons/tools/instruments/harp-white.webp",
+      "kind": "instrument",
+      "target": "icons/tools/skrzypce.svg",
+      "itemId": "instrument-skrzypce",
+      "context": "Instrument muzyczny, przedmiot bazowy i biegłość (NOE s. 132; PLAN_m6_drobne_zasady.md §5.1). Ikona w wierszu ekwipunku i przy biegłości, 16–64 px.",
+      "cell": 3,
+      "deliveryTargets": [
+        {
+          "source": "icons/tools/skrzypce.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "key": "pod-woda",
+      "name": "Pod wodą",
+      "request": "Submerged status: a simple adult HEAD silhouette fully BELOW one stout WAVY WATER SURFACE LINE, with TWO large round bubbles rising beside the head. Clear black gaps between head, line and bubbles. No face detail, scenery or text.",
+      "fallback": "icons/svg/waterfall.svg",
+      "kind": "status",
+      "target": "icons/statuses/pod-woda.svg",
+      "itemId": "status-pod-woda",
+      "context": "Status Pod wodą (podWoda), HUD i efekty żetonu, 16–32 px. Głowa pod taflą i bąbelki.",
+      "cell": 4,
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/pod-woda.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "key": "tonie",
+      "name": "Tonie",
+      "request": "Drowning status for a game: ONE anatomically coherent raised adult HAND protruding ABOVE a single stout wavy WATER SURFACE LINE, with ONE broad DOWNWARD ARROW beside it. Exactly four fingers and one thumb, grouped simply, intact wrist below the waterline. No person, face, extra hand, tiny droplets or text.",
+      "fallback": "icons/svg/anchor.svg",
+      "kind": "status",
+      "target": "icons/statuses/tonie.svg",
+      "itemId": "status-tonie",
+      "context": "Status Tonie (tonie), HUD i efekty żetonu, 16–32 px. Dłoń nad taflą i strzałka w dół.",
+      "cell": 5,
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/tonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "date": "2026-10-29",
+  "pass": "m6-instruments-water-glyphs"
+}

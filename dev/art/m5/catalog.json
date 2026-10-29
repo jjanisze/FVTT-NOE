@@ -324,7 +324,7 @@
         400
       ],
       "fill": 70,
-      "subject": "A torn small drone body: bent sheet metal, a few splayed cables and scorched panels, no intact rotors. A compact mechanical wreck, no living creature.",
+      "subject": "A small anonymous fused wreck with a useful mix of one or two larger pieces and tiny scraps, a jagged broken contour, jutting torn metal fragments and irregular transparent holes. Scorched servo and motor remains caught in cooled slag and short wires. No recognizable drone frame or intact unit silhouette.",
       "purpose": "Replaces a Small machine token after self-destruction. A 1×1 grid token, roughly 70 screen px per square; the wreck occupies about 70% of its frame and may sit beside other combat tokens and an independently drawn explosion decal."
     },
     {
@@ -338,7 +338,7 @@
         400
       ],
       "fill": 90,
-      "subject": "The burnt skeleton of a human-sized machine, twisted mechanical limbs and charred joints. Scorching is painted on the metal; no smoke clouds or separate ground effects.",
+      "subject": "An asymmetric jagged heap from a human-sized machine: deep missing bites, punched-through transparent holes, jutting armor fins and snapped supports. An off-center main mass with uneven attached remnants, visibly unequal shapes, cooled blackened slag and scorched wire. No circular pancake of evenly packed parts and no intact robot anatomy. Preserve the grounded painted materials of the earlier Medium version; style matching with larger wrecks is optional.",
       "purpose": "Replaces a Medium machine token after self-destruction. A 1×1 grid token, roughly 70 screen px per square; the wreck fills about 90% of the frame. It remains readable beside intact tokens and an independent explosion decal."
     },
     {
@@ -352,7 +352,7 @@
         800
       ],
       "fill": 90,
-      "subject": "The opened wreck hull of a heavy machine, cracked armour plates and exposed servos, with a few bent supports lying close to the hull. Mechanically distinct from the human-sized skeleton.",
+      "subject": "An independently generated asymmetric wreck of a large machine: one dominant torn and folded armor plate, a crushed heavy power housing and a snapped load-bearing member, fused by heat. Strong size hierarchy with sparse small fragments and wires. Irregular jagged outline, deep breaks and transparent gaps. No round carpet of repeated motors or evenly distributed little parts; no intact unit silhouette.",
       "purpose": "Replaces a Large machine token after self-destruction. A 2×2 grid token, roughly 140 × 140 screen px at a 70 px grid; the wreck fills about 90% of its frame and has no baked scene background."
     },
     {
@@ -366,7 +366,7 @@
         1600
       ],
       "fill": 92,
-      "subject": "The immense burned hull of a generic war machine with broken tracks and collapsed mechanical legs spread close to its body. Suggest the violent collapse with torn metal alone; no ground, crater, rubble terrain or recognisable franchise robot.",
+      "subject": "An independent gigantic structural collapse: an enormous buckled armor slab, crushed ribbed core and long twisted support casting, with very unequal masses, broad quiet surfaces, major missing chunks and sparse tiny scale cues. Melted charred anonymous robotics. No circular pancake, radial symmetry, repeated Small wrecks or uniformly sized sorted components. No recognizable intact unit; style matching is optional.",
       "purpose": "Shared wreck artwork for the largest machine tokens; Foundry retains the original token footprint. At a 70 px grid a 4×4 footprint is about 280 × 280 screen px. Use a 1600 px master for the largest documented token class and about 92% frame fill."
     },
     {
@@ -378,7 +378,7 @@
       "size": [
         128
       ],
-      "subject": "A brown-tinted glass bottle lying on its side, viewed directly from above, with a cloth rag stuffed into its neck and a small bright flame burning at the rag. Liquid visible in the bottle. No label.",
+      "subject": "An unlit brown-glass Molotov bottle lying flat, cream cloth at its neck, hand-painted illustrated outline and warm amber highlights. The existing renderer adds animated fire when lit; no baked flame or label.",
       "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
     },
     {
@@ -402,7 +402,7 @@
       "size": [
         128
       ],
-      "subject": "An off-white plastic explosive block in olive wrapping, lying flat, an electric cap pushed into it and two short wires trailing from it. No markings.",
+      "subject": "One squat cream C4 game-prop block in a scuffed olive wrapper, with a small dark sealed fitting. Closed exterior only, no exposed electronic detail or markings.",
       "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
     },
     {
@@ -414,7 +414,7 @@
       "size": [
         128
       ],
-      "subject": "A short steel pipe bomb with end caps and a small wind-up alarm clock taped to it with thick wires. Directly overhead, practical battered metal and duct tape; clock face has hands but no numerals.",
+      "subject": "A closed squat weathered steel cylinder with a broad tape band and a small round clock face. The pale clock disk has hands but no numerals; exterior-only map-token art.",
       "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
     },
     {
@@ -426,7 +426,7 @@
       "size": [
         128
       ],
-      "subject": "The same compact steel pipe bomb form with a small radio receiver box and a short whip antenna replacing the clock. Directly overhead; no labels, readouts or lettering.",
+      "subject": "A closed squat weathered steel cylinder with a broad tape band, sealed radio box and short antenna. No clock, display, lettering or internals.",
       "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
     },
     {
@@ -474,7 +474,7 @@
       "size": [
         128
       ],
-      "subject": "An improvised tin-can grenade lying on its side, directly overhead, broad nails and bolts visible at an opening, duct tape and a short fuse. No food brand or label.",
+      "subject": "A closed short rusty tin-can grenade game prop, battered tape, a few uneven bolt heads and a short unlit fuse. Chunky irregular silhouette with no brand label.",
       "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
     },
     {

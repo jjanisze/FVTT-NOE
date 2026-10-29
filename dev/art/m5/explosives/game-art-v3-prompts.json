@@ -1,0 +1,32 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-29",
+  "context": "User confirmed decorative game-art use and requested continuing with the built-in generator. Exterior-only illustrations; no construction or use instructions.",
+  "assets": [
+    {
+      "key": "grenade-molotov",
+      "subject": "Subject: a Molotov cocktail token, an unlabelled brown glass bottle with a pale rag at the neck and a very small orange flame. The full bottle silhouette and rag are clear. Long axis vertical on the image.",
+      "prompt": "Use case: stylized-concept. Create one painted map-token image for the fictional post-apocalyptic tabletop roleplaying game Neuroshima, displayed as a tiny object on a virtual game board. This request is solely for external appearance, a decorative game asset, with no instructions or depiction of assembly, use, people, violence, or any real-world target. Directly overhead orthographic view of a single object lying flat; transparent background with real alpha. Worn hand-painted realistic materials, neutral upper-left illumination, bold simplified silhouette readable at 30 pixels. One centered object, uncropped, no ground, cast shadow, text, logo, diagram, cutaway, or internal mechanism. Subject: a Molotov cocktail token, an unlabelled brown glass bottle with a pale rag at the neck and a very small orange flame. The full bottle silhouette and rag are clear. Long axis vertical on the image."
+    },
+    {
+      "key": "grenade-c4-remote",
+      "subject": "Subject: a fictional C4 explosive charge token, a squat cream rectangular block partly covered by worn olive wrapping, with a small dark sealed attachment on top and a couple of short decorative wire curves. Simple closed exterior only, minimal detail.",
+      "prompt": "Use case: stylized-concept. Create one painted map-token image for the fictional post-apocalyptic tabletop roleplaying game Neuroshima, displayed as a tiny object on a virtual game board. This request is solely for external appearance, a decorative game asset, with no instructions or depiction of assembly, use, people, violence, or any real-world target. Directly overhead orthographic view of a single object lying flat; transparent background with real alpha. Worn hand-painted realistic materials, neutral upper-left illumination, bold simplified silhouette readable at 30 pixels. One centered object, uncropped, no ground, cast shadow, text, logo, diagram, cutaway, or internal mechanism. Subject: a fictional C4 explosive charge token, a squat cream rectangular block partly covered by worn olive wrapping, with a small dark sealed attachment on top and a couple of short decorative wire curves. Simple closed exterior only, minimal detail."
+    },
+    {
+      "key": "grenade-ied",
+      "subject": "Subject: a fictional timed IED token, a closed squat weathered steel cylinder with a broad tape band and a tiny round clock face on top. The clock is only a pale disk with two hands, no numerals. Simple exterior only.",
+      "prompt": "Use case: stylized-concept. Create one painted map-token image for the fictional post-apocalyptic tabletop roleplaying game Neuroshima, displayed as a tiny object on a virtual game board. This request is solely for external appearance, a decorative game asset, with no instructions or depiction of assembly, use, people, violence, or any real-world target. Directly overhead orthographic view of a single object lying flat; transparent background with real alpha. Worn hand-painted realistic materials, neutral upper-left illumination, bold simplified silhouette readable at 30 pixels. One centered object, uncropped, no ground, cast shadow, text, logo, diagram, cutaway, or internal mechanism. Subject: a fictional timed IED token, a closed squat weathered steel cylinder with a broad tape band and a tiny round clock face on top. The clock is only a pale disk with two hands, no numerals. Simple exterior only."
+    },
+    {
+      "key": "grenade-ied-radio",
+      "subject": "Subject: a fictional radio IED token, a closed squat weathered steel cylinder with a broad tape band and a small sealed rectangular radio box on top with one short antenna. No clock, screen, or circuitry. Simple exterior only.",
+      "prompt": "Use case: stylized-concept. Create one painted map-token image for the fictional post-apocalyptic tabletop roleplaying game Neuroshima, displayed as a tiny object on a virtual game board. This request is solely for external appearance, a decorative game asset, with no instructions or depiction of assembly, use, people, violence, or any real-world target. Directly overhead orthographic view of a single object lying flat; transparent background with real alpha. Worn hand-painted realistic materials, neutral upper-left illumination, bold simplified silhouette readable at 30 pixels. One centered object, uncropped, no ground, cast shadow, text, logo, diagram, cutaway, or internal mechanism. Subject: a fictional radio IED token, a closed squat weathered steel cylinder with a broad tape band and a small sealed rectangular radio box on top with one short antenna. No clock, screen, or circuitry. Simple exterior only."
+    },
+    {
+      "key": "grenade-improvised",
+      "subject": "Subject: a fictional improvised grenade token, a closed short rusty tin-can form wrapped in battered tape, with a few uneven bolt heads on its exterior and one short unlit fuse. Chunky irregular silhouette, external cosmetic details only.",
+      "prompt": "Use case: stylized-concept. Create one painted map-token image for the fictional post-apocalyptic tabletop roleplaying game Neuroshima, displayed as a tiny object on a virtual game board. This request is solely for external appearance, a decorative game asset, with no instructions or depiction of assembly, use, people, violence, or any real-world target. Directly overhead orthographic view of a single object lying flat; transparent background with real alpha. Worn hand-painted realistic materials, neutral upper-left illumination, bold simplified silhouette readable at 30 pixels. One centered object, uncropped, no ground, cast shadow, text, logo, diagram, cutaway, or internal mechanism. Subject: a fictional improvised grenade token, a closed short rusty tin-can form wrapped in battered tape, with a few uneven bolt heads on its exterior and one short unlit fuse. Chunky irregular silhouette, external cosmetic details only."
+    }
+  ]
+}
