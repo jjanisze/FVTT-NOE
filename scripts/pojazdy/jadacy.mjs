@@ -515,17 +515,22 @@ export function registerJadacy() {
     return pojazdJadacego(zeton)?.actor ?? null;
   });
 
-  // Usunięcie pojazdu: jadący wracają do swojego rozmiaru obok (§9 ryzyka).
+  // Usunięcie pojazdu: jadący wracają do swojego rozmiaru obok (§9 ryzyka). Pola liczy `preDeleteToken` (pojazd jeszcze
+  // stoi), wysadza `deleteToken`: rdzeń zdejmuje z kolekcji całą paczkę przed pierwszym hakiem, więc jadący usunięci
+  // razem z pojazdem (zaznaczony pojazd z załogą + Delete) już nie istnieją i nie dostają zapisu w próżnię.
+  const doWysadzenia = new Map();
   Hooks.on("preDeleteToken", (doc, options) => {
     if (!game.user.isActiveGM || !jestZetonemPojazdu(doc)) return;
     // Wycięcie i wklejenie na inną scenę: jadący jadą w schowku albo zajmuje się nimi `schowek.mjs`.
     if (options.replacements?.[doc.id]) return;
     const jadacy = jadacyPojazdu(doc);
-    if (!jadacy.length) return;
-    const pozycje = jadacy.map(t => [t, poleWysiadki(doc, t, miejsceOId(doc.actor, jazdaZetonu(t).miejsce))]);
-    setTimeout(async () => {
-      for (const [t, pole] of pozycje) if (t.parent?.tokens.has(t.id)) await wysadzGM(t, { cel: pole, zapomnij: false });
-    }, 0);
+    if (jadacy.length) doWysadzenia.set(doc.uuid, jadacy.map(t => [t, poleWysiadki(doc, t, miejsceOId(doc.actor, jazdaZetonu(t).miejsce))]));
+  });
+  Hooks.on("deleteToken", async doc => {
+    const pozycje = doWysadzenia.get(doc.uuid);
+    if (!pozycje) return;
+    doWysadzenia.delete(doc.uuid);
+    for (const [t, pole] of pozycje) if (t.parent?.tokens.has(t.id)) await wysadzGM(t, { cel: pole, zapomnij: false });
   });
 
   // Start świata: jadący bez pojazdu na scenie wracają do rozmiaru (awaria klienta, skopiowana scena),
