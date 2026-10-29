@@ -117,11 +117,21 @@ export function dollItemOf(item, { kobalt = isKobaltEnabled() } = {}) {
   const quantity = _qty(item);
   const { slots, legacy } = _stored(item, quantity);
   return {
-    id: item.id, name: item.name, family, quantity, slots, legacy,
+    id: item.id, name: item.name, family, quantity, slots, legacy, zamontowana: jestZamontowana(item),
     blocks: blocksOf(item, family, { powerArmorKobalt: kobalt ? POWER_ARMOR_BLOCKS_KOBALT : [] }),
     capacity: capacityBonusOf(item)
   };
 }
+
+/**
+ * Broń zamontowana na stanowisku pojazdu (M4 D16, `pojazdy/bron.mjs`): u strzelca tylko na czas siedzenia na
+ * stanowisku. Flaga wpisana wprost — `bron.mjs` importuje lalkę pośrednio, nie odwrotnie.
+ */
+export function jestZamontowana(item) {
+  return !!item?.flags?.[MODULE_ID]?.zamontowana;
+}
+
+const _OBIE_RECE = [slotId("hand", 0), slotId("hand", 1)];
 
 /** Wszystkie przedmioty lalki aktora, w kolejności przedmiotów aktora (kolizje: pierwszy wygrywa). */
 export function dollItems(actor) {
@@ -144,7 +154,34 @@ export function dollItems(actor) {
       }
     }
   }
+  // Broń zamontowana (K2): strzelec trzyma ją w ręku — w pierwszej wolnej, wirtualnie (nic do bazy). Zajętych rąk lalka
+  // nie opróżnia: wtedy broń leży w plecaku, a karta broni oznacza brak rąk (D7). Drugą rękę bierze `dollState`.
+  const zamontowane = items.filter(d => d.zamontowana && !d.slots.length);
+  if (zamontowane.length) {
+    const occ = _occupants(actor);
+    const taken = new Set(items.flatMap(d => d.slots));
+    for (const d of zamontowane) {
+      const wolna = _OBIE_RECE.find(s => !taken.has(s) && !occ[s]);
+      if (!wolna) continue;
+      d.slots.push(wolna);
+      taken.add(wolna);
+    }
+  }
   return items;
+}
+
+/** Druga ręka na broni zamontowanej — trzyma się ją oburącz (Ciężka, s. 117): lokator wirtualny, tylko wolna ręka. */
+function _chwytZamontowanej(items, occupants) {
+  const out = {};
+  for (const d of items) {
+    if (!d.zamontowana) continue;
+    const reka = d.slots.find(s => groupOf(s) === "hand");
+    if (!reka) continue;
+    const druga = _OBIE_RECE.find(s => s !== reka);
+    if (items.some(x => x.slots.includes(druga)) || occupants[druga] || out[druga]) continue;
+    out[druga] = { slot: druga, label: `oburącz: ${d.name} (zamontowana)`, kind: "zamontowana" };
+  }
+  return out;
 }
 
 /**
@@ -169,7 +206,8 @@ export async function releaseHand(actor, slot) {
 /** Pełny stan lalki: przedmioty, lokatorzy rąk, rozkład. */
 export function dollState(actor) {
   const items = dollItems(actor);
-  const occupants = _occupants(actor);
+  const flaga = _occupants(actor);
+  const occupants = { ...flaga, ..._chwytZamontowanej(items, flaga) };
   return { items, occupants, layout: layoutOf(items, { occupants }) };
 }
 
@@ -227,7 +265,8 @@ export function heldItems(actor) {
 
 /** Ile rąk wolnych (bez przedmiotu i bez lokatora). */
 export function freeHands(actor) {
-  if (!isDollActor(actor)) return Math.max(0, 2 - heldItems(actor).length);
+  // BN bez lalki: broń zamontowana (natywnie `equipped`) zajmuje obie ręce.
+  if (!isDollActor(actor)) return Math.max(0, 2 - heldItems(actor).reduce((n, h) => n + (jestZamontowana(h.item) ? 2 : 1), 0));
   return heldItems(actor).filter(h => !h.item && !h.occupant).length;
 }
 
@@ -478,7 +517,14 @@ function _inCombat(actor) {
  */
 export function place(actor, item, to, options = {}) {
   if (!actor || !item) return Promise.resolve(false);
+  if (jestZamontowana(item) && !String(to).startsWith("hand")) _ostrzezZamontowana(item);
   return _serial(actor, () => _place(actor, item, to, options));
+}
+
+/** Broń zamontowana opuszcza ręce strzelca: oznaczone, nie blokowane (D7) — MG cofa, co się nie wydarzyło. */
+function _ostrzezZamontowana(item) {
+  ui.notifications.warn(`${item.name}: broń zamontowana w pojeździe — wraca do pojazdu przy opuszczeniu stanowiska; `
+    + "zdjęcie ze stanowiska to Robota na karcie pojazdu (MG cofa, jeśli to się nie wydarzyło).");
 }
 
 async function _place(actor, item, to, options = {}) {
@@ -534,6 +580,7 @@ export function draw(item, options = {}) {
  */
 export function takeOff(actor, item, options = {}) {
   if (!actor || !item) return Promise.resolve(false);
+  if (jestZamontowana(item)) _ostrzezZamontowana(item);
   return _serial(actor, () => _takeOff(actor, item, options));
 }
 
@@ -570,6 +617,7 @@ async function _takeOff(actor, item, options = {}) {
  */
 export function drop(actor, item, options = {}) {
   if (!actor || !item) return Promise.resolve(false);
+  if (jestZamontowana(item)) _ostrzezZamontowana(item);
   return _serial(actor, () => _drop(actor, item, options));
 }
 
@@ -770,7 +818,8 @@ function _onPreCreateItem(item, data, options) {
   if (f[SLOTS_FLAG] !== undefined) patch[`flags.${MODULE_ID}.${SLOTS_FLAG}`] = _del;
   if (f[LEGACY_BELT_FLAG] !== undefined) patch[`flags.${MODULE_ID}.${LEGACY_BELT_FLAG}`] = _del;
   const actor = item.parent;
-  if (actor && isDollActor(actor) && item.system?.equipped && governsEquipped(familyOf(item))) {
+  // Broń zamontowana przychodzi do strzelca w ręce (K2) — jej `equipped` zostaje.
+  if (actor && isDollActor(actor) && item.system?.equipped && governsEquipped(familyOf(item)) && !jestZamontowana(item)) {
     patch["system.equipped"] = false;
   }
   if (!foundry.utils.isEmpty(patch)) item.updateSource(patch);

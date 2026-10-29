@@ -47,6 +47,9 @@ export function jestZamontowana(item) {
   return !!item?.flags?.[MODULE_ID]?.[FLAGA_ZAMONTOWANA];
 }
 
+/** Opcja operacji: własne przeniesienie broni montowanej (bez ostrzeżenia „opuszcza stanowisko”). */
+const OPCJA_MONTAZU = "neuroMontaz";
+
 /** Przeniesienie broni z wpiętym magazynkiem między aktorami (MG): najpierw tworzymy, potem kasujemy. */
 async function _przenies(item, cel, { flagi = {}, usunFlagi = [], system = {} } = {}) {
   const zrodlo = item.actor;
@@ -63,7 +66,7 @@ async function _przenies(item, cel, { flagi = {}, usunFlagi = [], system = {} } 
   }
   const nowe = await cel.createEmbeddedDocuments("Item", doUtworzenia);
   if (mag && nowe[1]) await nowe[0].setFlag(MODULE_ID, "loadedMag", nowe[1].id);
-  await zrodlo.deleteEmbeddedDocuments("Item", [item.id, ...(mag ? [mag.id] : [])]);
+  await zrodlo.deleteEmbeddedDocuments("Item", [item.id, ...(mag ? [mag.id] : [])], { [OPCJA_MONTAZU]: true });
   return nowe[0];
 }
 
@@ -166,6 +169,13 @@ async function _montazMG(_n, { pojazd, bron, stanowisko }) {
 }
 
 export function registerBron() {
+  // K2: broń zamontowana zabrana strzelcowi inaczej niż przez stanowisko (przeciągnięcie na innego aktora, upuszczenie
+  // na ziemię, skasowanie) — oznaczone, nie blokowane (D7). Lalka ostrzega sama przy schowaniu i upuszczeniu.
+  Hooks.on("preDeleteItem", (item, options) => {
+    if (!jestZamontowana(item) || options?.[OPCJA_MONTAZU] || options?.neuroDoll) return;
+    ui.notifications.warn(`${item.name}: broń zamontowana w pojeździe — wraca do pojazdu przy opuszczeniu stanowiska; `
+      + "zabrana stąd zniknie ze stanowiska (MG cofa, jeśli to się nie wydarzyło).");
+  });
   zarejestrujSkutek("pojazd.montaz", async (dane) => {
     await doMG("pojazd.montaz", dane, { nosiciel: game.user.character });
     return "broń na stanowisku";

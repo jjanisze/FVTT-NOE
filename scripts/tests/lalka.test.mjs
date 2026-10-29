@@ -457,6 +457,31 @@ export function registerLalkaTests(quench) {
         await live(gun).delete();
       });
 
+      it("M4 K2: broń zamontowana u strzelca — w ręku oburącz (wirtualnie), freeHands 0; z pistoletem w ręce — w drugiej", async function () {
+        const data = weaponData("b92");
+        data.name = "Browning (zamontowany)";
+        data.system.equipped = true;
+        data.flags[MODULE_ID].zamontowana = { pojazd: "Actor.x", stanowisko: "wiezyczka-0-0", waga: 38 };
+        const mg = await make(data);
+        expect(live(mg).system.equipped, "przychodzi w ręce").to.equal(true);
+        expect(live(mg).getFlag(MODULE_ID, SLOTS_FLAG), "nic w bazie").to.equal(undefined);
+        expect(inHand(live(mg))).to.equal(true);
+        expect(freeHands(actor)).to.equal(0);
+        const druga = heldItems(actor).find(h => !h.item);
+        expect(druga?.occupant?.kind).to.equal("zamontowana");
+        // Pistolet w ręce przed wejściem na stanowisko: lalka niczego nie wypycha, broń bierze wolną rękę.
+        await live(mg).delete();
+        const gun = await make(weaponData("b92"));
+        expect(await place(actor, gun, "hand.0", { quiet: true })).to.equal(true);
+        const mg2 = await make(data);
+        const reka = heldItems(actor).find(h => h.item?.id === mg2.id);
+        expect(reka?.slot).to.equal("hand.1");
+        expect(slotsOf(live(gun))).to.deep.equal(["hand.0"]);
+        expect(freeHands(actor)).to.equal(0);
+        await live(mg2).delete();
+        await live(gun).delete();
+      });
+
       it("natywny przełącznik dnd5e idzie przez lejek (Załóż / Zdejmij)", async function () {
         const helm = await make(armorData("helm"));
         await live(helm).update({ "system.equipped": true });
