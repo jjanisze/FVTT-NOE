@@ -27,6 +27,7 @@ import {
 import { skretyNaDrodze } from "../pojazdy/jazda.mjs";
 import { OPCJA_SYNCHRONIZACJI } from "../pojazdy/historia.mjs";
 import { otwarteMiejsce, prezentacjaMiejsca, rozpoznawalnyJadacy, sortJadacego } from "../pojazdy/prezentacja.mjs";
+import { POZYCJE as POZYCJE_PALETY, budzetPalety, fazaZCzasu, wygasniecie } from "../pojazdy/paleta.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
@@ -149,6 +150,58 @@ export function registerPojazdyTests(quench) {
         expect(sortJadacego(1, 100, p)).to.equal(101);
         expect(sortJadacego(200, 100, p)).to.equal(200);
         expect(sortJadacego(200, 100, { warstwa: "pod" })).to.equal(99);
+      });
+    });
+
+    describe("Paleta kierowcy (D41, K1)", function () {
+      it("Gaz do dechy: +2× Szybkości, ST +5, Utrudnienie ataków; w fazie 1 zostaje tylko ST (do końca następnej tury)", function () {
+        const b = budzetPalety([{ id: "gazDoDechy", faza: 0 }]);
+        expect(b.ruch).to.equal(2);
+        expect(b.st).to.equal(5);
+        expect(b.atak).to.equal("wszyscy");
+        const f1 = budzetPalety([{ id: "gazDoDechy", faza: 1 }]);
+        expect([f1.ruch, f1.st, f1.atak]).to.deep.equal([0, 5, null]);
+        expect(budzetPalety([{ id: "szostyBieg" }]).atak).to.equal("kierowca");
+      });
+
+      it("bieg wsteczny: droga ×2 (½ Szybkości, s. 261); Cofanie autobusu ×4 z Utrudnieniem; bez cechy — bez Utrudnienia", function () {
+        expect(budzetPalety([{ id: "wsteczny" }]).mnoznikDrogi).to.equal(2);
+        expect(budzetPalety([{ id: "wsteczny" }]).utrudnienie).to.equal(false);
+        const bus = budzetPalety([{ id: "wsteczny" }], { cofanie: true, cwierc: true });
+        expect([bus.mnoznikDrogi, bus.utrudnienie, bus.wsteczny]).to.deep.equal([4, true, true]);
+        expect(budzetPalety([{ id: "wsteczny" }], { cofanie: true }).mnoznikDrogi).to.equal(2);
+        expect(budzetPalety([]).mnoznikDrogi).to.equal(1);
+      });
+
+      it("wygaśnięcie: początek następnej tury kierowcy → faza 1 albo usunięcie; ta sama tura — nic; koniec tury w fazie 1 → usunięcie", function () {
+        const f = { walka: "w", runda: 2, tura: 3, faza: 0 };
+        const start = (runda, tura) => ({ walka: "w", runda, tura, krawedz: "start" });
+        expect(wygasniecie(f, start(2, 3), POZYCJE_PALETY.gazDoDechy)).to.equal("zostaw");
+        expect(wygasniecie(f, start(3, 3), POZYCJE_PALETY.gazDoDechy)).to.equal("faza1");
+        expect(wygasniecie(f, start(3, 3), POZYCJE_PALETY.syrena)).to.equal("usun");
+        expect(wygasniecie(f, start(3, 3), POZYCJE_PALETY.uciag)).to.equal("zostaw");
+        expect(wygasniecie({ ...f, faza: 1 }, { walka: "w", runda: 2, tura: 3, krawedz: "koniec" }, POZYCJE_PALETY.gazDoDechy)).to.equal("usun");
+        expect(wygasniecie(f, { walka: "w", runda: 2, tura: 3, krawedz: "koniec" }, POZYCJE_PALETY.gazDoDechy)).to.equal("zostaw");
+        expect(wygasniecie(f, start(3, 0), POZYCJE_PALETY.wsteczny)).to.equal("usun");
+        expect(wygasniecie(f, { walka: "inna", runda: 9, tura: 0, krawedz: "start" }, POZYCJE_PALETY.gazDoDechy)).to.equal("zostaw");
+      });
+
+      it("poza walką zegar świata: runda = 6 s", function () {
+        expect(fazaZCzasu({ czas: 100 }, 103)).to.equal(0);
+        expect(fazaZCzasu({ czas: 100 }, 106)).to.equal(1);
+        expect(fazaZCzasu({ czas: 100 }, 112)).to.equal(2);
+        expect(fazaZCzasu({ czas: null, faza: 1 }, 999)).to.equal(1);
+      });
+
+      it("każda pozycja z cechą wskazuje istniejącą cechę katalogu, a każda cecha z czasem akcji ma pozycję w palecie", function () {
+        for (const [id, p] of Object.entries(POZYCJE_PALETY)) {
+          if (p.cecha) expect(CECHY_POJAZDOW[p.cecha], `${id} → ${p.cecha}`).to.exist;
+          expect(p.skutek, id).to.be.a("string");
+        }
+        const zPalety = new Set(Object.values(POZYCJE_PALETY).map(p => p.cecha).filter(Boolean));
+        for (const [id, c] of Object.entries(CECHY_POJAZDOW)) {
+          if (c.czas && id !== "przerzutka") expect(zPalety.has(id), `cecha ${id} (${c.czas}) bez pozycji palety`).to.equal(true);
+        }
       });
     });
 
@@ -399,6 +452,14 @@ export function registerPojazdyTests(quench) {
       it("zawrócenie to obrót 180° (ST 20), łagodny łuk < 67,5° — nic", function () {
         expect(skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 0, y: 300 }, { x: 0, y: 0 }]).map(s => s.rodzaj)).to.deep.equal(["obrot"]);
         expect(skretyNaDrodze(0, [{ x: 0, y: 0 }, { x: 0, y: 300 }, { x: 100, y: 500 }])).to.have.length(0);
+      });
+
+      it("skręt rozbity przez rdzeń na kroki po kratkach (skos po 45°) to dalej jeden skręt o 90°", function () {
+        // Jedzie w prawo (270°), potem skosem w prawo-w dół, potem w dół: dwa kroki po 45°.
+        const s = skretyNaDrodze(270, [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 200, y: 100 }, { x: 200, y: 200 }, { x: 200, y: 300 }]);
+        expect(s.map(x => [x.rodzaj, x.kat])).to.deep.equal([["skret", 90]]);
+        // Zygzak prosto (prawo, skos, prawo, skos) — żadnego skrętu.
+        expect(skretyNaDrodze(270, [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 200, y: 100 }, { x: 300, y: 100 }, { x: 400, y: 200 }])).to.have.length(0);
       });
     });
 

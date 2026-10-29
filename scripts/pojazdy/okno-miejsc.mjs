@@ -11,11 +11,12 @@ import { mozePrzeswietlic } from "./zeton.mjs";
 import { grafikaWnetrza, kadrGrafikiMiejsc } from "./grafika.mjs";
 import { rozpoznawalnyJadacy } from "./prezentacja.mjs";
 import {
-  jedzie, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
+  jedzie, kierowcaPojazdu, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
   ZASIEG_WSIADANIA_M, ST_PRZESIADKI
 } from "./jadacy.mjs";
 import { maSilnik, przelaczSwiatla, stanSilnika, uruchom, zgas } from "./silnik.mjs";
 import { akrobatykaPrzedAtakiem } from "./jazda.mjs";
+import { otworzPalete } from "./paleta.mjs";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 const okna = new Map();
@@ -204,6 +205,7 @@ function _onRenderTokenHUD(hud, html) {
   if (!doc || !kol || kol.querySelector(".neuro-pojazd-hud")) return;
   if (danePojazdu(doc.actor)) {
     kol.append(_przycisk("fa-solid fa-chair", "Miejsca — wsiądź, przesiądź się (s. 260–261)", () => otworzMiejsca(doc)));
+    if (doc.actor.isOwner) kol.append(_przycisk("fa-solid fa-steering-wheel", "Paleta kierowcy — akcje cech, bieg wsteczny (D41)", () => otworzPalete(doc)));
     if (doc.actor.isOwner && maSilnik(doc.actor)) {
       const s = stanSilnika(doc.actor);
       const b = _przycisk("fa-solid fa-key", s.wl ? "Zgaś silnik (bez kosztu)" : "Uruchom silnik (akcja)",
@@ -220,6 +222,7 @@ function _onRenderTokenHUD(hud, html) {
   if (pojazd && doc.isOwner) {
     kol.append(_przycisk("fa-solid fa-chair", `Miejsca w ${pojazd.name} — przesiądź się`, () => otworzMiejsca(pojazd, doc)));
     kol.append(_przycisk("fa-solid fa-door-open", `Wysiądź z ${pojazd.name}`, () => wysiadz(doc)));
+    if (kierowcaPojazdu(pojazd)?.id === doc.id) kol.append(_przycisk("fa-solid fa-steering-wheel", `Paleta kierowcy — ${pojazd.name}`, () => otworzPalete(pojazd)));
     if (jedzie(pojazd)) kol.append(_przycisk("fa-solid fa-person-falling", "Przed atakiem: ZRC (Akrobatyka) ST 10 (s. 261)", () => akrobatykaPrzedAtakiem(doc)));
   }
 }

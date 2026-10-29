@@ -33,6 +33,7 @@ import { maSilnik, stanSilnika } from "./silnik.mjs";
 import { aktywneAwariePojazdu, kartaObrazen } from "./awarie.mjs";
 import { jestWrakiem } from "./wrak.mjs";
 import { ZDOLNOSCI, maZdolnosc, mnoznikSzybkosci } from "./wojownik.mjs";
+import { mnoznikPrzelozenia, paletaPojazdu } from "./paleta.mjs";
 
 const FLAGA_TURA = "tura";
 const FLAGA_AKROBATYKA = "akrobatykaPojazdu";
@@ -41,15 +42,23 @@ const FLAGA_BEZRUCH = "bezruch";
 const ROZMIARY = ["tiny", "sm", "med", "lg", "huge", "grg"];
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 
-/** Obrót sprzed ruchu (preMoveToken → moveToken), id żetonu → stopnie. */
+/**
+ * Obrót sprzed ruchu, id żetonu → stopnie. `preMoveToken` idzie tylko u ruszającego, a karty jazdy liczy aktywny MG,
+ * u którego w `moveToken` `_source.rotation` to już obrót po ruchu — więc ruszający dopisuje obrót sprzed ruchu do
+ * operacji (`OPCJA_OBROTU`, rdzeń przesyła ją wszystkim). Mapa zostaje dla ruchu samego MG.
+ */
 const _obrotPrzed = new Map();
+const OPCJA_OBROTU = "neuroObrotPrzed";
 
 /* -------------------------------------------- */
 /*  Czyste funkcje                               */
 /* -------------------------------------------- */
 
 /**
- * Skręty na drodze: kolejne kierunki (stopnie, konwencja obrotu żetonu) → lista zmian ≥ 67,5°.
+ * Skręty na drodze: kolejne kierunki (stopnie, konwencja obrotu żetonu) → lista zmian ≥ 67,5°. Zmianę mierzy się od
+ * kierunku, w którym skończył się ostatni skręt (na starcie — obrót pojazdu), nie od poprzedniego odcinka: rdzeń
+ * rozbija przeciąganie na kroki po kratkach, a skos to kroki po 45° — skręt o 90° w dwóch takich krokach to dalej
+ * skręt o 90° (D10), a nie dwa łuki po 45°.
  * @param {number} startowy  obrót pojazdu przed ruchem
  * @param {{x: number, y: number}[]} punkty  środki kolejnych punktów drogi
  * @returns {{kat: number, rodzaj: "skret"|"obrot"}[]}
@@ -63,26 +72,42 @@ export function skretyNaDrodze(startowy, punkty) {
     kierunki.push(Math.atan2(dy, dx) * 180 / Math.PI - 90);
   }
   const out = [];
-  let poprzedni = startowy;
+  let odniesienie = startowy;
   for (const k of kierunki) {
-    const d = roznicaKatow(poprzedni, k);
-    if (d >= 157.5) out.push({ kat: Math.round(d), rodzaj: "obrot" });
-    else if (d >= 67.5) out.push({ kat: Math.round(d), rodzaj: "skret" });
-    poprzedni = k;
+    const d = roznicaKatow(odniesienie, k);
+    if (d < 67.5) continue;
+    out.push({ kat: Math.round(d), rodzaj: d >= 157.5 ? "obrot" : "skret" });
+    odniesienie = k;
   }
   return out;
 }
 
-/** Szybkość pojazdu w metrach na turę (efekty awarii już w danych). Mięśniowy — jeździec ×2. */
+/**
+ * Szybkość pojazdu w metrach na turę (efekty awarii i palety ze zmianami Szybkości już w danych). Mięśniowy —
+ * jeździec ×2, rower z Przerzutką — ×3 / ×2 / ×1 wg przełożenia (s. 263).
+ */
 export function szybkoscPojazdu(pojazdDoc) {
   const actor = pojazdDoc.actor;
   const dane = danePojazdu(actor);
   if (!dane) return 0;
   if (!dane.katalog.silnik) {
     const kier = kierowcaPojazdu(pojazdDoc);
-    return Math.round(2 * (Number(kier?.actor?.system?.attributes?.movement?.speeds?.walk) || 0) * mnoznikSzybkosci(pojazdDoc));
+    const mnoznik = cechyPojazdu(dane.podwozie).some(c => c.id === "przerzutka") ? mnoznikPrzelozenia(actor) : 2;
+    return Math.round(mnoznik * (Number(kier?.actor?.system?.attributes?.movement?.speeds?.walk) || 0) * mnoznikSzybkosci(pojazdDoc));
   }
   return Math.round((Number(actor.system.attributes.movement?.speeds?.walk) || 0) * mnoznikSzybkosci(pojazdDoc));
+}
+
+/**
+ * Budżet jazdy w tej turze kierowcy (E5 + paleta K1, D41): `v` — Szybkość, `dodatkowy` — dodatkowy ruch z palety
+ * (Gaz do dechy, Szósty bieg ×2 Szybkości), `limit` = v + dodatkowy (Przyspieszenie kierowcy dokłada jeszcze v),
+ * `mnoznikDrogi` — ile liczy się każdy metr (bieg wsteczny ×2, z Cofaniem autobusu ×4).
+ */
+export function budzetJazdy(pojazdDoc) {
+  const v = szybkoscPojazdu(pojazdDoc);
+  const paleta = paletaPojazdu(pojazdDoc.actor);
+  const dodatkowy = Math.round(v * paleta.ruch);
+  return { v, dodatkowy, limit: v + dodatkowy, mnoznikDrogi: paleta.mnoznikDrogi, paleta };
 }
 
 /**
@@ -125,13 +150,16 @@ function _tura(actor) {
   return actor.flags?.[MODULE_ID]?.[FLAGA_TURA] ?? null;
 }
 
-async function _onMoveToken(doc, movement) {
+async function _onMoveToken(doc, movement, operation) {
   if (!game.users.activeGM?.isSelf || !jestZetonemPojazdu(doc)) return;
   // Karty jazdy tylko na mapie taktycznej: plansza pościgu ma własne zasady (PLAN §6.2), znacznik nie jedzie.
   if (trybSceny(doc.parent) !== "taktyczna") return;
   if (movement.passed.waypoints.every(w => w.action === "displace")) return;
   const actor = doc.actor;
-  const startowy = _obrotPrzed.get(doc.id) ?? doc._source.rotation;
+  const b = budzetJazdy(doc);
+  // Bieg wsteczny: pojazd jedzie tyłem, więc kierunek jazdy to obrót + 180° — inaczej każde cofanie byłoby „obrotem”.
+  const przed = operation?.[OPCJA_OBROTU]?.[doc.id] ?? _obrotPrzed.get(doc.id) ?? doc._source.rotation;
+  const startowy = przed + (b.paleta.wsteczny ? 180 : 0);
   _obrotPrzed.delete(doc.id);
   const pkt = [doc.getCenterPoint(movement.origin), ...movement.passed.waypoints.map(w => doc.getCenterPoint(w))];
   const metry = Number(movement.passed.distance) || 0;
@@ -148,12 +176,14 @@ async function _onMoveToken(doc, movement) {
     if (!turaKierowcy) ostrz.push(kier ? `Ruch poza turą kierowcy (${kier.name}) — tura pojazdu to tura kierowcy (D9).` : "Nikt nie kieruje.");
     let t = _tura(actor);
     if (!t || t.walka !== walka.id || t.runda !== walka.round || t.kombatant !== kto?.id) t = { walka: walka.id, runda: walka.round, kombatant: kto?.id, droga: 0 };
-    t.droga = Math.round((t.droga + metry) * 10) / 10;
+    t.droga = Math.round((t.droga + metry * b.mnoznikDrogi) * 10) / 10;
     await actor.update({ [`flags.${MODULE_ID}.${FLAGA_TURA}`]: t });
-    const v = szybkoscPojazdu(doc);
-    linie.push(`Droga w tej turze: <strong>${t.droga} m</strong> z ${v} m${v ? ` (Przyspieszenie kierowcy: do ${v * 2} m)` : ""}.`);
-    if (t.droga > v * 2 + 0.1) ostrz.push(`Przekroczona Szybkość nawet z Przyspieszeniem (${t.droga} > ${v * 2} m).`);
-    else if (t.droga > v + 0.1) ostrz.push(`Ponad Szybkość pojazdu — tylko z Przyspieszeniem kierowcy (akcja).`);
+    const { v, limit } = b;
+    const zPalety = b.dodatkowy ? ` (${b.paleta.nazwy.join(", ")}: +${b.dodatkowy} m)` : "";
+    const wstecz = b.mnoznikDrogi !== 1 ? ` Bieg wsteczny — każdy metr liczy się ×${b.mnoznikDrogi}.` : "";
+    linie.push(`Droga w tej turze: <strong>${t.droga} m</strong> z ${limit} m${zPalety}${v ? ` (Przyspieszenie kierowcy: do ${limit + v} m)` : ""}.${wstecz}`);
+    if (t.droga > limit + v + 0.1) ostrz.push(`Przekroczona Szybkość nawet z Przyspieszeniem (${t.droga} > ${limit + v} m).`);
+    else if (t.droga > limit + 0.1) ostrz.push(`Ponad Szybkość pojazdu — tylko z Przyspieszeniem kierowcy (akcja).`);
   }
   if (maSilnik(actor) && !stanSilnika(actor).wl && !aktywneAwariePojazdu(actor).includes(15)) ostrz.push("Silnik zgaszony — Szybkość 0 (Uruchom: akcja kierowcy).");
   if (jestWrakiem(actor)) ostrz.push("To wrak — nie jedzie.");
@@ -172,6 +202,11 @@ async function _onMoveToken(doc, movement) {
   // Trudny teren — regiony (dnd5e liczy też pola zajęte przez istoty jako trudne, więc nie koszt drogi).
   if (metry > 0 && _przezTrudnyTeren(doc, pkt)) {
     const cechy = cechyPojazdu(danePojazdu(actor).podwozie).map(c => c.id);
+    if (b.dodatkowy && b.paleta.nazwy.some(n => /Gaz do dechy|Szósty bieg/.test(n))) {
+      ostrz.push(`${b.paleta.nazwy.join(", ")} w trudnym terenie — pojazd się przewraca (s. 263–264).`);
+      przyciski.push({ akcja: "pojazd.zastosujAwarie", label: "Przewrócenie (awaria 8)", gm: true, ikona: "fa-solid fa-car-burst",
+        dane: { pojazd: actor.uuid, k20: 8 } });
+    }
     if (cechy.includes("gasienice")) linie.push("Trudny teren — Gąsienice: bez kary.");
     else if (cechy.includes("terenowka")) linie.push("Trudny teren — Terenówka: Szybkość ×½, bez testów (s. 261).");
     else {
@@ -310,11 +345,13 @@ function _zdalAkrobatyke(tokenDoc) {
   return !!f?.zdal && !!c && f.walka === c.id && f.runda === c.round && f.tura === c.turn;
 }
 
-function _zrodloAtakuZPojazdu({ attackerToken }) {
+function _zrodloAtakuZPojazdu({ attackerToken, wrecz }) {
   const doc = attackerToken?.document ?? attackerToken;
   const p = doc ? pojazdJadacego(doc) : null;
   if (!p || !jedzie(p) || _zdalAkrobatyke(doc)) return null;
   if (maZdolnosc(doc.actor, ZDOLNOSCI.drzwi)) return null; // Konwojent (s. 88)
+  // Ale jazda! (Pochodzenie, s. 61): strzelając z jadącego pojazdu — bez Utrudnienia z niestabilnego podłoża.
+  if (!wrecz && doc.actor?.items?.some(i => i.flags?.[MODULE_ID]?.originAbilityId === "ale-jazda")) return null;
   return [{ rodzaj: "utrudnienie", label: "Atak z jadącego pojazdu — ZRC (Akrobatyka) ST 10 w tej turze to znosi (s. 261)", strona: "atakujący" }];
 }
 
@@ -409,11 +446,13 @@ export function registerJazda() {
     ui.notifications.info(`${combatant.name}: pojazd nie wchodzi do walki — działa w turze kierowcy (D9).`);
     return false;
   });
-  Hooks.on("preMoveToken", (doc) => {
-    if (jestZetonemPojazdu(doc)) _obrotPrzed.set(doc.id, doc._source.rotation);
+  Hooks.on("preMoveToken", (doc, _movement, options) => {
+    if (!jestZetonemPojazdu(doc)) return;
+    _obrotPrzed.set(doc.id, doc._source.rotation);
+    if (options) (options[OPCJA_OBROTU] ??= {})[doc.id] = doc._source.rotation;
   });
-  Hooks.on("moveToken", (doc, movement) => {
-    _onMoveToken(doc, movement).catch(err => console.error(`${MODULE_ID} | jazda`, err));
+  Hooks.on("moveToken", (doc, movement, operation) => {
+    _onMoveToken(doc, movement, operation).catch(err => console.error(`${MODULE_ID} | jazda`, err));
   });
   Hooks.on("updateCombat", (c, ch) => { _onUpdateCombat(c, ch).catch(err => console.error(`${MODULE_ID} | jazda: walka`, err)); });
   Hooks.on("deleteCombat", c => { _onDeleteCombat(c).catch(() => {}); });

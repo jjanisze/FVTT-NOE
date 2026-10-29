@@ -53,3 +53,14 @@
 .neuro-karta-pojazdu .sheet-sidebar .loyalty-badge { display: none; }
 .neuro-karta-pojazdu .sheet-sidebar .pills-group:has(> h3 > .fa-sailboat),
 .neuro-karta-pojazdu .sheet-sidebar .pills-group:has(> h3 > .fa-sun) { display: none; }
+/* Paleta kierowcy (D41, K1) */
+.neuro-okno-palety .window-content { padding: 8px 12px; }
+.neuro-paleta { display: flex; flex-direction: column; gap: 4px; }
+.neuro-paleta h4 { margin: 6px 0 2px; font-size: var(--font-size-13, 13px); border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+.neuro-paleta-info { margin: 2px 0; font-size: var(--font-size-12, 12px); }
+.neuro-paleta-grupa { display: flex; flex-wrap: wrap; gap: 4px; }
+.neuro-paleta-btn { flex: 1 1 45%; justify-content: flex-start; gap: 6px; line-height: 1.6; }
+.neuro-paleta-btn.active { box-shadow: 0 0 0 2px var(--color-warm-2, #c9593f) inset; font-weight: bold; }
+.neuro-paleta-btn .fa-triangle-exclamation { color: #b26b00; margin-left: auto; }
+.neuro-paleta-aktywne { list-style: none; margin: 2px 0; padding: 4px 6px; background: rgba(201, 89, 63, 0.12); border-radius: 4px; font-size: var(--font-size-12, 12px); }
+.neuro-paleta-kiedy { opacity: 0.75; }

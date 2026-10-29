@@ -38,6 +38,7 @@ import { grafikaWnetrza } from "./grafika.mjs";
 import { grafikaKadluba, odswiezWieze, usunWieze, wczytajWieze } from "./wieza.mjs";
 import { OPCJA_SYNCHRONIZACJI } from "./historia.mjs";
 import { otwarteMiejsce, prezentacjaJadacego, sortJadacego } from "./prezentacja.mjs";
+import { wstecznyPojazdu } from "./paleta.mjs";
 
 /** Krycie nadwozia w prześwietleniu (§4.2: „ok. 35%”). */
 const KRYCIE_PRZESWIETLENIA = 0.35;
@@ -400,7 +401,8 @@ export function registerZetonPojazdu() {
     if (!jestZetonemPojazdu(doc) || !["dragging", "keyboard"].includes(movement.method)) return;
     if (trybSceny(doc.parent) !== "taktyczna") return;
     if (movement.passed.waypoints.every(w => w.action === "displace")) return;
-    movement.autoRotate = true;
+    // Bieg wsteczny (paleta, D41): pojazd cofa przodem do przodu.
+    movement.autoRotate = !wstecznyPojazdu(doc.actor);
   });
 
   // Nowy żeton pojazdu dostaje obrys w skali sceny (§4.14): prototyp niesie obrys dla 1,5 m.

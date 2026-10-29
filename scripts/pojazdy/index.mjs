@@ -19,7 +19,8 @@
  *  - `awarie.mjs`      — Tabela awarii k20: wyzwalacze, [Zastosuj], zegary świata, tura kierowcy, karta obrażeń
  *  - `wrak.mjs`        — 0 PW: wrak, jadący wysadzeni, wybuch baku płonącego wraku
  *  - `naprawy.mjs`     — naprawa tymczasowa i fachowa (Robota M2), karoseria, Odbudowa
- *  - `jazda.mjs`       — tura kierowcy, skręty, teren, potrącenie, bezruch, atak z pojazdu, osłona jadących
+ *  - `jazda.mjs`       — tura kierowcy, budżet jazdy, skręty, teren, potrącenie, bezruch, atak z pojazdu, osłona jadących
+ *  - `paleta.mjs`      — paleta kierowcy: akcje cech, bieg wsteczny, Przerzutka; efekty, ST, Utrudnienia, Slalom (D41)
  *  - `bron.mjs`        — broń montowana: montaż (Robota / od ręki), zdjęcie, broń za strzelcem
  *  - `katalog.mjs`     — aktor z paczki `pojazdy` (wynik produkcji, Poligon, MG)
  *  - `karta.mjs`       — karta pojazdu: zakładki Pojazd, Załoga, Uzbrojenie, Awarie (podklasa stockowej)
@@ -49,7 +50,8 @@ import {
   danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, obsadaPojazdu, pojazdJadacego,
   rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "./stan.mjs";
-import { registerJazda, szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
+import { registerJazda, szybkoscPojazdu, budzetJazdy, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
+import { registerPaleta, otworzPalete, uzyjPalety, ustawPrzerzutke, paletaPojazdu, pozycjePojazdu, budzetPalety, POZYCJE } from "./paleta.mjs";
 import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron } from "./bron.mjs";
 import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
 import { registerKarta, zetonPojazdu } from "./karta.mjs";
@@ -94,6 +96,7 @@ export function registerPojazdy() {
   registerWrak();
   registerNaprawy();
   registerJazda();
+  registerPaleta();
   registerBron();
   registerKatalog();
   registerKarta();
@@ -114,7 +117,8 @@ export const pojazdyApi = {
   zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem,
   bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron, utworzZKatalogu, zetonPojazdu,
   maZdolnosc, trikKaskadera, synchronizujOC,
-  szybkoscPojazdu, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
+  szybkoscPojazdu, budzetJazdy, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
+  paleta: { otworz: otworzPalete, uzyj: uzyjPalety, przerzutka: ustawPrzerzutke, stan: paletaPojazdu, pozycje: pozycjePojazdu, budzet: budzetPalety, POZYCJE },
   naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote,
   /** MG: posadzenie od razu, bez kosztów i kart (testy, Poligon). */
   async posadz(pojazd, jadacy, miejsce) {
