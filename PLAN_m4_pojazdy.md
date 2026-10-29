@@ -1,10 +1,10 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
-> Status: **część 1 ZROBIONA** (E0–E8, noc 2026-10-19 — do weta MG, §10); **część 1b ZROBIONA** (E9–E11, pojazdy
-> między scenami, §4.14–§4.16, 2026-10-19); **część 2: P1–P4 ZROBIONE** (złożona droga, metryka, jadący, serie i
-> obszary, §6.2), **P5 — runda pytań** (§10, 11 pytań), P6 — stanowisko Poligonu przebudowane, bramka w §11;
-> **część 3 — wierzchowce, PROJEKT** (§6.3, przeniesione z M6 2026-10-25).
-> Decyzje MG D1–D31 (§1). Rozmiar: **XL** (część 1: L, część 1b: M, część 2: L — plansza od nowa).
+> Status (2026-10-29, runda 6): **część 1 i 1b ZROBIONE** (E0–E11; weto MG — §10); **grafika ZROBIONA** (14
+> pojazdów, 7 wnętrz, 14 wraków, 2 wieże; brak tylko 7 dźwięków); **część 2: P1–P4 ZROBIONE**, **P5 gotowe do
+> wykonania** (pytania rozstrzygnięte — D34–D41, §6.2.5), P6 częściowo; **część 3 — wierzchowce: gotowe do
+> wykonania** (D42–D43, §6.3). **Przejście końcowe: §0.1** — kolejność, zależności, zakres i to, czego nie robimy.
+> Decyzje MG D1–D44 (§1). Rozmiar: **XL** (część 1: L, 1b: M, 2: L, 3: L; przejście końcowe ≈ L–XL).
 > Wywołanie: `PLAN_beta.md` §0, krok 4 (przesunięty przed M6, MG 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie), a od 2026-10-19 także geometrię planszy
 > (tamten §2.1, §2.3–§2.6 i D2) — §6.2 tutaj. Grafika planszy (motywy, pustynia, kołysanie — tamten §2.2) zostaje.
@@ -21,15 +21,18 @@
 
 ## 0. W skrócie
 
-| Część | Co dostaje stół | Gdzie |
-|---|---|---|
-| **1. Pojazdy** | katalog 14 pojazdów (paczka), karta pojazdu, wsiadanie na miejsca z żetonami jadącymi razem z pojazdem, prześwietlenie i kropki, silnik (uruchom/zgaś, dym, drgania, dźwięk), jazda w turze kierowcy, skręty, potrącenia, awarie k20 ze skutkami i naprawami, Wojownik autostrady, stanowisko Poligonu | §4–§6 |
-| **1b. Między scenami** | jedna reguła skali (obrys w metrach, znacznik na mapach w km), pamięć obsady i karta „Posadzić?”, Ctrl+X / Ctrl+V z załogą | §4.14–§4.16 |
-| **2. Pościgi** | plansza od nowa — złożona droga (pojazdy w prawdziwej skali, tor = 36 m), metryka drogi dla zasięgów i obszarów, serie z celowaniem, jadący na planszy; paleta manewrów, Test Pościgu, komplikacje k20, ataki, wypadanie, koniec pościgu | §6.2 |
-| **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu | §6.3 |
+| Część | Co dostaje stół | Stan | Gdzie |
+|---|---|---|---|
+| **1. Pojazdy** | katalog 14 pojazdów (paczka), karta pojazdu, wsiadanie na miejsca z żetonami jadącymi razem z pojazdem, prześwietlenie i kropki, silnik (uruchom/zgaś, dym, drgania, dźwięk), jazda w turze kierowcy, skręty, potrącenia, awarie k20 ze skutkami i naprawami, Wojownik autostrady, stanowisko Poligonu | ✅ E0–E8 (weto MG i znane braki — §10) | §4–§6 |
+| **1b. Między scenami** | jedna reguła skali (obrys w metrach, znacznik na mapach w km), pamięć obsady i karta „Posadzić?”, Ctrl+X / Ctrl+V z załogą | ✅ E9–E11 | §4.14–§4.16 |
+| **Grafika** | 14 żetonów z góry i portretów, 7 wnętrz (prześwietlenie), 14 wraków, osobne wieże Bradleya i Abramsa (oś pod przyszłe celowanie), Garaż z podglądami | ✅ (brak 7 dźwięków; 13 wraków do oceny MG) | §8, §11 |
+| **2. Pościgi** | plansza od nowa — złożona droga (pojazdy w prawdziwej skali, tor = 36 m), metryka drogi dla zasięgów i obszarów, serie z celowaniem, jadący na planszy; paleta manewrów, Test Pościgu, komplikacje k20, ataki, wypadanie, koniec pościgu | 🟡 P1–P4 ✅; P5 ❌ (rozstrzygnięte); P6 🟡 | §6.2 |
+| **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu | ❌ (projekt rozstrzygnięty) | §6.3 |
+| **Przejście końcowe** (2026-10-29) | skala grafiki istot i jadących, paleta kierowcy, kotwica tury, braki części 1, P5–P6, W0–W5 | ❌ | §0.1 |
 
 ```mermaid
 flowchart LR
+  classDef done fill:#d4f4d4,stroke:#2e7d32
   E0[E0 Próba: obrys i jadący] --> E1[E1 Katalog i dane]
   E1 --> E2[E2 Karta pojazdu]
   E1 --> E3[E3 Wsiadanie, miejsca,<br/>prześwietlenie]
@@ -48,14 +51,73 @@ flowchart LR
   P2 --> P3[P3 Jadący na planszy]
   E11 --> P3
   P2 --> P4[P4 Serie i obszary]
-  P3 --> P5[P5 Mechanika pościgu]
-  P4 --> P5
-  P5 --> P6[P6 Poligon, testy]
+  P3 --> F[Przejście końcowe §0.1:<br/>P5, P6, W0–W5]
+  P4 --> F
+  class E0,E1,E2,E3,E4,E5,E6,E7,E8,E9,E10,E11,P1,P2,P3,P4 done
 ```
 
 ---
 
-## 1. Decyzje MG (2026-10-18 – 2026-10-19)
+## 0.1 Przejście końcowe (runda 6, 2026-10-29)
+
+Wszystkie pytania rozstrzygnięte (D34–D44). Zostało dziesięć pakietów. Każdy kończy się commitem z testami (zasady
+repozytorium: `AGENTS.md`). Drzewo robocze może zawierać cudzą, niezacommitowaną pracę (np. M5: wraki maszyn,
+materiały wybuchowe) — commituj tylko swoje pliki. Kod części 1 jest świeży i ma pokrycie: e2e `pojazd`,
+`pojazd-prezentacja`, `pojazd-miejsca`, `pojazd-undo`, `garaz-grafika`, `poscig`, `poscig-jadacy`, Quench `pojazdy`
+i `poscig` — każda zmiana wspólnego kodu idzie pod te testy.
+
+```mermaid
+flowchart LR
+  S0[S0 Skala grafiki istot:<br/>spike + iteracje MG] --> S1[S1 Jadący jak na mapie]
+  K1[K1 Paleta kierowcy:<br/>cechy, wsteczny] --> P5c[P5c Manewry]
+  KT[KT Kotwica tury] --> P5e[P5e Za kierowcą,<br/>koniec pościgu]
+  P5a[P5a Tura pościgu:<br/>budżet, Test Pościgu] --> P5b[P5b Komplikacje]
+  P5a --> P5c
+  P5a --> P5d[P5d Ataki, RO pojazdu,<br/>dryf drogi]
+  P5b --> P6[P6 Poligon, bramka<br/>części 2]
+  P5c --> P6
+  P5d --> P6
+  P5e --> P6
+  K2[K2 Lalka i broń<br/>montowana] --> B
+  K3[K3 Awaria 5: dym] --> B
+  W0[W0 Spike konia] --> W1[W1 Profil nośnika]
+  S1 --> W2
+  W1 --> W2[W2 Koń, wsiadanie]
+  W2 --> W3[W3 Walka: tura, budżet]
+  KT --> W3
+  K1 --> W3
+  W3 --> W4[W4 Spadanie, atak z grzbietu]
+  W4 --> W5[W5 Stajnia, zdolności M7]
+  W5 --> B[Bramka końcowa M4]
+  P6 --> B
+```
+
+| Pakiet | Zakres | Rozmiar | Zależy od | Gotowe gdy |
+|---|---|---|---|---|
+| **S0** | Spike skali grafiki istot (D42), rozszerzenie istniejącej sondy Garażu `skala-grafiki` (dziś: ludzie dnd5e, własna grafika i Gangus Kapo w Osobówce, auto +20%): wycinek mapy kampanii z narysowanymi autami, pojazdy z katalogu z jadącymi (także motocykl z pasażerem i deskorolka), postacie stockowe dnd5e, NOE i kampanii (z pierścieniem i bez), koń z bestiariusza; warianty mnożnika f = 1,0 / 0,8 / 0,7 / 0,6 obok siebie, do porównania także pojazdy ×1,1–1,2 (tylko podgląd). Iteracje z MG, bez zmian w danych. | S | — | MG wybiera f; wpis w D42 i §11 |
+| **S1** | Mnożnik grafiki istot jako ustawienie świata i jadący rysowany dokładnie jak na mapie (D42, §4.1) | S–M | S0 | Quench: siatka jadącego = siatka tej postaci poza pojazdem (14 podwozi, po ruchu, obrocie, przesiadce, schowku); e2e `pojazd-prezentacja` i `garaz-grafika` |
+| **K1** | Paleta kierowcy (D41): akcje cech pojazdu i bieg wsteczny, doliczane do budżetu jazdy; ta sama paleta przyjmie manewry P5c i akcje wierzchowca W3 | M | — | e2e `pojazd`: Gaz do dechy podnosi budżet i ST, wsteczny liczy ½ (Autobus ¼ z Utrudnieniem) |
+| **K2** | Lalka a broń montowana (§10, znane braki) | S | — | Quench/e2e: ręce na broni, upuszczenie i schowanie oznaczane |
+| **K3** | Awaria 5 — dym: Region przypięty do pojazdu i Oślepienie jadących na zakrytych miejscach (§4.8) | S | — | e2e: [Zastosuj] → jadący zakryci oślepieni; wysiadka, wsiadanie i naprawa uzgadniają efekt |
+| **KT** | Kotwica tury (D39): rejestr kotwic uogólniający `_kotwica` z `combat/towarzysze-walka.mjs` | S–M | — | Quench sortowania i pomijania tury; regresja e2e towarzyszy |
+| **P5a–P5e** | Mechanika pościgu (§6.2.5) | L | K1, KT | e2e `poscig-p5`: pościg od startu do mety bez notatek MG (`PLAN_beta.md`, M4) |
+| **P6** | Poligon i bramka części 2: sondy D34–D41 na stanowisku Pościg | M | P5 | stanowisko z sondami; e2e w obu światach |
+| **W0–W5** | Wierzchowce (§6.3) | L | S1, K1, KT | e2e `wierzchowiec`; stanowisko Stajnia |
+| **Zasoby** | 7 dźwięków (MISSING §P); żetony koni z góry ×3 (nowe zamówienie, §8); ocena MG 13 wraków | — | — | MISSING §P bez pozycji M4 |
+
+**Zamknięcie M4:** `release:check` zielony; macierz `IMPLEMENTATION.md` (wiersze „Walka na wierzchowcu”, „Pojazdy
+i pościgi”, „Pojazdy poza pościgiem”, „Manewry pościgu…”) i `PLAN_beta.md` (M4) zaktualizowane; M7 dostaje sygnał,
+że Jeździec, Rodeo i Zawsze w siodle mają nośnik (W5); `HANDOFF_m4_pojazdy.md` usunięty, jego pułapki są już w
+`ARCHITECTURE.md` §11.
+
+**Nie robimy w tym przejściu** (świadomie): obrót wież i zasady stanowisk (D33 — po becie, potwierdzone
+2026-10-29); Paka — Akrobatyka stojących zostaje tekstem cechy; pościg konny (W-P1); TT w bezruchu poza walką;
+spalanie z jazdy po mapie (liczy karta drużyny); etykiety rozmiarów (§10 — sprawa globalna, nie M4); przycięcie
+rysunku wybuchu na planszy (D31 — po pierwszej grze); własny żeton GMT400 (grafika kampanii).
+
+---
+
+## 1. Decyzje MG (2026-10-18 – 2026-10-29)
 
 | # | Decyzja |
 |---|---|
@@ -98,6 +160,22 @@ flowchart LR
 | D32 | **Prezentacja miejsc, MG 2026-10-25.** Wspólny model rozdziela otwarte/zakryte miejsce i kolejność grafiki. Właz Hammera: pełny żeton zawsze widoczny zgodnie ze zwykłą widocznością Foundry, **nad dachem**, bez kropki. Kabina nadal zakryta. Grafiki Hammera bez zmian; rysowanie pod osobnym dachem odłożone. To fundament W1, bez uruchamiania całej części 3. |
 | D33 | **Obsługa wieżyczek po becie, MG 2026-10-26.** Rozbudowane zasady stanowisk i wieżyczek odkładamy. Wstępne założenie: użycie broni na odpowiednim stanowisku ma niwelować wymogi/kary właściwości **Ciężka** oraz **Utrudnienie za atak z jadącego pojazdu**. To kierunek do doprecyzowania po becie, nie bieżąca zmiana mechaniki. |
 
+**Runda 6 (2026-10-29) — przegląd planu przed przejściem końcowym: pytania P5, wierzchowce, skala, zakres:**
+
+| # | Decyzja |
+|---|---|
+| D34 | **Ruch na planszy (P5, pyt. 1).** Kierowca przeciąga pojazd po torach, moduł liczy znaczniki z budżetu i oznacza przekroczenie. Metryka drogi już daje 36 m na tor, więc budżet z E5 działa na planszy bez nowej geometrii. **RAI: reszta metrów przechodzi na następną turę** — zapas = budżet + poprzedni zapas − 36 × przebyte znaczniki, najwyżej 35 m (Autobus 24 m awansuje dwa razy na trzy tury; niewykorzystane pełne znaczniki przepadają jak w RAW). Na planszy pojazd o Szybkości > 0 zawsze „jedzie”. Karta MG [Cofnij o znacznik] na końcu tury kierowcy pojawia się tylko, gdy pojazd stał: Szybkość 0 (oś, silnik, wrak), Hample bez dalszej jazdy albo brak kierowcy. Ruchy wymuszone (Hample −2, komplikacje, nat. 20 +1) to przyciski na kartach (stary D4). |
+| D35 | **Test Pościgu (pyt. 2, 2b).** Karta na początku tury kierowcy pojazdu z rolą pościgu, rzut po kliknięciu — kierowca może najpierw zadeklarować manewr (Ostrożna jazda — Ułatwienie; Gaz do dechy, Szósty bieg — ST +5). ST ze środowiska planszy. Sukces — nic; porażka — komplikacja; nat. 20 — bez komplikacji i [+1 znacznik]; nat. 1 — dwie komplikacje. **Porażka o 6+ — dodatkowo karta awarii k20** (RAW s. 264 obejmuje każdy Test (Pojazdy); hak w `awarie.mjs` już ją wystawia, MG może pominąć). |
+| D36 | **Komplikacje, atak na kierowcę, RO pojazdu (pyt. 3, 5, 10).** Komplikacje k20 (s. 267): [Zastosuj] dla mierzalnych (znaczniki, obrażenia, Szybkość ½, trudny teren, stany; 1–3 → awaria z tabeli k20), testy jako przyciski, reszta tekstem. Trafiony kierowca na planszy → Test (Pojazdy) ST max(10, ½ obrażeń); porażka [Cofnij o znacznik], o 5+ [Przewrócenie] (awaria 8). **Pojazd trafiony serią albo obszarem rzuca RO ZRC jak istota** (ZRC z katalogu; Slalom kierowcy daje Ułatwienie w Reakcji), potem Próg obrażeń. |
+| D37 | **Wręcz na znaczniku (pyt. 4, RAW).** Ten sam znacznik = zasięg wręcz bez względu na rząd; opuszczenie wspólnego znacznika nie prowokuje ataków okazyjnych. Jedyny wyjątek od D27 i tylko dla zasięgu wręcz — zasięgi dystansowe, obszary i linijka dalej z metryki. |
+| D38 | **Dryf drogi (pyt. 6, rozszerzone).** Wszystko na planszy poza pojazdami i ich jadącymi — wypadnięci, przedmioty, rzeczy na drodze (D30), przepaść z komplikacji 15 — cofa się o 3 znaczniki na początku każdej rundy. Aktywny MG przesuwa, karta wymienia, co minęło po drodze (interakcje rozstrzyga MG). Wypadnięty ląduje znacznik za pojazdem (3k6, Powalenie — część 1); zjazd z tyłu planszy — „został w tyle”, poza pościgiem. |
+| D39 | **Kotwica tury (pyt. 7, 7b; W-U6).** Jedno narzędzie dla trzech przypadków: towarzysz po właścicielu (M3, istnieje), pasażer „Za kierowcą” (jednorazowo, przycisk HUD-u jadącego; RAW na planszy, **RAI także na mapie taktycznej**), wierzchowiec prowadzony przez jeźdźca (Inicjatywa jeźdźca, własna tura pomijana, rusza się w turze jeźdźca; po zsiadaniu zachowuje wartość i dostaje własną turę). Rejestr kotwic zamiast drugiego owinięcia `Combat#_sortCombatants`. |
+| D40 | **Koniec pościgu i Rajdowiec (pyt. 8, 11).** Karta MG przy przewadze 7 znaczników, po 10 rundach (wygrywa najdalszy) i przy wyeliminowaniu (wrak, Szybkość 0 na stałe); meta — logiczny znacznik ustawiany przez MG, przeżywa recentrowanie. Runda pościgu = runda walki na scenie planszy. Rajdowiec na planszy działa zawsze, także poza walką. |
+| D41 | **Paleta kierowcy (pyt. 9 i znane braki).** Jeden przycisk na HUD-zie pojazdu i kierowcy otwiera paletę: akcje cech pojazdu (Gaz do dechy, Szósty bieg, Przerzutka, Akrobacja, Skok, Syrena, Działko wodne, Lemiesz, Uciąg, Ollie; Slalom jako Reakcja), bieg wsteczny (Cofanie ½; Autobus i Ciężarówka ¼ z Utrudnieniem), a na planszy sześć manewrów (Gazu!, Hample, Obrót 180°, Ostrożna jazda, Stuknięcie, Zajechanie). Wybór = karta + efekt na pojeździe do początku następnej tury kierowcy, który zmienia budżet, ST i Utrudnienia. Koszt akcji oznaczany, nie pobierany (D7). |
+| D42 | **Skala grafiki istot (MG 2026-10-29: „jeszcze bardziej radykalnie”; wartość po S0).** Różnicę skali między jadącym a postacią na mapie zmniejszamy od strony istot: **mnożnik f rysowania wszystkich istot** — stockowe dnd5e, NOE i kampania; ustawienie świata, tylko obraz (dokumenty, przestrzeń, zasięgi i `tokens/scale-overrides.json` bez zmian). **Jadący rysuje się dokładnie jak na mapie** (jego rozmiar sprzed wsiadania × f), niezależnie od rozmiaru dokumentu na miejscu (0,5 kratki zostaje polem kliknięcia i odstępem foteli). Rekomendacja: pojazdy zostają w prawdziwej skali (D21, D24, auta i ulice na mapach kampanii); powiększenie pojazdów tylko wtedy, gdy S0 pokaże, że bez niego nie wystarczy. Przewidziane kilka iteracji z MG. |
+| D43 | **Wierzchowce (MG 2026-10-29).** Obrys kwadratowy wg rozmiaru dnd5e (koń Duży — 2 × 2, zamiana obrysu się nie odpala). Kierowanie: **jedna wolna ręka** (RAI z Jeźdźca s. 97 — „nie musisz używać rąk”; oznaczane z lalki, Jeździec bez rąk). Budżet ruchu nośnika **teraz**, na wzorcu E5 (W-P3 — handoff ruchu nie ma kodu, przejmie budżet później). Żetony koni z góry, trzy warianty (zamówienie, §8). Inicjatywa przez kotwicę tury (D39). W-U1–W-U6 i W-P1–W-P2 przyjęte bez weta. |
+| D44 | **Zakres przejścia końcowego (MG 2026-10-29).** Zamykamy znane braki: lalka a broń montowana, bieg wsteczny i akcje cech (D41), dym awarii 5 (Region + Oślepienie). Paka zostaje tekstem cechy. **Wieże po becie — D33 potwierdzone**: grafika wieży nadal obraca się razem z kadłubem. Dziennik grafiki w §11 skrócony do tabeli. |
+
 ---
 
 ## 2. RAW w pigułce
@@ -131,19 +209,46 @@ Stuknięcie, Zajechanie.
 skoki, dwa koła), Pancerna fura (OC, AC [B] — uruchomienie i zatrzymanie w akcji bonusowej). Biegłości: Pojazdy +
 narzędzia małego mechanika (M6).
 
+**Część 3 — wierzchowce (s. 257) i zdolności wokół nich** (odczyt 2026-10-29):
+- *Wierzchowiec* — istota ≥ 1 rozmiar większa od jeźdźca, z siodłem (albo czymś podobnym). Dosiadanie i zsiadanie w
+  ruchu, w zasięgu 1,5 m, za połowę Szybkości. Dosiada się tylko wyszkolonego; ujeżdżony (Rodeo) — tylko ten, kto go
+  ujeździł.
+- *Kontrola* — Inicjatywa wierzchowca wyrównuje się z jeźdźcem; rusza się w turze jeźdźca i ma tylko jedną z czterech
+  akcji (s. 29–30): **Bieganie** (+2× Szybkości do początku następnej tury, Utrudnienie do jego Testów Ataku, ataki
+  dystansowe przeciw niemu z Utrudnieniem do końca tury; nie dla istot, które nie chodzą na nogach), **Przyspieszenie**
+  (+1× Szybkości w tej turze), **Odstąpienie**, **Unikanie**. Może działać już w turze dosiadania. Niewyszkolony robi,
+  co chce. Po zsiadaniu w walce zachowuje Inicjatywę jeźdźca, dba o siebie (Unikanie, Odstąpienie), może uciec.
+- *Spadanie* — przemieszczenie wierzchowca wbrew jego woli albo Powalenie jeźdźca lub wierzchowca → RO ZRC ST 10;
+  porażka — 1,5 m obok, Powalenie i „możliwe obrażenia” (MG).
+- *Walka z grzbietu* — jeździec albo pasażer bez biegłości w Tresurze atakuje z grzbietu **jadącego** wierzchowca z
+  Utrudnieniem.
+- **Jeździec** (Zwiadowca, Wyjadacz, s. 97): kieruje bez rąk (czyli zwykle ręce są potrzebne — D43), ataki dystansowe
+  bez Utrudnienia z niestabilnego podłoża, dosiadanie i zsiadanie za 1,5 m, TT wierzchowca + Premia Biegłości.
+  **Rodeo** (Sztuczka, s. 106): Dżokej — ujeżdżenie przyjaznego zwierzęcia ≥ 1 rozmiar większego bez siodła, Test MDR
+  (Tresura) ST 10 + mod. SIŁ istoty; Kawalerzysta — TT wierzchowca + Premia Biegłości. **Zawsze w siodle** (Kowboj,
+  s. 88): koń albo motocykl na najbliższym Długim odpoczynku — fabularne. **Ale jazda!** (Pochodzenie, s. 61):
+  strzelając z jadącego pojazdu, z wierzchowca albo spadając, ignorujesz Utrudnienia z niestabilnego podłoża.
+- Bestiariusz: koń zdrowy (Duży, 24 m), skażony (Duży, 18 m), teksańczyk (Duży, 36 m) — `dev/bestiary/bestiary.json`;
+  żetony to dziś atrapy (`tokens/_placeholder/kon-*.webp`).
+
 ---
 
-## 3. Co już mamy
+## 3. Co już mamy (stan 2026-10-29)
 
-| Element | Stan |
-|---|---|
-| Dane | `config/vehicles-data.mjs`: 14 podwozi z s. 262, rozbieżności RAW opisane; ST środowisk i stałe pościgu |
-| Aktorzy | GMT400 (podwozie Hammer), Hammer Posterunku |
-| Karta | stockowa `VehicleActorSheet` dnd5e + nasze wstawki: pasek paliwa (`party-travel.mjs`), przełącznik portret/żeton (`vehicle-portrait.mjs`). dnd5e 6.0.6 zmienił w karcie pojazdu 27 linii |
-| Model dnd5e | `crew`/`passengers` = listy UUID aktorów, `hp.dt` = Próg obrażeń, `hp.mt` = Próg awarii, ładownia, rozmiar, przedmioty montowane (`mountable`: własne TT/PW — Browning na GMT400). Do ukrycia: stanowiska i progi akcji (statki 2014), stępka/szerokość, jakość, tempa podróży dnd5e |
-| Awarie | `combat/maszyny.mjs` — rzut, [Zastosuj] dla MG, aktywne awarie, naprawa — dla maszyn Bestiariusza i dronów; wzorzec do ponownego użycia |
-| Wokół | Naprawa (M2, `production/naprawa.mjs`), lalka (wolne ręce), przedmioty na ziemi (`ground-items.mjs`), Podpalenie (`combat/podpalenie.mjs`), osłona w oknie ataku (`combat/cover.mjs`), okoliczności ataku, trudny teren (`scenes/difficult-terrain-hint.mjs`), FOV 220° z obrotu żetonu (`config/fov.mjs`), Sequencer + JB2A |
-| Pościg | plansza (Nevada, Ruiny Ameryki), przyciąganie, recentrowanie, interfejs MG; stanowiska Poligonu `poscig` i `droga` — geometria do przepisania (D24, §6.2) |
+| Obszar | Stan | Kod / dane | Testy |
+|---|---|---|---|
+| Dane | 14 podwozi (s. 262, rozbieżności RAW opisane) + katalog: obrysy, strefy z prezentacją i kolumnami dopasowanymi do grafiki, rura, cechy, `GRAFIKI_WRAKOW`, `wiezaGrafiki` (Bradley, Abrams); ST środowisk i stałe pościgu (`SRODOWISKA`, `znacznikiZDystansu`) | `config/vehicles-data.mjs` | Quench `pojazdy` |
+| Paczka | `pojazdy` — 14 aktorów, 52 cechy jako zdolności pojazdu | `dev/packs/build-pojazdy.mjs` | `validate-packs` |
+| Kampania | GMT400 (podwozie Hammera, obrys 1,5 × 3,5, 8 miejsc) i Hammer Posterunku po migracji E1; GMT400 jeździ na grafice Hammera | `migration/migrate-pojazdy.mjs` | — |
+| Część 1 i 1b | 22 moduły (mapa plików w `pojazdy/index.mjs`), API `game.neuroshima.pojazdy`; karta = podklasa stockowej `VehicleActorSheet` dnd5e 6 | `scripts/pojazdy/` | e2e `pojazd`, `pojazd-prezentacja`, `pojazd-miejsca`, `pojazd-undo`, `garaz-grafika`; Quench `pojazdy` 42/42 |
+| Otwarte miejsca (D32, W-U1) | dane gotowe na 10 pojazdach: Motocykl, Rower, Buggy, Hammer (właz), Ciężarówka (paka), Wóz strażacki (działko), Buldożer, Traktor, Motorower, Deskorolka; zakryte tylko Osobówka, Autobus, Czołg, BWP | `prezentacja.mjs`, katalog | e2e `pojazd-prezentacja` |
+| Wieże | osobna warstwa grafiki: oś, wycinek, transformacja kadłuba; **bez** własnego kąta (D33) | `pojazdy/wieza.mjs` | e2e `garaz-grafika` |
+| Pościg P1–P4 | złożona droga, metryka drogi, serie i obszary; z mechaniki tylko powłoka: role (ścigany/ścigający), przewaga, ST środowiska, runda ręczna, raport przewagi 7 i 10 rund | `scenes/poscig*.mjs`, `scenes/droga.mjs`, `scenes/poscig-serie.mjs` | e2e `poscig`, `poscig-jadacy`, `nevada-art`, `urban-art`; Quench `poscig` 72/72 |
+| Brak (P5) | Test Pościgu, komplikacje, manewry, budżet w znacznikach, ataki na planszy, dryf, koniec pościgu, runda z walki | — | — |
+| Brak (część 3) | profil nośnika, wierzchowiec, kotwica tury dla nośników | — | — |
+| Wokół, do użycia | Naprawa M2 (`production/naprawa.mjs`), lalka (`actors/doll.mjs` `freeHands`), okoliczności ataku (`combat/okolicznosci.mjs` — `zarejestrujZrodloOkolicznosci`, gałąź planszy w `odlegloscKrawedzi`), towarzysze w walce (`combat/towarzysze-walka.mjs` — `_kotwica`, `CombatantGroup`), Regiony przypięte do żetonu (ogień zaporowy D29), Sequencer + JB2A | | |
+| Handoff ruchu | `HANDOFF_movement_hotbar.md` — tylko projekt, **bez kodu** (budżetu ruchu postaci nie ma) | — | — |
+| dnd5e 6 / rdzeń 14 | `vehicle`: `crew`/`passengers`/`draft` (listy UUID), `hp.dt`, `hp.mt`; **brak** jeźdźca i wierzchowca w dnd5e (także reguły „controlled mount”); rdzeń przypina do żetonu tylko Regiony; `CombatantGroup` ze wspólną inicjatywą (dnd5e i M3 go używają) | `fvtt-dnd5e/module/data/actor/vehicle.mjs`, `common/documents/region.mjs` | — |
 
 ---
 
@@ -151,11 +256,31 @@ narzędzia małego mechanika (M6).
 
 ### 4.1 Jadący — żetony, które jadą z pojazdem (D2)
 
-**Diagnoza 2026-10-26 — skala do poprawy.** Dotychczasowy rozmiar miejsca 0,5 pomniejsza także
-grafikę jadącego o połowę, dodatkowo do ustawionych 85%. Potwierdzone na 14/14 podwozi.
-Rozmiar miejsca trzeba oddzielić od prezentacji postaci; sama zmiana stałej przesunęłaby także
-domyślne kotwice. [Pomiary i zakres poprawki](dev/audits/vehicle-occupant-scale-2026-10-26.md).
-Poniżej opis dotychczasowego zachowania; w tej diagnozie nie zmieniano mechanizmu.
+**Skala jadących — D42, pakiety S0–S1 (2026-10-29).** Diagnoza 2026-10-26
+([pomiary](dev/audits/vehicle-occupant-scale-2026-10-26.md)): rozmiar miejsca 0,5 kratki pomniejsza też grafikę
+jadącego o połowę, na 14/14 podwozi. Na zakrytym fotelu to nie razi (MG: „w aucie dobrze”), ale na motocyklu,
+deskorolce i — po części 3 — na koniu „malutki żetonik” wygląda źle. Poprawka rozdziela dwie odpowiedzialności:
+
+- **Dokument** jadącego zostaje 0,5 kratki pojazdu: pole kliknięcia, odstępy foteli, kotwice, schowek, Quench
+  geometrii. Nie zmieniać `ROZMIAR_MIEJSCA` (odstępy w `ukladMiejsc`) ani skal prototypów.
+- **Siatka** jadącego rysuje się w jego rozmiarze sprzed wsiadania (`jazda.rozmiar`) — w `_refreshMeshSizeAndScale`
+  podklasy z `zeton.mjs`, tak jak dziś obrys naturalny pojazdu (`obrysSiatki`). Postać w pojeździe jest więc tak
+  duża jak obok niego; na otwartym siodle wystaje poza motocykl jak prawdziwy człowiek. Kolejność w obrębie pojazdu:
+  przednie miejsce nad tylnym (sprawdzić w S0 na motocyklu z pasażerem).
+- **Mnożnik f istot** (D42) nakłada się na końcu, jednakowo na mapie i w pojeździe. Nowy `scenes/skala-istot.mjs`:
+  ustawienie świata `skalaGrafikiIstot` (domyślnie 1,0 do decyzji po S0, zakres 0,5–1,0) i czysta funkcja
+  `mnoznikGrafiki(tokenDoc)` — f dla aktorów `character` i `npc` (także wierzchowców), 1 dla pojazdów, pojemników typu
+  `vehicle`, `group`, żetonów bez aktora, obiektów (`scenes/obiekty.mjs`), przedmiotów na ziemi i znaczników.
+  Mnożenie `mesh.scale` w tej samej podklasie żetonu (jedyna podklasa modułu), po `super` i po rozmiarze jadącego.
+  Zmiana ustawienia odświeża siatki (`renderFlags.set({refreshMesh: true})`). Nic nie trafia do bazy, więc
+  `tokens/scale-overrides.json`, Szafy z potworami i postaciami oraz test `skala-zetonow` zostają bez zmian.
+- **Do oceny w S0:** pierścień dnd5e skaluje się z siatką; paski, nazwa, ramka i pole kliknięcia zostają w obrysie
+  dokumentu — czy przerwa między grafiką a paskiem przy f ≈ 0,6–0,7 przeszkadza; czytelność okrągłych portretów.
+- **Testy S1:** Quench — `mnoznikGrafiki` dla typów aktorów; siatka jadącego = siatka tej samej postaci obok pojazdu
+  (14 podwozi, po ruchu, obrocie, przesiadce, Ctrl+X/V); wsiadanie i wysiadanie nie zmieniają `texture.scaleX`.
+  Dotychczasowe testy sprawdzały tylko obrys 0,5 — nie wykryłyby tej wady.
+
+Poniżej opis mechanizmu jadących (bez zmian od E0).
 
 Rdzeń 14 ma już ten wzorzec dla Regionów przypiętych do żetonu: zmiany Regionu idą w tej samej operacji co ruch
 żetonu, a w animacji Region odświeża się co klatkę (`client/documents/token.mjs` — `#computeAttachedRegionUpdates`,
@@ -169,8 +294,9 @@ PIXI**:
   więc FOV 220° obraca się razem z pojazdem. Obrót jadącego = obrót pojazdu + `obrot`.
 - **Koniec ruchu:** MG zapisuje końcowe pozycje jadących jedną operacją, bez animacji.
 - **Drgania:** jeden ticker modułu dodaje to samo przesunięcie do siatki pojazdu i jego jadących — drżą razem.
-- **Rozmiar:** w czasie jazdy żeton jadącego dostaje rozmiar miejsca (np. 0,5 kratki), oryginalny zapisany we fladze;
-  wysiadanie, usunięcie pojazdu i przycisk MG „Wysadź wszystkich” go przywracają.
+- **Rozmiar:** w czasie jazdy dokument jadącego dostaje rozmiar miejsca (0,5 kratki pojazdu), oryginalny zapisany
+  we fladze; wysiadanie, usunięcie pojazdu i przycisk MG „Wysadź wszystkich” go przywracają. Grafika — patrz
+  „Skala jadących” wyżej (S1: siatka w rozmiarze oryginalnym × f).
 - **Wizja:** rdzeń nie wiąże wizji z widocznością żetonu (`Token#_isVisionSource` nie czyta `isVisible`), więc ukryty
   jadący dalej widzi — gracz patrzy z wnętrza pojazdu.
 
@@ -253,6 +379,41 @@ pojeździe (WKK) ląduje w ładowni, którą jadący i tak widzi.
   w oknie ataku z przyciskiem ZRC (Akrobatyka) ST 10 — silnik okoliczności ataku; Konwojent je wyłącza.
 - **Osłona jadących:** domyślnie ½ (TT +2, RAW s. 266), stanowiska i pojazdy pancerne wg §5 — podpowiedź w oknie osłony.
 - **Wypadanie:** usunięcie jadącego z jadącego pojazdu (przycisk MG albo awaria) → 3k6 i Powalenie, żeton obok.
+- **Ale jazda!** (Pochodzenie, s. 61) — brak w kodzie: dopisać w K1 do tego samego źródła okoliczności co Konwojent
+  (zdejmuje Utrudnienie z niestabilnego podłoża przy strzelaniu z pojazdu; W4 rozszerzy je na wierzchowca).
+
+**Paleta kierowcy — K1 (D41, D44).** Zamyka znane braki „Akcje bonusowe cech” i „Bieg wsteczny”, a P5c i W3
+dokładają do niej swoje pozycje.
+
+- **Gdzie:** nowy `pojazdy/paleta.mjs`; przycisk na HUD-zie pojazdu i kierowcy (`okno-miejsc.mjs`
+  `_onRenderTokenHUD`, obok Uruchom/Światła). Lista budowana z danych: cechy z `KATALOG_POJAZDOW[...].cechy` i ich
+  definicje z polem `czas` (`bonus`, `akcja`, `reakcja`) w `config/vehicles-data.mjs` — każda definicja dostaje
+  opcjonalny `skutek`. Nie-kierowca widzi paletę tylko do odczytu (oznaczanie, nie blokada).
+- **Skutek = efekt na aktorze pojazdu** z flagą `paleta: {id, walka, runda}`. Zdejmuje go aktywny MG na początku
+  następnej tury kierowcy (`combatTurnChange`); poza walką — zegar świata (runda = 6 s, jak zegary awarii E6).
+- **Budżet:** `szybkoscPojazdu` i budżet `tura.droga` (`jazda.mjs`) czytają efekty palety: Gaz do dechy i Szósty bieg
+  +2× Szybkości, Gazu! (P5) +1×, Ostrożna jazda (P5) ×½, Przerzutka — mnożnik rowerzysty ×3 / ×2 / ×1. Awaria 11
+  blokuje Gaz do dechy, Szósty bieg i Gazu! (oznaczenie); trudny teren — Gaz do dechy z kartą Przewrócenia (RAW).
+- **Testy:** `testKierowcy` (`jazda.mjs`) czyta ST +5 (Gaz do dechy, Szósty bieg — do końca następnej tury) i
+  Ułatwienie (Ostrożna jazda).
+- **Utrudnienia ataków:** nowe źródło okoliczności (`zarejestrujZrodloOkolicznosci`) — przy Gazie do dechy ataki
+  jadących i ataki na pojazd i jadących z Utrudnieniem; przy Szóstym biegu — motocyklisty i na niego.
+- **Wsteczny (Cofanie):** przełącznik w palecie. Gdy włączony, `preMoveToken` w `zeton.mjs` nie ustawia
+  `autoRotate` (pojazd cofa przodem do przodu), budżet liczy drogę ×2 (Cofanie ½), a z `cwierc: true` (Autobus,
+  Ciężarówka) ×4 i Utrudnienie do Testów (Pojazdy). Wyłącza się sam na początku następnej tury kierowcy.
+- **Reszta cech** (Akrobacja, Skok, Ollie, Syrena, Działko wodne, Lemiesz, Uciąg, Slalom) — karta z testem albo RO i
+  [Zaznacz trafionych] tam, gdzie RAW daje obszar; Kaskader dalej przez `trikKaskadera`.
+- **Testy K1:** Quench budżetu z efektami palety; e2e `pojazd` — Gaz do dechy (budżet i ST), wsteczny (bez obrotu,
+  ½), zdjęcie efektu na początku następnej tury kierowcy.
+
+**Kotwica tury — KT (D39).** `combat/towarzysze-walka.mjs` owija już `Combat#_sortCombatants` i `rollInitiative`
+funkcją `_kotwica(combatant)` (towarzysz → uczestnik właściciela). KT zamienia ją w rejestr
+`zarejestrujKotwice(id, fn)` (np. w `combat/kotwica-tury.mjs`, importowanym przez towarzyszy) — pierwsza niepusta
+kotwica wygrywa, kolejność: wierzchowiec prowadzony → pasażer „Za kierowcą” → towarzysz. Uczestnik z kotwicą
+sortuje się tuż za nią, a jego `initiative` przyjmuje wartość kotwicy (RAW: „wyrównuje się”), więc tracker pokazuje
+spójną liczbę. Drugiego owinięcia `_sortCombatants` nie dodawać. Pomijanie tury (wierzchowiec prowadzony) — wzór
+„bez komendy” towarzyszy: aktywny MG, krok naprzód, karta „jedzie z {jeździec}”, `nextTurn()`. Testy: Quench
+sortowania (trzy rodzaje kotwic, remisy), e2e towarzyszy jako regresja.
 
 ### 4.7 Potrącenie i Taranowanie
 
@@ -289,6 +450,14 @@ tworzy efekt na pojeździe:
 | 18 Pancerz | TT −1 |
 | 19 Jadący | losowy jadący: połowa obrażeń pojazdu, min. 2k10 (karta) |
 | 20 Broń | broń montowana uszkodzona; bez broni — awaria 19 |
+
+**Awaria 5 — K3 (D44).** Dziś tylko znacznik z tekstem. Docelowo: (1) Region przypięty do żetonu pojazdu
+(`attachment.token`, wzorzec ognia zaporowego D29) w obrysie pojazdu — obraz i granica dymu, z JB2A
+`jb2a.smoke.*` jak w `scenes/fx-markers.mjs`; (2) status **Oślepienie** na jadących **zakrytych** miejsc (otwarte —
+właz, paka, siodła — bez zmian), nakładany przez moduł przy [Zastosuj], posadzeniu i przesiadce, zdejmowany przy
+wysiadce, przesiadce na otwarte miejsce i naprawie (także tymczasowej — na czas zawieszenia). Zachowanie Regionu
+`applyActiveEffect` z rdzenia 14 wymaga UUID efektu i zdarzeń wejścia, które przy ruchu `displace` jadących są
+niepewne — nie opierać na nim mechaniki. Testy: e2e awarii 5 z dwoma jadącymi (zakryty i właz).
 
 ### 4.9 Naprawy, PW i wrak (D19 — improwizacja do weta)
 
@@ -341,6 +510,12 @@ kratki odpowiada viewportowi 780×1680; tekstura `fit: width`, kotwica (0,5; 0,4
 wystaje przed zajmowane pole. Celowanie po becie musi prowadzić **trzy** miejsca wieży
 (dowódca, działonowy, ładowniczy); kierowca pozostaje związany z kadłubem.
 
+**2026-10-29 — MG potwierdza D33: wieże po becie.** W przejściu końcowym wieża nadal obraca się z kadłubem.
+Szkic na później, żeby nie zgubić ustaleń: kąt wieży względem kadłuba jako flaga żetonu pojazdu (`wieza.kat`),
+`odswiezWieze` dodaje go do `body.rotation`, a strefa wieży (`obracaZWieza: true`) liczy miejsca wokół osi z
+`wiezaGrafiki` zamiast środka pojazdu (`srodekMiejsca` z drugim środkiem obrotu); obrót ku celowi przy ataku ze
+stanowiska wieży; dopiero potem reguły D33.
+
 **Montaż i demontaż to Roboty produkcji.** Produkcja już dziś ma Robotę ad hoc MG (dowolny przedmiot, cena i
 narzędzia od MG — `production/okna.mjs` `oknoAdHoc`) i wyniki trzech rodzajów: przedmiot, aktor (dron), naprawa z
 wtyczkami (`zarejestrujNaprawe` — tak naprawia się dron). Brakuje wyniku, który jest **skutkiem na innym
@@ -358,6 +533,14 @@ strzelca ścieżką przenoszenia przedmiotów (`production/przenoszenie.mjs`), z
 Udźwig jej nie liczy, lalka pokazuje ręce na broni montowanej, upuścić ani schować jej nie można. Opuszczenie
 stanowiska, wysiadka, wypadnięcie, śmierć strzelca i przycisk MG oddają ją pojazdowi; sprawdzenie przy starcie
 świata zwraca broń, której strzelec nie siedzi już na stanowisku.
+
+**K2 (D44) — lalka a broń montowana.** Stan dziś: waga 0 działa, ale `equipped: true` nadpisuje lalka
+(`actors/doll.mjs`), więc ręce nie są na broni, a upuszczenie i schowanie nie są oznaczane. Do zrobienia: lalka
+traktuje `jestZamontowana(item)` (`pojazdy/bron.mjs`) jak broń trzymaną oburącz na czas siedzenia na stanowisku
+(`freeHands` ją liczy), a upuszczenie (`ground-items.mjs`), schowanie
+i przeniesienie do innego aktora pokazują ostrzeżenie „broń zamontowana — wraca do pojazdu przy opuszczeniu
+stanowiska” (oznaczać, nie blokować). Testy: Quench `freeHands` ze strzelcem; e2e `pojazd` — strzelec Browninga
+na włazie Hammera.
 
 ### 4.12 Wrak i wybuch (D17)
 
@@ -458,7 +641,7 @@ karta z RO — nic, co wymaga nowej geometrii. Cechy pościgowe (Rajdowiec, Stuk
 
 ## 6. Etapy
 
-### 6.1 Część 1
+### 6.1 Część 1 i 1b — zrobione (E0–E11; przebieg w §11, braki w §10)
 
 | Etap | Zakres | Rozmiar | Gotowe gdy |
 |---|---|---|---|
@@ -561,42 +744,125 @@ rzędzie Miażdżąca (150 m) sięga ok. czterech znaczników, Długa (36 m) nas
 przez pojazd w rzędzie 2 o znacznik dalej wchodzi w rząd 3 o dwa znaczniki — kąt jest prawdziwy, stromy skos wyjeżdża
 z drogi. Później (miłe): Shift+klik drugiego celu — „poprowadź przez oba”.
 
-#### 6.2.5 Mechanika pościgu (runda pytań przed P5)
+#### 6.2.5 Mechanika pościgu — P5 (rozstrzygnięte 2026-10-29: D34–D41)
 
-Paleta manewrów (Gazu!, Hample, Obrót 180°, Ostrożna jazda, Stuknięcie, Zajechanie) dla załogi z pamięci obsady; Test
-Pościgu z ST planszy, nat. 20/1; komplikacje k20 (1–3 → awarie z części 1); ataki w pościgu (osłona ½, atak na
-kierowcę i jego test, Przewrócenie); wypadanie (−3 znaczniki na rundę); warunki końca (meta, przewaga 7, 10 rund);
-Rajdowiec w pościgu; zasada D4 starego planu — ruch tylko po kliknięciu; rzeczy na drodze wg znacznika (D30). Na
-planszy pojazd zawsze „jedzie”: przesiadka zawsze z kosztem RAW, atak z jadącego pojazdu zawsze z Utrudnieniem.
+Plansza daje geometrię (tor = znacznik: `torX`, `xNaTor`, `dystansZnacznikow`, `znacznikiZDystansu`), część 1 —
+jazdę i jadących. P5 dokłada **turę pościgu**: co dzieje się na początku i końcu tury kierowcy i na początku rundy.
+Nowe pliki: `scenes/poscig-zasady.mjs` (czyste funkcje — zapas, limit znaczników, komplikacje, warunki końca; pod
+Quench) i `scenes/poscig-tura.mjs` (haki walki, karty, przyciski). `poscig.mjs` ma już 23 KB — nie dopisywać do
+niego. Na planszy pojazd zawsze „jedzie” (`jedzie()`): przesiadka zawsze z kosztem RAW, atak z jadącego pojazdu
+domyślnie z Utrudnieniem i przyciskiem Akrobatyki (część 1). Stan dziś: role, przewaga, ST środowiska, ręczna
+runda i raport przewagi 7 / 10 rund (`poscig.mjs`, `poscig-ui.mjs`) — reszta nie istnieje.
+
+**P5a — tura pościgu (D34, D35, D40).**
+1. Runda pościgu = `combat.round` walki na scenie planszy; pole „runda” w `poscig-ui.mjs` zostaje dla MG poza walką.
+2. Początek tury combatanta, który siedzi na miejscu kierowcy pojazdu z rolą (`combatTurnChange`, aktywny MG):
+   karta „Test Pościgu” — ST ze środowiska sceny (`SRODOWISKA`, nadpisanie MG), Rajdowiec — Ułatwienie
+   (`wojownik.mjs`), efekty palety — Ułatwienie / ST +5. [Rzuć] u kierowcy → `testKierowcy` (`jazda.mjs`). Wynik:
+   nat. 20 → [+1 znacznik]; sukces → nic; porażka → [Losuj komplikację]; nat. 1 → [Losuj dwie]; porażka o 6+ →
+   dodatkowo istniejący hak awarii (`awarie.mjs`, `dnd5e.rollSkill`).
+3. Budżet: na planszy ten sam `tura.droga` co w E5 — gałąź planszy jest dziś wyłączona w haku ruchu `jazda.mjs`;
+   włączyć **tylko budżet** (bez kart skrętu, potrąceń i trudnego terenu, które na planszy nie mają sensu). Limit
+   znaczników = ⌊(Szybkość efektywna + dodatki palety + zapas) / 36⌋; przekroczenie oznaczane (D7), nie blokowane.
+4. Koniec tury kierowcy: zapas (D34) zapisany we fladze pojazdu `poscig.zapas`; pojazd, który stał (Szybkość 0,
+   Hample bez dalszej jazdy, brak kierowcy) → karta [Cofnij o znacznik].
+5. Jedna funkcja ruchów wymuszonych `przesunOZnaczniki(pojazdDoc, n)` — dla nat. 20, cofania, Hample, Obrotu,
+   komplikacji, ataku na kierowcę: przesuwa pojazd o n torów (jadący jadą z nim — część 1), nie liczy się do
+   `tura.droga`, po niej zwykłe recentrowanie.
+
+**P5b — komplikacje k20 (D36).** Tabela s. 267 jako dane `KOMPLIKACJE_POSCIGU` w `config/vehicles-data.mjs`
+(nazwa, parafraza, skutek: `znaczniki`, `obrazenia`, `test {cecha, umiejetnosc, st}`, `efekt`, `awaria`). Karta na
+wzór awarii (`zaproponujAwarie` / `rzucAwarie` / `zastosujAwarie`). Po [Zastosuj]: 1–3 → `rzucAwarie`; 4 → efekt
+Szybkość ½ (naprawa jak awaria 2); 6 i porażka 20 (ST 15) → 2k12 obrażeń pojazdu (karta obrażeń grupowych E6); 7 → efekt
+„bez kontaktu wzrokowego” do początku następnej tury kierowcy (tekst i plakietka, ataki rozstrzyga MG); 8, 19 i
+porażka 16 → −1 znacznik; 9 → lista RO SIŁ ST 15 jadących (1k6 obuchowych, porażka o 5+ — Powalenie); 11 → efekt
+trudnego terenu do końca następnej tury; porażka 13 → −2 znaczniki i komplikacja 7; porażka 14 → k4 rozmiar
+przeszkody i obrażenia; 15 → rzecz na drodze „przepaść” (k4 szerokość, D30, dryf D38) i karta [Hample] / [Skok];
+17 → RO KON ST 15 kierowcy i pasażerów (porażka — bez akcji i akcji bonusowej w najbliższej turze); 18 → RO KON
+ST 15 kierowcy (porażka — Oślepienie do końca następnej tury); 5, 10 (ST 20) i 12 (ST 15) — test, porażka →
+`zastosujAwarie(8)` (sukces 12 → [+1 znacznik]). Komplikacja nie przesuwa niczego bez kliknięcia.
+
+**P5c — manewry (D41, w palecie K1).** Na planszy paleta kierowcy dostaje sześć pozycji; cel (Stuknięcie,
+Zajechanie) = zaznaczony pojazd albo jadący w nim **na tym samym torze**.
+- **Gazu! [A]** — +1× Szybkości do początku następnej tury (awaria 11 — oznaczone).
+- **Hample [B]** — test ST 10 (porażka → komplikacja), −2 znaczniki; kierowcy jadących pojazdów na tych dwóch
+  torach dostają kartę testu ST 10 albo kolizja (rozstrzyga MG).
+- **Obrót 180° [A]** — tylko pojazdy Wielkie i mniejsze; test ST 20 (porażka → awaria 8), −2 znaczniki, potem jazda
+  w drugą stronę (zmiana roli — MG); pojazd na znaczniku docelowym: test ST 15 albo kolizja.
+- **Ostrożna jazda [A]** — Szybkość ½ i Ułatwienie do Testów (Pojazdy) do początku następnej tury; wyklucza Gaz do
+  dechy i Szósty bieg w tej turze.
+- **Stuknięcie [A]** — rozmiar własny ≥ rozmiar celu; test ST 10 (porażka o 5+ → komplikacja); sukces → cel test
+  ST 15, z Utrudnieniem gdy nasz pojazd większy; porażka celu → komplikacja celu.
+- **Zajechanie [A]** — test ST 10 (porażka o 5+ → komplikacja); sukces → Szybkość celu ½ do końca jego następnej tury.
+
+**P5d — ataki, RO pojazdu, wypadanie, dryf (D36–D38).**
+- **Wręcz na znaczniku (D37):** wyjątek wyłącznie w sprawdzeniu zasięgu wręcz — dwa żetony w różnych pojazdach (albo
+  jadący i ktoś na gołej drodze) na tym samym torze są w zasięgu. **Nie** zmieniać ogólnej `odlegloscKrawedzi`
+  (`combat/okolicznosci.mjs`): z niej idzie też „wróg w 1,5 m” dla ataków dystansowych, który ma dalej liczyć metryka.
+  Ataki okazyjne przy opuszczeniu znacznika — brak (moduł ich i tak nie automatyzuje; tekst na karcie).
+- **Atak na kierowcę (D36):** obrażenia aktora na miejscu kierowcy pojazdu na planszy — ten sam rodzaj haka, którym
+  E6 wyzwala awarię po obrażeniach ≥ Próg awarii (`awarie.mjs`) → karta Testu (Pojazdy) ST max(10, ⌊obrażenia / 2⌋);
+  [Cofnij o znacznik], o 5+ [Przewrócenie] (awaria 8).
+- **RO pojazdu (D36):** karta „trafieni na drodze” (`poscig-serie.mjs`) i karta wybuchu dostają dla pojazdów przycisk
+  RO ZRC z ZRC pojazdu (sprawdzić `rollSavingThrow` dnd5e 6 dla aktora `vehicle`; jeśli zawodzi — karta rzuca k20 +
+  mod. sama) i [Slalom — Reakcja kierowcy: Ułatwienie]; obrażenia dalej przez `hp.dt` (Próg obrażeń). To samo na mapie
+  taktycznej (Długa i Miażdżąca seria, granaty), bo RAW Slalomu nie zależy od pościgu.
+- **Wypadanie (D38):** `wypadnij` (`jadacy.mjs`) na planszy kładzie żeton na gołej drodze **tor za pojazdem**
+  (zamiast pola obok) i nadaje flagę `dryf`; 3k6 i Powalenie bez zmian.
+- **Dryf (D38):** początek rundy (`combatRound`, aktywny MG) — żetony z flagą `dryf`, przedmioty na ziemi
+  (`ground-items.mjs`), rzeczy na drodze i szablony leżące na gołej drodze (nie przypięte do pojazdu — D29) → −3 tory;
+  karta wymienia pojazdy minięte po drodze. Za tyłem planszy → zdjęcie z pasa i karta „został w tyle”. Recentrowanie
+  przesuwa już te obiekty o całe tory — dryf jest dodatkowym przesunięciem względem drogi.
+
+**P5e — Za kierowcą, koniec pościgu (D39, D40).**
+- Przycisk HUD-u jadącego „Za kierowcą” (raz na walkę; kotwica KT) — na planszy i na mapie taktycznej.
+- Początek rundy: karta MG warunków końca — przewaga ≥ 7 (raport już jest), runda > 10 (wygrywa najdalszy),
+  pojazd wyeliminowany (wrak, oś, Szybkość 0 bez naprawy w jeździe), pojazd na torze mety. Meta = znacznik „Meta”
+  (rysunek albo kafelek z flagą, ustawia MG w interfejsie pościgu), przesuwany przez recentrowanie jak szablony.
+  [Zakończ pościg] wyłącza karty tury i dryf, plansza zostaje.
+
+**Gotowe gdy:** e2e `poscig-p5` (MG + dwóch graczy): start → Test Pościgu z komplikacją i [Zastosuj] → Gazu! i ruch
+o dwa znaczniki → Hample bandytów z kartą kolizji → atak na kierowcę → wypadnięcie i dryf przez dwie rundy → seria z
+RO pojazdu i Slalomem → przewaga 7 albo meta → [Zakończ]. Quench: zapas metrów (Autobus 24 m: 0, 1, 1 znacznik w
+trzech turach), limit znaczników z paletą, każda komplikacja → skutek, warunki końca, wręcz na znaczniku, ST ataku
+na kierowcę.
 
 #### 6.2.6 Etapy części 2
 
 | Etap | Zakres | Rozmiar | Gotowe gdy |
 |---|---|---|---|
-| **P1** | **Plansza od nowa** (§6.2.1): tory 280 px, rzędy, twarde przyciąganie, plakietki, rozstawianie wg obrysu, recentrowanie z szablonami, motywy ×1,4. | M | e2e `poscig`: rozstawienie, zmiana toru, recentrowanie; pomiar FPS |
-| **P2** | **Metryka drogi** (§6.2.2) i jej podpięcia, strażnik Quench, reguła w `ARCHITECTURE.md`. | M | Quench: przykład MG, każdy konsument z tabeli |
-| **P3** | **Jadący na planszy** (D26): wyspy z części 1, pojazd zawsze jedzie, osłona ½, atak na kierowcę. | S–M | e2e: posadzenie, przesiadka, atak między pojazdami z zasięgiem z metryki |
-| **P4** | **Serie i obszary** (§6.2.3–§6.2.4). | M | e2e: Miażdżąca przez dwa pojazdy w rzędzie, granat w jednym pojeździe, ogień zaporowy jadący z pojazdem |
-| **P5** | **Mechanika pościgu** (§6.2.5) — po rundzie pytań. | M–L | pościg od startu do mety bez notatek MG (`PLAN_beta.md`, M4) |
-| **P6** | **Poligon i bramka**: stanowiska `poscig` i `droga` od nowa, sondy D24–D31, `release:check`. | M | bramka zielona |
+| **P1** ✅ | **Plansza od nowa** (§6.2.1): tory 280 px, rzędy, twarde przyciąganie, plakietki, rozstawianie wg obrysu, recentrowanie z szablonami, motywy ×1,4. | M | e2e `poscig`: rozstawienie, zmiana toru, recentrowanie; pomiar FPS |
+| **P2** ✅ | **Metryka drogi** (§6.2.2) i jej podpięcia, strażnik Quench, reguła w `ARCHITECTURE.md`. | M | Quench: przykład MG, każdy konsument z tabeli |
+| **P3** ✅ | **Jadący na planszy** (D26): wyspy z części 1, pojazd zawsze jedzie, osłona ½. (Atak na kierowcę przeszedł do P5d.) | S–M | e2e: posadzenie, przesiadka, atak między pojazdami z zasięgiem z metryki |
+| **P4** ✅ | **Serie i obszary** (§6.2.3–§6.2.4). | M | e2e: Miażdżąca przez dwa pojazdy w rzędzie, granat w jednym pojeździe, ogień zaporowy jadący z pojazdem |
+| **P5a** | Tura pościgu: runda z walki, Test Pościgu, budżet w znacznikach z zapasem, [Cofnij], `przesunOZnaczniki`. | M | Quench zapasu i limitu; e2e: karta testu na początku tury kierowcy |
+| **P5b** | Komplikacje k20 — dane i karta. | S–M | Quench: 20 skutków |
+| **P5c** | Sześć manewrów w palecie K1. | M | e2e: Gazu!, Hample z kartą kolizji, Zajechanie |
+| **P5d** | Wręcz na znaczniku, atak na kierowcę, RO pojazdu ze Slalomem, wypadanie na planszy, dryf. | M | e2e: atak na kierowcę, wypadnięcie i dwie rundy dryfu |
+| **P5e** | Za kierowcą (KT), koniec pościgu, meta. | S | e2e `poscig-p5` od startu do mety |
+| **P6** 🟡 | **Poligon i bramka**: stanowisko Pościg przebudowane (2026-10-19, sondy D21–D31); do dodania sondy D34–D41 i scena „pościg od startu do mety”; `release:check`. | M | bramka zielona |
 
 ### 6.3 Część 3 — nośniki: wierzchowce (z M6, MG 2026-10-25)
 
 > Przeniesione z `PLAN_m6_drobne_zasady.md` (tamten §5.7, decyzje D7 i D10, ustalenia U17–U21, otwarte P4 i P6).
 > Powód: to refaktor kodu części 1 (`pojazdy/stan.mjs`, jadący, żeton) pod te same testy (e2e `pojazd`, Garaż), a dwie
-> niedokończone sprawy tego planu to ten sam problem dla pojazdu i konia — **Inicjatywa za kierowcą** (§10, pytanie 7)
-> i **budżet ruchu nośnika z deklarowanymi akcjami** (znany brak „Akcje bonusowe cech” w §10; `HANDOFF_movement_hotbar.md`
-> §3 zostawia ruch pojazdów temu planowi). Rozmiar: **L**. Nie blokuje M6 ani M7.
+> niedokończone sprawy tego planu to ten sam problem dla pojazdu i konia — **Inicjatywa za kierowcą** (§10, pyt. 7 →
+> D39, kotwica tury) i **budżet ruchu nośnika z deklarowanymi akcjami** (dawny brak „Akcje bonusowe cech” → K1, D41;
+> `HANDOFF_movement_hotbar.md` §3 zostawia ruch pojazdów temu planowi). Rozmiar: **L**. Nie blokuje M6 ani M7.
 
-**RAW (s. 257).** Wierzchowiec ≥ 1 rozmiar większy od jeźdźca, z siodłem; wsiadanie i zsiadanie za ½ Szybkości, w
-zasięgu 1,5 m. Wyszkolony: Inicjatywa jeźdźca, rusza się w jego turze, ma tylko Bieganie, Przyspieszenie, Odstąpienie,
-Unikanie; niewyszkolony robi, co chce; po zsiadaniu w walce zachowuje Inicjatywę i dba o siebie. Przemieszczenie
-wierzchowca wbrew woli albo Powalenie jeźdźca lub wierzchowca → RO ZRC ST 10, porażka — spadasz 1,5 m obok z
-Powaleniem. Atak z grzbietu jadącego wierzchowca bez biegłości w Tresurze — Utrudnienie. Zdolności: Jeździec (Wyjadacz
-Zwiadowcy), Rodeo (Sztuczka), Zawsze w siodle (Kowboj). Stock dnd5e i rdzeń: brak wierzchowców.
+**RAW (s. 257) — pełny odczyt w §2.** Wierzchowiec ≥ 1 rozmiar większy od jeźdźca, z siodłem; wsiadanie i zsiadanie
+za ½ Szybkości, w zasięgu 1,5 m. Wyszkolony: Inicjatywa jeźdźca, rusza się w jego turze, ma tylko Bieganie,
+Przyspieszenie, Odstąpienie, Unikanie; niewyszkolony robi, co chce; po zsiadaniu w walce zachowuje Inicjatywę i dba o
+siebie. Przemieszczenie wierzchowca wbrew woli albo Powalenie jeźdźca lub wierzchowca → RO ZRC ST 10, porażka —
+spadasz 1,5 m obok z Powaleniem. Atak z grzbietu jadącego wierzchowca bez biegłości w Tresurze — Utrudnienie.
+Zdolności: Jeździec (Wyjadacz Zwiadowcy), Rodeo (Sztuczka), Zawsze w siodle (Kowboj), Ale jazda! (Pochodzenie).
+dnd5e 6 i rdzeń 14: brak wierzchowców i przypinania żetonu do żetonu (§3) — stąd mechanizm jadących z części 1.
 
 **Decyzje MG (2026-10-25).** **W-D1:** kierunek pełny, z generycyzacją mechaniki pojazdów — ten sam kod obsługuje
 pickupy, rowery, konie i czołgi. **W-D2:** gotowe przed betą („drużyna graczy jest absolutnie nieprzewidywalna”).
+**2026-10-29 (D42, D43):** obrys kwadratowy wg rozmiaru dnd5e; jedna wolna ręka do kierowania (RAI); budżet ruchu
+teraz, na wzorcu E5; Inicjatywa przez kotwicę tury (D39); żetony koni z góry; jeździec rysowany jak na mapie (S1 —
+warunek W2, bo jeździec 0,5 kratki na koniu 2 × 2 byłby ćwiercią jego szerokości).
 
 **Pojęcie.** *Nośnik* = aktor, którego żeton wiezie żetony jadących na miejscach. Dziś: pojazd (`vehicle` z flagą
 `pojazd`). Po części 3: także istota z flagą `wierzchowiec`. Profil nośnika decyduje o reszcie:
@@ -604,52 +870,70 @@ pickupy, rowery, konie i czołgi. **W-D2:** gotowe przed betą („drużyna grac
 | Cecha | `pojazd` | `wierzchowiec` |
 |---|---|---|
 | Aktor | `vehicle` | `npc` (Bestiariusz: koń zdrowy, skażony, teksańczyk; ujeżdżone Rodeo) |
-| Miejsca, obrys, ruch jadących w animacji, wsiadanie/wysiadanie, wypadanie, pamięć obsady, Ctrl+X/V | wspólne (`stan.mjs`, `jadacy.mjs`, `zeton.mjs`, `schowek.mjs`) | wspólne |
-| Jadący | ukryci + kropki + prześwietlenie (dziś) albo widoczni (W-U1) | **widoczni**, nad nośnikiem |
-| Sterowanie | kierowca, test Pojazdów, karty jazdy, silnik, paliwo, kluczyki, awarie, wrak | jeździec; wyszkolony — w turze jeźdźca, tylko Bieganie / Przyspieszenie / Odstąpienie / Unikanie; niewyszkolony — MG |
-| Inicjatywa | tura kierowcy; przesunięcie tury pasażera (§10, pytanie 7) | Inicjatywa wierzchowca = jeźdźca — **ten sam mechanizm co pytanie 7** (W-U6); po zsiadaniu zachowuje wartość |
-| Budżet ruchu | Szybkość pojazdu, Gazu! / Gaz do dechy | Szybkość wierzchowca + jego Przyspieszenie / Bieganie deklarowane przez jeźdźca — model przydziału z `HANDOFF_movement_hotbar.md` §5, przydział należy do żetonu nośnika (W-P3) |
-| Wsiadanie | koszty z części 1 | ½ Szybkości w zasięgu 1,5 m; Jeździec — 1,5 m (M7) |
-| Wypadanie | część 1 | przemieszczenie wbrew woli albo Powalenie jeźdźca/wierzchowca → karta RO ZRC ST 10; porażka — 1,5 m obok, Powalenie (ścieżka wypadania części 1) |
-| Atak z grzbietu | Utrudnienie z jadącego pojazdu, Akrobatyka znosi | Utrudnienie z jadącego wierzchowca bez biegłości w Tresurze; Jeździec znosi dla dystansowych (M7) — wiersz silnika okoliczności, „jedzie” jak `jedzie()` pojazdu |
+| Obrys | prostokąt w kratkach 1,5 m z katalogu, zamiana w czterech kierunkach (§4.3) | **kwadrat wg rozmiaru dnd5e** (Duży 2 × 2, Wielki 3 × 3 — tak, jak dnd5e stawia żeton istoty), liczony **z bieżącego rozmiaru żetonu** (kratki sceny ÷ `skalaPojazdu`). Moduł **nigdy** nie zmienia rozmiaru żetonu istoty — `preCreateToken`, bezpiecznik po utworzeniu i `zapiszPoRuchu` (`zeton.mjs`) pomijają wierzchowce; `obrysZamieniony` dla kwadratu i tak zwraca `false` (D43) |
+| Miejsca, ruch jadących w animacji, wsiadanie/wysiadanie, wypadanie, pamięć obsady, Ctrl+X/V | wspólne (`stan.mjs`, `jadacy.mjs`, `zeton.mjs`, `schowek.mjs`) | wspólne; domyślne miejsca z rozmiaru: siodło (jeździec, środek, lekko z przodu) + pasażer za nim, oba `otwarta/nad` |
+| Jadący | ukryci + kropki + prześwietlenie albo widoczni na otwartych miejscach (D32, W-U1) | **widoczni**, nad nośnikiem, rysowani jak na mapie (S1) |
+| Sterowanie | kierowca, test Pojazdów, karty jazdy, silnik, paliwo, kluczyki, awarie, wrak | jeździec; wyszkolony — w turze jeźdźca, tylko Bieganie / Przyspieszenie / Odstąpienie / Unikanie (paleta, W3); niewyszkolony — MG |
+| Ręce | kierownica — dwie wolne ręce (oznaczane) | wodze — **jedna** wolna ręka (oznaczane, D43); Jeździec — bez rąk |
+| Inicjatywa | tura kierowcy; „Za kierowcą” dla pasażera (D39) | Inicjatywa wierzchowca = jeźdźca przez **kotwicę tury** (KT, D39): tura wierzchowca pomijana, póki jeździec go prowadzi; po zsiadaniu zachowuje wartość i ma własną turę (MG: Unikanie/Odstąpienie, może uciec) |
+| Budżet ruchu | Szybkość pojazdu + paleta (Gazu!, Gaz do dechy…) | Szybkość wierzchowca + jego akcja z palety (Przyspieszenie +1×, Bieganie +2×) — ten sam `tura.droga` co E5, na aktorze wierzchowca (D43, W-P3) |
+| Wsiadanie | koszty z części 1 | ½ Szybkości jeźdźca w zasięgu 1,5 m; Jeździec — 1,5 m (M7); rozmiar i wyszkolenie oznaczane |
+| Wypadanie | część 1 | przemieszczenie wbrew woli albo Powalenie jeźdźca/wierzchowca → karta RO ZRC ST 10; porażka — 1,5 m obok, Powalenie, obrażenia wg MG (ścieżka wypadania części 1 bez 3k6) |
+| Atak z grzbietu | Utrudnienie z jadącego pojazdu, Akrobatyka znosi, Konwojent i Ale jazda! znoszą | Utrudnienie z jadącego wierzchowca bez biegłości w Tresurze (`ani`); Jeździec znosi dla dystansowych, Ale jazda! dla strzelania — nowe źródło okoliczności, „jedzie” jak `jedzie()` pojazdu |
+| TT | ½ osłony jadących (część 1) | Jeździec i Kawalerzysta (Rodeo): TT wierzchowca + Premia Biegłości jeźdźca na czas jazdy (efekt nakładany przy wsiadaniu — W5) |
 | Cel | pojazd albo jadący przez kropkę | wierzchowiec albo jeździec — zwykłe celowanie |
-| Utrzymanie | paliwo | jedzenie i woda (M5 — jak towarzysze); Zawsze w siodle (M7, karta) |
+| Utrzymanie | paliwo | jedzenie i woda — M5 (`consumeDailyNeeds`), jeśli koń jest towarzyszem albo w drużynie; reszta MG; Zawsze w siodle — karta (M7) |
 
-**Kod.** Warstwa w `pojazdy/stan.mjs`: `profilNosnika(actor)` (`pojazd` | `wierzchowiec` | `null`), `jestNosnikiem`,
-`daneNosnika`, `miejscaNosnika` — stare nazwy (`jestPojazdem`, `danePojazdu`…) zostają jako aliasy o węższym
-znaczeniu (tylko pojazd). Każdy moduł `pojazdy/*` dostaje jawną decyzję: wspólny (jadący, okno miejsc, schowek,
-obsada, geometria, żeton) albo pojazdowy (silnik, efekty silnika, awarie, naprawy, wrak, kluczyki, broń montowana,
-pościg). Katalog z wpisem `kon` (Duża, obrys 1 × 2 kratki, miejsca: jeździec + pasażer, profil `wierzchowiec`);
-Bestiariusz (`dev/bestiary/gen_bestiary.py`, `AUTOMATION`) nadaje koniom flagę. `crew`/`passengers` dnd5e piszemy
-tylko dla `vehicle`; wierzchowiec trzyma obsadę we fladze `obsada` (już istnieje).
+**Kod (W1).** Warstwa w `pojazdy/stan.mjs`: `profilNosnika(actor)` (`pojazd` | `wierzchowiec` | `null`),
+`jestNosnikiem`, `jestZetonemNosnika`, `daneNosnika`, `miejscaNosnika`. Stare nazwy (`jestPojazdem`,
+`jestZetonemPojazdu`, `danePojazdu`, `miejscaPojazdu`) zostają z **węższym** znaczeniem — tylko pojazd. Wierzchowiec
+= aktor `npc` z flagą `wierzchowiec: {wyszkolony, ujezdzony?: [uuid], strefy?}`; `daneNosnika` liczy obrys z
+rozmiaru żetonu (na scenie — bieżący żeton, poza nią — prototyp) i domyślne strefy siodła z rozmiaru (nadpisanie we fladze, jak `pojazd.strefy` dla GMT400), więc
+„dowolna istota z flagą” (W-P2) działa bez wpisu w katalogu. Klasyfikacja wywołań (stan 2026-10-29:
+`jestZetonemPojazdu` 31×, `danePojazdu` 32×, `jestPojazdem` 22×, `pojazdJadacego` 25×, `jadacyPojazdu` 20×):
+- **wspólne → nośnik:** `stan.mjs`, `geometria.mjs`, `prezentacja.mjs`, `zeton.mjs` (jadący w animacji, kropki,
+  prześwietlenie, kolejność — obrys kwadratu bez zamiany), `jadacy.mjs` (wsiadanie, wysiadanie, przesiadka,
+  wypadanie, dostęp z obecności — dla wierzchowca tylko wyszkolonego, W-U4), `okno-miejsc.mjs` (HUD: „Dosiądź”),
+  `obsada.mjs`, `schowek.mjs`, `historia.mjs`;
+- **tylko pojazd:** `silnik.mjs`, `efekty-silnika.mjs`, `awarie.mjs`, `naprawy.mjs`, `wrak.mjs`, `bron.mjs`,
+  `katalog.mjs`, `karta.mjs`, `wojownik.mjs`, `wieza.mjs`, karty skrętów, potrąceń i terenu w `jazda.mjs`,
+  `scenes/droga.mjs`, `scenes/poscig-serie.mjs` (pościg konny — W-P1);
+- **`jazda.mjs` dzielony:** budżet `tura.droga` i źródło okoliczności „atak z jadącego” — wspólne (razem z
+  `jedzie()`/`zapiszRuch` z `jadacy.mjs`); reszta pojazdowa.
+
+`crew`/`passengers` dnd5e piszemy tylko dla `vehicle` (`zapiszZaloge` w `jadacy.mjs`); wierzchowiec trzyma obsadę we
+fladze `obsada` (już istnieje). Pole `draft` pojazdu dnd5e (zwierzęta pociągowe) zostaje nieużywane — wóz konny to
+nie ten plan. Bestiariusz (`dev/bestiary/gen_bestiary.py`, `AUTOMATION`) nadaje koniom flagę `wierzchowiec`
+(`wyszkolony: true`).
 
 **Wykonalność:** wysoka złożoność, średnie ryzyko — część 1 jest świeża i każda zmiana idzie pod e2e `pojazd` i
 Garaż. Spike W0 przed refaktorem.
 
-**Ustalenia — do weta MG.**
+**Ustalenia — przyjęte bez weta (MG 2026-10-29).**
 
 | # | Ustalenie | Warstwa |
 |---|---|---|
-| W-U1 | Otwarte miejsca dostają też motocykl, motorower, rower, deskorolka, buggy (otwarta rama). Korzystają ze wspólnego modelu D32; wdrożone: właz Hammera, oba miejsca motocykla, osiem miejsc otwartej paki ciężarówki i oba fotele buggy (grafika 2026-10-26), pozostałe profile w W1. Widoczność określamy per miejsce, aby nośnik mógł mieć jednocześnie zakrytą kabinę i otwarte stanowisko. | RAI |
+| W-U1 | Otwarte miejsca per miejsce (wspólny model D32), więc nośnik może mieć jednocześnie zakrytą kabinę i otwarte stanowisko. **Dane gotowe** na 10 pojazdach (§3: Motocykl, Rower, Buggy, Hammer — właz, Ciężarówka — paka, Wóz strażacki — działko, Buldożer, Traktor, Motorower, Deskorolka); dla wierzchowca — domyślne siodło `otwarta/nad` (W1). | RAI |
 | W-U2 | Wierzchowiec zawsze ≥ 1 rozmiar większy od jeźdźca — sprawdzane przy wsiadaniu (oznaczane) | NOE |
-| W-U3 | Wyszkolenie: flaga `wyszkolony` na aktorze (domyślnie tak dla koni z katalogu; Rodeo — wyszkolony tylko dla ujeżdżającego) | NOE |
-| W-U4 | Niewyszkolony wierzchowiec: jeździec jedzie, ruchem steruje MG (żeton bez prawa ruchu dla gracza) | NOE |
+| W-U3 | Wyszkolenie: flaga `wyszkolony` na aktorze (domyślnie tak dla koni z Bestiariusza; Rodeo — wyszkolony tylko dla ujeżdżającego, lista `ujezdzony`) | NOE |
+| W-U4 | Niewyszkolony wierzchowiec: jeździec jedzie, ruchem steruje MG — dostęp z obecności (D11) nie nadaje graczowi prawa ruchu, tura wierzchowca nie jest pomijana | NOE |
 | W-U5 | Obsada konia przechodzi Ctrl+X / Ctrl+V jak pojazdu (E9–E11) | — |
-| W-U6 | Inicjatywa wierzchowca i „tura pasażera za kierowcą” (pytanie 7) — jedno narzędzie: kombatant nośnika dostaje Inicjatywę jeźdźca/kierowcy i wspólną grupę (wzorzec towarzyszy M3, `combat/towarzysze-walka.mjs`) | NOE |
+| W-U6 | Inicjatywa wierzchowca i „Za kierowcą” — jedno narzędzie: **kotwica tury** (KT, D39). Bez nowej `CombatantGroup`: wierzchowiec sortuje się za jeźdźcem, przejmuje jego wartość, jego tura jest pomijana. Koń, który jest też towarzyszem (M3), w siodle słucha kotwicy jeźdźca (pierwsza w rejestrze). | NOE |
 
-**Otwarte.** **W-P1** pościg konny — po becie (plansza zostaje pojazdowa). **W-P2** wierzchowce poza koniem (muł,
-neogator z Rodeo, gigamut) — katalog otwarty; na betę koń + „dowolna istota z flagą”. **W-P3** budżet ruchu nośnika:
-wspólny model z handoffu ruchu (przydział na żetonie nośnika, deklaruje jeździec/kierowca) czy zostaje dzisiejszy
-budżet jazdy z E5 — propozycja: wspólny, razem z kartami jazdy, gdy handoff dojdzie do kroku 2.
+**Rozstrzygnięte (2026-10-29).** **W-P1** pościg konny — po becie; kod nie blokuje konia na planszy, ale mechanika
+pościgu (P5) dotyczy pojazdów. **W-P2** na betę koń + „dowolna istota z flagą” (muł, neogator z Rodeo, gigamut — MG
+nadaje flagę). **W-P3** budżet ruchu nośnika **teraz**: `tura.droga` z E5 na aktorze wierzchowca + akcja wierzchowca
+z palety; `HANDOFF_movement_hotbar.md` nie ma kodu — kiedy dojdzie do kroku 2, przejmie ten budżet zamiast go
+dublować (dopisać tam odsyłacz).
 
 | Etap | Zakres | Rozmiar | Gotowe gdy |
 |---|---|---|---|
-| **W0** | Spike: koń z widocznym jeźdźcem przez animację jadących na scenie taktycznej (dwóch klientów); wspólna Inicjatywa nośnika i jeźdźca | S | notatka tak/nie w §11 |
-| **W1** | Warstwa profilu w `stan.mjs`, aliasy, klasyfikacja `pojazdy/*`; otwarte miejsca W-U1 na fundamencie D32 (`prezentacja.mjs`, już używany przez właz Hammera) | M | e2e `pojazd` zielone bez zmian; sonda Garażu „motocykl” |
-| **W2** | Katalog `kon`, flaga z Bestiariusza, wsiadanie (½ Szybkości, rozmiar, wyszkolenie) | S–M | Quench profilu; e2e: wsiadanie na konia |
-| **W3** | Walka: Inicjatywa (W-U6, razem z pytaniem 7), ruch wierzchowca w turze jeźdźca z jego akcjami (W-P3), niewyszkolony i po zsiadaniu | M | e2e `wierzchowiec`: jazda w walce dwóch rund |
-| **W4** | Spadanie z siodła, atak z grzbietu (silnik okoliczności), utrzymanie (M5) | S–M | e2e: Powalenie konia → karta RO jeźdźca |
-| **W5** | Poligon — stanowisko **Stajnia** obok Garażu, plakietki Jeźdźca, Rodeo, Zawsze w siodle (z M7) | S–M | sondy dla W-U1–W-U6 |
+| **W0** | Spike w piaskownicy, dwóch klientów: koń (Duży 2 × 2, atrapa) z jeźdźcem przez animację jadących — `posadzGM` na aktorze `npc` z tymczasowo poluzowanym `podwozieAktora`. Sprawdzić: dostęp z obecności na `npc` (gracz rusza koniem, nie dostaje niczego więcej), `zapiszPoRuchu` dla kwadratu, pierścień dnd5e na koniu, jeździec jak na mapie (S1), szkic kotwicy tury (sortowanie, pomijanie). | S | notatka tak/nie w §11 |
+| **W1** | Warstwa profilu w `stan.mjs` i klasyfikacja wywołań (wyżej); `daneNosnika` dla wierzchowca z rozmiaru dnd5e; domyślne siodło. | M | Quench profilu; e2e `pojazd`, `pojazd-prezentacja`, `poscig-jadacy` zielone bez zmian |
+| **W2** | Flaga `wierzchowiec` z Bestiariusza (trzy konie), HUD „Dosiądź / Zsiądź” (okno miejsc), koszty (½ Szybkości; Jeździec — 1,5 m), rozmiar, wyszkolenie i jedna wolna ręka oznaczane (D43). | S–M | Quench; e2e: dosiadanie konia, jeździec rysowany jak obok konia |
+| **W3** | Walka: kotwica tury (KT) — wierzchowiec za jeźdźcem, tura pomijana; akcja wierzchowca w palecie (K1): Bieganie +2× (Utrudnienie ataków wierzchowca, ataki dystansowe przeciw niemu z Utrudnieniem do końca tury), Przyspieszenie +1×, Odstąpienie, Unikanie; budżet `tura.droga` na wierzchowcu; niewyszkolony — tura dla MG; zsiadanie w walce — kotwica zdjęta, wartość zostaje, karta MG „dba o siebie”. | M | e2e `wierzchowiec` (MG + gracz): dosiadanie w walce, dwie rundy z Bieganiem, zsiadanie i własna tura konia |
+| **W4** | Spadanie: Powalenie jeźdźca albo wierzchowca (także wierzchowiec przy 0 PW) → karta RO ZRC ST 10 jeźdźca i pasażera; porażka — `wypadnij` w wariancie wierzchowca (1,5 m obok, Powalenie, obrażenia przyciskiem MG). „Wbrew woli” — z Odepchnięcia (`combat/melee-maneuvers.mjs`), Lemiesza, Działka wodnego i przycisku MG na HUD-zie. Atak z grzbietu — źródło okoliczności (Tresura, Jeździec, Ale jazda!). Utrzymanie — sprawdzić, że koń-towarzysz zjada w M5. | S–M | e2e: Powalenie konia → karta RO; atak z grzbietu bez Tresury z Utrudnieniem, z Tresurą bez |
+| **W5** | Poligon — stanowisko **Stajnia** obok Garażu (trzy konie, jeździec z Tresurą i bez, Zwiadowca z Jeźdźcem, postać z Rodeo, manekin do Odepchnięcia); zdolności M7: Jeździec (TT + Premia Biegłości, 1,5 m, bez rąk, bez Utrudnienia dystansowego), Rodeo (Dżokej — karta ujeżdżenia: MDR (Tresura) ST 10 + mod. SIŁ, dopisuje `ujezdzony`; Kawalerzysta — TT + Premia Biegłości), Zawsze w siodle (karta); plakietki pokrycia. | S–M | sondy W-U1–W-U6, D39, D43 zielone; M7 powiadomione |
 
 ---
 
@@ -665,15 +949,35 @@ budżet jazdy z E5 — propozycja: wspólny, razem z kartami jazdy, gdy handoff 
   „Posadzić?”, Ctrl+X / Ctrl+V pojazdu z trzema jadącymi na scenę o innej siatce.
 - **Część 2:** Quench metryki drogi (przykład MG z dwoma autobusami) i strażnik konsumentów (D27); e2e `poscig` —
   rozstawienie, serie przez dwa pojazdy, ogień zaporowy jadący z pojazdem; stanowiska Poligonu `poscig` i `droga`.
-- **Część 3:** Quench profilu nośnika i wspólnej Inicjatywy; e2e `wierzchowiec` i regresja `pojazd`; stanowisko
-  Poligonu **Stajnia** (§6.3).
+- **Część 3:** Quench profilu nośnika i kotwicy tury; e2e `wierzchowiec` i regresja `pojazd`; stanowisko Poligonu
+  **Stajnia** (§6.3).
+- **Przejście końcowe (§0.1):** S0 — rozszerzona sonda Garażu `skala-grafiki` (warianty f); S1 — Quench siatki
+  jadącego = siatka postaci obok pojazdu (14 podwozi); K1 — Quench budżetu z paletą, e2e `pojazd` (Gaz do dechy,
+  wsteczny); K2 — Quench `freeHands` ze strzelcem; K3 — e2e awarii 5; KT — Quench sortowania i pomijania, regresja
+  e2e towarzyszy; P5 — e2e `poscig-p5` od startu do mety, Quench `poscig-zasady.mjs`.
+- **Bramka końcowa:** `release:check` (oba światy piaskownicy, wszystkie suity). Poligon zostaje otwarty — straż
+  `poligon:stop` liczy okna stanowisk jako ludzi; `--force` tylko na słowo MG.
 
 ## 8. Grafika i dźwięk
 
-Do `dev/icons/MISSING.md`: 14 żetonów z góry (jeden obraz, prostokąt zgodny z obrysem, przezroczyste tło, rura
-wydechowa w stałym miejscu), 14 portretów, 14 indywidualnych wraków pojazdów (decyzja MG 2026-10-28; wraki z M5
-to drony i maszyny), dźwięki: uruchomienie benzyna/diesel/motocykl, zgaszenie, nieudane odpalenie, alarm. Dym i
-wybuch — z JB2A.
+**Dostarczone (2026-10-25 – 2026-10-28, §11):** 14 żetonów z góry (`tokens/pojazdy/`), 14 portretów
+(`tokens/portraits/`), 7 wnętrz do prześwietlenia (`tokens/pojazdy/wnetrza/`: Osobówka, Hammer, Autobus,
+Ciężarówka, Wóz strażacki, BWP, Czołg), osobne kadłuby i wieże BWP i Czołgu (`kadluby/`, `wieze/`), 14 wraków
+(`tokens/wraki/pojazd-*.webp`, `GRAFIKI_WRAKOW`); źródła, prompty i pomiary w `dev/art/m4/<pojazd>/README.md`.
+Atrapy w `tokens/pojazdy/_placeholder/` zostają jako awaryjne.
+
+**Brakuje:**
+- **7 dźwięków** (`dev/icons/MISSING.md` §P): `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
+  `zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, `syrena.ogg` → `sounds/pojazdy/` (katalogu jeszcze nie
+  ma). Kod gra je, gdy plik istnieje — bez zmian w kodzie. Źródło z licencją wpisać do `CREDITS.md`.
+- **Konie z góry — nowe zamówienie (D43):** trzy żetony (zdrowy, skażony, teksańczyk) w konwencji pojazdów —
+  przodem w dół, przezroczyste tło, kadr kwadratowy 2 × 2 (800 × 800 przy 400 px na pole, jak `tokens/README.md`),
+  siodło na jeźdźca i pasażera, sylwetka ok. 2,4 m długości (po S0 dopasować do wybranego f, bo koń jest istotą i
+  też dostaje mnożnik). Kotwice siodła mierzone na gotowym obrazie, jak przy pojazdach. Portrety koni — z Bestiariusza.
+- **Ocena MG:** 13 nowych wraków (Garaż → Karta prób → „Grafika: Wraki — wszystkie pojazdy”).
+- **GMT400:** własny żeton Suburbana (450 × 1050) — grafika kampanii, nie modułu.
+
+Dym i wybuch — z JB2A.
 
 ## 9. Ryzyka
 
@@ -688,10 +992,17 @@ wybuch — z JB2A.
 | Celowanie serii zbyt czułe na gołej drodze (x ściśnięty 6×) | kursor na pojeździe daje prawdziwe metry; później Shift+klik „przez oba” |
 | Wycinanie między scenami — zmiana zachowania rdzenia | e2e E11 łapie brak zachowanego id |
 | Wydajność szerszej planszy | pomiar FPS w e2e `poscig` (progi `PLAN_poscigi.md` §2.2a — zalecenia) |
+| Mnożnik grafiki istot (D42) zmienia wygląd całej kampanii | tylko obraz, ustawienie świata z domyślnym 1,0 do decyzji MG po S0; zero zmian w danych — cofnięcie = zmiana liczby |
+| Mnożnik a pierścień dnd5e, paski i nazwa (rysowane w obrysie dokumentu) | S0 pokazuje oba warianty pierścienia i przerwę pasek–grafika przy f ≈ 0,6–0,7, zanim cokolwiek wejdzie do kodu |
+| Druga warstwa nad `Combat#_sortCombatants` (towarzysze + nośniki) | KT: jeden rejestr kotwic w miejscu dzisiejszego `_kotwica`, bez drugiego owinięcia; regresja e2e towarzyszy |
+| Dryf drogi kontra recentrowanie (dwa przesunięcia w jednej rundzie) | dryf przesuwa względem drogi o −3 tory, recentrowanie przesuwa wszystko o całe tory — kolejność: recentrowanie po dryfie; Quench pozycji po rundzie |
+| Refaktor nośnika psuje świeżą część 1 | W0 przed W1; W1 bez zmiany zachowania pojazdów (e2e `pojazd`, `pojazd-prezentacja`, `poscig-jadacy` zielone bez zmian) |
+| Paleta (K1) rozjeżdża budżet poza walką (brak tur) | efekty palety poza walką na zegarze świata (runda = 6 s), jak zegary awarii |
 
 ## 10. Otwarte pytania i weto
 
-Brak blokujących. **Do weta MG** (wszystko zaimprowizowane tej nocy, każde na Poligonie, stanowisko Garaż):
+Brak blokujących. Jedyna otwarta liczba to mnożnik f (D42) — wybiera go MG po S0. **Do weta MG** (improwizacje
+nocy 2026-10-19, nadal bez formalnego weta; każde na Poligonie, stanowisko Garaż):
 
 | Co | Gdzie | Sonda Garażu |
 |---|---|---|
@@ -702,49 +1013,40 @@ Brak blokujących. **Do weta MG** (wszystko zaimprowizowane tej nocy, każde na 
 | Montaż broni: Trochę roboty od ceny broni, CZ/MK po połowie; narzędzia mechanika albo rusznikarza | §4.11 | `bron` |
 | Efekty silnika: gęstość i barwa dymu, siła drgań w trzech zestawach | §4.5, `pojazdy/efekty-silnika.mjs` (`ZESTAWY`) | `silnik`, `drgania` |
 | Kropka jako uchwyt celowania — prawy klik (klawisz T nie celuje w ukrytego jadącego) | D14 | `celowanie` |
+| 13 nowych wraków (2026-10-28) | §8, `tokens/wraki/` | `grafika-wraki` |
 
-Część 1b — bez otwartych pytań. Część 2 — runda pytań o mechanikę pościgu (§6.2.5) przed P5 (RAW s. 266–268
-przeczytane 2026-10-19; propozycje agenta w nawiasach):
+**Runda pytań P5 — rozstrzygnięta 2026-10-29** (RAW s. 266–268; propozycje agenta przyjęte bez weta, poza 1b):
 
-1. **Ruch po znacznikach** (pkt 3: znacznik za każde 36 m w turze kierowcy, brak ruchu — znacznik w tył). Kierowca
-   przeciąga pojazd po torach, moduł liczy znaczniki z Szybkości (Gazu!, Rajdowiec ×1,5, awarie) i oznacza przekroczenie,
-   koniec tury bez ruchu → karta MG [Cofnij o znacznik] — *czy* ruch tylko przyciskiem z karty (stary D4)?
-   (Przeciąganie z budżetem, jak w części 1.)
-2. **Test Pościgu** (pkt 4): karta z rzutem na początku tury kierowcy czy przy pierwszym ruchu? Nat. 20 — [+1 znacznik],
-   nat. 1 — dwie komplikacje. (Początek tury.)
-3. **Komplikacje k20** (s. 267): rzut z karty po porażce; [Zastosuj] dla mierzalnych (znaczniki, obrażenia, Szybkość ½,
-   trudny teren, stany, awaria z tabeli dla 1–3), testy jako przyciski na karcie, reszta tekst. (Tak.)
-4. **Walka wręcz na planszy** (pkt 5: „na tym samym znaczniku”): metryka drogi liczy rzędy w prawdziwych metrach (4,5 m
-   — poza zasięgiem 1,5 m). Wręcz: ten sam znacznik = zasięg niezależnie od rzędu (RAW) czy prawdziwe metry (burta
-   w burtę)? (RAW: ten sam znacznik.)
-5. **Atakowanie kierowcy** (pkt 5): obrażenia kierowcy na planszy → karta z Testem (Pojazdy) ST max(10, ½ obrażeń);
-   porażka [Cofnij o znacznik], o 5+ [Przewrócenie] (awaria 8). (Tak.)
-6. **Wypadanie w pościgu** (pkt 5): wypadnięty ląduje znacznik za pojazdem i cofa się o 3 znaczniki na rundę — moduł
-   przesuwa go na początku rundy z kartą interakcji, czy tylko pisze? (Przesuwa, karta dla MG.)
-7. **Inicjatywa za kierowcą** (pkt 2): jednorazowe przesunięcie tury pasażera za kierowcę — przycisk na HUD-zie
-   jadącego? (Tak.) *Od 2026-10-25 to samo narzędzie służy Inicjatywie wierzchowca — §6.3, W-U6.*
-8. **Koniec pościgu** (pkt 6): przewaga 7 i 10 rund — karta MG (wykrycie); meta — logiczny znacznik ustawiany przez MG,
-   przeżywa recentrowanie? (Tak.)
-9. **Manewry — gdzie**: paleta kierowcy na HUD-zie pojazdu (jak Uruchom/Światła) czy zakładka „Pościg” na karcie
-   pojazdu? Gazu! [A], Hample [B], Obrót 180° [A], Ostrożna jazda [A], Stuknięcie [A], Zajechanie [A]. (HUD.)
-10. **Pojazd trafiony serią** (D28): RO pojazdu na połowę czy pełne obrażenia przez Próg obrażeń?
-11. **Rajdowiec** („podczas walki, wyścigu i pościgu”): na planszy zawsze, także poza walką? (Tak.)
+| Pyt. | Sprawa | Rozstrzygnięcie | Decyzja |
+|---|---|---|---|
+| 1 | Ruch po znacznikach | przeciąganie po torach z budżetem; [Cofnij o znacznik] tylko gdy pojazd stał | D34 |
+| 1b | Reszta metrów < 36 m | **przechodzi na następną turę** (RAI; MG wybrał wbrew propozycji „RAW dosłownie”) | D34 |
+| 2, 2b | Test Pościgu | karta na początku tury kierowcy, rzut po kliknięciu; porażka o 6+ — także karta awarii | D35 |
+| 3 | Komplikacje k20 | [Zastosuj] dla mierzalnych, testy jako przyciski, reszta tekstem | D36 |
+| 4 | Wręcz na planszy | RAW: ten sam znacznik = zasięg wręcz | D37 |
+| 5 | Atak na kierowcę | Test (Pojazdy) ST max(10, ½ obrażeń); [Cofnij], o 5+ [Przewrócenie] | D36 |
+| 6 | Wypadanie w pościgu | moduł przesuwa, karta MG; rozszerzone na **dryf drogi** dla wszystkiego poza pojazdami | D38 |
+| 7, 7b | Za kierowcą | przycisk HUD-u jadącego, raz na walkę; także na mapie taktycznej (RAI); kotwica tury | D39 |
+| 8 | Koniec pościgu | karta MG (przewaga 7, 10 rund, wyeliminowany, meta); meta przeżywa recentrowanie | D40 |
+| 9 | Manewry — gdzie | paleta kierowcy na HUD-zie, razem z akcjami cech pojazdu | D41 |
+| 10 | Pojazd trafiony serią | RO ZRC pojazdu jak istoty (Slalom — Ułatwienie), potem Próg obrażeń | D36 |
+| 11 | Rajdowiec | na planszy zawsze, także poza walką | D40 |
 
-### Znane braki części 1 (oznaczane na kartach albo do zrobienia)
+### Znane braki części 1 — stan po rundzie 6
 
-- **Lalka a broń montowana** (D16): broń u strzelca ma wagę 0, ale lalka nie pokazuje rąk na niej i nie blokuje
-  upuszczenia ani schowania; `equipped` zostaje fałszem (lalka go nadpisuje).
-- **Bieg wsteczny**: pojazd zawsze obraca się w kierunku jazdy (D10 wykrywa skręty z obrotu); cofanie z ½ Szybkości
-  i Utrudnieniem — tylko tekst cechy Cofanie.
-- **Akcje bonusowe cech** (Gaz do dechy, Szósty bieg, Przerzutka, Slalom, Syrena, Działko wodne, Lemiesz, Uciąg,
-  Ollie) — karty użycia z opisem; budżet ruchu ich nie dolicza (karta jazdy podaje Przyspieszenie).
-- **Awaria 5 (dym)** — znacznik z tekstem, bez Regionu przesłaniającego wnętrze; **Paka** (Akrobatyka na początku
-  tury stojących) — tekst.
-- **TT w bezruchu** — tylko w walce (zmiana rundy); **spalanie** z jazdy po mapie — nie (podróż liczy karta drużyny).
-- **Dźwięki** — cisza do dostawy plików (MISSING §P); grafika — atrapy.
-- Rozmiar w pasku bocznym karty to etykiety dnd5e modułu (`huge` = „Ogromny”), a NOE mówi „Wielka maszyna” — rozjazd
-  sprzed M4 (`tokens/README.md` też liczy Wielki = `huge`); nagłówek zakładki Pojazd pisze po NOE.
-- GMT400 jeździ na atrapie Hammera — własny żeton z góry (Suburban, 1,5 × 3,5 kratki → 450 × 1050) to grafika kampanii.
+| Brak | Los | Gdzie |
+|---|---|---|
+| **Lalka a broń montowana** (D16): waga 0 działa, ale lalka nie pokazuje rąk na broni i nie oznacza upuszczenia ani schowania (`equipped` nadpisuje lalka) | **K2** | §4.11 |
+| **Bieg wsteczny**: pojazd zawsze obraca się w kierunku jazdy; Cofanie (½, Autobus i Ciężarówka ¼ z Utrudnieniem) to tylko tekst cechy | **K1** | §4.6 |
+| **Akcje bonusowe cech** (Gaz do dechy, Szósty bieg, Przerzutka, Slalom, Syrena, Działko wodne, Lemiesz, Uciąg, Ollie) — karty z opisem, budżet ich nie dolicza | **K1** | §4.6 |
+| **Awaria 5 (dym)** — znacznik z tekstem, bez Regionu i bez przesłonięcia | **K3** | §4.8 |
+| **Ale jazda!** (Pochodzenie) — brak w źródle okoliczności | **K1** (pojazd), **W4** (wierzchowiec) | §4.6 |
+| **Skala jadących** — grafika jadącego zmniejszona razem z miejscem | **S0–S1** | §4.1 |
+| **Paka** (Akrobatyka stojących na początku tury) — tekst cechy | zostaje (D44) | — |
+| **TT w bezruchu** — tylko w walce; **spalanie** z jazdy po mapie — nie (podróż liczy karta drużyny) | zostaje | — |
+| **Dźwięki** — cisza do dostawy 7 plików (MISSING §P) | zasoby | §8 |
+| **Etykiety rozmiarów**: NOE ma Dużą / Wielką / Ogromną maszynę (s. 262–264: Motocykl Duża, Osobówka Wielka, Autobus Ogromna), czyli dnd5e `lg` / `huge` / `grg`; tymczasem etykieta modułu dla `huge` brzmi „Ogromny” (`tokens/README.md` liczy Wielki = `huge` poprawnie). Rozjazd sprzed M4 dotyczy wszystkich istot | poza M4 — zgłosić jako globalną poprawkę etykiet; nagłówek zakładki Pojazd pisze po NOE | — |
+| **GMT400** jeździ na grafice Hammera — własny żeton z góry (Suburban, 1,5 × 3,5 kratki → 450 × 1050) | grafika kampanii | §8 |
 
 ### Znane braki części 2 (świadome, D31)
 
@@ -754,251 +1056,40 @@ przeczytane 2026-10-19; propozycje agenta w nawiasach):
 
 ## 11. Postęp
 
-**2026-10-28 — komplet 14 indywidualnych wraków.** Wszystkie grafiki zapisane i
-sprawdzone, w tym zaakceptowany sedan bez zmiany pliku. 13 nowych wraków czeka na ocenę MG.
-`GRAFIKI_WRAKOW` wybiera obraz po podwoziu; zachowuje transformację i pełną kopię tekstury
-do cofnięcia. Najechanie nie prześwietla wraku; uszkodzone wieże są częścią grafiki wraku.
-**Garaż → Karta prób → Grafika: Wraki — wszystkie pojazdy**: 14 par sprawny/wrak na jednej
-scenie, stały generator, sonda `grafika-wraki`. Katalog 53/53 obrazów, kolejka M4: tylko
-7 dźwięków. `npm test` zielony, Quench **42/42**, E2E **20/20**, brak błędów konsoli.
-Raport `logs/e2e/2026-10-28T01-55-11/`, 26 zrzutów (wraki 25–26).
-Źródła, pełne prompty i pomiary: `dev/art/m4/wraki/`.
-Poligon: rozbudowano dotychczasową scenę, zachowano jej 6 żetonów/aktorów i pełne
-dokumenty 15 innych scen / 200 żetonów. Garaż: 16 scen / 228 żetonów. MG i Gracz 1
-mają otwartą galerię, wszystkie 28 tekstur załadowane; 13 nowych grafik do oceny rano.
+**2026-10-29 — runda 6: przegląd planu przed przejściem końcowym.** Przejrzane: plan, kod (`scripts/pojazdy/`,
+`scenes/poscig*.mjs`, `scenes/droga.mjs`), zasoby, RAW (s. 29–30, 61, 88–89, 97, 106, 257, 260–268) oraz źródła
+dnd5e 6.0.6 i rdzenia 14.369. Ustalenia: z mechaniki P5 istnieje tylko powłoka (role, przewaga, ST środowiska, ręczna
+runda); `HANDOFF_movement_hotbar.md` nie ma kodu, więc W-P3 „czekać na handoff” blokowałoby wierzchowce; dnd5e 6 nie
+ma jeźdźców ani „controlled mount”, rdzeń przypina do żetonu tylko Regiony — zostaje mechanizm jadących z części 1;
+`_kotwica` towarzyszy M3 to gotowy wzorzec Inicjatywy; konie mają tylko atrapy żetonów; jeździec 0,5 kratki na koniu
+2 × 2 to ćwierć jego szerokości — S1 jest warunkiem W2. Rozmowa z MG: odpowiedzi na 11 pytań P5 (D34–D41), wierzchowce
+(D43), skala (D42 — MG proponuje radykalnie: mniejsze wszystkie istoty; agent: tylko obraz, mnożnik f, pojazdy bez
+zmian, chyba że S0 pokaże inaczej), zakres (D44). Plan uzupełniony: §0.1 (pakiety S0–S1, K1–K3, KT, P5a–P5e, P6,
+W0–W5), §2 (RAW wierzchowców), §3 (stan), §4.1, §4.6, §4.8, §4.11, §6.2.5, §6.3, §7–§10. Dziennik grafiki niżej
+skrócony do tabeli — pełne wpisy: historia git tego pliku (wersja sprzed 2026-10-29), `HANDOFF_m4_pojazdy.md`
+(„For the GM”) i `dev/art/m4/<pojazd>/README.md`. Kod bez zmian.
 
-**2026-10-28 — zmiana decyzji MG: osobny wrak każdego pojazdu.** Zatwierdzony
-`pojazd-osobowy.webp` zostaje wyłącznie wrakiem Osobówki. Zamiast czterech wspólnych
-kategorii powstaje 14 osobnych grafik: Osobówka, Hammer, Motocykl, Rower, Buggy,
-Ciężarówka, Autobus, Traktor, Wóz strażacki, Buldożer, M2 Bradley, M1A1 Abrams,
-Motorower i Deskorolka. Pozostałe 13 wraków generowane z bazowych żetonów, z zachowaniem
-bryły, skali i charakterystycznych elementów. MG zlecił autonomiczne wykonanie całej serii
-i wspólny przegląd wszystkich wariantów w Poligonie rano. Wcześniejsze wpisy o wspólnych
-wrakach kategorii są historyczne. Wielkość jadących nadal do osobnej rundy, bez zmian teraz.
+**2026-10-25 – 2026-10-28 — prezentacja miejsc i grafika (skrót).** Raporty w `logs/e2e/<znacznik>/`.
 
-**2026-10-28 — deskorolka i pierwszy wrak.** Ostatni z 14 pojazdów ma portret i żeton:
-czarny grip, jasne kółka i przednia łatka. MG polecił powiększenie do 120%: 180×216,
-obrys 0,6×0,72 kratki, widoczny 0,36×1,03 m. Trzy kopie powiększono z zachowaniem środka,
-obrotu i rozmiaru jadącego; 196 innych żetonów bez zmian. Otwarte miejsce stojące nadal
-jest jednym miejscem prowadzącego; test Załogi wyłącza tylko dodatkową pakę ciężarówki.
-Po ocenie roweru MG odłożył regulację wielkości jadących (w aucie dobrze, na rowerze za mały).
-Tego problemu nie korygowano grafiką ani zmianą skali postaci.
+| Data | Co | MG | Sonda Garażu | Raport e2e |
+|---|---|---|---|---|
+| 10-25 | D32: wspólny model prezentacji (`prezentacja.mjs`) — właz Hammera otwarty nad dachem, kabina zakryta; okno Miejsca i lista Załogi rozpoznają tylko widocznego jadącego; osłona, broń i własność niezależne | zatwierdzone | `wlaz-widoczny` | `2026-10-25T20-33-50` |
+| 10-25 | Motocykl: portret, żeton, oba miejsca otwarte; pojazd z samymi otwartymi miejscami nie przygasa | zatwierdzony | `grafika-motocykl` | `2026-10-25T23-18-10` |
+| 10-26 | Podglądy grafiki częścią Garażu (`dev/poligon/stations/garaz-grafika.mjs`, Reset odtwarza wszystko); koniec eksperymentu 85% — skale postaci przywrócone (39 żetonów i prototypów, 63 postacie) | — | `podglady-reset` | `2026-10-26T18-52-05` |
+| 10-26 | Diagnoza skali jadących: miejsce 0,5 zmniejsza grafikę o połowę, 14/14 — `dev/audits/vehicle-occupant-scale-2026-10-26.md` | → S0–S1 (D42) | — | — |
+| 10-26 | Ciężarówka: kabina zakryta (3), paka otwarta (8), wnętrze v2 po korekcie przesunięcia | ocena otwarta | `grafika-ciezarowka` | `2026-10-26T19-19-25` |
+| 10-26 | Buggy: rama rurowa, dwa fotele otwarte; obrys poprawiony z 1 × 2 na 1,4 × 2,8 | ocena otwarta | `grafika-buggy` | — |
+| 10-26 – 10-27 | Autobus (21 miejsc, przód New Look po korekcie szyby), Traktor (dwa miejsca otwarte) | zatwierdzone | `grafika-autobus`, `grafika-traktor` | `2026-10-26T23-23-09`, `2026-10-26T23-44-08` |
+| 10-27 | Wóz strażacki: bryła po odrzuceniu pierwszej pary, przód bez dachu poprawiony; 5 foteli zakrytych + operator działka otwarty | zatwierdzony | `grafika-woz-strazacki` | `2026-10-27T00-51-21` |
+| 10-27 | Buldożer: oba miejsca otwarte | zatwierdzony | `grafika-buldozer` | `2026-10-27T19-08-07` |
+| 10-27 | M2A2 Bradley: 3 + desant 6 (WKK, zamiast 12 z tabeli), obrys 2,4 × 4,5; osobna wieża — `wieza.mjs`, `wiezaGrafiki` (kadr, oś, wycinek), obraca się z kadłubem | zatwierdzony | `grafika-bwp` | `2026-10-27T21-20-59` |
+| 10-27 | M1A1 Abrams: kadłub 2,6 × 5,6, lufa poza obrysem (`fit: width`, kotwica 0,5 / 0,4), 4 miejsca, w tym 3 w wieży; profil „diesel” to kategoria mechaniki, nie napęd (turbina) | zatwierdzony | `grafika-czolg` | `2026-10-27T22-35-25` |
+| 10-28 | Motorower (0,6 × 1,56 po powiększeniu do 120%), Rower (0,6 × 1,5), Deskorolka (0,6 × 0,72 po 120%) — siodła otwarte | motorower zatwierdzony; rower i deskorolka — ocena otwarta; wielkość jadących → S0 | `grafika-motorower`, `grafika-rower`, `grafika-deskorolka` | `2026-10-28T00-15-54`, `2026-10-28T00-26-06`, `2026-10-28T01-12-07` |
+| 10-28 | 14 indywidualnych wraków (decyzja MG zamiast czterech wspólnych): `GRAFIKI_WRAKOW` po podwoziu, transformacja i pełna tekstura do cofnięcia, uszkodzone wieże w grafice wraku, najechanie nie prześwietla wraku | wrak Osobówki zatwierdzony, 13 do oceny | `grafika-wraki` | `2026-10-28T01-55-11` |
 
-Wrak `tokens/wraki/pojazd-osobowy.webp`, 450×900, wspólny dla Osobówki/Hammera/Buggy,
-do oceny MG. **Garaż → Karta prób → Grafika: Wrak auta osobowego**, `grafika-wrak-osobowy`:
-trzy sprawne i trzy zniszczone pojazdy. `garaz-wraki.mjs` odtwarza porównanie w generatorze.
-Zachowano 15 wcześniejszych scen i 200 żetonów. Garaż: Parking + 14 podglądów pojazdów
-oraz porównanie wraków, razem 16 scen. Runtime bez zmian; natywny wrak pojawia się przy 0 PW,
-cofnięcie przywraca oryginał. Quench **42/42**, `npm test` zielony, E2E Garażu **20/20**,
-`logs/e2e/2026-10-28T01-12-07/` (25 zrzutów; wraki nr 25). Źródła: `dev/art/m4/deskorolka/`
-i `dev/art/m4/wraki/`. Kolejka: 3 obrazy wraków + 7 dźwięków.
-
-**2026-10-28 — motorower zaakceptowany; rower jako trzynasty komplet, do oceny MG.**
-Stalowy rower z musztardową ramą, srebrnymi błotnikami i tylnym drucianym koszykiem.
-Portret 1024×1024, żeton 180×450, obrys 0,6×1,5 (0,90×2,25 m), widoczny 0,72×2,19 m.
-Wielkość względem zatwierdzonego motoroweru, kotwica zmierzona na siodle (0,50; 0,31).
-Siodło `otwarta/nad`, rowerzysta stale widoczny; bez silnika i wydechu. Układ i skale postaci
-jak w pozostałych podglądach. **Garaż → Karta prób → Grafika: Rower**, sonda `grafika-rower`.
-Generator: Parking + 13 podglądów. Instalacja bez resetu: zachowano 13 wcześniejszych scen
-i 190 innych żetonów, istniejący rower na Parkingu zaktualizowano z zachowaniem środka.
-Quench **42/42**, E2E Garażu **18/18**, `npm test` zielony. Raport i 23 zrzuty:
-`logs/e2e/2026-10-28T00-26-06/`, rower nr 12. Źródła: `dev/art/m4/rower/README.md`.
-Kolejka: 6 obrazów + 7 dźwięków; z pojazdów została deskorolka.
-
-**2026-10-28 — korekta wielkości motoroweru na życzenie MG.** Powiększenie do 120%:
-obrys 0,6×1,56 kratki (0,90×2,34 m), żeton 180×468. Widoczna sylwetka 0,86×2,25 m.
-Względna kotwica i wydech bez zmian; pionek kierowcy nie został powiększony.
-Zaktualizowano katalog, generator i trzy istniejące kopie w Garażu, zachowując ich środki,
-obroty i 187 innych żetonów. Bieżący podgląd zachowuje ręcznie ustawiony obrót 45°.
-E2E Garażu **17/17**, `npm test` zielony; nowy rozmiar sprawdzany także po świeżym resecie.
-Raport i 22 zrzuty: `logs/e2e/2026-10-28T00-15-54/`, motorower nr 11.
-
-**2026-10-28 — motorower: dwunasty komplet grafiki, do oceny MG.** Turkusowy motorower
-z kremową osłoną nóg, jednym czarnym siodłem i czerwoną skrzynką za kierowcą. Kierunek
-portretu zatwierdzony. Portret 1024×1024, żeton 150×390. SVG → malowany rzut; obrys
-wydłużono z 0,5×1 do 0,5×1,3, aby zachować proporcje, bez zmiany innych statystyk.
-Widoczna sylwetka 0,72×1,87 m, kotwica (0,50; 0,36), wydech (0,25; 0,18).
-Siodło `otwarta/nad`, pełny pionek stale nad pojazdem, bez kropek/prześwietlenia.
-**Garaż → Karta prób → Grafika: Motorower**, sonda `grafika-motorower`: pusty, kierowca,
-portret i odpowiednik postaci przy źródłowej skali. Jednomiejscowy podgląd ma dwa pojazdy,
-bez powielania pełnej obsady. Generator: Parking + 12 podglądów. Instalacja bez resetu,
-zachowano 12 wcześniejszych scen i 186 żetonów; motorower dodany na Parkingu.
-Quench **42/42**, E2E `garaz-grafika` **17/17**, `npm test` zielony. Raport i 22 zrzuty:
-`logs/e2e/2026-10-28T00-03-54/`, motorower zrzut 11. Źródła i pełne prompty:
-`dev/art/m4/motorower/README.md`. Kolejka: 8 obrazów + 7 dźwięków.
-
-**2026-10-27 — M1A1 Abrams: jedenasty komplet grafiki, zatwierdzony przez MG.** Portret 1024×1024,
-pełny żeton i wnętrze 780×2100, osobny kadłub oraz wieża 638×1588. Geometria SVG →
-malowane wnętrze → dach nad ustaloną kabiną; wspólny zewnętrzny kadłub i złożenie warstw
-bez różnic pikselowych. Widoczny kadłub 3,65×7,93 m, z lufą 9,83 m; viewport 780×1680,
-obrys 3,9×8,4 m, lufa wystaje poza pole. Cztery kotwice, oryginalne skale postaci.
-**Garaż → Karta prób → Grafika: M1A1 Abrams**, sonda `grafika-czolg`; Parking + 11
-podglądów. Instalacja bez resetu: zachowano 11 wcześniejszych scen i 175 innych żetonów,
-istniejący czołg na Parkingu zaktualizowano z zachowaniem środka. Renderer wieży wspólny
-z Bradleyem; niezależne celowanie nadal po becie. Quench **42/42**, E2E `garaz-grafika`
-**16/16**, `npm test` zielony. Raport i 21 zrzutów: `logs/e2e/2026-10-27T22-35-25/`,
-Abrams zrzuty 15–17 i 20–21. Źródła/prompty: `dev/art/m4/czolg/README.md`.
-Kolejka: 10 obrazów + 7 dźwięków. Profil „diesel” jest dotychczasową kategorią mechaniki,
-nie deklaracją rzeczywistego napędu Abramsa (turbina); parametrów gry nie zmieniono.
-
-**2026-10-27 — Bradley zatwierdzony; osobna grafika wieży.** MG zaakceptował bryłę i układ
-3+6, poprosił o wycięcie wieży i poprawną oś pod przyszłe celowanie. Bezstratne warstwy:
-`tokens/pojazdy/kadluby/bwp.webp` (720×1350) i `tokens/pojazdy/wieze/bwp.webp` (495×627).
-Złożenie daje 0 różnic pikseli względem zatwierdzonego kompletnego żetonu. `wiezaGrafiki`
-przechowuje kadr, oś i wycinek; generator zapisuje je we fladze `pojazd.grafika.wieza`.
-`pojazdy/wieza.mjs` rysuje górną warstwę w primary i prowadzi ją razem z kadłubem; D33
-celowania i reguł pozostaje po becie. Prześwietlenie ukrywa wieżę. Własna grafika i wrak
-nie dziedziczą nakładki. Brak nowych dokumentów żetonów i niezależnego kąta.
-`npm test` zielony, Quench **40/40**, E2E **garaz-grafika 14/14**, brak błędów modułu;
-`logs/e2e/2026-10-27T21-20-59/` (16 zrzutów). Próby: animowany skręt, wspólne drgania,
-odbicie/skala, krycie/barwa/wysokość, ukrycie, własna grafika, odrysowanie i usunięcie bez
-pozostawionych warstw. Garaż: `grafika-bwp`. [Podgląd osi](dev/art/m4/bwp/layers-review.html).
-
-**2026-10-27 — M2A2 Bradley: dziesiąty komplet grafiki, według korekty MG.** Zamiast
-ogólnego BWP: charakterystyczna kanciasta wieża dwuosobowa, boczny podwójny zasobnik,
-pojedynczy kierowca po lewej pojazdu i przedział silnika po prawej. Załoga 3 + desant 6:
-usunięto środkową trójkę siedzeń, boczne ławki po trzy zwrócone do siebie. Pojemność 9
-jest świadomym WKK dla wybranego M2A2, zamiast ogólnej załogi 12 z tabeli NOE.
-Portret 1024×1024 i para 720×1350, obrys 2,4×4,5 (3,6×6,75 m); widoczna bryła 3,385×6,55 m.
-SVG → wnętrze → dach; cała wieża zarejestrowana nad koszem, wspólna alfa i 0 różnic pikseli
-poza maską górnej zabudowy. Opcjonalne `obroty` w strefie określają początkowy kierunek
-postaci na danym miejscu; później własny obrót działa dotychczasowo. D33 nadal po becie.
-**Garaż → Karta prób → Grafika: M2 Bradley**, sonda `grafika-bwp`. Generator: Parking + 10 podglądów.
-Dodany do żywego Poligonu bez resetu: zachowano 10 wcześniejszych scen i 155 żetonów.
-`npm test` zielony, Quench **38/38**, E2E **garaz-grafika 13/13**, bez błędów modułu:
-`logs/e2e/2026-10-27T20-44-08/`, zrzuty Bradleya 13–14. Źródła i pełne prompty:
-`dev/art/m4/bwp/README.md`. Ocena MG otwarta. Kolejka: 12 obrazów + 7 dźwięków.
-
-**2026-10-27 — buldożer: dziewiąty komplet grafiki.** Portret 1024×1024 i otwarty żeton
-750×1200: dwie stalowe gąsienice, szeroki lemiesz, pojedynczy zrywak oraz fotel operatora
-i mniejsze siedzenie pomocnika. Rama bez daszka i szyb, oba miejsca `otwarta/nad`.
-Katalog 2,5×4, widoczny obrys 3,55×5,78 m. Kotwice i wydech dopasowane do obrazu,
-skale postaci zachowane. Portret + SVG → żeton; kadrowanie i skalowanie równomierne.
-**Grafika: Buldożer**, sonda `grafika-buldozer`; generator odtwarza dziesięć scen z Parkingiem.
-Dodano nowy podgląd i pojazd bez resetu, zachowując 146 starych żetonów na dziewięciu scenach.
-Packer, pomiary, świeży szablon i E2E **12/12**, bez błędów konsoli modułu:
-`logs/e2e/2026-10-27T19-08-07/`, buldożer zrzut 10. Pełny `npm test` nadal zatrzymuje
-niezwiązany skan flag w pliku broni. Źródła i prompty: `dev/art/m4/buldozer/README.md`.
-MG zatwierdził portret, żeton, proporcje i oba miejsca 2026-10-27; kolejka 14 obrazów + 7 dźwięków.
-
-**2026-10-27 — akceptacja bryły/proporcji wozu i poprawka przodu bez dachu.** MG zaakceptował
-nową sylwetkę. Wskazał dwa koguty przesuwające się na przód przy zdjęciu dachu i nienaturalny
-skrzynkowy rant. Edycja generatora usuwa lampy z dachem, zastępuje półkę niskim zaokrąglonym
-brzegiem przy desce; lokalna maska zmienia wyłącznie przód cutaway. Cały dach i wnętrze poza
-maską zachowane pikselowo, wspólna alfa, bez zmian obrysu, kotwic i dokumentów Poligonu.
-495 537 wspólnych pikseli poza łączną maską; 0 różnic. E2E 11/11, brak błędów modułu:
-`logs/e2e/2026-10-27T00-51-21/`, zrzuty 04–05. Źródła i prompt:
-`dev/art/m4/woz-strazacki/front-cutaway-prompts.json`. MG zatwierdził poprawiony przód 2026-10-27;
-cały komplet wozu strażackiego zaakceptowany.
-
-**2026-10-27 — korekta bryły wozu strażackiego po odrzuceniu pierwszej pary przez MG.**
-Nowy szkic z niezmienionego portretu: kabina/pompa/tył około 40/15/45% długości, węższa
-sekcja panelu pompy, krótka drabina tylko na tylnej zabudowie, cztery opony wystające o 25–28 cm.
-Para 600×1650, katalog 2×5,5 kratki; widoczna długość 7,70 m zamiast 8,64 m.
-515 059 wspólnych pikseli poza kabiną, zero różnic i wspólna alfa. Nowe kotwice sześciu miejsc.
-Trzy istniejące wozy w Garażu i wzorzec wnętrza poprawione bez resetu; środki pojazdów i skale
-postaci zachowane, 137 innych żetonów bez zmian. E2E 11/11, brak błędów modułu:
-`logs/e2e/2026-10-27T00-37-17/`, zrzuty 04–05. Pełny `npm test` nadal zatrzymuje niezwiązany
-odczyt flagi w pliku broni. Źródła, pomiary i prompty: `dev/art/m4/woz-strazacki/README.md`.
-Ocena nowej pary MG otwarta; kolejka bez zmian.
-
-**2026-10-27 — wóz strażacki: ósmy komplet grafiki.** Portret 1024×1024 i para bezstratnych
-żetonów 600×1800. Czerwono-kremowa kabina nad silnikiem, widoczna z góry pochylona szyba,
-pięć foteli 3+2; szósty operator działka wodnego stale widoczny nad otwartym pomostem.
-Geometria SVG → wnętrze → dach; korekta przednich kół i odbicia szyby. Wspólne 668 917 pikseli
-poza maską kabiny, zero różnic; wspólna alfa. Obrys 2×6, widoczna grafika z lusterkami 2,94×8,64 m.
-Skale postaci zachowane, reguły działka i odłożonych wieżyczek bez zmian.
-**Grafika: Wóz strażacki**, sonda `grafika-woz-strazacki`; dziewięć scen Garażu z Parkingiem.
-Instalacja bez resetu: osiem starych scen i 131 pozostałych żetonów zachowane, stojący wóz
-otrzymał grafikę bez zmiany geometrii. E2E `garaz-grafika` **11/11**, bez błędów modułu:
-`logs/e2e/2026-10-27T00-14-04/`, zrzuty 04–05. Packer i walidacja obrazu poprawne;
-pełny `npm test` blokuje niezwiązany skan `message-flags` w `scripts/weapons/wlasciwosci.mjs:138`.
-Źródła i prompty: `dev/art/m4/woz-strazacki/README.md`. Ocena MG otwarta; kolejka 16 obrazów + 7 dźwięków.
-
-**2026-10-27 — traktor: siódmy komplet grafiki.** Portret 1024×1024 i otwarty żeton
-450×750: wyblakła czerwień, cztery koła na dwóch osiach, centralne siodło i poduszka na
-błotniku. Oryginalny SVG wyznacza geometrię, portret wygląd, kotwice dopasowane do wyniku.
-Widoczny obrys 2,08×3,27 m w katalogowej ramce 1,5×2,5 kratki. Obie postacie `otwarta/nad`;
-bez zmian skal tekstur postaci ani dotychczasowego rozmiaru miejsca 0,5 kratki. Stały przycisk
-**Grafika: Traktor**, sonda `grafika-traktor`; generator tworzy Parking i siedem podglądów.
-W działającym Poligonie dodano nową scenę i Parking bez resetu, zachowując 123 stare żetony.
-`npm test`, packer i E2E `garaz-grafika` **10/10**, bez błędów konsoli modułu:
-`logs/e2e/2026-10-26T23-44-08/` (traktor: zrzut 07). MG zatwierdził wygląd, proporcje i oba miejsca 2026-10-27.
-Źródła i pełne prompty: `dev/art/m4/traktor/README.md`. Kolejka: 18 obrazów + 7 dźwięków.
-
-**2026-10-27 — widoczna szyba autobusu.** Po uwadze MG przód portretu i zamkniętego żetonu
-zmieniony na zaokrąglony, pochylony wariant inspirowany New Look/Fishbowl. Pas szkła i
-wycieraczki widoczne w pionowym rzucie; prześwietlenie usuwa szybę razem z dachem.
-Wnętrze zachowane pikselowo, 21 kotwic i skale bez zmian. Nowy przód komponowany lokalnie,
-pozostały dach i zewnętrzne nadwozie zachowane. Walidacja pikseli, `npm test`, E2E Garażu 9/9;
-`logs/e2e/2026-10-26T23-23-09/`. Obie karty Poligonu odświeżone bez resetu scen.
-MG zatwierdził ostateczny komplet po korekcie szyby 2026-10-27.
-
-**2026-10-27 — autobus: szósty komplet grafiki ukończony.** Portret 1024×1024 i zgodna para
-600×2400. Zatwierdzony układ: kierowca + 20 pasażerów, pięć rzędów i wolna podłoga z tyłu.
-Sylwetka/alfa wspólna, 0 różnic pikseli zewnętrznych poza dachem; bezstratny WEBP.
-Nadwozie 2,575 m szerokości, grafika z lusterkami 2,915×11,515 m przy ramce 3×12 m.
-Kotwice dopasowane do foteli; brak zmian skal postaci. Generator Garażu odtwarza siedem scen,
-podgląd autobusu 28×25 mieści 21 grafik odniesienia w czterech rzędach. Zainstalowano na
-Poligonie bez resetu sześciu wcześniejszych scen i bez zmian 78 istniejących żetonów.
-`npm test`, Quench pojazdów 37/37 po przebudowie wyłącznie piaskownicowej paczki, E2E
-`garaz-grafika` 9/9 bez błędów modułu; raport `logs/e2e/2026-10-26T21-13-27/`.
-Źródła, prompty i kompozytor: `dev/art/m4/autobus/README.md`. Kolejka: 20 obrazów + 7 dźwięków.
-Ocena estetyki MG: zatwierdzony 2026-10-27 po korekcie szyby.
-
-**2026-10-26 — korekta skali buggy po ocenie MG.** Pierwotne 1×2 kratki dawało 1,47 m
-szerokości grafiki. Dla szerokiej ramy pustynnej MG wskazał 2,03–2,13 m. Obrys katalogowy
-1,4×2,8, żeton 420×840; widoczna grafika 2,055×3,835 m (alfa >8), ramka 2,10×4,20 m.
-Kotwice rosną z pojazdem; skale postaci bez zmian. Spójność katalogu i podglądu zamiast
-lokalnego mnożnika. Rozmiar mechaniczny Duża i pozostałe parametry zachowane.
-
-**2026-10-26 — grafika buggy.** Piąty komplet: portret 1024×1024 i otwarty żeton 420×840,
-żółta rama rurowa, dwa fotele obok siebie i silnik z tyłu. Geometria SVG → grafika; końcowe
-kotwice dopasowane do foteli. Obaj jadący stale jako pełne pionki nad ramą, bez kropek;
-zachowana osłona 1/2 i dotychczasowy rozmiar jadących. Podgląd pusty / kierowca / pełna obsada
-w Garażu oraz pojazd na Parkingu; reset odtwarza teraz sześć scen. Starsze sceny Poligonu
-zachowane bez zmian skal i pozycji. `npm test`, Quench pojazdów 37/37, E2E `garaz-grafika`
-8/8 (widoczność bez najechania, celowanie, obrót i ruch obu kotwic, odtwarzanie).
-Źródła i prompty: `dev/art/m4/buggy/README.md`. Ocena estetyki MG otwarta; kolejka 22 obrazy + 7 dźwięków.
-
-**2026-10-26 — grafika ciężarówki.** Portret oraz para 600×1800: dach kabiny i wnętrze z trzema
-miejscami; otwarta drewniana paka w obu wariantach. Po uwagach MG korekta v2: wnętrze
-przesunięte o 26 px do zgodności z dachem; wspólna paka i reszta nadwozia skopiowane pikselowo.
-Bezstratny WEBP; walidacja odkodowanych plików potwierdza 0 różniących się pikseli poza kabiną.
-Kotwice kabiny i ośmiu miejsc paki dopasowane do obrazu; paka ma pełne widoczne postacie
-nad podłogą, kabina pozostaje zakryta. Generator Garażu odtwarza czwarty podgląd i używa grafiki
-na Parkingu. Odniesienia 11 osób układane w dwóch rzędach; bez eksperymentu 85%.
-Sonda `grafika-ciezarowka`. Walidacja WEBP, `npm test`, Quench 37/37 i E2E `garaz-grafika` 7/7
-zielone; raport `logs/e2e/2026-10-26T19-19-25/`. Ocena estetyki przez MG otwarta.
-
-**2026-10-26 — podglądy grafiki częścią Garażu.** Generator odtwarza Parking i trzy sceny
-Osobówki, Hammera oraz motocykla. Karta prób ma cztery skróty; Parking używa nowych grafik
-i kotwic również przy starszej paczce działającego Poligonu. Nowe podglądy: rozmiary katalogowe,
-stockowe postacie dnd5e ze źródłowymi skalami, portrety, puste pojazdy i pełna obsada.
-Wdrożenie może zachować istniejące sceny i ręczne zmiany; Reset odtwarza wszystko ze źródeł.
-Sonda `podglady-reset`. `npm test` i E2E `garaz-grafika` (6 kroków) zielone, bez błędów konsoli;
-raport `logs/e2e/2026-10-26T18-52-05/`. Skrypt generatora: `dev/poligon/stations/garaz-grafika.mjs`.
-
-**2026-10-26 — koniec eksperymentu 85%.** Na polecenie MG przywrócono pierwotne skale
-postaci we wszystkich podglądach pojazdów: 39 żetonów i prototypów, 63 postacie zweryfikowane.
-Podpisy i generatory podglądów poprawione. Zachowane indywidualne powiększenia postaci;
-globalnego 0,85 nie wdrożono. Mechaniczne zmniejszanie jadących do 0,5 kratki pozostaje bez zmian.
-
-**2026-10-26 — grafika motocykla i otwarte siodło.** Portret oraz żeton cruisera z dwoma miejscami.
-Kotwice dopasowane do finalnej grafiki, kierowca i pasażer stale nad siodłem bez kropek.
-Pojazd z wyłącznie otwartymi miejscami nie przygasa po najechaniu. Generator kompendium wybiera
-`strefyGrafiki` także dla otwartej grafiki bez wnętrza. Poligon: osobna scena motocykla, sonda
-`grafika-motocykl`, podgląd 120% / 85%. Quench 36/36; E2E `motocykl-art` i regresja
-`pojazd-prezentacja` zielone, raport `logs/e2e/2026-10-25T23-18-10/`. Pełna W1 pozostaje odłożona.
-Obsługa wieżyczek po becie zgodnie z D33; wyjątki od Ciężkiej i Utrudnienia są założeniem, nie implementacją.
-
-**2026-10-25 — D32, otwarty właz Hammera.** Wdrożony wspólny model prezentacji miejsc:
-zakryte/otwarte oraz lokalna warstwa grafiki względem nośnika. Właz pokazuje pełny żeton nad dachem,
-bez kropki; kabina zachowuje dotychczasowy widok. Okno Miejsca i lista Załogi rozpoznają tylko
-widocznego jadącego na otwartym miejscu. Osłona, broń montowana, własność i mechanika jazdy pozostają
-niezależne. Grafiki Hammera bez zmian, osobny dach/maska odłożone. Quench pojazdów 35/35;
-e2e `pojazd-prezentacja` i `pojazd` zielone, raport `logs/e2e/2026-10-25T20-33-50/`.
-Poligon: istniejąca scena Hammera, sonda `wlaz-widoczny`. Fundament W1 gotowy; pełna część 3 pozostaje otwarta.
+Stan na koniec serii: katalog 53/53 obrazów (kolejka M4: tylko 7 dźwięków), Garaż 16 scen / 228 żetonów, `npm test`
+zielony, Quench `pojazdy` **42/42**, e2e `garaz-grafika` **20/20**, bez błędów konsoli. Instalacje na żywym Poligonie
+zawsze bez resetu (zachowane sceny i ręczne zmiany). Dokumenty kampanii nietknięte.
 
 **2026-10-18 — projekt, runda 1.** Decyzje D1–D10; RAW s. 260–268 i s. 88–89 przeczytane; wykonalność jadących
 sprawdzona w źródłach rdzenia 14.369 (wzorzec Regionów przypiętych do żetonu, wizja niezależna od widoczności).

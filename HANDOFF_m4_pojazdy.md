@@ -10,8 +10,9 @@ Delete this file when M4 part 2 is finished (P5–P6) or vetoed and closed.
 - **Part 2, P1–P4** implemented: the chase board rebuilt as a folded road (`scenes/poscig*.mjs`), the road metric
   (`scenes/droga.mjs`), aimed bursts and road-space areas (`scenes/poscig-serie.mjs`). API `game.neuroshima.poscig`
   (`.droga`, `.serie`).
-- **P5 (chase mechanics)** waits for the GM's question round: `PLAN_m4_pojazdy.md` §10, eleven questions with the
-  agent's proposals.
+- **P5 (chase mechanics)** — the GM answered all eleven questions on 2026-10-29 (`PLAN_m4_pojazdy.md` D34–D41,
+  §6.2.5). **The final pass is planned in `PLAN_m4_pojazdy.md` §0.1** (S0–S1 creature/rider scale, K1–K3 driver
+  palette and part-1 gaps, KT turn anchors, P5a–P5e, P6, W0–W5 mounts) — start there, not here.
 - **Campaign:** the part-1 migration ran once (GMT400, Hammer Posterunku; Roll20 art in `flags.<mod>.pojazd.zetonPrzed`,
   restore with `game.modules.get("neuroshima-2026-overrides").api.migration.przywrocZetonyPojazdow()`). No chase board
   exists in the campaign, so the board geometry change needs no migration.
@@ -472,7 +473,7 @@ This is the presentation foundation for W1, not completion of the carrier/horse 
 and open-frame profiles remain in W1.
 
 1. Veto list and known gaps: `PLAN_m4_pojazdy.md` §10 (Garaż and Pościg probes).
-2. Answer the P5 questions (§10) — then P5 (manoeuvres, Test Pościgu, complications, ending) and P6 close M4.
+2. P5 questions are answered (D34–D41). Next: the final pass in `PLAN_m4_pojazdy.md` §0.1, then close M4.
 
 ## For the asset session
 
