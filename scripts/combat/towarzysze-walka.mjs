@@ -10,7 +10,8 @@
  *     inicjatywa, rzuca właściciel. Grupę tworzy aktywny MG, gdy właściciel albo towarzysz dołącza do walki;
  *     towarzysz z żetonem na scenie walki dołącza sam. Grupa ma własność graczy właściciela — bez niej rzut
  *     gracza nie dochodzi do grupy i ginie po cichu (spike E0).
- *   - **Kolejność (U7)** — owinięcie `Combat#_sortCombatants`: towarzysz porównywany jak właściciel, w parze
+ *   - **Kolejność (U7)** — kotwica tury (`combat/kotwica-tury.mjs`, M4 D39 — jedno owinięcie
+ *     `Combat#_sortCombatants` dla towarzyszy, pasażerów i wierzchowców): towarzysz porównywany jak właściciel, w parze
  *     właściciel pierwszy (dnd5e przy remisie sortuje alfabetycznie — F9). `CombatantGroup#activeCombatant`
  *     = właściciel (dnd5e: najniższe id). Grupa rozwinięta, gdy klient zobaczy ją pierwszy raz.
  *   - **Rzut towarzysza** idzie na właściciela: rzut za towarzysza w grupie zmieniłby inicjatywę grupy.
@@ -24,9 +25,10 @@
  */
 
 import { RODZAJE, TURY, ZRODLA } from "../config/towarzysze-data.mjs";
-import { porownajUczestnikow, decyzjaTury } from "../config/towarzysze-rules.mjs";
+import { decyzjaTury } from "../config/towarzysze-rules.mjs";
 import { towarzysz, towarzyszeWlasciciela } from "../actors/towarzysze.mjs";
 import { krokNaprzod, tikRaz } from "./tiki.mjs";
+import { PRIORYTET_KOTWICY, registerKotwicaTury, zarejestrujKotwice } from "./kotwica-tury.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -75,22 +77,10 @@ function _owin() {
   const CombatCls = CONFIG.Combat.documentClass;
   const proto = CombatCls.prototype;
 
-  const sort = proto._sortCombatants;
-  proto._sortCombatants = function (a, b) {
-    return porownajUczestnikow(a, b, _kotwica, (x, y) => sort.call(this, x, y));
-  };
-
-  const rollInitiative = proto.rollInitiative;
-  proto.rollInitiative = async function (ids, options) {
-    const lista = typeof ids === "string" ? [ids] : [...(ids ?? [])];
-    const doRzutu = new Set();
-    for (const id of lista) {
-      const kotwica = _kotwica(this.combatants.get(id));
-      if (!kotwica) doRzutu.add(id);
-      else if (kotwica.initiative === null || kotwica.initiative === undefined) doRzutu.add(kotwica.id); // rzuca właściciel
-    }
-    return rollInitiative.call(this, [...doRzutu], options);
-  };
+  // Kolejność i rzut za towarzysza (rzuca właściciel) — rejestr kotwic tury (M4 D39), jedno owinięcie dla wszystkich.
+  // Inicjatywę towarzysza trzyma grupa, więc kotwica jej nie wyrównuje.
+  registerKotwicaTury();
+  zarejestrujKotwice("towarzysz", _kotwica, { priorytet: PRIORYTET_KOTWICY.towarzysz });
 
   if (typeof proto.createGroups === "function") {
     const createGroups = proto.createGroups;

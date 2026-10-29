@@ -303,21 +303,43 @@ export function porownajBazowo(a, b) {
 }
 
 /**
- * Kolejność w walce (U7): towarzysz porównywany jak jego kotwica (uczestnik właściciela w tej samej
- * walce); w parze właściciel pierwszy, towarzysze jednego właściciela — po nazwie.
+ * Droga od korzenia do uczestnika po kotwicach: `[korzeń, …, c]`. Pętla (A za B, B za A) urywa się na pierwszym
+ * powtórzeniu — uczestnik w pętli jest wtedy sam sobie korzeniem łańcucha, który do niego doszedł.
+ * @param {(c: object) => object|null} kotwica
+ */
+export function sciezkaKotwic(c, kotwica = () => null) {
+  const droga = [c];
+  const byly = new Set([c.id]);
+  for (let k = kotwica(c); k && !byly.has(k.id); k = kotwica(k)) {
+    droga.unshift(k);
+    byly.add(k.id);
+  }
+  return droga;
+}
+
+const _poNazwie = (x, y) => String(x.nazwa ?? x.name ?? "").localeCompare(String(y.nazwa ?? y.name ?? ""))
+  || String(x.id).localeCompare(String(y.id));
+
+/**
+ * Kolejność w walce (U7, M4 D39): uczestnik z kotwicą porównywany jak korzeń swojego łańcucha kotwic (towarzysz →
+ * właściciel, pasażer „Za kierowcą” → kierowca, wierzchowiec → jeździec). W obrębie jednego korzenia — porządek
+ * drzewa: kotwica przed tymi, którzy za nią idą, rodzeństwo po nazwie (dnd5e przy remisie sortuje alfabetycznie, F9).
+ * Pies pasażera jedzie więc tuż za pasażerem, a nie za wszystkimi pasażerami kierowcy.
  * @param {{id: string}} a
  * @param {{id: string}} b
- * @param {(c: object) => object|null} kotwica  uczestnik właściciela albo `null` (sam sobie kotwicą)
- * @param {(a: object, b: object) => number} [bazowy]  porównanie kotwic
+ * @param {(c: object) => object|null} kotwica  bezpośrednia kotwica albo `null` (sam sobie kotwicą)
+ * @param {(a: object, b: object) => number} [bazowy]  porównanie korzeni
  */
 export function porownajUczestnikow(a, b, kotwica = () => null, bazowy = porownajBazowo) {
-  const A = kotwica(a) ?? a;
-  const B = kotwica(b) ?? b;
-  if (A.id !== B.id) return bazowy(A, B);
   if (a.id === b.id) return 0;
-  if (a.id === A.id) return -1;
-  if (b.id === B.id) return 1;
-  return String(a.nazwa ?? "").localeCompare(String(b.nazwa ?? "")) || String(a.id).localeCompare(String(b.id));
+  const pa = sciezkaKotwic(a, kotwica), pb = sciezkaKotwic(b, kotwica);
+  if (pa[0].id !== pb[0].id) return bazowy(pa[0], pb[0]);
+  for (let i = 1; ; i++) {
+    const x = pa[i], y = pb[i];
+    if (!x) return -1; // a jest kotwicą (przodkiem) b
+    if (!y) return 1;
+    if (x.id !== y.id) return _poNazwie(x, y);
+  }
 }
 
 /** Zatrzask Komendy obowiązuje w tej walce i tej rundzie (U8). */

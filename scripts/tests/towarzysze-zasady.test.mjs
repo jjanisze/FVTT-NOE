@@ -22,6 +22,7 @@ import { CLASSES } from "../config/classes-data.mjs";
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { MACHINE_FAILURES } from "../combat/bestiary-thresholds.mjs";
 import { krokNaprzod, kluczTiku } from "../combat/tiki.mjs";
+import { PRIORYTET_KOTWICY, kotwicaWpisu } from "../combat/kotwica-tury.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
 const PRZEPIS_KROCZACY = "15 CE, 1 CH, 10 CZ, 9 MK";
@@ -285,6 +286,47 @@ export function registerTowarzyszeZasadyTests(quench) {
         expect(sortuj([u("e", "Evie", 9, "v"), u("b", "Burek", 9, "v"), u("v", "Victor", 9)]))
           .to.deep.equal(["Victor", "Burek", "Evie"]);
         expect(sortuj([u("e", "Evie", 9, "nieobecny"), u("g", "Gangus", 12)])).to.deep.equal(["Gangus", "Evie"]);
+      });
+
+      it("M4 D39: łańcuch kotwic — pies pasażera tuż za pasażerem, pasażer „Za kierowcą” tuż za kierowcą", function () {
+        // Kierowca 8; pasażerka Ala (20 — przesunęła turę za kierowcę), jej pies Burek; drugi pasażer Zyg; obcy 10.
+        expect(sortuj([u("b", "Burek", 20, "a"), u("o", "Obcy", 10), u("z", "Zyg", 3, "k"), u("a", "Ala", 20, "k"), u("k", "Kierowca", 8)]))
+          .to.deep.equal(["Obcy", "Kierowca", "Ala", "Burek", "Zyg"]);
+      });
+
+      it("M4 D39: wierzchowiec za jeźdźcem z remisem trzech stron; pętla kotwic się nie zapętla", function () {
+        expect(sortuj([u("h", "Alfa (koń)", 12, "j"), u("x", "Bandyta", 12), u("j", "Jeździec", 12)]))
+          .to.deep.equal(["Bandyta", "Jeździec", "Alfa (koń)"]);
+        const petla = sortuj([u("p", "P", 5, "q"), u("q", "Q", 7, "p"), u("r", "R", 6)]);
+        expect(petla).to.have.length(3);
+      });
+    });
+
+    describe("Kotwica tury — rejestr (M4 D39, KT)", function () {
+      const walka = { id: "w" };
+      const c = (id, extra = {}) => ({ id, parent: walka, ...extra });
+      const kon = c("kon"), jezdziec = c("j"), wlasciciel = c("wl");
+      const wpisy = [
+        ["wierzchowiec", { fn: x => (x === kon ? jezdziec : null), priorytet: PRIORYTET_KOTWICY.wierzchowiec, wyrownaj: true }],
+        ["zaKierowca", { fn: () => null, priorytet: PRIORYTET_KOTWICY.zaKierowca, wyrownaj: true }],
+        ["towarzysz", { fn: x => (x === kon ? wlasciciel : null), priorytet: PRIORYTET_KOTWICY.towarzysz, wyrownaj: false }]
+      ];
+
+      it("koń, który jest też towarzyszem, w siodle słucha jeźdźca (W-U6) — wygrywa wyższy priorytet", function () {
+        const w = kotwicaWpisu(kon, wpisy);
+        expect(w.id).to.equal("wierzchowiec");
+        expect(w.kotwica).to.equal(jezdziec);
+        expect(PRIORYTET_KOTWICY.wierzchowiec).to.be.above(PRIORYTET_KOTWICY.zaKierowca);
+        expect(PRIORYTET_KOTWICY.zaKierowca).to.be.above(PRIORYTET_KOTWICY.towarzysz);
+      });
+
+      it("bez siodła — kotwica towarzysza; kotwica z innej walki albo on sam — brak", function () {
+        const bez = [wpisy[1], wpisy[2]];
+        expect(kotwicaWpisu(kon, bez).id).to.equal("towarzysz");
+        const obca = [["x", { fn: () => ({ id: "o", parent: { id: "inna" } }), priorytet: 1 }]];
+        expect(kotwicaWpisu(kon, obca)).to.equal(null);
+        expect(kotwicaWpisu(kon, [["x", { fn: x => x, priorytet: 1 }]])).to.equal(null);
+        expect(kotwicaWpisu({ id: "bez walki" }, wpisy)).to.equal(null);
       });
     });
 
