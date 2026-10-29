@@ -220,6 +220,10 @@ export async function zastosujAwarie(cel, k20, { zrodlo = "" } = {}) {
       await dodaj({ changes: [change(MOVE, CHANGE_TYPE.add, "-18")] });
       zrobione.push("Szybkość −18 m");
       break;
+    case 5:
+      await dodaj();
+      zrobione.push("dym w kabinie: Region przypięty do pojazdu, jadący na zakrytych miejscach Oślepieni (do naprawy)");
+      break;
     case 7:
       await dodaj({ changes: [change(MOVE, CHANGE_TYPE.multiply, "0")] });
       zrobione.push("Szybkość 0");
@@ -279,7 +283,7 @@ export async function zastosujAwarie(cel, k20, { zrodlo = "" } = {}) {
       break;
     }
     default:
-      // 3, 4, 5, 6, 10, 12, 14, 16 — znacznik z tekstem; pilnują ich haki (3, 4, 12) albo karty i okna (6, 10, 14, 16).
+      // 3, 4, 6, 10, 12, 14, 16 — znacznik z tekstem; pilnują ich haki (3, 4, 12) albo karty i okna (6, 10, 14, 16).
       await dodaj();
       zrobione.push(`znacznik „${AWARIE_POJAZDOW[k20].nazwa}”${[3, 4, 12].includes(Number(k20)) ? " — moduł liczy skutek na Testach i turach kierowcy" : " — skutek na kartach i w oknach"}`);
   }

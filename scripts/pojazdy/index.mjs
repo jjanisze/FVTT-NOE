@@ -17,6 +17,7 @@
  *  - `silnik.mjs`      — Uruchom/Zgaś, światła, kluczyki, na krótko (oznaczenia i blokady)
  *  - `efekty-silnika.mjs` — dym (ParticleGenerator), drgania (ticker), dźwięk — lokalnie z flagi `silnik`
  *  - `awarie.mjs`      — Tabela awarii k20: wyzwalacze, [Zastosuj], zegary świata, tura kierowcy, karta obrażeń
+ *  - `dym.mjs`         — awaria 5: Region dymu przypięty do pojazdu, chmura JB2A, Oślepienie zakrytych jadących
  *  - `wrak.mjs`        — 0 PW: wrak, jadący wysadzeni, wybuch baku płonącego wraku
  *  - `naprawy.mjs`     — naprawa tymczasowa i fachowa (Robota M2), karoseria, Odbudowa
  *  - `jazda.mjs`       — tura kierowcy, budżet jazdy, skręty, teren, potrącenie, bezruch, atak z pojazdu, osłona jadących
@@ -45,6 +46,7 @@ import {
   kartaObrazen, zegaryPojazdu
 } from "./awarie.mjs";
 import { registerWrak, zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem } from "./wrak.mjs";
+import { registerDym, uzgodnijDym, dymWKabinie } from "./dym.mjs";
 import { registerNaprawy, naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote } from "./naprawy.mjs";
 import {
   danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, obsadaPojazdu, pojazdJadacego,
@@ -93,6 +95,7 @@ export function registerPojazdy() {
   registerSilnik();
   registerEfektySilnika();
   registerAwarie();
+  registerDym();
   registerWrak();
   registerNaprawy();
   registerJazda();
@@ -114,7 +117,7 @@ export const pojazdyApi = {
   uruchom, zgas, przelaczSwiatla, utworzKluczyki, ustawNaKrotko, naKrotko, stanSilnika, warunkiUruchomienia,
   kluczykiPodReka, idKluczykow, punktRury, zagraj, ZESTAWY,
   AWARIE_POJAZDOW, efektyAwarii, aktywneAwariePojazdu, zaproponujAwarie, rzucAwarie, zastosujAwarie, kartaObrazen, zegaryPojazdu,
-  zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem,
+  zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem, uzgodnijDym, dymWKabinie,
   bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron, utworzZKatalogu, zetonPojazdu,
   maZdolnosc, trikKaskadera, synchronizujOC,
   szybkoscPojazdu, budzetJazdy, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
