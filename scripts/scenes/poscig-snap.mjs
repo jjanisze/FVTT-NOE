@@ -217,6 +217,11 @@ const yKsztaltu = sh => sh.y ?? sh.base?.y ?? sh.points?.[1] ?? sh.origin?.y;
  */
 async function przesunRzeczyNaDrodze(scene, dx) {
   const tiles = scene.tiles.filter(t => wPasie(t.y)).map(t => ({ _id: t.id, x: t.x + dx }));
+  // Wypadnięci z pojazdów (P5d, D38) leżą na drodze, nie w pojeździe — jadą z polem jak rzeczy na drodze.
+  const lezacy = scene.tokens.filter(t => t.getFlag(MODULE_ID, "dryf") && !jazdaZetonu(t) && wPasie(t.y));
+  // `displace`: zmiana x/y żetonu w v14 to marsz zatrzymywany przez ściany i inne żetony.
+  if (lezacy.length) await scene.moveTokens(Object.fromEntries(lezacy.map(t => [t.id, { destination: { x: t.x + dx, y: t.y, action: "displace" } }])),
+    { animate: false, showRuler: false, method: "api", [DERIVED_UPDATE]: true });
   const lights = scene.lights.filter(l => wPasie(l.y)).map(l => ({ _id: l.id, x: l.x + dx }));
   const drawings = scene.drawings.filter(d => wPasie(d.y + (d.shape?.height ?? 0) / 2)).map(d => ({ _id: d.id, x: d.x + dx }));
   const regions = scene.regions.filter(r => !r.attachment?.token && r.shapes.some(sh => wPasie(yKsztaltu(sh))))

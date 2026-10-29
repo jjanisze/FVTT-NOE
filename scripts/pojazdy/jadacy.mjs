@@ -28,6 +28,7 @@ import {
 import {
   naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
 } from "./geometria.mjs";
+import { torX, xNaTor } from "../scenes/poscig.mjs";
 
 const FLAGA_DOSTEP = "dostep";
 const FLAGA_RUCH = "ruch";
@@ -431,7 +432,17 @@ export async function wypadnij(jadacyDoc, { powod = "" } = {}) {
   if (!game.user.isGM) return doMG("pojazd.wypadnij", { jadacy: jadacyDoc.uuid, powod });
   const pojazd = pojazdJadacego(jadacyDoc);
   if (!pojazd) return;
-  await wysadzGM(jadacyDoc);
+  // Plansza pościgu (D38, s. 266): ląduje znacznik za pojazdem i odtąd dryfuje z drogą (`poscig-tura.mjs`).
+  const plansza = trybSceny(pojazd.parent) === "plansza";
+  let cel = null;
+  if (plansza) {
+    const g = pojazd.parent.grid.size, src = pojazd._source;
+    const { w, h } = jazdaZetonu(jadacyDoc)?.rozmiar ?? { w: 1, h: 1 };
+    const tor = xNaTor(src.x + src.width * g / 2);
+    cel = { x: Math.round(torX(tor - 1) - w * g / 2), y: Math.round(src.y + src.height * g / 2 - h * g / 2) };
+  }
+  await wysadzGM(jadacyDoc, { cel });
+  if (plansza) await jadacyDoc.setFlag(MODULE_ID, "dryf", true);
   const roll = await new Roll("3d6").evaluate();
   const actor = jadacyDoc.actor;
   await actor?.applyDamage?.([{ value: roll.total, type: "bludgeoning", properties: new Set() }]);

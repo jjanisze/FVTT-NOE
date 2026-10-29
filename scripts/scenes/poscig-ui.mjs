@@ -26,6 +26,7 @@ import {
 } from "../config/vehicles-data.mjs";
 
 import { MOTYWY, motywPoscigu } from "./poscig-themes.mjs";
+import { ustawMete } from "./poscig-tura.mjs";
 
 function _motywSelect(flaga) {
   const selected = motywPoscigu(flaga).id;
@@ -135,6 +136,7 @@ export async function oknoNowyPoscig() {
 
 function _podsumowanie(s) {
   if (!s) return "";
+  const meta = s.meta ? ` &nbsp;·&nbsp; meta: znacznik <strong>${s.meta}</strong>` : "";
   const wiersze = s.pionki.map(p =>
     `<tr><td>${foundry.utils.escapeHTML(p.nazwa)}</td>`
     + `<td style="text-align:center">${p.rola === "scigany" ? "ścigany" : "ścigający"}</td>`
@@ -145,7 +147,7 @@ function _podsumowanie(s) {
     : "";
   return `<fieldset><legend>Stan planszy</legend>`
     + `<p style="margin:.2em 0">Runda <strong>${s.runda}</strong>`
-    + ` &nbsp;·&nbsp; przewaga <strong>${s.przewaga ?? "—"}</strong></p>`
+    + ` &nbsp;·&nbsp; przewaga <strong>${s.przewaga ?? "—"}</strong>${meta}${s.zakonczony ? " &nbsp;·&nbsp; <em>zakończony</em>" : ""}</p>`
     + (wiersze
       ? `<table style="width:100%"><thead><tr><th style="text-align:left">Pojazd</th>`
         + `<th>Rola</th><th>Tor</th></tr></thead><tbody>${wiersze}</tbody></table>`
@@ -166,7 +168,11 @@ export async function oknoUstawienia(scene = canvas?.scene) {
     + _grupa("Motyw planszy", _motywSelect(flaga), "Wygląd planszy — niezależny od środowiska i ST.")
     + _grupa("ST Testu Pościgu", _liczba("st", flaga.st, { min: 0, max: 30 }),
       "Domyślnie ze środowiska — nadpisz, jeśli scena tego wymaga.")
-    + _grupa("Runda", _liczba("runda", flaga.runda, { min: 1 }))
+    + _grupa("Runda", _liczba("runda", flaga.runda, { min: 1 }), "Poza walką. W walce na tej scenie runda pościgu = runda walki (D40).")
+    + _grupa("Meta (znacznik)", _liczba("meta", Number(flaga.meta) || 0, { min: 0 }),
+      "Numer znacznika z podręcznika (przeżywa recentrowanie); 0 — bez mety. Karta końca na początku rundy (D40).")
+    + _grupa("Pościg zakończony", `<input type="checkbox" name="zakonczony" ${flaga.zakonczony ? "checked" : ""}>`,
+      "Wyłącza karty Testu Pościgu, zapasu i dryf drogi; plansza zostaje. Odznacz, żeby wznowić.")
     + _grupa("Tempo tła", _liczba("tempoTla", flaga.tempoTla ?? 2, { min: 0, max: 4, step: 0.1 }),
       "Prędkość przewijania tła i kołysania pojazdów. 0 zatrzymuje obraz; nie wpływa na mechanikę.")
     + `<hr><fieldset><legend>Dostaw pojazd</legend>`
@@ -192,8 +198,11 @@ export async function oknoUstawienia(scene = canvas?.scene) {
           motyw: f.elements.motyw.value,
           st: Number(f.elements.st.value),
           runda: Number(f.elements.runda.value),
-          tempoTla: Number(f.elements.tempoTla.value)
+          tempoTla: Number(f.elements.tempoTla.value),
+          zakonczony: !!f.elements.zakonczony.checked
         });
+        const meta = Number(f.elements.meta.value) || 0;
+        if (meta !== (Number(flaga.meta) || 0)) await ustawMete(scene, meta);
         const doDodania = _wybrane(f, "dodaj");
         for (const id of doDodania) {
           await dodajPojazd(scene, id, {

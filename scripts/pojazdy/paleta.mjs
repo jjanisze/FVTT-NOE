@@ -31,7 +31,10 @@ import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
 import { change, CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { CECHY_POJAZDOW, cechyPojazdu } from "../config/vehicles-data.mjs";
 import { krokNaprzod } from "../combat/tiki.mjs";
-import { MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, miejsceOId, pojazdJadacego } from "./stan.mjs";
+import {
+  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, miejsceOId, pojazdJadacego, trybSceny
+} from "./stan.mjs";
+import { xNaTor } from "../scenes/poscig.mjs";
 import { kierowcaPojazdu } from "./jadacy.mjs";
 import { aktywneAwariePojazdu } from "./awarie.mjs";
 
@@ -109,7 +112,47 @@ export const POZYCJE = {
     nazwa: "Bieg wsteczny", czas: "przelacznik", ikona: "fa-solid fa-backward", przelacznik: true, wsteczny: true,
     kiedy: d => !!d.katalog.silnik,
     skutek: "Pojazd cofa przodem do przodu: droga liczy się ×2 (połowa Szybkości, s. 261), z cechą Cofanie autobusu i ciężarówki ×4; z cechą Cofanie Testy (Pojazdy) z Utrudnieniem. Wyłącza się na początku następnej tury kierowcy."
-  }
+  },
+
+  // Manewry kierowcy — tylko na planszy pościgu (P5c, D41; s. 268). Dalsze kroki (testy, ruchy wymuszone,
+  // komplikacje) to przyciski kart obsługiwane przez `scenes/poscig-tura.mjs`.
+  gazu: {
+    nazwa: "Gazu!", czas: "akcja", plansza: true, ikona: "fa-solid fa-forward-fast", ruch: 1, blokujaAwarie: [11],
+    skutek: "Do początku następnej tury kierowcy dodatkowy ruch równy Szybkości pojazdu (s. 268)."
+  },
+  hample: {
+    nazwa: "Hample", czas: "bonus", plansza: true, ikona: "fa-solid fa-hand", hample: true,
+    skutek: "Gwałtowne hamowanie: Test (Pojazdy) ST 10, inaczej komplikacja; natychmiast −2 znaczniki. Kierowcy jadących pojazdów na tych znacznikach — Test (Pojazdy) ST 10 albo kolizja (MG) (s. 268)."
+  },
+  obrot180: {
+    nazwa: "Obrót 180°", czas: "akcja", plansza: true, ikona: "fa-solid fa-rotate", bezEfektu: true,
+    skutek: "Tylko pojazdy Wielkie i mniejsze. Test (Pojazdy) ST 20, inaczej Przewrócenie; natychmiast −2 znaczniki, dalej jazda w drugą stronę (rola — MG). Jadący pojazd na tym znaczniku — Test (Pojazdy) ST 15 albo kolizja (s. 268)."
+  },
+  ostroznaJazda: {
+    nazwa: "Ostrożna jazda", czas: "akcja", plansza: true, ikona: "fa-solid fa-gauge-simple-min",
+    ulatwienie: true, zmiany: [change(MOVE, CHANGE_TYPE.multiply, "0.5")], wyklucza: ["gazDoDechy", "szostyBieg"],
+    skutek: "Do początku następnej tury kierowcy: Szybkość ×½ i Ułatwienie do Testów (Pojazdy); nie razem z Gazem do dechy ani Szóstym biegiem (s. 268)."
+  },
+  stukniecie: {
+    nazwa: "Stuknięcie", czas: "akcja", plansza: true, ikona: "fa-solid fa-car-burst", bezEfektu: true, cel: true,
+    skutek: "Wyceluj pojazd (albo jadącego w nim) na tym samym znaczniku, co najwyżej twojego rozmiaru. Test (Pojazdy) ST 10, porażka o 5+ — komplikacja; sukces — kierowca celu: Test ST 15 (z Utrudnieniem, gdy twój pojazd większy), porażka — komplikacja (s. 268)."
+  },
+  zajechanie: {
+    nazwa: "Zajechanie", czas: "akcja", plansza: true, ikona: "fa-solid fa-road-barrier", bezEfektu: true, cel: true,
+    skutek: "Wyceluj pojazd na tym samym znaczniku. Test (Pojazdy) ST 10, porażka o 5+ — komplikacja; sukces — Szybkość celu ×½ do końca jego następnej tury (s. 268)."
+  },
+
+  // Bez pozycji w palecie — zakładają je komplikacje i manewry (`nalozEfektPalety`), wygasają jak paleta.
+  kontakt: { nazwa: "Bez kontaktu wzrokowego", ukryta: true, ikona: "fa-solid fa-eye-slash", kontakt: true,
+    skutek: "Komplikacja 7: do początku następnej tury kierowcy ani jadący nie atakują przeciwników, ani oni ich (s. 267)." },
+  nawierzchnia: { nazwa: "Zniszczona nawierzchnia", ukryta: true, ikona: "fa-solid fa-road-circle-exclamation",
+    zmiany: [change(MOVE, CHANGE_TYPE.multiply, "0.5")], wygasa: { zmiany: "koniec" },
+    skutek: "Komplikacja 11: trudny teren do końca następnej tury kierowcy — Szybkość ×½ (s. 261, 267)." },
+  zajechany: { nazwa: "Zajechana droga", ukryta: true, ikona: "fa-solid fa-road-barrier",
+    zmiany: [change(MOVE, CHANGE_TYPE.multiply, "0.5")], wygasa: { zmiany: "koniec" },
+    skutek: "Zajechanie: Szybkość ×½ do końca następnej tury kierowcy (s. 268)." },
+  oslepienie: { nazwa: "Oślepiające światło", ukryta: true, ikona: "fa-solid fa-sun", statusy: ["blinded"], wygasa: { statusy: "koniec" },
+    skutek: "Komplikacja 18: kierowca Oślepiony do końca następnej tury (s. 267)." }
 };
 
 /** Skok wg cechy: rozbieg (m), test i ST. */
@@ -132,7 +175,8 @@ const SKOKI = {
  *   mnoznikDrogi: number, wsteczny: boolean, slalom: boolean, nazwy: string[]}}
  */
 export function budzetPalety(wpisy, { cwierc = false, cofanie = false } = {}) {
-  const out = { ruch: 0, st: 0, ulatwienie: false, utrudnienie: false, atak: null, mnoznikDrogi: 1, wsteczny: false, slalom: false, nazwy: [] };
+  const out = { ruch: 0, st: 0, ulatwienie: false, utrudnienie: false, atak: null, mnoznikDrogi: 1, wsteczny: false, slalom: false,
+    kontakt: false, hample: false, nazwy: [] };
   for (const w of wpisy ?? []) {
     const def = POZYCJE[w?.id];
     if (!def) continue;
@@ -148,6 +192,8 @@ export function budzetPalety(wpisy, { cwierc = false, cofanie = false } = {}) {
       cos = true;
     }
     if (def.slalom && dziala("slalom")) { out.slalom = true; cos = true; }
+    if (def.kontakt && dziala("kontakt")) { out.kontakt = true; cos = true; }
+    if (def.hample && dziala("hample")) { out.hample = true; cos = true; }
     if (def.wsteczny && dziala("wsteczny")) {
       out.wsteczny = true;
       out.mnoznikDrogi *= cwierc ? 4 : 2;
@@ -225,12 +271,15 @@ export function pozycjePojazdu(pojazdDoc) {
   const awarie = aktywneAwariePojazdu(actor);
   const aktywne = new Set(efektyPalety(actor).map(e => e.flags[MODULE_ID][FLAGA_PALETY].id));
   const out = [];
+  const plansza = trybSceny(pojazdDoc.parent) === "plansza";
   for (const [id, def] of Object.entries(POZYCJE)) {
+    if (def.ukryta || (def.plansza && !plansza)) continue;
     if (def.cecha && !cechy.some(c => c.id === def.cecha)) continue;
     if (def.kiedy && !def.kiedy(ctx)) continue;
     const oznaczenia = [];
     for (const a of def.blokujaAwarie ?? []) if (awarie.includes(a)) oznaczenia.push(`Awaria ${a} — niedostępne wg RAW (oznaczone, nie blokowane).`);
     for (const w of def.wyklucza ?? []) if (aktywne.has(w)) oznaczenia.push(`Wyklucza ${POZYCJE[w]?.nazwa ?? w} w tej samej turze (s. 268).`);
+    if (id === "obrot180" && actor.system?.traits?.size === "grg") oznaczenia.push("Pojazd Ogromny — RAW: tylko Wielkie i mniejsze.");
     out.push({ id, def, aktywna: aktywne.has(id), oznaczenia });
   }
   return out;
@@ -309,21 +358,97 @@ export async function uzyjPalety(pojazdDoc, id) {
     przyciski.push({ akcja: "pojazd.roCelow", label: `RO ${def.ro.ability === "str" ? "SIŁ" : def.ro.ability.toUpperCase()} ST ${def.ro.st} — wycelowani`,
       ikona: "fa-solid fa-shield-halved", gm: true, dane: { ability: def.ro.ability, st: def.ro.st, porazka: def.ro.porazka, zrodlo: def.nazwa } });
   }
+  if (def.plansza) _manewr(id, pojazdDoc, kier, linie, ostrz, przyciski);
   if (id === "wsteczny" && _cofanie(actor).cofanie) linie.push(`Cecha Cofanie: ${_cofanie(actor).cwierc ? "jedna czwarta Szybkości" : "połowa Szybkości"}, Testy (Pojazdy) z Utrudnieniem.`);
 
-  if (!def.bezEfektu) {
-    const t = _turaTeraz();
-    await actor.createEmbeddedDocuments("ActiveEffect", [{
-      name: `${def.nazwa}${def.trwale ? "" : " (paleta)"}`, img: "icons/svg/upgrade.svg",
-      description: `<p>${esc(def.skutek)}</p>`,
-      system: { changes: def.zmiany ?? [] },
-      flags: { [MODULE_ID]: { [FLAGA_PALETY]: { id, ...t, czas: t.walka ? null : game.time.worldTime, faza: 0 } } }
-    }]);
-  }
+  if (!def.bezEfektu) await nalozEfektPalety(actor, id);
   await wyslijKarte(kartaPostoju({ ikona: pojazdDoc.texture.src, tytul: `${def.nazwa} — ${pojazdDoc.name}`,
     podtytul: def.czas === "przelacznik" ? "przełącznik kierowcy" : `[${CZAS[def.czas]}] ${{ akcja: "akcja", bonus: "akcja bonusowa", reakcja: "reakcja" }[def.czas]} kierowcy — koszt oznaczony (D7)`,
     rodzaj: ostrz.length ? "test" : "info", linie, ostrzezenia: ostrz, przyciski }), { actor: kier?.actor ?? actor });
   return { id };
+}
+
+/**
+ * Efekt palety na aktorze (pojazd albo kierowca): od teraz, wygasa na krawędziach tur kierowcy. Komplikacje i manewry
+ * zakładają tędy efekty bez pozycji w palecie (`ukryta`).
+ * @param {Actor} actor
+ * @param {string} id  klucz `POZYCJE`
+ */
+export async function nalozEfektPalety(actor, id) {
+  const def = POZYCJE[id];
+  if (!def || !actor) return null;
+  const t = _turaTeraz();
+  const [e] = await actor.createEmbeddedDocuments("ActiveEffect", [{
+    name: `${def.nazwa}${def.trwale || def.ukryta ? "" : " (paleta)"}`, img: "icons/svg/upgrade.svg",
+    description: `<p>${esc(def.skutek)}</p>`, statuses: def.statusy ?? [],
+    system: { changes: def.zmiany ?? [] },
+    flags: { [MODULE_ID]: { [FLAGA_PALETY]: { id, ...t, czas: t.walka ? null : game.time.worldTime, faza: 0 } } }
+  }]);
+  return e ?? null;
+}
+
+const ROZMIARY = ["tiny", "sm", "med", "lg", "huge", "grg"];
+
+/** Tor pojazdu na planszy (środek żetonu). */
+export function torPojazdu(doc) {
+  const g = doc.parent.grid.size;
+  return xNaTor(doc._source.x + doc._source.width * g / 2);
+}
+
+/** Pojazdy na planszy na podanych torach (bez tego). */
+function _pojazdyNaTorach(pojazdDoc, tory) {
+  return pojazdDoc.parent.tokens.filter(t => t.id !== pojazdDoc.id && jestZetonemPojazdu(t) && tory.includes(torPojazdu(t)));
+}
+
+/** Przycisk testu kierowcy pościgu z dalszymi krokami (JSON) — obsługa: `poscig-tura.mjs`. */
+export function przyciskTestuPoscigu(pojazdDoc, { label, st, umiejetnosc = "poj", utrudnienie = false, sukces = [], porazka = [], porazka5 = [] }) {
+  return { akcja: "poscig.testKierowcy", label, ikona: "fa-solid fa-dice-d20", wlasciciel: true,
+    dane: { pojazd: pojazdDoc.uuid, st, umiejetnosc, utrudnienie: utrudnienie ? 1 : 0,
+      sukces: JSON.stringify(sukces), porazka: JSON.stringify(porazka), porazka5: JSON.stringify(porazka5) } };
+}
+
+/** Przycisk kroków wymuszonych (ruch, awaria, komplikacja) — MG albo kierowca przez przekaźnik. */
+export function przyciskKrokow(pojazdDoc, label, kroki, ikona = "fa-solid fa-arrows-left-right") {
+  return { akcja: "poscig.kroki", label, ikona, wlasciciel: true, dane: { pojazd: pojazdDoc.uuid, kroki: JSON.stringify(kroki) } };
+}
+
+/** Manewr na planszy: linie, ostrzeżenia i przyciski karty (P5c). */
+function _manewr(id, pojazdDoc, kier, linie, ostrz, przyciski) {
+  const tor = torPojazdu(pojazdDoc);
+  const kolizje = (tory, st) => {
+    for (const p of _pojazdyNaTorach(pojazdDoc, tory)) {
+      const k = kierowcaPojazdu(p);
+      linie.push(`${esc(p.name)} na znaczniku ${torPojazdu(p)}${k ? "" : " (bez kierowcy)"} — Test (Pojazdy) ST ${st} albo kolizja (MG rozstrzyga).`);
+      if (k) przyciski.push(przyciskTestuPoscigu(p, { label: `${p.name}: Pojazdy ST ${st}`, st }));
+    }
+  };
+  if (id === "hample") {
+    if (kier) przyciski.push(przyciskTestuPoscigu(pojazdDoc, { label: "Hample: Pojazdy ST 10", st: 10, porazka: [{ komplikacja: 1 }] }));
+    przyciski.push(przyciskKrokow(pojazdDoc, "−2 znaczniki", [{ znaczniki: -2 }]));
+    kolizje([tor - 1, tor - 2], 10);
+  }
+  if (id === "obrot180") {
+    if (kier) przyciski.push(przyciskTestuPoscigu(pojazdDoc, { label: "Obrót: Pojazdy ST 20", st: 20, porazka: [{ awaria: 8 }] }));
+    przyciski.push(przyciskKrokow(pojazdDoc, "−2 znaczniki", [{ znaczniki: -2 }]));
+    kolizje([tor - 2], 15);
+    linie.push("Po obrocie pojazd jedzie w drugą stronę — rolę w pościgu zmienia MG.");
+  }
+  if (POZYCJE[id].cel) {
+    const t = [...game.user.targets][0]?.document ?? null;
+    const cel = t ? (jestZetonemPojazdu(t) ? t : pojazdJadacego(t)) : null;
+    if (!cel) ostrz.push("Wyceluj pojazd (albo jadącego w nim) na tym samym znaczniku — T, potem jeszcze raz z palety.");
+    else {
+      if (torPojazdu(cel) !== tor) ostrz.push(`${cel.name} jest na znaczniku ${torPojazdu(cel)}, nie na twoim (${tor}).`);
+      const moj = ROZMIARY.indexOf(pojazdDoc.actor.system?.traits?.size), jego = ROZMIARY.indexOf(cel.actor.system?.traits?.size);
+      if (id === "stukniecie" && moj < jego) ostrz.push("Twój pojazd jest mniejszy od celu — RAW: tylko maszyną co najmniej tego samego rozmiaru.");
+      linie.push(`Cel: <strong>${esc(cel.name)}</strong>.`);
+      const dalej = id === "stukniecie"
+        ? [{ test: { pojazd: cel.uuid, st: 15, utrudnienie: moj > jego, porazka: [{ komplikacja: 1, pojazd: cel.uuid }] } }]
+        : [{ efekt: "zajechany", pojazd: cel.uuid }];
+      if (kier) przyciski.push(przyciskTestuPoscigu(pojazdDoc, { label: `${POZYCJE[id].nazwa}: Pojazdy ST 10`, st: 10,
+        sukces: dalej, porazka5: [{ komplikacja: 1 }] }));
+    }
+  }
 }
 
 /** Przerzutka (s. 263): zmiana przełożenia roweru — akcja bonusowa, stan trwały. */
@@ -390,8 +515,7 @@ function _pojazdKierowcy(combatant) {
   return p && miejsceOId(p.actor, jazdaZetonu(tok).miejsce)?.kierowca ? p : null;
 }
 
-async function _wygas(pojazdDoc, t) {
-  const actor = pojazdDoc?.actor;
+async function _wygas(actor, t) {
   if (!actor) return;
   const usun = [], faza1 = [];
   for (const e of efektyPalety(actor)) {
@@ -408,10 +532,15 @@ async function _onTurnChange(combat, prior, current) {
   if (!game.users.activeGM?.isSelf || !krokNaprzod(prior, current)) return;
   const poprzedni = combat.combatants.get(prior?.combatantId);
   const biezacy = combat.combatants.get(current?.combatantId);
+  // Efekty palety pojazdu i samego kierowcy (Oślepienie z komplikacji 18) liczą tury kierowcy.
+  const koniec = { walka: combat.id, runda: prior?.round, tura: prior?.turn, krawedz: "koniec" };
+  const start = { walka: combat.id, runda: current.round, tura: current.turn, krawedz: "start" };
   const pKoniec = _pojazdKierowcy(poprzedni);
-  if (pKoniec) await _wygas(pKoniec, { walka: combat.id, runda: prior.round, tura: prior.turn, krawedz: "koniec" });
+  if (pKoniec) await _wygas(pKoniec.actor, koniec);
+  if (poprzedni?.actor && efektyPalety(poprzedni.actor).length) await _wygas(poprzedni.actor, koniec);
   const pStart = _pojazdKierowcy(biezacy);
-  if (pStart) await _wygas(pStart, { walka: combat.id, runda: current.round, tura: current.turn, krawedz: "start" });
+  if (pStart) await _wygas(pStart.actor, start);
+  if (biezacy?.actor && efektyPalety(biezacy.actor).length) await _wygas(biezacy.actor, start);
 }
 
 /** Poza walką: zegar świata. */
@@ -473,6 +602,9 @@ function _wPojezdzie(tokenLike) {
 function _zrodloAtakow({ attackerToken, targets }) {
   const out = [];
   const a = _wPojezdzie(attackerToken);
+  // Komplikacja 7 (s. 267): ani oni nas, ani my ich — oznaczone, rozstrzyga MG.
+  const bezKontaktu = [a, ...(targets ?? []).map(_wPojezdzie)].find(x => x && paletaPojazdu(x.pojazd.actor).kontakt);
+  if (bezKontaktu) out.push({ rodzaj: "uwaga", label: `${bezKontaktu.pojazd.name}: utrata kontaktu wzrokowego — atak niemożliwy do początku tury kierowcy (s. 267)`, strona: "MG" });
   if (a) {
     const b = paletaPojazdu(a.pojazd.actor);
     if (b.atak === "wszyscy" || (b.atak === "kierowca" && a.kierowca)) {

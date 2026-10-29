@@ -38,6 +38,10 @@ import {
 } from "../scenes/droga.mjs";
 import { trafieniLinia, trafieniObszar } from "../scenes/poscig-serie.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
+import {
+  ZAPAS_MAKS, PRZEPASCI_K4, dryf, komplikacja, limitZnacznikow, przebyteZnaczniki, skutekAtakuNaKierowce, stAtakuNaKierowce,
+  warunkiKonca, wynikTestuPoscigu, wZasieguWreczNaPlanszy, zapasPoTurze
+} from "../scenes/poscig-zasady.mjs";
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
 import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "../scenes/poscig-motion-model.mjs";
 
@@ -61,7 +65,9 @@ export function registerPoscigTests(quench) {
         for (const [id, theme] of Object.entries(MOTYWY)) {
           expect(theme.id).to.equal(id);
           expect(theme.nazwa).to.be.a("string").with.length.above(8);
-          expect(theme).to.have.all.keys("id", "nazwa", "seed", "bitmap", "sky", "far", "mid", "near", "lanes", "labels", "free", "ambient");
+          // `snow` — opcjonalny (zima: płatki `poscig-snow.mjs`).
+          const klucze = ["id", "nazwa", "seed", "bitmap", "sky", "far", "mid", "near", "lanes", "labels", "free", "ambient"];
+          expect(theme).to.have.all.keys(...klucze, ...("snow" in theme ? ["snow"] : []));
           expect(theme.bitmap).to.be.a("boolean");
           for (const part of ["far", "mid", "near"]) {
             expect(theme[part].colors.length).to.be.at.least(2);
@@ -286,6 +292,75 @@ export function registerPoscigTests(quench) {
     });
 
     /* -------------------------------------------- */
+
+    describe("Tura pościgu — zasady P5 (D34–D40)", function () {
+      it("D34: Autobus 24 m awansuje 0, 1, 1 znacznik w trzech turach; zapas najwyżej 35 m, pełne znaczniki przepadają", function () {
+        let zapas = 0;
+        const wyniki = [];
+        for (let i = 0; i < 3; i++) {
+          const limit = limitZnacznikow(24, zapas);
+          wyniki.push(limit);
+          zapas = zapasPoTurze(24, zapas, limit);
+        }
+        expect(wyniki).to.deep.equal([0, 1, 1]);
+        expect(zapas).to.equal(0);
+        // Stał, choć mógł jechać: niewykorzystany pełny znacznik przepada.
+        expect(zapasPoTurze(24, 24, 0)).to.equal(ZAPAS_MAKS);
+        expect(ZAPAS_MAKS).to.equal(35);
+        expect(zapasPoTurze(36, 0, 1)).to.equal(0);
+      });
+
+      it("limit z paletą: Osobówka 36 m z Gazem do dechy (+72 m) i zapasem 10 m — 3 znaczniki; przebyte z drogi", function () {
+        expect(limitZnacznikow(36 + 72, 10)).to.equal(3);
+        expect(limitZnacznikow(36, 35)).to.equal(1);
+        expect(przebyteZnaczniki(72)).to.equal(2);
+        expect(przebyteZnaczniki(0)).to.equal(0);
+      });
+
+      it("D35: Test Pościgu — nat. 20 znacznik więcej, nat. 1 dwie komplikacje, porażka o 6+ także awaria", function () {
+        expect(wynikTestuPoscigu(25, 10, 20)).to.include({ komplikacje: 0, znacznik: 1, rodzaj: "nat20" });
+        expect(wynikTestuPoscigu(12, 10, 8)).to.include({ komplikacje: 0, rodzaj: "sukces" });
+        expect(wynikTestuPoscigu(8, 10, 6)).to.include({ komplikacje: 1, awaria: false });
+        expect(wynikTestuPoscigu(4, 10, 2)).to.include({ komplikacje: 1, awaria: true });
+        expect(wynikTestuPoscigu(3, 15, 1)).to.include({ komplikacje: 2, awaria: true, rodzaj: "nat1" });
+      });
+
+      it("D36: każda z 20 komplikacji ma skutek do przycisku, tabela k20 domknięta", function () {
+        for (let k = 1; k <= 20; k++) {
+          const w = komplikacja(k);
+          expect(w, `k20 = ${k}`).to.exist;
+          expect(Object.keys(w.skutek).length, `${k}: skutek`).to.be.above(0);
+          for (const t of [w.skutek.test].filter(Boolean)) {
+            expect(["poj", "prc"]).to.include(t.umiejetnosc);
+            expect(t.st).to.be.oneOf([15, 20]);
+            expect((t.porazka ?? []).length + (t.sukces ?? []).length, `${k}: dalsze kroki`).to.be.above(0);
+          }
+        }
+        expect(komplikacja(2).skutek.awaria).to.equal(true);
+        expect(komplikacja(13).skutek.test.umiejetnosc, "13: Percepcja").to.equal("prc");
+        expect(komplikacja(12).skutek.test.sukces).to.deep.equal([{ znaczniki: 1 }]);
+        expect(komplikacja(0)).to.equal(null);
+        expect(Object.values(PRZEPASCI_K4)).to.deep.equal([18, 9, 6, 3]);
+      });
+
+      it("D36: atak na kierowcę — ST max(10, ½ obrażeń); porażka cofa, o 5+ — Przewrócenie", function () {
+        expect(stAtakuNaKierowce(7)).to.equal(10);
+        expect(stAtakuNaKierowce(31)).to.equal(15);
+        expect(skutekAtakuNaKierowce(15, 15)).to.equal(null);
+        expect(skutekAtakuNaKierowce(12, 15)).to.equal("cofnij");
+        expect(skutekAtakuNaKierowce(10, 15)).to.equal("przewrocenie");
+      });
+
+      it("D37 wręcz na znaczniku; D38 dryf −3 i mijane pojazdy; D40 warunki końca", function () {
+        expect(wZasieguWreczNaPlanszy(5, 5)).to.equal(true);
+        expect(wZasieguWreczNaPlanszy(5, 6)).to.equal(false);
+        const d = dryf(6, [{ id: "a", tor: 5 }, { id: "b", tor: 3 }, { id: "c", tor: 2 }, { id: "d", tor: 6 }]);
+        expect(d.tor).to.equal(3);
+        expect(d.minieci).to.deep.equal(["a", "b"]);
+        expect(warunkiKonca({ przewaga: 6, runda: 10 })).to.have.length(0);
+        expect(warunkiKonca({ przewaga: 7, runda: 11, wyeliminowani: ["Hammer"], naMecie: ["GMT"] })).to.have.length(4);
+      });
+    });
 
     describe("Stałe zasad pościgu", function () {
 

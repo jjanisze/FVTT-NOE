@@ -501,11 +501,14 @@ export function stan(scene = canvas?.scene) {
   const przewaga = (scigani.length && scigajacy.length)
     ? najdalszyScigany - najdalszyScigajacy : null;
 
+  // Runda pościgu = runda walki na scenie planszy (D40); pole „runda” flagi — dla MG poza walką.
+  const walka = game.combat?.started && game.combat.scene === scene ? game.combat : null;
+  const runda = walka ? walka.round : flaga.runda;
   const powody = [];
   if (przewaga !== null && przewaga >= PRZEWAGA_KONCZACA) {
     powody.push(`Ścigany ma ${przewaga} znaczników przewagi (próg: ${PRZEWAGA_KONCZACA}).`);
   }
-  if (flaga.runda > RUND_MAKS) {
+  if (runda > RUND_MAKS) {
     powody.push(`Minęło ${RUND_MAKS} rund — wygrywa ten, kto jest najdalej.`);
   }
 
@@ -514,7 +517,9 @@ export function stan(scene = canvas?.scene) {
     tory: flaga.tory,
     srodowisko: SRODOWISKA[flaga.srodowisko]?.nazwa ?? flaga.srodowisko,
     st: flaga.st,
-    runda: flaga.runda,
+    runda,
+    meta: Number(flaga.meta) || null,
+    zakonczony: !!flaga.zakonczony,
     przewaga,
     pionki,
     koniec: powody.length ? powody : null

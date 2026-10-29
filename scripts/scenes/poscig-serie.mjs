@@ -19,7 +19,9 @@
 import { pickCanvasPoint } from "./area-picker.mjs";
 import { kontekstDrogi, mierzyDroga, naDrodze, odlegloscWspolrzednych } from "./droga.mjs";
 import { FLAG_ROLA, FREEFORM_Y } from "./poscig.mjs";
-import { jazdaZetonu, jestZetonemPojazdu, pojazdJadacego } from "../pojazdy/stan.mjs";
+import { danePojazdu, jazdaZetonu, jestZetonemPojazdu, pojazdJadacego } from "../pojazdy/stan.mjs";
+import { kierowcaPojazdu } from "../pojazdy/jadacy.mjs";
+import { cechyPojazdu } from "../config/vehicles-data.mjs";
 import { kartaPostoju, wyslijKarte, zarejestrujAkcje } from "../postoj/karty.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -131,11 +133,16 @@ async function kartaTrafionych({ tytul, linia, cele, trafieni, zrodlo = null }) 
   const nazwy = l => l.map(c => esc(c.doc.name)).join(", ");
   const linie = [linia,
     ludzie.length ? `Trafieni: <strong>${nazwy(ludzie)}</strong>.` : "Nikt poza pojazdami.",
-    pojazdy.length ? `Pojazdy na linii: <strong>${nazwy(pojazdy)}</strong> — obrażenia pojazdu wg MG.` : "Żaden pojazd."];
+    pojazdy.length ? `Pojazdy na linii: <strong>${nazwy(pojazdy)}</strong> — RO ZRC pojazdu jak istoty, potem Próg obrażeń (D36).` : "Żaden pojazd."];
   const uuidy = l => l.map(c => c.doc.uuid).join(",");
   const przyciski = [];
   if (ludzie.length) przyciski.push({ akcja: "poscig.zaznacz", label: "Zaznacz trafionych", ikona: "fa-solid fa-user-check", gm: true, dane: { uuidy: uuidy(ludzie) } });
   if (pojazdy.length) przyciski.push({ akcja: "poscig.zaznacz", label: "Zaznacz pojazdy", ikona: "fa-solid fa-truck", gm: true, dane: { uuidy: uuidy(pojazdy) } });
+  // D36: pojazd rzuca RO ZRC jak istota (zaznaczony — przycisk RO karty ataku); Slalom to Reakcja jego kierowcy.
+  for (const p of pojazdy) {
+    if (!cechyPojazdu(danePojazdu(p.doc.actor)?.podwozie).some(c => c.id === "slalom") || !kierowcaPojazdu(p.doc)) continue;
+    przyciski.push({ akcja: "poscig.paleta", label: `Slalom: ${p.doc.name}`, ikona: "fa-solid fa-route", gm: true, dane: { pojazd: p.doc.uuid, id: "slalom" } });
+  }
   return wyslijKarte(kartaPostoju({ ikona: zrodlo?.img ?? "icons/svg/explosion.svg", tytul, rodzaj: "test", linie,
     ostrzezenia: ["Obraz między pojazdami nie jest geometrią (D31) — obowiązuje ta lista."], przyciski }),
     { actor: zrodlo, szept: "gm" });

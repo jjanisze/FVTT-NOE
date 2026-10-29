@@ -145,6 +145,7 @@ import { registerPoscigSnap, poscigSnapApi } from "./scenes/poscig-snap.mjs";
 import { registerPoscigMotion, poscigMotionApi } from "./scenes/poscig-motion.mjs";
 import { registerDroga, drogaApi } from "./scenes/droga.mjs";
 import { registerPoscigSerie, poscigSerieApi } from "./scenes/poscig-serie.mjs";
+import { registerPoscigTura, poscigTuraApi } from "./scenes/poscig-tura.mjs";
 import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
 import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
@@ -677,9 +678,11 @@ Hooks.once("ready", () => {
   registerPoscigMotion();
   registerDroga();
   registerPoscigSerie();
+  // P5: tura pościgu — Test Pościgu, zapas, komplikacje, dryf, koniec (PLAN_m4_pojazdy §6.2.5).
+  registerPoscigTura();
   game.neuroshima.poscig = {
     ...poscigApi, ...poscigUiApi, ...poscigSnapApi, ...poscigMotionApi,
-    tlo: poscigCanvasApi, ruch: poscigMotionApi, droga: drogaApi, serie: poscigSerieApi
+    tlo: poscigCanvasApi, ruch: poscigMotionApi, droga: drogaApi, serie: poscigSerieApi, tura: poscigTuraApi
   };
 
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)

@@ -34,6 +34,8 @@ import { aktywneAwariePojazdu, kartaObrazen } from "./awarie.mjs";
 import { jestWrakiem } from "./wrak.mjs";
 import { ZDOLNOSCI, maZdolnosc, mnoznikSzybkosci } from "./wojownik.mjs";
 import { mnoznikPrzelozenia, paletaPojazdu } from "./paleta.mjs";
+import { limitZnacznikow, przebyteZnaczniki } from "../scenes/poscig-zasady.mjs";
+import { PRIORYTET_KOTWICY, odswiezKotwice, zarejestrujKotwice } from "../combat/kotwica-tury.mjs";
 
 const FLAGA_TURA = "tura";
 const FLAGA_AKROBATYKA = "akrobatykaPojazdu";
@@ -150,9 +152,43 @@ function _tura(actor) {
   return actor.flags?.[MODULE_ID]?.[FLAGA_TURA] ?? null;
 }
 
+/**
+ * Plansza pościgu (P5a, D34): z jazdy E5 zostaje tylko budżet — droga w turze kierowcy w metrach drogi (36 m na tor),
+ * limit znaczników z Szybkości, palety i zapasu z poprzedniej tury (`poscigPojazdu.zapas`, pisze `poscig-tura.mjs`).
+ * Karty skrętów, potrąceń i terenu nie mają tu sensu. Ruchy wymuszone (`displace`) nie liczą się do budżetu.
+ */
+async function _ruchNaPlanszy(doc, movement) {
+  if (movement.passed.waypoints.every(w => w.action === "displace")) return;
+  const walka = game.combat?.started && game.combat.scene === doc.parent ? game.combat : null;
+  if (!walka) return;
+  const actor = doc.actor;
+  const b = budzetJazdy(doc);
+  await zapiszRuch(doc);
+  const kto = walka.combatant;
+  const kier = kierowcaPojazdu(doc);
+  let t = _tura(actor);
+  if (!t || t.walka !== walka.id || t.runda !== walka.round || t.kombatant !== kto?.id) t = { walka: walka.id, runda: walka.round, kombatant: kto?.id, droga: 0 };
+  t.droga = Math.round((t.droga + (Number(movement.passed.distance) || 0) * b.mnoznikDrogi) * 10) / 10;
+  await actor.update({ [`flags.${MODULE_ID}.${FLAGA_TURA}`]: t });
+  const zapas = Number(actor.flags?.[MODULE_ID]?.poscigPojazdu?.zapas) || 0;
+  const limit = limitZnacznikow(b.limit, zapas), zPrzysp = limitZnacznikow(b.limit + b.v, zapas);
+  const przebyte = przebyteZnaczniki(t.droga);
+  const ostrz = [];
+  if (!kier) ostrz.push("Nikt nie kieruje.");
+  else if (kto?.tokenId !== kier.id) ostrz.push(`Ruch poza turą kierowcy (${kier.name}) — tura pojazdu to tura kierowcy (D9).`);
+  if (przebyte > zPrzysp) ostrz.push(`Przekroczony limit nawet z Przyspieszeniem (${przebyte} > ${zPrzysp} znaczników).`);
+  else if (przebyte > limit) ostrz.push(`Ponad limit (${przebyte} > ${limit} znaczników) — tylko z Przyspieszeniem kierowcy (akcja).`);
+  if (!ostrz.length) return;
+  const szept = game.users.filter(u => u.isGM || (kier && kier.actor?.testUserPermission(u, "OWNER"))).map(u => u.id);
+  await wyslijKarte(kartaPostoju({ ikona: doc.texture.src, tytul: `Jazda: ${doc.name}`, rodzaj: "test",
+    linie: [`W tej turze ${przebyte} znaczników (${t.droga} m) z ${limit} (Szybkość ${b.v} m${b.dodatkowy ? ` + ${b.dodatkowy} m` : ""}, zapas ${zapas} m; D34).`],
+    ostrzezenia: ostrz }), { actor: kier?.actor ?? actor, szept, flagi: { aktor: (kier?.actor ?? actor).uuid } });
+}
+
 async function _onMoveToken(doc, movement, operation) {
   if (!game.users.activeGM?.isSelf || !jestZetonemPojazdu(doc)) return;
-  // Karty jazdy tylko na mapie taktycznej: plansza pościgu ma własne zasady (PLAN §6.2), znacznik nie jedzie.
+  if (trybSceny(doc.parent) === "plansza") return _ruchNaPlanszy(doc, movement);
+  // Karty jazdy tylko na mapie taktycznej; znacznik nie jedzie.
   if (trybSceny(doc.parent) !== "taktyczna") return;
   if (movement.passed.waypoints.every(w => w.action === "displace")) return;
   const actor = doc.actor;
@@ -375,6 +411,49 @@ function _domyslnaOslonaJadacego(token) {
 }
 
 /* -------------------------------------------- */
+/*  Za kierowcą (D39)                            */
+/* -------------------------------------------- */
+
+const FLAGA_ZA_KIEROWCA = "zaKierowca";
+
+/**
+ * Kotwica tury pasażera „Za kierowcą” (RAW s. 266 — jednorazowo; RAI także na mapie taktycznej): uczestnik kierowcy
+ * pojazdu, w którym pasażer dalej siedzi. Wysiadł albo kierowcy brak — kotwica nie działa, zostaje wyrównana wartość.
+ */
+function _kotwicaZaKierowca(c) {
+  const pid = c.getFlag?.(MODULE_ID, FLAGA_ZA_KIEROWCA);
+  const tok = pid ? c.token : null;
+  const p = tok ? pojazdJadacego(tok) : null;
+  if (!p || p.id !== pid) return null;
+  const k = kierowcaPojazdu(p);
+  if (!k || k.id === tok.id) return null;
+  return c.parent.combatants.find(o => o.tokenId === k.id) ?? null;
+}
+
+/** Czy jadący może jeszcze przesunąć turę za kierowcę (walka trwa, ma uczestnika, nie zrobił tego w tej walce). */
+export function mozeZaKierowca(jadacyDoc) {
+  const c = game.combat?.started ? game.combat.combatants.find(x => x.tokenId === jadacyDoc.id) : null;
+  const p = pojazdJadacego(jadacyDoc);
+  const k = p ? kierowcaPojazdu(p) : null;
+  return !!c && !!k && k.id !== jadacyDoc.id && !c.getFlag(MODULE_ID, FLAGA_ZA_KIEROWCA);
+}
+
+/** Pasażer: tura tuż za kierowcą, z jego Inicjatywą (kotwica tury, D39). */
+export async function zaKierowca(jadacyDoc) {
+  const combat = game.combat;
+  const c = combat?.combatants.find(x => x.tokenId === jadacyDoc.id);
+  const p = pojazdJadacego(jadacyDoc);
+  const k = p ? kierowcaPojazdu(p) : null;
+  if (!c || !k) return ui.notifications.warn("Za kierowcą: trwająca walka, pasażer i kierowca w niej.");
+  if (c.getFlag(MODULE_ID, FLAGA_ZA_KIEROWCA)) return ui.notifications.warn(`${jadacyDoc.name}: turę za kierowcę przesuwa się raz na walkę (s. 266).`);
+  await c.setFlag(MODULE_ID, FLAGA_ZA_KIEROWCA, p.id);
+  odswiezKotwice(combat);
+  await wyslijKarte(kartaPostoju({ ikona: jadacyDoc.texture.src, tytul: "Za kierowcą", rodzaj: "info",
+    linie: [`${esc(jadacyDoc.name)} działa odtąd tuż po kierowcy (${esc(k.name)}), z jego Inicjatywą — jednorazowo w tej walce (s. 266).`] }),
+    { actor: jadacyDoc.actor });
+}
+
+/* -------------------------------------------- */
 /*  Akcje kart                                   */
 /* -------------------------------------------- */
 
@@ -440,6 +519,7 @@ async function _zderzenie(_ev, btn) {
 /* -------------------------------------------- */
 
 export function registerJazda() {
+  zarejestrujKotwice("zaKierowca", _kotwicaZaKierowca, { priorytet: PRIORYTET_KOTWICY.zaKierowca, wyrownaj: true });
   // D9: pojazd nie wchodzi do trackera — działa w turze kierowcy.
   Hooks.on("preCreateCombatant", (combatant) => {
     if (!jestPojazdem(combatant.actor)) return;
