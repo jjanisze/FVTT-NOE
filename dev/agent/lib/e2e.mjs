@@ -374,7 +374,8 @@ async function settleBetweenSuites(clients) {
  */
 async function settle(client) {
   await client.eval(async () => {
-    foundry.nue?.Tour?.tourInProgress?.exit?.();
+    // `tourInProgress` is a boolean; the tour itself is `activeTour` (the old call never closed anything).
+    await foundry.nue?.Tour?.activeTour?.exit?.();
     for (const app of [...foundry.applications.instances.values()]) {
       if (app.hasFrame && app.rendered) await app.close({ animate: false });
     }
