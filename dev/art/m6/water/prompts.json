@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-29",
+  "tool": "OpenAI built-in image_gen",
+  "model": "not exposed",
+  "purpose": "Shared neutral ripple/silt texture for animated silhouette-clipped water filter",
+  "source": "surface-v1.png",
+  "archivedRuntime": "surface-muted-v1.webp",
+  "supersededReason": "GM rejected the first runtime proposal: contrast and wave-alpha detail were lost",
+  "currentRuntime": "vfx/water-surface.webp",
+  "currentRuntimeSource": "dev/icons/review/overlays/water/zanurzony.webp (exact unchanged RGBA copy)",
+  "processing": "Proportional downsample to 1024x512 RGB, WEBP quality 90; mirrored tiling and palette applied in shader",
+  "prompt": "Use case: stylized-concept. Asset: a seamless REPEATING WATER SURFACE TEXTURE for an animated virtual-tabletop shader, a wide landscape rectangle. Directly overhead view. Neutral GRAYSCALE ONLY, suitable for tinting into muddy olive, brown sewage or clean blue water in code. Quiet broad irregular ripple bands and soft suspended silt mottling, subdued highlights, low to medium contrast, hand-painted grounded game texture. The full rectangle is filled with texture; NO waterline, semicircle, horizon, edge, frame, object, shore, foam piles, bubbles, symbols or text. No crystal clarity, tropical turquoise or shiny glass. Make left/right and top/bottom edges tile seamlessly. There is no single focal point. This is a material texture, not a scene. Opaque background."
+}

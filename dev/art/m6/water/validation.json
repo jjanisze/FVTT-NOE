@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-29",
+  "source": { "path": "surface-v1.png", "width": 1774, "height": 887, "mode": "RGB", "bytes": 1837368,
+    "sha256": "484fa66973e6137e51d8d6eb8f404c527a90c0d245d7b7d0dd7a5e4d19a4d67e" },
+  "archivedRuntime": { "path": "surface-muted-v1.webp", "width": 1024, "height": 512, "mode": "RGB", "bytes": 54586,
+    "sha256": "05801c427778f2fd2f979ebf91bf05d9095d264b45a1a93a6863e6ad889d9032" },
+  "runtime": { "path": "vfx/water-surface.webp", "width": 512, "height": 512, "mode": "RGBA", "bytes": 117744,
+    "sha256": "cc9a069ce491314be586de13772f4377f71cb82939e2dc727e94a20322e26696",
+    "source": "dev/icons/review/overlays/water/zanurzony.webp", "byteIdenticalToSource": true },
+  "clipping": "Rendered token alpha in GPU filter, no alpha added outside the source silhouette",
+  "tiling": "Mirrored horizontal UV repeat and interior strip sampling; original painted wave alpha retained",
+  "tests": "logs/e2e/2026-10-29T22-03-59/report.json",
+  "largeTokenChecks": ["native Large 2x2", "native Huge 3x3", "long vehicle", "separate turret", "hover interior", "0/90/180/270 degrees"],
+  "swellCheck": "GPU reference comparison: lower extreme unchanged, upper extreme translated by 30px at 200px height and 60px at 400px height",
+  "largeGallery": { "sceneKey": "water-large-review-v1", "tokens": 12, "wetTokens": 8, "filteredLayers": 10 },
+  "comparison": "woda-efekty-02-gm-original_painting_versus_readable_waves_at_three_animation_phases.jpg",
+  "pixelChecks": [ "0 degrees", "90 degrees", "180 degrees", "270 degrees" ],
+  "poligon": { "sceneKey": "water-art-review-v1", "regions": 3, "tokens": 13, "wetTokens": 10, "profiles": { "metna": 6, "sciekowa": 2, "czysta": 2 } }
+}

@@ -30,6 +30,7 @@ import { tikRaz } from "../combat/tiki.mjs";
 import { wstrzymajOddech, zlapOddech, efektUduszenia } from "../actors/zagrozenia.mjs";
 import { jestMaszyna } from "../actors/towarzysze.mjs";
 import { szybkoscPrzedStanami } from "../actors/latanie.mjs";
+import { registerEfektyWody, efektyWodyApi, PROFILE_WODY } from "./woda-efekty.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const TYP_WODA = `${MODULE_ID}.woda`;
@@ -98,7 +99,12 @@ function utworzKlase() {
         nurt: new f.StringField({ required: true, initial: "spokojna", label: "Nurt",
           choices: Object.fromEntries(Object.entries(NURTY).map(([k, v]) => [k, `${v.label} (ST ${v.st})`])) }),
         grzaska: new f.BooleanField({ label: "Grząska (błoto)",
-          hint: "Pływanie w czymś grząskim kosztuje 3 m za 1,5 m (s. 255) — dodaj na tym Regionie trudny teren dnd5e." })
+          hint: "Pływanie w czymś grząskim kosztuje 3 m za 1,5 m (s. 255) — dodaj na tym Regionie trudny teren dnd5e." }),
+        wyglad: new f.StringField({ required: true, initial: "metna", label: "Wygląd wody",
+          choices: Object.fromEntries(Object.entries(PROFILE_WODY).map(([k, v]) => [k, v.label])),
+          hint: "Kolor efektu na pionkach ze stanem Pod wodą. Sam Region nie nakłada tego stanu." }),
+        silaEfektu: new f.NumberField({ required: true, initial: 0.8, min: 0, max: 1, step: 0.05,
+          label: "Siła efektu zanurzenia", hint: "0–1; domyślnie 0,8. Zachowuje widoczność postaci pod wodą." })
       };
     }
 
@@ -259,7 +265,7 @@ async function _onRerolled({ message, roll } = {}) {
 async function _onCreateEffect(effect) {
   const actor = effect.parent;
   if (!effect.statuses?.has(POD_WODA) || !(actor instanceof Actor) || !_jedynyZapisujacy(actor)) return;
-  if (jestMaszyna(actor) || efektUduszenia(actor)) return;
+  if (actor.type === "vehicle" || jestMaszyna(actor) || efektUduszenia(actor)) return;
   await wstrzymajOddech(actor);
   await efektUduszenia(actor)?.setFlag(MODULE_ID, Z_WODY, true);
 }
@@ -334,6 +340,7 @@ function _onRenderTokenHUD(hud, html) {
 /* -------------------------------------------- */
 
 export function registerWoda() {
+  registerEfektyWody(wodaZetonu);
   CONFIG.RegionBehavior.dataModels[TYP_WODA] = utworzKlase();
   CONFIG.RegionBehavior.typeIcons[TYP_WODA] = "fa-solid fa-water";
   zarejestrujDomyslnaOslone(_oslonaWPlytkiej);
@@ -346,4 +353,4 @@ export function registerWoda() {
 }
 
 /** `game.neuroshima.woda` */
-export const wodaApi = Object.freeze({ wodaZetonu, kartaTestu, kartaWejscia, rzutPlywania, zastosujTest, wynurz });
+export const wodaApi = Object.freeze({ wodaZetonu, kartaTestu, kartaWejscia, rzutPlywania, zastosujTest, wynurz, efekty: efektyWodyApi });

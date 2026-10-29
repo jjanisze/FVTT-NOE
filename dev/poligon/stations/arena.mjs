@@ -8,6 +8,8 @@
  */
 
 import { p, MOD } from "./_wspolne.mjs";
+import { zbudujGrafikeZanurzenia, narzedzieZanurzenia } from "./arena-woda.mjs";
+import { zbudujDuzeZanurzenie, narzedzieDuzegoZanurzenia } from "./arena-woda-duze.mjs";
 
 export default {
   id: "arena", name: "Arena", prio: "P2", icon: "fa-solid fa-khanda",
@@ -60,9 +62,14 @@ export default {
     ]);
     if (dron?.uchwyt) await game.neuroshima.drony.rozloz(dron.uchwyt, { pozycja: { x: 500, y: 1400 }, scena: s });
     await k.combat(s, [...party, ...foes]);
-    return { druzyna: party.filter(Boolean).length, wrogowie: foes.filter(Boolean).length };
+    const grafika = await zbudujGrafikeZanurzenia(k);
+    const duzePionki = await zbudujDuzeZanurzenie(k);
+    return { grafika, duzePionki, druzyna: party.filter(Boolean).length, wrogowie: foes.filter(Boolean).length };
   },
+  narzedzia: [narzedzieZanurzenia, narzedzieDuzegoZanurzenia],
   proby: [
+    p("grafika-zanurzenie-duze", "Grafika wody", "Pionki 2×2 i 3×3, długie pojazdy i osobna wieża: wspólny poziom fal, maska po obrocie, wyższy maksymalny zasięg o 15% wysokości", "Grafika: Zanurzenie — duże pionki. Porównaj suche i mokre próbki, obróć samochód, najedź na Bradleya; sprawdź kadłub i wieżę."),
+    p("grafika-zanurzenie", "Grafika wody", "Czytelne grzbiety i zanikająca alfa fal, intensywniejsza animacja, kontrast mętnej wody i ścieków, pozioma tafla przy obrocie; siła 80%", "Grafika: Zanurzenie. Porównaj z pierwotną nakładką: oceń wyraźne fale i prześwity przy 70–140 px. Obróć pionek i przełącz animację w ustawieniach."),
     p("runda", "Skala", "Czas zegarowy i liczba kliknięć na rundę; tracker z grupami inicjatywy", "Stoper; Liczniki → Zeruj przed rundą."),
     p("czat", "Skala", "Czat po trzech rundach: da się czytać? co jest zbędne?", "Trzy rundy, potem przewiń czat."),
     p("reakcje", "BN", "Reakcje BN, upuszczona broń i przedmioty na ziemi, „BN pada”", "Walka do upadku kilku Gangusów."),

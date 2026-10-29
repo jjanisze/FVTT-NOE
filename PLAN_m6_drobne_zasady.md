@@ -402,10 +402,75 @@ nadpisanie w Tiled (warstwa obiektów „woda” z właściwościami `glebokosc`
 podłogi. Mapy do sprawdzenia: Zasadzka, Arena. MG (U14): Tiled eksportuje kafle wody — pod pływanie i pod status
 zanurzenia.
 
-**Grafika (U14, pytanie MG „czy jest grafika zanurzenia?”) — nie ma.** dnd5e ma tylko `suffocation.svg` (Uduszenie);
-rdzeń — `icons/svg/waterfall.svg`. Do czasu dostawy: „Pod wodą” = `waterfall.svg`, „Tonie” = jej wariant z ikoną FA;
-wiersze w `dev/icons/MISSING.md` (klasa A: dwie białe ikony statusu; klasa B: nakładka żetonu „zanurzony” —
-falująca tafla na dolnej połowie żetonu).
+**Grafika (U14) — kandydaci do oceny, 2026-10-29.** Batch 120 zawiera dwa białe glify:
+głowa pod taflą i bąbelki („Pod wodą”) oraz dłoń nad taflą i strzałka w dół („Tonie”).
+Osobno przygotowano półprzezroczystą turkusową nakładkę na dolną połowę żetonu.
+Panel ikon ma kartę nakładki i zakładkę **Zanurzenie** z podglądem na istniejących żetonach,
+regulacją siły i porównaniem pełnej tafli z przycięciem do sylwetki.
+Do zatwierdzenia/instalacji zostają obecne ikony rdzenia (`waterfall.svg`, `anchor.svg`);
+Na etapie pierwszego podglądu nie wdrażano jeszcze mechaniki renderowania nakładki;
+ukończony renderer i późniejsze oceny opisano poniżej.
+W tym samym przeglądzie jest 12 monochromatycznych instrumentów (Batches 119–120).
+Potwierdzony zakres tej tury to 15 zasobów; kolorowe żetony stworzeń są osobnym zadaniem.
+[Źródła i podgląd](dev/icons/m6-pass/README.md), kolejka `dev/icons/MISSING.md` §M–N.
+
+**Ocena MG i przyjęty kierunek, 2026-10-29.**
+- Zaakceptowany kierunek: **tylko na sylwetce**; pełna półokrągła tafla poza postacią odrzucona.
+  Docelowe grafiki to żetony **top-down**; portret w okręgu jest wyłącznie zastępczy.
+- Siła efektu około **80%** według podglądu. Obecny suwak mnoży alfę zapisaną w teksturze,
+  więc nie oznacza to 80% nieprzezroczystego zakrycia postaci.
+- Tafla/fale mają zachować orientację ekranu przy obrocie żetonu. Obraca się sylwetka;
+  linia wody pozostaje pozioma i zakotwiczona przy centrum żetonu. Nie należy uzależniać
+  poziomu wody od zmieniającego się po obrocie prostokąta ograniczającego grafikę.
+- MG proponuje animację powtarzalnej prostokątnej tekstury: powolne falowanie w pionie
+  i ruch poziomy. Bieżący nieruchomy półokrąg jest tylko kandydatem poglądowym.
+- Większość wody ma być mętna/brudna. Czysta turkusowa woda może zostać wariantem
+  specjalnym, np. dla cysterny; nie powinna narzucać domyślnego wyglądu wszystkich akwenów.
+
+**Zatwierdzona implementacja:** mały filtr GPU wyłącznie na
+meshach widocznych żetonów ze statusem `podWoda`, używający alfy już wyrenderowanej
+obróconej sylwetki i współrzędnych obrazu niezależnych od kąta tekstury. Dzięki temu
+nie trzeba odtwarzać maski na CPU w każdej klatce. Jedna współdzielona powtarzalna
+tekstura fal, wspólny zegar animacji, parametry koloru/mętności i poziomu wody.
+Rozważyć spokojny dryf z łagodnym falowaniem zamiast identycznego ruchu całej tafli
+tam i z powrotem. Natywny mesh v14 obsługuje filtry; jego shader jest odświeżany przez
+core, więc osobny filtr pozwala zachować standardowy tor renderowania.
+Warianty do porównania: statyczny filtr jako prosty fallback, animowana tekstura
+z filtrem (rekomendowana), woda w pełni proceduralna (większy nakład strojenia).
+Realizacja: `scripts/scenes/woda-efekty.mjs`, współdzielona tekstura fal RGBA
+`vfx/water-surface.webp`, profil **mętna** i siła **0,8** jako domyślne.
+Region „Woda” ma pola **Wygląd wody** (mętna / ścieki / czysta) i **Siła efektu zanurzenia**.
+Poza Regionem ręczne Pod wodą używa wartości domyślnych. Samo wejście do Regionu
+nie nadaje tego stanu; zasady zanurzenia i oddechu pozostają w dotychczasowym module wody.
+Ustawienie użytkownika **Animacja zanurzenia** wyłącza ruch, zachowując statyczny efekt.
+Filtr zachowuje alfę pionka, obce filtry i natywny shader pierścienia; znika ze stanem
+Pod wodą, przy zniszczeniu żetonu i zmianie sceny. Brak masek przeliczanych na CPU.
+Sandbox: sonda E2E `woda-efekty` sprawdza piksele przy obrotach 0/90/180/270°,
+profile i siłę Regionu, animację, zmianę grafiki, odbicie/skale, niewidzialność,
+pierścień i sprzątanie zasobów. Dotychczasowa sonda `woda` sprawdza mechanikę.
+Poligon: **Arena → Karta prób → Grafika: Zanurzenie**, sonda `grafika-zanurzenie`.
+Galeria jest częścią generatora Areny i przy ponownym otwarciu zachowuje ręczne ustawienia;
+instalacja w istniejącym Poligonie dodaje ją bez resetu Areny.
+Pomiar renderowania ma charakter orientacyjny, nie jest gwarancją FPS.
+[Obsługa i dowody testów](HANDOFF_m6_zanurzenie.md).
+
+**Korekta wizualna po ocenie MG, 2026-10-29:** pierwszy renderer był znacznie mniej czytelny
+od pierwotnej grafiki (czysta 2/5, brudna/ścieki 0,25/5). Odrzucono płaski, mało kontrastowy
+materiał i zbyt subtelny ruch. Runtime ponownie używa dokładnie oryginalnej tekstury RGBA:
+zachowuje nieregularne grzbiety, rozjaśnienia i zmienną alfę fal. Mocniejszy kontrast barw,
+szybszy dryf i większe falowanie; mętna i ściekowa zachowują jasne grzbiety zamiast niemal
+jednolitego przyciemnienia. Przezroczyste ogony fal odsłaniają postać. Bez regularnych,
+proceduralnych pasów. Siła pozostaje 0,8, maska i niezależność od obrotu bez zmian.
+Ocena w tej samej galerii Poligonu; test dodaje zbliżenie z pierwotną nakładką i trzema
+fazami ruchu oraz sprawdza widoczną zmianę pikseli dla wszystkich profili.
+
+**Zamknięcie, 2026-10-29:** MG zaakceptował poprawkę fal („Idealnie”), następnie końcowy
+efekt na dużych pionkach. Rozszerzenie obejmuje natywne 2×2, 3×3, długie pojazdy i osobne
+primary meshe z tym samym właścicielem (np. wieżę). Wspólny poziom wody dla wszystkich warstw;
+dolny skrajny poziom zachowany, górny o dodatkowe 15% logicznej wysokości pionka wyżej.
+Podgląd **Arena → Grafika: Zanurzenie — duże pionki**, bez resetu wcześniejszych scen.
+Sandbox: **21/21 kroków**, `logs/e2e/2026-10-29T22-03-59/report.json`; `npm test` przechodzi.
+Prace M4 są prowadzone osobno; ten zakres nie zmienia kodu ani planu pojazdów.
 
 **Skok** — `HANDOFF_movement_hotbar.md` (Skok jako operacja ruchu z wzorami NOE, krok 3 tamtej kolejności): limit
 dal/wzwyż, rozbieg, lądowanie w trudnym terenie, Zwinność szczura, Skok Gladiatora. Region `skok` (zaprojektowane
