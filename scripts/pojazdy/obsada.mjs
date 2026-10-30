@@ -12,7 +12,7 @@
 
 import { kartaPostoju, wyslijKarte, zarejestrujAkcje } from "../postoj/karty.mjs";
 import {
-  jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, miejsceOId, obrysDziala, obsadaPojazdu, pojazdJadacego
+  jadacyPojazdu, jazdaZetonu, jestZetonemNosnika, miejsceNosnika, obrysDziala, obsadaPojazdu, nosnikJadacego
 } from "./stan.mjs";
 import { opisMiejsca, posadzGM, synchronizujZaloge, zajeteMiejsca } from "./jadacy.mjs";
 import { czekaNaWklejenie } from "./schowek.mjs";
@@ -30,16 +30,16 @@ function zetonAktora(actor, scena) {
  * @returns {{uuid: string, actor: Actor, miejsce: object, zeton: TokenDocument|null}[]}
  */
 export function brakujacaObsada(pojazdDoc) {
-  if (!jestZetonemPojazdu(pojazdDoc) || !obrysDziala(pojazdDoc.parent)) return [];
+  if (!jestZetonemNosnika(pojazdDoc) || !obrysDziala(pojazdDoc.parent)) return [];
   const scena = pojazdDoc.parent;
   const zajete = zajeteMiejsca(pojazdDoc);
   const out = [];
   for (const [uuid, mid] of obsadaPojazdu(pojazdDoc.actor)) {
     const actor = fromUuidSync(uuid);
-    const miejsce = miejsceOId(pojazdDoc.actor, mid);
+    const miejsce = miejsceNosnika(pojazdDoc, mid);
     if (!actor || !miejsce || zajete.has(mid)) continue;
     const zeton = zetonAktora(actor, scena);
-    if (zeton && pojazdJadacego(zeton)) continue;
+    if (zeton && nosnikJadacego(zeton)) continue;
     if (!zeton && actor.isToken) continue;
     out.push({ uuid, actor, miejsce, zeton });
   }
@@ -133,13 +133,13 @@ export function registerObsada() {
 
   Hooks.on("createToken", doc => {
     if (!game.user.isActiveGM || !obrysDziala(doc.parent)) return;
-    if (jestZetonemPojazdu(doc)) return zaplanuj(doc);
+    if (jestZetonemNosnika(doc)) return zaplanuj(doc);
     // Postać pojawia się na scenie z pojazdem, który ją pamięta (i jeszcze w nim nie siedzi).
     if (jazdaZetonu(doc)) return;
     const uuid = doc.actor?.uuid;
     if (!uuid) return;
     for (const p of doc.parent.tokens) {
-      if (jestZetonemPojazdu(p) && obsadaPojazdu(p.actor).some(([u]) => u === uuid)
+      if (jestZetonemNosnika(p) && obsadaPojazdu(p.actor).some(([u]) => u === uuid)
         && !jadacyPojazdu(p).some(t => t.actor?.uuid === uuid)) zaplanuj(p);
     }
   });

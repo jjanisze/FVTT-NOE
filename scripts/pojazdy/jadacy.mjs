@@ -19,12 +19,14 @@
  */
 
 import { doMG, zarejestrujProsbe } from "../postoj/przekaznik.mjs";
-import { kartaPostoju, wyslijKarte } from "../postoj/karty.mjs";
+import { kartaPostoju, wyslijKarte, zarejestrujAkcje } from "../postoj/karty.mjs";
 import { zarejestrujLadownieUpuszczenia } from "../actors/ground-items.mjs";
 import {
-  MODULE_ID, FLAGA_JAZDA, FLAGA_OBSADA, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu,
-  miejscaPojazdu, miejsceOId, obrysDziala, obsadaPojazdu, pojazdJadacego, rozmiarMiejsca, skalaPojazdu, trybSceny
+  MODULE_ID, FLAGA_JAZDA, FLAGA_OBSADA, daneNosnika, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemNosnika, kratkaPojazdu,
+  miejscaNosnika, miejsceNosnika, nosnikJadacego, obrysDziala, obsadaPojazdu, pojazdJadacego, profilNosnika, rozmiarMiejsca,
+  skalaPojazdu, trybSceny, wierzchowiecAktora
 } from "./stan.mjs";
+import { freeHands } from "../actors/doll.mjs";
 import {
   naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
 } from "./geometria.mjs";
@@ -50,14 +52,14 @@ export function zajeteMiejsca(pojazdDoc) {
 
 /** Żeton kierowcy pojazdu albo `null`. */
 export function kierowcaPojazdu(pojazdDoc) {
-  const kier = miejscaPojazdu(pojazdDoc.actor).find(m => m.kierowca);
+  const kier = miejscaNosnika(pojazdDoc.actor, pojazdDoc).find(m => m.kierowca);
   return kier ? zajeteMiejsca(pojazdDoc).get(kier.id) ?? null : null;
 }
 
 /** Miejsce jadącego (obiekt miejsca) albo `null`. */
 export function miejsceJadacego(jadacyDoc) {
-  const p = pojazdJadacego(jadacyDoc);
-  return p ? miejsceOId(p.actor, jazdaZetonu(jadacyDoc).miejsce) : null;
+  const p = nosnikJadacego(jadacyDoc);
+  return p ? miejsceNosnika(p, jazdaZetonu(jadacyDoc).miejsce) : null;
 }
 
 /**
@@ -84,7 +86,7 @@ export async function zapiszRuch(pojazdDoc) {
 
 /** Odległość (m) między krawędzią żetonu a obrysem pojazdu. */
 export function odlegloscOdPojazdu(jadacyDoc, pojazdDoc) {
-  const dane = danePojazdu(pojazdDoc.actor);
+  const dane = daneNosnika(pojazdDoc.actor, pojazdDoc);
   const scena = pojazdDoc.parent;
   const kp = kratkaPojazdu(scena);
   if (!kp) return Infinity;
@@ -139,7 +141,7 @@ function poleWysiadki(pojazdDoc, jadacyDoc, miejsce) {
   const scena = pojazdDoc.parent;
   const kratka = scena.grid.size;
   const kp = kratkaPojazdu(scena);
-  const dane = danePojazdu(pojazdDoc.actor);
+  const dane = daneNosnika(pojazdDoc.actor, pojazdDoc);
   const { w, h } = jazdaZetonu(jadacyDoc)?.rozmiar ?? { w: 1, h: 1 };
   // Kandydaci w kratkach pojazdu; rozmiar postaci jest w kratkach sceny.
   const bokPostaci = Math.max(w, h) / (skalaPojazdu(scena) || 1);
@@ -184,7 +186,7 @@ export function pamiecPoUzgodnieniu(pojazdDoc, { zapomnij = [] } = {}) {
     ...obsadaPojazdu(actor).filter(([u, m]) => !precz.has(u) && !uuidy.has(u) && !miejsca.has(m) && fromUuidSync(u)),
     ...obecni.filter(([u]) => !precz.has(u))
   ];
-  const kolej = new Map(miejscaPojazdu(actor).map((m, i) => [m.id, i]));
+  const kolej = new Map(miejscaNosnika(actor, pojazdDoc).map((m, i) => [m.id, i]));
   return pamiec.sort((a, b) => (kolej.get(a[1]) ?? 999) - (kolej.get(b[1]) ?? 999));
 }
 
@@ -197,15 +199,20 @@ const takieSame = (a, b) => a.length === b.length && a.every((x, i) => (Array.is
 async function zapiszZaloge(actor, pamiec, zmiany = {}) {
   const crew = [], passengers = [];
   const uzytkownicy = new Set();
+  const pojazd = profilNosnika(actor) === "pojazd";
+  const miejsca = miejscaNosnika(actor);
   for (const [uuid, mid] of pamiec) {
-    const m = miejsceOId(actor, mid);
+    const m = miejsca.find(x => x.id === mid);
     (m?.kierowca || m?.stanowisko ? crew : passengers).push(uuid);
     const a = fromUuidSync(uuid);
+    // Wierzchowiec (W-U4): dostęp z obecności ma tylko jeździec, i tylko na wyszkolonym (albo ujeżdżonym przez siebie).
+    if (!pojazd && !(m?.kierowca && wyszkolonyDla(actor, uuid))) continue;
     if (a) for (const u of game.users) if (!u.isGM && a.testUserPermission(u, "OWNER")) uzytkownicy.add(u.id);
   }
   const same = takieSame;
-  if (!same(actor.system.crew?.value ?? [], crew)) zmiany["system.crew.value"] = crew;
-  if (!same(actor.system.passengers?.value ?? [], passengers)) zmiany["system.passengers.value"] = passengers;
+  // `crew`/`passengers` dnd5e ma tylko pojazd; wierzchowiec trzyma obsadę w pamięci (`obsada`).
+  if (pojazd && !same(actor.system.crew?.value ?? [], crew)) zmiany["system.crew.value"] = crew;
+  if (pojazd && !same(actor.system.passengers?.value ?? [], passengers)) zmiany["system.passengers.value"] = passengers;
 
   // Zapis jako lista par, nie obiekt: obiekt flagi scala się przy update, a w delcie żetonu
   // niepowiązanego `_del` nie usuwa klucza — lista podmienia się w całości.
@@ -249,8 +256,8 @@ export async function synchronizujZaloge(pojazdDoc, { zapomnij = [] } = {}) {
 
 /** Wszystkie aktory pojazdów: świata i niepowiązanych żetonów na scenach. */
 function wszystkiePojazdy() {
-  const out = new Set(game.actors.filter(a => danePojazdu(a)));
-  for (const s of game.scenes) for (const t of s.tokens) if (!t.actorLink && jestZetonemPojazdu(t)) out.add(t.actor);
+  const out = new Set(game.actors.filter(a => profilNosnika(a)));
+  for (const s of game.scenes) for (const t of s.tokens) if (!t.actorLink && jestZetonemNosnika(t)) out.add(t.actor);
   return [...out];
 }
 
@@ -309,8 +316,8 @@ export async function posadzGM(pojazdDoc, jadacyDoc, miejsce) {
 export async function wysadzGM(jadacyDoc, { cel = null, zapomnij = true } = {}) {
   const j = jazdaZetonu(jadacyDoc);
   if (!j) return null;
-  const pojazd = pojazdJadacego(jadacyDoc);
-  const miejsce = pojazd ? miejsceOId(pojazd.actor, j.miejsce) : null;
+  const pojazd = nosnikJadacego(jadacyDoc);
+  const miejsce = pojazd ? miejsceNosnika(pojazd, j.miejsce) : null;
   const { w, h } = j.rozmiar ?? { w: 1, h: 1 };
   const pole = cel ?? (pojazd ? poleWysiadki(pojazd, jadacyDoc, miejsce) : { x: jadacyDoc._source.x, y: jadacyDoc._source.y });
   await jadacyDoc.update({ [`flags.${MODULE_ID}.${FLAGA_JAZDA}`]: _del, sort: j.sort ?? jadacyDoc._source.sort });
@@ -343,13 +350,13 @@ async function _karta(jadacy, tytul, linie, ostrzezenia = [], rodzaj = "info") {
 
 async function _wsiadz(_n, dane, user) {
   const { pojazd, jadacy } = await _docs(dane);
-  if (!pojazd || !jadacy || !jestZetonemPojazdu(pojazd) || !_moze(user, jadacy)) return;
+  if (!pojazd || !jadacy || !jestZetonemNosnika(pojazd) || !_moze(user, jadacy)) return;
   if (jadacy.parent !== pojazd.parent) return ui.notifications.warn("Pojazd i postać są na różnych scenach.");
   if (!obrysDziala(pojazd.parent)) return ui.notifications.warn(`${pojazd.name}: na tej mapie pojazd jest znacznikiem — wsiada się na mapie taktycznej.`);
-  const juz = pojazdJadacego(jadacy);
+  const juz = nosnikJadacego(jadacy);
   if (juz && juz.id !== pojazd.id) return ui.notifications.warn(`${jadacy.name} siedzi w innym pojeździe — najpierw Wysiądź.`);
   if (juz) return _przesiadz(_n, { ...dane, tryb: "ostroznie" }, user);
-  const miejsca = miejscaPojazdu(pojazd.actor);
+  const miejsca = miejscaNosnika(pojazd.actor, pojazd);
   const zajete = zajeteMiejsca(pojazd);
   const miejsce = miejsca.find(m => m.id === dane.miejsce) ?? miejsca.find(m => !zajete.has(m.id));
   if (!miejsce) return ui.notifications.warn(`${pojazd.name}: brak wolnego miejsca.`);
@@ -358,6 +365,7 @@ async function _wsiadz(_n, dane, user) {
   const odl = odlegloscOdPojazdu(jadacy, pojazd);
   await posadzGM(pojazd, jadacy, miejsce);
   await synchronizujZaloge(pojazd);
+  if (profilNosnika(pojazd.actor) === "wierzchowiec") return _kartaDosiadania(pojazd, jadacy, miejsce, odl);
 
   const ostrz = [];
   if (odl > ZASIEG_WSIADANIA_M + 0.2) ostrz.push(`Postać stała ${odl.toFixed(1)} m od pojazdu (RAW: do 1,5 m) — MG cofa, jeśli to się nie wydarzyło.`);
@@ -379,12 +387,16 @@ async function _wsiadz(_n, dane, user) {
 async function _wysiadz(_n, dane, user) {
   const { jadacy } = await _docs(dane);
   if (!jadacy || !_moze(user, jadacy)) return;
-  const pojazd = pojazdJadacego(jadacy);
+  const pojazd = nosnikJadacego(jadacy);
   if (!pojazd) return;
-  const miejsce = miejsceOId(pojazd.actor, jazdaZetonu(jadacy).miejsce);
+  const miejsce = miejsceNosnika(pojazd, jazdaZetonu(jadacy).miejsce);
   const wRuchu = jedzie(pojazd);
   await wysadzGM(jadacy);
   const pol = polowa(jadacy.actor);
+  if (profilNosnika(pojazd.actor) === "wierzchowiec") {
+    return _karta(jadacy, "Zsiadanie", [`Zsiada z <strong>${esc(pojazd.name)}</strong>.`,
+      maJezdzca(jadacy.actor) ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${pol} m</strong>.`]);
+  }
   const linie = [`Wysiada z <strong>${esc(pojazd.name)}</strong>.`,
     miejsce?.kierowca
       ? `Koszt (s. 260): połowa Szybkości — <strong>${pol} m</strong>.`
@@ -397,10 +409,10 @@ async function _wysiadz(_n, dane, user) {
 async function _przesiadz(_n, dane, user) {
   const { jadacy } = await _docs(dane);
   if (!jadacy || !_moze(user, jadacy)) return;
-  const pojazd = pojazdJadacego(jadacy);
+  const pojazd = nosnikJadacego(jadacy);
   if (!pojazd) return;
-  const z = miejsceOId(pojazd.actor, jazdaZetonu(jadacy).miejsce);
-  const na = miejsceOId(pojazd.actor, dane.miejsce);
+  const z = miejsceNosnika(pojazd, jazdaZetonu(jadacy).miejsce);
+  const na = miejsceNosnika(pojazd, dane.miejsce);
   if (!na || na.id === z?.id) return;
   if (zajeteMiejsca(pojazd).has(na.id)) return ui.notifications.warn(`${pojazd.name}: to miejsce jest zajęte.`);
   const wRuchu = jedzie(pojazd);
@@ -430,8 +442,9 @@ async function _przesiadz(_n, dane, user) {
 /** MG: wypadnięcie z pojazdu — 3k6 obuchowych i Powalenie (s. 261), bez RO: stosowane od razu. */
 export async function wypadnij(jadacyDoc, { powod = "" } = {}) {
   if (!game.user.isGM) return doMG("pojazd.wypadnij", { jadacy: jadacyDoc.uuid, powod });
-  const pojazd = pojazdJadacego(jadacyDoc);
+  const pojazd = nosnikJadacego(jadacyDoc);
   if (!pojazd) return;
+  if (profilNosnika(pojazd.actor) === "wierzchowiec") return spadnijZWierzchowca(jadacyDoc, { powod });
   // Plansza pościgu (D38, s. 266): ląduje znacznik za pojazdem i odtąd dryfuje z drogą (`poscig-tura.mjs`).
   const plansza = trybSceny(pojazd.parent) === "plansza";
   let cel = null;
@@ -455,6 +468,101 @@ export async function wypadnij(jadacyDoc, { powod = "" } = {}) {
   await wyslijKarte(html, { actor, rolls: [roll] });
 }
 
+/* -------------------------------------------- */
+/*  Wierzchowce (§6.3, W2, W4)                   */
+/* -------------------------------------------- */
+
+const ROZMIARY = ["tiny", "sm", "med", "lg", "huge", "grg"];
+
+/** Jeździec (Wyjadacz Zwiadowcy, s. 97): kieruje bez rąk, dosiada za 1,5 m. */
+export function maJezdzca(actor) {
+  return !!actor?.items?.some(i => i.flags?.[MODULE_ID]?.abilityId === "jezdziec");
+}
+
+/** Wyszkolony dla tego jeźdźca (W-U3): flaga `wyszkolony` albo ujeżdżony przez niego (Rodeo, lista `ujezdzony`). */
+export function wyszkolonyDla(actor, jezdziecUuid) {
+  const w = wierzchowiecAktora(actor);
+  return !!w && (!!w.wyszkolony || (Array.isArray(w.ujezdzony) && w.ujezdzony.includes(jezdziecUuid)));
+}
+
+/** Oznaczenia dosiadania (W-U2, W-U3, D43) — nic nie blokują. Czysta względem dokumentów (bierze aktorów). */
+export function oznaczeniaDosiadania(wierzchowiec, jezdziec, { kierujacy = true, wolneRece = 2, jezdziecZdolnosc = false } = {}) {
+  const out = [];
+  const rw = ROZMIARY.indexOf(wierzchowiec?.system?.traits?.size), rj = ROZMIARY.indexOf(jezdziec?.system?.traits?.size ?? "med");
+  if (rw >= 0 && rj >= 0 && rw - rj < 1) out.push("Wierzchowiec musi być co najmniej o rozmiar większy od jeźdźca (s. 257).");
+  if (kierujacy && !wyszkolonyDla(wierzchowiec, jezdziec?.uuid)) out.push("Niewyszkolony wierzchowiec — jeździec jedzie, ale ruchem i turą wierzchowca steruje MG (s. 257, W-U4).");
+  if (kierujacy && !jezdziecZdolnosc && wolneRece < 1) out.push("Wodze wymagają jednej wolnej ręki (D43) — Jeździec kieruje bez rąk.");
+  return out;
+}
+
+async function _kartaDosiadania(nosnik, jadacy, miejsce, odl) {
+  const jezdziec = maJezdzca(jadacy.actor);
+  const zasieg = jezdziec ? 1.5 : ZASIEG_WSIADANIA_M;
+  const ostrz = oznaczeniaDosiadania(nosnik.actor, jadacy.actor,
+    { kierujacy: !!miejsce.kierowca, wolneRece: freeHands(jadacy.actor), jezdziecZdolnosc: jezdziec });
+  if (odl > zasieg + 0.2) ostrz.push(`Postać stała ${odl.toFixed(1)} m od wierzchowca (RAW: w zasięgu 1,5 m) — MG cofa, jeśli to się nie wydarzyło.`);
+  const linie = [`Dosiada <strong>${esc(nosnik.name)}</strong> — ${miejsce.kierowca ? "<strong>jako jeździec</strong>" : "jako pasażer"}.`,
+    jezdziec ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${polowa(jadacy.actor)} m</strong>.`];
+  if (miejsce.kierowca && wyszkolonyDla(nosnik.actor, jadacy.actor?.uuid)) {
+    linie.push("Wyszkolony wierzchowiec: Inicjatywa jeźdźca, rusza się w jego turze i ma tylko Bieganie, Przyspieszenie, Odstąpienie albo Unikanie (s. 29–30, 257) — paleta na HUD-zie. Może działać już w turze dosiadania.");
+  }
+  return _karta(jadacy, "Dosiadanie", linie, ostrz);
+}
+
+/**
+ * MG: spadnięcie z wierzchowca (W4, s. 257) — ścieżka wypadania części 1 bez 3k6: 1,5 m obok, Powalenie, „możliwe
+ * obrażenia” przyciskiem MG.
+ */
+export async function spadnijZWierzchowca(jadacyDoc, { powod = "" } = {}) {
+  if (!game.user.isGM) return doMG("pojazd.wypadnij", { jadacy: jadacyDoc.uuid, powod });
+  const nosnik = nosnikJadacego(jadacyDoc);
+  if (!nosnik) return;
+  await wysadzGM(jadacyDoc);
+  const actor = jadacyDoc.actor;
+  await actor?.toggleStatusEffect?.("prone", { active: true });
+  await wyslijKarte(kartaPostoju({ ikona: jadacyDoc.texture?.src, tytul: "Spadnięcie z wierzchowca", rodzaj: "porazka",
+    linie: [`${esc(jadacyDoc.name)} spada z <strong>${esc(nosnik.name)}</strong>${powod ? ` (${esc(powod)})` : ""}: 1,5 m obok, <strong>Powalenie</strong> — zastosowane (s. 257).`,
+      "Możliwe obrażenia — wg MG."],
+    przyciski: [{ akcja: "pojazd.obrazeniaUpadku", label: "Obrażenia: 1k6", ikona: "fa-solid fa-person-falling-burst", gm: true,
+      dane: { aktor: actor?.uuid, wzor: "1d6" } }] }), { actor });
+}
+
+/**
+ * Karta utrzymania się w siodle (W4, s. 257): przemieszczenie wierzchowca wbrew jego woli albo Powalenie jeźdźca lub
+ * wierzchowca → RO ZRC ST 10 każdego jadącego; porażka — spadnięcie (przycisk karty). Aktywny MG wystawia; nic nie
+ * dzieje się samo.
+ */
+export async function kartaUtrzymania(nosnikDoc, { powod = "", tylko = null } = {}) {
+  const jadacy = jadacyPojazdu(nosnikDoc).filter(t => !tylko || t.id === tylko.id);
+  if (!jadacy.length) return null;
+  return wyslijKarte(kartaPostoju({ ikona: nosnikDoc.texture?.src, tytul: `Utrzymać się na ${nosnikDoc.name}?`, rodzaj: "test",
+    linie: [`${esc(powod || "Wierzchowiec szarpnięty")} — RO ZRC ST 10, porażka: spadnięcie 1,5 m obok i Powalenie (s. 257).`],
+    przyciski: jadacy.map(t => ({ akcja: "pojazd.utrzymanie", label: `${t.name}: RO ZRC ST 10`, ikona: "fa-solid fa-horse",
+      dane: { jadacy: t.uuid, powod } })) }), { actor: nosnikDoc.actor });
+}
+
+/** Jadący: RO ZRC ST 10 z karty utrzymania; porażka — spadnięcie przez MG. */
+async function _utrzymanie(_ev, btn) {
+  const t = await fromUuid(btn.dataset.jadacy);
+  if (!t?.actor?.isOwner) return ui.notifications.warn("Rzut wykonuje właściciel jeźdźca.");
+  const rolls = await t.actor.rollSavingThrow({ ability: "dex", target: 10 }, {}, { data: { flavor: `${t.name}: utrzymać się w siodle — RO ZRC ST 10 (s. 257)` } });
+  const r = Array.isArray(rolls) ? rolls[0] : rolls;
+  if (!r) return;
+  btn.disabled = true;
+  if (r.total < 10) await wypadnij(t, { powod: btn.dataset.powod || "nie utrzymał się w siodle" });
+}
+
+/** Aktywny MG: Powalenie jeźdźca albo wierzchowca, wierzchowiec przy 0 PW → karta utrzymania. */
+function _poPowaleniu(actor, powod) {
+  if (!game.user.isActiveGM || !actor) return;
+  for (const s of game.scenes) for (const t of s.tokens) {
+    if (t.actor !== actor && !(t.actorLink && t.actorId === actor.id)) continue;
+    if (profilNosnika(t.actor) === "wierzchowiec" && jadacyPojazdu(t).length) kartaUtrzymania(t, { powod: `${t.name}: ${powod}` });
+    const n = nosnikJadacego(t);
+    if (n && profilNosnika(n.actor) === "wierzchowiec") kartaUtrzymania(n, { powod: `${t.name}: ${powod}`, tylko: t });
+  }
+}
+
 /** MG: wszyscy jadący wysiadają obok (przycisk na karcie pojazdu, sprzątanie po awarii klienta). */
 export async function wysadzWszystkich(pojazdDoc) {
   if (!game.user.isGM) return;
@@ -465,12 +573,12 @@ export async function wysadzWszystkich(pojazdDoc) {
 /** Opis miejsca do kart i okna: „Kabina, rząd 2 — kierowca”. */
 export function opisMiejsca(pojazdActor, miejsce) {
   if (!miejsce) return "—";
-  const strefa = danePojazdu(pojazdActor)?.strefy.find(s => s.id === miejsce.strefa);
+  const strefa = daneNosnika(pojazdActor)?.strefy.find(s => s.id === miejsce.strefa);
   const czesci = [strefa?.nazwa ?? miejsce.strefa];
-  const wStrefie = miejscaPojazdu(pojazdActor).filter(m => m.strefa === miejsce.strefa);
+  const wStrefie = miejscaNosnika(pojazdActor).filter(m => m.strefa === miejsce.strefa);
   const rzedy = [...new Set(wStrefie.map(m => m.rzad))];
   if (rzedy.length > 1) czesci.push(`rząd ${rzedy.indexOf(miejsce.rzad) + 1}`);
-  if (miejsce.kierowca) czesci.push("kierowca");
+  if (miejsce.kierowca) czesci.push(profilNosnika(pojazdActor) === "wierzchowiec" ? "jeździec" : "kierowca");
   if (miejsce.stanowisko) czesci.push("stanowisko");
   return czesci.join(", ");
 }
@@ -493,10 +601,10 @@ export function wysiadz(jadacyDoc) {
  * Przesiądź się. `tryb`: „ostroznie” (×2) albo „szybko” (×1 z testem). Test rzuca gracz u siebie.
  */
 export async function przesiadz(jadacyDoc, miejsceId, { tryb = "ostroznie" } = {}) {
-  const pojazd = pojazdJadacego(jadacyDoc);
+  const pojazd = nosnikJadacego(jadacyDoc);
   if (!pojazd) return;
-  const z = miejsceOId(pojazd.actor, jazdaZetonu(jadacyDoc).miejsce);
-  const na = miejsceOId(pojazd.actor, miejsceId);
+  const z = miejsceNosnika(pojazd, jazdaZetonu(jadacyDoc).miejsce);
+  const na = miejsceNosnika(pojazd, miejsceId);
   if (!z || !na) return;
   const k = kosztPrzesiadki(z, na, { jedzie: jedzie(pojazd) });
   let test = null;
@@ -514,6 +622,25 @@ export function registerJadacy() {
   zarejestrujProsbe("pojazd.wsiadz", _wsiadz);
   zarejestrujProsbe("pojazd.wysiadz", _wysiadz);
   zarejestrujProsbe("pojazd.przesiadz", _przesiadz);
+  // W4: utrzymanie się w siodle po Powaleniu jeźdźca albo wierzchowca i przy 0 PW wierzchowca.
+  zarejestrujAkcje("pojazd.utrzymanie", _utrzymanie);
+  Hooks.on("createActiveEffect", e => {
+    if (e.parent instanceof Actor && e.statuses?.has?.("prone")) _poPowaleniu(e.parent, "Powalenie");
+  });
+  Hooks.on("updateActor", (actor, ch) => {
+    if (foundry.utils.getProperty(ch, "system.attributes.hp.value") === 0 && profilNosnika(actor) === "wierzchowiec") _poPowaleniu(actor, "wierzchowiec pada (0 PW)");
+  });
+  // Spadnięcie z wierzchowca: „możliwe obrażenia” — przycisk MG (W4).
+  zarejestrujAkcje("pojazd.obrazeniaUpadku", async (_ev, btn) => {
+    if (!game.user.isGM) return;
+    const a = await fromUuid(btn.dataset.aktor);
+    if (!a) return;
+    const r = await new Roll(btn.dataset.wzor || "1d6").evaluate();
+    await a.applyDamage([{ value: r.total, type: "bludgeoning", properties: new Set() }]);
+    btn.disabled = true;
+    await wyslijKarte(kartaPostoju({ ikona: a.img, tytul: "Obrażenia od upadku", rodzaj: "porazka", linie: [`${esc(a.name)}: <strong>${r.total}</strong> obuchowych — zastosowane.`] }),
+      { actor: a, rolls: [r] });
+  });
   zarejestrujProsbe("pojazd.wypadnij", async (_n, dane) => {
     const { jadacy } = await _docs(dane);
     if (jadacy) await wypadnij(jadacy, { powod: dane.powod });
@@ -531,11 +658,11 @@ export function registerJadacy() {
   // razem z pojazdem (zaznaczony pojazd z załogą + Delete) już nie istnieją i nie dostają zapisu w próżnię.
   const doWysadzenia = new Map();
   Hooks.on("preDeleteToken", (doc, options) => {
-    if (!game.user.isActiveGM || !jestZetonemPojazdu(doc)) return;
+    if (!game.user.isActiveGM || !jestZetonemNosnika(doc)) return;
     // Wycięcie i wklejenie na inną scenę: jadący jadą w schowku albo zajmuje się nimi `schowek.mjs`.
     if (options.replacements?.[doc.id]) return;
     const jadacy = jadacyPojazdu(doc);
-    if (jadacy.length) doWysadzenia.set(doc.uuid, jadacy.map(t => [t, poleWysiadki(doc, t, miejsceOId(doc.actor, jazdaZetonu(t).miejsce))]));
+    if (jadacy.length) doWysadzenia.set(doc.uuid, jadacy.map(t => [t, poleWysiadki(doc, t, miejsceNosnika(doc, jazdaZetonu(t).miejsce))]));
   });
   Hooks.on("deleteToken", async doc => {
     const pozycje = doWysadzenia.get(doc.uuid);
@@ -553,7 +680,7 @@ export function registerJadacy() {
       for (const t of scena.tokens) {
         const j = jazdaZetonu(t);
         if (!j) continue;
-        if (!pojazdJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y }, zapomnij: false });
+        if (!nosnikJadacego(t)) await wysadzGM(t, { cel: { x: t._source.x, y: t._source.y }, zapomnij: false });
         else if (!dziala) await wysadzGM(t, { zapomnij: false });
       }
     }

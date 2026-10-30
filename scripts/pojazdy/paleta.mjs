@@ -32,10 +32,11 @@ import { change, CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { CECHY_POJAZDOW, cechyPojazdu } from "../config/vehicles-data.mjs";
 import { krokNaprzod } from "../combat/tiki.mjs";
 import {
-  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, miejsceOId, pojazdJadacego, trybSceny
+  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, miejsceNosnika, miejsceOId,
+  nosnikJadacego, pojazdJadacego, profilNosnika, trybSceny
 } from "./stan.mjs";
 import { xNaTor } from "../scenes/poscig.mjs";
-import { kierowcaPojazdu } from "./jadacy.mjs";
+import { kierowcaPojazdu, wyszkolonyDla } from "./jadacy.mjs";
 import { aktywneAwariePojazdu } from "./awarie.mjs";
 
 export const FLAGA_PALETY = "paleta";
@@ -152,7 +153,25 @@ export const POZYCJE = {
     zmiany: [change(MOVE, CHANGE_TYPE.multiply, "0.5")], wygasa: { zmiany: "koniec" },
     skutek: "Zajechanie: Szybkość ×½ do końca następnej tury kierowcy (s. 268)." },
   oslepienie: { nazwa: "Oślepiające światło", ukryta: true, ikona: "fa-solid fa-sun", statusy: ["blinded"], wygasa: { statusy: "koniec" },
-    skutek: "Komplikacja 18: kierowca Oślepiony do końca następnej tury (s. 267)." }
+    skutek: "Komplikacja 18: kierowca Oślepiony do końca następnej tury (s. 267)." },
+
+  // Wierzchowiec prowadzony przez jeźdźca ma tylko jedną z czterech akcji (s. 29–30, 257; W3) — w turze jeźdźca.
+  bieganie: {
+    nazwa: "Bieganie", czas: "akcja", wierzchowiec: true, ikona: "fa-solid fa-horse", ruch: 2, bieganie: true,
+    skutek: "Do początku następnej tury jeźdźca dodatkowy ruch = Szybkość wierzchowca ×2; jego Testy Ataku z Utrudnieniem, ataki dystansowe przeciw niemu z Utrudnieniem (s. 29). Nie dla istot, które nie chodzą na nogach."
+  },
+  przyspieszenie: {
+    nazwa: "Przyspieszenie", czas: "akcja", wierzchowiec: true, ikona: "fa-solid fa-person-running", ruch: 1,
+    skutek: "W tej turze dodatkowy ruch = Szybkość wierzchowca (s. 30)."
+  },
+  odstapienie: {
+    nazwa: "Odstąpienie", czas: "akcja", wierzchowiec: true, ikona: "fa-solid fa-arrow-right-from-bracket",
+    skutek: "Ruch wierzchowca w tej turze nie prowokuje ataków okazyjnych (s. 30)."
+  },
+  unikanie: {
+    nazwa: "Unikanie", czas: "akcja", wierzchowiec: true, ikona: "fa-solid fa-shield-halved", statusy: ["dodging"],
+    skutek: "Do początku następnej tury jeźdźca ataki na wierzchowca z Utrudnieniem, jego RO na Zręczność z Ułatwieniem (s. 30)."
+  }
 };
 
 /** Skok wg cechy: rozbieg (m), test i ST. */
@@ -176,7 +195,7 @@ const SKOKI = {
  */
 export function budzetPalety(wpisy, { cwierc = false, cofanie = false } = {}) {
   const out = { ruch: 0, st: 0, ulatwienie: false, utrudnienie: false, atak: null, mnoznikDrogi: 1, wsteczny: false, slalom: false,
-    kontakt: false, hample: false, nazwy: [] };
+    kontakt: false, hample: false, bieganie: false, nazwy: [] };
   for (const w of wpisy ?? []) {
     const def = POZYCJE[w?.id];
     if (!def) continue;
@@ -194,6 +213,7 @@ export function budzetPalety(wpisy, { cwierc = false, cofanie = false } = {}) {
     if (def.slalom && dziala("slalom")) { out.slalom = true; cos = true; }
     if (def.kontakt && dziala("kontakt")) { out.kontakt = true; cos = true; }
     if (def.hample && dziala("hample")) { out.hample = true; cos = true; }
+    if (def.bieganie && dziala("bieganie")) { out.bieganie = true; cos = true; }
     if (def.wsteczny && dziala("wsteczny")) {
       out.wsteczny = true;
       out.mnoznikDrogi *= cwierc ? 4 : 2;
@@ -264,6 +284,13 @@ export function mnoznikPrzelozenia(actor) {
 /** Pozycje palety widoczne dla pojazdu: `[{id, def, oznaczenia: string[]}]`. */
 export function pozycjePojazdu(pojazdDoc) {
   const actor = pojazdDoc?.actor;
+  if (profilNosnika(actor) === "wierzchowiec") {
+    // Wierzchowiec: cztery akcje (W3), tylko dla wyszkolonego — niewyszkolony robi, co chce (MG, W-U4).
+    const kier = kierowcaPojazdu(pojazdDoc);
+    const aktywne = new Set(efektyPalety(actor).map(e => e.flags[MODULE_ID][FLAGA_PALETY].id));
+    const ozn = kier && !wyszkolonyDla(actor, kier.actor?.uuid) ? ["Niewyszkolony wierzchowiec — działa po swojemu, steruje MG (s. 257)."] : [];
+    return Object.entries(POZYCJE).filter(([, d]) => d.wierzchowiec).map(([id, def]) => ({ id, def, aktywna: aktywne.has(id), oznaczenia: ozn }));
+  }
   const dane = danePojazdu(actor);
   if (!dane) return [];
   const cechy = cechyPojazdu(dane.podwozie);
@@ -273,7 +300,7 @@ export function pozycjePojazdu(pojazdDoc) {
   const out = [];
   const plansza = trybSceny(pojazdDoc.parent) === "plansza";
   for (const [id, def] of Object.entries(POZYCJE)) {
-    if (def.ukryta || (def.plansza && !plansza)) continue;
+    if (def.ukryta || def.wierzchowiec || (def.plansza && !plansza)) continue;
     if (def.cecha && !cechy.some(c => c.id === def.cecha)) continue;
     if (def.kiedy && !def.kiedy(ctx)) continue;
     const oznaczenia = [];
@@ -309,13 +336,13 @@ export function mozeUzycPalety(pojazdDoc, user = game.user) {
 export async function uzyjPalety(pojazdDoc, id) {
   const def = POZYCJE[id];
   const actor = pojazdDoc?.actor;
-  if (!def || !jestPojazdem(actor)) return null;
+  if (!def || !profilNosnika(actor)) return null;
   if (!mozeUzycPalety(pojazdDoc)) return ui.notifications.warn("Paletą steruje kierowca (albo MG).");
   const poz = pozycjePojazdu(pojazdDoc).find(p => p.id === id);
   const kier = kierowcaPojazdu(pojazdDoc);
   const linie = [`<strong>${esc(def.nazwa)}</strong> [${CZAS[def.czas] ?? "—"}] — ${esc(def.skutek)}`];
   const ostrz = [...(poz?.oznaczenia ?? [])];
-  if (!kier) ostrz.push("Nikt nie siedzi za kierownicą.");
+  if (!kier) ostrz.push(profilNosnika(actor) === "wierzchowiec" ? "Nikt nie siedzi w siodle." : "Nikt nie siedzi za kierownicą.");
   const przyciski = [];
 
   // Przełączniki: drugie kliknięcie zdejmuje.
@@ -511,8 +538,8 @@ async function _roCelow(_ev, btn) {
 /** Żeton pojazdu, którego kierowcą jest kombatant (scena walki). */
 function _pojazdKierowcy(combatant) {
   const tok = combatant?.token;
-  const p = tok ? pojazdJadacego(tok) : null;
-  return p && miejsceOId(p.actor, jazdaZetonu(tok).miejsce)?.kierowca ? p : null;
+  const p = tok ? nosnikJadacego(tok) : null;
+  return p && miejsceNosnika(p, jazdaZetonu(tok).miejsce)?.kierowca ? p : null;
 }
 
 async function _wygas(actor, t) {
@@ -599,8 +626,15 @@ function _wPojezdzie(tokenLike) {
   return p ? { pojazd: p, kierowca: !!miejsceOId(p.actor, jazdaZetonu(doc).miejsce)?.kierowca } : null;
 }
 
-function _zrodloAtakow({ attackerToken, targets }) {
+function _zrodloAtakow({ attackerToken, targets, wrecz }) {
   const out = [];
+  // Bieganie wierzchowca (s. 29): jego Testy Ataku i ataki dystansowe przeciw niemu — z Utrudnieniem.
+  const atakujacy = attackerToken?.document ?? attackerToken;
+  if (atakujacy?.actor && paletaPojazdu(atakujacy.actor).bieganie) out.push({ rodzaj: "utrudnienie", label: "Bieganie — Testy Ataku biegnącego z Utrudnieniem (s. 29)", strona: "atakujący" });
+  if (!wrecz) for (const t of targets ?? []) {
+    const d = t?.document ?? t;
+    if (d?.actor && paletaPojazdu(d.actor).bieganie) { out.push({ rodzaj: "utrudnienie", label: `${d.name} biegnie — ataki dystansowe z Utrudnieniem (s. 29)`, strona: "cel" }); break; }
+  }
   const a = _wPojezdzie(attackerToken);
   // Komplikacja 7 (s. 267): ani oni nas, ani my ich — oznaczone, rozstrzyga MG.
   const bezKontaktu = [a, ...(targets ?? []).map(_wPojezdzie)].find(x => x && paletaPojazdu(x.pojazd.actor).kontakt);
@@ -663,7 +697,7 @@ class OknoPalety extends foundry.applications.api.ApplicationV2 {
     const div = document.createElement("div");
     div.className = "neuro-paleta";
     const actor = p.actor;
-    if (!danePojazdu(actor)) {
+    if (!profilNosnika(actor)) {
       div.textContent = "To nie jest pojazd.";
       return div;
     }
@@ -692,7 +726,7 @@ class OknoPalety extends foundry.applications.api.ApplicationV2 {
         data-pozycja="${esc(x.id)}" ${moze ? "" : "disabled"} data-tooltip="${esc(x.def.skutek)}">
         <i class="${esc(x.def.ikona)}" inert></i> ${esc(x.def.nazwa)}${x.oznaczenia.length ? ` <i class="fa-solid fa-triangle-exclamation" data-tooltip="${esc(x.oznaczenia.join(" "))}"></i>` : ""}</button>`).join("") + "</div>";
     }
-    if (cechyPojazdu(danePojazdu(actor).podwozie).some(c => c.id === "przerzutka")) {
+    if (danePojazdu(actor) && cechyPojazdu(danePojazdu(actor).podwozie).some(c => c.id === "przerzutka")) {
       const teraz = actor.flags?.[MODULE_ID]?.[FLAGA_PRZERZUTKI] ?? "standardowe";
       lista += `<h4>Przerzutka [B]</h4><div class="neuro-paleta-grupa">` + Object.entries(PRZELOZENIA).map(([k, v]) =>
         `<button type="button" class="neuro-paleta-btn${teraz === k ? " active" : ""}" data-przelozenie="${k}" ${moze ? "" : "disabled"}
@@ -728,7 +762,7 @@ class OknoPalety extends foundry.applications.api.ApplicationV2 {
 
 /** Otwiera paletę kierowcy pojazdu. */
 export async function otworzPalete(pojazdDoc) {
-  if (!jestZetonemPojazdu(pojazdDoc)) return null;
+  if (!profilNosnika(pojazdDoc?.actor)) return null;
   await okna.get(pojazdDoc.id)?.close();
   const app = new OknoPalety(pojazdDoc);
   okna.set(pojazdDoc.id, app);

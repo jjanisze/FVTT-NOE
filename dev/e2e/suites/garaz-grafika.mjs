@@ -35,6 +35,9 @@ async function point(client, id, over, scale=2.2) {
   if (over) await client.send("Input.dispatchMouseEvent", { type:"mouseMoved",...pos });
 }
 
+/** Catalogue frame ×1,1 (SKALA_POJAZDOW, D45) — token squares on a 1,5 m map. */
+const wSkali = ([w, h], cw, ch) => Math.abs(w - cw * 1.1) < 1e-3 && Math.abs(h - ch * 1.1) < 1e-3;
+
 export default {
   name: "garaz-grafika", clients: ["gm","Gracz 1","Gracz 2"],
   async run(t) {
@@ -43,7 +46,7 @@ export default {
       initial = await t.gm.eval(prepare);
       t.assert(initial.ok && !initial.missing.length, "garage builds without missing assets or actors", initial);
       const inv = await t.gm.eval(inventory);
-      t.equal(inv.scenes.length,16,"parking plus fourteen vehicle previews and one wreck preview");
+      t.equal(inv.scenes.length,17,"parking, fourteen vehicle previews, the wreck gallery and the creature-scale comparison (S0)");
       const parking = inv.scenes.find(s => s.key === "parking");
       for (const id of ["osobowka","hammer","motocykl","ciezarowka","buggy","autobus","traktor","wozStrazacki","buldozer","bwp","czolg","motorower","rower","deskorolka"]) {
         const slug=id==='wozStrazacki'?'woz-strazacki':id;
@@ -51,12 +54,12 @@ export default {
         const preview = inv.scenes.find(s => s.art === id);
         t.assert(!!preview,"preview: " + id);
         if(id==='motorower')t.assert([...preview.vehicles,...parking.vehicles.filter(v=>v.art.endsWith('/pojazdy/motorower.webp'))]
-          .every(v=>v.dimensions[0]===.6&&v.dimensions[1]===1.56),'moped preview and Parking keep the GM-requested 120% dimensions after rebuild');
+          .every(v=>wSkali(v.dimensions,.6,1.56)),'moped preview and Parking keep the GM-requested 120% dimensions after rebuild (×1,1, D45)');
         if (id === "buggy") t.assert([...preview.vehicles,...parking.vehicles.filter(v=>v.art.endsWith('/pojazdy/buggy.webp'))]
-          .every(v=>v.dimensions[0]===1.4&&v.dimensions[1]===2.8),"buggy preview and Parking keep the calibrated 2.1 m wide frame after rebuild");
+          .every(v=>wSkali(v.dimensions,1.4,2.8)),"buggy preview and Parking keep the calibrated 2.1 m wide frame after rebuild (×1,1, D45)");
         t.assert(preview.vehicles.some(v => v.crew === v.seats && v.crew > 0),"fully crewed: " + id);
         if(id==='wozStrazacki')t.assert([...preview.vehicles,...parking.vehicles.filter(v=>v.art.endsWith('/pojazdy/woz-strazacki.webp'))]
-          .every(v=>v.dimensions[0]===2&&v.dimensions[1]===5.5),'fire pumper uses the shorter portrait-matched frame in preview and Parking');
+          .every(v=>wSkali(v.dimensions,2,5.5)),'fire pumper uses the shorter portrait-matched frame in preview and Parking (×1,1, D45)');
         t.assert(preview.figures.every(f => f.scale === 1 && f.prototype === 1 && f.art.startsWith("systems/dnd5e/")),"stock figures have original scales: " + id);
         if(id==='autobus'){
           const refs=preview.figures.filter(f=>f.reference);
@@ -75,7 +78,7 @@ export default {
       });
       await t.waitFor(t.gm,()=>!!document.querySelector('#poligon-panel [data-tab="proby"]'),{message:"panel available"});
       await t.gm.eval(()=>document.querySelector('#poligon-panel [data-tab="proby"]').click());
-      await t.waitFor(t.gm,()=>document.querySelectorAll('#poligon-panel [data-op="tool"]').length === 16,{message:"parking, fourteen vehicles and wreck artwork buttons"});
+      await t.waitFor(t.gm,()=>document.querySelectorAll('#poligon-panel [data-op="tool"]').length === 19,{message:"parking, fourteen vehicles, wreck artwork and three creature-scale buttons"});
       for (const [i,key] of [[0,"parking"],[1,"vehicle-art-review-v4"],[2,"hammer-art-review-v1"],[4,"ciezarowka-art-review-v1"],[5,"buggy-art-review-v1"],[6,"autobus-art-review-v1"],[7,"traktor-art-review-v1"],[8,"woz-strazacki-art-review-v1"],[9,"buldozer-art-review-v1"],[10,"bwp-art-review-v1"],[11,"czolg-art-review-v1"],[12,"motorower-art-review-v1"],[13,"rower-art-review-v1"],[14,"deskorolka-art-review-v1"],[15,"wraki-art-review-v1"],[3,"motocykl-art-review-v1"]]) {
         await t.gm.eval(i=>document.querySelector(`#poligon-panel [data-op="tool"][data-arg="${i}"]`).click(),i);
         for (const client of [t.gm,t.client("Gracz 1")])
@@ -348,7 +351,7 @@ export default {
         return{vehicle:full.id,empty:empty.id,ref:ref.id,width:full.width,height:full.height,fit:full.texture.fit,anchorY:full.texture.anchorY,
           crew:P.jadacyPojazdu(full).map(d=>({id:d.id,seat:d.flags[M].jazda.miejsce}))};
       });
-      t.equal(s.width,2.6,'hull width');t.equal(s.height,5.6,'hull length excludes barrel');t.equal(s.fit,'width','art fits physical hull width');t.equal(s.anchorY,.4,'gun overhang extends forward');
+      t.assert(wSkali([s.width,s.height],2.6,5.6),'hull 2.6 × 5.6 ×1,1 (D45); length excludes barrel',[s.width,s.height]);t.equal(s.fit,'width','art fits physical hull width');t.equal(s.anchorY,.4,'gun overhang extends forward');
       await observer.eval(()=>canvas.tokens.releaseAll());await point(observer,s.vehicle,false,1.2);
       await t.waitFor(observer,s=>{const v=canvas.tokens.get(s.vehicle);return v.neuroKropki.children.length===4&&v.neuroWieza?.mesh?.visible&&s.crew.every(c=>!canvas.tokens.get(c.id).visible);},{args:[s],message:'closed Abrams conceals four crew'});
       await t.screenshot('Gracz 2','Abrams closed hull and gun overhang');
@@ -534,7 +537,7 @@ export default {
       const r=await t.gm.eval(async()=>{const [r]=await game.poligon.stations.reset('garaz',{fast:true,source:'e2e'});return{ok:r.ok,error:r.error,missing:r.missing};});
       t.assert(r.ok&&!r.missing.length,"second rebuild",r);
       const after=await t.gm.eval(inventory);
-      t.equal(after.scenes.length,16,"all previews recreated");t.equal(after.actors,before.actors,"no actor leak");
+      t.equal(after.scenes.length,17,"all previews recreated");t.equal(after.actors,before.actors,"no actor leak");
       const ids=before.scenes.map(s=>s.id);
       t.assert(after.scenes.every(s=>!ids.includes(s.id)),"scene documents were rebuilt");
       t.assert(after.scenes.filter(s=>s.art).every(s=>s.figures.every(f=>f.scale===1&&f.prototype===1)),"source figure scales restored");

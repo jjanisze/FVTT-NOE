@@ -26,8 +26,8 @@
  */
 
 import {
-  MODULE_ID, bliskie, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, kratkaPojazdu, miejsceOId,
-  miejscaPojazdu, obrysDziala, pojazdJadacego, skalaPojazdu, trybSceny, wymiaryZetonu
+  MODULE_ID, bliskie, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemNosnika, jestZetonemPojazdu, kratkaPojazdu,
+  miejsceNosnika, miejscaPojazdu, nosnikJadacego, obrysDziala, skalaPojazdu, trybSceny, wymiaryZetonu
 } from "./stan.mjs";
 import {
   naroznikDlaSrodka, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
@@ -38,6 +38,7 @@ import { grafikaWnetrza } from "./grafika.mjs";
 import { grafikaKadluba, odswiezWieze, usunWieze, wczytajWieze } from "./wieza.mjs";
 import { OPCJA_SYNCHRONIZACJI } from "./historia.mjs";
 import { otwarteMiejsce, prezentacjaJadacego, sortJadacego } from "./prezentacja.mjs";
+import { mnoznikGrafiki } from "../scenes/skala-istot.mjs";
 import { wstecznyPojazdu } from "./paleta.mjs";
 
 /** Krycie nadwozia w prześwietleniu (§4.2: „ok. 35%”). */
@@ -60,6 +61,17 @@ function obrysSiatki(token) {
   if (!obrysZamieniony(dane.obrys, doc.width / s, doc.height / s)) return null;
   const kp = kratkaPojazdu(scena);
   return { w: dane.obrys.w * kp, h: dane.obrys.h * kp };
+}
+
+/**
+ * Jadący rysuje się w rozmiarze sprzed wsiadania (D42, S1): dokument ma 0,5 kratki pojazdu — pole kliknięcia i odstęp
+ * foteli — ale postać w pojeździe jest tak duża jak obok niego. Piksele albo `null` (nie jadący).
+ */
+function rozmiarGrafikiJadacego(token) {
+  const r = jazdaZetonu(token.document)?.rozmiar;
+  const kratka = token.document.parent?.grid?.size;
+  if (!r || !kratka || !(r.w > 0) || !(r.h > 0)) return null;
+  return { w: r.w * kratka, h: r.h * kratka };
 }
 
 /** Czy ten klient może prześwietlić pojazd: MG, właściciel pojazdu, gracz z postacią w środku (D3). */
@@ -104,7 +116,7 @@ export function prowadzJadacych(pojazd, koniec = false) {
     const t = jDoc.object;
     if (!t || t.destroyed) continue;
     const j = jazdaZetonu(jDoc);
-    const miejsce = miejsceOId(doc.actor, j.miejsce);
+    const miejsce = miejsceNosnika(doc, j.miejsce);
     if (!miejsce) continue;
     const s = srodekMiejsca(srodek, doc.rotation, miejsce, kp);
     const { x, y } = naroznikDlaSrodka(s, jDoc.width, jDoc.height, kratka);
@@ -125,19 +137,20 @@ export function prowadzJadacych(pojazd, koniec = false) {
  */
 export function instrukcjePoRuchu(pojazdDoc) {
   const scena = pojazdDoc.parent;
-  if (!danePojazdu(pojazdDoc.actor) || !obrysDziala(scena)) return {};
+  if (!jestZetonemNosnika(pojazdDoc) || !obrysDziala(scena)) return {};
   const src = pojazdDoc._source;
   const kp = kratkaPojazdu(scena);
   const kratka = scena.grid.size;
   const instrukcje = {};
+  // Zamiana obrysu tylko dla pojazdu: rozmiaru żetonu istoty (wierzchowca) moduł nigdy nie zmienia (D43).
   const docelowy = wymiaryZetonu(pojazdDoc.actor, scena, src.rotation);
-  if (!bliskie(docelowy.w, src.width) || !bliskie(docelowy.h, src.height)) {
+  if (docelowy && (!bliskie(docelowy.w, src.width) || !bliskie(docelowy.h, src.height))) {
     instrukcje[pojazdDoc.id] = { dimensions: { width: docelowy.w, height: docelowy.h, action: "displace" } };
   }
   const srodek = pojazdDoc.getCenterPoint(src);
   for (const jDoc of jadacyPojazdu(pojazdDoc)) {
     const j = jazdaZetonu(jDoc);
-    const miejsce = miejsceOId(pojazdDoc.actor, j.miejsce);
+    const miejsce = miejsceNosnika(pojazdDoc, j.miejsce);
     if (!miejsce) continue;
     const s = srodekMiejsca(srodek, src.rotation, miejsce, kp);
     const { x, y } = naroznikDlaSrodka(s, jDoc._source.width, jDoc._source.height, kratka);
@@ -294,13 +307,22 @@ function podklasa(Baza) {
       return super.isVisible;
     }
 
-    /** @override — siatka pojazdu zawsze w obrysie naturalnym. */
+    /**
+     * @override — siatka pojazdu zawsze w obrysie naturalnym; jadący w rozmiarze sprzed wsiadania; istoty × f (D42).
+     * Powtarza `resize` rdzenia z innym polem bazowym — z poprawką pierścienia dnd5e, jak `super`.
+     */
     _refreshMeshSizeAndScale() {
       super._refreshMeshSizeAndScale();
-      const nat = obrysSiatki(this);
-      if (!nat) return;
-      const { fit, scaleX, scaleY } = this.document.texture;
-      this.mesh.resize(nat.w, nat.h, { fit, scaleX, scaleY });
+      const baza = obrysSiatki(this) ?? rozmiarGrafikiJadacego(this);
+      const f = mnoznikGrafiki(this.document);
+      if (!baza && f === 1) return;
+      const { width, height } = baza ? { width: baza.w, height: baza.h } : this.document.getSize();
+      let { fit, scaleX, scaleY } = this.document.texture;
+      if (this.hasDynamicRing && CONFIG.Token.ring.isGridFitMode) {
+        scaleX *= this.ring.subjectScaleAdjustment;
+        scaleY *= this.ring.subjectScaleAdjustment;
+      }
+      this.mesh.resize(width * f, height * f, { fit, scaleX, scaleY });
     }
 
     /** @override — przygaszenie w prześwietleniu. */
@@ -316,7 +338,7 @@ function podklasa(Baza) {
       const wnetrze = this._neuroGrafikaWnetrza();
       if (przeswietlane.has(this.document.id) && !wnetrze) this.mesh.alpha *= KRYCIE_PRZESWIETLENIA;
       const p = prezentacjaJadacego(this.document);
-      if (p) this.mesh.sort = sortJadacego(this.document.sort, p.pojazd.sort, p);
+      if (p) this.mesh.sort = sortJadacego(this.document.sort, p.pojazd.sort, p, p.miejsce);
     }
 
     /** @override */
@@ -342,14 +364,14 @@ function podklasa(Baza) {
       super._onAnimationUpdate(changed, context);
       if (!("x" in changed) && !("y" in changed) && !("rotation" in changed)
         && !("width" in changed) && !("height" in changed)) return;
-      if (!jestZetonemPojazdu(this.document)) return;
+      if (!jestZetonemNosnika(this.document)) return;
       prowadzJadacych(this, context.time >= context.duration);
     }
 
     /** @override — Alt+klik w prześwietlonego jadącego zaznacza pojazd (§4.2). */
     _onClickLeft(event) {
       if (event?.altKey) {
-        const pojazd = pojazdJadacego(this.document)?.object;
+        const pojazd = nosnikJadacego(this.document)?.object;
         if (pojazd?.visible) {
           pojazd.control({ releaseOthers: !event.shiftKey });
           return;
@@ -421,7 +443,7 @@ export function registerZetonPojazdu() {
   });
 
   Hooks.on("updateToken", (doc, changes) => {
-    if (jestZetonemPojazdu(doc)) {
+    if (jestZetonemNosnika(doc)) {
       if (jestRuchem(changes) && game.user.isActiveGM) {
         zapiszPoRuchu(doc).catch(err => console.error(`${MODULE_ID} | pojazd: zapis po ruchu`, err));
       }
@@ -432,7 +454,8 @@ export function registerZetonPojazdu() {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.jazda`)
       || foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=jazda`)) {
       odswiezPojazdySceny(doc.parent);
-      doc.object?.renderFlags.set({ refreshVisibility: true, refreshState: true });
+      // Rozmiar grafiki jadącego idzie z flagi, nie z wymiarów dokumentu (S1).
+      doc.object?.renderFlags.set({ refreshVisibility: true, refreshState: true, refreshSize: true });
     }
   });
   Hooks.on("createToken", doc => {
@@ -455,7 +478,7 @@ export function registerZetonPojazdu() {
   // Kropka celowanego jadącego ma czerwony obwód (D14).
   Hooks.on("targetToken", (user, token) => {
     if (user !== game.user) return;
-    const pojazd = pojazdJadacego(token.document)?.object;
+    const pojazd = nosnikJadacego(token.document)?.object;
     if (pojazd) odswiezKropki(pojazd);
   });
   Hooks.on("controlToken", token => {

@@ -10,7 +10,8 @@
  *  - `zeton.mjs`       — podklasa żetonu: siatka w obrysie naturalnym, jadący w animacji, ukrycie,
  *                        kropki, prześwietlenie; zapis po ruchu (MG)
  *  - `historia.mjs`    — historia rdzenia pomija pochodne zapisy miejsc i obrysu (jedno Ctrl+Z na ruch)
- *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności, pamięć obsady (MG)
+ *  - `jadacy.mjs`      — wsiadanie, wysiadanie, przesiadka, wypadanie, dostęp z obecności, pamięć obsady (MG);
+ *                        nośnik = pojazd albo wierzchowiec (§6.3): dosiadanie, utrzymanie się w siodle, spadnięcie
  *  - `obsada.mjs`      — karta „Posadzić?”: zapamiętana załoga na nowej scenie (§4.15)
  *  - `schowek.mjs`     — Ctrl+X / Ctrl+V pojazdu z załogą między scenami (§4.16)
  *  - `okno-miejsc.mjs` — okno miejsc i przyciski HUD żetonu
@@ -31,7 +32,8 @@
 import { registerZetonPojazdu, instrukcjePoRuchu, przeswietlany, mozePrzeswietlic } from "./zeton.mjs";
 import {
   registerJadacy, wsiadz, wysiadz, przesiadz, wypadnij, wysadzWszystkich, posadzGM, wysadzGM, synchronizujZaloge,
-  zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca, pamiecPoUzgodnieniu
+  zajeteMiejsca, kierowcaPojazdu, jedzie, odlegloscOdPojazdu, kosztPrzesiadki, opisMiejsca, pamiecPoUzgodnieniu,
+  kartaUtrzymania, spadnijZWierzchowca, oznaczeniaDosiadania, wyszkolonyDla, maJezdzca
 } from "./jadacy.mjs";
 import { registerOknoMiejsc, otworzMiejsca } from "./okno-miejsc.mjs";
 import { registerObsada, brakujacaObsada, posadzObsade } from "./obsada.mjs";
@@ -50,7 +52,8 @@ import { registerDym, uzgodnijDym, dymWKabinie } from "./dym.mjs";
 import { registerNaprawy, naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote } from "./naprawy.mjs";
 import {
   danePojazdu, jadacyPojazdu, jestPojazdem, kratkaPojazdu, miejscaPojazdu, miejsceOId, obsadaPojazdu, pojazdJadacego,
-  rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
+  rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu,
+  profilNosnika, jestNosnikiem, daneNosnika, miejscaNosnika, miejsceNosnika, nosnikJadacego, STREFY_SIODLA
 } from "./stan.mjs";
 import { registerJazda, szybkoscPojazdu, budzetJazdy, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem } from "./jazda.mjs";
 import { registerPaleta, otworzPalete, uzyjPalety, ustawPrzerzutke, paletaPojazdu, pozycjePojazdu, budzetPalety, POZYCJE } from "./paleta.mjs";
@@ -59,6 +62,7 @@ import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
 import { registerKarta, zetonPojazdu } from "./karta.mjs";
 import { registerWojownik, maZdolnosc, trikKaskadera, synchronizujOC } from "./wojownik.mjs";
 import * as geometria from "./geometria.mjs";
+import { registerSkalaIstot, skalaIstotApi } from "../scenes/skala-istot.mjs";
 
 /**
  * D20: wspólny stan (paliwo, PW, awarie, pamięć obsady) ma tylko aktor powiązany, a karta drużyny czyta paliwo z
@@ -87,6 +91,8 @@ function registerOstrzezenia() {
 
 export function registerPojazdy() {
   registerOstrzezenia();
+  // Skala grafiki istot (D42): ustawienie świata czytane przez podklasę żetonu z `zeton.mjs`.
+  registerSkalaIstot();
   registerZetonPojazdu();
   registerJadacy();
   registerObsada();
@@ -107,8 +113,10 @@ export function registerPojazdy() {
 }
 
 export const pojazdyApi = {
-  geometria,
+  geometria, skalaIstot: skalaIstotApi,
   danePojazdu, miejscaPojazdu, miejsceOId, jadacyPojazdu, pojazdJadacego, jestPojazdem,
+  profilNosnika, jestNosnikiem, daneNosnika, miejscaNosnika, miejsceNosnika, nosnikJadacego, STREFY_SIODLA,
+  kartaUtrzymania, spadnijZWierzchowca, oznaczeniaDosiadania, wyszkolonyDla, maJezdzca,
   kratkaPojazdu, skalaPojazdu, trybSceny, wymiaryZetonu, rozmiarMiejsca, niepowiazanyPojazdDruzyny,
   obsadaPojazdu, pamiecPoUzgodnieniu, brakujacaObsada, posadzObsade, czekaNaWklejenie,
   instrukcjePoRuchu, przeswietlany, mozePrzeswietlic,
@@ -126,7 +134,7 @@ export const pojazdyApi = {
   /** MG: posadzenie od razu, bez kosztów i kart (testy, Poligon). */
   async posadz(pojazd, jadacy, miejsce) {
     const zajete = zajeteMiejsca(pojazd);
-    const ms = miejscaPojazdu(pojazd.actor);
+    const ms = miejscaNosnika(pojazd.actor, pojazd);
     const cel = ms.find(m => m.id === miejsce) ?? ms.find(m => !zajete.has(m.id));
     if (!cel) throw new Error("Brak wolnego miejsca.");
     await posadzGM(pojazd, jadacy, cel);

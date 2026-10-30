@@ -13,20 +13,22 @@
  */
 
 import {
-  PODWOZIA, KATALOG_POJAZDOW, CECHY_POJAZDOW, cechyPojazdu, rozmiarPojazdu, ST_NA_KROTKO
+  PODWOZIA, KATALOG_POJAZDOW, CECHY_POJAZDOW, cechyPojazdu, rozmiarPojazdu, ST_NA_KROTKO, SKALA_POJAZDOW, obrysWSkali
 } from "../config/vehicles-data.mjs";
 import {
   kwadrant, obrysPrzyObrocie, obrysZamieniony, obroc, ukladMiejsc, srodekMiejsca, naroznikDlaSrodka,
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
-import { kosztPrzesiadki } from "../pojazdy/jadacy.mjs";
+import { kosztPrzesiadki, oznaczeniaDosiadania } from "../pojazdy/jadacy.mjs";
 import { grafikaWiezy, kadrGrafikiMiejsc } from "../pojazdy/grafika.mjs";
 import {
-  kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu
+  kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu,
+  daneNosnika, jestPojazdem, miejscaNosnika, profilNosnika
 } from "../pojazdy/stan.mjs";
-import { skretyNaDrodze } from "../pojazdy/jazda.mjs";
+import { skretyNaDrodze, utrudnienieZGrzbietu } from "../pojazdy/jazda.mjs";
 import { OPCJA_SYNCHRONIZACJI } from "../pojazdy/historia.mjs";
 import { otwarteMiejsce, prezentacjaMiejsca, rozpoznawalnyJadacy, sortJadacego } from "../pojazdy/prezentacja.mjs";
+import { mnoznikGrafiki, przytnijSkale } from "../scenes/skala-istot.mjs";
 import { POZYCJE as POZYCJE_PALETY, budzetPalety, fazaZCzasu, wygasniecie } from "../pojazdy/paleta.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -151,6 +153,19 @@ export function registerPojazdyTests(quench) {
         expect(sortJadacego(200, 100, p)).to.equal(200);
         expect(sortJadacego(200, 100, { warstwa: "pod" })).to.equal(99);
       });
+
+      it("S1: na siodle przednie miejsce rysuje się nad tylnym, cała obsada między nośnikiem a następną liczbą", function () {
+        const p = { warstwa: "nad" };
+        const [kier, pas] = ukladMiejsc(KATALOG_POJAZDOW.motocykl.obrys, KATALOG_POJAZDOW.motocykl.strefy);
+        expect(kier.y).to.be.above(pas.y);
+        const sk = sortJadacego(101, 100, p, kier), sp = sortJadacego(101, 100, p, pas);
+        expect(sk).to.be.above(sp);
+        for (const s of [sk, sp]) expect(s).to.be.at.least(101).and.below(102);
+        // Autobus: najdalszy przód i tył mieszczą się w ułamku.
+        const bus = ukladMiejsc(KATALOG_POJAZDOW.autobus.obrys, KATALOG_POJAZDOW.autobus.strefy);
+        for (const m of bus) expect(sortJadacego(101, 100, p, m)).to.be.at.least(101).and.below(102);
+        expect(sortJadacego(99, 100, { warstwa: "pod" }, kier)).to.be.below(100);
+      });
     });
 
     describe("Paleta kierowcy (D41, K1)", function () {
@@ -202,6 +217,94 @@ export function registerPojazdyTests(quench) {
         for (const [id, c] of Object.entries(CECHY_POJAZDOW)) {
           if (c.czas && id !== "przerzutka") expect(zPalety.has(id), `cecha ${id} (${c.czas}) bez pozycji palety`).to.equal(true);
         }
+      });
+    });
+
+    describe("Nośnik — wierzchowiec (§6.3, W1–W4)", function () {
+      const MOD = MODULE_ID;
+      const kon = (w = { wyszkolony: true }, extra = {}) => ({ type: "npc", flags: { [MOD]: { wierzchowiec: w } },
+        prototypeToken: { width: 2, height: 2 }, system: { traits: { size: "lg" } }, ...extra });
+
+      it("profil: pojazd z podwoziem, istota z flagą wierzchowca; pojemnik i zwykła istota — nic", function () {
+        expect(profilNosnika(kon())).to.equal("wierzchowiec");
+        expect(profilNosnika({ type: "vehicle", flags: { [MOD]: { pojazd: { podwozie: "osobowka" } } } })).to.equal("pojazd");
+        expect(profilNosnika({ type: "vehicle", flags: {} })).to.equal(null);
+        expect(profilNosnika({ type: "npc", flags: {} })).to.equal(null);
+        // Stare nazwy zostają węższe: koń nie jest pojazdem (silnik, awarie, wrak go nie widzą).
+        expect(jestPojazdem(kon())).to.equal(false);
+      });
+
+      it("obrys z rozmiaru (koń Duży 2 × 2), siodło na środku: jeździec z przodu, pasażer za nim, oba otwarte", function () {
+        const d = daneNosnika(kon());
+        expect(d.obrys).to.deep.equal({ w: 2, h: 2 });
+        const [j, p] = miejscaNosnika(kon());
+        expect(j.kierowca).to.equal(true);
+        expect(j.x).to.equal(0);
+        expect(p.x).to.equal(0);
+        expect(j.y).to.be.above(p.y);
+        expect(otwarteMiejsce(j) && otwarteMiejsce(p)).to.equal(true);
+        // Własne strefy we fladze (muł z jednym siodłem — W-P2).
+        const mul = kon({ wyszkolony: true, strefy: [{ id: "siodlo", nazwa: "Siodło", od: 0.5, do: 0.5, rzedy: [1], kolumny: [[0.5]] }] });
+        expect(miejscaNosnika(mul)).to.have.length(1);
+      });
+
+      it("oznaczenia dosiadania: o rozmiar większy, wyszkolony albo ujeżdżony przez jeźdźca, jedna wolna ręka (D43)", function () {
+        const jezdziec = { uuid: "Actor.a", system: { traits: { size: "med" } } };
+        expect(oznaczeniaDosiadania(kon(), jezdziec, { wolneRece: 1 })).to.have.length(0);
+        expect(oznaczeniaDosiadania(kon(), jezdziec, { wolneRece: 0 })).to.have.length(1);
+        expect(oznaczeniaDosiadania(kon(), jezdziec, { wolneRece: 0, jezdziecZdolnosc: true })).to.have.length(0);
+        expect(oznaczeniaDosiadania(kon({ wyszkolony: false }), jezdziec, { wolneRece: 2 })).to.have.length(1);
+        expect(oznaczeniaDosiadania(kon({ wyszkolony: false, ujezdzony: ["Actor.a"] }), jezdziec, { wolneRece: 2 })).to.have.length(0);
+        expect(oznaczeniaDosiadania({ ...kon(), system: { traits: { size: "med" } } }, jezdziec, { wolneRece: 2 })).to.have.length(1);
+        // Pasażer: ani ręce, ani wyszkolenie.
+        expect(oznaczeniaDosiadania(kon({ wyszkolony: false }), jezdziec, { kierujacy: false, wolneRece: 0 })).to.have.length(0);
+      });
+
+      it("atak z grzbietu jadącego wierzchowca: bez Tresury — Utrudnienie; Jeździec i Ale jazda! znoszą dla dystansowych", function () {
+        const a = (tre = 0, items = []) => ({ system: { skills: { tre: { value: tre } } }, items });
+        expect(utrudnienieZGrzbietu(a())).to.equal(true);
+        expect(utrudnienieZGrzbietu(a(1))).to.equal(false);
+        expect(utrudnienieZGrzbietu(a(), { jedzie: false })).to.equal(false);
+        const jezdziec = a(0, [{ flags: { [MOD]: { abilityId: "jezdziec" } } }]);
+        expect(utrudnienieZGrzbietu(jezdziec)).to.equal(false);
+        expect(utrudnienieZGrzbietu(jezdziec, { wrecz: true })).to.equal(true);
+        expect(utrudnienieZGrzbietu(a(0, [{ flags: { [MOD]: { originAbilityId: "ale-jazda" } } }]))).to.equal(false);
+      });
+
+      it("paleta wierzchowca: Bieganie +2×, Przyspieszenie +1×, Unikanie ze statusem; bez pozycji pojazdu", function () {
+        expect(budzetPalety([{ id: "bieganie" }])).to.include({ ruch: 2, bieganie: true });
+        expect(budzetPalety([{ id: "przyspieszenie" }]).ruch).to.equal(1);
+        expect(POZYCJE_PALETY.unikanie.statusy).to.deep.equal(["dodging"]);
+        const ids = Object.entries(POZYCJE_PALETY).filter(([, d]) => d.wierzchowiec).map(([id]) => id);
+        expect(ids).to.deep.equal(["bieganie", "przyspieszenie", "odstapienie", "unikanie"]);
+      });
+    });
+
+    describe("Skala grafiki istot (D42, S1)", function () {
+      const z = (type, flags = {}) => ({ actor: { type, flags } });
+
+      it("f dostają postacie i BN (także wierzchowce i maszyny); pojazdy, drużyny, obiekty i żetony bez aktora — 1", function () {
+        expect(mnoznikGrafiki(z("character"), 0.7)).to.equal(0.7);
+        expect(mnoznikGrafiki(z("npc"), 0.7)).to.equal(0.7);
+        expect(mnoznikGrafiki(z("npc", { [MODULE_ID]: { wierzchowiec: { wyszkolony: true } } }), 0.7)).to.equal(0.7);
+        expect(mnoznikGrafiki(z("vehicle"), 0.7)).to.equal(1);
+        expect(mnoznikGrafiki(z("group"), 0.7)).to.equal(1);
+        expect(mnoznikGrafiki(z("npc", { [MODULE_ID]: { obiekt: { bazowy: true } } }), 0.7)).to.equal(1);
+        expect(mnoznikGrafiki({ actor: null }, 0.7)).to.equal(1);
+        expect(mnoznikGrafiki(null, 0.7)).to.equal(1);
+      });
+
+      it("wartość przycięta do zakresu 0,5–1; śmieci i zero — bez zmian", function () {
+        expect(przytnijSkale(0.6)).to.equal(0.6);
+        expect(przytnijSkale(0.2)).to.equal(0.5);
+        expect(przytnijSkale(1.4)).to.equal(1);
+        for (const v of [0, -1, NaN, "x", null, undefined]) expect(przytnijSkale(v), String(v)).to.equal(1);
+      });
+
+      it("ustawienie świata zarejestrowane, domyślnie 0,8 — wybór MG po spike'u S0 (D42, D45)", function () {
+        const s = game.settings.settings.get(`${MODULE_ID}.skalaGrafikiIstot`);
+        expect(s?.scope).to.equal("world");
+        expect(s?.default).to.equal(0.8);
       });
     });
 
@@ -391,21 +494,22 @@ export function registerPojazdyTests(quench) {
       });
       const osobowka = { type: "vehicle", flags: { [MODULE_ID]: { pojazd: { podwozie: "osobowka" } } } };
 
-      it("mapy kampanii 1,5 m (64 i 70 px): kratka pojazdu = kratka sceny, obrys bez zmian", function () {
+      it("mapy kampanii 1,5 m (64 i 70 px): kratka pojazdu = kratka sceny, obrys katalogu ×1,1 (D45)", function () {
         for (const px of [64, 70]) {
           const s = scena(px, 1.5);
           expect(kratkaPojazdu(s)).to.equal(px);
           expect(skalaPojazdu(s)).to.equal(1);
           expect(trybSceny(s)).to.equal("taktyczna");
-          expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 1.5, h: 3 });
+          expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 1.65, h: 3.3 });
+          expect(SKALA_POJAZDOW, "D45: mnożnik pojazdów").to.equal(1.1);
         }
       });
 
       it("siatka 3 m: pojazd ma połowę kratek, miejsce ćwierć kratki — ta sama wielkość w metrach", function () {
         const s = scena(70, 3);
         expect(kratkaPojazdu(s)).to.equal(35);
-        expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 0.75, h: 1.5 });
-        expect(wymiaryZetonu(osobowka, s, 90), "bokiem").to.deep.equal({ w: 1.5, h: 0.75 });
+        expect(wymiaryZetonu(osobowka, s, 0)).to.deep.equal({ w: 0.825, h: 1.65 });
+        expect(wymiaryZetonu(osobowka, s, 90), "bokiem").to.deep.equal({ w: 1.65, h: 0.825 });
         expect(rozmiarMiejsca(s)).to.equal(0.25);
         expect(trybSceny(s)).to.equal("taktyczna");
       });
@@ -520,7 +624,7 @@ export function registerPojazdyTests(quench) {
           expect(a.system.attributes.ac.value, `${a.name} TT`).to.equal(p.tt);
           expect(a.system.attributes.movement.speeds.walk, `${a.name} Szybkość (dnd5e 6: speeds.walk)`).to.equal(p.szybkosc ?? 0);
           expect(a.system.traits.size, `${a.name} rozmiar`).to.equal(rozmiarPojazdu(id));
-          expect([a.prototypeToken.width, a.prototypeToken.height], `${a.name} obrys`).to.deep.equal([k.obrys.w, k.obrys.h]);
+          expect([a.prototypeToken.width, a.prototypeToken.height], `${a.name} obrys`).to.deep.equal([obrysWSkali(k.obrys).w, obrysWSkali(k.obrys).h]);
           expect(a.prototypeToken.lockRotation).to.be.false;
           expect(a.items.size, `${a.name} cechy`).to.equal(k.cechy.length);
         }

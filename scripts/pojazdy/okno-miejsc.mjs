@@ -6,12 +6,12 @@
  * z prawem prześwietlenia albo dla widocznego jadącego na otwartym miejscu (D3, D32).
  */
 
-import { danePojazdu, jazdaZetonu, miejscaPojazdu, pojazdJadacego, MODULE_ID } from "./stan.mjs";
+import { daneNosnika, danePojazdu, jazdaZetonu, jestNosnikiem, miejscaNosnika, nosnikJadacego, profilNosnika, MODULE_ID } from "./stan.mjs";
 import { mozePrzeswietlic } from "./zeton.mjs";
 import { grafikaWnetrza, kadrGrafikiMiejsc } from "./grafika.mjs";
 import { rozpoznawalnyJadacy } from "./prezentacja.mjs";
 import {
-  jedzie, kierowcaPojazdu, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
+  jedzie, kartaUtrzymania, kierowcaPojazdu, kosztPrzesiadki, odlegloscOdPojazdu, opisMiejsca, przesiadz, wsiadz, wysiadz, zajeteMiejsca,
   ZASIEG_WSIADANIA_M, ST_PRZESIADKI
 } from "./jadacy.mjs";
 import { maSilnik, przelaczSwiatla, stanSilnika, uruchom, zgas } from "./silnik.mjs";
@@ -45,7 +45,7 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
 
   async _renderHTML() {
     const p = this.pojazd;
-    const dane = danePojazdu(p.actor);
+    const dane = daneNosnika(p.actor, p);
     const div = document.createElement("div");
     div.className = "neuro-miejsca";
     if (!dane) {
@@ -59,13 +59,13 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     const zajete = zajeteMiejsca(p);
     // Żeton mógł zostać usunięty lub utracić własność, gdy okno było otwarte.
     const j = this.jadacy = p.parent.tokens.find(t => t === this.jadacy && t.actor && t.isOwner) ?? null;
-    const wTym = j && pojazdJadacego(j)?.id === p.id;
+    const wTym = j && nosnikJadacego(j)?.id === p.id;
     const moje = wTym ? jazdaZetonu(j).miejsce : null;
-    const z = moje ? miejscaPojazdu(p.actor).find(m => m.id === moje) : null;
+    const z = moje ? miejscaNosnika(p.actor, p).find(m => m.id === moje) : null;
     const wRuchu = jedzie(p);
     const rozmiarKropki = Math.max(22, Math.min(40, skala * 0.42));
 
-    const miejsca = miejscaPojazdu(p.actor).map(m => {
+    const miejsca = miejscaNosnika(p.actor, p).map(m => {
       const t = zajete.get(m.id);
       const rozpoznany = rozpoznawalnyJadacy(m, t, widac);
       const left = 50 + m.x / dane.obrys.w * 100;
@@ -138,9 +138,9 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
     if (!j.isOwner) return ui.notifications.warn("To nie twój żeton.");
     this.wTrakcie = true;
     try {
-      if (pojazdJadacego(j)?.id === this.pojazd.id) await przesiadz(j, id, { tryb: this.tryb });
+      if (nosnikJadacego(j)?.id === this.pojazd.id) await przesiadz(j, id, { tryb: this.tryb });
       else await wsiadz(this.pojazd, j, id);
-      if (pojazdJadacego(j)?.id === this.pojazd.id && jazdaZetonu(j)?.miejsce === id) await this.close();
+      if (nosnikJadacego(j)?.id === this.pojazd.id && jazdaZetonu(j)?.miejsce === id) await this.close();
     } finally {
       this.wTrakcie = false;
       if (this.rendered) {
@@ -158,7 +158,7 @@ class OknoMiejsc extends foundry.applications.api.ApplicationV2 {
 
 /** Jeden zaznaczony własny żeton postaci; bez zaznaczenia — jednoznaczny żeton postaci użytkownika. */
 export function zetonUzytkownika(scena) {
-  const mozeWsiadac = d => d.actor && d.isOwner && !danePojazdu(d.actor);
+  const mozeWsiadac = d => d.actor && d.isOwner && !jestNosnikiem(d.actor);
   const zazn = canvas.tokens?.controlled.map(t => t.document).filter(d => d.parent === scena && mozeWsiadac(d)) ?? [];
   if (zazn.length) return zazn.length === 1 ? zazn[0] : null;
   const postac = game.user.character;
@@ -218,10 +218,18 @@ function _onRenderTokenHUD(hud, html) {
     }
     return;
   }
-  const pojazd = pojazdJadacego(doc);
+  // Wierzchowiec (W2): Dosiądź — to samo okno miejsc (siodło i pasażer); paleta jeźdźca — W3.
+  if (profilNosnika(doc.actor) === "wierzchowiec") {
+    kol.append(_przycisk("fa-solid fa-horse", "Dosiądź — siodło albo za jeźdźcem (s. 257)", () => otworzMiejsca(doc)));
+    if (doc.actor.isOwner) kol.append(_przycisk("fa-solid fa-steering-wheel", "Paleta jeźdźca — akcje wierzchowca (s. 257)", () => otworzPalete(doc)));
+    if (game.user.isGM) kol.append(_przycisk("fa-solid fa-arrows-left-right-to-line", "Szarpnięty wbrew woli — RO ZRC jeźdźców (s. 257)",
+      () => kartaUtrzymania(doc, { powod: `${doc.name} przemieszczony wbrew woli` })));
+  }
+  const pojazd = nosnikJadacego(doc);
   if (pojazd && doc.isOwner) {
+    const kon = profilNosnika(pojazd.actor) === "wierzchowiec";
     kol.append(_przycisk("fa-solid fa-chair", `Miejsca w ${pojazd.name} — przesiądź się`, () => otworzMiejsca(pojazd, doc)));
-    kol.append(_przycisk("fa-solid fa-door-open", `Wysiądź z ${pojazd.name}`, () => wysiadz(doc)));
+    kol.append(_przycisk(kon ? "fa-solid fa-person-walking-arrow-right" : "fa-solid fa-door-open", kon ? `Zsiądź z ${pojazd.name}` : `Wysiądź z ${pojazd.name}`, () => wysiadz(doc)));
     if (mozeZaKierowca(doc)) kol.append(_przycisk("fa-solid fa-person-arrow-down-to-line", "Za kierowcą — tura tuż po kierowcy, raz na walkę (s. 266)", () => zaKierowca(doc)));
     if (kierowcaPojazdu(pojazd)?.id === doc.id) kol.append(_przycisk("fa-solid fa-steering-wheel", `Paleta kierowcy — ${pojazd.name}`, () => otworzPalete(pojazd)));
     if (jedzie(pojazd)) kol.append(_przycisk("fa-solid fa-person-falling", "Przed atakiem: ZRC (Akrobatyka) ST 10 (s. 261)", () => akrobatykaPrzedAtakiem(doc)));

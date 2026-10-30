@@ -204,6 +204,20 @@ export function ttBezruchu(p) {
  *
  * @type {Record<string, object>}
  */
+/**
+ * Mnożnik obrysu pojazdów (PLAN_m4_pojazdy D45, MG 2026-10-30 po spike'u S0): pojazdy rysują się i zajmują pole ×1,1
+ * prawdziwej skali, a istoty ×0,8 (`skalaGrafikiIstot`, D42) — razem różnica skali człowiek–auto maleje bez przesady w
+ * żadną stronę. Obrysy w katalogu zostają w prawdziwych metrach; mnożnik nakłada `danePojazdu` (`pojazdy/stan.mjs`) i
+ * paczka (`dev/packs/build-pojazdy.mjs`). Miejsca, rura i grafika są w ułamkach obrysu — idą za nim. Cofnięcie = 1.
+ */
+export const SKALA_POJAZDOW = 1.1;
+
+/** Obrys `{w, h}` w kratkach 1,5 m po mnożniku D45. Czysta. */
+export function obrysWSkali(obrys, skala = SKALA_POJAZDOW) {
+  const r = v => Math.round(v * skala * 1000) / 1000;
+  return { w: r(obrys.w), h: r(obrys.h) };
+}
+
 export const KATALOG_POJAZDOW = {
   osobowka: {
     rozmiar: "huge", obrys: { w: 1.5, h: 3 }, silnik: "benzyna", rura: [0.30, 0.03],

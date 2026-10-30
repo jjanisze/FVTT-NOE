@@ -77,6 +77,80 @@ async function seatWindow(s) {
     cabin: root.querySelector(`[data-miejsce="${s.cabinSeat}"]`)?.dataset.tooltip ?? "" };
 }
 
+/**
+ * S1 (D42): on every chassis the rider's mesh equals the same figure's mesh beside the vehicle — after boarding, a
+ * move with a turn and a seat change — and the creature multiplier scales both alike. Texture scale is never written.
+ */
+async function riderScale() {
+  const M = "neuroshima-2026-overrides", P = game.neuroshima.pojazdy;
+  const { KATALOG_POJAZDOW } = await import("/modules/" + M + "/scripts/config/vehicles-data.mjs");
+  const src = "systems/dnd5e/tokens/humanoid/Guard.webp";
+  const person = await Actor.implementation.create({ name: "Skala jadącego S1", type: "character", img: src,
+    system: { attributes: { hp: { value: 10, max: 10 } } },
+    prototypeToken: { width: 1, height: 1, texture: { src, scaleX: 0.8, scaleY: 0.8 },
+      ring: { enabled: false }, sight: { enabled: false }, displayName: 0 } });
+  const r = canvas.dimensions.sceneRect, g = canvas.grid.size;
+  const at = { x: Math.round(r.x + r.width / 2 - 2 * g), y: Math.round(r.y + r.height / 2) };
+  const mesh = doc => ({ w: Math.round(doc.object?.mesh?.width ?? -1), h: Math.round(doc.object?.mesh?.height ?? -1) });
+  const settle = async (rider, ref) => {
+    for (let i = 0; i < 40; i++) {
+      await new Promise(res => requestAnimationFrame(res));
+      const a = mesh(rider), b = mesh(ref);
+      if (a.w === b.w && a.h === b.h) break;
+    }
+    return { rider: mesh(rider), ref: mesh(ref), scale: rider.texture.scaleX };
+  };
+  const out = [];
+  const [ref] = await canvas.scene.createEmbeddedDocuments("Token",
+    [(await person.getTokenDocument({ x: at.x - 3 * g, y: at.y })).toObject()]);
+  for (const id of Object.keys(KATALOG_POJAZDOW)) {
+    const a = await P.utworzZKatalogu(id, { nazwa: "S1 " + id });
+    const [v] = await canvas.scene.createEmbeddedDocuments("Token",
+      [(await a.getTokenDocument({ x: at.x, y: at.y - g, rotation: 0 })).toObject()]);
+    const [rider] = await canvas.scene.createEmbeddedDocuments("Token",
+      [(await person.getTokenDocument({ x: at.x - 4.5 * g, y: at.y })).toObject()]);
+    const seats = P.miejscaPojazdu(a);
+    await P.posadz(v, rider, seats[0].id);
+    const seated = await settle(rider, ref);
+    await canvas.scene.moveTokens({ [v.id]: { destination: { x: at.x + g, y: at.y, rotation: 90, action: "displace" } } },
+      { animate: false, showRuler: false, method: "api" });
+    const turn = P.geometria.normalizujKat(90 + (rider.getFlag(M, "jazda")?.obrot ?? 0));
+    await window.__e2e.until(() => Math.abs(rider._source.rotation - turn) < 1, { message: id + ": rider turned with the vehicle" });
+    const turned = await settle(rider, ref);
+    let changed = null;
+    if (seats.length > 1) {
+      await P.posadz(v, rider, seats.at(-1).id);
+      changed = await settle(rider, ref);
+    }
+    out.push({ id, doc: rider.width, seated, turned, changed });
+    // Vehicle and its rider deleted in one operation: nobody unseats the already-deleted rider.
+    await canvas.scene.deleteEmbeddedDocuments("Token", [rider.id, v.id]);
+    await a.delete();
+  }
+  // f = 0.7: both figures shrink alike; documents untouched.
+  const moto = await P.utworzZKatalogu("motocykl", { nazwa: "S1 f" });
+  const [v] = await canvas.scene.createEmbeddedDocuments("Token",
+    [(await moto.getTokenDocument({ x: at.x, y: at.y })).toObject()]);
+  const [rider] = await canvas.scene.createEmbeddedDocuments("Token",
+    [(await person.getTokenDocument({ x: at.x - 4.5 * g, y: at.y })).toObject()]);
+  await P.posadz(v, rider, P.miejscaPojazdu(v.actor)[0].id);
+  const base = await settle(rider, ref);
+  const f0 = game.settings.get(M, "skalaGrafikiIstot"), f1 = 0.6;
+  await game.settings.set(M, "skalaGrafikiIstot", f1);
+  for (let i = 0; i < 40 && mesh(ref).w === base.ref.w; i++) await new Promise(res => requestAnimationFrame(res));
+  const small = await settle(rider, ref);
+  await game.settings.set(M, "skalaGrafikiIstot", f0);
+  const f = { base, small, f0, f1, domyslne: game.settings.settings.get(M + ".skalaGrafikiIstot").default, refDoc: ref.width, vehicle: Math.round(v.object.mesh.width), riderDoc: rider.width };
+  const vehicleSame = await (async () => {
+    for (let i = 0; i < 40 && mesh(ref).w !== base.ref.w; i++) await new Promise(res => requestAnimationFrame(res));
+    return Math.round(v.object.mesh.width) === f.vehicle;
+  })();
+  await canvas.scene.deleteEmbeddedDocuments("Token", [rider.id, v.id, ref.id]);
+  await moto.delete();
+  await person.delete();
+  return { out, f, vehicleSame };
+}
+
 export default {
   name: "pojazd-prezentacja",
   clients: ["gm", "Gracz 1", "Gracz 2"],
@@ -145,7 +219,7 @@ export default {
         const P = game.neuroshima.pojazdy, v = canvas.scene.tokens.get(s.vehicle), g = canvas.scene.tokens.get(s.gunner);
         const m = P.miejsceOId(v.actor, s.hatch), expected = P.geometria.srodekMiejsca(v.getCenterPoint(), v.rotation, m, v.parent.grid.size);
         const actual = g.getCenterPoint();
-        return v.width === 3 && v.height === 1.5 && Math.hypot(expected.x - actual.x, expected.y - actual.y) < 2
+        return v.width === 3.3 && v.height === 1.65 && Math.hypot(expected.x - actual.x, expected.y - actual.y) < 2
           && g.object.mesh.sort > v.object.mesh.sort && g.object.visible;
       }, { args: [s], message: "turned vehicle and relative rendering order" });
       t.equal((await observer.eval(state, s)).crew[4].sort, before, "relative display order does not rewrite rider sort");
@@ -180,6 +254,73 @@ export default {
         return d.width === 1 && !game.neuroshima.pojazdy.pojazdJadacego(d) && d.object.visible; },
         { args: [s], message: "disembarked normal token" });
       t.equal(await observer.eval(id => canvas.scene.tokens.get(id).sort, s.gunner), s.originalGunnerSort, "exit restores original sort");
+    });
+    await t.step("K2: the hatch gunner holds the mounted Browning with both hands; it goes back to the Hammer on a seat change", async () => {
+      const r = await t.gm.eval(async s => {
+        const M = "neuroshima-2026-overrides", P = game.neuroshima.pojazdy;
+        const { freeHands, heldItems } = await import("/modules/" + M + "/scripts/actors/doll.mjs");
+        const v = canvas.scene.tokens.get(s.vehicle), g = canvas.scene.tokens.get(s.gunner);
+        const pack = game.packs.get(M + ".bron");
+        const src = (await pack.getDocuments()).find(i => /browning/i.test(i.name));
+        const [b] = await v.actor.createEmbeddedDocuments("Item", [game.items.fromCompendium(src)]);
+        await P.posadz(v, g, s.hatch);
+        await P.zamontujOdReki(v, b, s.hatch);
+        await window.__e2e.until(() => g.actor.items.some(i => i.getFlag(M, "zamontowana")), { message: "weapon with the gunner" });
+        const mg = g.actor.items.find(i => i.getFlag(M, "zamontowana"));
+        const naStanowisku = { equipped: mg.system.equipped, free: freeHands(g.actor),
+          held: heldItems(g.actor).map(h => h.item?.name ?? h.occupant?.kind ?? null) };
+        await P.posadz(v, g, s.cabinSeat);
+        await window.__e2e.until(() => !g.actor.items.some(i => i.getFlag(M, "zamontowana")), { message: "weapon back on the vehicle" });
+        const wKabinie = { free: freeHands(g.actor), naPojezdzie: v.actor.items.some(i => /browning/i.test(i.name)) };
+        await P.wysadz(g);
+        return { naStanowisku, wKabinie };
+      }, s);
+      t.assert(r.naStanowisku.equipped, "mounted weapon stays equipped on the gunner", r.naStanowisku);
+      t.equal(r.naStanowisku.free, 0, "both hands on the gun");
+      t.assert(r.naStanowisku.held.includes("zamontowana"), "second hand shows the two-handed grip", r.naStanowisku.held);
+      t.equal(r.wKabinie.free, 2, "hands free again in the cabin");
+      t.assert(r.wKabinie.naPojezdzie, "Browning back in the Hammer");
+    });
+    await t.step("K3: mishap 5 blinds covered seats only; seat change, exit and repair reconcile; smoke region rides along", async () => {
+      const r = await t.gm.eval(async s => {
+        const M = "neuroshima-2026-overrides", P = game.neuroshima.pojazdy;
+        const v = canvas.scene.tokens.get(s.vehicle), g = canvas.scene.tokens.get(s.gunner), d = canvas.scene.tokens.get(s.driver);
+        const blind = doc => doc.actor.effects.some(e => e.flags?.[M]?.dymPojazdu === v.uuid && e.statuses.has("blinded"));
+        const region = () => canvas.scene.regions.find(x => x.flags?.[M]?.dymAwarii === v.id);
+        const wait = (fn, message) => window.__e2e.until(fn, { message });
+        await P.posadz(v, g, s.hatch);
+        await P.zastosujAwarie(v, 5);
+        await wait(() => blind(d) && region(), "driver blinded, region");
+        const start = { driver: blind(d), gunner: blind(g), attached: (region()?.attachment?.token?.id ?? region()?.attachment?.token) === v.id };
+        await P.posadz(v, g, s.cabinSeat);
+        await wait(() => blind(g), "gunner blinded in the cabin");
+        await P.wysadz(g);
+        await wait(() => !blind(g), "gunner out of the smoke");
+        const e = v.actor.effects.find(x => x.flags?.[M]?.awariaPojazdu?.k20 === 5);
+        await e.delete();
+        await wait(() => !blind(d) && !region(), "repair clears it");
+        return { start, cleared: true };
+      }, s);
+      t.assert(r.start.driver && !r.start.gunner, "cabin driver blinded, hatch gunner not", r.start);
+      t.assert(r.start.attached, "smoke region attached to the vehicle token");
+      t.assert(r.cleared, "seat change, exit and repair reconciled");
+    });
+    await t.step("S1: on all 14 chassis the rider is drawn as large as beside the vehicle; f scales both alike", async () => {
+      const r = await t.gm.eval(riderScale);
+      t.equal(r.out.length, 14, "fourteen chassis");
+      for (const c of r.out) {
+        const same = m => m && m.rider.w === m.ref.w && m.rider.h === m.ref.h && m.scale === 0.8;
+        t.assert(same(c.seated), `${c.id}: seated rider = figure outside, texture scale 0.8 kept`, c.seated);
+        t.assert(same(c.turned), `${c.id}: after a move with a 90° turn`, c.turned);
+        if (c.changed) t.assert(same(c.changed), `${c.id}: after a seat change`, c.changed);
+        t.equal(c.doc, 0.5, `${c.id}: the document stays half a vehicle square (click area, seat spacing)`);
+      }
+      const f = r.f;
+      t.assert(f.small.rider.w === f.small.ref.w && Math.abs(f.small.ref.w - f.base.ref.w * f.f1 / f.f0) <= 1,
+        "f 0.8 → 0.6: rider and outside figure shrink alike", f);
+      t.equal(f.domyslne, 0.8, "registered default f = 0.8 (D42, D45)");
+      t.equal(f.refDoc, 1, "outside figure document unchanged by f");
+      t.assert(r.vehicleSame, "vehicles keep their true scale under f");
     });
   }
 };

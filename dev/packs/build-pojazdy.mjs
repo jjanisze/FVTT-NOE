@@ -16,7 +16,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
-  PODWOZIA, KATALOG_POJAZDOW, CECHY_POJAZDOW, ROZMIAR_MASZYNY, cechyPojazdu, rozmiarPojazdu, ttBezruchu
+  PODWOZIA, KATALOG_POJAZDOW, CECHY_POJAZDOW, ROZMIAR_MASZYNY, cechyPojazdu, rozmiarPojazdu, ttBezruchu, obrysWSkali
 } from "../../scripts/config/vehicles-data.mjs";
 
 /** Stany, na które maszyna jest odporna: wszystkie poza Podpaleniem, Powaleniem i Unieruchomieniem (statbloki s. 262–264). */
@@ -148,7 +148,8 @@ export function szablonyPojazdow({ idFor, MODULE_ID, MODULE_ROOT }) {
           source: { custom: "Neuroshima RPG", book: "", page: "s. 262", rules: "2024" }
         },
         prototypeToken: {
-          name: p.nazwa, width: k.obrys.w, height: k.obrys.h, actorLink: false, disposition: 0, lockRotation: false,
+          // Obrys po mnożniku pojazdów (D45): prototyp mówi o mapie 1,5 m, scena przelicza go sama (§4.14).
+          name: p.nazwa, width: obrysWSkali(k.obrys).w, height: obrysWSkali(k.obrys).h, actorLink: false, disposition: 0, lockRotation: false,
           rotation: 0, displayName: 20, texture: { src: zeton, fit: "contain", scaleX: 1, scaleY: 1, anchorX: 0.5, anchorY: 0.5,
             ...(grafikaZetonu ? k.teksturaGrafiki : {}) },
           sight: { enabled: false, range: 0, angle: 360, visionMode: "basic" }, ring: { enabled: false }

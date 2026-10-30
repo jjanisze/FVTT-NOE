@@ -91,7 +91,7 @@ async function uruchomIJedz({ pojazd }) {
 async function poJezdzie({ pojazd, n0 }) {
   await window.__e2e.until(() => {
     const v = fromUuidSync(pojazd);
-    return v.width === 1.5 && v.height === 3;
+    return v.width === 1.65 && v.height === 3.3;
   }, { timeoutMs: 10000, message: "footprint swapped after the turn" });
   await window.__e2e.quiet({ idleMs: 800 });
   const nowe = game.messages.contents.slice(n0).map(m => m.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "));
@@ -198,7 +198,7 @@ export default {
       const r = await t.gm.eval(poJezdzie, { pojazd: s.pojazd, n0 });
       t.assert(/Skręt o \d+°/.test(r.jazda ?? ""), "turn test on the driving card", r.jazda);
       if (s.cywil) t.assert(/CYWIL/i.test(r.potracenie ?? ""), "the Cywil on the trampling card", r.potracenie);
-      t.equal(`${r.w}x${r.h}`, "1.5x3", "facing south: natural footprint");
+      t.equal(`${r.w}x${r.h}`, "1.65x3.3", "facing south: natural footprint (catalogue ×1,1, D45)");
       const m = await p2.eval(miejsceJadacego, { pojazd: s.pojazd, jadacy: s.jadacy });
       t.assert(m.odchylenie <= 2, "rider on the driver's seat after the turn (Gracz 2's client)", m.odchylenie);
       t.equal(m.widoczny, false, "still hidden for Gracz 2");

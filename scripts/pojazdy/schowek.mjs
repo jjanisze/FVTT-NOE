@@ -18,7 +18,8 @@
  */
 
 import {
-  MODULE_ID, FLAGA_JAZDA, jadacyPojazdu, jazdaZetonu, jestZetonemPojazdu, obrysDziala, rozmiarMiejsca
+  MODULE_ID, FLAGA_JAZDA, bliskie, jadacyPojazdu, jazdaZetonu, jestZetonemNosnika, obrysDziala, rozmiarMiejsca,
+  skalaPojazdu, zaokrKratki
 } from "./stan.mjs";
 import { instrukcjePoRuchu } from "./zeton.mjs";
 import { synchronizujZaloge, wysadzGM } from "./jadacy.mjs";
@@ -38,13 +39,24 @@ function dorzucJadacych() {
     const out = [...obiekty];
     const ids = new Set(out.map(o => o.document.id));
     for (const o of obiekty) {
-      if (!jestZetonemPojazdu(o.document)) continue;
+      if (!jestZetonemNosnika(o.document)) continue;
       for (const j of jadacyPojazdu(o.document)) {
         if (j.object && !ids.has(j.id)) { out.push(j.object); ids.add(j.id); }
       }
     }
     return out;
   };
+}
+
+/**
+ * Rozmiar sprzed wsiadania w kratkach sceny docelowej: flaga liczy go w kratkach sceny źródłowej, a postać ma te same
+ * metry na każdej siatce (człowiek 1 × 1 na 1,5 m to ½ × ½ na 3 m). Grafika jadącego rysuje się z tej liczby (S1).
+ */
+function przeskalujRozmiar(d, zrodlo, cel) {
+  const j = d.flags?.[MODULE_ID]?.[FLAGA_JAZDA];
+  const sz = skalaPojazdu(zrodlo), sc = skalaPojazdu(cel);
+  if (!j?.rozmiar || !(sz > 0) || !(sc > 0) || bliskie(sz, sc)) return;
+  j.rozmiar = { w: zaokrKratki(j.rozmiar.w * sc / sz), h: zaokrKratki(j.rozmiar.h * sc / sz) };
 }
 
 /** Jadący bez swojego pojazdu w schowku: wraca do własnego rozmiaru, bez miejsca. */
@@ -61,12 +73,13 @@ function naWklejenie(objects, data, { cut }) {
   if (!cel || !zrodlo) return;
   if (cut && zrodlo === cel) return; // aktualizacja z zachowanymi id
   const pojazdy = new Map();
-  objects.forEach((o, i) => { if (jestZetonemPojazdu(o.document)) pojazdy.set(o.document.id, i); });
+  objects.forEach((o, i) => { if (jestZetonemNosnika(o.document)) pojazdy.set(o.document.id, i); });
   const dziala = obrysDziala(cel);
   const doUsuniecia = [];
   for (let i = 0; i < objects.length; i++) {
     const j = jazdaZetonu(objects[i].document);
     if (!j) continue;
+    przeskalujRozmiar(data[i], zrodlo, cel);
     if (!pojazdy.has(j.pojazd)) { odepnij(data[i]); continue; }
     if (!dziala) { doUsuniecia.push(i); continue; }
     data[i].width = data[i].height = rozmiarMiejsca(cel);

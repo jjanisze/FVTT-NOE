@@ -168,6 +168,18 @@ RULES = {
 }
 
 # ------------------------------------------------------------------ #
+#  WIERZCHOWCE — istoty, które wiozą jeźdźca (PLAN_m4_pojazdy §6.3)   #
+# ------------------------------------------------------------------ #
+# Flaga `wierzchowiec` aktora: nośnik jadących (`scripts/pojazdy/stan.mjs`), wyszkolony — Inicjatywa jeźdźca i akcje
+# wierzchowca w palecie (s. 257). Inne istoty z siodłem (muł, neogator z Rodeo) dostają flagę od MG (W-P2).
+WIERZCHOWCE = {
+    "kon-zdrowy": {"wyszkolony": True},
+    "kon-skazony": {"wyszkolony": True},
+    "kon-teksanczyk": {"wyszkolony": True},
+}
+
+
+# ------------------------------------------------------------------ #
 #  AUTOMATION — per-creature overrides                                #
 # ------------------------------------------------------------------ #
 
@@ -334,6 +346,8 @@ def build_creature(cid, r):
         "features": [],
         "attacks": [],
     }
+    if cid in WIERZCHOWCE:
+        out["wierzchowiec"] = WIERZCHOWCE[cid]
 
     for f in r["features"]:
         out["features"].append({

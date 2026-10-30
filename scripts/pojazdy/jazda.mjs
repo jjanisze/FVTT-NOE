@@ -24,11 +24,11 @@ import { zarejestrujDomyslnaOslone } from "../combat/cover.mjs";
 import { change, CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { POTRACENIE_WG_ROZMIARU, ROZMIAR_MASZYNY, cechyPojazdu } from "../config/vehicles-data.mjs";
 import {
-  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, kratkaPojazdu, miejsceOId,
-  pojazdJadacego, trybSceny
+  MODULE_ID, danePojazdu, jadacyPojazdu, jazdaZetonu, jestPojazdem, jestZetonemPojazdu, kratkaPojazdu, miejsceNosnika,
+  miejsceOId, nosnikJadacego, pojazdJadacego, profilNosnika, trybSceny
 } from "./stan.mjs";
 import { obroc, roznicaKatow } from "./geometria.mjs";
-import { jedzie, kierowcaPojazdu, zapiszRuch } from "./jadacy.mjs";
+import { jedzie, kierowcaPojazdu, maJezdzca, wyszkolonyDla, zapiszRuch } from "./jadacy.mjs";
 import { maSilnik, stanSilnika } from "./silnik.mjs";
 import { aktywneAwariePojazdu, kartaObrazen } from "./awarie.mjs";
 import { jestWrakiem } from "./wrak.mjs";
@@ -91,7 +91,8 @@ export function skretyNaDrodze(startowy, punkty) {
 export function szybkoscPojazdu(pojazdDoc) {
   const actor = pojazdDoc.actor;
   const dane = danePojazdu(actor);
-  if (!dane) return 0;
+  // Wierzchowiec (W3, D43): własna Szybkość istoty; Rajdowiec dotyczy pojazdów.
+  if (!dane) return profilNosnika(actor) === "wierzchowiec" ? Math.round(Number(actor.system?.attributes?.movement?.speeds?.walk) || 0) : 0;
   if (!dane.katalog.silnik) {
     const kier = kierowcaPojazdu(pojazdDoc);
     const mnoznik = cechyPojazdu(dane.podwozie).some(c => c.id === "przerzutka") ? mnoznikPrzelozenia(actor) : 2;
@@ -185,8 +186,37 @@ async function _ruchNaPlanszy(doc, movement) {
     ostrzezenia: ostrz }), { actor: kier?.actor ?? actor, szept, flagi: { aktor: (kier?.actor ?? actor).uuid } });
 }
 
+/**
+ * Wierzchowiec (W3, D43, W-P3): ten sam budżet `tura.droga` co E5, na aktorze wierzchowca — Szybkość istoty plus akcja z
+ * palety (Przyspieszenie +1×, Bieganie +2×). Ślad ruchu (`zapiszRuch`) mówi, że wierzchowiec „jedzie” (atak z grzbietu).
+ */
+async function _ruchWierzchowca(doc, movement) {
+  if (movement.passed.waypoints.every(w => w.action === "displace")) return;
+  const walka = game.combat?.started && game.combat.scene === doc.parent ? game.combat : null;
+  if (!walka) return;
+  const actor = doc.actor;
+  await zapiszRuch(doc);
+  const jezdziec = kierowcaPojazdu(doc);
+  if (!jezdziec) return;
+  const kto = walka.combatant;
+  let t = _tura(actor);
+  if (!t || t.walka !== walka.id || t.runda !== walka.round || t.kombatant !== kto?.id) t = { walka: walka.id, runda: walka.round, kombatant: kto?.id, droga: 0 };
+  t.droga = Math.round((t.droga + (Number(movement.passed.distance) || 0)) * 10) / 10;
+  await actor.update({ [`flags.${MODULE_ID}.${FLAGA_TURA}`]: t });
+  const b = budzetJazdy(doc);
+  const ostrz = [];
+  if (wyszkolonyDla(actor, jezdziec.actor?.uuid) && kto?.tokenId !== jezdziec.id) ostrz.push(`Ruch poza turą jeźdźca (${jezdziec.name}) — wyszkolony wierzchowiec rusza się w jego turze (s. 257).`);
+  if (t.droga > b.limit + 0.1) ostrz.push(`Ponad Szybkość wierzchowca (${t.droga} > ${b.limit} m) — Przyspieszenie albo Bieganie z palety jeźdźca.`);
+  if (!ostrz.length) return;
+  await wyslijKarte(kartaPostoju({ ikona: doc.texture.src, tytul: `Jazda wierzchem: ${doc.name}`, rodzaj: "test",
+    linie: [`Droga w tej turze: <strong>${t.droga} m</strong> z ${b.limit} m${b.dodatkowy ? ` (${b.paleta.nazwy.join(", ")}: +${b.dodatkowy} m)` : ""}.`],
+    ostrzezenia: ostrz }), { actor: jezdziec.actor, szept: "gm" });
+}
+
 async function _onMoveToken(doc, movement, operation) {
-  if (!game.users.activeGM?.isSelf || !jestZetonemPojazdu(doc)) return;
+  if (!game.users.activeGM?.isSelf) return;
+  if (profilNosnika(doc.actor) === "wierzchowiec" && trybSceny(doc.parent) === "taktyczna") return _ruchWierzchowca(doc, movement);
+  if (!jestZetonemPojazdu(doc)) return;
   if (trybSceny(doc.parent) === "plansza") return _ruchNaPlanszy(doc, movement);
   // Karty jazdy tylko na mapie taktycznej; znacznik nie jedzie.
   if (trybSceny(doc.parent) !== "taktyczna") return;
@@ -400,6 +430,22 @@ export async function akrobatykaPrzedAtakiem(tokenDoc) {
   await tokenDoc.update({ [`flags.${MODULE_ID}.${FLAGA_AKROBATYKA}`]: { zdal: r.total >= 10, walka: c?.id ?? null, runda: c?.round ?? null, tura: c?.turn ?? null } });
 }
 
+/**
+ * Atak z grzbietu jadącego wierzchowca (W4, s. 257): bez biegłości w Tresurze — Utrudnienie. Jeździec (s. 97) znosi je dla
+ * ataków dystansowych, Ale jazda! (s. 61) — dla strzelania. „Jadący” — ruszył się w tej albo poprzedniej rundzie.
+ */
+export function utrudnienieZGrzbietu(actor, { jedzie: wRuchu = true, wrecz = false } = {}) {
+  if (!wRuchu || (Number(actor?.system?.skills?.tre?.value) || 0) >= 1) return false;
+  return wrecz || !(maJezdzca(actor) || actor?.items?.some(i => i.flags?.[MODULE_ID]?.originAbilityId === "ale-jazda"));
+}
+
+function _zrodloAtakuZGrzbietu({ attackerToken, wrecz }) {
+  const doc = attackerToken?.document ?? attackerToken;
+  const n = doc ? nosnikJadacego(doc) : null;
+  if (!n || profilNosnika(n.actor) !== "wierzchowiec" || !utrudnienieZGrzbietu(doc.actor, { jedzie: jedzie(n), wrecz })) return null;
+  return [{ rodzaj: "utrudnienie", label: "Atak z grzbietu jadącego wierzchowca bez biegłości w Tresurze (s. 257)", strona: "atakujący" }];
+}
+
 function _domyslnaOslonaJadacego(token) {
   const doc = token?.document;
   const p = doc ? pojazdJadacego(doc) : null;
@@ -518,8 +564,29 @@ async function _zderzenie(_ev, btn) {
 /*  Rejestracja                                  */
 /* -------------------------------------------- */
 
+/**
+ * Kotwica tury wierzchowca (D39, W3, W-U6): wyszkolony wierzchowiec z jeźdźcem w siodle działa w turze jeźdźca — Inicjatywa
+ * jeźdźca, własna tura pomijana. Niewyszkolony (W-U4) — bez kotwicy: ma swoją turę, steruje MG. Po zsiadaniu kotwica znika,
+ * wyrównana wartość zostaje.
+ */
+function _kotwicaWierzchowca(c) {
+  const tok = c.token;
+  if (!tok || profilNosnika(tok.actor) !== "wierzchowiec") return null;
+  const j = kierowcaPojazdu(tok);
+  if (!j || !wyszkolonyDla(tok.actor, j.actor?.uuid)) return null;
+  return c.parent.combatants.find(o => o.tokenId === j.id) ?? null;
+}
+
 export function registerJazda() {
   zarejestrujKotwice("zaKierowca", _kotwicaZaKierowca, { priorytet: PRIORYTET_KOTWICY.zaKierowca, wyrownaj: true });
+  zarejestrujKotwice("wierzchowiec", _kotwicaWierzchowca, {
+    priorytet: PRIORYTET_KOTWICY.wierzchowiec, wyrownaj: true, pomin: () => true,
+    karta: (c, k) => `<strong>${foundry.utils.escapeHTML(c.name)}</strong> jedzie z ${foundry.utils.escapeHTML(k.name)} — rusza się w turze jeźdźca (s. 257).`
+  });
+  // Dosiadanie i zsiadanie w walce zmienia kotwice: kolejność i Inicjatywa od razu (D39).
+  Hooks.on("neuroshima.pojazdZaloga", doc => {
+    if (profilNosnika(doc.actor) === "wierzchowiec" && game.combat?.started) odswiezKotwice(game.combat);
+  });
   // D9: pojazd nie wchodzi do trackera — działa w turze kierowcy.
   Hooks.on("preCreateCombatant", (combatant) => {
     if (!jestPojazdem(combatant.actor)) return;
@@ -537,6 +604,7 @@ export function registerJazda() {
   Hooks.on("updateCombat", (c, ch) => { _onUpdateCombat(c, ch).catch(err => console.error(`${MODULE_ID} | jazda: walka`, err)); });
   Hooks.on("deleteCombat", c => { _onDeleteCombat(c).catch(() => {}); });
   zarejestrujZrodloOkolicznosci("pojazdJadacy", _zrodloAtakuZPojazdu);
+  zarejestrujZrodloOkolicznosci("wierzchowiecJadacy", _zrodloAtakuZGrzbietu);
   zarejestrujDomyslnaOslone(_domyslnaOslonaJadacego);
   zarejestrujAkcje("pojazd.testKierowcy", _testKierowcy);
   zarejestrujAkcje("pojazd.potracony", _potracony);

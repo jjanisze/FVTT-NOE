@@ -488,12 +488,12 @@ export function registerPoscigTests(quench) {
         expect(dane.flags[MODULE_ID].poscig.wersja).to.equal(WERSJA_PLANSZY);
       });
 
-      it("pionek w prawdziwej skali, przodem w prawo: GMT400 leży poziomo (0,875 × 0,375 toru)", function () {
+      it("pionek w skali pojazdów (prawdziwa ×1,1, D45), przodem w prawo: GMT400 leży poziomo (0,9625 × 0,4125 toru)", function () {
         const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
         const scena = { grid: dane.grid, getFlag: (m, k) => dane.flags[m]?.[k] };
         const gmt = { type: "vehicle", getFlag: () => undefined,
           flags: { [MODULE_ID]: { pojazd: { podwozie: "hammer", obrys: { w: 1.5, h: 3.5 } } } } };
-        expect(wymiaryPionka(gmt, scena)).to.deep.equal({ w: 0.875, h: 0.375 });
+        expect(wymiaryPionka(gmt, scena)).to.deep.equal({ w: 0.9625, h: 0.4125 });
         // Pojazd spoza katalogu: prototyp w kratkach 1,5 m przeliczony na skalę planszy.
         const inny = { type: "vehicle", flags: {}, getFlag: () => undefined, prototypeToken: { width: 2, height: 1 } };
         expect(wymiaryPionka(inny, scena)).to.deep.equal({ w: 0.5, h: 0.25 });

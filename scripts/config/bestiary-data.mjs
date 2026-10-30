@@ -3713,7 +3713,10 @@ export const BESTIARY = {
     "tools": null,
     "typeNote": null,
     "usesZranienie": false,
-    "vulnerabilities": []
+    "vulnerabilities": [],
+    "wierzchowiec": {
+      "wyszkolony": true
+    }
   },
   "kon-teksanczyk": {
     "abilities": {
@@ -3800,7 +3803,10 @@ export const BESTIARY = {
     "tools": null,
     "typeNote": null,
     "usesZranienie": false,
-    "vulnerabilities": []
+    "vulnerabilities": [],
+    "wierzchowiec": {
+      "wyszkolony": true
+    }
   },
   "kon-zdrowy": {
     "abilities": {
@@ -3887,7 +3893,10 @@ export const BESTIARY = {
     "tools": null,
     "typeNote": null,
     "usesZranienie": false,
-    "vulnerabilities": []
+    "vulnerabilities": [],
+    "wierzchowiec": {
+      "wyszkolony": true
+    }
   },
   "konwojent-straznik": {
     "abilities": {

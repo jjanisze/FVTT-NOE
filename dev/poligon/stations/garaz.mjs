@@ -8,6 +8,7 @@
 import { p, manekin } from "./_wspolne.mjs";
 import { ustawGrafikePojazdu, zbudujPodgladyPojazdow, narzedziaGrafikiPojazdow } from "./garaz-grafika.mjs";
 import {zbudujPodgladyWrakow,narzedziaGrafikiWrakow} from './garaz-wraki.mjs';
+import { zbudujPodgladSkali, narzedziaSkali } from "./garaz-skala.mjs";
 
 export default {
   id: "garaz", name: "Garaż", prio: "P2", icon: "fa-solid fa-car-side",
@@ -16,7 +17,7 @@ export default {
     + "Kluczyki do Osobówki w stacyjce; Ciężarówka bez kluczyków (na krótko). Mechanik z narzędziami i surowcami do napraw. "
     + "Czternaście odtwarzalnych podglądów grafiki: Osobówka, Hammer, Motocykl, Ciężarówka, Buggy, Autobus, Traktor, Wóz strażacki, Buldożer, M2 Bradley, M1A1 Abrams, Motorower, Rower i Deskorolka; skróty na Karcie prób.",
   gracze: 3,
-  narzedzia: [...narzedziaGrafikiPojazdow,...narzedziaGrafikiWrakow],
+  narzedzia: [...narzedziaGrafikiPojazdow,...narzedziaGrafikiWrakow,...narzedziaSkali],
   async build(k) {
     const s = await k.scene("parking", { name: "Garaż · Parking", w: 48, h: 28, color: "#55524a", main: true });
     const P = game.neuroshima.pojazdy;
@@ -69,7 +70,8 @@ export default {
     } catch (err) { k.miss(`obsada: ${err.message}`); }
     const grafika = await zbudujPodgladyPojazdow(k);
     const wraki=await zbudujPodgladyWrakow(k);
-    return { pojazdy: Object.values(pojazdy).filter(Boolean).length, jadacy: osob ? P.jadacyPojazdu(osob).length : 0, grafika,wraki };
+    const skala = await zbudujPodgladSkali(k);
+    return { pojazdy: Object.values(pojazdy).filter(Boolean).length, jadacy: osob ? P.jadacyPojazdu(osob).length : 0, grafika,wraki, skala };
   },
   proby: [
     p('grafika-wraki','Wraki wszystkich pojazdów','Czternaście indywidualnych wraków obok sprawnych odpowiedników','Grafika: Wraki — wszystkie pojazdy. Porównaj każdą parę, obróć wrak i sprawdź, czy po najechaniu nie wraca wnętrze ani osobna wieża. Sprawny pojazd sprowadź do 0 PW; użyj Cofnij na karcie czatu MG. Abrams zachowuje skalę kadłuba i nawis lufy.'),
@@ -81,7 +83,7 @@ export default {
     p("grafika", "Grafika Osobówki", "Portret i dwa zgodne żetony: dach z bagażem oraz pusta kabina; wnętrze tylko z prawem prześwietlenia, miejsca na fotelach", "Nowa Osobówka z kompendium: najedź jako MG, kierowca i gracz z zewnątrz; odsuń kursor, obróć pojazd, otwórz Miejsca. Sprawdź też własną grafikę i pojazd bez wnętrza."),
     p("grafika-hammer", "Grafika Hammera", "Portret i zgodna para nadwozie/wnętrze: cztery koła, cztery fotele oraz centralne stanowisko pod włazem", "Scena Hammera: najedź na obsadzony pojazd, odsuń kursor i otwórz Miejsca. Porównaj z pustymi wersjami obok; sprawdź położenie włazu nad platformą i kotwice pięciu jadących. Po resecie podgląd używa rozmiaru katalogowego i źródłowych skal postaci dnd5e."),
     p("wlaz-widoczny", "Widoczny właz (D32)", "Strzelec włazu ma pełny żeton nad dachem, bez kropki; czterech pasażerów kabiny pozostaje zakrytych", "MG i obserwator: odsuń kursor, porównaj widok, wyceluj normalnie w strzelca. Najedź jako MG, obróć i przesuń pojazd. Przesiądź strzelca do kabiny i z powrotem; sprawdź okno Miejsca, ręczne ukrycie oraz wysiadkę. Grafiki bez zmian."),
-    p("skala-grafiki", "Skala grafiki", "Cztery koła na dwóch osiach; przednie miejsca bliżej foteli. Skala grafiki postaci i rozmiar auta oceniane osobno", "Porównaj zwykłych ludzi dnd5e z własną grafiką postaci i Gangusem Kapo. Przód na 63%/37% szerokości, tył na 67%/50%/33%; sprawdź także obrys auta powiększony o 20%.", "VETO"),
+    p("skala-grafiki", "Skala istot (S0, D42)", "Jadący rysuje się tak duży jak obok pojazdu; mnożnik f wszystkich istot zmniejsza różnicę skali z autami — wybierz f", "Skala istot (S0): kolumny f = 1 / 0,8 / 0,7 / 0,6 i dwie z powiększonymi pojazdami. Porównaj motocykl z pasażerem, deskorolkę, Osobówkę (najedź — kabina), ludzi dnd5e z pierścieniem i bez, NOE i konia. „Skala istot: tło mapy” kładzie pod spód mapę kampanii z narysowanymi autami (64 px na 1,5 m, przeciągnij kafelek); „zbuduj warianty” — inne liczby. Podaj f (i czy pojazdy mają rosnąć).", "VETO"),
     p("altklik", "Widok (D3)", "W prześwietleniu klik w jadącego zaznacza jadącego, Alt+klik — pojazd", "MG: najedź, kliknij jadącego, potem Alt+klik."),
     p("celowanie", "Widok (D14)", "Prawy klik w kropkę celuje w ukrytego jadącego; karta ataku podaje jego imię", "Gracz spoza pojazdu celuje w kropkę i strzela."),
     p("okno", "Miejsca (D4)", "Okno miejsc śledzi zaznaczony żeton postaci (MG: BG lub BN); koszty z RAW na karcie", "MG bez przypisanej postaci: HUD Osobówki → Miejsca, następnie zaznacz Mechanika na mapie i kliknij wolne miejsce. Powtórz dla BN, przesiądź się i wysiądź. Sprawdź zaznaczenie przed otwarciem, zmianę postaci w otwartym oknie, wiele zaznaczonych postaci i samo celowanie (nie wybiera pasażera)."),

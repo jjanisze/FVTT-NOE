@@ -199,7 +199,7 @@ export default {
       t.equal(b.tryb, "plansza", "board mode");
       t.equal(b.schowek.length, 2, "the rider joined the clipboard");
       t.equal(b.naMapie, 0, "car and rider left the map");
-      t.equal(`${b.px[0]}x${b.px[1]}`, "210x105", "Osobówka 3 × 1,5 squares facing right, 70 px per 1,5 m");
+      t.equal(`${b.px[0]}x${b.px[1]}`, "231x116", "Osobówka 3 × 1,5 squares ×1,1 (D45) facing right, 70 px per 1,5 m");
       t.equal(b.rot, 270, "facing right");
       t.equal(b.tor, 3, "on lane 3");
       t.equal(b.jadacyPx, 35, "rider at the seat size");

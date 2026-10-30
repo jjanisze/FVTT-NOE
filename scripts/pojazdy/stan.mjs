@@ -27,7 +27,7 @@
  * miejsc i jazdy — stan aktora działa dalej. Plansza pościgu ma własny tryb (`plansza`, PLAN §6.2).
  */
 
-import { KATALOG_POJAZDOW, PODWOZIA } from "../config/vehicles-data.mjs";
+import { KATALOG_POJAZDOW, PODWOZIA, obrysWSkali } from "../config/vehicles-data.mjs";
 import { ROZMIAR_MIEJSCA, obrysPrzyObrocie, ukladMiejsc } from "./geometria.mjs";
 
 export const MODULE_ID = "neuroshima-2026-overrides";
@@ -112,9 +112,16 @@ export function danePojazdu(actor) {
   const wlasne = actor.flags[MODULE_ID][FLAGA_POJAZD];
   return {
     podwozie, katalog, podstawa: PODWOZIA[podwozie],
-    obrys: wlasne.obrys ?? katalog.obrys,
+    obrys: _wSkali(wlasne.obrys ?? katalog.obrys),
     strefy: wlasne.strefy ?? katalog.strefy
   };
+}
+
+/** Obrys po mnożniku pojazdów (D45) — ten sam obiekt dla tego samego źródła, bo po nim pamięta się układ miejsc. */
+const _obrysySkali = new WeakMap();
+function _wSkali(obrys) {
+  if (!_obrysySkali.has(obrys)) _obrysySkali.set(obrys, obrysWSkali(obrys));
+  return _obrysySkali.get(obrys);
 }
 
 const _cacheMiejsc = new WeakMap();
@@ -176,4 +183,95 @@ export function jadacyPojazdu(pojazdDoc) {
 /** Miejsce o danym id w pojeździe. */
 export function miejsceOId(pojazdActor, id) {
   return miejscaPojazdu(pojazdActor).find(m => m.id === id) ?? null;
+}
+
+/* -------------------------------------------- */
+/*  Nośnik: pojazd albo wierzchowiec (§6.3, W1)  */
+/* -------------------------------------------- */
+
+/*
+ * *Nośnik* = aktor, którego żeton wiezie żetony jadących na miejscach. Pojazd (`vehicle` z flagą `pojazd`) albo istota z
+ * flagą `wierzchowiec: {wyszkolony, ujezdzony?: [uuid], strefy?}` (Bestiariusz nadaje ją koniom; MG — dowolnej istocie,
+ * W-P2). Wspólne mechanizmy jadących (miejsca, animacja, wsiadanie, pamięć obsady, schowek) pytają o nośnik; stare
+ * nazwy (`jestPojazdem`, `danePojazdu`, `miejscaPojazdu`, `pojazdJadacego`) zostają **tylko dla pojazdów** — silnik,
+ * awarie, wrak, broń i karta nie widzą konia.
+ */
+
+export const FLAGA_WIERZCHOWIEC = "wierzchowiec";
+
+/** Domyślne siodło: jeździec lekko z przodu środka, pasażer za nim — oba otwarte, nad nośnikiem (D32, W-U1). */
+export const STREFY_SIODLA = Object.freeze([{
+  // Kolumny jawnie: bez nich układ miejsc sadzałby kierującego przy lewej burcie, jak w aucie.
+  id: "siodlo", nazwa: "Siodło", od: 0.42, do: 0.6, rzedy: [1, 1], kolumny: [[0.5], [0.5]],
+  prezentacja: { widocznosc: "otwarta", warstwa: "nad" }
+}]);
+
+/** Flaga wierzchowca istoty albo `null`. */
+export function wierzchowiecAktora(actor) {
+  if (!actor || actor.type === "vehicle" || actor.type === "group") return null;
+  const w = actor.flags?.[MODULE_ID]?.[FLAGA_WIERZCHOWIEC];
+  return w && typeof w === "object" ? w : null;
+}
+
+/** Profil nośnika: `pojazd`, `wierzchowiec` albo `null`. */
+export function profilNosnika(actor) {
+  if (jestPojazdem(actor)) return "pojazd";
+  return wierzchowiecAktora(actor) ? "wierzchowiec" : null;
+}
+
+export const jestNosnikiem = actor => !!profilNosnika(actor);
+export const jestZetonemNosnika = tokenDoc => jestNosnikiem(tokenDoc?.actor);
+
+/**
+ * Obrys wierzchowca w kratkach pojazdu (1,5 m): kwadrat z bieżącego rozmiaru żetonu (kratki sceny ÷ `skalaPojazdu`),
+ * poza sceną — z prototypu (prototyp liczy kratki 1,5 m). Moduł nigdy nie zmienia rozmiaru żetonu istoty (D43).
+ */
+function _obrysWierzchowca(actor, tokenDoc) {
+  const t = tokenDoc ?? actor?.token ?? null;
+  if (t?.parent) {
+    const s = skalaPojazdu(t.parent) || 1;
+    return { w: zaokrKratki(t.width / s), h: zaokrKratki(t.height / s) };
+  }
+  const p = actor?.prototypeToken ?? {};
+  return { w: Number(p.width) || 1, h: Number(p.height) || 1 };
+}
+
+/**
+ * Dane nośnika: dla pojazdu — `danePojazdu` z `profil`; dla wierzchowca — obrys z rozmiaru żetonu i siodło (nadpisanie
+ * w `wierzchowiec.strefy`, jak `pojazd.strefy` dla GMT400).
+ * @param {Actor} actor
+ * @param {TokenDocument} [tokenDoc]  żeton na scenie (wierzchowiec: obrys z jego rozmiaru)
+ */
+export function daneNosnika(actor, tokenDoc = null) {
+  const p = danePojazdu(actor);
+  if (p) return { ...p, profil: "pojazd" };
+  const w = wierzchowiecAktora(actor);
+  if (!w) return null;
+  return { profil: "wierzchowiec", podwozie: null, katalog: null, podstawa: null, wierzchowiec: w,
+    obrys: _obrysWierzchowca(actor, tokenDoc), strefy: Array.isArray(w.strefy) && w.strefy.length ? w.strefy : STREFY_SIODLA };
+}
+
+const _cacheSiodel = new Map();
+
+/** Miejsca nośnika (pojazd — z pamięci danych aktora; wierzchowiec — wg obrysu i stref). */
+export function miejscaNosnika(actor, tokenDoc = null) {
+  if (jestPojazdem(actor)) return miejscaPojazdu(actor);
+  const d = daneNosnika(actor, tokenDoc);
+  if (!d) return [];
+  const klucz = `${d.obrys.w}x${d.obrys.h}:${d.strefy === STREFY_SIODLA ? "siodlo" : JSON.stringify(d.strefy)}`;
+  if (!_cacheSiodel.has(klucz)) _cacheSiodel.set(klucz, ukladMiejsc(d.obrys, d.strefy));
+  return _cacheSiodel.get(klucz);
+}
+
+/** Miejsce o id w nośniku (żeton — obrys wierzchowca z jego rozmiaru). */
+export function miejsceNosnika(nosnikDoc, id) {
+  return miejscaNosnika(nosnikDoc?.actor, nosnikDoc).find(m => m.id === id) ?? null;
+}
+
+/** Żeton nośnika (pojazd albo wierzchowiec), na którym jedzie ten żeton (ta sama scena), albo `null`. */
+export function nosnikJadacego(tokenDoc) {
+  const j = jazdaZetonu(tokenDoc);
+  if (!j) return null;
+  const n = tokenDoc.parent?.tokens.get(j.pojazd);
+  return n && jestZetonemNosnika(n) ? n : null;
 }

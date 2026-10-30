@@ -1744,7 +1744,9 @@ function buildNpc(c) {
           //   game.actors.filter(a => a.getFlag(MODULE_ID,"bestiary.tokenArtPending"))
           tokenArtPending: token?.source !== "own",
           tokenArtSource: token?.source ?? "portrait"
-        }
+        },
+        // Nośnik jadących (M4 §6.3): koń wiezie widocznego jeźdźca tym samym kodem co pickup.
+        ...(c.wierzchowiec ? { wierzchowiec: c.wierzchowiec } : {})
       }
     }
   };
