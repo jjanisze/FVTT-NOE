@@ -146,7 +146,9 @@ roster.push({
 const COVERAGE = [["Medyk", "Farmacja"], ["Zabójca Maszyn", "Empiryk"], ["Monter", "Serwisowanie"], ["Chemik", "Rusznikarstwo"],
   ["Kowboj", "Pistolero"], ["Szczur", "Truciciel"], ["Gwiazda", "Za garść gambli"], ["Łowca Mutantów", "Mutant na śniadanie"],
   // M4 E7 (2026-10-19): all three Wojownik Autostrady picks are automated; the level-5 persona carries Kaskader.
-  ["Wojownik Autostrady", "Drzwi w drzwi"], ["Wojownik Autostrady", "Pancerna fura"]];
+  ["Wojownik Autostrady", "Drzwi w drzwi"], ["Wojownik Autostrady", "Pancerna fura"],
+  // M4 W5 (2026-10-30): the long-rest card — the Stajnia's Kowboj.
+  ["Kowboj", "Zawsze w siodle"]];
 for (const [prof, pick] of COVERAGE) {
   const k = Object.keys(PROFESSIONS).find(c => PROFESSIONS[c].includes(prof));
   roster.push({
@@ -155,6 +157,14 @@ for (const [prof, pick] of COVERAGE) {
     picks: { "Zdolność z profesji": pick }, ekwipunek: LOADOUTS[k], grupa: "pokrycie"
   });
 }
+
+// M4 W5 (2026-10-30): the riding abilities on one rider — appended last, so no rotation above shifts.
+roster.push({
+  id: "jezdziec", name: "Jeździec", rola: "Zwiadowca 3 · Łowca Mutantów · Wyjadacz: Jeździec, Rodeo, Ale jazda! (pokrycie automatyki)",
+  klasa: "zwiadowca", poziom: 3, profesja: "Łowca Mutantów", pochodzenie: "Detroit", cechy: CECHY.zwiadowca,
+  picks: { "Zdolność z profesji": PROF_PICKS["Łowca Mutantów"], "Wyjadacz — wybierz jedną": "Jeździec", "Zdolność z Pochodzenia": "Ale jazda!" },
+  sztuczka: "Rodeo", ekwipunek: LOADOUTS.zwiadowca, grupa: "pokrycie"
+});
 
 export const ROSTER = Object.freeze(roster);
 export const personaDef = id => ROSTER.find(p => p.id === id) ?? null;

@@ -29,6 +29,7 @@
 
 import { KATALOG_POJAZDOW, PODWOZIA, obrysWSkali } from "../config/vehicles-data.mjs";
 import { ROZMIAR_MIEJSCA, obrysPrzyObrocie, ukladMiejsc } from "./geometria.mjs";
+import { rysujeIstote } from "../scenes/skala-istot.mjs";
 
 export const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_POJAZD = "pojazd";
@@ -137,6 +138,22 @@ export function miejscaPojazdu(actor) {
     _cacheMiejsc.set(klucz, wpis);
   }
   return wpis.miejsca;
+}
+
+/**
+ * Istota na planszy pościgu w prawdziwej skali (D24): rozmiar prototypu × skala pojazdów (człowiek — ¼ toru), jak
+ * po wklejeniu z mapy. Bez tego postać upuszczona z paska albo z karty „Posadzić?” ma tor szerokości, a w siodle
+ * motocykla rysuje się tak samo (S1). Tylko żeton w rozmiarze prototypu i bez miejsca — wklejony z planszy, jadący
+ * albo zmieniony przez MG zostaje; mapy taktyczne bez zmian. Czysta.
+ * @param {{width: number, height: number, flags?: object}} dane  źródło nowego żetonu
+ * @returns {{w: number, h: number}|null}
+ */
+export function wymiaryIstotyNaPlanszy(dane, actor, scena) {
+  if (trybSceny(scena) !== "plansza" || dane?.flags?.[MODULE_ID]?.[FLAGA_JAZDA] || !rysujeIstote({ actor })) return null;
+  const s = skalaPojazdu(scena), p = actor?.prototypeToken;
+  if (!(s > 0) || bliskie(s, 1) || !p) return null;
+  if (!bliskie(dane.width, p.width) || !bliskie(dane.height, p.height)) return null;
+  return { w: zaokrKratki(p.width * s), h: zaokrKratki(p.height * s) };
 }
 
 /** Wymiary żetonu pojazdu w kratkach sceny przy danym obrocie (§4.14) albo `null`. */

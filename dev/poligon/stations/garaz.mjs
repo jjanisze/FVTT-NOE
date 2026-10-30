@@ -5,10 +5,18 @@
  * każdej własnej cechy z §5, do weta MG (§10).
  */
 
-import { p, manekin } from "./_wspolne.mjs";
+import { MOD, p, manekin } from "./_wspolne.mjs";
 import { ustawGrafikePojazdu, zbudujPodgladyPojazdow, narzedziaGrafikiPojazdow } from "./garaz-grafika.mjs";
 import {zbudujPodgladyWrakow,narzedziaGrafikiWrakow} from './garaz-wraki.mjs';
 import { zbudujPodgladSkali, narzedziaSkali } from "./garaz-skala.mjs";
+
+/** K3: karta awarii 5 (dym) dla Ciężarówki na Parkingu — bez konsoli i bez szukania wyniku na kości. */
+async function awaria5() {
+  const scene = game.scenes.find(s => s.flags[MOD]?.testScene?.key === "parking" && s.flags[MOD]?.poligon?.station === "garaz");
+  const t = scene?.tokens.find(d => d.actor?.name === "Ciężarówka");
+  if (!t) return ui.notifications.warn("Brak Ciężarówki na Garaż · Parking — zresetuj stanowisko.");
+  await game.neuroshima.pojazdy.rzucAwarie(t.actor, { k20: 5 });
+}
 
 export default {
   id: "garaz", name: "Garaż", prio: "P2", icon: "fa-solid fa-car-side",
@@ -17,7 +25,8 @@ export default {
     + "Kluczyki do Osobówki w stacyjce; Ciężarówka bez kluczyków (na krótko). Mechanik z narzędziami i surowcami do napraw. "
     + "Czternaście odtwarzalnych podglądów grafiki: Osobówka, Hammer, Motocykl, Ciężarówka, Buggy, Autobus, Traktor, Wóz strażacki, Buldożer, M2 Bradley, M1A1 Abrams, Motorower, Rower i Deskorolka; skróty na Karcie prób.",
   gracze: 3,
-  narzedzia: [...narzedziaGrafikiPojazdow,...narzedziaGrafikiWrakow,...narzedziaSkali],
+  narzedzia: [...narzedziaGrafikiPojazdow,...narzedziaGrafikiWrakow,...narzedziaSkali,
+    { label: "Awaria 5 (dym) — Ciężarówka", icon: "fa-solid fa-smog", run: awaria5 }],
   async build(k) {
     const s = await k.scene("parking", { name: "Garaż · Parking", w: 48, h: 28, color: "#55524a", main: true });
     const P = game.neuroshima.pojazdy;
@@ -83,7 +92,7 @@ export default {
     p("grafika", "Grafika Osobówki", "Portret i dwa zgodne żetony: dach z bagażem oraz pusta kabina; wnętrze tylko z prawem prześwietlenia, miejsca na fotelach", "Nowa Osobówka z kompendium: najedź jako MG, kierowca i gracz z zewnątrz; odsuń kursor, obróć pojazd, otwórz Miejsca. Sprawdź też własną grafikę i pojazd bez wnętrza."),
     p("grafika-hammer", "Grafika Hammera", "Portret i zgodna para nadwozie/wnętrze: cztery koła, cztery fotele oraz centralne stanowisko pod włazem", "Scena Hammera: najedź na obsadzony pojazd, odsuń kursor i otwórz Miejsca. Porównaj z pustymi wersjami obok; sprawdź położenie włazu nad platformą i kotwice pięciu jadących. Po resecie podgląd używa rozmiaru katalogowego i źródłowych skal postaci dnd5e."),
     p("wlaz-widoczny", "Widoczny właz (D32)", "Strzelec włazu ma pełny żeton nad dachem, bez kropki; czterech pasażerów kabiny pozostaje zakrytych", "MG i obserwator: odsuń kursor, porównaj widok, wyceluj normalnie w strzelca. Najedź jako MG, obróć i przesuń pojazd. Przesiądź strzelca do kabiny i z powrotem; sprawdź okno Miejsca, ręczne ukrycie oraz wysiadkę. Grafiki bez zmian."),
-    p("skala-grafiki", "Skala istot (S0, D42)", "Jadący rysuje się tak duży jak obok pojazdu; mnożnik f wszystkich istot zmniejsza różnicę skali z autami — wybierz f", "Skala istot (S0): kolumny f = 1 / 0,8 / 0,7 / 0,6 i dwie z powiększonymi pojazdami. Porównaj motocykl z pasażerem, deskorolkę, Osobówkę (najedź — kabina), ludzi dnd5e z pierścieniem i bez, NOE i konia. „Skala istot: tło mapy” kładzie pod spód mapę kampanii z narysowanymi autami (64 px na 1,5 m, przeciągnij kafelek); „zbuduj warianty” — inne liczby. Podaj f (i czy pojazdy mają rosnąć).", "VETO"),
+    p("skala-grafiki", "Skala istot (S0–S1, D42, D45)", "MG wybrał f = 0,8 i pojazdy ×1,1 (2026-10-30): jadący rysuje się tak duży jak ta sama postać obok pojazdu, bez kropki na otwartym miejscu; ustawienie świata „Skala grafiki istot” zmienia wszystkie istoty naraz, pola i zasięgi zostają", "Skala istot: porównaj motocykl z pasażerem, deskorolkę, Osobówkę (najedź — kabina), ludzi dnd5e z pierścieniem i bez, NOE i konia; przesuń, obróć, przesiądź, wytnij i wklej. Zmień ustawienie na 1 i z powrotem.", "VETO"),
     p("altklik", "Widok (D3)", "W prześwietleniu klik w jadącego zaznacza jadącego, Alt+klik — pojazd", "MG: najedź, kliknij jadącego, potem Alt+klik."),
     p("celowanie", "Widok (D14)", "Prawy klik w kropkę celuje w ukrytego jadącego; karta ataku podaje jego imię", "Gracz spoza pojazdu celuje w kropkę i strzela."),
     p("okno", "Miejsca (D4)", "Okno miejsc śledzi zaznaczony żeton postaci (MG: BG lub BN); koszty z RAW na karcie", "MG bez przypisanej postaci: HUD Osobówki → Miejsca, następnie zaznacz Mechanika na mapie i kliknij wolne miejsce. Powtórz dla BN, przesiądź się i wysiądź. Sprawdź zaznaczenie przed otwarciem, zmianę postaci w otwartym oknie, wiele zaznaczonych postaci i samo celowanie (nie wybiera pasażera)."),
@@ -120,6 +129,19 @@ export default {
     p("wrak", "Wrak (D17)", "0 PW: wrak, jadący wysadzeni obok; płonący z paliwem — k4 rund do wybuchu (ogień wg rozmiaru, RO ZRC ST 15); Odbudowa", "Osobówka z awarią 1 do 0 PW.", "VETO"),
     // D16: broń montowana
     p("bron", "Broń montowana (D16)", "Strzelec na wieżyczce dostaje Browninga (bez wagi), wraca do pojazdu po zejściu; montaż jako Robota", "Gracz 3 przesiada się do Hammera na wieżyczkę; potem zejdź.", "VETO"),
+    p("bron-lalka", "Broń montowana a lalka (K2)", "Browning na wieżyczce zajmuje ręce strzelca w lalce (wirtualny chwyt); upuszczenie, schowanie i zdjęcie zamontowanej broni oznaczone ostrzeżeniem, nie zablokowane; usunięcie z pojazdu ostrzega",
+      "Gracz 3 na wieżyczce Hammera: otwórz lalkę, spróbuj wziąć drugą broń, upuścić i schować Browninga; MG usuwa Browning z karty Hammera."),
+    // D41: paleta kierowcy poza pościgiem
+    p("paleta", "Paleta kierowcy (D41, K1)", "Przycisk palety na HUD-zie pojazdu i kierowcy: akcje cech (Gaz do dechy, Szósty bieg, Przerzutka, Akrobacja, Skok, Syrena, Działko wodne, Lemiesz, Uciąg, Ollie; Slalom jako Reakcja) — karta i efekt do następnej tury kierowcy, budżet i ST na karcie jazdy; koszt akcji oznaczony, nie pobrany",
+      "Walka: Gracz 1 w Osobówce — Gaz do dechy i jazda ponad Szybkość; Motocykl — Szósty bieg; Wóz strażacki — Syrena i Działko wodne; Buldożer — Lemiesz. Poza walką efekty wygasają z zegarem świata (runda = 6 s)."),
+    p("wsteczny", "Bieg wsteczny (D41, K1)", "Paleta → Bieg wsteczny: droga liczy się podwójnie (½ Szybkości), Autobus i Ciężarówka ¼ z Utrudnieniem; pojazd cofa przodem do przodu, bez obrotu",
+      "Gracz 1 cofa Osobówką trzy kratki; MG cofa Autobusem."),
+    // K3: awaria 5 — dym
+    p("dym", "Awaria 5 — dym (K3, §4.8)", "[Zastosuj] przy awarii 5: chmura dymu (Region przypięty do pojazdu, JB2A), Oślepienie jadących na zakrytych miejscach; wysiadka zdejmuje, wsiadanie nakłada, naprawa usuwa chmurę i efekt",
+      "MG: narzędzie „Awaria 5 (dym) — Ciężarówka” → na karcie [Zastosuj]; jedź; wysiądź i wsiądź pasażerem; napraw tymczasowo i fachowo."),
+    // D39: Za kierowcą (RAI także na mapie)
+    p("za-kierowca", "Za kierowcą (D39)", "HUD pasażera w walce: „Za kierowcą” — tura tuż po kierowcy, raz na walkę; po wysiadce kotwica znika, Inicjatywa zostaje",
+      "Walka z Osobówką: Gracz 2 (tylna kanapa) → Za kierowcą; przejdź rundę; wysiądź.", "RAI"),
     // D11: dostęp
     p("dostep", "Dostęp (D11)", "Gracz w środku ma prawa właściciela (ruch, karta, ładownia, uruchamianie); po wysiadce traci; upuszczone w środku ląduje w ładowni (WKK)", "Gracz 2: przesuń Osobówkę, otwórz kartę, upuść przedmiot z lalki.", "WKK"),
     // Wojownik autostrady (E7)

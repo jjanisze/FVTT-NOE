@@ -27,7 +27,7 @@
 
 import {
   MODULE_ID, bliskie, danePojazdu, jadacyPojazdu, jazdaZetonu, jestZetonemNosnika, jestZetonemPojazdu, kratkaPojazdu,
-  miejsceNosnika, miejscaPojazdu, nosnikJadacego, obrysDziala, skalaPojazdu, trybSceny, wymiaryZetonu
+  miejsceNosnika, miejscaPojazdu, nosnikJadacego, obrysDziala, skalaPojazdu, trybSceny, wymiaryIstotyNaPlanszy, wymiaryZetonu
 } from "./stan.mjs";
 import {
   naroznikDlaSrodka, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
@@ -440,6 +440,15 @@ export function registerZetonPojazdu() {
     if (w && (!bliskie(w.w, doc._source.width) || !bliskie(w.h, doc._source.height))) {
       doc.updateSource({ width: w.w, height: w.h });
     }
+  });
+
+  // Istota na planszy w prawdziwej skali (D24): środek zostaje, przyciąganie do toru i tak wyrównuje.
+  Hooks.on("preCreateToken", (doc) => {
+    const w = wymiaryIstotyNaPlanszy(doc._source, doc.actor, doc.parent);
+    if (!w) return;
+    const g = doc.parent.grid.size;
+    doc.updateSource({ width: w.w, height: w.h,
+      x: Math.round(doc._source.x + (doc._source.width - w.w) * g / 2), y: Math.round(doc._source.y + (doc._source.height - w.h) * g / 2) });
   });
 
   Hooks.on("updateToken", (doc, changes) => {

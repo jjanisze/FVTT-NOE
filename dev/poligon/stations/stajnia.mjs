@@ -9,7 +9,7 @@ import { MOD, p, manekin } from "./_wspolne.mjs";
 export default {
   id: "stajnia", name: "Stajnia", prio: "P2", icon: "fa-solid fa-horse",
   opis: "Wybieg za warsztatem: trzy wyszkolone konie z Bestiariusza (zdrowy, skażony, teksańczyk) i dziki koń (niewyszkolony). "
-    + "Gracz 1 — Kowboj z Tresurą i Rodeo, w siodle zdrowego konia; Gracz 2 — Medyk bez Tresury; Gracz 3 — Zwiadowca z Jeźdźcem. "
+    + "Gracz 1 — Kowboj z Tresurą, Rodeo i Zawsze w siodle, w siodle zdrowego konia; Gracz 2 — Medyk bez Tresury; Gracz 3 — Zwiadowca z Jeźdźcem. "
     + "Manekin do Odepchnięcia i do strzelania z grzbietu.",
   gracze: 3,
   async build(k) {
@@ -25,7 +25,7 @@ export default {
       else if (!a.getFlag(MOD, "wierzchowiec")) await a.setFlag(MOD, "wierzchowiec", { wyszkolony: true });
       konie[key] = a;
     }
-    const kowboj = await k.persona("kowboj", "kowboj-5", { owner: "Gracz 1", name: "Kowboj (Tresura, Rodeo)" });
+    const kowboj = await k.persona("kowboj", "kowboj-zawsze-w-siodle", { owner: "Gracz 1", name: "Kowboj (Tresura, Rodeo)" });
     const medyczka = await k.persona("medyczka", "medyk-5", { owner: "Gracz 2", name: "Medyk (bez Tresury)" });
     const zwiadowca = await k.persona("zwiadowca", "zwiadowca-1", { owner: "Gracz 3", name: "Zwiadowca (Jeździec)" });
     if (kowboj) {
@@ -69,6 +69,8 @@ export default {
       "Zwiadowca dosiada konia — porównaj TT na karcie konia przed i po; zsiądź."),
     p("rodeo", "Rodeo — Dżokej (W5)", "Ujeżdżanie z HUD-u istoty: Test MDR (Tresura) ST 10 + mod. SIŁ; sukces — koń słucha tylko tego jeźdźca (kotwica tury, paleta)",
       "Zaznacz Kowboja, otwórz HUD dzikiego konia → Ujeżdżaj (Rodeo); potem dosiądź go Kowbojem i Medykiem."),
+    p("zawsze-w-siodle", "Zawsze w siodle (W5, s. 88)", "Po Długim odpoczynku Kowboja karta MG: los zsyła konia albo motocykl (fabularne — nic nie powstaje samo)",
+      "Gracz 1: Długi odpoczynek na karcie Kowboja; MG patrzy na czat."),
     p("schowek-konia", "Koń między scenami (W-U5)", "Ctrl+X / Ctrl+V konia z jeźdźcem przenosi obsadę jak pojazd", "Wytnij zdrowego konia z Kowbojem i wklej na Garaż · Parking.")
   ]
 };

@@ -173,7 +173,9 @@ async function seriaIObszary({ plansza, hammer, pcAktor }) {
     P.danePojazdu(h.actor).obrys, h._source.rotation, P.kratkaPojazdu(scena), 0.01), { message: "the Hammer's rider re-seated" });
   const przypiety = reg.attachment?.token;   // pole dokumentu: rozwiązany TokenDocument, nie id
   return { odwolany, seria, wybuch, przypieta: (przypiety?.id ?? przypiety) === h.id,
-    wStrefie: C.serie.regionZawieraNaDrodze(reg, bandyci[0]), pozaStrefa: C.serie.regionZawieraNaDrodze(reg, bandyci[1]) };
+    wStrefie: C.serie.regionZawieraNaDrodze(reg, bandyci[0]), pozaStrefa: C.serie.regionZawieraNaDrodze(reg, bandyci[1]),
+    // Bandyci powstali na planszy w rozmiarze prototypu — wsiedli w prawdziwej skali (D24), nie toru szerokości.
+    rozmiary: bandyci.map(b => b.getFlag(MOD, "jazda")?.rozmiar?.w ?? null), skala: P.skalaPojazdu(scena) };
 }
 
 export default {
@@ -250,6 +252,7 @@ export default {
       t.equal(r.przypieta, true, "zone pinned to the Hammer");
       t.equal(r.wStrefie, true, "the Hammer's rider is in the zone after the lane change");
       t.equal(r.pozaStrefa, false, "the other car's rider is not");
+      t.assert(r.rozmiary.every(w => Math.abs(w - r.skala) < 1e-3), "creatures dropped on the board come in true scale (¼ lane)", r);
     });
   }
 };

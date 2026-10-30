@@ -22,7 +22,7 @@ import {
 import { kosztPrzesiadki, oznaczeniaDosiadania } from "../pojazdy/jadacy.mjs";
 import { grafikaWiezy, kadrGrafikiMiejsc } from "../pojazdy/grafika.mjs";
 import {
-  kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryZetonu,
+  kratkaPojazdu, metryJednostki, rozmiarMiejsca, skalaPojazdu, trybSceny, wymiaryIstotyNaPlanszy, wymiaryZetonu,
   daneNosnika, jestPojazdem, miejscaNosnika, profilNosnika
 } from "../pojazdy/stan.mjs";
 import { skretyNaDrodze, utrudnienieZGrzbietu } from "../pojazdy/jazda.mjs";
@@ -534,6 +534,20 @@ export function registerPojazdyTests(quench) {
         expect(wymiaryZetonu(osobowka, s, 90), "bokiem").to.deep.equal({ w: 1.65, h: 0.825 });
         expect(rozmiarMiejsca(s)).to.equal(0.25);
         expect(trybSceny(s)).to.equal("taktyczna");
+      });
+
+      it("istota na planszy w prawdziwej skali (D24): prototyp × skala; jadący, zmieniony rozmiar, obiekt i mapa — bez zmian", function () {
+        const plansza = scena(280, 6, "m", true);
+        const czlowiek = { type: "character", flags: {}, prototypeToken: { width: 1, height: 1 } };
+        const kon = { type: "npc", flags: {}, prototypeToken: { width: 2, height: 2 } };
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1 }, czlowiek, plansza)).to.deep.equal({ w: 0.25, h: 0.25 });
+        expect(wymiaryIstotyNaPlanszy({ width: 2, height: 2 }, kon, plansza)).to.deep.equal({ w: 0.5, h: 0.5 });
+        expect(wymiaryIstotyNaPlanszy({ width: 0.25, height: 0.25 }, czlowiek, plansza), "wklejony z planszy").to.equal(null);
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1, flags: { [MODULE_ID]: { jazda: { pojazd: "x" } } } }, czlowiek, plansza), "jadący").to.equal(null);
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1 }, { ...czlowiek, flags: { [MODULE_ID]: { obiekt: {} } } }, plansza), "obiekt").to.equal(null);
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1 }, osobowka, plansza), "pojazd").to.equal(null);
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1 }, czlowiek, scena(70, 1.5)), "mapa kampanii").to.equal(null);
+        expect(wymiaryIstotyNaPlanszy({ width: 1, height: 1 }, czlowiek, scena(70, 3)), "mapa 3 m — siatka MG").to.equal(null);
       });
 
       it("mapy w km (1, 5, 140 km na kratkę): znacznik, nie kilometrowy samochód", function () {
