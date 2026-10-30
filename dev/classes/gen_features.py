@@ -271,12 +271,16 @@ COVERAGE = {
     # Wojownik autostrady (PLAN_m4_pojazdy E7) — poza pościgiem.
     "drzwi-w-drzwi": {
         "auto": [
-            ("Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu; Szybkość pojazdu kierowcy +50% w walce "
-             "(budżet ruchu na karcie jazdy)", "pojazdy/wojownik.mjs"),
+            ("Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu — także Test Pościgu, na planszy zawsze "
+             "(D40); Szybkość pojazdu kierowcy +50% (budżet ruchu na karcie jazdy)", "pojazdy/wojownik.mjs"),
             ("Konwojent: bez Utrudnienia za atak z jadącego pojazdu", "pojazdy/jazda.mjs"),
             ("Taranowanie: karta Potrącenia podaje RO na Zręczność z Utrudnieniem", "pojazdy/jazda.mjs"),
         ],
-        "manual": "Rajdowiec w pościgu (manewry, Test Pościgu) — część 2 planu pojazdów.",
+        "manual": "Taranowanie przy Stuknięciu na planszy pościgu — rozstrzyga MG.",
+    },
+    "zawsze-w-siodle": {
+        "auto": [("karta MG po Długim odpoczynku: los zsyła konia albo motocykl", "pojazdy/jezdziec.mjs")],
+        "manual": "Czy postać ma już konia albo motocykl, skąd się weźmie i jak się nazywa — fabuła MG.",
     },
     "kaskader": {
         "auto": [("karta pojazdu: trik kierowcy — Test MDR (Pojazdy) ST 15 z Ułatwieniem; porażka — 1k10 pojazdowi, "
@@ -467,6 +471,13 @@ COVERAGE = {
     },
 
     # ---- Opcje ----
+    "jezdziec": {
+        "auto": [
+            ("TT wierzchowca + Premia Biegłości, póki siedzisz w siodle (efekt na wierzchowcu)", "pojazdy/jezdziec.mjs"),
+            ("dosiadanie i zsiadanie za 1,5 m; wodze bez wolnej ręki (karta dosiadania)", "pojazdy/jadacy.mjs"),
+            ("bez Utrudnienia ataków dystansowych z grzbietu jadącego wierzchowca", "pojazdy/jazda.mjs"),
+        ],
+    },
     "stalowy-nadgarstek": {
         "auto": [
             ("strzał jedną ręką z broni palnej krótkiej i pistoletu maszynowego bez Utrudnienia", "combat/grip.mjs"),

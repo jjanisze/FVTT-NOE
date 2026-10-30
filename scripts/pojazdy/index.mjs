@@ -27,6 +27,7 @@
  *  - `katalog.mjs`     — aktor z paczki `pojazdy` (wynik produkcji, Poligon, MG)
  *  - `karta.mjs`       — karta pojazdu: zakładki Pojazd, Załoga, Uzbrojenie, Awarie (podklasa stockowej)
  *  - `wojownik.mjs`    — Wojownik autostrady: Rajdowiec, Konwojent, Taranowanie, Kaskader, Pancerna fura
+ *  - `jezdziec.mjs`    — Jeździec i Rodeo (TT wierzchowca, ujeżdżanie), Zawsze w siodle (§6.3, W5)
  */
 
 import { registerZetonPojazdu, instrukcjePoRuchu, przeswietlany, mozePrzeswietlic } from "./zeton.mjs";
@@ -61,6 +62,7 @@ import { registerBron, bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, s
 import { registerKatalog, utworzZKatalogu } from "./katalog.mjs";
 import { registerKarta, zetonPojazdu } from "./karta.mjs";
 import { registerWojownik, maZdolnosc, trikKaskadera, synchronizujOC } from "./wojownik.mjs";
+import { registerJezdziec, synchronizujTTWierzchowca, ujezdzaj, premiaTTWierzchowca, maRodeo } from "./jezdziec.mjs";
 import * as geometria from "./geometria.mjs";
 import { registerSkalaIstot, skalaIstotApi } from "../scenes/skala-istot.mjs";
 
@@ -110,6 +112,7 @@ export function registerPojazdy() {
   registerKatalog();
   registerKarta();
   registerWojownik();
+  registerJezdziec();
 }
 
 export const pojazdyApi = {
@@ -127,7 +130,7 @@ export const pojazdyApi = {
   AWARIE_POJAZDOW, efektyAwarii, aktywneAwariePojazdu, zaproponujAwarie, rzucAwarie, zastosujAwarie, kartaObrazen, zegaryPojazdu,
   zrobWrak, wybuchBaku, cofnijWrak, jestWrakiem, uzgodnijDym, dymWKabinie,
   bronStanowisk, zamontujOdReki, zamontujRobota, zdejmij, synchronizujBron, utworzZKatalogu, zetonPojazdu,
-  maZdolnosc, trikKaskadera, synchronizujOC,
+  maZdolnosc, trikKaskadera, synchronizujOC, synchronizujTTWierzchowca, ujezdzaj, premiaTTWierzchowca, maRodeo,
   szybkoscPojazdu, budzetJazdy, skretyNaDrodze, potraceniNaDrodze, akrobatykaPrzedAtakiem,
   paleta: { otworz: otworzPalete, uzyj: uzyjPalety, przerzutka: ustawPrzerzutke, stan: paletaPojazdu, pozycje: pozycjePojazdu, budzet: budzetPalety, POZYCJE },
   naprawTymczasowo, naprawFachowo, naprawKaroserie, odbuduj, kosztNaprawyAwarii, kosztKaroserii, czesciZaKwote,

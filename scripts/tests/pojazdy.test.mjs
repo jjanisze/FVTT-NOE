@@ -30,6 +30,7 @@ import { OPCJA_SYNCHRONIZACJI } from "../pojazdy/historia.mjs";
 import { otwarteMiejsce, prezentacjaMiejsca, rozpoznawalnyJadacy, sortJadacego } from "../pojazdy/prezentacja.mjs";
 import { mnoznikGrafiki, przytnijSkale } from "../scenes/skala-istot.mjs";
 import { POZYCJE as POZYCJE_PALETY, budzetPalety, fazaZCzasu, wygasniecie } from "../pojazdy/paleta.mjs";
+import { maRodeo, oznaczeniaUjezdzania, premiaTTWierzchowca, przyciskUjezdzania } from "../pojazdy/jezdziec.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const blisko = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
@@ -220,7 +221,7 @@ export function registerPojazdyTests(quench) {
       });
     });
 
-    describe("Nośnik — wierzchowiec (§6.3, W1–W4)", function () {
+    describe("Nośnik — wierzchowiec (§6.3, W1–W5)", function () {
       const MOD = MODULE_ID;
       const kon = (w = { wyszkolony: true }, extra = {}) => ({ type: "npc", flags: { [MOD]: { wierzchowiec: w } },
         prototypeToken: { width: 2, height: 2 }, system: { traits: { size: "lg" } }, ...extra });
@@ -277,6 +278,27 @@ export function registerPojazdyTests(quench) {
         expect(POZYCJE_PALETY.unikanie.statusy).to.deep.equal(["dodging"]);
         const ids = Object.entries(POZYCJE_PALETY).filter(([, d]) => d.wierzchowiec).map(([id]) => id);
         expect(ids).to.deep.equal(["bieganie", "przyspieszenie", "odstapienie", "unikanie"]);
+      });
+
+      it("Jeździec i Kawalerzysta (W5): TT wierzchowca + Premia Biegłości jeźdźca; Rodeo — rozmiar większy, przycisk tylko z Rodeo", function () {
+        const postac = (items = [], prof = 3) => ({ items, system: { attributes: { prof }, traits: { size: "med" } }, isOwner: true });
+        expect(premiaTTWierzchowca(postac())).to.equal(0);
+        expect(premiaTTWierzchowca(null)).to.equal(0);
+        expect(premiaTTWierzchowca(postac([{ flags: { [MOD]: { abilityId: "jezdziec" } } }]))).to.equal(3);
+        const kawalerzysta = postac([{ flags: { [MOD]: { sztuczka: "rodeo" } } }], 2);
+        expect(maRodeo(kawalerzysta)).to.equal(true);
+        expect(premiaTTWierzchowca(kawalerzysta)).to.equal(2);
+        // Rodeo: co najmniej o rozmiar większe; nieprzyjazne — oznaczenie dla MG, nie blokada.
+        expect(oznaczeniaUjezdzania(kon(), kawalerzysta)).to.have.length(0);
+        expect(oznaczeniaUjezdzania({ system: { traits: { size: "med" } } }, kawalerzysta)).to.have.length(1);
+        expect(oznaczeniaUjezdzania(kon(), kawalerzysta, false)).to.have.length(1);
+        // HUD: przycisk na niewyszkolonej istocie dla zaznaczonej postaci z Rodeo; nie na wyszkolonym koniu ani bez Rodeo.
+        const zeton = actor => ({ actor });
+        expect(przyciskUjezdzania(zeton(kon({ wyszkolony: false })), zeton(kawalerzysta))).to.be.a("function");
+        expect(przyciskUjezdzania(zeton({ type: "npc", flags: {}, system: { traits: { size: "lg" } } }), zeton(kawalerzysta))).to.be.a("function");
+        expect(przyciskUjezdzania(zeton(kon()), zeton(kawalerzysta))).to.equal(null);
+        expect(przyciskUjezdzania(zeton(kon({ wyszkolony: false })), zeton(postac()))).to.equal(null);
+        expect(przyciskUjezdzania(zeton(kon({ wyszkolony: false })), null)).to.equal(null);
       });
     });
 

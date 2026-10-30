@@ -1138,7 +1138,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zawsze w siodle",
     action: null,
-    auto: [],
+    auto: [{ what: "karta MG po Długim odpoczynku: los zsyła konia albo motocykl", where: "pojazdy/jezdziec.mjs" }],
+    manual: "Czy postać ma już konia albo motocykl, skąd się weźmie i jak się nazywa — fabuła MG.",
     text: "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać."
   },
   "drzwi-w-drzwi": {
@@ -1149,8 +1150,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Drzwi w drzwi",
     action: null,
-    auto: [{ what: "Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu; Szybkość pojazdu kierowcy +50% w walce (budżet ruchu na karcie jazdy)", where: "pojazdy/wojownik.mjs" }, { what: "Konwojent: bez Utrudnienia za atak z jadącego pojazdu", where: "pojazdy/jazda.mjs" }, { what: "Taranowanie: karta Potrącenia podaje RO na Zręczność z Utrudnieniem", where: "pojazdy/jazda.mjs" }],
-    manual: "Rajdowiec w pościgu (manewry, Test Pościgu) — część 2 planu pojazdów.",
+    auto: [{ what: "Rajdowiec: Ułatwienie do Testów MDR (Pojazdy) w walce i pościgu — także Test Pościgu, na planszy zawsze (D40); Szybkość pojazdu kierowcy +50% (budżet ruchu na karcie jazdy)", where: "pojazdy/wojownik.mjs" }, { what: "Konwojent: bez Utrudnienia za atak z jadącego pojazdu", where: "pojazdy/jazda.mjs" }, { what: "Taranowanie: karta Potrącenia podaje RO na Zręczność z Utrudnieniem", where: "pojazdy/jazda.mjs" }],
+    manual: "Taranowanie przy Stuknięciu na planszy pościgu — rozstrzyga MG.",
     text: "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność."
   },
   "kaskader": {
@@ -1504,7 +1505,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeździec",
     action: null,
-    auto: [],
+    auto: [{ what: "TT wierzchowca + Premia Biegłości, póki siedzisz w siodle (efekt na wierzchowcu)", where: "pojazdy/jezdziec.mjs" }, { what: "dosiadanie i zsiadanie za 1,5 m; wodze bez wolnej ręki (karta dosiadania)", where: "pojazdy/jadacy.mjs" }, { what: "bez Utrudnienia ataków dystansowych z grzbietu jadącego wierzchowca", where: "pojazdy/jazda.mjs" }],
     text: "Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości."
   },
   "zasadzka": {

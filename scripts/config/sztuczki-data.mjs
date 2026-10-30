@@ -479,7 +479,10 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 MDR; ujeżdżanie dzikich zwierząt (Test MDR Tresura ST 10 + mod. SIŁ istoty); "
       + "Kawalerzysta — TT wierzchowca + Premia Biegłości.",
     category: "pojazdy",
-    auto: []
+    auto: [
+      { what: "Ujeżdżanie z HUD-u istoty: Test MDR (Tresura) ST 10 + mod. SIŁ; sukces — wierzchowiec słucha tego jeźdźca.", where: "pojazdy/jezdziec.mjs" },
+      { what: "Kawalerzysta: TT wierzchowca + Premia Biegłości, póki jeździec siedzi w siodle.", where: "pojazdy/jezdziec.mjs" }
+    ]
   },
   rozroba: {
     label: "Rozróba",

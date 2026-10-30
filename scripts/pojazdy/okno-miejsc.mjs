@@ -17,6 +17,7 @@ import {
 import { maSilnik, przelaczSwiatla, stanSilnika, uruchom, zgas } from "./silnik.mjs";
 import { akrobatykaPrzedAtakiem, mozeZaKierowca, zaKierowca } from "./jazda.mjs";
 import { otworzPalete } from "./paleta.mjs";
+import { przyciskUjezdzania } from "./jezdziec.mjs";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 const okna = new Map();
@@ -225,6 +226,10 @@ function _onRenderTokenHUD(hud, html) {
     if (game.user.isGM) kol.append(_przycisk("fa-solid fa-arrows-left-right-to-line", "Szarpnięty wbrew woli — RO ZRC jeźdźców (s. 257)",
       () => kartaUtrzymania(doc, { powod: `${doc.name} przemieszczony wbrew woli` })));
   }
+  // Rodeo (W5): zaznaczona postać z Rodeo ujeżdża tę istotę — Test MDR (Tresura) ST 10 + mod. SIŁ.
+  const zaznaczona = canvas.tokens?.controlled.map(t => t.document).find(d => d !== doc && d.actor?.isOwner) ?? null;
+  const rodeo = przyciskUjezdzania(doc, zaznaczona);
+  if (rodeo) kol.append(_przycisk("fa-solid fa-hat-cowboy", `Ujeżdżaj (Rodeo): ${zaznaczona.name} — MDR (Tresura) ST 10 + mod. SIŁ istoty`, rodeo));
   const pojazd = nosnikJadacego(doc);
   if (pojazd && doc.isOwner) {
     const kon = profilNosnika(pojazd.actor) === "wierzchowiec";

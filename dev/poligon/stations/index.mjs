@@ -20,13 +20,14 @@ import kuznia from "./kuznia.mjs";
 import kreator from "./kreator.mjs";
 import droga from "./droga.mjs";
 import garaz from "./garaz.mjs";
+import stajnia from "./stajnia.mjs";
 import poziomy from "./poziomy.mjs";
 import poscig from "./poscig.mjs";
 import galeria from "./galeria.mjs";
 
 export const STATIONS = Object.freeze([
   hangar, magazyn, plac, strzelnica, garderoba, ciemnia, lazaret, bazar, zlomowisko,
-  arena, bestiariusz, kuznia, kreator, droga, garaz, poziomy, poscig, galeria
+  arena, bestiariusz, kuznia, kreator, droga, garaz, stajnia, poziomy, poscig, galeria
 ]);
 
 export const station = id => STATIONS.find(s => s.id === id) ?? null;

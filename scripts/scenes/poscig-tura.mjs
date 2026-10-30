@@ -386,7 +386,7 @@ export async function dryfDrogi(scene) {
     // v14: zmiana x/y żetonu to marsz, który zatrzymują ściany i inne żetony — przesunięcie to `displace`.
     await scene.moveTokens(Object.fromEntries(lista.map(z => [z._id, { destination: { x: z.x, y: z.y, action: "displace" } }])),
       { animate: false, showRuler: false, method: "api" });
-    const zTylu = lista.filter(z => z.wTyle).map(z => ({ _id: z._id, [`flags.${MODULE_ID}.-=${FLAGA_DRYF}`]: null }));
+    const zTylu = lista.filter(z => z.wTyle).map(z => ({ _id: z._id, [`flags.${MODULE_ID}.${FLAGA_DRYF}`]: _del }));
     if (zTylu.length) await scene.updateEmbeddedDocuments("Token", zTylu);
   }
   if (linie.length || wTyle.length) {

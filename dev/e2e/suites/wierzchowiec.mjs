@@ -7,6 +7,8 @@
  *  - The horse's own turn is skipped with a card; in the rider's turn Bieganie raises the horse's budget to 3× Speed.
  *  - GM: the horse knocked prone → "stay in the saddle?" card with the rider's DEX save button (W4).
  *  - Gracz 1 dismounts: the anchor goes, the horse keeps the rider's Initiative and takes its own turn.
+ *  - W5: Gracz 1's PC has Jeździec — the horse's TT + the rider's Proficiency Bonus while in the saddle, gone after
+ *    dismounting; with Rodeo the PC tames an untrained horse (MDR (Tresura) ST 10 + STR mod, the GM records the rider).
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -15,6 +17,17 @@ async function przygotuj() {
   const MOD = "neuroshima-2026-overrides";
   for (const c of [...game.combats]) await c.delete();
   for (const a of game.actors.filter(a => a.getFlag(MOD, "e2eKon"))) await a.delete();
+  const scene = canvas.scene, g = canvas.grid.size;
+  const pc = scene.tokens.find(t => t.name === "PC Gracz 1");
+  // W5: Jeździec (Wyjadacz Zwiadowcy) i Rodeo na postaci Gracza 1 — z paczek, oznaczone do sprzątnięcia.
+  const stare = pc.actor.items.filter(i => i.getFlag(MOD, "e2eW5")).map(i => i.id);
+  if (stare.length) await pc.actor.deleteEmbeddedDocuments("Item", stare);
+  const zdolnosc = (await game.packs.get(MOD + ".zdolnosci-klasowe").getDocuments()).find(i => i.getFlag(MOD, "abilityId") === "jezdziec");
+  const rodeo = (await game.packs.get(MOD + ".sztuczki").getDocuments()).find(i => i.getFlag(MOD, "sztuczka") === "rodeo");
+  await pc.actor.createEmbeddedDocuments("Item", [zdolnosc, rodeo].map(src => {
+    const d = game.items.fromCompendium(src);
+    return { ...d, flags: { ...d.flags, [MOD]: { ...d.flags[MOD], e2eW5: true } } };
+  }));
   const pack = game.packs.get(MOD + ".bestiariusz");
   const src = (await pack.getDocuments()).find(d => d.getFlag(MOD, "bestiary")?.id === "kon-zdrowy");
   const kon = await Actor.implementation.create({ ...game.actors.fromCompendium(src), name: "Koń e2e",
@@ -22,15 +35,14 @@ async function przygotuj() {
   const zPaczki = !!kon.getFlag(MOD, "wierzchowiec");
   if (!zPaczki) await kon.setFlag(MOD, "wierzchowiec", { wyszkolony: true }); // starsza paczka piaskownicy
   await kon.update({ "prototypeToken.actorLink": true });
-  const scene = canvas.scene, g = canvas.grid.size;
-  const pc = scene.tokens.find(t => t.name === "PC Gracz 1");
   await scene.moveTokens({ [pc.id]: { destination: { x: 3 * g, y: 15 * g, action: "displace" } } }, { animate: false });
   const [h] = await scene.createEmbeddedDocuments("Token", [(await kon.getTokenDocument({ x: 4 * g, y: 14.5 * g })).toObject()]);
   const enemy = scene.tokens.find(t => /ŻOŁNIERZ|CYWIL/i.test(t.name));
   const combat = await Combat.implementation.create({ scene: scene.id, active: true });
   await combat.createEmbeddedDocuments("Combatant", [[h, 20], [pc, 15], [enemy, 10]].map(([t, ini]) => ({ tokenId: t.id, sceneId: scene.id, actorId: t.actorId, initiative: ini })));
   await combat.startCombat();
-  return { kon: h.uuid, pc: pc.uuid, wrog: enemy.name, zPaczki, size: kon.system.traits.size, w: h.width, meshPrzed: Math.round(pc.object.mesh.width) };
+  return { kon: h.uuid, pc: pc.uuid, wrog: enemy.name, zPaczki, size: kon.system.traits.size, w: h.width, meshPrzed: Math.round(pc.object.mesh.width),
+    ttPrzed: kon.system.attributes.ac.value, prof: pc.actor.system.attributes.prof };
 }
 
 async function dosiadz({ kon, pc }) {
@@ -41,6 +53,42 @@ async function dosiadz({ kon, pc }) {
   await window.__e2e.until(() => h.actor.isOwner, { message: "presence access to the horse" });
   for (let i = 0; i < 40 && Math.round(me.object.mesh.width) < 50; i++) await new Promise(r => requestAnimationFrame(r));
   return { w: me.width, mesh: Math.round(me.object.mesh.width), owner: h.actor.isOwner };
+}
+
+/** GM: the horse's TT and the rider effect (W5). */
+async function ttKonia({ kon, jest }) {
+  const h = await fromUuid(kon);
+  const ef = () => h.actor.effects.filter(e => e.getFlag("neuroshima-2026-overrides", "ttJezdzca"));
+  await window.__e2e.until(() => (ef().length > 0) === jest, { message: jest ? "rider TT effect" : "rider TT effect removed" });
+  return { tt: h.actor.system.attributes.ac.value, efekty: ef().length, nazwa: ef()[0]?.name ?? null };
+}
+
+/** GM: an untrained horse beside the PC (Rodeo). */
+async function dzikiKon() {
+  const MOD = "neuroshima-2026-overrides";
+  const pack = game.packs.get(MOD + ".bestiariusz");
+  const src = (await pack.getDocuments()).find(d => d.getFlag(MOD, "bestiary")?.id === "kon-zdrowy");
+  const kon = await Actor.implementation.create({ ...game.actors.fromCompendium(src), name: "Dziki koń e2e",
+    flags: { ...src.flags, [MOD]: { ...src.flags[MOD], e2eKon: true, wierzchowiec: { wyszkolony: false } } } });
+  await kon.update({ "prototypeToken.actorLink": true, "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER });
+  const g = canvas.grid.size;
+  const [h] = await canvas.scene.createEmbeddedDocuments("Token", [(await kon.getTokenDocument({ x: 8 * g, y: 17 * g })).toObject()]);
+  return { kon: h.uuid, st: 10 + kon.system.abilities.str.mod };
+}
+
+/** Gracz 1 (Rodeo): taming with the roll; the GM records the rider on success. */
+async function ujezdzaj({ kon, pc }) {
+  const MOD = "neuroshima-2026-overrides";
+  const P = game.neuroshima.pojazdy;
+  const h = await fromUuid(kon), me = await fromUuid(pc);
+  const n0 = game.messages.size;
+  await P.ujezdzaj(h, me, { configure: false });
+  await window.__e2e.until(() => game.messages.contents.slice(n0).some(m => /Rodeo: /.test(m.content)), { message: "Rodeo card" });
+  const karta = game.messages.contents.slice(n0).find(m => /Rodeo: /.test(m.content)).content.replace(/<[^>]+>/g, " ");
+  const ok = /zwierzę ujeżdżone/.test(karta);
+  if (ok) await window.__e2e.until(() => (h.actor.getFlag(MOD, "wierzchowiec")?.ujezdzony ?? []).includes(me.actor.uuid), { message: "tamed by the GM" });
+  else await window.__e2e.quiet({ idleMs: 800 });
+  return { ok, karta, ujezdzony: h.actor.getFlag(MOD, "wierzchowiec")?.ujezdzony ?? [], rider: me.actor.uuid };
 }
 
 async function kolejnosc({ kon, pc }) {
@@ -118,6 +166,13 @@ export default {
       await t.screenshot("Gracz 1", "jezdziec na koniu");
     });
 
+    await t.step("Jeździec in the saddle: the horse's TT + the rider's Proficiency Bonus (W5)", async () => {
+      const r = await t.gm.eval(ttKonia, { kon: s.kon, jest: true });
+      t.equal(r.efekty, 1, "one rider effect");
+      t.equal(r.tt, s.ttPrzed + s.prof, "TT + PB");
+      t.assert(/^Jeździec/.test(r.nazwa), "named after the ability", r);
+    });
+
     await t.step("Turn anchor: the horse sorts right after the rider with the rider's Initiative (D39)", async () => {
       const r = await t.gm.eval(kolejnosc, { kon: s.kon, pc: s.pc });
       t.equal(r.kon, r.jezdziec, "aligned Initiative");
@@ -148,6 +203,15 @@ export default {
       }, { kon: s.kon });
       t.assert(r.aktywny, "the horse acts in its own turn after dismounting");
       t.equal(r.ini, 15, "kept the rider's Initiative");
+      const tt = await t.gm.eval(ttKonia, { kon: s.kon, jest: false });
+      t.equal(tt.tt, s.ttPrzed, "TT back after dismounting (W5)");
+    });
+
+    await t.step("Rodeo: Gracz 1 tames an untrained horse — MDR (Tresura) ST 10 + STR mod; the GM records the rider (W5)", async () => {
+      const d = await t.gm.eval(dzikiKon);
+      const r = await p1.eval(ujezdzaj, { kon: d.kon, pc: s.pc });
+      t.assert(r.karta.includes(`ST ${d.st}`), "card names ST 10 + STR mod", r);
+      t.equal(r.ujezdzony.includes(r.rider), r.ok, "recorded exactly on success");
     });
   }
 };

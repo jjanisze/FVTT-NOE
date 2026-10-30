@@ -232,7 +232,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Ale jazda!",
     text: "Brak Utrudnienia do Testów Ataku przy strzelaniu z jadącego pojazdu / wierzchowca / "
       + "podczas spadania.",
-    auto: []
+    auto: [{
+      what: "Strzelanie z jadącego pojazdu i z grzbietu jadącego wierzchowca bez Utrudnienia z niestabilnego podłoża.",
+      where: "pojazdy/jazda.mjs"
+    }]
   },
 
   /* --- Federacja Appalachów --- */
