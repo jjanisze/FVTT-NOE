@@ -9,6 +9,7 @@ their final paths remain absent until approval/installation. [Review handoff](m6
 Submersion is now an animated silhouette filter with a shared `vfx/water-surface.webp` material;
 the earlier static semicircle candidate is superseded. [Implementation](../../scripts/scenes/woda-efekty.mjs).
 M4 vehicles: **7 sounds still missing** (§P). All 14 vehicle sets and 14 individual wreck images are delivered; thirteen new wrecks await GM review.
+M4 mounts: **3 top-down horse tokens** requested (§W), not in the count above.
 
 Only outstanding asset requests belong here. Delivery history and remaining
 wiring/world-update tasks are in [FINAL_HANDOFF.md](FINAL_HANDOFF.md);
@@ -50,6 +51,22 @@ sizes and paths: `dev/art/m4/catalog.json`. Drops: `dev/art/m4/in/<set>/<key>.pn
 **Sounds — 7.** `sounds/pojazdy/`: `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
 `zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, `syrena.ogg` (optional) — mono 44.1 kHz
 Vorbis, CC0, M5 loudness rules; cues and lengths in the brief.
+
+## W. Wierzchowce (M4 część 3) — 3 żetony koni z góry
+
+Requested 2026-10-30 for `PLAN_m4_pojazdy.md` §8 (D43). Today the three Bestiary horses borrow dnd5e's
+DraftHorse / Warhorse tokens (alias); a file at the path below wins at the next `fvtt packs --only=bestiariusz`.
+Vehicle convention, not the creature one: **front toward the bottom**, alpha background, square 2 × 2 frame
+(800 × 800 at 400 px per square, `tokens/README.md`), body about 2.4 m long. A saddle with room for **rider and
+passenger** one behind the other on the centre line; after delivery the saddle anchors are measured on the image
+(`STREFY_SIODLA` in `scripts/pojazdy/stan.mjs`, as `strefyGrafiki` for vehicles). Horses are creatures, so they
+are also drawn at the creature scale f (0.8). Portraits stay from the Bestiary. Format: [tokens/PROMPT.md](../../tokens/PROMPT.md).
+
+| Missing final file | Final size / frame fill | Subject |
+|---|---|---|
+| `tokens/kon-zdrowy.webp` | 800×800 / 90% | Zdrowy, zadbany koń ze stajni, siodło na dwoje |
+| `tokens/kon-skazony.webp` | 800×800 / 90% | Koń skażony: wychudzony, matowa sierść, słaba poświata skażenia, to samo siodło |
+| `tokens/kon-teksanczyk.webp` | 800×800 / 90% | Teksańczyk — rosły, szlachetny koń wierzchowy, siodło kowbojskie na dwoje |
 
 ## E. Żetony towarzyszy — 4
 

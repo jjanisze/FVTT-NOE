@@ -280,6 +280,39 @@ The common shape: correct-looking code, correct-looking inspection, **zero conso
   road. Token movement is measured on the bare road (36 m per lane). Guarded by Quench `poscig` (metric) and the P2
   consumer probe.
 
+**Vehicles, riders and the chase turn (M4, 2026-10-19 – 2026-10-30).** Moved here from the M4 handoff; each one cost
+a red run or a silent no-op.
+
+- **v14 freezes the movement waypoints before `preMoveToken`, and that hook runs only on the mover's client.** A
+  footprint swap or the riders' new seats cannot be written into the move; the active GM writes them after the
+  animation (`pojazdy/zeton.mjs`, `zapiszPoRuchu`). Anything the GM needs from the moment before the move (the
+  pre-move heading for turn cards) travels as an update-operation option set in `preMoveToken` (`pojazdy/jazda.mjs`,
+  `OPCJA_OBROTU`) and is read back from `operation` in `moveToken` — reading the document there gives the
+  post-move value.
+- **A token `x`/`y` update is a walk, stopped by walls and other tokens.** Placing a token (drift on the chase
+  board, a rider falling off) goes through `scene.moveTokens({[id]: {destination: {x, y, action: "displace"}}})`;
+  a plain update stops at the first token in the way, with no error.
+- **Core removes the whole delete batch before the first `deleteToken` hook.** A `preDeleteToken` that schedules
+  follow-up updates for the other documents of the same batch updates deleted tokens (console errors). Unseat in
+  `deleteToken`.
+- **`combatRound` fires before the round is written and only on the initiating client.** The active GM detects a new
+  round in `combatTurnChange` (chase drift, end checks — `scenes/poscig-tura.mjs`).
+- **A Region's `attachment.token` reads back as the resolved `TokenDocument`, not an id** — compare `?.id`.
+- **`createEmbeddedDocuments` does not keep the input order.** Pair created tokens with their seats by `actorId`,
+  never by position (the Pościg station once seated a motorcycle's passenger as its driver).
+- **Unlinked-token actors ignore `_del` and recurse on ownership `-1`** (`INHERIT`): store explicit pairs and restore
+  explicit levels (`pojazdy/jadacy.mjs`, `poziomPrzywracany`). A dotted `delta.flags…` path in `updateSource` on an
+  empty delta fails validation and drops the whole token.
+- **Cross-scene Ctrl+X / Ctrl+V keeps token ids** (`keepId`), so riders stay linked to their vehicle without
+  remapping; copy-paste makes new ids (`pojazdy/schowek.mjs`).
+- **dnd5e 6 vehicle data:** speed is `movement.speeds.walk`; vehicle TT effects must target `ac.flat`. Bestiary NPCs
+  carry their AC as `ac.override`, so an effect that should raise it adds to `override` (`pojazdy/jezdziec.mjs`).
+- **The rider's drawing comes from its size before boarding** (S1). A creature created on the chase board at its
+  prototype size would be one lane (36 m) wide and draw that large in an open saddle; new creature tokens on a board
+  come in true scale (`wymiaryIstotyNaPlanszy`, `pojazdy/stan.mjs`).
+- **`fvtt reload` can leave a tab on the old import graph** after new modules appear — probe a new export and
+  hard-reload through CDP (`ignoreCache`) before trusting a test.
+
 ### 12. NOE vs WKK Content Lives in Physically Separate Files
 `scripts/wkk/` is the exclusive home for content that is not in the *Neuroshima Ostatnia Era*
 rulebook ("W Kolorze Kobaltu" — this table's house rules and campaign homebrew). Everything

@@ -14,7 +14,8 @@ Remaining prompts and rules: [BRIEFS_MISSING.md](BRIEFS_MISSING.md);
 queue rows: [MISSING.md](../../icons/MISSING.md) §P.
 
 `catalog.json` is generated — edit the table in `gen_catalog.py` (sizes, exhaust points, subjects)
-and rerun it; the placeholder generator reads the same catalog.
+and rerun it; the placeholder generator reads the same catalog. If delivered art moves an exhaust pipe, change
+the point there **and** `rura` in `scripts/config/vehicles-data.mjs` (`KATALOG_POJAZDOW`) — the smoke reads the latter.
 
 ```sh
 python dev/art/m4/gen_catalog.py            # table -> catalog.json

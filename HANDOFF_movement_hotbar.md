@@ -49,6 +49,16 @@ Source anchors in the dnd5e reference checkout:
 
 Official references: [TokenDocument movement API](https://foundryvtt.com/api/v14/classes/foundry.documents.TokenDocument.html), [v14 history-clear change](https://github.com/foundryvtt/foundryvtt/issues/13686), [dnd5e ruler introduction](https://github.com/foundryvtt/dnd5e/releases/tag/release-5.1.0#movement-automation).
 
+### Vehicles and mounts already budget their movement (M4, 2026-10-30)
+
+M4 did not wait for this handoff (`PLAN_m4_pojazdy.md` D43, W-P3). A vehicle or a ridden mount moves in its driver's or
+rider's turn against a budget computed in `scripts/pojazdy/jazda.mjs` (`budzetJazdy`: Speed, gear and palette
+multipliers, reverse; the chase board counts markers instead). Declarations for them are palette effects on the
+carrier (`scripts/pojazdy/paleta.mjs`: Gaz do dechy, Bieganie and Przyspieszenie of the mount — an ActiveEffect with
+the `paleta` flag, expiring at the driver's next turn), not the character's `bieganie` status. Overruns are marked on
+the driving card, never blocked. When the hotbar's movement model lands, it should **take over this budget for mounts**
+(one readout for walking and riding) rather than run a second one beside it; vehicles keep theirs.
+
 ### Existing NOE action entry points
 
 **Today, with no hotbar macros:** open the character sheet's **Stan → Bieganie**, while the character participates in a started combat. **Unikanie** is beside it. The corresponding statuses are also available through the token HUD's status menu.

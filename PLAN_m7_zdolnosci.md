@@ -318,7 +318,7 @@ Percepcji ST 15 wskazuje istotę), Łapiduch (reanimacja: przycisk na karcie „
 świata; nie po Olbrzymich obrażeniach), Krwawy anioł (kość zestawu małego medyka wg poziomu — `items/toolkit-medyk.mjs`).
 Narracyjne (tylko „Nie automatyzujemy: …”): Reputacja, Renoma, Stylowa, Slang, Znajomości, Skrytka, Szary, Jeden z nas,
 Kamuflaż, Doktor Brain, Bezlitosny przywódca. Zawsze w siodle — karta „los zsyła wierzchowca” przy Długim odpoczynku
-(MG decyduje) razem z wierzchowcami w `PLAN_m4_pojazdy.md` §6.3, W5.
+(MG decyduje) — zrobiona razem z wierzchowcami (`PLAN_m4_pojazdy.md` §6.3, W5, 2026-10-30).
 
 ### R10 — Śmierć, krytyki, odporności
 
@@ -340,7 +340,7 @@ Kamuflaż, Doktor Brain, Bezlitosny przywódca. Zawsze w siodle — karta „los
 |---|---|
 | R2 (biegłości ze zdolności) | tor awansów i reguła D1 (`PLAN_m6_drobne_zasady.md` §5.1, E1) |
 | Łyżeczka (Gladiator) | bliźniak improwizacji (M6 §5.2, E3) |
-| Jeździec (Wyjadacz Zwiadowcy), Rodeo, Zawsze w siodle | wierzchowce (`PLAN_m4_pojazdy.md` §6.3, W2–W5) — plakietki zamyka W5 |
+| Jeździec (Wyjadacz Zwiadowcy), Rodeo, Zawsze w siodle | ✅ **zrobione w M4 W5 (2026-10-30)**: `pojazdy/jezdziec.mjs` — TT wierzchowca + PB jeźdźca (Jeździec, Kawalerzysta), ujeżdżanie z HUD-u (Rodeo), karta po Długim odpoczynku (Zawsze w siodle); bez rąk, 1,5 m dosiadania i strzelanie z grzbietu — `jadacy.mjs`, `jazda.mjs`; plakietki `auto`, persona Obsady `jezdziec` i `kowboj-zawsze-w-siodle`, stanowisko Stajnia. M7 nic tu nie dokłada |
 | Szybkie nogi, Zwinność szczura (Skoczek), Zew areny (Skok Gladiatora), Szarża Berserkera (reszta Berserka) | warstwa akcji i paleta Ruch (`HANDOFF_movement_hotbar.md`, kroki 3 i 5) |
 | §3.0.1 znaczniki akcji | warstwa akcji z handoffu ruchu (krok 3) — M7 E0 idzie po nim albo razem z nim |
 | Kocie kości (Cztery łapy) | karta upadku dnd5e 6 — już jest; M6 E5 nie zmienia jej kształtu |
@@ -422,7 +422,7 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | **E4** | R4 + R5 — ~20 zdolności | M–L | E0 | testy wierszy w `okolicznosci.test.mjs`; e2e `zdolnosci-walka` (Ulubiona broń, Mój wróg, Rzeźnik) |
 | **E5** | R6 — 4 zdolności na `class-resource-dice.mjs` z wykrywaniem spustu | M | E0, E4 | Bolesny atak sam proponuje kości przy sojuszniku obok celu |
 | **E6** | R8 — Przycelowanie | M | E0 | e2e: kończyna dolna → Powalenie; głowa → krytyk i Stopień Zranienia |
-| **E7** | R9 + R10 i zdolności zależne od M6 (Łyżeczka) i od handoffu ruchu (Zew areny, Zwinność szczura — plakietki po kroku 3 handoffu); Jeździec, Rodeo, Zawsze w siodle — plakietki w M4 W5 | M | M6 E3, handoff ruchu | wpisy z plakietką „pełne” albo „częściowe” z opisem ręcznej reszty |
+| **E7** | R9 + R10 i zdolności zależne od M6 (Łyżeczka) i od handoffu ruchu (Zew areny, Zwinność szczura — plakietki po kroku 3 handoffu); Jeździec, Rodeo, Zawsze w siodle — zrobione w M4 W5 (2026-10-30) | M | M6 E3, handoff ruchu | wpisy z plakietką „pełne” albo „częściowe” z opisem ręcznej reszty |
 | **E8** | Domknięcie: plakietki w paczkach, **`resync` kopii w kampanii za zgodą MG** (Zdolności, Sztuczki, Pochodzenia), `docs/Zdolnosci.md` (dla graczy: co robi automat, gdzie przycisk, co rozstrzyga stół), macierz w `IMPLEMENTATION.md`, tabela RAI w `scripts/wkk/README.md` (D4, U2, U4, U6, U9, U10, U12, U14, U18–U20, U23, U24, U28), persony Poligonu (`dev/poligon/roster.mjs`) z tymi zdolnościami i stanowisko „Sala prób” | S–M | wszystkie | Pokrycie w zakresie: każda zdolność drużyny kampanii ≥ częściowa; w całym zakresie ≥ 75 % pełnych albo częściowych |
 
 ### Testy

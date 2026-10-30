@@ -55,7 +55,9 @@ flowchart LR
    [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)**: część 1 (pojazdy na mapie taktycznej, jadący, silnik, awarie, naprawy)
    — **zrobiona 2026-10-19 (E0–E8), do weta MG na Poligonie (Garaż), §10 planu**; część 1b (pojazdy między scenami,
    E9–E11) i część 2 P1–P4 (plansza od nowa — złożona droga, metryka drogi, jadący, serie i obszary) **zrobione
-   2026-10-19**; mechanika pościgu (P5) — runda pytań w §10 planu. Grafika i dźwięki — atrapy do dostawy (MISSING §P).
+   2026-10-19**; przejście końcowe (skala grafiki istot, paleta kierowcy, kotwica tury, mechanika pościgu P5–P6,
+   wierzchowce W0–W5) **zrobione 2026-10-30** — do weta MG na Poligonie (Garaż, Pościg, Stajnia). Zostały zasoby:
+   7 dźwięków i żetony koni z góry (MISSING).
 5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3) — **zrobione 2026-10-27 (E0–E8)**,
    bez wydania; notatki etapów — `PLAN_m6_drobne_zasady.md` §11.
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
@@ -298,14 +300,16 @@ Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_m4_pojazdy.md` §6
 grafika planszy — `PLAN_poscigi.md` §2.2.
 
 - [x] Pojazdy między scenami: skala w metrach, pamięć obsady, Ctrl+X / Ctrl+V z załogą (M4 E9–E11, 2026-10-19)
-- [ ] **Wierzchowce jako nośniki** (z M6, MG 2026-10-25): ten sam kod dla pickupa, roweru, konia i czołgu; Inicjatywa
-  jeźdźca razem z „turą pasażera za kierowcą”, spadanie z siodła, atak z grzbietu — `PLAN_m4_pojazdy.md` §6.3 (W0–W5)
+- [x] **Wierzchowce jako nośniki** (z M6, MG 2026-10-25): ten sam kod dla pickupa, roweru, konia i czołgu; Inicjatywa
+  jeźdźca razem z „turą pasażera za kierowcą”, spadanie z siodła, atak z grzbietu — `PLAN_m4_pojazdy.md` §6.3 (W0–W5,
+  2026-10-30)
 - [x] Plansza — złożona droga, metryka drogi, jadący na planszy, serie z celowaniem (M4 P1–P4, 2026-10-19)
 
 - [x] Tabela Awarii pojazdów k20 (s. 265) + wyzwalacz (≥ Próg awarii, porażka kierowcy o 5+) — `pojazdy/awarie.mjs`
   (M4 część 1, 2026-10-19)
-- [ ] Komplikacje pościgu k20 (s. 267) i ST pościgu na planszy
-- [ ] Paleta manewrów kierowcy (s. 268) z ruchem potwierdzanym kliknięciem (decyzja D4)
+- [x] Komplikacje pościgu k20 (s. 267) i ST pościgu na planszy (M4 P5, 2026-10-30)
+- [x] Paleta manewrów kierowcy (s. 268): karta i efekt do następnej tury kierowcy, ruchy wymuszone przyciskami (D41, M4 P5,
+  2026-10-30)
 - [x] Karta pojazdu: TT, Próg obrażeń, Próg awarii, paliwo, załoga (`pojazdy/karta.mjs`); spalanie i bak w
   `KATALOG_POJAZDOW` i we fladze `paliwo` aktorów z paczki (`PALIWO_DOMYSLNE` zostaje dla pojazdów spoza katalogu)
 - [x] Wsiadanie, kierowanie, wypadanie, trudny teren a Szybkość — okno miejsc, karty jazdy z testami (`pojazdy/`)

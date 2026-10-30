@@ -67,10 +67,11 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Broń improwizowana (reguła ogólna), Łyżeczka | ✅ | `actors/improwizacja.mjs` (M6 E3, e2e `improwizacja`); typ obrażeń wybiera gracz w oknie, „działa jak…” — MG |
 | | Latanie | ✅ | `actors/latanie.mjs` (M6 E5, e2e `latanie`) |
 | | Pływanie, walka pod wodą, wspinaczka | 🟡 | `scenes/woda.mjs`, `wspinaczka.mjs` (M6 E6, e2e `woda`), `docs/Ruch-i-teren.md`; w walce karty same, poza walką na żądanie MG (U15); Regiony wody z eksportu map — `TODO.md` repo map, dziś MG rysuje je ręcznie |
-| | Walka na wierzchowcu, skakanie | ❌ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3); skok — `HANDOFF_movement_hotbar.md` (Region `skok` już działa) |
+| | Walka na wierzchowcu | ✅ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3, W0–W5): koń z Bestiariusza to nośnik jak pojazd — jeździec widoczny w siodle (`pojazdy/stan.mjs`, `jadacy.mjs`), Inicjatywa jeźdźca przez kotwicę tury (`combat/kotwica-tury.mjs`), akcje wierzchowca w palecie (`pojazdy/paleta.mjs`), utrzymanie się w siodle i atak z grzbietu (`jadacy.mjs`, `jazda.mjs`), Jeździec, Rodeo i Zawsze w siodle (`pojazdy/jezdziec.mjs`); stanowisko Poligonu Stajnia; e2e `wierzchowiec`. Żetony koni z góry — zamówienie (MISSING); pościg konny — po becie (W-P1) |
+| | Skakanie | ❌ | `HANDOFF_movement_hotbar.md` (Region `skok` już działa) |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
-| | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami, wrak i wybuch baku, broń montowana, Wojownik autostrady | ✅ | `scripts/pojazdy/*`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`. Grafika i dźwięki — atrapy do dostawy (MISSING §P) |
-| | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ❌ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2) |
+| | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami (dym awarii 5 — Region i Oślepienie zakrytych), wrak i wybuch baku, broń montowana (ręce w lalce), paleta kierowcy (akcje cech, bieg wsteczny), Wojownik autostrady; jadący rysowany jak na mapie, skala grafiki istot (ustawienie świata, f = 0,8) i pojazdy ×1,1 | ✅ | `scripts/pojazdy/*`, `scenes/skala-istot.mjs`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`, `pojazd-paleta`, `pojazd-prezentacja`, `garaz-grafika`. Grafika gotowa; 7 dźwięków do dostawy (MISSING §P) |
+| | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ✅ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2.5, P5–P6): tura pościgu z budżetem w znacznikach i zapasem, karta Testu Pościgu, komplikacje k20 z [Zastosuj], atak na kierowcę, RO pojazdu ze Slalomem, wręcz na znaczniku, dryf drogi, Za kierowcą, koniec pościgu i meta (`scenes/poscig-tura.mjs`, `poscig-zasady.mjs`), manewry w palecie kierowcy (`pojazdy/paleta.mjs`); stanowisko Poligonu Pościg (Start–meta); e2e `poscig-p5` |
 
 ## Files
 
@@ -1196,6 +1197,28 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M4 — przejście końcowe: skala istot, paleta kierowcy, kotwica tury, pościg, wierzchowce (2026-10-30)
+
+Plan: `PLAN_m4_pojazdy.md` §0.1 i §11. Bez wydania. Do weta MG na Poligonie: Garaż, Pościg (Start–meta), Stajnia.
+
+- **Skala grafiki istot (S0–S1, D42, D45):** ustawienie świata „Skala grafiki istot” (domyślnie 0,8) zmniejsza
+  obraz postaci, potworów i wierzchowców — pola, zasięgi i kratki bez zmian; pojazdy ×1,1 (obrys). Jadący rysuje
+  się tak duży jak ta sama postać obok pojazdu. Na planszy pościgu istota stawiana z paska ma prawdziwą skalę.
+- **Paleta kierowcy (K1, D41):** akcje cech (Gaz do dechy, Szósty bieg, Przerzutka, Akrobacja, Skok, Syrena, Działko
+  wodne, Lemiesz, Uciąg, Ollie, Slalom) i bieg wsteczny — karta i efekt do następnej tury kierowcy, budżet jazdy je
+  dolicza; Ale jazda! w źródle okoliczności.
+- **Lalka a broń montowana (K2)** i **dym awarii 5 (K3):** ręce strzelca na broni stanowiska, upuszczenie i schowanie
+  oznaczane; chmura dymu przypięta do pojazdu, Oślepienie jadących na zakrytych miejscach.
+- **Kotwica tury (KT, D39):** jeden rejestr dla towarzysza, pasażera „Za kierowcą” i wierzchowca.
+- **Mechanika pościgu (P5–P6, D34–D41):** Test Pościgu na początku tury kierowcy, budżet w znacznikach z zapasem,
+  komplikacje k20 z [Zastosuj], sześć manewrów, atak na kierowcę, RO pojazdu ze Slalomem, wręcz na znaczniku, dryf
+  drogi, koniec pościgu i meta. Poligon: plansza Start–meta i sondy D34–D41.
+- **Wierzchowce (W0–W5, D43):** koń z Bestiariusza wiezie widocznego jeźdźca i pasażera, Inicjatywa jeźdźca, akcje
+  wierzchowca, utrzymanie się w siodle, atak z grzbietu; Jeździec, Rodeo (ujeżdżanie, Kawalerzysta) i Zawsze w siodle.
+  Poligon: stanowisko Stajnia; Obsada: persony `jezdziec` i `kowboj-zawsze-w-siodle`.
+- **Testy:** Quench `pojazdy`, `poscig`, `towarzysze`, `lalka`; e2e `pojazd-paleta`, `poscig-p5`, `wierzchowiec` (nowe)
+  oraz `pojazd`, `pojazd-prezentacja`, `poscig`, `poscig-jadacy`, `garaz-grafika`, `towarzysz`.
 
 ### Dokumentacja: pełna lista zasad WKK (2026-10-28)
 
