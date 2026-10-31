@@ -156,7 +156,11 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Przedwojenna edukacja",
     text: "Ułatwienie w Testach INT dot. wiedzy sprzed Molocha + biegłość w 1 zestawie narzędzi.",
-    auto: []
+    auto: [
+      { what: "biegłość w jednym zestawie narzędzi — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "wiedza sprzed wojny (Testy INT) — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Czy test dotyczy wiedzy sprzed wojny — stół."
   },
   "nano-tech": {
     id: "nano-tech",
@@ -170,8 +174,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
       what: "Test końcowy produkcji i naprawy elektroniki (tag „elektronika” przepisu): "
         + "Ułatwienie domyślnie zaznaczone w oknie rzutu.",
       where: "production/robota.mjs"
-    }],
-    manual: "Biegłość w narzędziach elektronika — MG dopisuje na karcie (zdolność nie ma awansu z biegłością)."
+    },
+      { what: "biegłość w narzędziach małego elektronika — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
 
   /* --- Człowiek Pustyni --- */
@@ -182,7 +187,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Dieta cud",
     text: "Potrzebujesz tylko 1 l wody i 250 g jedzenia dziennie; środki lecznicze przywracają "
       + "2× więcej PW + biegłość m. kucharz.",
-    auto: []
+    auto: [
+      { what: "biegłość w narzędziach małego kucharza — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ],
+    manual: "Mniejsze dzienne zapotrzebowanie na wodę i jedzenie, 2× PW ze środków leczniczych — stół."
   },
   "duch-pustyni": {
     id: "duch-pustyni",
@@ -190,7 +198,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Duch pustyni",
     text: "Ułatwienie do Skradania się i Survivalu na pustyni i piaszczystym terenie.",
-    auto: []
+    auto: [
+      { what: "Skradanie się i Survival na pustyni — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Czy teren jest pustynny lub piaszczysty — stół."
   },
   "polegam-tylko-na-sobie": {
     id: "polegam-tylko-na-sobie",
@@ -199,7 +210,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Polegam tylko na sobie",
     text: "Biegłość m. kowal; własnoręcznie wykonana broń biała/miotana: +1 do Testów Ataku "
       + "i obrażeń.",
-    auto: []
+    auto: [
+      { what: "biegłość w narzędziach małego kowala — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ],
+    manual: "+1 do ataku i obrażeń bronią zrobioną własnoręcznie (bez palnej) — gracz."
   },
 
   /* --- Detroit --- */
@@ -209,7 +223,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Siódme poty",
     text: "Biegłość w Pojazdach; pojazdy którymi jeździsz poruszają się o 50% szybciej.",
-    auto: []
+    auto: [
+      { what: "biegłość w Pojazdach — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ],
+    manual: "Pojazdy, którymi jeździsz, szybsze o 50% — MG."
   },
   "jesli-ma-silnik-to-ruszy": {
     id: "jesli-ma-silnik-to-ruszy",
@@ -222,8 +239,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
       what: "Test końcowy produkcji i naprawy pojazdów mechanicznych (tag „pojazd-mechaniczny”): "
         + "Ułatwienie domyślnie zaznaczone w oknie rzutu.",
       where: "production/robota.mjs"
-    }],
-    manual: "Biegłość w narzędziach mechanika — MG dopisuje na karcie (zdolność nie ma awansu z biegłością)."
+    },
+      { what: "biegłość w narzędziach małego mechanika — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "ale-jazda": {
     id: "ale-jazda",
@@ -245,7 +263,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Górnik z dziada pradziada",
     text: "Ułatwienie w Testach SIŁ (Atletyka) + Udźwig ×2.",
-    auto: []
+    auto: [
+      { what: "Ułatwienie w Testach SIŁ (Atletyka) — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Udźwig ×2 — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "wychuchana-spluwa": {
     id: "wychuchana-spluwa",
@@ -259,9 +280,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
       what: "Oznaczenie jednej broni palnej jako wychuchanej (zmiana tylko poza walką, "
         + "jedna naraz) i pełna odporność tego egzemplarza na zacięcia.",
       where: "weapons/jams.mjs"
-    }],
-    manual: "Biegłość w narzędziach rusznikarza nadaje MG — nic nie sprawdza, czy postać "
-      + "ma ją z Pochodzenia."
+    },
+      { what: "biegłość w narzędziach małego rusznikarza — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "szlachetne-urodzenie": {
     id: "szlachetne-urodzenie",
@@ -269,7 +290,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "5–6",
     label: "Szlachetne urodzenie",
     text: "2 biegłości z listy: Historia, Oszustwo, Perswazja, Zastraszanie.",
-    auto: []
+    auto: [
+      { what: "dwie biegłości z listy (Historia, Oszustwo, Perswazja, Zastraszanie) — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
 
   /* --- Miami --- */
@@ -287,7 +310,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Ja już swoje odchorowałem",
     text: "Ułatwienie w Rzutach Obronnych na Kondycję.",
-    auto: []
+    auto: [
+      { what: "Ułatwienie w RO na KON — reguła dnd5e na przedmiocie", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   wloczykij: {
     id: "wloczykij",
@@ -295,7 +320,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "5–6",
     label: "Włóczykij",
     text: "Podmokłe tereny i rozległe piaski to nie trudny teren + biegłość m. kartograf.",
-    auto: []
+    auto: [
+      { what: "biegłość w narzędziach małego kartografa — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ],
+    manual: "Podmokłe tereny i piaski bez trudnego terenu — stół."
   },
 
   /* --- Missisipi --- */
@@ -314,7 +342,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Kwas w żyłach",
     text: "Ułatwienie w RO przeciw truciznom i kwasom.",
-    auto: []
+    auto: [
+      { what: "Ułatwienie w RO przeciw truciznom i kwasom — gdy źródło RO jest znane (karta, natywne RO)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "RO bez znanego źródła — MG zaznacza Ułatwienie w oknie rzutu."
   },
   "chodzmy-na-pewno-juz-utonal": {
     id: "chodzmy-na-pewno-juz-utonal",
@@ -323,7 +354,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Chodźmy, na pewno już utonął",
     text: "Wstrzymanie oddechu 2 min × mod. KON; Ułatwienie w Testach SIŁ (Atletyka) "
       + "przy pływaniu.",
-    auto: []
+    auto: [
+      { what: "Atletyka przy pływaniu — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Wstrzymanie oddechu 2 min × mod. KON — stół."
   },
 
   /* --- Nowy Jork --- */
@@ -333,7 +367,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Edukacja",
     text: "2 biegłości z listy: Przyroda, Medycyna, Historia, Technika, dowolne narzędzia.",
-    auto: []
+    auto: [
+      { what: "dwie biegłości z listy (Przyroda, Medycyna, Historia, Technika, zestaw narzędzi) — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "gambling-we-krwi": {
     id: "gambling-we-krwi",
@@ -381,7 +417,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Wiesz, zjadłem własnego psa",
     text: "Biegłość w Zastraszaniu + Ułatwienie w Testach Zastraszania + biegłość m. rzeźnik.",
-    auto: []
+    auto: [
+      { what: "biegłość w Zastraszaniu i narzędziach małego rzeźnika — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Ułatwienie w Testach Zastraszania — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "zawziety-sukinkot": {
     id: "zawziety-sukinkot",
@@ -401,7 +440,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Na symulatorach to działało",
     text: "2 biegłości z listy: Pojazdy, Technika, m. mechanik, m. elektronik.",
-    auto: []
+    auto: [
+      { what: "dwie biegłości z listy (Pojazdy, Technika, m. mechanik, m. elektronik) — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "hi-tech": {
     id: "hi-tech",
@@ -409,7 +450,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Hi-Tech",
     text: "Ułatwienie do każdego Testu Cechy związanego z obsługą urządzenia elektronicznego.",
-    auto: []
+    auto: [
+      { what: "Testy Cech przy obsłudze elektroniki — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Czy test dotyczy urządzenia elektronicznego — stół."
   },
   "moloch-cos-slyszalem": {
     id: "moloch-cos-slyszalem",
@@ -418,7 +462,11 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Moloch? Coś słyszałem",
     text: "Ułatwienie w Testach INT o maszynach Molocha + Ułatwienie w RO przeciw ich "
       + "zdolnościom i atakom obszarowym.",
-    auto: []
+    auto: [
+      { what: "Ułatwienie w RO przeciw zdolnościom maszyn — gdy źródło RO to maszyna", where: "combat/ulatwienia-testow.mjs" },
+      { what: "wiedza o maszynach Molocha (Testy INT) — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "RO bez znanego źródła — stół."
   },
 
   /* --- Salt Lake City --- */
@@ -429,7 +477,11 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Cholerny kaznodzieja",
     text: "Biegłość w Perswazji + Ułatwienie przy przekonywaniu do wiary; Ułatwienie w testach "
       + "Wpływania na wyznawców.",
-    auto: []
+    auto: [
+      { what: "biegłość w Perswazji — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "przekonywanie do wiary i Wpływanie na wyznawców — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Czy rozmowa dotyczy wiary — stół."
   },
   "przed-wojna-wszystko-bylo-lepiej": {
     id: "przed-wojna-wszystko-bylo-lepiej",
@@ -437,7 +489,11 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Przed wojną wszystko było lepiej",
     text: "Biegłość w Historii i Medycynie + Ułatwienie w testach o wiedzy sprzed wojny.",
-    auto: []
+    auto: [
+      { what: "biegłość w Historii i Medycynie — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "wiedza o czasach sprzed wojny — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }
+    ],
+    manual: "Czy test dotyczy czasów sprzed wojny — stół."
   },
   wierze: {
     id: "wierze",
@@ -456,7 +512,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Człowiek zwany koniem",
     text: "2 biegłości z listy: Atletyka, Tresura, Medycyna.",
-    auto: []
+    auto: [
+      { what: "dwie biegłości z listy (Atletyka, Tresura, Medycyna) — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "doktor-quinn": {
     id: "doktor-quinn",
@@ -464,7 +522,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Doktor Quinn",
     text: "Biegłość w Medycynie + Ułatwienie w Testach Medycyny.",
-    auto: []
+    auto: [
+      { what: "biegłość w Medycynie — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Ułatwienie w Testach Medycyny — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   "zdrowa-okolica": {
     id: "zdrowa-okolica",
@@ -472,7 +533,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "5–6",
     label: "Zdrowa okolica",
     text: "Biegłość w RO na Kondycję + Ułatwienie w Rzutach Obronnych na Kondycję.",
-    auto: []
+    auto: [
+      { what: "biegłość w RO na KON — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Ułatwienie w RO na KON — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
 
   /* --- Vegas --- */
@@ -482,7 +546,9 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Hazardzista",
     text: "Biegłość w Zwinnych dłoniach i Oszustwie.",
-    auto: []
+    auto: [
+      { what: "biegłość w Zwinnych dłoniach i Oszustwie — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   telepata: {
     id: "telepata",
@@ -490,7 +556,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Telepata",
     text: "Biegłość w Intuicji + Ułatwienie w Testach Intuicji.",
-    auto: []
+    auto: [
+      { what: "biegłość w Intuicji — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Ułatwienie w Testach Intuicji — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" }
+    ]
   },
   fart: {
     id: "fart",

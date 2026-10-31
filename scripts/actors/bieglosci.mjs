@@ -13,7 +13,8 @@
  *     mówi tylko, czy liczba się zgadza. Kopie przedmiotów sprzed M6 nie mają nowych awansów — audyt to zaznacza; nic
  *     nie poprawia sam (to robi hand-off `HANDOFF_bieglosci_retro.md`).
  *
- * Źródło awansu rozpoznajemy po fladze `flags.<mod>.bieglosci` (`profesja` / `sztuczka`), którą stawia builder.
+ * Źródło awansu rozpoznajemy po fladze `flags.<mod>.bieglosci` (`profesja` / `sztuczka` / `zdolnosc` / `pochodzenie`),
+ * którą stawia builder.
  */
 
 import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
@@ -60,7 +61,10 @@ function _linia(w, zrodlo) {
   return `${zrodlo}: nie było z czego wybrać (${w.ile}) — postać ma już wszystko z puli.`;
 }
 
-/** Kroki tego przebiegu awansu z naszych `Trait` (profesja, Sztuczka), już po zastosowaniu na klonie. */
+/** Etykieta źródła `Trait` w ostrzeżeniu (flaga `bieglosci` z buildera; zdolności — PLAN_m7 E3). */
+const ZRODLA_TRAITU = Object.freeze({ profesja: "profesja", sztuczka: "Sztuczka", zdolnosc: "zdolność", pochodzenie: "zdolność Pochodzenia" });
+
+/** Kroki tego przebiegu awansu z naszych `Trait` (profesja, Sztuczka, zdolność), już po zastosowaniu na klonie. */
 function _zbierz(manager) {
   const linie = [];
   for (const step of manager.steps ?? []) {
@@ -70,7 +74,7 @@ function _zbierz(manager) {
     const zrodlo = adv.flags?.[MODULE_ID]?.bieglosci;
     if (!zrodlo) continue;
     const cfg = adv.configuration;
-    const kto = zrodlo === "profesja" ? `profesja ${adv.item?.name ?? ""}`.trim() : `Sztuczka ${adv.item?.name ?? ""}`.trim();
+    const kto = `${ZRODLA_TRAITU[zrodlo] ?? zrodlo} ${adv.item?.name ?? ""}`.trim();
     for (const w of wnioskiZTraitu({ grants: cfg.grants, choices: cfg.choices, mode: cfg.mode, chosen: adv.value?.chosen ?? [] })) {
       linie.push(_linia(w, kto));
     }

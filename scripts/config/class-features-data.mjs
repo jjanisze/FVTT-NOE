@@ -96,7 +96,8 @@ export const CLASS_FEATURES = {
     level: 3,
     label: "Szósty zmysł",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w każdym RO na ZRC — reguła dnd5e; gaśnie przy Oślepieniu, Ogłuszeniu i Nieprzytomności (D14)", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Zagrożenie, którego postać nie mogła zarejestrować zmysłami — MG przełącza okno rzutu na zwykły.",
     text: "Masz pierwsze objawy paranoi. Wszędzie widzisz niebezpieczeństwo, ale dzięki temu łatwiej ci uniknąć zagrożenia. Otrzymujesz Ułatwienie w RO na Zręczność przeciw zagrożeniom, które jesteś w stanie zarejestrować zmysłami, np. pułapki, śliska nawierzchnia, spadający sufit, granat czy długa seria z karabinu maszynowego. Szósty zmysł nie działa, jeśli jesteś pod wpływem stanu Oślepienie, Ogłuszenie lub Nieprzytomność."
   },
   "brutalny-cios": {
@@ -531,8 +532,7 @@ export const CLASS_FEATURES = {
     level: 1,
     label: "Specjalizacja",
     action: null,
-    auto: [],
-    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
+    auto: [{ what: "Specjalizacja w jednej umiejętności i jednym narzędziu, które już masz — awans dnd5e (tryb „expertise”); na 5. poziomie jeszcze jedna (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }],
     text: "Wybierasz jedną ze swoich biegłości w umiejętnościach i jedną z biegłości w używaniu narzędzi. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Na 5. poziomie wybierasz kolejną biegłość w umiejętnościach lub w narzędziach i zyskujesz dla niej ten sam efekt."
   },
   "szybkie-nogi": {
@@ -645,8 +645,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     resource: { value: "@scale.zwiadowca.mojBiom" },
-    auto: [{ what: "wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", where: "actors/party-travel.mjs" }, { what: "w znanym biomie: drużyna pieszo bez spowolnienia w trudnym terenie, zbieractwo na 4 osoby", where: "actors/party-travel.mjs" }],
-    manual: "Ułatwienie w Testach INT i MDR w biomie, brak zaskoczenia (moduł tylko przypomina), skradanie w tempie ruchu i wiedza z tropienia — przy stole.",
+    auto: [{ what: "wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", where: "actors/party-travel.mjs" }, { what: "w znanym biomie: drużyna pieszo bez spowolnienia w trudnym terenie, zbieractwo na 4 osoby", where: "actors/party-travel.mjs" }, { what: "Ułatwienie w Testach INT i MDR — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy test dotyczy twojego biomu, brak zaskoczenia (moduł tylko przypomina), skradanie w tempie ruchu i wiedza z tropienia — przy stole.",
     text: "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy."
   },
   "moj-wrog": {
@@ -763,7 +763,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden z nich",
     action: null,
-    auto: [],
+    auto: [{ what: "biegłość w Zastraszaniu, a jeśli już jest — Specjalizacja — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }, { what: "Sami swoi: Ułatwienie w testach CHA — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy rozmówca to „typ twojego pokroju” — stół.",
     text: "Tatuujesz sobie symbol przynależności do siejącego grozę gangu. Byle kto ci nie podskoczy, a reszta nie ma odwagi się z tobą sprzeczać. Postrach okolicy. Otrzymujesz biegłość w umiejętności Zastraszanie. Jeśli już ją masz, otrzymujesz zamiast tego Specjalizację. Sami swoi. Bandziory traktują cię jak swojego. Masz Ułatwienie w testach opartych na Charyzmie, kiedy gadasz z typami twojego pokroju."
   },
   "odwazny-czy-glupi": {
@@ -774,8 +775,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Odważny czy głupi",
     action: null,
-    auto: [{ what: "Odważny: sojusznicy ≤ 9 m — +1k4 do RO przeciw Przerażeniu: sam, gdy źródło RO jest znane (karta, natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", where: "combat/zdolnosci-wsparcie.mjs" }],
-    manual: "Głupi (niewrażliwość na Przerażenie) — zaznacza gracz; dane zdolności w PLAN_m7 E3.",
+    auto: [{ what: "Odważny: sojusznicy ≤ 9 m — +1k4 do RO przeciw Przerażeniu: sam, gdy źródło RO jest znane (karta, natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", where: "combat/zdolnosci-wsparcie.mjs" }, { what: "Głupi: niewrażliwość na Przerażenie — efekt na przedmiocie (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }],
     text: "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu."
   },
   "nie-do-zdarcia": {
@@ -809,7 +809,8 @@ export const CLASS_FEATURES = {
     label: "Zew areny",
     action: null,
     requiresState: "neuro-berserk",
-    auto: [],
+    auto: [{ what: "Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Praca nóg — moduł nie liczy ataków okazyjnych (U26); Skok Gladiatora — handoff ruchu.",
     text: "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości."
   },
   "zawolajcie-kolegow": {
@@ -844,7 +845,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Reputacja",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w testach Wpływania — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy to negocjacje stawki; premia 1k4 × 10% po wykonaniu zlecenia — stół.",
     text: "Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki."
   },
   "skuteczny-cios": {
@@ -1001,7 +1003,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Smakuje jak arszenik",
     action: null,
-    auto: [],
+    auto: [{ what: "odporność na obrażenia od kwasu i trucizny — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }, { what: "Ułatwienie w RO na KON przeciw kwasom, truciznom i skażeniu — gdy źródło RO jest znane (karta, natywne RO)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "RO bez znanego źródła — MG zaznacza Ułatwienie w oknie rzutu.",
     text: "Lata babrania się w toksycznych świństwach zrobiły swoje. Zyskujesz odporność na obrażenia od kwasu i trucizny. Masz też Ułatwienie w Rzutach Obronnych na Kondycję, przeciw działaniu kwasów, trucizn i skażenia radioaktywnego."
   },
   "pirotechnika": {
@@ -1067,8 +1070,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Farmacja",
     action: null,
-    auto: [{ what: "schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
-    manual: "Biegłość w narzędziach małego aptekarza zaznacza gracz na karcie.",
+    auto: [{ what: "schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }, { what: "biegłość w narzędziach małego aptekarza — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }],
     text: "Podobno medyk nie jest maszynką do skręcania leków z piasku. Ale ty znasz się na chemii i farmakologii, więc wiesz, że lekarstwa można ukręcić ze wszystkiego innego. Zyskujesz biegłość w narzędziach małego aptekarza. Potrafisz produkować leki i substancje leczące, używając składników chemicznych, jak i organicznych. Potrzebne ci narzędzia małego chemika, małego aptekarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy farmaceutyczne. SCHEMATY FARMACEUTYCZNE NAZWA ST PRODUKCJA SUROWCE Antybiotyk (10 dawek) 10 20 godzin 20 CH/MO Alkohol tani (1 l) 10 3 godziny 3 CH/MO AR 23 (1 szt) 25 35 godzin 33 CH, 1 CZ, 1 MK AR-35 BETA (1 szt) 25 50 godzin 49 CH, 1 CZ,1 MK Deadline (1 szt) 20 25 godzin 25 CH/MO, 1 MK Detoks (5 fiolek) 10 20 godzin 20 CH/MO Medpak (1 szt) 15 13 godzin 11 CH/MO, 1 CZ, 1 MK Nitrogliceryna (20 g) 15 10 godzin 10 CH/MO Painkiller (10 tabletek) 10 10 godzin 10 CH/ MO Pocisk - strzykawka (1 szt) 10 3 godziny 2 CZ, 1 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO RadOff (1 szt) 15 15 godzin 14 CH/MO, 1 MK Środki dezynfekujące (1 l) 10 5 godzin 5 CH/MO Środek usypiający (1 fiol.) 10 10 godzin 10 CH/MO Tornado (1 działka) 25 50 godzin 50 CH/MO Trybiotyl (1 porcja) 15 15 godzin 15 CH/MO Trucizna (1 fiolka) 10 10 godzin 10 CH/MO Uzupełnienie zestawu małego medyka (1 użycie) 10 5 godzin 5 CH/MO, 1 MK WD-TABS (10 tabletek) 10 10 godzin 10 CH/MO Zamiennik dowolnego leku (5 dawek) 20 10 godzin 10 CH/MO"
   },
   "mechanika": {
@@ -1079,8 +1081,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mechanika",
     action: null,
-    auto: [{ what: "schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
-    manual: "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor. Biegłość w narzędziach małego mechanika zaznacza gracz.",
+    auto: [{ what: "schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }, { what: "biegłość w narzędziach małego mechanika — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor.",
     text: "Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. SCHEMATY MECHANICZNE NAZWA ST PRODUKCJA SUROWCE Buggy 20 500 godzin 50 CZ, 200 MK Deskorolka 5 20 godzin 5 CZ, 5 MK Motorower 20 200 godzin 50 CZ, 50 MK Motocykl 25 300 godzin 50 CZ, 100 MK Osobówka (składak) 20 1000 godzin 100 CZ, 400 MK Paralotnia 25 100 godzin 20 CZ, 30 MK Pancerz wspomagany 30 1000 godzin 100 CE, 100 CZ, 300 MK Rower 10 40 godzin 10 CZ, 10 MK Traktor (mały) 20 1000 godzin 100 CZ, 400 MK Wózek typu dwukółka 10 20 godzin 1 CZ, 19 MK"
   },
   "hakerstwo": {
@@ -1091,8 +1093,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Hakerstwo",
     action: null,
-    auto: [{ what: "schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }, { what: "dron z produkcji: aktor-maszyna ze stemplem twórcy (TT i PW z twojej PB i mod. INT w chwili budowy) i złożony uchwyt w ekwipunku (25 / 4 kg)", where: "actors/drony.mjs" }, { what: "Rozłóż [A] / Złóż [A] — żeton drona obok ciebie; uchwyt przenosi się, nie kopiuje", where: "actors/drony.mjs" }, { what: "kontroler zdalnego sterowania: domowy ze schematu (100 m) albo fabryczny (300 m); Komenda [B], Steruj [A], Reaguj [R] z kontrolerem w ręce — karta z dozwolonymi akcjami, plakietki „atak wymaga Steruj [A]” i „druga aktywacja w rundzie”", where: "actors/drony-sterowanie.mjs" }, { what: "broń zamontowana na dronie: atak 2|3 + twoja PB + ZRC operatora, obrażenia kość broni + twój mod. INT, ST obszarowe 8 + PB + ZRC operatora; magazynek schodzi", where: "actors/drony-bron.mjs" }, { what: "zasilanie na zegarze świata: akumulator 1 h (średni) / 4 h (mały), agregat 0,5 l/h; wyczerpany — Wyłączony; Włóż akumulator z uchwytu", where: "actors/drony-stan.mjs" }, { what: "dron na 0 PW — Wyłączony; Olbrzymie obrażenia — karta „Śmierć” (zniszczony); Tabela awarii z pominięciem niepasujących pozycji i [Zastosuj] dla MG", where: "combat/maszyny.mjs" }, { what: "latający bez napędu w powietrzu — karta „Spada” z obrażeniami od upadku; Powalenie — opada bez obrażeń", where: "actors/drony-stan.mjs" }, { what: "tryb zdalny: sterujesz tylko dronem i widzisz przez niego (WASD, Esc — wyjdź); sygnał z odległości, ścian i sceny „pod ziemią”; utrata sygnału — widok wraca; Przejmij sterowanie poza walką", where: "actors/drony-zdalne.mjs" }, { what: "obraz z kamery jak analogowe FPV: śnieg, zanik koloru, rwanie i toczenie ze słabnącym sygnałem; w ciemności 18 m w czerni i bieli", where: "actors/drony-obraz.mjs" }, { what: "OSD kamery (czcionka Betaflight): RSSI, nazwa, zasilanie, tryb i aktywacja z ostrzeżeniami, lista akcji, ARMED z licznikiem naboi, PW", where: "actors/drony-osd.mjs" }, { what: "naprawa drona z uchwytu: PW 2k6 + mod. INT (1 h, także w Postoju); awarie — karta MG albo części wg tabeli WKK; zniszczony dron to wrak", where: "actors/drony-naprawa.mjs" }],
-    manual: "Biegłość w narzędziach małego hakera zaznacza gracz.",
+    auto: [{ what: "schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }, { what: "biegłość w narzędziach małego hakera — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }, { what: "dron z produkcji: aktor-maszyna ze stemplem twórcy (TT i PW z twojej PB i mod. INT w chwili budowy) i złożony uchwyt w ekwipunku (25 / 4 kg)", where: "actors/drony.mjs" }, { what: "Rozłóż [A] / Złóż [A] — żeton drona obok ciebie; uchwyt przenosi się, nie kopiuje", where: "actors/drony.mjs" }, { what: "kontroler zdalnego sterowania: domowy ze schematu (100 m) albo fabryczny (300 m); Komenda [B], Steruj [A], Reaguj [R] z kontrolerem w ręce — karta z dozwolonymi akcjami, plakietki „atak wymaga Steruj [A]” i „druga aktywacja w rundzie”", where: "actors/drony-sterowanie.mjs" }, { what: "broń zamontowana na dronie: atak 2|3 + twoja PB + ZRC operatora, obrażenia kość broni + twój mod. INT, ST obszarowe 8 + PB + ZRC operatora; magazynek schodzi", where: "actors/drony-bron.mjs" }, { what: "zasilanie na zegarze świata: akumulator 1 h (średni) / 4 h (mały), agregat 0,5 l/h; wyczerpany — Wyłączony; Włóż akumulator z uchwytu", where: "actors/drony-stan.mjs" }, { what: "dron na 0 PW — Wyłączony; Olbrzymie obrażenia — karta „Śmierć” (zniszczony); Tabela awarii z pominięciem niepasujących pozycji i [Zastosuj] dla MG", where: "combat/maszyny.mjs" }, { what: "latający bez napędu w powietrzu — karta „Spada” z obrażeniami od upadku; Powalenie — opada bez obrażeń", where: "actors/drony-stan.mjs" }, { what: "tryb zdalny: sterujesz tylko dronem i widzisz przez niego (WASD, Esc — wyjdź); sygnał z odległości, ścian i sceny „pod ziemią”; utrata sygnału — widok wraca; Przejmij sterowanie poza walką", where: "actors/drony-zdalne.mjs" }, { what: "obraz z kamery jak analogowe FPV: śnieg, zanik koloru, rwanie i toczenie ze słabnącym sygnałem; w ciemności 18 m w czerni i bieli", where: "actors/drony-obraz.mjs" }, { what: "OSD kamery (czcionka Betaflight): RSSI, nazwa, zasilanie, tryb i aktywacja z ostrzeżeniami, lista akcji, ARMED z licznikiem naboi, PW", where: "actors/drony-osd.mjs" }, { what: "naprawa drona z uchwytu: PW 2k6 + mod. INT (1 h, także w Postoju); awarie — karta MG albo części wg tabeli WKK; zniszczony dron to wrak", where: "actors/drony-naprawa.mjs" }],
     text: "Czerwone oczy, blada cera, skrzywione plecy i słownictwo, którego nikt nie rozumie. Już raz pomylili cię z mutantem i drogo za to zapłacili. W Posterunku byłbyś szychą, ale nie przyjmujesz rozkazów od głupszych od siebie. Otrzymujesz biegłość w narzędziach małego hakera. Potrafisz produkować sprzęt komputerowy i drony, ale potrzebujesz do tego narzędzi małego hakera, małego elektronika, surowców i czasu. Otrzymujesz wylistowane poniżej schematy hakerskie. SCHEMATY HAKERSKIE NAZWA ST PRODUKCJA SUROWCE Adapter wifi 10 30 godzin 10 CE, 4 CZ, 1 MK Dron kroczący 20 70 godzin 15 CE, 1 CH, 10 CZ, 9 MK Dron latający 25 90 godzin 10 CE, 1 CH, 29 CZ, 5 MK Komputer osobisty 15 40 godzin 15 CE, 1 CH, 3 CZ, 1 MK Komputer gamingowy 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Kontroler zdalnego sterowania (zasięg 100 m) 15 40 godzin 10 CE, 9 CZ, 1 MK Laptop 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Laptop wojskowy 30 140 godzin 50 CE, 1 CH, 14 CZ, 5 MK Monitorek 10 20 godzin 7 CE, 2 CZ, 1 MK Nośnik danych 10 20 godzin 8 CE, 1 CZ, 1 MK Przeprogramowanie malutkiej i małej maszyny Molocha 10 25 godzin 10 CE, 2 CZ Przeprogramowanie średniej maszyny Molocha 15 50 godzin 20 CE, 5 CZ Przeprogramowanie dużej maszyny Molocha 20 100 godzin 40 CE, 10 CZ Router 10 20 godzin 8 CE, 1 CZ, 1 MK Drony. Jako Haker możesz zbudować własnego drona, który działa według poniższych zasad. Kierowanie. Aby móc kierować dronem, potrzebny jest kontroler zdalnego sterowania. W Akcji Bonusowej możesz wydawać proste polecenia, tj., broń się, idź tam, podążaj za mną, podnieś to, upuść to, zostań. Dron nie atakuje samodzielnie. W Akcji możesz przejąć pełne sterowanie i używając zamontowanych kamer, wykorzystać wszystkie jego zdolności. Naprawianie. Poświęcając godzinę pracy, możesz przy pomocy odpowiednich narzędzi przywrócić swojej maszynie PW, w ilości 2k6 + twój modyfikator Inteligencji. Zasilanie. Akumulator 24V wystarcza na 1 godzinę pracy średniego drona i 4 godziny pracy małego. Instalacja agregatu prądotwórczego pozwala na dodatkowe zasilanie spalinowe (0,5 l paliwa/1 h). DRON KROCZĄCY Średnia maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 10 x modyfikator Inteligencji twórcy; PRÓG OBRAŻEŃ 5 PRÓG AWARII 15. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 10 (+0) – – – SZYBKOŚĆ: 9 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 2 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. DRON LATAJĄCY Mała maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 5 x modyfikator Inteligencji twórcy, PRÓG AWARII: 10 SIŁ ZRC KON INT MDR CHA 10 (+0) 16 (+3) 10 (+0) – – – SZYBKOŚĆ: lot 18 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 15 kg. Maksymalny: 30 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 3 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora."
   },
   "serwisowanie": {
@@ -1103,8 +1104,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Serwisowanie",
     action: null,
-    auto: [{ what: "schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
-    manual: "Biegłość w narzędziach małego elektronika zaznacza gracz na karcie.",
+    auto: [{ what: "schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }, { what: "biegłość w narzędziach małego elektronika — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }],
     text: "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MK"
   },
   "clint": {
@@ -1204,7 +1204,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rutyna",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w RO na ZRC i MDR w trwającej walce (U27)", where: "combat/ulatwienia-testow.mjs" }],
     text: "Kiedy inni panikują, ty wykonujesz rutynowe działania na polu walki. Ostrzał artylerii, eksplodujące granaty, czy seria z karabinu, to tylko elementy taktyczne, utrudniające wykonanie misji. Kalkulujesz i oceniasz ryzyko, będąc tam, gdzie są największe szanse na przeżycie. W czasie walki masz Ułatwienie w Rzutach Obronnych na Zręczność i Mądrość."
   },
   "trening-w-zbroi": {
@@ -1228,7 +1228,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Skrytka",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w Skradaniu się przy ukrywaniu przedmiotu — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy przedmiot jest najwyżej mały; Niewidoczność ukrytej rzeczy — stół.",
     text: "Potrafisz schować kontrabandę w wozie tak, żeby żaden pies jej nie wyniuchał, i ukryć niewielką broń tak, żeby obmacujący cię zbok niczego nie wymacał. Kiedy ukrywasz przedmiot lub istotę o rozmiarze nie większym niż mały, testujesz swoją umiejętność Skradanie się i wykonujesz test z Ułatwieniem. Przedmiot lub istota otrzymuje stan Niewidoczność."
   },
   "slang": {
@@ -1239,7 +1240,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Slang",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w Perswazji i Śledztwie — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy chodzi o półświatek; informacje za godzinę i kilka fajek — stół.",
     text: "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja."
   },
   "znajomosci": {
@@ -1261,7 +1263,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "A co mi tam!",
     action: null,
-    auto: [],
+    auto: [{ what: "odporność na obrażenia od trucizny i radioaktywne — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }, { what: "Ułatwienie w RO przeciw chorobom, truciznom i radiacji — gdy źródło RO jest znane", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Odporność na choroby (to nie typ obrażeń) i RO bez znanego źródła — stół.",
     text: "Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia."
   },
   "szary": {
@@ -1272,7 +1275,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Szary",
     action: null,
-    auto: [],
+    auto: [{ what: "Mądra kryjówka: + wyższy z mod. INT i MDR do Skradania się — reguła dnd5e", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Niewidoczność w tłumie i Nie widzisz mnie (Ułatwienie przy ukrywaniu na otwartym terenie) — stół.",
     text: "Szczurów jest pełno. Żebracy, włóczędzy, ludzkie wraki. Nikt z nimi nie gada. Nikt nie zwraca na nich uwagi. Jeśli zachowujesz się inteligentnie, wykorzystując ludzką pogardę, potrafisz stać się niezauważalny (otrzymujesz stan Niewidoczność). Mądra kryjówka. Dodajesz modyfikator Inteligencji lub Mądrości do testów Skradania się. Nie widzisz mnie. Możesz próbować ukrywać się na otwartym terenie, nawet w jasnym świetle dnia, czy na środku pustego hangaru, np. jako zwykły żul szukający złomu. Jeśli nic nie mówisz i nie robisz hałasu, masz Ułatwienie w Testach Ukrywania się, dopóki kogoś nie zaatakujesz lub nie zrobisz czegoś głośnego."
   },
   "truciciel": {
@@ -1296,7 +1300,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zwinność szczura",
     action: null,
-    auto: [],
+    auto: [{ what: "Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Skoczek (Akrobatyka i ZRC przy skoku) — handoff ruchu.",
     text: "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły."
   },
   "jeden-strzal": {
@@ -1318,7 +1323,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Kamuflaż",
     action: null,
-    auto: [],
+    auto: [{ what: "Ghillie: Ułatwienie w Skradaniu się — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy strój i malowanie pasują do otoczenia; Niewidoczny po strzale — stół.",
     text: "Jesteś w stanie przygotować sobie kamuflaż tak dobrze pasujący do otoczenia, że nawet po oddaniu strzału, trudno cię dostrzec. Ghillie. Jeśli przygotujesz sobie strój maskujący i pomalujesz twarz zgodnie z barwami otoczenia, otrzymujesz Ułatwienie do Testów Skradania się. Niewidoczny. Jeśli przed strzałem z broni dystansowej lub rzucanej, masz stan Niewidoczność, to nie stajesz się widoczny po wykonaniu ataku, dopóki się nie przemieścisz. Warunkiem jest noszenie stroju maskującego i malowanie twarzy, które pasują do otoczenia. Cel pozna jedynie kierunek, z którego wykonano atak, chyba że używasz broni o właściwości cicha."
   },
   "strzelec": {
@@ -1393,7 +1399,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden z nas",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w testach Wpływania — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Czy rozmówca to stróż prawa; brak tłumaczenia się po zabiciu gangusa — fabuła.",
     text: "Nie musisz się za każdym razem tłumaczyć miejscowym stróżom prawa, kiedy ubijesz jakiegoś gangusa lub złodzieja. Nie tracisz czasu na dyskusje, mówisz, że jesteś z „policji” i że to było konieczne, a oni tylko kiwają głowami. Jesteś jednym z nich. Dodatkowo, kiedy próbujesz przekonać do czegoś lokalnych stróżów prawa, otrzymujesz Ułatwienie w testach Wpływania."
   },
   "rzuc-bron-i-gleba": {
@@ -1445,8 +1452,8 @@ export const CLASS_FEATURES = {
     action: "R",
     hotbar: true,
     legacyAbilityKey: "empiryk",
-    auto: [{ what: "TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }],
-    manual: "Ułatwienie w RO na efekty maszyn — gracz.",
+    auto: [{ what: "TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }, { what: "Ułatwienie w RO na efekty maszyn — gdy źródło RO to maszyna (karta, natywne RO dnd5e)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "RO bez znanego źródła — MG zaznacza Ułatwienie w oknie rzutu.",
     text: "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny."
   },
   "slaby-punkt": {
@@ -1490,7 +1497,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Sokole oko",
     action: null,
-    auto: [],
+    auto: [{ what: "+3 do Testów Ataku dystansowych (także bronią rzucaną) — reguła dnd5e na przedmiocie (U29)", where: "config/zdolnosci-efekty.mjs" }],
     text: "Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną."
   },
   "stalowy-nadgarstek": {
@@ -1530,7 +1537,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Ludzie",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
     text: "Twoim wrogiem są Ludzie. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-maszyny": {
@@ -1540,7 +1548,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Maszyny",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
     text: "Twoim wrogiem są Maszyny. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-mutanty": {
@@ -1550,7 +1559,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Mutanty",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
     text: "Twoim wrogiem są Mutanty. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-potwory": {
@@ -1560,7 +1570,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Potwory",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
     text: "Twoim wrogiem są Potwory. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-zwierzeta": {
@@ -1570,7 +1581,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Zwierzęta",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
     text: "Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   ...KOBALT_CLASS_FEATURES

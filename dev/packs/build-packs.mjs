@@ -32,6 +32,7 @@ import {
 import { featureStatus, featureCoverageHtml } from "../../scripts/config/class-features-coverage.mjs";
 import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
 import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
+import { EFEKTY, BIEGLOSCI } from "../../scripts/config/zdolnosci-efekty.mjs";
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES, grenadeDescription, buildAmmoItemData } from "../../scripts/config/ammo-data.mjs";
 import { WEAPONS, WEAPON_MAP, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
@@ -233,6 +234,23 @@ function toolTraits(tools) {
 /*  Feature items                                */
 /* -------------------------------------------- */
 
+/**
+ * Zdolność jako dane (PLAN_m7 E3, `scripts/config/zdolnosci-efekty.mjs`): Efekty Aktywne przenoszone na aktora
+ * (reguły dnd5e 6, niewrażliwości, odporności) i awanse `Trait` z biegłościami — poziom 0, chyba że grupa mówi inaczej.
+ */
+function efektyZdolnosci(kind, id, img) {
+  return (EFEKTY[id] ?? []).map((e, i) => ({
+    _id: idFor(`${kind}-effect`, `${id}.${i}`),
+    name: e.name, img, type: "base", transfer: true, disabled: false,
+    system: { changes: e.zmiany, ...(e.warunki ? { conditions: e.warunki } : {}) },
+    flags: { [MODULE_ID]: { zdolnoscEfekt: id } }
+  }));
+}
+
+function bieglosciZdolnosci(kind, id) {
+  return (BIEGLOSCI[id] ?? []).map((g, i) => traitGroup(g.poziom ?? 0, g, `${kind}-${id}-traits-${i}`, kind));
+}
+
 function buildFeature(f) {
   const activities = {};
   // Anything with an action tag or limited uses gets a clickable utility activity,
@@ -290,8 +308,10 @@ function buildFeature(f) {
               : [{ period: f.uses.period, type: "recoverAll" }]
           }
         : { max: "", spent: 0, recovery: [] },
-      activities
+      activities,
+      ...(BIEGLOSCI[f.id] ? { advancement: advancementById(bieglosciZdolnosci("zdolnosc", f.id)) } : {})
     },
+    ...(EFEKTY[f.id] ? { effects: efektyZdolnosci("feature", f.id, iconFor("abilities", f.id)) } : {}),
     flags: {
       [MODULE_ID]: {
         abilityId: f.id,
@@ -587,14 +607,46 @@ function buildChemia(key) {
  * Sztuczki to opisowe `feat`y: treść, wymagania i jawna informacja o tym, czy
  * system cokolwiek z nich egzekwuje (patrz `sztuczki-data.mjs`).
  */
+const ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
+
+/**
+ * „Rozwój Cechy” Sztuczki (`SZTUCZKI[key].cechy`, PLAN_m7 E3) as dnd5e's feat ASI — the 2024 shape (Grappler:
+ * `points: 1`, `cap: 1`, the rest `locked`). One ability → `fixed`, nothing to click; „dowolna” → one point anywhere;
+ * `{ punkty, cap }` → Ćwiczenie czyni mistrza (the stock „Ability Score Improvement” feat). Max 20 — dnd5e's default.
+ */
+function asiSztuczki(key, cechy) {
+  const zero = Object.fromEntries(ABILITIES.map(a => [a, 0]));
+  let configuration;
+  if (Array.isArray(cechy) && cechy.length === 1) {
+    configuration = { points: 0, cap: 1, fixed: { ...zero, [cechy[0]]: 1 }, locked: [] };
+  } else if (Array.isArray(cechy)) {
+    configuration = { points: 1, cap: 1, fixed: zero, locked: ABILITIES.filter(a => !cechy.includes(a)) };
+  } else if (cechy === "dowolna") {
+    configuration = { points: 1, cap: 1, fixed: zero, locked: [] };
+  } else {
+    configuration = { points: cechy.punkty, cap: cechy.cap, fixed: zero, locked: [] };
+  }
+  return advancement("AbilityScoreImprovement", 0, "Rozwój Cechy", { ...configuration, max: null, recommendation: null },
+    `sztuczka-${key}-asi`);
+}
+
 function buildSztuczka(key) {
   const doc = sztuczkaItemData(key, { _id: idFor("sztuczka", key) });
-  // Proficiencies the Sztuczka grants (Muzyk: two instruments — PLAN_m6 §5.1). Level 0: a feat has no level, dnd5e
-  // runs it when the feat lands on the character, from a class's Sztuczka pick or a drop.
-  const groups = SZTUCZKI[key].bieglosci ?? [];
-  if (groups.length) {
-    doc.system.advancement = advancementById(groups.map((g, i) => traitGroup(0, g, `sztuczka-${key}-traits-${i}`, "sztuczka")));
+  const def = SZTUCZKI[key];
+  // Level 0: a feat has no level, dnd5e runs it when the feat lands on the character, from a class's Sztuczka pick
+  // or a drop (PLAN_m7 E0 spike a — the synthetic steps of AdvancementManager).
+  const adv = [];
+  if (def.cechy) adv.push(asiSztuczki(key, def.cechy));
+  // Proficiencies the Sztuczka grants (Muzyk: two instruments — PLAN_m6 §5.1).
+  (def.bieglosci ?? []).forEach((g, i) => adv.push(traitGroup(0, g, `sztuczka-${key}-traits-${i}`, "sztuczka")));
+  // Patriota: „dodatkowa zdolność z listy zdolności swojego Pochodzenia” — the pool of all 36, like Spec 5 (the
+  // advancement cannot narrow it to the background the character carries).
+  if (key === "patriota") {
+    adv.push(advancement("ItemChoice", 0, "Zdolność z Twojego Pochodzenia", {
+      allowDrops: true, choices: { 0: { count: 1 } }, pool: ORIGIN_ABILITIES_POOL, restriction: { type: "feat" }, type: "feat"
+    }, "sztuczka-patriota-pochodzenie"));
   }
+  if (adv.length) doc.system.advancement = advancementById(adv);
   return { ...doc, _key: null };
 }
 
@@ -604,7 +656,9 @@ function buildSztuczka(key) {
 
 function buildOriginAbility(key) {
   const doc = originAbilityItemData(key, { _id: idFor("origin-ability", key) });
-  return { ...doc, img: iconFor("abilities", key), _key: null };
+  const img = iconFor("abilities", key);
+  if (BIEGLOSCI[key]) doc.system.advancement = advancementById(bieglosciZdolnosci("pochodzenie", key));
+  return { ...doc, img, ...(EFEKTY[key] ? { effects: efektyZdolnosci("origin-ability", key, img) } : {}), _key: null };
 }
 
 /**

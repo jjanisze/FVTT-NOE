@@ -20,9 +20,11 @@
  * meant to be gradual — add an `auto` entry the moment the code lands, and the
  * item text updates on the next pack build.
  *
- * Statistic bumps ("+1 ZRC lub MDR") are NOT counted as automation: dnd5e has no
- * "choose an ability to raise" advancement that fits a feat picked mid-level, so
- * the player edits the score. That is stated once here rather than 30 times.
+ * Statistic bumps ("+1 ZRC lub MDR") — `cechy`, from the "Rozwój Cechy" line of the October rulebook (s. 102–108):
+ * an ability list (one of them +1; one entry = fixed), `"dowolna"`, or `{ punkty, cap }` (Ćwiczenie czyni mistrza).
+ * The pack builder turns it into an `AbilityScoreImprovement` advancement at level 0 on the feat — dnd5e runs it in
+ * the same advancement flow that picked the Sztuczka (PLAN_m7 E0 spike a, the 2024 feat pattern) — and the coverage
+ * badge counts it as automation (PLAN_m7 E3, D8). Until 2026-10-31 the player edited the score by hand.
  */
 
 import { createCoverageLedger } from "./coverage-ledger.mjs";
@@ -123,6 +125,7 @@ export const SZTUCZKI_CATEGORIES = Object.freeze({
 export const SZTUCZKI = Object.freeze({
   aramis: {
     label: "Aramis",
+    cechy: ["str", "dex"],
     req: "ZRC 15+ lub SIŁ 15+",
     text: "+1 SIŁ lub ZRC; Wytrącenie w Akcji Bonusowej; Utrudnienie dla celu przy Rozbrajaniu.",
     category: "rekonesans",
@@ -135,6 +138,7 @@ export const SZTUCZKI = Object.freeze({
   },
   aspirynaIMietusy: {
     label: "Aspiryna i Miętusy",
+    cechy: ["int", "cha"],
     req: "Biegłość: Medycyna + Oszustwo",
     text: "+1 INT lub CHA; leczenie narzędziami małego medyka nawet bez zapasów (z Utrudnieniem).",
     category: "produkcja",
@@ -154,6 +158,7 @@ export const SZTUCZKI = Object.freeze({
   },
   bezTrzymanki: {
     label: "Bez trzymanki",
+    cechy: ["dex", "wis"],
     req: "ZRC 15+, biegłość Pojazdy",
     text: "+1 ZRC lub MDR; kierowanie jednośladem bez rąk (z Utrudnieniem MDR).",
     category: "pojazdy",
@@ -169,6 +174,7 @@ export const SZTUCZKI = Object.freeze({
   },
   ciszejNizCien: {
     label: "Ciszej niż cień",
+    cechy: ["dex"],
     req: "ZRC 15+, biegłość Skradanie się",
     text: "+1 ZRC; przeciwnicy mają Utrudnienie w Testach Percepcji dotyczących wykrycia obecności.",
     category: "mobilnosc",
@@ -178,6 +184,7 @@ export const SZTUCZKI = Object.freeze({
   },
   czlowiekPajak: {
     label: "Człowiek-pająk",
+    cechy: ["str", "dex"],
     req: "Biegłość: Atletyka",
     text: "+1 SIŁ lub ZRC; Szybkość wspinaczki = Szybkość (wolne ręce / zestaw wspinaczkowy); "
       + "pochylony teren nie jest trudnym terenem; Ułatwienie w RO przy upadku.",
@@ -186,6 +193,7 @@ export const SZTUCZKI = Object.freeze({
   },
   cwiczenieCzyniMistrza: {
     label: "Ćwiczenie czyni mistrza",
+    cechy: { punkty: 2, cap: 2 },
     req: "Brak",
     text: "+1 do dwóch Cech Bazowych lub +2 do jednej (max 20). Można wybierać wielokrotnie.",
     category: "rozwoj",
@@ -194,6 +202,7 @@ export const SZTUCZKI = Object.freeze({
   },
   fabrykator: {
     label: "Fabrykator",
+    cechy: ["dex", "int"],
     req: "INT 18+, biegłość w 3 zestawach narzędzi",
     text: "+1 INT lub ZRC; produkcja przedmiotów 50% szybciej (mnóstwo narzędzi).",
     category: "produkcja",
@@ -202,11 +211,11 @@ export const SZTUCZKI = Object.freeze({
       what: "Produkcja: czas pracy ×0,5 przy każdej pracy nad Robotą i w Szybkiej produkcji "
         + "(nie przy naprawie — D34).",
       where: "production/wykonawca.mjs"
-    }],
-    manual: "Rozwój Cechy (+1 INT lub ZRC) wybiera się przy awansie."
+    }]
   },
   fachowiec: {
     label: "Fachowiec",
+    cechy: "dowolna",
     req: "INT 11+",
     text: "+1 dowolna Cecha; biegłość w 2 wybranych zestawach narzędzi.",
     category: "produkcja",
@@ -228,6 +237,7 @@ export const SZTUCZKI = Object.freeze({
   },
   grenadier: {
     label: "Grenadier",
+    cechy: ["str"],
     req: "Brak",
     text: "+1 SIŁ; Stalowe jaja [R] — podbiegnięcie do granatu (4,5 m) i rzut w Reakcji "
       + "bez ataków okazyjnych; dwukrotny zasięg rzutu granatem.",
@@ -236,6 +246,7 @@ export const SZTUCZKI = Object.freeze({
   },
   gunfight: {
     label: "Gunfight",
+    cechy: ["dex"],
     req: "ZRC 17+",
     text: "+1 ZRC; brak Utrudnienia do Testów Ataku bronią palną od wrogów w zasięgu do 1,5 m.",
     category: "dystans",
@@ -243,6 +254,7 @@ export const SZTUCZKI = Object.freeze({
   },
   immunitet: {
     label: "Immunitet",
+    cechy: ["con"],
     req: "KON 13+, biegłość Medycyna",
     text: "+1 KON; nigdy nie złapiesz nowej choroby; Ułatwienie w RO przeciw chorobom już posiadanym.",
     category: "wsparcie",
@@ -291,6 +303,7 @@ export const SZTUCZKI = Object.freeze({
   },
   mistrzBroniBialej: {
     label: "Mistrz broni białej",
+    cechy: ["dex", "int"],
     req: "INT 13+, ZRC 15+",
     text: "+1 INT lub ZRC; Fechmistrz — wybrana broń biała zadaje dodatkową kostkę obrażeń "
       + "(zmiana po Długim Odpoczynku z treningiem).",
@@ -312,6 +325,7 @@ export const SZTUCZKI = Object.freeze({
   },
   muzyk: {
     label: "Muzyk",
+    cechy: ["cha"],
     req: "CHA 13+",
     text: "+1 CHA; biegłość w 2 instrumentach; Pieśń otuchy (1×/Długi Odpoczynek) — "
       + "Fuks dla 1 + mod. CHA sojuszników.",
@@ -326,8 +340,7 @@ export const SZTUCZKI = Object.freeze({
       what: "Biegłość w 2 instrumentach — awans przy wzięciu Sztuczki (wybór z kategorii „Instrumenty muzyczne”; "
         + "awans buduje `dev/packs/build-packs.mjs`).",
       where: "actors/bieglosci.mjs"
-    }],
-    manual: "+1 CHA dopisuje gracz."
+    }]
   },
   neo: {
     label: "Neo",
@@ -359,6 +372,7 @@ export const SZTUCZKI = Object.freeze({
   },
   pakowanie: {
     label: "Pakowanie",
+    cechy: ["int", "wis"],
     req: "INT lub MDR 13+",
     text: "+1 MDR lub INT; wyciągnięcie dowolnego przedmiotu z plecaka jako Darmowa Interakcja; "
       + "Udźwig ×2.",
@@ -389,6 +403,7 @@ export const SZTUCZKI = Object.freeze({
   },
   panPlaster: {
     label: "Pan Plaster",
+    cechy: ["int", "wis"],
     req: "Biegłość: Medycyna",
     text: "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; "
       + "połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
@@ -402,6 +417,7 @@ export const SZTUCZKI = Object.freeze({
   },
   patriota: {
     label: "Patriota",
+    cechy: "dowolna",
     req: "Brak",
     text: "+1 dowolna Cecha; dodatkowa zdolność z listy zdolności swojego Pochodzenia.",
     category: "rozwoj",
@@ -409,6 +425,7 @@ export const SZTUCZKI = Object.freeze({
   },
   pewnaReka: {
     label: "Pewna ręka",
+    cechy: ["dex"],
     req: "ZRC 17+",
     text: "+1 ZRC; Pewny strzał [B] — Szybkość spada do 0, ale Ułatwienie do 1 ataku dystansowego "
       + "(nie przy seriach); brak Utrudnienia za niestabilne podłoże.",
@@ -432,6 +449,7 @@ export const SZTUCZKI = Object.freeze({
   },
   przycelowanie: {
     label: "Przycelowanie",
+    cechy: ["dex"],
     req: "ZRC 15+",
     text: "+1 ZRC; Celuję w… [B] — wycelowanie w konkretną kończynę lub element; "
       + "TT wzrasta, ale trafienie daje efekt wg tabeli Przycelowania.",
@@ -440,6 +458,7 @@ export const SZTUCZKI = Object.freeze({
   },
   przydasie: {
     label: "Przydasie",
+    cechy: ["int", "wis"],
     req: "MDR 13+, biegłość Percepcja",
     text: "+1 INT lub MDR; surowce potrzebne do produkcji własnoręcznie wykonywanych "
       + "przedmiotów tańsze o 50%.",
@@ -448,11 +467,11 @@ export const SZTUCZKI = Object.freeze({
     auto: [{
       what: "Produkcja: surowce ×0,5 (w górę) przy starcie Roboty i w Szybkiej produkcji; czas bez zmian.",
       where: "production/wykonawca.mjs"
-    }],
-    manual: "Rozwój Cechy (+1 INT lub MDR) wybiera się przy awansie."
+    }]
   },
   pulpFiction: {
     label: "Pulp Fiction",
+    cechy: ["dex"],
     req: "ZRC 15+",
     text: "+1 ZRC; brak Utrudnienia przy strzelaniu pistoletem / PM jedną ręką; "
       + "każda broń palna krótka zyskuje właściwość lekka.",
@@ -462,8 +481,7 @@ export const SZTUCZKI = Object.freeze({
       what: "Strzał z pistoletu / PM jedną ręką bez domyślnego Utrudnienia; broń palna krótka liczy się "
         + "jako lekka przy ataku drugą ręką (Oporządzenie).",
       where: "combat/grip.mjs"
-    }],
-    manual: "Rozwój Cechy (+1 ZRC) wybiera się przy awansie."
+    }]
   },
   robinHood: {
     label: "Robin Hood",
@@ -475,6 +493,7 @@ export const SZTUCZKI = Object.freeze({
   },
   rodeo: {
     label: "Rodeo",
+    cechy: ["wis"],
     req: "MDR 13+, biegłość Tresura",
     text: "+1 MDR; ujeżdżanie dzikich zwierząt (Test MDR Tresura ST 10 + mod. SIŁ istoty); "
       + "Kawalerzysta — TT wierzchowca + Premia Biegłości.",
@@ -486,6 +505,7 @@ export const SZTUCZKI = Object.freeze({
   },
   rozroba: {
     label: "Rozróba",
+    cechy: ["str", "con"],
     req: "SIŁ 17+",
     text: "+1 SIŁ lub KON; Młynek [B] — gdy co najmniej 3 wrogów jest w zasięgu 1,5 m, "
       + "w Akcji Bonusowej jeden atak wręcz bronią białą przeciw każdemu z nich.",
@@ -506,6 +526,7 @@ export const SZTUCZKI = Object.freeze({
   },
   samuraj: {
     label: "Samuraj",
+    cechy: ["str", "dex"],
     req: "ZRC 13+",
     text: "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią zadającą obrażenia cięte; dobycie "
       + "finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji; TT +1, gdy dzierżysz "
@@ -538,6 +559,7 @@ export const SZTUCZKI = Object.freeze({
   },
   siekierezada: {
     label: "Siekierezada",
+    cechy: ["str", "dex"],
     req: "SIŁ 13+",
     text: "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; "
       + "zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
@@ -550,10 +572,11 @@ export const SZTUCZKI = Object.freeze({
       what: "Tańczący z siekierkami — TT +1 z siekierką z katalogu w każdej ręce (silnik TT).",
       where: "config/tt-rules.mjs"
     }],
-    manual: "Zasięg rzutu siekierkami ×2 — MG. Rozwój Cechy przy awansie."
+    manual: "Zasięg rzutu siekierkami ×2 — MG."
   },
   snajper: {
     label: "Snajper",
+    cechy: ["dex", "wis"],
     req: "ZRC 17+, MDR 15+",
     text: "+1 ZRC lub MDR; brak Utrudnienia za daleki dystans; "
       + "zasięg daleki broni dystansowej ×2.",
@@ -574,6 +597,7 @@ export const SZTUCZKI = Object.freeze({
   },
   szkolenieWBroni: {
     label: "Szkolenie w broni",
+    cechy: ["str", "dex"],
     req: "Brak",
     text: "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
     category: "rozwoj",
@@ -581,6 +605,7 @@ export const SZTUCZKI = Object.freeze({
   },
   szkolenieWCiezkimPancerzu: {
     label: "Szkolenie w ciężkim pancerzu",
+    cechy: ["str", "con"],
     req: "SIŁ 13+, wyszkolenie w średnim pancerzu",
     text: "+1 SIŁ lub KON; wyszkolenie w ciężkich pancerzach.",
     category: "rozwoj",
@@ -588,6 +613,7 @@ export const SZTUCZKI = Object.freeze({
   },
   szkolenieWSrednimPancerzu: {
     label: "Szkolenie w średnim pancerzu",
+    cechy: ["str", "con"],
     req: "SIŁ 10+, wyszkolenie w lekkim pancerzu",
     text: "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
     category: "rozwoj",
@@ -607,6 +633,7 @@ export const SZTUCZKI = Object.freeze({
   },
   szybkiBill: {
     label: "Szybki Bill",
+    cechy: ["dex", "con"],
     req: "ZRC 15+, KON 17+",
     text: "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); "
       + "Długie susy [B] — Bieganie w Akcji Bonusowej.",
@@ -615,6 +642,7 @@ export const SZTUCZKI = Object.freeze({
   },
   szybkiePalce: {
     label: "Szybkie palce",
+    cechy: ["dex"],
     req: "ZRC 15+",
     text: "+1 ZRC; Szybka wymiana [B] — zmiana magazynka lub szybkoładowacza w Akcji Bonusowej; "
       + "Szybkie przeładowanie [B] — ignorowanie właściwości przeładowanie "
@@ -632,6 +660,7 @@ export const SZTUCZKI = Object.freeze({
   },
   uczSieUcz: {
     label: "Ucz się, ucz",
+    cechy: "dowolna",
     req: "INT 10+",
     text: "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
     category: "produkcja",
@@ -646,6 +675,7 @@ export const SZTUCZKI = Object.freeze({
   },
   wrestler: {
     label: "Wrestler",
+    cechy: ["str"],
     req: "SIŁ 15+",
     text: "+1 SIŁ; Ułatwienie do Testów Ataku wobec Pochwyconego; Duszenie (zamiast ataku — "
       + "1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, "
@@ -655,6 +685,7 @@ export const SZTUCZKI = Object.freeze({
   },
   zlomiarz: {
     label: "Złomiarz",
+    cechy: ["int", "wis"],
     req: "INT 13+, biegłość Śledztwo",
     text: "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; "
       + "Ułatwienie w Testach MDR/INT podczas szabrowania.",
@@ -666,7 +697,7 @@ export const SZTUCZKI = Object.freeze({
       where: "postoj/szabrowanie.mjs"
     }],
     manual: "Wycena (Antykwariusz): Ułatwienie w Testach Śledztwa przy wycenianiu — wycenia MG "
-      + "(PLAN_m5_postoj D4). Rozwój Cechy (+1 INT lub MDR) wybiera się przy awansie."
+      + "(PLAN_m5_postoj D4)."
   }
 });
 
@@ -674,8 +705,24 @@ export const SZTUCZKI = Object.freeze({
 /*  Coverage                                     */
 /* -------------------------------------------- */
 
+const CECHA_PL = Object.freeze({ str: "SIŁ", dex: "ZRC", con: "KON", int: "INT", wis: "MDR", cha: "CHA" });
+
+/** Opis Rozwoju Cechy z pola `cechy` (do plakietki). */
+export function opisCech(cechy) {
+  if (!cechy) return "";
+  if (cechy === "dowolna") return "+1 do dowolnej Cechy";
+  if (!Array.isArray(cechy)) return `+${cechy.cap} do jednej Cechy albo +1 do ${cechy.punkty} Cech`;
+  return `+1 ${cechy.map(c => CECHA_PL[c] ?? c).join(" lub ")}`;
+}
+
+/** Plakietka liczy Rozwój Cechy jako automatykę: awans dnd5e przy wyborze Sztuczki (PLAN_m7 E3, D8). */
+const LEDGER_ENTRIES = Object.fromEntries(Object.entries(SZTUCZKI).map(([key, def]) => [key, def.cechy ? {
+  ...def,
+  auto: [{ what: `Rozwój Cechy (${opisCech(def.cechy)}, maks. 20) — awans przy wyborze Sztuczki`, where: "config/sztuczki-data.mjs" }, ...(def.auto ?? [])]
+} : def]));
+
 const LEDGER = createCoverageLedger({
-  entries: SZTUCZKI,
+  entries: LEDGER_ENTRIES,
   cssPrefix: "neuro-sztuczka",
   noneHtml: "<strong>Bez automatyki.</strong> Efekt rozstrzyga MG przy stole.",
   title: "Sztuczki"

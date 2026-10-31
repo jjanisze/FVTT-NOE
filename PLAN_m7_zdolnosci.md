@@ -568,3 +568,31 @@ pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze pr
   postaci Gracza 2 (cudzy aktor, przez MG), znacznik [B]; Gracz 2 klika „Dobra rada +3” pod swoim RO — +3, efekt
   zużyty; drugi raz bez użycia — przetrwał cudze tury i zniknął na początku następnej tury Gracza 1.
 - **Pokrycie** zdolności klasowych i profesji: 53/133 z automatyką (21 pełnych; przed M7 33).
+
+### E3 — R1 + R2, zdolności jako dane (2026-10-31)
+
+- **Rozwój Cechy wszystkich Sztuczek (D8):** pole `cechy` w `config/sztuczki-data.mjs` — 33 z 53 Sztuczek, wyciągnięte
+  z linii „Rozwój Cechy” podręcznika (październik, s. 102–108) i sprawdzone z opisami w danych. Builder robi z niego ASI
+  dnd5e na poziomie 0 przedmiotu (wzorzec 2024: jedna Cecha — `fixed`, wybór — `points: 1` i reszta `locked`,
+  „dowolna”, Ćwiczenie czyni mistrza — 2 punkty, maks. 2); Patriota dostaje też `ItemChoice` z puli zdolności Pochodzeń.
+  Plakietka liczy Rozwój Cechy jako automatykę; zniknęły „dopisuje gracz” i „wybiera się przy awansie”.
+- **Rozbieżność do MG:** **Ławnik** — tabela kampanii `Tabele/Sztuczki.md` (i opis w danych) daje „+1 SIŁ lub KON”,
+  podręcznik październikowy nie ma linii Rozwój Cechy (CHANGELOG milczy). Zgodnie z RAW — bez ASI.
+- **Zdolności jako dane** (`config/zdolnosci-efekty.mjs`): `EFEKTY` — 14 zdolności z Efektami Aktywnymi na przedmiocie
+  (Sokole oko, Szósty zmysł — D14 z warunkiem stanów, Głupi, Zew areny — Doping w Berserku, Smakuje jak arszenik,
+  A co mi tam, Szary — Mądra kryjówka, Zwinność szczura — Wspinacz; Pochodzenia: Ja już swoje odchorowałem, Zdrowa
+  okolica, Telepata, Doktor Quinn, Wiesz, zjadłem własnego psa, Górnik); `BIEGLOSCI` — 25 zdolności z awansem `Trait`
+  (Serwisowanie, Mechanika, Hakerstwo, Farmacja, Jeden z nich — `upgrade`, Specjalizacja Złodzieja — `expertise` na
+  poziomach 1 i 5, 19 Pochodzeń); `ULATWIENIA` — wiersze rejestru §3.0.3 (Rutyna, Empiryk, Smakuje jak arszenik,
+  A co mi tam, Kwas w żyłach, Moloch? Coś słyszałem) i 19 propozycji „stół” (§5.4: Slang, Jeden z nas, Sami swoi,
+  Reputacja, Kamuflaż, Skrytka, Mój biom, Mój wróg ×5, wiedza sprzed wojny…). Ostrzeżenie biegłości (M6 D1) nazywa
+  nowe źródła („zdolność”, „zdolność Pochodzenia”).
+- **`validate-packs`:** każda Sztuczka z `cechy` ma dokładnie jeden ASI zgodny z danymi (i żadna bez); każda zdolność z
+  `EFEKTY` / `BIEGLOSCI` niesie efekty i `Trait` (klucze narzędzi sprawdzone). Przy okazji: walidator liczył efekty
+  zagnieżdżone w przedmiotach jako dokumenty paczki — teraz je pomija.
+- **Kopie w kampanii:** dostaną efekty dopiero po `resync` (E8); awanse (`Trait`, ASI) nie uruchomią się ponownie na
+  istniejących postaciach — zgodnie z uwagą retro R2 (gracze dopisali Cechy i biegłości ręcznie).
+- **Testy:** `zdolnosci-efekty` (9) — Quench 1437/1437; e2e `postac` — Sztuczka na starcie otwiera awans, Rozwój Cechy
+  (+1 ZRC) trafia na kartę (spike E0 a potwierdzony na żywo); `zdolnosci-po-rzucie`, `zdolnosci-wsparcie` zielone.
+- **Pokrycie:** zdolności klasowe i profesji 73/133 z automatyką (28 pełnych); Sztuczki — każda z Rozwojem Cechy
+  przynajmniej częściowa.

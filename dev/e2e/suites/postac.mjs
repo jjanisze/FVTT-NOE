@@ -7,7 +7,8 @@
  *    as the mouse does — dnd5e reads the drop behaviour from the dragover) and walks the manager:
  *    Kość Wytrzymałości, skill choices, granted features, the class's own pick, scale values;
  *  - then a Pochodzenie (fixed +1/+1 and one of the region's three abilities);
- *  - then the starting Sztuczka (NOE: one Sztuczka or 50 gambli at creation; no advancement).
+ *  - then the starting Sztuczka (NOE: one Sztuczka or 50 gambli at creation) — its „Rozwój Cechy” runs as a
+ *    level-0 ASI on the feat (PLAN_m7 E3, D8).
  *
  * Checks what each step leaves on the actor. Two bugs this suite found on its first run (2026-10-08):
  * a level-1 character started at 8/16 PW — dnd5e's HitPoints advancement added its hit-die value while
@@ -98,6 +99,15 @@ async function advance({ picks = {} }) {
         box.checked = true;
         box.dispatchEvent(new Event("change", { bubbles: true }));
         chosen.add(row);
+        await __e2e.sleep(250);
+      }
+    } else if (type === "AbilityScoreImprovementAdvancement") {
+      // A choice „Rozwój Cechy” of a Sztuczka (PLAN_m7 E3): spend the points on the first abilities that allow it.
+      // A fixed one (Pochodzenie, Szybkie palce) has nothing to spend.
+      for (let k = 0; k < 6 && (flow.points?.available ?? 0) > 0; k++) {
+        const inc = [...mgr.element.querySelectorAll('[data-action="increase"]')].find(b => !b.disabled);
+        if (!inc) break;
+        inc.click();
         await __e2e.sleep(250);
       }
     } else if (type === "HitPointsAdvancement") {
@@ -248,14 +258,20 @@ export default {
       t.equal(s.hp.value, s.hp.max, "PW still full");
     });
 
-    await t.step("player drops the starting Sztuczka: Szybkie palce, flagged, no advancement", async () => {
+    // PLAN_m7 E3 (D8): „Rozwój Cechy” of a Sztuczka is a level-0 ASI on the feat — Szybkie palce: +1 ZRC, fixed.
+    await t.step("player drops the starting Sztuczka: Szybkie palce — its Rozwój Cechy (+1 ZRC) runs as an advancement", async () => {
+      const before = await p.eval(snapshot, { name: ACTOR });
       const d = await p.eval(dropOnSheet, { name: ACTOR, pack: "sztuczki", entry: "Szybkie palce" });
-      t.equal(d.manager, false, "a Sztuczka opened an AdvancementManager");
+      t.assert(d.manager, "dropping the Sztuczka opened no AdvancementManager", d);
+      const seen = await p.eval(advance, { picks: {} });
+      t.log(seen.join(" → "));
+      t.assert(seen.some(s => s.startsWith("AbilityScoreImprovement:")), "Rozwój Cechy step", seen);
       const s = await t.waitFor(p, n => {
         const x = game.actors.getName(n);
         return x.items.some(i => i.name === "Szybkie palce") || null;
       }, { args: [ACTOR], message: "the Sztuczka on the actor" }).then(() => p.eval(snapshot, { name: ACTOR }));
       t.equal(s.sztuczki.join(","), "Szybkie palce", "Sztuczki on the actor");
+      t.equal(s.abilities.dex, before.abilities.dex + 1, "ZRC after Szybkie palce");
       t.equal(s.classes.join(","), "twardziel 1", "class untouched");
     });
 

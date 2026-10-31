@@ -18,6 +18,7 @@ import { rozstrzygnijTest } from "../config/ulatwienia-testow.mjs";
 import { kombatantWlasciciela } from "./czas-efektu.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 import { jestMaszyna } from "../actors/towarzysze.mjs";
+import { ULATWIENIA } from "../config/zdolnosci-efekty.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const TESTY_OPT = "neuroTesty";
@@ -152,7 +153,16 @@ function _onRenderMessage(message, html) {
     "Warunek fabularny — moduł go nie ocenia. Gdy pasuje, MG zmienia tryb rzutu w oknie albo przerzuca.", " neuro-testy-stol"));
 }
 
+/** Czy aktor ma zdolność (klasową, profesji, opcję albo Pochodzenia) o tym identyfikatorze. */
+function _maZdolnosc(actor, id) {
+  return actor?.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === id || i.getFlag(MODULE_ID, "originAbilityId") === id) ?? false;
+}
+
 export function registerUlatwieniaTestow() {
+  // Wiersze ze zdolności jako dane (PLAN_m7 E3, `config/zdolnosci-efekty.mjs`); `klucz` — gdy zdolność ma ich kilka.
+  for (const row of ULATWIENIA) {
+    zarejestrujUlatwienieTestu({ ...row, id: row.klucz ?? row.id, ma: actor => _maZdolnosc(actor, row.id) });
+  }
   Hooks.on("dnd5e.preRollD20Test", _onPreRollD20Test);
   Hooks.on("dnd5e.renderChatMessage", _onRenderMessage);
   console.log(`${MODULE_ID} | Ułatwienia w testach i RO (rejestr §3.0.3) registered`);

@@ -20,6 +20,7 @@ import {
 } from "../../scripts/config/classes-data.mjs";
 import { CLASS_FEATURES, resolveGrant } from "../../scripts/config/class-features-data.mjs";
 import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
+import { EFEKTY, BIEGLOSCI } from "../../scripts/config/zdolnosci-efekty.mjs";
 import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { STATBLOKI, RODZAJE } from "../../scripts/config/towarzysze-data.mjs";
 import { TOOL_DEFS } from "../../scripts/config/tools.mjs";
@@ -65,8 +66,10 @@ async function load(name) {
   }
   const db = new ClassicLevel(copy, { keyEncoding: "utf8", valueEncoding: "json", createIfMissing: false });
   await db.open();
+  // Effects embedded in items (`!items.effects!<item>.<effect>` — abilities as data, PLAN_m7 E3) are not items; other
+  // embedded records (actor items, table results) stay — the checks below read them from this list.
   const docs = [];
-  for await (const [, v] of db.iterator()) docs.push(v);
+  for await (const [k, v] of db.iterator()) if (!k.startsWith("!items.effects!")) docs.push(v);
   await db.close();
   return docs;
 }
@@ -276,6 +279,53 @@ for (const [key, def] of Object.entries(SZTUCZKI).filter(([, d]) => d.bieglosci?
   const traits = advOf(doc).filter(a => a.type === "Trait" && a.level === 0);
   if (traits.length !== def.bieglosci.length) fail(`sztuczka ${key}: ${traits.length} Trait(s), data has ${def.bieglosci.length}`);
   for (const a of traits) checkTraitKeys(`sztuczka ${key}`, a);
+}
+
+/* ---- Sztuczki with „Rozwój Cechy”: exactly one level-0 ASI matching `cechy`; none without (PLAN_m7 E3) ---- */
+const ABILITY_KEYS = ["str", "dex", "con", "int", "wis", "cha"];
+let withAsi = 0;
+for (const [key, def] of Object.entries(SZTUCZKI)) {
+  const doc = sztuczki.find(d => d.flags?.[MODULE_ID]?.sztuczka === key);
+  const asi = advOf(doc).filter(a => a.type === "AbilityScoreImprovement");
+  if (!def.cechy) {
+    if (asi.length) fail(`sztuczka ${key}: ASI without \`cechy\` in the data`);
+    continue;
+  }
+  withAsi++;
+  if (asi.length !== 1 || asi[0].level !== 0) { fail(`sztuczka ${key}: expected one level-0 ASI, found ${asi.length}`); continue; }
+  const c = asi[0].configuration ?? {};
+  const fixedSum = ABILITY_KEYS.reduce((s, k) => s + (Number(c.fixed?.[k]) || 0), 0);
+  const open = ABILITY_KEYS.filter(k => !(c.locked ?? []).includes(k));
+  const ok = Array.isArray(def.cechy) && def.cechy.length === 1
+    ? c.points === 0 && fixedSum === 1 && c.fixed[def.cechy[0]] === 1
+    : Array.isArray(def.cechy)
+      ? c.points === 1 && c.cap === 1 && fixedSum === 0 && open.length === def.cechy.length && def.cechy.every(k => open.includes(k))
+      : def.cechy === "dowolna"
+        ? c.points === 1 && c.cap === 1 && open.length === 6
+        : c.points === def.cechy.punkty && c.cap === def.cechy.cap && open.length === 6;
+  if (!ok) fail(`sztuczka ${key}: ASI ${JSON.stringify(c)} does not match cechy ${JSON.stringify(def.cechy)}`);
+}
+notes.push(`Sztuczki z Rozwojem Cechy (ASI): ${withAsi}`);
+
+/* ---- abilities as data (PLAN_m7 E3): effects and level-0 Traits on the feature / origin-ability items ---- */
+{
+  const byKey = new Map([
+    ...features.map(d => [d.flags?.[MODULE_ID]?.abilityId, d]),
+    ...pochodzenia.map(d => [d.flags?.[MODULE_ID]?.originAbilityId, d])
+  ]);
+  for (const [id, efekty] of Object.entries(EFEKTY)) {
+    const doc = byKey.get(id);
+    if (!doc) { fail(`EFEKTY: no ability item "${id}"`); continue; }
+    if ((doc.effects ?? []).length !== efekty.length) fail(`${id}: ${(doc.effects ?? []).length} effect(s), data has ${efekty.length}`);
+  }
+  for (const [id, grupy] of Object.entries(BIEGLOSCI)) {
+    const doc = byKey.get(id);
+    if (!doc) { fail(`BIEGLOSCI: no ability item "${id}"`); continue; }
+    const traits = advOf(doc).filter(a => a.type === "Trait");
+    if (traits.length !== grupy.length) fail(`${id}: ${traits.length} Trait(s), data has ${grupy.length}`);
+    for (const a of traits) checkTraitKeys(id, a);
+  }
+  notes.push(`zdolności jako dane: efekty ${Object.keys(EFEKTY).length}, biegłości ${Object.keys(BIEGLOSCI).length}`);
 }
 
 /* ---- features ---- */

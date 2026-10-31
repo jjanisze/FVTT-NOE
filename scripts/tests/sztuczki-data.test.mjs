@@ -49,9 +49,10 @@ export function registerSztuczkiDataTests(quench) {
     });
 
     describe("Rejestr automatyki", function () {
-      it("status wynika z `auto` i `manual`", function () {
+      it("status wynika z `auto` i `manual` (Rozwój Cechy z `cechy` liczy się jak wpis `auto` — PLAN_m7 E3)", function () {
         for (const [key, def] of Object.entries(SZTUCZKI)) {
-          const expected = !def.auto.length ? "none" : (def.manual ? "partial" : "auto");
+          const ile = def.auto.length + (def.cechy ? 1 : 0);
+          const expected = !ile ? "none" : (def.manual ? "partial" : "auto");
           expect(sztuczkaStatus(key), key).to.equal(expected);
         }
       });

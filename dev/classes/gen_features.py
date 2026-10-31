@@ -344,7 +344,10 @@ COVERAGE = {
     },
 
     # ---- Złodziej ----
-    "specjalizacja-zlodziej": {"manual": _PICK_ON_SHEET},
+    "specjalizacja-zlodziej": {
+        "auto": [("Specjalizacja w jednej umiejętności i jednym narzędziu, które już masz — awans dnd5e (tryb „expertise”); "
+                  "na 5. poziomie jeszcze jedna (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs")],
+    },
     "kocie-kosci": {
         "auto": [
             ("Ciche łapy [R]: przycisk pod własnym testem Skradania się — jedna lub więcej kości z puli, Reakcja "
@@ -386,9 +389,10 @@ COVERAGE = {
         "auto": [
             ("wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", "actors/party-travel.mjs"),
             ("w znanym biomie: drużyna pieszo bez spowolnienia w trudnym terenie, zbieractwo na 4 osoby", "actors/party-travel.mjs"),
+            ("Ułatwienie w Testach INT i MDR — podsuwane w oknie rzutu („do rozważenia”, PLAN_m7 E3)", "combat/ulatwienia-testow.mjs"),
         ],
-        "manual": "Ułatwienie w Testach INT i MDR w biomie, brak zaskoczenia (moduł tylko przypomina), "
-                  "skradanie w tempie ruchu i wiedza z tropienia — przy stole.",
+        "manual": "Czy test dotyczy twojego biomu, brak zaskoczenia (moduł tylko przypomina), skradanie w tempie ruchu "
+                  "i wiedza z tropienia — przy stole.",
     },
     "cichy-krok": {
         "auto": [
@@ -398,6 +402,80 @@ COVERAGE = {
         ],
     },
 
+    # PLAN_m7 E3 (R1, R2): zdolności jako dane — `config/zdolnosci-efekty.mjs`; warunki spoza rzutu — rejestr §3.0.3.
+    "sokole-oko": {"auto": [("+3 do Testów Ataku dystansowych (także bronią rzucaną) — reguła dnd5e na przedmiocie (U29)", "config/zdolnosci-efekty.mjs")]},
+    "szosty-zmysl": {
+        "auto": [("Ułatwienie w każdym RO na ZRC — reguła dnd5e; gaśnie przy Oślepieniu, Ogłuszeniu i Nieprzytomności (D14)", "config/zdolnosci-efekty.mjs")],
+        "manual": "Zagrożenie, którego postać nie mogła zarejestrować zmysłami — MG przełącza okno rzutu na zwykły.",
+    },
+    "zew-areny": {
+        "auto": [("Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", "config/zdolnosci-efekty.mjs")],
+        "manual": "Praca nóg — moduł nie liczy ataków okazyjnych (U26); Skok Gladiatora — handoff ruchu.",
+    },
+    "smakuje-jak-arszenik": {
+        "auto": [("odporność na obrażenia od kwasu i trucizny — efekt na przedmiocie", "config/zdolnosci-efekty.mjs"),
+                 ("Ułatwienie w RO na KON przeciw kwasom, truciznom i skażeniu — gdy źródło RO jest znane (karta, natywne RO)", "combat/ulatwienia-testow.mjs")],
+        "manual": "RO bez znanego źródła — MG zaznacza Ułatwienie w oknie rzutu.",
+    },
+    "a-co-mi-tam": {
+        "auto": [("odporność na obrażenia od trucizny i radioaktywne — efekt na przedmiocie", "config/zdolnosci-efekty.mjs"),
+                 ("Ułatwienie w RO przeciw chorobom, truciznom i radiacji — gdy źródło RO jest znane", "combat/ulatwienia-testow.mjs")],
+        "manual": "Odporność na choroby (to nie typ obrażeń) i RO bez znanego źródła — stół.",
+    },
+    "szary": {
+        "auto": [("Mądra kryjówka: + wyższy z mod. INT i MDR do Skradania się — reguła dnd5e", "config/zdolnosci-efekty.mjs")],
+        "manual": "Niewidoczność w tłumie i Nie widzisz mnie (Ułatwienie przy ukrywaniu na otwartym terenie) — stół.",
+    },
+    "zwinnosc-szczura": {
+        "auto": [("Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", "config/zdolnosci-efekty.mjs")],
+        "manual": "Skoczek (Akrobatyka i ZRC przy skoku) — handoff ruchu.",
+    },
+    "rutyna": {"auto": [("Ułatwienie w RO na ZRC i MDR w trwającej walce (U27)", "combat/ulatwienia-testow.mjs")]},
+    "jeden-z-nich": {
+        "auto": [("biegłość w Zastraszaniu, a jeśli już jest — Specjalizacja — awans przy wyborze zdolności (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs"),
+                 ("Sami swoi: Ułatwienie w testach CHA — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy rozmówca to „typ twojego pokroju” — stół.",
+    },
+    "slang": {
+        "auto": [("Ułatwienie w Perswazji i Śledztwie — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy chodzi o półświatek; informacje za godzinę i kilka fajek — stół.",
+    },
+    "jeden-z-nas": {
+        "auto": [("Ułatwienie w testach Wpływania — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy rozmówca to stróż prawa; brak tłumaczenia się po zabiciu gangusa — fabuła.",
+    },
+    "reputacja": {
+        "auto": [("Ułatwienie w testach Wpływania — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy to negocjacje stawki; premia 1k4 × 10% po wykonaniu zlecenia — stół.",
+    },
+    "kamuflaz": {
+        "auto": [("Ghillie: Ułatwienie w Skradaniu się — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy strój i malowanie pasują do otoczenia; Niewidoczny po strzale — stół.",
+    },
+    "skrytka": {
+        "auto": [("Ułatwienie w Skradaniu się przy ukrywaniu przedmiotu — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Czy przedmiot jest najwyżej mały; Niewidoczność ukrytej rzeczy — stół.",
+    },
+    "moj-wrog-ludzie": {
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    },
+    "moj-wrog-maszyny": {
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    },
+    "moj-wrog-mutanty": {
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    },
+    "moj-wrog-potwory": {
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    },
+    "moj-wrog-zwierzeta": {
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
+        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    },
     # ---- Profesje ----
     # PLAN_m7 E2 (R7): wsparcie sojusznika — `combat/zdolnosci-wsparcie.mjs`.
     "laska-boza": {
@@ -425,8 +503,8 @@ COVERAGE = {
     },
     "odwazny-czy-glupi": {
         "auto": [("Odważny: sojusznicy ≤ 9 m — +1k4 do RO przeciw Przerażeniu: sam, gdy źródło RO jest znane (karta, "
-                  "natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", "combat/zdolnosci-wsparcie.mjs")],
-        "manual": "Głupi (niewrażliwość na Przerażenie) — zaznacza gracz; dane zdolności w PLAN_m7 E3.",
+                  "natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", "combat/zdolnosci-wsparcie.mjs"),
+                 ("Głupi: niewrażliwość na Przerażenie — efekt na przedmiocie (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs")],
     },
     "amen": {
         "auto": [("przycisk pod nieudanym Testem Cechy, Ataku albo RO (bez znanego ST — zawsze, U4): +1k6, nowy wynik "
@@ -464,8 +542,9 @@ COVERAGE = {
         "manual": "Refleks łowcy (Inicjatywa) i Zabójca mutantów (Ułatwienie raz w rundzie) — gracz.",
     },
     "empiryk": {
-        "auto": [("TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", "combat/obrona.mjs")],
-        "manual": "Ułatwienie w RO na efekty maszyn — gracz.",
+        "auto": [("TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", "combat/obrona.mjs"),
+                 ("Ułatwienie w RO na efekty maszyn — gdy źródło RO to maszyna (karta, natywne RO dnd5e)", "combat/ulatwienia-testow.mjs")],
+        "manual": "RO bez znanego źródła — MG zaznacza Ułatwienie w oknie rzutu.",
     },
     "dziewiec-zyc": {
         "auto": [("Koci odskok [R] — Kocia kość do TT do początku następnej tury, w oknie „Reakcje celu” "
@@ -479,17 +558,18 @@ COVERAGE = {
         "auto": [("schematy rusznikarskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
     },
     "farmacja": {
-        "auto": [("schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
-        "manual": "Biegłość w narzędziach małego aptekarza zaznacza gracz na karcie.",
+        "auto": [("schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES),
+                 ("biegłość w narzędziach małego aptekarza — awans przy wyborze zdolności (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs")],
     },
     "mechanika": {
-        "auto": [("schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
-        "manual": "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor. "
-                  "Biegłość w narzędziach małego mechanika zaznacza gracz.",
+        "auto": [("schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES),
+                 ("biegłość w narzędziach małego mechanika — awans przy wyborze zdolności (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs")],
+        "manual": "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor.",
     },
     "hakerstwo": {
         "auto": [
             ("schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES),
+            ("biegłość w narzędziach małego hakera — awans przy wyborze zdolności (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs"),
             ("dron z produkcji: aktor-maszyna ze stemplem twórcy (TT i PW z twojej PB i mod. INT w chwili budowy) "
              "i złożony uchwyt w ekwipunku (25 / 4 kg)", "actors/drony.mjs"),
             ("Rozłóż [A] / Złóż [A] — żeton drona obok ciebie; uchwyt przenosi się, nie kopiuje", "actors/drony.mjs"),
@@ -513,11 +593,10 @@ COVERAGE = {
             ("naprawa drona z uchwytu: PW 2k6 + mod. INT (1 h, także w Postoju); awarie — karta MG albo części wg tabeli "
              "WKK; zniszczony dron to wrak", "actors/drony-naprawa.mjs"),
         ],
-        "manual": "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {
-        "auto": [("schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
-        "manual": "Biegłość w narzędziach małego elektronika zaznacza gracz na karcie.",
+        "auto": [("schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES),
+                 ("biegłość w narzędziach małego elektronika — awans przy wyborze zdolności (PLAN_m7 E3)", "config/zdolnosci-efekty.mjs")],
     },
     "rewolwerowiec": {
         "auto": [
