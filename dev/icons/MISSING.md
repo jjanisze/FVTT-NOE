@@ -45,17 +45,18 @@ Missing in `sounds/pojazdy/`:
 
 Specification: mono 44.1 kHz Vorbis, CC0, M5 loudness rules.
 
-## A. Action markers (M7) — 2 status glyphs
+## A. Action markers (M7) — 3 status glyphs
 
-Requested for `PLAN_m7_zdolnosci.md` §3.0.1 (GM decisions D5–D6). Shown on the token and in the
-Token HUD; core placeholders until delivery (`icons/svg/lightning.svg`, `icons/svg/clockwork.svg`,
-set in `scripts/config/conditions.mjs`). Class A white glyphs — [Pipeline.md](Pipeline.md), GM review;
+Requested for `PLAN_m7_zdolnosci.md` §3.0.1 (GM decisions D5–D6) and E4 (Strzelec, U20). Shown on the token and in
+the Token HUD; core placeholders until delivery (`icons/svg/lightning.svg`, `icons/svg/clockwork.svg`,
+`icons/svg/target.svg`, set in `scripts/config/conditions.mjs`). Class A white glyphs — [Pipeline.md](Pipeline.md), GM review;
 size and stroke as the other status glyphs ([ASSETS.md](../../icons/statuses/ASSETS.md)).
 
 | Missing file | Status id | Meaning |
 |---|---|---|
 | `icons/statuses/reakcja.svg` + `.webp` | `reakcja` | Reaction used — back at the start of the owner's next turn; must not read as Unikanie |
 | `icons/statuses/akcja-bonusowa.svg` + `.webp` | `akcjaBonusowa` | Bonus Action used this turn |
+| `icons/statuses/stanowisko-snajperskie.svg` + `.webp` | `stanowiskoSnajperskie` | Strzelec's sniper nest after 5 rounds of aiming (range ×3); gone when the token moves — must not read as a crosshair "targeted" marker |
 
 ## How an item gets added here
 

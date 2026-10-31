@@ -99,6 +99,8 @@ import { registerPoRzucie, poRzucieApi } from "./combat/po-rzucie.mjs";
 import { registerZdolnosciPoRzucie } from "./combat/zdolnosci-po-rzucie.mjs";
 import { registerZdolnosciWspolne } from "./combat/zdolnosci-wspolne.mjs";
 import { registerZdolnosciWsparcie } from "./combat/zdolnosci-wsparcie.mjs";
+import { registerZdolnosciWalka } from "./combat/zdolnosci-walka.mjs";
+import { registerZdolnosciAkcje, ulubionaBronApi } from "./combat/zdolnosci-akcje.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -381,6 +383,11 @@ Hooks.once("init", () => {
   registerZdolnosciPoRzucie();
   // Wsparcie sojusznika (PLAN_m7 E2, R7): Dobra rada, Łaska boża, Let's rock, Odważny, Kolejka, Kakofonia, Rzuć broń.
   registerZdolnosciWsparcie();
+  // Walka z kontekstem (PLAN_m7 E4, R4 + R5): Mój wróg, Rzeźnik, Zawołajcie kolegów, Dwóch na jednego, Zasadzka, Jeden
+  // strzał, Mutant na śniadanie, Słaby punkt, Zwód, Strzelec, Zabójcza spluwa; Ulubiona broń, Promocja, Celowanie,
+  // Szybka gadka, Szybkie badanie.
+  registerZdolnosciWalka();
+  registerZdolnosciAkcje();
   registerObalajaca();
   registerWeaponSaveProperties();
   // Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) (PLAN_m3 §7.12).
@@ -591,6 +598,8 @@ Hooks.once("ready", () => {
   game.neuroshima.poRzucie = poRzucieApi;
   // Ułatwienia w testach i RO (PLAN_m7 §3.0.3) — game.neuroshima.ulatwieniaTestow.wiersze(), .rozstrzygnij(config)
   game.neuroshima.ulatwieniaTestow = ulatwieniaTestowApi;
+  // Ulubiona broń (PLAN_m7 §3.0.5) — game.neuroshima.ulubionaBron.lista(actor), .wybierz(actor, item), .model(weapon)
+  game.neuroshima.ulubionaBron = ulubionaBronApi;
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };

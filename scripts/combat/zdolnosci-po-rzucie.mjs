@@ -11,6 +11,7 @@
  * | Twardość (Twardziel 3) | nieudany RO albo RPŚ + kość Twardości (U7) | właściciel | pula |
  * | Poprawka (Kowboj — Clint) | przerzut Testu Ataku bronią palną, raz na walkę | właściciel | użycie |
  * | Czas patriotów (Nowy Jork, s. 63) | +5 do Testu Cechy albo RO | właściciel | 1 /DO |
+ * | Trajektoria (Spec 7, s. 79) | + mod. INT do Testu Ataku dystansowego (PLAN_m7 E4; po rzucie jak D4) | właściciel | użycie (PB /DO) |
  * | Fart (Vegas, s. 65) | naturalna 1 → przerzut **sam** (D7) | — | 1 /KO |
  * | Kocie kości (Złodziej 2) | Ciche łapy [R]: + kości do Skradania; Zgrabne łapy: + kości do Akrobatyki | właściciel | pula |
  * | Urodzony morderca (Hegemonia, s. 63) | 1 na kości obrażeń → jeden przerzut tej kości — modyfikator `r1`, sam | — | — |
@@ -27,6 +28,7 @@ import {
 } from "../config/po-rzucie-rules.mjs";
 import { zarejestrujZrodloPoRzucie, rzutZDodatkiem } from "./po-rzucie.mjs";
 import { isFirearm } from "./grip.mjs";
+import { obronaOf } from "./trafienie.mjs";
 import { zadeklaruj, znacznik } from "../actors/actions.mjs";
 import { bramkaZajetaNa, zajmijBramke } from "./czas-efektu.mjs";
 import { poprosOStabilizacje, stabilizuj } from "./umieranie.mjs";
@@ -326,6 +328,28 @@ const CZAS_PATRIOTOW = {
   }
 };
 
+/**
+ * Trajektoria (Spec 7, s. 79): „możesz dodać” mod. INT do Testu Ataku dystansowego. Plan (R4) mówił o przełączniku w
+ * oknie ataku; przycisk po rzucie trzyma konwencję D4 i Czasu patriotów (decyzja agenta, E4 — MG może zawetować).
+ */
+const TRAJEKTORIA = {
+  id: "trajektoria", label: "📐 Trajektoria", klasa: "neuro-po-rzucie-trajektoria", kolejnosc: 95,
+  typy: ["attack"], styl: _styl("#2e86c1"), stylSzary: STYL_SZARY,
+  ocen(ctx) {
+    const w = _wlasna(ctx, { abilityId: "trajektoria" });
+    const mod = Number(w?.actor.system.abilities?.int?.mod) || 0;
+    if (!w || mod <= 0 || obronaOf(ctx.message)?.melee !== false) return { stan: "ukryty" };
+    return _stanLicznika(w.item, `${this.label} +${mod}`, "brak użyć (odnawia Długi odpoczynek)");
+  },
+  async wykonaj(ctx) {
+    const w = _wlasna(ctx, { abilityId: "trajektoria" });
+    const mod = Number(w?.actor.system.abilities?.int?.mod) || 0;
+    if (!w || mod <= 0) return null;
+    const roll = await rzutZDodatkiem(ctx.roll, String(mod));
+    return { roll, flavor: _flavor("#2e86c1", "📐 TRAJEKTORIA", `+${mod} (mod. INT)`), poWiadomosci: () => _zuzyj(w.item) };
+  }
+};
+
 const FART = {
   id: "fart", label: "🍀 Fart", kolejnosc: 5,
   typy: TESTY_K20, przerzut: true, wynik: "naturalna1",
@@ -423,7 +447,7 @@ function _onPostDamageRollConfiguration(rolls, config) {
 
 export function registerZdolnosciPoRzucie() {
   for (const row of [
-    FART, MOTYWACJA, SZCZESCIE, SPIEPRZYSZ, LEB_JAK_SKLEP, AMEN, TWARDOSC, POPRAWKA, CZAS_PATRIOTOW,
+    FART, MOTYWACJA, SZCZESCIE, SPIEPRZYSZ, LEB_JAK_SKLEP, AMEN, TWARDOSC, POPRAWKA, CZAS_PATRIOTOW, TRAJEKTORIA,
     _kocieKosci({ id: "kocie-kosci-ciche", label: "Ciche łapy", skill: "skr", reakcja: true, kolejnosc: 110 }),
     _kocieKosci({ id: "kocie-kosci-zgrabne", label: "Zgrabne łapy", skill: "akr", reakcja: false, kolejnosc: 111 })
   ]) zarejestrujZrodloPoRzucie(row);
@@ -432,4 +456,4 @@ export function registerZdolnosciPoRzucie() {
 }
 
 /** Powierzchnia dla testów Quench. */
-export const __testing = Object.freeze({ _dajacy, _wlasna, _pozostalo, _kosc, _onPostDamageRollConfiguration, MOTYWACJA, SPIEPRZYSZ, FART });
+export const __testing = Object.freeze({ _dajacy, _wlasna, _pozostalo, _kosc, _onPostDamageRollConfiguration, MOTYWACJA, SPIEPRZYSZ, FART, TRAJEKTORIA });

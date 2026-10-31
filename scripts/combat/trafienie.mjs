@@ -143,6 +143,15 @@ export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKryty
   return entry;
 }
 
+/**
+ * Chwila walki ataku — dziennik ataków dla zdolności (Dwóch na jednego — okno D13, Jeden strzał — pierwszy atak na
+ * cel; PLAN_m7 E4). `combatantId`, bo indeks tury przesuwa się, gdy ktoś dołącza do walki albo zmienia Inicjatywę.
+ */
+function _chwilaAtaku(combat = game.combat) {
+  if (!combat?.started) return null;
+  return { combatId: combat.id, round: combat.round, turn: combat.turn, combatantId: combat.combatant?.id ?? null };
+}
+
 /** Szkielet `obrona` z rzutu i aktywności — bez celów. */
 export function buildObrona(roll, activity) {
   const attacker = activity?.actor ?? null;
@@ -155,6 +164,7 @@ export function buildObrona(roll, activity) {
     total: _num(roll?.total),
     krytyk: !!roll?.isCritical,
     fumble: !!roll?.isFumble,
+    chwila: _chwilaAtaku(),
     targets: []
   };
 }

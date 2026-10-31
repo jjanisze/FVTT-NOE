@@ -1,6 +1,6 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
-> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D14
+> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D15
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
 > etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
@@ -372,6 +372,7 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D12 | (2026-10-31, U14) Let's rock — „ataków lub RO” | **Oba, dosłownie** („lub” włączające): premia do ataków i RO dla wszystkich naraz |
 | D13 | (2026-10-31, U10) Dwóch na jednego — okno | **Od końca twojej poprzedniej tury** — kroczące okno, kolejność inicjatywy nie decyduje |
 | D14 | (2026-10-31, U28) Szósty zmysł — zakres | **Każdy RO na ZRC**, stockowa reguła dnd5e (jak Danger Sense) z warunkiem efektu bez Oślepienia/Ogłuszenia/Nieprzytomności; zagrożenie niezauważalne — MG przełącza okno rzutu na zwykły |
+| D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: tabela kampanii ma rację** — +1 SIŁ lub KON (podręcznik październikowy pomija linię); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
@@ -421,7 +422,7 @@ Runda 2 (2026-10-31): U10, U12, U14, U28 zmienione (D11–D14); reszta U9–U30 
 | P2 | Licznik Motywacji „na sojuszniku” (kość podarowana zawczasu, jak Bardic Inspiration 2024) zamiast Reakcji przy rzucie | **Nie** — RAW to Reakcja przy rzucie |
 | P3 | Coś mi tu śmierdzi — szept do MG czy wprost do gracza | **Do gracza, sama obecność; MG — nazwa istoty (D9)** |
 | P4 | ASI i biegłości dla wszystkich 53 Sztuczek jednym przejściem czy tylko dla drużyny i pregenów | **Wszystkie (D8)** |
-| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | **MG wybiera, kiedy zechce** — nie blokuje; E3 obejmuje je z automatu (D8) |
+| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | **MG wybiera, kiedy zechce** — nie blokuje; E3 obejmuje je z automatu (D8); 2026-10-31 odłożone (D15) |
 | P6 | Spieprzysz to! na ukrytych rzutach BN | **Szept do MG (U6)** |
 | P7 | Pregeny na poziomach 2–3 (wybory profesji) przed styczniem | **Poza M7** — robi MG albo testerzy przy stole |
 
@@ -576,8 +577,9 @@ pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze pr
   dnd5e na poziomie 0 przedmiotu (wzorzec 2024: jedna Cecha — `fixed`, wybór — `points: 1` i reszta `locked`,
   „dowolna”, Ćwiczenie czyni mistrza — 2 punkty, maks. 2); Patriota dostaje też `ItemChoice` z puli zdolności Pochodzeń.
   Plakietka liczy Rozwój Cechy jako automatykę; zniknęły „dopisuje gracz” i „wybiera się przy awansie”.
-- **Rozbieżność do MG:** **Ławnik** — tabela kampanii `Tabele/Sztuczki.md` (i opis w danych) daje „+1 SIŁ lub KON”,
-  podręcznik październikowy nie ma linii Rozwój Cechy (CHANGELOG milczy). Zgodnie z RAW — bez ASI.
+- **Rozbieżność do MG → D15:** **Ławnik** — tabela kampanii `Tabele/Sztuczki.md` (i opis w danych) daje „+1 SIŁ lub
+  KON”, podręcznik październikowy nie ma linii Rozwój Cechy (CHANGELOG milczy). MG: tabela ma rację — ASI SIŁ/KON
+  (34 z 53 Sztuczek z `cechy`).
 - **Zdolności jako dane** (`config/zdolnosci-efekty.mjs`): `EFEKTY` — 14 zdolności z Efektami Aktywnymi na przedmiocie
   (Sokole oko, Szósty zmysł — D14 z warunkiem stanów, Głupi, Zew areny — Doping w Berserku, Smakuje jak arszenik,
   A co mi tam, Szary — Mądra kryjówka, Zwinność szczura — Wspinacz; Pochodzenia: Ja już swoje odchorowałem, Zdrowa
@@ -596,3 +598,52 @@ pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze pr
   (+1 ZRC) trafia na kartę (spike E0 a potwierdzony na żywo); `zdolnosci-po-rzucie`, `zdolnosci-wsparcie` zielone.
 - **Pokrycie:** zdolności klasowe i profesji 73/133 z automatyką (28 pełnych); Sztuczki — każda z Rozwojem Cechy
   przynajmniej częściowa.
+
+### E4 — R4 + R5, walka z kontekstem (2026-10-31)
+
+D15 przed etapem (Ławnik — tabela; resync w E8 — zgoda; pregeni — odłożone); weto do U9, U11, U16–U20 — brak.
+- **Premie liczbowe** (`combat/zdolnosci-walka.mjs`, części rzutu w `dnd5e.preRollAttack` / `preRollDamage`, plakietka
+  „+” na karcie ataku): **Mój wróg** (kolumna tabeli „+N/Nk6” ze skali Zwiadowcy, opcja → kategoria celu; jeden cel),
+  **Rzeźnik** (+3 z lalki — U9: inna broń w drugiej ręce wyklucza, tarcza, chwyt oburęczny i przedmiot-oryginał
+  bliźniaka nie), **Zabójcza spluwa** (rewolwer — kość pierwszego członu), **Dwóch na jednego** (+2 wręcz — D13).
+- **Dziennik ataków:** karta ataku stempluje `obrona.chwila = {combatId, round, turn, combatantId}`
+  (`combat/trafienie.mjs`); okno D13 i „pierwszy atak na cel” liczą się z czatu (200 ostatnich kart), indeks tury
+  przeliczany z `combatantId` — dołączenie do walki i zmiana Inicjatywy nie przesuwają okna.
+- **Ułatwienia** — źródła silnika okoliczności: Zawołajcie kolegów, Ja i mój gang! (Brutal w Berserku ≤ 3 m, widzi cel:
+  ściany wzroku, Oślepienie, Niewidoczność), Zasadzka (cel Zaskoczony albo 1. runda, twoja tura przed celem), Jeden
+  strzał — Pierwszy atak (finezyjna albo ogień pojedynczy = aktywność bez trybu serii), Celowanie, Zabójca mutantów,
+  Słaby punkt, Zwód. **Limity „raz w rundzie” i Celowanie zużywa dopiero rzut**, który naprawdę poszedł z Ułatwieniem
+  i tylko gdy dały je wyłącznie źródła z limitem (decyzja agenta: stałe Ułatwienie oszczędza limit, zniesione go nie
+  zużywa; RAW „możesz”).
+- **Strzelec (U20):** status „Stanowisko snajperskie” w HUD (ikona tymczasowa — `MISSING.md` A); silnik okoliczności:
+  zasięg daleki ×3 i bez wiersza „zasięg daleki” przy celowniku optycznym i zdolności; `moveToken` zdejmuje status.
+- **Refleks łowcy (U19):** `dnd5e.preConfigureInitiative` dokłada PB (z nazwą wroga w opisie rzutu), gdy w walce jest
+  wrogi mutant albo potwór — obie ścieżki Inicjatywy (tracker i okno). „Domyślnie w oknie” = zawsze doliczony; MG
+  wyłącza przerzutem — okno Inicjatywy dnd5e nie pokazuje części do odznaczenia.
+- **Akcje** (`combat/zdolnosci-akcje.mjs`): **Ulubiona broń** (3 klasy) — przycisk [B] pod kartą ataku ulubioną bronią w
+  twojej turze (nie pod kartą dodatkowego ataku ani zastąpioną); bez wyboru — „ten model?” z pytaniem; Złodziej —
+  tylko modele z biegłością; model = wpis katalogu, inaczej nazwa (U11); limit z tabeli Twardziela, Zwiadowca 2 od 9.
+  poziomu; zamiana jednej po Długim odpoczynku (karta z przyciskiem). Dodatkowy atak = zwykła aktywność ataku tej
+  broni (tryb z karty, cały potok); broń bez amunicji — sygnał MG, bez ataku. **Promocja [B]** — ten sam przycisk pod
+  atakiem wręcz w Berserku i nowa aktywność na Maszynie do zabijania. **Celowanie [B]** (aktywność na Jednym strzale):
+  ruch w tej turze (`movementHistory`) — sygnał MG; efekt do początku tury właściciela. **Słaby punkt [A]**: Test INT
+  (Technika) o ST z rozmiaru, efekt na maszynie (przez przekaźnik), szept MG o 3 współczynnikach; modyfikacja po rzucie
+  zmieniająca porażkę w sukces też nakłada efekt (`neuroshima.rollModified`); koniec walki / Długi odpoczynek zdejmuje
+  (U18). **Szybka gadka / Szybkie badanie [B]**: okno wyboru umiejętności (Wpływanie s. 41; Badanie — Test INT, także
+  Medycyna z INT). Builder: `activityName` / `activityAction` w danych zdolności (Celowanie, Promocja).
+- **Trajektoria — odstępstwo od planu (decyzja agenta, do weta MG):** zamiast przełącznika w oknie ataku — przycisk
+  po rzucie w rejestrze §3.0.2 (+mod. INT, licznik PB /DO), jak Czas patriotów i konwencja D4.
+- **Pułapka dnd5e 6 (znaleziona w e2e):** rzut z przycisku pod kartą czatu dostaje `system.origin` tej karty
+  (`BasicRoll.buildPost` czyta `event.target.closest("[data-message-id]")`) — dodatkowy atak wskazywał kartę ataku
+  zamiast swojej karty użycia i gubił flagę. Do aktywności idzie świeże zdarzenie z samymi klawiszami (Shift = bez
+  okien, konwencja dnd5e).
+- **Bez zmian:** Mój biom — przypomnienie „nie da się zaskoczyć” jest w karcie podróży, Ułatwienie zależy od tematu
+  testu (stół, E3).
+- **Testy:** warstwa 1 w `okolicznosci.test.mjs` (Strzelec w silniku, kolumna Mojego wroga, ST Słabego punktu, okno
+  D13, pierwsza runda, ręce Rzeźnika, kość spluwy, limit Ulubionych); Quench `zdolnosci-walka` (9: Mój wróg, Rzeźnik z
+  lalką, spluwa, Trajektoria, Celowanie i limity, Promocja poza Berserkiem, Strzelec w migawce, model Ulubionej,
+  Słaby punkt) — 1457/1457; e2e `zdolnosci-walka` (Mój wróg +1/+1k6, Rzeźnik +3 i bez niego z nożem w drugiej ręce,
+  Ulubiona broń Shift+klik → drugi atak, znacznik B, bez przycisku pod dodatkowym; Dwóch na jednego +2 tylko na tym
+  samym celu) i regresja `zdolnosci-po-rzucie`, `zdolnosci-wsparcie`, `combat`, `postac`, `umieranie`, `zagrozenia`,
+  `rekonwalescencja` — zielone na świeżym świecie.
+- **Pokrycie:** zdolności klasowe i profesji 88/133 z automatyką (40 pełnych).

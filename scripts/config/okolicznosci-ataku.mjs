@@ -9,7 +9,8 @@
  * ## Reguły (RAW)
  *
  *   - **Zasięg** (s. 28): cel w zasięgu dalekim — Utrudnienie; poza dalekim atak chybia (uwaga, nie
- *     blokada — pomiar od krawędzi żetonów bywa nieprecyzyjny, decyduje MG).
+ *     blokada — pomiar od krawędzi żetonów bywa nieprecyzyjny, decyduje MG). **Strzelec** (Zabójca, s. 94; `bron.snajper`
+ *     — stanowisko snajperskie, celownik optyczny): zasięg daleki ×3 i bez Utrudnienia za daleki dystans (PLAN_m7 E4).
  *   - **Atak dystansowy w zwarciu** (s. 28): Utrudnienie, jeśli ≤ 1,5 m jest przeciwnik, który cię
  *     widzi, nie jest Nieprzytomny i ma Szybkość > 0 (U7: Oślepienie, Pochwycenie, Sparaliżowanie,
  *     Unieruchomienie — wyłączają; niewidzialnego atakującego nikt nie widzi).
@@ -77,11 +78,21 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  * @property {boolean} [rzut]                atak rzutem (tryb `thrown`)
  * @property {boolean} [oparta]              dwójnóg/trójnóg rozłożony, stanowisko pojazdu albo „Oprzyj broń”
  * @property {number|null} [sila]            wartość SIŁ strzelca
+ * @property {boolean} [snajper]             Strzelec na stanowisku snajperskim, broń z celownikiem optycznym (U20)
  */
 
 const ma = (u, id) => !!u?.stany?.has?.(id);
 const _dist = s => _num(s.odleglosc);
 const _wl = (s, id) => new Set(s.bron?.wlasciwosci ?? []).has(id);
+
+/** Strzelec (s. 94): „Powiększenie” — maksymalny zasięg tej broni ×3. */
+export const SNAJPER_ZASIEG = 3;
+
+/** Zasięg daleki w metrach z Powiększeniem Strzelca; `null` — nieznany. */
+export function zasiegDaleki(s) {
+  const d = _num(s.zasieg?.daleki);
+  return d === null ? null : d * (s.bron?.snajper ? SNAJPER_ZASIEG : 1);
+}
 
 /** Broń palna i broń miotana albo rzucana — dla wierszy „pod wodą” (s. 255–256). */
 export const jestPalna = bron => String(bron?.typ ?? "").startsWith("palna");
@@ -125,11 +136,12 @@ export function autoKrytyk(cel, odleglosc) {
 /** Źródła RAW. Kolejność = kolejność w dymku. */
 export const ZRODLA_OKOLICZNOSCI = _f([
   // Zasięg i zwarcie (s. 28)
+  // Strzelec — Przewaga balistyczna (s. 94): bez Utrudnienia za daleki dystans.
   _f({ id: "zasiegDaleki", rodzaj: "utrudnienie", label: "Cel w zasięgu dalekim", strona: "s. 28", cel: true,
-    gdy: s => !s.wrecz && _dist(s) !== null && _num(s.zasieg?.normalny) !== null
-      && _dist(s) > _num(s.zasieg.normalny) && (_num(s.zasieg.daleki) === null || _dist(s) <= _num(s.zasieg.daleki)) }),
+    gdy: s => !s.wrecz && !s.bron?.snajper && _dist(s) !== null && _num(s.zasieg?.normalny) !== null
+      && _dist(s) > _num(s.zasieg.normalny) && (zasiegDaleki(s) === null || _dist(s) <= zasiegDaleki(s)) }),
   _f({ id: "pozaZasiegiem", rodzaj: "uwaga", label: "Cel poza zasięgiem dalekim — atak chybia", strona: "s. 28", cel: true,
-    gdy: s => !s.wrecz && _dist(s) !== null && _num(s.zasieg?.daleki) !== null && _dist(s) > _num(s.zasieg.daleki) }),
+    gdy: s => !s.wrecz && _dist(s) !== null && zasiegDaleki(s) !== null && _dist(s) > zasiegDaleki(s) }),
   _f({ id: "dystansowyWZwarciu", rodzaj: "utrudnienie", label: "Atak dystansowy w zwarciu", strona: "s. 28",
     gdy: s => {
       if (s.wrecz) return false;

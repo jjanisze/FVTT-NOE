@@ -24,6 +24,7 @@ import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 import { stanBroni } from "../weapons/wlasciwosci.mjs";
+import { hasAddon } from "../config/addons-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -135,6 +136,15 @@ function _celPochwytuje(atakujacy, cel, zetony) {
   return null;
 }
 
+/** Status Strzelca (Zabójca, s. 94; U20): MG nakłada go z HUD-u po 5 rundach mierzenia, ruch zdejmuje. */
+export const STANOWISKO_SNAJPERSKIE = "stanowiskoSnajperskie";
+
+/** Strzelec na stanowisku snajperskim z bronią z celownikiem optycznym (PLAN_m7 E4). */
+function _snajper(actor, item) {
+  if (!actor?.statuses?.has(STANOWISKO_SNAJPERSKIE) || !hasAddon(item, "celownik-optyczny")) return false;
+  return !!actor.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === "strzelec");
+}
+
 /** Zasięg normalny i daleki aktywności w metrach. */
 function _zasieg(activity) {
   const item = activity?.item;
@@ -177,7 +187,10 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     turaCelu: !!(jeden && game.combat?.started && game.combat.combatant?.tokenId === jeden.id),
     // `długa`, `ciężka` (s. 117) — właściwości i oparcie broni (PLAN_m6 §5.3); typ i rzut — wiersze „pod wodą” (§5.6).
     bron: item?.type === "weapon"
-      ? { ...stanBroni(item, actor), typ: item.system.type?.value ?? null, rzut: String(attackMode ?? "").startsWith("thrown") }
+      ? {
+        ...stanBroni(item, actor), typ: item.system.type?.value ?? null, rzut: String(attackMode ?? "").startsWith("thrown"),
+        snajper: _snajper(actor, item)
+      }
       : null
   };
   const ctx = {

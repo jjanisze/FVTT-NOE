@@ -73,6 +73,7 @@ import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
 import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
 import { registerZdolnosciPoRzucieTests } from "./zdolnosci-po-rzucie.test.mjs";
 import { registerZdolnosciWsparcieTests } from "./zdolnosci-wsparcie.test.mjs";
+import { registerZdolnosciWalkaTests } from "./zdolnosci-walka.test.mjs";
 import { registerZdolnosciEfektyTests } from "./zdolnosci-efekty.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
@@ -138,6 +139,7 @@ export function registerQuenchTests() {
     registerZdolnosciPoRzucieTests(quench);
     // PLAN_m7 E2: wsparcie sojusznika (R7).
     registerZdolnosciWsparcieTests(quench);
+    registerZdolnosciWalkaTests(quench);
     // PLAN_m7 E3: zdolności jako dane (R1, R2).
     registerZdolnosciEfektyTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");

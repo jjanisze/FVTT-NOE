@@ -7,7 +7,11 @@
  * pochwytującym, Unikanie i Bieganie (s. 30), kilka celów, źródła z rejestru, tryb (znoszą się),
  * automatyczne TK i jego wejście do `resolveHit`.
  *
- * Bez dokumentów — paczka nie dotyka świata. Migawka z żywej sceny i plakietki: e2e `combat`.
+ * Zdolności walki (PLAN_m7 E4, R4/R5): czyste reguły z `config/zdolnosci-walka.mjs` — kolumna Mojego wroga, ST Słabego
+ * punktu, okno Dwóch na jednego (D13), pierwsza runda (Zasadzka, Jeden strzał), ręce Rzeźnika (U9), kość Zabójczej
+ * spluwy, limit Ulubionych broni — i wiersze Strzelca w silniku (U20).
+ *
+ * Bez dokumentów — paczka nie dotyka świata. Migawka z żywej sceny i plakietki: e2e `combat`, `zdolnosci-walka`.
  */
 
 import {
@@ -15,6 +19,11 @@ import {
 } from "../config/okolicznosci-ataku.mjs";
 import { zuzytaWyrzutniaDane } from "../weapons/wlasciwosci.mjs";
 import { resolveHit } from "../config/defense-rules.mjs";
+import {
+  premiaMojegoWroga, stSlabegoPunktu, wOknieOdPoprzedniejTury, koniecPoprzedniejTury, przedCelemWPierwszejRundzie,
+  rzeznikDziala, koscZabojczejSpluwy, limitUlubionych, MOJ_WROG_KATEGORIE
+} from "../config/zdolnosci-walka.mjs";
+import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
 const U = (stany = [], o = {}) => ({ stany: new Set(stany), szybkosc0: false, nazwa: o.nazwa ?? null, ...o });
@@ -251,6 +260,94 @@ export function registerOkolicznosciTests(quench) {
         expect(ids(w.ulatwienia)).to.deep.equal(["niewidocznosc"]);
         expect(ids(w.utrudnienia)).to.deep.equal(["udzwig"]);
         expect(w.tryb).to.equal(0);
+      });
+    });
+
+    describe("Strzelec — stanowisko snajperskie (s. 94, U20)", function () {
+      const zasieg = { normalny: 18, daleki: 39 };
+      it("bez stanowiska: 30 m to zasięg daleki, 100 m — poza zasięgiem", function () {
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 30, zasieg })).utrudnienia)).to.include("zasiegDaleki");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 100, zasieg })).uwagi)).to.include("pozaZasiegiem");
+      });
+      it("na stanowisku: bez Utrudnienia za daleki dystans, maksymalny zasięg ×3 (117 m)", function () {
+        const bron = { wlasciwosci: [], snajper: true };
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 30, zasieg, bron })).utrudnienia)).to.not.include("zasiegDaleki");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 100, zasieg, bron })).uwagi)).to.not.include("pozaZasiegiem");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 120, zasieg, bron })).uwagi)).to.include("pozaZasiegiem");
+      });
+    });
+
+    describe("Zdolności walki — czyste reguły (PLAN_m7 E4)", function () {
+      it("Mój wróg: kolumna tabeli „+N/Nk6”; nieczytelna — null", function () {
+        expect(premiaMojegoWroga("+1/1k6")).to.deep.equal({ atak: 1, obrazenia: "1d6" });
+        expect(premiaMojegoWroga("+3/3k6")).to.deep.equal({ atak: 3, obrazenia: "3d6" });
+        expect(premiaMojegoWroga("+2/2d6")).to.deep.equal({ atak: 2, obrazenia: "2d6" });
+        expect(premiaMojegoWroga("")).to.equal(null);
+        expect(premiaMojegoWroga("2")).to.equal(null);
+      });
+
+      it("Mój wróg: każda opcja wskazuje kategorie Bestiariusza", function () {
+        for (const [id, kat] of Object.entries(MOJ_WROG_KATEGORIE)) {
+          for (const k of kat) expect(NEUROSHIMA_CREATURE_TYPES, `${id} → ${k}`).to.have.property(k);
+        }
+      });
+
+      it("Słaby punkt: ST z rozmiaru (s. 101)", function () {
+        expect(["tiny", "sm", "med", "lg", "huge", "grg"].map(stSlabegoPunktu)).to.deep.equal([5, 5, 10, 15, 20, 25]);
+        expect(stSlabegoPunktu("xyz")).to.equal(null);
+      });
+
+      it("Dwóch na jednego (D13): okno od końca twojej poprzedniej tury — w twojej turze", function () {
+        const teraz = { round: 2, turn: 2 };
+        const w = (round, turn) => wOknieOdPoprzedniejTury({ round, turn }, teraz, 2);
+        expect(koniecPoprzedniejTury(teraz, 2)).to.deep.equal({ round: 1, turn: 2 });
+        expect(w(1, 3), "po twojej poprzedniej turze").to.equal(true);
+        expect(w(2, 0), "wcześniej w tej rundzie").to.equal(true);
+        expect(w(2, 2), "w twojej turze (Reakcja sojusznika)").to.equal(true);
+        expect(w(1, 2), "w twojej poprzedniej turze").to.equal(false);
+        expect(w(1, 1), "przed twoją poprzednią turą").to.equal(false);
+        expect(w(2, 3), "przyszłość").to.equal(false);
+      });
+
+      it("Dwóch na jednego (D13): poza twoją turą okno kroczy; pierwsza runda; dane złe — false", function () {
+        expect(wOknieOdPoprzedniejTury({ round: 2, turn: 3 }, { round: 2, turn: 3 }, 2), "po twojej turze w tej rundzie").to.equal(true);
+        expect(wOknieOdPoprzedniejTury({ round: 2, turn: 1 }, { round: 2, turn: 3 }, 2), "przed twoją turą tej rundy").to.equal(false);
+        expect(wOknieOdPoprzedniejTury({ round: 1, turn: 3 }, { round: 2, turn: 0 }, 2), "zanim nadeszła twoja tura").to.equal(true);
+        expect(wOknieOdPoprzedniejTury({ round: 1, turn: 0 }, { round: 1, turn: 2 }, 2), "1. runda — od początku walki").to.equal(true);
+        expect(wOknieOdPoprzedniejTury(null, { round: 2, turn: 2 }, 2)).to.equal(false);
+        expect(wOknieOdPoprzedniejTury({ round: 2, turn: 0 }, { round: 2, turn: 2 }, -1), "poza walką").to.equal(false);
+        expect(wOknieOdPoprzedniejTury({ round: 2, turn: -1 }, { round: 2, turn: 2 }, 2), "kombatant zniknął").to.equal(false);
+      });
+
+      it("Zasadzka / Jeden strzał: 1. runda i przed celem w kolejności", function () {
+        expect(przedCelemWPierwszejRundzie({ round: 1, turn: 0 }, 0, 2)).to.equal(true);
+        expect(przedCelemWPierwszejRundzie({ round: 1, turn: 2 }, 2, 0)).to.equal(false);
+        expect(przedCelemWPierwszejRundzie({ round: 2, turn: 0 }, 0, 2), "druga runda").to.equal(false);
+        expect(przedCelemWPierwszejRundzie({ round: 1, turn: 0 }, 0, -1), "cel poza walką").to.equal(false);
+        expect(przedCelemWPierwszejRundzie(null, 0, 2), "bez walki").to.equal(false);
+      });
+
+      it("Rzeźnik (U9): inna broń w drugiej ręce wyklucza; ta sama oburącz, tarcza i pusta ręka — nie", function () {
+        expect(rzeznikDziala([{ id: "noz", bron: true }, { id: null, bron: false }], "noz")).to.equal(true);
+        expect(rzeznikDziala([{ id: "noz", bron: true }, { id: "noz", bron: true }], "noz"), "oburącz").to.equal(true);
+        expect(rzeznikDziala([{ id: "noz", bron: true }, { id: "tarcza", bron: false }], "noz"), "tarcza").to.equal(true);
+        expect(rzeznikDziala([{ id: "noz", bron: true }, { id: "krzeslo", bron: false }], "noz"), "przedmiot (bliźniak w ręce nie siedzi)").to.equal(true);
+        expect(rzeznikDziala([{ id: "noz", bron: true }, { id: "b92", bron: true }], "noz"), "druga broń").to.equal(false);
+        expect(rzeznikDziala([], "noz"), "BN bez lalki, nic w rękach").to.equal(true);
+      });
+
+      it("Zabójcza spluwa: jedna kość pierwszego członu", function () {
+        expect(koscZabojczejSpluwy("1d8 + @mod")).to.equal("1d8");
+        expect(koscZabojczejSpluwy("2d6")).to.equal("1d6");
+        expect(koscZabojczejSpluwy("5")).to.equal(null);
+      });
+
+      it("Ulubiona broń: Twardziel z tabeli, Zwiadowca dwie od 9. poziomu, Złodziej jedna", function () {
+        expect(limitUlubionych("ulubiona-bron-twardziel", { skala: 3 })).to.equal(3);
+        expect(limitUlubionych("ulubiona-bron-twardziel", { skala: null })).to.equal(1);
+        expect(limitUlubionych("ulubiona-bron-zwiadowca", { poziom: 9 })).to.equal(2);
+        expect(limitUlubionych("ulubiona-bron-zwiadowca", { poziom: 5 })).to.equal(1);
+        expect(limitUlubionych("ulubiona-bron-zlodziej", { poziom: 12 })).to.equal(1);
       });
     });
   }, { displayName: "Neuroshima: Okoliczności ataku — czysty silnik (M1)" });

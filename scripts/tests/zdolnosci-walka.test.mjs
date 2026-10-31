@@ -1,0 +1,185 @@
+/**
+ * Neuroshima 5e — walka z kontekstem (PLAN_m7 E4, R4 + R5), warstwa 4 — na aktorach testowych.
+ *
+ * Mój wróg wobec kategorii celu; Rzeźnik z lalką (pusta druga ręka, druga broń); Zabójcza spluwa na rewolwerze;
+ * Trajektoria pod Testem Ataku dystansowym (+INT, licznik); Celowanie — efekt tury właściciela, zużyty tylko przez
+ * atak, w którym był jedynym Ułatwieniem; Strzelec w migawce ataku; Ulubiona broń — model i lista; Słaby punkt —
+ * efekt na maszynie, bez dubla, zdjęty po Długim odpoczynku. Dziennik ataków (Dwóch na jednego), przyciski [B] i
+ * dodatkowy atak — e2e `zdolnosci-walka`; okno D13 i reszta czystych reguł — `okolicznosci.test.mjs`.
+ */
+
+import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup } from "./helpers.mjs";
+import { __testing as W, mojWrogPrzeciw, premieObrazen, FLAG_CELOWANIE, FLAG_SLABY_PUNKT } from "../combat/zdolnosci-walka.mjs";
+import { __testing as A, modelBroni, ulubionaDla, FLAG_ULUBIONE } from "../combat/zdolnosci-akcje.mjs";
+import { __testing as P } from "../combat/zdolnosci-po-rzucie.mjs";
+import { uzyjZrodla, kontekstRzutu } from "../combat/po-rzucie.mjs";
+import { jestEfektemTuryWlasciciela } from "../combat/czas-efektu.mjs";
+import { migawkaAtaku, STANOWISKO_SNAJPERSKIE } from "../combat/okolicznosci.mjs";
+import { isRevolver } from "../actors/rewolwerowiec.mjs";
+import * as mags from "../weapons/magazine-model.mjs";
+
+export function registerZdolnosciWalkaTests(quench) {
+  quench.registerBatch(`${MODULE_ID}.zdolnosci-walka`, context => {
+    const { describe, it, expect, before, after } = context;
+    const start = Date.now();
+    let cechy, bronie, magazynki;
+    const cecha = async (actor, id) => (await actor.createEmbeddedDocuments("Item",
+      [game.items.fromCompendium(cechy.find(i => i.getFlag(MODULE_ID, "abilityId") === id))]))[0];
+    const bron = async (actor, test) => (await actor.createEmbeddedDocuments("Item",
+      [game.items.fromCompendium(bronie.find(test))]))[0];
+    const atak = item => item.system.activities.find(a => a.type === "attack");
+    const npc = (name, typ) => scratchActor({ name: `${SCRATCH_PREFIX} ${name}`, type: "npc", system: { details: { type: { value: typ } } } });
+
+    before(async () => {
+      cechy = await game.packs.get(`${MODULE_ID}.zdolnosci-klasowe`).getDocuments();
+      bronie = await game.packs.get(`${MODULE_ID}.bron`).getDocuments();
+      magazynki = await game.packs.get(`${MODULE_ID}.magazynki`).getDocuments();
+    });
+    /** Pełny magazynek 9 mm wpięty w broń — jak fixture `skirmish` (pusta broń nie strzela). */
+    const naladuj = async (actor, gun) => {
+      const magwell = mags.weaponMagwell(gun);
+      const [mag] = await actor.createEmbeddedDocuments("Item",
+        [game.items.fromCompendium(magazynki.find(m => mags.magazineDefOf(m)?.magwell === magwell))]);
+      await mags.loadRounds(mag, "9mm", mags.freeSpace(mag));
+      await mags.swapMagazineItem(gun, mag);
+    };
+    after(async () => {
+      await scratchCleanup();
+      const msgs = game.messages.filter(m => m.timestamp >= start).map(m => m.id);
+      if (msgs.length) await ChatMessage.implementation.deleteDocuments(msgs);
+    });
+
+    describe("Premie liczbowe", function () {
+      it("Mój wróg: Potwory — +1/1k6 przeciw Potworowi, nic przeciw Człowiekowi", async function () {
+        const zw = await scratchActor({ name: `${SCRATCH_PREFIX} Zwiadowca` });
+        await cecha(zw, "moj-wrog-potwory");
+        const p = mojWrogPrzeciw(zw, await npc("Neodźwiedź", "Potwór"));
+        expect(p).to.include({ atak: 1, obrazenia: "1d6" });
+        expect(p.label).to.contain("Potwory");
+        expect(mojWrogPrzeciw(zw, await npc("Gangus", "Człowiek"))).to.equal(null);
+      });
+
+      it("Rzeźnik: +3 z pustą drugą ręką; druga broń w drugiej ręce — bez premii", async function () {
+        const tw = await scratchActor({ name: `${SCRATCH_PREFIX} Rzeźnik` });
+        await cecha(tw, "rzeznik");
+        const noz = await bron(tw, i => i.type === "weapon" && i.system.type?.value === "biala" && !i.system.properties?.has?.("two"));
+        const lalka = game.neuroshima.lalka;
+        await lalka.place(tw, noz, "hand");
+        expect(premieObrazen(atak(noz)).map(p => p.id), "pusta druga ręka").to.include("rzeznik");
+        const drugi = await bron(tw, i => i.type === "weapon" && i.system.type?.value === "biala" && i.name !== noz.name
+          && !i.system.properties?.has?.("two"));
+        await lalka.place(tw, drugi, "hand");
+        expect(lalka.heldItems(tw).filter(h => h.item).length, "dwie bronie w rękach").to.equal(2);
+        expect(premieObrazen(atak(noz)).map(p => p.id), "druga broń").to.not.include("rzeznik");
+      });
+
+      it("Zabójcza spluwa: rewolwer Clinta — jedna kość z formuły", async function () {
+        const kow = await scratchActor({ name: `${SCRATCH_PREFIX} Kowboj` });
+        await cecha(kow, "clint");
+        const rew = await bron(kow, i => isRevolver(i));
+        const p = premieObrazen(atak(rew), { formula: "1d8 + @mod" }).find(x => x.id === "zabojcza-spluwa");
+        expect(p?.czesc).to.equal("1d8");
+        const pistolet = await bron(kow, i => i.type === "weapon" && i.system.type?.value === "palnaKrotka" && !isRevolver(i));
+        expect(premieObrazen(atak(pistolet), { formula: "1d8" }).map(x => x.id), "nie rewolwer").to.not.include("zabojcza-spluwa");
+      });
+    });
+
+    describe("Trajektoria (po rzucie)", function () {
+      it("pod Testem Ataku dystansowym: +INT, zużywa użycie; bez INT > 0 — ukryta", async function () {
+        const spec = await scratchActor({ name: `${SCRATCH_PREFIX} Spec balistyk`, system: { abilities: { int: { value: 16 } } } });
+        const item = await cecha(spec, "trajektoria");
+        const pistolet = await bron(spec, i => i.getFlag(MODULE_ID, "weaponId") === "b92");
+        await naladuj(spec, pistolet);
+        await atak(pistolet).rollAttack({}, { configure: false }, { create: true });
+        const src = game.messages.contents.at(-1);
+        const ctx = kontekstRzutu(src);
+        expect(P.TRAJEKTORIA.ocen.call(P.TRAJEKTORIA, ctx).stan).to.equal("aktywny");
+        const nowa = await uzyjZrodla("trajektoria", src);
+        expect(nowa.rolls[0].total).to.equal(src.rolls[0].total + 3);
+        expect(Number(item.system.uses.spent)).to.equal(1);
+        await spec.update({ "system.abilities.int.value": 10 });
+        expect(P.TRAJEKTORIA.ocen.call(P.TRAJEKTORIA, kontekstRzutu(src)).stan, "mod. INT 0").to.equal("ukryty");
+      });
+    });
+
+    describe("Celowanie i limity Ułatwień", function () {
+      it("efekt tury właściciela; zużywa go atak, w którym był jedynym Ułatwieniem", async function () {
+        const zab = await scratchActor({ name: `${SCRATCH_PREFIX} Zabójca` });
+        const item = await cecha(zab, "jeden-strzal");
+        expect(item.system.activities.find(a => a.name === "Celowanie")?.activation?.type, "aktywność [B]").to.equal("bonus");
+        await A._celowanie(zab, item);
+        const e = zab.effects.find(x => x.getFlag(MODULE_ID, FLAG_CELOWANIE));
+        expect(e, "efekt Celowania").to.be.ok;
+        expect(jestEfektemTuryWlasciciela(e), "do początku tury właściciela").to.equal(true);
+        const ADV = CONFIG.Dice.D20Roll.ADV_MODE;
+        const rzut = (ulatwienia, tryb = ADV.ADVANTAGE) => [{ options: { advantageMode: tryb, neuroOkolicznosci: { ulatwienia } } }];
+        await W._onRollAttack(rzut([{ id: "celowanie" }, { id: "celPowalonyBlisko" }]), { subject: { actor: zab } });
+        expect(zab.effects.some(x => x.getFlag(MODULE_ID, FLAG_CELOWANIE)), "inne Ułatwienie — zostaje").to.equal(true);
+        await W._onRollAttack(rzut([{ id: "celowanie" }], ADV.NORMAL), { subject: { actor: zab } });
+        expect(zab.effects.some(x => x.getFlag(MODULE_ID, FLAG_CELOWANIE)), "zniesione — zostaje").to.equal(true);
+        await W._onRollAttack(rzut([{ id: "celowanie" }]), { subject: { actor: zab } });
+        expect(zab.effects.some(x => x.getFlag(MODULE_ID, FLAG_CELOWANIE)), "zużyte").to.equal(false);
+      });
+
+      it("Promocja: aktywność [B] na Maszynie do zabijania; poza Berserkiem — blokada", async function () {
+        const naj = await scratchActor({ name: `${SCRATCH_PREFIX} Najemnik` });
+        const item = await cecha(naj, "maszyna-do-zabijania");
+        const akt = item.system.activities.find(a => a.name === "Promocja");
+        expect(akt?.activation?.type).to.equal("bonus");
+        const warn = ui.notifications.warn;
+        let ostrzezenie = null;
+        ui.notifications.warn = msg => { ostrzezenie = msg; };
+        try {
+          expect(await akt.use({}, { configure: false }, { create: false })).to.equal(undefined);
+        } finally {
+          ui.notifications.warn = warn;
+        }
+        expect(ostrzezenie).to.contain("Berserku");
+      });
+    });
+
+    describe("Strzelec w migawce ataku", function () {
+      it("snajper tylko ze statusem, celownikiem optycznym i zdolnością", async function () {
+        const zab = await scratchActor({ name: `${SCRATCH_PREFIX} Snajper` });
+        const kar = await bron(zab, i => i.type === "weapon" && i.system.type?.value === "palnaDluga");
+        const snajper = () => migawkaAtaku(atak(kar)).migawka.bron?.snajper;
+        await zab.toggleStatusEffect(STANOWISKO_SNAJPERSKIE, { active: true });
+        await kar.setFlag(MODULE_ID, "addons", [{ id: "celownik-optyczny", delta: {} }]);
+        expect(snajper(), "bez zdolności").to.equal(false);
+        await cecha(zab, "strzelec");
+        expect(snajper(), "status + celownik + Strzelec").to.equal(true);
+        await zab.toggleStatusEffect(STANOWISKO_SNAJPERSKIE, { active: false });
+        expect(snajper(), "bez statusu").to.equal(false);
+      });
+    });
+
+    describe("Ulubiona broń — wybór", function () {
+      it("model z katalogu; dowolny egzemplarz tego modelu (U11); inna broń — nie", async function () {
+        const tw = await scratchActor({ name: `${SCRATCH_PREFIX} Twardziel` });
+        const item = await cecha(tw, "ulubiona-bron-twardziel");
+        const b1 = await bron(tw, i => i.getFlag(MODULE_ID, "weaponId") === "b92");
+        const b2 = await bron(tw, i => i.getFlag(MODULE_ID, "weaponId") === "b92");
+        const inna = await bron(tw, i => i.type === "weapon" && i.getFlag(MODULE_ID, "weaponId") !== "b92" && i.system.type?.value === "palnaKrotka");
+        expect(modelBroni(b1)).to.equal("b92");
+        expect(A._wolneMiejsce(tw)?.id, "wolne miejsce").to.equal(item.id);
+        await item.setFlag(MODULE_ID, FLAG_ULUBIONE, [{ model: modelBroni(b1), nazwa: b1.name }]);
+        expect(ulubionaDla(tw, b2)?.id, "drugi egzemplarz").to.equal(item.id);
+        expect(ulubionaDla(tw, inna)).to.equal(null);
+        expect(A._wolneMiejsce(tw), "Twardziel 1: jedna").to.equal(null);
+      });
+    });
+
+    describe("Słaby punkt — efekt na maszynie", function () {
+      it("efekt z uuid znalazcy, bez dubla; poza walką zdjęty po Długim odpoczynku (U18)", async function () {
+        const zm = await scratchActor({ name: `${SCRATCH_PREFIX} Zabójca maszyn` });
+        const item = await cecha(zm, "slaby-punkt");
+        const maszyna = await npc("Tankietka", "Maszyna");
+        await A._nalozSlabyPunkt(zm, item, maszyna);
+        await A._nalozSlabyPunkt(zm, item, maszyna);
+        expect(maszyna.effects.filter(e => e.getFlag(MODULE_ID, FLAG_SLABY_PUNKT) === zm.uuid)).to.have.length(1);
+        await A._onRestCompleted(zm, { longRest: true }, { type: "long" });
+        expect(maszyna.effects.some(e => e.getFlag(MODULE_ID, FLAG_SLABY_PUNKT)), "po Długim odpoczynku").to.equal(false);
+      });
+    });
+  }, { displayName: "Neuroshima: Zdolności walki — Mój wróg, Rzeźnik, Ulubiona broń… (M7 E4)" });
+}

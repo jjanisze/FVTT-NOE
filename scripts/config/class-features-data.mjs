@@ -225,7 +225,8 @@ export const CLASS_FEATURES = {
     label: "Szybka gadka",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "aktywność [B]: wybór Testu Wpływania (Oszustwo, Perswazja, Występy, Zastraszanie, Tresura)", where: "combat/zdolnosci-akcje.mjs" }],
+    manual: "Nastawienie istoty i ST (15 albo INT istoty) — MG.",
     text: "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (s .41)."
   },
   "ekspert": {
@@ -327,7 +328,8 @@ export const CLASS_FEATURES = {
     label: "Szybkie badanie",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "aktywność [B]: wybór Testu Badania (INT: Historia, Medycyna, Przyroda, Śledztwo, Technika)", where: "combat/zdolnosci-akcje.mjs" }],
+    manual: "Co postać się dowiaduje — MG.",
     text: "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT."
   },
   "leb-jak-sklep": {
@@ -397,7 +399,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@prof", period: "lr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk po rzucie pod Testem Ataku dystansowym: + mod. INT, licznik PB /DO", where: "combat/zdolnosci-po-rzucie.mjs" }],
     text: "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku."
   },
   "bystrzacha": {
@@ -442,7 +444,7 @@ export const CLASS_FEATURES = {
     action: "B",
     hotbar: true,
     picks: { scale: "@scale.twardziel.ulubionaBron" },
-    auto: [],
+    auto: [{ what: "przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); broń dystansowa bez amunicji — sygnał MG", where: "combat/zdolnosci-akcje.mjs" }, { what: "wybór modelu przy pierwszym użyciu, liczba z tabeli Twardziela; zamiana jednej po Długim odpoczynku", where: "combat/zdolnosci-akcje.mjs" }],
     text: "Wybierz jeden model broni (np. Peacemaker), której lubisz używać. Od tej pory, jeśli wykonujesz ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Na wyższych poziomach Twardziela, liczba twoich ulubionych broni rośnie zgodnie z kolumną Ulubiona broń w tabeli Zdolności klasowych Twardziela. Możesz zmienić jedną Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
   },
   "wyjadacz": {
@@ -568,7 +570,7 @@ export const CLASS_FEATURES = {
     label: "Ulubiona broń",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); broń dystansowa bez amunicji — sygnał MG", where: "combat/zdolnosci-akcje.mjs" }, { what: "wybór modelu (z biegłością) przy pierwszym użyciu; zamiana po Długim odpoczynku", where: "combat/zdolnosci-akcje.mjs" }],
     text: "Wybierz jeden model broni (np. szoker), w którym masz biegłość. Od tej pory, jeśli wykonujesz tą bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
   },
   "podstepny-atak": {
@@ -669,7 +671,7 @@ export const CLASS_FEATURES = {
     label: "Ulubiona broń",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); broń dystansowa bez amunicji — sygnał MG", where: "combat/zdolnosci-akcje.mjs" }, { what: "wybór modelu przy pierwszym użyciu, dwa od 9. poziomu; zamiana po Długim odpoczynku", where: "combat/zdolnosci-akcje.mjs" }],
     text: "Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie."
   },
   "klusownik": {
@@ -740,7 +742,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Dwóch na jednego",
     action: null,
-    auto: [],
+    auto: [{ what: "+2 do Testu Ataku wręcz w cel, którego sojusznik zaatakował wręcz od końca twojej poprzedniej tury (D13; dziennik ataków z kart trafienia)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Poza walką (bez tur) — gracz.",
     text: "Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury."
   },
   "ja-i-moj-gang": {
@@ -752,7 +755,7 @@ export const CLASS_FEATURES = {
     label: "Ja i mój gang!",
     action: null,
     requiresState: "neuro-berserk",
-    auto: [],
+    auto: [{ what: "w Berserku: sojusznik ≤ 3 m ma Ułatwienie w ataku na wroga, którego widzisz (ściany, Oślepienie, Niewidoczność)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Kiedy jesteś w Berserku, twoi towarzysze stają się twoim gangiem, walczącym niczym wataha zmutowanych wilków. Jeśli sojusznicy stoją w promieniu 3 metrów od ciebie, otrzymują Ułatwienie w Testach Ataku przeciw wrogim istotom, które widzisz. Zawsze prowadzisz swój gang do krwawego zwycięstwa!"
   },
   "jeden-z-nich": {
@@ -821,7 +824,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zawołajcie kolegów",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie w ataku wręcz, gdy ≤ 1,5 m stoi co najmniej dwóch przeciwników", where: "combat/zdolnosci-walka.mjs" }],
     text: "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz."
   },
   "maszyna-do-zabijania": {
@@ -834,7 +837,10 @@ export const CLASS_FEATURES = {
     action: null,
     oncePerTurn: true,
     requiresState: "neuro-berserk",
-    auto: [],
+    hotbar: true,
+    activityName: "Promocja",
+    activityAction: "B",
+    auto: [{ what: "Promocja [B]: w Berserku przycisk dodatkowego ataku wręcz na karcie ataku i aktywność", where: "combat/zdolnosci-akcje.mjs" }, { what: "Zwód: w Berserku raz w rundzie Ułatwienie w ataku wręcz z SIŁ (okno rzutu)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem."
   },
   "reputacja": {
@@ -1117,8 +1123,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: 1, period: "combat" },
     hotbar: true,
-    auto: [{ what: "Poprawka: przycisk pod własnym Testem Ataku bronią palną — przerzut, raz na walkę (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }],
-    manual: "Zabójcza spluwa (+1 kość obrażeń rewolweru) dolicza gracz — PLAN_m7 R4.",
+    auto: [{ what: "Poprawka: przycisk pod własnym Testem Ataku bronią palną — przerzut, raz na walkę (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "Zabójcza spluwa: rewolwer — jedna dodatkowa kość obrażeń (PLAN_m7 E4)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń."
   },
   "rewolwerowiec": {
@@ -1312,7 +1317,10 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden strzał",
     action: null,
-    auto: [],
+    hotbar: true,
+    activityName: "Celowanie",
+    activityAction: "B",
+    auto: [{ what: "Pierwszy atak: 1. runda, przed turą celu — Ułatwienie w pierwszym Teście Ataku na niego (broń finezyjna albo ogień pojedynczy)", where: "combat/zdolnosci-walka.mjs" }, { what: "Celowanie [B]: aktywność; ruch w tej turze — sygnał MG; następny atak z Ułatwieniem", where: "combat/zdolnosci-akcje.mjs" }],
     text: "Potrafisz się przygotować do zabijania lepiej niż ktokolwiek inny. Jeśli atakujesz bronią finezyjną lub strzelasz ogniem pojedynczym, otrzymujesz nowe możliwości. Pierwszy atak. W pierwszej rundzie walki, jeśli wykonujesz atak przed turą swojego celu, otrzymujesz Ułatwienie do pierwszego Testu Ataku przeciwko temu celowi. Celowanie [B]. W czasie walki i poza nią możesz zastygnąć w bezruchu i lepiej wycelować. Jeśli w swojej turze nie wykonasz ruchu, możesz poświęcić Akcję Bonusową na lepsze wycelowanie i wykonać jeden atak z Ułatwieniem."
   },
   "kamuflaz": {
@@ -1335,7 +1343,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Strzelec",
     action: null,
-    auto: [],
+    auto: [{ what: "status „Stanowisko snajperskie”: zasięg daleki ×3 i bez Utrudnienia za daleki dystans — broń z celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "5 rund mierzenia liczy MG i nakłada status z HUD-u (U20).",
     text: "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią."
   },
   "bez-tajemnic": {
@@ -1360,8 +1369,7 @@ export const CLASS_FEATURES = {
     action: null,
     oncePerTurn: true,
     legacyAbilityKey: "mutantNaSniadanie",
-    auto: [{ what: "Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }],
-    manual: "Refleks łowcy (Inicjatywa) i Zabójca mutantów (Ułatwienie raz w rundzie) — gracz.",
+    auto: [{ what: "Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }, { what: "Zabójca mutantów: raz w rundzie Ułatwienie przeciw mutantowi albo potworowi (okno rzutu)", where: "combat/zdolnosci-walka.mjs" }, { what: "Refleks łowcy: +PB do Inicjatywy, gdy w walce jest wrogi mutant albo potwór (U19)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości."
   },
   "pogromca": {
@@ -1466,7 +1474,8 @@ export const CLASS_FEATURES = {
     action: "A",
     hotbar: true,
     oncePerTurn: true,
-    auto: [],
+    auto: [{ what: "aktywność: Test INT (Technika) o ST z rozmiaru maszyny, efekt na celu, karta MG (3 współczynniki)", where: "combat/zdolnosci-akcje.mjs" }, { what: "po sukcesie raz w rundzie Ułatwienie w ataku na tę maszynę — do końca walki, poza walką do Długiego odpoczynku (U18)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Które 3 współczynniki zdradzić — MG.",
     text: "Każda maszyna ma swój słaby punkt. Wystarczy w niego trafić, żeby idealnie spasowane trybiki, przekładnie, pasy transmisyjne i kable zasilające szlag trafił. Jeśli w czasie walki z maszyną lub tuż przed nią, poświęcisz akcję na Test Inteligencji (Technika) o ST zależnym od jej rozmiaru, MG może ci zdradzić 3 wybrane współczynniki wskazanej maszyny. Mała i malutka (ST 5), średnia (ST 10), duża (ST 15), wielka (20), ogromna (25). Sukces oznacza również, że możesz raz w rundzie zaatakować ją z Ułatwieniem."
   },
   "obsluga-pancerza": {
@@ -1487,7 +1496,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rzeźnik",
     action: null,
-    auto: [],
+    auto: [{ what: "+3 do obrażeń, gdy druga ręka nie trzyma innej broni (lalka; tarcza i chwyt oburęczny — U9)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią."
   },
   "sokole-oko": {
@@ -1527,7 +1536,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zasadzka",
     action: null,
-    auto: [],
+    auto: [{ what: "Ułatwienie przeciw celowi Zaskoczonemu albo w 1. rundzie, gdy działasz przed nim (twoja tura)", where: "combat/zdolnosci-walka.mjs" }],
     text: "Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury."
   },
   "moj-wrog-ludzie": {
@@ -1537,8 +1546,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Ludzie",
     action: null,
-    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
-    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }, { what: "premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Twoim wrogiem są Ludzie. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-maszyny": {
@@ -1548,8 +1557,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Maszyny",
     action: null,
-    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
-    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }, { what: "premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Twoim wrogiem są Maszyny. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-mutanty": {
@@ -1559,8 +1568,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Mutanty",
     action: null,
-    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
-    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }, { what: "premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Twoim wrogiem są Mutanty. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-potwory": {
@@ -1570,8 +1579,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Potwory",
     action: null,
-    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
-    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }, { what: "premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Twoim wrogiem są Potwory. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-zwierzeta": {
@@ -1581,8 +1590,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Zwierzęta",
     action: null,
-    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }],
-    manual: "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+    auto: [{ what: "Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", where: "combat/ulatwienia-testow.mjs" }, { what: "premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", where: "combat/zdolnosci-walka.mjs" }],
+    manual: "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   ...KOBALT_CLASS_FEATURES

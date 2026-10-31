@@ -257,14 +257,17 @@ function buildFeature(f) {
   // so it can be rolled from the sheet and from the auto-managed hotbar macro.
   // `heal` makes it a dnd5e heal instead (Kondycha) — same shape as stock Second Wind.
   // `komenda` (Partner, Oswajanie zwierząt): a "Komenda" [B] that latches the companion's turn (PLAN_m3 D2).
-  if (f.action || f.uses || f.komenda) {
+  // `activityName`/`activityAction`: a tagged part of an untagged ability — Celowanie [B] of Jeden strzał, Promocja [B]
+  // of Maszyna do zabijania (PLAN_m7 E4, `combat/zdolnosci-akcje.mjs`).
+  const action = f.action ?? f.activityAction ?? null;
+  if (action || f.uses || f.komenda) {
     const aid = idFor("activity", f.id);
     activities[aid] = {
       _id: aid,
       type: f.heal ? "heal" : "utility",
-      name: f.komenda ? "Komenda" : f.label,
+      name: f.komenda ? "Komenda" : (f.activityName ?? f.label),
       activation: f.komenda ? { type: "bonus", value: 1 }
-        : f.action ? { type: ACTIVATION[f.action], value: 1 } : { type: "special", value: null },
+        : action ? { type: ACTIVATION[action], value: 1 } : { type: "special", value: null },
       consumption: f.uses
         ? { targets: [{ type: "itemUses", value: "1", target: "" }] }
         : { targets: [] },

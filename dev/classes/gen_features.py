@@ -158,7 +158,11 @@ AUTOMATION = {
     "bez-tajemnic": {"hotbar": True},
     "slaby-punkt": {"hotbar": True, "oncePerTurn": True},
     "mutant-na-sniadanie": {"oncePerTurn": True, "legacyAbilityKey": "mutantNaSniadanie"},
-    "maszyna-do-zabijania": {"oncePerTurn": True, "requiresState": "neuro-berserk"},
+    # Promocja [B] (s. 70): aktywność — dodatkowy atak wręcz w Berserku (`combat/zdolnosci-akcje.mjs`, PLAN_m7 E4).
+    "maszyna-do-zabijania": {"oncePerTurn": True, "requiresState": "neuro-berserk", "hotbar": True,
+                             "activityName": "Promocja", "activityAction": "B"},
+    # Celowanie [B] (s. 94): aktywność — bez ruchu, jeden atak z Ułatwieniem (PLAN_m7 E4).
+    "jeden-strzal": {"hotbar": True, "activityName": "Celowanie", "activityAction": "B"},
     "moj-bog-kule-nosi": {"oncePerTurn": True},
     "ja-i-moj-gang": {"requiresState": "neuro-berserk"},
     "zew-areny": {"requiresState": "neuro-berserk"},
@@ -457,24 +461,29 @@ COVERAGE = {
         "manual": "Czy przedmiot jest najwyżej mały; Niewidoczność ukrytej rzeczy — stół.",
     },
     "moj-wrog-ludzie": {
-        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
-        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs"),
+                 ("premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     },
     "moj-wrog-maszyny": {
-        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
-        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs"),
+                 ("premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     },
     "moj-wrog-mutanty": {
-        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
-        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs"),
+                 ("premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     },
     "moj-wrog-potwory": {
-        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
-        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs"),
+                 ("premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     },
     "moj-wrog-zwierzeta": {
-        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs")],
-        "manual": "Premia do ataku i obrażeń przeciw wrogom — PLAN_m7 R4 (E4).",
+        "auto": [("Ułatwienie w tropieniu (Survival) i wiedzy (INT) o twoich wrogach — podsuwane w oknie rzutu („do rozważenia”)", "combat/ulatwienia-testow.mjs"),
+                 ("premia z kolumny tabeli do Testu Ataku i obrażeń przeciw kategorii celu (jeden cel)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     },
     # ---- Profesje ----
     # PLAN_m7 E2 (R7): wsparcie sojusznika — `combat/zdolnosci-wsparcie.mjs`.
@@ -512,8 +521,8 @@ COVERAGE = {
     },
     "clint": {
         "auto": [("Poprawka: przycisk pod własnym Testem Ataku bronią palną — przerzut, raz na walkę (PLAN_m7 E1)",
-                  "combat/zdolnosci-po-rzucie.mjs")],
-        "manual": "Zabójcza spluwa (+1 kość obrażeń rewolweru) dolicza gracz — PLAN_m7 R4.",
+                  "combat/zdolnosci-po-rzucie.mjs"),
+                 ("Zabójcza spluwa: rewolwer — jedna dodatkowa kość obrażeń (PLAN_m7 E4)", "combat/zdolnosci-walka.mjs")],
     },
     "tarcza-wiary": {
         "auto": [
@@ -538,8 +547,9 @@ COVERAGE = {
         ],
     },
     "mutant-na-sniadanie": {
-        "auto": [("Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", "combat/obrona.mjs")],
-        "manual": "Refleks łowcy (Inicjatywa) i Zabójca mutantów (Ułatwienie raz w rundzie) — gracz.",
+        "auto": [("Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", "combat/obrona.mjs"),
+                 ("Zabójca mutantów: raz w rundzie Ułatwienie przeciw mutantowi albo potworowi (okno rzutu)", "combat/zdolnosci-walka.mjs"),
+                 ("Refleks łowcy: +PB do Inicjatywy, gdy w walce jest wrogi mutant albo potwór (U19)", "combat/zdolnosci-walka.mjs")],
     },
     "empiryk": {
         "auto": [("TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", "combat/obrona.mjs"),
@@ -642,7 +652,73 @@ COVERAGE = {
         "manual": "Urządzenia bez mikroprocesorów i pancerz zamontowany na dronie — rozstrzyga MG.",
     },
 
+    # PLAN_m7 E4 (R4, R5): walka z kontekstem — `combat/zdolnosci-walka.mjs`, akcje — `combat/zdolnosci-akcje.mjs`.
+    "dwoch-na-jednego": {
+        "auto": [("+2 do Testu Ataku wręcz w cel, którego sojusznik zaatakował wręcz od końca twojej poprzedniej tury (D13; "
+                  "dziennik ataków z kart trafienia)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Poza walką (bez tur) — gracz.",
+    },
+    "ja-i-moj-gang": {
+        "auto": [("w Berserku: sojusznik ≤ 3 m ma Ułatwienie w ataku na wroga, którego widzisz (ściany, Oślepienie, "
+                  "Niewidoczność)", "combat/zdolnosci-walka.mjs")],
+    },
+    "zawolajcie-kolegow": {
+        "auto": [("Ułatwienie w ataku wręcz, gdy ≤ 1,5 m stoi co najmniej dwóch przeciwników", "combat/zdolnosci-walka.mjs")],
+    },
+    "maszyna-do-zabijania": {
+        "auto": [("Promocja [B]: w Berserku przycisk dodatkowego ataku wręcz na karcie ataku i aktywność", "combat/zdolnosci-akcje.mjs"),
+                 ("Zwód: w Berserku raz w rundzie Ułatwienie w ataku wręcz z SIŁ (okno rzutu)", "combat/zdolnosci-walka.mjs")],
+    },
+    "jeden-strzal": {
+        "auto": [("Pierwszy atak: 1. runda, przed turą celu — Ułatwienie w pierwszym Teście Ataku na niego "
+                  "(broń finezyjna albo ogień pojedynczy)", "combat/zdolnosci-walka.mjs"),
+                 ("Celowanie [B]: aktywność; ruch w tej turze — sygnał MG; następny atak z Ułatwieniem", "combat/zdolnosci-akcje.mjs")],
+    },
+    "strzelec": {
+        "auto": [("status „Stanowisko snajperskie”: zasięg daleki ×3 i bez Utrudnienia za daleki dystans — broń z "
+                  "celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", "combat/zdolnosci-walka.mjs")],
+        "manual": "5 rund mierzenia liczy MG i nakłada status z HUD-u (U20).",
+    },
+    "slaby-punkt": {
+        "auto": [("aktywność: Test INT (Technika) o ST z rozmiaru maszyny, efekt na celu, karta MG (3 współczynniki)", "combat/zdolnosci-akcje.mjs"),
+                 ("po sukcesie raz w rundzie Ułatwienie w ataku na tę maszynę — do końca walki, poza walką do Długiego "
+                  "odpoczynku (U18)", "combat/zdolnosci-walka.mjs")],
+        "manual": "Które 3 współczynniki zdradzić — MG.",
+    },
+    "trajektoria": {
+        "auto": [("przycisk po rzucie pod Testem Ataku dystansowym: + mod. INT, licznik PB /DO", "combat/zdolnosci-po-rzucie.mjs")],
+    },
+    "szybka-gadka": {
+        "auto": [("aktywność [B]: wybór Testu Wpływania (Oszustwo, Perswazja, Występy, Zastraszanie, Tresura)", "combat/zdolnosci-akcje.mjs")],
+        "manual": "Nastawienie istoty i ST (15 albo INT istoty) — MG.",
+    },
+    "szybkie-badanie": {
+        "auto": [("aktywność [B]: wybór Testu Badania (INT: Historia, Medycyna, Przyroda, Śledztwo, Technika)", "combat/zdolnosci-akcje.mjs")],
+        "manual": "Co postać się dowiaduje — MG.",
+    },
+    "ulubiona-bron-twardziel": {
+        "auto": [("przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); "
+                  "broń dystansowa bez amunicji — sygnał MG", "combat/zdolnosci-akcje.mjs"),
+                 ("wybór modelu przy pierwszym użyciu, liczba z tabeli Twardziela; zamiana jednej po Długim odpoczynku", "combat/zdolnosci-akcje.mjs")],
+    },
+    "ulubiona-bron-zlodziej": {
+        "auto": [("przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); "
+                  "broń dystansowa bez amunicji — sygnał MG", "combat/zdolnosci-akcje.mjs"),
+                 ("wybór modelu (z biegłością) przy pierwszym użyciu; zamiana po Długim odpoczynku", "combat/zdolnosci-akcje.mjs")],
+    },
+    "ulubiona-bron-zwiadowca": {
+        "auto": [("przycisk [B] na karcie ataku ulubioną bronią w twojej turze — zwykły atak tym modelem (U11); "
+                  "broń dystansowa bez amunicji — sygnał MG", "combat/zdolnosci-akcje.mjs"),
+                 ("wybór modelu przy pierwszym użyciu, dwa od 9. poziomu; zamiana po Długim odpoczynku", "combat/zdolnosci-akcje.mjs")],
+    },
+
     # ---- Opcje ----
+    "rzeznik": {
+        "auto": [("+3 do obrażeń, gdy druga ręka nie trzyma innej broni (lalka; tarcza i chwyt oburęczny — U9)", "combat/zdolnosci-walka.mjs")],
+    },
+    "zasadzka": {
+        "auto": [("Ułatwienie przeciw celowi Zaskoczonemu albo w 1. rundzie, gdy działasz przed nim (twoja tura)", "combat/zdolnosci-walka.mjs")],
+    },
     "jezdziec": {
         "auto": [
             ("TT wierzchowca + Premia Biegłości, póki siedzisz w siodle (efekt na wierzchowcu)", "pojazdy/jezdziec.mjs"),

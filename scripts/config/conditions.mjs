@@ -338,6 +338,16 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     img: `${OWN}/tonie.svg`,
     description: "<p>Nie utrzymujesz się na powierzchni: Szybkość 0, opadasz na dno. Na początku następnej tury "
       + "ponowny Test Siły (Atletyka) — sukces: wypływasz (s. 255).</p>"
+  },
+  // Strzelec (Zabójca, s. 94; PLAN_m7 U20) — MG nakłada z HUD-u po 5 rundach mierzenia; silnik okoliczności czyta go
+  // przy broni z celownikiem optycznym (`combat/okolicznosci.mjs`), ruch żetonu zdejmuje (`combat/zdolnosci-walka.mjs`).
+  // Ikona tymczasowa — zamówienie w dev/icons/MISSING.md.
+  stanowiskoSnajperskie: {
+    name: "Stanowisko snajperskie",
+    img: "icons/svg/target.svg",
+    description: "<p>Strzelec po 5 rundach mierzenia z bronią z celownikiem optycznym: maksymalny zasięg tej broni ×3 i "
+      + "bez Utrudnienia za daleki dystans (s. 94). Działa tylko z celownikiem optycznym i zdolnością Strzelec; "
+      + "znika, gdy się poruszysz.</p>"
   }
 });
 
