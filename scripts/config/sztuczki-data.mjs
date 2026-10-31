@@ -288,10 +288,9 @@ export const SZTUCZKI = Object.freeze({
   },
   lawnik: {
     label: "Ławnik",
-    // Podręcznik październikowy nie ma tu linii Rozwój Cechy; tabela kampanii ma — MG: tabela (PLAN_m7 D15).
-    cechy: ["str", "con"],
+    // Bez Rozwoju Cechy: „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika (MG, PLAN_m7 D15).
     req: "SIŁ 17+",
-    text: "+1 SIŁ lub KON; biegłość broń improwizowana (ciężkie 10 kg+ → 3k4 obrażeń obuchowych); "
+    text: "Biegłość broń improwizowana (ciężkie 10 kg+ → 3k4 obrażeń obuchowych); "
       + "Ułatwienie przy ataku ciężkim przedmiotem; możliwość Powalenia.",
     category: "wrecz",
     auto: []

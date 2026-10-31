@@ -3,14 +3,17 @@
  *
  * Mój wróg wobec kategorii celu; Rzeźnik z lalką (pusta druga ręka, druga broń); Zabójcza spluwa na rewolwerze;
  * Trajektoria pod Testem Ataku dystansowym (+INT, licznik); Celowanie — efekt tury właściciela, zużyty tylko przez
- * atak, w którym był jedynym Ułatwieniem; Strzelec w migawce ataku; Ulubiona broń — model i lista; Słaby punkt —
+ * atak, w którym był jedynym Ułatwieniem; Strzelec w migawce ataku i deklaracja stanowiska (karta MG od razu poza
+ * walką, po 5 rundach w walce; zatwierdzenie nakłada status); Ulubiona broń — model i lista; Słaby punkt —
  * efekt na maszynie, bez dubla, zdjęty po Długim odpoczynku. Dziennik ataków (Dwóch na jednego), przyciski [B] i
  * dodatkowy atak — e2e `zdolnosci-walka`; okno D13 i reszta czystych reguł — `okolicznosci.test.mjs`.
  */
 
-import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup } from "./helpers.mjs";
+import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, walkaTestowa } from "./helpers.mjs";
 import { __testing as W, mojWrogPrzeciw, premieObrazen, FLAG_CELOWANIE, FLAG_SLABY_PUNKT } from "../combat/zdolnosci-walka.mjs";
-import { __testing as A, modelBroni, ulubionaDla, FLAG_ULUBIONE } from "../combat/zdolnosci-akcje.mjs";
+import {
+  __testing as A, modelBroni, ulubionaDla, FLAG_ULUBIONE, sprawdzMierzenie, zatwierdzStanowisko
+} from "../combat/zdolnosci-akcje.mjs";
 import { __testing as P } from "../combat/zdolnosci-po-rzucie.mjs";
 import { uzyjZrodla, kontekstRzutu } from "../combat/po-rzucie.mjs";
 import { jestEfektemTuryWlasciciela } from "../combat/czas-efektu.mjs";
@@ -150,6 +153,47 @@ export function registerZdolnosciWalkaTests(quench) {
         expect(snajper(), "status + celownik + Strzelec").to.equal(true);
         await zab.toggleStatusEffect(STANOWISKO_SNAJPERSKIE, { active: false });
         expect(snajper(), "bez statusu").to.equal(false);
+      });
+
+      it("deklaracja gracza: aktywność; poza walką karta MG od razu, zatwierdzenie nakłada status (U20)", async function () {
+        const zab = await scratchActor({ name: `${SCRATCH_PREFIX} Snajper deklaruje` });
+        const item = await cecha(zab, "strzelec");
+        expect(item.system.activities.find(a => a.name === "Stanowisko snajperskie")?.activation?.type).to.equal("special");
+        const kar = await bron(zab, i => i.type === "weapon" && i.system.type?.value === "palnaDluga");
+        expect(A._bronSnajperska(zab), "bez celownika").to.equal(null);
+        await kar.setFlag(MODULE_ID, "addons", [{ id: "celownik-optyczny", delta: {} }]);
+        await game.neuroshima.lalka.place(zab, kar, "hand");
+        expect(A._bronSnajperska(zab)?.id, "celownik w ręce").to.equal(kar.id);
+        const przed = game.messages.size;
+        await A._mierzenie(zab);
+        const karta = game.messages.contents.slice(przed).find(m => m.content.includes(`data-neuro-m7-stanowisko="${zab.uuid}"`));
+        expect(karta, "karta z przyciskiem").to.be.ok;
+        expect(karta.whisper.every(id => game.users.get(id)?.isGM), "tylko MG").to.equal(true);
+        await zatwierdzStanowisko(zab);
+        expect(zab.statuses.has(STANOWISKO_SNAJPERSKIE)).to.equal(true);
+      });
+
+      it("w walce: przycisk dopiero po 5 rundach mierzenia, raz", async function () {
+        const zab = await scratchActor({ name: `${SCRATCH_PREFIX} Snajper w walce` });
+        const walka = await walkaTestowa([zab], { nazwa: "strzelec" });
+        try {
+          const { combat } = walka;
+          const efekt = round => zab.createEmbeddedDocuments("ActiveEffect", [{
+            name: "Mierzenie (Strzelec)", img: "icons/svg/target.svg", type: "base",
+            flags: { [MODULE_ID]: { [A.FLAG_MIERZENIE]: { combatId: combat.id, round, zgloszone: false } } }
+          }]);
+          const karty = () => game.messages.filter(m => m.content.includes(`data-neuro-m7-stanowisko="${zab.uuid}"`)).length;
+          await efekt(combat.round - 4);
+          await sprawdzMierzenie(combat);
+          expect(karty(), "4 rundy — jeszcze nie").to.equal(0);
+          await zab.deleteEmbeddedDocuments("ActiveEffect", zab.effects.map(e => e.id));
+          await efekt(combat.round - 5);
+          await sprawdzMierzenie(combat);
+          await sprawdzMierzenie(combat);
+          expect(karty(), "5 rund — jedna karta").to.equal(1);
+        } finally {
+          await walka.sprzatnij();
+        }
       });
     });
 

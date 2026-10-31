@@ -372,7 +372,7 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D12 | (2026-10-31, U14) Let's rock — „ataków lub RO” | **Oba, dosłownie** („lub” włączające): premia do ataków i RO dla wszystkich naraz |
 | D13 | (2026-10-31, U10) Dwóch na jednego — okno | **Od końca twojej poprzedniej tury** — kroczące okno, kolejność inicjatywy nie decyduje |
 | D14 | (2026-10-31, U28) Szósty zmysł — zakres | **Każdy RO na ZRC**, stockowa reguła dnd5e (jak Danger Sense) z warunkiem efektu bez Oślepienia/Ogłuszenia/Nieprzytomności; zagrożenie niezauważalne — MG przełącza okno rzutu na zwykły |
-| D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: tabela kampanii ma rację** — +1 SIŁ lub KON (podręcznik październikowy pomija linię); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
+| D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: bez Rozwoju Cechy** — „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika, rację ma podręcznik październikowy (MG poprawił się po E4; ASI dodane w E4 i cofnięte); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
@@ -578,8 +578,8 @@ pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze pr
   „dowolna”, Ćwiczenie czyni mistrza — 2 punkty, maks. 2); Patriota dostaje też `ItemChoice` z puli zdolności Pochodzeń.
   Plakietka liczy Rozwój Cechy jako automatykę; zniknęły „dopisuje gracz” i „wybiera się przy awansie”.
 - **Rozbieżność do MG → D15:** **Ławnik** — tabela kampanii `Tabele/Sztuczki.md` (i opis w danych) daje „+1 SIŁ lub
-  KON”, podręcznik październikowy nie ma linii Rozwój Cechy (CHANGELOG milczy). MG: tabela ma rację — ASI SIŁ/KON
-  (34 z 53 Sztuczek z `cechy`).
+  KON”, podręcznik październikowy nie ma linii Rozwój Cechy (CHANGELOG milczy). MG: linię usunięto — bez ASI
+  (33 z 53 Sztuczek z `cechy`; tekst w danych bez „+1 SIŁ lub KON”, tabela w vaulcie do poprawy).
 - **Zdolności jako dane** (`config/zdolnosci-efekty.mjs`): `EFEKTY` — 14 zdolności z Efektami Aktywnymi na przedmiocie
   (Sokole oko, Szósty zmysł — D14 z warunkiem stanów, Głupi, Zew areny — Doping w Berserku, Smakuje jak arszenik,
   A co mi tam, Szary — Mądra kryjówka, Zwinność szczura — Wspinacz; Pochodzenia: Ja już swoje odchorowałem, Zdrowa
@@ -601,7 +601,8 @@ pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze pr
 
 ### E4 — R4 + R5, walka z kontekstem (2026-10-31)
 
-D15 przed etapem (Ławnik — tabela; resync w E8 — zgoda; pregeni — odłożone); weto do U9, U11, U16–U20 — brak.
+D15 przed etapem (resync w E8 — zgoda; pregeni — odłożone; Ławnik — ASI dodane tutaj, po E4 cofnięte: MG się
+poprawił, linii nie ma); weto do U9, U11, U16–U20 — brak.
 - **Premie liczbowe** (`combat/zdolnosci-walka.mjs`, części rzutu w `dnd5e.preRollAttack` / `preRollDamage`, plakietka
   „+” na karcie ataku): **Mój wróg** (kolumna tabeli „+N/Nk6” ze skali Zwiadowcy, opcja → kategoria celu; jeden cel),
   **Rzeźnik** (+3 z lalki — U9: inna broń w drugiej ręce wyklucza, tarcza, chwyt oburęczny i przedmiot-oryginał
@@ -617,6 +618,10 @@ D15 przed etapem (Ławnik — tabela; resync w E8 — zgoda; pregeni — odłoż
   zużywa; RAW „możesz”).
 - **Strzelec (U20):** status „Stanowisko snajperskie” w HUD (ikona tymczasowa — `MISSING.md` A); silnik okoliczności:
   zasięg daleki ×3 i bez wiersza „zasięg daleki” przy celowniku optycznym i zdolności; `moveToken` zdejmuje status.
+  **Deklaracja gracza (MG po E4):** aktywność „Stanowisko snajperskie” (wymaga broni z celownikiem w ręce) — poza walką
+  od razu karta MG z przyciskiem („pół minuty minęło”); w walce efekt „Mierzenie” z rundą startu, po 5 rundach bez
+  ruchu aktywny MG dostaje przycisk na początku tury Strzelca; ruch i koniec walki przerywają. Status nakłada MG
+  przyciskiem albo z HUD-u.
 - **Refleks łowcy (U19):** `dnd5e.preConfigureInitiative` dokłada PB (z nazwą wroga w opisie rzutu), gdy w walce jest
   wrogi mutant albo potwór — obie ścieżki Inicjatywy (tracker i okno). „Domyślnie w oknie” = zawsze doliczony; MG
   wyłącza przerzutem — okno Inicjatywy dnd5e nie pokazuje części do odznaczenia.

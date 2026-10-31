@@ -132,9 +132,8 @@ export function registerZdolnosciEfektyTests(quench) {
         expect(asi2.configuration.points).to.equal(1);
         expect([...asi2.configuration.locked]).to.have.members(["con", "int", "wis", "cha"]);
         const lawnik = szt.find(i => i.getFlag(MODULE_ID, "sztuczka") === "lawnik");
-        // Podręcznik milczy, tabela kampanii daje +1 SIŁ lub KON — MG wybrał tabelę (PLAN_m7 D15).
-        const asi3 = adv(lawnik).find(a => a.type === "AbilityScoreImprovement");
-        expect([...asi3.configuration.locked]).to.have.members(["dex", "int", "wis", "cha"]);
+        // „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika — bez Rozwoju Cechy (MG, PLAN_m7 D15).
+        expect(adv(lawnik).some(a => a.type === "AbilityScoreImprovement"), "Ławnik — bez Rozwoju Cechy").to.equal(false);
       });
     });
   });

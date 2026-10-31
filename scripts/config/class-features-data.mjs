@@ -1343,8 +1343,11 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Strzelec",
     action: null,
-    auto: [{ what: "status „Stanowisko snajperskie”: zasięg daleki ×3 i bez Utrudnienia za daleki dystans — broń z celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", where: "combat/zdolnosci-walka.mjs" }],
-    manual: "5 rund mierzenia liczy MG i nakłada status z HUD-u (U20).",
+    hotbar: true,
+    activityName: "Stanowisko snajperskie",
+    activityAction: "S",
+    auto: [{ what: "status „Stanowisko snajperskie”: zasięg daleki ×3 i bez Utrudnienia za daleki dystans — broń z celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", where: "combat/zdolnosci-walka.mjs" }, { what: "aktywność „Stanowisko snajperskie”: deklaracja gracza; w walce 5 rund mierzenia bez ruchu liczy moduł, poza walką od razu — status nakłada MG przyciskiem na karcie (U20)", where: "combat/zdolnosci-akcje.mjs" }],
+    manual: "Czy stanowisko jest przygotowane i cel się nadaje — MG zatwierdza.",
     text: "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią."
   },
   "bez-tajemnic": {

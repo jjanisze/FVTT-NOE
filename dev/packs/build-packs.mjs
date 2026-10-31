@@ -125,7 +125,7 @@ const ORIGIN_ABILITIES_POOL = Object.keys(ORIGIN_ABILITIES).map(id => ({ uuid: o
 /*  Helpers                                      */
 /* -------------------------------------------- */
 
-const ACTIVATION = { A: "action", B: "bonus", R: "reaction" };
+const ACTIVATION = { A: "action", B: "bonus", R: "reaction", S: "special" };
 
 /** Usage-card line of a `komenda` ability (PLAN_m3 D2) — the latch itself is combat/towarzysze-walka.mjs. */
 const KOMENDA_CHAT = "Komenda [B] — towarzysz działa w swojej turze, zaraz po tobie. Bez komendy unika walki (s. 99–100).";
@@ -267,7 +267,7 @@ function buildFeature(f) {
       type: f.heal ? "heal" : "utility",
       name: f.komenda ? "Komenda" : (f.activityName ?? f.label),
       activation: f.komenda ? { type: "bonus", value: 1 }
-        : action ? { type: ACTIVATION[action], value: 1 } : { type: "special", value: null },
+        : action && action !== "S" ? { type: ACTIVATION[action], value: 1 } : { type: "special", value: null },
       consumption: f.uses
         ? { targets: [{ type: "itemUses", value: "1", target: "" }] }
         : { targets: [] },

@@ -8,6 +8,7 @@
  * | Jeden strzał — Celowanie (Zabójca, s. 94) | bez ruchu w tej turze → [B] → jeden atak z Ułatwieniem | aktywność „Celowanie”, efekt na aktorze |
  * | Słaby punkt [A] (Zabójca maszyn, s. 101) | Test INT (Technika) o ST z rozmiaru → efekt na maszynie, karta MG (3 współczynniki) | aktywność, efekt na celu |
  * | Szybka gadka [B] (Cwaniak 3, s. 73), Szybkie badanie [B] (Spec 2, s. 78) | Wpływanie / Badanie (s. 41) w Akcji Bonusowej | aktywność → wybór umiejętności |
+ * | Strzelec (Zabójca, s. 94; U20) | gracz deklaruje stanowisko; w walce moduł liczy 5 rund mierzenia bez ruchu, poza walką — od razu; status nakłada MG przyciskiem | aktywność „Stanowisko snajperskie”, karta MG |
  *
  * Akcję Bonusową deklaruje warstwa akcji (`actors/actions.mjs`): aktywność [B] — sama przy użyciu; przycisk na karcie —
  * `zadeklaruj` przed atakiem. Druga Akcja Bonusowa w turze → sygnał MG (D5), atak idzie dalej.
@@ -23,6 +24,7 @@ import { zastapionaPrzez, rootOf } from "./po-rzucie.mjs";
 import { kombatantWlasciciela, zarejestrujEfektTuryWlasciciela } from "./czas-efektu.mjs";
 import { sygnalNaruszenia } from "./sygnal-naruszenia.mjs";
 import { FLAG_CELOWANIE, FLAG_SLABY_PUNKT } from "./zdolnosci-walka.mjs";
+import { STANOWISKO_SNAJPERSKIE } from "./okolicznosci.mjs";
 import {
   esc, przedmiotZdolnosci, gra, zeton, kategoria, nalozEfekt, usunEfekty, flavorKarty, stylPrzycisku, STYL_SZARY
 } from "./zdolnosci-wspolne.mjs";
@@ -31,6 +33,7 @@ import { heldItems } from "../actors/doll.mjs";
 import { weaponIdOf } from "../weapons/magazine-model.mjs";
 import { magazineReadiness } from "../weapons/magazine.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
+import { hasAddon } from "../config/addons-data.mjs";
 import {
   ULUBIONA_BRON, limitUlubionych, stSlabegoPunktu, UMIEJETNOSCI_AKCJI
 } from "../config/zdolnosci-walka.mjs";
@@ -46,6 +49,10 @@ export const FLAG_DODATKOWY = "dodatkowyAtak";
 const FLAG_TEST_SLABY = "slabyPunktTest";
 /** Słaby punkt znaleziony w walce: id walki (sprzątanie po walce; poza walką — Długi odpoczynek, U18). */
 const FLAG_SLABY_WALKA = "slabyPunktWalka";
+/** Strzelec mierzy w walce: `{ combatId, round, zgloszone }` na efekcie „Mierzenie”. */
+const FLAG_MIERZENIE = "mierzenie";
+/** Strzelec (s. 94): tyle rund precyzyjnego mierzenia. */
+const RUNDY_MIERZENIA = 5;
 const KOLOR = "#b9770e";
 const DLUGI_KOLOR = "#5d6d7e";
 
@@ -340,13 +347,96 @@ async function _onRollModified({ message, roll, actor }) {
   if (cel) await _nalozSlabyPunkt(actor, _ma(actor, "slaby-punkt"), cel);
 }
 
-/** Słaby punkt w walce kończy się z walką (U18). */
+/** Słaby punkt w walce i mierzenie Strzelca kończą się z walką (U18, U20). */
 async function _onDeleteCombat(combat) {
   if (!game.users.activeGM?.isSelf) return;
   for (const c of combat.combatants) {
-    const ids = c.actor?.effects.filter(e => e.getFlag(MODULE_ID, FLAG_SLABY_WALKA) === combat.id).map(e => e.id) ?? [];
+    const ids = c.actor?.effects.filter(e => e.getFlag(MODULE_ID, FLAG_SLABY_WALKA) === combat.id
+      || e.getFlag(MODULE_ID, FLAG_MIERZENIE)?.combatId === combat.id).map(e => e.id) ?? [];
     if (ids.length) await c.actor.deleteEmbeddedDocuments("ActiveEffect", ids);
   }
+}
+
+/* -------------------------------------------- */
+/*  Strzelec — stanowisko snajperskie            */
+/* -------------------------------------------- */
+
+/** Broń z celownikiem optycznym w ręce (s. 94) albo `null`. */
+function _bronSnajperska(actor) {
+  return heldItems(actor).map(h => h.item).find(i => i?.type === "weapon" && hasAddon(i, "celownik-optyczny")) ?? null;
+}
+
+const _mierzenieEfekty = actor => actor.effects.filter(e => e.getFlag(MODULE_ID, FLAG_MIERZENIE));
+
+/** Karta MG z przyciskiem zatwierdzenia stanowiska. */
+async function _kartaStanowiska(actor, linia) {
+  return ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    whisper: ChatMessage.getWhisperRecipients("GM").map(u => u.id),
+    content: flavorKarty(KOLOR, `🎯 Stanowisko snajperskie — ${esc(actor.name)}`, linia)
+      + `<button type="button" data-neuro-m7-stanowisko="${esc(actor.uuid)}">Zatwierdź stanowisko</button>`
+  });
+}
+
+/**
+ * Deklaracja gracza (U20). W walce: efekt „Mierzenie” z rundą startu — po 5 rundach bez ruchu MG dostaje przycisk.
+ * Poza walką: przycisk od razu („pół minuty minęło”). Status zawsze nakłada MG.
+ */
+async function _mierzenie(actor) {
+  if (actor.statuses?.has(STANOWISKO_SNAJPERSKIE)) {
+    ui.notifications.info(`${actor.name} już jest na stanowisku snajperskim.`);
+    return;
+  }
+  const bron = _bronSnajperska(actor);
+  const stare = _mierzenieEfekty(actor).map(e => e.id);
+  if (stare.length) await actor.deleteEmbeddedDocuments("ActiveEffect", stare);
+  const combat = game.combat?.started && kombatantWlasciciela(actor) ? game.combat : null;
+  if (!combat) {
+    await _kartaStanowiska(actor, `${esc(actor.name)} przygotowuje stanowisko z bronią ${esc(bron?.name ?? "?")} i mierzy `
+      + "(5 rund, s. 94). Poza walką — zatwierdź, gdy czas minął.");
+    ui.notifications.info("Stanowisko snajperskie: czeka na zatwierdzenie MG.");
+    return;
+  }
+  await actor.createEmbeddedDocuments("ActiveEffect", [{
+    name: "Mierzenie (Strzelec)", img: "icons/svg/target.svg", type: "base",
+    description: `<p>Precyzyjne mierzenie od rundy ${combat.round} — po ${RUNDY_MIERZENIA} rundach bez ruchu MG zatwierdza `
+      + "stanowisko snajperskie (s. 94). Ruch przerywa.</p>",
+    flags: { [MODULE_ID]: { [FLAG_MIERZENIE]: { combatId: combat.id, round: combat.round, zgloszone: false } } }
+  }]);
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    whisper: game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id),
+    content: flavorKarty(KOLOR, `🎯 Mierzenie — ${esc(actor.name)}`,
+      `Od rundy ${combat.round} (${esc(bron?.name ?? "?")}). W rundzie ${combat.round + RUNDY_MIERZENIA}, jeśli się nie ruszysz, `
+      + "MG dostaje przycisk stanowiska.")
+  });
+}
+
+/** Aktywny MG, na początku tury aktora: 5 rund mierzenia minęło — karta z przyciskiem (raz). */
+export async function sprawdzMierzenie(combat) {
+  if (!game.users.activeGM?.isSelf || !combat?.started) return;
+  const actor = combat.combatant?.actor;
+  const e = actor ? _mierzenieEfekty(actor).find(x => x.getFlag(MODULE_ID, FLAG_MIERZENIE).combatId === combat.id) : null;
+  const m = e?.getFlag(MODULE_ID, FLAG_MIERZENIE);
+  if (!m || m.zgloszone || combat.round < m.round + RUNDY_MIERZENIA) return;
+  await e.setFlag(MODULE_ID, FLAG_MIERZENIE, { ...m, zgloszone: true });
+  await _kartaStanowiska(actor, `${RUNDY_MIERZENIA} rund mierzenia bez ruchu (od rundy ${m.round}).`);
+}
+
+/** MG: status „Stanowisko snajperskie”, mierzenie zdjęte. */
+export async function zatwierdzStanowisko(actor) {
+  if (!game.user.isGM || !actor) return;
+  const ids = _mierzenieEfekty(actor).map(e => e.id);
+  if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
+  await actor.toggleStatusEffect(STANOWISKO_SNAJPERSKIE, { active: true });
+}
+
+/** Ruch przerywa mierzenie (status zdejmuje `combat/zdolnosci-walka.mjs`) — u klienta, który przesunął żeton. */
+function _onMoveToken(doc, _movement, _operation, user) {
+  const actor = doc.actor;
+  if (user?.id !== game.user.id || !actor?.isOwner) return;
+  const ids = _mierzenieEfekty(actor).map(e => e.id);
+  if (ids.length) void actor.deleteEmbeddedDocuments("ActiveEffect", ids);
 }
 
 /* -------------------------------------------- */
@@ -399,6 +489,7 @@ function _bronPromocji(actor) {
 
 const WALIDACJA = {
   "slaby-punkt": () => _slabyPunktCel(),
+  "strzelec": actor => (_bronSnajperska(actor) ? {} : { powod: "Stanowisko snajperskie: weź do ręki broń z celownikiem optycznym (s. 94)." }),
   "maszyna-do-zabijania": actor => (actor.statuses?.has("berserk") ? {} : { powod: "Promocja — tylko w Berserku." })
 };
 
@@ -459,6 +550,7 @@ function _onPostUseActivity(activity, usageConfig) {
   }
   if (id === "jeden-strzal") void _celowanie(actor, item);
   else if (id === "slaby-punkt") void _slabyPunkt(actor, item);
+  else if (id === "strzelec") void _mierzenie(actor);
   else if (UMIEJETNOSCI_AKCJI[id]) void _szybkaAkcja(actor, item);
 }
 
@@ -489,6 +581,15 @@ async function _onRestCompleted(actor, result, config) {
 /* -------------------------------------------- */
 
 async function _onClick(event) {
+  const stanowisko = event.target.closest?.("[data-neuro-m7-stanowisko]");
+  if (stanowisko) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!game.user.isGM) return;
+    stanowisko.disabled = true;
+    await zatwierdzStanowisko(await fromUuid(stanowisko.dataset.neuroM7Stanowisko));
+    return;
+  }
   const zmien = event.target.closest?.("[data-neuro-m7-ulubiona-zmien]");
   if (zmien) {
     event.preventDefault();
@@ -526,6 +627,10 @@ export function registerZdolnosciAkcje() {
   Hooks.on("dnd5e.restCompleted", (actor, result, config) => { void _onRestCompleted(actor, result, config); });
   Hooks.on("neuroshima.rollModified", payload => { void _onRollModified(payload); });
   Hooks.on("deleteCombat", combat => { void _onDeleteCombat(combat); });
+  Hooks.on("updateCombat", (combat, changes) => {
+    if ("turn" in changes || "round" in changes) void sprawdzMierzenie(combat);
+  });
+  Hooks.on("moveToken", _onMoveToken);
   document.addEventListener("click", _onClick, { capture: true });
   console.log(`${MODULE_ID} | Akcje zdolności (M7 E4) registered`);
 }
@@ -539,5 +644,5 @@ export const ulubionaBronApi = Object.freeze({
 /** Powierzchnia dla testów Quench. */
 export const __testing = Object.freeze({
   modelBroni, ulubionaDla, _wolneMiejsce, _limit, _jestDodatkowy, _wTejTurze, _ostatniAtak, _bezAmunicji,
-  _dodatkowyAtak, _celowanie, _slabyPunkt, _nalozSlabyPunkt, _onRestCompleted
+  _dodatkowyAtak, _celowanie, _slabyPunkt, _nalozSlabyPunkt, _onRestCompleted, _mierzenie, _bronSnajperska, FLAG_MIERZENIE
 });

@@ -163,6 +163,8 @@ AUTOMATION = {
                              "activityName": "Promocja", "activityAction": "B"},
     # Celowanie [B] (s. 94): aktywność — bez ruchu, jeden atak z Ułatwieniem (PLAN_m7 E4).
     "jeden-strzal": {"hotbar": True, "activityName": "Celowanie", "activityAction": "B"},
+    # Stanowisko snajperskie (s. 94, U20): deklaracja gracza — 5 rund mierzenia liczy moduł, status nakłada MG.
+    "strzelec": {"hotbar": True, "activityName": "Stanowisko snajperskie", "activityAction": "S"},
     "moj-bog-kule-nosi": {"oncePerTurn": True},
     "ja-i-moj-gang": {"requiresState": "neuro-berserk"},
     "zew-areny": {"requiresState": "neuro-berserk"},
@@ -676,8 +678,10 @@ COVERAGE = {
     },
     "strzelec": {
         "auto": [("status „Stanowisko snajperskie”: zasięg daleki ×3 i bez Utrudnienia za daleki dystans — broń z "
-                  "celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", "combat/zdolnosci-walka.mjs")],
-        "manual": "5 rund mierzenia liczy MG i nakłada status z HUD-u (U20).",
+                  "celownikiem optycznym (silnik okoliczności); ruch zdejmuje status", "combat/zdolnosci-walka.mjs"),
+                 ("aktywność „Stanowisko snajperskie”: deklaracja gracza; w walce 5 rund mierzenia bez ruchu liczy moduł, "
+                  "poza walką od razu — status nakłada MG przyciskiem na karcie (U20)", "combat/zdolnosci-akcje.mjs")],
+        "manual": "Czy stanowisko jest przygotowane i cel się nadaje — MG zatwierdza.",
     },
     "slaby-punkt": {
         "auto": [("aktywność: Test INT (Technika) o ST z rozmiaru maszyny, efekt na celu, karta MG (3 współczynniki)", "combat/zdolnosci-akcje.mjs"),
