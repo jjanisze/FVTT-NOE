@@ -411,6 +411,9 @@ async function _consumeOneDose(item) {
   return true;
 }
 
+/** One dose without a disease entry — Krwawienie bez RO and the Hemofilia medicine (WKK #43, `combat/bleeding.mjs`). */
+export const zuzyjDawke = _consumeOneDose;
+
 async function _postDoseMessage(actor, entry, item, left) {
   const key = item.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(entry.medicine);
   const pool = CHEMIA_FLAVOR[key] ?? CHEMIA_FLAVOR_DEFAULT;

@@ -174,7 +174,7 @@ would drop the rows marked WKK here.
 | `wkk/config/woda-kobalt.mjs` | Water quality (D37 — a rule from the system's test version, dropped from print): dirty ST 10 → infectious disease, radioactive ST 15 → exhaustion, chemical ST 15 → 1d6 acid and exhaustion; qualities, cleanest first. Hosts: `config/postoj-rules.mjs` (`skutkiWody`), `actors/party-supplies.mjs`, `postoj/doba.mjs`; sub-setting `kobaltWoda` |
 | `wkk/config/bebeszenie-kobalt.mjs` | Butchering rows the book lacks (D36): Tiny beast, Gargantuan machine. Host: `config/bebeszenie-data.mjs` (`wierszBebeszenia`) |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
-| `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |
+| `wkk/combat/bleeding.mjs` | `dumdum` bleed profile; `KRWAWIENIE_KOBALT` (rule 43) — the Medycyna test on a bleed spends a medic-kit charge, a bleed without a save also stops on the Hemofilia medicine and ends on its own after three turns of damage. Host: `combat/bleeding.mjs` (`drogiZatrzymania(profile, { kobalt })`) |
 | `wkk/registry.mjs` | Every WKK export in one place — see its own header comment |
 
 Every file above has a matching "host" file at the equivalent path one level up (e.g.

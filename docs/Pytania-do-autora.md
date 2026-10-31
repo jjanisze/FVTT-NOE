@@ -1,6 +1,6 @@
 # Pytania do autora systemu
 
-> 2026-10-10 (towarzysze i drony, 1–2) i 2026-10-12 (handel, postój, wyprawy, 3–16), wydanie październikowe. Miejsca, w których moduł przyjął odczyt MG, a podręcznik zostawia wątpliwość.
+> 2026-10-10 (towarzysze i drony, 1–2), 2026-10-12 (handel, postój, wyprawy, 3–16) i 2026-10-31 (krwawienie, 17), wydanie październikowe. Miejsca, w których moduł przyjął odczyt MG, a podręcznik zostawia wątpliwość.
 > Na potrzeby zgłoszenia autorowi, obok [erraty przepisów profesji](Errata-produkcja.md). Do czasu odpowiedzi moduł
 > działa według opisanego odczytu.
 
@@ -133,3 +133,24 @@ ostre i zakaźne choroby — dalej lekami z ekwipunku. Nędzne — bez leków.
 Wybuch następuje po k4 rundach, ale martwa maszyna wypada z kolejki walki.
 
 **Odczyt modułu:** odliczanie na początku każdej rundy (nie tury maszyny); poza walką — po k4 × 6 s, kiedy MG uzna.
+
+## 17. Trzy różne „Krwawienia” (s. 109, s. 92, s. 201–203)
+
+Podręcznik nazywa tak samo trzy zasady, które działają inaczej:
+
+- **Hemofilia** (s. 109) — po obrażeniach ciętych lub kłutych; na końcu tury RO na Kondycję ST 10, porażka 1k4;
+  ustaje po leku, Teście Medycyny ST 15 z narzędziami małego medyka albo po trzech zdanych RO z rzędu.
+- **Podstępny atak** (Złodziej, poz. 3, s. 92) — 1k8 na początku tury celu, bez RO; ustaje po opatrzeniu rany, bez
+  podanego ST ani narzędzi.
+- **Kolory Rdza, Rtęć i Stal** (s. 201–203) — każdy otrzymany Stopień Zranienia; −1 PW na początku każdej tury;
+  ustaje po akcji Pomaganie z Testem Inteligencji (Medycyna) ST 10.
+
+Nie wiadomo, czy to jeden stan z trzema źródłami (czy lek na Hemofilię zatrzymuje pozostałe, czy dwa źródła naraz
+się sumują), ani jak trudne jest opatrzenie po Podstępnym ataku.
+
+**Odczyt modułu (MG):** postać krwawi naraz z jednego źródła — groźniejsze zastępuje słabsze. Opatrzenie po
+Podstępnym ataku to test jak przy Hemofilii (Medycyna ST 15 z narzędziami małego medyka). W Kolorze Kobaltu
+(zasada 43): test zużywa ładunek narzędzi, a krwawienie bez RO zatrzymuje też lek na Hemofilię i samo ustaje po
+trzeciej turze obrażeń. Krwawienie z Kolorów jeszcze nie działa w module.
+
+**Pytanie:** czy to celowo trzy różne stany? Jeśli nie — która wersja jest wzorcowa?

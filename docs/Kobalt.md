@@ -91,7 +91,7 @@ wyłączeniu; „—” znaczy: to samo, bo zasada działa zawsze.
 | 21 | Bogate życie przynosi szczęście | codzienna, rosnąca szansa na Fuksa | Bogate utrzymanie = Normalne | Kolor Kobaltu |
 | 22 | Bebeszenie: Malutka bestia i Ogromna maszyna | dopisane wiersze tabeli | takich istot się nie bebeszy | Kolor Kobaltu |
 | 23 | Broń postaci: Laska, Miecz, Złoty Desert Eagle | wpisy w tabeli broni | — | zawsze |
-| 24 | Nabój .44 Mag (dum-dum) | Rozrywająca: RO KON ST 14 albo Krwawienie 1k8, aż do opatrzenia | — | zawsze |
+| 24 | Nabój .44 Mag (dum-dum) | Rozrywająca: RO KON ST 14 albo Krwawienie 1k8, aż do opatrzenia (z Kobaltem — zasada 43) | — | zawsze |
 | 25 | Granat sygnałowy | sygnał świetlny i dymny, bez obrażeń | — | zawsze |
 | 26 | Kamizelka taktyczna | lekki pancerz TT 12, +1 przedmiot podręczny | — | zawsze |
 | 27 | Pistolero (Kowboj) | zdolność z profesji, pistoletowy bliźniak Rewolwerowca | nie ma jej w puli awansu (już wybrana zostaje) | Kolor Kobaltu |
@@ -110,6 +110,7 @@ wyłączeniu; „—” znaczy: to samo, bo zasada działa zawsze.
 | 40 | Pojazdy: wybuch baku | płonący wrak z paliwem wybucha po k4 rundach | — | zawsze |
 | 41 | Pojazdy: cechy domowe | Gąsienice, Otwarta rama, Wieżyczka i inne | — | zawsze |
 | 42 | Smaczki postaci: Żeton Luxor i gadżety | żeton kasyna za 10 gb, cztery przedmioty, które hałasują | — | zawsze |
+| 43 | Krwawienie: ładunek medyka, lek i trzy tury | Test Medycyny na krwawienie zużywa ładunek narzędzi; krwawienie bez RO (Podstępny atak, dum-dum) zatrzymuje też lek na Hemofilię i samo ustaje po trzech turach obrażeń | test bez ładunku; krwawienie bez RO trwa do opatrzenia | Kolor Kobaltu |
 
 ## Zasady
 
@@ -391,8 +392,9 @@ siedzi we właściwościach:
 
 - **Rozrywająca** (tylko WKK) — żywa istota trafiona takim pociskiem, która nie ma redukcji, odporności ani
   niewrażliwości na obrażenia kłute (maszyna nigdy), wykonuje RO na Kondycję ST 14. Porażka — **Krwawienie
-  (pocisk dum-dum)**: 1k8 obrażeń na **początku** każdej swojej tury. Tego krwawienia nie da się przeczekać —
-  żaden RO go nie zatrzymuje, tylko opatrzenie rany (Medycyna ST 15).
+  (pocisk dum-dum)**: 1k8 obrażeń na **początku** każdej swojej tury. Żaden RO go nie zatrzymuje, tylko
+  opatrzenie rany (Medycyna ST 15); z Kolorem Kobaltu także lek na Hemofilię, a samo ustaje po trzeciej turze
+  obrażeń (zasada 43).
 - **Hollow-point** — pocisk rozpłaszcza się na przeszkodzie: osłona z niezerową redukcją zatrzymuje go całkowicie.
 - **Obalająca**.
 
@@ -621,6 +623,27 @@ Rzeczy z kart bohaterów tej kampanii, bez mechaniki albo prawie bez:
 
 ✅ *Działa zawsze. Inne stoły, które zainstalują moduł, zobaczą żarty tego stołu — to świadomy koszt prostej
 reguły podziału (`scripts/wkk/README.md`).*
+
+### 43. Krwawienie: ładunek medyka, lek i trzy tury
+<!-- kod: scripts/wkk/combat/bleeding.mjs (KRWAWIENIE_KOBALT), scripts/combat/bleeding.mjs -->
+
+Podręcznik ma trzy różne zasady o tej samej nazwie „Krwawienie” — Hemofilia, Podstępny atak i Stopień Zranienia
+w Kolorach Rdza, Rtęć i Stal ([Pytania do autora](Pytania-do-autora.md), pkt 17). Do odpowiedzi autora moduł
+przyjmuje odczyt MG:
+
+- **Opatrzenie** każdego krwawienia to Test Medycyny ST 15 z narzędziami małego medyka (jak przy Hemofilii) —
+  także po Podstępnym ataku, dla którego podręcznik nie podaje ST. Z Kobaltem test **zużywa ładunek** narzędzi,
+  w obu wynikach (jak Pomoc medyczna, zasada 15). Pustą torbą opatruje tylko ktoś z Aspiryną i Miętusami — z
+  Utrudnieniem i bez ładunku, jak przy leczeniu.
+- **Krwawienie bez RO** (Podstępny atak, nabój dum-dum — zasada 24) zatrzymuje też **lek na Hemofilię**
+  (Desmopresyna albo Preparaty krwiopochodne — z ekwipunku krwawiącego, potem medyka), a **samo ustaje po
+  trzeciej turze obrażeń** — odpowiednik trzech zdanych RO Hemofilii. Nowa rana tej samej wagi liczy tury od
+  nowa.
+
+Bez Kobaltu test nie zużywa ładunku, a krwawienie bez RO trwa, dopóki ktoś nie opatrzy rany. Krwawienie z
+Kolorów jeszcze nie działa w module — profile startowe nie mają kodu.
+
+✅ *Zaimplementowane.*
 
 ## Czego Kobalt nie obejmuje
 

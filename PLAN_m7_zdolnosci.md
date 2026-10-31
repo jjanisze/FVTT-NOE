@@ -684,3 +684,8 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   BN obok PC Gracz 2, zwykły rzut → przycisk Bolesnego ataku z dymkiem sojusznika, karta 2k6 przy krytyku, Podstępny gaśnie
   razem z nim; regresja 8 pakietów zielona na świeżym świecie.
 - **Pokrycie:** zdolności klasowe i profesji 92/133 z automatyką (43 pełne).
+- **Po E5 (MG):** Skuteczny cios — limit rundy Wściekłego ciosu przyjęty. Krwawienie — trzy zasady o tej samej
+  nazwie (Hemofilia, Podstępny atak, Stopień Zranienia w Kolorach) to problem podręcznika, osobny koszyk:
+  `docs/Pytania-do-autora.md` pkt 17. Do odpowiedzi — Podstępny atak opatruje się jak Hemofilię (Medycyna ST 15,
+  narzędzia małego medyka), a zasada WKK 43 (`docs/Kobalt.md`): test zużywa ładunek, krwawienie bez RO (Podstępny,
+  dum-dum) zatrzymuje też Desmopresyna i samo ustaje po trzeciej turze obrażeń. Testy: Quench `amunicja` +8.
