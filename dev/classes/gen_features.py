@@ -227,6 +227,30 @@ COVERAGE = {
     },
 
     # ---- Cwaniak ----
+    # PLAN_m7 E1 (R3): przyciski „po rzucie” — rejestr `combat/po-rzucie.mjs`, źródła w `combat/zdolnosci-po-rzucie.mjs`.
+    "motywacja": {
+        "auto": [
+            ("przycisk pod Testem k20 sojusznika ≤ 18 m (od krawędzi żetonów): + kość Motywacji z tabeli Cwaniaka, "
+             "nowa karta, werdykt i skutki przeliczają się (D4)", "combat/zdolnosci-po-rzucie.mjs"),
+            ("użycie zużyte, Reakcja oznaczona — drugie użycie w rundzie zgłasza MG (D5)", "actors/actions.mjs"),
+        ],
+    },
+    "szczescie": {
+        "auto": [
+            ("przycisk pod własnym Testem k20: przerzut z tym samym Ułatwieniem lub Utrudnieniem, wynik trzeba "
+             "zaakceptować — po nim przerzuty znikają", "combat/zdolnosci-po-rzucie.mjs"),
+            ("raz w rundzie, użycia ze skali Cwaniaka (Długi odpoczynek)", "combat/czas-efektu.mjs"),
+        ],
+    },
+    "spieprzysz-to": {
+        "auto": [
+            ("przycisk pod udanym Testem Ataku albo RO istoty ≤ 18 m: przerzut, zostaje gorszy wynik; werdykt i skutek "
+             "RO przeliczają się", "combat/zdolnosci-po-rzucie.mjs"),
+            ("rzut MG ukryty przed graczem — przycisk widzi MG (U6)", "combat/zdolnosci-po-rzucie.mjs"),
+            ("użycie zużyte, Reakcja oznaczona", "actors/actions.mjs"),
+        ],
+        "manual": "Czy Cwaniak widzi tę istotę — stół.",
+    },
     "moja-prawa-reka": {
         "auto": [
             ("Prawa ręka powiązana z tobą: PW 5 × twój poziom Cwaniaka, KW k6 × ten poziom, PB +2 (nie rośnie), "
@@ -254,6 +278,10 @@ COVERAGE = {
     },
 
     # ---- Spec ----
+    "leb-jak-sklep": {
+        "auto": [("przycisk pod Testem INT (także z umiejętnością) i każdym testem narzędzi: + kość z tabeli Speca, "
+                  "pula PB na Długi odpoczynek (PLAN_m7 E1)", "combat/zdolnosci-po-rzucie.mjs")],
+    },
     "szybka-produkcja": {
         "auto": [("koszyk do 25 gb (50 gb od 11. poz.), 1 min × 1 gb, bez Testu, ładunek na odpoczynek", "production/szybka.mjs")],
     },
@@ -263,6 +291,14 @@ COVERAGE = {
     # ---- Twardziel ----
     "kondycha": {
         "auto": [("Akcja Bonusowa: leczenie 1k8 + poziom Twardziela, mod. KON razy na Długi odpoczynek", "config/class-features-data.mjs")],
+    },
+    "twardosc": {
+        "auto": [
+            ("przycisk pod nieudanym RO i Rzutem Przeciw Śmierci: + kość Twardości z puli (mod. KON na Długi odpoczynek) "
+             "(PLAN_m7 E1, U7)", "combat/zdolnosci-po-rzucie.mjs"),
+            ("RPŚ zamieniony na sukces poprawia liczniki: porażka cofnięta (naturalna 1 — dwie), sukces dopisany, "
+             "trzeci stabilizuje", "combat/zdolnosci-po-rzucie.mjs"),
+        ],
     },
     "trzeci-atak": {
         "auto": [("nie łączy się z Drugim atakiem z innej klasy — wyszarzony słabszy", "actors/class-rules.mjs")],
@@ -298,6 +334,14 @@ COVERAGE = {
 
     # ---- Złodziej ----
     "specjalizacja-zlodziej": {"manual": _PICK_ON_SHEET},
+    "kocie-kosci": {
+        "auto": [
+            ("Ciche łapy [R]: przycisk pod własnym testem Skradania się — jedna lub więcej kości z puli, Reakcja "
+             "oznaczona (PLAN_m7 E1)", "combat/zdolnosci-po-rzucie.mjs"),
+            ("Zgrabne łapy: przycisk pod własnym testem Akrobatyki — jedna lub więcej kości", "combat/zdolnosci-po-rzucie.mjs"),
+        ],
+        "manual": "Cztery łapy (mniej obrażeń od upadku) — gracz odejmuje wynik Kocich kości sam i zaznacza zużyte.",
+    },
 
     # ---- Zwiadowca ----
     "partner": {
@@ -344,6 +388,15 @@ COVERAGE = {
     },
 
     # ---- Profesje ----
+    "amen": {
+        "auto": [("przycisk pod nieudanym Testem Cechy, Ataku albo RO (bez znanego ST — zawsze, U4): +1k6, nowy wynik "
+                  "trzeba zaakceptować; użycia mod. CHA na Długi odpoczynek (PLAN_m7 E1)", "combat/zdolnosci-po-rzucie.mjs")],
+    },
+    "clint": {
+        "auto": [("Poprawka: przycisk pod własnym Testem Ataku bronią palną — przerzut, raz na walkę (PLAN_m7 E1)",
+                  "combat/zdolnosci-po-rzucie.mjs")],
+        "manual": "Zabójcza spluwa (+1 kość obrażeń rewolweru) dolicza gracz — PLAN_m7 R4.",
+    },
     "tarcza-wiary": {
         "auto": [
             ("TT 10 + mod. ZRC + mod. CHA bez pancerza i ochraniaczy (hełm i tarcza wolno) — metoda TT „NOE (automatycznie)”, "

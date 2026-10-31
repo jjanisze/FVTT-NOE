@@ -3,9 +3,11 @@
  *
  * Uogólnienie paska Forsowania i Fuksa (`combat/rerolls.mjs`). Zasady łańcucha — `config/po-rzucie-rules.mjs`.
  *
- *   - **Źródło** (`zarejestrujZrodloPoRzucie`): `{ id, label, klasa, styl, typy, przerzut, wynik, kolejnosc,
- *     ocen(ctx), wykonaj(ctx) }`. `ocen` mówi, czy ten widz widzi przycisk i czy aktywny (kto, zasoby, zasięg);
- *     `wykonaj` pyta, płaci i zwraca `{ roll, flavor, flags?, poWiadomosci? }` albo `null` (anulowane).
+ *   - **Źródło** (`zarejestrujZrodloPoRzucie`): `{ id, label, klasa, styl, typy, przerzut, zamyka, wynik, kolejnosc,
+ *     ocen(ctx), wykonaj(ctx), auto? }`. `ocen` mówi, czy ten widz widzi przycisk i czy aktywny (kto, zasoby, zasięg);
+ *     `wykonaj` pyta, płaci i zwraca `{ roll, flavor, flags?, poWiadomosci? }` albo `null` (anulowane). `zamyka` —
+ *     „nowy wynik musisz zaakceptować” bez przerzutu (Amen): po nim przerzuty znikają jak po przerzucie. `auto(ctx)` —
+ *     źródło bez przycisku, które odpala samo u autora rzutu (Fart, D7); `wykonaj` dostaje wtedy `ctx.auto = true`.
  *   - **Łańcuch**: każda modyfikacja to nowa wiadomość z `flags.<mod>.poRzucie = { rootId, poprzednieId, uzyte,
  *     przerzut, zrodlo, info, przed }`; Test Ataku zostaje Testem Ataku (typ `attack`, powiązania karty i
  *     `rerollOf` — rozstrzygacz trafienia przenosi werdykt, `combat/trafienie.mjs`). Starą kartę „zastępuje” nowa:
@@ -17,7 +19,7 @@
  *     rzutu; gdy klika ktoś inny (Motywacja na rzucie sojusznika) — aktywny MG przy utworzeniu nowej karty.
  */
 
-import { TESTY_K20, LANCUCH_ZERO, poUzyciu, stanPrzycisku, wynikTestu } from "../config/po-rzucie-rules.mjs";
+import { RZUTY_REJESTRU, PROG_RPS, LANCUCH_ZERO, poUzyciu, stanPrzycisku, wynikTestu } from "../config/po-rzucie-rules.mjs";
 import { rollInfo, rollTypeOf } from "../config/chat-message-data.mjs";
 import { obronaOf, verdictOfEntry } from "./trafienie.mjs";
 
@@ -110,7 +112,7 @@ function _aktorRzutu(message) {
   return sp.actor ? game.actors.get(sp.actor) ?? null : null;
 }
 
-/** Wynik wobec progu: ST z opcji rzutu; Test Ataku — werdykt jedynego celu (więcej celów — nieznany, U4). */
+/** Wynik wobec progu: ST z opcji rzutu; Test Ataku — werdykt jedynego celu (więcej celów — nieznany, U4); RPŚ — 10. */
 function _wynik(message, roll, typ) {
   if (typ === "attack") {
     const obrona = obronaOf(message);
@@ -118,7 +120,7 @@ function _wynik(message, roll, typ) {
     const v = verdictOfEntry(obrona, obrona.targets[0]).verdict;
     return v === "pudło" ? "porazka" : v ? "sukces" : null;
   }
-  return wynikTestu(roll?.total, roll?.options?.target);
+  return wynikTestu(roll?.total, roll?.options?.target ?? (typ === "death" ? PROG_RPS : null));
 }
 
 function _naturalna(roll) {
@@ -134,7 +136,7 @@ function _naturalna(roll) {
  */
 export function kontekstRzutu(message) {
   const info = infoOf(message);
-  if (!info || !TESTY_K20.includes(info.type)) return null;
+  if (!info || !RZUTY_REJESTRU.includes(info.type)) return null;
   const roll = message.rolls?.[0];
   if (!roll) return null;
   return {
@@ -199,20 +201,22 @@ function _odpalHaki(payload) {
  * Użyj źródła na karcie.
  * @param {string} zrodloId
  * @param {ChatMessage} message
+ * @param {{auto?: boolean}} [o]  `auto` — źródło automatyczne (bez pytań; ostrzeżenia ciche)
  * @returns {Promise<ChatMessage|null>} nowa karta łańcucha
  */
-export async function uzyjZrodla(zrodloId, message) {
+export async function uzyjZrodla(zrodloId, message, { auto = false } = {}) {
   const row = _zrodla.get(zrodloId);
   if (!row || !message || _wToku.has(message.id)) return null;
   if (zastapionaPrzez(message)) {
-    ui.notifications.warn("Ten rzut został już zastąpiony — użyj przycisku na nowszej karcie.");
+    if (!auto) ui.notifications.warn("Ten rzut został już zastąpiony — użyj przycisku na nowszej karcie.");
     return null;
   }
   const ctx = kontekstRzutu(message);
   if (!ctx) return null;
+  ctx.auto = auto;
   const st = stanPrzycisku(row, ctx, row.ocen(ctx));
   if (st.stan !== "aktywny") {
-    if (st.powod) ui.notifications.warn(`${row.label}: ${st.powod}.`);
+    if (st.powod && !auto) ui.notifications.warn(`${row.label}: ${st.powod}.`);
     return null;
   }
 
@@ -220,7 +224,7 @@ export async function uzyjZrodla(zrodloId, message) {
   try {
     const res = await row.wykonaj(ctx);
     if (!res?.roll) return null;
-    const lancuch = poUzyciu(ctx.lancuch, row.id, { przerzut: !!row.przerzut });
+    const lancuch = poUzyciu(ctx.lancuch, row.id, { przerzut: !!row.przerzut || !!row.zamyka });
     const { rerollOf, ...typ } = _danePowiazan(message);
     const wlasciciel = !!ctx.actor?.isOwner;
     const flags = {
@@ -253,7 +257,23 @@ export async function uzyjZrodla(zrodloId, message) {
 /*  Haki czatu                                   */
 /* -------------------------------------------- */
 
+/** Źródła automatyczne (Fart): tylko autor rzutu, który posiada aktora — jeden klient, bez wyścigu. */
+async function _auto(message) {
+  if (message.author?.id !== game.user.id) return;
+  const ctx = kontekstRzutu(message);
+  if (!ctx?.actor?.isOwner || zastapionaPrzez(message)) return;
+  for (const row of _wKolejnosci()) {
+    if (typeof row.auto !== "function") continue;
+    let chce = false;
+    try { chce = row.auto(ctx); } catch (err) { console.error(`${MODULE_ID} | po rzucie: „${row.id}” — auto`, err); }
+    if (!chce) continue;
+    const nowa = await uzyjZrodla(row.id, message, { auto: true });
+    if (nowa) return;
+  }
+}
+
 function _onCreateMessage(message) {
+  void _auto(message);
   const f = message.flags?.[MODULE_ID]?.[FLAG_PO_RZUCIE];
   if (!f?.poprzednieId) return;
   _zapamietaj(message);
@@ -304,6 +324,7 @@ function _onRenderMessage(message, html) {
   bar.classList.add("neuroshima-reroll-bar");
   Object.assign(bar.style, STYL_PASKA);
   for (const row of _wKolejnosci()) {
+    if (typeof row.auto === "function") continue;   // bez przycisku — odpala samo (Fart)
     let ocena;
     try { ocena = row.ocen(ctx); } catch (err) {
       console.error(`${MODULE_ID} | po rzucie: „${row.id}” — ocena rzuciła wyjątek`, err);

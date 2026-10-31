@@ -71,6 +71,7 @@ import { registerPoziomyTests } from "./poziomy.test.mjs";
 import { registerAkcjeTests } from "./akcje.test.mjs";
 import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
 import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
+import { registerZdolnosciPoRzucieTests } from "./zdolnosci-po-rzucie.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
 export function registerQuenchTests() {
@@ -131,6 +132,8 @@ export function registerQuenchTests() {
     registerAkcjeTests(quench);
     registerPoRzucieTests(quench);
     registerUlatwieniaTestowTests(quench);
+    // PLAN_m7 E1: zdolności po rzucie (R3).
+    registerZdolnosciPoRzucieTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

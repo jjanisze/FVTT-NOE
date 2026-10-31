@@ -22,6 +22,10 @@
 
 /** Testy k20 (s. 17): Test Cechy (z umiejętnością i narzędziem), Rzut Obronny, Test Ataku. RPŚ nim nie jest (s. 34). */
 export const TESTY_K20 = Object.freeze(["skill", "ability", "tool", "attack", "save"]);
+/** Rodzaje rzutu, pod którymi rejestr w ogóle rysuje pasek: Testy k20 i RPŚ (Twardość wymienia go wprost, U7). */
+export const RZUTY_REJESTRU = Object.freeze([...TESTY_K20, "death"]);
+/** Próg RPŚ (s. 34): 10 lub więcej — sukces. */
+export const PROG_RPS = 10;
 /** Test Cechy — także z umiejętnością albo narzędziem. */
 export const TESTY_CECHY = Object.freeze(["skill", "ability", "tool"]);
 
@@ -78,6 +82,20 @@ export function stanPrzycisku(row, ctx, ocena = null) {
   if (b.stan !== "aktywny") return b;
   if (!ocena || ocena.stan === "aktywny") return { stan: "aktywny", ...(ocena?.powod ? { powod: ocena.powod } : {}) };
   return { stan: ocena.stan === "szary" ? "szary" : "ukryty", powod: ocena.powod };
+}
+
+/**
+ * Licznik RPŚ po zamianie porażki na sukces po rzucie (Twardość, U7). dnd5e już zapisał porażkę (naturalna 1 — dwie,
+ * s. 34): cofamy ją i dopisujemy sukces; trzeci sukces stabilizuje (liczniki od zera, jak `applyDeathSaveResult`).
+ * @param {{success?: number, failure?: number}} death  liczniki po pierwotnym rzucie
+ * @param {{naturalna?: number|null}} [o]
+ * @returns {{success: number, failure: number, outcome: "stable"|null}}
+ */
+export function korektaRPS(death, { naturalna = null } = {}) {
+  const failure = Math.max(0, (Number(death?.failure) || 0) - (naturalna === 1 ? 2 : 1));
+  const success = Math.min(3, (Number(death?.success) || 0) + 1);
+  if (success >= 3) return { success: 0, failure: 0, outcome: "stable" };
+  return { success, failure, outcome: null };
 }
 
 /**

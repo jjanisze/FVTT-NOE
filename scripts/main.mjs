@@ -96,6 +96,7 @@ import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
 import { registerArmourPiercing } from "./combat/armour-piercing.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerPoRzucie, poRzucieApi } from "./combat/po-rzucie.mjs";
+import { registerZdolnosciPoRzucie } from "./combat/zdolnosci-po-rzucie.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -373,6 +374,8 @@ Hooks.once("init", () => {
   // Rejestr „po rzucie” (PLAN_m7 §3.0.2): pasek pod rzutem k20, łańcuch modyfikacji, hak `neuroshima.rollModified`.
   registerPoRzucie();
   registerRerolls();
+  // Jego źródła ze zdolności (PLAN_m7 E1, R3): Motywacja, Szczęście, Spieprzysz to!, Amen, Twardość, Fart…
+  registerZdolnosciPoRzucie();
   registerObalajaca();
   registerWeaponSaveProperties();
   // Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) (PLAN_m3 §7.12).

@@ -176,7 +176,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.cha.mod", period: "sr" },
     resource: { die: "@scale.cwaniak.motywacja" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod Testem k20 sojusznika ≤ 18 m (od krawędzi żetonów): + kość Motywacji z tabeli Cwaniaka, nowa karta, werdykt i skutki przeliczają się (D4)", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "użycie zużyte, Reakcja oznaczona — drugie użycie w rundzie zgłasza MG (D5)", where: "actors/actions.mjs" }],
     text: "Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim odpoczynku."
   },
   "szczescie": {
@@ -188,7 +188,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@scale.cwaniak.szczescie", period: "lr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod własnym Testem k20: przerzut z tym samym Ułatwieniem lub Utrudnieniem, wynik trzeba zaakceptować — po nim przerzuty znikają", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "raz w rundzie, użycia ze skali Cwaniaka (Długi odpoczynek)", where: "combat/czas-efektu.mjs" }],
     text: "Raz w rundzie możesz powtórzyć dowolny test, którego wynik ci nie odpowiada. Powtórzony test zawiera takie samo Ułatwienie lub Utrudnienie, jak test pierwotny. Wynik, który otrzymasz w przerzucie, musisz zaakceptować. Możesz użyć tej zdolności tyle razy, ile wskazuje kolumna Szczęście w tabeli Zdolności klasowych Cwaniaka. Zdolność Szczęście odnawia się po Długim odpoczynku."
   },
   "kolejka": {
@@ -212,7 +212,8 @@ export const CLASS_FEATURES = {
     action: "R",
     uses: { max: "@abilities.cha.mod", period: "sr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod udanym Testem Ataku albo RO istoty ≤ 18 m: przerzut, zostaje gorszy wynik; werdykt i skutek RO przeliczają się", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "rzut MG ukryty przed graczem — przycisk widzi MG (U6)", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "użycie zużyte, Reakcja oznaczona", where: "actors/actions.mjs" }],
+    manual: "Czy Cwaniak widzi tę istotę — stół.",
     text: "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku."
   },
   "szybka-gadka": {
@@ -338,7 +339,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@prof", period: "lr" },
     resource: { die: "@scale.spec.lebJakSklep" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod Testem INT (także z umiejętnością) i każdym testem narzędzi: + kość z tabeli Speca, pula PB na Długi odpoczynek (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }],
     text: "Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku."
   },
   "szybka-produkcja": {
@@ -484,7 +485,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.con.mod", period: "lr" },
     resource: { die: "@scale.twardziel.twardosc" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod nieudanym RO i Rzutem Przeciw Śmierci: + kość Twardości z puli (mod. KON na Długi odpoczynek) (PLAN_m7 E1, U7)", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "RPŚ zamieniony na sukces poprawia liczniki: porażka cofnięta (naturalna 1 — dwie), sukces dopisany, trzeci stabilizuje", where: "combat/zdolnosci-po-rzucie.mjs" }],
     text: "Posiadasz wrodzoną „odporność na śmierć” i ogromną ilość szczęścia. Do każdego Rzutu Obronnego (oraz do Rzutu Przeciw Śmierci), którego nie zdasz, możesz dodać wynik z jednej kości Twardości, zgodnie z kolumną Twardość w tabeli Zdolności klasowych Twardziela. Masz tych kości tyle, ile wynosi twój modyfikator Kondycji. Pula kości Twardości odnawia się po ukończeniu Długiego odpoczynku."
   },
   "nie-klekam": {
@@ -555,7 +556,8 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.dex.mod", period: "lr" },
     resource: { die: "@scale.zlodziej.kocieKosci" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Ciche łapy [R]: przycisk pod własnym testem Skradania się — jedna lub więcej kości z puli, Reakcja oznaczona (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }, { what: "Zgrabne łapy: przycisk pod własnym testem Akrobatyki — jedna lub więcej kości", where: "combat/zdolnosci-po-rzucie.mjs" }],
+    manual: "Cztery łapy (mniej obrażeń od upadku) — gracz odejmuje wynik Kocich kości sam i zaznacza zużyte.",
     text: "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. Zgrabne łapy. Kiedy wykonujesz Test Zręczności (Akrobatyka) i wynik nie jest zadowalający, możesz dorzucić Kocie kości do rzutu przed poznaniem efektu testu. Wartość Kociej kości zwiększa się wraz z twoim poziomem Złodzieja zgodnie z kolumną Kocie kości w tabeli Zdolności klasowych Złodzieja. Posiadasz tyle Kocich kości, ile wynosi twój modyfikator Zręczności. Liczba Kocich kości odnawia się po odbyciu Długiego odpoczynku."
   },
   "ulubiona-bron-zlodziej": {
@@ -913,7 +915,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@abilities.cha.mod", period: "lr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod nieudanym Testem Cechy, Ataku albo RO (bez znanego ST — zawsze, U4): +1k6, nowy wynik trzeba zaakceptować; użycia mod. CHA na Długi odpoczynek (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }],
     text: "Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku."
   },
   "laska-boza": {
@@ -1113,7 +1115,8 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: 1, period: "combat" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Poprawka: przycisk pod własnym Testem Ataku bronią palną — przerzut, raz na walkę (PLAN_m7 E1)", where: "combat/zdolnosci-po-rzucie.mjs" }],
+    manual: "Zabójcza spluwa (+1 kość obrażeń rewolweru) dolicza gracz — PLAN_m7 R4.",
     text: "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń."
   },
   "rewolwerowiec": {

@@ -355,7 +355,12 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "5–6",
     label: "Czas patriotów",
     text: "1×/Długi Odpoczynek: +5 do dowolnego Testu Cechy lub Rzutu Obronnego.",
-    auto: []
+    // „Odnawia się po ukończeniu Długiego odpoczynku” (s. 63) — licznik na przedmiocie (PLAN_m7 E1).
+    uses: { max: 1, period: "lr" },
+    auto: [{
+      what: "przycisk +5 pod własnym Testem Cechy albo RO, raz na Długi odpoczynek — nowa karta, skutki przeliczają się",
+      where: "combat/zdolnosci-po-rzucie.mjs"
+    }]
   },
 
   /* --- Południowa Hegemonia --- */
@@ -365,7 +370,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Urodzony morderca",
     text: "Jeśli na kości obrażeń wypadnie 1, możesz raz powtórzyć rzut tą kością.",
-    auto: []
+    auto: [{
+      what: "każda kość obrażeń z jednym przerzutem jedynki (`r1`) — sama, bo przerzut 1 niczego nie pogarsza (PLAN_m7 E1)",
+      where: "combat/zdolnosci-po-rzucie.mjs"
+    }]
   },
   "zjadlem-wlasnego-psa": {
     id: "zjadlem-wlasnego-psa",
@@ -382,6 +390,7 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Zawzięty sukinkot",
     text: "1×/Długi Odpoczynek: gdy PW → 0, na początku następnej tury wstajesz z 1 PW "
       + "i przeprowadzasz turę normalnie.",
+    uses: { max: 1, period: "lr" },
     auto: []
   },
 
@@ -490,7 +499,12 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Fart",
     text: "Naturalne 1 na k20 → powtórz rzut (wynik nowego obowiązuje). Odnawia się "
       + "po Krótkim odpoczynku.",
-    auto: []
+    uses: { max: 1, period: "sr" },
+    auto: [{
+      what: "naturalna 1 w Teście k20 → przerzut sam (D7: „powtarzasz rzut”), raz na Krótki odpoczynek; wynik trzeba "
+        + "zaakceptować (PLAN_m7 E1)",
+      where: "combat/zdolnosci-po-rzucie.mjs"
+    }]
   }
 });
 
@@ -610,7 +624,10 @@ export function originAbilityItemData(key, { _id } = {}) {
       requirements: `Pochodzenie: ${origin}`,
       properties: [],
       prerequisites: { repeatable: false },
-      uses: { max: "", spent: 0, recovery: [] },
+      // Zdolności „1× na odpoczynek” (Fart, Czas patriotów, Zawzięty sukinkot) — licznik dnd5e (PLAN_m7 E1).
+      uses: def.uses
+        ? { max: String(def.uses.max), spent: 0, recovery: [{ period: def.uses.period, type: "recoverAll" }] }
+        : { max: "", spent: 0, recovery: [] },
       activities: {}
     },
     flags: {

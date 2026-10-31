@@ -231,9 +231,9 @@ może uruchomić awansu ponownie — `resync` zmienia dane przedmiotu, nie aktor
 | Twardość (Twardziel 3) | nieudany RO albo RPŚ → + kość Twardości | właściciel | pula (KON /DO) |
 | Poprawka z Clinta (Kowboj) | przerzut Testu Ataku bronią palną | właściciel | raz na walkę |
 | Czas patriotów (Nowy Jork) | +5 do testu cechy albo RO | właściciel | 1 /DO |
-| Fart (Vegas) | naturalna 1 na k20 → przerzut; **proponowany**, nie automatyczny jak stockowy `halflingLucky` (limit użyć) | właściciel | 1 /KO |
-| Urodzony morderca (Hegemonia) | 1 na kości obrażeń → jednorazowy przerzut tej kości | właściciel, karta obrażeń | — |
-| Kocie kości (Złodziej 2) | Ciche łapy: + kości do testu ukrywania; Cztery łapy: − kości z obrażeń od upadku (karta upadku dnd5e 6) | właściciel | pula (ZRC /DO) + Reakcja |
+| Fart (Vegas) | naturalna 1 na k20 → przerzut **automatycznie** (D7; RAW „powtarzasz rzut”) | — | 1 /KO |
+| Urodzony morderca (Hegemonia) | 1 na kości obrażeń → jednorazowy przerzut tej kości — `r1`, sam (wybór zdominowany, §5.4) | — | — |
+| Kocie kości (Złodziej 2) | Ciche łapy [R]: + kości do testu ukrywania; Zgrabne łapy: + kości do Akrobatyki (§5.4); Cztery łapy: − kości z obrażeń od upadku (karta upadku dnd5e 6) | właściciel | pula (ZRC /DO); [R] tylko Ciche i Cztery łapy |
 
 ### R4 — Premie sytuacyjne do ataku i obrażeń (silnik okoliczności + `preRollAttack`/`preRollDamage`)
 
@@ -514,3 +514,32 @@ okazyjne jako mechanika, pełna ekonomia akcji (blokowanie), pościg (Drzwi w dr
 
 **Na później:** znaczniki z przepływów [B] modułu bez natywnej aktywności (Szybkoładowacz, Komenda towarzysza,
 drony) — przy ich etapach; zapamiętane wybory (§3.0.5) — z Ulubioną bronią w E4.
+
+### E1 — R3, zdolności po rzucie (2026-10-31)
+
+Źródła rejestru w `combat/zdolnosci-po-rzucie.mjs`: **Motywacja**, **Szczęście**, **Spieprzysz to!**, **Łeb jak sklep**,
+**Amen**, **Twardość** (także RPŚ — liczniki poprawia `korektaRPS`, trzeci sukces stabilizuje przez
+`combat/umieranie.mjs`), **Poprawka** (Clint), **Czas patriotów**, **Fart** (automatycznie u autora rzutu, D7),
+**Kocie kości — Ciche łapy [R] i Zgrabne łapy** (jedna lub więcej kości); **Urodzony morderca** — modyfikator `r1` na
+kościach obrażeń (`dnd5e.postDamageRollConfiguration`), bez przycisku. Rejestr dostał RPŚ jako rodzaj rzutu (nie
+Test k20 — Fuks i reszta go nie widzą), `zamyka` (Amen: „nowy wynik musisz zaakceptować”) i źródła automatyczne.
+
+Ustalenia przy implementacji (bez weta, w duchu U1–U8):
+- **Kto klika:** gracz — swoje postacie; MG — postacie bez aktywnego gracza i BN. Spieprzysz to! na rzucie ukrytym
+  przed graczem Cwaniaka — przycisk u MG (U6) zamiast osobnego szeptu: MG i tak widzi tę kartę.
+- **Przerzuty ze zdolności** (Szczęście, Spieprzysz to!, Poprawka, Fart) liczą od rzutu pierwotnego łańcucha
+  (`Roll#reroll` — ta sama klasa, tryb i opcje), jak Fuks (U2). Poprawka i Szczęście **bez bramki porażki**: RAW mówi
+  „powtórzyć test”, nie „Przerzut nieudanego” — dosłownie (Szczęście: U5).
+- **Spieprzysz to!** zostawia gorszy wynik; gdy gorszy jest stary, karta łańcucha niesie kopię bez ponownej animacji,
+  a nowy rzut toczy Dice So Nice osobno.
+- **Pochodzenia z limitem** (Fart, Czas patriotów, Zawzięty sukinkot) dostały licznik `uses` w danych
+  (`config/pochodzenia-data.mjs`); kopie na kartach sprzed tej zmiany — przycisk aktywny z dymkiem „licznik: stół”,
+  Fart bez licznika nie odpala sam. Dociągnie je `resync` (E8, za zgodą MG).
+- **Częściowe:** Kocie kości — Cztery łapy (upadek) zostaje graczowi; Clint — Zabójcza spluwa to R4.
+
+**Testy:** `zdolnosci-po-rzucie` (10) — Quench 1422/1422; e2e `zdolnosci-po-rzucie` (nowy, trzy klienty): Gracz 2
+chybia BN o 1, Gracz 1 klika Motywację na jego karcie — nowa karta z trafieniem u MG, stara zastąpiona u obu graczy,
+użycie i Reakcja zapisane; jawny udany RO BN → Spieprzysz to! → gorszy wynik poniżej ST, druga Reakcja w rundzie →
+szept naruszenia (D5). Regresja `zagrozenia` zielona. **Uwaga dla suit e2e:** `t.waitFor` czeka na wynik
+prawdziwy i **nie zna opcji `until`** (cicho ją pomija) — warunek musi siedzieć w funkcji przeglądarki; tak samo
+napisane kroki w `zagrozenia` sprawdzają tylko pierwszy odczyt.
