@@ -4,7 +4,8 @@ const MODULE_ID = "neuroshima-2026-overrides";
 /**
  * Kolor Kobaltu — see `docs/Kobalt.md` (player/GM-facing rule catalog, Polish) and
  * `PLAN_kobalt.md` (dev-side architecture) for the full writeup. Unlike the book's own Kolory
- * (Rdza/Stal/Rtęć/Chrom — mutually exclusive campaign-start profiles, undeveloped in code),
+ * (Rdza/Stal/Rtęć/Chrom — mutually exclusive campaign-start profiles; `kolorNeuroshimy` below, of which only the
+ * Stopień Zranienia bleed is wired so far — `combat/bleeding.mjs`),
  * Kobalt is a stackable set of home-rule patches to mechanics that are untested or don't hold up
  * on a VTT. One world-scope boolean, same shape as `forsowanieEnabled` in `combat/rerolls.mjs`.
  * Default `true`: the GM's assumption is 80%+ of tables play with it on.
@@ -36,6 +37,17 @@ export function isKobaltWoda() {
   return isKobaltEnabled() && game.settings.get(MODULE_ID, "kobaltWoda") !== false;
 }
 
+/** Kolory Neuroshimy (s. 201–203) — jeden na kampanię. */
+export const KOLORY_NEUROSHIMY = Object.freeze({
+  brak: "Bez Koloru", rdza: "Rdza", rtec: "Rtęć", stal: "Stal", chrom: "Chrom"
+});
+
+/** Kolor kampanii: klucz `KOLORY_NEUROSHIMY`. Z jego zasad działa na razie krwawienie przy Stopniu Zranienia. */
+export function kolorNeuroshimy() {
+  if (typeof game === "undefined") return "brak";
+  return game.settings.get(MODULE_ID, "kolorNeuroshimy") ?? "brak";
+}
+
 export function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_SWAY, {
     name: "Animacja pojazdów na planszy pościgu",
@@ -63,6 +75,12 @@ export function registerSettings() {
     name: "Kobalt: jakość wody (WKK)",
     hint: "RO przy piciu brudnej i skażonej wody (Nędzne utrzymanie, zapasy). Działa z Kolorem Kobaltu.",
     scope: "world", config: true, type: Boolean, default: true
+  });
+  game.settings.register(MODULE_ID, "kolorNeuroshimy", {
+    name: "Kolor Neuroshimy",
+    hint: "Zasady opcjonalne z Teczki MG (s. 201–203). Na razie działa z nich tylko krwawienie przy każdym Stopniu "
+      + "Zranienia (Rdza, Rtęć, Stal) — reszta Koloru zostaje przy stole.",
+    scope: "world", config: true, type: String, choices: KOLORY_NEUROSHIMY, default: "brak"
   });
 
   game.settings.register(MODULE_ID, "weaponSoundVolume", {

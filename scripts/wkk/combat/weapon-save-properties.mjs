@@ -12,8 +12,8 @@ import { startBleeding } from "../../combat/bleeding.mjs";
 export const ROZRYWAJACA = {
   label: "Rozrywająca",
   ability: "con",
-  status: "bleeding",
-  statusLabel: "Krwawienie",
+  status: "krwawienieDumdum",
+  statusLabel: "Krwawienie (Dum-dum)",
   dc: { mode: "fixed", value: 14 },
   sizes: null,
   alternativeToDamage: false,
@@ -21,7 +21,7 @@ export const ROZRYWAJACA = {
   color: "#c0392b",
   exemptDamageType: "piercing",
   exemptCreatureTypes: ["maszyna"],
-  // Krwawienie ma własny cykl i profil; samo przełączenie statusu zostawiłoby ikonę na
-  // tokenie i nie zadałoby ani jednego punktu obrażeń.
-  onFail: actor => startBleeding(actor, { profile: "dumdum", reason: "pocisk dum-dum" }),
+  // Krwawienie ma własny cykl (`combat/bleeding.mjs`); samo przełączenie stanu zostawiłoby ikonę na tokenie
+  // bez tyknięć. `status` zostaje — odporność na stan i cofnięcie skutku po przerzucie szukają efektu po nim.
+  onFail: actor => startBleeding(actor, { rodzaj: "dumdum", reason: "pocisk dum-dum" }),
 };

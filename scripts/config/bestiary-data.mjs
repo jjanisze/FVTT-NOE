@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 53 creatures, 265 features (104 automated), 1 attack riders.
+ * 53 creatures, 265 features (104 automated), 2 attack riders.
  */
 
 export const BESTIARY = {
@@ -2957,7 +2957,9 @@ export const BESTIARY = {
         "id": "pila-tarczowa",
         "kind": "mwak",
         "name": "Piła tarczowa",
-        "onHit": null,
+        "onHit": {
+          "krwawienie": "pila"
+        },
         "range": null,
         "reach": 3,
         "rider": "Trafiona istota zaczyna krwawić i otrzymuje 1k4 obrażeń na początku swojej tury, dopóki rana nie zostanie opatrzona.",

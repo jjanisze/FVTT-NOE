@@ -236,6 +236,8 @@ function _onApplyDamage(actor, amount, options = {}) {
  * a MG ma na karcie „+1 porażka (wręcz)” (U2).
  */
 function _wrecz(options) {
+  // Własne nałożenia mówią wprost (tyknięcie krwawienia — nigdy wręcz: `combat/bleeding.mjs`).
+  if (typeof options?.neuroshimaWrecz === "boolean") return options.neuroshimaWrecz;
   const message = options?.origin ?? options?.originatingMessage ?? null;
   if (!message) return null;
   const obrona = obronaOf(attackMessageFor(message));

@@ -1,35 +1,27 @@
 /**
- * Dum-dum bleed profile — WKK-only, no RAW basis. From the dum-dum round (.44 Mag, caliber
- * `44mag_dd`, `wkk/config/ammo-data.mjs`) via the `Rozrywająca` weapon-save property
- * (`wkk/combat/weapon-save-properties.mjs`). Spliced into `BLEED_PROFILES` by
- * `combat/bleeding.mjs` — see that file's header comment for how it's chosen over the RAW
- * `hemofilia` profile when both could apply to the same actor.
+ * Krwawienie (Dum-dum) — WKK-only, no RAW basis. From the dum-dum round (.44 Mag, caliber `44mag_dd`,
+ * `wkk/config/ammo-data.mjs`) via the `Rozrywająca` weapon-save property (`wkk/combat/weapon-save-properties.mjs`).
  *
- * Hits harder (1k8), lands at the START of the victim's turn, and no save stops it — only
- * dressing the wound does, plus (with Kolor Kobaltu) the stop paths of `KRWAWIENIE_KOBALT` below.
+ * GM decision (2026-10-31, `docs/Krwawienia.md`): the same bleed as Podstępny atak under another name, but a separate
+ * effect — a target can carry both at once. So this is only the rename; `config/krwawienia-data.mjs` clones the
+ * Podstępny atak entry with these keys on top.
  */
-export const DUMDUM_BLEED_PROFILE = Object.freeze({
+export const DUMDUM_BLEED = Object.freeze({
   id: "dumdum",
-  label: "Krwawienie (pocisk dum-dum)",
-  when: "start",
-  damage: "1d8",
-  medicineDC: 15,
-  dose: false,
-  severity: 2,
-  save: null
+  status: "krwawienieDumdum",
+  label: "Krwawienie (Dum-dum)",
+  img: "icons/svg/explosion.svg",
+  zrodlo: "WKK — nabój .44 Mag dum-dum (zasada 24)",
+  opis: "<p>(WKK) Jak Krwawienie (Podstępny atak): 1k8 obrażeń na początku swojej tury, aż ktoś opatrzy ranę — Test "
+    + "narzędzi małego medyka ST 10 (ładunek narzędzi). Osobny efekt, może być naraz z Podstępnym atakiem.</p>"
+    + "<p>Przy 0 PW każde tyknięcie to porażka w Rzucie Przeciw Śmierci; stabilizacja krwawienia nie zatrzymuje. "
+    + "Jedna akcja leczenia zatrzymuje jedno krwawienie.</p>"
 });
 
 /**
- * WKK #43 (Kolor Kobaltu; MG, 2026-10-31). The book has three rules that all go by „Krwawienie” and
- * behave differently — Hemofilia, Podstępny atak, the Stopień Zranienia bleed of Rdza/Rtęć/Stal
- * (`docs/Pytania-do-autora.md` §17). Until the author answers:
- *   - `ladunek`     — the Medycyna test on any bleed spends a charge of narzędzia małego medyka, either
- *                     result (as Pomoc medyczna, rule 15); an empty kit only with Aspiryna i Miętusy —
- *                     with Utrudnienie and no charge, as healing from an empty bag;
- *   - `lek`         — a bleed without a save (Podstępny atak, dum-dum, Przycelowanie's artery) also stops on the Hemofilia
- *                     medicine (Desmopresyna, Preparaty krwiopochodne), as Hemofilia itself does;
- *   - `turyObrazen` — and it ends on its own after this many turns of damage, the counterpart of
- *                     Hemofilia's three saves in a row.
- * Without Kobalt: the test spends nothing, and a bleed without a save lasts until the wound is dressed.
+ * WKK #43 (Kolor Kobaltu; MG, 2026-10-31 / 2026-11-01). The Hemofilia medicine (Desmopresyna, Preparaty
+ * krwiopochodne) stops any bleed, not only Hemofilia — one chosen bleed per dose, like every treatment action. Never the
+ * Wyciek of a machine. Without Kobalt: Hemofilia only (RAW). The kit charge and the ST 10 dressing test are no longer
+ * WKK — they are the module's reading for everyone (`docs/Krwawienia.md`).
  */
-export const KRWAWIENIE_KOBALT = Object.freeze({ ladunek: true, lek: true, turyObrazen: 3 });
+export const KRWAWIENIE_KOBALT = Object.freeze({ lek: true });

@@ -222,6 +222,11 @@ AUTOMATION = {
     # (scripts/combat/autodestrukcja.mjs `wybuch()`, parametry z cechy „Autodestrukcja (100%)” tej istoty).
     "kurczak-wybuchowy.detonacja": {"kind": "detonacja", "activation": "action"},
 
+    # ---- Juggernaut: piła tarczowa (Notatnik Łowcy, s. 217; docs/Krwawienia.md) ----
+    # „Trafiona istota zaczyna krwawić … dopóki rana nie zostanie opatrzona” — osobny efekt Krwawienie (Piły
+    # Juggernauta). Przycisk pod trafieniem (werdykt może jeszcze zmienić reakcja), czyta scripts/combat/bleeding.mjs.
+    "juggernaut.pila-tarczowa": {"onHit": {"krwawienie": "pila"}},
+
     # ---- Reakcje TT (PLAN_tt D13, scripts/combat/obrona.mjs) ----
     # „Gladiator może podnieść swoją TT o +3 wobec jednego ataku wręcz" — przycisk MG w oknie
     # „Reakcje celu" na karcie ataku; `scope: attack` = tylko ten atak.
@@ -286,10 +291,15 @@ AUTOMATION = {
 #  Build                                                              #
 # ------------------------------------------------------------------ #
 
+# Klucze, które dotyczą tylko ataku — cecha o tej samej nazwie (akcja legendarna „wykonuje atak piłą…”) ich nie bierze.
+ATTACK_ONLY_KEYS = {"onHit", "dropsAs", "damageType"}
+
+
 def automate(cid, feat):
     key = f"{cid}.{slug(feat['name'])}"
     if key in AUTOMATION:
-        return AUTOMATION[key]
+        auto = AUTOMATION[key]
+        return None if set(auto) <= ATTACK_ONLY_KEYS else auto
     if AUTODESTRUKCJA_NAME.match(feat["name"].strip()):
         return rule_autodestrukcja(cid, feat)
     rule = RULES.get(slug(feat["name"]))

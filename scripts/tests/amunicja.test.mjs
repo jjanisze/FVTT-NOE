@@ -15,10 +15,9 @@
  *    Błąd przeżył, bo komunikat brzmiał jak zasada gry. Testy trzymają teraz kształt danych,
  *    a nie samo zachowanie.
  *
- * 3. **Dum-dum.** Amunicja z dwiema cechami (Rozrywająca, Hollow-point) i własnym profilem
- *    Krwawienia. Sprawdzamy, że nie bije mocniej od zwykłego `.44 Mag` (cały zysk ma siedzieć
- *    w cechach) i że profil Hemofilii został nietknięty przy okazji dodawania drugiego. Do tego zasada
- *    WKK 43: jak kończy się krwawienie bez RO (dum-dum, Podstępny atak) z Kobaltem i bez.
+ * 3. **Dum-dum.** Amunicja z dwiema cechami (Rozrywająca, Hollow-point) i własnym Krwawieniem (Dum-dum).
+ *    Sprawdzamy, że nie bije mocniej od zwykłego `.44 Mag` (cały zysk ma siedzieć w cechach). Same krwawienia —
+ *    `krwawienia.test.mjs`.
  *
  * Zero walk, zero `activity.use()`, zero trwałych zmian w świecie — patrz `TESTING.md`.
  */
@@ -29,14 +28,9 @@ import {
 import { hasWeaponProperty } from "../config/weapons.mjs";
 import { __testing as mag } from "../weapons/magazine.mjs";
 import { __testing as saveProps } from "../combat/weapon-save-properties.mjs";
+import { KRWAWIENIA } from "../config/krwawienia-data.mjs";
 import {
-  BLEED, BLEED_PROFILES, bleedProfile, drogiZatrzymania, isBleeding, opatrz, podajLek, startBleeding, tickBleed
-} from "../combat/bleeding.mjs";
-import { createToolkits } from "../config/toolkits-data.mjs";
-import { zapasyMedyka } from "../items/toolkit-medyk.mjs";
-import { dosesRemaining } from "../actors/health-panel.mjs";
-import {
-  MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor, stub
+  MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor
 } from "./helpers.mjs";
 
 function ammoStackData(caliberId, quantity) {
@@ -63,7 +57,7 @@ function pistolData(name, ammoType) {
 
 export function registerAmmoTests(quench) {
   quench.registerBatch(`${MODULE_ID}.amunicja`, context => {
-    const { describe, it, before, after, afterEach, expect } = context;
+    const { describe, it, before, after, expect } = context;
 
     let actor;
 
@@ -223,185 +217,6 @@ export function registerAmmoTests(quench) {
 
     /* ------------------------------------------------------------------ */
 
-    describe("Profile Krwawienia", function () {
-      it("dum-dum: 1k8 na początku tury, bez rzutu na przerwanie", function () {
-        const p = BLEED_PROFILES.dumdum;
-        expect(p.damage).to.equal("1d8");
-        expect(p.when).to.equal("start");
-        expect(p.save).to.equal(null);
-        expect(p.dose).to.equal(false);
-      });
-
-      // Regresja: dodanie drugiego profilu nie miało prawa ruszyć RAW-owego pierwszego.
-      it("hemofilia zachowuje wartości RAW", function () {
-        const p = BLEED_PROFILES.hemofilia;
-        expect(p.damage).to.equal("1d4");
-        expect(p.when).to.equal("end");
-        expect(p.save.dc).to.equal(BLEED.saveDC).and.to.equal(10);
-        expect(p.save.ability).to.equal("con");
-        expect(p.save.streakToStop).to.equal(3);
-        expect(p.dose).to.equal(true);
-      });
-
-      it("dum-dum jest cięższy, więc nadpisuje trwające krwawienie z hemofilii", function () {
-        expect(BLEED_PROFILES.dumdum.severity).to.be.above(BLEED_PROFILES.hemofilia.severity);
-      });
-
-      // Wpisy sprzed profili nie mają pola `profile`. Muszą dalej znaczyć „hemofilia",
-      // inaczej stary zapis na karcie zmieniłby zasady po cichu.
-      it("krwawienie zapisane bez profilu czyta się jako hemofilia", async function () {
-        await actor.setFlag(MODULE_ID, "krwawienie", { active: true, streak: 1 });
-        try {
-          expect(bleedProfile(actor).id).to.equal("hemofilia");
-        } finally {
-          await actor.unsetFlag(MODULE_ID, "krwawienie");
-        }
-      });
-
-      it("aktor bez krwawienia też dostaje sensowny profil zamiast undefined", function () {
-        expect(bleedProfile(actor).id).to.equal("hemofilia");
-      });
-    });
-
-    /* ------------------------------------------------------------------ */
-
-    // WKK 43 (MG, 2026-10-31): trzy „Krwawienia” podręcznika działają różnie (Pytania do autora §17). Z Kobaltem
-    // test Medycyny zużywa ładunek, a krwawienie bez RO (Podstępny atak, dum-dum) zatrzymuje też lek na Hemofilię
-    // i samo ustaje po trzeciej turze obrażeń. Ustawienie i rzuty podstawione — świat zostaje, jak był.
-    describe("Krwawienie bez RO — zasada 43 (WKK)", function () {
-      const przywroc = [];
-      const kobalt = wlaczony => {
-        const get = game.settings.get.bind(game.settings);
-        przywroc.push(stub(game.settings, "get",
-          (ns, key) => (ns === MODULE_ID && key === "kobaltEnabled") ? wlaczony : get(ns, key)));
-      };
-      const krwawiacy = async (profile, tury = 0) => {
-        const a = await scratchActor({ system: { attributes: { hp: { value: 40, max: 40 } } } });
-        await a.setFlag(MODULE_ID, "krwawienie", { active: true, streak: 0, tury, profile });
-        return a;
-      };
-      const medyk = async ladunki => {
-        const m = await scratchActor({ name: `${SCRATCH_PREFIX} medyk`, system: { skills: { med: { value: 1 } } } });
-        await createToolkits(m, { only: ["medyka"] });
-        const kit = m.items.find(i => i.type === "tool" && i.system.type?.baseItem === "medyka");
-        await kit.update({ "system.uses.max": "5", "system.uses.spent": 5 - ladunki });
-        return m;
-      };
-      const zDesmopresyna = async m => {
-        await m.createEmbeddedDocuments("Item", [{
-          name: `${SCRATCH_PREFIX} Desmopresyna`, type: "consumable", system: { quantity: 1 },
-          flags: { [MODULE_ID]: { chemiaKey: "desmopresyna" } }
-        }]);
-        return () => m.items.filter(i => i.getFlag(MODULE_ID, "chemiaKey") === "desmopresyna")
-          .reduce((n, i) => n + dosesRemaining(i), 0);
-      };
-
-      afterEach(() => { while (przywroc.length) przywroc.pop()(); });
-      after(async () => {
-        const smieci = game.messages.filter(m => String(m.speaker?.alias ?? "").startsWith(SCRATCH_PREFIX)).map(m => m.id);
-        if (smieci.length) await ChatMessage.deleteDocuments(smieci);
-      });
-
-      it("drogi zatrzymania: lek i trzy tury tylko bez RO i z Kobaltem; ładunek przy każdym krwawieniu z Kobaltem", function () {
-        for (const id of ["podstepny", "dumdum", "tetnica"]) {
-          expect(drogiZatrzymania(BLEED_PROFILES[id], { kobalt: true }), id)
-            .to.deep.equal({ lek: true, ladunek: true, turyObrazen: 3 });
-          expect(drogiZatrzymania(BLEED_PROFILES[id], { kobalt: false }), id)
-            .to.deep.equal({ lek: false, ladunek: false, turyObrazen: null });
-        }
-        expect(drogiZatrzymania(BLEED_PROFILES.hemofilia, { kobalt: true }))
-          .to.deep.equal({ lek: true, ladunek: true, turyObrazen: null });
-        expect(drogiZatrzymania(BLEED_PROFILES.hemofilia, { kobalt: false }))
-          .to.deep.equal({ lek: true, ladunek: false, turyObrazen: null });
-        expect(drogiZatrzymania(BLEED_PROFILES.hydraulika, { kobalt: true }), "wyciek maszyny — tylko naprawa")
-          .to.deep.equal({ lek: false, ladunek: false, turyObrazen: null });
-      });
-
-      it("z Kobaltem trzecia tura obrażeń kończy krwawienie", async function () {
-        kobalt(true);
-        const a = await krwawiacy("podstepny", 1);
-        await tickBleed(a);
-        expect(a.getFlag(MODULE_ID, "krwawienie")?.tury).to.equal(2);
-        expect(a.system.attributes.hp.value, "obrażenia w każdej turze").to.be.below(40);
-        await tickBleed(a);
-        expect(isBleeding(a)).to.equal(false);
-      });
-
-      it("bez Kobaltu krwawienie bez RO trwa dalej, tury i tak się liczą", async function () {
-        kobalt(false);
-        const a = await krwawiacy("dumdum", 5);
-        await tickBleed(a);
-        expect(isBleeding(a)).to.equal(true);
-        expect(a.getFlag(MODULE_ID, "krwawienie")?.tury).to.equal(6);
-      });
-
-      it("nowa rana tej samej wagi liczy tury od nowa z Kobaltem; bez Kobaltu nic nie zmienia", async function () {
-        kobalt(true);
-        const a = await krwawiacy("podstepny", 2);
-        await startBleeding(a, { profile: "dumdum" });
-        expect(a.getFlag(MODULE_ID, "krwawienie")).to.include({ profile: "dumdum", tury: 0 });
-        przywroc.pop()();
-        kobalt(false);
-        const b = await krwawiacy("podstepny", 2);
-        await startBleeding(b, { profile: "dumdum" });
-        expect(b.getFlag(MODULE_ID, "krwawienie")).to.include({ profile: "podstepny", tury: 2 });
-      });
-
-      it("Test Medycyny z Kobaltem zużywa ładunek w obu wynikach", async function () {
-        kobalt(true);
-        const m = await medyk(3);
-        const a = await krwawiacy("podstepny");
-        const nieudany = stub(m, "rollSkill", async () => [{ total: 5 }]);
-        expect(await opatrz(a, m)).to.equal(false);
-        nieudany();
-        expect(zapasyMedyka(m)[0].remaining, "porażka").to.equal(2);
-        przywroc.push(stub(m, "rollSkill", async () => [{ total: 15 }]));
-        expect(await opatrz(a, m)).to.equal(true);
-        expect(isBleeding(a)).to.equal(false);
-        expect(zapasyMedyka(m)[0].remaining, "sukces").to.equal(1);
-      });
-
-      it("pusta torba: z Kobaltem bez testu (bez Aspiryny i Miętusów); bez Kobaltu test bez ładunku", async function () {
-        kobalt(true);
-        const m = await medyk(0);
-        const a = await krwawiacy("podstepny");
-        let rzucono = 0;
-        przywroc.push(stub(m, "rollSkill", async () => { rzucono++; return [{ total: 15 }]; }));
-        expect(await opatrz(a, m)).to.equal(null);
-        expect(rzucono, "z Kobaltem nie ma rzutu").to.equal(0);
-        expect(isBleeding(a)).to.equal(true);
-        const rzut = przywroc.pop();
-        przywroc.pop()();
-        przywroc.push(rzut);
-        kobalt(false);
-        expect(await opatrz(a, m)).to.equal(true);
-        expect(rzucono).to.equal(1);
-        expect(zapasyMedyka(m)[0].remaining).to.equal(0);
-      });
-
-      it("lek na Hemofilię zatrzymuje krwawienie bez RO z Kobaltem — dawka z ekwipunku medyka", async function () {
-        kobalt(true);
-        const m = await medyk(5);
-        const dawki = await zDesmopresyna(m);
-        const a = await krwawiacy("dumdum");
-        expect(await podajLek(a, m)).to.equal(true);
-        expect(isBleeding(a)).to.equal(false);
-        expect(dawki()).to.equal(0);
-      });
-
-      it("bez Kobaltu lek nie działa na krwawienie bez RO", async function () {
-        kobalt(false);
-        const m = await medyk(5);
-        const dawki = await zDesmopresyna(m);
-        const a = await krwawiacy("podstepny");
-        expect(await podajLek(a, m)).to.equal(false);
-        expect(isBleeding(a)).to.equal(true);
-        expect(dawki()).to.equal(1);
-      });
-    });
-
-    /* ------------------------------------------------------------------ */
-
     describe("Rozrywająca jako cecha broni", function () {
       const config = () => saveProps.SAVE_PROPERTIES.rozrywajaca;
 
@@ -411,8 +226,9 @@ export function registerAmmoTests(quench) {
         expect(saveProps.computeDC({ actor: null }, config())).to.equal(14);
       });
 
-      it("zamiast przełączać status, uruchamia własne krwawienie", function () {
+      it("zamiast przełączać status, uruchamia własne krwawienie — stan Krwawienia (Dum-dum)", function () {
         expect(config().onFail).to.be.a("function");
+        expect(config().status, "odporność i cofnięcie po przerzucie szukają efektu po stanie").to.equal(KRWAWIENIA.dumdum.status);
       });
 
       it("cel z odpornością na kłute jest wyłączony spod cechy", async function () {

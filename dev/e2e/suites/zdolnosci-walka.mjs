@@ -65,7 +65,15 @@ async function strzal({ targetName, obrazenia = true }) {
   }
   if (!usage) throw new Error("attack.use() was cancelled every time");
   const link = { data: { system: { origin: usage.message.id } } };
-  const [a] = await attack.rollAttack({}, { configure: false }, link);
+  // Ustalona kość ataku (naturalna 15): żywa jedynka zacina B 92 i następny strzał odpada (flaka z 2026-11-01).
+  const orig = CONFIG.Dice.randomUniform;
+  CONFIG.Dice.randomUniform = () => 0.27;
+  let a;
+  try {
+    [a] = await attack.rollAttack({}, { configure: false }, link);
+  } finally {
+    CONFIG.Dice.randomUniform = orig;
+  }
   const d = obrazenia ? (await attack.rollDamage({}, { configure: false }, link))?.[0] : null;
   const msg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
   return {
@@ -88,11 +96,18 @@ async function ulubionaKlik({ messageId }) {
   if (!btn) return { przycisk: false };
   const etykieta = btn.textContent;
   const przed = game.messages.size;
-  btn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, shiftKey: true }));
+  // Ustalona kość dodatkowego ataku — jak w `strzal`, bez zacięcia od żywej jedynki.
+  const orig = CONFIG.Dice.randomUniform;
+  CONFIG.Dice.randomUniform = () => 0.27;
   let atak = null;
-  for (let i = 0; i < 60 && !atak; i++) {
-    await new Promise(r => setTimeout(r, 150));
-    atak = game.messages.contents.slice(przed).find(m => m.flags[MOD]?.obrona && m.getOriginatingMessage?.()?.getFlag(MOD, "dodatkowyAtak"));
+  try {
+    btn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, shiftKey: true }));
+    for (let i = 0; i < 60 && !atak; i++) {
+      await new Promise(r => setTimeout(r, 150));
+      atak = game.messages.contents.slice(przed).find(m => m.flags[MOD]?.obrona && m.getOriginatingMessage?.()?.getFlag(MOD, "dodatkowyAtak"));
+    }
+  } finally {
+    CONFIG.Dice.randomUniform = orig;
   }
   if (!atak) return { przycisk: true, etykieta, atak: null };
   let bezPrzycisku = false;

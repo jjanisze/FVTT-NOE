@@ -69,8 +69,9 @@ Effects, warunki przerwania, karty czatu).
 - **Choroby i fobie** — panel na karcie postaci (zakładka Biografia), 8 chorób przewlekłych + 4
   popularne, 8 fobii — z automatyczną częścią mechaniczną (Active Effects) tam, gdzie tekst
   podręcznika da się jednoznacznie przełożyć na regułę.
-- **Krwawienie** (Hemofilia) — wyzwalane obrażeniami ciętymi/kłutymi, rzuty obronne co turę, trzy
-  sposoby zatrzymania zgodne z RAW.
+- **Krwawienia** — zamiast jednego stanu dnd5e osobne efekty: Hemofilia, Podstępny atak, Przycelowanie — tętnica,
+  Kolory Rdza/Rtęć/Stal, piła Juggernauta (w WKK także dum-dum); każde tyka i zatrzymuje się według swojego tekstu
+  ([Krwawienia](Krwawienia.md)).
 - **Spadanie, latanie, woda, wspinaczka** — upadek z kartą obrażeń, lotnik wg NOE (Powalony opada bez
   obrażeń), Regiony wody z testami pływania w walce, Tonie i Pod wodą z oddechem, walka pod wodą, karta
   wspinaczki — [Ruch i teren](Ruch-i-teren.md).

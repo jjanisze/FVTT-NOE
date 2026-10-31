@@ -24,7 +24,7 @@ import { migawkaAtaku, STANOWISKO_SNAJPERSKIE } from "../combat/okolicznosci.mjs
 import { isRevolver } from "../actors/rewolwerowiec.mjs";
 import * as mags from "../weapons/magazine-model.mjs";
 import { bolesny, uzyjBolesnego, uzyjPodstepnego, skuteczny, FLAG_PODSTEPNY } from "../combat/zdolnosci-trafienie.mjs";
-import { isBleeding, bleedProfile } from "../combat/bleeding.mjs";
+import { maKrwawienie } from "../combat/bleeding.mjs";
 import { czesciDla, wyceluj, zamiar, zastosujPrzycelowanie, juzZastosowane, FLAG_EFEKT } from "../combat/przycelowanie.mjs";
 import { buildTargetEntry, verdictOfEntry, przycelowanieZRzutu } from "../combat/trafienie.mjs";
 
@@ -269,8 +269,7 @@ export function registerZdolnosciWalkaTests(quench) {
         await uzyjPodstepnego(ctx, "oslepienie");
         expect(cel.statuses.has("blinded")).to.equal(true);
         await uzyjPodstepnego(ctx, "krwawienie");
-        expect(isBleeding(cel)).to.equal(true);
-        expect(bleedProfile(cel).id).to.equal("podstepny");
+        expect(maKrwawienie(cel, "podstepny"), "Krwawienie (Podstępny atak)").to.equal(true);
         const maszyna = await npc("Dron", "Maszyna");
         const warn = ui.notifications.warn;
         ui.notifications.warn = () => {};
@@ -372,10 +371,9 @@ export function registerZdolnosciWalkaTests(quench) {
 
         const zyla = await npc("Gangus tętnica", "Człowiek");
         await zastosujPrzycelowanie(ctxDla(tw, zyla, czesc("tetnica", "Tętnica", 4, "wyciek")));
-        expect(bleedProfile(zyla).id).to.equal("tetnica");
+        expect(maKrwawienie(zyla, "tetnica")).to.equal(true);
         await zastosujPrzycelowanie(ctxDla(tw, obronca, czesc("tetnica", "Układ hydrauliczny", 4, "wyciek")));
-        expect(isBleeding(obronca)).to.equal(true);
-        expect(bleedProfile(obronca).id, "maszyna — wyciek do naprawy").to.equal("hydraulika");
+        expect(maKrwawienie(obronca, "wyciek"), "maszyna — Wyciek do naprawy").to.equal(true);
         expect(await zastosujPrzycelowanie(ctxDla(tw, zyla, czesc("glowa", "Głowa", 5, "krytyk"))), "głowa — bez przycisku").to.equal(null);
       });
     });

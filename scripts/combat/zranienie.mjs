@@ -245,6 +245,9 @@ export async function applyZranienie(actor, reason = "") {
 
   // Update flag
   await actor.setFlag(MODULE_ID, "zranienie", { level: newLevel });
+  // Otrzymany Stopień — dla zasad, które z niego wynikają (krwawienie w Kolorach Rdza, Rtęć, Stal: `combat/bleeding.mjs`).
+  // Tylko tu, nie w `setZranienie`: ręczne ustawienie przez MG to nie „otrzymanie”.
+  Hooks.callAll("neuroshima.stopienZranienia", actor, { przed: current, po: newLevel, powod: reason });
 
   const levelInfo = ZRANIENIE_LEVELS[newLevel];
 

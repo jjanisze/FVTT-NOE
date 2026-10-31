@@ -35,6 +35,8 @@
  * therefore run at `init`, which is where `main.mjs` calls it.
  */
 
+import { KRWAWIENIA } from "./krwawienia-data.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** dnd5e keeps its status art here; the 14 canonical stany all reuse it. */
@@ -170,13 +172,11 @@ export const NEUROSHIMA_STANY = Object.freeze({
  * it keeps them out of the "conditions" rules lookup while still listing them.
  */
 export const NEUROSHIMA_ZAGROZENIA = Object.freeze({
-  bleeding: {
-    name: "Krwawienie",
-    img: `${SVG}/bleeding.svg`,
-    description: "<p>RO na Kondycję o ST 10 na koniec swojej tury. Porażka: 1k4 obrażeń. "
-      + "Trzy sukcesy pod rząd kończą krwawienie.</p><p>Patrz Hemofilia — <em>Choroby przewlekłe</em>.</p>",
-    pseudo: true
-  },
+  // Krwawienia — osobne stany, każdy ze swoją ikoną (docs/Krwawienia.md; dane i ikony tymczasowe w
+  // `config/krwawienia-data.mjs`, zamówienie glifów w dev/icons/MISSING.md, sekcja K). Zastępują jeden `bleeding` dnd5e.
+  ...Object.fromEntries(Object.values(KRWAWIENIA).map(d => [d.status, {
+    name: d.label, img: d.img, description: d.opis, pseudo: true
+  }])),
   burning: {
     name: "Podpalenie",
     img: `${SVG}/burning.svg`,
@@ -360,6 +360,7 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
  * magic constructs; none are referenced anywhere in the rulebook.
  */
 export const REMOVED_CONDITIONS = Object.freeze([
+  "bleeding",     // jedno Krwawienie dnd5e — u nas osobne krwawienia (NEUROSHIMA_ZAGROZENIA, docs/Krwawienia.md)
   "petrified",    // Skamienienie — nothing turns to stone in Podzielone Stany
   "cursed",       // klątwa — magic
   "transformed",  // przemiana — magic

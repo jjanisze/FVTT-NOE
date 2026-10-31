@@ -1542,7 +1542,11 @@ const BESTIARY_SHARED_ITEM_ICONS = Object.freeze({
   "gola-klata": `modules/${MODULE_ID}/icons/abilities/gola-klata.svg`
 });
 
-function buildBestiaryItem(c, entry, kind) {
+/**
+ * @param {{idKey?: string}} [o]  klucz id zamiast `entry.id` — atak, który dzieli id z cechą tej samej istoty (piła
+ *   tarczowa Juggernauta: atak i akcja legendarna); bez tego druga pozycja nadpisywała pierwszą i ataku nie było.
+ */
+function buildBestiaryItem(c, entry, kind, { idKey = entry.id } = {}) {
   const isAttack = kind === "attack";
   const activities = {};
   const effects = [];
@@ -1578,7 +1582,7 @@ function buildBestiaryItem(c, entry, kind) {
     : `<p>${entry.text}</p>`;
 
   return {
-    _id: idFor("bestiary-item", `${c.id}.${entry.id}`),
+    _id: idFor("bestiary-item", `${c.id}.${idKey}`),
     name: entry.name,
     type: "feat",
     img: BESTIARY_ITEM_ICONS[`${c.id}.${entry.id}`]
@@ -1657,8 +1661,10 @@ function buildNpc(c) {
   // Every trait and action becomes an item. Ones the automation layer didn't
   // claim still carry their rulebook text, so the sheet is complete even where
   // nothing is mechanised.
+  // Cecha zachowuje swoje id (kopie w świecie już je mają), atak o tym samym id dostaje przyrostek.
+  const idCech = new Set(c.features.map(f => f.id));
   const items = [
-    ...c.attacks.map(a => buildBestiaryItem(c, a, "attack")),
+    ...c.attacks.map(a => buildBestiaryItem(c, a, "attack", { idKey: idCech.has(a.id) ? `${a.id}.atak` : a.id })),
     ...c.features.map(f => buildBestiaryItem(c, f, "feature"))
   ];
 

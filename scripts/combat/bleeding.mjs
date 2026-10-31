@@ -1,450 +1,372 @@
 /**
- * Neuroshima 5e — Krwawienie.
+ * Neuroshima 5e — Krwawienia (docs/Krwawienia.md; ustalenia MG 2026-10-31 i 2026-11-01).
  *
- * Two sources produce the same visible condition but do NOT behave the same way, so the
- * mechanics live in `BLEED_PROFILES` and the state carries which one is running:
+ * Każde krwawienie to **osobny Efekt Aktywny** ze swoim stanem i ikoną (`config/krwawienia-data.mjs` — `KRWAWIENIA`,
+ * stany w `config/conditions.mjs`): Hemofilia, Podstępny atak, w WKK Dum-dum, Przycelowanie — Tętnica, Kolory
+ * Rdza/Rtęć/Stal, piła Juggernauta, a u maszyn Wyciek. Ten sam się nie powtarza, różne mogą być naraz — każde tyka
+ * osobno i zatrzymuje się osobno (jedna akcja leczenia — jedno krwawienie).
  *
- *   - `hemofilia` — RAW (str. 109), the original and still the default.
- *   - `dumdum`    — homebrew "W Kolorze Kobaltu", from the dum-dum round (.44 Mag, caliber
- *                   `44mag_dd`). Hits harder (1k8), lands at the START of the victim's turn,
- *                   and crucially cannot be waited out: there is no save that stops it, only
- *                   dressing the wound does. That is the whole point of the ammunition.
+ *   - **Tyknięcie** (`updateCombat`, MG): na początku albo na końcu tury krwawiącego, raz na krawędź (`tikRaz`). Obrażenia
+ *     bez rodzaju (liczba do `applyDamage` — bez odporności, nie uruchamiają Hemofilii); przy 0 PW to porażka w Rzucie
+ *     Przeciw Śmierci (`combat/umieranie.mjs`), nigdy podwójna „z ataku wręcz”. Hemofilia: najpierw RO na Kondycję ST 10,
+ *     trzy zdane z rzędu kończą krwawienie.
+ *   - **Zatrzymanie** — przyciski na kartach krwawienia, liczone dla medyka (postać gracza albo zaznaczony żeton):
+ *     `opatrz` (test i ST z `stop`; narzędzia małego medyka — ładunek za każdą próbę, pusta torba tylko z Dnem torby
+ *     i z Utrudnieniem; Kolory i Wyciek — nie sam sobie), `podajLek` (lek na Hemofilię — przy Hemofilii zawsze, przy
+ *     innych w WKK, zasada 43), „Naprawione” przy Wycieku (MG albo właściciel). Usunięcie efektu na cudzym aktorze idzie
+ *     przez przekaźnik MG.
+ *   - **Wyzwalacze:** Hemofilia — obrażenia cięte lub kłute chorego (`dnd5e.calculateDamage`); Kolory — każdy Stopień
+ *     Zranienia (`neuroshima.stopienZranienia` z `applyZranienie`), gdy świat gra Rdzą, Rtęcią albo Stalą; piła — przycisk
+ *     pod trafieniem ataku z `flags.<mod>.bestiary.onHit.krwawienie`; reszta — wołający `startBleeding`
+ *     (`combat/zdolnosci-trafienie.mjs`, `combat/przycelowanie.mjs`, Rozrywająca dum-dum).
+ *   - **Poza walką** (`updateWorldTime`, MG): przypomnienie „X krwawi” co 10 minut zegara świata — krótsze przesunięcia
+ *     się sumują, licznik zeruje tyknięcie w walce; z modułem Splatter — plama krwi pod żetonem. Obrażenia nakłada MG.
  *
- * Both share the `bleeding` status and the token icon, and an actor only ever runs ONE bleed
- * at a time — a dum-dum round hitting an already-bleeding haemophiliac upgrades the bleed to
- * the worse profile rather than stacking a second one (`severity`), and the reverse does not
- * downgrade it. Nothing in the fiction supports two independent bleeds, and two concurrent
- * end-of-turn saves would be unreadable at the table.
- *
- * RAW (str. 109): a haemophiliac who takes cięte or kłute damage starts bleeding.
- * At the end of each of their turns they roll RO na Kondycję ST 10; a failure
- * deals 1k4. The bleeding stops on any of three things:
- *
- *   - injecting the medicine (Desmopresyna / preparaty krwiopochodne),
- *   - a Test Medycyny ST 15 with narzędzia małego medyka,
- *   - three consecutive successful RO na Kondycję ST 10.
- *
- * All three are implemented. The streak reuses the same idea as the phobia
- * Przełamanie counter, so the two read the same way at the table.
- *
- * With Kolor Kobaltu (WKK #43, `KRWAWIENIE_KOBALT`): the Medycyna test spends a kit charge, and a
- * bleed without a save also stops on the Hemofilia medicine or on its own after three turns of
- * damage — `drogiZatrzymania` is the one place that decides which stop paths a bleed has.
- *
- * State lives in `flags.<module>.krwawienie = { active, streak, tury, since, profile }` plus the
- * `bleeding` status on the actor, so it is visible on the token as well as the sheet.
+ * Stan na efekcie: `flags.<mod>.krwawienie = { rodzaj, seria, ostatnio, od }` (`seria` — zdane RO Hemofilii z rzędu,
+ * `ostatnio` — czas świata ostatniego tyknięcia albo przypomnienia). Efekt założony ręcznie z HUD-u działa tak samo —
+ * brak flagi to wartości domyślne.
  */
 
 import { effectsFor } from "../config/disease-effects.mjs";
 import { chemiaForDisease, chemiaKeyByName } from "../config/chemia-data.mjs";
-import { isKobaltEnabled } from "../config/settings.mjs";
+import { isKobaltEnabled, kolorNeuroshimy } from "../config/settings.mjs";
+import { creatureKindOf, isHitVerdict } from "../config/defense-rules.mjs";
+import { rollTypeOf } from "../config/chat-message-data.mjs";
+import {
+  KRWAWIENIA, lekDziala, celPasuje, przypomnienie, KOLORY_Z_KRWAWIENIEM
+} from "../config/krwawienia-data.mjs";
 import { dosesRemaining, getChoroby, takeDose, zuzyjDawke } from "../actors/health-panel.mjs";
+import { hasToolKit } from "../actors/tool-availability.mjs";
 import { maDnoTorby, zapasyMedyka, zuzyjLadunekMedyka } from "../items/toolkit-medyk.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
-import { DUMDUM_BLEED_PROFILE, KRWAWIENIE_KOBALT } from "../wkk/combat/bleeding.mjs";
+import { doMG, zarejestrujProsbe } from "../postoj/przekaznik.mjs";
+import { obronaOf, verdictOfEntry } from "./trafienie.mjs";
 import { krokNaprzod, tikRaz } from "./tiki.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
-const FLAG = "krwawienie";
+/** Flaga efektu krwawienia: `{ rodzaj, seria, ostatnio, od }`. */
+export const FLAG = "krwawienie";
+/** Flaga karty z przyciskami krwawienia. */
+const KARTA = "bleed";
+/** Flaga karty ataku: krwawienie z `onHit` już nałożone (`{ [tokenUuid]: true }` — lista, bo UUID ma kropki). */
+const ONHIT_UZYTE = "krwawienieOnHit";
+const PROSBA_START = "krwawienie.start";
+const PROSBA_STOP = "krwawienie.zatamuj";
+const KOLOR = "#c0392b";
+/** Stara, jedna flaga krwawienia na aktorze (sprzed 2026-11-01) — tylko do migracji. */
+const STARA_FLAGA = "krwawienie";
 
-/** RAW thresholds. Kept as the Hemofilia profile's values and as the module's public constant. */
-export const BLEED = Object.freeze({
-  saveAbility: "con",
-  saveDC: 10,
-  damage: "1d4",
-  medicineDC: 15,
-  streakToStop: 3
-});
+/** Progi RAW Hemofilii (s. 109) — publiczna stała z czasów jednego profilu. */
+export const BLEED = Object.freeze({ saveAbility: "con", saveDC: 10, damage: "1d4", medicineDC: 15, streakToStop: 3 });
 
-/**
- * Per-source bleed behaviour.
- *
- * `when`      — "end" or "start" of the victim's own turn.
- * `save`      — null means the bleed cannot be shrugged off; only a stop path ends it.
- * `dose`      — whether "Wstrzyknij lek" is offered. Only Hemofilia has a medicine to inject;
- *               a dum-dum wound is a hole, not a disorder, so it gets the bandage path only.
- * `severity`  — higher wins when a second source hits an already-bleeding actor.
- */
-export const BLEED_PROFILES = Object.freeze({
-  hemofilia: Object.freeze({
-    id: "hemofilia",
-    label: "Krwawienie (hemofilia)",
-    when: "end",
-    damage: BLEED.damage,
-    medicineDC: BLEED.medicineDC,
-    dose: true,
-    severity: 1,
-    save: Object.freeze({ ability: BLEED.saveAbility, dc: BLEED.saveDC, streakToStop: BLEED.streakToStop })
-  }),
-  // WKK-only, no RAW basis — see wkk/combat/bleeding.mjs.
-  dumdum: DUMDUM_BLEED_PROFILE,
-  // Podstępny atak (Złodziej 3, s. 92; PLAN_m7 E5): 1k8 at the start of the victim's turn, no save — it stops
-  // "po opatrzeniu rany", read as the Hemofilia test (MG; the book gives no ST — Pytania do autora §17).
-  podstepny: Object.freeze({
-    id: "podstepny",
-    label: "Krwawienie (Podstępny atak)",
-    when: "start",
-    damage: "1d8",
-    medicineDC: BLEED.medicineDC,
-    dose: false,
-    severity: 2,
-    save: null
-  }),
-  // Przycelowanie w tętnicę (Twardziel 2, s. 87; Sztuczka, s. 106; PLAN_m7 E6): 1k6 at the start of the victim's turn
-  // until the wound is dressed — another bleed of the same name (Pytania do autora §17). Between Hemofilia and the 1k8s.
-  tetnica: Object.freeze({
-    id: "tetnica",
-    label: "Krwawienie (przecięta tętnica)",
-    when: "start",
-    damage: "1d6",
-    medicineDC: BLEED.medicineDC,
-    dose: false,
-    severity: 1.5,
-    save: null
-  }),
-  // The machine half of the same row — układ hydrauliczny: 1k6 per turn "do naprawy uszkodzenia". Not a wound: no
-  // Medycyna, no medicine, no WKK 43; it ends when the owner or the GM marks the damage repaired.
-  hydraulika: Object.freeze({
-    id: "hydraulika",
-    label: "Wyciek (układ hydrauliczny)",
-    when: "start",
-    damage: "1d6",
-    medicineDC: null,
-    dose: false,
-    severity: 1.5,
-    save: null,
-    naprawa: true
-  })
-});
+const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+const _onHitUzyte = new Set();
 
-/** Profil krwawienia aktora — brak zapisanego profilu = Hemofilia (stan sprzed tej zmiany). */
-export function bleedProfile(actor) {
-  const key = actor?.getFlag(MODULE_ID, FLAG)?.profile ?? "hemofilia";
-  return BLEED_PROFILES[key] ?? BLEED_PROFILES.hemofilia;
+/* -------------------------------------------- */
+/*  Stan                                         */
+/* -------------------------------------------- */
+
+/** Maszyna albo pojazd — krwawić nie może, Wyciek tak. */
+function _maszyna(actor) {
+  return actor?.type === "vehicle" || creatureKindOf(actor?.system?.details?.type?.value) === "maszyna";
 }
 
-/**
- * Which stop paths a bleed with this profile has, besides the Medycyna test every bleed gets.
- * @param {object} profile  An entry of `BLEED_PROFILES`.
- * @param {{kobalt?: boolean}} [opts]
- * @returns {{lek: boolean, ladunek: boolean, turyObrazen: number|null}}
- *   `lek` — "Wstrzyknij lek" is offered; `ladunek` — the test spends a kit charge;
- *   `turyObrazen` — the bleed ends on its own after this many turns of damage (null: never).
- */
-export function drogiZatrzymania(profile, { kobalt = isKobaltEnabled() } = {}) {
-  // A machine's leak (`naprawa`) is not a wound — WKK 43 does not reach it, only a repair ends it.
-  const k = kobalt && !profile?.naprawa ? KRWAWIENIE_KOBALT : null;
-  const bezRO = !profile?.save;
-  return {
-    lek: !!profile?.dose || (bezRO && !!k?.lek),
-    ladunek: !!k?.ladunek,
-    turyObrazen: bezRO && k ? k.turyObrazen : null
-  };
+function _efekt(actor, rodzaj) {
+  const def = KRWAWIENIA[rodzaj];
+  return def ? actor?.effects?.find(e => e.statuses?.has(def.status)) ?? null : null;
 }
 
-/** Damage types that start a bleed — cięte / kłute. */
-const BLEEDING_DAMAGE = new Set(["slashing", "piercing"]);
+const _stan = effect => effect?.getFlag(MODULE_ID, FLAG) ?? {};
 
-/* -------------------------------------------- */
-/*  Registration                                 */
-/* -------------------------------------------- */
-
-export function registerBleeding() {
-  // `dnd5e.preApplyDamage` only gets a total — the damage *types* are gone by
-  // then. `calculateDamage` is the last hook that still sees the breakdown,
-  // which is what decides whether a hit was cięte/kłute.
-  Hooks.on("dnd5e.calculateDamage", _onCalculateDamage);
-  Hooks.on("updateCombat", _onUpdateCombat);
-  Hooks.on("renderChatMessageHTML", _bindBleedButtons);
-  console.log("Neuroshima 5e | Krwawienie (Hemofilia) registered");
+/** Krwawienia aktora w kolejności `KRWAWIENIA`: `[{ def, effect }]`. */
+export function krwawienia(actor) {
+  return Object.values(KRWAWIENIA).map(def => ({ def, effect: _efekt(actor, def.id) })).filter(k => k.effect);
 }
 
-/**
- * Name this function carried before bleed profiles existed, when every bleed was a save.
- * Kept because it is reachable as `game.neuroshima.health.bleeding.rollBleedSave` and may sit
- * in someone's macro; it is the same tick either way.
- */
-export const rollBleedSave = tickBleed;
+export const maKrwawienie = (actor, rodzaj) => !!_efekt(actor, rodzaj);
 
-export const bleedingApi = {
-  isBleeding, startBleeding, stopBleeding, tickBleed, rollBleedSave, bleedProfile, drogiZatrzymania, podajLek, opatrz,
-  BLEED_PROFILES
-};
+/** Czy aktor krwawi (dowolne krwawienie; Wyciek maszyny się nie liczy). */
+export function isBleeding(actor) {
+  return krwawienia(actor).some(k => !k.def.naprawa);
+}
 
-/* -------------------------------------------- */
-/*  State                                       */
-/* -------------------------------------------- */
-
-/** The actor's Hemofilia entry, if they have one that is currently biting. */
+/** Wpis Hemofilii aktora, jeśli ją ma. */
 function _hemofiliaEntry(actor) {
   return getChoroby(actor).find(e => effectsFor(e)?.bleed) ?? null;
 }
 
-export function isBleeding(actor) {
-  return actor?.getFlag(MODULE_ID, FLAG)?.active === true;
+/* -------------------------------------------- */
+/*  Początek i koniec                            */
+/* -------------------------------------------- */
+
+/**
+ * Zacznij krwawienie. Ten sam rodzaj drugi raz — nic (się nie powtarza); maszyna nie krwawi, a Wyciek dotyczy tylko
+ * maszyn. Cudzy aktor — przez MG.
+ * @param {Actor} actor
+ * @param {{rodzaj?: string, profile?: string, reason?: string}} [o]  `profile` — dawna nazwa `rodzaj`
+ * @returns {Promise<ActiveEffect|null>}
+ */
+export async function startBleeding(actor, { rodzaj, profile, reason = "" } = {}) {
+  const def = KRWAWIENIA[rodzaj ?? profile ?? "hemofilia"];
+  if (!actor || !def || !celPasuje(def, { maszyna: _maszyna(actor) }) || _efekt(actor, def.id)) return null;
+  if (!actor.isOwner) {
+    await doMG(PROSBA_START, { actorUuid: actor.uuid, rodzaj: def.id, reason });
+    return null;
+  }
+  const fx = (await ActiveEffect.implementation.fromStatusEffect(def.status)).toObject();
+  delete fx._id;
+  const teraz = game.time.worldTime;
+  foundry.utils.setProperty(fx, `flags.${MODULE_ID}.${FLAG}`, { rodzaj: def.id, seria: 0, ostatnio: teraz, od: teraz });
+  if (reason) fx.description = `${fx.description ?? ""}<p>Źródło: ${esc(reason)}.</p>`;
+  const [effect] = await actor.createEmbeddedDocuments("ActiveEffect", [fx]);
+  seqScrollText(def.naprawa ? "WYCIEK!" : "KRWAWIENIE!", actor, { color: KOLOR, fontSize: 32, duration: 2000 });
+  await _karta(actor, def, {
+    glowa: def.label.toUpperCase(),
+    tresc: `${esc(actor.name)} ${def.naprawa ? "traci płyn" : "zaczyna krwawić"}${reason ? ` (${esc(reason)})` : ""}. ${_regula(def)}`
+  });
+  return effect ?? null;
 }
 
 /**
- * Start bleeding. A second cut does not stack a second save — RAW describes one ongoing bleed,
- * and the same holds for the homebrew profile. A *worse* source does upgrade the bleed in
- * place, though: taking a dum-dum round while already bleeding from hemofilia has to matter,
- * otherwise the ammunition would be strictly worse against exactly the targets it is meant for.
- *
- * @param {Actor5e} actor
- * @param {object} [options]
- * @param {string} [options.reason]   Free text for the chat card.
- * @param {string} [options.profile]  Key in `BLEED_PROFILES`. Defaults to Hemofilia.
+ * Zatrzymaj krwawienie `rodzaj` (bez rodzaju — wszystkie, np. przy śmierci). Cudzy aktor — przez MG.
+ * @returns {Promise<boolean>} czy było co zatrzymać
  */
-export async function startBleeding(actor, { reason = "", profile = "hemofilia" } = {}) {
-  const next = BLEED_PROFILES[profile] ?? BLEED_PROFILES.hemofilia;
-
-  if (isBleeding(actor)) {
-    const current = bleedProfile(actor);
-    const state = actor.getFlag(MODULE_ID, FLAG) ?? {};
-    if (next.severity < current.severity) return;
-    if (next.severity === current.severity) {
-      // A bleed that runs out by itself (WKK #43) is renewed by a fresh wound of the same weight — the new
-      // one replaces the old, as with Podstępny atak's other effects. Otherwise there is nothing to renew.
-      const limit = drogiZatrzymania(next).turyObrazen;
-      if (!limit) return;
-      await actor.setFlag(MODULE_ID, FLAG, { ...state, profile: next.id, tury: 0 });
-      await ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<div class="neuro-bleed-card is-bleeding">
-          <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> NOWA RANA</div>
-          <div class="neuro-bleed-body">${actor.name}${reason ? ` (${reason})` : ""} — ${next.label}, ${limit} tury od nowa.
-            ${_profileRule(next)}</div>
-          ${_stopButtons(actor)}
-        </div>`,
-        flags: { [MODULE_ID]: { bleed: true } }
-      });
-      return;
-    }
-
-    await actor.setFlag(MODULE_ID, FLAG, { ...state, profile: next.id, streak: 0, tury: 0 });
+export async function stopBleeding(actor, rodzaj = null, how = "") {
+  const lista = krwawienia(actor).filter(k => !rodzaj || k.def.id === rodzaj);
+  if (!lista.length) return false;
+  if (!actor.isOwner) {
+    await doMG(PROSBA_STOP, { actorUuid: actor.uuid, rodzaj, how });
+    return true;
+  }
+  await actor.deleteEmbeddedDocuments("ActiveEffect", lista.map(k => k.effect.id));
+  for (const { def } of lista) {
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div class="neuro-bleed-card is-bleeding">
-        <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> KRWAWIENIE SIĘ POGŁĘBIA</div>
-        <div class="neuro-bleed-body">${actor.name} krwawił już wcześniej, ale rana${reason ? ` (${reason})` : ""}
-          jest gorsza. Obowiązuje teraz: <strong>${next.label}</strong> — ${_profileRule(next)}</div>
-        ${_stopButtons(actor)}
-      </div>`,
-      flags: { [MODULE_ID]: { bleed: true } }
+      content: `<div class="neuro-bleed-card is-stopped">
+        <div class="neuro-bleed-head"><i class="fa-solid fa-droplet-slash"></i> ${def.naprawa ? "WYCIEK USUNIĘTY" : "KRWAWIENIE ZATAMOWANE"}</div>
+        <div class="neuro-bleed-body">${esc(actor.name)} — ${esc(def.label)}${how ? `: ${esc(how)}` : ""}.</div>
+      </div>`
     });
-    return;
   }
-
-  await actor.setFlag(MODULE_ID, FLAG, {
-    active: true, streak: 0, tury: 0, since: game.time.worldTime, profile: next.id
-  });
-  await actor.toggleStatusEffect("bleeding", { active: true });
-  seqScrollText(next.naprawa ? "WYCIEK!" : "KRWAWIENIE!", actor, { color: "#c0392b", fontSize: 32, duration: 2000 });
-
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div class="neuro-bleed-card">
-      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> ${next.naprawa ? "WYCIEK" : "KRWAWIENIE"}</div>
-      <div class="neuro-bleed-body">${next.label}. ${actor.name} ${next.naprawa ? "traci płyn" : "zaczyna krwawić"}${reason ? ` (${reason})` : ""}.
-        ${_profileRule(next)}</div>
-      ${_stopButtons(actor)}
-    </div>`,
-    flags: { [MODULE_ID]: { bleed: true } }
-  });
+  return true;
 }
 
-/** One-line rules reminder for a profile, used on every card it produces. */
-function _profileRule(profile) {
-  const when = profile.when === "start" ? "Na początku" : "Na końcu";
-  const drogi = drogiZatrzymania(profile);
-  if (profile.naprawa) {
-    return `${when} każdej swojej tury: <strong>${profile.damage}</strong> obrażeń, aż uszkodzenie zostanie naprawione.`;
+/** Przypomnienie zasady na każdej karcie krwawienia. */
+function _regula(def) {
+  const kiedy = def.when === "start" ? "Na początku" : "Na końcu";
+  const ile = def.strata === "pw" ? `utrata <strong>${def.damage.replace(/d/g, "k")}</strong> PW` : `<strong>${def.damage.replace(/d/g, "k")}</strong> obrażeń`;
+  if (def.save) {
+    const cecha = CONFIG.DND5E.abilities?.[def.save.ability]?.label ?? def.save.ability;
+    return `${kiedy} każdej swojej tury: RO na ${cecha} ST ${def.save.dc}, porażka — ${ile}. `
+      + `${def.save.streakToStop} zdane RO z rzędu kończą krwawienie.`;
   }
-  if (!profile.save && drogi.turyObrazen) {
-    return `${when} każdej swojej tury: <strong>${profile.damage}</strong> obrażeń, najwyżej przez `
-      + `${drogi.turyObrazen} tury. Wcześniej przerywa je opatrzenie rany (Medycyna ST ${profile.medicineDC}, `
-      + `ładunek narzędzi małego medyka)${drogi.lek ? " albo lek na Hemofilię (Desmopresyna)" : ""}.`;
-  }
-  if (!profile.save) {
-    return `${when} każdej swojej tury: <strong>${profile.damage}</strong> obrażeń. `
-      + `Nie da się tego przeczekać — krwawienie ustaje dopiero po opatrzeniu rany `
-      + `(Medycyna ST ${profile.medicineDC}).`;
-  }
-  const abilityLabel = CONFIG.DND5E.abilities?.[profile.save.ability]?.label ?? profile.save.ability;
-  return `${when} każdej swojej tury: RO na ${abilityLabel} ST ${profile.save.dc}, `
-    + `porażka = ${profile.damage} obrażeń. ${profile.save.streakToStop} zdane RO pod rząd kończą krwawienie.`;
-}
-
-/** Stop bleeding and say why. */
-export async function stopBleeding(actor, how = "") {
-  if (!isBleeding(actor)) return;
-  const wyciek = bleedProfile(actor).naprawa;
-  await actor.unsetFlag(MODULE_ID, FLAG);
-  await actor.toggleStatusEffect("bleeding", { active: false });
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div class="neuro-bleed-card is-stopped">
-      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet-slash"></i> ${wyciek ? "WYCIEK USUNIĘTY" : "KRWAWIENIE POWSTRZYMANE"}</div>
-      <div class="neuro-bleed-body">${actor.name}${how ? ` — ${how}` : ""}.</div>
-    </div>`
-  });
+  return `${kiedy} każdej swojej tury: ${ile}, ${def.naprawa ? "aż do naprawy" : "aż ktoś zatamuje krwawienie"}.`;
 }
 
 /* -------------------------------------------- */
-/*  Triggers                                    */
+/*  Tyknięcie                                    */
 /* -------------------------------------------- */
 
 /**
- * Hook: `dnd5e.calculateDamage(actor, damages, options)` — start a bleed when a
- * haemophiliac takes slashing or piercing damage. Reads the per-type breakdown
- * rather than a total, so a mixed-type hit (a bayonet with an explosive rider)
- * still counts, and pure bludgeoning correctly does not.
+ * Hak `updateCombat` (MG): jedna granica tury to koniec poprzedniej i początek bieżącej — każde krwawienie tyka na
+ * swojej krawędzi, raz (`tikRaz` z kluczem rodzaju, więc różne krwawienia nie zjadają sobie tyknięć).
  */
-function _onCalculateDamage(actor, damages, options) {
-  if (actor?.type !== "character") return;
-  if (!_hemofiliaEntry(actor)) return;
-  if (isBleeding(actor)) return;
-
-  // Healing arrives through the same path with a negative/`healing` type.
-  const cut = (damages ?? []).find(d =>
-    BLEEDING_DAMAGE.has(d.type) && (d.value ?? 0) > 0);
-  if (!cut) return;
-
-  const label = CONFIG.DND5E.damageTypes?.[cut.type]?.label ?? cut.type;
-  // Deferred: this fires mid-calculation, and starting the bleed writes flags,
-  // a token status and a chat card — none of which belong inside that call.
-  setTimeout(() => startBleeding(actor, { reason: `obrażenia ${label.toLowerCase()}` }), 0);
-}
-
-/**
- * Hook: `updateCombat` — the periodic bleed tick.
- *
- * One turn boundary is two events: the previous combatant's turn ended and the current one's
- * began. Which of the two actors ticks is decided by that actor's own profile (`when`), not by
- * the hook — Hemofilia lands its RO at the end of its victim's turn where RAW puts it, while a
- * dum-dum wound opens up at the start of theirs. Both are checked here so the two never need
- * separate wiring.
- */
-async function _onUpdateCombat(combat, changed, options) {
+async function _onUpdateCombat(combat, changed) {
   if (!game.user.isGM) return;
   if (!("turn" in changed) && !("round" in changed)) return;
-  // Wstecz nie ma końca ani początku tury — i każda tura tyka raz (PLAN_m3 F17).
   if (!krokNaprzod(combat.previous, combat.current)) return;
 
   const previousId = combat.previous?.combatantId;
   const ended = previousId ? combat.combatants.get(previousId)?.actor ?? null : null;
   const started = combat.combatant?.actor ?? null;
-
-  if (ended && isBleeding(ended) && bleedProfile(ended).when === "end"
-    && await tikRaz(ended, "krwawienie", combat, { round: combat.previous.round, combatantId: previousId, krawedz: "end" })) {
-    await tickBleed(ended);
+  for (const { def } of krwawienia(ended).filter(k => k.def.when === "end")) {
+    if (await tikRaz(ended, `krwawienie-${def.id}`, combat, { round: combat.previous.round, combatantId: previousId, krawedz: "end" })) {
+      await tickBleed(ended, def.id);
+    }
   }
-  if (started && isBleeding(started) && bleedProfile(started).when === "start"
-    && await tikRaz(started, "krwawienie", combat, { round: combat.current.round, combatantId: combat.current.combatantId, krawedz: "start" })) {
-    await tickBleed(started);
+  for (const { def } of krwawienia(started).filter(k => k.def.when === "start")) {
+    if (await tikRaz(started, `krwawienie-${def.id}`, combat, { round: combat.current.round, combatantId: combat.current.combatantId, krawedz: "start" })) {
+      await tickBleed(started, def.id);
+    }
   }
 }
 
-/* -------------------------------------------- */
-/*  The save                                    */
-/* -------------------------------------------- */
-
 /**
- * One bleed tick, on whichever turn edge the actor's profile names.
- *
- * With a save (Hemofilia): failure deals the damage and resets the streak, success advances it,
- * and enough successes in a row stop the bleeding. Without one (dum-dum): the damage simply
- * lands, every turn, until somebody dresses the wound.
+ * Jedno tyknięcie krwawienia `rodzaj`. Martwy nie krwawi — jego krwawienia znikają bez karty.
+ * @returns {Promise<{obrazenia?: number, seria?: number, koniec?: boolean}|null>}
  */
-export async function tickBleed(actor) {
-  if (!isBleeding(actor)) return;
-  const profile = bleedProfile(actor);
-  const state = actor.getFlag(MODULE_ID, FLAG) ?? { active: true, streak: 0 };
+export async function tickBleed(actor, rodzaj = "hemofilia") {
+  const def = KRWAWIENIA[rodzaj];
+  const effect = _efekt(actor, rodzaj);
+  if (!def || !effect) return null;
+  if (actor.statuses?.has("dead")) {
+    await actor.deleteEmbeddedDocuments("ActiveEffect", krwawienia(actor).map(k => k.effect.id));
+    return null;
+  }
+  const stan = _stan(effect);
+  const teraz = game.time.worldTime;
 
-  if (profile.save) {
-    const rolls = await actor.rollSavingThrow(
-      { ability: profile.save.ability, target: profile.save.dc },
-      { configure: false }
-    );
+  if (def.save) {
+    const rolls = await actor.rollSavingThrow({ ability: def.save.ability, target: def.save.dc }, { configure: false });
     const roll = Array.isArray(rolls) ? rolls[0] : rolls;
-    if (!roll) return;
-
-    if (roll.total >= profile.save.dc) {
-      const streak = (state.streak ?? 0) + 1;
-      if (streak >= profile.save.streakToStop) {
-        await stopBleeding(actor, `${profile.save.streakToStop} zdane RO pod rząd`);
-        return;
+    if (!roll) return null;
+    if (roll.total >= def.save.dc) {
+      const seria = (Number(stan.seria) || 0) + 1;
+      if (seria >= def.save.streakToStop) {
+        await stopBleeding(actor, rodzaj, `${def.save.streakToStop} zdane RO z rzędu`);
+        return { seria, koniec: true };
       }
-      await actor.setFlag(MODULE_ID, FLAG, { ...state, streak });
-      await ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor }),
-        content: `<div class="neuro-bleed-card">
-          <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> Krwawienie — RO zdane</div>
-          <div class="neuro-bleed-body">Seria: ${streak}/${profile.save.streakToStop}. Krwawienie trwa.</div>
-          ${_stopButtons(actor)}
-        </div>`,
-        flags: { [MODULE_ID]: { bleed: true } }
-      });
-      return;
+      await effect.update({ [`flags.${MODULE_ID}.${FLAG}`]: { ...stan, rodzaj, seria, ostatnio: teraz } });
+      await _karta(actor, def, { glowa: `${def.label} — RO zdane`, tresc: `Seria: ${seria}/${def.save.streakToStop}. Krwawienie trwa.` });
+      return { seria };
     }
   }
 
-  const dmg = await new Roll(profile.damage).evaluate();
-  await actor.applyDamage([{ value: dmg.total, type: "slashing" }], { ignore: true });
-  // Turns of damage are counted always, so switching Kobalt on mid-bleed counts the turns already bled.
-  const tury = profile.save ? 0 : (state.tury ?? 0) + 1;
-  const limit = profile.save ? null : drogiZatrzymania(profile).turyObrazen;
-  const koniec = !!limit && tury >= limit;
-  if (!koniec) await actor.setFlag(MODULE_ID, FLAG, { ...state, streak: 0, tury });
-
-  const head = profile.save ? "Krwawienie — RO oblane" : "Krwawienie";
-  let tail = `Rana nie chce się zamknąć — opatrz ją (Medycyna ST ${profile.medicineDC}), żeby to przerwać.`;
-  if (profile.save) tail = "Seria przerwana.";
-  else if (profile.naprawa) tail = "Wyciek trwa — do naprawy uszkodzenia.";
-  else if (koniec) tail = `To ${limit}. tura krwawienia — rana zasycha.`;
-  else if (limit) tail = `Tura ${tury}/${limit} — opatrz ranę (Medycyna ST ${profile.medicineDC}), żeby przerwać wcześniej.`;
-
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    rolls: [dmg],
-    content: `<div class="neuro-bleed-card is-bleeding">
-      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> ${head}</div>
-      <div class="neuro-bleed-body">${actor.name} traci <strong>${dmg.total}</strong> PW. ${tail}</div>
-      ${koniec ? "" : _stopButtons(actor)}
-    </div>`,
-    flags: { [MODULE_ID]: { bleed: true } }
+  const dmg = await new Roll(def.damage).evaluate();
+  // Liczba — obrażenia bez rodzaju (dnd5e: bez odporności); nie z ataku wręcz, więc przy 0 PW jedna porażka.
+  await actor.applyDamage(dmg.total, { neuroshimaWrecz: false });
+  await _efekt(actor, rodzaj)?.update({ [`flags.${MODULE_ID}.${FLAG}`]: { ...stan, rodzaj, seria: 0, ostatnio: teraz } });
+  await _karta(actor, def, {
+    glowa: def.save ? `${def.label} — RO oblane` : def.label,
+    tresc: `${esc(actor.name)} traci <strong>${dmg.total}</strong> PW.${def.save ? " Seria przerwana." : ""}`,
+    rolls: [dmg]
   });
-  if (koniec) await stopBleeding(actor, `${limit} tury krwawienia, rana zaschła (WKK)`);
+  return { obrazenia: dmg.total };
 }
 
+/** Dawna nazwa tyknięcia Hemofilii — może siedzieć w makrze (`game.neuroshima.health.bleeding.rollBleedSave`). */
+export const rollBleedSave = actor => tickBleed(actor, "hemofilia");
+
 /* -------------------------------------------- */
-/*  Stop paths                                  */
+/*  Zatrzymanie                                  */
 /* -------------------------------------------- */
 
-function _stopButtons(actor) {
-  const profile = bleedProfile(actor);
-  if (profile.naprawa) {
-    return `<div class="neuro-bleed-actions">
-      <button type="button" class="neuro-bleed-btn" data-action="naprawa" data-actor-id="${actor.id}">
-        <i class="fa-solid fa-wrench"></i> Naprawione</button>
-    </div>`;
+const TEST_ETYKIETA = {
+  narzedzia: (s) => `Opatrz — narzędzia małego medyka, ST ${s.dc}`,
+  medycyna: (s) => `Medycyna ST ${s.dc} (narzędzia małego medyka)`,
+  pomaganie: (s) => `Pomaganie — Medycyna ST ${s.dc}`,
+  mechanik: (s) => `Napraw — narzędzia małego mechanika, ST ${s.dc}`
+};
+const TEST_IKONA = { narzedzia: "fa-kit-medical", medycyna: "fa-kit-medical", pomaganie: "fa-hands-holding", mechanik: "fa-wrench" };
+
+function _przyciski(actor, def) {
+  const btn = (akcja, ikona, tekst) => `<button type="button" class="neuro-bleed-btn" data-action="${akcja}" `
+    + `data-rodzaj="${def.id}" data-actor-uuid="${actor.uuid}"><i class="fa-solid ${ikona}"></i> ${tekst}</button>`;
+  const out = [btn("test", TEST_IKONA[def.stop.test], TEST_ETYKIETA[def.stop.test](def.stop))];
+  if (lekDziala(def, { kobalt: isKobaltEnabled() })) out.push(btn("lek", "fa-syringe", "Wstrzyknij lek"));
+  if (def.naprawa) out.push(btn("naprawa", "fa-screwdriver-wrench", "Naprawione (MG)"));
+  return `<div class="neuro-bleed-actions">${out.join("")}</div>`;
+}
+
+async function _karta(actor, def, { glowa, tresc, rolls = [] }) {
+  return ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    rolls,
+    content: `<div class="neuro-bleed-card is-bleeding">
+      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> ${esc(glowa)}</div>
+      <div class="neuro-bleed-body">${tresc}</div>
+      ${_przyciski(actor, def)}
+    </div>`,
+    flags: { [MODULE_ID]: { [KARTA]: true } }
+  });
+}
+
+/** Medyk z punktu widzenia klikającego: jego postać albo zaznaczony żeton; MG bez zaznaczenia — sam krwawiący. */
+function _medyk(actor) {
+  return canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character ?? (game.user.isGM ? actor : null);
+}
+
+const _ten = (a, b) => !!a && !!b && a.uuid === b.uuid;
+
+async function _rzut(medic, stop, { utrudnienie = false, dialog = {}, event = null } = {}) {
+  // `event` — Shift i reszta skrótów dnd5e z kliknięcia przycisku (szybki rzut bez okna).
+  const cfg = { target: stop.dc, ...(utrudnienie ? { disadvantage: true } : {}), ...(event ? { event } : {}) };
+  let rolls;
+  if (stop.test === "narzedzia") rolls = await medic.rollToolCheck({ tool: "medyka", ability: "int", ...cfg }, dialog);
+  else if (stop.test === "mechanik") {
+    const a = medic.system?.abilities ?? {};
+    const ability = (Number(a.int?.mod) || 0) > (Number(a.dex?.mod) || 0) ? "int" : "dex";
+    rolls = await medic.rollToolCheck({ tool: "mechanika", ability, ...cfg }, dialog);
+  } else rolls = await medic.rollSkill({ skill: "med", ability: "int", ...cfg }, dialog);
+  return Array.isArray(rolls) ? rolls[0] : rolls;
+}
+
+/**
+ * Test zatrzymania krwawienia `rodzaj` przez `medic` (test i ST z `stop`). Narzędzia małego medyka — ładunek za każdą
+ * próbę; pusta torba tylko z Dnem torby (Aspiryna i Miętusy), wtedy z Utrudnieniem i bez ładunku.
+ * @param {Actor} actor  krwawiący
+ * @param {string} rodzaj
+ * @param {Actor} [medic]
+ * @param {{dialog?: object, event?: Event}} [o]  do `rollSkill` / `rollToolCheck` (testy bez okna; kliknięcie z Shiftem)
+ * @returns {Promise<boolean|null>} czy zatrzymane; `null` — bez rzutu
+ */
+export async function opatrz(actor, rodzaj, medic = actor, { dialog = {}, event = null } = {}) {
+  const def = KRWAWIENIA[rodzaj];
+  if (!def || !_efekt(actor, rodzaj)) return null;
+  const s = def.stop;
+  const warn = m => { ui.notifications.warn(m); return null; };
+  if (!medic?.isOwner) return warn("Zaznacz żeton postaci, która udziela pomocy.");
+  if (!s.sam && _ten(medic, actor)) {
+    return warn(def.naprawa ? "Maszyna nie naprawi się sama." : `${def.label}: zatamować może tylko ktoś inny (akcja Pomaganie).`);
   }
-  // "Wstrzyknij lek": u chorego na Hemofilię dawka z jego wpisu choroby (`takeDose`); przy krwawieniu
-  // bez RO z Kobaltem (WKK #43) — dawka leku na Hemofilię z ekwipunku. Bez żadnej z tych dróg przycisku
-  // nie ma, zamiast guzika, który cicho nic nie robi.
-  const dose = drogiZatrzymania(profile).lek
-    ? `<button type="button" class="neuro-bleed-btn" data-action="lek" data-actor-id="${actor.id}">
-        <i class="fa-solid fa-syringe"></i> Wstrzyknij lek</button>`
-    : "";
-  return `<div class="neuro-bleed-actions">
-    ${dose}
-    <button type="button" class="neuro-bleed-btn" data-action="medycyna" data-actor-id="${actor.id}">
-      <i class="fa-solid fa-kit-medical"></i> Medycyna ST ${profile.medicineDC}</button>
-  </div>`;
+  let zapas = null;
+  let utrudnienie = false;
+  if (s.test === "narzedzia" || s.test === "medycyna") {
+    if (!hasToolKit(medic, "medyka")) return warn(`${medic.name} nie ma narzędzi małego medyka.`);
+    zapas = zapasyMedyka(medic).find(z => z.remaining >= 1 && z.item.isOwner) ?? null;
+    if (!zapas) {
+      if (!maDnoTorby(medic)) return warn(`${medic.name} ma pustą torbę małego medyka — opatrzenie zużywa ładunek.`);
+      utrudnienie = true;
+    }
+  }
+  if (s.test === "mechanik" && !hasToolKit(medic, "mechanika")) return warn(`${medic.name} nie ma narzędzi małego mechanika.`);
+
+  const roll = await _rzut(medic, s, { utrudnienie, dialog, event });
+  if (!roll) return null;
+  const zostalo = zapas ? await zuzyjLadunekMedyka(zapas.item) : null;
+  const ladunek = zapas ? ` — ładunek narzędzi: zostało ${zostalo}/${zapas.max}` : utrudnienie ? " — pusta torba, Dno torby" : "";
+  if (roll.total >= s.dc) {
+    await stopBleeding(actor, rodzaj, `${def.naprawa ? "naprawa" : "opatrzenie"}: ${medic.name}${ladunek}`);
+    return true;
+  }
+  ui.notifications.info(`${TEST_ETYKIETA[s.test](s)}: ${roll.total} — nieudany, ${def.label} trwa${ladunek}.`);
+  return false;
+}
+
+/** Lek na Hemofilię (Desmopresyna, preparaty krwiopochodne) z dawką, którego ten klient może użyć. */
+function _lekNaHemofilie(actor) {
+  const klucze = chemiaForDisease("hemofilia");
+  return actor?.items?.find(i => i.type === "consumable" && i.isOwner
+    && klucze.includes(i.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(i.name)) && dosesRemaining(i) > 0) ?? null;
+}
+
+/**
+ * „Wstrzyknij lek”: jedna dawka zatrzymuje jedno krwawienie `rodzaj` — Hemofilię zawsze, inne tylko w WKK (zasada 43).
+ * Chory na Hemofilię bierze dawkę ze swojego wpisu choroby; inaczej — lek krwawiącego, potem medyka.
+ * @returns {Promise<boolean>}
+ */
+export async function podajLek(actor, rodzaj, medic = actor) {
+  const def = KRWAWIENIA[rodzaj];
+  if (!def || !_efekt(actor, rodzaj) || !lekDziala(def, { kobalt: isKobaltEnabled() })) return false;
+  const entry = actor.isOwner ? _hemofiliaEntry(actor) : null;
+  if (entry && rodzaj === "hemofilia") {
+    await takeDose(actor, entry.id);
+    await stopBleeding(actor, rodzaj, "wstrzyknięty lek");
+    return true;
+  }
+  const lek = _lekNaHemofilie(actor) ?? (_ten(medic, actor) ? null : _lekNaHemofilie(medic));
+  if (!lek) {
+    ui.notifications.warn(`Brak leku na Hemofilię (Desmopresyna, preparaty krwiopochodne) u ${actor.name}`
+      + `${medic && !_ten(medic, actor) ? ` ani u ${medic.name}` : ""}.`);
+    return false;
+  }
+  if (!await zuzyjDawke(lek)) return false;
+  await stopBleeding(actor, rodzaj, `wstrzyknięty lek (${lek.name}${lek.actor === actor ? "" : `, ${lek.actor?.name}`})`);
+  return true;
 }
 
 function _bindBleedButtons(message, html) {
-  if (!message.getFlag(MODULE_ID, "bleed")) return;
+  if (!message.getFlag(MODULE_ID, KARTA)) return;
   const el = html instanceof HTMLElement ? html : html?.[0];
   for (const btn of el?.querySelectorAll(".neuro-bleed-btn") ?? []) {
     if (btn.dataset.bound) continue;
@@ -456,95 +378,202 @@ function _bindBleedButtons(message, html) {
 async function _onClickBleedStop(event) {
   event.preventDefault();
   event.stopPropagation();
-  const { action, actorId } = event.currentTarget.dataset;
-  const actor = game.actors.get(actorId);
-  if (!actor?.isOwner || !isBleeding(actor)) return;
-
-  // The medic is whoever is acting, not necessarily the patient.
-  const medic = game.user.character ?? canvas.tokens.controlled[0]?.actor ?? actor;
-  if (action === "lek") await podajLek(actor, medic);
-  if (action === "medycyna") await opatrz(actor, medic);
-  // The repair itself is the owner's or the GM's call (drone repairs, a mechanic's work) — the button only records it.
-  if (action === "naprawa" && bleedProfile(actor).naprawa) await stopBleeding(actor, "uszkodzenie naprawione");
+  const { action, rodzaj, actorUuid } = event.currentTarget.dataset;
+  const actor = actorUuid ? fromUuidSync(actorUuid) : null;
+  const def = KRWAWIENIA[rodzaj];
+  if (!actor || !def) return;
+  if (!_efekt(actor, rodzaj)) return ui.notifications.info(`${actor.name}: ${def.label} już nie trwa.`);
+  if (action === "test") await opatrz(actor, rodzaj, _medyk(actor), { event });
+  else if (action === "lek") await podajLek(actor, rodzaj, _medyk(actor));
+  else if (action === "naprawa" && def.naprawa && (game.user.isGM || actor.isOwner)) {
+    await stopBleeding(actor, rodzaj, "naprawione (MG)");
+  }
 }
 
-/**
- * "Wstrzyknij lek": a haemophiliac doses from their disease entry; a bleed without a save (WKK #43) takes a
- * Hemofilia medicine — the patient's own first, then the medic's.
- * @param {Actor} actor  The bleeding actor.
- * @param {Actor} [medic]
- * @returns {Promise<boolean>} Whether the bleeding stopped.
- */
-export async function podajLek(actor, medic = actor) {
-  if (!isBleeding(actor) || !drogiZatrzymania(bleedProfile(actor)).lek) return false;
-  const entry = _hemofiliaEntry(actor);
-  if (entry) {
-    // Spend a real dose through the normal medicine path, so supply is tracked
-    // and the usual narrative card still fires.
-    await takeDose(actor, entry.id);
-    await stopBleeding(actor, "wstrzyknięty lek");
-    return true;
-  }
-  const lek = _lekNaHemofilie(actor) ?? (medic === actor ? null : _lekNaHemofilie(medic));
-  if (!lek) {
-    ui.notifications.warn(`Brak leku na Hemofilię (Desmopresyna, Preparaty krwiopochodne) u ${actor.name}`
-      + `${medic === actor ? "" : ` ani u ${medic.name}`}.`);
-    return false;
-  }
-  if (!lek.isOwner) {
-    ui.notifications.warn(`${lek.name} należy do ${lek.actor?.name} — poda go gracz tej postaci.`);
-    return false;
-  }
-  if (!await zuzyjDawke(lek)) return false;
-  await stopBleeding(actor, `wstrzyknięty lek (${lek.name}${lek.actor === actor ? "" : `, ${lek.actor?.name}`})`);
-  return true;
-}
+/* -------------------------------------------- */
+/*  Wyzwalacze                                   */
+/* -------------------------------------------- */
+
+const BLEEDING_DAMAGE = new Set(["slashing", "piercing"]);
 
 /**
- * Test Medycyny with narzędzia małego medyka against the profile's ST. WKK #43: it spends a kit charge, either
- * result; an empty kit only with Aspiryna i Miętusy — with Utrudnienie and no charge.
- * @param {Actor} actor  The bleeding actor.
- * @param {Actor} [medic]
- * @param {{dialog?: object}} [opts]  Passed to `rollSkill` (tests fast-forward it).
- * @returns {Promise<boolean|null>} Whether the bleeding stopped; null when no test was rolled.
+ * Hak `dnd5e.calculateDamage` — chory na Hemofilię, który dostaje obrażenia cięte lub kłute, zaczyna krwawić. Czyta
+ * rozbicie na rodzaje, więc broń mieszana się liczy, a obuchowa i tyknięcia krwawień (bez rodzaju) — nie.
  */
-export async function opatrz(actor, medic = actor, { dialog = {} } = {}) {
-  if (!isBleeding(actor)) return null;
-  const profile = bleedProfile(actor);
-  if (profile.naprawa) return null;
-  const dc = profile.medicineDC;
-  const kit = medic.items.find(i => i.type === "tool" && i.system.type?.baseItem === "medyka");
-  if (!kit) {
-    ui.notifications.warn(`${medic.name} nie ma narzędzi małego medyka — RAW wymaga ich do tego testu.`);
-    return null;
+function _onCalculateDamage(actor, damages) {
+  if (actor?.type !== "character" || !_hemofiliaEntry(actor) || maKrwawienie(actor, "hemofilia")) return;
+  const cut = (damages ?? []).find(d => BLEEDING_DAMAGE.has(d.type) && (d.value ?? 0) > 0);
+  if (!cut) return;
+  const label = CONFIG.DND5E.damageTypes?.[cut.type]?.label ?? cut.type;
+  // Odroczone: hak biegnie w środku liczenia obrażeń, a start pisze efekt i kartę.
+  setTimeout(() => startBleeding(actor, { rodzaj: "hemofilia", reason: `obrażenia ${label.toLowerCase()}` }), 0);
+}
+
+/** Hak `neuroshima.stopienZranienia` — Kolory Rdza, Rtęć, Stal: każdy otrzymany Stopień Zranienia to krwawienie. */
+function _onStopienZranienia(actor, { przed = 0, po = 0 } = {}) {
+  if (!(po > przed) || !KOLORY_Z_KRWAWIENIEM.includes(kolorNeuroshimy())) return;
+  void startBleeding(actor, { rodzaj: "kolory", reason: `Stopień Zranienia ${po}` });
+}
+
+/** Krwawienie z `onHit` broni (piła Juggernauta): `rodzaj` z flagi Bestiariusza albo `null`. */
+function _krwawienieZBroni(item) {
+  const r = item?.flags?.[MODULE_ID]?.bestiary?.onHit?.krwawienie ?? null;
+  return KRWAWIENIA[r] ? r : null;
+}
+
+/** Przycisk pod kartą ataku, który trafił: „Krwawienie (…) → cel” — RAW bez RO, ale werdykt może jeszcze zmienić reakcja. */
+function _onRenderAttackCard(message, html) {
+  if (rollTypeOf(message) !== "attack" || html.querySelector(".neuro-bleed-onhit")) return;
+  const rodzaj = _krwawienieZBroni(message.getAssociatedItem?.());
+  const obrona = obronaOf(message);
+  const actor = message.getAssociatedActor?.();
+  if (!rodzaj || !obrona?.targets?.length || !actor?.isOwner) return;
+  const def = KRWAWIENIA[rodzaj];
+  const trafione = obrona.targets.filter(t => isHitVerdict(verdictOfEntry(obrona, t).verdict));
+  if (!trafione.length) return;
+  const uzyte = message.getFlag(MODULE_ID, ONHIT_UZYTE) ?? [];
+  const div = document.createElement("div");
+  div.className = "neuro-bleed-onhit neuro-bleed-actions";
+  for (const t of trafione) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "neuro-bleed-btn";
+    b.dataset.neuroBleedOnhit = t.tokenUuid ?? t.actorUuid;
+    b.innerHTML = `<i class="fa-solid fa-droplet"></i> ${esc(def.label)} → ${esc(t.name)}`;
+    b.disabled = uzyte.includes(b.dataset.neuroBleedOnhit) || _onHitUzyte.has(`${message.id}:${b.dataset.neuroBleedOnhit}`);
+    b.addEventListener("click", ev => _onClickOnHit(ev, message, rodzaj));
+    div.appendChild(b);
   }
-  let zapas = null;
-  let pustaTorba = false;
-  if (drogiZatrzymania(profile).ladunek) {
-    zapas = zapasyMedyka(medic).find(z => z.remaining >= 1 && z.item.isOwner) ?? null;
-    pustaTorba = !zapas;
-    if (pustaTorba && !maDnoTorby(medic)) {
-      ui.notifications.warn(`${medic.name} ma pustą torbę małego medyka (WKK: test na krwawienie zużywa ładunek).`);
-      return null;
+  (html.querySelector(".message-content") ?? html).appendChild(div);
+}
+
+async function _onClickOnHit(event, message, rodzaj) {
+  event.preventDefault();
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  const uuid = btn.dataset.neuroBleedOnhit;
+  const doc = uuid ? fromUuidSync(uuid) : null;
+  const cel = doc?.actor ?? doc;
+  if (!cel || btn.disabled) return;
+  btn.disabled = true;
+  _onHitUzyte.add(`${message.id}:${uuid}`);
+  await startBleeding(cel, { rodzaj, reason: message.getAssociatedItem?.()?.name ?? "" });
+  if (message.isOwner) await message.setFlag(MODULE_ID, ONHIT_UZYTE, [...(message.getFlag(MODULE_ID, ONHIT_UZYTE) ?? []), uuid]);
+}
+
+/* -------------------------------------------- */
+/*  Poza walką                                   */
+/* -------------------------------------------- */
+
+/** Aktorzy z krwawieniem: świata i niepowiązanych żetonów na scenach. */
+function _krwawiacy() {
+  const out = new Map();
+  const dodaj = a => { if (a && !out.has(a.uuid) && krwawienia(a).length) out.set(a.uuid, a); };
+  for (const a of game.actors ?? []) dodaj(a);
+  for (const s of game.scenes ?? []) for (const t of s.tokens ?? []) if (!t.actorLink) dodaj(t.actor);
+  return [...out.values()];
+}
+
+const _wWalce = actor => (game.combats ?? []).some(c => c.started && c.combatants.some(cb => cb.actor?.uuid === actor.uuid));
+
+/**
+ * Hak `updateWorldTime` (aktywny MG): co 10 minut zegara świata przypomnienie „X krwawi” — szept do MG, plama krwi pod
+ * żetonem (Splatter). Walczący tykają w turach, więc ich to nie dotyczy.
+ * @returns {Promise<{actor: string, rodzaj: string, minut: number}[]>} przypomnienia (testy)
+ */
+export async function przypomnijPozaWalka(worldTime = game.time.worldTime) {
+  if (!game.users.activeGM?.isSelf) return [];
+  const linie = [];
+  for (const actor of _krwawiacy()) {
+    if (_wWalce(actor)) continue;
+    let zaplamiony = false;
+    for (const { def, effect } of krwawienia(actor)) {
+      const stan = _stan(effect);
+      const przed = Number.isFinite(stan.ostatnio) ? stan.ostatnio : stan.od;
+      const p = przypomnienie(przed, worldTime);
+      if (p.ostatnio !== stan.ostatnio) await effect.update({ [`flags.${MODULE_ID}.${FLAG}`]: { ...stan, rodzaj: def.id, ostatnio: p.ostatnio } });
+      if (!p.nalezne) continue;
+      linie.push({ actor: actor.name, rodzaj: def.id, label: def.label, minut: Math.floor((worldTime - przed) / 60) });
+      if (!def.naprawa && !zaplamiony) {
+        const token = actor.token?.object ?? actor.getActiveTokens?.()[0];
+        if (token && CONFIG.Splatter?.splat) { try { CONFIG.Splatter.splat(token); } catch { /* bez Splattera */ } }
+        zaplamiony = true;
+      }
     }
   }
-  const rolls = await medic.rollSkill({ skill: "med", target: dc, ...(pustaTorba ? { disadvantage: true } : {}) }, dialog);
-  const roll = Array.isArray(rolls) ? rolls[0] : rolls;
-  if (!roll) return null;
-  const zostalo = zapas ? await zuzyjLadunekMedyka(zapas.item) : null;
-  const ladunek = zapas ? `; −1 ładunek, zostało ${zostalo}/${zapas.max}` : pustaTorba ? "; pusta torba, Aspiryna i Miętusy" : "";
-  if (roll.total >= dc) {
-    await stopBleeding(actor, `opatrzony przez ${medic.name}${ladunek}`);
-    return true;
+  if (linie.length) {
+    await ChatMessage.create({
+      whisper: ChatMessage.getWhisperRecipients("GM"),
+      content: `<div class="neuro-bleed-card is-bleeding">
+        <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> Krwawienia poza walką</div>
+        <div class="neuro-bleed-body">${linie.map(l => `<strong>${esc(l.actor)}</strong> — ${esc(l.label)}, ${l.minut} min bez zatamowania`).join("<br>")}
+          <br><em>Przypomnienie co 10 minut zegara świata; ile to kosztuje — decyzja MG.</em></div>
+      </div>`
+    });
   }
-  ui.notifications.info(`Test Medycyny nieudany (${roll.total} vs ST ${dc}) — krwawienie trwa${ladunek}.`);
-  return false;
+  return linie.map(({ actor, rodzaj, minut }) => ({ actor, rodzaj, minut }));
 }
 
-/** A Hemofilia medicine (Desmopresyna, Preparaty krwiopochodne) the actor carries with a dose left. */
-function _lekNaHemofilie(actor) {
-  const klucze = chemiaForDisease("hemofilia");
-  return actor?.items.find(i => i.type === "consumable"
-    && klucze.includes(i.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(i.name))
-    && dosesRemaining(i) > 0) ?? null;
+/* -------------------------------------------- */
+/*  Migracja                                     */
+/* -------------------------------------------- */
+
+/**
+ * Jedna flaga i wspólny stan `bleeding` (do 2026-10-31) → efekt rodzaju z dawnego profilu (`hydraulika` → Wyciek,
+ * brak profilu → Hemofilia). Raz, u aktywnego MG przy starcie.
+ */
+export async function migrujStareKrwawienia() {
+  if (!game.users.activeGM?.isSelf) return 0;
+  let n = 0;
+  const aktorzy = new Map();
+  for (const a of game.actors ?? []) aktorzy.set(a.uuid, a);
+  for (const s of game.scenes ?? []) for (const t of s.tokens ?? []) if (!t.actorLink && t.actor) aktorzy.set(t.actor.uuid, t.actor);
+  for (const actor of aktorzy.values()) {
+    const stara = actor.flags?.[MODULE_ID]?.[STARA_FLAGA];
+    const ids = actor.effects.filter(e => e.statuses?.has("bleeding")).map(e => e.id);
+    if (!stara && !ids.length) continue;
+    try {
+      if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
+      if (stara) await actor.unsetFlag(MODULE_ID, STARA_FLAGA);
+      if (stara?.active) {
+        const rodzaj = stara.profile === "hydraulika" ? "wyciek" : (KRWAWIENIA[stara.profile] ? stara.profile : "hemofilia");
+        await startBleeding(actor, { rodzaj, reason: "przeniesione ze starego zapisu krwawienia" });
+      }
+      n++;
+    } catch (err) {
+      console.error(`${MODULE_ID} | migracja krwawienia ${actor.name}`, err);
+    }
+  }
+  if (n) console.log(`${MODULE_ID} | Krwawienia: przeniesiono ${n} aktorów na osobne efekty`);
+  return n;
 }
+
+/* -------------------------------------------- */
+
+export function registerBleeding() {
+  // `dnd5e.preApplyDamage` dostaje już tylko sumę — rodzaje obrażeń widzi jeszcze `calculateDamage`.
+  Hooks.on("dnd5e.calculateDamage", _onCalculateDamage);
+  Hooks.on("updateCombat", _onUpdateCombat);
+  Hooks.on("renderChatMessageHTML", _bindBleedButtons);
+  Hooks.on("dnd5e.renderChatMessage", _onRenderAttackCard);
+  Hooks.on("neuroshima.stopienZranienia", _onStopienZranienia);
+  Hooks.on("updateWorldTime", (worldTime) => { void przypomnijPozaWalka(worldTime); });
+  Hooks.once("ready", () => { void migrujStareKrwawienia(); });
+  zarejestrujProsbe(PROSBA_START, async (_nosiciel, d) => {
+    const a = await fromUuid(d.actorUuid);
+    return a ? startBleeding(a, { rodzaj: d.rodzaj, reason: d.reason }) : null;
+  });
+  zarejestrujProsbe(PROSBA_STOP, async (_nosiciel, d) => {
+    const a = await fromUuid(d.actorUuid);
+    return a ? stopBleeding(a, d.rodzaj ?? null, d.how ?? "") : null;
+  });
+  console.log(`${MODULE_ID} | Krwawienia (osobne efekty) registered`);
+}
+
+export const bleedingApi = Object.freeze({
+  KRWAWIENIA, krwawienia, maKrwawienie, isBleeding, startBleeding, stopBleeding, tickBleed, rollBleedSave,
+  opatrz, podajLek, przypomnijPozaWalka, migrujStareKrwawienia
+});
+
+/** Powierzchnia dla testów Quench. */
+export const __testing = Object.freeze({ _maszyna, _efekt, _onStopienZranienia, _krwawienieZBroni });

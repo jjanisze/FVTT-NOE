@@ -57,6 +57,7 @@ import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
 import { registerAmmoTests } from "./amunicja.test.mjs";
+import { registerKrwawieniaTests } from "./krwawienia.test.mjs";
 import { registerMagazynkiTests } from "./magazynki.test.mjs";
 import { registerWeaponStateTests } from "./stany-broni.test.mjs";
 import { registerPartyTests } from "./party.test.mjs";
@@ -89,6 +90,7 @@ export function registerQuenchTests() {
     registerDiseaseTests(quench);
     registerEffectChangesTests(quench);
     registerAmmoTests(quench);
+    registerKrwawieniaTests(quench);
     registerMagazynkiTests(quench);
     registerWeaponStateTests(quench);
     registerPartyTests(quench);

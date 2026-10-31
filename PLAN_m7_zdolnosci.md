@@ -734,3 +734,24 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   krótsze przesunięcia zegara się sumują; staza tylko stabilizuje; Wyciek maszyny — Test narzędzi małego mechanika ST 10
   (decyzja agenta, MG zlecił). Design kompletny — `docs/Krwawienia.md`; następnie przebudowa `combat/bleeding.mjs`
   (efekt na krwawienie, migracja flagi, piła, Kolory, przypomnienie); siedem glifów w `dev/icons/MISSING.md` (sekcja K).
+
+### Krwawienia — przebudowa (2026-11-01)
+
+Według `docs/Krwawienia.md` (trzy rundy ustaleń MG): jeden profil krwawienia na aktorze → osobny Efekt Aktywny na każdy
+rodzaj.
+- **Dane** — `config/krwawienia-data.mjs` (`KRWAWIENIA`: Hemofilia, Podstępny atak, Dum-dum z `wkk/combat/bleeding.mjs`
+  jako klon z inną nazwą, Tętnica, Kolory, piła, Wyciek; `stop` — test, ST, ładunek, sam sobie; `lek` — RAW / WKK;
+  przypomnienie co 600 s). Stany w `config/conditions.mjs` z tych danych; jeden `bleeding` dnd5e usunięty.
+- **Silnik** — `combat/bleeding.mjs`: start bez powtórzeń (maszyny — tylko Wyciek), tyknięcia per rodzaj (`tikRaz` z
+  kluczem rodzaju), obrażenia bez rodzaju i nigdy „z ataku wręcz” (`neuroshimaWrecz: false` czyta
+  `combat/umieranie.mjs`), przyciski per krwawienie (medyk klikającego; cudzy aktor — przekaźnik MG), Shift = rzut bez
+  okna; Kolory z haka `neuroshima.stopienZranienia` (`applyZranienie`) i ustawienia świata „Kolor Neuroshimy”
+  (`config/settings.mjs`); piła — `onHit.krwawienie` z generatora Bestiariusza i przycisk pod trafieniem; przypomnienie
+  poza walką (szept MG, plama Splattera); migracja starej flagi przy starcie.
+- **Przy okazji:** piła tarczowa Juggernauta w ogóle nie trafiała do kompendium — atak i akcja legendarna miały to samo
+  id i druga nadpisywała pierwszy (`dev/packs/build-packs.mjs`: atak o id cechy dostaje przyrostek). E2e `zdolnosci-walka`
+  — ustalona kość ataku (żywa jedynka zacinała B 92 i psuła następny krok).
+- **WKK 43** — już tylko lek na Hemofilię przy innych krwawieniach; ładunek i ST 10 to odczyt dla wszystkich.
+- **Testy:** nowy Quench `krwawienia` (18; z `amunicja` wyjęte stare 8) — 1491/1491; nowe e2e `krwawienia` (medyk gracza
+  opatruje cudzą postać przez MG — tylko jedno krwawienie, ładunek; piła z kompendium; tyknięcia per krwawienie;
+  przypomnienie po 11 min) + regresja 12 pakietów zielona.

@@ -60,10 +60,10 @@
 | **Lek na Hemofilię** | tak | tylko WKK | tylko WKK | tylko WKK | tylko WKK | tylko WKK |
 | **Sam sobie** | tak | tak | tak | tak | nie | tak |
 | **Przy 0 PW** | porażka w RPŚ, gdy RO oblany | porażka w RPŚ | porażka w RPŚ | porażka w RPŚ | porażka w RPŚ | porażka w RPŚ |
-| **W module dziś** | działa; ładunek tylko w WKK | działa, ale opatrzenie Medycyną ST 15 | działa, ale opatrzenie Medycyną ST 15 | działa, ale opatrzenie Medycyną ST 15 | brak — Kolory nie mają kodu | brak — tylko opis ataku |
+| **W module** | działa | działa | działa | działa | działa — ustawienie świata „Kolor Neuroshimy” | działa — przycisk pod trafieniem piłą |
 
-Dziś w module wszystkie krwawienia dzielą jeden stan i postać krwawi naraz tylko z jednego źródła (groźniejsze zastępuje
-słabsze) — to idzie do przebudowy według ustaleń wyżej.
+W module (od 2026-11-01) każde krwawienie to osobny efekt ze swoim stanem na żetonie; tyka i zatrzymuje się osobno,
+przyciski na kartach krwawienia. Ikony są na razie tymczasowe, docelowe zamówione.
 
 ## Poza tabelą: Wyciek (układ hydrauliczny maszyny)
 

@@ -22,7 +22,7 @@
  * | Kończyna górna | upuszczenie broni, tarczy, przedmiotu | ścieżka Wytrącenia bez RO (`wytracPrzedmiot`, lalka) |
  * | Kończyna dolna | Powalenie | stan `prone` (odporność na stan — bez skutku) |
  * | Opona/gąsienica | Szybkość o połowę do naprawy | Efekt Aktywny bez czasu trwania — zdejmuje go naprawa |
- * | Tętnica / układ hydrauliczny | −1k6 PW na początku tury | profil Krwawienia `tetnica` / `hydraulika` (`combat/bleeding.mjs`) |
+ * | Tętnica / układ hydrauliczny | −1k6 PW na początku tury | Krwawienie (Przycelowanie — Tętnica) / Wyciek (`combat/bleeding.mjs`) |
  *
  * Skutek na cudzym celu wykonuje MG (przekaźnik). „Jednorazowy” znika po zastosowaniu — przycisk gaśnie, a karta
  * zapamiętuje to we fladze (U21).
@@ -297,8 +297,8 @@ async function _wykonaj({ skutek, label, kto, actorUuid, tokenUuid, zrodlo }) {
     return say(`${kogo}: <strong>Szybkość o połowę</strong> do naprawy uszkodzenia (${esc(kto)}).`);
   }
   if (skutek === "wyciek") {
-    const profile = kategoria(actor) === "maszyna" || actor.type === "vehicle" ? "hydraulika" : "tetnica";
-    return startBleeding(actor, { reason: `Przycelowanie — ${kto}`, profile });
+    const rodzaj = kategoria(actor) === "maszyna" || actor.type === "vehicle" ? "wyciek" : "tetnica";
+    return startBleeding(actor, { reason: `Przycelowanie — ${kto}`, rodzaj });
   }
   return null;
 }
