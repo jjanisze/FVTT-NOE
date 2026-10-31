@@ -388,6 +388,23 @@ async function seed(gm, fixture) {
   return gm.eval(`(url, moduleId) => import(url).then(m => m.default({ moduleId }))`, url, MODULE_ID);
 }
 
+const CORE_UI = ["sidebar", "controls", "hotbar", "players", "nav", "chat"];
+
+/**
+ * The frameless core interface every suite must leave rendered. `foundry.applications.instances` holds these
+ * too, so an unfiltered close loop takes them down; release gate 0.21.0: one in `explosive-art` and the next 18
+ * suites failed on a missing sidebar, chat and controls — each passing alone.
+ * @returns {Promise<Record<string, string[]>>} closed apps by client name (healthy clients left out)
+ */
+async function closedCoreUi(clients) {
+  const out = {};
+  for (const c of clients.values()) {
+    const closed = await c.eval(names => names.filter(k => ui[k] && !ui[k].rendered), CORE_UI).catch(() => []);
+    if (closed.length) out[c.name] = closed;
+  }
+  return out;
+}
+
 /** Every client's console errors since the last drain, by client name (clients with none left out). */
 function drainAllErrors(clients) {
   return Object.fromEntries([...clients.values()].map(c => [c.name, c.drainErrors()]).filter(([, e]) => e.length));
@@ -512,6 +529,13 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       } catch (err) {
         error = { message: err.message, details: err.details, assertion: err instanceof AssertionError };
         try { await t.screenshot("gm", "failure"); } catch { /* best effort */ }
+      }
+      // The suite that closed the interface fails under its own name; a reload gives the next suite a whole one.
+      const closedUi = await closedCoreUi(clients);
+      if (Object.keys(closedUi).length) {
+        const list = Object.entries(closedUi).map(([k, v]) => `${k}: ${v.join(", ")}`).join("; ");
+        error ??= { message: `harness: the suite left the core interface closed (${list})`, assertion: true };
+        for (const name of Object.keys(closedUi)) await clients.get(name).reload();
       }
       const consoleErrors = drainAllErrors(clients);
       compat.push(...drainAllCompat(clients, "suite"));

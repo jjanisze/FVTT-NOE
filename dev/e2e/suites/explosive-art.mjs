@@ -155,7 +155,8 @@ export default{
    t.assert(result.sceneCountUnchanged&&result.preserved&&!result.pending,'old sample documents preserved exactly',result);
    await t.gm.eval(async()=>{
     await game.poligon.stations.view('strzelnica','explosive-art-review-v1');
-    for(const app of [...foundry.applications.instances.values()])if(app.rendered)await app.close();
+    // Framed windows only: the instances include the sidebar, hotbar and controls (gate 0.21.0).
+    for(const app of [...foundry.applications.instances.values()])if(app.hasFrame&&app.rendered)await app.close();
    });
    for(const c of[t.gm,player])await t.waitFor(c,()=>canvas.ready&&canvas.scene.flags['neuroshima-2026-overrides']?.explosiveArtGallery&&canvas.tiles.placeables.length===45&&canvas.tiles.placeables.every(p=>p.mesh?.texture?.valid));
    await t.screenshot('Gracz 1','completed gallery after upgrading the earlier four-image preview');

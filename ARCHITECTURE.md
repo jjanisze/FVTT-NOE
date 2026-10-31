@@ -312,6 +312,10 @@ a red run or a silent no-op.
   come in true scale (`wymiaryIstotyNaPlanszy`, `pojazdy/stan.mjs`).
 - **`fvtt reload` can leave a tab on the old import graph** after new modules appear — probe a new export and
   hard-reload through CDP (`ignoreCache`) before trusting a test.
+- **`foundry.applications.instances` includes the core interface** (sidebar, chat, controls, hotbar, players,
+  navigation). A "close every window" loop needs `app.hasFrame`, or the page loses its UI and every later e2e suite
+  fails on `null` while each one passes alone (release gate 0.21.0, `explosive-art`). The e2e runner now checks
+  the core UI after each suite (`closedCoreUi`, `dev/agent/lib/e2e.mjs`).
 
 ### 12. NOE vs WKK Content Lives in Physically Separate Files
 `scripts/wkk/` is the exclusive home for content that is not in the *Neuroshima Ostatnia Era*

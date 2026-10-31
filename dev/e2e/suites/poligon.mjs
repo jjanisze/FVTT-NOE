@@ -63,8 +63,10 @@ function liczby() {
 async function panel() {
   await game.poligon.stations.go("hangar");
   for (const a of foundry.applications.instances.values()) if (a.document && a.rendered) await a.close();
-  game.poligon.panel.open();
-  await new Promise(r => setTimeout(r, 1500));
+  const app = game.poligon.panel.open();
+  // The panel keeps its tab for the page's life; the art suites before this one leave it on Karta prób.
+  app.tab = "stanowiska";
+  await app.render();
   return document.querySelectorAll("#poligon-panel .poligon-row").length;
 }
 

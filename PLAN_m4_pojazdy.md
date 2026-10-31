@@ -1075,8 +1075,12 @@ siodło, jeździec jak na mapie, kotwica) pokrywa e2e `wierzchowiec`; pierście�
   prototypu dostaje prawdziwą skalę (¼ toru, D24).
 - **Bramka wydania** na `27caaa5`: część czerwieni to moje testy (19 → 20 narzędzi Garażu, rozmiar motocykla
   sprzed D45, dwa e2e wiązały wynik `createEmbeddedDocuments` po pozycji — bandyta siadał za kierownicą Osobówki);
-  reszta — strona MG w świecie wydania straciła cały interfejs w trakcie `garaz-grafika` i kolejne suity padały na
-  `null` w czacie i pasku bocznym; w piaskownicy 17 z nich przeszło od razu, przyczyny nie odtworzono.
+  reszta — strona MG traciła cały interfejs (pasek boczny, czat, kontrolki) i 18 kolejnych suit padało na `null`,
+  każda zielona osobno. Przyczyna znaleziona na `f59dad4`: sprzątanie na końcu `explosive-art` zamykało każdą
+  wyrenderowaną aplikację z `foundry.applications.instances`, a tam są też aplikacje rdzenia. Teraz zamyka tylko okna
+  z ramką, a e2e po każdej suicie sprawdza interfejs rdzenia — winna suita pada pod własną nazwą, klient się
+  przeładowuje. Drugi przeciek tego samego rodzaju: panel Poligonu pamięta zakładkę przez całe życie strony, suity
+  grafik zostawiały go na „Karcie prób”, a `poligon` liczył wiersze „Stanowisk” — teraz sam wybiera zakładkę.
 - **Grafiki (Codex, `5dc38a9`) i integracja (`ec1bb53`):** konie dostały własne żetony z góry z siodłem na dwoje
   (zamówienie D43 zamknięte), skale 19 istot przeliczone dla nowych grafik (konie z 1,41 na 1,0). Siodło
   zmierzone na gotowych żetonach: siedzisko 0,60 od przodu, poduszka pasażera 0,69 (wcześniej 0,42 / 0,60 — jeździec
