@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-30T23:09:00.890Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "portrait",
+  "candidateId": "p06",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/pajak-layout-v1.png",
+      "role": "PRIMARY body orientation and eight-leg fan layout; four fully visible legs on each side",
+      "svg": "dev/art/creatures/geometry/pajak-layout-v1.svg"
+    },
+    {
+      "path": "dev/art/creatures/in/pajak/portrait-p04.png",
+      "role": "Machine identity, equipment, materials and painting only; DO NOT copy camera or leg pose"
+    }
+  ],
+  "prompt": "Use case: sketch-to-render. Create a NEW FULL-BODY PORTRAIT from the GEOMETRY diagram in IMAGE 1, using IMAGE 2 only for this robot's identity, materials, optics and paint style. Do not edit or preserve image 2's oblique pose. The head is CENTRED and faces directly toward the viewer at the lower centre, abdomen recedes straight up the picture. Camera elevated about 55–65 degrees above ground, with NO lateral yaw: a symmetrical front-centred view. Follow image 1's eight distinct leg paths: FOUR COMPLETE legs on the LEFT and FOUR COMPLETE legs on the RIGHT. All eight pointed feet end OUTSIDE the body and have clear space around them. Place the rear-right foot high and far to the RIGHT outside the rear abdomen, never behind it. Every leg has its own body root, slender jointed shafts and pointed foot, four widely separated fans per side. Exactly eight total. Keep the recognisable small slim oval olive/rust steel scout body, forward box of eight dark optical lenses, small top camera pod and TWO thin rear antennae from image 2. Simple thin rod legs, no armour bulk or weapons. Realistic hand-painted muted metal, quiet large surfaces and selected bolts, empty dark charcoal portrait backdrop, comfortable margins. No diagram colours, text, numbers, labels or ground."
+}

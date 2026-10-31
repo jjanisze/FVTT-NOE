@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-zdrowy",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+      "role": "painting, lighting and charcoal portrait backdrop only, NOT anatomy, pose or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset: full-body HORSE portrait for a grounded American post-apocalyptic tabletop RPG. Image 1 is STYLE ONLY: take its realistic hand-painted brushwork, restrained earthy palette, natural materials, upper-left soft light, charcoal mottled portrait background and readable silhouette. Do NOT copy dog anatomy, dog pose, fur or collar. Subject: an ordinary HEALTHY, well-cared-for adult riding/work HORSE from a settlement stable. Strong sensible working-horse build, healthy weight, normal equine proportions, long horse neck and face, upright horse ears, exactly FOUR believable horse legs each ending in ONE solid hoof. Warm bay coat, black mane, black tail and dark lower legs; a small distinct white star on forehead. Calm attentive natural dark eyes, closed mouth, groomed but not glossy show-horse polish. Tack: practical worn brown leather riding saddle on a muted cream wool blanket. There is ONE main saddle, with a modest LOW brown leather rear pillion cushion immediately behind the main rider seat on the centerline, giving recognizable tandem rider and passenger sitting areas. The cushion stays low against the back; no towering backrests, two separate bulky saddles, vehicle seats or fantasy throne. Keep the horse's spine and back at normal equine length. Simple breast strap/girth and plain bridle; reins secured loosely near the pommel, not tangled across legs. No rider, passenger, weapon, large saddle bags, bedrolls or objects covering the sitting areas. Full body in natural standing three-quarter front view at the horse's chest height, all FOUR hooves separated/readable, whole mane and complete tail visible. Comfortably framed portrait aspect about 4:5, no cropped ears or hooves. Dark charcoal subtly textured painted backdrop, restrained soft contact shadow only, no scenery, fence or stable. Grounded painterly realistic game art, not photo, glossy CGI or cartoon. No numbers, lettering, logos, border, armor, mutations, wounds or glow."
+}

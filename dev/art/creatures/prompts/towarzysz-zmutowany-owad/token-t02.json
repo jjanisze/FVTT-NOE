@@ -1,0 +1,20 @@
+{
+  "creatureId": "towarzysz-zmutowany-owad",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-owad/portrait-p01.webp",
+      "role": "approved exact identity and eight-limbed anatomy"
+    },
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-owad/token-t01.webp",
+      "role": "overhead token to correct; it currently omits one walking-leg pair"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Correct Image 2, the existing overhead insect token, to match the approved portrait in Image 1. Preserve the portrait identity: broad rust-brown biological chitin, layered segmented oval abdomen, small glossy dark eyes, huge mandibles, two massive digging forelimbs. CRITICAL CORRECTION: portrait anatomy has EIGHT locomotor limbs in total: SIX thinner walking legs arranged in THREE bilateral pairs behind TWO massive shovel-like digging forelegs. The current token has only FOUR thin walking legs plus TWO digging forelegs. ADD THE MISSING THIRD WALKING-LEG PAIR. Final silhouette must clearly show FOUR DISTINCT LIMBS ON EACH SIDE: at the front/bottom one broad armored digging forelimb; behind it THREE separately readable slender bent walking legs, each attached to the side of the body with a joint and ending in a clawed foot. Space those three walking-leg pairs along the rear body so no leg merges with another or hides underneath the abdomen. Exactly EIGHT legs total. Mandibles are mouthparts, not legs. Do not add antenna-like detached fragments, extra pincers or repeated feet. Keep the same near-vertical overhead camera, head toward the BOTTOM (south), rear toward the top. Retain the same body proportions, armor plates, colors and hand-painted realistic rendering. Grounded post-apocalyptic creature token, neutral upper-left light. Square with genuine transparent alpha, entire figure and all eight feet inside clear margins; longest extent around 70% of the square. No floor, ring, base, text, glow or long shadow. The approved portrait is the anatomy authority even though this is a fictional mutated insect.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

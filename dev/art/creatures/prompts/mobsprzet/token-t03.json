@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-30T23:29:37.643Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "token",
+  "candidateId": "t03",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f"
+    },
+    {
+      "path": "dev/art/creatures/in/mobsprzet/token-t02.png",
+      "role": "Edit target: preserve the accepted three-tier design; straighten its alignment",
+      "sha256": "a6be62c946e0939513c454ffc4ae324877a36029d8b5d22ec06ccc74312861f8"
+    },
+    {
+      "path": "dev/art/creatures/in/references/mobsprzet-layout-v1.png",
+      "role": "Axis/symmetry guide only: vertical centreline and horizontal paired wheel axles",
+      "svg": "dev/art/creatures/geometry/mobsprzet-layout-v1.svg"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Image 2 is the CURRENT TOKEN TO STRAIGHTEN. Image 1 fixes identity, image 3 fixes the axes. Preserve image 2's THREE distinct rust-orange housing tiers and two visible black pivot gaps, FOUR tyres, single gun barrel and one rear whip antenna. Correct the crooked orientation/perspective so the chassis, both equipment boxes, pivot centres and gun barrel all share ONE PERFECTLY VERTICAL north-south centreline through the centre of the frame. Gun points straight DOWN at six o'clock. Paired left/right tyres are level with each other on HORIZONTAL front and rear axles, same apparent tyre size, no diagonal yaw, roll, sideways lean or shearing. Front-centred steep overhead camera, roughly 85 degrees, enough tier edge/shadow to distinguish the three stacked housings. Do not flatten the design into one merged bonnet, redesign the housings or add weapons/wheels. Match existing orange iron materials, bolts and paint wear. Genuine transparent alpha, square, every part inside 90% extent, no base, ground or text.",
+  "gmReview": {
+    "creatureId": "mobsprzet",
+    "kind": "token",
+    "candidateId": "t02",
+    "sha256": "f2b0e5b44243aa598236986bfca50b9e1446b0ad82361d8953cc29d2cbcd01af",
+    "decision": "revise",
+    "rating": 3,
+    "notes": "Token jest krzywy - naprostuj",
+    "updatedAt": "2026-10-30T23:21:35.784Z"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.916Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "generacja-iii-szpieg",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-kapo.webp",
+      "role": "Painting/backdrop ONLY; no copied character, tattoos, clothes or weapons"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne nearly ordinary human male traveller, Generation-III infiltrator living unnoticed among people. Lean adult about thirty-five, unremarkable clean-shaven face, short ash-brown hair, ordinary brown eyes. Only subtle clues: one slightly misshapen outer ear and one small pale skin patch above collar. Human proportions, two normal arms and legs; no obvious monster, claw, red eye or cybernetics. Muted grey-green canvas field jacket, faded brown trousers, practical boots, small plain travel satchel and canteen. Relaxed reserved standing pose, hands empty and visible, not menacing. Full-body three-quarter front, smooth face and broad cloth planes. Reference paint/backdrop only; no gang tattoos, weapons or copied costume."
+}

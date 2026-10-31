@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-31T00:00:21.673Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "token",
+  "candidateId": "t04",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+      "role": "Approved machine identity",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f"
+    },
+    {
+      "path": "dev/art/creatures/in/mobsprzet/token-t03.png",
+      "role": "Edit target: straight three-tier token t03",
+      "sha256": "83c1c6c669d1f589b33d00b56438d69a89ef2f0c11663206ff30a0634321fc39"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "mobsprzet",
+    "kind": "token",
+    "candidateId": "t03",
+    "sha256": "06c4119e8a2165a4ededf60523c7af408d810311df074dc54da714d8b7e63146",
+    "decision": "revise",
+    "rating": 3,
+    "notes": "Move the turret south (down), so it covers move of the middle segment. Do something to make it less \"toy-like\" using style, and more of a pragmatic combat machine. ",
+    "updatedAt": "2026-10-30T23:55:19.562Z"
+  },
+  "prompt": "Use case: precise-object-edit. Image 2 is the exact CURRENT TOKEN to edit; image 1 fixes the machine identity. Keep the straight vertical north-south centreline, horizontal paired wheel axles, FOUR tyres and THREE distinct functional housings. Move ONLY THE UPPER GUN MODULE SOUTH/DOWN, including its attached gun barrel and antenna, so the upper box now OVERLAPS and conceals roughly the rear THIRD of the middle housing's top. The machine should look more compact and mechanically connected, not like three separate blocks spread along a toy chassis. Keep enough exposed front part of the middle box and lower base deck to read all three tiers. Keep one barrel pointing straight south, every tip safely within the square frame.\nChange the visual treatment to a pragmatic unmanned combat machine: subdued desaturated oxide-brown/orange salvage panels over dark iron, diffuse MATTE paint, dark functional pivot collars, stout practical mounts and axle hardware, a couple of protected cable bundles/clamps. Several slightly unequal welded plate repairs and broad local grease shadows give a believable assembled utilitarian construction. Reduce bright candy-orange saturation, shiny ornamental bevels, jewel-like bolt highlights and perfectly repeated toy-like details. The barrel is plain blackened gun steel, not a glossy decorative tube. Keep quiet broad metal surfaces with only local seam wear, no all-over tiny cracks or dense texture noise. Preserve the existing light four-wheel gun-platform identity: no heavy tank armour, extra weapons, fifth wheel or human driver. Same steep front-centred overhead camera and painterly game-token medium. Genuine transparent alpha, no ground, base, text, symbols or frame."
+}

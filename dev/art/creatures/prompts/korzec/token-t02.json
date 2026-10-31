@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30T22:13:51.537Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "korzec",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/korzec/portrait-p01.webp",
+      "role": "Exact approved portrait identity and anatomy"
+    },
+    {
+      "path": "tokens/gangus-kapo.webp",
+      "role": "Overhead CAMERA and foreshortening ONLY; no character, clothing or weapon transfer"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. IMAGE 1 is the exact Korzec creature. IMAGE 2 demonstrates a standing creature seen from ABOVE; use its foreshortening only. Generate a genuine overhead battle-map token of the Korzec. Place the camera almost DIRECTLY ABOVE its crown, looking DOWN at about 85 degrees. The tall trunk must be STRONGLY FORESHORTENED into a short compact top-view cluster: see top of its head/canopy, top of shoulders and the upper surfaces of its branching arms, not a full-height frontal trunk. Root feet only partly peek out to the sides below the body, much of the upright trunk is hidden by its own upper portions. The distinctive long arching branch and natural axe-like blade project sideways/backward to the right, kept fully readable. Preserve exact organic brown bark materials, sparse moss, branch limbs, flattened snout and root-foot anatomy from image 1, no dog or human features, no manufactured axe. HEAD/FRONT points SOUTH at the bottom; rear/back projects north at top. Square, genuine transparent alpha with open gaps between branches, all tips within margins and longest extent about 90% of frame. Broad painterly shapes and quiet wood planes, no floor, shadow slab, ring, scenery or text."
+}

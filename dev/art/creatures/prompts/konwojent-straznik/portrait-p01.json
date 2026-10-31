@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.917Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "konwojent-straznik",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-kapo.webp",
+      "role": "Painting/backdrop ONLY; no copied character, tattoos, clothes or weapons"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne ordinary professional convoy guard, adult man with medium build, short hair, practical alert face. Olive-brown field jacket over simple dark protective vest, muted canvas trousers, boots, plain cap, two modest magazine pouches. Holds ONE compact Thompson-like submachine gun with BOX magazine at low ready, both hands on this same weapon, muzzle lowered. Simple baton at belt. Serviceable modest gear, no high-tech helmet, glowing optics, faction patch or exaggerated armour. Human two arms/two legs, full-body three-quarter standing pose, natural separated hands and weapon grip, no firing. Painting reference only, no copied character or tattoos."
+}

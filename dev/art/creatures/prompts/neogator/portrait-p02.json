@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neogator",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/neogator/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "a230496b193e813e2c407db9be7344f8d613fa714fcf2550dd114ed5f0cde3e0"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "961bd8ebd2afc61972d7d8d206a6851ede09a3bda2a6de1b17684748baa29511",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Grubsza skóra, z przerośniętymi, zgrubiałymi łuskami, oraz zmodyfikowana, dwu-zawiasowa, wężo-podobna szczęka zdolna do bardzo szerokiego rozwarcia"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Modify this exact Neogator with thicker heavy hide and visibly overgrown coarse hornlike scales: fewer, larger, thickened overlapping armour scutes with rounded swollen edges on the back, flanks and head, smooth broad plate faces. The jaw is the key mutation: a snake-like double-hinged mandible with a distinct additional lower-jaw joint well behind the mouth corner, allowing an exceptionally wide gape. Show its mouth opened very wide, roughly a right-angle-plus gape, with the long lower mandible visibly dropping from the secondary hinge and a stretched non-graphic throat. Preserve broad crocodilian upper skull, black colour, huge low four-legged body and swimming tail. One head only, anatomically coherent tooth rows, no extra nested mouths or gore. Full animal inside margins, same painterly charcoal backdrop."
+}

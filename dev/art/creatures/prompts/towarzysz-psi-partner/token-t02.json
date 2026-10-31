@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-psi-partner",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+      "role": "exact subject identity, coat markings and collar"
+    },
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/token-t01.webp",
+      "role": "existing token to edit: preserve overhead anatomy and framing"
+    }
+  ],
+  "prompt": "Use case: precise image edit for a top-down tabletop token. IMAGE 1 is the approved-direction portrait identity reference. IMAGE 2 is the current overhead token to EDIT. Preserve image 2's near-overhead camera, head pointing toward the BOTTOM (south), all four legs, tail silhouette, body proportions, anatomy and painterly rendering. Correct ONLY these identity details using portrait image 1: (1) The dog has a broad DARK CHARCOAL-BROWN SADDLE of fur across most of its back, shoulders and upper flanks, clearly recognizable from above. Not a black outline, stripe or harness: a natural continuous large coat patch, like the portrait's dark saddle. Retain rusty tan legs, tan head, light cream chest/toes and the portrait's asymmetric ears. (2) The collar is plain worn brown leather. The short iron chain hangs from the UNDERSIDE at the throat/chest, as gravity requires. Remove the metallic chain/ring currently lying across the TOP of the neck/back. In the overhead view the underside chain should be mostly hidden by the neck/head; do not relocate it to the back just to show it. No added equipment, harness, muzzle cage, tags or armor. Keep a natural cautious dog expression. Same grounded hand-painted realistic wasteland game art, muted earth colors and neutral upper-left light. Full figure visible, comfortable clear margins, square genuine transparent alpha background. No text, floor, scenery, circular base, painted checkerboard or long shadow. Do not change pose, camera or dog identity."
+}

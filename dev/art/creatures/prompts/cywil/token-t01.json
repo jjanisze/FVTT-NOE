@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T22:05:13.786Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cywil",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/cywil/portrait-p01.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008"
+    },
+    {
+      "path": "tokens/gangus-kapo.webp",
+      "role": "Camera/painting ONLY; do not copy anatomy or equipment"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+    "decision": "approve",
+    "rating": 4
+  },
+  "prompt": "Use case: stylized-concept. Derive one TTRPG battle-map token from the EXACT approved portrait in IMAGE 1. IMAGE 2 is CAMERA AND PAINTING STYLE ONLY: take the overhead viewpoint and brushwork, never its character, anatomy, pose, clothing, weapons, armour or background. Preserve image 1's identity, proportions, colour markings and equipment.\nCamera 80–85 degrees above the ground, showing crown, back and upper surfaces, with strong correct foreshortening. HEAD/FRONT AT BOTTOM (SOUTH), rear/tail toward top. It must read as a view down onto the subject, not a standing front or side portrait. Painterly realistic game art, upper-left soft light, broad smooth light/shadow gradients and quiet large surfaces, selected edge detail only. No uniform fine cracks, noise or all-over sharpening. Square composition, every extremity and all equipment safely inside margins. Genuine transparent alpha, including spaces between limbs. No ring, base, floor, scenery, rectangular shadow or painted checkerboard, only very short faint contact shading.\nThe exact adult woman mechanic/trader in blue rolled-sleeve shirt, tan work apron, brown trousers and boots. One hand holding the same short steel pipe down beside her, the other at her apron pocket. Small holstered revolver and modest apron tools remain. TWO arms/TWO legs; no gang armour, tattoos or extra weapons from style example.\nLongest subject extent about 90% of the square canvas. Preserve readable silhouette at 70 screen pixels."
+}

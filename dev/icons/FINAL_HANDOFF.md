@@ -1,5 +1,21 @@
 # Icon session complete — 2026-10-17
 
+**Zamknięcie kolejki grafik, 2026-10-31:** wszystkie 23 pary portret/żeton (16 Bestiariusza,
+3 konie i 4 towarzysze) mają obie akceptacje i docelowe pliki. Ostatnie dostawy to
+Neoniedźwiedź p07/t01 (5/5, 4/5) i Mobsprzęt p01/t05 (4/5, 4/5).
+[Wersje i hashe](../art/creatures/installed.json). Zatwierdzono i dostarczono też 12 ikon
+instrumentów oraz „Pod wodą” i „Tonie” z B119–120, jako dokładne SVG/WEBP.
+[Decyzje i rejestr dostawy](m6-pass/reviewed-installed.json). Stara statyczna nakładka została
+odrzucona przez GM jako zastąpiona animowanym filtrem; nie wymaga nowej grafiki.
+Pozostało **7 dźwięków pojazdów**, w tym opcjonalna syrena; [kolejka](MISSING.md).
+
+**Integracja odłożona poza zakres „tylko zasoby”:** ustawić `iconReady: true` dla 12
+instrumentów w `scripts/config/toolkits-data.mjs`, skierować obrazy „Pod wodą” i „Tonie”
+w `scripts/config/conditions.mjs` na nowe `icons/statuses/{pod-woda,tonie}.svg`, następnie
+przebudować odpowiednie paczki zwykłym pipeline'em. Bestiariusz/towarzysze mają już pliki
+w ścieżkach docelowych; build i świadoma aktualizacja istniejących aktorów pozostają osobne.
+Ta dostawa nie zmienia kodu wykonawczego ani światów Foundry. Poniższe wpisy są historią tur.
+
 **Zanurzenie — implementacja po ocenie MG, 2026-10-29:** półokrągłą taflę zastąpił
 animowany filtr na sylwetce pionka, ze wspólną teksturą `vfx/water-surface.webp`.
 Po odrzuceniu słabo widocznej pierwszej wersji tekstura ponownie używa oryginalnej grafiki RGBA;

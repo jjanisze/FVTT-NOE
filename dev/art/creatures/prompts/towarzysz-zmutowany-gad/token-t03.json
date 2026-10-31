@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-zmutowany-gad",
+  "asset": "token",
+  "candidateId": "t03",
+  "portraitId": "p03",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/portrait-p03.webp",
+      "role": "exact subject identity, including five toes on each foot"
+    },
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/token-t02.webp",
+      "role": "overhead token to edit; correct toe count only"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. IMAGE 1 is the exact lizard portrait identity. IMAGE 2 is the near-overhead token to EDIT. Preserve Image 2's entire pose, four splayed legs, head south/bottom, bent tapering tail, body proportions, colors, ochre side stripe, cream lower jaw, small dorsal crest, fine scales, painterly rendering, near-overhead camera and transparent alpha background. ONE targeted correction: all FOUR feet must match the portrait's lizard anatomy, each with FIVE attached slender clawed toes, not four. Currently the token feet read as four broad claws. On EACH foot make five distinct tapered toes, each extending from its own plausible root on the same foot and each ending in one dark claw. One shorter inner toe plus four longer toes per foot; the short inner fifth toe must be visibly attached, not a floating claw. Four feet total, five toes on each, twenty toes total. Do not add feet or legs, detach claws, overlap digits into impossible forks, or alter the body. Keep all digits and the whole tail safely inside clear margins. No harness, armor, collar, floor, scenery, text, border, circular base, glow or long shadow. Same single isolated lizard token, square genuine transparent background. Correct the small foot details only; do not redesign the creature."
+}

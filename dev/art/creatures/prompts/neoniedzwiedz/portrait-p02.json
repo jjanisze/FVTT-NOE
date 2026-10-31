@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neoniedzwiedz",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/neoniedzwiedz/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "f89e1cee4b146b5c763339a207e38cb716575398a4f375b17df94d3735f9ed97"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "ea139fd27dd7f15e5ecd9cdbe4639fe83358036fa5a40d90c97f46da3de75744",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Zrób go niemal kompletnie łysego, z futrem tylko na pysku, grzbiecie, ogonie i dolnych kończynach"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Make this exact huge bear almost completely BALD. Remove fur from most of its broad shoulders, chest, neck, belly, flanks and upper limbs, exposing thick naturally folded grey-brown skin with smooth broad light/shadow gradients and a few large anatomical creases. Fur remains ONLY on muzzle/face, a narrow dorsal strip along the back, the short tail and lower legs/paws. The shoulders and immense upper arms must be bare, not coated in short fur. Preserve the colossal bear proportions, four paws, head, pose, brown palette, full-body framing and charcoal backdrop. No new wounds, spots, cracks or microscopic wrinkles."
+}

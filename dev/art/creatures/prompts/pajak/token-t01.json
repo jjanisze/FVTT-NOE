@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:29:37.643Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p07",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/pajak/portrait-p07.webp",
+      "role": "Exact approved portrait identity and anatomy",
+      "sha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0"
+    }
+  ],
+  "prompt": "Use case: background-extraction. The approved image already establishes the intended elevated bird's-eye token pose. Create a true transparent cutout of this EXACT ROBOT, preserving its CAMERA, POSE AND ALL EIGHT WALKING LEGS. Remove only the charcoal painted background, including all gaps between limbs. Keep FOUR complete legs and four visible pointed feet on EACH side, all distinct body roots and joints, the slim oval olive/rust body, optical face, top camera pod and TWO long rear antennae. DO NOT redesign, repose or regenerate the limbs into six legs. Preserve the eight-leg silhouette literally. Front/head already faces SOUTH at bottom and rear/antennae north. Retain realistic hand-painted materials and soft upper-left light. Square composition, genuine transparent alpha, no ground, shadow slab, ring, text or extra parts; full silhouette safely within margins. The final sprite will be normalized to a small creature frame, so keep clean readable edge.",
+  "gmReview": {
+    "creatureId": "pajak",
+    "kind": "portrait",
+    "candidateId": "p07",
+    "sha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0",
+    "decision": "approve",
+    "rating": 4,
+    "notes": "",
+    "updatedAt": "2026-10-30T23:21:44.534Z"
+  }
+}

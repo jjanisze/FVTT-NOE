@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pies-mutek",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pies-mutek/portrait-p02.png",
+      "role": "Exact reviewed portrait edit target",
+      "sha256": "e12aa4949fcfa7cb2cf52daccb8118f0f660e254c0c618b6724292f2bdee01cd"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "pies-mutek",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "602fd6124b85f50692fc58394d7e0930f2c94ba690e322d7e3edefa247eaadd5",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Bardzo dobrze, skróć język do połowy",
+    "updatedAt": "2026-10-30T22:31:04.804Z"
+  },
+  "prompt": "Use case: precise-object-edit. Apply only the GM-requested revision to image 1; preserve identity, palette, realistic hand-painted treatment, full-body framing, quiet broad surface gradients and dark charcoal backdrop. Keep this exact approved direction: asymmetric warped canine face, one larger higher eye and one smaller lower eye, lean four-legged body, brown skin/fur patches and short tail. Shorten ONLY the dangling red tongue to HALF its current length. The tongue tip should now end around the upper foreleg/chest region, roughly halfway between the mouth and the former low tip; keep it clearly unusually long but no longer near the feet. Keep tongue width, colour, curvature and its attachment to the mouth natural. No other changes."
+}

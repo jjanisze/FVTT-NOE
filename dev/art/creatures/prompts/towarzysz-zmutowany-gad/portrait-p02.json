@@ -1,0 +1,16 @@
+{
+  "creatureId": "towarzysz-zmutowany-gad",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+      "role": "approved painting, palette and portrait-format reference only; NOT anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Full-body amphibious mutated LIZARD companion portrait for a grounded post-apocalyptic tabletop RPG. Image 1 is painting/lighting/backdrop STYLE ONLY. Match that confident realistic hand-painted game illustration, dark charcoal subtly mottled background, muted natural colors, neutral upper-left key light. Subject is a lean dog-sized water-dragon/iguana-like lizard: agile, cautious, about an ordinary dog's physical threat level. Clearly LIZARD anatomy, not an alligator or crocodile. A short blunt rounded-triangular head with a short snout and small nostrils, a visible slim neck, round golden-brown eyes; lips CLOSED, no display of huge teeth. Four moderately long splayed legs, each with five slender clearly attached clawed toes; light webbing only near toe bases. Fine small pebbled scales, NO massive rectangular crocodile armor plates. Olive-gray and dusty brown mottled skin, cream underside and lower jaw, a faint muted ochre stripe from cheek along flank. Slight small skin fold beneath throat, just a few very low small soft dorsal crests; no massive horns or spikes. Long tapering tail, subtly flattened laterally near the tip for swimming, curved behind the animal and entirely inside the frame. Slim flexible waist and modest musculature, not a bulky crocodilian trunk. Subtle believable mutation in an irregular scale pattern and asymmetrical tiny crest, biological only. Three-quarter front chest-height camera. Entire body from nose to all FOUR feet and full tail, natural standing pose, comfortable breathing room, 4:5 portrait aspect. Serious painterly realism, readable natural materials, restrained contact shadow, dark charcoal studio-like backdrop, no scenery, no water pool. No equipment, harness, collar, chain, armor, metal, weapon, text, frame, logo, glow, gore or cartoon styling. Do not copy the reference dog's anatomy, coat or equipment.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

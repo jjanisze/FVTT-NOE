@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-30T23:01:07.255Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f"
+    },
+    {
+      "path": "dev/art/creatures/in/references/mobsprzet-layout-v1.png",
+      "role": "Original geometry guide: three staggered housing masses, two articulation gaps, four wheels; ignore labels/flat colours",
+      "svg": "dev/art/creatures/geometry/mobsprzet-layout-v1.svg"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "mobsprzet",
+    "kind": "token",
+    "candidateId": "t01",
+    "sha256": "2036a28fc6f9679d907df8141a9983d526e04017876df653daad996e7a26ceee",
+    "decision": "revise",
+    "rating": 2,
+    "notes": "Trzy segmenty maszyny nie są jasno widoczne na tokenie. Narysuj od nowa.",
+    "updatedAt": "2026-10-30T22:48:58.738Z"
+  },
+  "prompt": "Use case: stylized-concept. Redraw this token FROM SCRATCH from the approved machine portrait in image 1. Image 2 supplies the original plan-view BLOCKOUT: expose THREE DISTINCT ORANGE HOUSINGS with readable gaps/seams, staggered forward/backward so none disappears behind the next. (1) LOW RECTANGULAR FOUR-WHEEL CHASSIS, with an exposed front deck; (2) MIDDLE SLOPING EQUIPMENT BOX sitting on a clearly separate dark swivel collar; (3) UPPER RECTANGULAR GUN BOX on its own second narrower pivot collar, with ONE long gun barrel aiming SOUTH. The upper head sits toward the rear/north, middle box projects south beyond it, lower base deck projects still farther south; three individually readable masses, not a single long armoured bonnet with a cannon glued on. Preserve the portrait's stacked ungainly silhouette, faded rust-orange steel, large bolts, local wear, four chunky tyres and single rear whip antenna. View steeply from ABOVE, about 80–85 degrees, showing three top surfaces, tier edges and small separating shadows; exaggerated separation is allowed for readability. Use the diagram's proportions as projection guidance, not flat vector rendering or its labels. No new guns, robot arms or fifth wheel. Square true transparent alpha, all tips inside 90% extent, front/barrel south. Realistic painterly game token, broad material patches, upper-left light; no ground, base, frame or text."
+}

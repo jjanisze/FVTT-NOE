@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gangus-boss",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/gangus-boss/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "e8e886cf975b8cd2e223cf86d23bf5c228130d4f91c48cba13f95c610ea732d6"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "074075164f881b5a5d98d3927ff4803872d4ae0b930dea5004b55b42abaf766f",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Dodaj więcej blingu"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Add MORE BLING to this exact gang boss: two clearly readable thick gold chains of unequal lengths, one large plain gold medallion, several chunky gold rings, a broad gold watch and a more conspicuous gold belt buckle. The jewellery looks like scavenged ostentatious wealth, rendered in broad bright metallic forms rather than hundreds of tiny gems. Preserve the exact face, stocky powerful body, sleeveless vest, burgundy shirt, dark trousers, improvised arm guards, boots, single reinforced blunt club, pose, full-body framing and charcoal backdrop. Do not add text, logos, crowns, new weapons or companions. Keep natural hands and fingers."
+}

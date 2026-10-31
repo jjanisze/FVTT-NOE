@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:29:37.643Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pies-mutek",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p03",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/pies-mutek/portrait-p03.webp",
+      "role": "Exact approved portrait identity and anatomy",
+      "sha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Derive one near-overhead TTRPG token of the EXACT mutant dog in image 1. Preserve the lean brown Great-Dane-like FOUR-LEGGED body, short tail, local bald/skin-sore patches, crooked asymmetrical face with one higher larger eye and one smaller lower eye, uneven ears and the shortened but still long red tongue. Match the approved p03 tongue length, do not restore the very long p02 tongue. Camera 85–90 degrees from above, showing head crown, shoulders and back; head SOUTH at bottom, tail north. Four coherent canine legs, no extra eyes/heads/limbs, no manufactured equipment. Square genuine transparent alpha through limb gaps, longest extent 90% with clear margins, no ground or circular base. Grounded hand-painted game art, broad quiet skin/fur masses and selected detail, upper-left light; no fine cracked-surface texture over everything.",
+  "gmReview": {
+    "creatureId": "pies-mutek",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-30T23:20:43.179Z"
+  }
+}

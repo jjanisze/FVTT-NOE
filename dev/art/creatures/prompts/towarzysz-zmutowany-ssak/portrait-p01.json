@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T00:12:20.494700+00:00",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-zmutowany-ssak",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "painting and portrait format only"
+    }
+  ],
+  "prompt": "Grounded hand-painted realistic post-apocalyptic game illustration. Muted natural colours, readable material texture, neutral upper-left light, crisp silhouette. Match the existing module portrait/token examples. No text, logos, border, fantasy ornaments or magic. Reference anatomy/equipment must never leak from a style-only image.\nSUBJECT: Powerful Large mutated predator, bear-like body, canine muzzle, coarse fur and sparse bare skin patches. Four legs, no wounds or gore.\nFull-body creature portrait, all extremities visible, three-quarter front view at the creature's chest height. Portrait aspect about 4:5. Dark charcoal subtly mottled backdrop, no scenery, only restrained contact shading. Natural grounded pose, comfortable margins. Reference is STYLE ONLY; invent the specified subject."
+}

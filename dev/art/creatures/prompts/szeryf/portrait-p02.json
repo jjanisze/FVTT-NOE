@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "szeryf",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/szeryf/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "e0690e93a139797bc86120108bc63e3ec5870a0ec60130e9619112ee24f7d6e8"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "315a6efc454621192339dda2bb9c2732215ca7f7870975f1bfe9de527723b949",
+    "decision": "approve",
+    "rating": 4,
+    "notes": "Zrób ją czarnoskórą "
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Change this exact female sheriff to a BLACK WOMAN with deep warm brown skin and natural Black facial features, greying tightly curled dark hair tied back. Keep her age around fifty and experienced self-possessed expression. Preserve the same hat, ochre shirt, plain star badge, brown coat, trousers, boots, holstered revolver, single lowered lever-action rifle, natural hands and grip, full-body pose, painterly style and dark charcoal backdrop. This is a human identity change only, no other equipment or composition changes. Smoothly shaded skin, no all-over microtexture."
+}

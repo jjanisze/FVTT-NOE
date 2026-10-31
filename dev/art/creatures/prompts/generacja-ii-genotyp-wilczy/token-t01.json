@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "generacja-ii-genotyp-wilczy",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/generacja-ii-genotyp-wilczy/portrait-p02.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "generacja-ii-genotyp-wilczy",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-30T22:40:02.629Z"
+  },
+  "prompt": "Use case: stylized-concept. Generate one TTRPG battle-map token from the EXACT APPROVED PORTRAIT in image 1, preserving its identity, body proportions, colours and all equipment. This is a NEW VIEW, not a portrait cutout.\nCamera almost vertically ABOVE, 88–90 degrees down, orthographic bird's-eye/plan view. Crown/back of head and TOPS of shoulders dominate; most face and front chest are occluded by the head and shoulders. Strong foreshortening compresses an upright torso; feet only peek out around the silhouette. No large front-facing face, no full-length frontal chest. HEAD/FRONT SOUTH at bottom, rear/tail NORTH at top.\nGrounded hand-painted realistic game art, muted colours, soft upper-left light, broad quiet surface gradients and selected edge detail; no fine all-over cracked texture. Square, genuine transparent alpha including limb gaps, all tips safely within margins, longest extent about 90%. No scenery, floor, circle, base, text, watermark or rectangular shadow.\nThe exact large hunched wolf/human hybrid p02 with enraged short flat PUG face, human-like bare chest, belly, throat, inner arms and palms, dark fur along back and outer limbs, plain torn shorts. Exactly TWO long arms with clawed HUMAN-like hands and TWO digitigrade legs; short tail. Overhead shows furred back and pug crown, with only a glimpse of bare inner arm/palms and face. Do not revert to long wolf muzzle or cover inner surfaces in fur."
+}

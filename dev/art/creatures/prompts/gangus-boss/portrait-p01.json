@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.916Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gangus-boss",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-kapo.webp",
+      "role": "Painting/backdrop ONLY; no copied character, tattoos, clothes or weapons"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne formidable adult male gang leader, ex-gladiator with stocky extremely powerful boxer/wrestler build, shaved head, stern heavy face and a small old healed brow scar. Grounded confident full-body three-quarter stance. Short dark sleeveless leather vest over plain muted burgundy shirt, thick belt, dark work trousers, heavy boots, several broad improvised metal forearm plates. ONE heavy reinforced club: steel pipe with thick BLUNT scrap-metal head, resting low beside him in one hand, never across shoulder. Natural two hands and feet. Human, no fantasy barbarian armour, skull throne, crown, gang emblem or copied tattoos. Smooth skin gradients, broad cloth/leather shapes, selective edge wear. Empty charcoal backdrop, no henchmen. Painting reference only."
+}

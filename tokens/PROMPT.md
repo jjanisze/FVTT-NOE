@@ -1,5 +1,11 @@
 # Prompty do generowania żetonów top-down
 
+Pipeline portret → akceptacja → żeton → akceptacja i panel z podglądem 1:1:
+[dev/art/creatures](../dev/art/creatures/README.md).
+Duże płaszczyzny ciała powinny mieć spokojny światłocień. Chorobę i uszkodzenia opisuj jako
+lokalne objawy; nie zastępuj wyglądu świata jednolitą drobną siatką spękań na wszystkim.
+Sprawdź oryginał w skali 1:1 — mały podgląd potrafi ukryć nadmiar detalu.
+
 Szablon + gotowe wypełnienia. Prompty są **po angielsku** — modele graficzne są na angielskim
 trenowane i po polsku gubią szczegóły techniczne (zwłaszcza „head toward the bottom").
 

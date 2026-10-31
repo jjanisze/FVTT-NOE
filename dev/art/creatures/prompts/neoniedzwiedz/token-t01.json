@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-31T00:18:45.327Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neoniedzwiedz",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p07",
+  "references": [
+    {
+      "path": "dev/art/creatures/in/neoniedzwiedz/portrait-p07.png",
+      "role": "Approved p07 identity: anatomy, bald skin, restricted fur, folds and scars",
+      "sha256": "acd62eaf30b57cd058125a4ca6cd246ab6d299197ced8cb93f739552d1f43419"
+    },
+    {
+      "path": "tokens/towarzysz-zmutowany-ssak.webp",
+      "role": "Overhead camera, south-facing format and painterly game-token readability ONLY; do not borrow its furry body or open mouth",
+      "sha256": "e05af551a87fcefe5c7016f3c22e9e615ab3bd0aa96970d34023d31158d11a06"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p07",
+    "kind": "portrait",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "Perfect.",
+    "sha256": "d7ee23887c4fb4412ace59741a3be2de8b42527fcb160217362fdf8a6f9e97f9",
+    "updatedAt": "2026-10-31T00:14:46.345Z"
+  },
+  "prompt": "Use case: stylized-concept. Asset: one transparent overhead battle-map creature token. Image 1 is the APPROVED SUBJECT identity. Image 2 is ONLY a camera/painting/format reference; do not copy that animal's fur distribution, mouth, wounds or build.\nCreate the exact colossal mostly BALD bear in image 1, viewed steeply from above, camera about 80 degrees above the ground. Crown, long back and four planted paws visible, very little vertical chest. HEAD AT THE BOTTOM / SOUTH, short tail at the TOP / NORTH. Straight north-south body axis. A natural quadrupedal standing pose, all FOUR separate plantigrade paws with bear claws inside the frame, low forward head with a calm closed bear mouth. Preserve the long lowered back, heavy skeletal shoulder structure but reduced flesh, lean upper limbs beneath LOOSE LARGE DRAPING SKIN FOLDS, muted mocha-brown bare shoulders/flanks/upper legs, and separated broad pale OLD HEALED SCARS from p07. Bare skin dominates the visible body. Dark ash-brown fur ONLY on the face, narrow spine strip, short tail and lower-leg/paw cuffs. No solid fur coat across shoulders or flanks. No feline anatomy, horns, extra limb, clothing, tack or armour. No open wounds or blood.\nNaturalistic hand-painted game art. Quiet broad light-to-shadow gradients on the large bare surfaces, a few broad skin folds and scar bands, selective fine detail at face/claws/silhouette. Do not turn skin into an all-over network of tiny cracks, wrinkles or pores. Soft neutral upper-left light and readable large value masses, consistent with the approved portrait. Genuine transparent alpha background, square canvas, whole animal comfortably framed. No circular ring, ground, scenery, comparison subject, text, watermark, long cast shadow or painted checkerboard. Readable at 70 screen pixels."
+}

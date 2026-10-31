@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pies-mutek",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pies-mutek/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "11c9f79233552a6baca0d08c977990cdd503cced623189be2f7a2c326a13291a"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "83d8dc42fb041a9c3d9c0dd4cf25c94d309e6605c81611260220c4999a224d53",
+    "decision": "revise",
+    "rating": 3,
+    "notes": "Wygląda jak zwykły pies. Daj mu niesymetryczną, wypaczoną twarz z nierównymi oczami oraz nienaturalnie wydłużony język. Mniej mięśni."
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Make this exact dog an unmistakable biological mutant. Reduce the exaggerated chest/shoulder muscle bulk, giving a leaner Great-Dane-like frame. Warp the face ASYMMETRICALLY: one eye noticeably larger and higher, the other smaller and lower, crooked muzzle/jawline and uneven drooping ears, but exactly two eyes and one head. Extend the red tongue to an unnaturally great length, hanging almost to the feet in a single long limp curve, connected to the mouth, not a second limb. Preserve four legs, short tail, brown colour, several local bald/skin-sore patches and full-body standing pose. Keep large skin planes smooth and quiet. No collar, metal, gear, extra eyes, new heads or gore. Same charcoal backdrop."
+}

@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-zdrowy",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-zdrowy/portrait-p01.webp",
+      "role": "approved exact horse, coat markings and tandem tack"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Derive ONE matching top-down battle-map token from this approved horse portrait. Preserve this individual healthy bay horse: warm brown coat, black mane and tail, dark lower legs, small white forehead star, normal work/riding-horse proportions and FOUR legs with one solid hoof per leg. Same practical brown leather saddle, cream wool blanket, main rider seat and low rear pillion cushion directly behind it on the centerline. Both sitting zones should be readable and unobstructed from above; no bags, riders, reins across the seats, big boxes or second bulky saddle. Exact equine anatomy: NO dog paws, fingers, antlers, extra limbs or equipment. Camera near-vertical overhead, about 80–85 degrees above the ground, visibly looking at the crown, neck, saddle and back. HEAD AND NOSE POINT STRAIGHT TOWARD BOTTOM (south); hindquarters and full tail toward top. Horse stands naturally with four slightly separated legs, hooves distinct on either side, foreshortened from above; keep the body narrow and anatomically coherent, not a side-view, frontal portrait or splayed toy. Grounded hand-painted realistic game token, muted natural materials and neutral upper-left lighting matching the portrait. Square genuine TRANSPARENT ALPHA background, all ears, nose, hooves, stirrups and tail tip fully inside comfortable margins. Longest silhouette extent about 90% of the square; readable saddle and silhouette at 70px. No floor, scenery, ring, base, circular crop, text, painted checkerboard, halo, long shadow or heavy contact shadow.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

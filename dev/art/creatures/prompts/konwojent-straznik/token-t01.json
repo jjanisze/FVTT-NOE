@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T22:05:13.786Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "konwojent-straznik",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/konwojent-straznik/portrait-p02.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc"
+    },
+    {
+      "path": "tokens/gangus-kapo.webp",
+      "role": "Camera/painting ONLY; do not copy anatomy or equipment"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p02",
+    "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+    "decision": "approve",
+    "rating": 3
+  },
+  "prompt": "Use case: stylized-concept. Derive one TTRPG battle-map token from the EXACT approved portrait in IMAGE 1. IMAGE 2 is CAMERA AND PAINTING STYLE ONLY: take the overhead viewpoint and brushwork, never its character, anatomy, pose, clothing, weapons, armour or background. Preserve image 1's identity, proportions, colour markings and equipment.\nCamera 80–85 degrees above the ground, showing crown, back and upper surfaces, with strong correct foreshortening. HEAD/FRONT AT BOTTOM (SOUTH), rear/tail toward top. It must read as a view down onto the subject, not a standing front or side portrait. Painterly realistic game art, upper-left soft light, broad smooth light/shadow gradients and quiet large surfaces, selected edge detail only. No uniform fine cracks, noise or all-over sharpening. Square composition, every extremity and all equipment safely inside margins. Genuine transparent alpha, including spaces between limbs. No ring, base, floor, scenery, rectangular shadow or painted checkerboard, only very short faint contact shading.\nThe exact older bearded convoy guard in cap, olive-brown jacket and protective vest. TWO arms and TWO legs only. One lowered submachine gun in both hands across the front, with a box magazine and barrel directed roughly south-east; baton stays on belt. Preserve his grey beard, cap, pouches, boots and human identity; do not copy the style reference's face, tattoos, club or clothing.\nLongest subject extent about 90% of the square canvas. Preserve readable silhouette at 70 screen pixels."
+}

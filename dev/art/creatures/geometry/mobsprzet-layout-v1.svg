@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200" viewBox="0 0 1000 1200">
+<rect width="1000" height="1200" fill="#e6e3dc"/>
+<g stroke="#222" stroke-width="10" stroke-linejoin="round">
+<g fill="#333"><rect x="190" y="410" width="150" height="230" rx="40"/><rect x="660" y="410" width="150" height="230" rx="40"/><rect x="190" y="830" width="150" height="230" rx="40"/><rect x="660" y="830" width="150" height="230" rx="40"/></g>
+<rect x="325" y="370" width="350" height="690" rx="20" fill="#7e4e2c"/>
+<path d="M345 890 H655 V1040 H345Z" fill="#ad6730"/>
+<path d="M345 945 H655 M365 900 V1030 M635 900 V1030" fill="none" stroke="#d2ae78" stroke-width="5"/>
+<ellipse cx="500" cy="760" rx="125" ry="70" fill="#292b2b"/>
+<path d="M355 545 H645 V825 L610 890 H390 L355 825Z" fill="#ce8750"/>
+<path d="M355 825 H645 M390 560 H610 V790 H390Z" fill="none" stroke="#e4ba83" stroke-width="6"/>
+<ellipse cx="500" cy="545" rx="110" ry="42" fill="#262727"/>
+<rect x="365" y="300" width="270" height="255" rx="12" fill="#e0a365"/>
+<rect x="390" y="325" width="220" height="130" rx="4" fill="none" stroke="#ffe0a2" stroke-width="6"/>
+<rect x="460" y="475" width="80" height="95" fill="#343537"/>
+<path d="M475 570 V1100 H525 V570Z" fill="#606266"/>
+<path d="M610 320 Q690 220 730 110" fill="none" stroke-width="12"/>
+</g>
+<g font-family="sans-serif" font-size="30" fill="#222"><text x="40" y="1140">TOP VIEW - THREE SEPARATE HOUSINGS</text></g>
+</svg>

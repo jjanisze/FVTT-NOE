@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "konwojent-straznik",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/konwojent-straznik/portrait-p02.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "konwojent-straznik",
+    "kind": "token",
+    "candidateId": "t01",
+    "sha256": "65a7800582f857d3dcf7f1a70f069a425e59cbdd9838842cbeaaded2cfea440f",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Perspektywa bardziej od góry (top-down)",
+    "updatedAt": "2026-10-30T22:31:46.204Z"
+  },
+  "prompt": "Use case: stylized-concept. Generate one TTRPG battle-map token from the EXACT APPROVED PORTRAIT in image 1, preserving its identity, body proportions, colours and all equipment. This is a NEW VIEW, not a portrait cutout.\nCamera almost vertically ABOVE, 88–90 degrees down, orthographic bird's-eye/plan view. Crown/back of head and TOPS of shoulders dominate; most face and front chest are occluded by the head and shoulders. Strong foreshortening compresses an upright torso; feet only peek out around the silhouette. No large front-facing face, no full-length frontal chest. HEAD/FRONT SOUTH at bottom, rear/tail NORTH at top.\nGrounded hand-painted realistic game art, muted colours, soft upper-left light, broad quiet surface gradients and selected edge detail; no fine all-over cracked texture. Square, genuine transparent alpha including limb gaps, all tips safely within margins, longest extent about 90%. No scenery, floor, circle, base, text, watermark or rectangular shadow.\nThe exact older bearded guard p02 in cap, olive jacket and protective vest, trousers and boots, baton on belt, ONE compact submachine gun with box magazine held in both hands across the front. Redraw with the camera MUCH MORE DIRECTLY ABOVE than t01: top of cap and shoulders, nearly hidden face/chest, foreshortened torso and small boot ends. TWO arms/TWO legs, same natural grip, gun aiming south-east."
+}

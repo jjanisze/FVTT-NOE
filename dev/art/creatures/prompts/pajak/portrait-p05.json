@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "portrait",
+  "candidateId": "p05",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pajak/portrait-p04.png",
+      "role": "Exact reviewed portrait edit target",
+      "sha256": "43bf665761869b3eecacf64e9649fd4e581ab7a245843c15ff285842834955e4"
+    },
+    {
+      "path": "dev/art/creatures/in/references/pajak-layout-v1.png",
+      "role": "Original SVG guide: exactly four complete walking legs per side; geometry/pattern only",
+      "svg": "dev/art/creatures/geometry/pajak-layout-v1.svg"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "pajak",
+    "kind": "portrait",
+    "candidateId": "p04",
+    "sha256": "7337ff1d93a36d01592c5936584f8492ad4183c203241e26d3c3f05c85f1789f",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Brakuje jednek nogi po prawej stronie.",
+    "updatedAt": "2026-10-30T22:49:16.093Z"
+  },
+  "prompt": "Use case: precise-object-edit. Apply only the GM-requested revision to image 1; preserve identity, palette, realistic hand-painted treatment, full-body framing, quiet broad surface gradients and dark charcoal backdrop. The GM still cannot read four legs on the right. Repose the robot to match the EIGHT-LEG layout in image 2: FOUR complete slender jointed walking legs fan out on EACH side with broad visible gaps. All four RIGHT legs must be OUTSIDE the body silhouette, including their complete shafts, joints and pointed feet; none may hide as a short stub underneath the head. Exactly eight total, not nine or ten. Use a higher front-centred three-quarter viewpoint, about 55 degrees above the ground, to expose the far-side roots and all eight feet. Preserve the LIGHT oval scout body, thin simple rod legs, observation optics/top camera and exactly TWO rear antennae. Image 2 defines only leg count/placement, never copy its flat colours, labels or diagram style. Same realistic portrait paint/backdrop as image 1."
+}

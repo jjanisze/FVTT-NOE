@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-teksanczyk",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p01.webp",
+      "role": "portrait to edit; preserve black horse and white blaze, strengthen noble muscular build and premium tack"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Edit this Teksańczyk portrait according to GM feedback. Preserve the BLACK horse identity, long narrow white facial blaze, four normal equine legs each ending in one solid hoof, full black mane and tail, portrait camera and charcoal painted backdrop. Make him unmistakably a magnificent prime riding STALLION: substantially broader and deeper chest, powerful defined shoulders and neck crest, round well-developed hindquarters and clearly stronger musculature than the current horse, while retaining elegant natural equine proportions. Proud noble standing bearing, raised attentive head and ears, not rearing or fighting. Eyes lively, bright and clear with natural specular catchlights. Hooves healthy, dark polished keratin with a modest clean sheen. The black coat is sleek, glossy, almost carefully brushed flat, with rich controlled highlights defining musculature; neatly groomed smooth mane and tail. No shaggy unkempt coat, starvation, scales, magic or mutation. Upgrade saddle and tack so they are visibly EXPENSIVE and superbly made: quality rich brown Western leather, subtle fine floral/border tooling and small ornamental details, neat stitching, restrained bright metal fittings, well-fitted clean cream wool saddle blanket. Main rider saddle plus a low matching comfortable rear pillion cushion on the centerline; keep sitting areas unobstructed. Beautiful craftsmanship without garish gold, letters, giant decorations or fantasy armor. Maintain FOUR distinct legs, all four complete hooves and full tail visible with comfortable framing, about 4:5. Serious realistic hand-painted game illustration matching the original brushwork, soft neutral upper-left light and dark charcoal mottled background. No rider, bags, weapon, text, border, scenery, extra limbs or glossy CGI rendering.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

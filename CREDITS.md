@@ -383,11 +383,119 @@ resizing and WEBP conversion without repainting. Source/output hashes:
 
 ## Token art
 
+### Companion portrait/token pairs generated with OpenAI
+
+The four pairs `towarzysz-psi-partner`, `towarzysz-zmutowany-owad`,
+`towarzysz-zmutowany-ssak` and `towarzysz-zmutowany-gad` under `tokens/portraits/` and
+`tokens/` were generated using OpenAI's built-in image tool. Its model identifier is not
+exposed. The GM approved each selected portrait and token at 5/5 on 2026-10-30; selected
+versions are respectively p01/t02, p01/t02, p02/t01 and p03/t03. The mammal selection
+explicitly returns to the earlier bear-like pair. Final files are exact copies of the
+reviewed WEBPs, prepared by proportional resizing/padding and encoding, without repainting.
+Prompts, reference roles, source/output hashes, saved GM decisions and delivery records:
+[`dev/art/creatures/`](dev/art/creatures/README.md).
+
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
 top-down token set where it fits, or a clearly-marked placeholder otherwise. Full sourcing rules,
 including why `dnd5e`'s Forgotten Adventures tokens are **referenced by path and never copied
 into this module** (their license forbids redistribution outside Foundry VTT), are documented in
 [`tokens/README.md`](tokens/README.md).
+
+### Healthy riding-horse pair
+
+`tokens/portraits/kon-zdrowy.webp` (p01) and `tokens/kon-zdrowy.webp` (t01) were generated
+with OpenAI's built-in image tool, whose model identifier is not exposed. The GM approved
+the portrait at 5/5 and token at 4/5 on 2026-10-30. The token preserves the portrait's bay
+coat, white forehead star and tandem saddle. Final files copy exact approved review bytes.
+Prompts, source/output hashes and delivery records are under `dev/art/creatures/`.
+
+### Texan riding-horse pair
+
+`tokens/portraits/kon-teksanczyk.webp` (p02) and `tokens/kon-teksanczyk.webp` (t01) were
+generated with OpenAI's built-in image tool. The GM approved both at 5/5 on 2026-10-30.
+The overhead token preserves the portrait's powerful black horse, white blaze and decorated
+tandem saddle. Delivery copies the exact approved review WEBPs; no pack build or world update
+is part of this asset pass. Prompts, hashes and approvals: `dev/art/creatures/`.
+
+### Bestiary portrait candidates
+
+The sixteen new bestiary portrait candidates under `dev/art/creatures/candidates/` were
+generated with OpenAI's built-in image tool on 2026-10-30. Its model identifier is not exposed.
+The GM supplied Neuroshima 1.5 pencil drawings for Taran, Korzec and the organic giant spider
+as anatomy references, and an existing machine concept for Mobsprzet. Reference originals
+remain local and ignored; they are not shipped or relicensed. Other designs use the NOE
+appearance descriptions, with existing module portraits as painting references only.
+Frozen prompts and provenance: `dev/art/creatures/prompts/` and `reference-sources.json`.
+These are review candidates; approval precedes token generation and final delivery.
+
+After the GM's portrait review, eight matching overhead token candidates were generated with
+the same built-in tool: giant spider, convoy guard, civilian, reptilian Generation II, Korzec,
+Mobsprzet, rat swarm and Taran. Each records the exact approved portrait version and hash.
+The token PNGs have generated transparency; preparation only crops, resizes, pads and encodes
+lossless RGBA WEBP. Korzec t02 strengthens overhead foreshortening. Nine portrait revisions,
+including the sick horse, follow the saved GM notes; all await separate approval.
+Full prompts, references and versions remain under `dev/art/creatures/`.
+
+Five Bestiary pairs were approved and delivered as exact reviewed WEBPs after that round:
+`gigantyczny-pajak` p01/t01, `generacja-ii-genotyp-gadzi` p01/t01, `korzec` p01/t02,
+`roj-szczurow` p01/t01 and `taran` p01/t01. Each pair is under `tokens/portraits/<id>.webp`
+and `tokens/<id>.webp`. The selected portrait/token ratings are 4/4, 5/5, 4/5, 4/4 and 4/4.
+Delivery records and SHA-256 values are in `dev/art/creatures/installed.json`; no compendium
+build or world update accompanies this asset delivery.
+
+The next revision uses original SVG blockouts for Mobsprzet's three visible housing tiers
+and the reconnaissance spider's four legs per side. Those geometry guides are under
+`dev/art/creatures/geometry/`; their PNG renderings are reference inputs, not final artwork.
+The resulting portraits and overhead sprites continue to use the built-in image tool.
+
+The 2026-10-31 pass adds overhead candidates for the approved sick horse, Neogator, gang boss,
+wolf Generation II, spy and sheriff. Guard/civilian tokens receive steeper overhead cameras;
+Mobsprzet is redrawn with three clearly separated housing masses. Neobear receives looser
+skin folds and reduced bulk, the mutant dog's tongue is halved, and the scout spider receives
+further leg-placement trials. Complete prompts and retained preparation variants are in the
+same creature pipeline directory; GM ratings are never inferred for new candidates.
+
+Five further approved pairs are delivered as exact review bytes: sick horse p09/t01
+(portrait 5/5, token approved without a numeric rating), guard p02/t02 (3/5, 5/5), civilian
+p01/t02 (4/5, 5/5), gang boss p02/t01 (5/5, 5/5), and spy p02/t01 (5/5, 5/5).
+Each occupies `tokens/portraits/<id>.webp` and `tokens/<id>.webp`; delivery hashes are in
+`dev/art/creatures/installed.json`. The sick horse's approved t01 is retained while a
+separate pose/saddle-alignment alternative is reviewed. Its healthy-horse reference supplies
+projection and pose only, not colour, body mass or equipment identity.
+
+The GM then approved and delivered the aligned sick-horse t02 (p09/t02, 5/5 and 4/5),
+Neogator p02/t01 (4/5, 4/5), mutant dog p03/t01 (5/5, 5/5), wolf Generation II p02/t01
+(5/5, 4/5), scout spider p07/t01 (4/5, 4/5) and sheriff p02/t02 (4/5, 4/5). The previous
+sick-horse t01 is retained as a candidate and delivery backup. There are 21 delivered pairs.
+
+At the GM's request, Neobear p05/p06/p07 are three independent fresh portrait generations,
+with no input images and no reuse of the repeatedly edited p04 bitmap. The written concept
+preserves the mostly hairless lean bear, restricted fur, loose skin and broad healed scars.
+The Mobsprzet t04 edit lowers the upper weapon module and substitutes subdued matte salvage
+materials and functional fittings for the earlier bright, toy-like treatment. Complete
+prompts and reference roles remain under `dev/art/creatures/prompts/`.
+
+The GM selected the fresh Neobear p07 portrait at 5/5. Its first overhead token t01 uses
+that exact approved identity; the existing mutated-mammal token supplies camera/painting
+only. Three Mobsprzet alternatives, t05/t06/t07, independently edit t04 with the upper
+gun housing farther south while retaining the approved p01 machine identity. Their exact
+prompts and reference hashes are frozen in the same directory; t05's successful prompt is
+`mobsprzet/token-t05-retry01.json`. All four new tokens are unapproved review candidates,
+prepared by cropping/resizing/padding and lossless WEBP encoding without repainting.
+
+The GM approved Neobear p07/t01 (5/5, 4/5) and selected Mobsprzet p01/t05 (4/5, 4/5).
+Both exact reviewed pairs are now delivered under `tokens/portraits/<id>.webp` and
+`tokens/<id>.webp`, completing all 23 pairs in the creature pipeline. The previous
+Mobsprzet portrait remains in a local delivery backup. Final hashes and versions:
+`dev/art/creatures/installed.json`.
+
+All 14 monochrome glyphs from Batches 119–120 were approved and delivered on 2026-10-31
+as exact SVG/WEBP masks: 12 musical instruments in `icons/tools/`, plus
+`icons/statuses/pod-woda.svg` and `icons/statuses/tonie.svg` with WEBP sidecars. They were
+generated with OpenAI's built-in image tool; no model identifier is exposed. Complete
+prompts, source roles and selected candidate/delivery hashes are in `dev/icons/m6-pass/`
+and `dev/icons/review/candidates/batch-{119,120}/`. No glyph shape was redrawn at delivery.
+The old static overlay was rejected as superseded by the separately credited animated water.
 
 ## Bestiariusz portraits
 
@@ -413,8 +521,9 @@ Gemini; some image-to-image from pencil reference drawings, the rest from text p
 `kurczak-wybuchowy`, `mobsprzet`, `pajak`, `spawacz`, `techmorwa-srednia`. The two Kurczak portraits and their
 top-down tokens (`tokens/kurczak.webp`, `tokens/kurczak-wybuchowy.webp`) are a newer set by the GM (2026-10-25).
 
-Two creatures have no portrait yet (Generacja II – genotyp wilczy, Gigantyczny pająk); their token
-art stands in. Any new portrait needs a known source recorded here.
+Generacja II – genotyp wilczy and Gigantyczny pająk originally used token art in place of
+portraits. Both now have approved generated portrait/token pairs credited in the creature
+pipeline section above. Any new portrait needs a known source recorded here.
 
 ## Chase-board artwork
 

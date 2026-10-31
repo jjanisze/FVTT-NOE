@@ -1,0 +1,20 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p02.webp",
+      "role": "exact sick horse identity, pose, anatomy, tack and framing to preserve; replace surface rendering"
+    },
+    {
+      "path": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p02.webp",
+      "role": "broad smooth material shading only, not body condition, black color or expensive equipment"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. REPAINT THE SURFACES of the sick horse in image 1 using clean large tonal planes. Image 1 is the exact subject and composition. Image 2 demonstrates restrained smooth light-to-shadow modelling ONLY; do not copy its black coat, strong muscles, health or ornate equipment. Keep the same thin gray-brown horse, skeletal chest and ribs, narrow legs, cloudy eyes, few broad bald/discolored skin patches, sparse mane, small faint contamination color patches, simple cheap brown saddle and rear pad, frayed blanket, four solid hooves, same standing pose and head direction. Preserve full-body framing and the unchanged charcoal background. CRITICAL FINISH: the large exposed chest, shoulder, neck and upper-leg surfaces must have BROAD, QUIET, CONTINUOUS SMOOTH COLOR GRADIENTS. Build their volume with light and shadow, not with fine line texture. Repaint these areas from clean value planes rather than enhancing the existing surface marks. Most skin and short coat should be uninterrupted areas of gently varying warm gray, muted brown and mauve. Illness is expressed at LARGE SCALE by the emaciated anatomy, a few uneven hairless patches, restrained broad color variation and misty eyes. Local imperfections should be sparse, separated and soft-edged. No all-over fine line networks, crazed-paint finish, branching mesh, stippling, crosshatch, tiny repeated scales, pores or artificial grain. Avoid blanket detail uniformly covering every surface. Keep clear edges and readable anatomy; this is selective material repainting, NOT global blur or loss of focus. Tail must be clearly SOFT HORSE HAIR: a sparse flowing tail composed of continuous tapering hair strands/locks with a natural directional fall, finer hairs only at its silhouette. Remove the rigid branching root-like appearance. Mane also reads as soft directional hair, not twigs. Tack has plain smoothly shaded leather panels; wear appears at a few edges and seams only. Hooves retain a few larger signs of poor condition rather than fine surface noise. Keep eyes cloudy, coat patchy and body thin so the animal still looks visibly sick. Same subdued realistic painted illustration and soft upper-left illumination, full four feet and whole tail inside margins, opaque background, 4:5 portrait. Do not add anything, change pose, add muscles, improve equipment or change the scene.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

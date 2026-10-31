@@ -1,0 +1,4 @@
+[data-graphics-navigation]{display:flex;gap:8px;flex-wrap:wrap;align-items:center;width:100%;margin:8px 0}
+[data-graphics-navigation] a{display:inline-block;font:13px/1.4 system-ui,sans-serif;text-decoration:none;border:1px solid #53634e;border-radius:5px;padding:8px 12px;color:#eee9dc;background:#29372c}
+[data-graphics-navigation] a:hover,[data-graphics-navigation] a[aria-current="page"]{background:#43583e;border-color:#a5b58d;color:#fff}
+[data-graphics-navigation] a:focus-visible{outline:2px solid #c9d7b7;outline-offset:2px}

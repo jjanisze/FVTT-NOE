@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-30T23:29:37.643Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "kon-skazony",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p09",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p09.webp",
+      "role": "Exact approved sick-horse identity, thinness, skin patches, blisters and cheap tack",
+      "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3"
+    },
+    {
+      "path": "tokens/kon-zdrowy.webp",
+      "role": "POSE, camera and relative saddle/body/tail placement template ONLY; do not copy healthy bulk or markings"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Make an alternative token of the exact sick horse in IMAGE 1, aligned to the POSE/PROJECTION template in IMAGE 2. Preserve the sick horse's severe thinness, narrow chest/rump, cloudy eyes, mottled pale bald patches, several local blisters, soft thin mane/tail and plain cheap worn tandem saddle with small rear passenger pad. Take ONLY pose, camera and longitudinal placement from image 2: identical straight north-south body axis, muzzle at lower edge, four legs in the same visible extended positions, rump starting at the same vertical level and main saddle seat around 40% down the frame. The tail must fall/curve back alongside the rump like image 2 rather than projecting as a long straight plume north and shrinking the whole torso. Make the sick horse BODY length in the overhead projection match the template, while staying visibly narrower and underweight. Main saddle and rear pad sit at the same relative heights as the template, not shifted toward the head. Do NOT copy the healthy bay coat, white forehead star, healthy muscle mass or fancier tack. Strict overhead view, head south, true transparent alpha, square with full longest extent about 90%, all tips inside margins, quiet painterly gradients and no new all-over microtexture.",
+  "gmReview": {
+    "creatureId": "kon-skazony",
+    "kind": "token",
+    "candidateId": "t01",
+    "sha256": "cd09f9784e8543033a9471b451cc11b03c3227b5c4a5ed1d03436e02f3738507",
+    "decision": "approve",
+    "rating": null,
+    "notes": "Mam pewne obawy czy ma tą samą posturę co pozostałe konie.",
+    "updatedAt": "2026-10-30T23:20:05.423Z"
+  }
+}

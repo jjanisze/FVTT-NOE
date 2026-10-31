@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neuroshima · portrety i żetony</title><link rel="stylesheet" href="./style.css"></head>
+<body><header><div><span class="eyebrow">NEUROSHIMA · PRACOWNIA GRAFIK</span><h1>Portret → żeton</h1></div>
+<nav><button id="queue-tab" class="active">Do oceny</button><button id="references-tab">Dotychczasowe pary</button><button id="refresh">Odśwież</button></nav></header>
+<nav class="asset-tabs" aria-label="Pracownia grafik"></nav>
+<div class="toolbar"><label>Tło żetonów <select id="background"><option value="dark">Ciemne</option><option value="light">Jasne</option><option value="checker">Szachownica</option></select></label>
+<label>Obrót podglądu <select id="rotation"><option value="0">0° · głowa w dół</option><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></label><span id="summary"></span></div>
+<div id="workspace"><aside><label class="search">Szukaj stworzenia<input id="search" placeholder="Nazwa lub grupa"></label><div id="queue"></div></aside><main id="main"></main></div>
+<div id="notice" role="status" aria-live="polite"></div><script type="module" src="/navigation.mjs"></script><script type="module" src="./app.mjs"></script></body></html>

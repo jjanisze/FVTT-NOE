@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30T21:21:46.388Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gigantyczny-pajak",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/gigantyczny-pajak-no15.jpg",
+      "role": "Primary GM-provided concept; anatomy and proportions"
+    },
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "Painting, light and backdrop ONLY; no dog anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nImage 1 is the primary species body plan; image 2 painting/backdrop ONLY. One organic horse-sized hairy giant spider. Preserve the small cephalothorax, large rounded near-spherical abdomen and very long slender articulated legs. EXACTLY EIGHT walking legs, four from each side of the cephalothorax, individually readable; two SHORT mouth pedipalps must not resemble additional walking legs. Sparse bristly hair at silhouette, charcoal-brown body and legs, dark plum-brown abdomen with broad smooth reflected light, a few natural eye highlights and short fangs, no glowing eyes. Three-quarter front view from sufficiently above to distinguish all eight legs, all tips inside margins. No armour, mechanical parts, human props, web scenery or corpses. Never copy dog anatomy or equipment."
+}

@@ -3,6 +3,14 @@
 Requested 2026-10-29. Scope confirmed by the GM: **14 monochrome icons and one water overlay**.
 The four companion tokens and eleven bestiary tokens remain a separate painted-token task.
 
+**Approved artwork delivered, 2026-10-31:** the GM approved all 12 instrument glyphs and
+both water-status glyphs. Their exact candidate SVG/WEBP bytes are now in `icons/tools/`
+and `icons/statuses/`. [Selected candidates, saved decisions and delivery hashes](reviewed-installed.json).
+The old static overlay was rejected because water is built separately with the animated
+silhouette filter. Its historical review remains intact; no replacement static file is queued.
+Instrument `iconReady`, status-image wiring, pack builds and existing actors remain deferred
+under the assets-only instruction. [Integration tasks](../FINAL_HANDOFF.md).
+
 **After GM review:** the static water candidate is superseded by the animated silhouette filter,
 `scripts/scenes/woda-efekty.mjs`. After the low-contrast first proposal, `vfx/water-surface.webp`
 reuses the original RGBA painting unchanged, with stronger contrast and motion in the shader.
@@ -20,9 +28,9 @@ Full-sheet water and water clipped to the creature silhouette are compared as hi
 the animated Foundry implementation uses only the silhouette.
 
 The previous 557 review cards and saved feedback are retained.
-Runtime icons, `iconReady`, compendia and campaign/Poligon documents are unchanged.
-Candidates remain queued until the GM saves review decisions; a later installation
-must use the exact selected masks and set instrument/status image wiring.
+At preparation on 2026-10-29, runtime icons, `iconReady`, compendia and campaign/Poligon
+documents were unchanged and candidates awaited saved decisions. The later delivery above
+installs only the exact selected artwork; instrument/status image wiring is still deferred.
 
 ## Sources and processing
 

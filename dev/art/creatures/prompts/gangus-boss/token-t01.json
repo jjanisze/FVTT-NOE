@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gangus-boss",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/gangus-boss/portrait-p02.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "gangus-boss",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-30T22:32:00.774Z"
+  },
+  "prompt": "Use case: stylized-concept. Generate one TTRPG battle-map token from the EXACT APPROVED PORTRAIT in image 1, preserving its identity, body proportions, colours and all equipment. This is a NEW VIEW, not a portrait cutout.\nCamera almost vertically ABOVE, 88–90 degrees down, orthographic bird's-eye/plan view. Crown/back of head and TOPS of shoulders dominate; most face and front chest are occluded by the head and shoulders. Strong foreshortening compresses an upright torso; feet only peek out around the silhouette. No large front-facing face, no full-length frontal chest. HEAD/FRONT SOUTH at bottom, rear/tail NORTH at top.\nGrounded hand-painted realistic game art, muted colours, soft upper-left light, broad quiet surface gradients and selected edge detail; no fine all-over cracked texture. Square, genuine transparent alpha including limb gaps, all tips safely within margins, longest extent about 90%. No scenery, floor, circle, base, text, watermark or rectangular shadow.\nThe exact powerful gang boss p02, shaved head, dark sleeveless leather vest and burgundy shirt, improvised forearm plates, dark trousers and boots. Keep the TWO gold chains and medallion, rings, gold watch/buckle, single reinforced blunt steel club held low beside him. TWO arms/TWO legs, natural hands. From directly overhead only a small part of face/chest/jewellery is visible, with crown and shoulders dominating. No additional guns, clubs or tattoos."
+}

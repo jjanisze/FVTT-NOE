@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30T00:20:31.015410+00:00",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-zmutowany-ssak",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/portrait-p02.webp",
+      "role": "exact subject identity"
+    },
+    {
+      "path": "tokens/pies-bojowy.webp",
+      "role": "camera, painting and token format only"
+    }
+  ],
+  "prompt": "Grounded hand-painted realistic post-apocalyptic game illustration. Muted natural colours, readable material texture, neutral upper-left light, crisp silhouette. Match the existing module portrait/token examples. No text, logos, border, fantasy ornaments or magic. Reference anatomy/equipment must never leak from a style-only image.\nImage 1 is the exact SUBJECT. Preserve its anatomy, proportions, colours, markings, equipment and identity. Image 2 is CAMERA/STYLE ONLY: never copy its subject, anatomy or equipment.\nCreate one near-overhead battle-map token: camera about 80 degrees above ground, visible crown and back, strong foreshortening. HEAD TOWARD THE BOTTOM (south), tail/rear toward the top; not a side-view or front portrait. SUBJECT: Powerful Large mutated predator, bear-like body, canine muzzle, coarse fur and sparse bare skin patches. Four legs, no wounds or gore.\nSquare, genuine transparent alpha, longest extent about 90% of frame; all limbs and extremities inside clear margins. No ring, base, floor, scenery, painted checkerboard or long shadow. Neutral upper-left illumination, painterly defined edge and only a very short soft contact shadow. Readable at 70 screen pixels.\nThe style reference wears manufactured equipment. DO NOT COPY IT. The requested companion has NO armor, harness, muzzle cage, metal plates, straps, collar, chain or clothing: biological anatomy only. Take only brushwork, light and backdrop from a portrait-style reference."
+}

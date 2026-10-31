@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "references": [
+    {
+      "id": "mobsprzet",
+      "source": "dev/art/creatures/geometry/mobsprzet-layout-v1.svg",
+      "sourceSha256": "c77da9d4120391f2657ffbc324676fd92dd82455cb8361542c1958e6047e2006",
+      "render": "dev/art/creatures/in/references/mobsprzet-layout-v1.png",
+      "renderSha256": "f7f76a3587d93962ca13e856ec25006f87302c09527ee053e4ffaa5d20ad1f2d",
+      "size": [
+        250,
+        300
+      ],
+      "renderer": "Chrome SVG on detached canvas",
+      "role": "Geometry only; retain approved portrait identity and painting"
+    },
+    {
+      "id": "pajak",
+      "source": "dev/art/creatures/geometry/pajak-layout-v1.svg",
+      "sourceSha256": "a6b9d0d0b1f577621a0cb5d6229492064e34c24119558bfa60d5eca5c5d1b35f",
+      "render": "dev/art/creatures/in/references/pajak-layout-v1.png",
+      "renderSha256": "7775c664d8c45e16f020a81fa545a1eba785774be80b02a71a5cf09ffa322bce",
+      "size": [
+        250,
+        300
+      ],
+      "renderer": "Chrome SVG on detached canvas",
+      "role": "Geometry only; retain approved portrait identity and painting"
+    }
+  ]
+}

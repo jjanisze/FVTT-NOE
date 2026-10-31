@@ -1,0 +1,340 @@
+{
+  "date": "2026-10-31",
+  "approvedGlyphs": 14,
+  "installed": [
+    {
+      "itemId": "instrument-akordeon",
+      "candidateId": "batch119-akordeon",
+      "source": "candidates/batch-119/akordeon.png",
+      "sourceSha256": "ab419702c7d7e410943dce2a4bd57cd110af81eeaec65dcce3cbde8f08f1fa53",
+      "feedback": {
+        "itemId": "instrument-akordeon",
+        "decision": "approve",
+        "candidateId": "batch119-akordeon",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:29.716Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/akordeon.svg",
+          "sha256": "beb618dd3ebd845fb7bec9e057a87bce28d8f684e7e580c3456437e0644f3dcd"
+        },
+        {
+          "path": "icons/tools/akordeon.webp",
+          "sha256": "097dc93a1bec8e1e3fd055d414a9d9e9ac5fa4592218e4979d72d0ae347bdeed"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-banjo",
+      "candidateId": "batch119-banjo",
+      "source": "candidates/batch-119/banjo.png",
+      "sourceSha256": "7e81a708ff7b39ada03a82344b5870094dd32fb510fecf1cb29fe4e1794eb949",
+      "feedback": {
+        "itemId": "instrument-banjo",
+        "decision": "approve",
+        "candidateId": "batch119-banjo",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:32.528Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/banjo.svg",
+          "sha256": "1a193b6f40b434d7459eaa612efd63b8fe7694d03951aeacc124a7a71d9275b6"
+        },
+        {
+          "path": "icons/tools/banjo.webp",
+          "sha256": "b037d9286c58dfc76ce6bec1ff35c7a2df6165ab8be1fa555a2ea46bad55cd6a"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-gitaraAkustyczna",
+      "candidateId": "batch119-gitaraAkustyczna",
+      "source": "candidates/batch-119/gitaraAkustyczna.png",
+      "sourceSha256": "61a8be397d6cca22884ff2b82075e3381c3af3c83b4630f78320f833cf3e2cdd",
+      "feedback": {
+        "itemId": "instrument-gitaraAkustyczna",
+        "decision": "approve",
+        "candidateId": "batch119-gitaraAkustyczna",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:34.742Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/gitaraAkustyczna.svg",
+          "sha256": "e0061ae1ef645e4bae9dd52fd69166fe30c73d13441e5b08a0ee74de6c0ea39d"
+        },
+        {
+          "path": "icons/tools/gitaraAkustyczna.webp",
+          "sha256": "e66367a7954725c08a13e4a7eb863fa03060c9fc7c0d36051dd0d800d3349307"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-gitaraBasowa",
+      "candidateId": "batch119-gitaraBasowa",
+      "source": "candidates/batch-119/gitaraBasowa.png",
+      "sourceSha256": "c4df5a8f2266fbdf708cd07b06385f81835f28b3d207435621fcc90287f870d5",
+      "feedback": {
+        "itemId": "instrument-gitaraBasowa",
+        "decision": "approve",
+        "candidateId": "batch119-gitaraBasowa",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:37.046Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/gitaraBasowa.svg",
+          "sha256": "9810ee698fa4a275e82dff57a730201edbd5cdb69ebdf107ea02df5f43fb75f0"
+        },
+        {
+          "path": "icons/tools/gitaraBasowa.webp",
+          "sha256": "a907f6c2ce76cb8e4a3143d4d61ff879272297c5b458e7ebc03f7410c16b4220"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-gitaraElektryczna",
+      "candidateId": "batch119-gitaraElektryczna",
+      "source": "candidates/batch-119/gitaraElektryczna.png",
+      "sourceSha256": "dd2b71986a3d5243d5399666b4af7146b4d97a42d0c65d08f47e05958741a420",
+      "feedback": {
+        "itemId": "instrument-gitaraElektryczna",
+        "decision": "approve",
+        "candidateId": "batch119-gitaraElektryczna",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:39.416Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/gitaraElektryczna.svg",
+          "sha256": "f08dfc92034fcf249aff0b56c628f3607687c5e25e8dc735c24ee02fcd2fdf9a"
+        },
+        {
+          "path": "icons/tools/gitaraElektryczna.webp",
+          "sha256": "fa7eecaabd02361267113c7af6463885cc99e67c9aedb298a8aa36d221eef680"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-harmonijka",
+      "candidateId": "batch119-harmonijka",
+      "source": "candidates/batch-119/harmonijka.png",
+      "sourceSha256": "7ed4e9cded4587d7e44a93508c4bbfafdd1a1a3780788ae9014b47c7b149562a",
+      "feedback": {
+        "itemId": "instrument-harmonijka",
+        "decision": "approve",
+        "candidateId": "batch119-harmonijka",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:42.914Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/harmonijka.svg",
+          "sha256": "fef88658654c44609a37e0a512ea448d3d61b23695d0ecfd6d811ca3860519e0"
+        },
+        {
+          "path": "icons/tools/harmonijka.webp",
+          "sha256": "926f7c819653d1159a4c07cab56858f12776bd86dc5ea6f989834823380325c7"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-keyboard",
+      "candidateId": "batch119-keyboard",
+      "source": "candidates/batch-119/keyboard.png",
+      "sourceSha256": "ecbe79388a297184d2ee38a5d0ed90cc6dd4a4a1b2f5358d5c6afdca7af84259",
+      "feedback": {
+        "itemId": "instrument-keyboard",
+        "decision": "approve",
+        "candidateId": "batch119-keyboard",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:45.193Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/keyboard.svg",
+          "sha256": "cf5ae8348067a540fb87b5b726788274dc645ea2da590b69e9944ed81056819d"
+        },
+        {
+          "path": "icons/tools/keyboard.webp",
+          "sha256": "e2b4efc77fd88697a565beb639775a1aa49042c06527b2a73e5e3d559323358e"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-kontrabas",
+      "candidateId": "batch119-kontrabas",
+      "source": "candidates/batch-119/kontrabas.png",
+      "sourceSha256": "658999777ea31bcf8967bf6e7f106875b28e4d81142d32d8712da85884371b61",
+      "feedback": {
+        "itemId": "instrument-kontrabas",
+        "decision": "approve",
+        "candidateId": "batch119-kontrabas",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:37:54.169Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/kontrabas.svg",
+          "sha256": "601fbe94852e23a118c4fb0cd8c43e871febf0bc90994f4e32716f133f0c4d0c"
+        },
+        {
+          "path": "icons/tools/kontrabas.webp",
+          "sha256": "bbe2ec4346b844c877da7c6b3a3f1959eaba24657e53929a09f6f72c662491bf"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-mikser",
+      "candidateId": "batch119-mikser",
+      "source": "candidates/batch-119/mikser.png",
+      "sourceSha256": "9c6a95983ebd1d909b981269ed093dfe55acdeb143b26d8c98b17cc6781d6920",
+      "feedback": {
+        "itemId": "instrument-mikser",
+        "decision": "approve",
+        "candidateId": "batch119-mikser",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:01.845Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/mikser.svg",
+          "sha256": "1b75c50b95d368345324d987557ae2c4fe6a408bc0096806e411f6c19a044a90"
+        },
+        {
+          "path": "icons/tools/mikser.webp",
+          "sha256": "03afccdd3f547accfd25c0d23fc5b49535c6c22aaa45d9754572766a397995ff"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-perkusja",
+      "candidateId": "batch120-perkusja",
+      "source": "candidates/batch-120/perkusja.png",
+      "sourceSha256": "b22ef9b997c754e5ac951dd9145a82e8105e76f93df5d8dbc8aeb43fed66b49d",
+      "feedback": {
+        "itemId": "instrument-perkusja",
+        "decision": "approve",
+        "candidateId": "batch120-perkusja",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:06.619Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/perkusja.svg",
+          "sha256": "687a8a3b2fe2b20f672259f334454cd29953b4e29e329ff12d117277b812ec15"
+        },
+        {
+          "path": "icons/tools/perkusja.webp",
+          "sha256": "dc04310545b36621ec4b42513cc7ce6882ea50e5adf0099cc948fdbae0381ec4"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-saksofon",
+      "candidateId": "batch120-saksofon",
+      "source": "candidates/batch-120/saksofon.png",
+      "sourceSha256": "c3f6a49ceed2dc4ba250218bc485cc88f17b9da64cb004f54945bfbf3828050b",
+      "feedback": {
+        "itemId": "instrument-saksofon",
+        "decision": "approve",
+        "candidateId": "batch120-saksofon",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:10.375Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/saksofon.svg",
+          "sha256": "775bf1069407c09f60557de2b7e2bcf3ee805fe46238206c1cb7d7d4748a2f79"
+        },
+        {
+          "path": "icons/tools/saksofon.webp",
+          "sha256": "cc6aaf238682d47d3d543af273249aa6e15b2e60bef1588b69ae7574eb911486"
+        }
+      ]
+    },
+    {
+      "itemId": "instrument-skrzypce",
+      "candidateId": "batch120-skrzypce",
+      "source": "candidates/batch-120/skrzypce.png",
+      "sourceSha256": "3f2b04afa697d5d1942b7bb4e50093bc62147e22bc2d88a67f008567f99f4710",
+      "feedback": {
+        "itemId": "instrument-skrzypce",
+        "decision": "approve",
+        "candidateId": "batch120-skrzypce",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:14.750Z"
+      },
+      "files": [
+        {
+          "path": "icons/tools/skrzypce.svg",
+          "sha256": "25cc26cdd21d4d20d2b6150cbb9f5b334af642ced6a092376a385eb1a6e7b884"
+        },
+        {
+          "path": "icons/tools/skrzypce.webp",
+          "sha256": "ff45d0c177f6298d34b0b9626a14a0274009588fdd6e64e26c66910b7af0f136"
+        }
+      ]
+    },
+    {
+      "itemId": "status-pod-woda",
+      "candidateId": "batch120-pod-woda",
+      "source": "candidates/batch-120/pod-woda.png",
+      "sourceSha256": "3bb4b4d94448ec443240e17ea24d62cd562a0c610396cd1ca5a975ebea4ed419",
+      "feedback": {
+        "itemId": "status-pod-woda",
+        "decision": "approve",
+        "candidateId": "batch120-pod-woda",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:22.932Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/pod-woda.svg",
+          "sha256": "c0dc58a6cb00d6f590563ac2cc8ee31b5a72e221ecd1ff611ee86befe8b18c41"
+        },
+        {
+          "path": "icons/statuses/pod-woda.webp",
+          "sha256": "461d039d47cce0b326349e2a488cd35fa80d688c261e6c16a4fab357e263a810"
+        }
+      ]
+    },
+    {
+      "itemId": "status-tonie",
+      "candidateId": "batch120-tonie",
+      "source": "candidates/batch-120/tonie.png",
+      "sourceSha256": "a813d186788f36abbc2b5514ade683a157334f1c72e14a6bfd2465a8582aa889",
+      "feedback": {
+        "itemId": "status-tonie",
+        "decision": "approve",
+        "candidateId": "batch120-tonie",
+        "notes": "",
+        "updatedAt": "2026-10-31T00:38:28.498Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/tonie.svg",
+          "sha256": "2aa992491459f4c90c5ac5fc4f294ebda5d70e7c3a246a51062d22d4898528e0"
+        },
+        {
+          "path": "icons/statuses/tonie.webp",
+          "sha256": "257b17c46affff25724a7234223effc6f0678398c82774e5f47d9ed077b619ac"
+        }
+      ]
+    }
+  ],
+  "overlay": {
+    "itemId": "water-submerged-overlay",
+    "decision": {
+      "itemId": "water-submerged-overlay",
+      "decision": "reject",
+      "candidateId": "water-overlay-v1",
+      "notes": "We build this separately.",
+      "updatedAt": "2026-10-31T00:38:42.196Z"
+    },
+    "disposition": "Historical static candidate rejected; animated silhouette water already delivered separately as vfx/water-surface.webp."
+  },
+  "scope": "Exact approved artwork delivery only; instrument iconReady, status-image wiring, compendia and worlds were not changed."
+}

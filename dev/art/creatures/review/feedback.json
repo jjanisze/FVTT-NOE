@@ -1,0 +1,857 @@
+{
+  "version": 1,
+  "items": {
+    "towarzysz-psi-partner:portrait": {
+      "creatureId": "towarzysz-psi-partner",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "b900f844259d3ea542ac4f83920f63ebef593d45cb02d55258bbfedd71910782",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T00:33:55.956Z"
+    },
+    "towarzysz-psi-partner:token": {
+      "creatureId": "towarzysz-psi-partner",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "629be85b24ded8ef32f60cdd664d6ef66db169a3fb924e94343bd22ff652450e",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T00:33:56.764Z"
+    },
+    "towarzysz-zmutowany-owad:portrait": {
+      "creatureId": "towarzysz-zmutowany-owad",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T01:02:13.868Z"
+    },
+    "towarzysz-zmutowany-owad:token": {
+      "creatureId": "towarzysz-zmutowany-owad",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "e8c5db222f8cca6179ef4012dd527b6a47c065c6c68bb1716e658c15cce7c291",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T01:02:19.290Z"
+    },
+    "towarzysz-zmutowany-ssak:portrait": {
+      "creatureId": "towarzysz-zmutowany-ssak",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "d49493832f29b43dbae12631ea2f82b5dc7f5621894443c231ed449c101cf542",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "Biorąc pod uwagę opis, który przeoczyłem - wracamy do oryginalnej koncepcji!",
+      "updatedAt": "2026-10-30T01:02:54.755Z"
+    },
+    "towarzysz-zmutowany-ssak:token": {
+      "creatureId": "towarzysz-zmutowany-ssak",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "e05af551a87fcefe5c7016f3c22e9e615ab3bd0aa96970d34023d31158d11a06",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "Do regeneracji - zły wstępny portret.",
+      "updatedAt": "2026-10-30T01:02:58.500Z"
+    },
+    "towarzysz-zmutowany-gad:portrait": {
+      "creatureId": "towarzysz-zmutowany-gad",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "1928c1a473cdffaa214ed2e90df9733a1c27c6f6d5647b3ccd297d27299e04ce",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T01:03:13.665Z"
+    },
+    "towarzysz-zmutowany-gad:token": {
+      "creatureId": "towarzysz-zmutowany-gad",
+      "kind": "token",
+      "candidateId": "t03",
+      "sha256": "3bd04f330c4ce7bf6cecb907f9185a43d704105519613b620383fdb55ff9bf7a",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T01:03:17.417Z"
+    },
+    "kon-skazony:portrait": {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p09",
+      "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:26:16.042Z"
+    },
+    "kon-teksanczyk:portrait": {
+      "creatureId": "kon-teksanczyk",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "34aa6f42a5cf83b4f9616064e42359bb5de7773ed01ea50bcfcbb37b1b789eb3",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T19:42:31.197Z"
+    },
+    "kon-zdrowy:portrait": {
+      "creatureId": "kon-zdrowy",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "40d3a5b2f4c456ce9f8e19fb31746ff4b3c5b6d2b66ff063f9f85dd7531b6d0c",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T19:16:23.627Z"
+    },
+    "kon-zdrowy:token": {
+      "creatureId": "kon-zdrowy",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "c8669a5b959db31e751ce12c845e9dde57905faee78782fe198b8150946d3b7f",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T19:41:37.632Z"
+    },
+    "kon-teksanczyk:token": {
+      "creatureId": "kon-teksanczyk",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "32a19826fcdfc7c88fbd4a56151081760825638d5425b5e089d4f073e0aa9298",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T20:30:22.755Z"
+    },
+    "gigantyczny-pajak:portrait": {
+      "creatureId": "gigantyczny-pajak",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "cfef8e759d90ff1e25a4418869e10ae0f93519cee134e54eac7469d2b65339cd",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:39:55.581Z"
+    },
+    "neogator:portrait": {
+      "creatureId": "neogator",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "9afbc2054b74ca1cec10828e3bc6f82fe89243e9a2366d6b328267858a39bb57",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:26:35.733Z"
+    },
+    "neoniedzwiedz:portrait": {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p07",
+      "sha256": "d7ee23887c4fb4412ace59741a3be2de8b42527fcb160217362fdf8a6f9e97f9",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "Perfect.",
+      "updatedAt": "2026-10-31T00:14:46.345Z"
+    },
+    "pies-mutek:portrait": {
+      "creatureId": "pies-mutek",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:20:43.179Z"
+    },
+    "konwojent-straznik:portrait": {
+      "creatureId": "konwojent-straznik",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+      "decision": "approve",
+      "rating": 3,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:50:58.719Z"
+    },
+    "cywil:portrait": {
+      "creatureId": "cywil",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:51:05.215Z"
+    },
+    "gangus-boss:portrait": {
+      "creatureId": "gangus-boss",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:32:00.774Z"
+    },
+    "generacja-ii-genotyp-gadzi:portrait": {
+      "creatureId": "generacja-ii-genotyp-gadzi",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "76862550ed6984d3b4b89fa34f8fc7b0096cbda3493198ad89d87aaa4989b851",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:51:47.816Z"
+    },
+    "generacja-ii-genotyp-wilczy:portrait": {
+      "creatureId": "generacja-ii-genotyp-wilczy",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:40:02.629Z"
+    },
+    "generacja-iii-szpieg:portrait": {
+      "creatureId": "generacja-iii-szpieg",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "d0989afcdcf6b5ace9ed855100225eb4ad4c953a5d37866bb1db9bd18f606c26",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:40:11.422Z"
+    },
+    "korzec:portrait": {
+      "creatureId": "korzec",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "a7b289d933a64afce81242f943f6e73a840246241455fe45aee67d7c0818fe85",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:55:50.493Z"
+    },
+    "mobsprzet:portrait": {
+      "creatureId": "mobsprzet",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:55:57.898Z"
+    },
+    "pajak:portrait": {
+      "creatureId": "pajak",
+      "kind": "portrait",
+      "candidateId": "p07",
+      "sha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:21:44.534Z"
+    },
+    "roj-szczurow:portrait": {
+      "creatureId": "roj-szczurow",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "6133ba33a217258255a4269195f6094435be44d13d0b060f4faa0d395ee031fe",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:57:30.956Z"
+    },
+    "szeryf:portrait": {
+      "creatureId": "szeryf",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:49:49.243Z"
+    },
+    "taran:portrait": {
+      "creatureId": "taran",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "e7375737272812fd82788309554b9cdc6c6eeba75f021c7977728cb5ad96a094",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:58:32.812Z"
+    },
+    "gigantyczny-pajak:token": {
+      "creatureId": "gigantyczny-pajak",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "5a26755b4a07c88917c052883d07c2e4416d24fb5c27edfa26ef075e90342f69",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:26:23.998Z"
+    },
+    "konwojent-straznik:token": {
+      "creatureId": "konwojent-straznik",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "6d769206dae62aadb961b420fa33581104cbf2eedb68525ec3b260557aaed5fd",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:20:48.852Z"
+    },
+    "cywil:token": {
+      "creatureId": "cywil",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "419d1c15528c264c5eeab0923ed9b0b4e0ad4f708f65cdf8702469e493de5451",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:20:55.237Z"
+    },
+    "generacja-ii-genotyp-gadzi:token": {
+      "creatureId": "generacja-ii-genotyp-gadzi",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "8f7b30d16b8268b84ca11a67ce54611f13213e9ee03df845b21eca55b79464ea",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:32:07.496Z"
+    },
+    "korzec:token": {
+      "creatureId": "korzec",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "96d1e21a37707a3a5c366ec44218223fe969cfc0dbe096217b7e10282dc0a8a2",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:40:20.801Z"
+    },
+    "mobsprzet:token": {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t05",
+      "sha256": "b280fd179f48ca666229003ff6941718c78b2273c75813f1520bd4ac0056904f",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-31T00:27:58.390Z"
+    },
+    "roj-szczurow:token": {
+      "creatureId": "roj-szczurow",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "6851f9fb1392d85203f0535e96cab2b04bd4e782218ee5147ac15e8346ea7f4f",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:49:23.406Z"
+    },
+    "taran:token": {
+      "creatureId": "taran",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "8baf42c2cd06bc7c44a0403d80affba15471598c0e96eac3fcdbb8309514b05a",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:50:01.511Z"
+    },
+    "kon-skazony:token": {
+      "creatureId": "kon-skazony",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "bfde89254e328bc56578b531002cd2b1974a537d984216663170480de38581f5",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:52:01.112Z"
+    },
+    "gangus-boss:token": {
+      "creatureId": "gangus-boss",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "36131a20877a07f2c8859a17c1040f292c1a378b07365539c2449824ae88a573",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:21:12.054Z"
+    },
+    "generacja-iii-szpieg:token": {
+      "creatureId": "generacja-iii-szpieg",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "4418a3866ceab8a2357f00ad07ddd5c103b5c940db93989785585a9abe15c3d5",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:21:18.117Z"
+    },
+    "szeryf:token": {
+      "creatureId": "szeryf",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "bb6ce05efd3f8e04d65d03fc1a4581a33a5e3030de66d3d0b7372b36860bfc88",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:55:35.426Z"
+    },
+    "neogator:token": {
+      "creatureId": "neogator",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "2dd01555f948b22846dc9e7a66992aa8a5baef5f09f353ff71a7d913cce58673",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:52:08.343Z"
+    },
+    "pies-mutek:token": {
+      "creatureId": "pies-mutek",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "a2eedd27620e550d2e514f5f474c238f1ddfca47d7ff02a7d3b8be448eefe442",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:53:01.998Z"
+    },
+    "generacja-ii-genotyp-wilczy:token": {
+      "creatureId": "generacja-ii-genotyp-wilczy",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "fdfa24d448214346146651cdfb9343b6853ae6e6996ad1ca8670a71ee6248613",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:53:09.068Z"
+    },
+    "pajak:token": {
+      "creatureId": "pajak",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "25529157fb391e80ddc4943d3cb8f4d628522ce0247d2b3620d27e3cf34b6cd3",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:55:30.232Z"
+    },
+    "neoniedzwiedz:token": {
+      "creatureId": "neoniedzwiedz",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "1670eb739ddead8fbddeb36b7a1a45a90f3197168fb28e827682df13fba22d11",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-31T00:27:32.795Z"
+    }
+  },
+  "history": [
+    {
+      "creatureId": "towarzysz-zmutowany-gad",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "b1462484a930d5d9438bb3eae3f618c662d31ccfcc981b7dbc101d315a3e450e",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "Trochę zbyt aligatorowaty",
+      "updatedAt": "2026-10-30T00:36:54.689Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-owad",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T00:34:06.979Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-owad",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "4908e1f512b6db432527b20bb0cfc62c6a81140546790bda36dbdd46f47fd4c3",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Zła ilość odnóży - na portrecie wygląda jakby miał 6 + 2, tutaj ma 4+2",
+      "updatedAt": "2026-10-30T00:34:55.858Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-ssak",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "d49493832f29b43dbae12631ea2f82b5dc7f5621894443c231ed449c101cf542",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Zmutowany ssak nie oznacza niedźwiedź. Kreatura nie powinna być ewidentnie silniejsza od psa. Wybierz inną, mniej bojową kreaturę która jest możliwościami fizycznymi bliżej psa.",
+      "updatedAt": "2026-10-30T00:36:07.353Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-ssak",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "e05af551a87fcefe5c7016f3c22e9e615ab3bd0aa96970d34023d31158d11a06",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Do regeneracji - zły wstępny portret.",
+      "updatedAt": "2026-10-30T00:36:24.614Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-gad",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "b1462484a930d5d9438bb3eae3f618c662d31ccfcc981b7dbc101d315a3e450e",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Trochę zbyt aligatorowaty - spróbuj mniej aligatorowate, bardziej jaszczurkowate. Względny poziom zagrożenia: podobny jak pies.",
+      "updatedAt": "2026-10-30T00:37:43.347Z"
+    },
+    {
+      "creatureId": "towarzysz-zmutowany-gad",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "1f5c03b023285330252229a631ddf955b95ba06935e83b73f32ef933d9675a06",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Patrz uwagi portretu.",
+      "updatedAt": "2026-10-30T00:37:54.014Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "dd415d8af4f6cd3ba7cd3fa70475e236b9100cd4c4990a27b2dc146c2eafc1bb",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Ma wyglądać na jeszcze bardziej chorego: spękania na kopytach, wychudzone kończyny, przebarwienia skóry, kępki wybrakowanego, nierównego futra, łysizny, skazy i przemiany skórne, mgliste oczy",
+      "updatedAt": "2026-10-30T19:14:08.203Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "dd415d8af4f6cd3ba7cd3fa70475e236b9100cd4c4990a27b2dc146c2eafc1bb",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Ma wyglądać na jeszcze bardziej chorego: spękania na kopytach, wychudzone kończyny, przebarwienia skóry, kępki wybrakowanego, nierównego futra, łysizny, skazy i przemiany skórne, mgliste oczy. Siodło powinno być prostsze, tańsze, gorsze, znoszone.",
+      "updatedAt": "2026-10-30T19:14:46.544Z"
+    },
+    {
+      "creatureId": "kon-teksanczyk",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "e85fb7d59db3a40164d16756177ca8ebb99e8f32a39fca1a29b813f1ec6efa4c",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Większa klatka i muskuły, postawa niczym dorodny rumak, błyszczące oczy i kopyta, lśniące, niemal ulizane włosie. Siodło powinno mieć drobne ornamenty i być widocznie dobrej jakości. ",
+      "updatedAt": "2026-10-30T19:16:12.498Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "5ab87b8dbe0ffdfe6967f3bf2b762db4983d1056e3a48c7f14e34120747a6f3d",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Model dodał zbyt dużo mikro-detali i spękanej tekstury, skutkiem czego ogon wygląda jak korzeń. Wymaga usunięcia mikro-detali.",
+      "updatedAt": "2026-10-30T19:42:27.055Z"
+    },
+    {
+      "creatureId": "generacja-ii-genotyp-wilczy",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "d98eb9b188c855fd78a9d5a95f3903e2204c8d4224d7c8744fc25618ed1de3d8",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T21:52:41.884Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p06",
+      "sha256": "485fa460d3e675bfc07bbf00ccb78815d24a7f48f1c07353cc8b49332bd4d42f",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Udało się usunąć noise. Dodajmy mu tylko jakieś ropiejące bąble albo inne oznaki choroby",
+      "updatedAt": "2026-10-30T20:32:07.237Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "portrait",
+      "candidateId": "p08",
+      "sha256": "f4fb29f5cdab1d74939a13a064b8d530c9f046eeb9b482acc6d092ff62aae59c",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Uczyń go jeszcze chudszym",
+      "updatedAt": "2026-10-30T21:59:09.298Z"
+    },
+    {
+      "creatureId": "neogator",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "961bd8ebd2afc61972d7d8d206a6851ede09a3bda2a6de1b17684748baa29511",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Grubsza skóra, z przerośniętymi, zgrubiałymi łuskami, oraz zmodyfikowana, dwu-zawiasowa, wężo-podobna szczęka zdolna do bardzo szerokiego rozwarcia",
+      "updatedAt": "2026-10-30T21:48:39.383Z"
+    },
+    {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "ea139fd27dd7f15e5ecd9cdbe4639fe83358036fa5a40d90c97f46da3de75744",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Zrób go niemal kompletnie łysego, z futrem tylko na pysku, grzbiecie, ogonie i dolnych kończynach",
+      "updatedAt": "2026-10-30T21:49:34.832Z"
+    },
+    {
+      "creatureId": "pies-mutek",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "83d8dc42fb041a9c3d9c0dd4cf25c94d309e6605c81611260220c4999a224d53",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Wygląda jak zwykły pies. Daj mu niesymetryczną, wypaczoną twarz z nierównymi oczami oraz nienaturalnie wydłużony język. Mniej mięśni.",
+      "updatedAt": "2026-10-30T21:50:40.307Z"
+    },
+    {
+      "creatureId": "gangus-boss",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "074075164f881b5a5d98d3927ff4803872d4ae0b930dea5004b55b42abaf766f",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Dodaj więcej blingu",
+      "updatedAt": "2026-10-30T21:51:41.205Z"
+    },
+    {
+      "creatureId": "generacja-ii-genotyp-wilczy",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "d98eb9b188c855fd78a9d5a95f3903e2204c8d4224d7c8744fc25618ed1de3d8",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Niech wewnętrzne części ciała - klatka, brzuch, szyja, wewnętrzne części rąk i dłoni - będą bardziej ludzkie. A pysk bardziej przypominający wściekłego mopsa (pug)",
+      "updatedAt": "2026-10-30T21:55:03.445Z"
+    },
+    {
+      "creatureId": "generacja-ii-genotyp-wilczy",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-30T22:32:18.730Z"
+    },
+    {
+      "creatureId": "generacja-iii-szpieg",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "b411f1a6a9c487de24a05dc86cd889fd9eedd4ea2d6297e90512eef640097c20",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Daj mu trochę zbyt szeroki uśmiech i trochę zbyt przyjacielską pozę.",
+      "updatedAt": "2026-10-30T21:55:43.055Z"
+    },
+    {
+      "creatureId": "pajak",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "fcf3827d68ae8575943695d9d9d6bb5470de4e916c0a0117f82a70715b8618da",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Lżejsza budowa, więcej wagi poświęconego na sprzęt obserwacyjny, wątlejsze, prostsze nóżki, dwie antenki z tyłu",
+      "updatedAt": "2026-10-30T21:57:25.986Z"
+    },
+    {
+      "creatureId": "szeryf",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "315a6efc454621192339dda2bb9c2732215ca7f7870975f1bfe9de527723b949",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "Zrób ją czarnoskórą ",
+      "updatedAt": "2026-10-30T21:58:20.069Z"
+    },
+    {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "e5c5f2033d2549d3362bd195f1f27474c3eac1d56c274c9803d3aeacc39084df",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Tam gdzie nie ma futra zredukuj masę ciała i upodobnij trochę do \"workowatego\" wyglądu kota syjamskiego. ",
+      "updatedAt": "2026-10-30T22:30:45.328Z"
+    },
+    {
+      "creatureId": "pies-mutek",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "602fd6124b85f50692fc58394d7e0930f2c94ba690e322d7e3edefa247eaadd5",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Bardzo dobrze, skróć język do połowy",
+      "updatedAt": "2026-10-30T22:31:04.804Z"
+    },
+    {
+      "creatureId": "konwojent-straznik",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "65a7800582f857d3dcf7f1a70f069a425e59cbdd9838842cbeaaded2cfea440f",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Perspektywa bardziej od góry (top-down)",
+      "updatedAt": "2026-10-30T22:31:46.204Z"
+    },
+    {
+      "creatureId": "cywil",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "b023b9e57da0ce4bb34c9f3013152e8fed80cc63a0b6e5b3a8919181743ae4b5",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Perspektywa bardziej od góry (top-down)",
+      "updatedAt": "2026-10-30T22:31:51.226Z"
+    },
+    {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "2036a28fc6f9679d907df8141a9983d526e04017876df653daad996e7a26ceee",
+      "decision": "revise",
+      "rating": 2,
+      "notes": "Trzy segmenty maszyny nie są jasno widoczne na tokenie. Narysuj od nowa.",
+      "updatedAt": "2026-10-30T22:48:58.738Z"
+    },
+    {
+      "creatureId": "pajak",
+      "kind": "portrait",
+      "candidateId": "p04",
+      "sha256": "7337ff1d93a36d01592c5936584f8492ad4183c203241e26d3c3f05c85f1789f",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Brakuje jednek nogi po prawej stronie.",
+      "updatedAt": "2026-10-30T22:49:16.093Z"
+    },
+    {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "c9363f2b590c81bc8a5ddf480c80ec6c10640fa6c2d20e50b4a24d83d652d528",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:20:38.711Z"
+    },
+    {
+      "creatureId": "kon-skazony",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "cd09f9784e8543033a9471b451cc11b03c3227b5c4a5ed1d03436e02f3738507",
+      "decision": "approve",
+      "rating": null,
+      "notes": "Mam pewne obawy czy ma tą samą posturę co pozostałe konie.",
+      "updatedAt": "2026-10-30T23:20:05.423Z"
+    },
+    {
+      "creatureId": "neogator",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "2dd01555f948b22846dc9e7a66992aa8a5baef5f09f353ff71a7d913cce58673",
+      "decision": "approve",
+      "rating": null,
+      "notes": "",
+      "updatedAt": "2026-10-30T23:52:06.054Z"
+    },
+    {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "c9363f2b590c81bc8a5ddf480c80ec6c10640fa6c2d20e50b4a24d83d652d528",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Trochę odchudź ciało tam gdzie jest goła skóra, dodaj wiele szram i blizn",
+      "updatedAt": "2026-10-30T23:22:36.530Z"
+    },
+    {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "f2b0e5b44243aa598236986bfca50b9e1446b0ad82361d8953cc29d2cbcd01af",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Token jest krzywy - naprostuj",
+      "updatedAt": "2026-10-30T23:21:35.784Z"
+    },
+    {
+      "creatureId": "szeryf",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "55978737eb510e53ba34e45c6649f5d92c5b1b4f181c33e2d96cfe6f404d56f7",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Poprawa kamery na bardziej top-down",
+      "updatedAt": "2026-10-30T23:22:01.708Z"
+    },
+    {
+      "creatureId": "neoniedzwiedz",
+      "kind": "portrait",
+      "candidateId": "p04",
+      "sha256": "b5f1f37983ceddc4c80bc330fd4d9aa51b2fa2069eafff1965d12a0a3c98ce5b",
+      "decision": "revise",
+      "rating": null,
+      "notes": "We got all the pieces, but over multiple rounds of editing, we ended up with significant noise and artifacts. Regenerate the image fresh. In fact, give me 2-3 different variants based on this concept.",
+      "updatedAt": "2026-10-30T23:52:55.911Z"
+    },
+    {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t03",
+      "sha256": "06c4119e8a2165a4ededf60523c7af408d810311df074dc54da714d8b7e63146",
+      "decision": "revise",
+      "rating": 3,
+      "notes": "Move the turret south (down), so it covers move of the middle segment. Do something to make it less \"toy-like\" using style, and more of a pragmatic combat machine. ",
+      "updatedAt": "2026-10-30T23:55:19.562Z"
+    },
+    {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t04",
+      "sha256": "d1df0a07d22adc5bad7c497a66691cbe375891068fe425cc50d2a8f0bd2fc30d",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-31T00:15:25.834Z"
+    },
+    {
+      "creatureId": "mobsprzet",
+      "kind": "token",
+      "candidateId": "t04",
+      "sha256": "d1df0a07d22adc5bad7c497a66691cbe375891068fe425cc50d2a8f0bd2fc30d",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Shift the turret even more south/down. Generate me multiple variants.",
+      "updatedAt": "2026-10-31T00:16:16.568Z"
+    }
+  ]
+}

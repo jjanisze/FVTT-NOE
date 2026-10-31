@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-psi-partner",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "references": [
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "style and portrait format only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset: a full-body creature portrait for a grounded American post-apocalyptic tabletop RPG. Image 1 is ONLY a painting, lighting and portrait-format reference. Match its confident hand-painted realistic game illustration, dark charcoal subtly mottled backdrop, readable material texture, restrained earthy palette and neutral upper-left key light. Create a DIFFERENT dog; copy none of the reference's armor, harness, spikes, muzzle cage, numbers, scars or aggression.\nSUBJECT: a lean wiry short-haired wasteland mongrel companion, natural believable canine anatomy. Dusty rusty-tan coat, a dark charcoal-brown saddle across the back, lighter cream chest and chin, a few cream front toes; one semi-pricked ear and one softly folded ear. Narrow medium-length muzzle, natural amber-brown eyes. Plain worn brown leather collar with one dull iron ring and a SHORT piece of three or four chain links. No harness, no armor or clothing. Alert, loyal and cautious, mouth relaxed slightly open; no exaggerated snarl or drool. Standing with all FOUR paws and the entire tail visible, weight slightly forward, subtle three-quarter front view at the dog's chest height. Full figure from ears to claws, centered with comfortable breathing room. Recognizable silhouette and large readable markings; no tiny decorative features. Portrait aspect ratio approximately 4:5. Entire background is dark charcoal painterly studio-like space with a very restrained contact shadow, no scenery or props. Serious, worn and believable, not cute cartoon, not photo, not glossy CGI. No text, lettering, logos, frame, watermark or gore."
+}

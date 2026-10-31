@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.255Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cywil",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/cywil/portrait-p01.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "cywil",
+    "kind": "token",
+    "candidateId": "t01",
+    "sha256": "b023b9e57da0ce4bb34c9f3013152e8fed80cc63a0b6e5b3a8919181743ae4b5",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Perspektywa bardziej od góry (top-down)",
+    "updatedAt": "2026-10-30T22:31:51.226Z"
+  },
+  "prompt": "Use case: stylized-concept. Generate one TTRPG battle-map token from the EXACT APPROVED PORTRAIT in image 1, preserving its identity, body proportions, colours and all equipment. This is a NEW VIEW, not a portrait cutout.\nCamera almost vertically ABOVE, 88–90 degrees down, orthographic bird's-eye/plan view. Crown/back of head and TOPS of shoulders dominate; most face and front chest are occluded by the head and shoulders. Strong foreshortening compresses an upright torso; feet only peek out around the silhouette. No large front-facing face, no full-length frontal chest. HEAD/FRONT SOUTH at bottom, rear/tail NORTH at top.\nGrounded hand-painted realistic game art, muted colours, soft upper-left light, broad quiet surface gradients and selected edge detail; no fine all-over cracked texture. Square, genuine transparent alpha including limb gaps, all tips safely within margins, longest extent about 90%. No scenery, floor, circle, base, text, watermark or rectangular shadow.\nThe exact adult woman mechanic p01 with tied-back dark hair, blue rolled-sleeve shirt, tan apron with modest tools, brown trousers/boots and small holstered revolver. One hand holds the short steel pipe beside her, the other rests in an apron pocket. Redraw MUCH MORE DIRECTLY ABOVE than t01: see hair crown, shoulders and upper back, most face and front apron hidden/foreshortened, small boot ends. TWO arms/TWO legs."
+}

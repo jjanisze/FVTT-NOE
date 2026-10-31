@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "generacja-ii-genotyp-wilczy",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/generacja-ii-genotyp-wilczy/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "8d02ef427ca68cdb4861570206b3849adae8aa7a4523cf0e2619945ea99dfae6"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "d98eb9b188c855fd78a9d5a95f3903e2204c8d4224d7c8744fc25618ed1de3d8",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Niech wewnętrzne części ciała - klatka, brzuch, szyja, wewnętrzne części rąk i dłoni - będą bardziej ludzkie. A pysk bardziej przypominający wściekłego mopsa (pug)"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Change this hybrid's INNER body surfaces to look much more HUMAN: bare human-like skin across the chest, abdomen, throat and front of neck, inner arms and palms, with human chest/abdominal anatomy and smooth broad shading. Coarse dark fur remains along the back, outer arms, shoulders' outer edges, outer legs and tail. Change the head from a long wolf muzzle to an enraged PUG-like canine face: very short flattened snout, broad low forehead, bulldog/pug jowls, broad nose, natural wrinkles concentrated on face and small close-set ears; unsettling human/dog hybrid, not a cartoon or ordinary pet. Keep exactly two long arms with clawed hands and two digitigrade legs, hunched large stature, shorts, pose and backdrop. No added limbs, armour or fine cracked-skin pattern."
+}

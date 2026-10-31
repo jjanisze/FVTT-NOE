@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:29:37.643Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neoniedzwiedz",
+  "asset": "portrait",
+  "candidateId": "p04",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/neoniedzwiedz/portrait-p03.png",
+      "role": "Exact reviewed portrait edit target",
+      "sha256": "b55b59e85759a9c69371657f642574413d422edb2a7b7b85e348f6057bcf32b9"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Edit this exact huge mostly bald bear, following the GM notes. SLIM THE BARE REGIONS further: visibly reduce the chest, shoulders, belly, flank and upper-leg mass under the loose skin while retaining its enormous bear body plan and slack broad folds. Add MANY HEALED SCARS across the exposed skin: a readable collection of long broad pale scar bands and a few darker old healed slash marks of varied lengths and directions, concentrated on shoulders, sides and upper limbs. These are separated MACRO marks, roughly a dozen or two across the visible body, not a carpet of tiny cuts. No open wounds, bleeding or raw gore. Large spaces between scars keep smooth quiet skin gradients. Preserve the same bear head, four paws, pose, muzzle/back/tail/lower-leg fur, colours and charcoal backdrop. Do not add small all-over cracks or dense fine wrinkles.",
+  "gmReview": {
+    "creatureId": "neoniedzwiedz",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "c9363f2b590c81bc8a5ddf480c80ec6c10640fa6c2d20e50b4a24d83d652d528",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Trochę odchudź ciało tam gdzie jest goła skóra, dodaj wiele szram i blizn",
+    "updatedAt": "2026-10-30T23:22:36.530Z"
+  }
+}

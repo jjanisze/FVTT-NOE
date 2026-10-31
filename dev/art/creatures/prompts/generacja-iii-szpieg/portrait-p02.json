@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "generacja-iii-szpieg",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/generacja-iii-szpieg/portrait-p01.png",
+      "role": "Edit target: exact reviewed portrait version p01",
+      "sha256": "027f1dc07e1abe2d202d4085b76e931ea67001d2c36de7f40ac298507f62c67f"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "b411f1a6a9c487de24a05dc86cd889fd9eedd4ea2d6297e90512eef640097c20",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Daj mu trochę zbyt szeroki uśmiech i trochę zbyt przyjacielską pozę."
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Give this exact nearly human infiltrator a slightly TOO WIDE friendly smile and a slightly TOO FRIENDLY welcoming pose. Keep the same ordinary human face identity and small ear deformity, but widen his tooth-showing smile just beyond comfortable natural warmth. Uncrossed relaxed shoulders, one open palm offered in a small welcoming gesture and the other hand relaxed near his satchel, torso turned invitingly toward the viewer. Subtle social unease, not a monstrous mouth, gore, manic clown or exaggerated caricature. Preserve age, hair, ordinary eyes, clothing, satchel, canteen, human two arms/two legs, full body and charcoal backdrop. Keep skin smooth."
+}

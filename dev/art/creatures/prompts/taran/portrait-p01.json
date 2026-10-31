@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30T21:21:46.387Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "taran",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/taran-no15.png",
+      "role": "Primary GM-provided concept; anatomy and proportions"
+    },
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "Painting, light and backdrop ONLY; no dog anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nImage 1 is the species anatomy authority; image 2 is painting/backdrop ONLY. Faithfully render the armoured quadruped in the pencil reference: low car-sized humped body, four short powerful running legs, huge overlapping broad bony plates, a few large dorsal spikes, long low skull with a VERY LONG straight forward-pointing nasal horn and horned cheek plates, toothed lower jaw, long tapering tail trailing behind. Keep the unusual low head and shell proportions, do not substitute an ordinary rhino, armadillo or dinosaur. Three-quarter near-side view slightly from the front; head, horn, shell, four feet and tail legible. Dusty ochre/umber body, slate-brown plate edges. Bare trace of dust at feet, no obscuring cloud. Broad plate faces have smooth gradients and large structural boundaries, not tiny cracked-skin texture. No equipment."
+}

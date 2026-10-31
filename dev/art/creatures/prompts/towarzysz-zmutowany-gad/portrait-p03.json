@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-zmutowany-gad",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/portrait-p02.webp",
+      "role": "portrait to edit; preserve identity and rendering, correct limb proportions and posture"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Edit this full-body mutated lizard companion portrait. Keep the exact same natural olive-brown scale palette, muted ochre flank marking, cream throat, short rounded lizard head, natural eye, modest dorsal crest, painterly style, upper-left light and charcoal mottled backdrop. Correct the overly dog-like leg proportions and tall upright posture into a believable water-dragon/iguana-like quadrupedal LIZARD stance. Its belly and torso should be LOW AND MOSTLY HORIZONTAL, a small distance above the ground. Neck is shorter and slants gently forward, not a vertical giraffe-like neck. Four legs are shorter and visibly bent, with elbows and knees splayed to the SIDES of the body; forearms angle down/outward to the ground, not four long straight dog legs beneath the chest. Front and back feet have five attached slender clawed reptile toes. A lean flexible lizard body, not a crocodile tank or a small dinosaur; ordinary-dog-comparable threat with closed jaws and a calm alert expression. Make the long tail taper smoothly, curve behind the body, and keep its entire tip inside the frame. No new spikes, exaggerated muscles, collar, harness, armor, manmade gear, wounds or text. Keep chest-height three-quarter portrait camera; the animal's upper back and all FOUR feet must be visible. The feet and tail are separate silhouettes with comfortable margins. Full-body portrait aspect about 4:5, same dark painted backdrop and restrained contact shadow. Biological anatomy only. Preserve identity; revise ONLY the posture, leg length, neck elevation and tail taper."
+}

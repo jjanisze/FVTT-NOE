@@ -10,6 +10,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildCatalog, saveStyleFeedback } from "./catalog.mjs";
 import { buildReferenceCatalog, referenceAsset, referenceRoots } from "./dnd5e-reference.mjs";
+import { createCreatureReviewHandler } from "../../art/creatures/server.mjs";
+import { readJson, readWithBackup, writeJsonAtomic, bodyJson } from "./review-store.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -45,22 +47,6 @@ function sendFile(res, file) {
   fs.createReadStream(file).pipe(res);
 }
 
-function readJson(file, fallback) {
-  try { return JSON.parse(fs.readFileSync(file, "utf8")); }
-  catch (err) { if (err.code === "ENOENT") return fallback; throw err; }
-}
-
-async function bodyJson(req) {
-  const chunks = [];
-  let length = 0;
-  for await (const chunk of req) {
-    length += chunk.length;
-    if (length > 64 * 1024) throw new Error("Feedback payload exceeds 64 KiB");
-    chunks.push(chunk);
-  }
-  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
-}
-
 function validateFeedback(input, manifest) {
   const item = manifest.items.find(x => x.id === input.itemId);
   if (!item) throw new Error("Unknown itemId");
@@ -73,16 +59,18 @@ function validateFeedback(input, manifest) {
   return { itemId: item.id, decision: input.decision, candidateId, notes, updatedAt: new Date().toISOString() };
 }
 
-export function createReviewServer({ moduleRoot = MODULE_ROOT, reviewRoot = path.join(moduleRoot, "dev/icons/review"), dnd5eRoots } = {}) {
+export function createReviewServer({ moduleRoot = MODULE_ROOT, reviewRoot = path.join(moduleRoot, "dev/icons/review"), artRoot, dnd5eRoots } = {}) {
 const ICON_ROOT = path.join(moduleRoot, "icons");
 const MANIFEST = path.join(reviewRoot, "manifest.json");
 const FEEDBACK = path.join(reviewRoot, "feedback.json");
-const FEEDBACK_BACKUP = path.join(reviewRoot, "feedback.json.bak");
+const creatureHandler = createCreatureReviewHandler({moduleRoot,artRoot,basePath:"/creatures"});
 let localReferenceRoots = dnd5eRoots;
 const getReferenceRoots = () => localReferenceRoots ??= referenceRoots(moduleRoot);
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${HOST}:${PORT}`);
+    if(url.pathname==="/creatures") { res.writeHead(302,{location:"/creatures/"}); return res.end(); }
+    if(url.pathname.startsWith("/creatures/")) return await creatureHandler(req,res);
     if (req.method === "POST") {
       if (!req.headers["content-type"]?.startsWith("application/json")) throw new Error("Expected JSON payload");
       if (req.headers.origin && req.headers.origin !== `http://${HOST}:${req.socket.localPort}`) throw new Error("Invalid request origin");
@@ -98,29 +86,14 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "GET" && url.pathname === "/api/manifest") return json(res, 200, readJson(MANIFEST, { items: [] }));
     if (req.method === "GET" && url.pathname === "/api/feedback") {
-      return json(res, 200, readJson(FEEDBACK, readJson(FEEDBACK_BACKUP, { version: 1, items: {} })));
+      return json(res, 200, readWithBackup(FEEDBACK, { version: 1, items: {} }));
     }
     if (req.method === "POST" && url.pathname === "/api/feedback") {
       const manifest = readJson(MANIFEST, { items: [] });
       const entry = validateFeedback(await bodyJson(req), manifest);
-      const feedback = readJson(FEEDBACK, { version: 1, items: {} });
+      const feedback = readWithBackup(FEEDBACK, { version: 1, items: {} });
       feedback.items[entry.itemId] = entry;
-      const temp = FEEDBACK + ".tmp";
-      fs.writeFileSync(temp, JSON.stringify(feedback, null, 2) + "\n", "utf8");
-      // Windows cannot reliably rename over an existing file. Keep the last
-      // complete state as a recovery copy, then replace the primary.
-      if (fs.existsSync(FEEDBACK)) {
-        fs.copyFileSync(FEEDBACK, FEEDBACK_BACKUP);
-        fs.rmSync(FEEDBACK);
-      }
-      try {
-        fs.renameSync(temp, FEEDBACK);
-      } catch (err) {
-        if (!fs.existsSync(FEEDBACK) && fs.existsSync(FEEDBACK_BACKUP)) {
-          fs.copyFileSync(FEEDBACK_BACKUP, FEEDBACK);
-        }
-        throw err;
-      }
+      writeJsonAtomic(FEEDBACK, feedback);
       return json(res, 200, entry);
     }
     if (req.method !== "GET") return json(res, 405, { error: "Method not allowed" });
@@ -135,11 +108,13 @@ const server = http.createServer(async (req, res) => {
 return server;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const server = createReviewServer();
-  server.listen(PORT, HOST, () => {
-    console.log(`Icon review: http://${HOST}:${PORT}/`);
-    console.log(`Icon browser: http://${HOST}:${PORT}/browser.html`);
-    console.log(`Feedback:   ${path.join(HERE, "feedback.json")}`);
+export function startGraphicsReview({port=PORT,...options}={}) {
+  const server=createReviewServer(options);
+  server.listen(port,HOST,()=>{
+    const url=`http://${HOST}:${server.address().port}/`;
+    console.log(JSON.stringify({url,creaturesUrl:url+"creatures/",kind:"graphics-review"}));
   });
+  return server;
 }
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) startGraphicsReview();

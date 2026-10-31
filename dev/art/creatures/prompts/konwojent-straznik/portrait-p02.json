@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:31:05.856Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "konwojent-straznik",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/konwojent-straznik/portrait-p01.png",
+      "role": "Edit target; preserve identity and composition except the specifically requested change"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Change ONLY this convoy guard's facial identity to make him distinct from other people in the set. He is a pale-skinned man around fifty with a narrower long face, prominent hooked nose, grey-blue eyes, a short neatly trimmed salt-and-pepper beard and greying hair visible at the cap edge. Quiet, alert and experienced expression, natural smooth facial light/shadow with a few broad age lines. Preserve the exact pose, body proportions, two hands and their grip, lowered single submachine gun, cap, clothing, protective vest, boots, belt, baton, full-body framing, painterly brushwork and dark charcoal backdrop. No extra equipment or text. Chest and clothes remain painted in broad smooth masses."
+}

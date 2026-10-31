@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-zmutowany-ssak",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/in/towarzysz-zmutowany-ssak/portrait-p01.png",
+      "role": "edit target"
+    }
+  ],
+  "prompt": "Precise edit of Image 1. Remove ALL manufactured equipment from this mutated mammal: the entire metal muzzle/face cage, every head strap and buckle, spiked collar, leather harness, chest plate, body straps and all metal studs. Reconstruct the uncovered head, neck, shoulders, chest and back with the animal's own coarse brown fur and natural bare skin, matching the nearby anatomy and lighting. This is a biological bear-bodied quadrupedal predator with a canine muzzle, not an armored dog. Keep its four legs/paws, broad powerful body, overall proportions, pose, mouth expression, patchy fur, dark charcoal backdrop, full-body framing and grounded painterly brushwork unchanged. No new accessories, no collar or leash, no saddle, no clothing, no mechanical parts, no text and no gore. Change only the man-made equipment and the natural surfaces it was hiding."
+}

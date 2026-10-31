@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-31T00:00:21.673Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neoniedzwiedz",
+  "asset": "portrait",
+  "candidateId": "p07",
+  "portraitId": null,
+  "references": [],
+  "gmReview": {
+    "creatureId": "neoniedzwiedz",
+    "kind": "portrait",
+    "candidateId": "p04",
+    "sha256": "b5f1f37983ceddc4c80bc330fd4d9aa51b2fa2069eafff1965d12a0a3c98ce5b",
+    "decision": "revise",
+    "rating": null,
+    "notes": "We got all the pieces, but over multiple rounds of editing, we ended up with significant noise and artifacts. Regenerate the image fresh. In fact, give me 2-3 different variants based on this concept.",
+    "updatedAt": "2026-10-30T23:52:55.911Z"
+  },
+  "variantLabel": "C — długi grzbiet, ciężkie luźne fałdy",
+  "prompt": "Use case: stylized-concept. Generate a FRESH full-body bestiary portrait from this written concept, not an edit of previous artwork. One colossal bear, about three metres at the shoulder and five metres from nose to its SHORT bear tail, standing naturally on FOUR plantigrade paws. Anatomically a BEAR with a recognisable bear head, shoulder hump and heavy paws; no cat features. Its body is mostly HAIRLESS: bare shoulders, chest, neck, belly, flanks and upper limbs. Fur is restricted to the face/muzzle, a narrow strip along the spine, short tail and lower legs/paw cuffs. The bare body is lean beneath loose draping skin, with a few LARGE soft hanging folds at neck, belly and limb joints. Many old healed scars, around 12–18 broad closed pale scar bands of varied length across exposed shoulders/flanks/upper limbs; no open wounds or blood. \nRendering is naturalistic HAND-PAINTED game illustration with restrained brushwork. Broad skin planes have visibly SMOOTH, uninterrupted light-to-shadow gradients and calm colour fields between the large folds/scars. Anatomy is described through large value masses, not tiny surface lines. Fur is grouped into soft simple masses with selected silhouette tufts. Detail concentrates at eyes, nose, claws and a few scar edges. Soft diffuse upper-left light. Empty dark charcoal painted backdrop, only faint contact shading. Portrait aspect about 4:5, the ENTIRE animal including all four feet and tail comfortably inside margins. No text, labels, border, props or clothing. No uniform fine web of skin lines, dense pores or photographic texture noise.\nVariant C: an old long-backed bear with a wide skeletal ribcage but reduced flesh, lean upper limbs and heavy loose skin draped in a few broad folds along the neck, near flank and abdomen. Muted dark mocha skin and faded ash-brown restricted face/dorsal/paw fur. More side-on three-quarter front view with the near shoulder advanced, head held forward low, substantial planted paws. A few long pale healed scars crossing the near shoulder and side, additional shorter broad scar bands on limbs. Distinct quieter low long silhouette, no obese belly or inflated bodybuilder muscles."
+}

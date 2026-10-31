@@ -1,7 +1,7 @@
 {
   "version": 1,
   "title": "M6 · 14 ikon + nakładka zanurzenia · 15 do oceny",
-  "updated": "2026-10-29",
+  "updated": "2026-10-31",
   "items": [
     {
       "id": "batch90-brutal",
@@ -16237,7 +16237,8 @@
           "src": "candidates/batch-119/akordeon.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-banjo",
@@ -16265,7 +16266,8 @@
           "src": "candidates/batch-119/banjo.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-gitaraAkustyczna",
@@ -16293,7 +16295,8 @@
           "src": "candidates/batch-119/gitaraAkustyczna.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-gitaraBasowa",
@@ -16321,7 +16324,8 @@
           "src": "candidates/batch-119/gitaraBasowa.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-gitaraElektryczna",
@@ -16349,7 +16353,8 @@
           "src": "candidates/batch-119/gitaraElektryczna.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-harmonijka",
@@ -16377,7 +16382,8 @@
           "src": "candidates/batch-119/harmonijka.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-keyboard",
@@ -16405,7 +16411,8 @@
           "src": "candidates/batch-119/keyboard.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-kontrabas",
@@ -16433,7 +16440,8 @@
           "src": "candidates/batch-119/kontrabas.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-mikser",
@@ -16461,7 +16469,8 @@
           "src": "candidates/batch-119/mikser.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-perkusja",
@@ -16489,7 +16498,8 @@
           "src": "candidates/batch-120/perkusja.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-saksofon",
@@ -16517,7 +16527,8 @@
           "src": "candidates/batch-120/saksofon.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "instrument-skrzypce",
@@ -16545,7 +16556,8 @@
           "src": "candidates/batch-120/skrzypce.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "status-pod-woda",
@@ -16573,7 +16585,8 @@
           "src": "candidates/batch-120/pod-woda.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "status-tonie",
@@ -16601,7 +16614,8 @@
           "src": "candidates/batch-120/tonie.png",
           "note": "Kandydat w dotychczasowym stylu; oceń także przy 16 px."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "water-submerged-overlay",
@@ -16629,7 +16643,8 @@
           "src": "overlays/water/zanurzony.webp",
           "note": "Źródło ma własną przezroczystość. Zalecana początkowa intensywność rysowania: 60%. Podgląd pokazuje taflę na żetonach."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

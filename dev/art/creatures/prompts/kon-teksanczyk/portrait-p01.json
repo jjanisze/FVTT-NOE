@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-teksanczyk",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+      "role": "painting, lighting and charcoal portrait backdrop only, NOT anatomy, pose or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset: full-body TEKSAŃCZYK horse portrait for a grounded American post-apocalyptic tabletop RPG. Image 1 is STYLE ONLY: match the confident realistic hand-painted game illustration, muted natural colors, upper-left soft light and dark charcoal mottled portrait backdrop. Do NOT copy its dog anatomy, pose, fur or collar. Create an exceptional noble adult western riding HORSE: taller, faster-looking and more athletic than an ordinary work horse, powerful but elegant hindquarters and shoulders, natural long equine neck and face, exactly FOUR horse legs with ONE solid hoof each. Glossy healthy BLACK coat with restrained brown light in highlights, black mane and full black tail, a narrow long white blaze down the forehead toward the nose. Natural dark eyes, attentive ears, proud calm expression and closed mouth, not rearing or snarling. High-quality weathered brown WESTERN saddle, believable horn and low cantle, restrained tooled border decoration without lettering, muted cream saddle blanket with a simple broad faded rust stripe. ONE main riding saddle plus a LOW comfortable plain brown rear pillion cushion directly behind its main rider seat, both on the horse's centerline for tandem rider and passenger. It must look like practical equestrian tack on a normal-length horse back, not two huge saddles or an extended vehicle seat. Neat girth, simple leather bridle and reins secured near the saddle, sitting areas unobstructed. No people, armor, guns, bags, big bedrolls or decorative fantasy ornaments. Full-body natural standing three-quarter front portrait at chest height, all FOUR hooves and full tail entirely visible with comfortable breathing room. About 4:5 portrait format. Dark charcoal mottled painted backdrop, only restrained ground-contact shading, no scenery or props. Serious worn-world painterly realism with fine material texture, not glossy CGI, photo or cute cartoon. No text, logos, frame, extra limbs, mutation, wounds, neon or glow."
+}

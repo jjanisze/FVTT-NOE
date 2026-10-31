@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "receivedOn": "2026-10-30",
+  "policy": "Private reference originals stay in ignored in/references; they are not shipped or relicensed. The pencil drawings supply anatomy, not painting style.",
+  "entries": [
+    {
+      "id": "taran",
+      "appearanceSource": "dev/bestiary/bestiary.json#taran",
+      "referenceStatus": "provided",
+      "reference": {
+        "path": "dev/art/creatures/in/references/taran-no15.png",
+        "sha256": "bd6b7417cfb421ed2ee6a83d555d7b6033997b82a384957c821b9de44a1ee60d",
+        "origin": "Neuroshima 1.5: GM-provided pencil reference"
+      }
+    },
+    {
+      "id": "korzec",
+      "appearanceSource": "dev/bestiary/bestiary.json#korzec",
+      "referenceStatus": "provided",
+      "reference": {
+        "path": "dev/art/creatures/in/references/korzec-no15.jpg",
+        "sha256": "8acf3c3c20404e7414f18e72588efab3412903627ab37f55b46b4e13c41cd613",
+        "origin": "Neuroshima 1.5: GM-provided pencil reference"
+      }
+    },
+    {
+      "id": "gigantyczny-pajak",
+      "appearanceSource": "dev/bestiary/bestiary.json#gigantyczny-pajak",
+      "referenceStatus": "provided",
+      "reference": {
+        "path": "dev/art/creatures/in/references/gigantyczny-pajak-no15.jpg",
+        "sha256": "998475557c1d9e5bb350b193a8b33095d1a469f2e2df86370ae3525bbbea1daa",
+        "origin": "Neuroshima 1.5: GM-provided pencil reference"
+      }
+    },
+    {
+      "id": "mobsprzet",
+      "appearanceSource": "dev/bestiary/bestiary.json#mobsprzet",
+      "referenceStatus": "provided",
+      "reference": {
+        "path": "dev/art/creatures/in/references/mobsprzet-concept.png",
+        "sha256": "badb17e8e4e7e7e858b28a2dc2c282bea0ea4b0d193c48025850b2744c0e3b8c",
+        "origin": "GM-provided existing machine concept"
+      }
+    },
+    {
+      "id": "neogator",
+      "appearanceSource": "dev/bestiary/bestiary.json#neogator",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "neoniedzwiedz",
+      "appearanceSource": "dev/bestiary/bestiary.json#neoniedzwiedz",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "pies-mutek",
+      "appearanceSource": "dev/bestiary/bestiary.json#pies-mutek",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "generacja-ii-genotyp-gadzi",
+      "appearanceSource": "dev/bestiary/bestiary.json#generacja-ii-genotyp-gadzi",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "generacja-ii-genotyp-wilczy",
+      "appearanceSource": "dev/bestiary/bestiary.json#generacja-ii-genotyp-wilczy",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "generacja-iii-szpieg",
+      "appearanceSource": "dev/bestiary/bestiary.json#generacja-iii-szpieg",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "pajak",
+      "appearanceSource": "dev/bestiary/bestiary.json#pajak",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "roj-szczurow",
+      "appearanceSource": "dev/bestiary/bestiary.json#roj-szczurow",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "cywil",
+      "appearanceSource": "dev/bestiary/bestiary.json#cywil",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "gangus-boss",
+      "appearanceSource": "dev/bestiary/bestiary.json#gangus-boss",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "konwojent-straznik",
+      "appearanceSource": "dev/bestiary/bestiary.json#konwojent-straznik",
+      "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "szeryf",
+      "appearanceSource": "dev/bestiary/bestiary.json#szeryf",
+      "referenceStatus": "GM confirmed no illustration available"
+    }
+  ],
+  "legacyMobsprzetToken": {
+    "path": "dev/art/creatures/in/references/mobsprzet-token-legacy.png",
+    "sha256": "af0263c5a275a1ddaf0c79987490406444fe6d2d4df1d2bad0e1e39c187c5a65",
+    "assessment": "Existing near-overhead image on opaque grey background. Its barrel/housing arrangement differs from the chosen single-barrel portrait concept. Retained as reference, not an approved current token."
+  }
+}

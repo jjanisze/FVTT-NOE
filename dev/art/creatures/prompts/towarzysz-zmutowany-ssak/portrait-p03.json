@@ -1,0 +1,16 @@
+{
+  "creatureId": "towarzysz-zmutowany-ssak",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+      "role": "approved painting, palette and portrait-format reference only; NOT anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Full-body creature portrait for a grounded post-apocalyptic tabletop RPG. Image 1 is STYLE ONLY: match its realistic hand-painted brushwork, muted earthy colors, gentle upper-left light and charcoal mottled studio backdrop. Create a DIFFERENT animal: a lean long-bodied mutated coati/raccoon-like scavenging companion, physically and emotionally comparable to an ordinary medium dog, alert and inquisitive rather than a battle monster. Slender flexible torso, modest shoulders, narrow neck, four lean legs with small dexterous five-toed paws; no enormous muscles or thick bear forequarters. Distinct long tapered mobile snout with a soft dark nose, small rounded ears, natural dark brown intelligent eyes, mouth CLOSED. Shaggy dusty gray-brown coarse fur, cream lower muzzle and throat, a subdued dark mask around the eyes, long supple tail with five broad faded charcoal rings. Tail curves behind the body with the entire tip visible. Subtle biological mutation: irregular hairless slate-gray skin patches on one flank and near an elbow, slight natural asymmetry of ears; no open wounds. Believable anatomy, not a cute cartoon, not a hyena, wolf, bear, badger-tank or fantasy beast. The identity should read as a resourceful forager and climbing companion, not an apex predator. Standing naturally on all FOUR paws, relaxed closed jaws, chest-height three-quarter front camera, entire figure and tail visible with comfortable margins, portrait aspect about 4:5. Serious painterly realistic game art, not glossy CGI or a photograph. Background dark charcoal, minimal soft contact shading, no scenery or props. No armor, harness, muzzle cage, collar, chain, clothing, metal, lettering, frame, logo or glow. Take NO dog markings, anatomy or collar from the style reference.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.917Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "szeryf",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-kapo.webp",
+      "role": "Painting/backdrop ONLY; no copied character, tattoos, clothes or weapons"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne seasoned settlement sheriff, adult woman around fifty, sturdy self-possessed stance, greying dark hair tied back, naturally smoothly shaded weathered face. Broad practical brown hat, faded ochre shirt with simple small unlettered star badge, plain open dark brown canvas coat, dark trousers and leather boots. Large-frame revolver HOLSTERED at hip; holds ONE plain lever-action rifle lowered across body with both hands in visibly natural grip. Practical western lawkeeper, restrained colours, no gold ornament, skulls, gang tattoos or magic. Full-body three-quarter front, hat/rifle tips inside margin, broad quiet cloth planes and few seams. Painting reference only, no copied identity/equipment."
+}

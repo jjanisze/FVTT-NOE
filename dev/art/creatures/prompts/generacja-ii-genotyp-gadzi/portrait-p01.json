@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.916Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "generacja-ii-genotyp-gadzi",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "Painting/backdrop ONLY; no dog identity, anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne Generation-II reptile/human hybrid: a coherent sandy rattlesnake-like genotype, human-derived bipedal torso, TWO muscular arms with long clawed five-fingered hands, TWO bent digitigrade legs with clawed feet, ONE tapering reptile tail. Broad sandy short-snout reptilian head, subtle venom fangs and narrow watchful eyes, no cobra hood or chameleon eyes. Hunched clearly humanoid, unsettling rather than heroic fantasy lizard warrior. Bare torso with smooth sandy skin planes and a few selected LARGE scale groups at brow, shoulders and tail; no fine scale tessellation over everything. Plain worn brown knee-length cloth trousers and simple belt cover pelvis. No armour, weapon, jewellery or magical glow. Full body three-quarter front; separate two hands, two feet and tail. Painting reference only, no dog features/equipment."
+}

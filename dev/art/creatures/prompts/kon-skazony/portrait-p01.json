@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-zdrowy/portrait-p01.webp",
+      "role": "portrait family, normal horse anatomy, practical tandem saddle design, painted backdrop and lighting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept, portrait variant. Create a full-body CONTAMINATED HORSE portrait in exactly the same grounded hand-painted game-art family as the input healthy horse. The input supplies normal equine anatomy, camera/framing, charcoal mottled backdrop, soft upper-left illumination and especially the practical tack design. This is a DIFFERENT less healthy ordinary horse, not a dead/zombie horse or a supernatural monster. Keep exactly FOUR normal horse legs with ONE solid hoof each, normal-length horse back, normal long equine neck and face, upright ears, all limbs and whole tail within comfortable margins. Make it visibly lean and poorly nourished compared with the reference: some ribs and hip contours showing naturally, modestly hollow flanks, thinner neck musculature, dull scruffy ASH-GRAY/BROWN coat with small irregular sparse-hair patches, dirty tangled dark mane and thin ragged dark tail. No exposed flesh, open wounds, skeletal bones, grotesque mutations or extra limbs. Closed mouth and tired but still alert natural dark eyes; no demonic stare. The rulebook says it coughs and glows a little in the dark: express this as a VERY FAINT localized dirty yellow-green luminescence on a few small uneven coat patches near the shoulder and flank. Barely luminous surface, not bright neon, a green halo around the whole silhouette, magical aura, vapor, lightning or glowing veins. The animal should remain predominantly muted gray-brown. Use the SAME practical brown leather main saddle, cream wool blanket and low brown rear pillion cushion design as the reference: two readable tandem sitting zones on the centerline, one main saddle, normal-length horse back. The rear pillion is a LOW rounded leather cushion, not a rigid storage box; no lid, latch, tall backrest or second large saddle. Tack is more weathered and crudely repaired, with a plain bridle; reins secured safely near the pommel. Sitting areas unobstructed. No riders, bags, armor, weapons, props, stable, scenery, text, logos or border. Natural standing three-quarter front view at chest height, all FOUR solid hooves distinct, complete tail, about 4:5 portrait format, dark charcoal painted backdrop with only restrained contact shading. Serious believable post-apocalyptic painted illustration, not photograph, glossy CGI, fantasy concept monster or cartoon."
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T22:13:51.537Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "portrait",
+  "candidateId": "p04",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pajak/portrait-p03.png",
+      "role": "Edit target: lighter scout; seven legs visible and one hidden"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Make ONE local correction to this exact light eight-legged observation robot. Reveal its currently hidden REAR RIGHT walking leg as a complete slender jointed rod leg extending out behind the right side of its abdomen into the empty UPPER-RIGHT area of the picture, with a sharp foot fully visible. Its root attaches to the far rear-right side of the chassis; its bent segments angle up/right in the picture before descending to its foot. The other SEVEN currently visible walking legs must remain unchanged. Result: EIGHT walking legs total, four visible feet per side. Keep the slim observation-focused body, all optical sensors, top camera pod, exactly TWO rear antennae, rust/olive colours, pose, background, framing and all existing equipment unchanged. Do not add any other limbs or duplicate antennae. Full body with all leg tips inside margins."
+}

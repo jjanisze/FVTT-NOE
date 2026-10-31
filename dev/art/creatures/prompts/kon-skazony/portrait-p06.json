@@ -1,0 +1,20 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p06",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p05.webp",
+      "role": "exact portrait to edit: preserve horse, silhouette, pose, color, tack and tail; simplify body surfaces"
+    },
+    {
+      "path": "dev/art/creatures/candidates/kon-zdrowy/portrait-p01.webp",
+      "role": "smooth short-coat form shading only, not health, build, bay color or equipment"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Image 1 is the exact composition to edit. Keep every object, the full horse silhouette, pose, thin anatomy, body color patches, cloudy eyes, equipment, mane and soft flowing tail. Image 2 is a reference ONLY for quiet smooth shading of large short-coated horse surfaces. Make ONE change: REPAINT the surface of the entire horse BODY below the head with VERY LOW TEXTURE FREQUENCY. Remove the repeated small S-shaped waves, curls, ridges and decorative line groups from the brown coat, exposed skin, chest, neck, shoulders, belly, hips and all four legs. These fine marks are NOT anatomical features and should NOT be preserved. Every broad body plane should be a calm continuous tonal gradient, like softly painted matte velvet on the short-coated reference horse. Clearly define only the major large shapes: bony chest, shoulders, rib arcs, hips and leg joints, using diffuse light-to-shadow transitions. Keep the existing large gray-brown/pink color patches and their silhouettes, but render their interior completely smoothly. No individual body hairs, brush-scratch lines, little loops, flakes, crosshatch, pores, skin networks or fine surface pattern. Nothing that looks like a topographical map or texture stamped over the body. Keep real form and focus; do not blur the whole picture or simplify the anatomy. The head/eyes/muzzle, mane and tail may retain selective fine detail. The tail remains the current soft hair, and the current simple brown saddle, plain bridle, cream blanket, source background and lighting remain unchanged. In particular the large front CHEST plane and the entire NECK must contain mostly uninterrupted smooth soft gradients, including the dark brown sections. Preserve the same thin gray-brown horse with pale patches and cloudy eyes, not the healthy bay horse from image 2. Same full-body portrait, four legs and hooves, complete tail, opaque charcoal backdrop, same framing and proportions. Change body surface rendering ONLY."
+}

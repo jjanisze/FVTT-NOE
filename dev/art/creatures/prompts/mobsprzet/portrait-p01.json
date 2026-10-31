@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:21:46.388Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/mobsprzet-concept.png",
+      "role": "Primary GM-provided concept; anatomy and proportions"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nReference is the existing GM concept. Remake cleanly while preserving its identity: one compact unmanned FOUR-WHEEL gun robot. No human, driver, seat or cockpit. EXACTLY FOUR chunky off-road tyres on low rectangular chassis, two axles. Above is an asymmetric sloping lower equipment housing, a short rotating pedestal, then a taller rectangular steel weapon box with ONE forward-projecting barrel and one thin curved whip antenna. Preserve the distinctive stacked sloping-box silhouette and wheelbase. No extra guns, tracks or robot arms. Unequal welded panels, warm faded oxide orange over dark iron, local rust concentrated at a few seams, several heavy bolts and two bundled rear cables. Broad metal faces have clear quiet smooth gradients, wear in large patches rather than all-over tiny pitting. Three-quarter front ground-level full-body view, antenna and all wheels complete. Empty charcoal backdrop replaces reference ruins."
+}

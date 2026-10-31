@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "entries": {
+    "towarzysz-psi-partner": {
+      "installedAt": "2026-10-30T19:01:06.611371+00:00",
+      "portrait": {
+        "path": "tokens/portraits/towarzysz-psi-partner.webp",
+        "sha256": "b900f844259d3ea542ac4f83920f63ebef593d45cb02d55258bbfedd71910782",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/towarzysz-psi-partner.webp",
+        "sha256": "629be85b24ded8ef32f60cdd664d6ef66db169a3fb924e94343bd22ff652450e",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "towarzysz-zmutowany-owad": {
+      "installedAt": "2026-10-30T19:01:10.243621+00:00",
+      "portrait": {
+        "path": "tokens/portraits/towarzysz-zmutowany-owad.webp",
+        "sha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/towarzysz-zmutowany-owad.webp",
+        "sha256": "e8c5db222f8cca6179ef4012dd527b6a47c065c6c68bb1716e658c15cce7c291",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "towarzysz-zmutowany-ssak": {
+      "installedAt": "2026-10-30T19:01:14.124594+00:00",
+      "portrait": {
+        "path": "tokens/portraits/towarzysz-zmutowany-ssak.webp",
+        "sha256": "d49493832f29b43dbae12631ea2f82b5dc7f5621894443c231ed449c101cf542",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/towarzysz-zmutowany-ssak.webp",
+        "sha256": "e05af551a87fcefe5c7016f3c22e9e615ab3bd0aa96970d34023d31158d11a06",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "towarzysz-zmutowany-gad": {
+      "installedAt": "2026-10-30T19:01:17.806999+00:00",
+      "portrait": {
+        "path": "tokens/portraits/towarzysz-zmutowany-gad.webp",
+        "sha256": "1928c1a473cdffaa214ed2e90df9733a1c27c6f6d5647b3ccd297d27299e04ce",
+        "candidateId": "p03",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/towarzysz-zmutowany-gad.webp",
+        "sha256": "3bd04f330c4ce7bf6cecb907f9185a43d704105519613b620383fdb55ff9bf7a",
+        "candidateId": "t03",
+        "previousSha256": null
+      }
+    },
+    "kon-zdrowy": {
+      "installedAt": "2026-10-30T19:58:05.545821+00:00",
+      "portrait": {
+        "path": "tokens/portraits/kon-zdrowy.webp",
+        "sha256": "40d3a5b2f4c456ce9f8e19fb31746ff4b3c5b6d2b66ff063f9f85dd7531b6d0c",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/kon-zdrowy.webp",
+        "sha256": "c8669a5b959db31e751ce12c845e9dde57905faee78782fe198b8150946d3b7f",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "kon-teksanczyk": {
+      "installedAt": "2026-10-30T21:19:05.751067+00:00",
+      "portrait": {
+        "path": "tokens/portraits/kon-teksanczyk.webp",
+        "sha256": "34aa6f42a5cf83b4f9616064e42359bb5de7773ed01ea50bcfcbb37b1b789eb3",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/kon-teksanczyk.webp",
+        "sha256": "32a19826fcdfc7c88fbd4a56151081760825638d5425b5e089d4f073e0aa9298",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "gigantyczny-pajak": {
+      "installedAt": "2026-10-30T22:54:42.842863+00:00",
+      "portrait": {
+        "path": "tokens/portraits/gigantyczny-pajak.webp",
+        "sha256": "cfef8e759d90ff1e25a4418869e10ae0f93519cee134e54eac7469d2b65339cd",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/gigantyczny-pajak.webp",
+        "sha256": "5a26755b4a07c88917c052883d07c2e4416d24fb5c27edfa26ef075e90342f69",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "generacja-ii-genotyp-gadzi": {
+      "installedAt": "2026-10-30T22:54:46.756313+00:00",
+      "portrait": {
+        "path": "tokens/portraits/generacja-ii-genotyp-gadzi.webp",
+        "sha256": "76862550ed6984d3b4b89fa34f8fc7b0096cbda3493198ad89d87aaa4989b851",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/generacja-ii-genotyp-gadzi.webp",
+        "sha256": "8f7b30d16b8268b84ca11a67ce54611f13213e9ee03df845b21eca55b79464ea",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "korzec": {
+      "installedAt": "2026-10-30T22:54:50.780899+00:00",
+      "portrait": {
+        "path": "tokens/portraits/korzec.webp",
+        "sha256": "a7b289d933a64afce81242f943f6e73a840246241455fe45aee67d7c0818fe85",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/korzec.webp",
+        "sha256": "96d1e21a37707a3a5c366ec44218223fe969cfc0dbe096217b7e10282dc0a8a2",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "roj-szczurow": {
+      "installedAt": "2026-10-30T22:54:54.194465+00:00",
+      "portrait": {
+        "path": "tokens/portraits/roj-szczurow.webp",
+        "sha256": "6133ba33a217258255a4269195f6094435be44d13d0b060f4faa0d395ee031fe",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/roj-szczurow.webp",
+        "sha256": "6851f9fb1392d85203f0535e96cab2b04bd4e782218ee5147ac15e8346ea7f4f",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "taran": {
+      "installedAt": "2026-10-30T22:54:58.365854+00:00",
+      "portrait": {
+        "path": "tokens/portraits/taran.webp",
+        "sha256": "e7375737272812fd82788309554b9cdc6c6eeba75f021c7977728cb5ad96a094",
+        "candidateId": "p01",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/taran.webp",
+        "sha256": "8baf42c2cd06bc7c44a0403d80affba15471598c0e96eac3fcdbb8309514b05a",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "kon-skazony": {
+      "installedAt": "2026-10-30T23:58:32.437436+00:00",
+      "portrait": {
+        "path": "tokens/portraits/kon-skazony.webp",
+        "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+        "candidateId": "p09",
+        "previousSha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3"
+      },
+      "token": {
+        "path": "tokens/kon-skazony.webp",
+        "sha256": "bfde89254e328bc56578b531002cd2b1974a537d984216663170480de38581f5",
+        "candidateId": "t02",
+        "previousSha256": "cd09f9784e8543033a9471b451cc11b03c3227b5c4a5ed1d03436e02f3738507"
+      }
+    },
+    "konwojent-straznik": {
+      "installedAt": "2026-10-30T23:30:03.069357+00:00",
+      "portrait": {
+        "path": "tokens/portraits/konwojent-straznik.webp",
+        "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/konwojent-straznik.webp",
+        "sha256": "6d769206dae62aadb961b420fa33581104cbf2eedb68525ec3b260557aaed5fd",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "cywil": {
+      "installedAt": "2026-10-30T23:30:06.504854+00:00",
+      "portrait": {
+        "path": "tokens/portraits/cywil.webp",
+        "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+        "candidateId": "p01",
+        "previousSha256": "5f460e538478f2d9c8d6ce2679b1894f4ccb32918328877aafd5fab3948f27a2"
+      },
+      "token": {
+        "path": "tokens/cywil.webp",
+        "sha256": "419d1c15528c264c5eeab0923ed9b0b4e0ad4f708f65cdf8702469e493de5451",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "gangus-boss": {
+      "installedAt": "2026-10-30T23:30:09.191700+00:00",
+      "portrait": {
+        "path": "tokens/portraits/gangus-boss.webp",
+        "sha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/gangus-boss.webp",
+        "sha256": "36131a20877a07f2c8859a17c1040f292c1a378b07365539c2449824ae88a573",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "generacja-iii-szpieg": {
+      "installedAt": "2026-10-30T23:30:12.112094+00:00",
+      "portrait": {
+        "path": "tokens/portraits/generacja-iii-szpieg.webp",
+        "sha256": "d0989afcdcf6b5ace9ed855100225eb4ad4c953a5d37866bb1db9bd18f606c26",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/generacja-iii-szpieg.webp",
+        "sha256": "4418a3866ceab8a2357f00ad07ddd5c103b5c940db93989785585a9abe15c3d5",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "neogator": {
+      "installedAt": "2026-10-30T23:58:32.463253+00:00",
+      "portrait": {
+        "path": "tokens/portraits/neogator.webp",
+        "sha256": "9afbc2054b74ca1cec10828e3bc6f82fe89243e9a2366d6b328267858a39bb57",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/neogator.webp",
+        "sha256": "2dd01555f948b22846dc9e7a66992aa8a5baef5f09f353ff71a7d913cce58673",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "pies-mutek": {
+      "installedAt": "2026-10-30T23:58:32.488312+00:00",
+      "portrait": {
+        "path": "tokens/portraits/pies-mutek.webp",
+        "sha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188",
+        "candidateId": "p03",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/pies-mutek.webp",
+        "sha256": "a2eedd27620e550d2e514f5f474c238f1ddfca47d7ff02a7d3b8be448eefe442",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "generacja-ii-genotyp-wilczy": {
+      "installedAt": "2026-10-30T23:58:32.515410+00:00",
+      "portrait": {
+        "path": "tokens/portraits/generacja-ii-genotyp-wilczy.webp",
+        "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/generacja-ii-genotyp-wilczy.webp",
+        "sha256": "fdfa24d448214346146651cdfb9343b6853ae6e6996ad1ca8670a71ee6248613",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "pajak": {
+      "installedAt": "2026-10-30T23:58:32.547502+00:00",
+      "portrait": {
+        "path": "tokens/portraits/pajak.webp",
+        "sha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0",
+        "candidateId": "p07",
+        "previousSha256": "1aa366661de4e68ac9a8a340f84caa49512fe25727a10b0f56c416fd39f43579"
+      },
+      "token": {
+        "path": "tokens/pajak.webp",
+        "sha256": "25529157fb391e80ddc4943d3cb8f4d628522ce0247d2b3620d27e3cf34b6cd3",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "szeryf": {
+      "installedAt": "2026-10-30T23:58:32.580309+00:00",
+      "portrait": {
+        "path": "tokens/portraits/szeryf.webp",
+        "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74",
+        "candidateId": "p02",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/szeryf.webp",
+        "sha256": "bb6ce05efd3f8e04d65d03fc1a4581a33a5e3030de66d3d0b7372b36860bfc88",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "neoniedzwiedz": {
+      "installedAt": "2026-10-31T00:39:39.773375+00:00",
+      "portrait": {
+        "path": "tokens/portraits/neoniedzwiedz.webp",
+        "sha256": "d7ee23887c4fb4412ace59741a3be2de8b42527fcb160217362fdf8a6f9e97f9",
+        "candidateId": "p07",
+        "previousSha256": null
+      },
+      "token": {
+        "path": "tokens/neoniedzwiedz.webp",
+        "sha256": "1670eb739ddead8fbddeb36b7a1a45a90f3197168fb28e827682df13fba22d11",
+        "candidateId": "t01",
+        "previousSha256": null
+      }
+    },
+    "mobsprzet": {
+      "installedAt": "2026-10-31T00:39:42.812327+00:00",
+      "portrait": {
+        "path": "tokens/portraits/mobsprzet.webp",
+        "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+        "candidateId": "p01",
+        "previousSha256": "933aaa06dd827ccfff7ff27e9d1366866bac00ec627c4cbfa9c2d2f3203039ca"
+      },
+      "token": {
+        "path": "tokens/mobsprzet.webp",
+        "sha256": "b280fd179f48ca666229003ff6941718c78b2273c75813f1520bd4ac0056904f",
+        "candidateId": "t05",
+        "previousSha256": null
+      }
+    }
+  }
+}

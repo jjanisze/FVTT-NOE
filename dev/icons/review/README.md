@@ -1,5 +1,24 @@
 # Icon review queue
 
+## Shared graphics workspace
+
+`review:graphics`, `review:icons` and `review:creatures` start the same server. Open its
+printed URL; portrait/token review is at `/creatures/`. One listener and shared navigation
+serve icon reviews, their library, 5e references, portraits/tokens and the water preview.
+
+`review-store.mjs` shares JSON parsing, bounded requests, backup recovery and atomic writes.
+Workflows retain their validators and existing feedback files; no GM decisions are migrated.
+Creature approvals retain SHA-256 checks and exact source-portrait linkage. Saving feedback
+does not install assets or change Foundry. The creature sidebar pins active work, collapses
+plans and groups completed pairs in a category tree. Search opens matching branches and
+accepts Polish words without diacritics; expansion and drafts persist across navigation.
+New candidates reopen work; explicit later approval of an older version is respected.
+
+`npm run test:graphics-review` runs isolated review tests. `test:creature-art` additionally
+checks image preparation and the portrait-approval gate. Neither runs Foundry regressions
+or changes real feedback. Chrome checks on 2026-10-30 covered tabs, 3 active horses, 16 plans,
+4 completed companions, search/tree expansion, the reverted mammal and a narrow viewport.
+
 This local tool puts item context, the current icon and generated candidates on
 one dark page. Every image is also shown at 64, 32 and 16 px. Decisions and free
 text notes are written to `feedback.json`, so they survive browser restarts and
@@ -13,7 +32,7 @@ With Foundry already open in the Chrome debug session, refresh the read-only
 world/module item inventory with `npm run audit:icons`. Its snapshot is written
 to `audits/live-items.json`; it never opens Foundry's LevelDB files directly.
 
-Open `http://127.0.0.1:41741/`. Select a candidate, choose **Approve selected**,
+Open the URL printed by the server. Select a candidate, choose **Approve selected**,
 **Needs revision** or **Reject all**, write any notes, and press **Save feedback**.
 For **Needs revision**, the selected image is the reference for the next generation;
 the review page preserves that selection when it is reopened.

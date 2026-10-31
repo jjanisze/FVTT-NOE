@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "towarzysz-psi-partner",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/in/towarzysz-psi-partner/portrait-p01.png",
+      "role": "subject identity"
+    },
+    {
+      "path": "tokens/pies-bojowy.webp",
+      "role": "camera and token-painting format only"
+    }
+  ],
+  "prompt": "Create ONE top-down tabletop battle-map TOKEN of the exact mongrel dog in Image 1, on a genuinely transparent background.\nREFERENCE ROLES: Image 1 is SUBJECT IDENTITY: preserve its lean wiry ordinary-dog proportions, narrow muzzle, dusty rusty-tan fur, dark charcoal-brown saddle on the back, cream chin/chest/front toes, one semi-pricked ear and one folded ear, natural amber eyes, worn plain brown leather collar with iron ring and three short chain links. The chain hangs naturally under the collar and may be partly hidden from overhead. Image 2 is ONLY CAMERA / TOKEN PAINTING / SILHOUETTE FORMAT: copy its high overhead camera, grounded painterly realism, crisp readable fur and clean isolated edge. Do NOT copy Image 2's pit-bull anatomy, armor, muzzle cage, harness, spikes, digits, scars or coat design.\nCAMERA: approximately 80 degrees above ground, looking down on crown, shoulders and back; very strong overhead foreshortening. Dog's HEAD POINTS STRAIGHT DOWN toward the BOTTOM of the image, rear and tail toward the TOP. Canine spine aligned vertically. Whole dog and tail inside frame. A natural cautious forward step, FOUR legs / FOUR paws, front paws separated enough for the silhouette. Normal canine anatomy, no extra limbs. Most of the chest is naturally hidden in this view. This must read as a map token, never a front-view or side-view portrait, never a horizontal dog facing left or right.\nFORMAT: square composition, about 70% longest silhouette extent with generous evenly distributed transparent margins. No background, floor, ground disc, checkerboard drawing, ring, border, base or text. Neutral upper-left lighting and restrained near-body contact shading only, no long cast shadow. Hand-painted realistic game token, subdued earth tones, firm silhouette readable at 70 screen pixels. Keep broad coat markings, collar and ear asymmetry consistent with the portrait. No gore, fantasy effects, glowing eyes or extra equipment."
+}

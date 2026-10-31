@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-30T21:21:46.388Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "korzec",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/korzec-no15.jpg",
+      "role": "Primary GM-provided concept; anatomy and proportions"
+    },
+    {
+      "path": "tokens/portraits/pies-bojowy.webp",
+      "role": "Painting, light and backdrop ONLY; no dog anatomy or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nImage 1 is the primary anatomy authority; image 2 painting/backdrop ONLY. Faithfully reinterpret the uncanny creature in the pencil image: elongated upright hollow trunk-like body of living bark-like skin; small canopy-like upper head with flattened long snout, tiny pale eyes and hanging pointed tooth/root projections; irregular long jointed branch arms including the high arching limb terminating in a broad natural axe-shaped blade, hooked branching forelimbs below and thick splayed root legs supporting the base. Preserve the spidery asymmetric branch silhouette and hollow ribbed underside in the drawing. A territorial biological herbivore mimicking a thorny tree, not a friendly human-faced tree giant or an ordinary quadruped. Bark represented by several large ridges and deep grooves with broad quiet surfaces between them; sparse moss patches and a few large thorns. Brown-grey living wood, muted moss green. Three-quarter chest-height view, all branches/root feet complete. Upper blade is anatomy, not a manufactured weapon. No scenery."
+}

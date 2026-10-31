@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p04",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p02.webp",
+      "role": "clean smooth painterly rendering, lighting and framing only; create the specified different thin gray-brown horse"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Make a NEW full-body gray-brown riding-horse portrait using the input ONLY for its restrained realistic painting, smooth form shading, soft upper-left light, three-quarter camera and dark charcoal backdrop. The new horse is very lean with low body condition: prominent ribs and hip bones, a slender narrow chest, thin legs with prominent joints, narrow neck, slightly drooping attentive ears and natural eyes clouded pale gray. Exactly four normal horse legs, one solid hoof on each foot. Short sparse cool gray-brown coat with a few LARGE softly bounded pale pink-gray hairless patches over the shoulders and flank, and restrained broad mottled color stains. The horse's body is to be painted with CLEAN SMOOTH CONTINUOUS GRADIENTS OF LIGHT AND SHADE. Especially the broad front chest, neck and shoulder are quiet uninterrupted surfaces softly turning from highlight into shadow, like the smooth modelling of the reference. Model ribs and muscles through broad value transitions. Keep most of the skin/coat visually simple; selective fine detail belongs at eyes, muzzle, ears and a few silhouette hairs. Hairless regions have a plain smooth matte surface, like softly shaded velvet, with no drawn surface pattern. At most a few broad, isolated marks of discoloration, leaving large calm areas between them. All body planes must look cleanly painted rather than noise-covered. Sparse dark mane and tail are SOFT FLOWING HAIR: continuous thin tapered strands gathered into loose natural locks, hanging with gravity and a few wispy loose ends. The tail is slender and ragged in outline, but still unmistakably soft flexible hair. Plain inexpensive brown leather main riding saddle and a small low rear pillion cushion, one behind the other on the center line. Simple leather panels with broad smooth shading, a few stitches at seams and one or two large edge scuffs; coarse cream blanket with a few large frayed edge threads, simple bridle. Equipment is modest and well-used rather than decorated. Tiny faint dull yellow-green color patches on one shoulder and a flank suggest the creature's variant, without a surrounding light effect. Emaciated anatomy, cloudy eyes and sparse discolored coat provide its distinctive appearance; keep its anatomy believable. It stands naturally, mouth closed. Full horse, all four hooves, complete tail tip and both ears visible within comfortable margins, 4:5 portrait, same subtly painted dark charcoal backdrop as the reference. Preserve clean readable edges and full spatial form. Rendering target: elegant broad tonal painting with smooth gradients and very sparse local surface detail. Only one horse and its simple tack, opaque background. No riders, extra objects, text, border or armor."
+}

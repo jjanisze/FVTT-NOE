@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:21:17.600Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p07",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/kon-skazony/portrait-p06.png",
+      "role": "Edit target: exact smooth-surface horse identity, pose and equipment"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Edit this exact sick horse portrait, changing ONLY a few local signs of illness. Add a small cluster of three or four distinct swollen pustules/blisters on the visible shoulder bald patch, and two on the flank bald patch, with dull reddish rims and small creamy-yellow centres. Non-graphic mild veterinary skin illness, no flowing fluid, deep wounds or gore. They must read as a few larger individually placed lesions; leave over 95% of the surface untouched and smooth. Preserve the horse's entire identity, skinny proportions, mottled pale bald patches, cloudy eyes, pose, all four legs, soft hair tail, plain old leather saddle with rear passenger pad, bridle, neutral charcoal backdrop and composition. CRITICAL: keep the already approved quiet chest/neck smooth light-to-shadow gradients, no new fine scratches, craquelure, cellular web, scales or all-over stippling anywhere. Do not sharpen the texture. Same portrait framing, all extremities visible, no text or border."
+}

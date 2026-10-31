@@ -1,0 +1,2272 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "kon-zdrowy",
+      "title": "Koń — zdrowy",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Koń, który nocuje w stajni, je nieskażoną paszę, pije czystą wodę i przynajmniej raz w życiu widział weterynarza. Silne zwierzę pociągowe, nadające się również do jazdy wierzchem.",
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 i żeton t01 zaakceptowane (5/5 i 4/5). Para zapisana w finalnych plikach; integracja paczek poza tą turą.",
+      "source": "dev/bestiary/bestiary.json#kon-zdrowy",
+      "targets": {
+        "portrait": "tokens/portraits/kon-zdrowy.webp",
+        "token": "tokens/kon-zdrowy.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/kon-zdrowy/portrait-p01.webp",
+            "sha256": "40d3a5b2f4c456ce9f8e19fb31746ff4b3c5b6d2b66ff063f9f85dd7531b6d0c",
+            "source": "dev/art/creatures/in/kon-zdrowy/portrait-p01.png",
+            "sourceSha256": "03b1dd90b355c38c03d6f8a43475d674074bc9442a0e37f74013e35345cc394a",
+            "prompt": "dev/art/creatures/prompts/kon-zdrowy/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:02:30.956338+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/kon-zdrowy/token-t01.webp",
+            "sha256": "c8669a5b959db31e751ce12c845e9dde57905faee78782fe198b8150946d3b7f",
+            "source": "dev/art/creatures/in/kon-zdrowy/token-t01.png",
+            "sourceSha256": "86dd7d1cc83764f22d378ee5800ea5fefe8fa6f4fa0ecbc48faeddd35c678d4e",
+            "prompt": "dev/art/creatures/prompts/kon-zdrowy/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T19:29:07.862076+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "40d3a5b2f4c456ce9f8e19fb31746ff4b3c5b6d2b66ff063f9f85dd7531b6d0c",
+            "sourceBox": [
+              416,
+              24,
+              844,
+              1156
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Wierzchowce"
+      ]
+    },
+    {
+      "id": "kon-skazony",
+      "title": "Koń — skażony",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Koń, jaki jest, każdy widzi. To, że kaszle i trochę świeci w ciemnościach, wpływa jedynie korzystnie na jego cenę. Żywi się każdą rośliną, pije skażoną wodę i jakoś żyje.",
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p09/t02 zapisana dokładnie w docelowych plikach. Wyrównany t02 jest finalny (4/5); wcześniejszy t01 zachowano jako kandydat i kopię poprzedniej dostawy.",
+      "source": "dev/bestiary/bestiary.json#kon-skazony",
+      "targets": {
+        "portrait": "tokens/portraits/kon-skazony.webp",
+        "token": "tokens/kon-skazony.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p01.webp",
+            "sha256": "dd415d8af4f6cd3ba7cd3fa70475e236b9100cd4c4990a27b2dc146c2eafc1bb",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p01.png",
+            "sourceSha256": "1044469c7145f71952c11bad3babdf04fdf883055e992280f859239b68c48564",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:08:03.325810+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p02.webp",
+            "sha256": "5ab87b8dbe0ffdfe6967f3bf2b762db4983d1056e3a48c7f14e34120747a6f3d",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p02.png",
+            "sourceSha256": "b13abdbda2d0f75daab4c6cfa25de412dc042906568f9f4bf5210438545c1b63",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:29:12.164194+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p03.webp",
+            "sha256": "c298e1c57466b1b3a61388341f02c0fa550952e9673950c5719501ba18fa39d4",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p03.png",
+            "sourceSha256": "89f535bb2542e302a79991812ec913d62c1b5abd38400337471b6e77d23eeef9",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p03.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:56:31.723862+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Próba przygotowawcza: siatka drobnych spękań osłabiona, ale nadal widoczna na piersi i szyi. Następna próba p04 powstaje bez teksturowanego portretu jako bazy."
+          },
+          {
+            "id": "p04",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p04.webp",
+            "sha256": "72f8a19769c2e87c71bb9a6d45eb5f76951e73059927c70db5a0a0d85fa95e3b",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p04.png",
+            "sourceSha256": "7f246bc9ae424e989793737822ff8e9f127bf2ac99f1c8b59a6fa03d33568096",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p04.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T20:00:26.919922+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Nowa baza z gładkim światłocieniem zamiast spękanej referencji. Duże powierzchnie spokojniejsze; kolejna wersja usuwa ozdobne siodło przeniesione z referencji Teksańczyka."
+          },
+          {
+            "id": "p05",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p05.webp",
+            "sha256": "faea4e20cc3d49b5f6bc2785476ca4d1313101683aa2305bd9602e05ec180e25",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p05.png",
+            "sourceSha256": "4cf818e77f5727f8fb57360b2f62460fe87add8f2e9c70bef807d9b9c603e876",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p05.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T20:05:31.609987+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Uproszczony sprzęt, spokojniejsze plamy skóry i miękki ogon. W kontroli 1:1 pozostały powtarzalne zawijasy w brązowych partiach ciała; następna edycja ogranicza je."
+          },
+          {
+            "id": "p06",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p06.webp",
+            "sha256": "485fa460d3e675bfc07bbf00ccb78815d24a7f48f1c07353cc8b49332bd4d42f",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p06.png",
+            "sourceSha256": "204bc682a327a77ced9fc1287bd9208aa4fd5253624d68e37c05ae51fc864223",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p06.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T20:10:16.815839+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Wersja do oceny: spokojne gradienty na piersi i szyi zamiast drobnej siatki, miękkie włosie ogona i prosty sprzęt. Zachowano poprzednie próby do porównania."
+          },
+          {
+            "id": "p07",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p07.webp",
+            "sha256": "b9a70702d53ae237c0001a6d7bc7cdb9b16c560c1c45e6c24a1cb854ffaf2137",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p07.png",
+            "sourceSha256": "dfdfb373a02b7deb7d3dfb4c9e94530274a58fdc8d1ba8fad9e7daa029e12c3d",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p07.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:25:10.109558+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preparatory variant: faint fine surface pattern returned; p08 is the current local-edit proposal."
+          },
+          {
+            "id": "p08",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p08.webp",
+            "sha256": "f4fb29f5cdab1d74939a13a064b8d530c9f046eeb9b482acc6d092ff62aae59c",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p08.png",
+            "sourceSha256": "775123110f378b10e5f5c149d8ec865776a5085973980deb25cfee103aa258c3",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p08.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:35:22.131670+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Five localised blisters on p06 base; compare smooth surfaces at 1:1 with p06/p07. Awaiting GM portrait approval."
+          },
+          {
+            "id": "p09",
+            "src": "dev/art/creatures/candidates/kon-skazony/portrait-p09.webp",
+            "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+            "source": "dev/art/creatures/in/kon-skazony/portrait-p09.png",
+            "sourceSha256": "d4792ac9f92f8416f40b5b2a2538738a5b94aea82ab94078de9cc82b14daf295",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/portrait-p09.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:10:06.426729+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/kon-skazony/token-t01.webp",
+            "sha256": "cd09f9784e8543033a9471b451cc11b03c3227b5c4a5ed1d03436e02f3738507",
+            "source": "dev/art/creatures/in/kon-skazony/token-t01.png",
+            "sourceSha256": "588c3a08d59d5a43a458759b5326584ea62a028cd04f4bf8d5d0e3e9fdc09d30",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T23:10:59.789109+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p09",
+            "portraitSha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+            "sourceBox": [
+              435,
+              20,
+              822,
+              1216
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/kon-skazony/token-t02.webp",
+            "sha256": "bfde89254e328bc56578b531002cd2b1974a537d984216663170480de38581f5",
+            "source": "dev/art/creatures/in/kon-skazony/token-t02.png",
+            "sourceSha256": "8bdd4f567ce65ca54ae0c4f5e5f66f71b047b87bb9ce53b6722b987776bcf705",
+            "prompt": "dev/art/creatures/prompts/kon-skazony/token-t02.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T23:36:57.042674+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Pose/saddle-alignment alternative using the healthy-horse token as a projection template. Approved t01 remains delivered; t02 needs its own review.",
+            "portraitId": "p09",
+            "portraitSha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+            "sourceBox": [
+              421,
+              57,
+              839,
+              1180
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Wierzchowce"
+      ]
+    },
+    {
+      "id": "kon-teksanczyk",
+      "title": "Koń — Teksańczyk",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Marzenie każdego kowboja i jedyna rasa godna szlachty z Federacji Appalachów. To nie jest zwykły koń, lecz wierny towarzysz (choć pierońsko drogi w utrzymaniu).",
+      "stage": "portrait-approval",
+      "guidance": "Portret p02 i żeton t01 zaakceptowane 5/5; dokładnie ocenione pliki zapisane w docelowych ścieżkach. Bez builda paczek.",
+      "source": "dev/bestiary/bestiary.json#kon-teksanczyk",
+      "targets": {
+        "portrait": "tokens/portraits/kon-teksanczyk.webp",
+        "token": "tokens/kon-teksanczyk.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p01.webp",
+            "sha256": "e85fb7d59db3a40164d16756177ca8ebb99e8f32a39fca1a29b813f1ec6efa4c",
+            "source": "dev/art/creatures/in/kon-teksanczyk/portrait-p01.png",
+            "sourceSha256": "ebb821b2e17dab2ddfcb6ee574b066f0da3dccc5aefc06ec62633f24cbbfa423",
+            "prompt": "dev/art/creatures/prompts/kon-teksanczyk/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:02:35.244932+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p02.webp",
+            "sha256": "34aa6f42a5cf83b4f9616064e42359bb5de7773ed01ea50bcfcbb37b1b789eb3",
+            "source": "dev/art/creatures/in/kon-teksanczyk/portrait-p02.png",
+            "sourceSha256": "914ef5a5000e21a81e71318dc6a6ad4a6c9b242249c181a61915289f49443059",
+            "prompt": "dev/art/creatures/prompts/kon-teksanczyk/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T19:29:16.917116+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/kon-teksanczyk/token-t01.webp",
+            "sha256": "32a19826fcdfc7c88fbd4a56151081760825638d5425b5e089d4f073e0aa9298",
+            "source": "dev/art/creatures/in/kon-teksanczyk/token-t01.png",
+            "sourceSha256": "432d0299e3361e9fcde973f369fe9d81636f64ad2ea3a7c81e003989de1d2a30",
+            "prompt": "dev/art/creatures/prompts/kon-teksanczyk/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T19:56:41.170827+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p02",
+            "portraitSha256": "34aa6f42a5cf83b4f9616064e42359bb5de7773ed01ea50bcfcbb37b1b789eb3",
+            "sourceBox": [
+              406,
+              34,
+              869,
+              1192
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Wierzchowce"
+      ]
+    },
+    {
+      "id": "gigantyczny-pajak",
+      "title": "Gigantyczny pająk",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Nie ma chyba bardziej przerażającego widoku niż wielki, włochaty pająk wielkości konia. W człowieku odzywa się atawistyczny strach, który rozpełza się po ciele i paraliżuje. Marzysz, żeby się po prostu wycofać i nie zaplątać przypadkiem w jego sieć. A tu psikus, bo ten skurczybyk skacze na naprawdę wielkie odległości. Już mu nie uciekniesz muszko.",
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 (4/5) i żeton t01 (4/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach.",
+      "source": "dev/bestiary/bestiary.json#gigantyczny-pajak",
+      "targets": {
+        "portrait": "tokens/portraits/gigantyczny-pajak.webp",
+        "token": "tokens/gigantyczny-pajak.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/gigantyczny-pajak/portrait-p01.webp",
+            "sha256": "cfef8e759d90ff1e25a4418869e10ae0f93519cee134e54eac7469d2b65339cd",
+            "source": "dev/art/creatures/in/gigantyczny-pajak/portrait-p01.png",
+            "sourceSha256": "07bb1d13b8c76c143147c84bb81b6982b25f09b1ae889eb662fd39d184b16d05",
+            "prompt": "dev/art/creatures/prompts/gigantyczny-pajak/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:25:18.892018+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "GM pencil reference defines anatomy; existing module art supplies painting only. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/gigantyczny-pajak/token-t01.webp",
+            "sha256": "5a26755b4a07c88917c052883d07c2e4416d24fb5c27edfa26ef075e90342f69",
+            "source": "dev/art/creatures/in/gigantyczny-pajak/token-t01.png",
+            "sourceSha256": "44e7ad3e8986213eaa1c8b92dd0988dfedea60e1764fe42eb3ed764a3e6dfd88",
+            "prompt": "dev/art/creatures/prompts/gigantyczny-pajak/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T22:16:11.691424+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "cfef8e759d90ff1e25a4418869e10ae0f93519cee134e54eac7469d2b65339cd",
+            "sourceBox": [
+              55,
+              19,
+              1217,
+              1230
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Zwierzęta"
+      ]
+    },
+    {
+      "id": "neogator",
+      "title": "Neogator",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Neogator to co najmniej 6 metrów opancerzonej i pływającej śmierci. Ma czarne, rogowe łuski i paszczę tak wielką, że może przegryźć człowieka na pół. Bez wysiłku przewróci łódkę i pożre wszystko, co wypadło z niej do wody.",
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t01 zapisana dokładnie w docelowych plikach.",
+      "source": "dev/bestiary/bestiary.json#neogator",
+      "targets": {
+        "portrait": "tokens/portraits/neogator.webp",
+        "token": "tokens/neogator.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/neogator/portrait-p01.webp",
+            "sha256": "961bd8ebd2afc61972d7d8d206a6851ede09a3bda2a6de1b17684748baa29511",
+            "source": "dev/art/creatures/in/neogator/portrait-p01.png",
+            "sourceSha256": "a230496b193e813e2c407db9be7344f8d613fa714fcf2550dd114ed5f0cde3e0",
+            "prompt": "dev/art/creatures/prompts/neogator/portrait-p01.json",
+            "width": 790,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:29:42.987482+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/neogator/portrait-p02.webp",
+            "sha256": "9afbc2054b74ca1cec10828e3bc6f82fe89243e9a2366d6b328267858a39bb57",
+            "source": "dev/art/creatures/in/neogator/portrait-p02.png",
+            "sourceSha256": "70f648eefbee0e06d97da6036a1df677ddb59022016b75b28730d5cb79aba553",
+            "prompt": "dev/art/creatures/prompts/neogator/portrait-p02.json",
+            "width": 790,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:06.008283+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/neogator/token-t01.webp",
+            "sha256": "2dd01555f948b22846dc9e7a66992aa8a5baef5f09f353ff71a7d913cce58673",
+            "source": "dev/art/creatures/in/neogator/token-t01.png",
+            "sourceSha256": "300c5284ea1bdf30625836368f30121d691b1930cd0ae84124bfe31639512ba8",
+            "prompt": "dev/art/creatures/prompts/neogator/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T23:11:00.722239+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "9afbc2054b74ca1cec10828e3bc6f82fe89243e9a2366d6b328267858a39bb57",
+            "sourceBox": [
+              190,
+              17,
+              1108,
+              1204
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Zwierzęta"
+      ]
+    },
+    {
+      "id": "neoniedzwiedz",
+      "title": "Neoniedźwiedź",
+      "group": "bestiary",
+      "size": "huge",
+      "px": 1200,
+      "fill": 0.92,
+      "brief": "Gruba skóra, trzy metry w kłębie, pięć metrów od paszczy do ogona, czyni z niego drapieżnika, który skutecznie broni swoich terenów łowieckich.",
+      "stage": "portrait-approval",
+      "guidance": "Para p07/t01 zatwierdzona i zapisana dokładnie w docelowych plikach (portret 5/5, żeton 4/5). Starsze warianty pozostają w historii. Brak otwartej pracy nad grafiką tego wpisu.",
+      "source": "dev/bestiary/bestiary.json#neoniedzwiedz",
+      "targets": {
+        "portrait": "tokens/portraits/neoniedzwiedz.webp",
+        "token": "tokens/neoniedzwiedz.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p01.webp",
+            "sha256": "ea139fd27dd7f15e5ecd9cdbe4639fe83358036fa5a40d90c97f46da3de75744",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p01.png",
+            "sourceSha256": "f89e1cee4b146b5c763339a207e38cb716575398a4f375b17df94d3735f9ed97",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p01.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:29:47.155151+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p02.webp",
+            "sha256": "e5c5f2033d2549d3362bd195f1f27474c3eac1d56c274c9803d3aeacc39084df",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p02.png",
+            "sourceSha256": "1c107f77cfdefd8949ad3e99de85f678e025c93aa95a4cdbbff77547b2174c89",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p02.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:09.133937+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p03.webp",
+            "sha256": "c9363f2b590c81bc8a5ddf480c80ec6c10640fa6c2d20e50b4a24d83d652d528",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p03.png",
+            "sourceSha256": "b55b59e85759a9c69371657f642574413d422edb2a7b7b85e348f6057bcf32b9",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p03.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:10:58.655022+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM latest saved portrait notes; awaiting approval of this exact revision."
+          },
+          {
+            "id": "p04",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p04.webp",
+            "sha256": "b5f1f37983ceddc4c80bc330fd4d9aa51b2fa2069eafff1965d12a0a3c98ce5b",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p04.png",
+            "sourceSha256": "80753ab061ab11783018a6ee4db1b603bb6460c76878013a3253ff9cbf9b730a",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p04.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:36:54.520114+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Leaner bare regions and separated broad healed scars; awaiting approval of this new portrait."
+          },
+          {
+            "id": "p05",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p05.webp",
+            "sha256": "b1b1b18585f243beccf21c8c229bd3573301910115c91fbe026f027b88a2b130",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p05.png",
+            "sourceSha256": "a5609f18c8ba96a635d3883de96fb70c9a9850aae548c90feefc218a84ca99dd",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p05.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T00:05:01.645879+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "A — pochylony brunatny, wąska talia. Świeża niezależna generacja bez obrazów wejściowych; do wyboru i oceny portretu."
+          },
+          {
+            "id": "p06",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p06.webp",
+            "sha256": "0a1382f89e07f4af810fd5526d8e3f3ddc339f05d37ff0e5a7dbf9ca53a5727f",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p06.png",
+            "sourceSha256": "3d6448bfbf54ae6c8746aef8f547b2e3bc035f1b076e4216c1fc9572522e2c89",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p06.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T00:05:01.970544+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "B — wysoki, najbardziej wychudzony. Świeża niezależna generacja bez obrazów wejściowych; do wyboru i oceny portretu."
+          },
+          {
+            "id": "p07",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/portrait-p07.webp",
+            "sha256": "d7ee23887c4fb4412ace59741a3be2de8b42527fcb160217362fdf8a6f9e97f9",
+            "source": "dev/art/creatures/in/neoniedzwiedz/portrait-p07.png",
+            "sourceSha256": "acd62eaf30b57cd058125a4ca6cd246ab6d299197ced8cb93f739552d1f43419",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/portrait-p07.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T00:05:02.225627+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "C — długi grzbiet, ciężkie luźne fałdy. Świeża niezależna generacja bez obrazów wejściowych; do wyboru i oceny portretu."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/neoniedzwiedz/token-t01.webp",
+            "sha256": "1670eb739ddead8fbddeb36b7a1a45a90f3197168fb28e827682df13fba22d11",
+            "source": "dev/art/creatures/in/neoniedzwiedz/token-t01.png",
+            "sourceSha256": "64e49db786191ecae6abde4fcf9aa9c691730a79ae3dfa263e3b55c6e295708b",
+            "prompt": "dev/art/creatures/prompts/neoniedzwiedz/token-t01.json",
+            "width": 1200,
+            "height": 1200,
+            "createdAt": "2026-10-31T00:20:33.333515+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First overhead token from GM-approved p07 (5/5); bald skin, restricted dorsal fur, broad folds and healed scars. Awaiting token review.",
+            "portraitId": "p07",
+            "portraitSha256": "d7ee23887c4fb4412ace59741a3be2de8b42527fcb160217362fdf8a6f9e97f9",
+            "sourceBox": [
+              316,
+              8,
+              966,
+              1216
+            ],
+            "fill": 0.92
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Zwierzęta"
+      ]
+    },
+    {
+      "id": "pies-mutek",
+      "title": "Pies mutek",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Półtora metra w kłębie, dobrze zbudowany, przypominający sylwetką doga. Pokryta wrzodami skóra brunatnej barwy, krótki ogon. Pies mutek ma nienaturalnie wielką głowę, ostre, długie zębiska i czerwony jęzor, którym mógłby zamiatać ulice.",
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p03/t01 zapisana dokładnie w docelowych plikach.",
+      "source": "dev/bestiary/bestiary.json#pies-mutek",
+      "targets": {
+        "portrait": "tokens/portraits/pies-mutek.webp",
+        "token": "tokens/pies-mutek.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/pies-mutek/portrait-p01.webp",
+            "sha256": "83d8dc42fb041a9c3d9c0dd4cf25c94d309e6605c81611260220c4999a224d53",
+            "source": "dev/art/creatures/in/pies-mutek/portrait-p01.png",
+            "sourceSha256": "11c9f79233552a6baca0d08c977990cdd503cced623189be2f7a2c326a13291a",
+            "prompt": "dev/art/creatures/prompts/pies-mutek/portrait-p01.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:29:50.320234+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/pies-mutek/portrait-p02.webp",
+            "sha256": "602fd6124b85f50692fc58394d7e0930f2c94ba690e322d7e3edefa247eaadd5",
+            "source": "dev/art/creatures/in/pies-mutek/portrait-p02.png",
+            "sourceSha256": "e12aa4949fcfa7cb2cf52daccb8118f0f660e254c0c618b6724292f2bdee01cd",
+            "prompt": "dev/art/creatures/prompts/pies-mutek/portrait-p02.json",
+            "width": 790,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:12.607898+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/pies-mutek/portrait-p03.webp",
+            "sha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188",
+            "source": "dev/art/creatures/in/pies-mutek/portrait-p03.png",
+            "sourceSha256": "8b33949f20f67c939eeae1b7dc6473be685137180dbbe222e557a3ee205a8baa",
+            "prompt": "dev/art/creatures/prompts/pies-mutek/portrait-p03.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:10:58.922936+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM latest saved portrait notes; awaiting approval of this exact revision."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/pies-mutek/token-t01.webp",
+            "sha256": "a2eedd27620e550d2e514f5f474c238f1ddfca47d7ff02a7d3b8be448eefe442",
+            "source": "dev/art/creatures/in/pies-mutek/token-t01.png",
+            "sourceSha256": "fb4b72254e2fb590f0ac2b6d1505ef23e60e2024e76cb9cfec74bb049f370424",
+            "prompt": "dev/art/creatures/prompts/pies-mutek/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:36:55.041555+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; awaiting independent token review.",
+            "portraitId": "p03",
+            "portraitSha256": "e883e21e9f5f4c2c521ad008c987c8c000b7549588252311fab0ffa4509ad188",
+            "sourceBox": [
+              353,
+              15,
+              958,
+              1202
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ]
+    },
+    {
+      "id": "konwojent-straznik",
+      "title": "Konwojent (strażnik)",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Typowy przedstawiciel lokalnej policji, strażnik bramy lub ochroniarz konwoju. Bramkarz, wykidajło czy obstawa wędrownego kupca, to również zawody, którymi się para. Zazwyczaj średnio opancerzony i uzbrojony w broń automatyczną, ale tak naprawdę jakość jego sprzętu, zależy od tego, kto mu płaci. Konwojenci nie lubią być porównywani do najemników, ponieważ zazwyczaj mają rodziny na utrzymaniu lub są typowymi lokalsami. Dlatego też nigdy nie walczą na śmierć i życie, i po otrzymaniu kilku siniaków poddają się, jeśli mogą w ten sposób ocalić skórę.",
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t02 zapisana dokładnie w docelowych plikach.",
+      "source": "dev/bestiary/bestiary.json#konwojent-straznik",
+      "targets": {
+        "portrait": "tokens/portraits/konwojent-straznik.webp",
+        "token": "tokens/konwojent-straznik.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/konwojent-straznik/portrait-p01.webp",
+            "sha256": "878c1870f4233bcac0df550107d2e6530527b3563803e2404de162cd297b8d74",
+            "source": "dev/art/creatures/in/konwojent-straznik/portrait-p01.png",
+            "sourceSha256": "6643c3399c849f8d0a2166ef48e6864d229bf2956f98dd1a4a95e0731053808e",
+            "prompt": "dev/art/creatures/prompts/konwojent-straznik/portrait-p01.json",
+            "width": 799,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:17.408124+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First portrait; facial likeness from the style reference will be varied in p02."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/konwojent-straznik/portrait-p02.webp",
+            "sha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+            "source": "dev/art/creatures/in/konwojent-straznik/portrait-p02.png",
+            "sourceSha256": "2834f18349266438a76cf98c3a075f104cd4a1fdcd133c92aee32504406f0454",
+            "prompt": "dev/art/creatures/prompts/konwojent-straznik/portrait-p02.json",
+            "width": 799,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:35:18.326992+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Varied facial identity: older bearded guard, while keeping the same equipment, pose and hands. Awaiting GM approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/konwojent-straznik/token-t01.webp",
+            "sha256": "65a7800582f857d3dcf7f1a70f069a425e59cbdd9838842cbeaaded2cfea440f",
+            "source": "dev/art/creatures/in/konwojent-straznik/token-t01.png",
+            "sourceSha256": "da79b4e2bd4ca43ce5f6c7ee56429aaba206d6a6713c5a1a91f53402cbefdc11",
+            "prompt": "dev/art/creatures/prompts/konwojent-straznik/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T22:16:12.216183+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+            "sourceBox": [
+              278,
+              59,
+              1115,
+              1194
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/konwojent-straznik/token-t02.webp",
+            "sha256": "6d769206dae62aadb961b420fa33581104cbf2eedb68525ec3b260557aaed5fd",
+            "source": "dev/art/creatures/in/konwojent-straznik/token-t02.png",
+            "sourceSha256": "60444995bc99843c2f571c464bc784b91e218d36942958477bd83b23df1ceeba",
+            "prompt": "dev/art/creatures/prompts/konwojent-straznik/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:04.515241+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "2feaa69e63ecfebefc76e2500b1d12bccb95604b09c9ec0ef690abc66c89c2dc",
+            "sourceBox": [
+              206,
+              89,
+              1129,
+              1126
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ]
+    },
+    {
+      "id": "towarzysz-psi-partner",
+      "title": "Psi partner",
+      "guidance": "GM zaakceptował portret p01 i żeton t02: po 5/5. Para zainstalowana w finalnych plikach i paczce towarzyszy.",
+      "group": "companion",
+      "size": "sm",
+      "px": 400,
+      "fill": 0.7,
+      "brief": "Lean short-haired wasteland mongrel, rusty tan fur, dark saddle, cream chest and toes, one folded ear, plain worn collar and a short chain.",
+      "targets": {
+        "portrait": "tokens/portraits/towarzysz-psi-partner.webp",
+        "token": "tokens/towarzysz-psi-partner.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/towarzysz-psi-partner/portrait-p01.webp",
+            "sha256": "b900f844259d3ea542ac4f83920f63ebef593d45cb02d55258bbfedd71910782",
+            "source": "dev/art/creatures/in/towarzysz-psi-partner/portrait-p01.png",
+            "sourceSha256": "bdd3fdc3e14e457fb30aa19161f68879124cc241d0947a84bbfd361e4ca9b780",
+            "prompt": "dev/art/creatures/prompts/dog-portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:10:33.835613+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/towarzysz-psi-partner/token-t01.webp",
+            "sha256": "86ca9f3d4df3591e86f6878b9fc512e5304f59751a6d3fb2eb6b28bbc66bd896",
+            "source": "dev/art/creatures/in/towarzysz-psi-partner/token-t01.png",
+            "sourceSha256": "38c24446a38becb12fa57a1fd674e6ed05843eadb4eb157661ce5c3234c7555d",
+            "prompt": "dev/art/creatures/prompts/dog-token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:12:20.249333+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "b900f844259d3ea542ac4f83920f63ebef593d45cb02d55258bbfedd71910782",
+            "sourceBox": [
+              437,
+              11,
+              820,
+              1207
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/towarzysz-psi-partner/token-t02.webp",
+            "sha256": "629be85b24ded8ef32f60cdd664d6ef66db169a3fb924e94343bd22ff652450e",
+            "source": "dev/art/creatures/in/towarzysz-psi-partner/token-t02.png",
+            "sourceSha256": "fd15cd47cf581b831868a48a3a8a2be1a1bfb8ad904a5928dec1c0bb7edd008c",
+            "prompt": "dev/art/creatures/prompts/towarzysz-psi-partner/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:32:48.766655+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "b900f844259d3ea542ac4f83920f63ebef593d45cb02d55258bbfedd71910782",
+            "sourceBox": [
+              446,
+              44,
+              828,
+              1203
+            ],
+            "fill": 0.7
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Towarzysze"
+      ]
+    },
+    {
+      "id": "towarzysz-zmutowany-owad",
+      "title": "Zmutowany owad",
+      "group": "companion",
+      "size": "sm",
+      "px": 400,
+      "fill": 0.7,
+      "brief": "Biological burrowing mutant with EIGHT limbs: six slender walking legs plus two strong digging forelegs, thick rust-brown chitin and broad mandibles. Match the approved portrait; no wings or machinery.",
+      "guidance": "GM zaakceptował portret p01 i poprawiony żeton t02: po 5/5. Układ 6 odnóży krocznych + 2 kopiące. Finalne pliki przywrócone.",
+      "targets": {
+        "portrait": "tokens/portraits/towarzysz-zmutowany-owad.webp",
+        "token": "tokens/towarzysz-zmutowany-owad.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-owad/portrait-p01.webp",
+            "sha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-owad/portrait-p01.png",
+            "sourceSha256": "514b72e4909be72e6479d143bcd34a653ac282ec5210f20ac6a9571d29a48b41",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-owad/portrait-p01.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:17:04.352521+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-owad/token-t01.webp",
+            "sha256": "4908e1f512b6db432527b20bb0cfc62c6a81140546790bda36dbdd46f47fd4c3",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-owad/token-t01.png",
+            "sourceSha256": "4da284ebaaea26fa7281ecc81007f36f4fa1c7480830374c182a5924df5ce721",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-owad/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:25:36.846417+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+            "sourceBox": [
+              230,
+              65,
+              1053,
+              1195
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-owad/token-t02.webp",
+            "sha256": "e8c5db222f8cca6179ef4012dd527b6a47c065c6c68bb1716e658c15cce7c291",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-owad/token-t02.png",
+            "sourceSha256": "395f60067eb07a70a353f81984ab1e1202cde1ad903fd36b5141ead4925b0b89",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-owad/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:43:56.111947+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "3743377aaf79cbe359acc99ab475c7a07e74627aabfa08deb46abae01f97e4b0",
+            "sourceBox": [
+              207,
+              87,
+              1050,
+              1149
+            ],
+            "fill": 0.7
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Towarzysze"
+      ]
+    },
+    {
+      "id": "towarzysz-zmutowany-ssak",
+      "title": "Zmutowany ssak",
+      "group": "companion",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Powerful bear-like mutated mammal with a canine muzzle, coarse brown fur and sparse bare skin patches. Four legs, biological anatomy, no equipment or gore. The GM returned to portrait p02 and token t01 after considering the source description.",
+      "guidance": "GM po ponownym przeczytaniu opisu wrócił do wcześniejszej koncepcji: portret p02 i żeton t01, oba 5/5. Szopia propozycja pozostaje tylko do porównania. Finalne pliki przywrócone.",
+      "targets": {
+        "portrait": "tokens/portraits/towarzysz-zmutowany-ssak.webp",
+        "token": "tokens/towarzysz-zmutowany-ssak.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/portrait-p01.webp",
+            "sha256": "c02b45a723043cd7334afcff0943e8b0fef1d0a422ccc8896674987807ee1f88",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-ssak/portrait-p01.png",
+            "sourceSha256": "057c59d03adcd6a653afe7cc8335c9b8300513ceb85518b91ab6e72d550d37a6",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-ssak/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:17:04.859004+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Szkic odrzucony podczas przygotowania: pancerz przeniesiony z referencji stylu. Poprawiona wersja p02."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/portrait-p02.webp",
+            "sha256": "d49493832f29b43dbae12631ea2f82b5dc7f5621894443c231ed449c101cf542",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-ssak/portrait-p02.png",
+            "sourceSha256": "9f8bd1fea9bab294dce6c2a145aac714a090db32d4677b87631598293af43359",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-ssak/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:20:30.893390+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/portrait-p03.webp",
+            "sha256": "c7ee292ef843bed32c3a532d0cdec0dbf907b4bfc255adc2defd23ae32639afa",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-ssak/portrait-p03.png",
+            "sourceSha256": "ca2ce11b03aa3d547fe9fd67ca6afaf40482125347f5d2f9707aa791c7ed90af",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-ssak/portrait-p03.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:44:01.254825+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/token-t01.webp",
+            "sha256": "e05af551a87fcefe5c7016f3c22e9e615ab3bd0aa96970d34023d31158d11a06",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-ssak/token-t01.png",
+            "sourceSha256": "efad8994a753ac56ef6a5f835ded8cce1f53897d1dc1ed9b8039e90baa119c0c",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-ssak/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T00:25:42.282725+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p02",
+            "portraitSha256": "d49493832f29b43dbae12631ea2f82b5dc7f5621894443c231ed449c101cf542",
+            "sourceBox": [
+              329,
+              27,
+              931,
+              1198
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-ssak/token-t02.webp",
+            "sha256": "1513faf622d6292f0297cb1cf202d5bde13672313b380b08494388accb5fa4c4",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-ssak/token-t02.png",
+            "sourceSha256": "73c56cfb47e0e274fe19b2daded6fb2f6ec4f4d46dd7b4e6451f816479c1fd24",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-ssak/token-t02.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T00:47:25.820153+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p03",
+            "portraitSha256": "c7ee292ef843bed32c3a532d0cdec0dbf907b4bfc255adc2defd23ae32639afa",
+            "sourceBox": [
+              390,
+              21,
+              844,
+              1227
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Towarzysze"
+      ]
+    },
+    {
+      "id": "towarzysz-zmutowany-gad",
+      "title": "Zmutowany gad",
+      "group": "companion",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Lean amphibious water-dragon/iguana-like lizard companion, dog-comparable threat, short blunt head, slender neck, fine olive-brown scales and long tapered swimming tail. Four splayed clawed feet; no crocodile armor or equipment.",
+      "guidance": "GM zaakceptował bardziej jaszczurkowy portret p03 i żeton t03: po 5/5. Finalne pliki przywrócone.",
+      "targets": {
+        "portrait": "tokens/portraits/towarzysz-zmutowany-gad.webp",
+        "token": "tokens/towarzysz-zmutowany-gad.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/portrait-p01.webp",
+            "sha256": "b1462484a930d5d9438bb3eae3f618c662d31ccfcc981b7dbc101d315a3e450e",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/portrait-p01.png",
+            "sourceSha256": "efae15c99885228150029b7194d8f0506d5e04f65c02201a910ea45f489e3dfb",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:17:05.360059+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/portrait-p02.webp",
+            "sha256": "9185a9a0ba3ee9a3319d2ddaa90756c95a9b45189a0b2dd907678063735100f6",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/portrait-p02.png",
+            "sourceSha256": "0dc6186bb1a6e85344050cbc7276f76d4b83271ddd3156f5b282c13df0b1ad56",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:44:07.823364+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/portrait-p03.webp",
+            "sha256": "1928c1a473cdffaa214ed2e90df9733a1c27c6f6d5647b3ccd297d27299e04ce",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/portrait-p03.png",
+            "sourceSha256": "ca1879921ff58dc8dc5fb4c7aab46b5533dffe812a8b18ec3d8cd9b92c8f8efd",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/portrait-p03.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T00:45:27.608141+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/token-t01.webp",
+            "sha256": "1f5c03b023285330252229a631ddf955b95ba06935e83b73f32ef933d9675a06",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/token-t01.png",
+            "sourceSha256": "6c1d6665bb79413a8f06377d8e91dd77b217e0bb4fd9f90c51b4eeeaf7dc0847",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:25:39.557216+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p01",
+            "portraitSha256": "b1462484a930d5d9438bb3eae3f618c662d31ccfcc981b7dbc101d315a3e450e",
+            "sourceBox": [
+              189,
+              29,
+              1083,
+              1152
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/token-t02.webp",
+            "sha256": "c6723a4663628b9cd8cd6d4d737a27ce8cb493b0ee1e01fdd5427879a00d7b04",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/token-t02.png",
+            "sourceSha256": "c25b66fac8b436037141215a2c8c90a3cb158618762658c7d6be0b95e5ecaa00",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:48:31.777422+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p03",
+            "portraitSha256": "1928c1a473cdffaa214ed2e90df9733a1c27c6f6d5647b3ccd297d27299e04ce",
+            "sourceBox": [
+              315,
+              25,
+              940,
+              1187
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t03",
+            "src": "dev/art/creatures/candidates/towarzysz-zmutowany-gad/token-t03.webp",
+            "sha256": "3bd04f330c4ce7bf6cecb907f9185a43d704105519613b620383fdb55ff9bf7a",
+            "source": "dev/art/creatures/in/towarzysz-zmutowany-gad/token-t03.png",
+            "sourceSha256": "2be0880768a7e71670ce0aab5bb48d1ceb853c41b300a3acb36a077aee249aa2",
+            "prompt": "dev/art/creatures/prompts/towarzysz-zmutowany-gad/token-t03.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T00:51:23.265897+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "portraitId": "p03",
+            "portraitSha256": "1928c1a473cdffaa214ed2e90df9733a1c27c6f6d5647b3ccd297d27299e04ce",
+            "sourceBox": [
+              320,
+              50,
+              964,
+              1178
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Towarzysze"
+      ]
+    },
+    {
+      "id": "cywil",
+      "title": "Cywil",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "",
+      "source": "dev/bestiary/bestiary.json#cywil",
+      "targets": {
+        "portrait": "tokens/portraits/cywil.webp",
+        "token": "tokens/cywil.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/cywil/portrait-p01.webp",
+            "sha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+            "source": "dev/art/creatures/in/cywil/portrait-p01.png",
+            "sourceSha256": "b97bb584e7c826d0f7c3d696807b41663af9ec51d09ffc0c0ed2a9f62ae50de8",
+            "prompt": "dev/art/creatures/prompts/cywil/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:09.929086+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/cywil/token-t01.webp",
+            "sha256": "b023b9e57da0ce4bb34c9f3013152e8fed80cc63a0b6e5b3a8919181743ae4b5",
+            "source": "dev/art/creatures/in/cywil/token-t01.png",
+            "sourceSha256": "49649581fe149d9df4c1295a497ef2bf8c3083a27ecc3fb6d85645e899dd84d4",
+            "prompt": "dev/art/creatures/prompts/cywil/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T22:16:12.781664+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+            "sourceBox": [
+              234,
+              24,
+              1065,
+              1207
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/cywil/token-t02.webp",
+            "sha256": "419d1c15528c264c5eeab0923ed9b0b4e0ad4f708f65cdf8702469e493de5451",
+            "source": "dev/art/creatures/in/cywil/token-t02.png",
+            "sourceSha256": "f1dfd4f95207d689b4072b3471a08894707f4c041631b8d1cda5e220884acaf5",
+            "prompt": "dev/art/creatures/prompts/cywil/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:05.231768+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "add6499a8ae17cf2230040f615ac19cf24ef493c6fd94cd49240f34349602008",
+            "sourceBox": [
+              113,
+              43,
+              1098,
+              1188
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p01/t02 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "gangus-boss",
+      "title": "Gangus boss",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "",
+      "source": "dev/bestiary/bestiary.json#gangus-boss",
+      "targets": {
+        "portrait": "tokens/portraits/gangus-boss.webp",
+        "token": "tokens/gangus-boss.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/gangus-boss/portrait-p01.webp",
+            "sha256": "074075164f881b5a5d98d3927ff4803872d4ae0b930dea5004b55b42abaf766f",
+            "source": "dev/art/creatures/in/gangus-boss/portrait-p01.png",
+            "sourceSha256": "e8e886cf975b8cd2e223cf86d23bf5c228130d4f91c48cba13f95c610ea732d6",
+            "prompt": "dev/art/creatures/prompts/gangus-boss/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:14.006888+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/gangus-boss/portrait-p02.webp",
+            "sha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf",
+            "source": "dev/art/creatures/in/gangus-boss/portrait-p02.png",
+            "sourceSha256": "d1bf102335955496bc94e4d388e2aaf153b889c5fec50ab30f16d79dd6467753",
+            "prompt": "dev/art/creatures/prompts/gangus-boss/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:16.288313+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/gangus-boss/token-t01.webp",
+            "sha256": "36131a20877a07f2c8859a17c1040f292c1a378b07365539c2449824ae88a573",
+            "source": "dev/art/creatures/in/gangus-boss/token-t01.png",
+            "sourceSha256": "277eeea23ecb558400f2ffbf26df5cb4963b98b4758ca70966d18869a48df298",
+            "prompt": "dev/art/creatures/prompts/gangus-boss/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:01.348587+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "bae52a5a76c91b6e652bb0eb6670d6b9ff315b9722f4e18fa9bcda3857988adf",
+            "sourceBox": [
+              53,
+              76,
+              1170,
+              1192
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t01 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "generacja-ii-genotyp-gadzi",
+      "title": "Generacja II — genotyp gadzi",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Są równie różnorodni, jak wszystkie gady. Ci z genami grzechotnika są jadowici i mają łuski w kolorze piachu. DNA aligatora daje im wielkie paszcze i błony między palcami. A krzyżówka z kameleonem oprócz wyłupiastych oczu, potrafi być niewidzialna. Serio ci mówię. Jeden stoi właśnie za twoimi plecami!",
+      "source": "dev/bestiary/bestiary.json#generacja-ii-genotyp-gadzi",
+      "targets": {
+        "portrait": "tokens/portraits/generacja-ii-genotyp-gadzi.webp",
+        "token": "tokens/generacja-ii-genotyp-gadzi.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/generacja-ii-genotyp-gadzi/portrait-p01.webp",
+            "sha256": "76862550ed6984d3b4b89fa34f8fc7b0096cbda3493198ad89d87aaa4989b851",
+            "source": "dev/art/creatures/in/generacja-ii-genotyp-gadzi/portrait-p01.png",
+            "sourceSha256": "7da4f831339ec35cce7d7d3108d5c7ec18601985c81a25bfe57961ba07e722fa",
+            "prompt": "dev/art/creatures/prompts/generacja-ii-genotyp-gadzi/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:29:54.018861+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/generacja-ii-genotyp-gadzi/token-t01.webp",
+            "sha256": "8f7b30d16b8268b84ca11a67ce54611f13213e9ee03df845b21eca55b79464ea",
+            "source": "dev/art/creatures/in/generacja-ii-genotyp-gadzi/token-t01.png",
+            "sourceSha256": "f4d2d5b689615473363cee7ead031fb7f16e33607706b46b8755c4ba782d9108",
+            "prompt": "dev/art/creatures/prompts/generacja-ii-genotyp-gadzi/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T22:16:13.345144+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "76862550ed6984d3b4b89fa34f8fc7b0096cbda3493198ad89d87aaa4989b851",
+            "sourceBox": [
+              220,
+              90,
+              1177,
+              1177
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Mutanci"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 (5/5) i żeton t01 (5/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach."
+    },
+    {
+      "id": "generacja-ii-genotyp-wilczy",
+      "title": "Generacja II — genotyp wilczy",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Nie ma dwóch takich samych. Różnią się wielkością pyska, długością kończyn, stopniem przygarbienia, wzrostem czy nawet barwami sierści. Wszystkie jednak wyglądają, jak wyjęte z koszmaru hybrydy człowieka z wilkiem lub psem. Jeśli usłyszysz jego upiorne wycie, lepiej natychmiast znajdź sobie dobrą kryjówkę, bo sfora już na ciebie poluje.",
+      "source": "dev/bestiary/bestiary.json#generacja-ii-genotyp-wilczy",
+      "targets": {
+        "portrait": "tokens/portraits/generacja-ii-genotyp-wilczy.webp",
+        "token": "tokens/generacja-ii-genotyp-wilczy.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/generacja-ii-genotyp-wilczy/portrait-p01.webp",
+            "sha256": "d98eb9b188c855fd78a9d5a95f3903e2204c8d4224d7c8744fc25618ed1de3d8",
+            "source": "dev/art/creatures/in/generacja-ii-genotyp-wilczy/portrait-p01.png",
+            "sourceSha256": "8d02ef427ca68cdb4861570206b3849adae8aa7a4523cf0e2619945ea99dfae6",
+            "prompt": "dev/art/creatures/prompts/generacja-ii-genotyp-wilczy/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:29:57.909750+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/generacja-ii-genotyp-wilczy/portrait-p02.webp",
+            "sha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+            "source": "dev/art/creatures/in/generacja-ii-genotyp-wilczy/portrait-p02.png",
+            "sourceSha256": "3b0150c2147c20d822ee1fc73f6fab4fb5ff60bcd7550b2959983786536ef5c7",
+            "prompt": "dev/art/creatures/prompts/generacja-ii-genotyp-wilczy/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:20.195046+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/generacja-ii-genotyp-wilczy/token-t01.webp",
+            "sha256": "fdfa24d448214346146651cdfb9343b6853ae6e6996ad1ca8670a71ee6248613",
+            "source": "dev/art/creatures/in/generacja-ii-genotyp-wilczy/token-t01.png",
+            "sourceSha256": "217fe162415e6bf335a43b5479cb267d84364f04ca48d2bfd23d231dacdf4a53",
+            "prompt": "dev/art/creatures/prompts/generacja-ii-genotyp-wilczy/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T23:11:02.332711+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "5525250d04c3585203e8baa5ed06657f33a3ea6eac90b78310f259156b197326",
+            "sourceBox": [
+              54,
+              26,
+              1221,
+              1200
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Mutanci"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t01 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "generacja-iii-szpieg",
+      "title": "Generacja III — Szpieg",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Nie różni się niczym od człowieka, poza drobną deformacją, którą można zrzucić na chorobę skóry, wypadek w pracy czy wady płodu. Może mieć jedną rękę krótszą, krzywą małżowinę uszną, dwukolorowe źrenice lub przebarwienia skóry.",
+      "source": "dev/bestiary/bestiary.json#generacja-iii-szpieg",
+      "targets": {
+        "portrait": "tokens/portraits/generacja-iii-szpieg.webp",
+        "token": "tokens/generacja-iii-szpieg.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/generacja-iii-szpieg/portrait-p01.webp",
+            "sha256": "b411f1a6a9c487de24a05dc86cd889fd9eedd4ea2d6297e90512eef640097c20",
+            "source": "dev/art/creatures/in/generacja-iii-szpieg/portrait-p01.png",
+            "sourceSha256": "027f1dc07e1abe2d202d4085b76e931ea67001d2c36de7f40ac298507f62c67f",
+            "prompt": "dev/art/creatures/prompts/generacja-iii-szpieg/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:00.918872+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/generacja-iii-szpieg/portrait-p02.webp",
+            "sha256": "d0989afcdcf6b5ace9ed855100225eb4ad4c953a5d37866bb1db9bd18f606c26",
+            "source": "dev/art/creatures/in/generacja-iii-szpieg/portrait-p02.png",
+            "sourceSha256": "38cdb65f4f50b65e7899b414b210e6f2e41e0efa3b2f95aed927a967e59f6297",
+            "prompt": "dev/art/creatures/prompts/generacja-iii-szpieg/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:24.114521+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/generacja-iii-szpieg/token-t01.webp",
+            "sha256": "4418a3866ceab8a2357f00ad07ddd5c103b5c940db93989785585a9abe15c3d5",
+            "source": "dev/art/creatures/in/generacja-iii-szpieg/token-t01.png",
+            "sourceSha256": "23bc2c7f8c4987c64fcd5d3a420751ba596aba607472d0b62d54357f0284caf1",
+            "prompt": "dev/art/creatures/prompts/generacja-iii-szpieg/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:03.132845+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "d0989afcdcf6b5ace9ed855100225eb4ad4c953a5d37866bb1db9bd18f606c26",
+            "sourceBox": [
+              150,
+              109,
+              1110,
+              1158
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Mutanci"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t01 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "korzec",
+      "title": "Korzec",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Wydłużone ciało pokryte ostrymi kolcami przypominające do złudzenia pokryte korą drzewo. Potrafi zastygnąć bez ruchu, idealnie wtapiając się w środowisko. Kamuflaż potęguje to, że bardzo często jego skórę porasta mech, lub przysiadają na niej owady.",
+      "source": "dev/bestiary/bestiary.json#korzec",
+      "targets": {
+        "portrait": "tokens/portraits/korzec.webp",
+        "token": "tokens/korzec.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/korzec/portrait-p01.webp",
+            "sha256": "a7b289d933a64afce81242f943f6e73a840246241455fe45aee67d7c0818fe85",
+            "source": "dev/art/creatures/in/korzec/portrait-p01.png",
+            "sourceSha256": "f6982de524022c2c60ddb1ab8267847702058fc05ce67cced1d3b9d14c6acaf1",
+            "prompt": "dev/art/creatures/prompts/korzec/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:25:15.821619+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "GM pencil reference defines anatomy; existing module art supplies painting only. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/korzec/token-t01.webp",
+            "sha256": "7ed1d251060f011ef8b744e4e5d2ddc19af23dab75c6d8d87360d76fec97ebdd",
+            "source": "dev/art/creatures/in/korzec/token-t01.png",
+            "sourceSha256": "1ce6c36f6021d5de2bf467c6dc162d86beca3471fdd94c5c0631485e55a609b5",
+            "prompt": "dev/art/creatures/prompts/korzec/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T22:16:14.651509+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preparatory camera variant; t02 uses stronger overhead foreshortening.",
+            "portraitId": "p01",
+            "portraitSha256": "a7b289d933a64afce81242f943f6e73a840246241455fe45aee67d7c0818fe85",
+            "sourceBox": [
+              41,
+              1,
+              1244,
+              1220
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/korzec/token-t02.webp",
+            "sha256": "96d1e21a37707a3a5c366ec44218223fe969cfc0dbe096217b7e10282dc0a8a2",
+            "source": "dev/art/creatures/in/korzec/token-t02.png",
+            "sourceSha256": "f79bba79094f8df7edbf9a13d41e70fe8f202affc4743e72eb0022052997f454",
+            "prompt": "dev/art/creatures/prompts/korzec/token-t02.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T22:18:21.561389+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Stronger overhead foreshortening than t01; compact crown/trunk cluster with root feet partly occluded. Awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "a7b289d933a64afce81242f943f6e73a840246241455fe45aee67d7c0818fe85",
+            "sourceBox": [
+              20,
+              61,
+              1238,
+              1177
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 (4/5) i żeton t02 (5/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach."
+    },
+    {
+      "id": "mobsprzet",
+      "title": "Mobsprzęt",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Nie ma jednego zunifikowanego wyglądu, bo to składaki z losowych podwozi z przyspawanymi akurat takimi systemami, jakie są konieczne operacyjnie. Wyglądają więc pokracznie, jak koślawe kupy przerdzewiałego złomu jeżdżące po polu bitwy na kołach łazika lub gąsienicach niewielkiego ciągnika. Lżejsze warianty to sam karabin maszynowy na konstrukcji pustynnego buggy. Cięższe, to czołgowe gąsienice, gruby pancerz, miotacze ognia i wyrzutnie rakiet, często ciągnące za sobą plątaninę anten od sensorów i czujników. Moloch nie potrzebuje kierowców i nie przejmuje się estetyką - wnętrze to plątanina kabli, źródeł zasilania i systemów sterujących złożonych w asymetrycznym nieładzie.",
+      "source": "dev/bestiary/bestiary.json#mobsprzet",
+      "targets": {
+        "portrait": "tokens/portraits/mobsprzet.webp",
+        "token": "tokens/mobsprzet.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+            "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "source": "dev/art/creatures/in/mobsprzet/portrait-p01.png",
+            "sourceSha256": "4808fa3d63c84a9082516e1cee1eb308ce77a4027b608e7f2d03197e25b34645",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:25:21.724858+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Remade from the GM single-barrel four-wheel concept; legacy overhead image exists but has opaque grey background. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t01.webp",
+            "sha256": "2036a28fc6f9679d907df8141a9983d526e04017876df653daad996e7a26ceee",
+            "source": "dev/art/creatures/in/mobsprzet/token-t01.png",
+            "sourceSha256": "554b2b489d501cb4441473b19c32cf9f261796b1d6d5020f750f9fda71727353",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T22:16:15.387574+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              252,
+              11,
+              1013,
+              1107
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t02.webp",
+            "sha256": "f2b0e5b44243aa598236986bfca50b9e1446b0ad82361d8953cc29d2cbcd01af",
+            "source": "dev/art/creatures/in/mobsprzet/token-t02.png",
+            "sourceSha256": "a6be62c946e0939513c454ffc4ae324877a36029d8b5d22ec06ccc74312861f8",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:05.926242+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Redrawn from the approved portrait with an original three-tier SVG blockout. Three housing masses and two pivot gaps are now visible. Awaiting token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              291,
+              40,
+              958,
+              1173
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t03",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t03.webp",
+            "sha256": "06c4119e8a2165a4ededf60523c7af408d810311df074dc54da714d8b7e63146",
+            "source": "dev/art/creatures/in/mobsprzet/token-t03.png",
+            "sourceSha256": "83c1c6c669d1f589b33d00b56438d69a89ef2f0c11663206ff30a0634321fc39",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t03.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:36:55.776116+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Straightened vertical axis and horizontal paired wheel axles; three housing tiers retained. Awaiting token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              276,
+              25,
+              979,
+              1178
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t04",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t04.webp",
+            "sha256": "d1df0a07d22adc5bad7c497a66691cbe375891068fe425cc50d2a8f0bd2fc30d",
+            "source": "dev/art/creatures/in/mobsprzet/token-t04.png",
+            "sourceSha256": "556bad9337e097325bb8e77893fd856d223577b04563f1143568240863c02342",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t04.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T00:05:02.737658+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Upper weapon module shifted south over the middle housing; subdued matte salvage materials, plate repairs and functional cable fittings. Awaiting token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              272,
+              30,
+              983,
+              1189
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t05",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t05.webp",
+            "sha256": "b280fd179f48ca666229003ff6941718c78b2273c75813f1520bd4ac0056904f",
+            "source": "dev/art/creatures/in/mobsprzet/token-t05.png",
+            "sourceSha256": "92b5062ff25aedb27c4d69497b9396144430e340e9d9063793d2546435a1cb20",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t05-retry01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T00:24:27.353758+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "A — moderate extra south shift from t04; three-tier body and rear strip visible. Static fictional game asset. Awaiting token review.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              266,
+              57,
+              987,
+              1213
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t06",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t06.webp",
+            "sha256": "4519f4b7e91fc64549aa7ea94b4d8c7381afb07b854c3bfa4a33562799f94057",
+            "source": "dev/art/creatures/in/mobsprzet/token-t06.png",
+            "sourceSha256": "5a6b0ec3553155c772d1af5b9c0a020cdb2297dc89b767c3eed685666cb327e2",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t06.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T00:23:28.151017+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "B — further south-shift alternative from t04; upper turret covers most middle panel, rear part remains visible. Awaiting token review.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              255,
+              116,
+              998,
+              1223
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t07",
+            "src": "dev/art/creatures/candidates/mobsprzet/token-t07.webp",
+            "sha256": "66268e9371e1730d6d7a2b45c604387860327285b70e178ef4d7f020667f9365",
+            "source": "dev/art/creatures/in/mobsprzet/token-t07.png",
+            "sourceSha256": "f1d419dfa1b63d9f1537f3fe617d209cecd9746a773f89b84ca47a2d24a93573",
+            "prompt": "dev/art/creatures/prompts/mobsprzet/token-t07.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T00:23:32.744721+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "C — compact stacked-body alternative from t04, upper turret farther south. Prompt requested maximum shift; actual placement is a generator variation, not a calibrated translation. Awaiting token review.",
+            "portraitId": "p01",
+            "portraitSha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+            "sourceBox": [
+              252,
+              106,
+              1003,
+              1187
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Maszyny"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "GM wybrał żeton t05/A (4/5) do zatwierdzonego portretu p01 (4/5). Para dostarczona dokładnie w docelowych plikach; t06/B i t07/C pozostają alternatywami. Wcześniejszy portret zachowano w kopii poprzedniej dostawy."
+    },
+    {
+      "id": "pajak",
+      "title": "Pająk",
+      "group": "bestiary",
+      "size": "tiny",
+      "px": 200,
+      "fill": 0.6,
+      "brief": "Kolejna maszyna o dość obrazowej nazwie - owalny tułów wielkości małego psa porusza się na ośmiu odnóżach zakończonych ostrymi szpikulcami, choć są też wersje z chwytnymi łapkami lub płetwami. Głowotułów na przedzie mieści w sobie układ decyzyjny maszyny i jej główny napęd, a także bezpośrednio związany z funkcją tej maszyny układ ośmiu niezależnych sensorów zbierających szczegółowe informacje o otoczeniu.",
+      "source": "dev/bestiary/bestiary.json#pajak",
+      "targets": {
+        "portrait": "tokens/portraits/pajak.webp",
+        "token": "tokens/pajak.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p01.webp",
+            "sha256": "1e1b3963405170336f70a0f84892657fdd8b8cd5f358c099b89f20b5c76098e8",
+            "source": "dev/art/creatures/in/pajak/portrait-p01.png",
+            "sourceSha256": "aeabbc60710869d3267db5f0199e47c3cf27d1505d088ca1b36e711f8941ea6c",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p01.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:03.835317+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First portrait: eight sensors; far-side leg arrangement needs a clearer view before choosing a token source."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p02.webp",
+            "sha256": "fcf3827d68ae8575943695d9d9d6bb5470de4e916c0a0117f82a70715b8618da",
+            "source": "dev/art/creatures/in/pajak/portrait-p02.png",
+            "sourceSha256": "2ad170e4fb1723dbfc3e3e74e568ea97bb0a3ba1a883c41424738f7aebdf2970",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p02.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:35:15.083403+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Clearer eight-leg arrangement: four walking feet on each side; eight sensors preserved. Awaiting GM approval."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p03.webp",
+            "sha256": "80d603daf0878de060229f012aeb21d2dd9e2030128b72d61ad1e5d3fcf6b463",
+            "source": "dev/art/creatures/in/pajak/portrait-p03.png",
+            "sourceSha256": "5fe065d1dc19a7456eda0a1610b3199cf75c80df9ccfb7685ed3ce84263105da",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p03.json",
+            "width": 790,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:28.102063+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preparatory lighter scout revision; one far-side rear leg is unclear, so p04 will spread it into view."
+          },
+          {
+            "id": "p04",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p04.webp",
+            "sha256": "7337ff1d93a36d01592c5936584f8492ad4183c203241e26d3c3f05c85f1789f",
+            "source": "dev/art/creatures/in/pajak/portrait-p04.png",
+            "sourceSha256": "43bf665761869b3eecacf64e9649fd4e581ab7a245843c15ff285842834955e4",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p04.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:17:49.815860+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Adds the hidden rear-right leg to the lighter observation robot; eight walking legs now visible, two antennae retained. Awaiting GM portrait approval."
+          },
+          {
+            "id": "p05",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p05.webp",
+            "sha256": "4891471b882e86353e0df29eab5265997077ef9dcd93a6a5d6246bb47afca8e4",
+            "source": "dev/art/creatures/in/pajak/portrait-p05.png",
+            "sourceSha256": "47f22feb3e28d08701e39b6b4cd1060cbacf342473a51576ba76f88e013f3c90",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p05.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:10:59.185534+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preparatory pose: one far-side rear foot still occluded; p06 changes camera and gives the geometry guide priority."
+          },
+          {
+            "id": "p06",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p06.webp",
+            "sha256": "b2067643ac551a522738f4d6100631338b1394ec750a6a44e29c2e2e0f45ab78",
+            "source": "dev/art/creatures/in/pajak/portrait-p06.png",
+            "sourceSha256": "d2f52e4cbeb3d8977df61742873c26101a9f06f1f6a9762f9c6f9293b60fca34",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p06.json",
+            "width": 832,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:13:27.886848+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preparatory frontal view: generated only three pairs of legs. p07 locally adds the missing pair."
+          },
+          {
+            "id": "p07",
+            "src": "dev/art/creatures/candidates/pajak/portrait-p07.webp",
+            "sha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0",
+            "source": "dev/art/creatures/in/pajak/portrait-p07.png",
+            "sourceSha256": "875791b354e33da8aca5d7c27d8cd3278022ec4bfba849b85eff49a6aafae598",
+            "prompt": "dev/art/creatures/prompts/pajak/portrait-p07.json",
+            "width": 832,
+            "height": 1000,
+            "createdAt": "2026-10-30T23:16:27.283443+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Front-centred elevated view with four complete walking legs and four separated feet per side; two antennae retained. Awaiting GM portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/pajak/token-t01.webp",
+            "sha256": "25529157fb391e80ddc4943d3cb8f4d628522ce0247d2b3620d27e3cf34b6cd3",
+            "source": "dev/art/creatures/in/pajak/token-t01.png",
+            "sourceSha256": "859e8d4f3ed79cbb946e79b7ab3b372b5a0721d095b3051ec384807ffe11e5d0",
+            "prompt": "dev/art/creatures/prompts/pajak/token-t01.json",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2026-10-30T23:36:55.212059+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Transparent extraction preserving the approved p07 camera and all eight visible walking legs. Awaiting token approval.",
+            "portraitId": "p07",
+            "portraitSha256": "0cfef2299f2042907071023ed3fcd6ab3659b7a8116017b428ee32995fa90ad0",
+            "sourceBox": [
+              25,
+              18,
+              1229,
+              1228
+            ],
+            "fill": 0.6
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Maszyny"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p07/t01 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "roj-szczurow",
+      "title": "Rój szczurów",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Setki oczu patrzących z mroku. Setki paszcz, pazurów i małych ostrych ząbków, które bez wahania dobiorą się do twojej skóry. Nieważne, ile amunicji w nie wywalisz, nieważne, ile razy zamachniesz się gazrurką, miażdżąc pojedyncze sztuki. Bez szczelnego pancerza lub miotacza ognia, długo nie pożyjesz.",
+      "source": "dev/bestiary/bestiary.json#roj-szczurow",
+      "targets": {
+        "portrait": "tokens/portraits/roj-szczurow.webp",
+        "token": "tokens/roj-szczurow.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/roj-szczurow/portrait-p01.webp",
+            "sha256": "6133ba33a217258255a4269195f6094435be44d13d0b060f4faa0d395ee031fe",
+            "source": "dev/art/creatures/in/roj-szczurow/portrait-p01.png",
+            "sourceSha256": "ce18eb6bab8da251aae52af64f7fe314b45e5a241794a175731d4e819c314094",
+            "prompt": "dev/art/creatures/prompts/roj-szczurow/portrait-p01.json",
+            "width": 789,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:06.914638+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/roj-szczurow/token-t01.webp",
+            "sha256": "6851f9fb1392d85203f0535e96cab2b04bd4e782218ee5147ac15e8346ea7f4f",
+            "source": "dev/art/creatures/in/roj-szczurow/token-t01.png",
+            "sourceSha256": "0d296f61f177123c0477a552aa32731281833cbf479b8aeaaa9ae9c9341900a3",
+            "prompt": "dev/art/creatures/prompts/roj-szczurow/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T22:16:16.809646+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "6133ba33a217258255a4269195f6094435be44d13d0b060f4faa0d395ee031fe",
+            "sourceBox": [
+              76,
+              17,
+              1207,
+              1218
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Zwierzęta"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 (4/5) i żeton t01 (4/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach."
+    },
+    {
+      "id": "szeryf",
+      "title": "Szeryf",
+      "group": "bestiary",
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "",
+      "source": "dev/bestiary/bestiary.json#szeryf",
+      "targets": {
+        "portrait": "tokens/portraits/szeryf.webp",
+        "token": "tokens/szeryf.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/szeryf/portrait-p01.webp",
+            "sha256": "315a6efc454621192339dda2bb9c2732215ca7f7870975f1bfe9de527723b949",
+            "source": "dev/art/creatures/in/szeryf/portrait-p01.png",
+            "sourceSha256": "e0690e93a139797bc86120108bc63e3ec5870a0ec60130e9619112ee24f7d6e8",
+            "prompt": "dev/art/creatures/prompts/szeryf/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:30:20.777724+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Based on the NOE appearance and role; GM confirmed no pencil illustration available. Awaiting portrait approval."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/szeryf/portrait-p02.webp",
+            "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74",
+            "source": "dev/art/creatures/in/szeryf/portrait-p02.png",
+            "sourceSha256": "2caf4b277065eedcdb7559639ec918908e291980a49cddf98cfcab41d4e69eaf",
+            "prompt": "dev/art/creatures/prompts/szeryf/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T22:12:31.980817+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies the GM saved portrait notes. New revision is not approved; retain all prior versions and decisions."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/szeryf/token-t01.webp",
+            "sha256": "55978737eb510e53ba34e45c6649f5d92c5b1b4f181c33e2d96cfe6f404d56f7",
+            "source": "dev/art/creatures/in/szeryf/token-t01.png",
+            "sourceSha256": "94f0a8ab962adb4079a8a7c51a5b06876592eb1d9ce10d84cb8354823353b50c",
+            "prompt": "dev/art/creatures/prompts/szeryf/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:11:03.818696+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; steep overhead camera. Awaiting independent token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74",
+            "sourceBox": [
+              255,
+              97,
+              1140,
+              1128
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/szeryf/token-t02.webp",
+            "sha256": "bb6ce05efd3f8e04d65d03fc1a4581a33a5e3030de66d3d0b7372b36860bfc88",
+            "source": "dev/art/creatures/in/szeryf/token-t02.png",
+            "sourceSha256": "4ace557cc7c7a3eadf08b88ea36ecb1e834768a4cf60fd3c52873f19f3b83da5",
+            "prompt": "dev/art/creatures/prompts/szeryf/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-30T23:36:56.313122+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact approved portrait; awaiting independent token review.",
+            "portraitId": "p02",
+            "portraitSha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74",
+            "sourceBox": [
+              175,
+              51,
+              1200,
+              1184
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Zaakceptowana para p02/t02 zapisana dokładnie w docelowych plikach."
+    },
+    {
+      "id": "taran",
+      "title": "Taran",
+      "group": "bestiary",
+      "size": "lg",
+      "px": 800,
+      "fill": 0.9,
+      "brief": "Z dala idzie go pomylić z łazikiem albo niewielkim autem prującym przez pustynię ze stałą prędkością lekko przekraczającą 50 km/h, wzbijającym przy tym tumany kurzu. W rzeczywistości to zgarbiona bestia pokryta wielkimi płytami pancerza, z także opancerzonym podłużnym łbem pochylonym niemal przy samej ziemi. Nóg zazwyczaj nie widać, bo taran jest wiecznie w ruchu i zawsze wzbija masę pyłu w powietrze. Kilka taranów może wyglądać jak przemieszczające się po pustyni wydmy lub niewielkie wędrujące wzgórza.",
+      "source": "dev/bestiary/bestiary.json#taran",
+      "targets": {
+        "portrait": "tokens/portraits/taran.webp",
+        "token": "tokens/taran.webp"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/taran/portrait-p01.webp",
+            "sha256": "e7375737272812fd82788309554b9cdc6c6eeba75f021c7977728cb5ad96a094",
+            "source": "dev/art/creatures/in/taran/portrait-p01.png",
+            "sourceSha256": "3de787a6ec833652e72a845c046044d2a8002d8afa2bfd56efed34c4c248811e",
+            "prompt": "dev/art/creatures/prompts/taran/portrait-p01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-30T21:25:12.824570+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "GM pencil reference defines anatomy; existing module art supplies painting only. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/taran/token-t01.webp",
+            "sha256": "8baf42c2cd06bc7c44a0403d80affba15471598c0e96eac3fcdbb8309514b05a",
+            "source": "dev/art/creatures/in/taran/token-t01.png",
+            "sourceSha256": "dbdfc4778bb345b8ede2a78ad9171f6f49d572e0729fe4e54c089ba5f70ddf3e",
+            "prompt": "dev/art/creatures/prompts/taran/token-t01.json",
+            "width": 800,
+            "height": 800,
+            "createdAt": "2026-10-30T22:16:17.856497+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Derived from the exact GM-approved portrait; awaiting independent token approval.",
+            "portraitId": "p01",
+            "portraitSha256": "e7375737272812fd82788309554b9cdc6c6eeba75f021c7977728cb5ad96a094",
+            "sourceBox": [
+              242,
+              14,
+              1012,
+              1233
+            ],
+            "fill": 0.9
+          }
+        ]
+      },
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ],
+      "stage": "portrait-approval",
+      "guidance": "Portret p01 (4/5) i żeton t01 (4/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach."
+    }
+  ],
+  "references": [
+    {
+      "id": "pies-bojowy",
+      "title": "Pies bojowy",
+      "portrait": "tokens/portraits/pies-bojowy.webp",
+      "token": "tokens/pies-bojowy.webp"
+    },
+    {
+      "id": "kanibal",
+      "title": "Kanibal",
+      "portrait": "tokens/portraits/kanibal.webp",
+      "token": "tokens/kanibal.webp"
+    },
+    {
+      "id": "gangus-kapo",
+      "title": "Gangus kapo",
+      "portrait": "tokens/portraits/gangus-kapo.webp",
+      "token": "tokens/gangus-kapo.webp"
+    },
+    {
+      "id": "neokot",
+      "title": "Neokot",
+      "portrait": "tokens/portraits/neokot.webp",
+      "token": "tokens/neokot.webp"
+    }
+  ]
+}

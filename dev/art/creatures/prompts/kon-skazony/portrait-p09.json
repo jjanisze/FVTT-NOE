@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.570Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p09",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/kon-skazony/portrait-p08.png",
+      "role": "Edit target: exact reviewed portrait version p08",
+      "sha256": "775123110f378b10e5f5c149d8ec865776a5085973980deb25cfee103aa258c3"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p08",
+    "sha256": "f4fb29f5cdab1d74939a13a064b8d530c9f046eeb9b482acc6d092ff62aae59c",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Uczyń go jeszcze chudszym"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Make this exact horse visibly THINNER and more underweight: reduce the flesh on chest, belly, rump, upper legs and neck; narrower chest and hindquarters, more hollow flanks, visible broad rib forms and hip landmarks beneath the skin. Keep it standing naturally with exactly four intact legs. Preserve the existing identity, cloudy eyes, bald colour patches, five small local skin blisters, soft tail, bridle, simple saddle and rear passenger pad, full-body pose and charcoal backdrop. Broad smoothly blended skin planes, a few large anatomical shadows only; thinness must come from silhouette and body mass, without adding a network of scratches or fine surface texture."
+}

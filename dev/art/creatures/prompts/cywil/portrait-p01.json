@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T21:22:41.916Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cywil",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-kapo.webp",
+      "role": "Painting/backdrop ONLY; no copied character, tattoos, clothes or weapons"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Coloured full-body bestiary portrait, grounded hand-painted realistic game illustration. Broad readable brushwork, smooth light-to-shadow gradients across large forms, quiet surfaces with selective crisp detail at silhouette and focal features. No uniform high-frequency texture, craquelure, fractal cracks or sharpening noise. Soft upper-left light, muted natural colours. Empty dark charcoal subtly mottled backdrop, restrained contact shading only. Entire subject, feet, tails and tips inside comfortable margins. Portrait aspect about 4:5. No captions, symbols, border or circular crop. \nOne ordinary adult woman working as settlement mechanic/trader, sturdy build, practical tied-back dark hair, sun-weathered but smoothly shaded natural face. Rolled-sleeve faded blue work shirt, plain tan canvas waist apron with two large pockets, brown work trousers, boots, simple belt with small holstered revolver. Short plain steel pipe held loosely down beside her in one hand, non-aiming relaxed stance. Two natural hands/two feet, full-body three-quarter front. No heavy armour, tactical vest, gang tattoos or ornate gadgets. Large quiet cloth folds and broad material shapes, local wear at cuffs only. Painting reference only, no copied face/equipment."
+}

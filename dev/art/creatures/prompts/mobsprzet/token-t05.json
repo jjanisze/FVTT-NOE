@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-31T00:18:45.327Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "token",
+  "candidateId": "t05",
+  "portraitId": "p01",
+  "variantLabel": "A — wieża nad połową odsłoniętego środka",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+      "role": "Approved machine identity",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f"
+    },
+    {
+      "path": "dev/art/creatures/in/mobsprzet/token-t04.png",
+      "role": "Exact edit target: keep chassis, shift full upper turret south",
+      "sha256": "556bad9337e097325bb8e77893fd856d223577b04563f1143568240863c02342"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "t04",
+    "kind": "token",
+    "sha256": "d1df0a07d22adc5bad7c497a66691cbe375891068fe425cc50d2a8f0bd2fc30d",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Shift the turret even more south/down. Generate me multiple variants.",
+    "updatedAt": "2026-10-31T00:16:16.568Z"
+  },
+  "prompt": "Use case: precise-object-edit. Asset: transparent overhead game token of the approved Mobsprzet machine. Image 1 fixes the approved machine IDENTITY. Image 2 is the t04 TOKEN TO EDIT. Create an independent alternative directly from t04, not a further iteration of another new variant.\nThe GM wants the TOP GUN TURRET substantially further SOUTH / DOWN over the middle body. Keep the underlying chassis and both wheel axles in their current locations and keep its straight north-south centreline. Translate the WHOLE UPPER BOX assembly together: its box, gun mounting block, attached barrel and single antenna. Do not merely lower the barrel or swivel the turret. Do not tilt the turret to one side. The turret must clearly conceal MORE of the middle housing from the overhead camera. Keep FOUR tyres, ONE straight south-facing barrel, ONE antenna and the same THREE housing identities (low base deck, middle electronics/control body, upper gun turret). Preserve the four-wheel light unmanned platform proportions, matte desaturated oxide-orange/brown plates and dark iron. Quiet broad metal areas, local weld repairs and grease shading, functional pivot collars and cable clamps. Maintain the t04's more utilitarian materials, avoid bright glossy toy finish and ornamental repeated bevels. No new weapon, crew, tracks or decorative spikes.\nVariant A / moderate extra south shift: move the upper turret DOWN by about ONE HALF of a tyre's top-to-bottom diameter in the t04 reference (roughly 110 pixels on that source). Its front/gun mounting face should now sit over approximately the centre of the formerly exposed middle top panel. Retain a visible front strip of the middle body below it and the separate base deck. This is a clearly visible extra move beyond t04, not a tiny nudge.\nPreserve the barrel's sensible physical proportions; reframe with enough transparent margin so the muzzle and antenna remain fully inside the square canvas, even if the gun now projects farther past the front bumper. Same steep front-centred overhead camera and painterly treatment. Genuine transparent alpha, no ground, ring, base disc, captions, letters or frame."
+}

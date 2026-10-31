@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30T23:13:27.957Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "portrait",
+  "candidateId": "p07",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pajak/portrait-p06.png",
+      "role": "Edit target: current frontal machine with six visible legs"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Make ONE surgical change to this exact image: ADD ONE MATCHING PAIR OF WALKING LEGS. The image currently has SIX legs, three left and three right. Keep those six existing legs UNCHANGED, and add ONE new leg on the LEFT plus ONE new leg on the RIGHT, so the result has EIGHT complete walking legs, FOUR clearly separated feet on EACH side. Place the new pair BETWEEN the current rearmost/highest pair and the middle pair. Each new root bolts to the side of the abdomen between the existing upper and middle leg roots. Each new leg uses the same thin olive steel rod segments and round hinge joints. Left new foot ends far left halfway between the current upper and middle left feet, roughly at image height 50%; right new foot ends symmetrically far right at that same height. New legs must be fully outside the body outline, with visible knees and pointed feet, no occlusion or merging. Keep the entire body, eight face lenses, top camera, two antennae, frontal elevated camera, current six legs, background, scale and materials unchanged. No other edits. The sole requested change is six legs becoming eight by adding exactly two, one on each side."
+}

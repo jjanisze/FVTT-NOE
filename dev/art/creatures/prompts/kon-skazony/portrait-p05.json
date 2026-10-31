@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p05",
+  "portraitId": null,
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p04.webp",
+      "role": "portrait to edit; preserve horse, sparse smooth body shading and all geometry; simplify tack only"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Keep this exact horse portrait, pose, anatomy, thin ribcage, gray-brown and pale pink coat/skin patches, cloudy eyes, soft flowing tail and mane, charcoal backdrop and lighting. CRITICAL: preserve the broad smooth color gradients on the chest, neck and shoulders. Do not add any surface pattern or extra body texture. Edit ONLY the equipment and a few hoof-edge details. Replace the elaborate Western saddle with a modest inexpensive plain low brown riding saddle/pad: remove the tall front horn, decorative leather tooling and ornate fittings. Keep one main rider seat and the small low rear pillion cushion in the same positions on the horse's back. Both are simple smoothly shaded brown leather panels with a few stitches along the edges, one or two large repairs/scuffs and basic dull buckles. Keep the cream blanket, its simple larger frayed edges and bridle, but no added ornaments. Plain soft leather shading, not an all-over surface pattern. At the bottom four hooves only, make the keratin matte and unpolished with one or two larger separate linear splits at a toe edge; this detail must be confined to the hoof material and must not spread up the legs or onto skin. Horse body rendering stays clean and quiet: chest, neck and limb planes shade smoothly from light to shadow. No change in figure, framing or color, no new lesions, fine mesh, artificial grain or anatomy changes. Same entire horse, all four solid hooves and full tail inside the frame, same opaque dark background and 4:5 portrait."
+}

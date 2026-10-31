@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200" viewBox="0 0 1000 1200">
+<rect width="1000" height="1200" fill="#eeeae2"/>
+<g stroke-width="20" stroke-linejoin="round" fill="none">
+<g stroke="#5c777e"><path d="M420 350 L250 220 L125 100"/><path d="M405 450 L225 415 L100 380"/><path d="M405 550 L220 650 L95 780"/><path d="M420 650 L265 880 L160 1090"/></g>
+<g stroke="#b56b3a"><path d="M580 350 L750 220 L875 100"/><path d="M595 450 L775 415 L900 380"/><path d="M595 550 L780 650 L905 780"/><path d="M580 650 L735 880 L840 1090"/></g>
+</g>
+<ellipse cx="500" cy="470" rx="125" ry="240" fill="#75775f" stroke="#222" stroke-width="8"/>
+<rect x="415" y="605" width="170" height="130" rx="20" fill="#8b8976" stroke="#222" stroke-width="8"/>
+<g fill="#1c2028"><circle cx="438" cy="645" r="12"/><circle cx="480" cy="645" r="12"/><circle cx="520" cy="645" r="12"/><circle cx="562" cy="645" r="12"/><circle cx="438" cy="690" r="12"/><circle cx="480" cy="690" r="12"/><circle cx="520" cy="690" r="12"/><circle cx="562" cy="690" r="12"/></g>
+<g stroke="#222" stroke-width="8"><path d="M465 260 L420 95"/><path d="M535 260 L580 95"/></g>
+<g font-family="sans-serif" font-size="28" fill="#222"><text x="120" y="1170">FOUR COMPLETE LEGS ON EACH SIDE</text></g>
+</svg>

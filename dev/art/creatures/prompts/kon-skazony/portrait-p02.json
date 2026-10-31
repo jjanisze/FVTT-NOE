@@ -1,0 +1,16 @@
+{
+  "creatureId": "kon-skazony",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p01.webp",
+      "role": "portrait to edit; preserve identity and painting, intensify visible sickness and downgrade tack"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Edit this contaminated horse portrait according to GM feedback. Preserve the horse's four-leg anatomy, ash gray-brown color family, small faint yellow-green contamination patches, standing three-quarter front view, full-body framing, charcoal painted backdrop and upper-left illumination. It must look MUCH MORE SICKLY, poorly kept and malnourished, while still a living usable ordinary horse. Clearly visible ribs, narrow wasted limbs with tendons and prominent joints, thin neck musculature and bony hips. Hooves should show visible irregular cracks, chips and rough unpolished keratin, but remain one solid hoof on each leg. Coat is coarse, patchy and uneven: irregular clumps of remaining hair, bald gray-pink discolored skin patches, blotches and dry raised rough skin changes/scars; no open bloody wounds, exposed bones or gore. Eyes noticeably misty/clouded and tired, not glowing demonic eyes. Thin ragged mane and tail with uneven missing strands. Keep faint localized contamination glow restrained, not a fantasy aura. REPLACE the current expensive Western saddle with visibly CHEAP, simple and heavily worn tack: a low plain patched brown leather main riding pad/saddle without ornate tooling or a fancy high horn, fraying dirty coarse cloth blanket, rough repair stitching, mismatched straps and a simple cheap bridle. Retain two believable tandem sitting areas: the main rider saddle and a thin low rear pillion cushion, not a rigid box. No chest armor, bags or objects over the seats. Full figure, all FOUR solid hooves, ears and tail tip safely framed. Same grounded hand-painted realistic wasteland-game portrait, about 4:5. No text, frame, logos, people, scenery, extra limbs, fantasy ornament or huge glow.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}

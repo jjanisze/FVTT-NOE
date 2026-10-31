@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T22:05:13.786Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "mobsprzet",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p01",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/mobsprzet/portrait-p01.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f"
+    },
+    {
+      "path": "tokens/obronca.webp",
+      "role": "Camera/painting ONLY; do not copy anatomy or equipment"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p01",
+    "sha256": "7f323d53e7ccf445eccaed87a03a0521d7c782ad4638a592bdec6a14b964115f",
+    "decision": "approve",
+    "rating": 4
+  },
+  "prompt": "Use case: stylized-concept. Derive one TTRPG battle-map token from the EXACT approved portrait in IMAGE 1. IMAGE 2 is CAMERA AND PAINTING STYLE ONLY: take the overhead viewpoint and brushwork, never its character, anatomy, pose, clothing, weapons, armour or background. Preserve image 1's identity, proportions, colour markings and equipment.\nCamera 80–85 degrees above the ground, showing crown, back and upper surfaces, with strong correct foreshortening. HEAD/FRONT AT BOTTOM (SOUTH), rear/tail toward top. It must read as a view down onto the subject, not a standing front or side portrait. Painterly realistic game art, upper-left soft light, broad smooth light/shadow gradients and quiet large surfaces, selected edge detail only. No uniform fine cracks, noise or all-over sharpening. Square composition, every extremity and all equipment safely inside margins. Genuine transparent alpha, including spaces between limbs. No ring, base, floor, scenery, rectangular shadow or painted checkerboard, only very short faint contact shading.\nThe exact unmanned rust-orange FOUR-WHEEL machine. Four chunky tyres, two axles, compact rectangular platform, stacked sloping steel equipment boxes, SINGLE gun barrel aiming straight SOUTH and single rear whip antenna. Near-vertical overhead engineering view, not three-quarter ground view. Body and barrel aligned north-south, wheels project to both sides, no extra wheels, robot arms, legs or weapons copied from style reference. Retain the stacked concept's recognisable upper gun box and rear equipment housing.\nLongest subject extent about 90% of the square canvas. Preserve readable silhouette at 70 screen pixels."
+}

@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "kon-skazony",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p09",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-skazony/portrait-p09.webp",
+      "role": "Exact approved portrait identity",
+      "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "kon-skazony",
+    "kind": "portrait",
+    "candidateId": "p09",
+    "sha256": "98a7e8b1a5260ed2a3dc072e8116025b502105e4af56b1f879cf32022041a2c3",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-30T22:26:16.042Z"
+  },
+  "prompt": "Use case: stylized-concept. Generate one TTRPG battle-map token from the EXACT APPROVED PORTRAIT in image 1, preserving its identity, body proportions, colours and all equipment. This is a NEW VIEW, not a portrait cutout.\nCamera almost vertically ABOVE, 88–90 degrees down, orthographic bird's-eye/plan view. Crown/back of head and TOPS of shoulders dominate; most face and front chest are occluded by the head and shoulders. Strong foreshortening compresses an upright torso; feet only peek out around the silhouette. No large front-facing face, no full-length frontal chest. HEAD/FRONT SOUTH at bottom, rear/tail NORTH at top.\nGrounded hand-painted realistic game art, muted colours, soft upper-left light, broad quiet surface gradients and selected edge detail; no fine all-over cracked texture. Square, genuine transparent alpha including limb gaps, all tips safely within margins, longest extent about 90%. No scenery, floor, circle, base, text, watermark or rectangular shadow.\nThe exact severely underweight mottled horse p09: bony narrow body, cloudy eyes, pale bald patches with a few local blisters, soft thin tail, plain worn brown tandem saddle with a rear passenger pad, bridle and reins. FOUR legs and two ears only. Strict overhead view with horse muzzle south, tail north, spine/saddle centre line straight north-south, readable rider seat and rear pad. Preserve thinness; do not turn it into a healthy muscular horse."
+}

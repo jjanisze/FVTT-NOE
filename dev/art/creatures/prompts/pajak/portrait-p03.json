@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-30T22:02:33.571Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "pajak",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/pajak/portrait-p02.png",
+      "role": "Edit target: exact reviewed portrait version p02",
+      "sha256": "2ad170e4fb1723dbfc3e3e74e568ea97bb0a3ba1a883c41424738f7aebdf2970"
+    }
+  ],
+  "gmReview": {
+    "candidateId": "p02",
+    "sha256": "fcf3827d68ae8575943695d9d9d6bb5470de4e916c0a0117f82a70715b8618da",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Lżejsza budowa, więcej wagi poświęconego na sprzęt obserwacyjny, wątlejsze, prostsze nóżki, dwie antenki z tyłu"
+  },
+  "prompt": "Use case: precise-object-edit. Edit image 1 according to the GM's requested revision. Preserve all unmentioned features and the established realistic hand-painted portrait treatment. Redesign this exact reconnaissance robot to be LIGHTER and less armoured, with more of its visual mass devoted to observation equipment. Slim the oval body and replace thick armour plating with thin utilitarian covers. Replace bulky articulated legs with EIGHT slender simple rod-like mechanical legs, four per side, modest small hinge joints and sharp feet, all eight clearly readable and complete. The prominent forward observation package carries the existing eight optical sensors, with a few larger lenses and a compact swivelling camera pod on top; no weapon. Add EXACTLY TWO thin whip antennae projecting from the REAR. Retain compact small-dog scale, muted olive/dark metal palette, recognisable oval abdomen/front head layout and painterly charcoal background. No guns, thick forearm plates, extra limbs or decorative cables everywhere."
+}

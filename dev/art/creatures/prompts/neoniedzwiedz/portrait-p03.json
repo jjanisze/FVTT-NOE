@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30T23:01:07.254Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "neoniedzwiedz",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/neoniedzwiedz/portrait-p02.png",
+      "role": "Exact reviewed portrait edit target",
+      "sha256": "1c107f77cfdefd8949ad3e99de85f678e025c93aa95a4cdbbff77547b2174c89"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "neoniedzwiedz",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "e5c5f2033d2549d3362bd195f1f27474c3eac1d56c274c9803d3aeacc39084df",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Tam gdzie nie ma futra zredukuj masę ciała i upodobnij trochę do \"workowatego\" wyglądu kota syjamskiego. ",
+    "updatedAt": "2026-10-30T22:30:45.328Z"
+  },
+  "prompt": "Use case: precise-object-edit. Apply only the GM-requested revision to image 1; preserve identity, palette, realistic hand-painted treatment, full-body framing, quiet broad surface gradients and dark charcoal backdrop. Reduce bulk and muscle mass specifically in the BALD regions: chest, shoulders, belly, flanks and upper limbs become noticeably leaner and less inflated. Give the bare body a LOOSE BAGGY SKIN look reminiscent of a hairless cat: a few large soft hanging skin folds, slack side pouches and draped skin at joints, not a taut bodybuilder torso. Keep this a colossal BEAR, with the same bear face, four paws, body plan, short tail and existing fur confined to face, dorsal strip, tail and lower limbs. No feline head or cat anatomy. Broad large folds and smoothly shaded skin; no dense tiny wrinkles, scars or fine cracked texture."
+}

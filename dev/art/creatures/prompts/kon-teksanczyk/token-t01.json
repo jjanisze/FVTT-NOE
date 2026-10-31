@@ -1,0 +1,20 @@
+{
+  "creatureId": "kon-teksanczyk",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kon-teksanczyk/portrait-p02.webp",
+      "role": "approved exact horse identity and premium tandem saddle"
+    },
+    {
+      "path": "dev/art/creatures/candidates/kon-zdrowy/token-t01.webp",
+      "role": "approved overhead horse camera and framing only, not individual coat, markings or equipment"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create a matching near-overhead battle-map token of the approved BLACK Teksańczyk horse in image 1. Image 1 supplies the exact identity: strong broad chest and shoulders, sleek black coat and black mane/tail, long narrow white facial blaze, healthy polished dark hooves, well-made rich brown Western saddle with restrained ornamental tooling and small bright fittings, cream saddle blanket, main rider seat and a low brown rear pillion cushion on the centerline. Image 2 is overhead HORSE CAMERA AND FRAMING ONLY; do not copy its bay coat, small forehead star, ordinary build or plain saddle. Head and nose face STRAIGHT DOWN toward bottom/south, hindquarters and full tail toward top; camera about 80–85 degrees above the ground, crown, neck, back and saddle visible. Exactly FOUR anatomical horse legs, one solid hoof each, slightly separated natural standing pose, no extra feet or dog paws. Both sitting zones unobstructed; no riders, bags, reins over seats or big boxes. Preserve the strong elegant equine proportions and short sleek coat. Realistic painterly shading with large smooth quiet gradients on neck, shoulders and hindquarters; selective detail at eyes, mane edges and saddle seams. No dense all-over micro-texture, crackle, hatch or artificial speckling. Show the black coat using controlled neutral upper-left highlights, not a flat black silhouette. Square genuine transparent alpha, complete tail, ears, nose, hooves and stirrups fully inside clear margins. Longest figure extent about 90% of square. No floor, circular base, ring, scene, text, border, aura or long shadow.",
+  "date": "2026-10-30",
+  "tool": "OpenAI built-in image_gen",
+  "model": null
+}
