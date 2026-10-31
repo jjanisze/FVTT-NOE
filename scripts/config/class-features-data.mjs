@@ -200,7 +200,7 @@ export const CLASS_FEATURES = {
     action: null,
     restActivity: "sr",
     resource: { die: "@scale.cwaniak.kolejka" },
-    auto: [],
+    auto: [{ what: "okno Krótkiego odpoczynku: pole „Piję Kolejkę” u każdego, gdy w drużynie jest Cwaniak z Kolejką; każda Kość Wytrzymałości + kość z tabeli Cwaniaka (PLAN_m7 E2, U15)", where: "combat/zdolnosci-wsparcie.mjs" }],
     text: "Podczas Krótkiego odpoczynku, puszczasz wśród towarzyszy kolejkę z napitkiem własnej roboty. Każdy, kto pije, odzyskuje dodatkowo +1k4 PW za każdą wydaną Kość Wytrzymałości, podczas tego odpoczynku. Pokrzepiająca siła płynąca ze zdolności Kolejka rośnie zgodnie z ostatnią kolumną w tabeli Zdolności klasowych Cwaniaka."
   },
   "spieprzysz-to": {
@@ -302,7 +302,7 @@ export const CLASS_FEATURES = {
     action: "B",
     uses: { max: "@prof", period: "sr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Akcja Bonusowa z wycelowanym sojusznikiem: efekt +mod. INT na nim (także na cudzym aktorze — przekaźnik MG), do początku twojej następnej tury (PLAN_m7 E2)", where: "combat/zdolnosci-wsparcie.mjs" }, { what: "przycisk po rzucie pod jego Testem Cechy, Ataku albo RO — jedno użycie (D11)", where: "combat/zdolnosci-wsparcie.mjs" }],
     text: "W Akcji Bonusowej możesz wybrać jednego sojusznika, który cię słyszy i dać mu dobrą radę. Do początku twojej następnej tury otrzymuje premię do Testu Cechy, Ataku lub Rzutu Obronnego, równą twojemu modyfikatorowi Inteligencji. Możesz użyć tej zdolności tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "inteligentna-obrona": {
@@ -774,7 +774,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Odważny czy głupi",
     action: null,
-    auto: [],
+    auto: [{ what: "Odważny: sojusznicy ≤ 9 m — +1k4 do RO przeciw Przerażeniu: sam, gdy źródło RO jest znane (karta, natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", where: "combat/zdolnosci-wsparcie.mjs" }],
+    manual: "Głupi (niewrażliwość na Przerażenie) — zaznacza gracz; dane zdolności w PLAN_m7 E3.",
     text: "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu."
   },
   "nie-do-zdarcia": {
@@ -867,7 +868,7 @@ export const CLASS_FEATURES = {
     label: "Kakofonia",
     action: "A",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Akcja: karta ze słyszącymi istotami ≤ 9 m, RO KON ST 8 + CHA + PB (sojusznicy z Ułatwieniem) — MG rzuca przyciskiem; porażka — Obezwładnienie do początku twojej następnej tury", where: "combat/zdolnosci-wsparcie.mjs" }, { what: "wynik RO zmieniony po rzucie przelicza skutek w obie strony", where: "combat/zdolnosci-wsparcie.mjs" }],
     text: "W swojej Akcji możesz wydobyć ze swojego instrumentu lub z gardła zestaw głośnych nieharmonicznych dźwięków, który może zdezorientować twoich wrogów. Każda słysząca istota w promieniu 9 metrów wokół ciebie, wykonuje RO na Kondycję o ST równym 8 plus twój modyfikator Charyzmy i twoja Premia Biegłości. Porażka w Rzucie Obronnym oznacza Obezwładnienie istoty do początku twojej następnej tury. Twoi sojusznicy mają Ułatwienie w tym RO."
   },
   "lets-rock": {
@@ -879,7 +880,7 @@ export const CLASS_FEATURES = {
     label: "Let’s rock!",
     action: "A",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Akcja: Test Występów albo instrumentu (z biegłością) → premia z tabeli do Testów Ataku i RO (D12) sojuszników ≤ 27 m bez Ogłuchnięcia, do początku twojej następnej tury", where: "combat/zdolnosci-wsparcie.mjs" }, { what: "Nieprzytomność, Obezwładnienie albo Ogłuchnięcie wykonawcy kończy premię natychmiast", where: "combat/zdolnosci-wsparcie.mjs" }],
     text: "Potrafisz swoją muzyką lub śpiewem zagrzewać towarzyszy do boju. W swojej akcji wykonujesz „bojowy kawałek”, który pomaga się skupić i dodaje sił. Wszyscy sojusznicy, którzy cię słyszą i są w zasięgu 27 metrów od ciebie, otrzymują premię do Testów Ataku lub Rzutów Obronnych, zależną od wyniku testu umiejętności Występy lub instrumentu muzycznego. Premia działa do początku twojej następnej tury. Zdolność Let’s rock możesz powtarzać w nieskończoność, za każdym razem ponownie testując umiejętność Występy. Jeśli w czasie występu otrzymasz stan Nieprzytomność, Obezwładnienie lub Ogłuchnięcie, efekt natychmiast się kończy. WYNIK TESTU PREMIA DO TESTÓW SOJUSZNIKÓW 5 – 9 +1 10 – 14 +2 15 – 19 +3 20 – 24 +4 25 + +5"
   },
   "stylowa": {
@@ -927,7 +928,8 @@ export const CLASS_FEATURES = {
     label: "Łaska boża",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Akcja Bonusowa: wycelowani sojusznicy ≤ 18 m (do poziomów Cwaniaka) — +1k4 do Testów Ataku i RO (reguły dnd5e), do początku twojej następnej tury", where: "combat/zdolnosci-wsparcie.mjs" }],
+    manual: "Czy sojusznicy słyszą twój głos — stół.",
     text: "W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka."
   },
   "moj-bog-kule-nosi": {
@@ -1403,7 +1405,7 @@ export const CLASS_FEATURES = {
     label: "Rzuć broń i gleba!",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "Akcja Bonusowa: wycelowany człowiek ≤ 9 m, karta RO MDR ST 8 + CHA + PB — MG rzuca; porażka — broń z rąk na ziemię (lalka), Powalenie, Przerażenie do końca twojej następnej tury", where: "combat/zdolnosci-wsparcie.mjs" }],
     text: "Siła twojego głosu potrafi zmusić największego cwaniaka do upuszczenia broni. W Akcji Bonusowej możesz krzyknąć polecenie do wybranego człowieka w zasięgu 9 metrów i zmusić go do poddania się. Przeciwnik wykonuje Rzut Obronny na Mądrość o ST równym 8 plus twój modyfikator Charyzmy i Premia Biegłości. Porażka w teście oznacza, że natychmiast upuszcza broń, kładzie się na ziemię i jest pod wpływem stanu Przerażenie do końca twojej następnej tury."
   },
   "partner": {

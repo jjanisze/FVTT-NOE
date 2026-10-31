@@ -72,6 +72,7 @@ import { registerAkcjeTests } from "./akcje.test.mjs";
 import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
 import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
 import { registerZdolnosciPoRzucieTests } from "./zdolnosci-po-rzucie.test.mjs";
+import { registerZdolnosciWsparcieTests } from "./zdolnosci-wsparcie.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
 export function registerQuenchTests() {
@@ -134,6 +135,8 @@ export function registerQuenchTests() {
     registerUlatwieniaTestowTests(quench);
     // PLAN_m7 E1: zdolności po rzucie (R3).
     registerZdolnosciPoRzucieTests(quench);
+    // PLAN_m7 E2: wsparcie sojusznika (R7).
+    registerZdolnosciWsparcieTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

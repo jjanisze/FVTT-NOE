@@ -17,6 +17,7 @@
 import { rozstrzygnijTest } from "../config/ulatwienia-testow.mjs";
 import { kombatantWlasciciela } from "./czas-efektu.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
+import { jestMaszyna } from "../actors/towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const TESTY_OPT = "neuroTesty";
@@ -51,12 +52,36 @@ function _typ(config) {
   return null;
 }
 
+/** Stany i typy obrażeń aktywności → źródło RO (`config/ulatwienia-testow.mjs` `KONTEKSTY_RO`). */
+const KONTEKST_STANU = Object.freeze({ frightened: "przerazenie", poisoned: "trucizna" });
+const KONTEKST_OBRAZEN = Object.freeze({ acid: "kwas", poison: "trucizna", radiant: "skazenie" });
+
+/**
+ * Źródło RO z karty aktywności, która żąda rzutu (natywne RO dnd5e — Bestiariusz): `SaveActivity#rollSave` daje
+ * rzutowi zdarzenie kliknięcia i `system.origin` karty, więc da się dojść do aktywności — nakładane stany, typy
+ * obrażeń, szablon (obszar) i to, czy rzuca na nas maszyna.
+ */
+function _kontekstZKarty(config, message) {
+  const id = foundry.utils.getProperty(message ?? {}, "data.system.origin")
+    ?? config?.event?.target?.closest?.("[data-message-id]")?.dataset?.messageId;
+  let activity = null;
+  try { activity = id ? game.messages.get(id)?.getAssociatedActivity?.() : null; } catch (_e) { activity = null; }
+  if (!activity) return [];
+  const out = new Set();
+  for (const e of activity.effects ?? []) for (const s of e.effect?.statuses ?? []) if (KONTEKST_STANU[s]) out.add(KONTEKST_STANU[s]);
+  for (const p of activity.damage?.parts ?? []) for (const t of p.types ?? []) if (KONTEKST_OBRAZEN[t]) out.add(KONTEKST_OBRAZEN[t]);
+  if (activity.target?.template?.type) out.add("obszar");
+  if (activity.actor && jestMaszyna(activity.actor)) out.add("maszyna");
+  return [...out];
+}
+
 /**
  * Kontekst rzutu dla wierszy.
- * @param {object} config  konfiguracja rzutu dnd5e
+ * @param {object} config   konfiguracja rzutu dnd5e
+ * @param {object} [message] konfiguracja wiadomości (trzeci argument haka)
  * @returns {object|null}
  */
-export function kontekstTestu(config) {
+export function kontekstTestu(config, message = null) {
   const actor = config?.subject;
   const typ = _typ(config);
   if (!(actor instanceof Actor) || !typ) return null;
@@ -66,13 +91,13 @@ export function kontekstTestu(config) {
     actor, typ, ability, skill, tool: config.tool ?? null,
     walka: !!kombatantWlasciciela(actor),
     stany: new Set(actor.statuses ?? []),
-    kontekst: [].concat(config.neuroKontekst ?? [])
+    kontekst: [...new Set([...[].concat(config.neuroKontekst ?? []), ...(typ === "save" ? _kontekstZKarty(config, message) : [])])]
   };
 }
 
 /** Rozstrzygnięcie dla rzutu z wierszy posiadanych przez aktora. */
-export function rozstrzygnijRzut(config) {
-  const ctx = kontekstTestu(config);
+export function rozstrzygnijRzut(config, message = null) {
+  const ctx = kontekstTestu(config, message);
   if (!ctx) return null;
   const rows = [..._wiersze.values()].filter(r => {
     try { return r.ma(ctx.actor); } catch (_e) { return false; }
@@ -80,9 +105,9 @@ export function rozstrzygnijRzut(config) {
   return rows.length ? { ctx, wynik: rozstrzygnijTest(rows, ctx) } : null;
 }
 
-function _onPreRollD20Test(config) {
+function _onPreRollD20Test(config, _dialog, message) {
   let r;
-  try { r = rozstrzygnijRzut(config); } catch (err) {
+  try { r = rozstrzygnijRzut(config, message); } catch (err) {
     console.error(`${MODULE_ID} | Ułatwienia testów`, err);
     return;
   }

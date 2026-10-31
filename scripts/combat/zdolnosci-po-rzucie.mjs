@@ -26,76 +26,18 @@ import {
   TESTY_K20, PROG_RPS, korektaRPS
 } from "../config/po-rzucie-rules.mjs";
 import { zarejestrujZrodloPoRzucie, rzutZDodatkiem } from "./po-rzucie.mjs";
-import { odlegloscKrawedzi } from "./okolicznosci.mjs";
 import { isFirearm } from "./grip.mjs";
 import { zadeklaruj, znacznik } from "../actors/actions.mjs";
 import { bramkaZajetaNa, zajmijBramke } from "./czas-efektu.mjs";
 import { poprosOStabilizacje, stabilizuj } from "./umieranie.mjs";
+import {
+  esc, k as _k, przedmiotZdolnosci as _przedmiot, pozostalo as _pozostalo, zuzyj as _zuzyj, koscSkali as _kosc, gra as _gra,
+  dystans as _dystans, sojusznicy as _sojusznicy, flavorKarty as _flavor, stylPrzycisku as _styl, STYL_SZARY
+} from "./zdolnosci-wspolne.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Motywacja i Spieprzysz to! — 18 m (s. 72). */
 const ZASIEG_CWANIAKA = 18;
-
-const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
-const _k = formula => String(formula).replace(/d/gi, "k");
-
-/* -------------------------------------------- */
-/*  Pomocniki                                    */
-/* -------------------------------------------- */
-
-/** Przedmiot zdolności klasy/profesji (`abilityId`) albo Pochodzenia (`originAbilityId`). */
-function _przedmiot(actor, { abilityId, originAbilityId }) {
-  return actor?.items?.find(i => (abilityId && i.getFlag(MODULE_ID, "abilityId") === abilityId)
-    || (originAbilityId && i.getFlag(MODULE_ID, "originAbilityId") === originAbilityId)) ?? null;
-}
-
-/** Pozostałe użycia albo `null` (przedmiot bez licznika). */
-function _pozostalo(item) {
-  const u = item?.system?.uses;
-  if (!u?.max) return null;
-  const v = Number(u.value);
-  return Number.isFinite(v) ? v : Math.max(0, Number(u.max) - (Number(u.spent) || 0));
-}
-
-async function _zuzyj(item, n = 1) {
-  const u = item?.system?.uses;
-  if (!u?.max) return;
-  await item.update({ "system.uses.spent": (Number(u.spent) || 0) + n });
-}
-
-/** Kość ze skali klasy (`@scale.cwaniak.motywacja` → "1d6"). */
-function _kosc(actor, sciezka, zapas) {
-  const s = foundry.utils.getProperty(actor?.getRollData?.() ?? {}, `scale.${sciezka}`);
-  const f = s?.formula ?? (s ? String(s) : "");
-  return /\d*d\d+/i.test(f) ? f : zapas;
-}
-
-function _zeton(actor) {
-  return actor?.token?.object ?? actor?.getActiveTokens?.()[0] ?? null;
-}
-
-/** Metry od krawędzi żetonów albo `null`, gdy któregoś nie ma na oglądanej scenie. */
-function _dystans(a, b) {
-  const ta = _zeton(a), tb = _zeton(b);
-  return ta && tb ? odlegloscKrawedzi(ta, tb) : null;
-}
-
-function _dyspozycja(actor) {
-  return _zeton(actor)?.document?.disposition ?? actor?.prototypeToken?.disposition ?? null;
-}
-
-function _sojusznicy(a, b) {
-  const da = _dyspozycja(a), db = _dyspozycja(b);
-  if (da === null || db === null) return a?.type === "character" && b?.type === "character";
-  return da === db && da !== CONST.TOKEN_DISPOSITIONS.SECRET;
-}
-
-/** Czy ten widz „gra” tą postacią: gracz — swoją; MG — gdy żaden aktywny gracz jej nie posiada. */
-function _gra(actor) {
-  if (!actor?.isOwner) return false;
-  if (!game.user.isGM) return true;
-  return !game.users.some(u => !u.isGM && u.active && actor.testUserPermission(u, "OWNER"));
-}
 
 /** Czy użytkownik widzi wynik karty (ukryty rzut MG — nie). */
 function _widziWynik(message, user) {
@@ -127,15 +69,6 @@ async function _potwierdz(ctx, tytul, tresc) {
     rejectClose: false
   });
 }
-
-function _flavor(kolor, tytul, linia) {
-  return `<div style="border-left: 4px solid ${kolor}; background: color-mix(in srgb, ${kolor} 8%, transparent); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">`
-    + `<div style="font-weight: bold; color: ${kolor}; font-size: 13px; margin-bottom: 2px;">${tytul}</div>`
-    + `<div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${linia}</div></div>`;
-}
-
-const _styl = kolor => ({ background: `color-mix(in srgb, ${kolor} 15%, transparent)`, border: `1px solid color-mix(in srgb, ${kolor} 45%, transparent)`, color: kolor, cursor: "pointer" });
-const STYL_SZARY = { background: "rgba(128, 128, 128, 0.08)", border: "1px solid rgba(128, 128, 128, 0.2)", color: "#666", cursor: "default", opacity: "0.5" };
 
 /** Przerzut rzutu pierwotnego łańcucha (U2: dodane kości przepadają) — ta sama klasa, opcje i tryb. */
 async function _przerzut(ctx) {

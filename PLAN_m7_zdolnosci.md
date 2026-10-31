@@ -1,6 +1,6 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
-> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D10
+> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D14
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
 > etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
@@ -368,13 +368,17 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D8 | (2026-10-31, P4) ASI i biegłości Sztuczek | **Wszystkie 53** jednym przejściem buildera |
 | D9 | (2026-10-31, P3) Coś mi tu śmierdzi | **Gracz: sama obecność** — szept do gracza „wyczuwasz mutanta w promieniu 9 m” z [Percepcja ST 15]; kopia MG nazywa istotę. Dosłownie RAW: obecność automatycznie, *która* to istota — dopiero test |
 | D10 | (2026-10-31) Kolejność | **M7 teraz**, przed PM1/PM7 i krokami 1–3 handoffu ruchu (`PLAN_beta.md` §0 kroki 6–8). E0 buduje warstwę akcji z handoffu §4 w minimalnym kształcie (`config/actions-data.mjs`, `actors/actions.mjs`, `game.neuroshima.actions`) — tylko znaczniki R i B, bez budżetu ruchu; handoff dokłada ruch do tej samej warstwy (decyzja agenta w ramach D10) |
+| D11 | (2026-10-31, U12) Dobra rada — kiedy sojusznik wydaje premię | **Przycisk po rzucie u sojusznika**: pod jego Testem k20 do początku następnej tury Speca, jedno użycie (konwencja D4); nie przepada na błahym rzucie |
+| D12 | (2026-10-31, U14) Let's rock — „ataków lub RO” | **Oba, dosłownie** („lub” włączające): premia do ataków i RO dla wszystkich naraz |
+| D13 | (2026-10-31, U10) Dwóch na jednego — okno | **Od końca twojej poprzedniej tury** — kroczące okno, kolejność inicjatywy nie decyduje |
+| D14 | (2026-10-31, U28) Szósty zmysł — zakres | **Każdy RO na ZRC**, stockowa reguła dnd5e (jak Danger Sense) z warunkiem efektu bez Oślepienia/Ogłuszenia/Nieprzytomności; zagrożenie niezauważalne — MG przełącza okno rzutu na zwykły |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
 Runda 1 (2026-10-31): U1–U7 bez weta, U8 zmienione (D7). Przegląd agenta z tekstem RAW tego samego dnia — kolumna
 „Warstwa” poprawiona tam, gdzie RAW rozstrzyga wprost (U9 s. 115, U16 s. 16, U23 s. 34); U3 — Motywacja w RAW nie ma
 wymogu słyszenia.
-Kolejne rundy — przy etapach E2 (U12–U15), E4–E5 (U9–U11, U16–U20), E6–E7 (U21–U30).
+Runda 2 (2026-10-31): U10, U12, U14, U28 zmienione (D11–D14); reszta U9–U30 bez weta — MG może zawetować przy etapie.
 
 | # | Ustalenie | Warstwa |
 |---|---|---|
@@ -387,11 +391,11 @@ Kolejne rundy — przy etapach E2 (U12–U15), E4–E5 (U9–U11, U16–U20), E6
 | U7 | Twardość działa na RPŚ także przy czystej k20 (wyjątek od D1 z `PLAN_m1_walka.md`, bo RAW wprost wymienia RPŚ) | NOE |
 | U8 | ~~Fart proponowany, nie automatyczny~~ → **D7: automatyczny** (RAW „powtarzasz rzut”), 1 /KO | NOE |
 | U9 | Rzeźnik: chwyt oburęczny tej samej broni nie wyklucza premii (RAI); tarcza nie jest bronią — **NOE**: Cios tarczą to „atak bez broni” (s. 115); bliźniak improwizowany (M6 E3) w drugiej ręce nie jest „inną bronią”, dopóki nim nie atakujesz (RAI) | RAI / NOE |
-| U10 | Dwóch na jednego: „zaatakowana w ten sam sposób” = atak wręcz w tej rundzie, trafiony czy nie | RAI |
+| U10 | Dwóch na jednego: „zaatakowana w ten sam sposób” = atak wręcz, trafiony czy nie; ~~w tej rundzie~~ → **D13: od końca twojej poprzedniej tury** | RAI |
 | U11 | Ulubiona broń: „ta sama broń” = ten sam model z katalogu (dowolny egzemplarz) | NOE |
-| U12 | Dobra rada: jeden rzut — pierwszy pasujący po nadaniu | RAI |
+| U12 | Dobra rada: jeden rzut (RAW w liczbie pojedynczej — wobec „Testów” w Łasce bożej); ~~pierwszy pasujący~~ → **D11: przycisk po rzucie u sojusznika** | NOE / RAI |
 | U13 | Łaska boża: wszystkie ataki i RO do początku tury dającego | NOE |
-| U14 | Let's rock: wykonawca wybiera ataki **albo** RO dla wszystkich naraz | RAI |
+| U14 | ~~Let's rock: wykonawca wybiera ataki albo RO~~ → **D12: ataki i RO** („lub” włączające) | NOE |
 | U15 | Kolejka: przełącznik w oknie KO, kość ze skali Cwaniaka | NOE |
 | U16 | Bolesny atak: „z Ułatwieniem” = tryb rzutu po zniesieniu (NOE s. 16: Ułatwienie i Utrudnienie się znoszą — „nie masz ani Ułatwienia, ani Utrudnienia”) | NOE |
 | U17 | Podstępny atak: wybór efektu na karcie zamiast przycisku kości | NOE |
@@ -405,7 +409,7 @@ Kolejne rundy — przy etapach E2 (U12–U15), E4–E5 (U9–U11, U16–U20), E6
 | U25 | ~~Coś mi tu śmierdzi: szept do MG, nie do gracza~~ → **D9**: gracz dostaje samą obecność, MG — nazwę istoty | NOE |
 | U26 | Zew areny — Praca nóg: tylko notka (ataków okazyjnych moduł nie liczy) | — |
 | U27 | Rutyna: Ułatwienie w RO ZRC i MDR tylko w trwającej walce | NOE |
-| U28 | Szósty zmysł: domyślnie włączone w RO ZRC przeciw efektom obszarowym, pułapkom i upadkom; MG wyłącza | RAI |
+| U28 | ~~Szósty zmysł: tylko efekty obszarowe, pułapki i upadki~~ → **D14: każdy RO ZRC** (reguła stock), MG wyłącza przy zagrożeniu niezauważalnym | NOE / RAI |
 | U29 | Sokole oko: każdy atak dystansowy (także rzucana broń biała) | NOE |
 | U30 | ASI ze Sztuczek: pola stałe tam, gdzie Sztuczka nie daje wyboru; wybór — tam, gdzie RAW mówi „lub” | NOE |
 
@@ -543,3 +547,24 @@ użycie i Reakcja zapisane; jawny udany RO BN → Spieprzysz to! → gorszy wyni
 szept naruszenia (D5). Regresja `zagrozenia` zielona. **Uwaga dla suit e2e:** `t.waitFor` czeka na wynik
 prawdziwy i **nie zna opcji `until`** (cicho ją pomija) — warunek musi siedzieć w funkcji przeglądarki; tak samo
 napisane kroki w `zagrozenia` sprawdzają tylko pierwszy odczyt.
+
+### E2 — R7, wsparcie sojusznika (2026-10-31)
+
+Weto runda 2 (D11–D14) przed etapem. `combat/zdolnosci-wsparcie.mjs`: **Dobra rada** (efekt-znacznik na sojuszniku,
+przycisk po rzucie pod jego Testem k20, jedno użycie — D11), **Łaska boża** (+1k4 do ataków i RO — reguły dnd5e 6,
+RPŚ ich nie zbiera), **Let's rock** (Test Występów albo instrumentu z biegłością → premia z tabeli do ataków i RO,
+D12; przerwanie przy Nieprzytomności, Obezwładnieniu, Ogłuchnięciu wykonawcy), **Odważny** (wiersz §3.0.3 przy znanym
+źródle RO, przycisk po rzucie przy RO na MDR bez źródła), **Kolejka** (pole „Piję Kolejkę” w oknie KO — podklasa
+`restTypes.short.dialogClass` jak „W cieple” w DO; kość przy `dnd5e.preRollHitDieV2`), **Kakofonia** i **Rzuć broń i
+gleba** (karta RO z przyciskiem MG; porażka — skutek, wynik zmieniony po rzucie przelicza go w obie strony). Wspólne
+pomocniki E1 i E2 — `combat/zdolnosci-wspolne.mjs` (efekt na cudzym aktorze przez przekaźnik MG).
+
+- **Źródło RO z karty aktywności** (rejestr §3.0.3): natywne RO dnd5e (Bestiariusz) niosą zdarzenie kliknięcia i
+  `system.origin` karty — kontekst bierze nakładane stany (Przerażenie, Zatrucie), typy obrażeń (kwas, trucizna,
+  radioaktywne), szablon (obszar) i maszynę-źródło. Odważny, Smakuje jak arszenik, A co mi tam i Empiryk tego używają.
+- **Pułapka v14/dnd5e:** stan z `fromStatusEffect` to efekt typu „condition” bez `system.origin` — pseudo-wygasanie
+  bierze wtedy źródło z rdzeniowego `origin`. Każdy efekt M7 z `sourceStart`/`sourceEnd` ustawia oba.
+- **Testy:** `zdolnosci-wsparcie` (6) — Quench 1428/1428; e2e `zdolnosci-wsparcie` (nowy): Gracz 1 daje Dobrą radę
+  postaci Gracza 2 (cudzy aktor, przez MG), znacznik [B]; Gracz 2 klika „Dobra rada +3” pod swoim RO — +3, efekt
+  zużyty; drugi raz bez użycia — przetrwał cudze tury i zniknął na początku następnej tury Gracza 1.
+- **Pokrycie** zdolności klasowych i profesji: 53/133 z automatyką (21 pełnych; przed M7 33).

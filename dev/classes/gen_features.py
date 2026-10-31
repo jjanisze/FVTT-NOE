@@ -251,6 +251,10 @@ COVERAGE = {
         ],
         "manual": "Czy Cwaniak widzi tę istotę — stół.",
     },
+    "kolejka": {
+        "auto": [("okno Krótkiego odpoczynku: pole „Piję Kolejkę” u każdego, gdy w drużynie jest Cwaniak z Kolejką; każda "
+                  "Kość Wytrzymałości + kość z tabeli Cwaniaka (PLAN_m7 E2, U15)", "combat/zdolnosci-wsparcie.mjs")],
+    },
     "moja-prawa-reka": {
         "auto": [
             ("Prawa ręka powiązana z tobą: PW 5 × twój poziom Cwaniaka, KW k6 × ten poziom, PB +2 (nie rośnie), "
@@ -278,6 +282,13 @@ COVERAGE = {
     },
 
     # ---- Spec ----
+    "dobra-rada": {
+        "auto": [
+            ("Akcja Bonusowa z wycelowanym sojusznikiem: efekt +mod. INT na nim (także na cudzym aktorze — przekaźnik MG), "
+             "do początku twojej następnej tury (PLAN_m7 E2)", "combat/zdolnosci-wsparcie.mjs"),
+            ("przycisk po rzucie pod jego Testem Cechy, Ataku albo RO — jedno użycie (D11)", "combat/zdolnosci-wsparcie.mjs"),
+        ],
+    },
     "leb-jak-sklep": {
         "auto": [("przycisk pod Testem INT (także z umiejętnością) i każdym testem narzędzi: + kość z tabeli Speca, "
                   "pula PB na Długi odpoczynek (PLAN_m7 E1)", "combat/zdolnosci-po-rzucie.mjs")],
@@ -388,6 +399,35 @@ COVERAGE = {
     },
 
     # ---- Profesje ----
+    # PLAN_m7 E2 (R7): wsparcie sojusznika — `combat/zdolnosci-wsparcie.mjs`.
+    "laska-boza": {
+        "auto": [("Akcja Bonusowa: wycelowani sojusznicy ≤ 18 m (do poziomów Cwaniaka) — +1k4 do Testów Ataku i RO "
+                  "(reguły dnd5e), do początku twojej następnej tury", "combat/zdolnosci-wsparcie.mjs")],
+        "manual": "Czy sojusznicy słyszą twój głos — stół.",
+    },
+    "lets-rock": {
+        "auto": [
+            ("Akcja: Test Występów albo instrumentu (z biegłością) → premia z tabeli do Testów Ataku i RO (D12) "
+             "sojuszników ≤ 27 m bez Ogłuchnięcia, do początku twojej następnej tury", "combat/zdolnosci-wsparcie.mjs"),
+            ("Nieprzytomność, Obezwładnienie albo Ogłuchnięcie wykonawcy kończy premię natychmiast", "combat/zdolnosci-wsparcie.mjs"),
+        ],
+    },
+    "kakofonia": {
+        "auto": [
+            ("Akcja: karta ze słyszącymi istotami ≤ 9 m, RO KON ST 8 + CHA + PB (sojusznicy z Ułatwieniem) — MG rzuca "
+             "przyciskiem; porażka — Obezwładnienie do początku twojej następnej tury", "combat/zdolnosci-wsparcie.mjs"),
+            ("wynik RO zmieniony po rzucie przelicza skutek w obie strony", "combat/zdolnosci-wsparcie.mjs"),
+        ],
+    },
+    "rzuc-bron-i-gleba": {
+        "auto": [("Akcja Bonusowa: wycelowany człowiek ≤ 9 m, karta RO MDR ST 8 + CHA + PB — MG rzuca; porażka — broń z rąk "
+                  "na ziemię (lalka), Powalenie, Przerażenie do końca twojej następnej tury", "combat/zdolnosci-wsparcie.mjs")],
+    },
+    "odwazny-czy-glupi": {
+        "auto": [("Odważny: sojusznicy ≤ 9 m — +1k4 do RO przeciw Przerażeniu: sam, gdy źródło RO jest znane (karta, "
+                  "natywne RO z Przerażeniem), inaczej przycisk po rzucie przy RO na MDR (PLAN_m7 E2)", "combat/zdolnosci-wsparcie.mjs")],
+        "manual": "Głupi (niewrażliwość na Przerażenie) — zaznacza gracz; dane zdolności w PLAN_m7 E3.",
+    },
     "amen": {
         "auto": [("przycisk pod nieudanym Testem Cechy, Ataku albo RO (bez znanego ST — zawsze, U4): +1k6, nowy wynik "
                   "trzeba zaakceptować; użycia mod. CHA na Długi odpoczynek (PLAN_m7 E1)", "combat/zdolnosci-po-rzucie.mjs")],
