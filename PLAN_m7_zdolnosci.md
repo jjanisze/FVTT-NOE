@@ -725,6 +725,10 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
 - **Po E6 (MG, po rozmowie o krwawieniach):** krwawienia to osobne efekty z własnymi ikonami — Hemofilia, Podstępny
   atak (WKK: Dum-dum, ten sam efekt pod inną nazwą), Przycelowanie — Tętnica, Rdza/Rtęć/Stal i piła tarczowa
   Juggernauta (dodana); ten sam się nie kumuluje, różne — tak; zatrzymanie z narzędziami zawsze zużywa ładunek (poza
-  Aspiryną i Miętusami); samoczynny koniec po trzech turach na razie odpada. Porównanie i otwarte pytania —
-  `docs/Krwawienia.md`; przebudowa `combat/bleeding.mjs` (efekt na krwawienie, migracja flagi, piła, Kolory) czeka na
-  odpowiedzi; pięć glifów w `dev/icons/MISSING.md` (sekcja K).
+  Aspiryną i Miętusami); samoczynny koniec po trzech turach na razie odpada. Druga runda: opatrzenie bez ST = Test
+  narzędzi małego medyka ST 10 z ładunkiem; dum-dum osobno od Podstępnego (mogą być naraz); lek na Hemofilię przy
+  innych krwawieniach tylko w WKK; Kolory tykają w turze krwawiącego i nie da się ich zatamować samemu; jedna akcja
+  leczenia — jedno krwawienie; stabilizacja nie zatrzymuje krwawienia; obrażenia z krwawienia bez rodzaju; poza walką
+  przypomnienie MG co 10 minut zegara świata (+ ślad Splattera). Porównanie i reszta pytań — `docs/Krwawienia.md`;
+  przebudowa `combat/bleeding.mjs` (efekt na krwawienie, migracja flagi, piła, Kolory) po przeglądzie tabeli; siedem
+  glifów w `dev/icons/MISSING.md` (sekcja K).

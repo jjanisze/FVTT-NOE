@@ -72,6 +72,22 @@ token size. Today all share the core `bleeding` status. Class A white glyphs, sa
 | `icons/statuses/krwawienie-kolory.svg` + `.webp` | `krwawienieKolory` | Kolory Rdza/Rtęć/Stal — the light bleed from each Stopień Zranienia, −1 PW per turn (a small single drop) |
 | `icons/statuses/krwawienie-pila.svg` + `.webp` | `krwawieniePila` | Juggernaut's circular saw (Notatnik Łowcy, s. 217) — 1k4 per turn until dressed (a drop with a saw-tooth edge) |
 
+## K. Bleeds (M7) — 7 status glyphs
+
+GM decision 2026-10-31 ([docs/Krwawienia.md](../../docs/Krwawienia.md)): the bleeds are separate effects with their own icons,
+and one actor can carry several at once — so each needs a glyph that reads as "bleeding" yet tells the others apart at
+token size. Today all share the core `bleeding` status. Class A white glyphs, same rules as section A.
+
+| Missing file | Status id (planned) | Meaning |
+|---|---|---|
+| `icons/statuses/krwawienie-hemofilia.svg` + `.webp` | `krwawienieHemofilia` | Hemofilia bleed — the disease, not a wound (a drop with a blood-cell / clotting hint) |
+| `icons/statuses/krwawienie-podstepny.svg` + `.webp` | `krwawieniePodstepny` | Podstępny atak — a cut wound, 1k8 per turn |
+| `icons/statuses/krwawienie-tetnica.svg` + `.webp` | `krwawienieTetnica` | Przycelowanie — severed artery, 1k6 per turn (a spurting drop) |
+| `icons/statuses/krwawienie-kolory.svg` + `.webp` | `krwawienieKolory` | Kolory Rdza/Rtęć/Stal — the light bleed from each Stopień Zranienia, −1 PW per turn (a small single drop) |
+| `icons/statuses/krwawienie-pila.svg` + `.webp` | `krwawieniePila` | Juggernaut's circular saw (Notatnik Łowcy, s. 217) — 1k4 per turn until dressed (a drop with a saw-tooth edge) |
+| `icons/statuses/krwawienie-dumdum.svg` + `.webp` | `krwawienieDumdum` | WKK dum-dum round — same numbers as Podstępny atak but a separate effect that can sit next to it, so it must not look the same (a drop with a bullet hole) |
+| `icons/statuses/wyciek.svg` + `.webp` | `wyciek` | Machine hydraulics hit by Przycelowanie — 1k6 per turn until repaired; not a wound (an oil drop, no blood red) |
+
 ## How an item gets added here
 
 Add only a confirmed missing asset: final path, purpose, spec and prompt/brief link.
