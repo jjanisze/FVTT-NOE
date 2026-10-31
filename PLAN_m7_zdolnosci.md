@@ -652,3 +652,35 @@ poprawił, linii nie ma); weto do U9, U11, U16–U20 — brak.
   samym celu) i regresja `zdolnosci-po-rzucie`, `zdolnosci-wsparcie`, `combat`, `postac`, `umieranie`, `zagrozenia`,
   `rekonwalescencja` — zielone na świeżym świecie.
 - **Pokrycie:** zdolności klasowe i profesji 88/133 z automatyką (40 pełnych).
+
+### E5 — R6, po trafieniu (2026-10-31)
+
+Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofnięte), **Strzelec — deklaracja gracza**
+(aktywność, liczenie rund w walce, przycisk MG). Weto do U16, U17 — brak.
+- **`combat/zdolnosci-trafienie.mjs`** — przyciski pod kartą ataku, który trafił **jedyny** cel (werdykt z
+  `obrona`, karta niezastąpiona przerzutem, widz gra atakującym); efekty na celu przez przekaźnik MG:
+  - **Bolesny atak** (U16): broń z ZRC (aktywność liczy ZRC albo finezyjna przy ZRC ≥ SIŁ); tryb rzutu po zniesieniu
+    — Ułatwienie, albo przytomny sojusznik ≤ 1,5 m od celu (dymek go nazywa) i bez Utrudnienia. „Przytomny” = bez stanu
+    Obezwładnienia i stanów, które go dają (RAW), nie liczba PW. Kości ze skali Złodzieja, osobna karta obrażeń dnd5e
+    (typ broni, krytyk podwaja — jak Wściekły cios).
+  - **Podstępny atak** (U17): przycisk obok Bolesnego, okno wyboru — Krwawienie (nowy profil `podstepny` w
+    `combat/bleeding.mjs`: 1k8 na początku tury, bez RO, ustaje po opatrzeniu — Medycyna ST 15 jak profil dum-dum;
+    RAW nie podaje ST; maszyny nie krwawią), Spowolnienie (rzut 1k6 × 1,5 m, odjęte od wszystkich Szybkości jak przy
+    Zranieniu), Oślepienie; obie do końca **następnej** tury atakującego (`sourceEnd` dnd5e pomija turę nałożenia).
+    Takie same się nie kumulują — nowy zastępuje stary. Zużywa „raz na turę” Bolesnego ataku.
+  - **Mój bóg kule nosi:** +1k10 pod trafieniem bronią palną.
+  - **Skuteczny cios:** pod trafieniem wręcz; kość Wściekłego ciosu i **jego limit „raz w rundzie”** (decyzja agenta,
+    RAI: „Twoje Wściekłe ciosy stają się skuteczniejsze” — to nadal Wściekły cios; MG może zawetować) → Odepchnięcie
+    (odepchnij / przewróć) albo Wytrącenie przez `combat/melee-maneuvers.mjs` (RO celu; cudzy cel — karta dla MG, jak
+    Z bara!), albo Zamaszysty — dodatkowy atak tą bronią w wycelowaną drugą istotę ≤ 1,5 m od trafionej, w zasięgu
+    (1,5 m, broń `rch` 3 m).
+  - „Raz na turę” — bramka `tura` (każda tura, także cudza), nie stockowe `uses` z `turnStart`, które odnawiają się tylko
+    na początku **własnej** tury.
+- Wspólne z E4: `dodatkowyAtak` (`combat/zdolnosci-akcje.mjs`), limit rundy Wściekłego ciosu (`actors/class-resource-dice.mjs`
+  — `alreadyUsedThisRound`, `markUsedThisRound`).
+- **Testy:** warstwa 1 (spust Bolesnego ataku — U16, Spowolnienie, zasięg Zamaszystego); Quench `zdolnosci-walka` +3
+  (Bolesny: kości, krytyk 2k6, bez spustu nic; Podstępny: bez kumulacji, `sourceEnd` ze źródłem, Szybkości, Oślepienie,
+  Krwawienie z profilem, nie na maszynie; Skuteczny: kości i dystans) — 1465/1465; e2e `zdolnosci-walka` — krok E5:
+  BN obok PC Gracz 2, zwykły rzut → przycisk Bolesnego ataku z dymkiem sojusznika, karta 2k6 przy krytyku, Podstępny gaśnie
+  razem z nim; regresja 8 pakietów zielona na świeżym świecie.
+- **Pokrycie:** zdolności klasowe i profesji 92/133 z automatyką (43 pełne).

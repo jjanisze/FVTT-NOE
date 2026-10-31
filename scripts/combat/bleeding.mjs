@@ -70,7 +70,19 @@ export const BLEED_PROFILES = Object.freeze({
     save: Object.freeze({ ability: BLEED.saveAbility, dc: BLEED.saveDC, streakToStop: BLEED.streakToStop })
   }),
   // WKK-only, no RAW basis — see wkk/combat/bleeding.mjs.
-  dumdum: DUMDUM_BLEED_PROFILE
+  dumdum: DUMDUM_BLEED_PROFILE,
+  // Podstępny atak (Złodziej 3, s. 92; PLAN_m7 E5): 1k8 at the start of the victim's turn, no save — it stops
+  // "po opatrzeniu rany", the bandage path.
+  podstepny: Object.freeze({
+    id: "podstepny",
+    label: "Krwawienie (Podstępny atak)",
+    when: "start",
+    damage: "1d8",
+    medicineDC: BLEED.medicineDC,
+    dose: false,
+    severity: 2,
+    save: null
+  })
 });
 
 /** Profil krwawienia aktora — brak zapisanego profilu = Hemofilia (stan sprzed tej zmiany). */

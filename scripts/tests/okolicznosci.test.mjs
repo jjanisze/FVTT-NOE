@@ -21,7 +21,8 @@ import { zuzytaWyrzutniaDane } from "../weapons/wlasciwosci.mjs";
 import { resolveHit } from "../config/defense-rules.mjs";
 import {
   premiaMojegoWroga, stSlabegoPunktu, wOknieOdPoprzedniejTury, koniecPoprzedniejTury, przedCelemWPierwszejRundzie,
-  rzeznikDziala, koscZabojczejSpluwy, limitUlubionych, MOJ_WROG_KATEGORIE
+  rzeznikDziala, koscZabojczejSpluwy, limitUlubionych, MOJ_WROG_KATEGORIE,
+  bolesnyDozwolony, spowolnienieMetry, zamaszystyDozwolony, PODSTEPNE_EFEKTY
 } from "../config/zdolnosci-walka.mjs";
 import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { MODULE_ID } from "./helpers.mjs";
@@ -348,6 +349,29 @@ export function registerOkolicznosciTests(quench) {
         expect(limitUlubionych("ulubiona-bron-zwiadowca", { poziom: 9 })).to.equal(2);
         expect(limitUlubionych("ulubiona-bron-zwiadowca", { poziom: 5 })).to.equal(1);
         expect(limitUlubionych("ulubiona-bron-zlodziej", { poziom: 12 })).to.equal(1);
+      });
+    });
+
+    describe("Po trafieniu — czyste reguły (PLAN_m7 E5)", function () {
+      it("Bolesny atak (U16): Ułatwienie albo sojusznik obok celu bez Utrudnienia", function () {
+        expect(bolesnyDozwolony({ tryb: 1, sojusznikObok: false }), "Ułatwienie").to.equal(true);
+        expect(bolesnyDozwolony({ tryb: 0, sojusznikObok: true }), "sojusznik, zwykły rzut").to.equal(true);
+        expect(bolesnyDozwolony({ tryb: 0, sojusznikObok: false }), "nic").to.equal(false);
+        expect(bolesnyDozwolony({ tryb: -1, sojusznikObok: true }), "Utrudnienie mimo sojusznika").to.equal(false);
+      });
+
+      it("Podstępny atak: trzy efekty, Krwawienie tylko dla żywych; Spowolnienie 1k6 × 1,5 m", function () {
+        expect(Object.keys(PODSTEPNE_EFEKTY)).to.have.members(["krwawienie", "spowolnienie", "oslepienie"]);
+        expect(PODSTEPNE_EFEKTY.krwawienie.zywe).to.equal(true);
+        expect([1, 4, 6].map(spowolnienieMetry)).to.deep.equal([1.5, 6, 9]);
+      });
+
+      it("Zamaszysty cios: ≤ 1,5 m od trafionej i w zasięgu ataku wręcz", function () {
+        expect(zamaszystyDozwolony({ odCelu: 1.5, odAtakujacego: 1.5 })).to.equal(true);
+        expect(zamaszystyDozwolony({ odCelu: 3, odAtakujacego: 1.5 }), "daleko od trafionej").to.equal(false);
+        expect(zamaszystyDozwolony({ odCelu: 1.5, odAtakujacego: 3 }), "poza zasięgiem").to.equal(false);
+        expect(zamaszystyDozwolony({ odCelu: 1.5, odAtakujacego: 3, zasieg: 3 }), "broń z zasięgiem").to.equal(true);
+        expect(zamaszystyDozwolony({ odCelu: null, odAtakujacego: 1.5 }), "nieznane").to.equal(false);
       });
     });
   }, { displayName: "Neuroshima: Okoliczności ataku — czysty silnik (M1)" });

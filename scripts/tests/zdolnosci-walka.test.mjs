@@ -5,7 +5,9 @@
  * Trajektoria pod Testem Ataku dystansowym (+INT, licznik); Celowanie — efekt tury właściciela, zużyty tylko przez
  * atak, w którym był jedynym Ułatwieniem; Strzelec w migawce ataku i deklaracja stanowiska (karta MG od razu poza
  * walką, po 5 rundach w walce; zatwierdzenie nakłada status); Ulubiona broń — model i lista; Słaby punkt —
- * efekt na maszynie, bez dubla, zdjęty po Długim odpoczynku. Dziennik ataków (Dwóch na jednego), przyciski [B] i
+ * efekt na maszynie, bez dubla, zdjęty po Długim odpoczynku. Po trafieniu (E5): Bolesny atak (spust, kości, krytyk),
+ * Podstępny atak (Spowolnienie i Oślepienie bez kumulacji, Krwawienie z profilem, nie na maszynie), Skuteczny cios
+ * (kość Wściekłego ciosu, limit rundy). Dziennik ataków (Dwóch na jednego), przyciski [B] i
  * dodatkowy atak — e2e `zdolnosci-walka`; okno D13 i reszta czystych reguł — `okolicznosci.test.mjs`.
  */
 
@@ -20,6 +22,8 @@ import { jestEfektemTuryWlasciciela } from "../combat/czas-efektu.mjs";
 import { migawkaAtaku, STANOWISKO_SNAJPERSKIE } from "../combat/okolicznosci.mjs";
 import { isRevolver } from "../actors/rewolwerowiec.mjs";
 import * as mags from "../weapons/magazine-model.mjs";
+import { bolesny, uzyjBolesnego, uzyjPodstepnego, skuteczny, FLAG_PODSTEPNY } from "../combat/zdolnosci-trafienie.mjs";
+import { isBleeding, bleedProfile } from "../combat/bleeding.mjs";
 
 export function registerZdolnosciWalkaTests(quench) {
   quench.registerBatch(`${MODULE_ID}.zdolnosci-walka`, context => {
@@ -223,6 +227,69 @@ export function registerZdolnosciWalkaTests(quench) {
         expect(maszyna.effects.filter(e => e.getFlag(MODULE_ID, FLAG_SLABY_PUNKT) === zm.uuid)).to.have.length(1);
         await A._onRestCompleted(zm, { longRest: true }, { type: "long" });
         expect(maszyna.effects.some(e => e.getFlag(MODULE_ID, FLAG_SLABY_PUNKT)), "po Długim odpoczynku").to.equal(false);
+      });
+    });
+
+    describe("Po trafieniu (E5)", function () {
+      /** Kontekst trafienia jak z karty — bez sceny (sojusznik obok celu — e2e). */
+      const ctxDla = async (actor, cel, { tryb = 1, krytyk = false, melee = false } = {}) => {
+        const sztylet = await bron(actor, i => i.type === "weapon" && i.system.properties?.has?.("fin"));
+        return { actor, bron: sztylet, activity: atak(sztylet), celDoc: null, celActor: cel, krytyk, tryb, obrona: { melee } };
+      };
+
+      it("Bolesny atak: Ułatwienie — kości ze skali; bez Ułatwienia i sojusznika — nic; krytyk podwaja", async function () {
+        const zl = await scratchActor({ name: `${SCRATCH_PREFIX} Złodziej`, system: { abilities: { dex: { value: 16 } } } });
+        await cecha(zl, "bolesny-atak");
+        const cel = await npc("Gangus", "Człowiek");
+        const ctx = await ctxDla(zl, cel);
+        expect(bolesny(ctx)?.kosci, "kość (bez klasy — 1k6)").to.equal("1d6");
+        expect(bolesny({ ...ctx, tryb: 0 }), "bez Ułatwienia, bez sojusznika").to.equal(null);
+        expect(bolesny({ ...ctx, tryb: -1 }), "Utrudnienie").to.equal(null);
+        const roll = await uzyjBolesnego({ ...ctx, krytyk: true });
+        expect(roll.formula, "krytyk").to.match(/^2d6/);
+      });
+
+      it("Podstępny atak: Spowolnienie i Oślepienie do końca następnej tury, bez kumulacji; Krwawienie z profilem; nie na maszynie", async function () {
+        const zl = await scratchActor({ name: `${SCRATCH_PREFIX} Złodziej podstępny`, system: { abilities: { dex: { value: 16 } } } });
+        await cecha(zl, "bolesny-atak");
+        await cecha(zl, "podstepny-atak");
+        const cel = await npc("Gangus podstępny", "Człowiek");
+        const ctx = await ctxDla(zl, cel);
+        expect(bolesny(ctx)?.podstepny, "przycisk Podstępnego ataku").to.be.ok;
+        await uzyjPodstepnego(ctx, "spowolnienie");
+        await uzyjPodstepnego(ctx, "spowolnienie");
+        const sp = cel.effects.filter(e => e.getFlag(MODULE_ID, FLAG_PODSTEPNY) === "spowolnienie");
+        expect(sp, "bez kumulacji").to.have.length(1);
+        expect(sp[0]._source.duration.expiry).to.equal("sourceEnd");
+        expect(sp[0].getSourceActor()?.id, "źródło — Złodziej").to.equal(zl.id);
+        expect(sp[0].system.changes.map(c => c.key)).to.include("system.attributes.movement.speeds.walk");
+        await uzyjPodstepnego(ctx, "oslepienie");
+        expect(cel.statuses.has("blinded")).to.equal(true);
+        await uzyjPodstepnego(ctx, "krwawienie");
+        expect(isBleeding(cel)).to.equal(true);
+        expect(bleedProfile(cel).id).to.equal("podstepny");
+        const maszyna = await npc("Dron", "Maszyna");
+        const warn = ui.notifications.warn;
+        ui.notifications.warn = () => {};
+        try {
+          expect(await uzyjPodstepnego({ ...ctx, celActor: maszyna }, "krwawienie"), "maszyna nie krwawi").to.equal(null);
+        } finally {
+          ui.notifications.warn = warn;
+        }
+      });
+
+      it("Skuteczny cios: tylko wręcz i z kośćmi Wściekłego ciosu", async function () {
+        const naj = await scratchActor({ name: `${SCRATCH_PREFIX} Najemnik skuteczny` });
+        await cecha(naj, "skuteczny-cios");
+        const cel = await npc("Gangus skuteczny", "Człowiek");
+        const ctx = await ctxDla(naj, cel, { melee: true });
+        expect(skuteczny(ctx), "bez Wściekłego ciosu").to.equal(null);
+        const w = await cecha(naj, "wsciekly-cios");
+        await w.update({ "system.uses.max": "2", "system.uses.spent": 2 });
+        expect(skuteczny(ctx)?.powod).to.contain("brak kości");
+        await w.update({ "system.uses.spent": 0 });
+        expect(skuteczny(ctx)?.powod, "kość jest").to.equal(null);
+        expect(skuteczny({ ...ctx, obrona: { melee: false } }), "dystans").to.equal(null);
       });
     });
   }, { displayName: "Neuroshima: Zdolności walki — Mój wróg, Rzeźnik, Ulubiona broń… (M7 E4)" });

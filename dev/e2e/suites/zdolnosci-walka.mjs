@@ -9,6 +9,8 @@
  *  - GM wkłada nóż do drugiej ręki → obrażenia B 92 bez Rzeźnika.
  *  - Dwóch na jednego (D13): PC Gracz 2 (Ganger) — po ataku wręcz PC Gracz 1 na tego samego BN-a jego atak wręcz ma +2;
  *    na innego BN-a — nie.
+ *  - Bolesny atak (E5): BN obok PC Gracz 2, PC Gracz 1 strzela z bliska (zwykły rzut) — pod trafieniem przycisk z kośćmi
+ *    i dymkiem sojusznika; klik → karta obrażeń, przycisk Podstępnego ataku gaśnie razem z nim (raz na turę).
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -131,6 +133,69 @@ async function atakWrecz({ kto, cel }) {
   };
 }
 
+/** GM: Bolesny i Podstępny atak dla PC Gracz 1; BN obok PC Gracz 2, 3 pola od PC Gracz 1; Gracz 1 na ruchu. */
+async function ustawBolesny({ cel }) {
+  const MOD = "neuroshima-2026-overrides";
+  const cechy = await game.packs.get(`${MOD}.zdolnosci-klasowe`).getDocuments();
+  const tw = game.actors.getName("PC Gracz 1");
+  await tw.createEmbeddedDocuments("Item", ["bolesny-atak", "podstepny-atak"]
+    .map(id => game.items.fromCompendium(cechy.find(d => d.getFlag(MOD, "abilityId") === id))));
+  await tw.update({ "system.abilities.dex.value": 16 });
+  // Nóż z kroku Rzeźnika do plecaka — B 92 jedną ręką strzela z Utrudnieniem (chwyt), a Bolesny atak go nie znosi.
+  const lalka = game.neuroshima.lalka;
+  for (const h of lalka.heldItems(tw)) if (h.item && h.item.getFlag(MOD, "weaponId") !== "b92") await lalka.place(tw, h.item, "pack");
+  const g = canvas.scene.grid.size;
+  const tok = n => canvas.scene.tokens.find(t => t.name === n);
+  const p1 = tok("PC Gracz 1"), p2 = tok("PC Gracz 2");
+  await tok(cel).move({ x: p2.x + g, y: p2.y, action: "displace" });
+  await p1.move({ x: p2.x, y: p2.y - 3 * g, action: "displace" });
+  await game.combat.update({ turn: game.combat.turns.findIndex(c => c.name === "PC Gracz 1") });
+  return { naRuchu: game.combat.combatant?.name };
+}
+
+/** Gracz 1: strzał z naturalną 20 (trafienie mimo TT); przyciski pod kartą, klik Bolesnego ataku. */
+async function bolesnyKlik({ targetName }) {
+  const MOD = "neuroshima-2026-overrides";
+  const actor = game.user.character;
+  const gun = actor.items.find(i => i.getFlag(MOD, "weaponId") === "b92");
+  const attack = gun.system.activities.find(a => a.type === "attack");
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  const orig = CONFIG.Dice.randomUniform;
+  CONFIG.Dice.randomUniform = () => 0.00001;
+  let msg;
+  try {
+    let usage = null;
+    for (let i = 0; i < 20 && !usage; i++) {
+      usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
+      if (!usage) await new Promise(r => setTimeout(r, 250));
+    }
+    await attack.rollAttack({}, { configure: false }, { data: { system: { origin: usage.message.id } } });
+    msg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
+  } finally {
+    CONFIG.Dice.randomUniform = orig;
+  }
+  const sel = `[data-message-id="${msg.id}"] [data-neuro-m7-traf="bolesny"]`;
+  let btn = null;
+  for (let i = 0; i < 40 && !btn; i++) {
+    await new Promise(r => setTimeout(r, 150));
+    btn = ui.chat.element?.querySelector(sel);
+  }
+  const tryb = msg.rolls[0].options.advantageMode;
+  if (!btn) return { przycisk: false, tryb, verdict: msg.flags[MOD].obrona.targets[0]?.verdict };
+  const info = { przycisk: true, etykieta: btn.textContent, dymek: btn.dataset.tooltip ?? null, tryb };
+  const przed = game.messages.size;
+  btn.click();
+  let karta = null;
+  for (let i = 0; i < 40 && !karta; i++) {
+    await new Promise(r => setTimeout(r, 150));
+    karta = game.messages.contents.slice(przed).find(m => m.type === "damage" && /Bolesny atak/.test(m.flavor ?? ""));
+  }
+  const podstepny = ui.chat.element?.querySelector(`[data-message-id="${msg.id}"] [data-neuro-m7-traf="podstepny"]`);
+  return { ...info, karta: !!karta, formula: karta?.rolls?.[0]?.formula ?? null, podstepnyWylaczony: !!podstepny?.disabled };
+}
+
 async function turaGracza({ name }) {
   await game.combat.update({ turn: game.combat.turns.findIndex(c => c.name === name) });
   return { naRuchu: game.combat.combatant?.name, runda: game.combat.round };
@@ -194,6 +259,19 @@ export default {
       t.assert(a2.premie.includes("dwoch-na-jednego:2"), "+2 on the same target", a2);
       const a3 = await t.gm.eval(atakWrecz, { kto: "PC Gracz 2", cel: npc[1].name });
       t.assert(!a3.premie.some(p => p.startsWith("dwoch-na-jednego")), "nothing on another target", a3);
+    });
+
+    await t.step("Bolesny atak (E5): ally next to the target → dice button under the hit; click → damage card, once per turn", async () => {
+      const r = await t.gm.eval(ustawBolesny, { cel: npc[1].name });
+      t.equal(r.naRuchu, "PC Gracz 1", "PC Gracz 1 on turn");
+      await t.waitFor(p1, () => game.combat?.combatant?.name === "PC Gracz 1", { message: "Gracz 1 to see their turn" });
+      const b = await p1.eval(bolesnyKlik, { targetName: npc[1].name });
+      t.assert(b.przycisk, "the Bolesny atak button is offered", b);
+      t.equal(b.tryb, 0, "a normal roll — the ally is the trigger, not advantage");
+      t.assert(/PC Gracz 2/.test(b.dymek ?? ""), "the tooltip names the ally", b);
+      t.assert(b.karta, "a damage card follows the click", b);
+      t.assert(/^2d6/.test(b.formula ?? ""), "natural 20 → crit doubles the 1k6", b);
+      t.assert(b.podstepnyWylaczony, "Podstępny atak shares the once-per-turn use", b);
     });
   }
 };

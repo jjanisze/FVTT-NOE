@@ -654,6 +654,23 @@ COVERAGE = {
         "manual": "Urządzenia bez mikroprocesorów i pancerz zamontowany na dronie — rozstrzyga MG.",
     },
 
+    # PLAN_m7 E5 (R6): po trafieniu — `combat/zdolnosci-trafienie.mjs`.
+    "bolesny-atak": {
+        "auto": [("przycisk pod kartą ataku, który trafił: broń z ZRC, Ułatwienie w rzucie albo przytomny sojusznik "
+                  "≤ 1,5 m od celu i bez Utrudnienia (U16) — kości ze skali, osobna karta obrażeń, raz na turę", "combat/zdolnosci-trafienie.mjs")],
+    },
+    "podstepny-atak": {
+        "auto": [("zamiast kości Bolesnego ataku — wybór efektu (U17): Krwawienie 1k8 na początku tury celu (żywe), "
+                  "Spowolnienie −1k6 × 1,5 m, Oślepienie — do końca twojej następnej tury; bez kumulacji", "combat/zdolnosci-trafienie.mjs")],
+    },
+    "moj-bog-kule-nosi": {
+        "auto": [("przycisk +1k10 pod kartą ataku bronią palną, który trafił — raz na turę", "combat/zdolnosci-trafienie.mjs")],
+    },
+    "skuteczny-cios": {
+        "auto": [("przycisk pod trafieniem wręcz: kość Wściekłego ciosu (jego limit raz w rundzie) → Odepchnięcie "
+                  "(odepchnij / przewróć), Wytrącenie albo Zamaszysty cios — dodatkowy atak w drugą istotę obok", "combat/zdolnosci-trafienie.mjs")],
+        "manual": "Czy druga istota jest w zasięgu twojego ataku wręcz (broń z zasięgiem) — moduł sprawdza 1,5 m i 3 m.",
+    },
     # PLAN_m7 E4 (R4, R5): walka z kontekstem — `combat/zdolnosci-walka.mjs`, akcje — `combat/zdolnosci-akcje.mjs`.
     "dwoch-na-jednego": {
         "auto": [("+2 do Testu Ataku wręcz w cel, którego sojusznik zaatakował wręcz od końca twojej poprzedniej tury (D13; "

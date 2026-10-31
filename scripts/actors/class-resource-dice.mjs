@@ -64,13 +64,13 @@ function _uses(item) {
 }
 
 /** Has this `oncePerTurn` ability already fired this combat round? Outside combat, no gate. */
-function _alreadyUsedThisRound(item) {
+export function alreadyUsedThisRound(item) {
   if (!game.combat) return false;
   const last = item.getFlag(MODULE_ID, FLAG_ROUND);
   return !!last && last.combatId === game.combat.id && last.round === game.combat.round;
 }
 
-async function _markUsedThisRound(item) {
+export async function markUsedThisRound(item) {
   if (!game.combat) return;
   await item.setFlag(MODULE_ID, FLAG_ROUND, { combatId: game.combat.id, round: game.combat.round });
 }
@@ -91,7 +91,7 @@ function _damageTypeOptions(selected) {
 /* -------------------------------------------- */
 
 async function postResourceDiceCard(actor, item, feature, abilityId) {
-  if (_alreadyUsedThisRound(item)) {
+  if (alreadyUsedThisRound(item)) {
     ui.notifications.warn(`${feature.label}: już użyto w tej rundzie.`);
     return;
   }
@@ -139,7 +139,7 @@ async function _onCommit(message, root, count) {
   if (!item || !feature) return;
 
   const actor = item.actor;
-  if (_alreadyUsedThisRound(item)) {
+  if (alreadyUsedThisRound(item)) {
     ui.notifications.warn(`${feature.label}: już użyto w tej rundzie.`);
     return;
   }
@@ -161,7 +161,7 @@ async function _onCommit(message, root, count) {
   const typeLabel = CONFIG.DND5E.damageTypes?.[damageType]?.label ?? damageType;
 
   await item.update({ "system.uses.spent": (Number(item.system.uses.spent) || 0) + count });
-  await _markUsedThisRound(item);
+  await markUsedThisRound(item);
 
   const formula = _diceFormula(feature.resource.die, count);
 

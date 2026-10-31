@@ -101,6 +101,7 @@ import { registerZdolnosciWspolne } from "./combat/zdolnosci-wspolne.mjs";
 import { registerZdolnosciWsparcie } from "./combat/zdolnosci-wsparcie.mjs";
 import { registerZdolnosciWalka } from "./combat/zdolnosci-walka.mjs";
 import { registerZdolnosciAkcje, ulubionaBronApi } from "./combat/zdolnosci-akcje.mjs";
+import { registerZdolnosciTrafienie } from "./combat/zdolnosci-trafienie.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -388,6 +389,8 @@ Hooks.once("init", () => {
   // Szybka gadka, Szybkie badanie.
   registerZdolnosciWalka();
   registerZdolnosciAkcje();
+  // Po trafieniu (PLAN_m7 E5, R6): Bolesny atak, Podstępny atak, Mój bóg kule nosi, Skuteczny cios.
+  registerZdolnosciTrafienie();
   registerObalajaca();
   registerWeaponSaveProperties();
   // Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) (PLAN_m3 §7.12).

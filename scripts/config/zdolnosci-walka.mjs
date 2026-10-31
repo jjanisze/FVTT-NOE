@@ -127,3 +127,37 @@ export const UMIEJETNOSCI_AKCJI = Object.freeze({
   "szybka-gadka": Object.freeze({ akcja: "Wpływanie", skille: Object.freeze(["osz", "per", "wys", "zas", "tre"]), cecha: null }),
   "szybkie-badanie": Object.freeze({ akcja: "Badanie", skille: Object.freeze(["his", "med", "prz", "sle", "tch"]), cecha: "int" })
 });
+
+/* -------------------------------------------- */
+/*  Po trafieniu (PLAN_m7 E5, R6)                */
+/* -------------------------------------------- */
+
+/**
+ * Bolesny atak (Złodziej 1, s. 91; U16): Ułatwienie w rzucie, który poszedł (po zniesieniu z Utrudnieniem — już go
+ * nie ma) albo sojusznik ≤ 1,5 m od celu i brak Utrudnienia.
+ * @param {{tryb: number, sojusznikObok: boolean}} o  `tryb` jak `ADV_MODE` dnd5e: 1, 0, −1
+ */
+export function bolesnyDozwolony({ tryb, sojusznikObok }) {
+  return tryb === 1 || (tryb !== -1 && !!sojusznikObok);
+}
+
+/** Podstępny atak (Złodziej 3, s. 92): efekt zamiast kości Bolesnego ataku (U17); takie same się nie kumulują. */
+export const PODSTEPNE_EFEKTY = Object.freeze({
+  krwawienie: Object.freeze({ label: "Krwawienie", opis: "1k8 obrażeń na początku tury celu, aż ktoś opatrzy ranę", zywe: true }),
+  spowolnienie: Object.freeze({ label: "Spowolnienie", opis: "Szybkość −1k6 × 1,5 m do końca twojej następnej tury" }),
+  oslepienie: Object.freeze({ label: "Oślepienie", opis: "Oślepiony do końca twojej następnej tury" })
+});
+
+/** Spowolnienie: wynik 1k6 × 1,5 m. */
+export const spowolnienieMetry = k6 => (Number(k6) || 0) * 1.5;
+
+/** Mój bóg kule nosi (Kaznodzieja, s. 75): raz na turę, trafienie bronią palną. */
+export const MOJ_BOG_KOSC = "1d10";
+
+/**
+ * Skuteczny cios — Zamaszysty (Najemnik, s. 70): druga istota ≤ 1,5 m od trafionej i w zasięgu twojego ataku wręcz.
+ * @param {{odCelu: number|null, odAtakujacego: number|null, zasieg?: number}} o  metry od krawędzi żetonów
+ */
+export function zamaszystyDozwolony({ odCelu, odAtakujacego, zasieg = 1.5 }) {
+  return odCelu !== null && odCelu <= 1.5 && odAtakujacego !== null && odAtakujacego <= zasieg;
+}

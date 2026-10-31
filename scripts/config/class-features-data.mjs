@@ -524,7 +524,7 @@ export const CLASS_FEATURES = {
     passive: true,
     resource: { die: "@scale.zlodziej.bolesnyAtak" },
     oncePerTurn: true,
-    auto: [],
+    auto: [{ what: "przycisk pod kartą ataku, który trafił: broń z ZRC, Ułatwienie w rzucie albo przytomny sojusznik ≤ 1,5 m od celu i bez Utrudnienia (U16) — kości ze skali, osobna karta obrażeń, raz na turę", where: "combat/zdolnosci-trafienie.mjs" }],
     text: "Potrafisz wykorzystać każdą słabość przeciwnika, żeby wykonać Bolesny atak. Raz na turę, kiedy atakujesz bronią z Ułatwieniem, używając Zręczności, możesz zadać jednemu celowi dodatkowo 1k6 obrażeń. Nie musisz mieć Ułatwienia w tym ataku, jeśli cel stoi w zasięgu 1,5 metra od twojego sojusznika, który nie jest pod wpływem stanu Obezwładnienie, a ty nie masz Utrudnienia w Teście Ataku. Dodatkowe obrażenia zwiększają się w miarę twojego rozwoju w klasie Złodzieja, zgodnie z kolumną Bolesny atak w tabeli Zdolności klasowych Złodzieja."
   },
   "specjalizacja-zlodziej": {
@@ -580,7 +580,7 @@ export const CLASS_FEATURES = {
     level: 3,
     label: "Podstępny atak",
     action: null,
-    auto: [],
+    auto: [{ what: "zamiast kości Bolesnego ataku — wybór efektu (U17): Krwawienie 1k8 na początku tury celu (żywe), Spowolnienie −1k6 × 1,5 m, Oślepienie — do końca twojej następnej tury; bez kumulacji", where: "combat/zdolnosci-trafienie.mjs" }],
     text: "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury."
   },
   "elektronik": {
@@ -864,7 +864,8 @@ export const CLASS_FEATURES = {
     label: "Skuteczny cios",
     action: null,
     hotbar: true,
-    auto: [],
+    auto: [{ what: "przycisk pod trafieniem wręcz: kość Wściekłego ciosu (jego limit raz w rundzie) → Odepchnięcie (odepchnij / przewróć), Wytrącenie albo Zamaszysty cios — dodatkowy atak w drugą istotę obok", where: "combat/zdolnosci-trafienie.mjs" }],
+    manual: "Czy druga istota jest w zasięgu twojego ataku wręcz (broń z zasięgiem) — moduł sprawdza 1,5 m i 3 m.",
     text: "Twoje Wściekłe ciosy stają się skuteczniejsze, ale kosztem siły uderzenia. Możesz zużyć jedną kostkę Wściekłego ciosu, żeby zyskać jedną z poniższych przewag w walce. Potężny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Odepchnięcie. Sprytny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Wytrącenie. Zamaszysty cios! Jeśli w zasięgu 1,5 m od trafionej przez ciebie istoty, znajduje się druga istota, znajdująca się w zasięgu twojego ataku wręcz, możesz wykonać przeciw niej dodatkowo jeden atak wręcz."
   },
   "kakofonia": {
@@ -949,7 +950,7 @@ export const CLASS_FEATURES = {
     label: "Mój bóg kule nosi",
     action: null,
     oncePerTurn: true,
-    auto: [],
+    auto: [{ what: "przycisk +1k10 pod kartą ataku bronią palną, który trafił — raz na turę", where: "combat/zdolnosci-trafienie.mjs" }],
     text: "Twoja broń prowadzona jest ręką bóstwa, by skuteczniej wykańczać grzeszników. Raz na turę, kiedy zadasz obrażenia w Teście Ataku bronią palną, możesz dodać 1k10 obrażeń."
   },
   "tarcza-wiary": {

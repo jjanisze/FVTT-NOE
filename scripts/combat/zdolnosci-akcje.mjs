@@ -242,7 +242,7 @@ function _klawisze(event) {
  * @param {{activity?: Activity|null, zrodlo: string, rodzaj: string, deklaruj?: boolean, event?: Event|null}} o
  *   `event` z Shiftem — bez okien użycia i rzutu (konwencja dnd5e „szybki rzut”).
  */
-async function _dodatkowyAtak(actor, bron, { activity = null, zrodlo, rodzaj, deklaruj = true, event = null }) {
+export async function dodatkowyAtak(actor, bron, { activity = null, zrodlo, rodzaj, deklaruj = true, event = null }) {
   if (await _bezAmunicji(actor, bron, zrodlo)) return null;
   if (deklaruj) await zadeklaruj(actor, "B", { zrodlo });
   const akt = activity?.item?.id === bron.id ? activity : bron.system.activities?.find(a => a.type === "attack");
@@ -255,12 +255,12 @@ async function _dodatkowyAtak(actor, bron, { activity = null, zrodlo, rodzaj, de
 export async function atakUlubiona(actor, bron, { activity = null, event = null } = {}) {
   const item = ulubionaDla(actor, bron) ?? await _ustawUlubiona(actor, bron);
   if (!item) return null;
-  return _dodatkowyAtak(actor, bron, { activity, zrodlo: item.name, rodzaj: "ulubiona-bron", event });
+  return dodatkowyAtak(actor, bron, { activity, zrodlo: item.name, rodzaj: "ulubiona-bron", event });
 }
 
 /** Promocja z przycisku karty ataku wręcz. */
 export async function atakPromocja(actor, bron, { activity = null, event = null } = {}) {
-  return _dodatkowyAtak(actor, bron, { activity, zrodlo: "Promocja (Maszyna do zabijania)", rodzaj: "promocja", event });
+  return dodatkowyAtak(actor, bron, { activity, zrodlo: "Promocja (Maszyna do zabijania)", rodzaj: "promocja", event });
 }
 
 const _promocjaDostepna = actor => !!_ma(actor, "maszyna-do-zabijania") && !!actor.statuses?.has("berserk");
@@ -541,7 +541,7 @@ function _onPostUseActivity(activity, usageConfig) {
     const akt = game.messages.get(d.messageId)?.getAssociatedActivity?.() ?? null;
     // Akcję Bonusową aktywności [B] zadeklarowała już warstwa akcji.
     if (bron) {
-      void _dodatkowyAtak(actor, bron, {
+      void dodatkowyAtak(actor, bron, {
         activity: akt, zrodlo: item.name, rodzaj: ULUBIONA_BRON.includes(id) ? "ulubiona-bron" : "promocja", deklaruj: false,
         event: usageConfig.event ?? null
       });
@@ -644,5 +644,5 @@ export const ulubionaBronApi = Object.freeze({
 /** Powierzchnia dla testów Quench. */
 export const __testing = Object.freeze({
   modelBroni, ulubionaDla, _wolneMiejsce, _limit, _jestDodatkowy, _wTejTurze, _ostatniAtak, _bezAmunicji,
-  _dodatkowyAtak, _celowanie, _slabyPunkt, _nalozSlabyPunkt, _onRestCompleted, _mierzenie, _bronSnajperska, FLAG_MIERZENIE
+  dodatkowyAtak, _celowanie, _slabyPunkt, _nalozSlabyPunkt, _onRestCompleted, _mierzenie, _bronSnajperska, FLAG_MIERZENIE
 });
