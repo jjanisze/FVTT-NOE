@@ -729,6 +729,8 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   narzędzi małego medyka ST 10 z ładunkiem; dum-dum osobno od Podstępnego (mogą być naraz); lek na Hemofilię przy
   innych krwawieniach tylko w WKK; Kolory tykają w turze krwawiącego i nie da się ich zatamować samemu; jedna akcja
   leczenia — jedno krwawienie; stabilizacja nie zatrzymuje krwawienia; obrażenia z krwawienia bez rodzaju; poza walką
-  przypomnienie MG co 10 minut zegara świata (+ ślad Splattera). Porównanie i reszta pytań — `docs/Krwawienia.md`;
-  przebudowa `combat/bleeding.mjs` (efekt na krwawienie, migracja flagi, piła, Kolory) po przeglądzie tabeli; siedem
-  glifów w `dev/icons/MISSING.md` (sekcja K).
+  przypomnienie MG co 10 minut zegara świata (+ ślad Splattera). Trzecia runda (2026-11-01): utrata 1+ PW przy 0 PW =
+  porażka w RPŚ jak obrażenia; lek w WKK — jedno krwawienie na dawkę; Dno torby także przy Teście Medycyny Hemofilii;
+  krótsze przesunięcia zegara się sumują; staza tylko stabilizuje; Wyciek maszyny — Test narzędzi małego mechanika ST 10
+  (decyzja agenta, MG zlecił). Design kompletny — `docs/Krwawienia.md`; następnie przebudowa `combat/bleeding.mjs`
+  (efekt na krwawienie, migracja flagi, piła, Kolory, przypomnienie); siedem glifów w `dev/icons/MISSING.md` (sekcja K).
