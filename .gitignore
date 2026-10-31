@@ -36,6 +36,10 @@ dev/icons/review/review-preview.png
 # READMEs and small review WEBPs are tracked; the shipped art lives under tokens/, ui/, icons/.
 dev/art/**/in/
 dev/art/**/out/
+# Creature portrait/token pipeline (dev/art/creatures): every generated candidate WEBP stays local, like the icon
+# review's — approved ones are copied to tokens/ and tokens/portraits/ (hashes in installed.json); prompts, manifest
+# and feedback are tracked.
+dev/art/creatures/candidates/**/*.webp
 
 # NOT a bare `*.log` — LevelDB names its write-ahead log `NNNNNN.log`, and that
 # is where a freshly built pack's documents live until a later open compacts

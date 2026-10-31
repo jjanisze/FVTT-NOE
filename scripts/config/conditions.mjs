@@ -305,10 +305,10 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     statuses: ["incapacitated"]
   },
   // Woda (PLAN_m6 §5.6, s. 255–256) — nakłada Region `woda` i karta testu pływania (`scenes/woda.mjs`), MG albo
-  // właściciel z HUD. Ikony rdzenia do czasu dostawy (`dev/icons/MISSING.md` §N).
+  // właściciel z HUD. Ikony: B119–120 (2026-10-31).
   podWoda: {
     name: "Pod wodą",
-    img: "icons/svg/waterfall.svg",
+    img: `${OWN}/pod-woda.svg`,
     description: "<p>Zanurzony. <strong>Oddech:</strong> wstrzymujesz go 1 + mod. Kondycji minut; obrażenia w tym czasie — "
       + "RO na Kondycję ST 10 albo Uduszenie. <strong>Broń palna:</strong> Utrudnienie, pocisk leci 30 cm, zacina się "
       + "przy 5 i mniej, połowa obrażeń. <strong>Przeciw tobie:</strong> wręcz — Utrudnienie (chyba że atakujący ma "
@@ -317,7 +317,7 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   },
   tonie: {
     name: "Tonie",
-    img: "icons/svg/anchor.svg",
+    img: `${OWN}/tonie.svg`,
     description: "<p>Nie utrzymujesz się na powierzchni: Szybkość 0, opadasz na dno. Na początku następnej tury "
       + "ponowny Test Siły (Atletyka) — sukces: wypływasz (s. 255).</p>"
   }

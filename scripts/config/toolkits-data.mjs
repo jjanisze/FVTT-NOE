@@ -317,33 +317,32 @@ export const TOOLKITS = [
  * muzyczne” w `config/tools.mjs`, biegłość nadawana awansem (Cwaniak, Kowboj, Gwiazda, Sztuczka Muzyk — PLAN_m6
  * §5.1). „Cecha: Charyzma lub Zręczność”, „Używanie: zagraj znany kawałek (ST 10), improwizacja (ST 15)”,
  * „Produkcja: komponowanie muzyki” — w opisie, nie przepis. Elektryczne potrzebują wzmacniacza (50 gb) i zasilania.
- * Ikony — do dostawy (`dev/icons/MISSING.md`); do tego czasu `placeholder` z ikon rdzenia.
+ * Ikony własne (`icons/tools/<id>.svg`, B119, 2026-10-31).
  */
 const INSTRUMENT_ACTIONS = Object.freeze([
   Object.freeze({ name: "Zagraj znany kawałek", dc: 10 }),
   Object.freeze({ name: "Improwizacja", dc: 15 })
 ]);
 const ELECTRIC = "Wymaga prądu: wzmacniacz (50 gb) i źródło energii — gniazdko elektryczne albo akumulator.";
-const I = (id, label, weight, price, avail, placeholder, electric = false) => ({
-  id, label, typ: "music", ability: "cha", altAbility: "dex", weight, price, avail, iconReady: false, placeholder,
+const I = (id, label, weight, price, avail, electric = false) => ({
+  id, label, typ: "music", ability: "cha", altAbility: "dex", weight, price, avail, iconReady: true,
   actions: INSTRUMENT_ACTIONS, produkcja: "komponowanie muzyki.", ...(electric ? { special: ELECTRIC } : {})
 });
-const CORE_INSTR = "icons/tools/instruments";
 
 /** @type {Toolkit[]} */
 export const INSTRUMENTS = [
-  I("akordeon", "Akordeon", 10, 50, 40, `${CORE_INSTR}/horn-flared-wood.webp`),
-  I("banjo", "Banjo", 3, 40, 50, `${CORE_INSTR}/lute-gold-brown.webp`),
-  I("gitaraAkustyczna", "Gitara akustyczna", 2, 50, 50, `${CORE_INSTR}/lute-gold-brown.webp`),
-  I("gitaraBasowa", "Gitara basowa", 4, 100, 40, `${CORE_INSTR}/lute-gold-brown.webp`, true),
-  I("gitaraElektryczna", "Gitara elektryczna", 4, 130, 20, `${CORE_INSTR}/lute-gold-brown.webp`, true),
-  I("harmonijka", "Harmonijka ustna", 0.1, 20, 90, `${CORE_INSTR}/pipe-flute-tan.webp`),
-  I("keyboard", "Keyboard", 7, 150, 20, `${CORE_INSTR}/chimes-wood-brown.webp`, true),
-  I("kontrabas", "Kontrabas elektryczny", 10, 150, 10, `${CORE_INSTR}/harp-lap-brown.webp`, true),
-  I("mikser", "Mikser audio + głośniki", 5, 110, 20, `${CORE_INSTR}/microphone-stand-tall.webp`, true),
-  I("perkusja", "Perkusja", 20, 150, 10, `${CORE_INSTR}/drum-snare-red.webp`),
-  I("saksofon", "Saksofon", 6, 100, 20, `${CORE_INSTR}/saxophone.webp`),
-  I("skrzypce", "Skrzypce elektryczne", 0.5, 120, 10, `${CORE_INSTR}/harp-white.webp`, true)
+  I("akordeon", "Akordeon", 10, 50, 40),
+  I("banjo", "Banjo", 3, 40, 50),
+  I("gitaraAkustyczna", "Gitara akustyczna", 2, 50, 50),
+  I("gitaraBasowa", "Gitara basowa", 4, 100, 40, true),
+  I("gitaraElektryczna", "Gitara elektryczna", 4, 130, 20, true),
+  I("harmonijka", "Harmonijka ustna", 0.1, 20, 90),
+  I("keyboard", "Keyboard", 7, 150, 20, true),
+  I("kontrabas", "Kontrabas elektryczny", 10, 150, 10, true),
+  I("mikser", "Mikser audio + głośniki", 5, 110, 20, true),
+  I("perkusja", "Perkusja", 20, 150, 10),
+  I("saksofon", "Saksofon", 6, 100, 20),
+  I("skrzypce", "Skrzypce elektryczne", 0.5, 120, 10, true)
 ];
 
 /** Core fallback icon for kits without a dedicated icon yet. */
