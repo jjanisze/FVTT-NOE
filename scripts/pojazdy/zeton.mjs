@@ -30,7 +30,7 @@ import {
   miejsceNosnika, miejscaPojazdu, nosnikJadacego, obrysDziala, skalaPojazdu, trybSceny, wymiaryIstotyNaPlanszy, wymiaryZetonu
 } from "./stan.mjs";
 import {
-  naroznikDlaSrodka, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
+  naroznikDlaSrodka, naroznikPoZamianie, normalizujKat, obrysZamieniony, punktWPojezdzie, srodekMiejsca
 } from "./geometria.mjs";
 import { obrotPionka } from "../scenes/poscig.mjs";
 import { wPasiePoscigu } from "../scenes/poscig-motion-model.mjs";
@@ -145,7 +145,11 @@ export function instrukcjePoRuchu(pojazdDoc) {
   // Zamiana obrysu tylko dla pojazdu: rozmiaru żetonu istoty (wierzchowca) moduł nigdy nie zmienia (D43).
   const docelowy = wymiaryZetonu(pojazdDoc.actor, scena, src.rotation);
   if (docelowy && (!bliskie(docelowy.w, src.width) || !bliskie(docelowy.h, src.height))) {
-    instrukcje[pojazdDoc.id] = { dimensions: { width: docelowy.w, height: docelowy.h, action: "displace" } };
+    // Własny narożnik zamiast `dimensions` rdzenia: tamto zaokrągla środek i obrót tam i z powrotem dryfuje o piksel.
+    instrukcje[pojazdDoc.id] = {
+      destination: { ...naroznikPoZamianie(src, docelowy, kratka), width: docelowy.w, height: docelowy.h, action: "displace" },
+      autoRotate: false, showRuler: false, constrainOptions: { ignoreWalls: true, ignoreCost: true }
+    };
   }
   const srodek = pojazdDoc.getCenterPoint(src);
   for (const jDoc of jadacyPojazdu(pojazdDoc)) {

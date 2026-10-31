@@ -17,7 +17,9 @@ async function prepare() {
     d.system.equipped = true;
     if (d.flags[M].gogleWariant) Object.assign(d.flags[M], { gogleHasBaterie: true, gogleCharge: 100, gogleChargeMaxMin: 60 });
   }
-  const [lamp, nvg, thermal] = await carrier.createEmbeddedDocuments("Item", data);
+  // By name, not position: createEmbeddedDocuments does not keep the input order.
+  const made = await carrier.createEmbeddedDocuments("Item", data);
+  const [lamp, nvg, thermal] = data.map(d => made.find(i => i.name === d.name));
   await window.__e2e.quiet({ idleMs: 700 });
   return { vehicle: vehicle.id, token: token.id, actor: carrier.id, lamp: lamp.id, nvg: nvg.id, thermal: thermal.id };
 }

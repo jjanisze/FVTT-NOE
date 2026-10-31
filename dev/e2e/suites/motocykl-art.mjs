@@ -62,7 +62,8 @@ export default {
       }, s);
       await t.waitFor(observer, s => {
         const v = canvas.scene.tokens.get(s.vehicle), P = game.neuroshima.pojazdy;
-        return v.width === 1.5 && v.height === 0.5 && s.riders.every(id => {
+        // Obrys motocykla ×1,1 (D45): 0,55 × 1,65 kratki, bokiem 1,65 × 0,55.
+        return Math.abs(v.width - 1.65) < 1e-3 && Math.abs(v.height - 0.55) < 1e-3 && s.riders.every(id => {
           const d = canvas.scene.tokens.get(id), m = P.miejsceOId(v.actor, d.flags["neuroshima-2026-overrides"].jazda.miejsce);
           const p = P.geometria.srodekMiejsca(v.getCenterPoint(), v.rotation, m, v.parent.grid.size), a = d.getCenterPoint();
           return Math.hypot(p.x - a.x, p.y - a.y) < 2 && d.object.visible;

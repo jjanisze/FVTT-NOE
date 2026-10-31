@@ -78,7 +78,7 @@ export default {
       });
       await t.waitFor(t.gm,()=>!!document.querySelector('#poligon-panel [data-tab="proby"]'),{message:"panel available"});
       await t.gm.eval(()=>document.querySelector('#poligon-panel [data-tab="proby"]').click());
-      await t.waitFor(t.gm,()=>document.querySelectorAll('#poligon-panel [data-op="tool"]').length === 19,{message:"parking, fourteen vehicles, wreck artwork and three creature-scale buttons"});
+      await t.waitFor(t.gm,()=>document.querySelectorAll('#poligon-panel [data-op="tool"]').length === 20,{message:"parking, fourteen vehicles, wreck artwork, three creature-scale buttons and the mishap 5 tool"});
       for (const [i,key] of [[0,"parking"],[1,"vehicle-art-review-v4"],[2,"hammer-art-review-v1"],[4,"ciezarowka-art-review-v1"],[5,"buggy-art-review-v1"],[6,"autobus-art-review-v1"],[7,"traktor-art-review-v1"],[8,"woz-strazacki-art-review-v1"],[9,"buldozer-art-review-v1"],[10,"bwp-art-review-v1"],[11,"czolg-art-review-v1"],[12,"motorower-art-review-v1"],[13,"rower-art-review-v1"],[14,"deskorolka-art-review-v1"],[15,"wraki-art-review-v1"],[3,"motocykl-art-review-v1"]]) {
         await t.gm.eval(i=>document.querySelector(`#poligon-panel [data-op="tool"][data-arg="${i}"]`).click(),i);
         for (const client of [t.gm,t.client("Gracz 1")])

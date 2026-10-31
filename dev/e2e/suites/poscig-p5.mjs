@@ -29,7 +29,9 @@ async function przygotuj() {
   // Postacie w skali planszy (1,5 m = ¼ toru), jak po wklejeniu albo z karty „Posadzić?”.
   const y = 1500, bok = P.skalaPojazdu(scene);
   const dane = await Promise.all([pc1, pc2, bandyta].map((a, i) => a.getTokenDocument({ x: 300 + i * 200, y, width: bok, height: bok })));
-  const [t1, t2, tb] = await scene.createEmbeddedDocuments("Token", dane.map(d => d.toObject()));
+  // Po aktorze, nie po pozycji: kolejność z createEmbeddedDocuments nie jest stała (bandyta trafiał za kierownicę Osobówki).
+  const nowe = await scene.createEmbeddedDocuments("Token", dane.map(d => d.toObject()));
+  const [t1, t2, tb] = [pc1, pc2, bandyta].map(a => nowe.find(t => t.actorId === a.id));
   const tok = a => scene.tokens.find(t => t.actorId === a.id && P.jestPojazdem(t.actor));
   const vOs = tok(os), vHm = tok(hm);
   const kier = a => P.miejscaPojazdu(a).find(m => m.kierowca).id;

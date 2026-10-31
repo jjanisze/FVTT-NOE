@@ -163,6 +163,22 @@ export function naroznikDlaSrodka(srodek, w, h, kratka) {
 }
 
 /**
+ * Lewy górny róg po zamianie obrysu wokół tego samego środka (§4.3). Rdzeń przy zmianie wymiarów zaokrągla
+ * `środek − pół obrysu`; przy połówkach piksela (obrys ×1,1, D45: 3,3 × 1,65 kratki) obrót tam i z powrotem
+ * przesuwał pojazd o piksel, a Ctrl+Z nie wracał do pozy. Zaokrąglenie w dół przy przejściu w pion (`h > w`)
+ * i w górę przy powrocie w poziom odwraca się dokładnie dla każdego ułamka. Czysta.
+ * @param {{x: number, y: number, width: number, height: number}} src  źródło żetonu (kratki sceny)
+ * @param {{w: number, h: number}} cel  nowy obrys w kratkach sceny
+ * @param {number} kratka  rozmiar kratki w pikselach
+ */
+export function naroznikPoZamianie(src, cel, kratka) {
+  const r = cel.h > cel.w ? Math.floor : Math.ceil;
+  // Szum zmiennoprzecinkowy (3,3 × 100 = 329,999…) nie może przerzucić całego piksela na drugą stronę; bez -0.
+  const q = v => r(Math.round(v * 1e6) / 1e6) || 0;
+  return { x: q(src.x + (src.width - cel.w) * kratka / 2), y: q(src.y + (src.height - cel.h) * kratka / 2) };
+}
+
+/**
  * Czy punkt sceny leży w obróconym prostokącie pojazdu.
  * @param {{x: number, y: number}} punkt
  * @param {{x: number, y: number}} srodek

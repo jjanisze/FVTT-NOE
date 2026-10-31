@@ -16,7 +16,7 @@ import {
   PODWOZIA, KATALOG_POJAZDOW, CECHY_POJAZDOW, cechyPojazdu, rozmiarPojazdu, ST_NA_KROTKO, SKALA_POJAZDOW, obrysWSkali
 } from "../config/vehicles-data.mjs";
 import {
-  kwadrant, obrysPrzyObrocie, obrysZamieniony, obroc, ukladMiejsc, srodekMiejsca, naroznikDlaSrodka,
+  kwadrant, obrysPrzyObrocie, obrysZamieniony, obroc, ukladMiejsc, srodekMiejsca, naroznikDlaSrodka, naroznikPoZamianie,
   punktWPojezdzie, roznicaKatow, normalizujKat, ROZMIAR_MIEJSCA
 } from "../pojazdy/geometria.mjs";
 import { kosztPrzesiadki, oznaczeniaDosiadania } from "../pojazdy/jadacy.mjs";
@@ -487,6 +487,21 @@ export function registerPojazdyTests(quench) {
 
       it("narożnik żetonu jadącego dla środka miejsca", function () {
         expect(naroznikDlaSrodka({ x: 525, y: 525 }, ROZMIAR_MIEJSCA, ROZMIAR_MIEJSCA, 100)).to.deep.equal({ x: 500, y: 500 });
+      });
+
+      it("zamiana obrysu tam i z powrotem wraca co do piksela (połówki pikseli po ×1,1, D45)", function () {
+        // Osobówka 3,3 × 1,65 kratki: pół różnicy to 82,5 px przy 100 px i 57,75 px przy 70 px.
+        for (const [kratka, x0, y0] of [[100, 400, 1100], [100, 401, 1101], [70, 333, 777], [64, 0, 0], [280, 1145, 444]]) {
+          const poziom = { x: x0, y: y0, width: 3.3, height: 1.65 };
+          const p = naroznikPoZamianie(poziom, { w: 1.65, h: 3.3 }, kratka);
+          const w = naroznikPoZamianie({ ...p, width: 1.65, height: 3.3 }, { w: 3.3, h: 1.65 }, kratka);
+          expect(w, `kratka ${kratka}, start ${x0},${y0}`).to.deep.equal({ x: x0, y: y0 });
+          expect(Math.abs(p.x + 1.65 * kratka / 2 - (x0 + 3.3 * kratka / 2)), "środek zostaje (poniżej piksela)").to.be.below(1);
+        }
+        // Od pionu: najpierw w poziom, potem z powrotem.
+        const pion = { x: 482, y: 1017, width: 1.65, height: 3.3 };
+        const p = naroznikPoZamianie(pion, { w: 3.3, h: 1.65 }, 100);
+        expect(naroznikPoZamianie({ ...p, width: 3.3, height: 1.65 }, { w: 1.65, h: 3.3 }, 100)).to.deep.equal({ x: 482, y: 1017 });
       });
     });
 
