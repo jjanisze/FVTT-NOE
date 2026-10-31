@@ -244,12 +244,13 @@ function _onRenderKarty(message, html) {
 }
 
 /** Fuks zamienił porażkę testu pływania w sukces: cofnij skutek. */
-async function _onRerolled({ message, roll } = {}) {
+async function _onRerolled({ message, roll, przed: tuzPrzed } = {}) {
   const r = message?.getFlag?.(MODULE_ID, RZUT);
   if (!r || !roll) return;
   const actor = fromUuidSync(r.actorUuid);
   if (!actor?.isOwner) return;
-  const przed = message.rolls?.[0]?.total ?? 0;
+  // Wynik tuż przed tą modyfikacją (łańcuch po rzucie, PLAN_m7 §3.0.2).
+  const przed = tuzPrzed ?? message.rolls?.[0]?.total ?? 0;
   if (przed >= r.st || !(roll.total >= r.st)) return;
   await zastosujTest(actor, true);
   await ChatMessage.create({

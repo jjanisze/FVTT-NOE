@@ -1,8 +1,23 @@
 import { itemUuidOf } from "../config/chat-message-data.mjs";
 import { cardButtonHost } from "../config/chat-card-dom.mjs";
+import { przejscie } from "../config/po-rzucie-rules.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
+/**
+ * Wynik RO zmieniony po rzucie (Fuks, Twardość, Spieprzysz to!…): oblany → zdany zdejmuje Powalenie, zdany → oblany
+ * je nakłada. Odpala klient właściciela celu albo aktywny MG (`combat/po-rzucie.mjs`).
+ */
+async function _onRollModified({ message, roll, przed, actor }) {
+  const f = message?.flags?.[MODULE_ID]?.obalajacaRO;
+  if (!f || !roll || !actor?.isOwner) return;
+  const zmiana = przejscie(przed ?? message.rolls?.[0]?.total ?? 0, roll.total, f.st);
+  if (!zmiana) return;
+  await actor.toggleStatusEffect("prone", { active: zmiana === "naPorazke" });
+  ui.notifications.info(`Obalająca: wynik RO zmieniony — ${actor.name} ${zmiana === "naSukces" ? "wstaje (zdany)" : "zostaje powalony"}.`);
+}
+
 export function registerObalajaca() {
+  Hooks.on("neuroshima.rollModified", _onRollModified);
   // `dnd5e.renderChatMessage`, nie `renderChatMessageHTML`: to drugie leci przed
   // `ChatMessageDataModel#getHTML`, które nadpisuje całe `.message-content`.
   Hooks.on('dnd5e.renderChatMessage', (message, html) => {
@@ -105,7 +120,9 @@ export function registerObalajaca() {
                 if (hasDociazenie) {
                     rollConfig.disadvantage = true;
                 }
-                const rolls = await target.actor.rollSavingThrow(rollConfig, { configure: false }, { create: true });
+                // Flaga na karcie RO — przerzut albo dodatek po rzucie przelicza Powalenie (PLAN_m7 §3.0.2).
+                const rolls = await target.actor.rollSavingThrow(rollConfig, { configure: false },
+                  { create: true, data: { flags: { [MODULE_ID]: { obalajacaRO: { st: saveDC } } } } });
                 const roll = Array.isArray(rolls) ? rolls[0] : rolls;
 
                 if (roll) {

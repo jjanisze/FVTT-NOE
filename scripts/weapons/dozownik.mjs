@@ -206,7 +206,7 @@ function _registerChatLogListener(app, html) {
     if (!actor) return;
 
     const rolls = await actor.rollSavingThrow(
-      { ability: "con", target: dc },
+      { ability: "con", target: dc, neuroKontekst: ["trucizna"] },
       {},
       { data: { flavor: `Rzut Obronny na Kondycję — Trucizna (ST ${dc})` } },
     );

@@ -68,6 +68,9 @@ import { registerTokenScaleTests } from "./skala-zetonow.test.mjs";
 import { registerProdukcjaTests } from "./produkcja.test.mjs";
 import { registerLalkaTests } from "./lalka.test.mjs";
 import { registerPoziomyTests } from "./poziomy.test.mjs";
+import { registerAkcjeTests } from "./akcje.test.mjs";
+import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
+import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
 export function registerQuenchTests() {
@@ -124,6 +127,10 @@ export function registerQuenchTests() {
     registerAutodestrukcjaTests(quench);
     registerBebeszenieTests(quench);
     registerKartyCzatuTests(quench);
+    // PLAN_m7 E0: warstwa akcji i bramki, rejestr „po rzucie”, Ułatwienia w testach i RO.
+    registerAkcjeTests(quench);
+    registerPoRzucieTests(quench);
+    registerUlatwieniaTestowTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

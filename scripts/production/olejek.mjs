@@ -162,7 +162,7 @@ async function _onClick(event) {
   const target = (btn.dataset.cel ? fromUuidSync(btn.dataset.cel) : null)
     ?? canvas?.tokens?.controlled?.[0]?.actor ?? game.user.targets?.first?.()?.actor;
   if (!target) return ui.notifications.warn("Zaznacz żeton celu.");
-  const rolls = await target.rollSavingThrow({ ability: "con", target: st }, {}, { data: { flavor: `RO na Kondycję — olejek trujący (ST ${st})` } });
+  const rolls = await target.rollSavingThrow({ ability: "con", target: st, neuroKontekst: ["trucizna"] }, {}, { data: { flavor: `RO na Kondycję — olejek trujący (ST ${st})` } });
   const r = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!r) return;
   if (r.total < st) {

@@ -31,6 +31,7 @@ import { heldItems, familyOf } from "./doll.mjs";
 import { equippedArmor } from "./armor-rules.mjs";
 import { isZaslonaWeapon } from "./samuraj.mjs";
 import { weaponIdOf } from "../weapons/magazine-model.mjs";
+import { zarejestrujEfektTuryWlasciciela } from "../combat/czas-efektu.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -270,39 +271,6 @@ export function isTurnLongTTEffect(effect) {
     || effect?.getFlag?.(MODULE_ID, TT_EFFECT_FLAG) != null;
 }
 
-/** Kombatant właściciela w bieżącej, rozpoczętej walce. */
-function _ownerCombatant(actor, combat = game.combat) {
-  if (!combat?.started || !actor) return null;
-  return combat.getCombatantsByActor(actor)[0] ?? null;
-}
-
-function _onPreCreateEffect(effect) {
-  if (!isTurnLongTTEffect(effect)) return;
-  const actor = effect.parent;
-  if (!(actor instanceof Actor)) return;
-  const owner = _ownerCombatant(actor);
-  if (!owner) return;
-  effect.updateSource({ "start.combatant": owner.id });
-}
-
-/** Rdzeń oznaczył wygaśnięcie (`expiryAction: "update"`) — kasujemy, inaczej ikona zostaje. */
-async function _onUpdateEffect(effect, changes) {
-  if (!game.users.activeGM?.isSelf) return;
-  if (foundry.utils.getProperty(changes, "duration.expired") !== true) return;
-  if (!isTurnLongTTEffect(effect)) return;
-  await effect.delete({ neuroTTExpired: true });
-}
-
-async function _purgeTurnLongEffects(actor) {
-  const ids = actor?.effects?.filter(isTurnLongTTEffect).map(e => e.id) ?? [];
-  if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
-}
-
-async function _onDeleteCombat(combat) {
-  if (!game.users.activeGM?.isSelf) return;
-  for (const c of combat.combatants) await _purgeTurnLongEffects(c.actor);
-}
-
 /* -------------------------------------------- */
 /*  Porządki po starym wdrożeniu (§6)            */
 /* -------------------------------------------- */
@@ -347,11 +315,8 @@ export function registerTT() {
   _patchPrepareDerivedData();
   _patchAttribution();
 
-  Hooks.on("preCreateActiveEffect", _onPreCreateEffect);
-  Hooks.on("updateActiveEffect", _onUpdateEffect);
-  Hooks.on("deleteCombat", _onDeleteCombat);
-  // Odpoczynek kończy wszystko, co trwało „do początku następnej tury” (jak stany klasowe).
-  Hooks.on("dnd5e.restCompleted", actor => { void _purgeTurnLongEffects(actor); });
+  // Początek na właścicielu, skasowanie po wygaśnięciu, porządki po walce i odpoczynku — `combat/czas-efektu.mjs`.
+  zarejestrujEfektTuryWlasciciela(isTurnLongTTEffect);
 
   Hooks.once("ready", () => {
     if (game.users.activeGM?.isSelf) void cleanupLegacyTTEffects();

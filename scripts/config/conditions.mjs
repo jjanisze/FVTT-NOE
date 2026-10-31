@@ -275,6 +275,24 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     // Szachista: Roszada czyta ten stan (`config/tt-rules.mjs`).
     duration: { value: 1, units: "turns", expiry: "turnStart" }
   },
+  // Znaczniki akcji (PLAN_m7 §3.0.1, D5–D6): zakłada je `actors/actions.mjs` przy użyciu [R] / [B] w walce, zdejmuje
+  // początek następnej tury właściciela (`combat/czas-efektu.mjs`). Oznaczają, nie blokują — drugie użycie w rundzie
+  // daje sygnał naruszenia; MG zdejmuje znacznik z HUD-u żetonu. Ikony tymczasowe z rdzenia (MISSING, klasa A).
+  reakcja: {
+    name: "Reakcja zużyta",
+    img: "icons/svg/lightning.svg",
+    description: "<p>Reakcja zużyta — wraca na początku twojej następnej tury (Tura w pigułce, s. 37). Drugie użycie "
+      + "moduł zgłasza MG; nie blokuje. Bez Reakcji w ogóle: Obezwładnienie (s. 35) i Znaczny Stopień Zranienia "
+      + "(s. 32).</p>",
+    duration: { value: 1, units: "turns", expiry: "turnStart" }
+  },
+  akcjaBonusowa: {
+    name: "Akcja bonusowa zużyta",
+    img: "icons/svg/clockwork.svg",
+    description: "<p>Akcja Bonusowa zużyta w tej turze (1× na turę — Tura w pigułce, s. 37); znacznik trwa do "
+      + "początku twojej następnej tury. Druga moduł zgłasza MG; nie blokuje.</p>",
+    duration: { value: 1, units: "turns", expiry: "turnStart" }
+  },
   // Bieganie [A] (s. 30, PLAN_m1_walka U8) — znacznik jak Unikanie: czyta go silnik okoliczności ataku
   // (`config/okolicznosci-ataku.mjs`), zdejmuje początek następnej tury właściciela (`actors/tt.mjs`).
   bieganie: {

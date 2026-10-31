@@ -52,7 +52,8 @@ function _zaznaczeni() {
 /** RO na Kondycję bez okna, z flagą zagrożenia na wiadomości (Fuks czyta ją w `neuroshima.rerolled`). */
 async function _roKondycji(actor, { st, tryb = 0, flavor, flaga }) {
   const rolls = await actor.rollSavingThrow(
-    { ability: "con", target: st, advantage: tryb > 0, disadvantage: tryb < 0 },
+    // `neuroKontekst` — źródło RO dla Ułatwień ze zdolności (PLAN_m7 §3.0.3).
+    { ability: "con", target: st, advantage: tryb > 0, disadvantage: tryb < 0, neuroKontekst: ["srodowisko"] },
     { configure: false },
     { data: { flavor, flags: { [MODULE_ID]: { [RZUT]: { ...flaga, actorUuid: actor.uuid, st } } } } }
   );
@@ -327,12 +328,13 @@ function _onUpdateEffect(effect, changes) {
 }
 
 /** Fuks zamienił porażkę RO zagrożenia w sukces: cofnij jej skutek (raz — Fuks przerzuca rzut raz). */
-async function _onRerolled({ message, roll } = {}) {
+async function _onRerolled({ message, roll, przed: tuzPrzed } = {}) {
   const r = message?.getFlag?.(MODULE_ID, RZUT);
   if (!r || !roll) return;
   const actor = fromUuidSync(r.actorUuid);
   if (!actor?.isOwner) return;
-  const przed = message.rolls?.[0]?.total ?? 0;
+  // Wynik tuż przed tą modyfikacją (łańcuch po rzucie, PLAN_m7 §3.0.2) — drugi dodatek nie cofa skutku drugi raz.
+  const przed = tuzPrzed ?? message.rolls?.[0]?.total ?? 0;
   if (przed >= r.st || !(roll.total >= r.st)) return;
   if (r.rodzaj === "oddech") {
     const stan = stanOddechu(actor);

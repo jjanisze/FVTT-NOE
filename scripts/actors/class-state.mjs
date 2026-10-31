@@ -20,6 +20,7 @@ import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 import { ttSource } from "./tt.mjs";
+import { zadeklaruj } from "./actions.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -73,6 +74,8 @@ function _rgba(hex, alpha) {
 const STATE_CONFIG = {
   "neuro-berserk": {
     label: "Berserk",
+    // Stan `berserk` — warunek efektu dla reguł dnd5e 6 „tylko w Berserku” (`statuses.berserk`, PLAN_m7 §3.0.3, spike b).
+    status: "berserk",
     icon: "icons/svg/blood.svg",
     tint: "#8b1a1a",
     scrollText: { text: "BERSERK!", color: "#c0392b" },
@@ -215,6 +218,7 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
     img: cfg.icon ?? item?.img ?? "icons/svg/upgrade.svg",
     tint: cfg.tint ?? null,
     duration,
+    statuses: cfg.status ? [cfg.status] : [],
     system: { changes, origin: effectOrigin(item?.uuid ?? actor.uuid) },
     flags: {
       [MODULE_ID]: {
@@ -230,6 +234,8 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
     seqScrollText?.(cfg.scrollText.text, actor.getActiveTokens?.()[0], { color: cfg.scrollText.color });
   }
   _postStateCard(actor, cfg, "on");
+  // Natywna aktywność jest anulowana (preUseActivity niżej), więc [B]/[R] zgłasza ten przepływ (PLAN_m7 §3.0.1).
+  if (feature.action === "B" || feature.action === "R") void zadeklaruj(actor, feature.action, { zrodlo: feature.label });
 
   return true;
 }

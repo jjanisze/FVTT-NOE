@@ -376,6 +376,8 @@ function registerLongBurstActivityType() {
           event,
           ability,
           target: adjustedDc,
+          // Źródło RO dla Ułatwień ze zdolności (PLAN_m7 §3.0.3): seria — efekt obszarowy.
+          neuroKontekst: ["obszar"],
           ...(oneHanded || heavy ? { advantage: true } : {})
         }, {}, {
           data: {

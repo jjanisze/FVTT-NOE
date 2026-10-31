@@ -30,6 +30,7 @@ import { jestMaszyna } from "../actors/towarzysze.mjs";
 import { startNaKombatanta } from "./czas-efektu.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
 import { cardButtonHost } from "../config/chat-card-dom.mjs";
+import { przejscie } from "../config/po-rzucie-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -143,6 +144,7 @@ export function registerWeaponSaveProperties() {
     el.addEventListener("click", _onClickSaveButton);
   });
   Hooks.on("updateActiveEffect", _onUpdateEffect);
+  Hooks.on("neuroshima.rollModified", _onRollModified);
 }
 
 /* -------------------------------------------- */
@@ -306,25 +308,63 @@ async function _resolveTarget(target, config, saveDC, { attacker = null } = {}) 
     return;
   }
 
-  // 5. Rzut obronny.
+  // 5. Rzut obronny. Flaga `skutekRO` na karcie — przerzut albo dodatek po rzucie przelicza skutek (PLAN_m7 §3.0.2).
+  const key = Object.keys(SAVE_PROPERTIES).find(k => SAVE_PROPERTIES[k] === config) ?? null;
+  // Źródło RO dla Ułatwień ze zdolności (PLAN_m7 §3.0.3): skutek broni maszyny — Empiryk.
   const rolls = await actor.rollSavingThrow(
-    { ability: config.ability, target: saveDC },
+    { ability: config.ability, target: saveDC, neuroKontekst: attacker && jestMaszyna(attacker) ? ["maszyna"] : [] },
     { configure: false },
-    { create: true },
+    { create: true, data: { flags: { [MODULE_ID]: { [SKUTEK_RO]: { wlasciwosc: key, st: saveDC, attackerUuid: attacker?.uuid ?? null } } } } },
   );
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!roll) return;
 
   const total = roll.total ?? 0;
   if (total < saveDC) {
-    // `onFail` zastępuje samo przełączenie statusu tam, gdzie efekt jest czymś więcej niż
-    // znacznikiem (Krwawienie ma własny cykl i profil obrażeń).
-    if (config.onFail) await config.onFail(actor, { attacker });
-    else await actor.toggleStatusEffect(config.status, { active: true });
+    await _skutekPorazki(actor, config, attacker);
     ui.notifications.info(`${config.label}: ${name} oblał RO i otrzymuje ${config.statusLabel}!`);
   } else {
     ui.notifications.info(`${config.label}: ${name} zdał RO i uniknął efektu (${config.statusLabel}).`);
   }
+}
+
+/** Flaga karty RO właściwości: `{ wlasciwosc, st, attackerUuid }`. */
+const SKUTEK_RO = "skutekRO";
+
+/**
+ * Skutek oblanego RO. `onFail` zastępuje samo przełączenie statusu tam, gdzie efekt jest czymś więcej niż
+ * znacznikiem (Krwawienie ma własny cykl i profil obrażeń).
+ */
+async function _skutekPorazki(actor, config, attacker) {
+  if (config.onFail) await config.onFail(actor, { attacker });
+  else await actor.toggleStatusEffect(config.status, { active: true });
+}
+
+/** Cofnięcie skutku, gdy wynik po rzucie zmienił się na zdany. */
+async function _cofnijSkutek(actor, config) {
+  const ids = actor.effects.filter(e => e.statuses?.has(config.status)).map(e => e.id);
+  if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
+}
+
+/**
+ * Wynik RO zmieniony po rzucie (Fuks, Twardość, Spieprzysz to!…): oblany → zdany cofa skutek, zdany → oblany
+ * go nakłada. Odpala klient właściciela celu albo aktywny MG (`combat/po-rzucie.mjs`).
+ */
+async function _onRollModified({ message, roll, przed, actor }) {
+  const f = message?.flags?.[MODULE_ID]?.[SKUTEK_RO];
+  const config = f?.wlasciwosc ? SAVE_PROPERTIES[f.wlasciwosc] : null;
+  if (!config || !roll || !actor?.isOwner) return;
+  const zmiana = przejscie(przed ?? message.rolls?.[0]?.total ?? 0, roll.total, f.st);
+  if (!zmiana) return;
+  const attacker = f.attackerUuid ? fromUuidSync(f.attackerUuid) : null;
+  if (zmiana === "naSukces") await _cofnijSkutek(actor, config);
+  else await _skutekPorazki(actor, config, attacker);
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-save-prop-result"><i class="fas ${config.icon}" style="color:${config.color}"></i> `
+      + `<b>${foundry.utils.escapeHTML(actor.name)}</b> — wynik RO zmieniony po rzucie: `
+      + (zmiana === "naSukces" ? `zdany, ${config.statusLabel} zdjęte.` : `oblany, ${config.statusLabel}.`) + `</div>`
+  });
 }
 
 /** Wspólna karta "cecha nie zadziałała" — dla obu bramek powyżej. */

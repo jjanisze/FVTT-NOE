@@ -5,8 +5,9 @@
  *
  *  - Przemarznięcie, −10 °C for 2 h: PC Gracz 2 warmly dressed (no roll), PC Gracz 1 fails hour 1
  *    (d20 2 vs ST 15) and passes hour 2 → one level `przemarznie`.
- *  - Gracz 1 spends a Fuks on the GM's failed roll: the level is undone (rerolls.mjs no longer needs to
- *    edit the GM's message — the mark goes on the player's actor) and the bar does not come back.
+ *  - Gracz 1 spends a Fuks on the GM's failed roll: the level is undone and the bar does not come back. The
+ *    player never edits the GM's message: the reroll card names its predecessor and every client derives "superseded"
+ *    from that (post-roll registry, `combat/po-rzucie.mjs`, PLAN_m7 E0 — until then a mark on the player's actor).
  *  - Długi odpoczynek "w cieple": all Przemarznięcie levels at once, then the usual −1 (Kac).
  *  - Doba bez snu: RO ST 20, 18 + 1 fails → `bezsennosc` (the fixture PC has +1 on CON saves).
  *  - Uduszenie in a real combat: holding breath; damage → card → Gracz 1's RO ST 10 fails → suffocating;
@@ -24,9 +25,14 @@ function stan({ name }) {
     poziom: a._source.system.attributes.exhaustion,
     oddech: game.neuroshima.zagrozenia.stanOddechu(a),
     fuksy: game.neuroshima.fuksy.liczba(a),
-    modKon: a.system.abilities.con.mod,
-    przerzucone: a.getFlag(MOD, "przerzucone") ?? []
+    modKon: a.system.abilities.con.mod
   };
+}
+
+/** Any client: is this message superseded by a later card of its roll chain (post-roll registry)? */
+function zastapiona({ messageId }) {
+  const m = game.messages.get(messageId);
+  return { zastapiona: !!game.neuroshima.poRzucie.zastapionaPrzez(m), edytowalna: !!m?.canUserModify(game.user, "update") };
 }
 
 /** GM: clean start for both PCs; Gracz 1 gets one Fuks. */
@@ -245,7 +251,9 @@ export default {
       t.assert(r.przycisk && r.potwierdzenie, "Fuks button and confirmation", r);
       const s = await t.waitFor(t.gm, stan, { args: [{ name: "PC Gracz 1" }], until: x => x.wyczerpanie.length === 0, message: "level undone" });
       t.equal(s.fuksy, 0, "Fuks spent");
-      t.assert(s.przerzucone.includes(pierwszy.id), "reroll mark on the player's actor (the GM's message is not theirs to edit)", s);
+      const z1 = await p1.eval(zastapiona, { messageId: pierwszy.id });
+      t.assert(z1.zastapiona && !z1.edytowalna, "the GM's card is superseded for the player, who cannot edit it", z1);
+      t.assert((await t.gm.eval(zastapiona, { messageId: pierwszy.id })).zastapiona, "… and for the GM");
       t.equal(r.pasek, false, "no reroll bar after the reroll");
     });
 

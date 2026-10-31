@@ -514,8 +514,9 @@ function _onRenderTokenHUD(hud, html) {
 async function drink(actor) {
   if (!actor) return null;
 
+  // Alkohol to trucizna (A co mi tam, s. 93 — „bo to przecież trucizna”) — źródło RO dla Ułatwień (PLAN_m7 §3.0.3).
   const roll = await actor.rollSavingThrow(
-    { ability: "con", target: UPOJENIE_DRINK_DC },
+    { ability: "con", target: UPOJENIE_DRINK_DC, neuroKontekst: ["trucizna"] },
     { configure: false }
   );
   const result = Array.isArray(roll) ? roll[0] : roll;
@@ -546,7 +547,7 @@ async function soberUp(actor) {
   if (!actor || current <= 0) return null;
 
   const roll = await actor.rollSavingThrow(
-    { ability: "con", target: UPOJENIE_SOBER_DC },
+    { ability: "con", target: UPOJENIE_SOBER_DC, neuroKontekst: ["trucizna"] },
     { configure: false }
   );
   const result = Array.isArray(roll) ? roll[0] : roll;
@@ -587,7 +588,7 @@ async function radiationSave(actor, dc) {
   const band = SKAZENIE_LEVELS.find(l => l.dc === dc);
   const bandName = band ? band.name.toLowerCase() : `ST ${dc}`;
 
-  const roll = await actor.rollSavingThrow({ ability: "con", target: dc }, { configure: false });
+  const roll = await actor.rollSavingThrow({ ability: "con", target: dc, neuroKontekst: ["skazenie"] }, { configure: false });
   const result = Array.isArray(roll) ? roll[0] : roll;
   const success = (result?.total ?? 0) >= dc;
 

@@ -41,6 +41,8 @@ import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs"
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { dziurawyHelmData } from "../wkk/config/dziurawy-helm.mjs";
 import { activityRefOf, isUsageCard } from "../config/chat-message-data.mjs";
+import { zadeklaruj } from "../actors/actions.mjs";
+import { zastapionaPrzez } from "./po-rzucie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PROSBA_FLAG = "obronaProsba";
@@ -289,6 +291,8 @@ export async function executeReaction(message, tokenUuid, reactionId, { roll = n
     e.used.push(record);
     if (record.effect === "critDowngrade") e.critDowngraded = true;
   });
+  // Każda reakcja z katalogu to [R] w RAW (także Krytyczna ochrona i Parowanie, s. 115) — znacznik (PLAN_m7 §3.0.1).
+  await zadeklaruj(actor, "R", { zrodlo: row.label });
   return { ok: true };
 }
 
@@ -571,8 +575,8 @@ function _renderReactions(message, html, obrona) {
   const section = document.createElement("section");
   section.className = "neuro-obrona";
 
-  if (message.flags?.[MODULE_ID]?.rerolled) {
-    section.innerHTML = `<div class="neuro-obrona-note">Zastąpione przerzutem — reakcje na karcie przerzutu.</div>`;
+  if (zastapionaPrzez(message)) {
+    section.innerHTML = `<div class="neuro-obrona-note">Zastąpione przerzutem albo modyfikacją — reakcje na nowszej karcie.</div>`;
     root.append(section);
     return;
   }
@@ -669,6 +673,7 @@ export async function useIntelligentDefence(actor, { card = true } = {}) {
   const bonus = _num(row.bonus(s));
   await _spendCharge(actor, row.id);
   await _createTurnEffect(actor, row, bonus);
+  await zadeklaruj(actor, "R", { zrodlo: row.label });
   if (!card) return;
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),

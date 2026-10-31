@@ -130,10 +130,11 @@ async function _handlerRO(actor, request, data, { event } = {}) {
 }
 
 /** Fuks zamienił porażkę RO w sukces — cofnij Wyczerpanie „Gambling” (raz). */
-async function _onRerolled({ message, roll, actor }) {
+async function _onRerolled({ message, roll, actor, przed }) {
   if (!message?.flags?.[MODULE_ID]?.gamblingRO || !actor?.isOwner) return;
   const st = GAMBLING_RO.st;
-  const byla = (message.rolls?.[0]?.total ?? 0) >= st;
+  // `przed` — wynik tuż przed tą modyfikacją (łańcuch po rzucie, PLAN_m7 §3.0.2).
+  const byla = (przed ?? message.rolls?.[0]?.total ?? 0) >= st;
   if (!byla && (roll?.total ?? 0) >= st) await removeExhaustion(actor, "gambling");
 }
 

@@ -477,10 +477,11 @@ async function _handlerSenRO(actor, request, data, { event } = {}) {
   return roll?.parent ?? null;
 }
 
-async function _onRerolled({ message, roll, actor }) {
+async function _onRerolled({ message, roll, actor, przed }) {
   const f = message?.flags?.[MODULE_ID]?.senRO;
   if (!f || !actor?.isOwner) return;
-  if ((message.rolls?.[0]?.total ?? 0) < f.st && (roll?.total ?? 0) >= f.st) {
+  // `przed` — wynik tuż przed tą modyfikacją (łańcuch po rzucie, PLAN_m7 §3.0.2).
+  if ((przed ?? message.rolls?.[0]?.total ?? 0) < f.st && (roll?.total ?? 0) >= f.st) {
     const { removeExhaustion } = await import("../config/exhaustion.mjs");
     await removeExhaustion(actor, "bezsennosc");
   }

@@ -1465,7 +1465,9 @@ async function _rollExplosiveSavesFromCard(event, card, payload) {
       const rolls = await actor.rollSavingThrow({
         event,
         ability,
-        target: dc
+        target: dc,
+        // Źródło RO dla Ułatwień ze zdolności (PLAN_m7 §3.0.3): ładunek wybuchowy — efekt obszarowy.
+        neuroKontekst: ["obszar"]
       }, {
         configure: false
       }, {

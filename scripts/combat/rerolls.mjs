@@ -1,7 +1,9 @@
 /**
  * Neuroshima 5e — Przerzuty: Forsowanie & Fuks
  *
- * Two reroll mechanics shown as subtle buttons under d20 test results.
+ * Two reroll mechanics shown as subtle buttons under d20 test results. Since PLAN_m7 E0 (2026-10-31) both are
+ * **sources of the post-roll registry** (`combat/po-rzucie.mjs`): the bar, the roll chain, "superseded" cards and
+ * the hook live there; this file keeps what is theirs — eligibility, the confirmation dialogs, the roll and the cost.
  *
  * FORSOWANIE (Pushing a Test):
  *   - Eligible: skill, ability, tool checks (NOT attacks, NOT saves)
@@ -11,19 +13,20 @@
  *
  * FUKS (Lucky Break):
  *   - Eligible: ALL d20 rolls (attacks, saves, skill/ability/tool checks)
- *   - Reroll: same formula as original (new dice, same modifiers)
+ *   - Reroll: same formula as the chain's original roll (new dice, same modifiers; U2 — added dice are lost)
  *   - Cost: 1 Fuks (consumable resource, max 3 per character)
  *   - Greyed out when character has 0 Fuksy
  *   - New result must be accepted
  *   - Source: Fanty items, abilities, GM rewards
  *
- * Both require a confirmation dialog before use.
- * Chat messages for results have distinct colored styling.
+ * Both are a Przerzut — by definition a retry of a **failed** Test k20 (s. 16; Fuks s. 17): with a known ST/TT the
+ * buttons hide after a success, without one they stay (registry rule, `config/po-rzucie-rules.mjs`). After any
+ * reroll in the chain neither comes back. Both require a confirmation dialog before use.
  *
- * HOOK `neuroshima.rerolled({ message, roll, kind: "forsowanie"|"fuks", actor })` — after either
- * reroll, so whatever was waiting on the source roll can re-resolve against the new total. The
- * crafting final Test (`production/robota.mjs`) is the first listener: its source message carries
- * `flags.<mod>.robotaTest`, and a reroll that meets the ST finishes the Robota (PLAN_produkcja D2).
+ * HOOK `neuroshima.rerolled` (alias of `neuroshima.rollModified`) — `combat/po-rzucie.mjs` fires it after every
+ * modification, so whatever was waiting on the source roll can re-resolve against the new total. The crafting final
+ * Test (`production/robota.mjs`) was the first listener: its source message carries `flags.<mod>.robotaTest`, and a
+ * reroll that meets the ST finishes the Robota (PLAN_produkcja D2).
  */
 
 import { addExhaustion } from "../config/exhaustion.mjs";
@@ -31,7 +34,8 @@ import { seqScrollText } from "../weapons/sequencer.mjs";
 import { jestTowarzyszem } from "../actors/towarzysze.mjs";
 import { MAX_FUKSY } from "../config/fuksy-rules.mjs";
 import { liczbaFuksow, zuzyjFuksa, przyznajFuksa, ustawLiczbeFuksow } from "../actors/fuksy.mjs";
-import { rollInfo, rollTypeOf } from "../config/chat-message-data.mjs";
+import { TESTY_K20, TESTY_CECHY } from "../config/po-rzucie-rules.mjs";
+import { zarejestrujZrodloPoRzucie } from "./po-rzucie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -52,7 +56,8 @@ export function registerRerolls() {
     default: true
   });
 
-  Hooks.on("dnd5e.renderChatMessage", onRenderChatMessage);
+  zarejestrujZrodloPoRzucie(FORSOWANIE);
+  zarejestrujZrodloPoRzucie(FUKS);
 
   console.log("Neuroshima 5e | Przerzuty (Forsowanie + Fuks) registered");
 }
@@ -112,146 +117,9 @@ function _isPlayerCharacter(actor) {
   return actor?.type === "character" && !jestTowarzyszem(actor);
 }
 
-/** Rzuty przerzucone przez gracza, który nie mógł oznaczyć cudzej wiadomości — ostatnie N na aktorze. */
-const PRZERZUCONE = "przerzucone";
-
-/**
- * Oznacz rzut jako przerzucony (jeden przerzut na rzut). Autor wiadomości albo MG pisze flagę na niej.
- * Gracz, który przerzuca rzut wykonany przez MG na jego postaci (zagrożenia z `actors/zagrozenia.mjs`,
- * Niedożywienie z `actors/party-supplies.mjs`), cudzej wiadomości edytować nie może — wtedy znacznik
- * idzie na jego aktora. Do 2026-10 `update` rzucał tu wyjątkiem uprawnień: Fuks był już zjedzony, hak
- * `neuroshima.rerolled` nie odpalał, a pasek wracał przy każdym przerysowaniu (PLAN_m1_walka E7).
- * @param {ChatMessage} message
- * @param {Actor} actor
- */
-async function _oznaczPrzerzucony(message, actor) {
-  if (!message) return;
-  if (message.canUserModify(game.user, "update")) {
-    await message.update({ [`flags.${MODULE_ID}.rerolled`]: true });
-    return;
-  }
-  const lista = actor?.getFlag(MODULE_ID, PRZERZUCONE) ?? [];
-  await actor?.setFlag(MODULE_ID, PRZERZUCONE, [...lista.filter(id => id !== message.id), message.id].slice(-20));
-  ui.chat?.updateMessage?.(message);
-}
-
-/** Czy ten rzut już przerzucono (flaga wiadomości albo znacznik na aktorze). */
-function _przerzucony(message, actor) {
-  return Boolean(message.flags?.[MODULE_ID]?.rerolled)
-    || (actor?.getFlag(MODULE_ID, PRZERZUCONE) ?? []).includes(message.id);
-}
-
-/* -------------------------------------------- */
-/*  Chat Message — Button Injection              */
-/* -------------------------------------------- */
-
-/**
- * Hook: dnd5e.renderChatMessage
- * Injects subtle Forsuj / Fuks buttons under d20 roll results.
- */
-function onRenderChatMessage(message, html) {
-  const rollData = rollInfo(message);
-  if (!rollData) return;
-
-  // Skip reroll result messages and already-rerolled source messages
-  if (message.flags?.[MODULE_ID]?.forsowanie) return;
-  if (message.flags?.[MODULE_ID]?.fuks) return;
-  if (message.flags?.[MODULE_ID]?.rerolled) return;
-
-  // Re-render guard: don't duplicate bar
-  if (html.querySelector(".neuroshima-reroll-bar")) return;
-
-  const rollType = rollData.type;
-  const forsowanieEnabled = game.settings.get(MODULE_ID, "forsowanieEnabled");
-  const isForsowanieEligible = forsowanieEnabled
-    && ["skill", "ability", "tool"].includes(rollType);
-  const isFuksEligible = ["skill", "ability", "tool", "attack", "save"].includes(rollType);
-
-  if (!isForsowanieEligible && !isFuksEligible) return;
-
-  // Get actor
-  const actorId = message.speaker?.actor;
-  if (!actorId) return;
-  const actor = game.actors.get(actorId);
-  if (!actor?.isOwner || !_isPlayerCharacter(actor)) return;
-  if (_przerzucony(message, actor)) return;
-
-  // Build the subtle reroll bar
-  const bar = document.createElement("div");
-  bar.classList.add("neuroshima-reroll-bar");
-  Object.assign(bar.style, {
-    display: "flex",
-    gap: "6px",
-    marginTop: "6px",
-    justifyContent: "center",
-    alignItems: "center"
-  });
-
-  // ---- Forsowanie button ----
-  if (isForsowanieEligible) {
-    const abilityKey = _getAbilityKey(rollData, actor);
-    if (abilityKey) {
-      const abilityLabel = CONFIG.DND5E.abilities[abilityKey]?.label ?? abilityKey;
-      const abilityScore = actor.system.abilities[abilityKey]?.value;
-
-      if (abilityScore !== undefined) {
-        const btn = document.createElement("button");
-        btn.classList.add("forsuj-btn");
-        btn.dataset.actorId = actorId;
-        btn.dataset.messageId = message.id;
-        btn.dataset.ability = abilityKey;
-        btn.dataset.abilityScore = String(abilityScore);
-        btn.dataset.abilityLabel = abilityLabel;
-        Object.assign(btn.style, {
-          fontSize: "11px",
-          padding: "2px 8px",
-          background: "rgba(230, 126, 34, 0.15)",
-          border: "1px solid rgba(230, 126, 34, 0.4)",
-          borderRadius: "3px",
-          color: "#e67e22",
-          cursor: "pointer",
-          fontWeight: "normal",
-          lineHeight: "1.4"
-        });
-        btn.textContent = `⚡ Forsuj (k20+${abilityScore})`;
-        btn.addEventListener("click", _onClickForsowanie);
-        bar.appendChild(btn);
-      }
-    }
-  }
-
-  // ---- Fuks button ----
-  if (isFuksEligible) {
-    const fuksy = getFuksy(actor);
-    const hasFuksy = fuksy > 0;
-    const btn = document.createElement("button");
-    btn.classList.add("fuks-btn");
-    btn.dataset.actorId = actorId;
-    btn.dataset.messageId = message.id;
-    Object.assign(btn.style, {
-      fontSize: "11px",
-      padding: "2px 8px",
-      borderRadius: "3px",
-      fontWeight: "normal",
-      lineHeight: "1.4",
-      background: hasFuksy ? "rgba(39, 174, 96, 0.15)" : "rgba(128, 128, 128, 0.08)",
-      border: hasFuksy ? "1px solid rgba(39, 174, 96, 0.4)" : "1px solid rgba(128, 128, 128, 0.2)",
-      color: hasFuksy ? "#27ae60" : "#666",
-      cursor: hasFuksy ? "pointer" : "default",
-      opacity: hasFuksy ? "1" : "0.5"
-    });
-    btn.textContent = `🍀 Fuks (${fuksy})`;
-    if (hasFuksy) {
-      btn.addEventListener("click", _onClickFuks);
-    } else {
-      btn.disabled = true;
-      btn.setAttribute("data-tooltip", "Brak Fuksów");
-    }
-    bar.appendChild(btn);
-  }
-
-  const content = html.querySelector(".message-content") ?? html;
-  content.appendChild(bar);
+/** Pasek widzi tylko właściciel bohatera, którego to rzut (jak przed rejestrem). */
+function _wlascicielBohatera(ctx) {
+  return !!ctx.actor?.isOwner && _isPlayerCharacter(ctx.actor);
 }
 
 /**
@@ -270,9 +138,8 @@ function _getAbilityKey(rollData, actor) {
 /**
  * Build a human-readable description of what a roll tested.
  */
-function _describeRoll(message) {
-  const rollData = rollInfo(message);
-  if (!rollData) return message.rolls?.[0]?.formula ?? "k20";
+function _describeRoll(rollData, roll) {
+  if (!rollData) return roll?.formula ?? "k20";
 
   switch (rollData.type) {
     case "attack": return "Atak";
@@ -289,176 +156,143 @@ function _describeRoll(message) {
       return `Test ${abl}`;
     }
     case "tool": return "Test narzędzi";
-    default: return message.rolls?.[0]?.formula ?? "k20";
+    default: return roll?.formula ?? "k20";
   }
 }
 
 /* -------------------------------------------- */
-/*  Forsowanie — Confirmation & Execution        */
+/*  Forsowanie                                   */
 /* -------------------------------------------- */
 
-async function _onClickForsowanie(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const btn = event.currentTarget;
-  const { actorId, messageId, abilityScore: scoreStr, abilityLabel } = btn.dataset;
-  const abilityScore = Number(scoreStr);
+const FORSOWANIE = Object.freeze({
+  id: "forsowanie",
+  label: "⚡ Forsuj",
+  klasa: "forsuj-btn",
+  kolejnosc: 10,
+  typy: TESTY_CECHY,
+  przerzut: true,
+  wynik: "porazka",
+  styl: { background: "rgba(230, 126, 34, 0.15)", border: "1px solid rgba(230, 126, 34, 0.4)", color: "#e67e22", cursor: "pointer" },
 
-  const actor = game.actors.get(actorId);
-  if (!actor || !_isPlayerCharacter(actor)) return;
+  ocen(ctx) {
+    if (!game.settings.get(MODULE_ID, "forsowanieEnabled")) return { stan: "ukryty" };
+    if (!_wlascicielBohatera(ctx)) return { stan: "ukryty" };
+    const key = _getAbilityKey(ctx.info, ctx.actor);
+    const score = key ? ctx.actor.system.abilities[key]?.value : undefined;
+    if (score === undefined) return { stan: "ukryty" };
+    return { stan: "aktywny", etykieta: `⚡ Forsuj (k20+${score})` };
+  },
 
-  const currentExhaustion = actor.system.attributes?.exhaustion ?? 0;
-  const deathWarning = currentExhaustion >= 5
-    ? `<p style="color: #e74c3c; font-weight: bold;">⚠ Kolejny poziom Wyczerpania oznacza ŚMIERĆ!</p>`
-    : "";
+  async wykonaj(ctx) {
+    const actor = ctx.actor;
+    const abilityKey = _getAbilityKey(ctx.info, actor);
+    const abilityLabel = CONFIG.DND5E.abilities[abilityKey]?.label ?? abilityKey;
+    const abilityScore = Number(actor.system.abilities[abilityKey]?.value);
 
-  // Confirmation dialog
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
-    window: { title: "Forsowanie" },
-    content: `
-      <div style="padding: 4px 0;">
-        <p><strong>${actor.name}</strong> forsuje test.</p>
-        <p>Przerzut: <strong>k20 + ${abilityLabel} (${abilityScore})</strong></p>
-        <p style="color: #e67e22; font-weight: bold;">
-          Koszt: +1 Wyczerpanie (${currentExhaustion} → ${currentExhaustion + 1}/6)
-        </p>
-        ${deathWarning}
-      </div>
-    `,
-    yes: { icon: "fas fa-bolt", label: "Forsuj!" },
-    no: { icon: "fas fa-times", label: "Anuluj", default: true },
-    rejectClose: false
-  });
+    const currentExhaustion = actor.system.attributes?.exhaustion ?? 0;
+    const deathWarning = currentExhaustion >= 5
+      ? `<p style="color: #e74c3c; font-weight: bold;">⚠ Kolejny poziom Wyczerpania oznacza ŚMIERĆ!</p>`
+      : "";
 
-  if (!confirmed) return;
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: "Forsowanie" },
+      content: `
+        <div style="padding: 4px 0;">
+          <p><strong>${actor.name}</strong> forsuje test.</p>
+          <p>Przerzut: <strong>k20 + ${abilityLabel} (${abilityScore})</strong></p>
+          <p style="color: #e67e22; font-weight: bold;">
+            Koszt: +1 Wyczerpanie (${currentExhaustion} → ${currentExhaustion + 1}/6)
+          </p>
+          ${deathWarning}
+        </div>
+      `,
+      yes: { icon: "fas fa-bolt", label: "Forsuj!" },
+      no: { icon: "fas fa-times", label: "Anuluj", default: true },
+      rejectClose: false
+    });
+    if (!confirmed) return null;
 
-  // Disable the entire bar immediately
-  const bar = btn.closest(".neuroshima-reroll-bar");
-  if (bar) bar.querySelectorAll("button").forEach(b => { b.disabled = true; });
-  btn.textContent = "⚡ Forsowanie...";
-
-  // Roll k20 + full ability score
-  const roll = new Roll("1d20 + @score", { score: abilityScore });
-  await roll.evaluate();
-
-  // Styled chat message with amber border
-  await roll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    flavor: `
-      <div style="border-left: 4px solid #e67e22; background: rgba(230, 126, 34, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
-        <div style="font-weight: bold; color: #e67e22; font-size: 13px; margin-bottom: 2px;">⚡ FORSOWANIE</div>
-        <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Test ${abilityLabel} — k20 + ${abilityScore}</div>
-      </div>
-    `,
-    flags: { [MODULE_ID]: { forsowanie: true } }
-  });
-
-  // Apply exhaustion
-  await addExhaustion(actor, "forsowanie");
-
-  // Mark source message as rerolled (prevents re-adding buttons)
-  const originalMessage = game.messages.get(messageId);
-  await _oznaczPrzerzucony(originalMessage, actor);
-
-  // Ktoś może czekać na wynik tego rzutu — np. Test końcowy Roboty (`production/robota.mjs`).
-  Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll, kind: "forsowanie", actor });
-
-  bar?.remove();
-}
-
-/**
- * Dane karty przerzutu Fuksem. Przerzucony **Test Ataku** zostaje Testem Ataku: w dnd5e 6.0 to wiadomość typu
- * `attack` z powiązaniami karty źródłowej w `system` (karta użycia, aktywność, przedmiot, cele, tryb ataku), więc
- * „Obrażenia” z karty użycia czytają już przerzut, oraz flaga `rerollOf` — rozstrzygacz trafienia
- * (`combat/trafienie.mjs`) przenosi na nią werdykt i reakcje celu (PLAN_tt §4.8.7), a stara karta pokazuje
- * „zastąpione przerzutem”. (dnd5e 5.3 trzymało te powiązania we flagach `flags.dnd5e`.)
- */
-function _fuksRerollData(originalMessage) {
-  const flags = { [MODULE_ID]: { fuks: true } };
-  if (rollTypeOf(originalMessage) !== "attack") return { flags };
-  flags[MODULE_ID].rerollOf = originalMessage.id;
-  const src = originalMessage._source?.system ?? {};
-  const system = foundry.utils.deepClone({
-    origin: src.origin, activity: src.activity, item: src.item, targets: src.targets,
-    ability: src.ability, mode: src.mode, ammunition: src.ammunition
-  });
-  return { flags, type: "attack", system };
-}
-
-/* -------------------------------------------- */
-/*  Fuks — Confirmation & Execution              */
-/* -------------------------------------------- */
-
-async function _onClickFuks(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const btn = event.currentTarget;
-  const { actorId, messageId } = btn.dataset;
-
-  const actor = game.actors.get(actorId);
-  if (!actor || !_isPlayerCharacter(actor)) return;
-
-  const fuksy = getFuksy(actor);
-  if (fuksy <= 0) return;
-
-  const originalMessage = game.messages.get(messageId);
-  if (!originalMessage?.rolls?.length) {
-    ui.notifications.error("Nie znaleziono rzutu do przerzucenia.");
-    return;
+    // Roll k20 + full ability score
+    const roll = await new Roll("1d20 + @score", { score: abilityScore }).evaluate();
+    return {
+      roll,
+      flavor: `
+        <div style="border-left: 4px solid #e67e22; background: rgba(230, 126, 34, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
+          <div style="font-weight: bold; color: #e67e22; font-size: 13px; margin-bottom: 2px;">⚡ FORSOWANIE</div>
+          <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Test ${abilityLabel} — k20 + ${abilityScore}</div>
+        </div>
+      `,
+      flags: { forsowanie: true },
+      poWiadomosci: () => addExhaustion(actor, "forsowanie")
+    };
   }
+});
 
-  const originalRoll = originalMessage.rolls[0];
-  const rollDesc = _describeRoll(originalMessage);
+/* -------------------------------------------- */
+/*  Fuks                                         */
+/* -------------------------------------------- */
 
-  // Confirmation dialog
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
-    window: { title: "Fuks" },
-    content: `
-      <div style="padding: 4px 0;">
-        <p><strong>${actor.name}</strong> używa Fuksa!</p>
-        <p>Przerzut: <strong>${rollDesc}</strong> (${originalRoll.formula})</p>
-        <p style="color: #27ae60; font-weight: bold;">
-          Koszt: 1 Fuks (${fuksy} → ${fuksy - 1}/${MAX_FUKSY})
-        </p>
-        <p style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Nowy wynik musisz zaakceptować.</p>
-      </div>
-    `,
-    yes: { icon: "fas fa-dice", label: "Użyj Fuksa!" },
-    no: { icon: "fas fa-times", label: "Anuluj", default: true },
-    rejectClose: false
-  });
+const FUKS = Object.freeze({
+  id: "fuks",
+  label: "🍀 Fuks",
+  klasa: "fuks-btn",
+  kolejnosc: 20,
+  typy: TESTY_K20,
+  przerzut: true,
+  wynik: "porazka",
+  styl: { background: "rgba(39, 174, 96, 0.15)", border: "1px solid rgba(39, 174, 96, 0.4)", color: "#27ae60", cursor: "pointer" },
+  stylSzary: { background: "rgba(128, 128, 128, 0.08)", border: "1px solid rgba(128, 128, 128, 0.2)", color: "#666", cursor: "default", opacity: "0.5" },
 
-  if (!confirmed) return;
+  ocen(ctx) {
+    if (!_wlascicielBohatera(ctx)) return { stan: "ukryty" };
+    const fuksy = getFuksy(ctx.actor);
+    if (fuksy <= 0) return { stan: "szary", powod: "Brak Fuksów", etykieta: `🍀 Fuks (${fuksy})` };
+    return { stan: "aktywny", etykieta: `🍀 Fuks (${fuksy})` };
+  },
 
-  // Disable the entire bar immediately
-  const bar = btn.closest(".neuroshima-reroll-bar");
-  if (bar) bar.querySelectorAll("button").forEach(b => { b.disabled = true; });
-  btn.textContent = "🍀 Fuks...";
+  async wykonaj(ctx) {
+    const actor = ctx.actor;
+    const fuksy = getFuksy(actor);
+    if (fuksy <= 0) return null;
 
-  // Reroll with the same formula and data
-  const reroll = new Roll(originalRoll.formula, originalRoll.data ?? {});
-  await reroll.evaluate();
+    // Przerzut liczy rzut od nowa z formuły rzutu pierwotnego łańcucha (U2).
+    const originalRoll = ctx.root?.rolls?.[0] ?? ctx.roll;
+    const rollDesc = _describeRoll(ctx.info, originalRoll);
 
-  // Styled chat message with green border
-  await reroll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    flavor: `
-      <div style="border-left: 4px solid #27ae60; background: rgba(39, 174, 96, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
-        <div style="font-weight: bold; color: #27ae60; font-size: 13px; margin-bottom: 2px;">🍀 FUKS</div>
-        <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${rollDesc} — przerzut</div>
-      </div>
-    `,
-    ..._fuksRerollData(originalMessage)
-  });
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: "Fuks" },
+      content: `
+        <div style="padding: 4px 0;">
+          <p><strong>${actor.name}</strong> używa Fuksa!</p>
+          <p>Przerzut: <strong>${rollDesc}</strong> (${originalRoll.formula})</p>
+          <p style="color: #27ae60; font-weight: bold;">
+            Koszt: 1 Fuks (${fuksy} → ${fuksy - 1}/${MAX_FUKSY})
+          </p>
+          <p style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Nowy wynik musisz zaakceptować.</p>
+        </div>
+      `,
+      yes: { icon: "fas fa-dice", label: "Użyj Fuksa!" },
+      no: { icon: "fas fa-times", label: "Anuluj", default: true },
+      rejectClose: false
+    });
+    if (!confirmed) return null;
 
-  // Zużyj Fuksa, który wygasa najwcześniej (Fuksy v2, U24).
-  await zuzyjFuksa(actor);
-  seqScrollText("FUKS!", actor, { color: "#2ecc71", fontSize: 36, duration: 2000 });
-
-  // Mark source message as rerolled
-  await _oznaczPrzerzucony(originalMessage, actor);
-
-  Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll: reroll, kind: "fuks", actor });
-
-  bar?.remove();
-}
+    // Reroll with the same formula and data
+    const roll = await new Roll(originalRoll.formula, originalRoll.data ?? {}).evaluate();
+    return {
+      roll,
+      flavor: `
+        <div style="border-left: 4px solid #27ae60; background: rgba(39, 174, 96, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
+          <div style="font-weight: bold; color: #27ae60; font-size: 13px; margin-bottom: 2px;">🍀 FUKS</div>
+          <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${rollDesc} — przerzut</div>
+        </div>
+      `,
+      flags: { fuks: true },
+      poWiadomosci: async () => {
+        // Zużyj Fuksa, który wygasa najwcześniej (Fuksy v2, U24).
+        await zuzyjFuksa(actor);
+        seqScrollText("FUKS!", actor, { color: "#2ecc71", fontSize: 36, duration: 2000 });
+      }
+    };
+  }
+});

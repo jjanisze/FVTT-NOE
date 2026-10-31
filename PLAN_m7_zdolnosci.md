@@ -1,6 +1,8 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
-> Status: **PROJEKT** (2026-10-25). Decyzje MG D1–D5 (§5.1); ustalenia U1–U30 do weta (§5.2); otwarte P1–P7 (§5.3).
+> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D10
+> (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
+> etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
 > każdej zdolności) jest spełniona od 2026-10-03; ten plan podnosi samo pokrycie. Rozmiar: **XL** (≈ 120 pozycji,
 > z czego ~65 do automatyki; po 2026-10-25 bez Szybkich nóg, Skoku Gladiatora, Skoczka i Jeźdźca — przeszły do
@@ -361,53 +363,78 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D3 | Do jakiego poziomu dojdą testerzy w styczniu | **3** (każda z 18 profesji może się pojawić) |
 | D4 | Motywacja (Reakcja „przed poznaniem efektu”), Amen, Łeb jak sklep | **Po rzucie, przyciskiem na karcie; werdykt przelicza się** (jak przy Fuksie). RAI: „efekt” = rozstrzygnięcie, nie liczba na kości — tak grał stół w sesji 12 |
 | D5 | Reakcje | **Znacznik „Reakcja zużyta” + dźwięk negatywny (buzz), gdy coś złego się stało; MG może zignorować** |
+| D6 | (2026-10-31, P1) Znacznik akcji bonusowej | **Tak** — „Akcja bonusowa zużyta” obok Reakcji, ten sam mechanizm, dźwięk i szept |
+| D7 | (2026-10-31, U8) Fart | **Automatycznie, dosłownie RAW** — „powtarzasz rzut” (tryb oznajmujący, bez „możesz”): pierwsza naturalna 1 w Teście k20 po Krótkim odpoczynku przerzuca się sama; jak stockowy `halflingLucky`, ale z 1 użyciem /KO |
+| D8 | (2026-10-31, P4) ASI i biegłości Sztuczek | **Wszystkie 53** jednym przejściem buildera |
+| D9 | (2026-10-31, P3) Coś mi tu śmierdzi | **Gracz: sama obecność** — szept do gracza „wyczuwasz mutanta w promieniu 9 m” z [Percepcja ST 15]; kopia MG nazywa istotę. Dosłownie RAW: obecność automatycznie, *która* to istota — dopiero test |
+| D10 | (2026-10-31) Kolejność | **M7 teraz**, przed PM1/PM7 i krokami 1–3 handoffu ruchu (`PLAN_beta.md` §0 kroki 6–8). E0 buduje warstwę akcji z handoffu §4 w minimalnym kształcie (`config/actions-data.mjs`, `actors/actions.mjs`, `game.neuroshima.actions`) — tylko znaczniki R i B, bez budżetu ruchu; handoff dokłada ruch do tej samej warstwy (decyzja agenta w ramach D10) |
 
-### 5.2 Ustalenia projektu — do weta MG
+### 5.2 Ustalenia projektu — weto MG w rundach
+
+Runda 1 (2026-10-31): U1–U7 bez weta, U8 zmienione (D7). Przegląd agenta z tekstem RAW tego samego dnia — kolumna
+„Warstwa” poprawiona tam, gdzie RAW rozstrzyga wprost (U9 s. 115, U16 s. 16, U23 s. 34); U3 — Motywacja w RAW nie ma
+wymogu słyszenia.
+Kolejne rundy — przy etapach E2 (U12–U15), E4–E5 (U9–U11, U16–U20), E6–E7 (U21–U30).
 
 | # | Ustalenie | Warstwa |
 |---|---|---|
 | U1 | Przycisk po rzucie znika, gdy właściciel źródła nie ma użyć, Reakcji (tylko sygnał, nie znika) ani zasięgu (szary z dymkiem) | — |
 | U2 | Modyfikacje jednego rzutu: kolejność klikania; przerzut kasuje dodane kości (jak Fuks) | RAI |
-| U3 | Motywacja: zasięg 18 m mierzony jak w silniku okoliczności, „słyszy” — nie sprawdzamy | NOE |
+| U3 | Motywacja: zasięg 18 m mierzony jak w silniku okoliczności; RAW nie wymaga, by sojusznik słyszał | NOE |
 | U4 | Amen: przycisk tylko przy porażce wobec znanego ST/TT; przy rzucie bez ST — zawsze, gracz decyduje | RAI |
 | U5 | Szczęście: tylko własne testy (RAW „dowolny test, którego wynik ci nie odpowiada”), także ataki i RO | NOE |
 | U6 | Spieprzysz to!: także na rzutach MG za BN, gdy karta jest jawna; przy ukrytej — MG dostaje szept z przyciskiem | RAI (P6) |
 | U7 | Twardość działa na RPŚ także przy czystej k20 (wyjątek od D1 z `PLAN_m1_walka.md`, bo RAW wprost wymienia RPŚ) | NOE |
-| U8 | Fart proponowany, nie automatyczny (limit 1 /KO) | — |
-| U9 | Rzeźnik: chwyt oburęczny tej samej broni nie wyklucza premii; tarcza nie jest bronią | RAI |
+| U8 | ~~Fart proponowany, nie automatyczny~~ → **D7: automatyczny** (RAW „powtarzasz rzut”), 1 /KO | NOE |
+| U9 | Rzeźnik: chwyt oburęczny tej samej broni nie wyklucza premii (RAI); tarcza nie jest bronią — **NOE**: Cios tarczą to „atak bez broni” (s. 115); bliźniak improwizowany (M6 E3) w drugiej ręce nie jest „inną bronią”, dopóki nim nie atakujesz (RAI) | RAI / NOE |
 | U10 | Dwóch na jednego: „zaatakowana w ten sam sposób” = atak wręcz w tej rundzie, trafiony czy nie | RAI |
 | U11 | Ulubiona broń: „ta sama broń” = ten sam model z katalogu (dowolny egzemplarz) | NOE |
 | U12 | Dobra rada: jeden rzut — pierwszy pasujący po nadaniu | RAI |
 | U13 | Łaska boża: wszystkie ataki i RO do początku tury dającego | NOE |
 | U14 | Let's rock: wykonawca wybiera ataki **albo** RO dla wszystkich naraz | RAI |
 | U15 | Kolejka: przełącznik w oknie KO, kość ze skali Cwaniaka | NOE |
-| U16 | Bolesny atak: „z Ułatwieniem” = tryb rzutu po zniesieniu (5e: Ułatwienie i Utrudnienie się znoszą) | NOE |
+| U16 | Bolesny atak: „z Ułatwieniem” = tryb rzutu po zniesieniu (NOE s. 16: Ułatwienie i Utrudnienie się znoszą — „nie masz ani Ułatwienia, ani Utrudnienia”) | NOE |
 | U17 | Podstępny atak: wybór efektu na karcie zamiast przycisku kości | NOE |
 | U18 | Słaby punkt: flaga na celu na czas walki; poza walką do Długiego odpoczynku | RAI |
 | U19 | Mutant na śniadanie — Refleks łowcy: premia do Inicjatywy domyślnie włączona, gdy w walce jest wrogi mutant/potwór | RAI |
 | U20 | Strzelec: 5 rund mierzenia liczy MG (przycisk w HUD), ruch zdejmuje status | RAI |
 | U21 | Przycelowanie: tabela RAW jako dane; efekt „jednorazowy” znika po zastosowaniu | NOE |
 | U22 | Nie do zdarcia nie zdejmuje automatycznego krytyka z Nieprzytomności — zdejmuje każdy | NOE |
-| U23 | Zawzięty sukinkot: rzuty przeciw śmierci zerowane przy wstaniu | RAI |
+| U23 | Zawzięty sukinkot: rzuty przeciw śmierci zerowane przy wstaniu — RAW wprost: odzyskanie ≥ 1 PW resetuje listę sukcesów i porażek (s. 34) | NOE |
 | U24 | Łapiduch: czas od śmierci z zegara świata (karta „Śmierć” zapisuje chwilę) | RAI |
-| U25 | Coś mi tu śmierdzi: szept do MG, nie do gracza (P3) | — |
+| U25 | ~~Coś mi tu śmierdzi: szept do MG, nie do gracza~~ → **D9**: gracz dostaje samą obecność, MG — nazwę istoty | NOE |
 | U26 | Zew areny — Praca nóg: tylko notka (ataków okazyjnych moduł nie liczy) | — |
 | U27 | Rutyna: Ułatwienie w RO ZRC i MDR tylko w trwającej walce | NOE |
 | U28 | Szósty zmysł: domyślnie włączone w RO ZRC przeciw efektom obszarowym, pułapkom i upadkom; MG wyłącza | RAI |
 | U29 | Sokole oko: każdy atak dystansowy (także rzucana broń biała) | NOE |
 | U30 | ASI ze Sztuczek: pola stałe tam, gdzie Sztuczka nie daje wyboru; wybór — tam, gdzie RAW mówi „lub” | NOE |
 
-### 5.3 Otwarte
+### 5.3 Otwarte → rozstrzygnięte (MG, 2026-10-31)
 
-| # | Pytanie | Propozycja |
+| # | Pytanie | Rozstrzygnięcie |
 |---|---|---|
-| P1 | Znacznik „Akcja bonusowa zużyta” obok Reakcji | **Tak** — Ulubiona broń, Dobra rada, Łaska boża, Przycelowanie, Promocja, Szybkie nogi i Berserk konkurują o tę samą akcję co rundę; ten sam mechanizm i dźwięk, a źródłem są deklaracje B z warstwy akcji handoffu ruchu |
-| P2 | Licznik Motywacji „na sojuszniku” (kość podarowana zawczasu, jak Bardic Inspiration 2024) zamiast Reakcji przy rzucie | Nie — RAW to Reakcja przy rzucie |
-| P3 | Coś mi tu śmierdzi — szept do MG czy wprost do gracza | Do MG z [Powiedz graczowi] (MG kontroluje niespodzianki) |
-| P4 | ASI i biegłości dla wszystkich 53 Sztuczek jednym przejściem czy tylko dla drużyny i pregenów | Wszystkie — to ta sama zmiana buildera, koszt w danych |
-| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | MG wybiera; plan obejmuje je z automatu, bo P4 |
-| P6 | Spieprzysz to! na ukrytych rzutach BN | Szept do MG (U6) |
-| P7 | Pregeny na poziomach 2–3 (wybory profesji) przed styczniem | Poza M7 — robi MG albo testerzy przy stole |
+| P1 | Znacznik „Akcja bonusowa zużyta” obok Reakcji | **Tak (D6)** — Ulubiona broń, Dobra rada, Łaska boża, Przycelowanie, Promocja, Szybkie nogi i Berserk konkurują o tę samą akcję co rundę; ten sam mechanizm i dźwięk; źródłem są przyciski [B] M7, potem deklaracje B z handoffu ruchu (D10) |
+| P2 | Licznik Motywacji „na sojuszniku” (kość podarowana zawczasu, jak Bardic Inspiration 2024) zamiast Reakcji przy rzucie | **Nie** — RAW to Reakcja przy rzucie |
+| P3 | Coś mi tu śmierdzi — szept do MG czy wprost do gracza | **Do gracza, sama obecność; MG — nazwa istoty (D9)** |
+| P4 | ASI i biegłości dla wszystkich 53 Sztuczek jednym przejściem czy tylko dla drużyny i pregenów | **Wszystkie (D8)** |
+| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | **MG wybiera, kiedy zechce** — nie blokuje; E3 obejmuje je z automatu (D8) |
+| P6 | Spieprzysz to! na ukrytych rzutach BN | **Szept do MG (U6)** |
+| P7 | Pregeny na poziomach 2–3 (wybory profesji) przed styczniem | **Poza M7** — robi MG albo testerzy przy stole |
+
+### 5.4 Luki planu znalezione przy przeglądzie RAW (agent, 2026-10-31)
+
+Bez decyzji MG — dopisane do rodzin:
+- **Kocie kości — Zgrabne łapy** (bez [R]): Test ZRC (Akrobatyka) → + Kocie kości przed poznaniem efektu (R3, obok
+  Cichych łap i Czterech łap; RAW pozwala zużyć jedną lub więcej kości naraz).
+- **Jeden strzał — Celowanie [B]**: bez ruchu w tej turze → jeden atak z Ułatwieniem (R4; „bez ruchu” z historii ruchu
+  rdzenia).
+- **Szary — Mądra kryjówka**: + mod. INT lub MDR do Skradania się — liczba, nie narracja (R1, reguła `check` /
+  `dnd5e.bonus`, wyższy z dwóch modyfikatorów — wybór „lub” na korzyść gracza, RAI).
+- **Urodzony morderca**: wybór przerzutu jedynki jest zdominowany (przerzut nie może pogorszyć 1), więc zamiast przycisku
+  — automat jak stockowe modyfikatory kości (R1/R3, do potwierdzenia spikiem: `r1` w rdzeniu v14 przerzuca raz).
+- **Ułatwienia „gdy X” bez danych w grze** (Slang, Jeden z nas, Jeden z nich — Sami swoi, Reputacja, Kamuflaż — Ghillie,
+  Skrytka): wiersze rejestru §3.0.3 z `gdy: "stół"` — **proponowane w oknie rzutu jako odznaczone** z nazwą zdolności;
+  przypomnienie zamiast „Nie automatyzujemy”, plakietka „częściowa”.
 
 ---
 
@@ -444,4 +471,46 @@ okazyjne jako mechanika, pełna ekonomia akcji (blokowanie), pościg (Drzwi w dr
 
 ## 8. Postęp
 
-*(pusto — wpisy po etapach)*
+### E0 — fundament (2026-10-31)
+
+| Spike | Wynik | Notatka |
+|---|---|---|
+| **a** ASI na Sztuczce wybranej w `ItemChoice` klasy | **Tak** (z kodu) | `AdvancementManager` dokłada kroki „syntetyczne” dla przedmiotu z awansami, który dodał bieżący krok (`advancement-manager.mjs`, `addedIds`); feat liczy awanse po poziomie postaci, ASI featu siedzi na `level: 0` — wzorzec 2024 „Ability Score Improvement” (`points: 2`, `cap: 2`), czyli dokładnie Ćwiczenie czyni mistrza. Na żywo: e2e `postac` w E3 |
+| **b** Reguły 6.0 w ścieżkach rzutu modułu, status w warunku efektu | **Tak** (na żywo) | Piaskownica: `save` / `dnd5e.advantage` / `+1` z `roll.ability = con` → 2k20 na RO KON, RO ZRC bez zmian; `check` z `roll.skill = int` — **klucz Intuicji to `int`**, nie `ins` (polskie klucze) → Ułatwienie; `attack` / `dnd5e.bonus` / `3` z `roll.attack.type = ranged` → „+ 3” na B 92 w ręce, okno ataku z domyślnym „Ułatwienie” (gracz zmienia); warunek efektu `statuses.berserk = 1` gasi cały efekt. Efekt Berserka dostał stan `berserk` (`actors/class-state.mjs`) |
+| **c** Pseudo-wygasanie `sourceStart` z efektu spoza tacy | **Tak** (na żywo) | `ActiveEffect5e#isExpiryEvent`: źródło z `system.origin.actor` (`getSourceActor`), wygasa na początku tury źródła w walce, w której efekt powstał (`start.combat`), z pominięciem tury nałożenia. Taca nic tu nie dodaje — wystarczy efekt z `origin` na dającego, więc przekaźnik MG działa tak samo. Piaskownica: efekt utworzony wprost (jak przez przekaźnik) w cudzej turze zniknął na początku najbliższej tury dającego — rdzeń oznaczył `expired`, flaga `usunPoWygasnieciu` skasowała |
+
+**Zrobione:**
+- **Warstwa akcji** (D10, minimalna): `config/actions-data.mjs`, `actors/actions.mjs`, `game.neuroshima.actions`;
+  stany `reakcja` i `akcjaBonusowa` w `config/conditions.mjs` (ikony tymczasowe z rdzenia — MISSING §A); lejek
+  `zadeklaruj` woła: natywna aktywność z aktywacją `reaction` / `bonus` (`dnd5e.postUseActivity`), Berserk
+  (`toggleClassState`), Reakcje celu (`executeReaction`, Inteligentna obrona z paska). Sygnał — istniejący
+  `combat/sygnal-naruszenia.mjs` (M6). Przy okazji z RAW: Obezwładnienie i stany, które je nadają (s. 35), Znaczny
+  Stopień Zranienia — bez Reakcji, Poważny — bez Akcji Bonusowych (s. 32) też dają sygnał. Zryw — `dodatkowa()`.
+- **Czas efektów** (`combat/czas-efektu.mjs`): wspólne haki „do początku tury właściciela” (dawniej w `actors/tt.mjs`,
+  teraz rejestr predykatów — TT i znaczniki), flaga `usunPoWygasnieciu`, bramki tura / runda / walka
+  (`config/bramki.mjs`; Wściekły cios zostaje na swoim `resourceDiceRound` — przejdzie przy R6).
+- **Rejestr „po rzucie”** (`config/po-rzucie-rules.mjs`, `combat/po-rzucie.mjs`, `game.neuroshima.poRzucie`): Fuks i
+  Forsowanie jako źródła (`combat/rerolls.mjs` — dialogi, koszty i klasy przycisków bez zmian); łańcuch kart, indeks
+  następców bez zapisu na cudzej karcie, `rzutZDodatkiem` (ta sama k20 i klasa rzutu; Dice So Nice nie toczy k20
+  drugi raz — `results[].hidden`), hak `neuroshima.rollModified` z `przed` (alias `neuroshima.rerolled`); gdy klika
+  nie-właściciel rzutu, hak odpala aktywny MG.
+- **Poprawka RAW przy okazji:** Przerzut to powtórzenie **nieudanego** Testu k20 (s. 16), Fuks „który zakończył się
+  porażką” (s. 17) — Fuks i Forsowanie chowają się po sukcesie, gdy próg jest znany (wcześniej wisiały pod każdym
+  rzutem); bez progu zostają (U4).
+- **Inwentarz konsumentów** `rollModified`: rekonwalescencja (idempotentna przez stan), zagrożenia, woda, doba
+  (Bezsenność), handel (gambling), Robota, rozstrzygacz trafienia (`rerollOf` — werdykt i użyte reakcje celu
+  przechodzą), **nowi:** właściwości broni (`skutekRO`) i Obalająca (`obalajacaRO`) — oblany → zdany cofa stan, zdany →
+  oblany go nakłada; wcześniej Fuks na takim RO nie zdejmował Powalenia. Zagrożenia, woda, doba i handel liczą od
+  `przed` — drugi dodatek w łańcuchu nie cofa skutku drugi raz. Bez konsumenta (świadomie): RPŚ (to nie Test k20;
+  Twardość na RPŚ — E1 przez `combat/umieranie.mjs`).
+- **Rejestr §3.0.3** (`config/ulatwienia-testow.mjs`, `combat/ulatwienia-testow.mjs`): `dnd5e.preRollD20Test`,
+  plakietki z powodem, propozycje „stół”. **Kontekst RO** (`config.neuroKontekst`) dopisany: zagrożenia
+  (`srodowisko`), olejek trujący i dozownik (`trucizna`), Upojenie (`trucizna` — A co mi tam, s. 93), Skażenie
+  (`skazenie`), ładunki wybuchowe i seria (`obszar`), właściwości broni maszyny (`maszyna`). Reszta ścieżek RO
+  (choroby, fobie, Krwawienie, ogień zaporowy, pułapki z Regionów) — razem z wierszem, który jej potrzebuje.
+- **Testy:** `akcje` (12), `po-rzucie` (10), `ulatwienia-testow` (5); Quench 1412/1412; e2e regresja zielona —
+  `boot`, `zagrozenia` (gracz klika Fuksa na rzucie MG; krok sprawdza teraz „karta zastąpiona” z indeksu, nie dawny
+  znacznik na aktorze), `combat` (Reakcje celu), `umieranie`, `rekonwalescencja`.
+
+**Na później:** znaczniki z przepływów [B] modułu bez natywnej aktywności (Szybkoładowacz, Komenda towarzysza,
+drony) — przy ich etapach; zapamiętane wybory (§3.0.5) — z Ulubioną bronią w E4.

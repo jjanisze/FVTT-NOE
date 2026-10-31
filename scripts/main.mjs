@@ -51,6 +51,7 @@ import { registerDronyNaprawa, dronyNaprawaApi } from "./actors/drony-naprawa.mj
 import { registerMaszyny, maszynyApi } from "./combat/maszyny.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
+import { registerActions, actionsApi } from "./actors/actions.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
 import { registerClassMigration } from "./migration/migrate-classes.mjs";
 import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mjs";
@@ -87,12 +88,15 @@ import { registerWeapons } from "./config/weapons.mjs";
 import { registerArmor } from "./config/armor.mjs";
 import { registerArmorRules, report as armorReport } from "./actors/armor-rules.mjs";
 import { registerTT, ttApi } from "./actors/tt.mjs";
+import { registerCzasEfektu } from "./combat/czas-efektu.mjs";
 import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerCritRiders } from "./combat/crit-riders.mjs";
 import { registerPackTactics } from "./combat/pack-tactics.mjs";
 import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
 import { registerArmourPiercing } from "./combat/armour-piercing.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
+import { registerPoRzucie, poRzucieApi } from "./combat/po-rzucie.mjs";
+import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
 import { registerEmiterEmp, emiterEmpApi } from "./weapons/emiter-emp.mjs";
@@ -278,6 +282,8 @@ Hooks.once("init", () => {
   // Po registerPW i registerSP — owinięcia danych pochodnych towarzyszy muszą być zewnętrzne (PLAN_m3 §7.3).
   registerTowarzysze();
   registerClassState();
+  // Znaczniki Reakcji i Akcji Bonusowej (PLAN_m7 §3.0.1) — natywne aktywności [R]/[B] i lejek dla przepływów modułu.
+  registerActions();
   registerClassResourceDice();
   registerAbilityHotbar();
   registerClassMigration();
@@ -350,6 +356,8 @@ Hooks.once("init", () => {
   registerArmor();
   registerProficiencyIcons();
   registerArmorRules();
+  // Efekty do początku tury właściciela (TT, znaczniki akcji) i sprzątanie wygasłych — przed modułami, które je zakładają.
+  registerCzasEfektu();
   // Po pancerzach: owinięcie danych pochodnych TT widzi już ich karę Szybkości (Roszada, P4).
   registerTT();
   registerValidation();
@@ -362,6 +370,8 @@ Hooks.once("init", () => {
   registerPackTactics();
   registerBestiaryThresholds();
   registerArmourPiercing();
+  // Rejestr „po rzucie” (PLAN_m7 §3.0.2): pasek pod rzutem k20, łańcuch modyfikacji, hak `neuroshima.rollModified`.
+  registerPoRzucie();
   registerRerolls();
   registerObalajaca();
   registerWeaponSaveProperties();
@@ -379,6 +389,8 @@ Hooks.once("init", () => {
   registerZagrozenia();
   // Jeden silnik okoliczności Testu Ataku (PLAN_m1_walka E3–E4): zasięg, zwarcie, stany, auto-TK.
   registerOkolicznosci();
+  // Jego odpowiednik dla Testów Cechy i RO (PLAN_m7 §3.0.3): warunki spoza danych rzutu, źródło RO z karty.
+  registerUlatwieniaTestow();
   registerCoverSystem();
   // Jeden rozstrzygacz trafienia: werdykt na karcie ataku i tacka celów (PLAN_tt E2).
   registerTrafienie();
@@ -565,6 +577,12 @@ Hooks.once("ready", () => {
   game.neuroshima.tt = ttApi;
   // Reakcje celu — game.neuroshima.obrona.setTargets(message), .execute(message, tokenUuid, id)
   game.neuroshima.obrona = obronaApi;
+  // Warstwa akcji (PLAN_m7 §3.0.1) — game.neuroshima.actions.zadeklaruj(actor, "R"|"B", { zrodlo }), .znacznik(actor, "R")
+  game.neuroshima.actions = actionsApi;
+  // Rejestr „po rzucie” (PLAN_m7 §3.0.2) — game.neuroshima.poRzucie.uzyj("fuks", message), .zrodla(), .kontekst(message)
+  game.neuroshima.poRzucie = poRzucieApi;
+  // Ułatwienia w testach i RO (PLAN_m7 §3.0.3) — game.neuroshima.ulatwieniaTestow.wiersze(), .rozstrzygnij(config)
+  game.neuroshima.ulatwieniaTestow = ulatwieniaTestowApi;
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
