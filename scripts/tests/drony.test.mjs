@@ -88,7 +88,9 @@ export function registerDronyTests(quench) {
     const drony = [];
     let scena = null;
 
-    after(async () => {
+    after(async function () {
+      // ~50 usunięć po kolei; w świecie bramki (570 aktorów, otwarty katalog) każde to ~70 ms — więcej niż 2 s mocha.
+      this.timeout(20000);
       for (const d of drony) if (game.actors.get(d.id)) await d.delete();
       if (scena && game.scenes.get(scena.id)) await scena.delete();
       await scratchCleanup();
