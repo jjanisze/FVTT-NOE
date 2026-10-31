@@ -110,7 +110,7 @@ wyłączeniu; „—” znaczy: to samo, bo zasada działa zawsze.
 | 40 | Pojazdy: wybuch baku | płonący wrak z paliwem wybucha po k4 rundach | — | zawsze |
 | 41 | Pojazdy: cechy domowe | Gąsienice, Otwarta rama, Wieżyczka i inne | — | zawsze |
 | 42 | Smaczki postaci: Żeton Luxor i gadżety | żeton kasyna za 10 gb, cztery przedmioty, które hałasują | — | zawsze |
-| 43 | Krwawienie: ładunek medyka, lek i trzy tury | Test Medycyny na krwawienie zużywa ładunek narzędzi; krwawienie bez RO (Podstępny atak, dum-dum) zatrzymuje też lek na Hemofilię i samo ustaje po trzech turach obrażeń | test bez ładunku; krwawienie bez RO trwa do opatrzenia | Kolor Kobaltu |
+| 43 | Krwawienie: ładunek medyka, lek i trzy tury | Test Medycyny na krwawienie zużywa ładunek narzędzi; krwawienie bez RO (Podstępny atak, dum-dum, przecięta tętnica) zatrzymuje też lek na Hemofilię i samo ustaje po trzech turach obrażeń | test bez ładunku; krwawienie bez RO trwa do opatrzenia | Kolor Kobaltu |
 
 ## Zasady
 
@@ -635,13 +635,14 @@ przyjmuje odczyt MG:
   także po Podstępnym ataku, dla którego podręcznik nie podaje ST. Z Kobaltem test **zużywa ładunek** narzędzi,
   w obu wynikach (jak Pomoc medyczna, zasada 15). Pustą torbą opatruje tylko ktoś z Aspiryną i Miętusami — z
   Utrudnieniem i bez ładunku, jak przy leczeniu.
-- **Krwawienie bez RO** (Podstępny atak, nabój dum-dum — zasada 24) zatrzymuje też **lek na Hemofilię**
+- **Krwawienie bez RO** (Podstępny atak, nabój dum-dum — zasada 24, tętnica z Przycelowania) zatrzymuje też **lek na Hemofilię**
   (Desmopresyna albo Preparaty krwiopochodne — z ekwipunku krwawiącego, potem medyka), a **samo ustaje po
   trzeciej turze obrażeń** — odpowiednik trzech zdanych RO Hemofilii. Nowa rana tej samej wagi liczy tury od
   nowa.
 
 Bez Kobaltu test nie zużywa ładunku, a krwawienie bez RO trwa, dopóki ktoś nie opatrzy rany. Krwawienie z
-Kolorów jeszcze nie działa w module — profile startowe nie mają kodu.
+Kolorów jeszcze nie działa w module — profile startowe nie mają kodu. Wyciek z układu hydraulicznego maszyny (ten sam
+wiersz Przycelowania) to nie rana — zasada go nie obejmuje, kończy go tylko naprawa.
 
 ✅ *Zaimplementowane.*
 

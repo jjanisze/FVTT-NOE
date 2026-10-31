@@ -7,7 +7,8 @@
  * walką, po 5 rundach w walce; zatwierdzenie nakłada status); Ulubiona broń — model i lista; Słaby punkt —
  * efekt na maszynie, bez dubla, zdjęty po Długim odpoczynku. Po trafieniu (E5): Bolesny atak (spust, kości, krytyk),
  * Podstępny atak (Spowolnienie i Oślepienie bez kumulacji, Krwawienie z profilem, nie na maszynie), Skuteczny cios
- * (kość Wściekłego ciosu, limit rundy). Dziennik ataków (Dwóch na jednego), przyciski [B] i
+ * (kość Wściekłego ciosu, limit rundy). Przycelowanie (E6): części wg celu, TT i automatyczne TK w werdykcie, zamiar,
+ * skutki trafienia (Powalenie, wytrącenie, opona, tętnica / hydraulika). Dziennik ataków (Dwóch na jednego), przyciski [B] i
  * dodatkowy atak — e2e `zdolnosci-walka`; okno D13 i reszta czystych reguł — `okolicznosci.test.mjs`.
  */
 
@@ -24,6 +25,8 @@ import { isRevolver } from "../actors/rewolwerowiec.mjs";
 import * as mags from "../weapons/magazine-model.mjs";
 import { bolesny, uzyjBolesnego, uzyjPodstepnego, skuteczny, FLAG_PODSTEPNY } from "../combat/zdolnosci-trafienie.mjs";
 import { isBleeding, bleedProfile } from "../combat/bleeding.mjs";
+import { czesciDla, wyceluj, zamiar, zastosujPrzycelowanie, juzZastosowane, FLAG_EFEKT } from "../combat/przycelowanie.mjs";
+import { buildTargetEntry, verdictOfEntry, przycelowanieZRzutu } from "../combat/trafienie.mjs";
 
 export function registerZdolnosciWalkaTests(quench) {
   quench.registerBatch(`${MODULE_ID}.zdolnosci-walka`, context => {
@@ -290,6 +293,90 @@ export function registerZdolnosciWalkaTests(quench) {
         await w.update({ "system.uses.spent": 0 });
         expect(skuteczny(ctx)?.powod, "kość jest").to.equal(null);
         expect(skuteczny({ ...ctx, obrona: { melee: false } }), "dystans").to.equal(null);
+      });
+    });
+
+    describe("Przycelowanie (E6)", function () {
+      const czesc = (id, label, tt, skutek) => ({ czesc: id, label, tt, skutek });
+      /** Kontekst trafienia z kartą-atrapą: wpis celu z Przycelowaniem. */
+      const ctxDla = (actor, celActor, p) => ({
+        actor, celActor, celDoc: null, obrona: { targets: [{ przycelowanie: p }] },
+        message: { id: foundry.utils.randomID(), getFlag: () => null, isOwner: false }
+      });
+      const twardziel = async () => {
+        const tw = await scratchActor({ name: `${SCRATCH_PREFIX} Twardziel celuje` });
+        await cecha(tw, "przycelowanie");
+        return tw;
+      };
+
+      it("części: Twardziel — człowiek i maszyna Molocha, pojazd tylko ze Sztuczką", async function () {
+        const tw = await twardziel();
+        expect(czesciDla(tw, await npc("Gangus celu", "Człowiek")).map(c => c.id)).to.deep.equal(["gorna", "dolna", "glowa", "tetnica"]);
+        expect(czesciDla(tw, await npc("Obrońca celu", "Maszyna")).map(c => c.id)).to.deep.equal(["glowa", "opona", "tetnica"]);
+        const auto = await scratchActor({ name: `${SCRATCH_PREFIX} Pojazd celu`, type: "vehicle" });
+        expect(czesciDla(tw, auto), "Twardziel: tylko maszyny Molocha").to.deep.equal([]);
+        const sz = await scratchActor({ name: `${SCRATCH_PREFIX} Sztuczka celuje` });
+        await sz.createEmbeddedDocuments("Item", [{ name: "Przycelowanie", type: "feat", flags: { [MODULE_ID]: { sztuczka: "przycelowanie" } } }]);
+        expect(czesciDla(sz, auto).map(c => c.label), "Sztuczka: element maszyny").to.include("Opona/gąsienica");
+        expect(czesciDla(await scratchActor({ name: `${SCRATCH_PREFIX} bez` }), auto)).to.deep.equal([]);
+      });
+
+      it("werdykt: część podnosi TT celu; głowa — automatyczne TK, pudło zostaje pudłem", async function () {
+        const tw = await twardziel();
+        const cel = await npc("Gangus werdykt", "Człowiek");
+        const tt = cel.system.attributes.ac.value;
+        const tok = { actor: cel, uuid: "Scene.x.Token.cel", name: "cel" };
+        const obrona = total => ({ total, krytyk: false, fumble: false, melee: false });
+        expect(buildTargetEntry(tok, { obrona: obrona(tt + 1), attacker: tw }).verdict, "bez celowania").to.equal("trafienie");
+        const noga = buildTargetEntry(tok, { obrona: obrona(tt + 1), attacker: tw, przycelowanie: czesc("dolna", "Kończyna dolna", 2, "powalenie") });
+        expect(noga.verdict, "TT +2").to.equal("pudło");
+        expect(noga.przycelowanie).to.include({ czesc: "dolna", tt: 2 });
+        const glowa = buildTargetEntry(tok, { obrona: obrona(tt + 5), attacker: tw, przycelowanie: czesc("glowa", "Głowa", 5, "krytyk") });
+        expect(glowa.verdict).to.equal("krytyk");
+        expect(glowa.autoKrytyk).to.contain("Przycelowanie");
+        expect(verdictOfEntry(obrona(tt + 4), glowa).verdict, "pudło").to.equal("pudło");
+        const roll = { options: { neuroPrzycelowanie: { czesc: "dolna", label: "Kończyna dolna", tt: 2, skutek: "powalenie", tokenUuid: "A" } } };
+        expect(przycelowanieZRzutu(roll, "A")).to.include({ czesc: "dolna", tt: 2 });
+        expect(przycelowanieZRzutu(roll, "B"), "inny żeton").to.equal(null);
+      });
+
+      it("zamiar: jedna część dla jednego żetonu; inny żeton — nic", async function () {
+        const tw = await twardziel();
+        const cel = { actor: await npc("Gangus zamiar", "Człowiek"), document: { uuid: "Scene.x.Token.zamiar" }, name: "cel" };
+        expect((await wyceluj(tw, "glowa", { cel }))?.id).to.equal("glowa");
+        expect(zamiar(tw, "Scene.x.Token.zamiar")?.czesc).to.equal("glowa");
+        expect(zamiar(tw, "Scene.x.Token.inny")).to.equal(null);
+      });
+
+      it("skutki: Powalenie; wytrącenie broni BN-a; opona — Szybkość o połowę bez kumulacji; tętnica i hydraulika; raz", async function () {
+        const tw = await twardziel();
+        const noga = await npc("Gangus noga", "Człowiek");
+        const ctx = ctxDla(tw, noga, czesc("dolna", "Kończyna dolna", 2, "powalenie"));
+        expect(await zastosujPrzycelowanie(ctx)).to.equal("powalenie");
+        expect(noga.statuses.has("prone")).to.equal(true);
+        expect(juzZastosowane(ctx.message), "jednorazowy").to.equal(true);
+        expect(await zastosujPrzycelowanie(ctx), "drugi raz — nic").to.equal(null);
+
+        const reka = await npc("Gangus ręka", "Człowiek");
+        const pistolet = await bron(reka, i => i.type === "weapon" && i.getFlag(MODULE_ID, "weaponId") === "b92");
+        await pistolet.update({ "system.equipped": true });
+        await zastosujPrzycelowanie(ctxDla(tw, reka, czesc("gorna", "Kończyna górna", 3, "upuszczenie")));
+        expect(reka.items.get(pistolet.id)?.system.equipped, "broń wypada z ręki").to.not.equal(true);
+
+        const obronca = await npc("Obrońca opona", "Maszyna");
+        await obronca.update({ "system.attributes.movement.speeds.walk": "9" });
+        await zastosujPrzycelowanie(ctxDla(tw, obronca, czesc("opona", "Opona/gąsienica", 4, "spowolnienie")));
+        await zastosujPrzycelowanie(ctxDla(tw, obronca, czesc("opona", "Opona/gąsienica", 4, "spowolnienie")));
+        expect(obronca.effects.filter(e => e.getFlag(MODULE_ID, FLAG_EFEKT) === "opona"), "bez kumulacji").to.have.length(1);
+        expect(obronca.system.attributes.movement.speeds.walk).to.equal(4.5);
+
+        const zyla = await npc("Gangus tętnica", "Człowiek");
+        await zastosujPrzycelowanie(ctxDla(tw, zyla, czesc("tetnica", "Tętnica", 4, "wyciek")));
+        expect(bleedProfile(zyla).id).to.equal("tetnica");
+        await zastosujPrzycelowanie(ctxDla(tw, obronca, czesc("tetnica", "Układ hydrauliczny", 4, "wyciek")));
+        expect(isBleeding(obronca)).to.equal(true);
+        expect(bleedProfile(obronca).id, "maszyna — wyciek do naprawy").to.equal("hydraulika");
+        expect(await zastosujPrzycelowanie(ctxDla(tw, zyla, czesc("glowa", "Głowa", 5, "krytyk"))), "głowa — bez przycisku").to.equal(null);
       });
     });
   }, { displayName: "Neuroshima: Zdolności walki — Mój wróg, Rzeźnik, Ulubiona broń… (M7 E4)" });

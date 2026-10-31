@@ -22,12 +22,16 @@
  * ```js
  * flags[MODULE_ID].obrona = {
  *   v: 1, attackerUuid, attackerKind, melee, natural, total, krytyk, fumble,
- *   targets: [{ tokenUuid, actorUuid, name, tt, cover, used: [], critDowngraded, verdict, decided }]
+ *   targets: [{ tokenUuid, actorUuid, name, tt, cover, used: [], critDowngraded, verdict, decided, przycelowanie }]
  * }
  * ```
+ *
+ * `przycelowanie` — część ciała z Przycelowania (`combat/przycelowanie.mjs`, PLAN_m7 E6): `{ czesc, label, tt, skutek }`
+ * albo `null`. Jej `tt` dolicza się do TT celu jak premia reakcji; „głowa” daje automatyczne TK przy trafieniu.
  */
 
 import { resolveHit, creatureKindOf, isHitVerdict } from "../config/defense-rules.mjs";
+import { PRZYCELOWANIE_OPT } from "../config/zdolnosci-walka.mjs";
 import { coverAcBonus } from "./cover.mjs";
 // Cykl z `okolicznosci.mjs` bezpieczny — obie strony wołają się tylko z ciał funkcji.
 import { autoKrytykZRzutu } from "./okolicznosci.mjs";
@@ -121,23 +125,32 @@ export const reactionBonus = entry => (entry?.used ?? []).reduce((n, u) => n + _
 export function verdictOfEntry(obrona, entry) {
   return resolveHit({
     total: obrona.total, critical: obrona.krytyk, fumble: obrona.fumble, tt: entry.tt, cover: entry.cover,
-    bonuses: reactionBonus(entry), critDowngraded: entry.critDowngraded, autoCrit: !!entry.autoKrytyk
+    bonuses: reactionBonus(entry) + _num(entry.przycelowanie?.tt), critDowngraded: entry.critDowngraded,
+    autoCrit: !!entry.autoKrytyk
   });
+}
+
+/** Przycelowanie z opcji rzutu, jeśli dotyczy tego żetonu — `{ czesc, label, tt, skutek }` albo `null`. */
+export function przycelowanieZRzutu(roll, tokenUuid) {
+  const p = roll?.options?.[PRZYCELOWANIE_OPT];
+  return p?.czesc && p.tokenUuid === tokenUuid ? { czesc: p.czesc, label: p.label, tt: _num(p.tt), skutek: p.skutek } : null;
 }
 
 /**
  * Wpis celu na karcie ataku: TT wobec atakującego w chwili rzutu, osłona, werdykt.
  * @param {Token|TokenDocument} token
  */
-export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null, item = null }) {
+export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null, item = null, przycelowanie = null }) {
   const doc = token?.document ?? token;
   const actor = doc?.actor;
   const tt = actor ? ttAgainst(actor, { attacker, melee: obrona.melee, item }) : null;
+  const glowa = przycelowanie?.skutek === "krytyk" ? `Przycelowanie: ${przycelowanie.label} — trafienie krytyczne` : null;
   const entry = {
     tokenUuid: doc?.uuid ?? null, actorUuid: actor?.uuid ?? null, name: doc?.name ?? actor?.name ?? "?",
     tt, cover: _num(cover), used: [], critDowngraded: false, verdict: null, decided: false,
-    // Automatyczne TK z chwili rzutu (`combat/okolicznosci.mjs`, s. 35) — powód albo null.
-    autoKrytyk: autoKrytyk ?? null
+    // Automatyczne TK z chwili rzutu (`combat/okolicznosci.mjs`, s. 35; Przycelowanie w głowę) — powód albo null.
+    autoKrytyk: autoKrytyk ?? glowa,
+    przycelowanie: przycelowanie ?? null
   };
   entry.verdict = verdictOfEntry(obrona, entry).verdict;
   return entry;
@@ -309,7 +322,8 @@ function _onPreCreateMessage(message, data, _options, userId) {
   // Okno osłony pyta tylko przy jednym celu (`combat/cover.mjs`) — osłona należy do niego.
   const cover = tokens.length === 1 ? coverAcBonus(roll.options?.neuroCover) : 0;
   obrona.targets = tokens.map(t => buildTargetEntry(t, {
-    obrona, attacker: activity?.actor, cover, autoKrytyk: autoKrytykZRzutu(roll, t.document?.uuid), item: activity?.item ?? null
+    obrona, attacker: activity?.actor, cover, autoKrytyk: autoKrytykZRzutu(roll, t.document?.uuid), item: activity?.item ?? null,
+    przycelowanie: przycelowanieZRzutu(roll, t.document?.uuid)
   }));
   message.updateSource({ [`flags.${MODULE_ID}.${OBRONA_FLAG}`]: obrona });
 }

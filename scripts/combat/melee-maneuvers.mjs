@@ -149,8 +149,9 @@ async function _pushToken(attackerToken, targetToken) {
  * Wybór trzymanego przedmiotu i wypuszczenie go na ziemię u stóp celu (lalka, PLAN_paper_doll §5).
  * Postać — wybór spośród rąk; BN (bez lalki, D10) — spośród założonej broni, jak dotąd.
  * Bez MG na sesji (ziemia to Kafelki, które zakłada MG) przedmiot ląduje w plecaku celu.
+ * Też Przycelowanie w kończynę górną (`combat/przycelowanie.mjs`) — tam bez RO; `powod` trafia na kartę i do lalki.
  */
-async function _dropHeldItem(actor, targetToken) {
+export async function wytracPrzedmiot(actor, targetToken, { powod = "Wytrącenie" } = {}) {
   const doll = isDollActor(actor);
   const held = doll
     ? heldItems(actor).filter(h => h.item).map(h => ({ item: h.item, from: h.slot, label: `${h.item.name} (${slotLabel(h.slot).toLowerCase()})` }))
@@ -164,7 +165,7 @@ async function _dropHeldItem(actor, targetToken) {
   if (held.length > 1) {
     const options = held.map((h, n) => `<option value="${n}">${h.label}</option>`).join("");
     const n = await foundry.applications.api.DialogV2.prompt({
-      window: { title: `Wytrącenie — ${actor.name}` },
+      window: { title: `${powod} — ${actor.name}` },
       content: `<p>Który przedmiot wypada z ręki?</p><select name="item">${options}</select>`,
       ok: {
         label: "Wytrąć",
@@ -177,7 +178,7 @@ async function _dropHeldItem(actor, targetToken) {
   }
 
   const onGround = await dollDrop(actor, pick.item, {
-    from: pick.from ?? undefined, involuntary: true, at: targetToken, reason: "Wytrącenie", quiet: false
+    from: pick.from ?? undefined, involuntary: true, at: targetToken, reason: powod, quiet: false
   });
   if (onGround) return { dropped: pick.item, reason: null, where: "ground" };
   // Ziemia niedostępna (brak MG) — przedmiot i tak opuszcza rękę.
@@ -350,7 +351,7 @@ async function _applyEffect(attacker, attackerToken, target, maneuverId, dc, opt
     return;
   }
 
-  const { dropped, reason, where } = await _dropHeldItem(actor, target);
+  const { dropped, reason, where } = await wytracPrzedmiot(actor, target);
   await say(dropped
     ? `${prefix} — z ręki wypada mu <b>${dropped.name}</b>${where === "ground" ? " i ląduje u jego stóp" : " (bez MG na sesji — do plecaka)"}.`
     : `${prefix} — przedmiot wypada z ręki (${reason}).`);

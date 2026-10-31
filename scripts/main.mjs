@@ -102,6 +102,7 @@ import { registerZdolnosciWsparcie } from "./combat/zdolnosci-wsparcie.mjs";
 import { registerZdolnosciWalka } from "./combat/zdolnosci-walka.mjs";
 import { registerZdolnosciAkcje, ulubionaBronApi } from "./combat/zdolnosci-akcje.mjs";
 import { registerZdolnosciTrafienie } from "./combat/zdolnosci-trafienie.mjs";
+import { registerPrzycelowanie, przycelowanieApi } from "./combat/przycelowanie.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -391,6 +392,8 @@ Hooks.once("init", () => {
   registerZdolnosciAkcje();
   // Po trafieniu (PLAN_m7 E5, R6): Bolesny atak, Podstępny atak, Mój bóg kule nosi, Skuteczny cios.
   registerZdolnosciTrafienie();
+  // Przycelowanie (PLAN_m7 E6, R8): „Celuję w…” w oknie ataku, TT celu w werdykcie, skutek trafienia z tabeli.
+  registerPrzycelowanie();
   registerObalajaca();
   registerWeaponSaveProperties();
   // Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) (PLAN_m3 §7.12).
@@ -603,6 +606,8 @@ Hooks.once("ready", () => {
   game.neuroshima.ulatwieniaTestow = ulatwieniaTestowApi;
   // Ulubiona broń (PLAN_m7 §3.0.5) — game.neuroshima.ulubionaBron.lista(actor), .wybierz(actor, item), .model(weapon)
   game.neuroshima.ulubionaBron = ulubionaBronApi;
+  // Przycelowanie (PLAN_m7 E6) — game.neuroshima.przycelowanie.wyceluj(actor, "dolna"), .czesciDla(actor, cel)
+  game.neuroshima.przycelowanie = przycelowanieApi;
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };

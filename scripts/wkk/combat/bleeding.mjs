@@ -26,7 +26,7 @@ export const DUMDUM_BLEED_PROFILE = Object.freeze({
  *   - `ladunek`     — the Medycyna test on any bleed spends a charge of narzędzia małego medyka, either
  *                     result (as Pomoc medyczna, rule 15); an empty kit only with Aspiryna i Miętusy —
  *                     with Utrudnienie and no charge, as healing from an empty bag;
- *   - `lek`         — a bleed without a save (Podstępny atak, dum-dum) also stops on the Hemofilia
+ *   - `lek`         — a bleed without a save (Podstępny atak, dum-dum, Przycelowanie's artery) also stops on the Hemofilia
  *                     medicine (Desmopresyna, Preparaty krwiopochodne), as Hemofilia itself does;
  *   - `turyObrazen` — and it ends on its own after this many turns of damage, the counterpart of
  *                     Hemofilia's three saves in a row.

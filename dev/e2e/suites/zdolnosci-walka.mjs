@@ -11,6 +11,9 @@
  *    na innego BN-a — nie.
  *  - Bolesny atak (E5): BN obok PC Gracz 2, PC Gracz 1 strzela z bliska (zwykły rzut) — pod trafieniem przycisk z kośćmi
  *    i dymkiem sojusznika; klik → karta obrażeń, przycisk Podstępnego ataku gaśnie razem z nim (raz na turę).
+ *  - Przycelowanie (E6): PC Gracz 1 dostaje zdolność Twardziela. Kończyna dolna BN-a — TT +2 na wpisie celu, Akcja
+ *    Bonusowa zaznaczona, przycisk pod trafieniem → BN Powalony (przez MG). Głowa PC Gracz 3 z naturalną 19 — werdykt
+ *    „krytyk” z Przycelowania, krytyczne obrażenia, nałożone jak z tacki → +1 Stopień Zranienia.
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -196,6 +199,93 @@ async function bolesnyKlik({ targetName }) {
   return { ...info, karta: !!karta, formula: karta?.rolls?.[0]?.formula ?? null, podstepnyWylaczony: !!podstepny?.disabled };
 }
 
+/** GM: Przycelowanie (Twardziel) dla PC Gracz 1; PC Gracz 3 z zapasem PW, bez Zranienia; Gracz 1 na ruchu. */
+async function ustawPrzycelowanie() {
+  const MOD = "neuroshima-2026-overrides";
+  const cechy = await game.packs.get(`${MOD}.zdolnosci-klasowe`).getDocuments();
+  const tw = game.actors.getName("PC Gracz 1");
+  await tw.createEmbeddedDocuments("Item", [game.items.fromCompendium(cechy.find(d => d.getFlag(MOD, "abilityId") === "przycelowanie"))]);
+  const p3 = game.actors.getName("PC Gracz 3");
+  await p3.update({ "system.attributes.hp.max": 80, "system.attributes.hp.value": 80 });
+  const z = await import("/modules/neuroshima-2026-overrides/scripts/combat/zranienie.mjs");
+  await z.setZranienie(p3, 0);
+  await game.combat.update({ turn: game.combat.turns.findIndex(c => c.name === "PC Gracz 1") });
+  return {
+    naRuchu: game.combat.combatant?.name, zranienie: z.getZranienieLvl(p3),
+    zeton: canvas.scene.tokens.some(t => t.actor?.id === p3.id)
+  };
+}
+
+/**
+ * Gracz 1: wyceluj (API) w część `czesc` celu, strzał z B 92 z ustaloną kością (`u` → naturalna 19); wpis celu na karcie;
+ * `kliknij` — przycisk skutku pod trafieniem; `obrazenia` — rzut obrażeń z tej samej karty użycia.
+ */
+async function przycelowanyStrzal({ targetName, czesc, u = 0.07, kliknij = false, obrazenia = false }) {
+  const MOD = "neuroshima-2026-overrides";
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const actor = game.user.character;
+  const gun = actor.items.find(i => i.getFlag(MOD, "weaponId") === "b92");
+  const attack = gun.system.activities.find(a => a.type === "attack");
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  const cel = await game.neuroshima.przycelowanie.wyceluj(actor, czesc, { cel: target });
+  const orig = CONFIG.Dice.randomUniform;
+  CONFIG.Dice.randomUniform = () => u;
+  let usage = null, msg = null;
+  try {
+    for (let i = 0; i < 20 && !usage; i++) {
+      usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
+      if (!usage) await sleep(250);
+    }
+    await attack.rollAttack({}, { configure: false }, { data: { system: { origin: usage.message.id } } });
+    msg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
+  } finally {
+    CONFIG.Dice.randomUniform = orig;
+  }
+  const wpis = msg.flags[MOD].obrona.targets[0] ?? {};
+  const out = {
+    wycelowano: cel?.id ?? null, natural: msg.flags[MOD].obrona.natural, messageId: msg.id,
+    verdict: wpis.verdict, przycelowanie: wpis.przycelowanie ?? null, autoKrytyk: wpis.autoKrytyk ?? null,
+    zamiarPo: !!actor.getFlag(MOD, "przycelowanie")
+  };
+  if (kliknij) {
+    const sel = `[data-message-id="${msg.id}"] [data-neuro-m7-przycelowanie]`;
+    let btn = null;
+    for (let i = 0; i < 40 && !btn; i++) {
+      await sleep(150);
+      btn = ui.chat.element?.querySelector(sel);
+    }
+    out.przycisk = btn?.textContent ?? null;
+    if (btn) {
+      btn.click();
+      for (let i = 0; i < 40 && !ui.chat.element?.querySelector(sel)?.disabled; i++) await sleep(150);
+      out.wylaczony = !!ui.chat.element?.querySelector(sel)?.disabled;
+    }
+  }
+  if (obrazenia) {
+    const [d] = await attack.rollDamage({}, { configure: false }, { data: { system: { origin: usage.message.id } } });
+    const karta = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id
+      && m.rolls?.[0] instanceof CONFIG.Dice.DamageRoll);
+    out.obrazenia = { krytyk: !!(d?.isCritical || d?.options?.isCritical), formula: d?.formula ?? null, messageId: karta?.id ?? null };
+  }
+  return out;
+}
+
+/** GM: obrażenia z karty nałożone jak z tacki dnd5e (`combat.mjs`) — Stopień Zranienia przed i po. */
+async function nalozJakTacka({ messageId, actorName }) {
+  const z = await import("/modules/neuroshima-2026-overrides/scripts/combat/zranienie.mjs");
+  const message = game.messages.get(messageId);
+  const target = game.actors.getName(actorName);
+  const before = z.getZranienieLvl(target);
+  const damages = dnd5e.dice.aggregateDamageRolls(message.rolls, { respectProperties: true }).map(r => ({
+    value: Math.max(0, r.total), type: r.options.type, properties: new Set(r.options.properties ?? [])
+  }));
+  await target.applyDamage(damages, { isDelta: true, origin: message });
+  await new Promise(r => setTimeout(r, 400));
+  return { before, after: z.getZranienieLvl(target) };
+}
+
 async function turaGracza({ name }) {
   await game.combat.update({ turn: game.combat.turns.findIndex(c => c.name === name) });
   return { naRuchu: game.combat.combatant?.name, runda: game.combat.round };
@@ -272,6 +362,37 @@ export default {
       t.assert(b.karta, "a damage card follows the click", b);
       t.assert(/^2d6/.test(b.formula ?? ""), "natural 20 → crit doubles the 1k6", b);
       t.assert(b.podstepnyWylaczony, "Podstępny atak shares the once-per-turn use", b);
+    });
+
+    await t.step("Przycelowanie (E6): lower limb → TT +2, Bonus Action, button under the hit → the NPC is Powalony", async () => {
+      const r = await t.gm.eval(ustawPrzycelowanie);
+      t.equal(r.naRuchu, "PC Gracz 1", "PC Gracz 1 on turn");
+      t.assert(r.zeton, "PC Gracz 3 has a token on the scene", r);
+      await t.waitFor(p1, () => game.combat?.combatant?.name === "PC Gracz 1"
+        && game.user.character?.items.some(i => i.getFlag("neuroshima-2026-overrides", "abilityId") === "przycelowanie"),
+      { message: "Gracz 1 to see their turn and the new ability" });
+      const s = await p1.eval(przycelowanyStrzal, { targetName: npc[0].name, czesc: "dolna", kliknij: true });
+      t.equal(s.wycelowano, "dolna", "aim declared through the API");
+      t.equal(s.natural, 19, "fixed die");
+      t.assert(s.przycelowanie?.czesc === "dolna" && s.przycelowanie?.tt === 2, "the target entry carries the aimed part", s);
+      t.equal(s.verdict, "trafienie", "a hit despite +2 TT");
+      t.assert(!s.zamiarPo, "the aim is spent by the attack", s);
+      t.assert(/powal/i.test(s.przycisk ?? ""), "the Przycelowanie button is offered", s);
+      t.assert(s.wylaczony, "one-shot: the button goes grey after the click", s);
+      await t.waitFor(t.gm, ({ name }) => canvas.scene.tokens.find(tk => tk.name === name)?.actor?.statuses?.has("prone") || null,
+        { args: [{ name: npc[0].name }], message: "the NPC is Powalony (applied by the GM relay)" });
+      const b = await t.gm.eval(znacznikB, { name: "PC Gracz 1" });
+      t.assert((b?.zrodla ?? []).some(z => /Przycelowanie/.test(z)), "the Bonus Action marker names Przycelowanie", b);
+    });
+
+    await t.step("Przycelowanie (E6): head on a natural 19 → crit verdict, critical damage, +1 Stopień Zranienia", async () => {
+      const s = await p1.eval(przycelowanyStrzal, { targetName: "PC Gracz 3", czesc: "glowa", obrazenia: true });
+      t.equal(s.natural, 19, "no natural crit — the crit comes from the aim");
+      t.equal(s.verdict, "krytyk", "head shot → Trafienie Krytyczne");
+      t.assert(/Przycelowanie/.test(s.autoKrytyk ?? ""), "the crit reason names Przycelowanie", s);
+      t.assert(s.obrazenia?.krytyk, "the damage roll is critical", s);
+      const w = await t.gm.eval(nalozJakTacka, { messageId: s.obrazenia.messageId, actorName: "PC Gracz 3" });
+      t.equal(w.after, w.before + 1, "one Stopień Zranienia from the crit");
     });
   }
 };

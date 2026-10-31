@@ -89,6 +89,31 @@ export const BLEED_PROFILES = Object.freeze({
     dose: false,
     severity: 2,
     save: null
+  }),
+  // Przycelowanie w tętnicę (Twardziel 2, s. 87; Sztuczka, s. 106; PLAN_m7 E6): 1k6 at the start of the victim's turn
+  // until the wound is dressed — another bleed of the same name (Pytania do autora §17). Between Hemofilia and the 1k8s.
+  tetnica: Object.freeze({
+    id: "tetnica",
+    label: "Krwawienie (przecięta tętnica)",
+    when: "start",
+    damage: "1d6",
+    medicineDC: BLEED.medicineDC,
+    dose: false,
+    severity: 1.5,
+    save: null
+  }),
+  // The machine half of the same row — układ hydrauliczny: 1k6 per turn "do naprawy uszkodzenia". Not a wound: no
+  // Medycyna, no medicine, no WKK 43; it ends when the owner or the GM marks the damage repaired.
+  hydraulika: Object.freeze({
+    id: "hydraulika",
+    label: "Wyciek (układ hydrauliczny)",
+    when: "start",
+    damage: "1d6",
+    medicineDC: null,
+    dose: false,
+    severity: 1.5,
+    save: null,
+    naprawa: true
   })
 });
 
@@ -107,7 +132,8 @@ export function bleedProfile(actor) {
  *   `turyObrazen` — the bleed ends on its own after this many turns of damage (null: never).
  */
 export function drogiZatrzymania(profile, { kobalt = isKobaltEnabled() } = {}) {
-  const k = kobalt ? KRWAWIENIE_KOBALT : null;
+  // A machine's leak (`naprawa`) is not a wound — WKK 43 does not reach it, only a repair ends it.
+  const k = kobalt && !profile?.naprawa ? KRWAWIENIE_KOBALT : null;
   const bezRO = !profile?.save;
   return {
     lek: !!profile?.dose || (bezRO && !!k?.lek),
@@ -213,13 +239,13 @@ export async function startBleeding(actor, { reason = "", profile = "hemofilia" 
     active: true, streak: 0, tury: 0, since: game.time.worldTime, profile: next.id
   });
   await actor.toggleStatusEffect("bleeding", { active: true });
-  seqScrollText("KRWAWIENIE!", actor, { color: "#c0392b", fontSize: 32, duration: 2000 });
+  seqScrollText(next.naprawa ? "WYCIEK!" : "KRWAWIENIE!", actor, { color: "#c0392b", fontSize: 32, duration: 2000 });
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<div class="neuro-bleed-card">
-      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> KRWAWIENIE</div>
-      <div class="neuro-bleed-body">${next.label}. ${actor.name} zaczyna krwawić${reason ? ` (${reason})` : ""}.
+      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet"></i> ${next.naprawa ? "WYCIEK" : "KRWAWIENIE"}</div>
+      <div class="neuro-bleed-body">${next.label}. ${actor.name} ${next.naprawa ? "traci płyn" : "zaczyna krwawić"}${reason ? ` (${reason})` : ""}.
         ${_profileRule(next)}</div>
       ${_stopButtons(actor)}
     </div>`,
@@ -231,6 +257,9 @@ export async function startBleeding(actor, { reason = "", profile = "hemofilia" 
 function _profileRule(profile) {
   const when = profile.when === "start" ? "Na początku" : "Na końcu";
   const drogi = drogiZatrzymania(profile);
+  if (profile.naprawa) {
+    return `${when} każdej swojej tury: <strong>${profile.damage}</strong> obrażeń, aż uszkodzenie zostanie naprawione.`;
+  }
   if (!profile.save && drogi.turyObrazen) {
     return `${when} każdej swojej tury: <strong>${profile.damage}</strong> obrażeń, najwyżej przez `
       + `${drogi.turyObrazen} tury. Wcześniej przerywa je opatrzenie rany (Medycyna ST ${profile.medicineDC}, `
@@ -249,12 +278,13 @@ function _profileRule(profile) {
 /** Stop bleeding and say why. */
 export async function stopBleeding(actor, how = "") {
   if (!isBleeding(actor)) return;
+  const wyciek = bleedProfile(actor).naprawa;
   await actor.unsetFlag(MODULE_ID, FLAG);
   await actor.toggleStatusEffect("bleeding", { active: false });
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<div class="neuro-bleed-card is-stopped">
-      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet-slash"></i> KRWAWIENIE POWSTRZYMANE</div>
+      <div class="neuro-bleed-head"><i class="fa-solid fa-droplet-slash"></i> ${wyciek ? "WYCIEK USUNIĘTY" : "KRWAWIENIE POWSTRZYMANE"}</div>
       <div class="neuro-bleed-body">${actor.name}${how ? ` — ${how}` : ""}.</div>
     </div>`
   });
@@ -370,6 +400,7 @@ export async function tickBleed(actor) {
   const head = profile.save ? "Krwawienie — RO oblane" : "Krwawienie";
   let tail = `Rana nie chce się zamknąć — opatrz ją (Medycyna ST ${profile.medicineDC}), żeby to przerwać.`;
   if (profile.save) tail = "Seria przerwana.";
+  else if (profile.naprawa) tail = "Wyciek trwa — do naprawy uszkodzenia.";
   else if (koniec) tail = `To ${limit}. tura krwawienia — rana zasycha.`;
   else if (limit) tail = `Tura ${tury}/${limit} — opatrz ranę (Medycyna ST ${profile.medicineDC}), żeby przerwać wcześniej.`;
 
@@ -392,6 +423,12 @@ export async function tickBleed(actor) {
 
 function _stopButtons(actor) {
   const profile = bleedProfile(actor);
+  if (profile.naprawa) {
+    return `<div class="neuro-bleed-actions">
+      <button type="button" class="neuro-bleed-btn" data-action="naprawa" data-actor-id="${actor.id}">
+        <i class="fa-solid fa-wrench"></i> Naprawione</button>
+    </div>`;
+  }
   // "Wstrzyknij lek": u chorego na Hemofilię dawka z jego wpisu choroby (`takeDose`); przy krwawieniu
   // bez RO z Kobaltem (WKK #43) — dawka leku na Hemofilię z ekwipunku. Bez żadnej z tych dróg przycisku
   // nie ma, zamiast guzika, który cicho nic nie robi.
@@ -427,6 +464,8 @@ async function _onClickBleedStop(event) {
   const medic = game.user.character ?? canvas.tokens.controlled[0]?.actor ?? actor;
   if (action === "lek") await podajLek(actor, medic);
   if (action === "medycyna") await opatrz(actor, medic);
+  // The repair itself is the owner's or the GM's call (drone repairs, a mechanic's work) — the button only records it.
+  if (action === "naprawa" && bleedProfile(actor).naprawa) await stopBleeding(actor, "uszkodzenie naprawione");
 }
 
 /**
@@ -472,6 +511,7 @@ export async function podajLek(actor, medic = actor) {
 export async function opatrz(actor, medic = actor, { dialog = {} } = {}) {
   if (!isBleeding(actor)) return null;
   const profile = bleedProfile(actor);
+  if (profile.naprawa) return null;
   const dc = profile.medicineDC;
   const kit = medic.items.find(i => i.type === "tool" && i.system.type?.baseItem === "medyka");
   if (!kit) {

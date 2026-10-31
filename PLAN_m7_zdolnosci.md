@@ -689,3 +689,36 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   `docs/Pytania-do-autora.md` pkt 17. Do odpowiedzi — Podstępny atak opatruje się jak Hemofilię (Medycyna ST 15,
   narzędzia małego medyka), a zasada WKK 43 (`docs/Kobalt.md`): test zużywa ładunek, krwawienie bez RO (Podstępny,
   dum-dum) zatrzymuje też Desmopresyna i samo ustaje po trzeciej turze obrażeń. Testy: Quench `amunicja` +8.
+
+### E6 — R8, Przycelowanie (2026-10-31)
+
+- **`combat/przycelowanie.mjs`** — tabela RAW jako dane (U21: `PRZYCELOWANIE` w `config/zdolnosci-walka.mjs`, ta sama u
+  Twardziela s. 87 i w Sztuczce s. 106). Podwójne etykiety podręcznika rozdzielone na rodzaj celu: żywa istota —
+  kończyna górna, kończyna dolna, głowa, tętnica; maszyna — jednostka centralna, opona/gąsienica, układ hydrauliczny.
+  Twardziel celuje w „maszyny Molocha” (kategoria maszyna), Sztuczka w „element maszyny” — także pojazd. Obiekt — nic.
+- **Wejścia:** aktywność [B] Twardziela (okno wyboru części dla jedynego celu; Akcję Bonusową zaznacza warstwa akcji),
+  pole „Celuję w…” w oknie Testu Ataku (każdy z Przycelowaniem, domyślnie zamiar z aktywności), API
+  `game.neuroshima.przycelowanie.wyceluj(actor, czesc)` (makra, e2e). Zamiar — jeden żeton, ta sama tura, zużywa go
+  pierwszy rzut ataku; wybór w oknie bez zamiaru zaznacza Akcję Bonusową przy rzucie (`dnd5e.postAttackRollConfiguration`
+  — po oknie i bez niego).
+- **Werdykt** (`combat/trafienie.mjs`): część na wpisie celu (`przycelowanie`), jej TT dolicza się jak premia reakcji;
+  głowa / jednostka centralna — automatyczne TK przy trafieniu (pudło zostaje pudłem), więc krytyczne obrażenia
+  (`shouldUpgradeCrit`) i Stopień Zranienia (`isCriticalHitOn`) idą istniejącą drogą; przerzut Fuksem kopiuje wpis.
+- **Skutki** — przycisk pod trafieniem jedynego celu (jak E5 — reakcja może jeszcze zmienić werdykt), cudzy cel przez MG;
+  „jednorazowy” gaśnie po zastosowaniu (flaga karty):
+  - kończyna górna — ścieżka Wytrącenia bez RO (`wytracPrzedmiot`, eksport z `combat/melee-maneuvers.mjs`; lalka, BN —
+    założona broń);
+  - kończyna dolna — Powalenie (odporność na stan — bez skutku);
+  - opona/gąsienica — Efekt Aktywny bez czasu trwania, wszystkie Szybkości ×½ (po odjęciu Spowolnienia), bez kumulacji;
+    zdejmuje go naprawa;
+  - tętnica — nowy profil Krwawienia `tetnica` (1k6 na początku tury, bez RO, Medycyna ST 15; między Hemofilią a 1k8);
+    to czwarte krwawienie podręcznika (Pytania do autora pkt 17), więc z Kobaltem obejmuje je zasada WKK 43 (decyzja
+    agenta — MG może zawetować); układ hydrauliczny — profil `hydraulika` (1k6, „Wyciek”, tylko przycisk „Naprawione”,
+    bez WKK 43).
+- **Testy:** warstwa 1 (tabela, części wg rodzaju celu, rodzaj celu, TT w werdykcie); Quench `zdolnosci-walka` +4
+  (części Twardziela i Sztuczki, werdykt i automatyczne TK, zamiar, skutki — Powalenie, wytrącenie, opona ×½ bez kumulacji,
+  tętnica i hydraulika, raz), `amunicja` (drogi zatrzymania nowych profili) — 1481/1481; e2e `zdolnosci-walka` — krok E6:
+  kończyna dolna BN-a → TT +2 na wpisie, Akcja Bonusowa, przycisk → Powalenie przez MG; głowa PC Gracz 3 z naturalną 19 →
+  „krytyk”, krytyczne obrażenia, +1 Stopień Zranienia. Regresja: `combat`, `umieranie`, `obiekt`, `dron`,
+  `zdolnosci-po-rzucie`, `zdolnosci-wsparcie`, `rekonwalescencja` — zielone na świeżym świecie.
+- **Pokrycie:** 93/133 z automatyką (43 pełne).

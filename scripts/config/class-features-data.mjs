@@ -465,7 +465,8 @@ export const CLASS_FEATURES = {
     label: "Przycelowanie",
     action: "B",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "„Celuję w…” w oknie ataku i aktywność [B] (wybór części dla jedynego celu): TT celu rośnie o premię części w werdykcie, głowa / jednostka centralna — automatyczne Trafienie Krytyczne (krytyczne obrażenia, Stopień Zranienia); Akcja Bonusowa zaznaczona", where: "combat/przycelowanie.mjs" }, { what: "przycisk pod trafieniem: kończyna górna — wytrącenie (lalka), dolna — Powalenie, opona/gąsienica — Szybkość o połowę do naprawy, tętnica — Krwawienie 1k6, układ hydrauliczny — wyciek 1k6 do naprawy", where: "combat/przycelowanie.mjs" }],
+    manual: "Naprawa opony i układu hydraulicznego — MG zdejmuje efekt; czy cel w ogóle ma daną część (pojazd bez opon, maszyna bez hydrauliki).",
     text: "Możesz użyć Akcji Bonusowej, żeby przed atakiem wycelować w konkretną kończynę żywej istoty lub element maszyny Molocha. TT celu zostaje zwiększona, ale jeśli uzyskasz trafienie, nakładasz na cel efekty zgodne z poniższą tabelą. CZĘŚĆ CIAŁA TT CELU EFEKT CZAS TRWANIA EFEKTU Kończyna górna +3 Upuszczenie broni/tarczy/przedmiotu Jednorazowy Kończyna dolna +2 Powalenie celu Jednorazowy Głowa/jednostka centralna +5 Trafienie Krytyczne Jednorazowy Opona/gąsienica +4 Spowolnienie o ½ Szybkości Do naprawy uszkodzenia Tętnica/układ hydrauliczny +4 Utrata 1k6 PW na początku każdej tury istoty Do opatrzenia rany/naprawy uszkodzenia"
   },
   "zryw": {

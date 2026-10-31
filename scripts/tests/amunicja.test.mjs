@@ -303,7 +303,7 @@ export function registerAmmoTests(quench) {
       });
 
       it("drogi zatrzymania: lek i trzy tury tylko bez RO i z Kobaltem; ładunek przy każdym krwawieniu z Kobaltem", function () {
-        for (const id of ["podstepny", "dumdum"]) {
+        for (const id of ["podstepny", "dumdum", "tetnica"]) {
           expect(drogiZatrzymania(BLEED_PROFILES[id], { kobalt: true }), id)
             .to.deep.equal({ lek: true, ladunek: true, turyObrazen: 3 });
           expect(drogiZatrzymania(BLEED_PROFILES[id], { kobalt: false }), id)
@@ -313,6 +313,8 @@ export function registerAmmoTests(quench) {
           .to.deep.equal({ lek: true, ladunek: true, turyObrazen: null });
         expect(drogiZatrzymania(BLEED_PROFILES.hemofilia, { kobalt: false }))
           .to.deep.equal({ lek: true, ladunek: false, turyObrazen: null });
+        expect(drogiZatrzymania(BLEED_PROFILES.hydraulika, { kobalt: true }), "wyciek maszyny — tylko naprawa")
+          .to.deep.equal({ lek: false, ladunek: false, turyObrazen: null });
       });
 
       it("z Kobaltem trzecia tura obrażeń kończy krwawienie", async function () {

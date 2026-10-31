@@ -144,12 +144,15 @@ Podręcznik nazywa tak samo trzy zasady, które działają inaczej:
   podanego ST ani narzędzi.
 - **Kolory Rdza, Rtęć i Stal** (s. 201–203) — każdy otrzymany Stopień Zranienia; −1 PW na początku każdej tury;
   ustaje po akcji Pomaganie z Testem Inteligencji (Medycyna) ST 10.
+- **Przycelowanie w tętnicę** (Twardziel, poz. 2, s. 87; Sztuczka, s. 106) — bez nazwy „Krwawienie”, ale działa tak
+  samo: −1k6 PW na początku każdej tury istoty, do opatrzenia rany; bez ST.
 
 Nie wiadomo, czy to jeden stan z trzema źródłami (czy lek na Hemofilię zatrzymuje pozostałe, czy dwa źródła naraz
 się sumują), ani jak trudne jest opatrzenie po Podstępnym ataku.
 
 **Odczyt modułu (MG):** postać krwawi naraz z jednego źródła — groźniejsze zastępuje słabsze. Opatrzenie po
-Podstępnym ataku to test jak przy Hemofilii (Medycyna ST 15 z narzędziami małego medyka). W Kolorze Kobaltu
+Podstępnym ataku i przeciętej tętnicy to test jak przy Hemofilii (Medycyna ST 15 z narzędziami małego medyka). W
+Kolorze Kobaltu
 (zasada 43): test zużywa ładunek narzędzi, a krwawienie bez RO zatrzymuje też lek na Hemofilię i samo ustaje po
 trzeciej turze obrażeń. Krwawienie z Kolorów jeszcze nie działa w module.
 

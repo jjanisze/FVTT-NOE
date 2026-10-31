@@ -455,7 +455,11 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC; Celuję w… [B] — wycelowanie w konkretną kończynę lub element; "
       + "TT wzrasta, ale trafienie daje efekt wg tabeli Przycelowania.",
     category: "rekonesans",
-    auto: []
+    auto: [{
+      what: "„Celuję w…” w oknie ataku: TT celu + premia części, głowa — automatyczne TK; przycisk skutku pod trafieniem "
+        + "(wytrącenie, Powalenie, opona, tętnica / hydraulika); element maszyny — także pojazd.",
+      where: "combat/przycelowanie.mjs"
+    }]
   },
   przydasie: {
     label: "Przydasie",

@@ -161,3 +161,47 @@ export const MOJ_BOG_KOSC = "1d10";
 export function zamaszystyDozwolony({ odCelu, odAtakujacego, zasieg = 1.5 }) {
   return odCelu !== null && odCelu <= 1.5 && odAtakujacego !== null && odAtakujacego <= zasieg;
 }
+
+/* -------------------------------------------- */
+/*  Przycelowanie (PLAN_m7 E6, R8)               */
+/* -------------------------------------------- */
+
+/** Klucz w `roll.options` Testu Ataku: `{ czesc, label, tt, skutek, tokenUuid, deklarowane }`. */
+export const PRZYCELOWANIE_OPT = "neuroPrzycelowanie";
+
+/**
+ * Tabela Przycelowania — ta sama u Twardziela (poz. 2, s. 87) i w Sztuczce (s. 106); U21: tabela RAW jako dane.
+ * `zywa` / `maszyna` — nazwa części dla żywej istoty albo maszyny (`null`: tej części ona nie ma; podwójne etykiety
+ * podręcznika — „Głowa/jednostka centralna”, „Tętnica/układ hydrauliczny” — rozdzielone na dwa rodzaje celu); `tt` —
+ * o ile rośnie TT celu; `skutek` — co nakłada trafienie; `trwa` — „jednorazowy” znika po zastosowaniu.
+ */
+export const PRZYCELOWANIE = Object.freeze({
+  gorna: Object.freeze({ zywa: "Kończyna górna", maszyna: null, tt: 3, skutek: "upuszczenie", opis: "upuszcza broń, tarczę albo przedmiot", trwa: "jednorazowy" }),
+  dolna: Object.freeze({ zywa: "Kończyna dolna", maszyna: null, tt: 2, skutek: "powalenie", opis: "Powalenie", trwa: "jednorazowy" }),
+  glowa: Object.freeze({ zywa: "Głowa", maszyna: "Jednostka centralna", tt: 5, skutek: "krytyk", opis: "Trafienie Krytyczne", trwa: "jednorazowy" }),
+  opona: Object.freeze({ zywa: null, maszyna: "Opona/gąsienica", tt: 4, skutek: "spowolnienie", opis: "Szybkość o połowę", trwa: "do naprawy uszkodzenia" }),
+  tetnica: Object.freeze({ zywa: "Tętnica", maszyna: "Układ hydrauliczny", tt: 4, skutek: "wyciek", opis: "−1k6 PW na początku każdej tury", trwa: "do opatrzenia rany albo naprawy" })
+});
+
+/**
+ * Rodzaj celu dla tabeli: `"zywa"`, `"maszyna"` albo `null` (nie ma w co celować). Twardziel celuje w „maszyny
+ * Molocha” — istoty kategorii maszyna; Sztuczka w „element maszyny” — także w pojazd. Obiekt (drzwi, skrzynia) — nic.
+ * @param {{kategoria: string|null, pojazd?: boolean, obiekt?: boolean, pojazdy?: boolean}} o
+ *   `pojazdy` — atakujący ma Sztuczkę (pojazd się liczy)
+ */
+export function rodzajCeluPrzycelowania({ kategoria, pojazd = false, obiekt = false, pojazdy = false }) {
+  if (obiekt) return null;
+  if (pojazd) return pojazdy ? "maszyna" : null;
+  return kategoria === "maszyna" ? "maszyna" : "zywa";
+}
+
+/**
+ * Części do wyboru dla rodzaju celu, w kolejności tabeli.
+ * @param {"zywa"|"maszyna"|null} rodzaj
+ * @returns {{id: string, label: string, tt: number, skutek: string, opis: string, trwa: string}[]}
+ */
+export function czesciPrzycelowania(rodzaj) {
+  if (!rodzaj) return [];
+  return Object.entries(PRZYCELOWANIE).filter(([, d]) => d[rodzaj])
+    .map(([id, d]) => ({ id, label: d[rodzaj], tt: d.tt, skutek: d.skutek, opis: d.opis, trwa: d.trwa }));
+}

@@ -22,7 +22,8 @@ import { resolveHit } from "../config/defense-rules.mjs";
 import {
   premiaMojegoWroga, stSlabegoPunktu, wOknieOdPoprzedniejTury, koniecPoprzedniejTury, przedCelemWPierwszejRundzie,
   rzeznikDziala, koscZabojczejSpluwy, limitUlubionych, MOJ_WROG_KATEGORIE,
-  bolesnyDozwolony, spowolnienieMetry, zamaszystyDozwolony, PODSTEPNE_EFEKTY
+  bolesnyDozwolony, spowolnienieMetry, zamaszystyDozwolony, PODSTEPNE_EFEKTY,
+  PRZYCELOWANIE, czesciPrzycelowania, rodzajCeluPrzycelowania
 } from "../config/zdolnosci-walka.mjs";
 import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { MODULE_ID } from "./helpers.mjs";
@@ -372,6 +373,35 @@ export function registerOkolicznosciTests(quench) {
         expect(zamaszystyDozwolony({ odCelu: 1.5, odAtakujacego: 3 }), "poza zasięgiem").to.equal(false);
         expect(zamaszystyDozwolony({ odCelu: 1.5, odAtakujacego: 3, zasieg: 3 }), "broń z zasięgiem").to.equal(true);
         expect(zamaszystyDozwolony({ odCelu: null, odAtakujacego: 1.5 }), "nieznane").to.equal(false);
+      });
+    });
+
+    describe("Przycelowanie — tabela (PLAN_m7 E6, U21)", function () {
+      it("tabela RAW: TT +3 / +2 / +5 / +4 / +4, skutki", function () {
+        expect(Object.fromEntries(Object.entries(PRZYCELOWANIE).map(([id, d]) => [id, [d.tt, d.skutek]]))).to.deep.equal({
+          gorna: [3, "upuszczenie"], dolna: [2, "powalenie"], glowa: [5, "krytyk"], opona: [4, "spowolnienie"], tetnica: [4, "wyciek"]
+        });
+      });
+
+      it("żywa istota: kończyny, głowa, tętnica; maszyna: jednostka centralna, opona, hydraulika", function () {
+        expect(czesciPrzycelowania("zywa").map(c => c.id)).to.deep.equal(["gorna", "dolna", "glowa", "tetnica"]);
+        expect(czesciPrzycelowania("maszyna").map(c => c.label)).to.deep.equal(["Jednostka centralna", "Opona/gąsienica", "Układ hydrauliczny"]);
+        expect(czesciPrzycelowania(null)).to.deep.equal([]);
+      });
+
+      it("rodzaj celu: maszyna z kategorii; pojazd tylko ze Sztuczką; obiekt — nic", function () {
+        expect(rodzajCeluPrzycelowania({ kategoria: "czlowiek" })).to.equal("zywa");
+        expect(rodzajCeluPrzycelowania({ kategoria: "maszyna" })).to.equal("maszyna");
+        expect(rodzajCeluPrzycelowania({ kategoria: null, pojazd: true }), "Twardziel — maszyny Molocha").to.equal(null);
+        expect(rodzajCeluPrzycelowania({ kategoria: null, pojazd: true, pojazdy: true }), "Sztuczka").to.equal("maszyna");
+        expect(rodzajCeluPrzycelowania({ kategoria: "czlowiek", obiekt: true })).to.equal(null);
+      });
+
+      it("premia części podnosi TT jak reakcja — trafienie o 1 staje się pudłem", function () {
+        expect(resolveHit({ total: 13, tt: 12 }).verdict).to.equal("trafienie");
+        expect(resolveHit({ total: 13, tt: 12, bonuses: PRZYCELOWANIE.dolna.tt }).verdict).to.equal("pudło");
+        expect(resolveHit({ total: 18, tt: 12, bonuses: PRZYCELOWANIE.glowa.tt, autoCrit: true }).verdict, "głowa").to.equal("krytyk");
+        expect(resolveHit({ total: 16, tt: 12, bonuses: PRZYCELOWANIE.glowa.tt, autoCrit: true }).verdict, "pudło zostaje pudłem").to.equal("pudło");
       });
     });
   }, { displayName: "Neuroshima: Okoliczności ataku — czysty silnik (M1)" });

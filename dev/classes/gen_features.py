@@ -654,6 +654,16 @@ COVERAGE = {
         "manual": "Urządzenia bez mikroprocesorów i pancerz zamontowany na dronie — rozstrzyga MG.",
     },
 
+    # PLAN_m7 E6 (R8): Przycelowanie — `combat/przycelowanie.mjs`.
+    "przycelowanie": {
+        "auto": [("„Celuję w…” w oknie ataku i aktywność [B] (wybór części dla jedynego celu): TT celu rośnie o premię "
+                  "części w werdykcie, głowa / jednostka centralna — automatyczne Trafienie Krytyczne (krytyczne obrażenia, "
+                  "Stopień Zranienia); Akcja Bonusowa zaznaczona", "combat/przycelowanie.mjs"),
+                 ("przycisk pod trafieniem: kończyna górna — wytrącenie (lalka), dolna — Powalenie, opona/gąsienica — "
+                  "Szybkość o połowę do naprawy, tętnica — Krwawienie 1k6, układ hydrauliczny — wyciek 1k6 do naprawy", "combat/przycelowanie.mjs")],
+        "manual": "Naprawa opony i układu hydraulicznego — MG zdejmuje efekt; czy cel w ogóle ma daną część (pojazd bez opon, "
+                  "maszyna bez hydrauliki).",
+    },
     # PLAN_m7 E5 (R6): po trafieniu — `combat/zdolnosci-trafienie.mjs`.
     "bolesny-atak": {
         "auto": [("przycisk pod kartą ataku, który trafił: broń z ZRC, Ułatwienie w rzucie albo przytomny sojusznik "
