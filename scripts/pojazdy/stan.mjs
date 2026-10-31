@@ -219,7 +219,8 @@ export const FLAGA_WIERZCHOWIEC = "wierzchowiec";
 /** Domyślne siodło: jeździec lekko z przodu środka, pasażer za nim — oba otwarte, nad nośnikiem (D32, W-U1). */
 export const STREFY_SIODLA = Object.freeze([{
   // Kolumny jawnie: bez nich układ miejsc sadzałby kierującego przy lewej burcie, jak w aucie.
-  id: "siodlo", nazwa: "Siodło", od: 0.42, do: 0.6, rzedy: [1, 1], kolumny: [[0.5], [0.5]],
+  // Rzędy zmierzone na żetonach koni z góry (2026-10-31, D43): siedzisko 0,60 od przodu, poduszka pasażera 0,69.
+  id: "siodlo", nazwa: "Siodło", od: 0.6, do: 0.69, rzedy: [1, 1], kolumny: [[0.5], [0.5]],
   prezentacja: { widocznosc: "otwarta", warstwa: "nad" }
 }]);
 

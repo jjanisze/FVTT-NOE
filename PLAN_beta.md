@@ -57,7 +57,7 @@ flowchart LR
    E9–E11) i część 2 P1–P4 (plansza od nowa — złożona droga, metryka drogi, jadący, serie i obszary) **zrobione
    2026-10-19**; przejście końcowe (skala grafiki istot, paleta kierowcy, kotwica tury, mechanika pościgu P5–P6,
    wierzchowce W0–W5) **zrobione 2026-10-30** — do weta MG na Poligonie (Garaż, Pościg, Stajnia). Zostały zasoby:
-   7 dźwięków i żetony koni z góry (MISSING).
+   7 dźwięków (MISSING); żetony koni z góry dostarczone 2026-10-31.
 5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3) — **zrobione 2026-10-27 (E0–E8)**,
    bez wydania; notatki etapów — `PLAN_m6_drobne_zasady.md` §11.
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed

@@ -3,7 +3,7 @@
 > Status (2026-10-30): **M4 ZROBIONE** — część 1 i 1b (E0–E11), grafika (14 pojazdów, 7 wnętrz, 14 wraków, 2 wieże),
 > część 2 (P1–P6), część 3 — wierzchowce (W0–W5) i całe przejście końcowe (§0.1: S0–S1, K1–K3, KT, P5a–P5e, P6,
 > W0–W5); przebieg i bramka — §11. Do weta MG na Poligonie: Garaż, Pościg (Start–meta), Stajnia (§10). Zostały zasoby:
-> 7 dźwięków i żetony koni z góry (§8). Decyzje MG D1–D45 (§1). Rozmiar: **XL**.
+> 7 dźwięków (§8); żetony koni z góry dostarczone 2026-10-31. Decyzje MG D1–D45 (§1). Rozmiar: **XL**.
 > Wywołanie: `PLAN_beta.md` §0, krok 4 (przesunięty przed M6, MG 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie), a od 2026-10-19 także geometrię planszy
 > (tamten §2.1, §2.3–§2.6 i D2) — §6.2 tutaj. Grafika planszy (motywy, pustynia, kołysanie — tamten §2.2) zostaje.
@@ -26,7 +26,7 @@
 | **1b. Między scenami** | jedna reguła skali (obrys w metrach, znacznik na mapach w km), pamięć obsady i karta „Posadzić?”, Ctrl+X / Ctrl+V z załogą | ✅ E9–E11 | §4.14–§4.16 |
 | **Grafika** | 14 żetonów z góry i portretów, 7 wnętrz (prześwietlenie), 14 wraków, osobne wieże Bradleya i Abramsa (oś pod przyszłe celowanie), Garaż z podglądami | ✅ (brak 7 dźwięków; 13 wraków do oceny MG) | §8, §11 |
 | **2. Pościgi** | plansza od nowa — złożona droga (pojazdy w prawdziwej skali, tor = 36 m), metryka drogi dla zasięgów i obszarów, serie z celowaniem, jadący na planszy; paleta manewrów, Test Pościgu, komplikacje k20, ataki, wypadanie, koniec pościgu | ✅ P1–P6 | §6.2 |
-| **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu; Jeździec, Rodeo, Zawsze w siodle | ✅ W0–W5 (żetony koni — zamówienie, §8) | §6.3 |
+| **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu; Jeździec, Rodeo, Zawsze w siodle | ✅ W0–W5 (żetony koni z góry — 2026-10-31) | §6.3 |
 | **Przejście końcowe** (2026-10-29) | skala grafiki istot i jadących, paleta kierowcy, kotwica tury, braki części 1, P5–P6, W0–W5 | ✅ 2026-10-30 | §0.1, §11 |
 
 ```mermaid
@@ -105,7 +105,7 @@ flowchart LR
 | **P5a–P5e** | Mechanika pościgu (§6.2.5) | L | K1, KT | e2e `poscig-p5`: pościg od startu do mety bez notatek MG (`PLAN_beta.md`, M4) |
 | **P6** | Poligon i bramka części 2: sondy D34–D41 na stanowisku Pościg | M | P5 | stanowisko z sondami; e2e w obu światach |
 | **W0–W5** | Wierzchowce (§6.3) | L | S1, K1, KT | e2e `wierzchowiec`; stanowisko Stajnia |
-| **Zasoby** | 7 dźwięków (MISSING §P); żetony koni z góry ×3 (nowe zamówienie, §8); ocena MG 13 wraków | — | — | MISSING §P bez pozycji M4 |
+| **Zasoby** | 7 dźwięków (MISSING §P); żetony koni z góry ×3 (✅ 2026-10-31, §8); ocena MG 13 wraków | — | — | MISSING §P bez pozycji M4 |
 
 **Zamknięcie M4:** `release:check` zielony; macierz `IMPLEMENTATION.md` (wiersze „Walka na wierzchowcu”, „Pojazdy
 i pościgi”, „Pojazdy poza pościgiem”, „Manewry pościgu…”) i `PLAN_beta.md` (M4) zaktualizowane; M7 dostaje sygnał,
@@ -973,7 +973,8 @@ Atrapy w `tokens/pojazdy/_placeholder/` zostają jako awaryjne.
 - **7 dźwięków** (`dev/icons/MISSING.md` §P): `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
   `zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, `syrena.ogg` → `sounds/pojazdy/` (katalogu jeszcze nie
   ma). Kod gra je, gdy plik istnieje — bez zmian w kodzie. Źródło z licencją wpisać do `CREDITS.md`.
-- **Konie z góry — nowe zamówienie (D43):** trzy żetony (zdrowy, skażony, teksańczyk) w konwencji pojazdów —
+- ✅ **Konie z góry (D43), dostarczone 2026-10-31** (Codex; siodło zmierzone: siedzisko 0,60 od przodu, poduszka
+  pasażera 0,69 — `STREFY_SIODLA`). Zamówienie było takie: trzy żetony (zdrowy, skażony, teksańczyk) w konwencji pojazdów —
   przodem w dół, przezroczyste tło, kadr kwadratowy 2 × 2 (800 × 800 przy 400 px na pole, jak `tokens/README.md`),
   siodło na jeźdźca i pasażera, sylwetka ok. 2,4 m długości (po S0 dopasować do wybranego f, bo koń jest istotą i
   też dostaje mnożnik). Kotwice siodła mierzone na gotowym obrazie, jak przy pojazdach. Portrety koni — z Bestiariusza.
@@ -1058,6 +1059,33 @@ nocy 2026-10-19, nadal bez formalnego weta; każde na Poligonie, stanowisko Gara
 - **Smugi między pojazdami** idą po obrazie (w bok, do tyłu) — zgodnie z D31, nie do naprawy.
 
 ## 11. Postęp
+
+**2026-10-29 – 2026-10-31 — przejście końcowe zrobione, wydanie v0.21.0.** Pakiety w kolejności commitów: KT
+(`0d13846`, rejestr kotwic tury), K1 (`5d1fe7b`, paleta kierowcy), K2 (`540e544`), K3 (`9f12b8b`), P5a–P5e (`aa041f8`),
+S0–S1 i W1–W4 z D45 (`d22ba04`), W5 (`3e81b55`, Stajnia), P6 (`a1c7479`, plansza Start–meta, sondy D34–D41), dokumenty
+(`27caaa5`), poprawki z bramki (`b7b08c6`). W0 nie był osobnym spike'em: jego sprawdzenia (dostęp z obecności,
+siodło, jeździec jak na mapie, kotwica) pokrywa e2e `wierzchowiec`; pierścień dnd5e na koniu — do oka MG w Stajni.
+
+- **S0 → D42/D45:** MG wybrał f = 0,8 i pojazdy ×1,1. Skutek uboczny ×1,1, złapany dopiero przez bramkę: obrys 3,3 ×
+  1,65 kratki ma połówki pikseli, a rdzeń przy zmianie wymiarów zaokrągla środek — każdy obrót tam i z powrotem
+  przesuwał pojazd o piksel, Ctrl+Z nie wracał do pozy (`pojazd-undo`). Zamiana obrysu stawia teraz własny narożnik
+  (`naroznikPoZamianie`: w dół przy przejściu w pion, w górę przy powrocie — odwraca się dokładnie).
+- **S1 → plansza:** jadący rysuje się z rozmiaru sprzed wsiadania, a istota postawiona na planszy z paska albo z karty
+  „Posadzić?” miała tor szerokości — na otwartym siodle motocykla 224 px. Nowa istota na planszy w rozmiarze
+  prototypu dostaje prawdziwą skalę (¼ toru, D24).
+- **Bramka wydania** na `27caaa5`: część czerwieni to moje testy (19 → 20 narzędzi Garażu, rozmiar motocykla
+  sprzed D45, dwa e2e wiązały wynik `createEmbeddedDocuments` po pozycji — bandyta siadał za kierownicą Osobówki);
+  reszta — strona MG w świecie wydania straciła cały interfejs w trakcie `garaz-grafika` i kolejne suity padały na
+  `null` w czacie i pasku bocznym; w piaskownicy 17 z nich przeszło od razu, przyczyny nie odtworzono.
+- **Grafiki (Codex, `5dc38a9`) i integracja (`ec1bb53`):** konie dostały własne żetony z góry z siodłem na dwoje
+  (zamówienie D43 zamknięte), skale 19 istot przeliczone dla nowych grafik (konie z 1,41 na 1,0). Siodło
+  zmierzone na gotowych żetonach: siedzisko 0,60 od przodu, poduszka pasażera 0,69 (wcześniej 0,42 / 0,60 — jeździec
+  siadał na szyi).
+- **Kampania (2026-10-31, na słowo MG):** trzy istoty Bestiariusza i ich sześć żetonów na Silosie na nowych grafikach,
+  GMT400 na trzech mapach taktycznych w obrysie ×1,1, Lorentz dostał harmonijkę (Sesja 11).
+- **Poligon:** stanowiska Garaż, Pościg i Stajnia zasiane na nowych paczkach; sondy czekają na weto MG.
+
+Zostały: 7 dźwięków (MISSING §P), ocena MG 13 wraków, weto sond Garażu, Pościgu i Stajni.
 
 **2026-10-29 — runda 6: przegląd planu przed przejściem końcowym.** Przejrzane: plan, kod (`scripts/pojazdy/`,
 `scenes/poscig*.mjs`, `scenes/droga.mjs`), zasoby, RAW (s. 29–30, 61, 88–89, 97, 106, 257, 260–268) oraz źródła

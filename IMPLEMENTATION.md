@@ -67,7 +67,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Broń improwizowana (reguła ogólna), Łyżeczka | ✅ | `actors/improwizacja.mjs` (M6 E3, e2e `improwizacja`); typ obrażeń wybiera gracz w oknie, „działa jak…” — MG |
 | | Latanie | ✅ | `actors/latanie.mjs` (M6 E5, e2e `latanie`) |
 | | Pływanie, walka pod wodą, wspinaczka | 🟡 | `scenes/woda.mjs`, `wspinaczka.mjs` (M6 E6, e2e `woda`), `docs/Ruch-i-teren.md`; w walce karty same, poza walką na żądanie MG (U15); Regiony wody z eksportu map — `TODO.md` repo map, dziś MG rysuje je ręcznie |
-| | Walka na wierzchowcu | ✅ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3, W0–W5): koń z Bestiariusza to nośnik jak pojazd — jeździec widoczny w siodle (`pojazdy/stan.mjs`, `jadacy.mjs`), Inicjatywa jeźdźca przez kotwicę tury (`combat/kotwica-tury.mjs`), akcje wierzchowca w palecie (`pojazdy/paleta.mjs`), utrzymanie się w siodle i atak z grzbietu (`jadacy.mjs`, `jazda.mjs`), Jeździec, Rodeo i Zawsze w siodle (`pojazdy/jezdziec.mjs`); stanowisko Poligonu Stajnia; e2e `wierzchowiec`. Żetony koni z góry — zamówienie (MISSING); pościg konny — po becie (W-P1) |
+| | Walka na wierzchowcu | ✅ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3, W0–W5): koń z Bestiariusza to nośnik jak pojazd — jeździec widoczny w siodle (`pojazdy/stan.mjs`, `jadacy.mjs`), Inicjatywa jeźdźca przez kotwicę tury (`combat/kotwica-tury.mjs`), akcje wierzchowca w palecie (`pojazdy/paleta.mjs`), utrzymanie się w siodle i atak z grzbietu (`jadacy.mjs`, `jazda.mjs`), Jeździec, Rodeo i Zawsze w siodle (`pojazdy/jezdziec.mjs`); stanowisko Poligonu Stajnia; e2e `wierzchowiec`. żetony koni z góry z siodłem na dwoje (2026-10-31); pościg konny — po becie (W-P1) |
 | | Skakanie | ❌ | `HANDOFF_movement_hotbar.md` (Region `skok` już działa) |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
 | | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami (dym awarii 5 — Region i Oślepienie zakrytych), wrak i wybuch baku, broń montowana (ręce w lalce), paleta kierowcy (akcje cech, bieg wsteczny), Wojownik autostrady; jadący rysowany jak na mapie, skala grafiki istot (ustawienie świata, f = 0,8) i pojazdy ×1,1 | ✅ | `scripts/pojazdy/*`, `scenes/skala-istot.mjs`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`, `pojazd-paleta`, `pojazd-prezentacja`, `garaz-grafika`. Grafika gotowa; 7 dźwięków do dostawy (MISSING §P) |
@@ -1197,6 +1197,30 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.21.0 — Pojazdy, pościgi i wierzchowce (M4), drobne zasady (M6), nowe grafiki (2026-10-31)
+
+Wymaga **dnd5e 6.0.6** i Foundry **14.367+** (zweryfikowane na 14.369) — bez zmian względem v0.20.0. Przebieg i decyzje
+MG: `PLAN_m4_pojazdy.md` §11, `PLAN_m6_drobne_zasady.md` §11; szczegóły — wpisy niżej. Testy przed wydaniem:
+Quench 1385/1385, e2e pojazdów, pościgów, wierzchowców i grafik zielone w piaskownicy; bramka wydania — raport
+`logs/release/0.21.0-*.json`.
+
+Co zobaczy stół:
+- **Pojazdy (M4 część 1 i 1b):** paczka 14 pojazdów z grafiką z góry, wnętrzami i wrakami; wsiadanie na miejsca,
+  jadący jadą z pojazdem (kropki u obcych, prześwietlenie u jadących); silnik, światła, kluczyki; jazda w turze
+  kierowcy ze skrętami, terenem i potrąceniami; awarie k20 z [Zastosuj], naprawy, wrak; broń montowana; Wojownik
+  autostrady; Ctrl+X / Ctrl+V pojazdu z załogą między scenami.
+- **Pościgi (M4 część 2):** plansza na złożonej drodze w prawdziwej skali, metryka drogi dla zasięgów i serii; Test
+  Pościgu, budżet w znacznikach z zapasem, komplikacje k20, sześć manewrów w palecie kierowcy, atak na kierowcę, RO
+  pojazdu, dryf drogi, koniec pościgu i meta.
+- **Wierzchowce (M4 część 3):** koń z Bestiariusza wiezie widocznego jeźdźca; Inicjatywa jeźdźca, akcje wierzchowca,
+  utrzymanie się w siodle, atak z grzbietu; Jeździec, Rodeo, Zawsze w siodle.
+- **Skala grafiki istot:** nowe ustawienie świata (domyślnie 0,8) zmniejsza obraz postaci i potworów przy autach;
+  pojazdy ×1,1. Same grafiki — pola, zasięgi i kratki bez zmian.
+- **Drobne zasady (M6):** biegłości profesji i instrumenty, broń improwizowana i Łyżeczka, obiekty do zniszczenia,
+  latanie, pływanie i wspinaczka.
+- **Grafiki:** 23 pary portret/żeton (16 istot Bestiariusza, trzy konie, cztery towarzysze), 12 ikon instrumentów,
+  ikony „Pod wodą” i „Tonie”; skale żetonów przeliczone dla nowych grafik.
 
 ### M4 — przejście końcowe: skala istot, paleta kierowcy, kotwica tury, pościg, wierzchowce (2026-10-30)
 
