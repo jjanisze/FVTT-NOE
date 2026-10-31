@@ -58,6 +58,20 @@ size and stroke as the other status glyphs ([ASSETS.md](../../icons/statuses/ASS
 | `icons/statuses/akcja-bonusowa.svg` + `.webp` | `akcjaBonusowa` | Bonus Action used this turn |
 | `icons/statuses/stanowisko-snajperskie.svg` + `.webp` | `stanowiskoSnajperskie` | Strzelec's sniper nest after 5 rounds of aiming (range ×3); gone when the token moves — must not read as a crosshair "targeted" marker |
 
+## K. Bleeds (M7) — 5 status glyphs
+
+GM decision 2026-10-31 ([docs/Krwawienia.md](../../docs/Krwawienia.md)): the bleeds are separate effects with their own icons,
+and one actor can carry several at once — so each needs a glyph that reads as "bleeding" yet tells the others apart at
+token size. Today all share the core `bleeding` status. Class A white glyphs, same rules as section A.
+
+| Missing file | Status id (planned) | Meaning |
+|---|---|---|
+| `icons/statuses/krwawienie-hemofilia.svg` + `.webp` | `krwawienieHemofilia` | Hemofilia bleed — the disease, not a wound (a drop with a blood-cell / clotting hint) |
+| `icons/statuses/krwawienie-podstepny.svg` + `.webp` | `krwawieniePodstepny` | Podstępny atak — a cut wound, 1k8 per turn; the WKK dum-dum bleed reuses it unless the GM asks for its own |
+| `icons/statuses/krwawienie-tetnica.svg` + `.webp` | `krwawienieTetnica` | Przycelowanie — severed artery, 1k6 per turn (a spurting drop) |
+| `icons/statuses/krwawienie-kolory.svg` + `.webp` | `krwawienieKolory` | Kolory Rdza/Rtęć/Stal — the light bleed from each Stopień Zranienia, −1 PW per turn (a small single drop) |
+| `icons/statuses/krwawienie-pila.svg` + `.webp` | `krwawieniePila` | Juggernaut's circular saw (Notatnik Łowcy, s. 217) — 1k4 per turn until dressed (a drop with a saw-tooth edge) |
+
 ## How an item gets added here
 
 Add only a confirmed missing asset: final path, purpose, spec and prompt/brief link.

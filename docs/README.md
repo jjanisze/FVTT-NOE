@@ -31,7 +31,9 @@
 14. [Errata](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od przepisu standardowego;
     wynik 85 Tabeli Fantów.
 15. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
-    przeciwników; handel, sen, szabrowanie, bebeszenie, Fanty.
+    przeciwników; handel, sen, szabrowanie, bebeszenie, Fanty; krwawienia.
+16. [Krwawienia — porównanie](Krwawienia.md) — pięć zasad krwawienia z podręcznika obok siebie, ustalenia MG i
+    otwarte pytania.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
 [issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w

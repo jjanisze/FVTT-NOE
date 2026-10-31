@@ -722,3 +722,9 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   „krytyk”, krytyczne obrażenia, +1 Stopień Zranienia. Regresja: `combat`, `umieranie`, `obiekt`, `dron`,
   `zdolnosci-po-rzucie`, `zdolnosci-wsparcie`, `rekonwalescencja` — zielone na świeżym świecie.
 - **Pokrycie:** 93/133 z automatyką (43 pełne).
+- **Po E6 (MG, po rozmowie o krwawieniach):** krwawienia to osobne efekty z własnymi ikonami — Hemofilia, Podstępny
+  atak (WKK: Dum-dum, ten sam efekt pod inną nazwą), Przycelowanie — Tętnica, Rdza/Rtęć/Stal i piła tarczowa
+  Juggernauta (dodana); ten sam się nie kumuluje, różne — tak; zatrzymanie z narzędziami zawsze zużywa ładunek (poza
+  Aspiryną i Miętusami); samoczynny koniec po trzech turach na razie odpada. Porównanie i otwarte pytania —
+  `docs/Krwawienia.md`; przebudowa `combat/bleeding.mjs` (efekt na krwawienie, migracja flagi, piła, Kolory) czeka na
+  odpowiedzi; pięć glifów w `dev/icons/MISSING.md` (sekcja K).
