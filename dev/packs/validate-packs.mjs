@@ -307,6 +307,19 @@ for (const [key, def] of Object.entries(SZTUCZKI)) {
 }
 notes.push(`Sztuczki z Rozwojem Cechy (ASI): ${withAsi}`);
 
+/* ---- Sztuczki: effects on the feat; the ASI alone never earns „pełne” (PLAN_m7 E3, found at P5) ---- */
+for (const [key, def] of Object.entries(SZTUCZKI)) {
+  const doc = sztuczki.find(d => d.flags?.[MODULE_ID]?.sztuczka === key);
+  const n = (doc?.effects ?? []).length;
+  if (n !== (def.efekty?.length ?? 0)) fail(`sztuczka ${key}: ${n} effect(s), data has ${def.efekty?.length ?? 0}`);
+  // The badge counts the Rozwój Cechy as automation, so a Sztuczka with nothing else listed and no `manual` would read
+  // „Zautomatyzowane” while its real effect is left to the table. Only `tylkoCechy` (Ćwiczenie czyni mistrza) may.
+  if (def.cechy && !def.auto?.length && !def.manual && !def.tylkoCechy) {
+    fail(`sztuczka ${key}: only its Rozwój Cechy is automated — list the rest in \`manual\` (or \`auto\`)`);
+  }
+  if (def.tylkoCechy && (!def.cechy || def.auto?.length || def.manual)) fail(`sztuczka ${key}: \`tylkoCechy\` with more than an ASI`);
+}
+
 /* ---- abilities as data (PLAN_m7 E3): effects and level-0 Traits on the feature / origin-ability items ---- */
 {
   const byKey = new Map([

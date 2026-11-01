@@ -279,6 +279,30 @@ export function registerOkolicznosciTests(quench) {
       });
     });
 
+    describe("Sztuczki dystansowe — Snajper, Gunfight", function () {
+      const zasieg = { normalny: 18, daleki: 39 };
+      it("Snajper: bez Utrudnienia za daleki dystans, zasięg daleki ×2 (78 m)", function () {
+        const bron = { wlasciwosci: [], snajperSztuczka: true };
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 30, zasieg, bron })).utrudnienia)).to.not.include("zasiegDaleki");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 70, zasieg, bron })).uwagi)).to.not.include("pozaZasiegiem");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 80, zasieg, bron })).uwagi)).to.include("pozaZasiegiem");
+      });
+      it("Snajper ze Strzelcem: większe powiększenie (×3), mnożniki się nie mnożą", function () {
+        const bron = { wlasciwosci: [], snajper: true, snajperSztuczka: true };
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 110, zasieg, bron })).uwagi)).to.not.include("pozaZasiegiem");
+        expect(ids(rozstrzygnijOkolicznosci(m({ odleglosc: 120, zasieg, bron })).uwagi)).to.include("pozaZasiegiem");
+      });
+      it("Gunfight: broń palna bez Utrudnienia za wroga obok; łuk i rzut — nadal z Utrudnieniem", function () {
+        const wrogowieObok = [U([], { nazwa: "Gangus" })];
+        const palna = { wlasciwosci: [], typ: "palnaKrotka", gunfight: true };
+        expect(ids(rozstrzygnijOkolicznosci(m({ wrogowieObok, bron: palna })).utrudnienia)).to.not.include("dystansowyWZwarciu");
+        expect(ids(rozstrzygnijOkolicznosci(m({ wrogowieObok, bron: { ...palna, gunfight: false } })).utrudnienia))
+          .to.include("dystansowyWZwarciu");
+        expect(ids(rozstrzygnijOkolicznosci(m({ wrogowieObok, bron: { wlasciwosci: [], typ: "miotana", gunfight: true } })).utrudnienia))
+          .to.include("dystansowyWZwarciu");
+      });
+    });
+
     describe("Zdolności walki — czyste reguły (PLAN_m7 E4)", function () {
       it("Mój wróg: kolumna tabeli „+N/Nk6”; nieczytelna — null", function () {
         expect(premiaMojegoWroga("+1/1k6")).to.deep.equal({ atak: 1, obrazenia: "1d6" });

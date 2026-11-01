@@ -93,7 +93,7 @@ M7 przechodzi na reguły tam, gdzie warunek mieści się w danych rzutu (spike w
 - **Wszystkie zdolności 18 profesji** (każda wybierana na 3. poziomie) — 62 (z WKK Pistolero).
 - **Opcje** (Wyjadacz Twardziela i Zwiadowcy, Mój wróg ×5) — 11.
 - **Zdolności Pochodzeń i Sztuczki** drużyny kampanii i pregenów Jazdy Próbnej — 11 Pochodzeń, 6 Sztuczek (+ Sztuczki
-  pregenów, gdy MG je wybierze — P4).
+  pregenów, D16: Muzyk, Przycelowanie, Mistrz walki wręcz, Szybkie palce, Pan Plaster, Ciszej niż cień).
 
 **Stan w zakresie (2026-10-25):** 10 pełnych, 24 częściowe, 72 bez automatyki (106 klasowych); Pochodzenia i Sztuczki
 drużyny: 1 pełna, 3 częściowe, 13 bez.
@@ -373,6 +373,7 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D13 | (2026-10-31, U10) Dwóch na jednego — okno | **Od końca twojej poprzedniej tury** — kroczące okno, kolejność inicjatywy nie decyduje |
 | D14 | (2026-10-31, U28) Szósty zmysł — zakres | **Każdy RO na ZRC**, stockowa reguła dnd5e (jak Danger Sense) z warunkiem efektu bez Oślepienia/Ogłuszenia/Nieprzytomności; zagrożenie niezauważalne — MG przełącza okno rzutu na zwykły |
 | D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: bez Rozwoju Cechy** — „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika, rację ma podręcznik październikowy (MG poprawił się po E4; ASI dodane w E4 i cofnięte); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
+| D16 | (2026-11-01, P5) Sztuczki pregenów | **Buźka — Muzyk, Carson — Przycelowanie, Dante — Mistrz walki wręcz, Góra — Szybkie palce, Iris — Pan Plaster, Kluczyk — Ciszej niż cień**; kryterium MG: automatyka widoczna przy stole, prosta dla nowych graczy (cztery wybrał agent, Dantego, Iris i Kluczyka — MG). **Kluczyk: Złodziej 1** (klasa-zaślepka „Wybierz” z alfy usunięta 2026-09-25; jej cechy były Złodzieja). **Iris: INT 18 → 16 → 17** — alfowe +2 z Ćwiczenia czyni mistrza cofnięte, +1 INT z Pana Plastra. Na kartach w E8 (kampania zamrożona) |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
@@ -422,7 +423,7 @@ Runda 2 (2026-10-31): U10, U12, U14, U28 zmienione (D11–D14); reszta U9–U30 
 | P2 | Licznik Motywacji „na sojuszniku” (kość podarowana zawczasu, jak Bardic Inspiration 2024) zamiast Reakcji przy rzucie | **Nie** — RAW to Reakcja przy rzucie |
 | P3 | Coś mi tu śmierdzi — szept do MG czy wprost do gracza | **Do gracza, sama obecność; MG — nazwa istoty (D9)** |
 | P4 | ASI i biegłości dla wszystkich 53 Sztuczek jednym przejściem czy tylko dla drużyny i pregenów | **Wszystkie (D8)** |
-| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | **MG wybiera, kiedy zechce** — nie blokuje; E3 obejmuje je z automatu (D8); 2026-10-31 odłożone (D15) |
+| P5 | Sztuczki pregenów (dziś brak — wycięte 2026-09-25) | **MG wybiera, kiedy zechce** — nie blokuje; E3 obejmuje je z automatu (D8); 2026-10-31 odłożone (D15); **2026-11-01 wybrane (D16)** |
 | P6 | Spieprzysz to! na ukrytych rzutach BN | **Szept do MG (U6)** |
 | P7 | Pregeny na poziomach 2–3 (wybory profesji) przed styczniem | **Poza M7** — robi MG albo testerzy przy stole |
 
@@ -755,3 +756,26 @@ rodzaj.
 - **Testy:** nowy Quench `krwawienia` (18; z `amunicja` wyjęte stare 8) — 1491/1491; nowe e2e `krwawienia` (medyk gracza
   opatruje cudzą postać przez MG — tylko jedno krwawienie, ładunek; piła z kompendium; tyknięcia per krwawienie;
   przypomnienie po 11 min) + regresja 12 pakietów zielona.
+
+### P5 i luka E3 w plakietkach Sztuczek (2026-11-01)
+
+- **P5 → D16** — Sztuczki pregenów wybrane (MG: „to, co pokazuje automatykę, a nowy gracz zrozumie”). Źródło dawnych
+  wyborów: kopia czystki z 2026-09-25 (`Neuro 5e/Integracje/backups/jazda-probna-alpha-items-2026-09-25.json`) — autorzy
+  jednostrzałówki dali Jest zajebiście, Kuloodporny, Baśkę, Szturmowca, Ćwiczenie czyni mistrza i Ciszej niż cień;
+  Kuloodporność i Szturmowca pregeni już nie spełniają (wymagania z podręcznika październikowego). Stan w rejestrze:
+  Muzyk, Przycelowanie, Szybkie palce — pełne; Mistrz walki wręcz, Pan Plaster, Ciszej niż cień — częściowe.
+- **Luka E3 (znalezisko agenta):** od E3 plakietka liczy Rozwój Cechy jako automatykę, więc 18 Sztuczek bez innych wpisów
+  `auto` i bez `manual` pokazywało „Zautomatyzowane”, choć ich właściwy efekt rozstrzyga stół (Gunfight, Grenadier,
+  Wrestler, Snajper…). Poprawione: biegłości z D8, których E3 nie zrobił — `bieglosci` → `Trait` na Fachowcu (2 zestawy),
+  Uczu się, ucz (2 umiejętności), Szkoleniu w broni (kategoria), Szkoleniach w pancerzu (średni, ciężki) i Ławniku (broń
+  improwizowana); `efekty` na Sztuczce (Szybki Bill — biegłość w Inicjatywie, stockowa flaga `initiativeAlert`;
+  Człowiek-pająk — wspinaczka = Szybkość); **Gunfight** i **Snajper** w silniku okoliczności (`bron.gunfight`,
+  `bron.snajperSztuczka`; Snajper ze Strzelcem — większe powiększenie, ×3, RAI); **Immunitet** — wiersz rejestru
+  ułatwień (choroba; rejestr widzi teraz też klucze Sztuczek); reszta — „Nie automatyzujemy: …”. Strażnik: `tylkoCechy`
+  (tylko Ćwiczenie czyni mistrza) w danych, `validate-packs` i Quench `sztuczki-dane` odrzucają Sztuczkę, której jedyną
+  automatyką jest ASI. Sztuczki: 19 pełnych, 22 częściowe, 12 bez.
+- **Pregeni — do przejścia w E8** (poza samymi Sztuczkami; znalezione przy wyborze): klucze umiejętności stock dnd5e
+  (`rel`, `prf`, `arc`… — audyt `bieglosci` z M6), magazynki niezgodne z amunicją (Góra: H&K UMP z gniazdem 9 mm i
+  .45 ACP w plecaku; Carson: Winchester .30-06 i naboje .44 Mag), Iris — Trajektoria zamiast zdolności Speca 1.
+- **Paczki:** przebudowane wszystkie (kampania wyłączona); w `bestiariusz` wchodzi piła tarczowa Juggernauta (atak z
+  przyrostkiem `.atak`, przebudowa krwawień) i ostatnie sześć własnych grafik. Quench 1495/1495.

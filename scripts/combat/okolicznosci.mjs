@@ -25,6 +25,7 @@ import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 import { stanBroni } from "../weapons/wlasciwosci.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
+import { hasAbility, ABILITY_KEYS } from "../actors/abilities.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -189,7 +190,9 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     bron: item?.type === "weapon"
       ? {
         ...stanBroni(item, actor), typ: item.system.type?.value ?? null, rzut: String(attackMode ?? "").startsWith("thrown"),
-        snajper: _snajper(actor, item)
+        snajper: _snajper(actor, item),
+        snajperSztuczka: hasAbility(actor, ABILITY_KEYS.SNAJPER),
+        gunfight: hasAbility(actor, ABILITY_KEYS.GUNFIGHT)
       }
       : null
   };

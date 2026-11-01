@@ -28,8 +28,14 @@
  */
 
 import { createCoverageLedger } from "./coverage-ledger.mjs";
+import { change, CHANGE_TYPE } from "./effect-changes.mjs";
+import { KATEGORIE_BRONI } from "./classes-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
+
+/** Pule biegłości (kształt `PROFESSIONS[].bieglosci`): siedem kategorii broni z tabel, zestawy narzędzi. */
+const BRON = KATEGORIE_BRONI.map(k => `weapon:${k}`);
+const ZESTAW = "tool:tool:*";
 
 /** Approved native art; rule IDs retain their original spelling. */
 const SZTUCZKA_ICONS = Object.freeze({
@@ -105,6 +111,12 @@ export const SZTUCZKI_SOURCE = "Tabele/Sztuczki.md";
  * @property {string[]} [legacyAbilityKeys] `ABILITY_KEYS` satisfied by owning this feat
  *                                       (`actors/abilities.mjs`). One Sztuczka can grant
  *                                       several — `Szybkie palce` covers two.
+ * @property {object[]} [bieglosci]       Proficiency groups → level-0 `Trait` advancements (shape of
+ *                                       `PROFESSIONS[].bieglosci`; builder: `dev/packs/build-packs.mjs`).
+ * @property {{name: string, zmiany: object[]}[]} [efekty] Transfer Active Effects on the feat (shape of
+ *                                       `EFEKTY` in `zdolnosci-efekty.mjs`).
+ * @property {boolean} [tylkoCechy]      The Sztuczka is nothing but its Rozwój Cechy — the only one whose ASI
+ *                                       alone earns the „pełne” badge (`validate-packs` checks the rest).
  * @property {SztuczkaAuto[]} auto       Automated parts (empty = none yet).
  * @property {string} [manual]           What stays the GM's call by design.
  */
@@ -162,7 +174,8 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 15+, biegłość Pojazdy",
     text: "+1 ZRC lub MDR; kierowanie jednośladem bez rąk (z Utrudnieniem MDR).",
     category: "pojazdy",
-    auto: []
+    auto: [],
+    manual: "Kierowanie jednośladem bez rąk (Test z Utrudnieniem MDR) — rozstrzyga MG."
   },
   benzynaZamiastKrwi: {
     label: "Benzyna zamiast krwi",
@@ -189,7 +202,10 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub ZRC; Szybkość wspinaczki = Szybkość (wolne ręce / zestaw wspinaczkowy); "
       + "pochylony teren nie jest trudnym terenem; Ułatwienie w RO przy upadku.",
     category: "mobilnosc",
-    auto: []
+    efekty: [{ name: "Człowiek-pająk — wspinaczka", zmiany: [change("system.attributes.movement.climb", CHANGE_TYPE.upgrade, "@attributes.movement.walk")] }],
+    auto: [{ what: "Szybkość wspinaczki = Szybkość — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }],
+    manual: "Warunek „wolne ręce albo zestaw wspinaczkowy”, pochylony teren bez trudnego terenu i Ułatwienie w RO przy "
+      + "upadku — MG."
   },
   cwiczenieCzyniMistrza: {
     label: "Ćwiczenie czyni mistrza",
@@ -198,6 +214,7 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 do dwóch Cech Bazowych lub +2 do jednej (max 20). Można wybierać wielokrotnie.",
     category: "rozwoj",
     repeatable: true,
+    tylkoCechy: true,
     auto: []
   },
   fabrykator: {
@@ -219,7 +236,8 @@ export const SZTUCZKI = Object.freeze({
     req: "INT 11+",
     text: "+1 dowolna Cecha; biegłość w 2 wybranych zestawach narzędzi.",
     category: "produkcja",
-    auto: []
+    bieglosci: [{ wybory: [{ ile: 2, pula: [ZESTAW] }], tryb: "default", tytul: "Zestawy narzędzi" }],
+    auto: [{ what: "Biegłość w 2 zestawach narzędzi — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }]
   },
   gradOlowiu: {
     label: "Grad ołowiu",
@@ -242,7 +260,8 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ; Stalowe jaja [R] — podbiegnięcie do granatu (4,5 m) i rzut w Reakcji "
       + "bez ataków okazyjnych; dwukrotny zasięg rzutu granatem.",
     category: "granaty",
-    auto: []
+    auto: [],
+    manual: "Stalowe jaja [R] (podbiegnięcie do granatu i rzut w Reakcji) i dwukrotny zasięg rzutu granatem — MG."
   },
   gunfight: {
     label: "Gunfight",
@@ -250,7 +269,11 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 17+",
     text: "+1 ZRC; brak Utrudnienia do Testów Ataku bronią palną od wrogów w zasięgu do 1,5 m.",
     category: "dystans",
-    auto: []
+    legacyAbilityKeys: ["gunfight"],
+    auto: [{
+      what: "Bez Utrudnienia „atak dystansowy w zwarciu” przy ataku bronią palną (silnik okoliczności ataku).",
+      where: "config/okolicznosci-ataku.mjs"
+    }]
   },
   immunitet: {
     label: "Immunitet",
@@ -258,7 +281,11 @@ export const SZTUCZKI = Object.freeze({
     req: "KON 13+, biegłość Medycyna",
     text: "+1 KON; nigdy nie złapiesz nowej choroby; Ułatwienie w RO przeciw chorobom już posiadanym.",
     category: "wsparcie",
-    auto: []
+    auto: [{
+      what: "Ułatwienie w RO, których źródłem jest choroba — wiersz rejestru ułatwień w oknie rzutu.",
+      where: "combat/ulatwienia-testow.mjs"
+    }],
+    manual: "„Nigdy nie złapiesz nowej choroby” — MG nie nakłada nowych chorób; moduł nie blokuje zarażenia."
   },
   jestZajebiscie: {
     label: "Jest zajebiście",
@@ -293,7 +320,9 @@ export const SZTUCZKI = Object.freeze({
     text: "Biegłość broń improwizowana (ciężkie 10 kg+ → 3k4 obrażeń obuchowych); "
       + "Ułatwienie przy ataku ciężkim przedmiotem; możliwość Powalenia.",
     category: "wrecz",
-    auto: []
+    bieglosci: [{ nadania: ["weapon:improwizowana"], tryb: "default", tytul: "Broń improwizowana" }],
+    auto: [{ what: "Biegłość w broni improwizowanej — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }],
+    manual: "Ciężki przedmiot 10 kg+ (3k4 obrażeń obuchowych), Ułatwienie przy ataku nim i Powalenie — MG."
   },
   miotacz: {
     label: "Miotacz",
@@ -309,7 +338,9 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 INT lub ZRC; Fechmistrz — wybrana broń biała zadaje dodatkową kostkę obrażeń "
       + "(zmiana po Długim Odpoczynku z treningiem).",
     category: "wrecz",
-    auto: []
+    auto: [],
+    manual: "Fechmistrz — dodatkowa kość obrażeń wybraną bronią białą i jej zmiana po Długim odpoczynku: "
+      + "gracz dorzuca kość, wybór pilnuje MG."
   },
   mistrzWalkiWrecz: {
     label: "Mistrz walki wręcz",
@@ -422,7 +453,11 @@ export const SZTUCZKI = Object.freeze({
     req: "Brak",
     text: "+1 dowolna Cecha; dodatkowa zdolność z listy zdolności swojego Pochodzenia.",
     category: "rozwoj",
-    auto: []
+    auto: [{
+      what: "Dodatkowa zdolność Pochodzenia — awans przy wzięciu Sztuczki (wybór z puli zdolności Pochodzeń).",
+      where: "config/sztuczki-data.mjs"
+    }],
+    manual: "Awans nie zawęża puli do Pochodzenia postaci — wybór sprawdza MG."
   },
   pewnaReka: {
     label: "Pewna ręka",
@@ -431,7 +466,9 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC; Pewny strzał [B] — Szybkość spada do 0, ale Ułatwienie do 1 ataku dystansowego "
       + "(nie przy seriach); brak Utrudnienia za niestabilne podłoże.",
     category: "dystans",
-    auto: []
+    auto: [],
+    manual: "Pewny strzał [B] (Szybkość 0, Ułatwienie do jednego ataku dystansowego, nie przy seriach) i brak "
+      + "Utrudnienia za niestabilne podłoże — gracz zaznacza w oknie rzutu, MG pilnuje."
   },
   pierwotnyInstynkt: {
     label: "Pierwotny instynkt",
@@ -515,7 +552,9 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub KON; Młynek [B] — gdy co najmniej 3 wrogów jest w zasięgu 1,5 m, "
       + "w Akcji Bonusowej jeden atak wręcz bronią białą przeciw każdemu z nich.",
     category: "wrecz",
-    auto: []
+    auto: [],
+    manual: "Młynek [B] — atak wręcz przeciw każdemu z co najmniej 3 wrogów w zasięgu 1,5 m: gracz atakuje "
+      + "po kolei, warunek pilnuje MG."
   },
   ruchomeGniazdoCkm: {
     label: "Ruchome gniazdo CKM",
@@ -586,7 +625,11 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC lub MDR; brak Utrudnienia za daleki dystans; "
       + "zasięg daleki broni dystansowej ×2.",
     category: "dystans",
-    auto: []
+    legacyAbilityKeys: ["snajper"],
+    auto: [{
+      what: "Zasięg daleki ×2 i bez Utrudnienia za daleki dystans (silnik okoliczności ataku; ze Strzelcem — ×3).",
+      where: "config/okolicznosci-ataku.mjs"
+    }]
   },
   szachista: {
     label: "Szachista",
@@ -606,7 +649,8 @@ export const SZTUCZKI = Object.freeze({
     req: "Brak",
     text: "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
     category: "rozwoj",
-    auto: []
+    bieglosci: [{ wybory: [{ ile: 1, pula: BRON }], tryb: "default", tytul: "Kategoria broni" }],
+    auto: [{ what: "Biegłość w jednej kategorii broni — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }]
   },
   szkolenieWCiezkimPancerzu: {
     label: "Szkolenie w ciężkim pancerzu",
@@ -614,7 +658,8 @@ export const SZTUCZKI = Object.freeze({
     req: "SIŁ 13+, wyszkolenie w średnim pancerzu",
     text: "+1 SIŁ lub KON; wyszkolenie w ciężkich pancerzach.",
     category: "rozwoj",
-    auto: []
+    bieglosci: [{ nadania: ["armor:hvy"], tryb: "default", tytul: "Ciężkie pancerze" }],
+    auto: [{ what: "Wyszkolenie w ciężkich pancerzach — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }]
   },
   szkolenieWSrednimPancerzu: {
     label: "Szkolenie w średnim pancerzu",
@@ -622,7 +667,8 @@ export const SZTUCZKI = Object.freeze({
     req: "SIŁ 10+, wyszkolenie w lekkim pancerzu",
     text: "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
     category: "rozwoj",
-    auto: []
+    bieglosci: [{ nadania: ["armor:med"], tryb: "default", tytul: "Średnie pancerze" }],
+    auto: [{ what: "Wyszkolenie w średnich pancerzach — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }]
   },
   szturmowiec: {
     label: "Szturmowiec",
@@ -643,7 +689,10 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); "
       + "Długie susy [B] — Bieganie w Akcji Bonusowej.",
     category: "mobilnosc",
-    auto: []
+    // Biegłość w Inicjatywie — stockowa flaga dnd5e (reguły „modern”: PB do Inicjatywy, jak Alert 2024).
+    efekty: [{ name: "Szybki Bill — Inicjatywa", zmiany: [change("flags.dnd5e.initiativeAlert", CHANGE_TYPE.override, true)] }],
+    auto: [{ what: "Biegłość w Inicjatywie (+PB) — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }],
+    manual: "Długie susy [B] — Bieganie w Akcji Bonusowej: koszt akcji pilnuje gracz."
   },
   szybkiePalce: {
     label: "Szybkie palce",
@@ -669,7 +718,8 @@ export const SZTUCZKI = Object.freeze({
     req: "INT 10+",
     text: "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
     category: "produkcja",
-    auto: []
+    bieglosci: [{ wybory: [{ ile: 2, pula: ["skills:*"] }], tryb: "default", tytul: "Umiejętności" }],
+    auto: [{ what: "Biegłość w 2 umiejętnościach — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }]
   },
   ukrytyCel: {
     label: "Ukryty cel",
@@ -686,7 +736,8 @@ export const SZTUCZKI = Object.freeze({
       + "1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, "
       + "z Utrudnieniem → Powalenie).",
     category: "wrecz",
-    auto: []
+    auto: [],
+    manual: "Ułatwienie wobec Pochwyconego, Duszenie i Rzut na matę — MG."
   },
   zlomiarz: {
     label: "Złomiarz",

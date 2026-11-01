@@ -14,7 +14,7 @@
  *     źródło RO z karty; `gdy: "stol"` — warunek fabularny („gdy rozmawiasz z półświatkiem”), podsuwany w plakietce.
  *
  * Klucze: `abilityId` zdolności klasowej / profesji / opcji albo `originAbilityId` zdolności Pochodzenia — jedna
- * przestrzeń nazw (identyfikatory się nie powtarzają). Strony RAW w komentarzach; bez cytatów (repozytorium publiczne).
+ * przestrzeń nazw (identyfikatory się nie powtarzają); w `ULATWIENIA` także klucz Sztuczki (camelCase, `immunitet`). Strony RAW w komentarzach; bez cytatów (repozytorium publiczne).
  */
 
 import { change, CHANGE_TYPE } from "./effect-changes.mjs";
@@ -125,6 +125,8 @@ export const ULATWIENIA = Object.freeze([
   { id: "smakuje-jak-arszenik", label: "Smakuje jak arszenik", rzut: ["save:con"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("kwas", "trucizna", "skazenie") },
   // Szczur — A co mi tam: RO przeciw chorobom, truciznom i radiacji.
   { id: "a-co-mi-tam", label: "A co mi tam", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba", "trucizna", "skazenie") },
+  // Sztuczka Immunitet (klucz Sztuczki): Ułatwienie w RO przeciw chorobom.
+  { id: "immunitet", label: "Immunitet", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba") },
   // Pochodzenia.
   { id: "kwas-w-zylach", label: "Kwas w żyłach", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("trucizna", "kwas") },
   { id: "moloch-cos-slyszalem", label: "Moloch? Coś słyszałem", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("maszyna") },

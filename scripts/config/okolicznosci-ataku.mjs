@@ -11,9 +11,12 @@
  *   - **Zasięg** (s. 28): cel w zasięgu dalekim — Utrudnienie; poza dalekim atak chybia (uwaga, nie
  *     blokada — pomiar od krawędzi żetonów bywa nieprecyzyjny, decyduje MG). **Strzelec** (Zabójca, s. 94; `bron.snajper`
  *     — stanowisko snajperskie, celownik optyczny): zasięg daleki ×3 i bez Utrudnienia za daleki dystans (PLAN_m7 E4).
+ *     Sztuczka **Snajper** (`bron.snajperSztuczka`): zasięg daleki ×2 i bez Utrudnienia za daleki dystans; ze Strzelcem
+ *     liczy się większe powiększenie (×3), mnożniki się nie mnożą (RAI).
  *   - **Atak dystansowy w zwarciu** (s. 28): Utrudnienie, jeśli ≤ 1,5 m jest przeciwnik, który cię
  *     widzi, nie jest Nieprzytomny i ma Szybkość > 0 (U7: Oślepienie, Pochwycenie, Sparaliżowanie,
- *     Unieruchomienie — wyłączają; niewidzialnego atakującego nikt nie widzi).
+ *     Unieruchomienie — wyłączają; niewidzialnego atakującego nikt nie widzi). Sztuczka **Gunfight** (`bron.gunfight`):
+ *     bez tego Utrudnienia przy ataku bronią palną.
  *   - **Stany** (s. 35): własne Utrudnienie — Oślepienie, Przerażenie, Zatrucie, Unieruchomienie,
  *     Pochwycenie (cele inne niż pochwytujący), Powalenie (wręcz); własne Ułatwienie — Niewidoczność.
  *     Przeciw tobie Ułatwienie — Nieprzytomność, Ogłuszenie, Oślepienie, Unieruchomienie, Powalenie
@@ -79,6 +82,8 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  * @property {boolean} [oparta]              dwójnóg/trójnóg rozłożony, stanowisko pojazdu albo „Oprzyj broń”
  * @property {number|null} [sila]            wartość SIŁ strzelca
  * @property {boolean} [snajper]             Strzelec na stanowisku snajperskim, broń z celownikiem optycznym (U20)
+ * @property {boolean} [snajperSztuczka]     atakujący ma Sztuczkę Snajper
+ * @property {boolean} [gunfight]            atakujący ma Sztuczkę Gunfight
  */
 
 const ma = (u, id) => !!u?.stany?.has?.(id);
@@ -88,10 +93,14 @@ const _wl = (s, id) => new Set(s.bron?.wlasciwosci ?? []).has(id);
 /** Strzelec (s. 94): „Powiększenie” — maksymalny zasięg tej broni ×3. */
 export const SNAJPER_ZASIEG = 3;
 
-/** Zasięg daleki w metrach z Powiększeniem Strzelca; `null` — nieznany. */
+/** Sztuczka Snajper: zasięg daleki broni dystansowej ×2. */
+export const SNAJPER_SZTUCZKA_ZASIEG = 2;
+
+/** Zasięg daleki w metrach z Powiększeniem Strzelca albo Sztuczki Snajper (większe z dwóch); `null` — nieznany. */
 export function zasiegDaleki(s) {
   const d = _num(s.zasieg?.daleki);
-  return d === null ? null : d * (s.bron?.snajper ? SNAJPER_ZASIEG : 1);
+  if (d === null) return null;
+  return d * (s.bron?.snajper ? SNAJPER_ZASIEG : s.bron?.snajperSztuczka ? SNAJPER_SZTUCZKA_ZASIEG : 1);
 }
 
 /** Broń palna i broń miotana albo rzucana — dla wierszy „pod wodą” (s. 255–256). */
@@ -136,15 +145,16 @@ export function autoKrytyk(cel, odleglosc) {
 /** Źródła RAW. Kolejność = kolejność w dymku. */
 export const ZRODLA_OKOLICZNOSCI = _f([
   // Zasięg i zwarcie (s. 28)
-  // Strzelec — Przewaga balistyczna (s. 94): bez Utrudnienia za daleki dystans.
+  // Strzelec — Przewaga balistyczna (s. 94) i Sztuczka Snajper: bez Utrudnienia za daleki dystans.
   _f({ id: "zasiegDaleki", rodzaj: "utrudnienie", label: "Cel w zasięgu dalekim", strona: "s. 28", cel: true,
-    gdy: s => !s.wrecz && !s.bron?.snajper && _dist(s) !== null && _num(s.zasieg?.normalny) !== null
+    gdy: s => !s.wrecz && !s.bron?.snajper && !s.bron?.snajperSztuczka && _dist(s) !== null && _num(s.zasieg?.normalny) !== null
       && _dist(s) > _num(s.zasieg.normalny) && (zasiegDaleki(s) === null || _dist(s) <= zasiegDaleki(s)) }),
   _f({ id: "pozaZasiegiem", rodzaj: "uwaga", label: "Cel poza zasięgiem dalekim — atak chybia", strona: "s. 28", cel: true,
     gdy: s => !s.wrecz && _dist(s) !== null && zasiegDaleki(s) !== null && _dist(s) > zasiegDaleki(s) }),
   _f({ id: "dystansowyWZwarciu", rodzaj: "utrudnienie", label: "Atak dystansowy w zwarciu", strona: "s. 28",
     gdy: s => {
-      if (s.wrecz) return false;
+      // Gunfight (Sztuczka): broń palna strzela w zwarciu bez Utrudnienia.
+      if (s.wrecz || (s.bron?.gunfight && jestPalna(s.bron))) return false;
       const wrog = (s.wrogowieObok ?? []).find(w => przeszkadzaWZwarciu(w, s.atakujacy));
       return wrog ? `Atak dystansowy w zwarciu${wrog.nazwa ? ` (${wrog.nazwa})` : ""}` : false;
     } }),

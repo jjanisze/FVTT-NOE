@@ -57,6 +57,13 @@ export function registerSztuczkiDataTests(quench) {
         }
       });
 
+      it("sam Rozwój Cechy nie daje plakietki „pełne” — reszta efektu w `auto` albo `manual` (P5)", function () {
+        const golaCecha = Object.entries(SZTUCZKI)
+          .filter(([, d]) => d.cechy && !d.auto.length && !d.manual && !d.tylkoCechy).map(([k]) => k);
+        expect(golaCecha).to.be.empty;
+        expect(Object.entries(SZTUCZKI).filter(([, d]) => d.tylkoCechy).map(([k]) => k)).to.deep.equal(["cwiczenieCzyniMistrza"]);
+      });
+
       it("kubełki pokrycia dzielą zbiór Sztuczek bez reszty", function () {
         const { auto, partial, none } = sztuczkiCoverage();
         expect(auto.length + partial.length + none.length).to.equal(KEYS.length);

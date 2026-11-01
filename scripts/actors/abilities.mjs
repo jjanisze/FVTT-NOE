@@ -82,7 +82,10 @@ export const ABILITY_KEYS = {
   INTELIGENTNA_OBRONA: "inteligentnaObrona",
   MUTANT_NA_SNIADANIE: "mutantNaSniadanie",
   EMPIRYK: "empiryk",
-  DZIEWIEC_ZYC: "dziewiecZyc"
+  DZIEWIEC_ZYC: "dziewiecZyc",
+  // Silnik okoliczności ataku (`config/okolicznosci-ataku.mjs`) — Sztuczki dystansowe.
+  GUNFIGHT: "gunfight",
+  SNAJPER: "snajper"
 };
 
 /**
@@ -152,6 +155,17 @@ export const ABILITY_DEFINITIONS = {
     // Opcja Wyjadacza (Twardziel, Zwiadowca) — przedmiot z kompendium nosi samą nazwę opcji.
     aliases: ["stalowy nadgarstek"],
     noticeColor: "#4a5a6b"
+  },
+  [ABILITY_KEYS.GUNFIGHT]: {
+    label: "Gunfight",
+    exactAliases: ["gunfight"],
+    noticeColor: "#6b4a3a"
+  },
+  // Tylko dokładna nazwa: „Karabin snajperski” i „Stanowisko snajperskie” zawierają „snajper”.
+  [ABILITY_KEYS.SNAJPER]: {
+    label: "Snajper",
+    exactAliases: ["snajper"],
+    noticeColor: "#3a4a6b"
   },
   [ABILITY_KEYS.PULP_FICTION]: {
     label: "Pulp Fiction",

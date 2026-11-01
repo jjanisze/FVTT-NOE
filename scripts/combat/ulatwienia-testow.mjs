@@ -153,9 +153,10 @@ function _onRenderMessage(message, html) {
     "Warunek fabularny — moduł go nie ocenia. Gdy pasuje, MG zmienia tryb rzutu w oknie albo przerzuca.", " neuro-testy-stol"));
 }
 
-/** Czy aktor ma zdolność (klasową, profesji, opcję albo Pochodzenia) o tym identyfikatorze. */
+/** Czy aktor ma zdolność (klasową, profesji, opcję, Pochodzenia) albo Sztuczkę o tym identyfikatorze. */
 function _maZdolnosc(actor, id) {
-  return actor?.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === id || i.getFlag(MODULE_ID, "originAbilityId") === id) ?? false;
+  return actor?.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === id || i.getFlag(MODULE_ID, "originAbilityId") === id
+    || i.getFlag(MODULE_ID, "sztuczka") === id) ?? false;
 }
 
 export function registerUlatwieniaTestow() {

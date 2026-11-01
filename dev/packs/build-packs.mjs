@@ -650,6 +650,15 @@ function buildSztuczka(key) {
     }, "sztuczka-patriota-pochodzenie"));
   }
   if (adv.length) doc.system.advancement = advancementById(adv);
+  // Effects the Sztuczka carries (Szybki Bill — Inicjatywa, Człowiek-pająk — wspinaczka), shape of `EFEKTY`.
+  if (def.efekty?.length) {
+    doc.effects = def.efekty.map((e, i) => ({
+      _id: idFor("sztuczka-effect", `${key}.${i}`),
+      name: e.name, img: doc.img, type: "base", transfer: true, disabled: false,
+      system: { changes: e.zmiany, ...(e.warunki ? { conditions: e.warunki } : {}) },
+      flags: { [MODULE_ID]: { sztuczkaEfekt: key } }
+    }));
+  }
   return { ...doc, _key: null };
 }
 
