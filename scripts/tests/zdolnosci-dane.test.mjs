@@ -162,6 +162,26 @@ export function registerZdolnosciDataTests(quench) {
 
         expect(planFeatureResync(new Item.implementation(want), want)).to.equal(null);
       });
+
+      it("Sztuczka bez efektu z danych i plakietki (Szybki Bill sprzed E8) — plan je zakłada; zgodna kopia — nic", async function () {
+        const doc = (await game.packs.get(`${MODULE_ID}.sztuczki`)?.getDocuments() ?? [])
+          .find(d => d.getFlag(MODULE_ID, "sztuczka") === "szybkiBill");
+        if (!doc?.effects.size) this.skip(); // paczka sprzed przebudowy
+        const want = doc.toObject();
+        const old = foundry.utils.deepClone(want);
+        old.effects = [];
+        old.system.description.value = stripCoverageBadge(old.system.description.value, "neuro-sztuczka");
+
+        const plan = planFeatureResync(new Item.implementation(old), want, "sztuczka");
+        expect(plan.efekty.map(e => e.name)).to.deep.equal(["Szybki Bill — Inicjatywa"]);
+        expect(plan.what).to.include("plakietka pokrycia");
+        expect(planFeatureResync(new Item.implementation(want), want, "sztuczka")).to.equal(null);
+
+        // v14 nadaje zmianom efektu własne `_id` przy tworzeniu — dosłany efekt nie może wracać w każdym przebiegu.
+        const nowe = foundry.utils.deepClone(want);
+        for (const e of nowe.effects) for (const c of e.system?.changes ?? []) c._id = foundry.utils.randomID();
+        expect(planFeatureResync(new Item.implementation(nowe), want, "sztuczka"), "inne _id zmian").to.equal(null);
+      });
     });
   });
 }

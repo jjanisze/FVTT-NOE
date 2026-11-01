@@ -166,5 +166,49 @@ roster.push({
   sztuczka: "Rodeo", ekwipunek: LOADOUTS.zwiadowca, grupa: "pokrycie"
 });
 
+/**
+ * M7 E8 (2026-11-01): everything M7 automated that no persona carried — one profession or option pick, one starting
+ * Sztuczka and one Pochodzenie ability each (Jeździec above covers Rodeo and Ale jazda!). Appended last, so no
+ * rotation above shifts; Trajektoria is a Spec 7 class feature.
+ */
+const M7 = [
+  // [klasa, poziom, profesja, picks, sztuczka, pochodzenie, zdolność Pochodzenia]
+  ["brutal", 3, "Ganger", { "Zdolność z profesji": "Odważny czy głupi" }, "Wrestler", "Salt Lake City", "Wierzę"],
+  ["brutal", 3, "Ganger", { "Zdolność z profesji": "Jeden z nich" }, "Ławnik", "Salt Lake City", "Przed wojną wszystko było lepiej"],
+  ["brutal", 3, "Ganger", { "Zdolność z profesji": "Dwóch na jednego" }, "Rozróba", "Federacja Appalachów", "Szlachetne urodzenie"],
+  ["brutal", 3, "Najemnik", { "Zdolność z profesji": "Reputacja" }, "Szkolenie w ciężkim pancerzu", "Vegas", "Telepata"],
+  ["brutal", 3, "Gladiator", { "Zdolność z profesji": "Łyżeczka" }, "Grenadier", "Vegas", "Fart"],
+  ["brutal", 3, "Gladiator", { "Zdolność z profesji": "Zawołajcie kolegów" }, "Mistrz broni białej", "Posterunek", "Moloch? Coś słyszałem"],
+  ["brutal", 3, "Gladiator", { "Zdolność z profesji": "Nie do zdarcia" }, "Szkolenie w średnim pancerzu", "Posterunek", "Hi-Tech"],
+  ["cwaniak", 3, "Gwiazda", { "Zdolność z profesji": "Kakofonia" }, "Ucz się, ucz", "Teksas", "Zdrowa okolica"],
+  ["cwaniak", 3, "Kaznodzieja Nowej Ery", { "Zdolność z profesji": "Łaska boża" }, "Patriota", "Teksas", "Doktor Quinn"],
+  ["cwaniak", 3, "Kaznodzieja Nowej Ery", { "Zdolność z profesji": "Mój bóg kule nosi" }, "Gunfight", "Człowiek Pustyni", "Polegam tylko na sobie"],
+  ["cwaniak", 3, "Kaznodzieja Nowej Ery", { "Zdolność z profesji": "Amen" }, "Szkolenie w broni", "Człowiek Pustyni", "Duch pustyni"],
+  ["spec", 3, "Medyk", { "Zdolność z profesji": "Krwawy anioł" }, "Immunitet", "Południowa Hegemonia", "Zawzięty sukinkot"],
+  ["spec", 3, "Chemik", { "Zdolność z profesji": "Smakuje jak arszenik" }, "Fachowiec", "Południowa Hegemonia", "Wiesz, zjadłem własnego psa"],
+  ["twardziel", 3, "Kowboj", { "Zdolność z profesji": "Clint", "Wyjadacz — wybierz jedną": "Stalowy nadgarstek" }, "Szybki Bill", "Miami", "Ja już swoje odchorowałem"],
+  ["zlodziej", 3, "Kurier", { "Zdolność z profesji": "Slang" }, "Człowiek-pająk", "Miami", "Włóczykij"],
+  ["zlodziej", 3, "Szczur", { "Zdolność z profesji": "Szary" }, "Złomiarz", "Nowy Jork", "Czas patriotów"],
+  ["zlodziej", 3, "Szczur", { "Zdolność z profesji": "A co mi tam!" }, "Ciszej niż cień", "Asgard", "Przedwojenna edukacja"],
+  ["zlodziej", 3, "Zabójca", { "Zdolność z profesji": "Jeden strzał" }, "Snajper", "Missisipi", "Kwas w żyłach"],
+  ["zlodziej", 3, "Zabójca", { "Zdolność z profesji": "Kamuflaż" }, "Pewna ręka", "Missisipi", "Chodźmy, na pewno już utonął"],
+  ["zwiadowca", 3, "Łowca Mutantów", { "Zdolność z profesji": "Bez tajemnic", "Mój wróg — wybierz jedną": "Mój wróg: Mutanty", "Wyjadacz — wybierz jedną": "Sokole oko" }, "Przycelowanie", "Missisipi", null],
+  ["zwiadowca", 3, "Sędzia", { "Zdolność z profesji": "Jeden z nas", "Mój wróg — wybierz jedną": "Mój wróg: Zwierzęta", "Wyjadacz — wybierz jedną": "Zasadzka" }, "Ćwiczenie czyni mistrza", "Missisipi", null],
+  ["zwiadowca", 3, "Zabójca Maszyn", { "Zdolność z profesji": "Empiryk", "Mój wróg — wybierz jedną": "Mój wróg: Potwory" }, null, "Missisipi", null],
+  ["spec", 7, "Monter", { "Zdolność z profesji": PROF_PICKS.Monter }, null, "Missisipi", null]
+];
+for (const [k, poziom, prof, picks, sztuczka, origin, zdolnosc] of M7) {
+  // Spec 7 is there for its class feature; everyone else for the profession pick.
+  const wyroznik = poziom === 7 ? "Trajektoria" : picks["Zdolność z profesji"];
+  const reszta = [...(poziom === 7 ? ["Trajektoria"] : []), ...Object.values(picks), sztuczka && `Sztuczka ${sztuczka}`, zdolnosc];
+  roster.push({
+    id: `m7-${slug(wyroznik)}`, name: `${prof}: ${wyroznik}`,
+    rola: `${CLASS_LABEL[k]} ${poziom} · ${prof} · ${reszta.filter(Boolean).join(", ")} (pokrycie M7)`,
+    klasa: k, poziom, profesja: prof, pochodzenie: origin, cechy: CECHY[k],
+    picks: { ...picks, ...(zdolnosc ? { "Zdolność z Pochodzenia": zdolnosc } : {}) },
+    ...(sztuczka ? { sztuczka } : {}), ekwipunek: LOADOUTS[k], grupa: "pokrycie"
+  });
+}
+
 export const ROSTER = Object.freeze(roster);
 export const personaDef = id => ROSTER.find(p => p.id === id) ?? null;

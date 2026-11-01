@@ -1,6 +1,7 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
-> Status: **W REALIZACJI** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”). Decyzje MG D1–D15
+> Status: **ZAMKNIĘTY 2026-11-01** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”); E0–E8 w §8,
+> pregeni od nowa (D17) — osobna robota po M7. Decyzje MG D1–D17
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
 > etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
@@ -374,6 +375,7 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D14 | (2026-10-31, U28) Szósty zmysł — zakres | **Każdy RO na ZRC**, stockowa reguła dnd5e (jak Danger Sense) z warunkiem efektu bez Oślepienia/Ogłuszenia/Nieprzytomności; zagrożenie niezauważalne — MG przełącza okno rzutu na zwykły |
 | D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: bez Rozwoju Cechy** — „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika, rację ma podręcznik październikowy (MG poprawił się po E4; ASI dodane w E4 i cofnięte); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
 | D16 | (2026-11-01, P5) Sztuczki pregenów | **Buźka — Muzyk, Carson — Przycelowanie, Dante — Mistrz walki wręcz, Góra — Szybkie palce, Iris — Pan Plaster, Kluczyk — Ciszej niż cień**; kryterium MG: automatyka widoczna przy stole, prosta dla nowych graczy (cztery wybrał agent, Dantego, Iris i Kluczyka — MG). **Kluczyk: Złodziej 1** (klasa-zaślepka „Wybierz” z alfy usunięta 2026-09-25; jej cechy były Złodzieja). **Iris: INT 18 → 16 → 17** — alfowe +2 z Ćwiczenia czyni mistrza cofnięte, +1 INT z Pana Plastra. Na kartach w E8 (kampania zamrożona) |
+| D17 | (2026-11-01, E8) Pregeni — łatać czy zbudować | **Zbudować od nowa kreatorem postaci** (te same Cechy, Pochodzenie i grafika; klasa 1. poziomu — Kluczyk: Złodziej; Sztuczka z D16; wybory z alfy przeniesione na klucze NOE); stare aktory do folderu „alfa”. Osobna robota zaraz po M7 — audyt M6 pokazał braki biegłości klasy i martwe klucze umiejętności u wszystkich sześciu. **Poligon:** persony i stanowisko M7 — zgoda na przebudowę |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
@@ -806,3 +808,28 @@ rodzaj.
 - **Testy:** Quench `zdolnosci-karty` (14) — 1509/1509; nowe e2e `zdolnosci-karty` (mutant wchodzi w 9 m: gracz bez nazwy,
   MG z nazwą, Percepcja wskazuje; Zawzięty sukinkot przez gracza — wstaje na początku tury; śmierć → karta Łapiducha →
   reanimacja gracza przez MG) + regresja `umieranie`, `combat`, `zdolnosci-walka`, `postac`, `improwizacja` — zielone.
+
+
+### E8 — domknięcie (2026-11-01)
+
+- **`resync` trzech rodzajów kopii** (`migration/resync-class-features.mjs`, nadal `game.neuroshima.zdolnosci.resync`):
+  zdolności klasowe i profesji, Sztuczki, zdolności Pochodzeń (`RODZAJE` — paczka, flaga, prefiks plakietki); nowy krok
+  **efekty z danych** (E3 — `zdolnoscEfekt` / `sztuczkaEfekt`): odcisk nazwa + zmiany + warunki, bez `_id` zmian (v14
+  nadaje je przy tworzeniu — pierwsza wersja odtwarzała efekty w każdym przebiegu; złapane drugim przebiegiem na sucho
+  w kampanii, test w `zdolnosci-dane`). Awanse (ASI, `Trait`) poza zakresem — uwaga retro R2.
+- **Kampania (D15):** pełna kopia zapasowa przed zapisem (`fvtt backup`, CRC OK, świat otwarty; rejestr w
+  `Neuro 5e/Integracje/backups/README.md`), na sucho 51 zmian u 14 aktorów — plakietki, liczniki (Fart, Czas patriotów,
+  Zawzięty sukinkot, Wierzę, Zryw), aktywności (Kłusownik, Zryw, Wierzę), efekty (Sokole oko, Szósty zmysł, Ja już swoje
+  odchorowałem, Telepata, Doktor Quinn); zapis, drugi przebieg — 0. Sprawdzone: efekty działają na aktorach, liczniki
+  pełne. Serwer kampanii z powrotem zatrzymany.
+- **Dokumentacja:** `docs/Zdolnosci.md` (dla graczy: plakietki, przyciski po rzucie i pod kartą, karty MG, co zostaje
+  stołowi), spis w `docs/README.md`; macierz i changelog M7 w `IMPLEMENTATION.md` (pokrycie, nowe pliki, sekcja
+  krwawień); tabela odczytów M7 w `scripts/wkk/README.md` (D4, U2, U4, U6, U9, U10, U12, U14, U18–U20, U23, U24, U28 i
+  decyzje agenta).
+- **Poligon (zgoda MG na przebudowę):** niezmiennik „każda zautomatyzowana zdolność na personie” pękł po M7 (69 bez
+  persony — Obsada nie była przebudowana od M4, Jeździec nawet niezbudowany). Grupa **„pokrycie M7”** w `roster.mjs` —
+  23 persony doklejone na końcu (nic wyżej się nie przesuwa): jeden wybór profesji albo opcji, jedna Sztuczka i jedna
+  zdolność Pochodzenia każda; Spec 7 dla Trajektorii. Pokrycie 41/41 Sztuczek, 101/101 zdolności, 34/34 Pochodzeń.
+  Stanowisko **Sala prób** (`stations/sala-prob.mjs`): pięć miejsc z personami M7, nocny ghul 15 m dalej, manekin,
+  pacjent do reanimacji, 12 prób; zresetowane w Poligonie bez braków.
+- **Pregeni (D17):** zbudować od nowa kreatorem — osobna robota zaraz po M7.

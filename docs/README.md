@@ -34,6 +34,8 @@
     przeciwników; handel, sen, szabrowanie, bebeszenie, Fanty; krwawienia.
 16. [Krwawienia — porównanie](Krwawienia.md) — pięć zasad krwawienia z podręcznika obok siebie, ustalenia MG i
     otwarte pytania.
+17. [Zdolności, Sztuczki i Pochodzenia](Zdolnosci.md) — plakietki automatyki, przyciski po rzucie i pod kartą
+    ataku, karty MG, co zostaje przy stole.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
 [issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w

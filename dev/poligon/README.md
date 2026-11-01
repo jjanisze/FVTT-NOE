@@ -195,8 +195,8 @@ npm run fvtt -- eval --profile=poligon --expr="game.poligon.uwagi.oznacz('<id>',
 
 ## Obsada
 
-`roster.mjs` defines 42 generic personas: one per class at level 1, one per profession at level 5,
-the Hangar's five, specials (Goły, Chomik, Weteran, Warsztat, Stary wyga) and coverage personas. Each
+`roster.mjs` defines 69 generic personas: one per class at level 1, one per profession at level 5,
+the Hangar's five, specials (Goły, Chomik, Weteran, Warsztat, Stary wyga) and coverage personas (M7: 23 more). Each
 is built **once** through dnd5e's real AdvancementManager (`lib/advancement.mjs`, ~7–20 s) into the
 world compendium **Poligon · Obsada**; stations import copies and give the roster loadout through
 the module's funnels. Invariant (checked by `game.poligon.obsada.coverage()` and the e2e suite):

@@ -7,8 +7,8 @@ zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5
 v0.19.0; migracja na dnd5e 6 — v0.20.0; M4 (pojazdy, pościgi, wierzchowce) i M6 (drobne zasady RAW z biegłościami
 profesji) — v0.21.0. Walka, ekwipunek, stany i przetrwanie grały się przy żywym stole; produkcja, towarzysze, drony,
 handel, postój, pojazdy i pościgi czekają na pierwsze sesje (kampania testowa w styczniu). Czysta instalacja (B6)
-sprawdzana przy każdym wydaniu. Przed betą: PM1 i PM7, ruch w turze ze skakaniem, M7 (zdolności poziomów 1–3),
-style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+sprawdzana przy każdym wydaniu. M7 (zdolności poziomów 1–3) — zamknięte 2026-11-01. Przed betą: PM1 i PM7, ruch w turze
+ze skakaniem, style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -44,13 +44,13 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
 | | **Lalka** (dla graczy: Oporządzenie): dwie ręce, 4 + 3 egzemplarze broni pod ręką, pas, noszone (pancerz, hełm, ochraniacze, Głowa/Twarz/Ramię/Strój); dobywanie, chwyt, koszty ruchów | ✅ | `actors/doll*.mjs`, `combat/grip.mjs`, `PLAN_paper_doll.md`. Migracja D9 zastosowana, przekaźnik sprawdzony z klientem gracza, paczki przebudowane, grafika zaakceptowana. Zostały ikony „śmieci sprzedawcy" (partia 42) |
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
-| | Automatyka zdolności | 🟡 | 4/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
+| | Automatyka zdolności | 🟡 | 34/36 — 20 pełnych, 14 częściowych (`game.neuroshima.pochodzenia.report()`); M7, `docs/Zdolnosci.md` |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
 | | Biegłości profesji i klas: umiejętności, zestawy, instrumenty, broń, wieloklasowość (s. 69–101) | ✅ | awanse `Trait` w paczkach (`dev/packs/build-packs.mjs`, `validate-packs`), ostrzeżenie po awansie i audyt postaci — `actors/bieglosci.mjs` (M6 E1, e2e `postac`); przegląd istniejących BG — `HANDOFF_bieglosci_retro.md` |
-| | Automatyka zdolności | 🟡 | 33/133 — 10 pełnych, 23 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
+| | Automatyka zdolności | 🟡 | 100/133 — 45 pełnych, 55 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`); reszta — fabuła albo warstwa ruchu (handoff). M7, `docs/Zdolnosci.md` |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 19/53 — 5 pełnych, 14 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| | Automatyka | 🟡 | 41/53 — 19 pełnych, 22 częściowe (`game.neuroshima.sztuczki.report()`); Rozwój Cechy i biegłości — awanse przy wyborze; sam ASI nie daje plakietki „pełne” (`validate-packs`). M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | ✅ | `dluga`, `ciezka`, `jednorazowa` — `weapons/wlasciwosci.mjs`, wiersze silnika okoliczności (M6 E2); `ppanc`/`przebijająca` — `combat/armour-piercing.mjs`; `burząca`/`karczująca` na obiektach i pojazdach — `scenes/obiekty.mjs`; `PLAN_weapon_properties.md` |
@@ -155,6 +155,18 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/items/staza.mjs` | Staza — przedmiot z kompendium `sprzet`, stabilizacja przez lejek umierania |
 | `scripts/config/okolicznosci-ataku.mjs` | Okoliczności Testu Ataku — czysty silnik: tabela źródeł RAW, tryb rzutu, automatyczne TK ≤ 1,5 m |
 | `scripts/combat/okolicznosci.mjs` | Okoliczności Testu Ataku — migawka sceny, jeden hak `dnd5e.preRollAttack`, plakietki na karcie, rejestr źródeł spoza RAW |
+| `scripts/actors/actions.mjs` | Znaczniki „Reakcja zużyta” / „Akcja bonusowa zużyta”, lejek `zadeklaruj`, `dodatkowa` (Zryw) — M7 §3.0.1 |
+| `scripts/combat/po-rzucie.mjs` | Rejestr modyfikacji po rzucie (Fuks, Forsowanie, zdolności), łańcuch kart, hak `neuroshima.rollModified` — M7 §3.0.2 |
+| `scripts/combat/ulatwienia-testow.mjs` | Rejestr Ułatwień w testach i RO z warunkiem (walka, źródło RO, „stół”) — M7 §3.0.3 |
+| `scripts/config/zdolnosci-efekty.mjs` | Zdolności jako dane: Efekty Aktywne, awanse `Trait`, wiersze rejestru Ułatwień — M7 E3 |
+| `scripts/combat/zdolnosci-po-rzucie.mjs` | Zdolności po rzucie (Motywacja, Szczęście, Spieprzysz to!, Łeb jak sklep, Amen, Twardość, Fart…) — M7 E1 |
+| `scripts/combat/zdolnosci-wsparcie.mjs` | Wsparcie sojusznika (Dobra rada, Łaska boża, Let's rock, Odważny, Kolejka, Kakofonia) — M7 E2 |
+| `scripts/combat/zdolnosci-walka.mjs` | Premie i Ułatwienia w ataku ze zdolności (Mój wróg, Rzeźnik, Dwóch na jednego, Zasadzka…) — M7 E4 |
+| `scripts/combat/zdolnosci-akcje.mjs` | Akcje bonusowe i dodatkowe ataki (Ulubiona broń, Promocja, Celowanie, Słaby punkt, Strzelec) — M7 E4 |
+| `scripts/combat/zdolnosci-trafienie.mjs` | Przyciski pod trafieniem (Bolesny i Podstępny atak, Mój bóg kule nosi, Skuteczny cios) — M7 E5 |
+| `scripts/combat/przycelowanie.mjs` | Przycelowanie: „Celuję w…” w oknie ataku, TT części, skutek pod trafieniem — M7 E6 |
+| `scripts/combat/zdolnosci-karty.mjs` | Karty MG (Zryw, Kłusownik, Wierzę, Bez tajemnic, Coś mi tu śmierdzi, Łapiduch) — M7 E7; zasady `config/zdolnosci-karty-rules.mjs` |
+| `scripts/config/krwawienia-data.mjs` | Krwawienia jako osobne efekty — dane (`docs/Krwawienia.md`); silnik `combat/bleeding.mjs` |
 | `scripts/combat/sygnal-naruszenia.mjs` | Sygnał naruszenia „oznaczać, nie zakazywać”: szept do MG i właścicieli z powodami + dźwięk porażki (M6 D1, D11; M7) |
 | `scripts/config/rekonwalescencja-rules.mjs` | Powrót do zdrowia — czyste zasady: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, widok pipek, licznik Regeneracji, szansa RO, prognoza kalendarzyka |
 | `scripts/actors/rekonwalescencja.mjs` | Neutralizacja Stopnia Zranienia po DO (Gojenie, Pomoc medyczna, samoleczenie WKK), sekcja w oknie DO, karty RO, przekaźnik ładunku, kalendarzyk zdrowia |
@@ -1059,15 +1071,11 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   „nie przejdziesz 3 m w linii prostej". Panel wypisuje je pod stanem jako „Poza automatyką: …",
   żeby było widać, która połowa stanu jest egzekwowana
 
-### 4.1b Krwawienie — Hemofilia (`bleeding.mjs`)
-- [x] Wyzwalacz: obrażenia **cięte lub kłute**. Czytane z `dnd5e.calculateDamage`, nie
-  `preApplyDamage` — ten drugi dostaje wyłącznie sumę, typy są już wtedy stracone. Dzięki temu
-  trafienie mieszane (bagnet + rider) łapie, a czysto obuchowe nie
-- [x] Stan `bleeding` na pionku + flaga z serią; RO na Kondycję ST 10 na koniec **swojej** tury
-  (hook `updateCombat` patrzy na `combat.previous`, więc RO ląduje tam, gdzie stawia je RAW)
-- [x] Porażka = 1k4 obrażeń i zerowanie serii; trzy sukcesy pod rząd kończą krwawienie
-- [x] Trzy drogi zatrzymania z RAW: wstrzyknięcie leku (zużywa realną dawkę przez normalną ścieżkę
-  Używek), Test Medycyny ST 15 **wymagający narzędzi małego medyka** u leczącego, oraz seria 3 RO
+### 4.1b Krwawienia (`bleeding.mjs`, `config/krwawienia-data.mjs`)
+- [x] Od 2026-11-01 każde krwawienie to osobny efekt ze swoim stanem: Hemofilia, Podstępny atak, Przycelowanie — tętnica,
+  Kolory (Rdza/Rtęć/Stal), piła Juggernauta, w WKK dum-dum; Wyciek maszyny osobno. Ten sam się nie powtarza, różne
+  trwają naraz; tyka i zatrzymuje się osobno, przyciski na kartach krwawienia, przypomnienie poza walką. Zasady i
+  ustalenia MG — [docs/Krwawienia.md](docs/Krwawienia.md); przebieg — `PLAN_m7_zdolnosci.md` §8.
 
 ### 4.1c Spadanie [ZAGROŻENIE] (`falling.mjs`)
 - [x] dnd5e 5.3 ma tylko **ikonę statusu** `falling` — zero obrażeń od upadku w całym systemie.
@@ -1197,6 +1205,31 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M7 — zdolności poziomów 1–3, Sztuczki i Pochodzenia (2026-10-31 – 2026-11-01)
+
+Przebieg, decyzje MG (D1–D17) i ustalenia: `PLAN_m7_zdolnosci.md`; dla graczy — [docs/Zdolnosci.md](docs/Zdolnosci.md).
+Testy na koniec: Quench 1510/1510, e2e `zdolnosci-po-rzucie`, `zdolnosci-wsparcie`, `zdolnosci-walka`, `krwawienia`,
+`zdolnosci-karty` i regresja zielone.
+
+Co zobaczy stół:
+- **Znaczniki akcji:** „Reakcja zużyta” i „Akcja bonusowa zużyta” z sygnałem dla MG przy drugim użyciu — oznaczają,
+  nie blokują.
+- **Po rzucie:** przyciski zdolności pod Testem k20 (Motywacja, Szczęście, Spieprzysz to!, Łeb jak sklep, Amen,
+  Twardość, Dobra rada…), Fart sam; werdykt przelicza się od razu.
+- **Atak:** Ułatwienia i premie ze zdolności i Sztuczek w oknie ataku, „Celuję w…” (Przycelowanie), przyciski pod
+  trafieniem (Ulubiona broń, Bolesny i Podstępny atak, Skuteczny cios), Nie do zdarcia zdejmuje krytyki.
+- **Karty MG:** Zryw, Kłusownik, Wierzę, Bez tajemnic, Słaby punkt, Coś mi tu śmierdzi, Strzelec, Łapiduch; Zawzięty
+  sukinkot na karcie „Umiera”.
+- **Krwawienia:** osobne efekty według ustaleń MG ([docs/Krwawienia.md](docs/Krwawienia.md)); piła Juggernauta
+  wreszcie w kompendium.
+- **Sztuczki:** Rozwój Cechy i biegłości jako awanse przy wyborze; uczciwe plakietki; Gunfight i Snajper w silniku
+  okoliczności.
+- **Pokrycie:** zdolności klasowe i profesji 100/133 (było 33), Pochodzenia 34/36 (było 4), Sztuczki 41/53 (było 19).
+
+Dla MG — kopie na kartach postaci zrobionych wcześniej: `await game.neuroshima.zdolnosci.resync()` (na sucho, raport
+w konsoli), potem `resync({ commit: true })` — plakietki, efekty z danych, liczniki i aktywności zdolności, Sztuczek i
+zdolności Pochodzeń. Rozwoju Cechy i biegłości nie dosyła (awanse nie biegną drugi raz) — braki: hand-off biegłości M6.
 
 ### v0.21.0 — Pojazdy, pościgi i wierzchowce (M4), drobne zasady (M6), nowe grafiki (2026-10-31)
 

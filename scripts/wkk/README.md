@@ -118,6 +118,34 @@ as the tables above; the Łyżeczka row is the author's ruling (RAI), the rest a
 | Wall templates: door Średni/wood/wytrzymały, steel door Średni/thin steel/twardy, window Duży/glass/kruchy, fence Duży/thin steel/wytrzymały, railing Średni/wood/wytrzymały (U10) | `config/obiekty-rules.mjs` (`SZABLONY`) |
 | Water is only counted in combat — turn-start swim tests and the entry card; outside combat the GM asks (U15) | `config/woda-rules.mjs` (`testNaPoczatkuTury`), `scenes/woda.mjs` |
 
+### GM readings and RAI of abilities (M7)
+
+Class, profession and origin abilities and Sztuczki (`PLAN_m7_zdolnosci.md` §5). Same status as the tables above:
+they fill a silence in the book and stay in the NOE tree. Rows marked *agent* are the implementer's calls the GM
+did not veto; the bleed decisions have their own page, `docs/Krwawienia.md`.
+
+| Reading | Where |
+|---|---|
+| "Before the effect is known" (Motywacja, Amen, Łeb jak sklep) means before the outcome is resolved: a button after the roll, the verdict recomputes (D4) | `combat/po-rzucie.mjs`, `combat/zdolnosci-po-rzucie.mjs` |
+| Several modifications of one roll apply in click order; a reroll drops the dice added before it, like a Fuks (U2) | `combat/po-rzucie.mjs` |
+| Amen: the button shows on a failure against a known DC/TT; without a DC — always, the player decides (U4) | `combat/zdolnosci-po-rzucie.mjs` |
+| Spieprzysz to! on an NPC roll hidden from the player — the button sits with the GM (U6, P6) | `combat/zdolnosci-po-rzucie.mjs` |
+| Rzeźnik: a two-handed grip on the same weapon does not exclude the bonus; an improvised twin in the other hand is not "another weapon" until it attacks (U9) | `combat/zdolnosci-walka.mjs` |
+| Dwóch na jednego: "attacked the same way" = a melee attack, hit or miss, since the end of your previous turn (U10, D13) | `combat/zdolnosci-walka.mjs` |
+| Dobra rada: one roll, a button under the ally's roll until the start of the Spec's next turn (U12, D11) | `combat/zdolnosci-wsparcie.mjs` |
+| Let's rock: attacks **and** saves (U14, D12) | `combat/zdolnosci-wsparcie.mjs` |
+| Słaby punkt: a flag on the target for the combat; outside combat until a long rest (U18) | `combat/zdolnosci-akcje.mjs`, `combat/zdolnosci-walka.mjs` |
+| Refleks łowcy: the initiative bonus is on whenever a hostile mutant or monster is in the combat (U19) | `combat/zdolnosci-walka.mjs` |
+| Strzelec: the player declares the post, the module counts 5 rounds without moving, the GM applies the status; moving removes it (U20) | `combat/zdolnosci-akcje.mjs` |
+| Zawzięty sukinkot: standing up resets the death-save track (U23); if the combat ends before their turn they stand up then (*agent*) | `combat/umieranie.mjs` |
+| Łapiduch: time since death from the world clock, the death card records the moment (U24); only after three failures or a Stopień past Krytyczny — max PW 0 and the sixth exhaustion level would kill again (*agent*) | `combat/zdolnosci-karty.mjs`, `config/zdolnosci-karty-rules.mjs` |
+| Szósty zmysł: every DEX save, a stock dnd5e rule; the GM switches it off for an unnoticeable threat (U28, D14) | `config/zdolnosci-efekty.mjs` |
+| Skuteczny cios shares the Wściekły cios once-per-round limit (*agent*, accepted by the GM) | `combat/zdolnosci-trafienie.mjs`, `actors/class-resource-dice.mjs` |
+| Trajektoria: a button after the ranged attack roll instead of a toggle in the attack window (*agent*) | `combat/zdolnosci-po-rzucie.mjs` |
+| Snajper with Strzelec: the larger magnification (×3), multipliers do not stack (*agent*) | `config/okolicznosci-ataku.mjs` |
+| Krwawy anioł: "level" is the Spec level, the class of the profession (*agent*) | `items/toolkit-medyk.mjs` |
+| Bez tajemnic: the three statistics default to TT, PW and Speed; the GM may pick others (*agent*) | `combat/zdolnosci-karty.mjs` |
+
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
 the system" / RAI and state the mechanic and its reasoning — they do not repeat the name.
