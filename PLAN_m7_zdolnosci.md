@@ -854,3 +854,10 @@ rodzaj.
 - **Kampania:** pełna kopia zapasowa przed zapisem (CRC OK, świat otwarty), budowa, stare karty do folderu
   „alfa” (Postacie › PC), żetony na scenie szablonów podmienione na nowe w tych samych miejscach. Serwer kampanii
   z powrotem zatrzymany.
+- **Poligon (MG: „usuwa mylącą i zbędną rozbieżność”):** startowa Sztuczka persony szła zwykłym tworzeniem
+  przedmiotu, więc persony z poziomu 1 i grupy M7 nie dostawały jej Rozwoju Cechy ani biegłości (Muzyk bez
+  instrumentów) — inaczej niż postać zrobiona przy stole i niż persony z 5. poziomu, którym Sztuczkę daje wybór
+  klasy na 4. poziomie. Teraz przez menedżera (`lib/obsada.mjs`; tryb `fast` bez zmian). E2e `poligon`: 69 person,
+  45 Sztuczek z krokami — wszystkie w dzienniku budowy, pokrycie 41/41, 101/101, 34/34, stanowiska bez braków
+  (jedyny błąd konsoli — wycieczka nowego świata rdzenia przy zakładaniu świata, ta sama co 2026-10-19). Obsada
+  Poligonu MG przebudowana, wszystkie 20 stanowisk zresetowanych bez braków.

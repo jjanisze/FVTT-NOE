@@ -7,9 +7,10 @@
  *   klasa / poziom   class identifier and level (the class is dropped at 1, then levelled up)
  *   profesja         the profession picked at the Subclass step (level 3)
  *   pochodzenie      the background (Pochodzenie) dropped after the class
- *   cechy            ability scores before Pochodzenie (+1/+1)
+ *   cechy            ability scores before Pochodzenie (+1/+1) and the Sztuczka's „Rozwój Cechy”
  *   picks            what to choose at named advancement steps — step title → item name(s) / skill label(s)
- *   sztuczka         the starting Sztuczka (NOE: one at creation, no advancement)
+ *   sztuczka         the starting Sztuczka (NOE: one at creation), dropped through the manager — its
+ *                    „Rozwój Cechy” and proficiencies take `picks` too (step title → ability key / label)
  *   multi            further classes `[{klasa, poziom, picks}]` (multiclass)
  *   ekwipunek        the loadout, applied to every imported copy through the kit (doll, magazines)
  *

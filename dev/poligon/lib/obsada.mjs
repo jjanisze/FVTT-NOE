@@ -4,9 +4,9 @@
  *
  * A persona is built on a scratch world actor — class dropped at level 1 (AdvancementManager), levelled
  * up through the manager (profession at the Subclass step), further classes the same way, Pochodzenie
- * dropped (its ASI and ability pick), the starting Sztuczka added — then imported into the pack and the
- * scratch actor deleted. Every step the manager showed is kept in the pack entry's flags, so a missing
- * pick or a changed step is visible in the build log, not guessed.
+ * dropped (its ASI and ability pick), the starting Sztuczka dropped (its „Rozwój Cechy” and proficiencies)
+ * — then imported into the pack and the scratch actor deleted. Every step the manager showed is kept in
+ * the pack entry's flags, so a missing pick or a changed step is visible in the build log, not guessed.
  *
  * `fast` (the e2e rot guard only, never the GM's Poligon): class at its level without the manager —
  * what the e2e suites do for setup. Clearly marked on the persona; the build log says "fast".
@@ -107,9 +107,12 @@ export async function buildPersona(def, { fast = false } = {}) {
       else steps.push(...(await addWithAdvancement(scratch, game.items.fromCompendium(bg), { picks })).steps);
     }
     if (def.sztuczka) {
+      // Through the manager like a drop on the sheet: the Sztuczka's „Rozwój Cechy” and proficiencies (E3) are
+      // its steps — a plain create skipped them, so personas differed from table-made characters.
       const sz = await find("sztuczki", def.sztuczka);
-      if (sz) await scratch.createEmbeddedDocuments("Item", [game.items.fromCompendium(sz)]);
-      else steps.push(`BRAK Sztuczki ${def.sztuczka}`);
+      if (!sz) steps.push(`BRAK Sztuczki ${def.sztuczka}`);
+      else if (fast) await scratch.createEmbeddedDocuments("Item", [game.items.fromCompendium(sz)]);
+      else steps.push(...(await addWithAdvancement(scratch, game.items.fromCompendium(sz), { picks })).steps);
     }
     await scratch.update({ "system.attributes.hp.value": scratch.system.attributes.hp.max });
 
