@@ -3,9 +3,9 @@
 > Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
 > M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją; **v0.20.0
 > 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**; **v0.21.0 2026-10-31 — M4 (pojazdy,
-> pościgi, wierzchowce) i M6 wydane**; przegląd 2026-10-31 — §0.1). Etap bieżący: **późna alfa** — każdy rozdział RAW
-> ma narzędzia w Foundry; przed betą zostają automatyka zdolności (M7), ruch w turze ze skakaniem, PM1/PM7, style
-> i dokumentacja. Bramki spełnione: B3, B4, B5, B6 — bramka wydania v0.21.0 zielona na `5ac17bb` (e2e 44/44 w świecie
+> pościgi, wierzchowce) i M6 wydane**; przegląd 2026-10-31 — §0.1; **2026-11-01 — M7 (automatyka zdolności poziomów
+> 1–3) zamknięte, w `master` bez wydania**). Etap bieżący: **późna alfa** — każdy rozdział RAW ma narzędzia w Foundry;
+> przed betą zostają ruch w turze ze skakaniem, PM1/PM7, style i dokumentacja. Bramki spełnione: B3, B4, B5, B6 — bramka wydania v0.21.0 zielona na `5ac17bb` (e2e 44/44 w świecie
 > gołym i zalecanym, Quench 1385/1385, 0 ostrzeżeń zgodności z naszego kodu). Otwarte: B1 (Skakanie), B2 (zamrożenie
 > przy kandydacie), B7 (dokumentacja dla graczy pojazdów i pościgu), B8 (przegląd przy kandydacie) — §0.1.
 > **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12; weto M3 i M5: MG przeszedł je slice po
@@ -36,15 +36,22 @@ ułożeniu tej kolejności i nie miały w niej miejsca — **M7 w zakresie D2** 
 i **ruch w turze ze skakaniem** (`HANDOFF_movement_hotbar.md`; M6 oddał mu skakanie). Wchodzą jako kroki 7 i 8;
 style przesuwają się za M7. Kolejność kroków 6–11 i harmonogram (§0.1) to **propozycja agenta, do decyzji MG**.
 
+**2026-11-02 — po M7:** MG puścił M7 przed krokami 6–7 (`PLAN_m7_zdolnosci.md` D10, 2026-10-31) i M7 zamknął się
+w dwa dni (E0–E8, pregeni Jazdy Próbnej — D17), zamiast szacowanych 4–7. E0 postawił warstwę akcji w minimalnym
+kształcie (znaczniki Reakcji i Akcji Bonusowej, bez budżetu ruchu), którą handoff ruchu rozbuduje — więc to teraz
+trzy zdolności M7 czekają na krok 7, a nie M7 na niego. Następne: krok 6 (PM1, PM7), potem 7 i 9; kod stylów jest
+odblokowany. Wydanie z M7 przed kandydatem (jak v0.21.0 po M4 i M6) — propozycja agenta, do decyzji MG: paczki M7
+są zmienione, `resync` kampanii zrobiony, `master` ma 19 commitów po v0.21.0.
+
 ```mermaid
 flowchart LR
-  DONE["1–5. Zrobione<br/>v0.19.1 → v0.21.0"] --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
+  DONE["1–5. Zrobione<br/>v0.19.1 → v0.21.0"] --> M7["8. M7 Zdolności poz. 1–3<br/>zrobione 2026-11-01"]
+  M7 --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
   PM --> RU["7. Ruch w turze, Skakanie,<br/>pasek walki"]
-  RU --> M7["8. M7 Zdolności poz. 1–3"]
-  M7 --> ST["9. Style i motywy"]
+  RU --> ST["9. Style i motywy"]
   ST --> RC{{"10. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
   RC --> GG["11. Styczeń: kampania testowa<br/>„Za garść gambli”"]
-  MG["Tor MG: weto Poligonu,<br/>decyzje M7 §5 i handoffu §10"] -.-> RC
+  MG["Tor MG: weto Poligonu (M4, Sala prób),<br/>decyzje handoffu §10"] -.-> RC
   ART["Tor grafiki: dźwięki, ilustracje,<br/>Garderoba i Galeria"] -.-> ST
 ```
 
@@ -77,37 +84,40 @@ flowchart LR
    pełna bramka wydania i krótki obchód Poligonu.
 7. **Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25) —
    [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md) (projekt i kolejność dostawy §8; dowody dostępności akcji —
-   `AUDIT_shared_actions.md`; nic jeszcze nie wdrożone). Przed betą z trzech powodów: Skakanie to jedyny ❌ w macierzy
-   spoza listy §4 (B1); etap E0 M7 zależy od kroku 3 handoffu (warstwa akcji — Szybkie nogi, Skok Gladiatora, Zew
-   areny, Zwinność szczura); budżet ruchu i szablony paska to nowy zapisany stan (B2). **Przed kodem MG rozstrzyga
-   §10 handoffu** — przede wszystkim, czy czerwona trasa jest tylko kolorem, czy blokadą końca ruchu. Kroki 1–3
-   (budżet, akcje, skok) przed M7; 4–6 (linijka zielono-czerwona, szablony paska sześciu klas, stanowisko Poligonu)
-   przed kandydatem — pasek walki to też materiał zwiastuna.
+   `AUDIT_shared_actions.md`; ruchu jeszcze nie ma). Przed betą z trzech powodów: Skakanie to jedyny ❌ w macierzy
+   spoza listy §4 (B1); trzy zdolności M7 czekają na budżet ruchu — Skok Gladiatora, Skoczek, Szybkie nogi (warstwę
+   akcji ze znacznikami R i B postawił już E0 M7: `config/actions-data.mjs`, `actors/actions.mjs`; handoff dokłada do
+   niej ruch); budżet ruchu i szablony paska to nowy zapisany stan (B2). **Przed kodem MG rozstrzyga §10 handoffu** —
+   przede wszystkim, czy czerwona trasa jest tylko kolorem, czy blokadą końca ruchu. Kroki 1–3 (budżet, akcje, skok)
+   i 4–6 (linijka zielono-czerwona, szablony paska sześciu klas, stanowisko Poligonu) przed kandydatem — pasek walki
+   to też materiał zwiastuna.
 8. **M7 — automatyka zdolności poziomów 1–3** (nowe 2026-10-31; zakres D2, MG 2026-10-25) —
    [PLAN_m7_zdolnosci.md](PLAN_m7_zdolnosci.md): wszystkie zdolności poziomów 1–3 klas i profesji oraz Sztuczki i
    Pochodzenia pregenów (D3 — testerzy dojdą do poziomu 3). XL, etapy E0–E8, dziesięć rodzin zamiast zdolności po
-   jednej. Status: **zamknięte 2026-11-01** — E0–E8, pokrycie zdolności klasowych i profesji 100/133, Pochodzeń 34/36,
-   Sztuczek 41/53; `resync` kopii w kampanii zrobiony (kopia zapasowa przed); dla graczy `docs/Zdolnosci.md`. Zostaje:
-   zdolności czekające na warstwę ruchu (handoff); pregeni Jazdy Próbnej zbudowani od nowa kreatorem (D17,
-   2026-11-01).
+   jednej. Status: **zamknięte 2026-11-01, bez wydania** — E0–E8 (notatki etapów: `PLAN_m7_zdolnosci.md` §8); pokrycie
+   zdolności klasowych i profesji 100/133 (45 pełnych), Pochodzeń 34/36 (20), Sztuczek 41/53 (19); `resync` kopii
+   w kampanii zrobiony (kopia zapasowa przed); dla graczy `docs/Zdolnosci.md`; Poligon — 23 persony M7 i stanowisko
+   „Sala prób”; pregeni Jazdy Próbnej zbudowani od nowa kreatorem (D17), persony Poligonu dostają Sztuczkę tą samą
+   drogą. Zostaje: trzy zdolności czekające na krok 7, obchód MG w „Sali prób”, wydanie. Kryterium końca — §3 M7.
 9. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
    dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
    (`dev/icons/MISSING.md`); **język ikon** (`PLAN_icon_design.md`) — na samym końcu tego etapu. Plan zdjęć do
    zwiastuna: sceny Poligonu, na których każdy podsystem da się pokazać od ręki. *2026-10-31:* kod stylów (karty
    czatu, PM13) **po M7**, bo E1 M7 dokłada przyciski „po rzucie” do kart rzutu — restyl kart raz, po nich. Grafika
-   (ilustracje, Garderoba, Galeria) może iść równolegle od zaraz.
+   (ilustracje, Garderoba, Galeria) może iść równolegle od zaraz. *2026-11-02:* M7 zrobione — kod stylów odblokowany.
 10. **Kandydat do wydania → beta i zwiastun przed świętami** — zamrożenie modeli (B2), bramki B1–B8, dokumenty.
 11. **Styczeń: kampania testowa „Za garść gambli”** — świat MG (poza repo, obok świata kampanii na tej samej
    instalacji), testerzy tylko przez przeglądarkę na serwer MG (przekierowany port). Przed pierwszą sesją: HTTPS
    (hasła i ciasteczka sesji nie idą otwartym tekstem), hasło na każdym koncie, testerzy jako Gracz (nie Zaufany
    — bez wgrywania plików), przekierowany **tylko** port kampanii (nie piaskownice, Poligon, port DevTools Chrome
    ani serwer przeglądu ikon), `fvtt` w trybie `runtime` na czas sesji. Znaleziska jako wydania bety bez niszczących
-   migracji. Także: pregeny na poziomach 1–3 z wyborami profesji (`PLAN_m7_zdolnosci.md` P7 — MG albo testerzy przy
-   stole). Moduł treści „Za garść gambli” powstaje dopiero po testach bety (plan w repo map, poza tym repo).
+   migracji. Także: pregeni stoją na poziomie 1 (zbudowani kreatorem 2026-11-01, D17); poziomy 2–3 z wyborami
+   profesji — MG albo testerzy przy stole (`PLAN_m7_zdolnosci.md` P7). Moduł treści „Za garść gambli” powstaje dopiero po testach bety (plan w repo map, poza tym repo).
 
 **Poza kolejnością, przed betą (MG):** lepsze narzędzia przeglądu ręcznego — termin i zakres MG. Dalej (2026-10-31):
-weto Poligonu (M4 — krok 4; formalne sondy M3 i M5 odłożone 2026-10-17); decyzje M7 §5 i handoffu §10; zgłoszenie
+weto Poligonu (M4 — krok 4; formalne sondy M3 i M5 odłożone 2026-10-17; od 2026-11-01 także „Sala prób” M7 —
+12 prób); decyzje handoffu §10 (decyzje M7 zapadły: D1–D17); zgłoszenie
 błędu dnd5e `Infinite` (krok 3); `stash@{0}` „codex-wip” z 2026-10-30 — przestarzały (CREDITS i paczka `towarzysze`
 są już w `master`), została w nim jedna linia `tokens/PROMPT.md`: zastosować albo porzucić.
 
@@ -122,7 +132,7 @@ plikowi — `dev/packs/build-packs.mjs`, `tokenArtFor`); etykieta rozmiaru `huge
 `tokens/aliases.json` — licencja na odwołanie pozwala, więc to nie blokuje bety; własne żetony, jeśli MG chce
 kompletu do zwiastuna.
 
-### 0.1 Przegląd 2026-10-31 — sesje od 2026-10-18, bramki, harmonogram
+### 0.1 Przegląd 2026-10-31 — sesje od 2026-10-18, bramki, harmonogram (uzupełniony 2026-11-02 po M7)
 
 **Sesje agentów od poprzedniego przeglądu** (Claude — kod i wydania; Codex — grafika, audyty i wybrane poprawki;
 Copilot — projekty planów). Dwa wydania, trzy kamienie (migracja, M4, M6), ok. 200 commitów; Quench 1211 → 1385,
@@ -143,19 +153,21 @@ paczki e2e 21 → 44.
 | 10-28 | Copilot, Claude | pełna lista zasad WKK (`docs/Kobalt.md`, `kobalt-doc-check` w `npm test`); wraki i wieże w kodzie; źródła grafiki pojazdów w repo (≈ 212 MB w historii) | `63aab03`, `b340286`, `70cc1ef` |
 | 10-29 | Copilot | M4 przejście końcowe — runda 6 (D34–D45) | `ced4a43` |
 | 10-29–31 | Claude | M4 K1–K3, KT, S0–S1, P5–P6, W0–W5; integracja grafiki Codexa; wydanie — bramka trzy razy (`explosive-art` zamykał interfejs rdzenia, timeout sprzątania Quench `drony`) | v0.21.0 na `5ac17bb` |
+| 10-31–11-01 | Claude | M7 E0–E8 z rundami decyzji MG (D6–D17); krwawienia — każde osobnym efektem (`docs/Krwawienia.md`, WKK 43); `resync` kampanii; Poligon: 23 persony M7, „Sala prób”; pregeni Jazdy Próbnej od nowa kreatorem (D17) | `4433dd4` … `a30a4c6`, bez wydania |
+| 11-01 | agent grafiki | ikony stanów M7 (Reakcja, Akcja Bonusowa, krwawienia), 7 dźwięków pojazdów M4, ostatnie sześć par Bestiariusza, portrety i żetony sześciu pregenów | `d70adb6` |
 
-**Bramki (2026-10-31):**
+**Bramki (2026-10-31; stan po M7 — 2026-11-02):**
 
 | # | Stan | Co zostaje |
 |---|:-:|---|
 | B1 | 🟡 | W macierzy dwa ❌: Kolory Neuroshimy (na liście §4 — w porządku) i **Skakanie** (krok 7 — albo MG przenosi je do §4) |
-| B2 | ⏳ | Przed zamrożeniem: PM1, PM7, stan ruchu (krok 7), dane paczek M7 (E3) i `resync` kampanii (E8). Zamrożenie — krok 10 |
-| B3 | ✅ | 19 paczek; krok `packs` bramki v0.21.0 |
-| B4 | ✅ | Quench 1385/1385, e2e 44/44 w obu światach bramki, `npm test` |
-| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie: klasowe 33/133, Sztuczki 19/53, Pochodzenia 4/36 — podnosi M7 |
+| B2 | ⏳ | Przed zamrożeniem: PM1, PM7, stan ruchu (krok 7). Dane paczek M7 (E3) i `resync` kampanii (E8) — zrobione 2026-11-01. Zamrożenie — krok 10 |
+| B3 | ✅ | 19 paczek; krok `packs` bramki v0.21.0; po M7 przebudowane (2026-11-01), `validate-packs` zielone |
+| B4 | ✅ | Bramka v0.21.0: Quench 1385/1385, e2e 44/44 w obu światach, `npm test`. Po M7 w piaskownicy: Quench 1510/1510, nowe paczki e2e M7 i regresja zielone — pełna bramka przy następnym wydaniu |
+| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7: klasowe 100/133 (45 pełnych), Sztuczki 41/53 (19), Pochodzenia 34/36 (20) — przed M7 33/133, 19/53, 4/36 |
 | B6 | ✅ | `release:check` v0.21.0 — świat goły i zalecany, moduł z `module.zip` |
-| B7 | 🟡 | `docs/` bez pojazdów, wierzchowców i mechaniki pościgu; M7 dopisze `docs/Zdolnosci.md`; nagłówek macierzy poprawiony 2026-10-31 |
-| B8 | ⏳ | Przegląd przy kandydacie; listy WKK pilnuje `kobalt-doc-check` od 2026-10-28 |
+| B7 | 🟡 | `docs/` bez pojazdów, wierzchowców i mechaniki pościgu; `docs/Zdolnosci.md` jest (M7 E8); nagłówek macierzy poprawiony 2026-10-31 |
+| B8 | ⏳ | Przegląd przy kandydacie; listy WKK pilnuje `kobalt-doc-check` od 2026-10-28; odczyty RAI M7 w tabeli `scripts/wkk/README.md` |
 
 **Harmonogram — propozycja agenta, do decyzji MG.** Tempo ostatnich dwóch tygodni: kamień L–XL w 1–3 dni pracy
 agentów plus rundy pytań MG. Szacunek: PM1 + PM7 — 1–2 dni; ruch (kroki 1–6 handoffu) — 2–4 dni z decyzjami §10;
@@ -169,6 +181,11 @@ tydzień zapasu przed świętami.
 - **B: beta pod koniec listopada** — tylko z M7 przyciętym do drużyny kampanii i pregenów (D1) i stylami ograniczonymi
   do kart czatu i PM13. Koszt: zwiastun bez języka ikon, a testerzy na poziomach 2–3 trafią na zdolności z plakietką
   „brak”.
+
+*2026-11-02, po M7:* M7 zajęło dwa dni zamiast 4–7, bez osobnych rund weta (decyzje D6–D17 zapadały w trakcie).
+Zostaje: PM1 + PM7 (1–2 dni), ruch (2–4 dni z decyzjami §10), style (1–2 tygodnie), kandydat (3–5 dni) — około 3–4
+tygodni, **kandydat na przełomie listopada i grudnia**; cel „przed świętami” z większym zapasem. Wariant B przestał
+być cięciem M7 — M7 jest w całym zakresie D2; zostaje jako „style tylko karty czatu i PM13”.
 
 ---
 
@@ -218,7 +235,8 @@ flowchart LR
   M2 --> M5[M5 Szabrowanie, handel, postój]
   M1 --> M4[M4 Pojazdy]
   M1 --> M6[M6 Drobne zasady RAW]
-  M0 --> M7[M7 Automatyka zdolności drużyny — ciągle]
+  M0 --> M7[M7 Automatyka zdolności poz. 1–3 — zrobione]
+  M7 --> BETA
   M5 --> BETA{{Wczesna beta: B1–B8}}
   M3 --> BETA
   M4 --> BETA
@@ -469,31 +487,38 @@ i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 - [x] Pływanie i woda, wspinaczka (s. 255–257) — M6 E6; Regiony wody z eksportu map — `TODO.md` repo map — `PLAN_m6_drobne_zasady.md` §5.6. Walka na
   wierzchowcu → M4 część 3; skakanie → `HANDOFF_movement_hotbar.md`
 
-### M7 — Automatyka zdolności poziomów 1–3 (XL) — przed betą w zakresie D2
+### M7 — Automatyka zdolności poziomów 1–3 (XL) — ZROBIONE 2026-11-01 (bez wydania)
 
-> **Plan: [PLAN_m7_zdolnosci.md](PLAN_m7_zdolnosci.md)** (projekt 2026-10-25, decyzje MG D1–D5). Przed betą (D2):
+> **Plan: [PLAN_m7_zdolnosci.md](PLAN_m7_zdolnosci.md)** (projekt 2026-10-25, decyzje MG D1–D17). Przed betą (D2):
 > wszystkie zdolności poziomów 1–3 klas i profesji + Sztuczki i Pochodzenia drużyny i pregenów; kolejność wg drużyny
 > kampanii; dziesięć rodzin mechanizmów zamiast zdolności po jednej. Tam, gdzie lista niżej się z nim rozjeżdża,
-> wygrywa tamten plik. *Stan 2026-10-31:* projekt, nic nie wdrożone; czeka na weto MG §5.2–§5.3 i na kroki 1–3
-> `HANDOFF_movement_hotbar.md` (§0 kroki 7–8). Jeździec, Rodeo i Zawsze w siodle zrobione w M4 W5.
+> wygrywa tamten plik. *Stan 2026-11-02:* zamknięte — E0–E8 i pregeni (D17), notatki etapów w `PLAN_m7_zdolnosci.md`
+> §8. M7 poszedł przed handoffem ruchu (D10); trzy zdolności zależne od ruchu czekają na krok 7 §0. Jeździec, Rodeo
+> i Zawsze w siodle zrobione w M4 W5.
 
-- [ ] Weto MG: ustalenia U1–U30 (§5.2) i pytania P1–P7 (§5.3)
-- [ ] E0 — fundament: znacznik „Reakcja zużyta” (i akcji bonusowej, jeśli P1), rejestr „po rzucie”, rejestr
+- [x] Weto MG: ustalenia U1–U30 (§5.2) i pytania P1–P7 (§5.3) — rundy 2026-10-31 i 11-01, decyzje D6–D17
+- [x] E0 — fundament: znacznik „Reakcja zużyta” (i akcji bonusowej, jeśli P1), rejestr „po rzucie”, rejestr
   warunkowych Ułatwień, bramki raz na turę/rundę; trzy spiki
-- [ ] E1 — po rzucie (R3): Motywacja, Szczęście, Amen, Łeb jak sklep, Spieprzysz to!, Twardość, Fart…
-- [ ] E2 — wsparcie sojusznika (R7): Dobra rada, Łaska boża, Let's rock…
-- [ ] E3 — Efekty Aktywne i awanse na featach (R1, R2), ASI i biegłości wszystkich Sztuczek (P4) — **zmienia dane paczek**
-- [ ] E4 — walka z kontekstem (R4, R5): Ulubiona broń, Mój wróg, Rzeźnik…
-- [ ] E5 — kości raz na turę (R6) na `class-resource-dice.mjs`: Bolesny atak, Podstępny atak, Mój bóg kule nosi,
+- [x] E1 — po rzucie (R3): Motywacja, Szczęście, Amen, Łeb jak sklep, Spieprzysz to!, Twardość, Fart…
+- [x] E2 — wsparcie sojusznika (R7): Dobra rada, Łaska boża, Let's rock…
+- [x] E3 — Efekty Aktywne i awanse na featach (R1, R2), ASI i biegłości wszystkich Sztuczek (P4) — **zmienia dane paczek**
+- [x] E4 — walka z kontekstem (R4, R5): Ulubiona broń, Mój wróg, Rzeźnik…
+- [x] E5 — kości raz na turę (R6) na `class-resource-dice.mjs`: Bolesny atak, Podstępny atak, Mój bóg kule nosi,
   Skuteczny cios — z wykrywaniem spustu
-- [ ] E6 — Przycelowanie (R8)
-- [ ] E7 — karty MG, śmierć i krytyki (R9, R10); zdolności zależne od M6 i handoffu ruchu
-- [ ] E8 — plakietki w paczkach, `resync` kopii w kampanii za zgodą MG, `docs/Zdolnosci.md`, macierz, tabela RAI,
+- [x] E6 — Przycelowanie (R8)
+- [x] E7 — karty MG, śmierć i krytyki (R9, R10); zdolności zależne od M6 (zależne od handoffu ruchu — po kroku 7)
+- [x] E8 — plakietki w paczkach, `resync` kopii w kampanii za zgodą MG, `docs/Zdolnosci.md`, macierz, tabela RAI,
   stanowisko Poligonu „Sala prób”
 - [x] Bramka bety to **plakietka pokrycia na każdej zdolności** (B5), nie pełna automatyka — spełniona od 2026-10-03
 
 **Gotowe gdy:** każda zdolność drużyny kampanii co najmniej częściowa; w całym zakresie D2 ≥ 75 % pełnych albo
 częściowych (`PLAN_m7_zdolnosci.md` §6, E8).
+
+*Wynik 2026-11-02:* w zakresie D2 75 % (100/133). Drużyna kampanii (odczyt świata po `resync`): 53 zdolności, 29
+pełnych, 22 częściowe, dwie z plakietką „brak” — **Mój wróg i Wyjadacz u Victora**, zdolności-parasole, których
+mechanika siedzi w opcji wybranej przy awansie (Mój wróg: grupa — częściowa; wariant Wyjadacza — pełna). Kryterium
+spełnione co do treści; same plakietki parasoli mówią „brak” — do poprawienia wpisem w rejestrze (wybór wariantu to
+awans), przebudową paczek i `resync`, jeśli MG chce.
 
 ---
 
@@ -505,7 +530,7 @@ przegród z encji CDDA, M6 P5); tu zostaje krótka lista bez projektu.
 | Pozycja | Dlaczego później |
 |---|---|
 | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem. Brać wersję z października: krwawienie tamuje Pomaganie + INT (Medycyna) ST 10 |
-| Pełna automatyka 133 zdolności klasowych, 53 Sztuczek, 36 zdolności Pochodzeń, 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
+| Pełna automatyka reszty — po M7 bez automatyki zostają 33 zdolności klasowe, 12 Sztuczek i 2 zdolności Pochodzeń; częściowe do pełnych; 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
 | Własne żetony sześciu istot Bestiariusza (dziś pożyczone z dnd5e przez `tokens/aliases.json`; 46 ma własne od 2026-10-31), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
 | Screen shake DS/MS, iskry i krew trafienia | Oprawa |
 | Zorganizowane grupy, Front | Treść świata, brak mechaniki |
@@ -526,8 +551,8 @@ przegród z encji CDDA, M6 P5); tu zostaje krótka lista bez projektu.
 - **Rozrost zakresu przez WKK** — nowe pomysły stołu idą do `scripts/wkk/` i nie blokują bram.
 - **Przeglądy MG to wąskie gardło** (2026-10-31) — weto M3 i M5 odłożone, M4 czeka, M7 i handoff ruchu potrzebują
   rund decyzji przed kodem. Agenci kończą kamień szybciej, niż MG zdąży go przejść na Poligonie. Zaradczo: decyzje
-  M7 §5 i handoffu §10 zebrać od razu, w jednej rundzie, a weto robić stanowiskami, nie całością.
-- **Zakres M7 (XL)** — ok. 65 zdolności do automatyki. Jeśli się rozjedzie, cięcie według D1 (drużyna kampanii
-  i pregeny), reszta poziomów 1–3 do PLAN_1_0.md; B5 nie zależy od M7.
+  M7 §5 i handoffu §10 zebrać od razu, w jednej rundzie, a weto robić stanowiskami, nie całością. *2026-11-02:*
+  decyzje M7 zapadały w trakcie (D6–D17); czekają weto M4, obchód „Sali prób” i decyzje handoffu §10.
+- ~~**Zakres M7 (XL)**~~ — *zamknięte 2026-11-01:* M7 w całym zakresie D2, cięcie według D1 niepotrzebne.
 - **Rozmiar repozytorium** — źródła grafiki pojazdów dodały ok. 212 MB do historii (2026-10-28; paczki git ≈ 500 MB).
   Kolejne źródła grafiki (`dev/art/**/in`, `out`) zostają poza gitem, jak ustala `.gitignore`.
