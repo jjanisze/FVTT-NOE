@@ -13,6 +13,7 @@
  *
  * Sztuczki (feats) modifiers, detected by feat name on the medic:
  *   • Pan Plaster        → the kit rolls one extra healing die (+1k4).
+ *   • Krwawy anioł       → (Medyk) the kit's die grows with the Spec level: k6 from 3, k8, k10, k12 (PLAN_m7 R9).
  *   • Aspiryna i Miętusy → may heal with an EMPTY kit, but such tool checks are rolled
  *                          with Utrudnienie (Disadvantage) and consume no supplies.
  *
@@ -44,7 +45,7 @@
  */
 
 import { freeHandPill } from "../combat/grip.mjs";
-import { MEDYK_HEAL_FLAG, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
+import { MEDYK_HEAL_FLAG, MEDYK_MAX_CHARGES, koscLeczeniaMedyka } from "../config/toolkits-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { poprosOStabilizacje } from "../combat/umieranie.mjs";
 
@@ -462,10 +463,12 @@ export async function healWithMedyk(medic, item) {
     return;
   }
 
-  // Heal roll — Pan Plaster adds one extra die.
+  // Heal roll — Pan Plaster adds one extra die; Krwawy anioł grows the die.
   const dice = tier.dice + (hasPanPlaster ? 1 : 0);
+  const krwawyAniol = medic.items.some(i => i.getFlag(MODULE_ID, "abilityId") === "krwawy-aniol");
+  const sciany = koscLeczeniaMedyka(medic.classes?.spec?.system?.levels ?? medic.system.details?.level, krwawyAniol);
   const intMod = medic.system.abilities.int?.mod ?? 0;
-  const formula = tier.mod ? `${dice}d4 + ${intMod}` : `${dice}d4`;
+  const formula = tier.mod ? `${dice}d${sciany} + ${intMod}` : `${dice}d${sciany}`;
   const healRoll = await new Roll(formula).evaluate();
   const heal = Math.max(0, healRoll.total);
 
@@ -489,6 +492,7 @@ export async function healWithMedyk(medic, item) {
   // Chat card
   const mods = [];
   if ( hasPanPlaster ) mods.push("Pan Plaster: +1 kostka PW");
+  if ( sciany > 4 )    mods.push(`Krwawy anioł: k${sciany}`);
   if ( improvising )   mods.push("Aspiryna i Miętusy: bez zapasów (Utrudnienie)");
 
   const body = `

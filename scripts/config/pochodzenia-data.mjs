@@ -334,7 +334,12 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Coś mi tu śmierdzi",
     text: "Automatyczne wyczucie mutantów w zasięgu 9 m; Test Percepcji ST 15 → wskazanie "
       + "konkretnej istoty.",
-    auto: []
+    auto: [{
+      what: "Mutant wchodzi w 9 m (ruch, nowy żeton, początek tury): szept do gracza — sama obecność i przycisk "
+        + "Percepcji ST 15, który wskazuje istotę; MG dostaje nazwy (D9).",
+      where: "combat/zdolnosci-karty.mjs"
+    }],
+    manual: "Liczy aktywny MG na scenie, którą ogląda; mutant w zasięgu na innej scenie — MG."
   },
   "kwas-w-zylach": {
     id: "kwas-w-zylach",
@@ -430,7 +435,11 @@ export const ORIGIN_ABILITIES = Object.freeze({
     text: "1×/Długi Odpoczynek: gdy PW → 0, na początku następnej tury wstajesz z 1 PW "
       + "i przeprowadzasz turę normalnie.",
     uses: { max: 1, period: "lr" },
-    auto: []
+    auto: [{
+      what: "Przycisk „Zawzięty sukinkot — wstanę” na karcie „Umiera” (właściciel): zużyte użycie, na początku następnej "
+        + "tury 1 PW, koniec Nieprzytomności i tor Rzutów Przeciw Śmierci od zera (U23); poza walką — od razu.",
+      where: "combat/umieranie.mjs"
+    }]
   },
 
   /* --- Posterunek --- */
@@ -502,7 +511,14 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Wierzę",
     text: "1×/Długi Odpoczynek: wymyślasz drobny przedmiot (maks. 5 gb) — MG musi wprowadzić "
       + "go do gry. Musi być łatwy do zabrania i przypadkowy.",
-    auto: []
+    uses: { max: 1, period: "lr" },
+    // Aktywność na przedmiocie zdolności (builder): użycie zjada licznik, okno i kartę daje `combat/zdolnosci-karty.mjs`.
+    aktywnosc: "Wierzę",
+    auto: [{
+      what: "Aktywność 1 /DO: gracz wpisuje przedmiot, MG dostaje kartę z przyciskiem „Do ekwipunku” (szept).",
+      where: "combat/zdolnosci-karty.mjs"
+    }],
+    manual: "Czy przedmiot pasuje (maks. 5 gb, łatwy do zabrania, przypadkowy) i jak wchodzi do gry — MG."
   },
 
   /* --- Teksas --- */

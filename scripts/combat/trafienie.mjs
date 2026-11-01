@@ -121,11 +121,22 @@ export function naturalOf(roll) {
 /** Suma premii z użytych reakcji na tym celu. */
 export const reactionBonus = entry => (entry?.used ?? []).reduce((n, u) => n + _num(u.bonus), 0);
 
+/**
+ * Nie do zdarcia (Gladiator, s. 69–70; PLAN_m7 R10, U22): każde trafienie krytyczne w posiadacza — z kości i automatyczne
+ * (Nieprzytomność, Przycelowanie w głowę) — jest zwykłym. Powód albo `null`.
+ */
+export function bezKrytykaDla(actor) {
+  return actor?.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === "nie-do-zdarcia") ? "Nie do zdarcia" : null;
+}
+
+/** Krytyk zdjęty z celu: reakcją (Krytyczna ochrona) albo zdolnością celu (`bezKrytyka` — przetrwa przerzut). */
+export const krytykZdjety = entry => !!(entry?.critDowngraded || entry?.bezKrytyka);
+
 /** Werdykt jednego celu z zapisu na karcie (bez sięgania do żywych danych). */
 export function verdictOfEntry(obrona, entry) {
   return resolveHit({
     total: obrona.total, critical: obrona.krytyk, fumble: obrona.fumble, tt: entry.tt, cover: entry.cover,
-    bonuses: reactionBonus(entry) + _num(entry.przycelowanie?.tt), critDowngraded: entry.critDowngraded,
+    bonuses: reactionBonus(entry) + _num(entry.przycelowanie?.tt), critDowngraded: krytykZdjety(entry),
     autoCrit: !!entry.autoKrytyk
   });
 }
@@ -150,7 +161,8 @@ export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKryty
     tt, cover: _num(cover), used: [], critDowngraded: false, verdict: null, decided: false,
     // Automatyczne TK z chwili rzutu (`combat/okolicznosci.mjs`, s. 35; Przycelowanie w głowę) — powód albo null.
     autoKrytyk: autoKrytyk ?? glowa,
-    przycelowanie: przycelowanie ?? null
+    przycelowanie: przycelowanie ?? null,
+    bezKrytyka: bezKrytykaDla(actor)
   };
   entry.verdict = verdictOfEntry(obrona, entry).verdict;
   return entry;
@@ -269,6 +281,7 @@ export function hitTargetsForDamage(rolls) {
  * @returns {boolean}
  */
 export function isCriticalHitOn(target, options = {}) {
+  if (bezKrytykaDla(target)) return false;
   if (options?.isCritical === true) return true;
   const message = options?.origin ?? options?.originatingMessage ?? null;
   if (!message) return false;

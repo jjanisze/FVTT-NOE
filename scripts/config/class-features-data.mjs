@@ -476,7 +476,10 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Zryw",
     action: null,
-    auto: [],
+    uses: { max: 1, period: "sr" },
+    hotbar: true,
+    auto: [{ what: "aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa i ogłoszenie; Akcja Bonusowa podnosi limit znacznika", where: "combat/zdolnosci-karty.mjs" }],
+    manual: "Dodatkowej Akcji moduł nie liczy (znaczniki ma tylko Reakcja i Akcja Bonusowa) — pilnuje stół.",
     text: "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
   },
   "twardosc": {
@@ -547,6 +550,7 @@ export const CLASS_FEATURES = {
     action: "B",
     hotbar: true,
     auto: [],
+    manual: "Odstąpienie, Przyspieszenie i Ukrywanie się w Akcji Bonusowej — aktywność stawia znacznik Akcji Bonusowej, sam ruch czeka na handoff ruchu.",
     text: "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się."
   },
   "kocie-kosci": {
@@ -682,7 +686,11 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Kłusownik",
     action: null,
-    auto: [],
+    hotbar: true,
+    activityName: "Pułapka",
+    activityAction: "S",
+    auto: [{ what: "aktywność „Pułapka” z narzędziami małego kłusownika: Test Survivalu albo narzędzi, karta z ST pułapki 8 + MDR + PB (zauważenie, wyzwolenie, unik)", where: "combat/zdolnosci-karty.mjs" }],
+    manual: "ST zakładania z przykładów, rodzaj i działanie pułapki — MG.",
     text: "Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w tabeli poniżej."
   },
   "wyjadacz-zwiadowca": {
@@ -790,7 +798,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Nie do zdarcia",
     action: null,
-    auto: [],
+    auto: [{ what: "każde trafienie krytyczne w posiadacza — z kości, Nieprzytomności, Przycelowania w głowę — jest zwykłym: werdykt na karcie, rzut obrażeń bez krytyka, bez Stopnia Zranienia z krytyka (U22)", where: "combat/trafienie.mjs" }],
     text: "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!"
   },
   "lyzeczka": {
@@ -801,7 +809,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Łyżeczka",
     action: null,
-    auto: [],
+    auto: [{ what: "atak przedmiotem z ręki techniką łyżeczki: tabela wagi (1k6–4k6, władanie), biegłość, rzut na 6 m; cięższy niż SIŁ — sygnał MG; naturalna 1 — karta z przyciskiem „Rozpada się na dwie części”", where: "actors/improwizacja.mjs" }],
+    manual: "Rodzaj obrażeń wybiera gracz w oknie obrażeń; czy przedmiot się nadaje — MG.",
     text: "Długopis, felga, wąż ogrodowy, hydrant, kula bilardowa czy mała zardzewiała łyżeczka, stanowi broń, w której masz biegłość. Możesz tym przedmiotem walczyć wręcz lub nim rzucać na dystans do 6 metrów. Maksymalna waga tej tzw. „łyżeczki” to wartość twojej Siły. Kość i typ obrażeń zależne są od wagi i rodzaju przedmiotu (ustal to z MG). Jeśli w Teście ataku „łyżeczką” wypadnie naturalna 1, rozpada się ona na dwie równe części. WAGA PRZEDMIOTU OBRAŻENIA WŁADANIE do 5 kg 1k6 Jednoręczne 6 - 11 kg 2k6 Oburęczne 12 -17 kg 3k6 Oburęczne 18 - 20 kg 4k6 Oburęczne"
   },
   "zew-areny": {
@@ -902,6 +911,7 @@ export const CLASS_FEATURES = {
     label: "Stylówa",
     action: null,
     auto: [],
+    manual: "+1 do Wpływania za każde 50 gambli towarów luksusowych na sobie — gracz dolicza w oknie rzutu (moduł nie wycenia luksusu).",
     text: "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania."
   },
   "za-garsc-gambli": {
@@ -977,6 +987,7 @@ export const CLASS_FEATURES = {
     label: "Bezlitosny przywódca",
     action: null,
     auto: [],
+    manual: "Vendetta (Ułatwienie przeciw temu, kto w ostatniej rundzie zranił członka twojej mafii) i Szef każe [B] (atak członka w jego Reakcji) — stół.",
     text: "Twoja mafia to twoja rodzina. Zabijesz każdego, kto choćby krzywo spojrzy na twojego brata, siostrę, matkę czy psa. Wszyscy, którzy noszą wytatuowany symbol twojej mafijnej rodziny, są pod twoją ochroną i twoim skutecznym przywództwem. Vendetta: Otrzymujesz Ułatwienie w Teście Ataku przeciw istocie, która zadała obrażenia członkowi twojej mafii w przeciągu ostatniej rundy. Szef każe [B]: W Akcji Bonusowej możesz wydać rozkaz ataku członkowi swojej grupy. Ten w Reakcji, może zaatakować wskazaną przez ciebie istotę, znajdującą się w zasięgu jego ataku."
   },
   "renoma": {
@@ -988,6 +999,7 @@ export const CLASS_FEATURES = {
     label: "Renoma",
     action: null,
     auto: [],
+    manual: "+1 do Wpływania za każde 50 gambli towarów luksusowych na sobie — gracz dolicza w oknie rzutu (moduł nie wycenia luksusu).",
     text: "Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania."
   },
   "moja-prawa-reka": {
@@ -1046,6 +1058,7 @@ export const CLASS_FEATURES = {
     label: "Doktor Brain",
     action: null,
     auto: [],
+    manual: "Serum z mutanta i trwała zmiana Cech (+4 INT do 20, −2 KON albo ZRC) — gracz zmienia na karcie, gdy MG pozwoli.",
     text: "Chcesz być jajogłowym mutantem geniuszem? Proszę bardzo. Znajdujesz martwego mutanta i tworzysz serum z jego rdzenia mózgowego, które sobie aplikujesz. Wartość twojej Cechy Inteligencja rośnie na stałe o 4 (do maksymalnie 20). Twój organizm płaci jednak za to wielką cenę. Zmniejsz na stałe swoją Kondycję lub Zręczność o 2."
   },
   "krwawy-aniol": {
@@ -1056,7 +1069,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Krwawy anioł",
     action: null,
-    auto: [],
+    auto: [{ what: "kość PW narzędzi małego medyka według poziomu Speca: k6 od 3., k8 od 6., k10 od 9., k12 od 12.", where: "items/toolkit-medyk.mjs" }],
     text: "Potrafisz używać leków skuteczniej niż ktokolwiek inny. Wiesz, gdzie wbić strzykawkę, żeby pacjent szybko stanął na nogi i zyskał więcej energii do walki. Od tej pory, kiedy używasz zestawu małego medyka, przywracasz więcej Punktów Wytrzymałości. Zamiast kostki k4 używasz na 3. poz. - k6, na 6. poz. - k8, na 9. poz. - k10, a na 12. poz. - k12."
   },
   "lapiduch": {
@@ -1067,7 +1080,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Łapiduch",
     action: null,
-    auto: [],
+    auto: [{ what: "po potwierdzonej śmierci (trzy porażki, Stopień ponad Krytyczny) karta z przyciskiem „Reanimacja”: Test Medycyny o ST z czasu od śmierci według zegara świata (U24), nie po Olbrzymich obrażeniach; sukces — znów umiera, niestabilny", where: "combat/zdolnosci-karty.mjs" }],
+    manual: "Minutę reanimacji przesuwa na zegarze MG.",
     text: "Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka s. 34). CZAS OD USTANIA TĘTNA ST TESTU MEDYCYNY do 1 minuty ST 15 do 2 minut ST 20 do 4 minut ST 25 do 8 minut ST 30"
   },
   "farmacja": {
@@ -1260,6 +1274,7 @@ export const CLASS_FEATURES = {
     label: "Znajomości",
     action: null,
     auto: [],
+    manual: "Test Charyzmy w cywilizowanym miejscu i to, kogo postać zna według tabeli — stół.",
     text: "Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. WYNIK TESTU CHARYZMY ZNAJOMOŚĆ 1-9 Nikogo tu nie znasz z imienia. 10-14 Masz znajomka, który tu mieszka. 15-19 Masz tu znajomka, który prowadzi biznes lub jest stróżem porządku. 20+ Twój znajomek to gruba szycha, która tu rządzi."
   },
   "a-co-mi-tam": {
@@ -1361,7 +1376,8 @@ export const CLASS_FEATURES = {
     label: "Bez tajemnic",
     action: "A",
     hotbar: true,
-    auto: [],
+    auto: [{ what: "aktywność [A] wobec jednego mutanta albo potwora: Test INT (Przyroda), karta MG z tym, co zdradza próg (ST 10 nazwa, 15 podatności, 20 TT, PW i Szybkość) i przyciskami „Powiedz graczowi”", where: "combat/zdolnosci-karty.mjs" }],
+    manual: "Słabe punkty spoza karty istoty i inny wybór trzech współczynników — MG.",
     text: "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20)."
   },
   "mutant-na-sniadanie": {

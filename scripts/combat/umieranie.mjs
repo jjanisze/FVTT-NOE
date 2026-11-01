@@ -38,6 +38,13 @@
  *   - **„Śmierć”** (D1) — tylko dla MG: przyczyna, liczby, [Potwierdź] / [Cofnij]. Śmierć to decyzja
  *     człowieka (R6). Przy trzech porażkach — przypomnienie o Ostatniej akcji (s. 34).
  *   - **„BN pada”** (D2) — tylko dla MG: BN już martwy, [Rzuty przeciw śmierci] wprowadza go do maszyny.
+ *
+ * ## Zawzięty sukinkot (Hegemonia, PLAN_m7 R10, U23)
+ *
+ * Na karcie „Umiera” właściciel ma [Zawzięty sukinkot — wstanę] (1 /DO, zdolność Pochodzenia). Klik zużywa użycie od
+ * razu; na początku następnej tury postaci (`updateCombat`, `tikRaz`) MG zapisuje 1 PW i zeruje tor — dalej zwykłe
+ * `ocuc` (koniec Nieprzytomności z 0 PW, karta zamknięta). Poza walką nie ma tur — wstaje od razu; koniec walki przed
+ * jego turą też go podnosi. Martwy nie wstaje, a kto odzyskał PW inaczej, już tylko zdejmuje zapowiedź.
  */
 
 import {
@@ -51,6 +58,7 @@ import { jestObiektem } from "../config/obiekty-rules.mjs";
 import { maStopnieZranienia, rodzajTowarzysza } from "../actors/towarzysze.mjs";
 import { wylacz, wlacz } from "./maszyny.mjs";
 import { rollInfo } from "../config/chat-message-data.mjs";
+import { krokNaprzod, tikRaz } from "./tiki.mjs";
 
 /** Dron (towarzysz-maszyna): 0 PW → Wyłączony, Olbrzymie obrażenia → zniszczenie (PLAN_m3 §7.4). */
 const _dron = actor => !!rodzajTowarzysza(actor)?.maszyna;
@@ -68,6 +76,8 @@ const KARTA_BN = "umieranieBN";
 const ZRODLO_PW0 = "pw0";
 /** Klucz w `options` aktualizacji/obrażeń. */
 const OPT = MODULE_ID;
+/** Zawzięty sukinkot — `originAbilityId` zdolności; zapowiedź wstania w fladze `umieranie.sukinkot = { combatId }`. */
+const SUKINKOT = "zawziety-sukinkot";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 const _num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
@@ -88,6 +98,8 @@ export function registerUmieranie() {
   Hooks.on("dnd5e.rollDeathSave", _onRollDeathSave);
   Hooks.on("dnd5e.preLongRest", _onPreLongRest);
   Hooks.on("updateWorldTime", _onUpdateWorldTime);
+  Hooks.on("updateCombat", _onUpdateCombat);
+  Hooks.on("deleteCombat", _onDeleteCombat);
   Hooks.on("renderChatMessageHTML", _onRenderMessage);
   _bezAutomatycznejSmierciZWyczerpania();
   console.log(`${MODULE_ID} | Umieranie registered`);
@@ -407,7 +419,8 @@ export async function zaproponujSmierc(actor, przyczyna, liczby = {}) {
     return k?.actorUuid === actor.uuid && k.przyczyna === przyczyna && k.stan === "proponowana";
   });
   if (otwarta) return otwarta;
-  const karta = { actorUuid: actor.uuid, przyczyna, liczby, stan: "proponowana" };
+  // `chwila` — zegar świata w chwili śmierci: Łapiduch liczy z niej ST reanimacji (U24, `combat/zdolnosci-karty.mjs`).
+  const karta = { actorUuid: actor.uuid, przyczyna, liczby, stan: "proponowana", chwila: game.time.worldTime };
   return ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     whisper: game.users.filter(u => u.isGM).map(u => u.id),
@@ -599,6 +612,7 @@ async function _wykonajProsbe(nosiciel, prosba, { lokalnie = false } = {}) {
     const cel = prosba.celUuid ? fromUuidSync(prosba.celUuid) : nosiciel;
     if (!cel) return null;
     if (prosba.typ === "obrazenia") return await _obrazenia(cel, prosba);
+    if (prosba.typ === "sukinkot") return await zacisnijZeby(cel);
     if (prosba.typ === "stabilizuj") {
       if (prosba.zrodlo === "medycyna" && !(_num(prosba.wynik) >= RZUT_PRZECIW_SMIERCI.st)) return null;
       const res = await stabilizuj(cel, { zrodlo: prosba.zrodlo, kto: prosba.kto ?? "" });
@@ -660,6 +674,7 @@ function _trescKarty(actor, { przyczyna = "", koniec = false } = {}) {
     s === "umierajacy" && btn("medycyna", "fa-hand-holding-medical", "Stabilizuj — Medycyna ST 10"),
     s === "umierajacy" && btn("medyk", "fa-kit-medical", "Mały medyk"),
     s === "umierajacy" && btn("staza", "fa-bandage", "Staza"),
+    _sukinkotGotowy(actor) && btn("sukinkot", "fa-person-arrow-up-from-line", "Zawzięty sukinkot — wstanę", "wlasciciel"),
     btn("wrecz", "fa-hand-fist", "+1 porażka (wręcz)", "mg")
   ].filter(Boolean).join("")}</div>`;
   return `<div class="neuro-umieranie-card is-${koniec && s !== "martwy" ? "przytomny" : s}">
@@ -672,6 +687,7 @@ function _trescKarty(actor, { przyczyna = "", koniec = false } = {}) {
       </div>
       <div class="neuro-umieranie-stan">${esc(STAN_OPIS[koniec && s !== "martwy" ? "przytomny" : s] ?? "")}</div>
       ${zranienie ? `<div class="neuro-umieranie-zranienie">${esc(zranienie)}</div>` : ""}
+      ${aktywna && _flaga(actor).sukinkot ? `<div class="neuro-umieranie-stan">Zawzięty sukinkot — na początku swojej tury wstaje z 1 PW.</div>` : ""}
     </div>
     ${przyciski}
   </div>`;
@@ -806,6 +822,8 @@ async function _onClick(event, message) {
       return actor.rollDeathSave({}, {}, {});
     case "wrecz":
       return game.user.isGM && dodajPorazki(actor, 1, "atak wręcz — MG");
+    case "sukinkot":
+      return _wyslij(actor, { typ: "sukinkot" });
     case "potwierdz":
       return game.user.isGM && potwierdzSmierc(message);
     case "cofnij":
@@ -838,7 +856,76 @@ async function _onClick(event, message) {
   }
 }
 
+/* -------------------------------------------- */
+/*  Zawzięty sukinkot (R10)                      */
+/* -------------------------------------------- */
+
+const _sukinkot = actor => actor?.items?.find(i => i.getFlag(MODULE_ID, "originAbilityId") === SUKINKOT) ?? null;
+
+/** Przycisk na karcie: umiera albo stabilny, ma zdolność z użyciem i jeszcze nie zapowiedział. */
+function _sukinkotGotowy(actor) {
+  const s = stan(actor);
+  if (s !== "umierajacy" && s !== "stabilny") return false;
+  return !_flaga(actor).sukinkot && _num(_sukinkot(actor)?.system?.uses?.value) > 0;
+}
+
+/**
+ * [Zawzięty sukinkot — wstanę] (MG): zużyte użycie, zapowiedź do początku następnej tury; poza walką — od razu.
+ * @param {Actor} actor
+ */
+export async function zacisnijZeby(actor) {
+  if (!game.user.isGM || !_sukinkotGotowy(actor)) return null;
+  const item = _sukinkot(actor);
+  await item.update({ "system.uses.spent": _num(item.system.uses.spent) + 1 });
+  const combat = game.combat?.started && game.combat.combatants.some(c => c.actor?.uuid === actor.uuid) ? game.combat : null;
+  if (!combat) return _wstan(actor);
+  await actor.setFlag(MODULE_ID, FLAG, { ..._flaga(actor), sukinkot: { combatId: combat.id } });
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<p><strong>${esc(actor.name)}</strong> zaciska zęby — Zawzięty sukinkot: na początku swojej następnej tury `
+      + `wstaje z 1 PW.</p>`
+  });
+  _odswiezKarte(actor);
+  return { zapowiedz: true };
+}
+
+/** Wstaje: 1 PW i czysty tor (U23); resztę — Nieprzytomność, stan, kartę — zamyka `ocuc` z `updateActor`. */
+async function _wstan(actor) {
+  const f = _flaga(actor);
+  if (f.sukinkot) await actor.setFlag(MODULE_ID, FLAG, { ...f, sukinkot: null });
+  if (_martwy(actor) || _pw(actor) > 0) return { wstal: false };
+  await actor.update({
+    "system.attributes.hp.value": 1, "system.attributes.death.success": 0, "system.attributes.death.failure": 0
+  });
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<p><strong>${esc(actor.name)}</strong> wstaje z 1 PW (Zawzięty sukinkot) i przeprowadza turę normalnie.</p>`
+  });
+  seqScrollText("WSTAJE", actor, { color: "#e67e22", fontSize: 30, duration: 2000 });
+  return { wstal: true };
+}
+
+/** Początek tury zapowiadającego (MG, raz — `tikRaz`). */
+async function _onUpdateCombat(combat, changed) {
+  if (!_jestWykonawca()) return;
+  if (!("turn" in changed) && !("round" in changed)) return;
+  if (!krokNaprzod(combat.previous, combat.current)) return;
+  const actor = combat.combatant?.actor ?? null;
+  if (_flaga(actor).sukinkot?.combatId !== combat.id) return;
+  if (await tikRaz(actor, "sukinkot", combat, { round: combat.current.round, combatantId: combat.current.combatantId, krawedz: "start" })) {
+    await _wstan(actor);
+  }
+}
+
+/** Walka skończyła się przed jego turą — wstaje teraz. */
+async function _onDeleteCombat(combat) {
+  if (!_jestWykonawca()) return;
+  for (const c of combat.combatants) {
+    if (_flaga(c.actor).sukinkot?.combatId === combat.id) await _wstan(c.actor);
+  }
+}
+
 /** `game.neuroshima.umieranie` */
 export const umieranieApi = {
-  stan, wMaszynie, stabilizuj, dodajPorazki, zaproponujSmierc, bnDoUmierania, poprosOStabilizacje, ocuc
+  stan, wMaszynie, stabilizuj, dodajPorazki, zaproponujSmierc, bnDoUmierania, poprosOStabilizacje, ocuc, zacisnijZeby
 };

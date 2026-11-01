@@ -30,7 +30,7 @@ import {
   DEFENSE_REACTIONS, reactionState, hasPendingReaction, isHitVerdict, isDiceBonus, bonusMax, npcReactionRow
 } from "../config/defense-rules.mjs";
 import {
-  obronaOf, OBRONA_FLAG, verdictOfEntry, buildTargetEntry, buildObrona, attackMessageFor, TT_VS_ATTACKER_FLAG
+  obronaOf, OBRONA_FLAG, verdictOfEntry, krytykZdjety, buildTargetEntry, buildObrona, attackMessageFor, TT_VS_ATTACKER_FLAG
 } from "./trafienie.mjs";
 import { coverAcBonus } from "./cover.mjs";
 import { getResolvedAbility } from "../actors/abilities.mjs";
@@ -167,7 +167,7 @@ export function attackCtx(obrona, entry) {
   return {
     total: obrona.total, natural: obrona.natural, verdict: r.verdict, need: r.need, target: r.target,
     autoHit: r.autoHit, melee: obrona.melee, attackerKind: obrona.attackerKind, used: entry.used,
-    critDowngraded: entry.critDowngraded, gmActive: !!game.users.activeGM, decided: entry.decided
+    critDowngraded: krytykZdjety(entry), gmActive: !!game.users.activeGM, decided: entry.decided
   };
 }
 
@@ -426,7 +426,7 @@ export async function setTargets(message) {
 export function shouldDowngradeCrit(obrona) {
   if (!obrona?.krytyk) return false;
   const hits = (obrona.targets ?? []).filter(t => t.verdict !== "pudło");
-  return hits.length > 0 && hits.every(t => t.critDowngraded);
+  return hits.length > 0 && hits.every(t => krytykZdjety(t));
 }
 
 /**
@@ -502,6 +502,14 @@ function _targetBlock(message, obrona, entry, visibility) {
     ? `<span class="neuro-obrona-verdict is-${ctx.verdict === "pudło" ? "miss" : "hit"}">${VERDICT_LABEL[ctx.verdict]}${after}${numbers}</span>`
     : "";
   div.innerHTML = `<div class="neuro-obrona-head"><strong>${esc(entry.name)}</strong>${verdict ? ` — ${verdict}` : ""}</div>`;
+
+  // Nie do zdarcia: trafienie, które byłoby krytyczne, jest zwykłym (R10).
+  if (entry.bezKrytyka && seeVerdict && ctx.verdict === "trafienie" && (obrona.krytyk || entry.autoKrytyk)) {
+    const line = document.createElement("div");
+    line.className = "neuro-obrona-used";
+    line.innerHTML = `<i class="fa-solid fa-shield-heart"></i> ${esc(entry.bezKrytyka)} — zwykłe obrażenia zamiast krytycznych`;
+    div.append(line);
+  }
 
   for (const u of entry.used) {
     const line = document.createElement("div");

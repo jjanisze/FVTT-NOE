@@ -670,6 +670,18 @@ function buildOriginAbility(key) {
   const doc = originAbilityItemData(key, { _id: idFor("origin-ability", key) });
   const img = iconFor("abilities", key);
   if (BIEGLOSCI[key]) doc.system.advancement = advancementById(bieglosciZdolnosci("pochodzenie", key));
+  // `aktywnosc` (Wierzę): klikalna aktywność, która zjada licznik — okno i kartę daje `combat/zdolnosci-karty.mjs`.
+  const def = ORIGIN_ABILITIES[key];
+  if (def?.aktywnosc) {
+    const aid = idFor("activity", `origin-${key}`);
+    doc.system.activities = {
+      [aid]: {
+        _id: aid, type: "utility", name: def.aktywnosc, activation: { type: "special", value: null },
+        consumption: def.uses ? { targets: [{ type: "itemUses", value: "1", target: "" }] } : { targets: [] },
+        description: {}
+      }
+    };
+  }
   return { ...doc, img, ...(EFEKTY[key] ? { effects: efektyZdolnosci("origin-ability", key, img) } : {}), _key: null };
 }
 

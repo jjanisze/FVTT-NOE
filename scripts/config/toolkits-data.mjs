@@ -33,6 +33,19 @@ const ZBROJE_SMIECIOWE_NAMES = Object.freeze([
 export const MEDYK_HEAL_FLAG = "medykHeal";
 /** Default / full medicine supply (RAW: "zapas medykamentów na pięciokrotne leczenie"). */
 export const MEDYK_MAX_CHARGES = 5;
+
+/**
+ * Krwawy anioł (Medyk, profesja Speca; PLAN_m7 R9): kość PW zestawu małego medyka rośnie z poziomem — k6 od 3., k8 od 6.,
+ * k10 od 9., k12 od 12.; bez zdolności (i poniżej 3.) — k4. Poziom — Speca, czyli klasy tej profesji. Czyste.
+ * @param {number} poziom
+ * @param {boolean} krwawyAniol
+ * @returns {number} ścianki kości
+ */
+export function koscLeczeniaMedyka(poziom, krwawyAniol) {
+  if (!krwawyAniol) return 4;
+  const p = Number(poziom) || 0;
+  return p >= 12 ? 12 : p >= 9 ? 10 : p >= 6 ? 8 : p >= 3 ? 6 : 4;
+}
 // Fixed (2026-09-06): `MEDYK_CHARGES_FLAG` ("medyk-charges") used to live here too — dead code,
 // never read or written anywhere (grepped the whole `scripts/` tree to confirm, not assumed).
 // The medicine supply has always actually lived on the item's NATIVE `system.uses` — see

@@ -101,6 +101,7 @@ import { registerZdolnosciWspolne } from "./combat/zdolnosci-wspolne.mjs";
 import { registerZdolnosciWsparcie } from "./combat/zdolnosci-wsparcie.mjs";
 import { registerZdolnosciWalka } from "./combat/zdolnosci-walka.mjs";
 import { registerZdolnosciAkcje, ulubionaBronApi } from "./combat/zdolnosci-akcje.mjs";
+import { registerZdolnosciKarty, zdolnosciKartyApi } from "./combat/zdolnosci-karty.mjs";
 import { registerZdolnosciTrafienie } from "./combat/zdolnosci-trafienie.mjs";
 import { registerPrzycelowanie, przycelowanieApi } from "./combat/przycelowanie.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
@@ -390,6 +391,7 @@ Hooks.once("init", () => {
   // Szybka gadka, Szybkie badanie.
   registerZdolnosciWalka();
   registerZdolnosciAkcje();
+  registerZdolnosciKarty();
   // Po trafieniu (PLAN_m7 E5, R6): Bolesny atak, Podstępny atak, Mój bóg kule nosi, Skuteczny cios.
   registerZdolnosciTrafienie();
   // Przycelowanie (PLAN_m7 E6, R8): „Celuję w…” w oknie ataku, TT celu w werdykcie, skutek trafienia z tabeli.
@@ -606,6 +608,7 @@ Hooks.once("ready", () => {
   game.neuroshima.ulatwieniaTestow = ulatwieniaTestowApi;
   // Ulubiona broń (PLAN_m7 §3.0.5) — game.neuroshima.ulubionaBron.lista(actor), .wybierz(actor, item), .model(weapon)
   game.neuroshima.ulubionaBron = ulubionaBronApi;
+  game.neuroshima.zdolnosciKarty = zdolnosciKartyApi;
   // Przycelowanie (PLAN_m7 E6) — game.neuroshima.przycelowanie.wyceluj(actor, "dolna"), .czesciDla(actor, cel)
   game.neuroshima.przycelowanie = przycelowanieApi;
 

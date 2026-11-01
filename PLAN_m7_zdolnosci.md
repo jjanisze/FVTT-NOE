@@ -767,7 +767,7 @@ rodzaj.
 - **Luka E3 (znalezisko agenta):** od E3 plakietka liczy Rozwój Cechy jako automatykę, więc 18 Sztuczek bez innych wpisów
   `auto` i bez `manual` pokazywało „Zautomatyzowane”, choć ich właściwy efekt rozstrzyga stół (Gunfight, Grenadier,
   Wrestler, Snajper…). Poprawione: biegłości z D8, których E3 nie zrobił — `bieglosci` → `Trait` na Fachowcu (2 zestawy),
-  Uczu się, ucz (2 umiejętności), Szkoleniu w broni (kategoria), Szkoleniach w pancerzu (średni, ciężki) i Ławniku (broń
+  Ucz się, ucz (2 umiejętności), Szkoleniu w broni (kategoria), Szkoleniach w pancerzu (średni, ciężki) i Ławniku (broń
   improwizowana); `efekty` na Sztuczce (Szybki Bill — biegłość w Inicjatywie, stockowa flaga `initiativeAlert`;
   Człowiek-pająk — wspinaczka = Szybkość); **Gunfight** i **Snajper** w silniku okoliczności (`bron.gunfight`,
   `bron.snajperSztuczka`; Snajper ze Strzelcem — większe powiększenie, ×3, RAI); **Immunitet** — wiersz rejestru
@@ -779,3 +779,30 @@ rodzaj.
   .45 ACP w plecaku; Carson: Winchester .30-06 i naboje .44 Mag), Iris — Trajektoria zamiast zdolności Speca 1.
 - **Paczki:** przebudowane wszystkie (kampania wyłączona); w `bestiariusz` wchodzi piła tarczowa Juggernauta (atak z
   przyrostkiem `.atak`, przebudowa krwawień) i ostatnie sześć własnych grafik. Quench 1495/1495.
+
+### E7 — R9 + R10, karty MG i śmierć (2026-11-01)
+
+- **R10 — Nie do zdarcia** (`combat/trafienie.mjs`): pole `bezKrytyka` na wpisie celu (z przedmiotu zdolności) — trwałe,
+  przerzut go nie kasuje (w przeciwieństwie do `critDowngraded` Krytycznej ochrony); `krytykZdjety` w werdykcie,
+  w stanie reakcji i w `shouldDowngradeCrit` (rzut obrażeń bez krytyka, gdy każdy trafiony go ma); `isCriticalHitOn`
+  — bez Stopnia Zranienia z krytyka także bez karty ataku (U22: każdy krytyk, też automatyczny). Linia na karcie ataku.
+- **R10 — Zawzięty sukinkot** (`combat/umieranie.mjs`): przycisk właściciela na karcie „Umiera” (przekaźnik umierania),
+  użycie schodzi od razu, zapowiedź w fladze; początek jego tury (`updateCombat`, `tikRaz`) — 1 PW i tor od zera (U23),
+  resztę zamyka `ocuc`. Poza walką — od razu; koniec walki przed jego turą też go podnosi (decyzja agenta).
+- **R9 — `combat/zdolnosci-karty.mjs`** (zasady: `config/zdolnosci-karty-rules.mjs`): **Zryw** (1 /KO, tylko w swojej
+  turze; Akcja Bonusowa — `actions.dodatkowa`, Akcji moduł nie liczy), **Kłusownik** (aktywność „Pułapka” z narzędziami
+  małego kłusownika; ST 8 + MDR + PB), **Wierzę** (aktywność 1 /DO — nowe pole `aktywnosc` zdolności Pochodzenia w
+  builderze; [Do ekwipunku] u MG), **Bez tajemnic** (Przyroda; karta MG z progami i [Powiedz graczowi]; trzy
+  współczynniki — podpowiedź TT, PW, Szybkość), **Coś mi tu śmierdzi** (D9; aktywny MG na oglądanej scenie, sygnał tylko
+  o nowych mutantach; Percepcja ST 15 wskazuje i pinguje), **Łapiduch** (karta „Śmierć” zapisuje `chwila` — U24; po
+  potwierdzeniu karta z [Reanimacja], ST z zegara; tylko po trzech porażkach i Stopniu ponad Krytyczny — maks. PW 0 i
+  szósty poziom Wyczerpania zabijają znów, RAI agenta). Shift — rzut bez okna. **Krwawy anioł** — kość zestawu małego
+  medyka z poziomu Speca (`koscLeczeniaMedyka`).
+- **Plakietki:** Łyżeczka (kod z M6 E3), notki „Nie automatyzujemy” — Renoma, Stylowa, Znajomości, Doktor Brain,
+  Bezlitosny przywódca, Szybkie nogi. Zależne od handoffu ruchu (niedostarczony): Skok Gladiatora, Skoczek, Szybkie nogi
+  — zostają częściowe / bez, z notką.
+- **Pokrycie:** zdolności klasowe i profesji **100/133 (45 pełnych) — 75 %**; Sztuczki 19 pełnych, 22 częściowe;
+  wszystkie Sztuczki pregenów (D16) co najmniej częściowe.
+- **Testy:** Quench `zdolnosci-karty` (14) — 1509/1509; nowe e2e `zdolnosci-karty` (mutant wchodzi w 9 m: gracz bez nazwy,
+  MG z nazwą, Percepcja wskazuje; Zawzięty sukinkot przez gracza — wstaje na początku tury; śmierć → karta Łapiducha →
+  reanimacja gracza przez MG) + regresja `umieranie`, `combat`, `zdolnosci-walka`, `postac`, `improwizacja` — zielone.

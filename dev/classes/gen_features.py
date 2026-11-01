@@ -126,6 +126,8 @@ AUTOMATION = {
     },
     "ulubiona-bron-twardziel": {"hotbar": True, "picks": {"scale": "@scale.twardziel.ulubionaBron"}},
     "przycelowanie": {"hotbar": True},
+    # Zryw: „po użyciu … Krótki lub Długi odpoczynek” — 1 /KO; karta i limit znacznika B (PLAN_m7 E7).
+    "zryw": {"uses": {"max": 1, "period": "sr"}, "hotbar": True},
     "drugi-atak": {"passive": True, "exclusiveGroup": "extraAttack"},
     "trzeci-atak": {"passive": True, "exclusiveGroup": "extraAttack"},
 
@@ -144,6 +146,8 @@ AUTOMATION = {
 
     # ---- Zwiadowca ----
     "ulubiona-bron-zwiadowca": {"hotbar": True},
+    # Kłusownik: minuta pracy — aktywność „Pułapka” bez typu akcji; test i karta MG (PLAN_m7 E7).
+    "klusownik": {"hotbar": True, "activityName": "Pułapka", "activityAction": "S"},
     "moj-wrog": {"passive": True, "resource": {"value": "@scale.zwiadowca.mojWrog"}},
     "moj-biom": {"passive": True, "resource": {"value": "@scale.zwiadowca.mojBiom"}},
 
@@ -715,6 +719,63 @@ COVERAGE = {
                  ("po sukcesie raz w rundzie Ułatwienie w ataku na tę maszynę — do końca walki, poza walką do Długiego "
                   "odpoczynku (U18)", "combat/zdolnosci-walka.mjs")],
         "manual": "Które 3 współczynniki zdradzić — MG.",
+    },
+    # ---- PLAN_m7 E7: R9 (karty MG) i R10 (krytyki, śmierć) ----
+    "zryw": {
+        "auto": [("aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa i ogłoszenie; Akcja "
+                  "Bonusowa podnosi limit znacznika", "combat/zdolnosci-karty.mjs")],
+        "manual": "Dodatkowej Akcji moduł nie liczy (znaczniki ma tylko Reakcja i Akcja Bonusowa) — pilnuje stół.",
+    },
+    "klusownik": {
+        "auto": [("aktywność „Pułapka” z narzędziami małego kłusownika: Test Survivalu albo narzędzi, karta z ST pułapki "
+                  "8 + MDR + PB (zauważenie, wyzwolenie, unik)", "combat/zdolnosci-karty.mjs")],
+        "manual": "ST zakładania z przykładów, rodzaj i działanie pułapki — MG.",
+    },
+    "bez-tajemnic": {
+        "auto": [("aktywność [A] wobec jednego mutanta albo potwora: Test INT (Przyroda), karta MG z tym, co zdradza próg "
+                  "(ST 10 nazwa, 15 podatności, 20 TT, PW i Szybkość) i przyciskami „Powiedz graczowi”", "combat/zdolnosci-karty.mjs")],
+        "manual": "Słabe punkty spoza karty istoty i inny wybór trzech współczynników — MG.",
+    },
+    "lapiduch": {
+        "auto": [("po potwierdzonej śmierci (trzy porażki, Stopień ponad Krytyczny) karta z przyciskiem „Reanimacja”: Test "
+                  "Medycyny o ST z czasu od śmierci według zegara świata (U24), nie po Olbrzymich obrażeniach; sukces — "
+                  "znów umiera, niestabilny", "combat/zdolnosci-karty.mjs")],
+        "manual": "Minutę reanimacji przesuwa na zegarze MG.",
+    },
+    "krwawy-aniol": {
+        "auto": [("kość PW narzędzi małego medyka według poziomu Speca: k6 od 3., k8 od 6., k10 od 9., k12 od 12.", "items/toolkit-medyk.mjs")],
+    },
+    "nie-do-zdarcia": {
+        "auto": [("każde trafienie krytyczne w posiadacza — z kości, Nieprzytomności, Przycelowania w głowę — jest zwykłym: "
+                  "werdykt na karcie, rzut obrażeń bez krytyka, bez Stopnia Zranienia z krytyka (U22)", "combat/trafienie.mjs")],
+    },
+    "lyzeczka": {
+        "auto": [("atak przedmiotem z ręki techniką łyżeczki: tabela wagi (1k6–4k6, władanie), biegłość, rzut na 6 m; "
+                  "cięższy niż SIŁ — sygnał MG; naturalna 1 — karta z przyciskiem „Rozpada się na dwie części”", "actors/improwizacja.mjs")],
+        "manual": "Rodzaj obrażeń wybiera gracz w oknie obrażeń; czy przedmiot się nadaje — MG.",
+    },
+    "szybkie-nogi": {
+        "manual": "Odstąpienie, Przyspieszenie i Ukrywanie się w Akcji Bonusowej — aktywność stawia znacznik Akcji "
+                  "Bonusowej, sam ruch czeka na handoff ruchu.",
+    },
+    "renoma": {
+        "manual": "+1 do Wpływania za każde 50 gambli towarów luksusowych na sobie — gracz dolicza w oknie rzutu "
+                  "(moduł nie wycenia luksusu).",
+    },
+    "stylowa": {
+        "manual": "+1 do Wpływania za każde 50 gambli towarów luksusowych na sobie — gracz dolicza w oknie rzutu "
+                  "(moduł nie wycenia luksusu).",
+    },
+    "znajomosci": {
+        "manual": "Test Charyzmy w cywilizowanym miejscu i to, kogo postać zna według tabeli — stół.",
+    },
+    "doktor-brain": {
+        "manual": "Serum z mutanta i trwała zmiana Cech (+4 INT do 20, −2 KON albo ZRC) — gracz zmienia na karcie, "
+                  "gdy MG pozwoli.",
+    },
+    "bezlitosny-przywodca": {
+        "manual": "Vendetta (Ułatwienie przeciw temu, kto w ostatniej rundzie zranił członka twojej mafii) i Szef każe [B] "
+                  "(atak członka w jego Reakcji) — stół.",
     },
     "trajektoria": {
         "auto": [("przycisk po rzucie pod Testem Ataku dystansowym: + mod. INT, licznik PB /DO", "combat/zdolnosci-po-rzucie.mjs")],
