@@ -5,6 +5,9 @@
 `review:graphics`, `review:icons` and `review:creatures` start the same server. Open its
 printed URL; portrait/token review is at `/creatures/`. One listener and shared navigation
 serve icon reviews, their library, 5e references, portraits/tokens and the water preview.
+The **Dźwięki pojazdów** tab adds the seven normalized M4 vehicle cues, individual
+audio controls, a shared audition-volume slider and source credits. Sources and exact
+normalization recipes: [M4 audio](../../art/m4/AUDIO.md).
 
 `review-store.mjs` shares JSON parsing, bounded requests, backup recovery and atomic writes.
 Workflows retain their validators and existing feedback files; no GM decisions are migrated.

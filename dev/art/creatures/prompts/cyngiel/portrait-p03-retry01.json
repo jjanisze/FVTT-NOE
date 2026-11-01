@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-31T10:50:37.419Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cyngiel",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/cyngiel/portrait-p02.png",
+      "role": "Exact edit target: new full-body Cyngiel; change the handgun only",
+      "sha256": "ec8a7b93cde12c431efc28d65d8dc63a811adb0a030737a852970754767b7019"
+    }
+  ],
+  "preparationIssue": "p02 generated a revolver although the intended equipment is a heavy semiautomatic pistol. This is an agent anatomy/equipment correction, not a GM rating.",
+  "prompt": "Use case: precise-object-edit. Edit this neutral fictional tabletop game portrait. Preserve the entire man, face, pose, clothing, boots, knife sheath, painterly style and charcoal background exactly as shown. Correct just ONE equipment detail: the lowered handgun currently looks like a revolver. Redraw it as a generic large BLACK SEMI-AUTOMATIC HANDGUN with a simple rectangular slide/frame silhouette and fixed grip, no cylinder/drum. Keep the same downward direction and a natural hand grip, finger alongside the frame. This is only a cosmetic correction of a game illustration; there is no firing, action scene, other person or injury. Do not add any other equipment or markings. Preserve the existing calm large surface shading and full-body framing.",
+  "priorAttempt": {
+    "prompt": "dev/art/creatures/prompts/cyngiel/portrait-p03.json",
+    "outcome": "Input was rejected by the image tool; no image created. Requested content is a neutral fictional character illustration."
+  }
+}

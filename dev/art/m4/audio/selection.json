@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-01",
+  "selected": [
+    {
+      "key": "start-benzyna",
+      "id": 405322,
+      "reason": "Petrol engine start; same recording supplies engine shutdown."
+    },
+    {
+      "key": "start-diesel",
+      "id": 435656,
+      "reason": "Heavy 1980s American diesel truck start, avoiding the later door slam."
+    },
+    {
+      "key": "start-motocykl",
+      "id": 737775,
+      "reason": "Close vintage Harley-Davidson start, without street traffic."
+    },
+    {
+      "key": "nieudane-odpalenie",
+      "id": 511685,
+      "reason": "Old engine cranking without a successful start."
+    },
+    {
+      "key": "alarm",
+      "id": 440419,
+      "reason": "Actual car-security alarm rather than hazard-light indicator clicks."
+    },
+    {
+      "key": "syrena",
+      "id": 479899,
+      "reason": "Dry classic American mechanical siren; short optional fire-engine cue."
+    }
+  ],
+  "excluded": [
+    {
+      "id": 401558,
+      "reason": "Metadata identifies BMW 120d diesel; unsuitable for the petrol slot despite its generic title."
+    },
+    {
+      "id": 548471,
+      "reason": "Description refers to alarm/hazard lights; chose an actual sounding security alarm."
+    },
+    {
+      "id": 315758,
+      "reason": "Street recording in Sydney; selected a dry studio American mechanical siren instead."
+    },
+    {
+      "id": 241756,
+      "reason": "Short diesel source includes a door slam; selected an older heavy American truck recording."
+    }
+  ]
+}

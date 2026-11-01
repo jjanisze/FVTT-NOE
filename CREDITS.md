@@ -497,6 +497,85 @@ prompts, source roles and selected candidate/delivery hashes are in `dev/icons/m
 and `dev/icons/review/candidates/batch-{119,120}/`. No glyph shape was redrawn at delivery.
 The old static overlay was rejected as superseded by the separately credited animated water.
 
+Six additional existing GM portraits are registered for reuse/regeneration review:
+`bit-boy-przewodnik`, `cyngiel`, `gangus-zolnierz`, `kitchin`, `spawacz` and
+`techmorwa-srednia`. Their p01 candidates are byte-identical WEBP copies at native
+resolution, not new generated images. Existing attribution below remains applicable;
+the original model and prompts are not recorded. Reuse records are under
+`dev/art/creatures/prompts/<id>/portrait-p01-reuse.json`. No new approval is inferred.
+
+After the GM rejected those six p01 portraits, new painted full-body portraits were
+generated with OpenAI's built-in image tool on 2026-10-31: Bit-boy p02, Cyngiel p03,
+Gangus zolnierz p02, Kitchin p02, Spawacz p03 and Techmorwa srednia p02. The approved
+sheriff portrait supplies painting/backdrop only. Bit-boy and Cyngiel restart from NOE;
+Gangus and Kitchin preserve the earlier concepts the GM liked. Spawacz uses the GM-provided
+Neuroshima 1.5 pencil sketch for anatomy; the private reference is not redistributed.
+Its local p03 edit adds the missing rear walking pair. Cyngiel p03 corrects the handgun;
+Techmorwa adopts an appliance disguise as an old washing machine with organic tentacles.
+Frozen prompts, input roles and hashes: `dev/art/creatures/prompts/` and
+`reference-sources.json`. The model identifier is not exposed. These are unapproved
+portrait candidates; no new tokens or final replacements are inferred from their creation.
+
+After the next GM review, Gangus p02 (4/5), Kitchin p02 (5/5) and Techmorwa p02 (5/5)
+supplied the exact identities for their transparent overhead tokens. The t02 revisions
+add Kitchin's missing sixth walking-leg pair and strengthen overhead foreshortening for
+the other two. The GM also requested an uncanny nonhuman mimic for Bit-boy p03, a more
+formal professional-assassin direction and concealed vest for Cyngiel p04, and quieter
+surfaces for Spawacz p04/p05. The second robot surface pass removes residual fine panel
+webbing while retaining the approved six-leg/two-tool-arm structure. These edits use the
+same built-in image tool and retain full prompts/reference hashes under the creature pipeline.
+No GM approval or final delivery is inferred for the new tokens or portrait revisions.
+
+The GM approved and delivered Gangus zolnierz p02/t02 (4/5, 5/5), Kitchin p02/t02
+(5/5, 5/5) and Techmorwa srednia p02/t02 (5/5, 5/5). Exact reviewed bytes occupy
+`tokens/portraits/<id>.webp` and `tokens/<id>.webp`; previous portraits were backed up.
+These three deliveries brought the ledger to 26 approved pairs and Bestiary coverage to 49/52.
+Archived input mappings preserve the old portraits used by frozen earlier prompts.
+
+Approved Bit-boy p03 and Cyngiel p04 (both 5/5) supply their new transparent tokens;
+t02 raises the camera above the initial drafts. Spawacz p06 adds the GM-requested coarse
+grease smears, long scratches, shallow dents and localized welding spatter over clean p05.
+All use OpenAI's built-in image tool, model identifier not exposed. Exact prompts, source
+hashes and versions remain under `dev/art/creatures/`; these three new review assets are
+not approved or delivered automatically.
+
+The next GM review approved Bit-boy p03/t02 and Cyngiel p04/t02, all four images at 5/5.
+Their exact reviewed WEBPs are delivered to the same final portrait/token paths, bringing
+the ledger to 28 approved pairs and native Bestiary token coverage to 51/52. Previous
+portraits and their historical input hashes remain archived.
+
+Spawacz p06 was approved at 4/5 and supplies the identity for token candidate t01, generated
+with the same built-in tool on 2026-10-31. The approved Mobsprzet token supplies overhead
+camera and painting only. The intended six-support/two-tool arrangement did not preserve
+the attachment topology: the GM rated t01 2/5 and requested multiple new generations.
+Its token remains unapproved and is not delivered.
+Exact prompt: `dev/art/creatures/prompts/spawacz/token-t01.json`; candidate:
+`dev/art/creatures/candidates/spawacz/token-t01.webp`.
+
+Five independent Spawacz token variants t02–t06 were subsequently generated using the same
+built-in tool, each from approved portrait p06 and an original SVG construction diagram.
+The first guide distinguishes lower pelvic leg roots from upper shoulder tool roots;
+the second also separates their projected paths. The diagrams were rendered in a detached
+Chrome canvas, with hashes in `dev/art/creatures/geometry/manifest.json`.
+The variants are review candidates only; t02 and t06 are labeled failed preparation attempts,
+while t03/t04/t05 are offered for comparison. Candidate files and exact per-call prompts:
+`dev/art/creatures/candidates/spawacz/token-t02.webp` through `token-t06.webp`, and
+`dev/art/creatures/prompts/spawacz/token-t02.json` through `token-t06.json`.
+The model identifier is not exposed. Packaging only crops, resizes and preserves alpha.
+
+The GM subsequently chose Spawacz t03 at 5/5 with a revision, asking to remove two tucked
+phantom rear joints while keeping the real full-length rear legs. Eight independent local
+edits t07–t14 were made with OpenAI's built-in image tool on 2026-10-31. Each uses the exact
+t03 generator PNG as its edit target and approved portrait p06 as an identity reference.
+Four paired prompt phrasings address the same deletion; no candidate is derived from another
+new edit. Review WEBPs: `dev/art/creatures/candidates/spawacz/token-t07.webp` through
+`token-t14.webp`. Exact prompts and input hashes: `dev/art/creatures/prompts/spawacz/token-t07.json`
+through `token-t14.json`. The GM approved t10 at 5/5. Its exact reviewed bytes and approved
+portrait p06 (4/5) are delivered as `tokens/spawacz.webp` and
+`tokens/portraits/spawacz.webp`. Alternatives remain in the review archive.
+This closes all 29 reviewed pairs and gives all 52 non-overlay Bestiary entries their own
+portrait and token files. Earlier portrait inputs remain archived with their historical hashes.
+
 ## Bestiariusz portraits
 
 The actor portraits in `tokens/portraits/` (the image shown on the sheet and to players, not the
@@ -752,7 +831,41 @@ holes, jutting fragments and a broken irregular contour. Their own v1 images wer
 with the same built-in tool; sources `maly-v2.png` and `sredni-v2.png`, full instructions in
 `revision-jagged-prompts.json`. Earlier accepted versions remain as historical sources.
 
+## Vehicle sound cues (M4)
+
+Seven vehicle cues in `sounds/pojazdy/` were delivered on 2026-11-01 from six original
+Freesound recordings, each verified as [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+Original WAVs were downloaded through the authenticated Freesound Download sound links;
+no public-preview audio was shipped. The existing M5 pipeline trims without changing pitch
+or tempo, normalizes sample peak/RMS, applies 5/30 ms fades and encodes mono 44.1 kHz Vorbis OGG.
+
+| File in sounds/pojazdy/ | Length | Source and author | Cue |
+|---|---|---|---|
+| `start-benzyna.ogg` | 2.8 s | [Car Engine Start.wav](https://freesound.org/people/tbsounddesigns/sounds/405322/) — tbsounddesigns | Saturn Vue: starter, catch and brief idle. |
+| `start-diesel.ogg` | 4.0 s | [FORD LTL 9000_engine start and idle.wav](https://freesound.org/people/YellowJacketStudios/sounds/435656/) — YellowJacketStudios | 1980s Ford LTL 9000 heavy-diesel start. |
+| `start-motocykl.ogg` | 2.5 s | [Motorcycle - Harley Davidson vintage](https://freesound.org/people/Vrymaa/sounds/737775/) — Vrymaa | Vintage Harley-Davidson start and first throttle rise. |
+| `zgaszenie.ogg` | 1.5 s | [Car Engine Start.wav](https://freesound.org/people/tbsounddesigns/sounds/405322/) — tbsounddesigns | The same Saturn shutting down. |
+| `nieudane-odpalenie.ogg` | 2.95 s | [failed_car_start.wav](https://freesound.org/people/jerry.berumen/sounds/511685/) — jerry.berumen | Unsuccessful cranking attempt and release. |
+| `alarm.ogg` | 2.9 s | [Alarm_Car_Parking.wav](https://freesound.org/people/cribbler/sounds/440419/) — cribbler | Actual car alarm pulses. |
+| `syrena.ogg` | 5.0 s | [R18-43-Siren Recorded in Studio.wav](https://freesound.org/people/craigsmith/sounds/479899/) — craigsmith | Dry American mechanical siren; optional fire-engine cue. |
+
+Exact source licenses, safe original URLs, trims and source/output hashes:
+`dev/art/m4/audio-sources.json`, `audio-originals.json`, `audio-clips.json` and `audio-report.json`.
+
 ## AI-assisted development
+
+<!-- m7-status-credits:start -->
+Ten GM-approved M7 status glyphs from Batches 121–123 were delivered on 2026-11-01
+as exact SVG/WEBP masks: `reakcja`, `akcja-bonusowa`, `stanowisko-snajperskie`,
+`krwawienie-hemofilia`, `krwawienie-podstepny`, `krwawienie-tetnica`, `krwawienie-kolory`,
+`krwawienie-pila`, `krwawienie-dumdum` and `wyciek` (all in `icons/statuses/`).
+Bonus Action uses the selected Batch 123 option A. The full-star candidate was explicitly
+reassigned by the GM to `icons/statuses/akcja.svg`, reserved for the primary action.
+All eleven corresponding WEBP files preserve the selected generated masks without redrawing.
+Artwork was generated with OpenAI's built-in image tool; the model identifier is not exposed.
+Sources, exact GM decisions, prompts and delivery hashes: `dev/icons/m7-status-pass/`
+and `dev/icons/review/candidates/batch-{121,122,123}/`.
+<!-- m7-status-credits:end -->
 
 
 

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:53:01.498Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/spawacz/portrait-p02.png",
+      "role": "Exact edit target: preserve torso, four existing supporting legs and two tool arms; add a separate rear walking pair",
+      "sha256": "63ad62d975679f17a243efdf3f0ecec9acbc1e1542a43e035da5e333058b8666"
+    }
+  ],
+  "preparationIssue": "p02 has only four visible supporting legs. The NOE description requires six walking legs plus two tool arms.",
+  "prompt": "Use case: precise-object-edit. Edit this exact fictional maintenance-robot portrait. KEEP the existing compact domed torso, circular front port cluster, shoulder shells, both tool arms and FOUR existing walking legs unchanged. ADD ONLY ONE NEW PAIR OF SUPPORTING WALKING LEGS behind the existing legs, so the robot now has SIX planted pointed feet in total, THREE ON EACH SIDE, plus the TWO shoulder TOOL ARMS held off the floor.\nThe new left rear leg emerges from behind the lower torso on the viewer's LEFT, bends outward to the left, then down to a separate pointed foot on the far-left ground, slightly higher in the picture than the existing front feet. Mirror a new right rear supporting leg on the viewer's RIGHT, bending outward and planting its own distinct far-right foot behind the front ones. Both new feet and their upper/lower segments must be plainly visible against the empty background and must not merge with existing legs or tools. Give the pair the same thin articulated steel construction, dark bearings and pointed shin tips as the four original walking legs. This is six supports, not four supports plus counting the tool arms. Preserve the exact torso design, tools (pliers and inactive welding tip), colours, quiet painterly rendering, empty charcoal backdrop and full-body framing. Reframe slightly wider only if needed to fit all SIX feet comfortably. No new people, equipment, guns, cart, text, sparks or scene."
+}

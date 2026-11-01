@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31T14:18:05.092Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "bit-boy-przewodnik",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p03",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/bit-boy-przewodnik/portrait-p03.webp",
+      "role": "Exact GM-approved portrait identity",
+      "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027"
+    },
+    {
+      "path": "dev/art/creatures/in/bit-boy-przewodnik/token-t01.png",
+      "role": "Edit target: t01 with overly oblique camera",
+      "sha256": "62f677938d6b659dba03206e68d18a50c555b47c7ca851dca150085acaee8ac9"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "bit-boy-przewodnik",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T14:05:27.423Z"
+  },
+  "preparationIssue": "Raise the camera to match the steeper overhead token convention.",
+  "prompt": "Use case: precise-object-edit. Image 2 is the CURRENT TOKEN draft to improve; image 1 fixes the approved identity. Change ONLY the CAMERA to nearly straight overhead, about 85 degrees above the ground. Show predominantly the crown, upper surfaces of shoulders/coat sleeves, hands and shoes. Strongly shorten the visible face, chest-front, tie/cardigan and legs through foreshortening: the current draft still shows a long frontal torso. The subject looks forward/down toward SOUTH/bottom, not up at the observer. A small face sliver is enough. Same centred north-south stance and complete genuine transparent alpha silhouette. This must be a battle-map token viewed from almost directly above, not an elevated front portrait.\nKeep the exact frail NONHUMAN counterfeit elderly creature, wispy grey hair, elongated/asymmetric false face where visible, incorrectly worn misbuttoned olive/brown layers, crooked coat and uneven trouser hems, mismatched shoes, one open beckoning hand and one loose hand. Preserve its skinny hunched build and long fingers. Do not normalize it into an ordinary friendly human, add a weapon, apron or extra limb. Preserve identity, colours, brushwork and local wear; do not add fine all-over texture.\nKeep all hands, feet and weapon/fabric tips safely inside the square. No ground, scene, base, ring, long shadow, letters, checkerboard or coloured backdrop."
+}

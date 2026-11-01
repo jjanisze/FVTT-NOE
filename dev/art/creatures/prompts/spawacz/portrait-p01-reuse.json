@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:30:13.064256+00:00",
+  "operation": "reuse-existing-portrait",
+  "tool": "Existing GM artwork — reused unchanged; no image generation",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "references": [
+    {
+      "path": "tokens/portraits/spawacz.webp",
+      "role": "Existing module portrait offered for explicit reuse or regeneration decision",
+      "sha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a"
+    }
+  ],
+  "provenance": "Previously credited GM-generated artwork. Original generator/model and prompt are not recorded. No new authorship or generation is claimed.",
+  "prompt": "No generation was performed for p01. This review candidate is a byte-identical copy of the existing module portrait. Approve to reuse this exact artwork as the subject identity; request revision or reject to regenerate the portrait before creating its top-down token. Preparation note: NOE: stalowa modliszka, sześć kończyn do poruszania i dwie dodatkowe narzędziowe; możliwy wózek z częściami. Obecny portret nie pokazuje jednoznacznie całego tego układu. Wskaż pozostawienie albo korektę przed żetonem."
+}

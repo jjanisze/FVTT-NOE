@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:30:13.064256+00:00",
+  "operation": "reuse-existing-portrait",
+  "tool": "Existing GM artwork — reused unchanged; no image generation",
+  "model": null,
+  "creatureId": "kitchin",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "references": [
+    {
+      "path": "tokens/portraits/kitchin.webp",
+      "role": "Existing module portrait offered for explicit reuse or regeneration decision",
+      "sha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0"
+    }
+  ],
+  "provenance": "Previously credited GM-generated artwork. Original generator/model and prompt are not recorded. No new authorship or generation is claimed.",
+  "prompt": "No generation was performed for p01. This review candidate is a byte-identical copy of the existing module portrait. Approve to reuse this exact artwork as the subject identity; request revision or reject to regenerate the portrait before creating its top-down token. Preparation note: NOE: czarny chitynowy pancerz, wijący tułów i tuzin odnóży. Oceń zgodność obecnego kierunku z opisem i liczbę odnóży przy późniejszym rzucie z góry."
+}

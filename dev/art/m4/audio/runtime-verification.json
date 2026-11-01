@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-01",
+  "approvedAudioFiles": [
+    {
+      "file": "sounds/pojazdy/start-benzyna.ogg",
+      "sha256": "bec0c6317b88e211b2a5ab465a3f19b0022874292996abe16f2417b7b6178fa7",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/start-diesel.ogg",
+      "sha256": "70e02a6637b517a0e47411496c4947ff453ef6af8c8ea93da0117c2d106cea0f",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/start-motocykl.ogg",
+      "sha256": "1038c779a9835974341fcc54c2aef9029e15ea0df7cbdc2cc75c633db3b5b819",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/zgaszenie.ogg",
+      "sha256": "c1d5f116f4109c2b9bfc0c229c7835c5ef5d1ea2568a6a74d5c08346783e21df",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/nieudane-odpalenie.ogg",
+      "sha256": "e1ff9c9380b222c368c3e8c21af92f3b2a4e01626793eb4bec1cbd5ac0ab6d8a",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/alarm.ogg",
+      "sha256": "1635fb0c1168e6b3ba4f420d0d7662d6fc37abf4f8e20e30f1ac6e3c9bb29d17",
+      "http": 200
+    },
+    {
+      "file": "sounds/pojazdy/syrena.ogg",
+      "sha256": "b6bf125636545c16df25f08364f398a7caca9fe8b17a1f01e311f29f4772c459",
+      "http": 200
+    }
+  ],
+  "sirenButtonClicked": true,
+  "sirenEffectPreserved": true,
+  "playback": [
+    {
+      "src": "modules/neuroshima-2026-overrides/sounds/pojazdy/syrena.ogg",
+      "volume": 0.8,
+      "loop": false,
+      "broadcast": false
+    }
+  ],
+  "unrelatedActionSilent": true,
+  "sirenEvent": "syrena",
+  "cleanupPending": false,
+  "cleanup": {
+    "cleaned": true,
+    "audioHelperRestored": true
+  },
+  "quench": {
+    "total": 60,
+    "passed": 60,
+    "failed": 0
+  },
+  "staticChecks": {
+    "command": "npm test",
+    "exitCode": 0
+  },
+  "runtimeSourceChanged": "scripts/pojazdy/paleta.mjs",
+  "screenshot": {
+    "published": false,
+    "reason": "Automatic approval review rejected storing a Foundry session screenshot in the public repository; redacted test evidence is used instead."
+  }
+}

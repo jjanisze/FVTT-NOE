@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-01",
+  "decision": "approve",
+  "basis": "Direct GM message",
+  "statement": "All audio is approved. Integrate, if integration steps are required.",
+  "approvedFiles": [
+    {
+      "path": "sounds/pojazdy/start-benzyna.ogg",
+      "sha256": "bec0c6317b88e211b2a5ab465a3f19b0022874292996abe16f2417b7b6178fa7",
+      "duration": 2.8,
+      "source": "https://freesound.org/people/tbsounddesigns/sounds/405322/",
+      "sourceSha256": "538a50e5846b60c8cae3de48213f3f5b216b8f2d12ce80b81d7caee87ebc33f2"
+    },
+    {
+      "path": "sounds/pojazdy/start-diesel.ogg",
+      "sha256": "70e02a6637b517a0e47411496c4947ff453ef6af8c8ea93da0117c2d106cea0f",
+      "duration": 4.0,
+      "source": "https://freesound.org/people/YellowJacketStudios/sounds/435656/",
+      "sourceSha256": "f8b01a407dc128bffc8acb17997f4a33853a471fe59473806437a09263211685"
+    },
+    {
+      "path": "sounds/pojazdy/start-motocykl.ogg",
+      "sha256": "1038c779a9835974341fcc54c2aef9029e15ea0df7cbdc2cc75c633db3b5b819",
+      "duration": 2.5,
+      "source": "https://freesound.org/people/Vrymaa/sounds/737775/",
+      "sourceSha256": "8fa4377cc77b313ad91c85a1bb15be5791d54ad46106bae98565ee292aa77d6e"
+    },
+    {
+      "path": "sounds/pojazdy/zgaszenie.ogg",
+      "sha256": "c1d5f116f4109c2b9bfc0c229c7835c5ef5d1ea2568a6a74d5c08346783e21df",
+      "duration": 1.5,
+      "source": "https://freesound.org/people/tbsounddesigns/sounds/405322/",
+      "sourceSha256": "538a50e5846b60c8cae3de48213f3f5b216b8f2d12ce80b81d7caee87ebc33f2"
+    },
+    {
+      "path": "sounds/pojazdy/nieudane-odpalenie.ogg",
+      "sha256": "e1ff9c9380b222c368c3e8c21af92f3b2a4e01626793eb4bec1cbd5ac0ab6d8a",
+      "duration": 2.95,
+      "source": "https://freesound.org/people/jerry.berumen/sounds/511685/",
+      "sourceSha256": "54b8fda9aa1ea670df5f86371d734d66759d733bac2000cd29fbc6a499f572b8"
+    },
+    {
+      "path": "sounds/pojazdy/alarm.ogg",
+      "sha256": "1635fb0c1168e6b3ba4f420d0d7662d6fc37abf4f8e20e30f1ac6e3c9bb29d17",
+      "duration": 2.9,
+      "source": "https://freesound.org/people/cribbler/sounds/440419/",
+      "sourceSha256": "1bafffc461b2de875c912d5091eb2720bfe014e392696d7a84b3c408f2a05911"
+    },
+    {
+      "path": "sounds/pojazdy/syrena.ogg",
+      "sha256": "b6bf125636545c16df25f08364f398a7caca9fe8b17a1f01e311f29f4772c459",
+      "duration": 5.0,
+      "source": "https://freesound.org/people/craigsmith/sounds/479899/",
+      "sourceSha256": "ec3cc6d6bbd9d45092385e965214f8509acb6dd4af4023590d6d41e82ca35d29"
+    }
+  ],
+  "integration": {
+    "complete": true,
+    "newRuntimeMappingsRequired": false,
+    "packRebuildRequired": false,
+    "runtimeFile": "scripts/pojazdy/efekty-silnika.mjs",
+    "runtimeSha256": "d88b88c7a2dcf0df5bf367ec35431261f5c49e2667cdf60e320f9d79cbabf657",
+    "sirenDispatchFile": "scripts/pojazdy/paleta.mjs",
+    "sirenDispatchSha256": "6f8e9c9b0a43f87d6bd5ba975a895e6f15268d396fb8a14abd36b94a3990345a",
+    "sirenPaletteDispatchAdded": true,
+    "existingBindings": {
+      "benzyna": "start-benzyna",
+      "diesel": "start-diesel",
+      "motocykl": "start-motocykl",
+      "stop": "zgaszenie",
+      "nieudane": "nieudane-odpalenie",
+      "alarm": "alarm",
+      "syrena": "syrena"
+    },
+    "releaseIncludesSounds": true
+  },
+  "notes": "Exact normalized audio retained. Siren palette action now emits the existing vehicle sound event; no mechanics or compendium changes."
+}

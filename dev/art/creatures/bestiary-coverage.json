@@ -1,0 +1,484 @@
+{
+  "date": "2026-10-31T16:02:32.840312+00:00",
+  "source": "dev/bestiary/bestiary.json",
+  "sourceSha256": "11713ee448e2c66f2030ed892d53ec20732eb3d2ae4e84cc6f5f19d249dcad7d",
+  "excludedOverlays": [
+    "zombie-nakladka-death-breath"
+  ],
+  "creatures": 52,
+  "nativeTokens": 52,
+  "missingNativeTokens": [],
+  "policy": "Audit every non-overlay creature for its own tokens/<id>.webp or .png. A fallback alias, including a legal dnd5e asset, does not count as native artwork.",
+  "entries": [
+    {
+      "id": "alahama",
+      "name": "ALAHAMA",
+      "nativeToken": "tokens/alahama.webp",
+      "portrait": "tokens/portraits/alahama.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "biodroid",
+      "name": "BIODROID",
+      "nativeToken": "tokens/biodroid.webp",
+      "portrait": "tokens/portraits/biodroid.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "bit-boy-przewodnik",
+      "name": "BIT-BOY PRZEWODNIK",
+      "nativeToken": "tokens/bit-boy-przewodnik.webp",
+      "portrait": "tokens/portraits/bit-boy-przewodnik.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/humanoid/Hobgoblin.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "bit-boys",
+      "name": "BIT-BOYS (aka CROATS)",
+      "nativeToken": "tokens/bit-boys.webp",
+      "portrait": "tokens/portraits/bit-boys.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "cyngiel",
+      "name": "CYNGIEL",
+      "nativeToken": "tokens/cyngiel.webp",
+      "portrait": "tokens/portraits/cyngiel.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/humanoid/Assassin.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "cywil",
+      "name": "CYWIL",
+      "nativeToken": "tokens/cywil.webp",
+      "portrait": "tokens/portraits/cywil.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gangus-boss",
+      "name": "GANGUS BOSS",
+      "nativeToken": "tokens/gangus-boss.webp",
+      "portrait": "tokens/portraits/gangus-boss.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gangus-kapo",
+      "name": "GANGUS KAPO",
+      "nativeToken": "tokens/gangus-kapo.webp",
+      "portrait": "tokens/portraits/gangus-kapo.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gangus-zolnierz",
+      "name": "GANGUS ŻOŁNIERZ",
+      "nativeToken": "tokens/gangus-zolnierz.webp",
+      "portrait": "tokens/portraits/gangus-zolnierz.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/humanoid/Thug.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-i-nocny-ghul",
+      "name": "GENERACJA I – NOCNY GHUL",
+      "nativeToken": "tokens/generacja-i-nocny-ghul.webp",
+      "portrait": "tokens/portraits/generacja-i-nocny-ghul.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-ii-genotyp-gadzi",
+      "name": "GENERACJA II – GENOTYP GADZI",
+      "nativeToken": "tokens/generacja-ii-genotyp-gadzi.webp",
+      "portrait": "tokens/portraits/generacja-ii-genotyp-gadzi.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-ii-genotyp-wilczy",
+      "name": "GENERACJA II – GENOTYP WILCZY",
+      "nativeToken": "tokens/generacja-ii-genotyp-wilczy.webp",
+      "portrait": "tokens/portraits/generacja-ii-genotyp-wilczy.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-iii-grubas",
+      "name": "GENERACJA III – GRUBAS",
+      "nativeToken": "tokens/generacja-iii-grubas.webp",
+      "portrait": "tokens/portraits/generacja-iii-grubas.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-iii-szpieg",
+      "name": "GENERACJA III – SZPIEG",
+      "nativeToken": "tokens/generacja-iii-szpieg.webp",
+      "portrait": "tokens/portraits/generacja-iii-szpieg.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-iii-techmutas",
+      "name": "GENERACJA III – TECHMUTAS",
+      "nativeToken": "tokens/generacja-iii-techmutas.webp",
+      "portrait": "tokens/portraits/generacja-iii-techmutas.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "generacja-iv-mesmeryta",
+      "name": "GENERACJA IV – MESMERYTA",
+      "nativeToken": "tokens/generacja-iv-mesmeryta.webp",
+      "portrait": "tokens/portraits/generacja-iv-mesmeryta.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gigamut",
+      "name": "GIGAMUT",
+      "nativeToken": "tokens/gigamut.webp",
+      "portrait": "tokens/portraits/gigamut.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gigantyczny-pajak",
+      "name": "GIGANTYCZNY PAJĄK",
+      "nativeToken": "tokens/gigantyczny-pajak.webp",
+      "portrait": "tokens/portraits/gigantyczny-pajak.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/GiantSpider.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "gladiator",
+      "name": "GLADIATOR",
+      "nativeToken": "tokens/gladiator.webp",
+      "portrait": "tokens/portraits/gladiator.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "harpie-aka-wampiry",
+      "name": "HARPIE (aka WAMPIRY)",
+      "nativeToken": "tokens/harpie-aka-wampiry.webp",
+      "portrait": "tokens/portraits/harpie-aka-wampiry.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "juggernaut",
+      "name": "JUGGERNAUT",
+      "nativeToken": "tokens/juggernaut.webp",
+      "portrait": "tokens/portraits/juggernaut.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kanibal",
+      "name": "KANIBAL",
+      "nativeToken": "tokens/kanibal.webp",
+      "portrait": "tokens/portraits/kanibal.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kidnaper",
+      "name": "KIDNAPER",
+      "nativeToken": "tokens/kidnaper.webp",
+      "portrait": "tokens/portraits/kidnaper.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kitchin",
+      "name": "KITCHIN",
+      "nativeToken": "tokens/kitchin.webp",
+      "portrait": "tokens/portraits/kitchin.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/GiantWasp.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kon-skazony",
+      "name": "KOŃ (SKAŻONY)",
+      "nativeToken": "tokens/kon-skazony.webp",
+      "portrait": "tokens/portraits/kon-skazony.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/DraftHorse.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kon-teksanczyk",
+      "name": "KOŃ (TEKSAŃCZYK)",
+      "nativeToken": "tokens/kon-teksanczyk.webp",
+      "portrait": "tokens/portraits/kon-teksanczyk.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/Warhorse.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kon-zdrowy",
+      "name": "KOŃ (ZDROWY)",
+      "nativeToken": "tokens/kon-zdrowy.webp",
+      "portrait": "tokens/portraits/kon-zdrowy.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/DraftHorse.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "konwojent-straznik",
+      "name": "KONWOJENT (STRAŻNIK)",
+      "nativeToken": "tokens/konwojent-straznik.webp",
+      "portrait": "tokens/portraits/konwojent-straznik.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/humanoid/Guard.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "korzec",
+      "name": "KORZEC",
+      "nativeToken": "tokens/korzec.webp",
+      "portrait": "tokens/portraits/korzec.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kurczak",
+      "name": "KURCZAK",
+      "nativeToken": "tokens/kurczak.webp",
+      "portrait": "tokens/portraits/kurczak.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "kurczak-wybuchowy",
+      "name": "KURCZAK WYBUCHOWY",
+      "nativeToken": "tokens/kurczak-wybuchowy.webp",
+      "portrait": "tokens/portraits/kurczak-wybuchowy.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "lowca",
+      "name": "ŁOWCA",
+      "nativeToken": "tokens/lowca.webp",
+      "portrait": "tokens/portraits/lowca.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "megator",
+      "name": "MEGATOR",
+      "nativeToken": "tokens/megator.webp",
+      "portrait": "tokens/portraits/megator.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "mobsprzet",
+      "name": "MOBSPRZĘT",
+      "nativeToken": "tokens/mobsprzet.webp",
+      "portrait": "tokens/portraits/mobsprzet.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "mrokoszczur",
+      "name": "MROKOSZCZUR",
+      "nativeToken": "tokens/mrokoszczur.webp",
+      "portrait": "tokens/portraits/mrokoszczur.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "myslacy-szczur",
+      "name": "MYŚLĄCY SZCZUR",
+      "nativeToken": "tokens/myslacy-szczur.webp",
+      "portrait": "tokens/portraits/myslacy-szczur.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "neogator",
+      "name": "NEOGATOR",
+      "nativeToken": "tokens/neogator.webp",
+      "portrait": "tokens/portraits/neogator.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/Crocodile.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "neokot",
+      "name": "NEOKOT",
+      "nativeToken": "tokens/neokot.webp",
+      "portrait": "tokens/portraits/neokot.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "neoniedzwiedz",
+      "name": "NEONIEDŹWIEDŹ",
+      "nativeToken": "tokens/neoniedzwiedz.webp",
+      "portrait": "tokens/portraits/neoniedzwiedz.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/CaveBear.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "obronca",
+      "name": "OBROŃCA",
+      "nativeToken": "tokens/obronca.webp",
+      "portrait": "tokens/portraits/obronca.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "pajak",
+      "name": "PAJĄK",
+      "nativeToken": "tokens/pajak.webp",
+      "portrait": "tokens/portraits/pajak.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "pies-bojowy",
+      "name": "PIES BOJOWY",
+      "nativeToken": "tokens/pies-bojowy.webp",
+      "portrait": "tokens/portraits/pies-bojowy.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "pies-mutek",
+      "name": "PIES MUTEK",
+      "nativeToken": "tokens/pies-mutek.webp",
+      "portrait": "tokens/portraits/pies-mutek.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/DireWolf.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "pulser",
+      "name": "PULSER",
+      "nativeToken": "tokens/pulser.webp",
+      "portrait": "tokens/portraits/pulser.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "roj-szczurow",
+      "name": "RÓJ SZCZURÓW",
+      "nativeToken": "tokens/roj-szczurow.webp",
+      "portrait": "tokens/portraits/roj-szczurow.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "spawacz",
+      "name": "SPAWACZ",
+      "nativeToken": "tokens/spawacz.webp",
+      "portrait": "tokens/portraits/spawacz.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/construct/FlyingSword.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "szczekowij",
+      "name": "SZCZĘKOWIJ",
+      "nativeToken": "tokens/szczekowij.webp",
+      "portrait": "tokens/portraits/szczekowij.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "szeryf",
+      "name": "SZERYF",
+      "nativeToken": "tokens/szeryf.webp",
+      "portrait": "tokens/portraits/szeryf.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "taran",
+      "name": "TARAN",
+      "nativeToken": "tokens/taran.webp",
+      "portrait": "tokens/portraits/taran.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "techmorwa-malutka",
+      "name": "TECHMORWA (malutka)",
+      "nativeToken": "tokens/techmorwa-malutka.webp",
+      "portrait": "tokens/portraits/techmorwa-malutka.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "techmorwa-srednia",
+      "name": "TECHMORWA (średnia)",
+      "nativeToken": "tokens/techmorwa-srednia.webp",
+      "portrait": "tokens/portraits/techmorwa-srednia.webp",
+      "fallbackAlias": "systems/dnd5e/tokens/beast/GiantCentipede.webp",
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    },
+    {
+      "id": "zolnierz-posterunku",
+      "name": "ŻOŁNIERZ POSTERUNKU",
+      "nativeToken": "tokens/zolnierz-posterunku.webp",
+      "portrait": "tokens/portraits/zolnierz-posterunku.webp",
+      "fallbackAlias": null,
+      "needsNativeToken": false,
+      "needsNativePortrait": false
+    }
+  ],
+  "nativePortraits": 52,
+  "missingNativePortraits": []
+}

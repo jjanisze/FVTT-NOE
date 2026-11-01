@@ -1,0 +1,32 @@
+{
+  "creatureId": "techmorwa-srednia",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/techmorwa-srednia/portrait-p02.webp",
+      "role": "Exact GM-approved subject identity and equipment",
+      "sha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a"
+    },
+    {
+      "path": "tokens/mobsprzet.webp",
+      "role": "Steep overhead camera and painted square-token presentation ONLY; no machine body, wheels, turret, antenna, gun or orange rust pattern transfer",
+      "sha256": "b280fd179f48ca666229003ff6941718c78b2273c75813f1520bd4ac0056904f"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Image 1 is the approved TECHMORWA identity: an organic mimic posing as a faded cream FRONT-LOADING WASHING MACHINE with FOUR thick brown flexible tentacles. Image 2 is CAMERA/FORMAT ONLY. Never copy its robot, wheels, weapons, antenna or orange panels.\nRender this mimic as a near-vertical OVERHEAD battle-map token, camera about 80–85 degrees above ground. The square cream TOP surface dominates, with only a short foreshortened strip of the SOUTH-facing FRONT panel visible at the bottom. The circular loading opening belongs on that south/front vertical face, NOT on the top lid. Its round hinged door is open to the viewer's LEFT / southwest and is naturally foreshortened. FOUR brown organic tentacles emerge from that front opening and spread forward/down and sideways on the ground: two broad low supports and two curled feelers, each tip separated and complete. Keep their exact dark brown/reddish organic identity and the body's subtle soft mimic seams, old cream panels and a few restrained lower-edge stains. No exposed giant beetle body, mechanical legs, wheels, extra tentacles, teeth, people or gore.\nFront/opening/tentacles toward BOTTOM / SOUTH, rear of appliance toward TOP / NORTH, all parts inside the square with margins. Accurate overhead foreshortening: do not simply reuse the front portrait at a smaller size. Same naturalistic hand-painted palette and smooth broad enamel light/shadow, upper-left light, clear silhouette at 70 pixels. Genuine transparent alpha, no charcoal painted backdrop, floor, scenery, base, ring, checkerboard, labels or manufacturer text.",
+  "date": "2026-10-31T13:24:28.128Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "techmorwa-srednia",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T13:18:57.608Z"
+  }
+}

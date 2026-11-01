@@ -460,6 +460,126 @@
       "rating": 4,
       "notes": "",
       "updatedAt": "2026-10-31T00:27:32.795Z"
+    },
+    "bit-boy-przewodnik:portrait": {
+      "creatureId": "bit-boy-przewodnik",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:05:27.423Z"
+    },
+    "cyngiel:portrait": {
+      "creatureId": "cyngiel",
+      "kind": "portrait",
+      "candidateId": "p04",
+      "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:06:12.020Z"
+    },
+    "gangus-zolnierz:portrait": {
+      "creatureId": "gangus-zolnierz",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-31T13:17:12.285Z"
+    },
+    "kitchin:portrait": {
+      "creatureId": "kitchin",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T13:17:22.267Z"
+    },
+    "spawacz:portrait": {
+      "creatureId": "spawacz",
+      "kind": "portrait",
+      "candidateId": "p06",
+      "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+      "decision": "approve",
+      "rating": 4,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:32:01.286Z"
+    },
+    "techmorwa-srednia:portrait": {
+      "creatureId": "techmorwa-srednia",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T13:18:57.608Z"
+    },
+    "gangus-zolnierz:token": {
+      "creatureId": "gangus-zolnierz",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "0a8942be71f3511ba18999bd44a4b03e83c030b9466c60eca05118d16978ef65",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:06:20.157Z"
+    },
+    "kitchin:token": {
+      "creatureId": "kitchin",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "7073b49a206accda584c61a36b1ba164a3b12261d320aca9d2eac44b07a45dff",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:06:26.174Z"
+    },
+    "techmorwa-srednia:token": {
+      "creatureId": "techmorwa-srednia",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "08ad1fe692fca22a79d778a908e76a6324d8a5a872c8d82f6207fcc2a315fd85",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:08:25.360Z"
+    },
+    "bit-boy-przewodnik:token": {
+      "creatureId": "bit-boy-przewodnik",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "1cdf49a0ad4d539b5f704fd6ca1fb5b0bcda86341d236a9a49d74109ae3d91fe",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:31:06.517Z"
+    },
+    "cyngiel:token": {
+      "creatureId": "cyngiel",
+      "kind": "token",
+      "candidateId": "t02",
+      "sha256": "4f51e85b81696f9dbf5b706e60836ecc3fd4e4d81e69bd1a35f026c77e9c2c12",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T14:31:12.811Z"
+    },
+    "spawacz:token": {
+      "creatureId": "spawacz",
+      "kind": "token",
+      "candidateId": "t10",
+      "sha256": "0185f544194b0f0e937480c2e8327c215057b9bb3a09af3c74750125a7c53c28",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T15:52:31.053Z"
     }
   },
   "history": [
@@ -852,6 +972,136 @@
       "rating": 4,
       "notes": "Shift the turret even more south/down. Generate me multiple variants.",
       "updatedAt": "2026-10-31T00:16:16.568Z"
+    },
+    {
+      "creatureId": "bit-boy-przewodnik",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Regenerate from original description.",
+      "updatedAt": "2026-10-31T10:36:47.052Z"
+    },
+    {
+      "creatureId": "cyngiel",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Fail. Regenerate.",
+      "updatedAt": "2026-10-31T10:36:56.117Z"
+    },
+    {
+      "creatureId": "gangus-zolnierz",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Fail. Regenerate. Though the concept is nice, but needs a more recent model and common style (bg etc)",
+      "updatedAt": "2026-10-31T10:37:33.711Z"
+    },
+    {
+      "creatureId": "kitchin",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Good concept, may use as basis.",
+      "updatedAt": "2026-10-31T10:37:43.552Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Use \nC:\\Git\\Neuroshima\\neuro5e\\Neuro 5e\\Podrecznik\\1_5\\Spawacz\n\nas reference and regenerate. ",
+      "updatedAt": "2026-10-31T10:40:53.781Z"
+    },
+    {
+      "creatureId": "techmorwa-srednia",
+      "kind": "portrait",
+      "candidateId": "p01",
+      "sha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59",
+      "decision": "reject",
+      "rating": null,
+      "notes": "Fail. Regenerate. Pick some mediium-sized piece of equipment it's masquerading as.",
+      "updatedAt": "2026-10-31T10:41:26.381Z"
+    },
+    {
+      "creatureId": "bit-boy-przewodnik",
+      "kind": "portrait",
+      "candidateId": "p02",
+      "sha256": "f0c576262a2665b85da07aa690a71faa3675f63f3beeed491fd0d6e370a53a61",
+      "decision": "revise",
+      "rating": 2,
+      "notes": "Add much more uncanny valley effect. The face should look wrong, distorted and only resembling a human. The clothes should look haphazard, worn incorrectly - like a semi-sentient monster masquerading as a human. This isn't a human - it's a monster masquerading as one,",
+      "updatedAt": "2026-10-31T13:14:19.039Z"
+    },
+    {
+      "creatureId": "cyngiel",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "ab1b44e11d4fb6c7acd9b0b27d084dfc1a1dcaec12cff6c333de50d18cf353d5",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Lean more into the post-apocalyptic agent 47 / Lorne Malvo assassin trope. A hidden vest under the chest.",
+      "updatedAt": "2026-10-31T13:17:06.726Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "portrait",
+      "candidateId": "p03",
+      "sha256": "d1437b1561c09306c65e3a81b6505745ac4e16520924612554c28a15670b8f63",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Same webbing/medium-low-frequency-noise / detail texture inpainting issue we had on the sickly horse. The shape is great, just the textures need a pass.",
+      "updatedAt": "2026-10-31T13:18:48.698Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "portrait",
+      "candidateId": "p05",
+      "sha256": "f22c82380c1cccafabeaaad79c7e7dfa278268e3d7543d8b35cf5eca7b55e944",
+      "decision": "revise",
+      "rating": 4,
+      "notes": "Okay, now that we've cleaned it up, we schmutz it back up again. The goal is to add LOW FREQUENCY texture - black grease stains, long scratches, and some medium frequency - welding spatter, dents.\n\nPreferrably without reintroducing the old webbing / detail overload effect ",
+      "updatedAt": "2026-10-31T14:08:17.624Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "token",
+      "candidateId": "t01",
+      "sha256": "eccb1dee04c4c8b71672415f13ef8e96b990138b749d5a0966024902be55b4ae",
+      "decision": "revise",
+      "rating": 2,
+      "notes": "Utter fail. Legs coming out of shoulderpads, and arms coming out from under / splitting from front legs. Utter lack of limb comprehension. \nI expect we'll spend a while iterating. Do multiple generations. ",
+      "updatedAt": "2026-10-31T14:47:48.362Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "token",
+      "candidateId": "t03",
+      "sha256": "e50bef8ca97622a09a064fed56d4bb7c436f18ae23b20dd25670676c7052b9ee",
+      "decision": "approve",
+      "rating": 5,
+      "notes": "",
+      "updatedAt": "2026-10-31T15:06:59.098Z"
+    },
+    {
+      "creatureId": "spawacz",
+      "kind": "token",
+      "candidateId": "t03",
+      "sha256": "e50bef8ca97622a09a064fed56d4bb7c436f18ae23b20dd25670676c7052b9ee",
+      "decision": "revise",
+      "rating": 5,
+      "notes": "ALMOST! At the top of the image, near the back, there's a pair of tucked extra legs. Not the full legs extending upper left and upper right - leave those. But two stray leg joints from phantom legs right at the upper side / back",
+      "updatedAt": "2026-10-31T15:29:03.486Z"
     }
   ]
 }

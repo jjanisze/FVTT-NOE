@@ -1,0 +1,114 @@
+[
+  {
+    "file": "sounds/pojazdy/start-benzyna.ogg",
+    "source": "https://freesound.org/people/tbsounddesigns/sounds/405322/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "538a50e5846b60c8cae3de48213f3f5b216b8f2d12ce80b81d7caee87ebc33f2",
+    "outputSha256": "bec0c6317b88e211b2a5ab465a3f19b0022874292996abe16f2417b7b6178fa7",
+    "duration": 2.8,
+    "bytes": 29462,
+    "peakDb": -7.3,
+    "rmsDb": -23.2,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/start-diesel.ogg",
+    "source": "https://freesound.org/people/YellowJacketStudios/sounds/435656/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "f8b01a407dc128bffc8acb17997f4a33853a471fe59473806437a09263211685",
+    "outputSha256": "70e02a6637b517a0e47411496c4947ff453ef6af8c8ea93da0117c2d106cea0f",
+    "duration": 4.0,
+    "bytes": 37996,
+    "peakDb": -6.5,
+    "rmsDb": -23.2,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/start-motocykl.ogg",
+    "source": "https://freesound.org/people/Vrymaa/sounds/737775/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "8fa4377cc77b313ad91c85a1bb15be5791d54ad46106bae98565ee292aa77d6e",
+    "outputSha256": "1038c779a9835974341fcc54c2aef9029e15ea0df7cbdc2cc75c633db3b5b819",
+    "duration": 2.5,
+    "bytes": 25525,
+    "peakDb": -10.2,
+    "rmsDb": -23.1,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/zgaszenie.ogg",
+    "source": "https://freesound.org/people/tbsounddesigns/sounds/405322/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "538a50e5846b60c8cae3de48213f3f5b216b8f2d12ce80b81d7caee87ebc33f2",
+    "outputSha256": "c1d5f116f4109c2b9bfc0c229c7835c5ef5d1ea2568a6a74d5c08346783e21df",
+    "duration": 1.5,
+    "bytes": 17952,
+    "peakDb": -7.2,
+    "rmsDb": -23.1,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/nieudane-odpalenie.ogg",
+    "source": "https://freesound.org/people/jerry.berumen/sounds/511685/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "54b8fda9aa1ea670df5f86371d734d66759d733bac2000cd29fbc6a499f572b8",
+    "outputSha256": "e1ff9c9380b222c368c3e8c21af92f3b2a4e01626793eb4bec1cbd5ac0ab6d8a",
+    "duration": 2.95,
+    "bytes": 32023,
+    "peakDb": -4.7,
+    "rmsDb": -23.2,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/alarm.ogg",
+    "source": "https://freesound.org/people/cribbler/sounds/440419/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "1bafffc461b2de875c912d5091eb2720bfe014e392696d7a84b3c408f2a05911",
+    "outputSha256": "1635fb0c1168e6b3ba4f420d0d7662d6fc37abf4f8e20e30f1ac6e3c9bb29d17",
+    "duration": 2.9,
+    "bytes": 26062,
+    "peakDb": -12.1,
+    "rmsDb": -23.0,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/pojazdy/syrena.ogg",
+    "source": "https://freesound.org/people/craigsmith/sounds/479899/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "ec3cc6d6bbd9d45092385e965214f8509acb6dd4af4023590d6d41e82ca35d29",
+    "outputSha256": "b6bf125636545c16df25f08364f398a7caca9fe8b17a1f01e311f29f4772c459",
+    "duration": 5.0,
+    "bytes": 52247,
+    "peakDb": -13.1,
+    "rmsDb": -23.0,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  }
+]

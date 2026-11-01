@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-31T10:45:11.192Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gangus-zolnierz",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/gangus-zolnierz.webp",
+      "role": "GM-approved concept to redraw: heavy balding gangster, worn suit, loose tie, lowered revolver; not background/rendering",
+      "sha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698"
+    },
+    {
+      "path": "tokens/portraits/szeryf.webp",
+      "role": "Painting, lighting, full-body framing and charcoal backdrop ONLY; do not copy this person's face, clothing, anatomy or equipment",
+      "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "gangus-zolnierz",
+    "kind": "portrait",
+    "candidateId": "p01",
+    "sha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698",
+    "decision": "reject",
+    "rating": null,
+    "notes": "Fail. Regenerate. Though the concept is nice, but needs a more recent model and common style (bg etc)",
+    "updatedAt": "2026-10-31T10:37:33.711Z"
+  },
+  "prompt": "Use case: style-transfer. Asset: a single full-body portrait for a fictional tabletop game's Bestiary. Naturalistic HAND-PAINTED illustration, matching the supplied painting reference's grounded proportions, restrained brushwork and empty dark charcoal subtly painted backdrop. Soft neutral upper-left illumination, muted earthy palette, a small diffuse contact shadow only. Broad, calm light-to-shadow gradients on large surfaces; detail is selective at the face, silhouette and a few functional seams. Large folds and local damage rather than a uniform cracked-paint mesh or high-frequency surface noise. Entire subject, every foot, appendage, tool tip and tail comfortably inside a vertical 4:5 portrait with about 6% breathing room. No scenery, captions, letters, logos, frame, base disc or circular crop. A neutral standing/display pose, no combat scene, target, victim, blood or gore. Any style-only human reference supplies painting and lighting ONLY, never its person, clothes, weapons or anatomy.\nImage 1 supplies the SUBJECT CONCEPT the GM liked: one broad, heavy-set middle-aged balding gangster with a blunt jowly face and stern ordinary expression, oversized worn dark suit jacket/trousers, dull cream shirt, loose dark tie, plain worn shoes and one simple long-barrel revolver hanging DOWN in his right hand. Redraw him from scratch in IMAGE 2's quieter HAND-PAINTED rendering and empty charcoal backdrop. Preserve that stout body shape, clothing concept and single revolver, with natural five-finger hands and a safe lowered grip. Full body including both complete shoes, all garment edges and gun tip inside margins. Remove the ruined street, power lines and scene lighting. No added tactical armour, hat, cigar, badges, jewellery, extra weapon or caricature facial exaggeration. Large shaded suit folds, calm skin planes and restrained local wear rather than photographic skin pores or uniform grit."
+}

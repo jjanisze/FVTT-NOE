@@ -486,7 +486,7 @@ okazyjne jako mechanika, pełna ekonomia akcji (blokowanie), pościg (Drzwi w dr
 
 **Zrobione:**
 - **Warstwa akcji** (D10, minimalna): `config/actions-data.mjs`, `actors/actions.mjs`, `game.neuroshima.actions`;
-  stany `reakcja` i `akcjaBonusowa` w `config/conditions.mjs` (ikony tymczasowe z rdzenia — MISSING §A); lejek
+  stany `reakcja` i `akcjaBonusowa` w `config/conditions.mjs` (własne glify MG podpięte — `dev/icons/m7-status-pass/`); lejek
   `zadeklaruj` woła: natywna aktywność z aktywacją `reaction` / `bonus` (`dnd5e.postUseActivity`), Berserk
   (`toggleClassState`), Reakcje celu (`executeReaction`, Inteligentna obrona z paska). Sygnał — istniejący
   `combat/sygnal-naruszenia.mjs` (M6). Przy okazji z RAW: Obezwładnienie i stany, które je nadają (s. 35), Znaczny
@@ -616,7 +616,7 @@ poprawił, linii nie ma); weto do U9, U11, U16–U20 — brak.
   Słaby punkt, Zwód. **Limity „raz w rundzie” i Celowanie zużywa dopiero rzut**, który naprawdę poszedł z Ułatwieniem
   i tylko gdy dały je wyłącznie źródła z limitem (decyzja agenta: stałe Ułatwienie oszczędza limit, zniesione go nie
   zużywa; RAW „możesz”).
-- **Strzelec (U20):** status „Stanowisko snajperskie” w HUD (ikona tymczasowa — `MISSING.md` A); silnik okoliczności:
+- **Strzelec (U20):** status „Stanowisko snajperskie” w HUD (własny glif MG podpięty — `dev/icons/m7-status-pass/`); silnik okoliczności:
   zasięg daleki ×3 i bez wiersza „zasięg daleki” przy celowniku optycznym i zdolności; `moveToken` zdejmuje status.
   **Deklaracja gracza (MG po E4):** aktywność „Stanowisko snajperskie” (wymaga broni z celownikiem w ręce) — poza walką
   od razu karta MG z przyciskiem („pół minuty minęło”); w walce efekt „Mierzenie” z rundą startu, po 5 rundach bez
@@ -733,7 +733,7 @@ Przed etapem MG po E4: **Ławnik bez Rozwoju Cechy** (D15 poprawione, ASI cofni�
   porażka w RPŚ jak obrażenia; lek w WKK — jedno krwawienie na dawkę; Dno torby także przy Teście Medycyny Hemofilii;
   krótsze przesunięcia zegara się sumują; staza tylko stabilizuje; Wyciek maszyny — Test narzędzi małego mechanika ST 10
   (decyzja agenta, MG zlecił). Design kompletny — `docs/Krwawienia.md`; następnie przebudowa `combat/bleeding.mjs`
-  (efekt na krwawienie, migracja flagi, piła, Kolory, przypomnienie); siedem glifów w `dev/icons/MISSING.md` (sekcja K).
+  (efekt na krwawienie, migracja flagi, piła, Kolory, przypomnienie); siedem glifów MG z B121–123 podpiętych — `dev/icons/m7-status-pass/`.
 
 ### Krwawienia — przebudowa (2026-11-01)
 

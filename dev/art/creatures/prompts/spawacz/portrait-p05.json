@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-31T13:30:34.596Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p05",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/spawacz/portrait-p04.png",
+      "role": "Exact edit target; remove remaining uniform fine surface pattern from broad panel interiors",
+      "sha256": "92c17ceb83bfb170b0089601484d9c79618981de721212e3b685ff6055226c81"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "d1437b1561c09306c65e3a81b6505745ac4e16520924612554c28a15670b8f63",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Same webbing/medium-low-frequency-noise / detail texture inpainting issue we had on the sickly horse. The shape is great, just the textures need a pass.",
+    "updatedAt": "2026-10-31T13:18:48.698Z"
+  },
+  "preparationIssue": "p04 removed heavy mottling, but native-size chest/shoulder crops still show a faint fine web across most plate interiors. This extra pass addresses that residual pattern only.",
+  "prompt": "Use case: precise-object-edit. Preserve the exact robot GEOMETRY and composition in this image. Refinish ONLY the visible broad grey plates with a freshly applied, continuous MATTE INDUSTRIAL POWDER-COAT. This means a single uniform opaque neutral-grey paint layer whose only variation is the smooth LIGHTING gradient describing each panel's curvature. The central chest plate and both large shoulder shells must look visibly NEWLY PAINTED and patternless. Use broad softly blended shading, like an airbrushed continuous grey gradient over the curved surface. Reconstruct the paint areas cleanly rather than carrying over the existing surface pixels.\nThere must be ZERO fine hairline crack/web patterns, mottling, tiny patches, grain, paint peeling, pores, scratches or distressed markings inside these large planes. No decorative surface texture at all. Do not add a different finer mesh. Keep the actual physical boundaries, port rims, structural bolt heads, true seams and sharp panel contour edges, plus the dark working mechanisms between plates. Those are geometry and stay crisp; plate INTERIORS are smooth and unmarked. The robot still has the identical SIX pointed support legs and TWO tool arms, identical circular port cluster, pliers and welding tip, cables, pose and colours elsewhere. Preserve the full-body painterly illustration and empty charcoal backdrop. No extra wear pass, anatomy changes, new props, text, frame or scenery."
+}

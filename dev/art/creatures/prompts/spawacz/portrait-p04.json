@@ -1,0 +1,27 @@
+{
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p04",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/spawacz/portrait-p03.png",
+      "role": "Exact geometry/pose to retain; repaint only the distracting noisy metal-surface treatment",
+      "sha256": "99e9a13e74844aafa40313f44b283855aaf807e8a50923107b6de8353ff1b2ff"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Perform a MATERIAL-SURFACE REPAINT ONLY on this exact fictional maintenance robot. The GM approves the silhouette and mechanical geometry. Preserve every plate outline, SIX planted support legs, TWO tool arms, all joints, circular ports, cables, pliers, inactive welding tip, pose, light direction, framing and charcoal background.\nRepaint the broad metal panel interiors with UNBROKEN SATIN GREY PAINT and smooth continuous light-to-shadow transitions. Large quiet value masses on the chest, shoulder shells and shin plates. Remove the existing pale branching web, blotchy worn-paint pattern, cloudy mottling and tiny repeated surface marks from these planes. These should now be calm broad painted-metal surfaces, defined by form and lighting, not by decoration. A small soft clean specular gradient is enough. Allow only a very few discrete larger edge chips at outer corners and slight dark oil immediately around functional bearings, leaving at least ninety percent of each plate interior visually quiet.\nKEEP sharp mechanical port rims, bolts, actual panel seams and joint construction; distinguish genuine geometry from the unwanted texture painted across it. Do not blur the whole robot or erase real structural edges. Do not add a new patterned surface or sharpening grain. Neutral subdued steel/grey palette with darker iron mechanisms, same naturalistic painterly medium. No new parts, equipment, sparks, figures, text or scenery.",
+  "date": "2026-10-31T13:24:28.128Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "d1437b1561c09306c65e3a81b6505745ac4e16520924612554c28a15670b8f63",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Same webbing/medium-low-frequency-noise / detail texture inpainting issue we had on the sickly horse. The shape is great, just the textures need a pass.",
+    "updatedAt": "2026-10-31T13:18:48.698Z"
+  }
+}

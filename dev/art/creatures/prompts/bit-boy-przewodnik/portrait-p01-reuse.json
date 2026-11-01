@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:30:13.064256+00:00",
+  "operation": "reuse-existing-portrait",
+  "tool": "Existing GM artwork — reused unchanged; no image generation",
+  "model": null,
+  "creatureId": "bit-boy-przewodnik",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "references": [
+    {
+      "path": "tokens/portraits/bit-boy-przewodnik.webp",
+      "role": "Existing module portrait offered for explicit reuse or regeneration decision",
+      "sha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb"
+    }
+  ],
+  "provenance": "Previously credited GM-generated artwork. Original generator/model and prompt are not recorded. No new authorship or generation is claimed.",
+  "prompt": "No generation was performed for p01. This review candidate is a byte-identical copy of the existing module portrait. Approve to reuse this exact artwork as the subject identity; request revision or reject to regenerate the portrait before creating its top-down token. Preparation note: Monochromatyczny portret, kadr nie obejmuje stóp. Oceń zachowanie tożsamości i stylu albo zleć wersję malarską w kolorze."
+}

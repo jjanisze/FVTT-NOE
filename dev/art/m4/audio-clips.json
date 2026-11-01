@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "date": "2026-11-01",
+  "profile": "M5 sample-peak/RMS normalization; pitch and tempo unchanged",
+  "clips": [
+    {
+      "source": "start-benzyna",
+      "start": 0.25,
+      "duration": 2.8,
+      "output": "sounds/pojazdy/start-benzyna.ogg",
+      "description": "Saturn Vue petrol starter catches, followed by a short idle; no later shutdown."
+    },
+    {
+      "source": "start-diesel",
+      "start": 1.55,
+      "duration": 4,
+      "output": "sounds/pojazdy/start-diesel.ogg",
+      "description": "1980s Ford LTL 9000 cranks, catches and settles into a heavy diesel idle; excludes the later door slam."
+    },
+    {
+      "source": "start-motocykl",
+      "start": 1.45,
+      "duration": 2.5,
+      "output": "sounds/pojazdy/start-motocykl.ogg",
+      "description": "Close vintage Harley-Davidson start into its first throttle rise; excludes later revs."
+    },
+    {
+      "source": "start-benzyna",
+      "start": 10.5,
+      "duration": 1.5,
+      "output": "sounds/pojazdy/zgaszenie.ogg",
+      "description": "Same Saturn recording as petrol start; engine shudders down into its natural quiet tail."
+    },
+    {
+      "source": "nieudane-odpalenie",
+      "start": 5.15,
+      "duration": 2.95,
+      "output": "sounds/pojazdy/nieudane-odpalenie.ogg",
+      "description": "Final seconds of the first unsuccessful cranking attempt, including its release; no successful engine catch."
+    },
+    {
+      "source": "alarm",
+      "start": 0,
+      "duration": 2.9,
+      "output": "sounds/pojazdy/alarm.ogg",
+      "description": "Actual car security alarm pulses rather than hazard-light indicator clicks."
+    },
+    {
+      "source": "syrena",
+      "start": 8.5,
+      "duration": 5,
+      "output": "sounds/pojazdy/syrena.ogg",
+      "description": "Dry American mechanical siren crest and falling wail; optional fire-engine cue without street traffic."
+    }
+  ]
+}

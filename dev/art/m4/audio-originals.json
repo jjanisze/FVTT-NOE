@@ -1,0 +1,35 @@
+{
+  "checked": "2026-11-01",
+  "originals": {
+    "start-benzyna": {
+      "file": "start-benzyna.original.wav",
+      "url": "https://cdn.freesound.org/sounds/405/405322.wav",
+      "sha256": "538a50e5846b60c8cae3de48213f3f5b216b8f2d12ce80b81d7caee87ebc33f2"
+    },
+    "start-diesel": {
+      "file": "start-diesel.original.wav",
+      "url": "https://cdn.freesound.org/sounds/435/435656.wav",
+      "sha256": "f8b01a407dc128bffc8acb17997f4a33853a471fe59473806437a09263211685"
+    },
+    "start-motocykl": {
+      "file": "start-motocykl.original.wav",
+      "url": "https://cdn.freesound.org/sounds/737/737775.wav",
+      "sha256": "8fa4377cc77b313ad91c85a1bb15be5791d54ad46106bae98565ee292aa77d6e"
+    },
+    "nieudane-odpalenie": {
+      "file": "nieudane-odpalenie.original.wav",
+      "url": "https://cdn.freesound.org/sounds/511/511685.wav",
+      "sha256": "54b8fda9aa1ea670df5f86371d734d66759d733bac2000cd29fbc6a499f572b8"
+    },
+    "alarm": {
+      "file": "alarm.original.wav",
+      "url": "https://cdn.freesound.org/sounds/440/440419.wav",
+      "sha256": "1bafffc461b2de875c912d5091eb2720bfe014e392696d7a84b3c408f2a05911"
+    },
+    "syrena": {
+      "file": "syrena.original.wav",
+      "url": "https://cdn.freesound.org/sounds/479/479899.wav",
+      "sha256": "ec3cc6d6bbd9d45092385e965214f8509acb6dd4af4023590d6d41e82ca35d29"
+    }
+  }
+}

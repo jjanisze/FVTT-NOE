@@ -10,7 +10,7 @@ export const DUMDUM_BLEED = Object.freeze({
   id: "dumdum",
   status: "krwawienieDumdum",
   label: "Krwawienie (Dum-dum)",
-  img: "icons/svg/explosion.svg",
+  img: "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-dumdum.svg",
   zrodlo: "WKK — nabój .44 Mag dum-dum (zasada 24)",
   opis: "<p>(WKK) Jak Krwawienie (Podstępny atak): 1k8 obrażeń na początku swojej tury, aż ktoś opatrzy ranę — Test "
     + "narzędzi małego medyka ST 10 (ładunek narzędzi). Osobny efekt, może być naraz z Podstępnym atakiem.</p>"

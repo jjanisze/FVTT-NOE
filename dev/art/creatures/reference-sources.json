@@ -102,11 +102,61 @@
       "id": "szeryf",
       "appearanceSource": "dev/bestiary/bestiary.json#szeryf",
       "referenceStatus": "GM confirmed no illustration available"
+    },
+    {
+      "id": "spawacz",
+      "appearanceSource": "dev/bestiary/bestiary.json#spawacz",
+      "referenceStatus": "provided",
+      "receivedOn": "2026-10-31",
+      "reference": {
+        "path": "dev/art/creatures/in/references/spawacz-no15.png",
+        "sha256": "56741b285efd150e18ae80826f66e2da52584192de8ef376cd8b61f1fa9f0b82",
+        "origin": "Neuroshima 1.5: GM-provided pencil reference"
+      },
+      "role": "Mechanical anatomy and proportions; painting style comes from a separate approved module portrait."
     }
   ],
   "legacyMobsprzetToken": {
     "path": "dev/art/creatures/in/references/mobsprzet-token-legacy.png",
     "sha256": "af0263c5a275a1ddaf0c79987490406444fe6d2d4df1d2bad0e1e39c187c5a65",
     "assessment": "Existing near-overhead image on opaque grey background. Its barrel/housing arrangement differs from the chosen single-barrel portrait concept. Retained as reference, not an approved current token."
-  }
+  },
+  "archivedInputs": [
+    {
+      "originalPath": "tokens/portraits/gangus-zolnierz.webp",
+      "sha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698",
+      "archivedPath": "dev/art/creatures/in/gangus-zolnierz/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    },
+    {
+      "originalPath": "tokens/portraits/kitchin.webp",
+      "sha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0",
+      "archivedPath": "dev/art/creatures/in/kitchin/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    },
+    {
+      "originalPath": "tokens/portraits/techmorwa-srednia.webp",
+      "sha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59",
+      "archivedPath": "dev/art/creatures/in/techmorwa-srednia/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    },
+    {
+      "originalPath": "tokens/portraits/bit-boy-przewodnik.webp",
+      "sha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb",
+      "archivedPath": "dev/art/creatures/in/bit-boy-przewodnik/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    },
+    {
+      "originalPath": "tokens/portraits/cyngiel.webp",
+      "sha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c",
+      "archivedPath": "dev/art/creatures/in/cyngiel/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    },
+    {
+      "originalPath": "tokens/portraits/spawacz.webp",
+      "sha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a",
+      "archivedPath": "dev/art/creatures/in/spawacz/portrait-p01.webp",
+      "reason": "Final portrait replaced after explicit approval; frozen prompts retain the actual historical input path and hash."
+    }
+  ]
 }

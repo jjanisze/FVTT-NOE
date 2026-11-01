@@ -277,10 +277,10 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   },
   // Znaczniki akcji (PLAN_m7 §3.0.1, D5–D6): zakłada je `actors/actions.mjs` przy użyciu [R] / [B] w walce, zdejmuje
   // początek następnej tury właściciela (`combat/czas-efektu.mjs`). Oznaczają, nie blokują — drugie użycie w rundzie
-  // daje sygnał naruszenia; MG zdejmuje znacznik z HUD-u żetonu. Ikony tymczasowe z rdzenia (MISSING, klasa A).
+  // daje sygnał naruszenia; MG zdejmuje znacznik z HUD-u żetonu. Glify MG: dev/icons/m7-status-pass/.
   reakcja: {
     name: "Reakcja zużyta",
-    img: "icons/svg/lightning.svg",
+    img: `${OWN}/reakcja.svg`,
     description: "<p>Reakcja zużyta — wraca na początku twojej następnej tury (Tura w pigułce, s. 37). Drugie użycie "
       + "moduł zgłasza MG; nie blokuje. Bez Reakcji w ogóle: Obezwładnienie (s. 35) i Znaczny Stopień Zranienia "
       + "(s. 32).</p>",
@@ -288,7 +288,7 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   },
   akcjaBonusowa: {
     name: "Akcja bonusowa zużyta",
-    img: "icons/svg/clockwork.svg",
+    img: `${OWN}/akcja-bonusowa.svg`,
     description: "<p>Akcja Bonusowa zużyta w tej turze (1× na turę — Tura w pigułce, s. 37); znacznik trwa do "
       + "początku twojej następnej tury. Druga moduł zgłasza MG; nie blokuje.</p>",
     duration: { value: 1, units: "turns", expiry: "turnStart" }
@@ -341,10 +341,10 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   },
   // Strzelec (Zabójca, s. 94; PLAN_m7 U20) — MG nakłada z HUD-u po 5 rundach mierzenia; silnik okoliczności czyta go
   // przy broni z celownikiem optycznym (`combat/okolicznosci.mjs`), ruch żetonu zdejmuje (`combat/zdolnosci-walka.mjs`).
-  // Ikona tymczasowa — zamówienie w dev/icons/MISSING.md.
+  // Glif zatwierdzony przez MG — dev/icons/m7-status-pass/.
   stanowiskoSnajperskie: {
     name: "Stanowisko snajperskie",
-    img: "icons/svg/target.svg",
+    img: `${OWN}/stanowisko-snajperskie.svg`,
     description: "<p>Strzelec po 5 rundach mierzenia z bronią z celownikiem optycznym: maksymalny zasięg tej broni ×3 i "
       + "bez Utrudnienia za daleki dystans (s. 94). Działa tylko z celownikiem optycznym i zdolnością Strzelec; "
       + "znika, gdy się poruszysz.</p>"

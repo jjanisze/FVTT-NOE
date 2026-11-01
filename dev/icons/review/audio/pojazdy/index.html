@@ -1,0 +1,48 @@
+<!doctype html><html lang="pl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neuroshima · Dźwięki pojazdów</title><style>
+*{box-sizing:border-box}body{margin:0;background:#202522;color:#eee9dc;font:16px/1.5 system-ui,sans-serif}header,main{max-width:1180px;margin:auto;padding:22px}h1{margin:16px 0 8px}header p{margin:8px 0}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:16px;padding-top:0}article{padding:20px;background:#2b342d;border:1px solid #52604e;border-radius:8px}h2{font-size:19px;margin:0 0 10px}audio{width:100%;margin:10px 0}a{color:#c6d6ae}.measure,.source{font-size:13px;color:#c9cfc3}.source a{overflow-wrap:anywhere}.volume{display:flex;gap:12px;align-items:center;flex-wrap:wrap}input{width:220px}
+</style><header><h1>Dźwięki pojazdów</h1><p>Siedem krótkich sygnałów z oryginalnych nagrań CC0. Mono 44,1 kHz · OGG Vorbis · profil M5.</p>
+<p>Komplet zaakceptowany przez MG — 2026-11-01</p>
+<label class="volume">Głośność odsłuchu <input id="volume" type="range" min="0" max="1" step="0.05" value="0.65"></label></header>
+<main><article><h2>Uruchomienie — benzyna</h2><p>Saturn Vue: rozrusznik, zapłon i krótka praca silnika.</p>
+<audio controls preload="none"><source src="start-benzyna.ogg" type="audio/ogg"></audio>
+<p class="measure">2.8 s · peak -7.3 dB · RMS -23.2 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/tbsounddesigns/sounds/405322/" target="_blank" rel="noopener">Car Engine Start.wav</a> — tbsounddesigns</p></article>
+<article><h2>Uruchomienie — diesel</h2><p>Ciężarowy Ford LTL 9000 z lat 80.: ciężki rozruch diesla.</p>
+<audio controls preload="none"><source src="start-diesel.ogg" type="audio/ogg"></audio>
+<p class="measure">4 s · peak -6.5 dB · RMS -23.2 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/YellowJacketStudios/sounds/435656/" target="_blank" rel="noopener">FORD LTL 9000_engine start and idle.wav</a> — YellowJacketStudios</p></article>
+<article><h2>Uruchomienie — motocykl</h2><p>Stary Harley-Davidson: rozruch i pierwsze wejście na obroty.</p>
+<audio controls preload="none"><source src="start-motocykl.ogg" type="audio/ogg"></audio>
+<p class="measure">2.5 s · peak -10.2 dB · RMS -23.1 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/Vrymaa/sounds/737775/" target="_blank" rel="noopener">Motorcycle - Harley Davidson vintage</a> — Vrymaa</p></article>
+<article><h2>Zgaszenie silnika</h2><p>Gaszenie tego samego Saturna; naturalny spadek obrotów i wybrzmienie.</p>
+<audio controls preload="none"><source src="zgaszenie.ogg" type="audio/ogg"></audio>
+<p class="measure">1.5 s · peak -7.2 dB · RMS -23.1 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/tbsounddesigns/sounds/405322/" target="_blank" rel="noopener">Car Engine Start.wav</a> — tbsounddesigns</p></article>
+<article><h2>Nieudane odpalenie</h2><p>Rozrusznik starego auta kręci bez skutecznego zapłonu.</p>
+<audio controls preload="none"><source src="nieudane-odpalenie.ogg" type="audio/ogg"></audio>
+<p class="measure">2.95 s · peak -4.7 dB · RMS -23.2 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/jerry.berumen/sounds/511685/" target="_blank" rel="noopener">failed_car_start.wav</a> — jerry.berumen</p></article>
+<article><h2>Alarm samochodowy</h2><p>Kilka impulsów rzeczywistego alarmu samochodowego.</p>
+<audio controls preload="none"><source src="alarm.ogg" type="audio/ogg"></audio>
+<p class="measure">2.9 s · peak -12.1 dB · RMS -23 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/cribbler/sounds/440419/" target="_blank" rel="noopener">Alarm_Car_Parking.wav</a> — cribbler</p></article>
+<article><h2>Syrena — opcjonalna</h2><p>Sucha amerykańska syrena mechaniczna: szczyt i opadające wycie.</p>
+<audio controls preload="none"><source src="syrena.ogg" type="audio/ogg"></audio>
+<p class="measure">5 s · peak -13.1 dB · RMS -23 dB</p>
+<p class="source">CC0 · <a href="https://freesound.org/people/craigsmith/sounds/479899/" target="_blank" rel="noopener">R18-43-Siren Recorded in Studio.wav</a> — craigsmith</p></article></main><script type="module" src="/navigation.mjs"></script><script>
+const tracks=[...document.querySelectorAll('audio')],volume=document.querySelector('#volume');
+function update(){tracks.forEach(a=>a.volume=Number(volume.value))}volume.addEventListener('input',update);update();
+tracks.forEach(a=>a.addEventListener('play',()=>tracks.forEach(other=>{if(other!==a)other.pause()})));
+const urls=[];
+window.audioReviewReady=Promise.all(tracks.map(async a=>{
+  const source=a.querySelector('source');a.dataset.originalSrc=source.getAttribute('src');
+  const response=await fetch(source.src);if(!response.ok)throw new Error('Nie udało się pobrać '+a.dataset.originalSrc);
+  const url=URL.createObjectURL(new Blob([await response.arrayBuffer()],{type:'audio/ogg'}));urls.push(url);
+  const ready=new Promise((resolve,reject)=>{a.addEventListener('loadedmetadata',resolve,{once:true});a.addEventListener('error',()=>reject(new Error(a.dataset.originalSrc)),{once:true})});
+  a.preload='metadata';a.src=url;a.load();await ready;return a.dataset.originalSrc;
+}));
+window.audioReviewReady.catch(error=>{const p=document.createElement('p');p.textContent=error.message;document.querySelector('header').append(p)});
+window.addEventListener('pagehide',()=>urls.forEach(url=>URL.revokeObjectURL(url)),{once:true});
+</script></html>

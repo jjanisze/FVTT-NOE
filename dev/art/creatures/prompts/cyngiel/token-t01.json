@@ -1,0 +1,32 @@
+{
+  "creatureId": "cyngiel",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p04",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/cyngiel/portrait-p04.webp",
+      "role": "Exact GM-approved p04 identity, wardrobe, concealed vest and semiautomatic handgun",
+      "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab"
+    },
+    {
+      "path": "tokens/gangus-zolnierz.webp",
+      "role": "Steep overhead camera and readable painted-token format only; do not copy bald head, heavy body, revolver or worn suit identity",
+      "sha256": "0a8942be71f3511ba18999bd44a4b03e83c030b9466c60eca05118d16978ef65"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create one transparent overhead battle-map token for the exact approved CYNGIEL in image 1. Image 2 is CAMERA/FORMAT ONLY. Keep the slim angular middle-aged man, very short dark hair, controlled professional demeanour, long charcoal-black tailored overcoat, grey shirt, muted dark burgundy tie, dark trousers and practical brown boots. His protective vest remains concealed beneath clothing: restrained flat thickness at the chest, no external plate carrier or webbing. One heavy black SEMI-AUTOMATIC pistol in his RIGHT hand in a low lowered position, with a rectangular slide and fixed grip, not a revolver or automatic rifle. Left hand empty. Plain knife sheath remains on the belt where naturally visible. No extra equipment, barcode, badge, hat, tactical helmet or second gun.\nCamera around 85 degrees above the ground, almost straight overhead. Dominant dark-haired crown, shoulder tops and coat surfaces; face and shirt front are strongly foreshortened rather than a whole frontal portrait. Front/gaze toward BOTTOM / SOUTH, rear toward TOP / NORTH, centred north-south standing stance. Retain his lean proportions, not the reference's stout bald man. Two natural arms/hands and two complete boots; all tips including the lowered pistol inside square margins. Same painterly medium and broad quiet value shading as the approved portrait, soft upper-left illumination, readable at 70 pixels. Genuine transparent alpha, no floor, base, scenery, ring, text, checkerboard, white backdrop, shooting or injury.",
+  "date": "2026-10-31T14:11:56.351Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "cyngiel",
+    "kind": "portrait",
+    "candidateId": "p04",
+    "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T14:06:12.020Z"
+  }
+}

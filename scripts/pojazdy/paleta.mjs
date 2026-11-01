@@ -391,7 +391,10 @@ export async function uzyjPalety(pojazdDoc, id) {
   if (!def.bezEfektu) await nalozEfektPalety(actor, id);
   await wyslijKarte(kartaPostoju({ ikona: pojazdDoc.texture.src, tytul: `${def.nazwa} — ${pojazdDoc.name}`,
     podtytul: def.czas === "przelacznik" ? "przełącznik kierowcy" : `[${CZAS[def.czas]}] ${{ akcja: "akcja", bonus: "akcja bonusowa", reakcja: "reakcja" }[def.czas]} kierowcy — koszt oznaczony (D7)`,
-    rodzaj: ostrz.length ? "test" : "info", linie, ostrzezenia: ostrz, przyciski }), { actor: kier?.actor ?? actor });
+    rodzaj: ostrz.length ? "test" : "info", linie, ostrzezenia: ostrz, przyciski }), {
+    actor: kier?.actor ?? actor,
+    flagi: id === "syrena" ? { pojazdDzwiek: { pojazd: pojazdDoc.uuid, rodzaj: "syrena" } } : {}
+  });
   return { id };
 }
 

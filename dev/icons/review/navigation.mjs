@@ -4,7 +4,8 @@ const tabs=[
   ["/browser.html","Biblioteka ikon"],
   ["/creatures/","Portrety i żetony"],
   ["/dnd5e.html","Referencje 5e"],
-  ["/overlays/water/preview.html","Zanurzenie"]
+  ["/overlays/water/preview.html","Zanurzenie"],
+  ["/audio/pojazdy/index.html","Dźwięki pojazdów"]
 ];
 let nav=document.querySelector("nav.asset-tabs");
 if(!nav){nav=document.createElement("nav");nav.className="asset-tabs";(document.querySelector("header")??document.querySelector("main")??document.body).prepend(nav);}

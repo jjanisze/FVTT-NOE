@@ -1,0 +1,120 @@
+{
+  "checked": "2026-11-01",
+  "sourceKind": "Freesound CC0; authenticated original downloads",
+  "sources": [
+    {
+      "key": "start-benzyna",
+      "id": 405322,
+      "title": "Car Engine Start.wav",
+      "author": "tbsounddesigns",
+      "page": "https://freesound.org/people/tbsounddesigns/sounds/405322/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/405/405322_5387364-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/tbsounddesigns/sounds/405322/download/405322__tbsounddesigns__car-engine-start.wav",
+      "duration": 12.5,
+      "description": "Car engine starting, idling, then shutting off. Vehicle: 2004 Saturn Vue, Manual Transmission. Stereo image recording.",
+      "selection": "Petrol engine start; same recording supplies engine shutdown."
+    },
+    {
+      "key": "start-diesel",
+      "id": 435656,
+      "title": "FORD LTL 9000_engine start and idle.wav",
+      "author": "YellowJacketStudios",
+      "page": "https://freesound.org/people/YellowJacketStudios/sounds/435656/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/435/435656_2347916-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/YellowJacketStudios/sounds/435656/download/435656__yellowjacketstudios__ford-ltl-9000_engine-start-and-idle.wav",
+      "duration": 56.6,
+      "description": "This recording is the engine starting and idling of a 1980s FORD LTL 9000 diesel semi tractor. In the middle you hear the truck door slam shut. Recorded with a Rode NTG3 and a Zoom F8 field recorder.",
+      "selection": "Heavy 1980s American diesel truck start, avoiding the later door slam."
+    },
+    {
+      "key": "start-motocykl",
+      "id": 737775,
+      "title": "Motorcycle - Harley Davidson vintage",
+      "author": "Vrymaa",
+      "page": "https://freesound.org/people/Vrymaa/sounds/737775/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/737/737775_13973196-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/Vrymaa/sounds/737775/download/737775__vrymaa__motorcycle-harley-davidson-vintage.wav",
+      "duration": 11.401,
+      "description": "Starting an old Harley-Davidson motorcycle. Exhaust sound.\n* No background noise.\n* No reverb nor echo.\n* Clean sound, close range. Recorded with Iphone 8 or Thomann micro t.bone SC 420.",
+      "selection": "Close vintage Harley-Davidson start, without street traffic."
+    },
+    {
+      "key": "nieudane-odpalenie",
+      "id": 511685,
+      "title": "failed_car_start.wav",
+      "author": "jerry.berumen",
+      "page": "https://freesound.org/people/jerry.berumen/sounds/511685/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/511/511685_6753194-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/jerry.berumen/sounds/511685/download/511685__jerryberumen__failed_car_start.wav",
+      "duration": 21.3712,
+      "description": "old engine failing to start up",
+      "selection": "Old engine cranking without a successful start."
+    },
+    {
+      "key": "alarm",
+      "id": 440419,
+      "title": "Alarm_Car_Parking.wav",
+      "author": "cribbler",
+      "page": "https://freesound.org/people/cribbler/sounds/440419/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/440/440419_3728489-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/cribbler/sounds/440419/download/440419__cribbler__alarm_car_parking.wav",
+      "duration": 2.92267,
+      "description": "Annoying when peoples cars go off!",
+      "selection": "Actual car-security alarm rather than hazard-light indicator clicks."
+    },
+    {
+      "key": "syrena",
+      "id": 479899,
+      "title": "R18-43-Siren Recorded in Studio.wav",
+      "author": "craigsmith",
+      "page": "https://freesound.org/people/craigsmith/sounds/479899/",
+      "status": 200,
+      "license": [
+        {
+          "text": "Creative Commons 0",
+          "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+        }
+      ],
+      "preview": "https://cdn.freesound.org/previews/479/479899_2524442-lq.mp3",
+      "originalDownloadPage": "https://freesound.org/people/craigsmith/sounds/479899/download/479899__craigsmith__r18-43-siren-recorded-in-studio.wav",
+      "duration": 18.53,
+      "description": "Classic American mechanical siren. Starts and stops. Very dry -- recorded in studio.",
+      "selection": "Dry classic American mechanical siren; short optional fire-engine cue."
+    }
+  ]
+}

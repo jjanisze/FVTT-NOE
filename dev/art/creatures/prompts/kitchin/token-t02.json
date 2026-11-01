@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31T13:35:20.426Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "kitchin",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/kitchin/portrait-p02.webp",
+      "role": "Exact approved p02 subject identity",
+      "sha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9"
+    },
+    {
+      "path": "dev/art/creatures/in/kitchin/token-t01.png",
+      "role": "Edit target: first token draft t01",
+      "sha256": "42605e094711803ee14038a06184aef7768741243c5cb4a017a45dc293af2bf9"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "kitchin",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T13:17:22.267Z"
+  },
+  "preparationIssue": "t01 contains five walking-leg pairs; one pair must be added.",
+  "prompt": "Use case: precise-object-edit. Image 2 is the exact overhead token draft; image 1 fixes the approved Kitchin identity. The token currently has only FIVE PAIRED SETS of walking legs. ADD ONE NEW PAIR, one left and one right, on the first trunk segment just behind the head and in front of the currently nearest pair. Place their full jointed shapes visibly in the free space on each side of the neck/head, with pointed feet separated from the long antennae. Keep ALL TEN existing legs. The result must have SIX walking-leg attachment rows, each with one left and one right leg: TWELVE WALKING LEGS total. The two long fine antennae stay unchanged and do not count as walking legs.\nPreserve the exact overhead camera, head south/bottom, tail north/top, black plated curved body, mandibles, one rear stinger, colours and painted material. Add only this sixth paired row; no extra limb rows, leg deletion or reorganisation of the body. Every foot, both antenna tips and the tail stay inside the square. Genuine transparent alpha, no ground, base, scenery, shadow disc, lettering or frame."
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-01",
+  "batch": 122,
+  "passName": "m7-status-glyphs",
+  "subjects": [
+    {
+      "key": "wyciek",
+      "name": "Wyciek hydrauliczny",
+      "itemId": "m7-status-wyciek",
+      "kind": "status",
+      "statusId": "wyciek",
+      "fallback": "icons/svg/barrel.svg",
+      "context": "Przycelowanie: uszkodzona hydraulika maszyny, utrata 1k6 PW na turę do naprawy. Symbol techniczny, nie rana.",
+      "request": "ONE BROKEN RIGHT-ANGLE HYDRAULIC PIPE in side view with ONE LARGE OIL DROP falling from its open downward-facing end. Thick metal pipe silhouette, one stout coupling, ONE broad black inner channel cut, jagged broken pipe mouth. Drop is separate below with a wide black gap. Compact complete mechanical-leak symbol; no blood cells, wound, person, oil can, cog wheel, text or extra droplets.",
+      "target": "icons/statuses/wyciek.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/wyciek.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 1
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

@@ -2241,6 +2241,1004 @@
       ],
       "stage": "portrait-approval",
       "guidance": "Portret p01 (4/5) i żeton t01 (4/5) zaakceptowane. Dokładnie ocenione WEBP zapisane w docelowych ścieżkach."
+    },
+    {
+      "id": "bit-boy-przewodnik",
+      "title": "Bit-boy przewodnik",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ],
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Zgarbiony, wychudzony człowiek, noszący zniszczone ciuchy. Łatwo pomylić go z żulem, który ubrał kilka warstw ubrań, kompletnie do siebie niepasujących. Jego wygląd budzi litość, a twarz wydaje się znajoma, przypominając dobrotliwego staruszka.",
+      "stage": "portrait-approval",
+      "guidance": "Portret p03 i żeton t02 zatwierdzone po 5/5. Para dostarczona jako dokładnie ocenione bajty; wcześniejsze wersje i oceny zachowano.",
+      "source": "dev/bestiary/bestiary.json#bit-boy-przewodnik",
+      "targets": {
+        "portrait": "tokens/portraits/bit-boy-przewodnik.webp",
+        "token": "tokens/bit-boy-przewodnik.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/humanoid/Hobgoblin.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/bit-boy-przewodnik/portrait-p01.webp",
+            "sha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb",
+            "source": "dev/art/creatures/in/bit-boy-przewodnik/portrait-p01.webp",
+            "sourceSha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb",
+            "prompt": "dev/art/creatures/prompts/bit-boy-przewodnik/portrait-p01-reuse.json",
+            "width": 1024,
+            "height": 1024,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. Monochromatyczny portret, kadr nie obejmuje stóp. Oceń zachowanie tożsamości i stylu albo zleć wersję malarską w kolorze."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/bit-boy-przewodnik/portrait-p02.webp",
+            "sha256": "f0c576262a2665b85da07aa690a71faa3675f63f3beeed491fd0d6e370a53a61",
+            "source": "dev/art/creatures/in/bit-boy-przewodnik/portrait-p02.png",
+            "sourceSha256": "f8a8fd411127ceb9e581f0254f7b8038a56f791bdc1f112e96f35828397fac39",
+            "prompt": "dev/art/creatures/prompts/bit-boy-przewodnik/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:47:06.945228+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Fresh full-body colour portrait from the NOE description; no reuse of the rejected monochrome identity. Awaiting portrait approval."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/bit-boy-przewodnik/portrait-p03.webp",
+            "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+            "source": "dev/art/creatures/in/bit-boy-przewodnik/portrait-p03.png",
+            "sourceSha256": "d3c0c24e0f3b53cdc1b68f8429431d736299773120d68c8531d7b6c5d5b312e8",
+            "prompt": "dev/art/creatures/prompts/bit-boy-przewodnik/portrait-p03.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T13:27:48.614273+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies GM uncanny-mimic direction: distorted almost-human face, rehearsed smile, incorrect asymmetric clothing layers and awkward long-limbed stance. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/bit-boy-przewodnik/token-t01.webp",
+            "sha256": "2a5014c9141d8dd6d2988eb590630761652b68ed6d863bfc58bac3a9548434ef",
+            "source": "dev/art/creatures/in/bit-boy-przewodnik/token-t01.png",
+            "sourceSha256": "62f677938d6b659dba03206e68d18a50c555b47c7ca851dca150085acaee8ac9",
+            "prompt": "dev/art/creatures/prompts/bit-boy-przewodnik/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T14:17:58.904881+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First token from approved p03; uncanny face and incorrectly worn layers retained. Preparation draft needs a more vertical camera.",
+            "portraitId": "p03",
+            "portraitSha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+            "sourceBox": [
+              225,
+              51,
+              1104,
+              1205
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/bit-boy-przewodnik/token-t02.webp",
+            "sha256": "1cdf49a0ad4d539b5f704fd6ca1fb5b0bcda86341d236a9a49d74109ae3d91fe",
+            "source": "dev/art/creatures/in/bit-boy-przewodnik/token-t02.png",
+            "sourceSha256": "e6f3af5be6e3a8b3e03ab086b5008d0c875a7e5d7637741184ef6ab977d2caa7",
+            "prompt": "dev/art/creatures/prompts/bit-boy-przewodnik/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T14:23:01.523593+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Steeper overhead camera; exact approved p03 uncanny mimic, wrong clothing layers and beckoning hand retained. Awaiting token approval.",
+            "portraitId": "p03",
+            "portraitSha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+            "sourceBox": [
+              139,
+              99,
+              1182,
+              1159
+            ],
+            "fill": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "cyngiel",
+      "title": "Cyngiel",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ],
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Cyngle to płatni zabójcy, egzekutorzy, a nieraz i wysoko postawieni członkowie mafii. Wykorzystują każdą przewagę, żeby wyeliminować cel jak najmniejszym kosztem. Preferują cichą walkę bronią białą, a w ostateczności używają broni palnej o cięższym kalibrze. Lubią stanąć oko w oko z ofiarą i patrzeć, jak umiera.",
+      "stage": "portrait-approval",
+      "guidance": "Portret p04 i żeton t02 zatwierdzone po 5/5. Para dostarczona jako dokładnie ocenione bajty; wcześniejsze wersje i oceny zachowano.",
+      "source": "dev/bestiary/bestiary.json#cyngiel",
+      "targets": {
+        "portrait": "tokens/portraits/cyngiel.webp",
+        "token": "tokens/cyngiel.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/humanoid/Assassin.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/cyngiel/portrait-p01.webp",
+            "sha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c",
+            "source": "dev/art/creatures/in/cyngiel/portrait-p01.webp",
+            "sourceSha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c",
+            "prompt": "dev/art/creatures/prompts/cyngiel/portrait-p01-reuse.json",
+            "width": 1024,
+            "height": 1536,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. Obecny kierunek: starszy mężczyzna z brodą, okularami, hełmem, kamizelką i pistoletem. Kadr nie obejmuje całych nóg; pełna sylwetka żetonu będzie wymagała uzupełnienia na podstawie zatwierdzonej tożsamości."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/cyngiel/portrait-p02.webp",
+            "sha256": "905182d1c510aee5eea57e0892b0de4c9c7f5fdfcdf32b54ba072f101d289ba0",
+            "source": "dev/art/creatures/in/cyngiel/portrait-p02.png",
+            "sourceSha256": "ec8a7b93cde12c431efc28d65d8dc63a811adb0a030737a852970754767b7019",
+            "prompt": "dev/art/creatures/prompts/cyngiel/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:48:20.759674+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Fresh civilian enforcer concept and shared backdrop. Preparation issue: generator rendered a revolver instead of the intended heavy semiautomatic pistol; retained as a draft before local correction. Not approved."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/cyngiel/portrait-p03.webp",
+            "sha256": "ab1b44e11d4fb6c7acd9b0b27d084dfc1a1dcaec12cff6c333de50d18cf353d5",
+            "source": "dev/art/creatures/in/cyngiel/portrait-p03.png",
+            "sourceSha256": "2cb03d696f1865457832ac6a7aee58e47ae9b79a75506de1a9e00d3c7c21ccb3",
+            "prompt": "dev/art/creatures/prompts/cyngiel/portrait-p03-retry01.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:54:37.947804+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Corrects p02 revolver to a heavy semiautomatic pistol while preserving the new civilian enforcer identity and shared painterly backdrop. Awaiting portrait approval."
+          },
+          {
+            "id": "p04",
+            "src": "dev/art/creatures/candidates/cyngiel/portrait-p04.webp",
+            "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+            "source": "dev/art/creatures/in/cyngiel/portrait-p04.png",
+            "sourceSha256": "bedd1dedf780c8e163f0e1dfd0ecd9d66e37f0daaba8d81c50eb87c354fefeec",
+            "prompt": "dev/art/creatures/prompts/cyngiel/portrait-p04.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T13:29:33.624028+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Applies GM professional-assassin direction: short controlled haircut, charcoal overcoat/suit, subdued tie, concealed low-profile vest suggested beneath the shirt. Keeps the corrected handgun. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/cyngiel/token-t01.webp",
+            "sha256": "5afe4d7aa488333d27daa829ac94d38b592b2f677d767289e63cd44e856c8119",
+            "source": "dev/art/creatures/in/cyngiel/token-t01.png",
+            "sourceSha256": "29fb0baa0c903db719a0823fad2c92dc4c957348321909116d9ec36d498dfed2",
+            "prompt": "dev/art/creatures/prompts/cyngiel/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T14:18:02.253396+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First token from approved p04; exact assassin wardrobe, concealed vest and semiautomatic pistol retained. Preparation draft needs a more vertical camera.",
+            "portraitId": "p04",
+            "portraitSha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+            "sourceBox": [
+              243,
+              76,
+              1027,
+              1163
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/cyngiel/token-t02.webp",
+            "sha256": "4f51e85b81696f9dbf5b706e60836ecc3fd4e4d81e69bd1a35f026c77e9c2c12",
+            "source": "dev/art/creatures/in/cyngiel/token-t02.png",
+            "sourceSha256": "2739e9ac06ece24e79cdd2620cc873286661c13cbfb93df8f180439032ca03c2",
+            "prompt": "dev/art/creatures/prompts/cyngiel/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T14:23:05.235296+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Steeper overhead camera; approved p04 identity, dark overcoat, concealed vest, burgundy tie, sheath and semiautomatic pistol retained. Awaiting token approval.",
+            "portraitId": "p04",
+            "portraitSha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+            "sourceBox": [
+              183,
+              99,
+              1110,
+              1126
+            ],
+            "fill": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "gangus-zolnierz",
+      "title": "Gangus żołnierz",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Ludzie"
+      ],
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Szeregowe mięso armatnie wykorzystywane w gangsterskich porachunkach, napadach i rozbojach. Wykonuje polecenia przełożonego, najczęściej z zapałem godnym lepszej sprawy. Gangus zazwyczaj wygląda i ubiera się tak samo, jak jego koledzy z ferajny, dzięki czemu rozpoznaje swoich z daleka podczas strzelanin i pościgów. Ci którzy wykażą się odrobiną rozumu, nagradzani są bronią automatyczną, lepszym pancerzem lub pozwoleniem na kierowanie pojazdem.",
+      "stage": "portrait-approval",
+      "guidance": "Para p02/t02 zatwierdzona i zapisana w docelowych plikach: portret 4/5, żeton 5/5. Ocenione bajty zachowano bez zmian; wcześniejszy finalny portret jest w kopii poprzedniej dostawy.",
+      "source": "dev/bestiary/bestiary.json#gangus-zolnierz",
+      "targets": {
+        "portrait": "tokens/portraits/gangus-zolnierz.webp",
+        "token": "tokens/gangus-zolnierz.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/humanoid/Thug.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/gangus-zolnierz/portrait-p01.webp",
+            "sha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698",
+            "source": "dev/art/creatures/in/gangus-zolnierz/portrait-p01.webp",
+            "sourceSha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698",
+            "prompt": "dev/art/creatures/prompts/gangus-zolnierz/portrait-p01-reuse.json",
+            "width": 1024,
+            "height": 1536,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. Obecny kierunek: ciężko zbudowany, łysiejący gangster w garniturze, z rewolwerem. Oceń tożsamość i wyposażenie przed przeniesieniem do rzutu z góry."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/gangus-zolnierz/portrait-p02.webp",
+            "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+            "source": "dev/art/creatures/in/gangus-zolnierz/portrait-p02.png",
+            "sourceSha256": "68bc2208600295ea348c9212e158ee229ee198231732a4232fc4529e8dac0eaa",
+            "prompt": "dev/art/creatures/prompts/gangus-zolnierz/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:49:16.117841+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Preserves the GM-liked heavy gangster/suit/revolver concept, redrawn with shared painterly rendering and charcoal background. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/gangus-zolnierz/token-t01.webp",
+            "sha256": "141c0ed93f8c0e3c4c12ee2c0cc3ddd959fe6ae24aef1b974a6068faaffbfed8",
+            "source": "dev/art/creatures/in/gangus-zolnierz/token-t01.png",
+            "sourceSha256": "4aaf7c41a228c3f7f6329d868972346e6c3382faeda448c5f0d9effcc449996a",
+            "prompt": "dev/art/creatures/prompts/gangus-zolnierz/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T13:33:48.798512+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First token from approved p02; identity/equipment retained. Preparation draft: camera remains too oblique and needs a steeper overhead view.",
+            "portraitId": "p02",
+            "portraitSha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+            "sourceBox": [
+              127,
+              151,
+              1131,
+              1125
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/gangus-zolnierz/token-t02.webp",
+            "sha256": "0a8942be71f3511ba18999bd44a4b03e83c030b9466c60eca05118d16978ef65",
+            "source": "dev/art/creatures/in/gangus-zolnierz/token-t02.png",
+            "sourceSha256": "42ec105bc2f4138d6875775ec9e75762de3dc988c0cae29caed7df73be389538",
+            "prompt": "dev/art/creatures/prompts/gangus-zolnierz/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T13:39:42.662547+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Steeper overhead camera, compressed face/shirt surfaces, exact approved p02 identity and one revolver retained. Awaiting token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+            "sourceBox": [
+              50,
+              191,
+              1205,
+              1114
+            ],
+            "fill": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "id": "kitchin",
+      "title": "Kitchin",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ],
+      "size": "tiny",
+      "px": 200,
+      "fill": 0.6,
+      "brief": "Niewielka i niepozorna bestia o czarnym chitynowym pancerzu i tuzinie odnóży. Porusza się, prześlizgując swój wijący tułów przez najwęższe szczeliny, szukając zacienionych, chłodnych i wilgotnych miejsc. Trochę przypomina przedwojenną skolopendrę. Idzie to rozgnieść obcasem. To nie jest problem. Problemem jest to, że jak już dziabnie, to pada się nieprzytomnym na kilka godzin, a wtedy ofiarę wykańcza wszystko inne - promieniowanie, drapieżniki, pustynne słońce czy przechodząca akurat banda mutasów. Kitchin zazwyczaj wciska się pod kamień i siedzi w zacienionym miejscu, ale potrafi też zakraść się do śpiwora lub butów. Najwięcej ofiar kitchina to strudzeni wędrowcy, którzy zdjęli na chwilę buty, żeby dać odpocząć stopomi nie zajrzeli do środka przed założeniem ich z powrotem.",
+      "stage": "portrait-approval",
+      "guidance": "Para p02/t02 zatwierdzona i zapisana w docelowych plikach: obie grafiki 5/5. Żeton ma sześć par nóg. Wcześniejszy finalny portret zachowano w kopii poprzedniej dostawy.",
+      "source": "dev/bestiary/bestiary.json#kitchin",
+      "targets": {
+        "portrait": "tokens/portraits/kitchin.webp",
+        "token": "tokens/kitchin.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/beast/GiantWasp.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/kitchin/portrait-p01.webp",
+            "sha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0",
+            "source": "dev/art/creatures/in/kitchin/portrait-p01.webp",
+            "sourceSha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0",
+            "prompt": "dev/art/creatures/prompts/kitchin/portrait-p01-reuse.json",
+            "width": 1536,
+            "height": 1024,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. NOE: czarny chitynowy pancerz, wijący tułów i tuzin odnóży. Oceń zgodność obecnego kierunku z opisem i liczbę odnóży przy późniejszym rzucie z góry."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/kitchin/portrait-p02.webp",
+            "sha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+            "source": "dev/art/creatures/in/kitchin/portrait-p02.png",
+            "sourceSha256": "2917daf3e403b74d828d1ce4c546350f3cb08672aa9cbbef9df5d85b680c1df0",
+            "prompt": "dev/art/creatures/prompts/kitchin/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:50:46.274498+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Redrawn from the liked black segmented creature concept, six near-side walking legs and corresponding far-side pairs, shared charcoal backdrop. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/kitchin/token-t01.webp",
+            "sha256": "00d91532f8c16811ab40a2d84d4c28ff38e9abc85beb34f918e9dafe8c19555a",
+            "source": "dev/art/creatures/in/kitchin/token-t01.png",
+            "sourceSha256": "42605e094711803ee14038a06184aef7768741243c5cb4a017a45dc293af2bf9",
+            "prompt": "dev/art/creatures/prompts/kitchin/token-t01.json",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2026-10-31T13:33:53.139111+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First overhead token from approved p02. Preparation issue: only five paired sets of walking legs (10 total); retained before adding the missing pair.",
+            "portraitId": "p02",
+            "portraitSha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+            "sourceBox": [
+              218,
+              56,
+              910,
+              1333
+            ],
+            "fill": 0.6
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/kitchin/token-t02.webp",
+            "sha256": "7073b49a206accda584c61a36b1ba164a3b12261d320aca9d2eac44b07a45dff",
+            "source": "dev/art/creatures/in/kitchin/token-t02.png",
+            "sourceSha256": "389b691b5aed3f863bcd54f13e36c4eda23fa9dd3daee96bb9bb4d516ccd9270",
+            "prompt": "dev/art/creatures/prompts/kitchin/token-t02.json",
+            "width": 200,
+            "height": 200,
+            "createdAt": "2026-10-31T13:39:46.676194+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Corrected to six walking-leg pairs (12 legs), plus separate antennae, mandibles and rear stinger. Exact approved p02 identity. Awaiting token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+            "sourceBox": [
+              208,
+              53,
+              914,
+              1340
+            ],
+            "fill": 0.6
+          }
+        ]
+      }
+    },
+    {
+      "id": "spawacz",
+      "title": "Spawacz",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Maszyny"
+      ],
+      "size": "sm",
+      "px": 400,
+      "fill": 0.7,
+      "brief": "Przypomina trochę stalową modliszkę ciągnącą za sobą niewielki wózek. Półtorametrowa maszyna poruszająca się na sześciu kończynach, w razie potrzeby wysuwająca z korpusu kolejne dwie z wymiennymi końcówkami. Korpus wypełniony jest narzędziami do szybkich napraw na polu bitwy - znajduje się tam wszystko od cążek do kabli na spawarce skończywszy. Bardzo często ciągnie za sobą dodatkową przyczepę zawierającą części zamienne do maszyn, które obecnie serwisuje.",
+      "stage": "portrait-approval",
+      "guidance": "Portret p06 zatwierdzony 4/5 i żeton t10 zatwierdzony 5/5. Para dostarczona jako dokładnie ocenione bajty. Żeton usuwa dwa szczątkowe tylne stawy z wybranego t03 i zachowuje sześć podpór oraz dwa ramiona narzędziowe. Pozostałe próby i wszystkie zapisane decyzje zachowano.",
+      "source": "dev/bestiary/bestiary.json#spawacz",
+      "targets": {
+        "portrait": "tokens/portraits/spawacz.webp",
+        "token": "tokens/spawacz.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/construct/FlyingSword.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p01.webp",
+            "sha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a",
+            "source": "dev/art/creatures/in/spawacz/portrait-p01.webp",
+            "sourceSha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p01-reuse.json",
+            "width": 1024,
+            "height": 1536,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. NOE: stalowa modliszka, sześć kończyn do poruszania i dwie dodatkowe narzędziowe; możliwy wózek z częściami. Obecny portret nie pokazuje jednoznacznie całego tego układu. Wskaż pozostawienie albo korektę przed żetonem."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p02.webp",
+            "sha256": "106b3de8ef5805889e9f6f4df785b70f0efbd5ebcc3c976ce2e164a8ec786b31",
+            "source": "dev/art/creatures/in/spawacz/portrait-p02.png",
+            "sourceSha256": "63ad62d975679f17a243efdf3f0ecec9acbc1e1542a43e035da5e333058b8666",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:53:01.435990+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Redrawn from GM-provided Neuroshima 1.5 sketch. Preparation issue: only four supporting legs visible; retained before adding the missing rear pair. Not approved."
+          },
+          {
+            "id": "p03",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p03.webp",
+            "sha256": "d1437b1561c09306c65e3a81b6505745ac4e16520924612554c28a15670b8f63",
+            "source": "dev/art/creatures/in/spawacz/portrait-p03.png",
+            "sourceSha256": "99e9a13e74844aafa40313f44b283855aaf807e8a50923107b6de8353ff1b2ff",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p03.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:54:34.537345+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Adds the missing rear walking pair to the sketch-based design: six distinct supporting feet plus pliers and welding-tool arms. Awaiting portrait approval."
+          },
+          {
+            "id": "p04",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p04.webp",
+            "sha256": "26ae43ccc9631f11dd22e958be2f1c3dccc760538398fc4d5437dd1150f905a5",
+            "source": "dev/art/creatures/in/spawacz/portrait-p04.png",
+            "sourceSha256": "92c17ceb83bfb170b0089601484d9c79618981de721212e3b685ff6055226c81",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p04.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T13:29:38.564738+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Surface repaint greatly reduces mottling while preserving six supports and two tools. Retained as preparation version; inspect faint residual panel pattern at 1:1."
+          },
+          {
+            "id": "p05",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p05.webp",
+            "sha256": "f22c82380c1cccafabeaaad79c7e7dfa278268e3d7543d8b35cf5eca7b55e944",
+            "source": "dev/art/creatures/in/spawacz/portrait-p05.png",
+            "sourceSha256": "b423b53ffe00e512a9f065c9b85c77e1e016bccb98555172de881a9bfdf38c64",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p05.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T13:33:43.991452+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Second material-only pass removes the remaining fine panel web. Smooth uniform grey coating, real seams, ports, six supports and two tools retained. Awaiting portrait approval."
+          },
+          {
+            "id": "p06",
+            "src": "dev/art/creatures/candidates/spawacz/portrait-p06.webp",
+            "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "source": "dev/art/creatures/in/spawacz/portrait-p06.png",
+            "sourceSha256": "2b44e00666f229146a554aa8c4c9bc91999da567a326a67d7c74ed1a8cc843c4",
+            "prompt": "dev/art/creatures/prompts/spawacz/portrait-p06.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T14:18:05.025922+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Controlled coarse patina over cleaned p05: broad grease stains, long isolated scratches, shallow dents and localized welding-spatter details, with quiet panel interiors preserved. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/spawacz/token-t01.webp",
+            "sha256": "eccb1dee04c4c8b71672415f13ef8e96b990138b749d5a0966024902be55b4ae",
+            "source": "dev/art/creatures/in/spawacz/token-t01.png",
+            "sourceSha256": "79bbc9000a511865930e0f15fd701c916bd94a16fc1d2468d7e288c1980e8435",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T14:40:33.356638+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "GM: 2/5, do poprawy. Nogi wychodzą z naramienników, a narzędzia spod korpusu lub rozgałęzień przednich nóg. Liczba 6+2 nie zapewniła prawidłowych mocowań. Kolejne próby używają osobnego schematu kinematycznego.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              50,
+              36,
+              1208,
+              1150
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/spawacz/token-t02.webp",
+            "sha256": "66ffc12c25748c46610105c8d3d9b7577d5773136e486e4e461a2131704dc4f5",
+            "source": "dev/art/creatures/in/spawacz/token-t02.png",
+            "sourceSha256": "6d43528645d740ac6fa0100a3f51b7912d7799150f5b1c79ace2b16f2442fcf3",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:01:00.824836+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "A — niezależna próba ze schematem v1. Kontrola agenta: przednie podpory nadal zlewają się z łokciami narzędzi; zachowana jako nieudana próba, nie jako poprawiony wariant.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              15,
+              20,
+              1241,
+              1193
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t03",
+            "src": "dev/art/creatures/candidates/spawacz/token-t03.webp",
+            "sha256": "e50bef8ca97622a09a064fed56d4bb7c436f18ae23b20dd25670676c7052b9ee",
+            "source": "dev/art/creatures/in/spawacz/token-t03.png",
+            "sourceSha256": "361584fede873a0a90098addf5daf64e970571f927309cd423297cf5fcdac6fb",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t03.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:01:04.003572+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "GM: 5/5, do poprawy. Wybrana baza dalszych edycji. Usunąć tylko parę krótkich podwiniętych stawów tuż za górnym brzegiem korpusu; pełne tylne nogi wychodzące w górne rogi mają pozostać. Wersje t07–t14 są niezależnymi miejscowymi korektami tego oryginału.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              82,
+              14,
+              1174,
+              1213
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t04",
+            "src": "dev/art/creatures/candidates/spawacz/token-t04.webp",
+            "sha256": "1fbf2f2f328fa0d648ad4c46b4327a6bc988f8541e2080390ade83fb583f92eb",
+            "source": "dev/art/creatures/in/spawacz/token-t04.png",
+            "sourceSha256": "bf5bbc90437a379e17378198a2a1e1b192a3eb5ffcea563cf3106b1c5f41dbe7",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t04.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:01:07.950333+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "C — niezależna próba ze schematem v1, bardziej zwarta i mniej symetryczna. Osobne ramiona barkowe oraz podpory spod korpusu. Sprawdź źródła tylnych nóg i czytelność skrzyżowań. Bez oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              176,
+              61,
+              1141,
+              1191
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t06",
+            "src": "dev/art/creatures/candidates/spawacz/token-t06.webp",
+            "sha256": "c40b535f965407855586efc1667b46e83234a389606a195a2b423dcebfe3df34",
+            "source": "dev/art/creatures/in/spawacz/token-t06.png",
+            "sourceSha256": "b4cdc15b4ec4d9bf28a4be5ca8b13cf5b38439a8822828fd3a63a12ee0e27981",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t06.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:02:28.515383+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "E — próba ze schematem v2 i pochyleniem tułowia. Kontrola agenta: tylne nogi nadal wyglądają na mocowane w górnych płytach korpusu. Zachowana jako nieudana próba, nie jest rekomendowana do akceptacji.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              16,
+              62,
+              1241,
+              1195
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t05",
+            "src": "dev/art/creatures/candidates/spawacz/token-t05.webp",
+            "sha256": "01dc2b5a695f280d1c94e641a300ac55ec2eb7a02a04bbeef853f3b5f9837897",
+            "source": "dev/art/creatures/in/spawacz/token-t05.png",
+            "sourceSha256": "c0003f680afd566f06add783265069988b27dd3b8eecf526e6e377a3902f191e",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t05.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:02:32.014627+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "D — najbardziej obiecująca próba ze schematem v2. Ramiona narzędziowe wychodzą z barków i biegną na zewnątrz; przednie nogi podporowe są bliżej osi. Bez wspólnego łokcia nogi i narzędzia. Sprawdź jeszcze mocowania tylnych i środkowych nóg względem dolnego stelaża. Bez oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              30,
+              49,
+              1231,
+              1166
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t07",
+            "src": "dev/art/creatures/candidates/spawacz/token-t07.webp",
+            "sha256": "3d1a6fb025c61894f76934f803bf5a244126342fa7b0315e430246691033c83f",
+            "source": "dev/art/creatures/in/spawacz/token-t07.png",
+            "sourceSha256": "6b2c65eeb93fbfa75a23e96264eedaa27dd489cba40740e1696295e7ad43391a",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t07.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:38:48.101465+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "F — miejscowa korekta t03 ocenionego przez GM na 5/5, do poprawy. Kontrola agenta: oba szczątkowe tylne stawy usunięte, dwie pełne tylne podpory i pozostałe kończyny zachowane. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              81,
+              15,
+              1176,
+              1214
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t08",
+            "src": "dev/art/creatures/candidates/spawacz/token-t08.webp",
+            "sha256": "39adcf62b0bc5dec9d6a0e3ca68246d3f680a8111e7782a59a34383a572fdfaf",
+            "source": "dev/art/creatures/in/spawacz/token-t08.png",
+            "sourceSha256": "6d29407db398ed05754e2b41be357fb1ccff05442333eaaab9fa6b677d7ba2f4",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t08.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:40:57.664430+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "G — niezależna miejscowa korekta t03. Kontrola agenta: usunięta para szczątkowych tylnych stawów, dwie pełne tylne nogi i pozostała obsada kończyn zachowane. Porównaj rekonstrukcję tylnej krawędzi i powierzchnię płyt z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              71,
+              16,
+              1185,
+              1219
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t09",
+            "src": "dev/art/creatures/candidates/spawacz/token-t09.webp",
+            "sha256": "e56b0a60a3514e61c9046eaabd4c73f63892fae664cc3ade839d6e0f1f86fbac",
+            "source": "dev/art/creatures/in/spawacz/token-t09.png",
+            "sourceSha256": "8e4d3f9d41a0a72251e74739f936c616ccb7275178e342011dc0c2375b759ee0",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t09.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:41:01.197276+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "H — niezależna miejscowa korekta t03. Kontrola agenta: usunięta para szczątkowych tylnych stawów, dwie pełne tylne nogi i pozostała obsada kończyn zachowane. Porównaj rekonstrukcję tylnej krawędzi i powierzchnię płyt z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              80,
+              14,
+              1175,
+              1214
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t10",
+            "src": "dev/art/creatures/candidates/spawacz/token-t10.webp",
+            "sha256": "0185f544194b0f0e937480c2e8327c215057b9bb3a09af3c74750125a7c53c28",
+            "source": "dev/art/creatures/in/spawacz/token-t10.png",
+            "sourceSha256": "eef384cde3fe98b5b81ee4adc6238b9666ae855b814afc32913cceca386106a2",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t10.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:42:47.290589+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "I — miejscowa korekta wybranego t03. GM zatwierdził t10 na 5/5; para z portretem p06 (4/5) dostarczona jako dokładnie ocenione WEBP. Pozostałe próby zachowano.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              81,
+              14,
+              1175,
+              1214
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t11",
+            "src": "dev/art/creatures/candidates/spawacz/token-t11.webp",
+            "sha256": "39cf3ed24ab066715fd32a2acc1196fdc427ca01dd588a2d657f21a564b4fc57",
+            "source": "dev/art/creatures/in/spawacz/token-t11.png",
+            "sourceSha256": "c53f551242460df365167e98eb8db4f62fec3e70ccd6f7d294ab04ee37d9f9c2",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t11.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:42:51.761349+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "J — niezależna miejscowa korekta t03. Kontrola agenta: oba zbędne tylne stawy usunięte; pełne tylne podpory, pozostałe cztery nogi i dwa ramiona narzędziowe zachowane. Porównaj kształt odtworzonego górnego brzegu i drobne zmiany materiału z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              81,
+              18,
+              1175,
+              1213
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t12",
+            "src": "dev/art/creatures/candidates/spawacz/token-t12.webp",
+            "sha256": "030be6e52b91325a9e39a48b4c8918218aed22386d2675ace500602dd2f0d540",
+            "source": "dev/art/creatures/in/spawacz/token-t12.png",
+            "sourceSha256": "3817652010c40f38df1700f06c321913a9ace0f603a2d720b64e61965caae3c8",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t12.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:44:40.409968+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "K — niezależna miejscowa korekta t03. Kontrola agenta: oba szczątkowe tylne stawy usunięte, pełne tylne nogi pozostawione. Zachowany układ sześciu podpór i dwóch ramion narzędziowych; porównaj górny brzeg i powierzchnie płyt z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              80,
+              14,
+              1175,
+              1213
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t13",
+            "src": "dev/art/creatures/candidates/spawacz/token-t13.webp",
+            "sha256": "1e3395c0cea51b1b800ff24733a28daa4d365bfdce655554e00e8e4d685b3113",
+            "source": "dev/art/creatures/in/spawacz/token-t13.png",
+            "sourceSha256": "e54a68fb26f132295c7c3c791c82f46228a7df1d1fb07912204c80750002a509",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t13.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:44:45.058325+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "L — niezależna miejscowa korekta t03. Kontrola agenta: oba szczątkowe tylne stawy usunięte, pełne tylne nogi pozostawione. Zachowany układ sześciu podpór i dwóch ramion narzędziowych; porównaj górny brzeg i powierzchnie płyt z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              76,
+              16,
+              1180,
+              1212
+            ],
+            "fill": 0.7
+          },
+          {
+            "id": "t14",
+            "src": "dev/art/creatures/candidates/spawacz/token-t14.webp",
+            "sha256": "4e4f168d9bf51fc35ed9e0ede438d3ce884170e05c093a0c54b00aace3276051",
+            "source": "dev/art/creatures/in/spawacz/token-t14.png",
+            "sourceSha256": "9e52e886c50343f93efb8fcce14bd8c58b94d453a4f30d58e6987adbe4a3af24",
+            "prompt": "dev/art/creatures/prompts/spawacz/token-t14.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T15:45:50.457687+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "M — niezależna miejscowa korekta t03. Kontrola agenta: oba szczątkowe tylne stawy usunięte, pełne tylne nogi i pozostałe kończyny zachowane. Porównaj odtworzony górny brzeg i drobne zmiany materiału z bazą. Bez nowej oceny GM.",
+            "portraitId": "p06",
+            "portraitSha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+            "sourceBox": [
+              75,
+              15,
+              1181,
+              1217
+            ],
+            "fill": 0.7
+          }
+        ]
+      }
+    },
+    {
+      "id": "techmorwa-srednia",
+      "title": "Techmorwa średnia",
+      "group": "bestiary",
+      "reviewGroups": [
+        "Bestiariusz",
+        "Potwory"
+      ],
+      "size": "med",
+      "px": 400,
+      "fill": 0.9,
+      "brief": "Jeśli myślisz, że wszystkie techmorwy są malutkie, to się grubo mylisz. Niektóre żyją na tyle długo, że rosną do wielkości lodówki. Otwierasz taką podczas szaberku, a tu znienacka wyskakują macki, które cię łapią i pakują do środka. Straszna śmierć. A słyszałeś o techmorwie, która udawała sklepowego manekina? Jeden kumpel zabrał taką do samochodu i …",
+      "stage": "portrait-approval",
+      "guidance": "Para p02/t02 zatwierdzona i zapisana w docelowych plikach: obie grafiki 5/5. Pralka w rzucie z góry i cztery macki. Wcześniejszy finalny portret zachowano w kopii poprzedniej dostawy.",
+      "source": "dev/bestiary/bestiary.json#techmorwa-srednia",
+      "targets": {
+        "portrait": "tokens/portraits/techmorwa-srednia.webp",
+        "token": "tokens/techmorwa-srednia.webp"
+      },
+      "legacyToken": {
+        "path": "systems/dnd5e/tokens/beast/GiantCentipede.webp",
+        "origin": "dnd5e fallback; not native creature artwork"
+      },
+      "candidates": {
+        "portrait": [
+          {
+            "id": "p01",
+            "src": "dev/art/creatures/candidates/techmorwa-srednia/portrait-p01.webp",
+            "sha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59",
+            "source": "dev/art/creatures/in/techmorwa-srednia/portrait-p01.webp",
+            "sourceSha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59",
+            "prompt": "dev/art/creatures/prompts/techmorwa-srednia/portrait-p01-reuse.json",
+            "width": 1024,
+            "height": 1536,
+            "createdAt": "2026-10-31T10:30:13.064256+00:00",
+            "tool": "Existing GM artwork — reused unchanged; no image generation",
+            "model": null,
+            "agentNotes": "Istniejący portret GM, skopiowany bez zmian i bez nowej generacji. NOE opisuje dużego naśladowcę urządzeń (np. lodówki lub manekina), z mackami. Obecny portret pokazuje odkrytą owadzią postać. Wskaż zachowanie tego kierunku albo inny wygląd przed żetonem."
+          },
+          {
+            "id": "p02",
+            "src": "dev/art/creatures/candidates/techmorwa-srednia/portrait-p02.webp",
+            "sha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+            "source": "dev/art/creatures/in/techmorwa-srednia/portrait-p02.png",
+            "sourceSha256": "63e2cfe7ec934be646ff6ba9d034ff8a1a25ba2d2d94ca8d6577e2068a0fc6c4",
+            "prompt": "dev/art/creatures/prompts/techmorwa-srednia/portrait-p02.json",
+            "width": 800,
+            "height": 1000,
+            "createdAt": "2026-10-31T10:50:49.927940+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Fresh medium-sized mimic posing as an old washing machine, organic hollow and four tentacles. No reuse of rejected exposed beetle design. Awaiting portrait approval."
+          }
+        ],
+        "token": [
+          {
+            "id": "t01",
+            "src": "dev/art/creatures/candidates/techmorwa-srednia/token-t01.webp",
+            "sha256": "f88fcb84d2bd721d886783927bb37962ce66e59767190e0f260a15d82e30521f",
+            "source": "dev/art/creatures/in/techmorwa-srednia/token-t01.png",
+            "sourceSha256": "4ffcbd954f907965179f82504025d8d4b4ae64392292662343ea09111dcc9184",
+            "prompt": "dev/art/creatures/prompts/techmorwa-srednia/token-t01.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T13:33:56.765869+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "First token from approved p02; four tentacles and appliance identity retained. Preparation draft: front panel is too visible, camera needs a steeper overhead view.",
+            "portraitId": "p02",
+            "portraitSha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+            "sourceBox": [
+              205,
+              49,
+              1117,
+              1201
+            ],
+            "fill": 0.9
+          },
+          {
+            "id": "t02",
+            "src": "dev/art/creatures/candidates/techmorwa-srednia/token-t02.webp",
+            "sha256": "08ad1fe692fca22a79d778a908e76a6324d8a5a872c8d82f6207fcc2a315fd85",
+            "source": "dev/art/creatures/in/techmorwa-srednia/token-t02.png",
+            "sourceSha256": "6a1abe1c2eeaad267bb3dd8a4022c02b114bef0d3cb358ef9a8c9313c6299427",
+            "prompt": "dev/art/creatures/prompts/techmorwa-srednia/token-t02.json",
+            "width": 400,
+            "height": 400,
+            "createdAt": "2026-10-31T13:45:57.591329+00:00",
+            "tool": "OpenAI built-in image_gen",
+            "model": null,
+            "agentNotes": "Steeper overhead projection: nearly square top lid, foreshortened front opening and hinged door, four distinct tentacles. Exact GM-approved p02 identity. Awaiting token approval.",
+            "portraitId": "p02",
+            "portraitSha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+            "sourceBox": [
+              224,
+              50,
+              1125,
+              1213
+            ],
+            "fill": 0.9
+          }
+        ]
+      }
     }
   ],
   "references": [

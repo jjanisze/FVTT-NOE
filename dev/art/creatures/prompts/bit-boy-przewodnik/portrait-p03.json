@@ -1,0 +1,27 @@
+{
+  "creatureId": "bit-boy-przewodnik",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/bit-boy-przewodnik/portrait-p02.png",
+      "role": "Edit target: keep full-body frame and rendering, replace the ordinary human impression with the GM-requested uncanny mimic",
+      "sha256": "f8a8fd411127ceb9e581f0254f7b8038a56f791bdc1f112e96f35828397fac39"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. This is a fictional Bestiary creature portrait. Transform this ordinary old wanderer into a NONHUMAN MONSTER poorly masquerading as an elderly human. Keep the full-body composition, hunch, broad muted colours, painterly style and empty charcoal background, but change its facial anatomy and badly worn clothing decisively.\nThe face is only an APPROXIMATION of a human face: an overlong lower face, oddly spaced eyes at slightly different heights, a misplaced small nose and a too-wide, badly rehearsed friendly smile, slack cheek planes that do not line up naturally with the jaw. An unsettling counterfeit human expression, recognisably uncanny rather than just an ill or disfigured real person. This is an invented creature, not a realistic human with a medical condition. Some grey wisps of hair and the suggestion of age remain, but it must no longer read as a normal sympathetic grandfather. No glowing eyes, fangs, skull, zombie wounds or demonic horns.\nThe creature has put human clothes on WRONG: the faded overcoat sits backwards and diagonally across the shoulders with its lining partly outside, a cardigan is inside-out with its buttons misaligned and one shoulder dropped, unrelated shirt layers protrude from the wrong gaps, trouser hems uneven, mismatched worn shoes. A few broad tears at hems and a stiff awkward imitation of a human stance. Two actual arms and two legs, subtly overlong forearms and narrow fingers; avoid an accidental extra limb. Keep one asking/beckoning gesture but make it unnaturally rehearsed. Large clear folds and smoothly shaded face planes, with no extra veil of tiny cracks, pores or all-over texture. All feet and hands inside the existing margins. No scenery, writing, armour, weapons, blood or gore.",
+  "date": "2026-10-31T13:24:28.127Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "bit-boy-przewodnik",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "f0c576262a2665b85da07aa690a71faa3675f63f3beeed491fd0d6e370a53a61",
+    "decision": "revise",
+    "rating": 2,
+    "notes": "Add much more uncanny valley effect. The face should look wrong, distorted and only resembling a human. The clothes should look haphazard, worn incorrectly - like a semi-sentient monster masquerading as a human. This isn't a human - it's a monster masquerading as one,",
+    "updatedAt": "2026-10-31T13:14:19.039Z"
+  }
+}

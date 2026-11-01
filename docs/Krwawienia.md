@@ -63,7 +63,8 @@
 | **W module** | działa | działa | działa | działa | działa — ustawienie świata „Kolor Neuroshimy” | działa — przycisk pod trafieniem piłą |
 
 W module (od 2026-11-01) każde krwawienie to osobny efekt ze swoim stanem na żetonie; tyka i zatrzymuje się osobno,
-przyciski na kartach krwawienia. Ikony są na razie tymczasowe, docelowe zamówione.
+przyciski na kartach krwawienia. Siedem własnych glifów zatwierdzonych przez MG jest
+podpiętych w konfiguracji; źródła i decyzje: `dev/icons/m7-status-pass/`.
 
 ## Poza tabelą: Wyciek (układ hydrauliczny maszyny)
 

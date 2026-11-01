@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-31T10:45:11.192Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cyngiel",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/szeryf.webp",
+      "role": "Painting, lighting, full-body framing and charcoal backdrop ONLY; do not copy this person's face, clothing, anatomy or equipment",
+      "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "cyngiel",
+    "kind": "portrait",
+    "candidateId": "p01",
+    "sha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c",
+    "decision": "reject",
+    "rating": null,
+    "notes": "Fail. Regenerate.",
+    "updatedAt": "2026-10-31T10:36:56.117Z"
+  },
+  "prompt": "Use case: stylized-concept. Asset: a single full-body portrait for a fictional tabletop game's Bestiary. Naturalistic HAND-PAINTED illustration, matching the supplied painting reference's grounded proportions, restrained brushwork and empty dark charcoal subtly painted backdrop. Soft neutral upper-left illumination, muted earthy palette, a small diffuse contact shadow only. Broad, calm light-to-shadow gradients on large surfaces; detail is selective at the face, silhouette and a few functional seams. Large folds and local damage rather than a uniform cracked-paint mesh or high-frequency surface noise. Entire subject, every foot, appendage, tool tip and tail comfortably inside a vertical 4:5 portrait with about 6% breathing room. No scenery, captions, letters, logos, frame, base disc or circular crop. A neutral standing/display pose, no combat scene, target, victim, blood or gore. Any style-only human reference supplies painting and lighting ONLY, never its person, clothes, weapons or anatomy.\nRegenerate the CYNGIEL as a fresh full-body fictional civilian underworld enforcer, not a police/SWAT officer. A lean, self-possessed middle-aged man with short dark hair, a narrow tired face and restrained watchful expression. An ordinary charcoal-brown leather coat over a plain muted grey shirt, dark trousers and practical worn boots. Unshowy clothing, no helmet, tactical vest, sunglasses or radio headset. One large plain heavy pistol held safely DOWN at his side with the index finger clear of the trigger, and a plain sheathed utility knife on his belt. No second gun, sword arsenal, brand markings or military insignia. The description favours quiet close work and an inconspicuous civilian appearance, not a special-forces hero. Neutral relaxed three-quarter-front standing pose, both natural hands and both complete boots visible. Match the painting style and background only from the reference."
+}

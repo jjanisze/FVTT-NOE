@@ -1,6 +1,8 @@
 # Missing artwork briefs — M4 vehicles
 
-7 sounds remain from the request (`PLAN_m4_pojazdy.md` §8).
+All seven requested vehicle sounds are delivered (`PLAN_m4_pojazdy.md` §8).
+Six verified CC0 originals, exact trims, normalization reports and audition instructions:
+[AUDIO.md](AUDIO.md).
 All 14 vehicle sets and [14 individual wrecks](wraki/README.md) are delivered. Thirteen new wrecks await GM review.
 The sedan portrait and closed/interior token pair are delivered: [OSOBOWKA.md](OSOBOWKA.md).
 Also delivered: [Hammer](hammer/README.md), [motorcycle](motocykl/README.md), [cargo truck](ciezarowka/README.md), [buggy](buggy/README.md), [bus](autobus/README.md), [tractor](traktor/README.md), [fire pumper](woz-strazacki/README.md), [bulldozer](buldozer/README.md), [M2A2 Bradley](bwp/README.md), [M1A1 Abrams](czolg/README.md), [moped](motorower/README.md), [bicycle](rower/README.md) and [skateboard](deskorolka/README.md).
@@ -129,6 +131,9 @@ Final files `tokens/portraits/pojazd-<key>.webp` for the 13 remaining keys of th
 
 ## Sounds — 7
 
+Delivered and GM-approved 2026-11-01, including the optional siren. All seven pass the M5
+technical profile and remain available in the shared review tool's **Dźwięki pojazdów** tab.
+
 Final files under `sounds/pojazdy/`, **mono 44.1 kHz Vorbis OGG**, CC0 (Freesound), normalised like
 the M5 set ([AUDIO.md](../m5/AUDIO.md): −3 dB peak ceiling, −23 dB RMS ceiling, 5 ms / 30 ms fades);
 credit each in `CREDITS.md`. Only start and stop are played (GM decision D8) — no engine loops.
@@ -143,4 +148,5 @@ credit each in `CREDITS.md`. Only start and stop are played (GM decision D8) —
 | `sounds/pojazdy/alarm.ogg` | 2–4 s | Car alarm whooping or horn bursts (failed hot-wiring) |
 | `sounds/pojazdy/syrena.ogg` | 3–5 s | Fire-engine wail (the fire engine's Siren trait); optional |
 
-Until a file exists the module stays silent for that cue — no placeholder sounds are shipped.
+All seven exact runtime paths now exist. Existing sound mappings are retained; the driver's
+Syrena action now emits the existing sound event. [Approval and integration evidence](AUDIO.md).

@@ -1,0 +1,119 @@
+{
+  "world": "agent-m7-20261031",
+  "checks": [
+    {
+      "statusId": "reakcja",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/reakcja.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 6414
+    },
+    {
+      "statusId": "akcjaBonusowa",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/akcja-bonusowa.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 3718
+    },
+    {
+      "statusId": "stanowiskoSnajperskie",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/stanowisko-snajperskie.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 5226
+    },
+    {
+      "statusId": "krwawienieHemofilia",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-hemofilia.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 5865
+    },
+    {
+      "statusId": "krwawieniePodstepny",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-podstepny.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 6845
+    },
+    {
+      "statusId": "krwawienieTetnica",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-tetnica.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 6624
+    },
+    {
+      "statusId": "krwawienieKolory",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-kolory.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 6585
+    },
+    {
+      "statusId": "krwawieniePila",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-pila.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 6977
+    },
+    {
+      "statusId": "krwawienieDumdum",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/krwawienie-dumdum.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 5774
+    },
+    {
+      "statusId": "wyciek",
+      "img": "modules/neuroshima-2026-overrides/icons/statuses/wyciek.svg",
+      "effectImageMatches": true,
+      "approvedHashMatches": true,
+      "texture": [
+        150,
+        150
+      ],
+      "visiblePixels": 3151
+    }
+  ],
+  "configuredStatuses": 10,
+  "worldDocumentsWritten": 0,
+  "date": "2026-11-01",
+  "preview": "live-render-preview.png"
+}

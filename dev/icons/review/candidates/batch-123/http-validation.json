@@ -1,0 +1,46 @@
+{
+    "date":  "2026-11-01",
+    "batch":  123,
+    "activeCards":  5,
+    "newCandidates":  6,
+    "allRemoteHashesMatchLocal":  true,
+    "primaryActionReferenceStatus":  200,
+    "candidates":  [
+                       {
+                           "id":  "batch123-akcja-bonusowa-a",
+                           "path":  "candidates/batch-123/akcja-bonusowa-a.png",
+                           "status":  200,
+                           "sha256":  "ff496b7f32f572297196a7266ae821707fd578edfaf32c69bdde66fa3ba168ef"
+                       },
+                       {
+                           "id":  "batch123-akcja-bonusowa-b",
+                           "path":  "candidates/batch-123/akcja-bonusowa-b.png",
+                           "status":  200,
+                           "sha256":  "94416db2aa036f3543938e4aef909240fcfc80f3c9dcd40caf8de30a8aae7835"
+                       },
+                       {
+                           "id":  "batch123-krwawienie-podstepny",
+                           "path":  "candidates/batch-123/krwawienie-podstepny.png",
+                           "status":  200,
+                           "sha256":  "bf6772958ed46af81bb42f46d571a0151a7b774728f59b8153f5091366d62330"
+                       },
+                       {
+                           "id":  "batch123-krwawienie-tetnica",
+                           "path":  "candidates/batch-123/krwawienie-tetnica.png",
+                           "status":  200,
+                           "sha256":  "6b79b838cf1332cd33ff7d51cff3fed7229eef0b39e2a6c5d2bc2cf301210dec"
+                       },
+                       {
+                           "id":  "batch123-krwawienie-kolory",
+                           "path":  "candidates/batch-123/krwawienie-kolory.png",
+                           "status":  200,
+                           "sha256":  "b9b82e2da96825e7225c164ec7beb253e4e74268d2cadba27e539059f8ecc18d"
+                       },
+                       {
+                           "id":  "batch123-wyciek",
+                           "path":  "candidates/batch-123/wyciek.png",
+                           "status":  200,
+                           "sha256":  "7b061bf422be4274163bd86eaf25e83abca08315c6fda361e36b6b4a10ee3571"
+                       }
+                   ]
+}

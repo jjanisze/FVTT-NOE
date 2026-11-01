@@ -1,0 +1,32 @@
+{
+  "creatureId": "bit-boy-przewodnik",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p03",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/bit-boy-przewodnik/portrait-p03.webp",
+      "role": "Exact approved p03 nonhuman mimic identity",
+      "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027"
+    },
+    {
+      "path": "tokens/cywil.webp",
+      "role": "Steep overhead camera and readable token painting only; do not copy woman, bun, apron, denim, gun or tools",
+      "sha256": "419d1c15528c264c5eeab0923ed9b0b4e0ad4f708f65cdf8702469e493de5451"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create a transparent overhead battle-map token of the exact GM-approved Bit-boy mimic in image 1. Image 2 supplies the STEEP OVERHEAD CAMERA and painted token format ONLY; do not copy its person, clothes, hair, equipment or weapon.\nPreserve the extremely thin hunched humanoid monster, grey wispy hair, overlong almost-human face, badly rehearsed grin, narrow elongated hands and incorrectly worn mismatched brown/olive clothing layers. One shoulder misaligned with the overcoat, lining and shirt layers protruding from wrong gaps, inside-out/misbuttoned cardigan, unequal trouser hems and worn mismatched shoes. This remains a NONHUMAN CREATURE poorly impersonating an old man; do not normalize its proportions into a friendly ordinary grandfather. Two actual arms and two legs, one inviting/beckoning hand extended a little toward the SOUTH/front, other hand loose. No staff, armour, weapon, extra limb, horn, blood or wounds.\nCamera almost directly above, around 85 degrees above ground: crown, shoulder tops and upper garment surfaces dominate; only a short foreshortened part of its false face, torso front and legs. Front/head/gaze toward BOTTOM / SOUTH, rear toward TOP / NORTH. Not a front portrait or a sideways figure. Same naturalistic hand-painted earthy palette, broad readable cloth masses and restrained upper-left light. Keep every fingertip and shoe inside square margins. Genuine transparent alpha, no ground, floor, shadow disc, scene, frame, ring, checkerboard, white background or text.",
+  "date": "2026-10-31T14:11:56.351Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "bit-boy-przewodnik",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T14:05:27.423Z"
+  }
+}

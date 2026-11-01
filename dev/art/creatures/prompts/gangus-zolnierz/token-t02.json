@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31T13:35:20.426Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "gangus-zolnierz",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/gangus-zolnierz/portrait-p02.webp",
+      "role": "Exact approved p02 subject identity",
+      "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe"
+    },
+    {
+      "path": "dev/art/creatures/in/gangus-zolnierz/token-t01.png",
+      "role": "Edit target: first token draft t01",
+      "sha256": "4aaf7c41a228c3f7f6329d868972346e6c3382faeda448c5f0d9effcc449996a"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "gangus-zolnierz",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+    "decision": "approve",
+    "rating": 4,
+    "notes": "",
+    "updatedAt": "2026-10-31T13:17:12.285Z"
+  },
+  "preparationIssue": "t01 camera remains too oblique; improve overhead foreshortening.",
+  "prompt": "Use case: precise-object-edit. Image 2 is the exact TOKEN draft to improve; image 1 is the approved portrait identity. Change ONLY the CAMERA to a much steeper overhead view, around 85 degrees above the ground. Show principally the balding CROWN, upper surfaces of shoulders, sleeves, hands and shoes, with only a small foreshortened sliver of the face and shirt front. The previous draft shows a whole frontal face and a long cream shirt front; those front-facing surfaces must now be strongly compressed by the high camera. This must look like a battle-map figure seen from almost directly above, not an elevated frontal character portrait.\nPreserve the exact stout bald gangster, dark worn suit, cream shirt, loose dark tie, natural two-arm/two-leg body, shoes and single long-barrel revolver in his right hand. Front/gaze remains SOUTH / toward bottom, weapon lowered to the south side, left hand empty. Do not replace him with the style-reference person or add armour, hat, second weapon or tattoos. Same hand-painted natural colours and genuine transparent alpha, complete silhouette including gun tip safely inside square margins. No floor, shadow base, scene, frame, words, white backdrop or checkerboard."
+}

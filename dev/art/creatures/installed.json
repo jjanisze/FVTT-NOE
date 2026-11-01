@@ -345,6 +345,96 @@
         "candidateId": "t05",
         "previousSha256": null
       }
+    },
+    "gangus-zolnierz": {
+      "installedAt": "2026-10-31T14:09:49.640864+00:00",
+      "portrait": {
+        "path": "tokens/portraits/gangus-zolnierz.webp",
+        "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+        "candidateId": "p02",
+        "previousSha256": "0947d80e8483e5b03a408852fe804bdb39349a4895f98c6fa110a7ee6b2b2698"
+      },
+      "token": {
+        "path": "tokens/gangus-zolnierz.webp",
+        "sha256": "0a8942be71f3511ba18999bd44a4b03e83c030b9466c60eca05118d16978ef65",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "kitchin": {
+      "installedAt": "2026-10-31T14:09:52.274224+00:00",
+      "portrait": {
+        "path": "tokens/portraits/kitchin.webp",
+        "sha256": "1d28b36f6ca7720330b0bfdf6984fb891e9fd563ccf6696929b972061854e7a9",
+        "candidateId": "p02",
+        "previousSha256": "9cadd0f8dfec8c8b3488980ebce59e6d9cbcad895ac4a30cc157fd013bc61ce0"
+      },
+      "token": {
+        "path": "tokens/kitchin.webp",
+        "sha256": "7073b49a206accda584c61a36b1ba164a3b12261d320aca9d2eac44b07a45dff",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "techmorwa-srednia": {
+      "installedAt": "2026-10-31T14:09:54.401562+00:00",
+      "portrait": {
+        "path": "tokens/portraits/techmorwa-srednia.webp",
+        "sha256": "f804632ff1afbf1e93bb8ccd04e2053328ea22329cb43ba6559b7296eb80fa9a",
+        "candidateId": "p02",
+        "previousSha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59"
+      },
+      "token": {
+        "path": "tokens/techmorwa-srednia.webp",
+        "sha256": "08ad1fe692fca22a79d778a908e76a6324d8a5a872c8d82f6207fcc2a315fd85",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "bit-boy-przewodnik": {
+      "installedAt": "2026-10-31T14:34:16.313470+00:00",
+      "portrait": {
+        "path": "tokens/portraits/bit-boy-przewodnik.webp",
+        "sha256": "5310b9975e2969f63b8e33df9e83a819d70a9f455e023bdefa9acb23105d5027",
+        "candidateId": "p03",
+        "previousSha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb"
+      },
+      "token": {
+        "path": "tokens/bit-boy-przewodnik.webp",
+        "sha256": "1cdf49a0ad4d539b5f704fd6ca1fb5b0bcda86341d236a9a49d74109ae3d91fe",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "cyngiel": {
+      "installedAt": "2026-10-31T14:34:18.913282+00:00",
+      "portrait": {
+        "path": "tokens/portraits/cyngiel.webp",
+        "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+        "candidateId": "p04",
+        "previousSha256": "d3bd1333b66d11391dbcb9ac6de85423438d4a4d4a763f75f8aa24ee96e1a83c"
+      },
+      "token": {
+        "path": "tokens/cyngiel.webp",
+        "sha256": "4f51e85b81696f9dbf5b706e60836ecc3fd4e4d81e69bd1a35f026c77e9c2c12",
+        "candidateId": "t02",
+        "previousSha256": null
+      }
+    },
+    "spawacz": {
+      "installedAt": "2026-10-31T15:54:21.348769+00:00",
+      "portrait": {
+        "path": "tokens/portraits/spawacz.webp",
+        "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+        "candidateId": "p06",
+        "previousSha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a"
+      },
+      "token": {
+        "path": "tokens/spawacz.webp",
+        "sha256": "0185f544194b0f0e937480c2e8327c215057b9bb3a09af3c74750125a7c53c28",
+        "candidateId": "t10",
+        "previousSha256": null
+      }
     }
   }
 }

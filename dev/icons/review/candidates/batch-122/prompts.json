@@ -1,0 +1,8 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "reference": "raw/style-reference.png",
+  "role": "Style reference only",
+  "atlas": "Use case: logo-brand. Create ONE square 3-by-3 ATLAS of tiny virtual-tabletop STATUS GLYPHS. Image 1 is a STYLE AND FORMAT reference only; do not copy its subjects. Exactly NINE equal square cells, strict row-major order. No drawn grid, cell lines, labels or text. PURE SOLID WHITE silhouettes on a perfectly clean PURE BLACK background. No grey, color, shading, gradients, highlights, outlines, hatching, distressed texture, speckles, letters, numerals, frame or watermark. Match the reference's broad sober stencil silhouettes and wide black negative spaces, but simplify for 16-24 px token-status display. Each glyph complete and centered inside its own cell, at most 70 percent of its cell width and height; nothing crossing a cell boundary. Few large elements, chunky shapes; no decorative details. Abstract game symbols only, no realistic injuries or flesh.\nEXACT ROW-MAJOR CONTENTS:\nCELL 1: ONE BROKEN RIGHT-ANGLE HYDRAULIC PIPE in side view with ONE LARGE OIL DROP falling from its open downward-facing end. Thick metal pipe silhouette, one stout coupling, ONE broad black inner channel cut, jagged broken pipe mouth. Drop is separate below with a wide black gap. Compact complete mechanical-leak symbol; no blood cells, wound, person, oil can, cog wheel, text or extra droplets.\nCELLS 2 THROUGH 9: COMPLETELY EMPTY PURE BLACK. No filler, duplicates, marks or ornaments.\nPreserve the exact cell order and black separation.",
+  "targetedCorrections": []
+}

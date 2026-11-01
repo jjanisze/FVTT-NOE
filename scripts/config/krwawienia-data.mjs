@@ -18,6 +18,7 @@
 import { DUMDUM_BLEED, KRWAWIENIE_KOBALT } from "../wkk/combat/bleeding.mjs";
 
 const _f = Object.freeze;
+const OWN = "modules/neuroshima-2026-overrides/icons/statuses";
 
 /** „Opatrzenie rany” bez podanego ST — powstrzymanie krwawienia z opisu narzędzi małego medyka (s. 135). */
 export const OPATRZENIE = _f({ test: "narzedzia", dc: 10, ladunek: true, sam: true });
@@ -28,7 +29,7 @@ const PRZY_ZERO = "<p>Przy 0 PW każde tyknięcie to porażka w Rzucie Przeciw �
 
 const PODSTEPNY = _f({
   id: "podstepny", status: "krwawieniePodstepny", label: "Krwawienie (Podstępny atak)",
-  img: "icons/svg/blood.svg", zrodlo: "Złodziej, poz. 3, s. 92",
+  img: `${OWN}/krwawienie-podstepny.svg`, zrodlo: "Złodziej, poz. 3, s. 92",
   when: "start", damage: "1d8", strata: "obrazenia", save: null, stop: OPATRZENIE, lek: "wkk", cel: "zywe",
   opis: "<p>1k8 obrażeń na początku swojej tury, aż ktoś opatrzy ranę: Test narzędzi małego medyka ST 10 "
     + "(ładunek narzędzi). Złodziej, poz. 3, s. 92.</p>" + PRZY_ZERO
@@ -38,7 +39,7 @@ const PODSTEPNY = _f({
 export const KRWAWIENIA = _f({
   hemofilia: _f({
     id: "hemofilia", status: "krwawienieHemofilia", label: "Krwawienie (Hemofilia)",
-    img: "systems/dnd5e/icons/svg/statuses/bleeding.svg", zrodlo: "Choroby, s. 109",
+    img: `${OWN}/krwawienie-hemofilia.svg`, zrodlo: "Choroby, s. 109",
     when: "end", damage: "1d4", strata: "obrazenia",
     save: _f({ ability: "con", dc: 10, streakToStop: 3 }),
     stop: _f({ test: "medycyna", dc: 15, ladunek: true, sam: true }), lek: "raw", cel: "zywe",
@@ -51,14 +52,14 @@ export const KRWAWIENIA = _f({
   dumdum: _f({ ...PODSTEPNY, ...DUMDUM_BLEED }),
   tetnica: _f({
     id: "tetnica", status: "krwawienieTetnica", label: "Krwawienie (Przycelowanie — Tętnica)",
-    img: "icons/svg/degen.svg", zrodlo: "Twardziel, poz. 2, s. 87; Sztuczka, s. 106",
+    img: `${OWN}/krwawienie-tetnica.svg`, zrodlo: "Twardziel, poz. 2, s. 87; Sztuczka, s. 106",
     when: "start", damage: "1d6", strata: "pw", save: null, stop: OPATRZENIE, lek: "wkk", cel: "zywe",
     opis: "<p>Utrata 1k6 PW na początku swojej tury, aż ktoś opatrzy ranę: Test narzędzi małego medyka ST 10 "
       + "(ładunek narzędzi). Przycelowanie — Twardziel, s. 87; Sztuczka, s. 106.</p>" + PRZY_ZERO
   }),
   kolory: _f({
     id: "kolory", status: "krwawienieKolory", label: "Krwawienie (Rdza/Rtęć/Stal)",
-    img: "icons/svg/acid.svg", zrodlo: "Kolory Neuroshimy, s. 201–202",
+    img: `${OWN}/krwawienie-kolory.svg`, zrodlo: "Kolory Neuroshimy, s. 201–202",
     when: "start", damage: "1", strata: "pw", save: null,
     stop: _f({ test: "pomaganie", dc: 10, ladunek: false, sam: false }), lek: "wkk", cel: "zywe",
     opis: "<p>Utrata 1 PW na początku swojej tury. Zatrzymuje ktoś inny: akcja Pomaganie i Test Inteligencji "
@@ -66,14 +67,14 @@ export const KRWAWIENIA = _f({
   }),
   pila: _f({
     id: "pila", status: "krwawieniePila", label: "Krwawienie (Piły Juggernauta)",
-    img: "icons/svg/hazard.svg", zrodlo: "Notatnik Łowcy, s. 217",
+    img: `${OWN}/krwawienie-pila.svg`, zrodlo: "Notatnik Łowcy, s. 217",
     when: "start", damage: "1d4", strata: "obrazenia", save: null, stop: OPATRZENIE, lek: "wkk", cel: "zywe",
     opis: "<p>1k4 obrażeń na początku swojej tury, aż ktoś opatrzy ranę: Test narzędzi małego medyka ST 10 "
       + "(ładunek narzędzi). Piła tarczowa Juggernauta, Notatnik Łowcy, s. 217.</p>" + PRZY_ZERO
   }),
   wyciek: _f({
     id: "wyciek", status: "wyciek", label: "Wyciek (układ hydrauliczny)",
-    img: "icons/svg/barrel.svg", zrodlo: "Twardziel, poz. 2, s. 87; Sztuczka, s. 106",
+    img: `${OWN}/wyciek.svg`, zrodlo: "Twardziel, poz. 2, s. 87; Sztuczka, s. 106",
     when: "start", damage: "1d6", strata: "pw", save: null,
     stop: _f({ test: "mechanik", dc: 10, ladunek: false, sam: false }), lek: null, cel: "maszyna", naprawa: true,
     opis: "<p>Maszyna traci 1k6 PW na początku swojej tury, aż ktoś ją naprawi: Test narzędzi małego mechanika "

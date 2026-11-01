@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-01",
+  "newCandidates": 6,
+  "affectedCards": [
+    "m7-status-akcja-bonusowa",
+    "m7-status-krwawienie-podstepny",
+    "m7-status-krwawienie-tetnica",
+    "m7-status-krwawienie-kolory",
+    "m7-status-wyciek"
+  ],
+  "previousCandidatesPreserved": true,
+  "gmFeedbackUnchanged": true,
+  "runtimeSourcesUnchanged": {
+    "scripts/config/conditions.mjs": "1e05c6d5f13de7fb14cf71c11b56b3850982cf3432cbd11f2b2a0efd21619304",
+    "scripts/config/krwawienia-data.mjs": "daa60f6b85107e8fc11d3cbb67680cdd4d86ea48d320479e274c5194ee93914c",
+    "scripts/wkk/combat/bleeding.mjs": "9453c843961da0bb28cda7d59ddb0fbf1bb75b7e2a031a5b4f760a7cae97982d"
+  }
+}

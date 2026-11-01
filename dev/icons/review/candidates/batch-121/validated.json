@@ -1,0 +1,16 @@
+{
+  "batch": 121,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "reakcja": "d9ddd13bd2f365db6d1c564e79fb3a2377f7f65ae94978d9fa4565c94b5f0169",
+    "akcja-bonusowa": "44fcd27bbd2627b00b8f1516b2e5b68457f6389639d7d2f8f79f29f5755c211e",
+    "stanowisko-snajperskie": "a0853e62bb041669685d4054b17a96d7cc80220cc74954f7b8da65dd4640fdd8",
+    "krwawienie-hemofilia": "5c8784890f0c37aed38add16abae1be642e8f6bcf1043ec107a90de61369dbc4",
+    "krwawienie-podstepny": "6892a8da011740279fd5fe337ca60538f77478d0aeafa3d18492be16e9d2bd43",
+    "krwawienie-tetnica": "7d03f98be2d18b594a0fd84a1de0f9d2bdc875574a6dbe1c469f71b0d4a65cbd",
+    "krwawienie-kolory": "b5598abe744436920d46dd3ec1382bc3e714369c66f9452b41a234cf97b16ec4",
+    "krwawienie-pila": "e778c36ba0c15ec3bdfa65ea30e3ae4b6558fb384d2049b5370fe74fbe22cf02",
+    "krwawienie-dumdum": "3951804faf8d5fa721aa05e6c47678912a4b87595600b752abb5bde8a5d6d9ec"
+  }
+}

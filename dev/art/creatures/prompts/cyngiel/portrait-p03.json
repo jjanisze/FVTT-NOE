@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:49:08.124Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cyngiel",
+  "asset": "portrait",
+  "candidateId": "p03",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/cyngiel/portrait-p02.png",
+      "role": "Exact edit target: new full-body Cyngiel; change the handgun only",
+      "sha256": "ec8a7b93cde12c431efc28d65d8dc63a811adb0a030737a852970754767b7019"
+    }
+  ],
+  "preparationIssue": "p02 generated a revolver although the intended equipment is a heavy semiautomatic pistol. This is an agent anatomy/equipment correction, not a GM rating.",
+  "prompt": "Use case: precise-object-edit. This is a static full-body fictional tabletop game character portrait, no combat or injury. Change ONLY the handgun held down in the man's right hand. Replace the current REVOLVER with ONE heavy black SEMI-AUTOMATIC PISTOL: a broad rectangular straight slide over the frame, squared front, ordinary fixed pistol grip, visually the general silhouette of a large Desert Eagle type sidearm. There must be NO revolver cylinder, round chamber drum, exposed cartridge circles or long thin revolver barrel. Keep a natural five-finger grip, index finger clear of trigger, muzzle lowered safely toward the floor. Preserve the exact same man, face, hair, expression, leather coat, grey shirt, knife in sheath, trousers, boots, body pose, full-body composition, colours, painterly treatment and empty charcoal backdrop. Do not redesign or add anything else. Keep quiet broad cloth and skin gradients, not an extra layer of microtexture. No letters, text, brand logo, extra weapon, flash, scenery or cropping."
+}

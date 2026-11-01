@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-01",
+  "batch": 121,
+  "passName": "m7-status-glyphs",
+  "subjects": [
+    {
+      "key": "reakcja",
+      "name": "Reakcja zużyta",
+      "itemId": "m7-status-reakcja",
+      "kind": "status",
+      "statusId": "reakcja",
+      "fallback": "icons/svg/lightning.svg",
+      "context": "Reakcja zużyta; wraca na początku następnej tury właściciela. Nie jest Unikaniem.",
+      "request": "ONE stout diagonal LIGHTNING BOLT with ONE separate large CHECK MARK at its lower right. A compact two-part spent-reaction marker. Wide black gap between bolt and check. No human, dodging pose, shield, clock or extra marks.",
+      "target": "icons/statuses/reakcja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/reakcja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 1
+    },
+    {
+      "key": "akcja-bonusowa",
+      "name": "Akcja bonusowa zużyta",
+      "itemId": "m7-status-akcja-bonusowa",
+      "kind": "status",
+      "statusId": "akcjaBonusowa",
+      "fallback": "icons/svg/clockwork.svg",
+      "context": "Akcja bonusowa zużyta w tej turze. Odrębny znacznik od Reakcji.",
+      "request": "ONE broad FIVE-POINT STAR with ONE separate large CHECK MARK at its lower right. A compact two-part spent-bonus-action marker. Wide black gap between star and check. Star has a solid broad center, five short points. No plus sign, medical cross, lightning bolt, sparkles or extra stars.",
+      "target": "icons/statuses/akcja-bonusowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/akcja-bonusowa.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 2
+    },
+    {
+      "key": "stanowisko-snajperskie",
+      "name": "Stanowisko snajperskie",
+      "itemId": "m7-status-stanowisko-snajperskie",
+      "kind": "status",
+      "statusId": "stanowiskoSnajperskie",
+      "fallback": "icons/svg/target.svg",
+      "context": "Strzelec po pięciu rundach mierzenia: stanowisko strzeleckie, zasięg x3; znika po ruchu. Nie cel ani celownik na przeciwniku.",
+      "request": "ONE scoped RIFLE resting horizontally ON TWO BROAD SANDBAGS, viewed from the side. Short stout scope visibly above the receiver, stock at left and complete barrel at right; sandbags form a low stable firing rest beneath it. Three large black separating cuts maximum. Compact sniper-position silhouette, no person, crosshair, target, reticle, scenery, tiny bipod or loose cartridges.",
+      "target": "icons/statuses/stanowisko-snajperskie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/stanowisko-snajperskie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 3
+    },
+    {
+      "key": "krwawienie-hemofilia",
+      "name": "Krwawienie — Hemofilia",
+      "itemId": "m7-status-krwawienie-hemofilia",
+      "kind": "status",
+      "statusId": "krwawienieHemofilia",
+      "fallback": "systems/dnd5e/icons/svg/statuses/bleeding.svg",
+      "context": "Chorobowe krwawienie; symbol krwi i komórek, bez rany ciętej.",
+      "request": "ONE broad upright BLOOD DROP containing THREE LARGE ROUND BLACK CUTOUTS arranged loosely like blood cells: two above, one below, with thick white bridges between. Smooth outer teardrop, pointed top. No cut wound, slash, teeth, bullet hole, medical cross or tiny dots.",
+      "target": "icons/statuses/krwawienie-hemofilia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-hemofilia.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 4
+    },
+    {
+      "key": "krwawienie-podstepny",
+      "name": "Krwawienie — Podstępny atak",
+      "itemId": "m7-status-krwawienie-podstepny",
+      "kind": "status",
+      "statusId": "krwawieniePodstepny",
+      "fallback": "icons/svg/blood.svg",
+      "context": "Rana cięta po Podstępnym ataku, 1k8 na turę. Musi różnić się od dum-dum.",
+      "request": "ONE bold DIAGONAL CUT-WOUND SYMBOL: two thick tapered white lips separated by ONE wide diagonal black slash, with TWO LARGE WHITE BLOOD DROPS hanging BELOW the cut. Abstract non-graphic wound glyph, no flesh, weapon, large enclosing teardrop, round bullet hole or fine scratches.",
+      "target": "icons/statuses/krwawienie-podstepny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-podstepny.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 5
+    },
+    {
+      "key": "krwawienie-tetnica",
+      "name": "Krwawienie — Tętnica",
+      "itemId": "m7-status-krwawienie-tetnica",
+      "kind": "status",
+      "statusId": "krwawienieTetnica",
+      "fallback": "icons/svg/degen.svg",
+      "context": "Przycelowanie: przecięta tętnica, utrata 1k6 PW na turę. Wyraźny tryskający strumień.",
+      "request": "A bold SPURTING BLOOD SYMBOL: ONE short broad severed VESSEL STUMP at the bottom, with THREE THICK CURVED JETS fanning UPWARD and outward and ending in large rounded drop tips. Very broad black gaps between the three jets. No hand, flower, tree, fountain basin, enclosing teardrop or tiny splash dots.",
+      "target": "icons/statuses/krwawienie-tetnica.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-tetnica.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 6
+    },
+    {
+      "key": "krwawienie-kolory",
+      "name": "Krwawienie — Rdza / Rtęć / Stal",
+      "itemId": "m7-status-krwawienie-kolory",
+      "kind": "status",
+      "statusId": "krwawienieKolory",
+      "fallback": "icons/svg/acid.svg",
+      "context": "Lekkie krwawienie od Stopnia Zranienia, utrata 1 PW na turę. Najprostsza, pojedyncza kropla.",
+      "request": "Exactly ONE SMALL SIMPLE SOLID BLOOD DROP: smooth broad teardrop silhouette with a pointed top and rounded bottom. No internal holes, cuts, highlights, slash, secondary drops or other elements. It occupies about HALF the height of its cell; generous black margins.",
+      "target": "icons/statuses/krwawienie-kolory.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-kolory.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 7
+    },
+    {
+      "key": "krwawienie-pila",
+      "name": "Krwawienie — Piły Juggernauta",
+      "itemId": "m7-status-krwawienie-pila",
+      "kind": "status",
+      "statusId": "krwawieniePila",
+      "fallback": "icons/svg/hazard.svg",
+      "context": "Rana po pile tarczowej Juggernauta, 1k4 na turę do opatrzenia. Zębaty obrys.",
+      "request": "ONE large upright BLOOD DROP with a pointed smooth top and SIX LARGE SAW TEETH cut into the LOWER OUTER EDGE. Thick broad solid white center; angular coarse sawtooth lower silhouette is unmistakable. No cog wheel, circular saw disk, internal hole, wound slash or tiny teeth.",
+      "target": "icons/statuses/krwawienie-pila.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-pila.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 8
+    },
+    {
+      "key": "krwawienie-dumdum",
+      "name": "Krwawienie — Dum-dum",
+      "itemId": "m7-status-krwawienie-dumdum",
+      "kind": "status",
+      "statusId": "krwawienieDumdum",
+      "fallback": "icons/svg/explosion.svg",
+      "context": "Osobne krwawienie WKK od pocisku dum-dum; może współistnieć z Podstępnym atakiem. Duży otwór postrzałowy.",
+      "request": "ONE broad upright BLOOD DROP with ONE LARGE JAGGED BLACK BULLET HOLE punched through its center. Hole is a single roughly round aperture with FIVE coarse irregular notches, occupying nearly half the width of the drop. Smooth outer edge. No diagonal cut, tiny cracks, weapon, bullet, extra holes or saw teeth on the outer edge.",
+      "target": "icons/statuses/krwawienie-dumdum.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-dumdum.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "cell": 9
+    }
+  ]
+}

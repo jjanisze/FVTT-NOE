@@ -1,0 +1,27 @@
+{
+  "creatureId": "cyngiel",
+  "asset": "portrait",
+  "candidateId": "p04",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/cyngiel/portrait-p03.png",
+      "role": "Edit target: accepted direction, shift wardrobe/demeanour toward post-collapse professional assassin, conceal body armour",
+      "sha256": "2cb03d696f1865457832ac6a7aee58e47ae9b79a75506de1a9e00d3c7c21ccb3"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Revise this fictional full-body CYNGIEL portrait toward the detached professional-assassin archetype the GM requested, drawing on the controlled menace and plain formal wardrobe of Agent 47 / Lorne Malvo, as an original character. Keep the same angular middle-aged facial identity, physique, one lowered black SEMI-AUTOMATIC pistol, sheathed knife, full-body framing, painterly treatment and charcoal backdrop.\nGive him very closely cropped dark hair, a clean-shaven face, still emotionless eyes and a composed, inconspicuous stance. Replace the ordinary brown leather outfit with a practical faded charcoal/black tailored overcoat, muted light-grey button shirt, narrow dark burgundy tie and worn dark suit trousers above the existing practical boots. A little wear only at cuffs and hems, rather than all-over grunge. Under his shirt/coat he wears a CONCEALED plain low-profile protective vest: suggest its flat upper edge very discreetly at the slightly open collar and its restrained thickness beneath the chest fabric. It is hidden under clothing, not an outside tactical plate carrier; no webbing, external pouches, helmet, radio, insignia, barcode or logo. A post-collapse civilian contract-killer look rather than military special forces. Preserve the corrected semi-automatic handgun's rectangular slide; do not turn it back into a revolver. Smooth broad fabric/skin shading with selective crisp edges. No combat scene, other person, blood, text or new equipment.",
+  "date": "2026-10-31T13:24:28.128Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "cyngiel",
+    "kind": "portrait",
+    "candidateId": "p03",
+    "sha256": "ab1b44e11d4fb6c7acd9b0b27d084dfc1a1dcaec12cff6c333de50d18cf353d5",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Lean more into the post-apocalyptic agent 47 / Lorne Malvo assassin trope. A hidden vest under the chest.",
+    "updatedAt": "2026-10-31T13:17:06.726Z"
+  }
+}

@@ -2,13 +2,13 @@
 
 ## Stan projektu
 
-**Etap: alfa** (v0.20.0, 2026-10-18 — Foundry 14.369, dnd5e 6.0.6; kampania przeniesiona). Zamknięte: M0, M1
-(walka i powrót do zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5 (handel,
-szabrowanie, postój) — v0.19.0; migracja na dnd5e 6 — v0.20.0. Walka, ekwipunek, stany i przetrwanie grały się przy
-żywym stole; produkcja, towarzysze, drony, handel i postój czekają na pierwsze sesje (kampania testowa w styczniu).
-Czysta instalacja (B6) sprawdzana przy każdym wydaniu. M6 (drobne zasady RAW z biegłościami profesji) zamknięty
-2026-10-27, bez wydania. Przed betą: M4 (większość pojazdów nie istnieje), M7, style. Droga do bety, bramki
-i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+**Etap: późna alfa** (v0.21.0, 2026-10-31 — Foundry 14.369, dnd5e 6.0.6). Zamknięte: M0, M1 (walka i powrót do
+zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5 (handel, szabrowanie, postój) —
+v0.19.0; migracja na dnd5e 6 — v0.20.0; M4 (pojazdy, pościgi, wierzchowce) i M6 (drobne zasady RAW z biegłościami
+profesji) — v0.21.0. Walka, ekwipunek, stany i przetrwanie grały się przy żywym stole; produkcja, towarzysze, drony,
+handel, postój, pojazdy i pościgi czekają na pierwsze sesje (kampania testowa w styczniu). Czysta instalacja (B6)
+sprawdzana przy każdym wydaniu. Przed betą: PM1 i PM7, ruch w turze ze skakaniem, M7 (zdolności poziomów 1–3),
+style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -59,7 +59,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; drony — aktor i uchwyt (M3); pojazdy to karta dla MG — M4 |
 | Teczka MG | Szabrowanie (komplikacja w ukryciu, losowe przedmioty), bebeszenie, rozbiórka; paczka `tabele` | ✅ | `postoj/szabrowanie.mjs`, `bebeszenie.mjs`, `rozbiorka.mjs`, `config/szabrowanie-data.mjs`, `bebeszenie-data.mjs`, `dev/packs/tabele.mjs` (26 RollTable); `docs/Wyprawy.md` (M5) |
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
-| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN, autodestrukcja | ✅ | 51 istot, 100/260 zdolności zautomatyzowane (autodestrukcja 8 maszyn — odliczanie, wybuch, wrak: `combat/autodestrukcja.mjs`, M5), 25/51 docelowych żetonów. Awarie maszyn: rzut z pominięciem niepasujących pozycji i [Zastosuj] dla MG (`combat/maszyny.mjs`, M3) |
+| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN, autodestrukcja | ✅ | 51 istot, 100/260 zdolności zautomatyzowane (autodestrukcja 8 maszyn — odliczanie, wybuch, wrak: `combat/autodestrukcja.mjs`, M5), 46 istot z własnym żetonem, 6 na żetonach pożyczonych z dnd5e (`tokens/aliases.json`). Awarie maszyn: rzut z pominięciem niepasujących pozycji i [Zastosuj] dla MG (`combat/maszyny.mjs`, M3) |
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
 | | Uduszenie, Przemarznięcie | ✅ | `actors/zagrozenia.mjs` — to samo narzędzie MG: mróz (ST z temperatury co godzinę; ciepło ubrany, śpiwór, koc), Uduszenie (faza na statusie, koniec tury w walce, karta RO przy obrażeniach, „Złap oddech” w panelu Stan); „W cieple” w oknie DO — `PLAN_m1_walka.md` E7 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |

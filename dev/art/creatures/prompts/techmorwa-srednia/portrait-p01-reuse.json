@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-31T10:30:13.064256+00:00",
+  "operation": "reuse-existing-portrait",
+  "tool": "Existing GM artwork — reused unchanged; no image generation",
+  "model": null,
+  "creatureId": "techmorwa-srednia",
+  "asset": "portrait",
+  "candidateId": "p01",
+  "references": [
+    {
+      "path": "tokens/portraits/techmorwa-srednia.webp",
+      "role": "Existing module portrait offered for explicit reuse or regeneration decision",
+      "sha256": "30f05b0aa5c22036a6505a55dbe3141c4b04c77a927e021c9afaf460b3cdda59"
+    }
+  ],
+  "provenance": "Previously credited GM-generated artwork. Original generator/model and prompt are not recorded. No new authorship or generation is claimed.",
+  "prompt": "No generation was performed for p01. This review candidate is a byte-identical copy of the existing module portrait. Approve to reuse this exact artwork as the subject identity; request revision or reject to regenerate the portrait before creating its top-down token. Preparation note: NOE opisuje dużego naśladowcę urządzeń (np. lodówki lub manekina), z mackami. Obecny portret pokazuje odkrytą owadzią postać. Wskaż zachowanie tego kierunku albo inny wygląd przed żetonem."
+}

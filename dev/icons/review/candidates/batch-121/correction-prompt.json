@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-01",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "reference": "raw/style-reference.png",
+  "role": "Style reference only",
+  "prompt": "Use case: logo-brand. Create ONE square 3-by-3 atlas of monochrome tabletop status glyphs. Image 1 is STYLE reference only. Exact equal cells, no drawn grid, no text. Pure solid WHITE silhouettes on perfectly clean solid BLACK. Broad simple heavy shapes and wide negative-space cuts, extremely legible at 16-24 px. No grey, gradients, textures, speckles, labels or borders. Each complete subject centered in its cell, at most 65 percent cell width or height. These are abstract game glyphs, no realistic injuries or flesh.\nCELL 1 (top left): SEVERED ARTERY / SPURTING BLOOD, SIDE VIEW. A short thick horizontal blood vessel stump at LEFT, shown as a broad hollow biological tube with one large black inner channel, open cut end facing RIGHT. TWO thick tapering jets of blood shoot RIGHTWARD from that open end at different upward angles; THREE large separate rounded blood drops continue to the RIGHT. Clearly ASYMMETRIC LEFT-TO-RIGHT composition. No upright vessel, pot, vase, fountain, flower, tree, trunk, ground line, hand, enclosing blood-drop shape, metal couplings, screw thread or tiny droplets.\nCELL 2 (top center): SAW-TOOTH BLOOD DROP. ONE unmistakable broad TEARDROP, pointed top, wide ROUND lower bowl. Preserve its complete SMOOTH CURVED LEFT side and ROUND BOTTOM; FOUR large sharply cut SAW TEETH protrude ONLY from its RIGHT SIDE, halfway down through the lower right edge. The teeth are short triangular side projections. Solid white center with NO holes. Overall still a rounded drop, NOT an arrowhead, pine tree, star, gear, saw disk, pointed bottom or flat-sided chevron.\nCELLS 3 THROUGH 9: COMPLETELY EMPTY PURE BLACK, no marks or filler.\nPreserve this exact layout, generous black gaps and all margins.",
+  "subjects": [
+    {
+      "key": "krwawienie-tetnica",
+      "cell": 1,
+      "reason": "First glyph resembles a fountain or flower in a vase."
+    },
+    {
+      "key": "krwawienie-pila",
+      "cell": 2,
+      "reason": "First glyph resembles an arrowhead or pine tree."
+    }
+  ],
+  "emptyCells": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

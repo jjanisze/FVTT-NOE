@@ -1,7 +1,9 @@
 # Portrait → top-down token
 
-Reusable, agent-operated image workflow and local GM reviewer. All 23 queued pairs
-(4 companions, 3 horses, 16 Bestiary entries) are approved and delivered.
+Reusable, agent-operated image workflow and local GM reviewer. All 29 pairs are approved
+and delivered (4 companions, 3 horses, 22 other Bestiary entries). The final delivery is
+Spawacz p06/t10 (4/5, 5/5), selected from eight local corrections of t03.
+The full 52-creature Bestiary now has its own portrait and token files for every entry.
 Versions and alternatives remain in [manifest.json](manifest.json).
 Current state and next actions: [PLAN_grafiki_stworzen.md](../../../PLAN_grafiki_stworzen.md).
 
@@ -9,8 +11,10 @@ Current GM scope (2026-10-30): assets and explicitly authorized **review-tool gr
 integration**. Foundry runtime code, pack builds and Claude's regressions remain outside
 this pass. Create each token only after its portrait is
 approved, then request token approval. The full portrait audit adds five more bestiary
-entries that previously had token aliases. Queue: 4 companion pairs, 3 horse pairs and
-16 other bestiary pairs. [Reference list and horse briefs](REFERENCJE.md).
+entries that previously had token aliases. Current queue: 4 companion pairs, 3 horse pairs
+and 22 other bestiary pairs. [Reference list and horse briefs](REFERENCJE.md).
+[Full Bestiary coverage](bestiary-coverage.json) distinguishes native creature artwork from
+fallback aliases, across all 52 non-overlay creatures; portrait and token coverage are both 52/52.
 All four companions have now been approved, including the GM's return to mammal p02/t01;
 their exact reviewed final files were restored without rebuilding packs.
 
@@ -56,6 +60,22 @@ companions. Mammal p01 is retained with an agent rejection note; p02 removes the
 and its token comes from p02. Dog t02 restores the portrait's dark saddle marking and
 removes the misplaced chain from the top of the neck. Earlier versions remain available.
 This is preparation feedback, not a GM rating.
+
+Spawacz exposed a separate failure: matching the number of limbs did not preserve their
+attachment topology. Six supports must trace to the low pelvic chassis; two tool arms
+must trace to the upper shoulders, with no shared elbows or forked segments. Construction
+SVGs now distinguish those roots and their heights. A second guide separates front leg
+and tool-arm projections to avoid crossings that the generator fused into shared joints.
+Three alternatives use the first guide, two use the revised guide, all independently from
+the same approved portrait. Failed outputs remain labeled as preparation failures;
+the agent's recommendation is separate from GM approval.
+
+The GM then selected t03 at 5/5 with a narrowly specified revision: delete the two small
+tucked rear-joint protrusions, retaining the two real full-length rear legs. Eight local
+edit attempts use that exact original independently, with four paired prompt phrasings.
+This avoids accumulating changes across sequential derivatives. Inspect both the removed
+phantom parts and the retained real supports; compare the repaired rim and material finish
+against the parent, rather than requesting a new overall pose.
 
 The first GM review approved the dog pair at 5/5 and the insect portrait at 5/5. The insect
 token was revised to match the portrait's six walking legs plus two digging forelimbs.
@@ -103,6 +123,14 @@ loose skin and scars were established. On the GM's instruction, p05/p06/p07 rest
 from the written concept, with no image inputs. The GM selected p07 at 5/5; its first overhead
 token t01 was separately approved at 4/5 and delivered with p07. Other variants and their feedback remain intact. Broad smooth skin planes are the review
 criterion, not simply a new filename or another edit pass.
+
+For Spawacz, the GM approved the geometry but flagged the same surface-web failure on metal.
+The first material repaint reduced mottling yet native-size crops exposed a faint remaining
+mesh. A further pass specified continuous patternless grey powder-coat on plate interiors,
+keeping real seams, port rims and mechanical joints sharp. The p03/p05 crop comparison is
+under `out/spawacz-surface-1to1.jpg`; no final pixels were blurred by a script.
+The next GM instruction adds coarse grease smears, long scratches, shallow dents and
+localized welding spatter over that cleaned base (p06), retaining quiet spaces between marks.
 Earlier preparation variants are retained with agent notes: direct editing left the mesh,
 a new base improved it but transferred expensive tack,
 then tack and the remaining body-surface curls were corrected separately. This is a practical
@@ -111,8 +139,13 @@ result from these trials, not proof that a particular word always causes the art
 - `manifest.json`: queue, final targets, candidate versions, dimensions and SHA-256 hashes.
 - `prompts/`: exact prompts and reference roles; tracked.
 - `in/`: original generated PNGs and backups of replaced deliveries; local, ignored.
+- `reference-sources.json`: input provenance and archived path/hash mappings when an
+  approved delivery replaces a final image used by an older frozen prompt. Keep the
+  historical prompt unchanged and resolve that old input through its archived copy.
 - `candidates/`: normalized review WEBPs; tracked. Portraits fit within 1000 px, preserving
-  aspect. Tokens are lossless RGBA WEBPs, square and centered.
+  aspect. Exception: existing-portrait reuse candidates retain exact original WEBP bytes and
+  native resolution (up to 1536 px here), with explicit reuse provenance and no invented model/prompt.
+  Tokens are lossless RGBA WEBPs, square and centered.
 - `review/feedback.json`: GM decisions, ratings, notes and prior decisions; created on first
   save. A `.bak` copy protects the previous save. Unsaved form drafts stay in browser storage.
 - `out/`: contact sheets and local QA evidence; ignored.

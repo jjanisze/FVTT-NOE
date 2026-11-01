@@ -1,5 +1,115 @@
 # Icon session complete — 2026-10-17
 
+**M4 — siedem dźwięków dostarczonych, 2026-11-01:** rozruch benzyny, diesla i motocykla,
+gaszenie, nieudane odpalenie, alarm i opcjonalna syrena są w `sounds/pojazdy/`.
+Wybrane z sześciu oryginalnych nagrań Freesound CC0 pobranych przez zalogowaną przeglądarkę.
+Istniejący normalizer M5: mono 44,1 kHz Vorbis, limity peak −3 dB i RMS −23 dB,
+fade 5/30 ms, bez zmiany tempa i wysokości. Wszystkie siedem przechodzi kontrolę;
+razem 221 267 bajtów. [Źródła, cięcia i raport](../art/m4/AUDIO.md).
+Pracownia ma zakładkę **Dźwięki pojazdów** z siedmioma kontrolkami odsłuchu.
+Garaż → sonda **silnik** opisuje wszystkie sygnały; stacji nie resetowano.
+MG zaakceptował wszystkie siedem — [dokładne hashe i akceptacja](../art/m4/audio/approval.json).
+Mapowania plików były gotowe; uzupełniono brakujący sygnał z przycisku Syrena w
+`scripts/pojazdy/paleta.mjs` do istniejącego haka audio. Sandbox: prawdziwy klik,
+jedno odtworzenie syreny, zachowany efekt, inna akcja bez dźwięku, siedem natywnych
+plików zgodnych z akceptacją; dane testowe usunięte. Quench Pojazdy **60/60**, `npm test` zielony.
+[Zredagowany raport](../art/m4/audio/runtime-verification.json).
+Automatyczna kontrola odrzuciła publikację zrzutu sesji Foundry; nie zapisano go w repo.
+MISSING nie ma obecnie żadnych niedostarczonych plików.
+
+**M7 — wszystkie glify dostarczone, 2026-11-01:** MG zaakceptował komplet pozostałych
+pięciu tematów; dla bonusowej wybrał A (mała czteroramienna gwiazda). Wszystkie dziesięć
+zamówionych stanów i dodatkowa pełna gwiazda zwykłej akcji mają dokładne pliki SVG/WEBP
+w `icons/statuses/`. Zero kart czeka na ocenę. Usunięto z MISSING obie ukończone grupy;
+zostało sześć wymaganych dźwięków pojazdów i opcjonalna syrena.
+[Zapisane decyzje i hashe](m7-status-pass/reviewed-installed.json),
+[weryfikacja dostawy](m7-status-pass/final-delivery.json).
+Na polecenie MG integracja jest również zakończona: podmieniono dziesięć ścieżek obrazu
+w `scripts/config/conditions.mjs`, `scripts/config/krwawienia-data.mjs` i
+`scripts/wkk/combat/bleeding.mjs`. Zwykła Akcja pozostaje samą grafiką w rezerwie.
+`npm test` zielony; sandbox Quench **80/80** (konfiguracja 45, akcje 12, krwawienia 23).
+[Sprawdzenie fabryki efektów, hashy i renderowania 10/10](m7-status-pass/runtime-verification.json),
+[zrzut z renderera Foundry](m7-status-pass/live-render-preview.png).
+Poligon: odświeżeni MG i Gracz 1; **Lazaret → Karta prób → ikony** ma opis nowych glifów.
+Stacji nie resetowano. Bez buildów paczek i zmian kampanii.
+
+**M7 — pierwsze decyzje i poprawki, 2026-11-01:** pięć zaakceptowanych glifów
+(Reakcja, Stanowisko snajperskie, Hemofilia, Piły Juggernauta, Dum-dum) ma dokładne
+SVG/WEBP w ścieżkach docelowych. Na wyraźne polecenie w uwadze MG pełną gwiazdę
+zachowano jako `icons/statuses/akcja.svg` + `.webp`, bez dodawania mechaniki Akcji.
+Pięć pozostałych tematów ma sześć nowych kandydatów w B123: bonusowa A/B, trzy krople
+z wewnętrznymi znakami i przerwany przewód hydrauliczny. Wcześniejsze oceny i kandydaci
+zachowane. [Decyzje i pliki](m7-status-pass/README.md).
+
+Historyczny zakres pierwszej dostawy (wykonany w integracji powyżej): podpiąć glify w
+`scripts/config/conditions.mjs`, `scripts/config/krwawienia-data.mjs` oraz
+`scripts/wkk/combat/bleeding.mjs` stosownie do stanu dostaw. Pełna gwiazda jest rezerwą
+graficzną; nie zamawia automatycznie nowego efektu ani mechaniki. Ta tura nie zmienia
+kodu FVTT, testów regresji, paczek ani światów.
+
+**NOE — pełne pokrycie portretów i żetonów, 2026-10-31:** GM zatwierdził Spawacza t10 na 5/5.
+Para p06/t10 (4/5, 5/5) jest dostarczona jako dokładnie ocenione bajty. Wszystkie 29 par
+z panelu ma finalne pliki, a audyt pełnego Bestiariusza potwierdza **52/52 własnych portretów
+i 52/52 własnych żetonów**. Death Breath jest nakładką, wyłączoną z liczby istot.
+138 kandydatów, zero aktywnych wpisów. Archiwum poprzednich portretów obejmuje teraz sześć
+podmian, bez przepisywania historycznych promptów.
+Nie uruchamiano buildów paczek ani aktualizacji aktorów/światów; kod i testy pozostają poza tą turą.
+[Dostawy](../art/creatures/installed.json), [audyt](../art/creatures/bestiary-coverage.json).
+
+**Spawacz — osiem miejscowych korekt, 2026-10-31:** GM wybrał t03 na 5/5, do poprawy
+wyłącznie dwa podwinięte szczątkowe stawy przy górnej/tylnej krawędzi korpusu. t07–t14
+są niezależnymi edycjami tego samego oryginału i zachowują pełne tylne nogi. Nowe wersje
+czekają na osobne oceny; są arkusze całych sylwetek i wycinków poprawki. 138 kandydatów,
+29 par, nadal 28 dostarczonych par i 51/52 własnych żetonów Bestiariusza.
+Zmiany tej tury: zasoby, prompty, metadane i dokumentacja. Kod Foundry, testy regresji,
+buildy paczek i światy pozostają nietknięte.
+[Bieżące grafiki i dokładne prompty](../art/creatures/REFERENCJE.md).
+
+**Spawacz — mocowania kończyn, 2026-10-31:** GM ocenił t01 na 2/5 i zlecił wiele generacji.
+Z zaakceptowanego p06 i dwóch nowych schematów SVG powstało pięć niezależnych prób t02–t06.
+Zacznij od t05; porównaj t03/t04. t02/t06 zachowane jako nieudane próby przygotowania.
+130 kandydatów w 29 parach; nadal 28 dostarczonych par i 51/52 własnych żetonów Bestiariusza.
+Nowe wersje nie mają ocen GM ani dostawy. Zmieniono wyłącznie zasoby, prompty, metadane
+i dokumentację; bez zmian kodu, testów, paczek lub światów.
+[Warianty, kontrola anatomii i prompty](../art/creatures/REFERENCJE.md).
+
+**Ostatni żeton do oceny, 2026-10-31:** Bit-boy przewodnik p03/t02 i Cyngiel p04/t02
+zaakceptowane po 5/5 dla obu obrazów i dostarczone. Razem 28 dostarczonych par; pełny
+Bestiariusz ma 51/52 własnych żetonów. Spawacz p06 zaakceptowany 4/5, jego t01 z rzeczywistą
+alfą czeka na osobną ocenę. Rejestr: 125 kandydatów, 29 par, jeden aktywny wpis.
+Zmiany tej dostawy obejmują obrazy, prompty, metadane i dokumentację. Kod, konfiguracja,
+testy regresji, buildy paczek i światy Foundry nie były zmieniane ani uruchamiane.
+[Bieżące grafiki i instrukcje oceny](../art/creatures/REFERENCJE.md).
+
+**Trzy dalsze pary dostarczone, 2026-10-31:** Gangus żołnierz p02/t02 (4/5, 5/5),
+Kitchin p02/t02 (5/5, 5/5), Techmorwa średnia p02/t02 (5/5, 5/5). Razem 26 dostarczonych par;
+pełne pokrycie własnych żetonów Bestiariusza to 49/52. Bit-boy p03 i Cyngiel p04 zatwierdzone
+5/5 — ich żetony t02 czekają na ocenę. Spawacz p06 z kontrolowaną patyną czeka na ocenę portretu.
+Poprzednie finalne portrety zachowano; mapowania wejść starych promptów są w
+`dev/art/creatures/reference-sources.json`. 124 kandydatów, 29 par, trzy aktywne wpisy.
+Buildy paczek, konfiguracja i światy pozostają osobną integracją poza zakresem „tylko zasoby”.
+
+**Kolejna ocena szóstki, 2026-10-31:** zatwierdzone portrety Gangusa p02 (4/5), Kitchina
+p02 (5/5) i Techmorwy p02 (5/5) odblokowały ich żetony do osobnej oceny. Bieżące t02 poprawiają
+kamerę i liczbę nóg Kitchina. Bit-boy p03, Cyngiel p04 i Spawacz p05 są nowymi poprawkami
+portretów według uwag GM. U Spawacza zachowano geometrię, a odmalowano płyty bez szumu/faktury.
+Wciąż 23 dostarczone pary; sześć nowych pozostaje aktywnych. Kod i światy poza zakresem.
+
+**Nowe portrety szóstki, 2026-10-31:** GM odrzucił wszystkie istniejące p01. W panelu są
+Bit-boy p02, Cyngiel p03, Gangus żołnierz p02, Kitchin p02, Spawacz p03 oraz Techmorwa
+średnia p02. Zachowano wskazane koncepty Gangusa i Kitchina; Spawacz korzysta z nowego
+szkicu Neuroshimy 1.5 i ma sześć nóg podporowych plus dwa narzędzia. Techmorwa udaje pralkę.
+Nowe portrety czekają na osobne akceptacje; żetony dopiero po nich. 109 kandydatów w 29 parach,
+bez zmiany finalnych grafik, kodu, aliasów lub światów.
+
+**Korekta pełnego audytu Bestiariusza, 2026-10-31:** zakończona kolejka 23 par nie obejmowała
+wszystkich istot. W całym Bestiariuszu 46/52 ma własny żeton; sześć nadal korzysta z dnd5e:
+Bit-boy przewodnik, Cyngiel, Gangus żołnierz, Kitchin, Spawacz, Techmorwa średnia.
+Wszystkie dodano do wspólnego panelu z istniejącymi portretami p01 do decyzji
+reuse/regeneracja, następnie własny żeton i osobna akceptacja. [Pełne pokrycie](../art/creatures/bestiary-coverage.json),
+[kolejka i instrukcje](../art/creatures/REFERENCJE.md). Razem 29 par: 23 zatwierdzone, 6 aktywnych.
+Nie zmieniono wcześniejszych decyzji, finalnych obrazów, aliasów, kodu lub światów.
+
 **Zamknięcie kolejki grafik, 2026-10-31:** wszystkie 23 pary portret/żeton (16 Bestiariusza,
 3 konie i 4 towarzysze) mają obie akceptacje i docelowe pliki. Ostatnie dostawy to
 Neoniedźwiedź p07/t01 (5/5, 4/5) i Mobsprzęt p01/t05 (4/5, 4/5).

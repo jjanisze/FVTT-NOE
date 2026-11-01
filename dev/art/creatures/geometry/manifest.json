@@ -26,6 +26,32 @@
       ],
       "renderer": "Chrome SVG on detached canvas",
       "role": "Geometry only; retain approved portrait identity and painting"
+    },
+    {
+      "id": "spawacz",
+      "source": "dev/art/creatures/geometry/spawacz-attachment-v1.svg",
+      "sourceSha256": "b61e12ea58a22973010da88ef9a1efffea2147eea3ec24d6219751cbf89513c2",
+      "render": "dev/art/creatures/in/references/spawacz-attachment-v1.png",
+      "renderSha256": "e2b7dd86d094afcd6d3fb78001768dd4219d838aed0cf6cb2a014242844cb706",
+      "size": [
+        1500,
+        1100
+      ],
+      "renderer": "Chrome SVG on detached canvas",
+      "role": "Attachment topology only: six independent low pelvic leg sockets and two upper shoulder tool sockets; overhead pose and frontal height explanation. Diagram colors and text are not final paint."
+    },
+    {
+      "id": "spawacz-attachment-v2",
+      "source": "dev/art/creatures/geometry/spawacz-attachment-v2.svg",
+      "sourceSha256": "079decac19c9fd0740f501dfb6973b6af8ceacc81881a38c840d59913a3fbb13",
+      "render": "dev/art/creatures/in/references/spawacz-attachment-v2.png",
+      "renderSha256": "be07a00548822ada0aa7fca44eeb12d4d360afc0ec3add4cc497a47e99fa2ccd",
+      "size": [
+        1500,
+        1100
+      ],
+      "renderer": "Chrome SVG on detached canvas",
+      "role": "Revised attachment routing: ghosted torso reveals all six low hip sockets; tools outboard and front support legs inboard. Diagram colors and text are not final paint."
     }
   ]
 }

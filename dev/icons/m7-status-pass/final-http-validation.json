@@ -1,0 +1,118 @@
+{
+    "date":  "2026-11-01",
+    "verifiedFiles":  22,
+    "remainingActiveCards":  0,
+    "allRemoteHashesMatchReceipt":  true,
+    "files":  [
+                  {
+                      "path":  "icons/statuses/reakcja.svg",
+                      "status":  200,
+                      "sha256":  "0b96c1d30fbd6399bab2d76ac0016b2560121a56882660b032180ea82ff7380e"
+                  },
+                  {
+                      "path":  "icons/statuses/reakcja.webp",
+                      "status":  200,
+                      "sha256":  "a70cede8d293ab23a6dd6d5a9a09f8f7d7f0fb8aa3d3d9b0f42a374187808d26"
+                  },
+                  {
+                      "path":  "icons/statuses/stanowisko-snajperskie.svg",
+                      "status":  200,
+                      "sha256":  "b6cecf36a0a64fb17b7031c6623df6f96f05f67cd602e37864326296e0e81ef4"
+                  },
+                  {
+                      "path":  "icons/statuses/stanowisko-snajperskie.webp",
+                      "status":  200,
+                      "sha256":  "47ceb92905f3db901091aba41bc68bce32cc48a22298567ed34e22230c9b1e0d"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-hemofilia.svg",
+                      "status":  200,
+                      "sha256":  "e345b250d211e1ffbe6e57e9eec79590969c525eb40f017e43cbe42657985394"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-hemofilia.webp",
+                      "status":  200,
+                      "sha256":  "ee74ccd2e0be72495f504165ac6c5db0073bf73569882602fb4095348ca0e3f4"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-pila.svg",
+                      "status":  200,
+                      "sha256":  "b8b08702cee46d18155c0024899d21364febde3016cdcf92ee16552ce2be1b09"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-pila.webp",
+                      "status":  200,
+                      "sha256":  "27e5a2e1ad5edaa30757a93ef70d1afa63f50834db3e3c70b731f18133b873f0"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-dumdum.svg",
+                      "status":  200,
+                      "sha256":  "64e2851365a88d1755937a812362a2e9207faa2f839c3b7ffa7848a346fe36ff"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-dumdum.webp",
+                      "status":  200,
+                      "sha256":  "9c28fcaf5d1a1da5db4c0a9e6e1c169e55e2363d87b6bc35622505f874fa755a"
+                  },
+                  {
+                      "path":  "icons/statuses/akcja.svg",
+                      "status":  200,
+                      "sha256":  "9b636d96c91afe5854e1e2599509c5155193cb2c1c34248a771a07d06ff54b87"
+                  },
+                  {
+                      "path":  "icons/statuses/akcja.webp",
+                      "status":  200,
+                      "sha256":  "0e86988fef6149361785e67ac1336f8bff525072b695530a3d014b097c3d66d8"
+                  },
+                  {
+                      "path":  "icons/statuses/akcja-bonusowa.svg",
+                      "status":  200,
+                      "sha256":  "55051d1e7bbf4b27213c57674080d26ddc1ce58d6f226564d18dd529126b5e39"
+                  },
+                  {
+                      "path":  "icons/statuses/akcja-bonusowa.webp",
+                      "status":  200,
+                      "sha256":  "f139d4f3c4d75fc0fdc071185fdc3866d30be14eb7049d14a34d2f68465caf39"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-podstepny.svg",
+                      "status":  200,
+                      "sha256":  "33420114a14083b453d3bfe8ccc9874692fb1ee10610090d045e55aa16981563"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-podstepny.webp",
+                      "status":  200,
+                      "sha256":  "7e6034447028d804fd5eaf5934e0296908c1b702b296f776fa2ecdb7ce5b5a11"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-tetnica.svg",
+                      "status":  200,
+                      "sha256":  "a6adc1998daa516e22bd8e0019375529d1b1c96d0d67ea14108d042f663e7977"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-tetnica.webp",
+                      "status":  200,
+                      "sha256":  "ffe620f1340a69153089f2cc1a99b07277dad1ef98b7ad346bfdc7eb7f38fa0c"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-kolory.svg",
+                      "status":  200,
+                      "sha256":  "45e5b0ddd719afd1d24eb97f14fc76886d6a2d25120bc4d2ed36a688453c2660"
+                  },
+                  {
+                      "path":  "icons/statuses/krwawienie-kolory.webp",
+                      "status":  200,
+                      "sha256":  "9aff2cb5ccc4535ae74bd4f78d8c731a1cb73a3239758609d500b568dec22742"
+                  },
+                  {
+                      "path":  "icons/statuses/wyciek.svg",
+                      "status":  200,
+                      "sha256":  "54f92b056d5bf5d9697493635f3525b5667c2de20ab7dc306a576c37450cfa02"
+                  },
+                  {
+                      "path":  "icons/statuses/wyciek.webp",
+                      "status":  200,
+                      "sha256":  "9a837f2d22aa11edc31f86f635633539ca7594eecb5a917fe42eb44237cb751c"
+                  }
+              ]
+}

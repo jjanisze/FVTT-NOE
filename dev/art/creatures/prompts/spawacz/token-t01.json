@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-31T14:35:22.546Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p06",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/spawacz/portrait-p06.webp",
+      "role": "Exact GM-approved p06 robot geometry, six supports, two tools and controlled coarse patina",
+      "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094"
+    },
+    {
+      "path": "tokens/mobsprzet.webp",
+      "role": "Steep overhead camera and readable painted token format only; no wheels, gun, turret, antenna or orange-panel transfer",
+      "sha256": "b280fd179f48ca666229003ff6941718c78b2273c75813f1520bd4ac0056904f"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p06",
+    "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+    "decision": "approve",
+    "rating": 4,
+    "notes": "",
+    "updatedAt": "2026-10-31T14:32:01.286Z"
+  },
+  "prompt": "Use case: stylized-concept. Create a genuine transparent battle-map token of the EXACT GM-APPROVED SPAWACZ maintenance robot in IMAGE 1. IMAGE 2 supplies only the very steep overhead camera and readable painted token presentation. Do not copy its body, orange paint, wheels, weapon, turret or antenna.\nCamera almost directly above, 85–90 degrees above ground. Look down on the grey domed torso and shoulder tops, with front-facing surfaces strongly foreshortened; do not reproduce the full frontal portrait. The cluster of circular front ports belongs on the SOUTH/front side of the body, visible as a shortened front band, not as an invented face painted onto the top of the dome. FRONT and both tool tips toward BOTTOM / SOUTH, rear toward TOP / NORTH.\nIt has EXACTLY SIX planted pointed SUPPORT LEGS plus EXACTLY TWO separate TOOL ARMS. Arrange the six supports clearly around the torso: three on the left at northwest, west and southwest, and three on the right at northeast, east and southeast. Every pointed supporting foot must be distinct and visible in transparent space. The two TOOL ARMS project toward the south/front, held above the ground between/inside the front supporting legs: LEFT arm with the narrow articulated pliers, RIGHT arm with the bent inactive copper welding nozzle. The arms do not count as support legs. Six supports plus two tools is eight appendages, not four supports or eight spider walking legs. Preserve the approved thin articulated steel construction, dark/bronze bearings, compact grey domed body, real plate seams and cables, with no new parts or organic features.\nPreserve the p06 material treatment: broad quiet smoothly shaded grey plate areas interrupted only by a few large black/brown grease smears, long isolated scratches, shallow dents and a couple of localized weld-spatter patches. No all-over fine crack web, tiny repeated speckles, cloudy mottling or uniform texture carpet. Painterly naturalistic rendering and soft upper-left light, readable at 70 screen pixels. Centre the complete robot with all SIX feet and both tool tips comfortably inside a square frame. Genuine transparent alpha background. No floor, base, ring, scenery, text, logos, gun, cart, active welding sparks, person, checkerboard or long cast shadow."
+}

@@ -1,10 +1,97 @@
 # Referencje i bieżące grafiki Bestiariusza
 
 Stan: 2026-10-31. Obowiązuje **portret → akceptacja → żeton → akceptacja**.
-Docelowe pliki mają **wszystkie 23 zatwierdzone pary**: czterech towarzyszy, trzy konie
-i szesnaście wpisów Bestiariusza. Ostatnia dostawa to **Neoniedźwiedź p07/t01** i
-**Mobsprzęt p01/t05**. Nie pozostał żaden brak w tej kolejce portretów/żetonów.
+Docelowe pliki ma **29 zatwierdzonych par**: czterech towarzyszy, trzy konie
+i dwadzieścia dwa pozostałe wpisy Bestiariusza. Ostatnia dostawa to **Spawacz p06/t10,
+4/5 i 5/5**. Wszystkie 29 par jest ukończone, bez aktywnych wpisów.
+Własne portrety i żetony ma teraz **52/52 istot**.
 Nie uruchamiano buildów paczek lub zmian świata. [Wersje i hashe dostaw](installed.json).
+
+## Spawacz — p06/t10 zatwierdzone i dostarczone
+
+Poprzedni raport zakończenia obejmował zamkniętą kolejkę, a nie cały Bestiariusz.
+[Audyt wszystkich 52 istot](bestiary-coverage.json) potwierdza własne portrety i żetony
+dla każdej istoty. Nakładka Death Breath jest wyłączona z liczby istot.
+
+GM odrzucił wszystkie sześć istniejących p01 i zlecił regenerację. Z nowych portretów
+zatwierdził Gangusa p02 (4/5), Kitchina p02 (5/5) i Techmorwę p02 (5/5), następnie ich
+żetony t02 (wszystkie 5/5). Pary są dostarczone. Bit-boy p03/t02 i Cyngiel p04/t02 też zostały
+zatwierdzone po 5/5 i dostarczone. Spawacz p06 uzyskał 4/5 i odblokował generację t01.
+
+| Wpis | Bieżący portret | Co teraz ocenić |
+|---|---|---|
+| Bit-boy przewodnik | [p03](candidates/bit-boy-przewodnik/portrait-p03.webp), zatwierdzony 5/5 | [Żeton t02](candidates/bit-boy-przewodnik/token-t02.webp) zatwierdzony 5/5; para dostarczona |
+| Cyngiel | [p04](candidates/cyngiel/portrait-p04.webp), zatwierdzony 5/5 | [Żeton t02](candidates/cyngiel/token-t02.webp) zatwierdzony 5/5; para dostarczona |
+| Gangus żołnierz | [p02](candidates/gangus-zolnierz/portrait-p02.webp), zatwierdzony 4/5 | t02 zatwierdzony 5/5; para dostarczona |
+| Kitchin | [p02](candidates/kitchin/portrait-p02.webp), zatwierdzony 5/5 | t02 zatwierdzony 5/5; para dostarczona |
+| Spawacz | [p06](candidates/spawacz/portrait-p06.webp), zatwierdzony 4/5 | [t10](candidates/spawacz/token-t10.webp) zatwierdzony 5/5; para dostarczona |
+| Techmorwa średnia | [p02](candidates/techmorwa-srednia/portrait-p02.webp), zatwierdzony 5/5 | t02 zatwierdzony 5/5; para dostarczona |
+
+### Ostatnia partia — wybrano t10
+
+GM ocenił **t03 na 5/5, do poprawy**. Wskazał wyłącznie dwie krótkie, podwinięte resztki
+stawów przy górnej/tylnej krawędzi korpusu; pełne tylne nogi wychodzące w górne rogi
+mają pozostać. Osiem poniższych edycji powstało niezależnie z tego samego źródłowego PNG t03
+oraz zatwierdzonego portretu p06, z czterema parami instrukcji dotyczących tej samej poprawki.
+Nie zmieniano kierunku postaci ani nie proszono o nową pozę.
+
+| Wariant | Oceniany WEBP | Dokładny prompt i hashe wejść |
+|---|---|---|
+| F | [t07](candidates/spawacz/token-t07.webp) | [JSON](prompts/spawacz/token-t07.json) |
+| G | [t08](candidates/spawacz/token-t08.webp) | [JSON](prompts/spawacz/token-t08.json) |
+| H | [t09](candidates/spawacz/token-t09.webp) | [JSON](prompts/spawacz/token-t09.json) |
+| I | [t10](candidates/spawacz/token-t10.webp) | [JSON](prompts/spawacz/token-t10.json) |
+| J | [t11](candidates/spawacz/token-t11.webp) | [JSON](prompts/spawacz/token-t11.json) |
+| K | [t12](candidates/spawacz/token-t12.webp) | [JSON](prompts/spawacz/token-t12.json) |
+| L | [t13](candidates/spawacz/token-t13.webp) | [JSON](prompts/spawacz/token-t13.json) |
+| M | [t14](candidates/spawacz/token-t14.webp) | [JSON](prompts/spawacz/token-t14.json) |
+
+Oględziny agenta: wszystkie osiem usuwa wskazaną parę, zachowując sześć pełnych podpór
+i oba ramiona narzędziowe. Różnią się rekonstrukcją tylnego brzegu i drobnymi zmianami
+powierzchni metalu. GM zatwierdził **t10 na 5/5** i dostarczono parę p06/t10.
+Finalne pliki: `tokens/portraits/spawacz.webp` i `tokens/spawacz.webp`.
+Pozostałe nowe wersje nie mają ocen GM ani dostawy. Oryginalne PNG pozostają
+w `in/spawacz/token-t07.png`–`token-t14.png`, dostępne do inspekcji z panelu.
+
+Arkusze: `out/spawacz-phantom-batch.jpg` — baza t03 i osiem pełnych sylwetek;
+`out/spawacz-phantom-rear-details.jpg` — same wycinki miejsca poprawki.
+Poniższe wcześniejsze próby pozostają historią, z niezmienionymi zapisami ocen.
+
+### Poprzednia seria — przed wyborem t03
+
+Odrzucone p01 pozostają jako niezmienione kopie dotychczasowych portretów GM z zapisanymi
+decyzjami. Zachowano też wszystkie próby pośrednie. Spawacz p04 zmniejszył plamy, ale na
+próbkach 1:1 pozostała delikatna siatka; p05 odmalowuje wnętrza płyt gładką powłoką bez
+rozmywania rzeczywistych łączeń. Pierwszy żeton Kitchina miał pięć par nóg; t02 dodaje
+szóstą. Gangus i Techmorwa dostają bardziej pionową kamerę względem t01.
+Po zaakceptowaniu czystej geometrii Spawacza GM poprosił o ponowne przybrudzenie kontrolowanymi,
+dużymi śladami. p06 dodaje tę patynę na bazie p05, pozostawiając szerokie spokojne płaszczyzny.
+GM ocenił t01 na **2/5, do poprawy**: nogi wychodziły z naramienników, a narzędzia
+z przednich nóg lub spod korpusu. Sama liczba 6+2 nie oznacza poprawnej anatomii.
+Na prośbę GM powstało pięć niezależnych generacji, każda z p06 i schematu mocowań,
+bez przenoszenia błędnych pikseli z t01. [Schemat v1](geometry/spawacz-attachment-v1.svg)
+oddziela sześć dolnych gniazd biodrowych i dwa gniazda barkowe. [Schemat v2](geometry/spawacz-attachment-v2.svg)
+dodatkowo rozsuwa ramiona na zewnątrz i przednie podpory ku osi, odsłaniając gniazda pod
+półprzezroczystą bryłą pomocniczą; przezroczysty tułów nie jest częścią finalnej grafiki.
+
+| Próba | Żeton | Kontrola przygotowania, nie ocena GM | Dokładny prompt |
+|---|---|---|---|
+| A | [t02](candidates/spawacz/token-t02.webp) | Nadal zlewa przednie nogi z łokciami; zachowana jako nieudana próba | [JSON](prompts/spawacz/token-t02.json) |
+| B | [t03](candidates/spawacz/token-t03.webp) | Osobne ramiona barkowe; sprawdź przebieg nóg za przedramionami | [JSON](prompts/spawacz/token-t03.json) |
+| C | [t04](candidates/spawacz/token-t04.webp) | Bardziej zwarty układ; sprawdź tylne mocowania i skrzyżowania | [JSON](prompts/spawacz/token-t04.json) |
+| D | [t05](candidates/spawacz/token-t05.webp) | Wyróżniony w poprzedniej kontroli: narzędzia na zewnątrz, przednie nogi bliżej osi; GM następnie wybrał t03 | [JSON](prompts/spawacz/token-t05.json) |
+| E | [t06](candidates/spawacz/token-t06.webp) | Tylne nogi wyglądają na mocowane w górnych płytach; zachowana jako nieudana próba | [JSON](prompts/spawacz/token-t06.json) |
+
+Z nowej ósemki zatwierdzono i dostarczono t10. Pozostałe próby są dostępne do porównania.
+Kliknięcie portretu otwiera oryginał w 1:1.
+
+Arkusz poprzedniej serii: `out/spawacz-attachment-shortlist.jpg`, z portretem p06 i wariantami B/C/D
+oraz próbkami 70/140 px na dwóch tłach. Wszystkie źródłowe PNG są dostępne w panelu.
+Starsze arkusze: `out/spawacz-approved-portrait-token.jpg`, `out/spawacz-attachment-variants.jpg`,
+`out/remaining-three-review.jpg`,
+`out/three-portrait-revisions.jpg`,
+`out/three-approved-portrait-token-pairs.jpg` i `out/spawacz-surface-1to1.jpg`.
+Dokładne instrukcje: `prompts/<id>/`. Starszy arkusz sześciu portretów pozostaje w historii.
 
 ## Neoniedźwiedź — p07/t01 zatwierdzone i dostarczone
 
@@ -59,6 +146,12 @@ starsze próby pozostają do porównania. Poprzedni finalny portret zachowano w 
 
 | Wpis | Portret | Żeton | Oceny portret/żeton |
 |---|---|---|---|
+| Spawacz | p06 | t10 | 4/5 · 5/5 |
+| Bit-boy przewodnik | p03 | t02 | 5/5 · 5/5 |
+| Cyngiel | p04 | t02 | 5/5 · 5/5 |
+| Gangus żołnierz | p02 | t02 | 4/5 · 5/5 |
+| Kitchin | p02 | t02 | 5/5 · 5/5 |
+| Techmorwa średnia | p02 | t02 | 5/5 · 5/5 |
 | Neoniedźwiedź | p07 | t01 | 5/5 · 4/5 |
 | Mobsprzęt | p01 | t05 | 4/5 · 4/5 |
 | Koń skażony — wyrównana postawa | p09 | t02 | 5/5 · 4/5 |
@@ -78,7 +171,7 @@ Dostawa kopiuje dokładnie ocenione bajty. [Rejestr dostaw](installed.json).
 
 ## Referencje, geometria i pochodzenie
 
-GM dostarczył ilustracje Neuroshimy 1.5: **Taran**, **Korzec** i **Gigantyczny pająk**.
+GM dostarczył ilustracje Neuroshimy 1.5: **Taran**, **Korzec**, **Gigantyczny pająk** i później **Spawacz**.
 Wyznaczają anatomię i proporcje; malowanie pochodzi z osobnych referencji stylu.
 Dla pozostałych wpisów GM potwierdził brak ilustracji. Podstawą są opisy NOE z
 `dev/bestiary/bestiary.json` oraz późniejsze wskazówki GM.
@@ -100,4 +193,7 @@ pierwszego skażonego t01 skracał tułów w kadrze i przesuwał siodło około 
 Zatwierdzony t02 wyrównuje postawę do pozostałych koni, zachowując chudość.
 Historyczne arkusze: `out/horse-comparison.jpg`, `out/horse-comparison-t02.jpg`.
 
-Walidacja: **95 kandydatów w 23 parach**, bez błędów formatu, kadru i powiązań.
+Rejestr ma **138 kandydatów w 29 parach**. Walidacja bieżącej partii obejmuje format, kadrowanie,
+alfę, hashe i dokładne powiązania żetonów z zatwierdzonymi portretami. Własne portrety i żetony ma 52/52 istot.
+Mapowania archiwalnych wejść po podmianie finalnych portretów są w `reference-sources.json`;
+zamrożone prompty zachowują rzeczywistą historyczną ścieżkę i hash użytego obrazu.

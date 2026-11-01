@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-31T10:45:11.188Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "bit-boy-przewodnik",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "tokens/portraits/szeryf.webp",
+      "role": "Painting, lighting, full-body framing and charcoal backdrop ONLY; do not copy this person's face, clothing, anatomy or equipment",
+      "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "bit-boy-przewodnik",
+    "kind": "portrait",
+    "candidateId": "p01",
+    "sha256": "61995c391f6896bd7c24aa7a8621eee90579ad6cfa3115f721a32086f8333aeb",
+    "decision": "reject",
+    "rating": null,
+    "notes": "Regenerate from original description.",
+    "updatedAt": "2026-10-31T10:36:47.052Z"
+  },
+  "prompt": "Use case: stylized-concept. Asset: a single full-body portrait for a fictional tabletop game's Bestiary. Naturalistic HAND-PAINTED illustration, matching the supplied painting reference's grounded proportions, restrained brushwork and empty dark charcoal subtly painted backdrop. Soft neutral upper-left illumination, muted earthy palette, a small diffuse contact shadow only. Broad, calm light-to-shadow gradients on large surfaces; detail is selective at the face, silhouette and a few functional seams. Large folds and local damage rather than a uniform cracked-paint mesh or high-frequency surface noise. Entire subject, every foot, appendage, tool tip and tail comfortably inside a vertical 4:5 portrait with about 6% breathing room. No scenery, captions, letters, logos, frame, base disc or circular crop. A neutral standing/display pose, no combat scene, target, victim, blood or gore. Any style-only human reference supplies painting and lighting ONLY, never its person, clothes, weapons or anatomy.\nCreate a FRESH design from the written Neuroshima description, not from the rejected monochrome portrait. One stooped, very thin elderly HUMAN-looking man. A kind, familiar-looking old face with a gentle inviting expression, sunken cheeks and grey wispy hair; his frailty inspires sympathy. A little hunched in the shoulders, one hand extended in a modest asking/beckoning gesture, the other relaxed. Mismatched layers of ordinary worn clothes: loose faded olive overcoat, brown cardigan, frayed beige shirt, dark baggy trousers and worn unequal shoes. Large readable cloth folds, only a few actual tears at hems. Show the ENTIRE figure including both shoes. Plausible human hands with five digits and slightly long natural nails; no dramatic monster claws. He leads and lures a mutant pack, but looks like an ordinary pitiable old wanderer, not a demon, zombie, heroic wizard or fantasy beggar costume. No staff, armour, weapon, magic glow or other creature. Use colour and the shared painterly charcoal background."
+}

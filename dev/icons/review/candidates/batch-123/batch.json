@@ -1,0 +1,181 @@
+{
+  "date": "2026-11-01",
+  "batch": 123,
+  "passName": "m7-status-gm-revisions",
+  "subjects": [
+    {
+      "key": "akcja-bonusowa-a",
+      "itemId": "m7-status-akcja-bonusowa",
+      "name": "Akcja bonusowa zużyta — A · mniejsza czteroramienna gwiazda",
+      "label": "A · mniejsza czteroramienna gwiazda",
+      "target": "icons/statuses/akcja-bonusowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/akcja-bonusowa.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Akcja bonusowa zużyta w tej turze. Odrębny znacznik od Reakcji.",
+      "request": "BONUS ACTION, OPTION A: ONE modest FOUR-POINT STAR at upper left, with ONE separate large CHECK MARK at lower right. The four-point star is noticeably SMALLER and less commanding than the broad primary five-point star in reference image 2 cell 2. Four SHORT points and a broad center, not a needle-thin sparkle. Keep a generous black gap before the check. No five-point primary star, extra stars, plus sign, medical cross, letters or surrounding frame.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-akcja-bonusowa",
+          "decision": "revise",
+          "candidateId": "batch121-akcja-bonusowa",
+          "notes": "The star would be the action. Use this as the action icon, even though it isn't required yet. For the BONUS action, use something that feels secondary to the primary star action. I like the design language of the star being the primary action, but it does not suit the bonus. ",
+          "updatedAt": "2026-11-01T00:30:08.160Z"
+        },
+        "selectedSource": "candidates/batch-121/akcja-bonusowa.png",
+        "sourceSha256": "44fcd27bbd2627b00b8f1516b2e5b68457f6389639d7d2f8f79f29f5755c211e"
+      },
+      "cell": 1
+    },
+    {
+      "key": "akcja-bonusowa-b",
+      "itemId": "m7-status-akcja-bonusowa",
+      "name": "Akcja bonusowa zużyta — B · pół gwiazdy",
+      "label": "B · pół gwiazdy",
+      "target": "icons/statuses/akcja-bonusowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/akcja-bonusowa.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Akcja bonusowa zużyta w tej turze. Odrębny znacznik od Reakcji.",
+      "request": "BONUS ACTION, OPTION B: ONE RIGHT-HAND HALF of a broad FIVE-POINT STAR, sliced cleanly down its vertical center, with ONE separate large CHECK MARK at lower right. A clear straight vertical cut edge at left; retain the top point, right upper point and right lower point of the primary star. Half the main action symbol indicates a lesser secondary action. No outline or ghost half, full star, extra stars, arrow, frame, letters or tiny marks.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-akcja-bonusowa",
+          "decision": "revise",
+          "candidateId": "batch121-akcja-bonusowa",
+          "notes": "The star would be the action. Use this as the action icon, even though it isn't required yet. For the BONUS action, use something that feels secondary to the primary star action. I like the design language of the star being the primary action, but it does not suit the bonus. ",
+          "updatedAt": "2026-11-01T00:30:08.160Z"
+        },
+        "selectedSource": "candidates/batch-121/akcja-bonusowa.png",
+        "sourceSha256": "44fcd27bbd2627b00b8f1516b2e5b68457f6389639d7d2f8f79f29f5755c211e"
+      },
+      "cell": 2
+    },
+    {
+      "key": "krwawienie-podstepny",
+      "itemId": "m7-status-krwawienie-podstepny",
+      "name": "Krwawienie — Podstępny atak — Kropla z cięciem",
+      "label": "Kropla z cięciem",
+      "target": "icons/statuses/krwawienie-podstepny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-podstepny.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Rana cięta po Podstępnym ataku, 1k8 na turę. Musi różnić się od dum-dum.",
+      "request": "CUT-WOUND BLEED: ONE broad smooth upright WHITE BLOOD DROP with ONE WIDE DIAGONAL BLACK SLASH cut INSIDE it, bottom left to upper right. The slash is thick and tapered like a simple incision. It remains wholly INSIDE the drop, leaving a thick continuous white rim on every side. Match the approved drop silhouette in reference image 2 cell 4. No external wound lips, hanging drops, round holes, weapons, realistic flesh or fine scratches.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-krwawienie-podstepny",
+          "decision": "revise",
+          "candidateId": "batch121-krwawienie-podstepny",
+          "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+          "updatedAt": "2026-11-01T00:31:06.679Z"
+        },
+        "selectedSource": "candidates/batch-121/krwawienie-podstepny.png",
+        "sourceSha256": "6892a8da011740279fd5fe337ca60538f77478d0aeafa3d18492be16e9d2bd43"
+      },
+      "cell": 3
+    },
+    {
+      "key": "krwawienie-tetnica",
+      "itemId": "m7-status-krwawienie-tetnica",
+      "name": "Krwawienie — Tętnica — Kropla z tętnicą",
+      "label": "Kropla z tętnicą",
+      "target": "icons/statuses/krwawienie-tetnica.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-tetnica.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Przycelowanie: przecięta tętnica, utrata 1k6 PW na turę. Wyraźny tryskający strumień.",
+      "request": "ARTERIAL BLEED: ONE broad smooth upright WHITE BLOOD DROP with ONE LARGE BLACK BRANCHING BLOOD-VESSEL DIAGRAM INSIDE: a thick central stem rises from the lower center and splits into two broad curved branches toward upper left and upper right. Include ONE short white interruption across one black branch to suggest a rupture. Keep a continuous thick white rim around the entire diagram. Match the approved drop in reference image 2 cell 4. Black channels are WIDE and simple, no tiny branches, external fountain, pipe, spray, flower, lettering or extra drops.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-krwawienie-tetnica",
+          "decision": "revise",
+          "candidateId": "batch121-krwawienie-tetnica",
+          "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+          "updatedAt": "2026-11-01T00:31:12.047Z"
+        },
+        "selectedSource": "candidates/batch-121/krwawienie-tetnica.png",
+        "sourceSha256": "7d03f98be2d18b594a0fd84a1de0f9d2bdc875574a6dbe1c469f71b0d4a65cbd"
+      },
+      "cell": 4
+    },
+    {
+      "key": "krwawienie-kolory",
+      "itemId": "m7-status-krwawienie-kolory",
+      "name": "Krwawienie — Rdza / Rtęć / Stal — Kropla z utratą PW",
+      "label": "Kropla z utratą PW",
+      "target": "icons/statuses/krwawienie-kolory.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/krwawienie-kolory.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Lekkie krwawienie od Stopnia Zranienia, utrata 1 PW na turę. Najprostsza, pojedyncza kropla.",
+      "request": "LIGHT BLEED / HIT-POINT LOSS: ONE broad smooth upright WHITE BLOOD DROP containing exactly ONE LARGE SHORT HORIZONTAL BLACK MINUS BAR across its center. Thick broad rounded bar fully INSIDE the drop, surrounded by generous white space; it indicates a small loss. Match the approved drop silhouette in reference image 2 cell 4. No other holes, spots, numerals, cross, plus, heart, slash, external drops or decorative marks.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-krwawienie-kolory",
+          "decision": "revise",
+          "candidateId": "batch121-krwawienie-kolory",
+          "notes": "All bleeding should use a common design language  - blood drop with something inside. This one needs something inside.",
+          "updatedAt": "2026-11-01T00:31:31.387Z"
+        },
+        "selectedSource": "candidates/batch-121/krwawienie-kolory.png",
+        "sourceSha256": "b5598abe744436920d46dd3ec1382bc3e714369c66f9452b41a234cf97b16ec4"
+      },
+      "cell": 5
+    },
+    {
+      "key": "wyciek",
+      "itemId": "m7-status-wyciek",
+      "name": "Wyciek hydrauliczny — Pęknięty elastyczny przewód hydrauliczny",
+      "label": "Pęknięty elastyczny przewód hydrauliczny",
+      "target": "icons/statuses/wyciek.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/statuses/wyciek.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "context": "Przycelowanie: uszkodzona hydraulika maszyny, utrata 1k6 PW na turę do naprawy. Symbol techniczny, nie rana.",
+      "request": "HYDRAULIC LEAK: ONE thick FLEXIBLE REINFORCED HOSE curving loosely diagonally from upper left to lower right, BROKEN HALF-WAY ALONG ITS LENGTH. The two frayed torn ends face one another across a clear wide black gap near the center; three SHORT THICK reinforcement strands jut from the torn ends. ONE LARGE OIL DROP falls below the break. One stout crimped sleeve remains at the distant intact upper-left end. Show a supple curved hose with no rigid right-angle elbow. Broad solid silhouettes, at most two large black sleeve cuts. NO faucet, tap, valve handle, water spout, plumbing pipe, oil can, gear, fine braid texture, tiny wires, lettering or extra drops.",
+      "revisionOf": {
+        "feedback": {
+          "itemId": "m7-status-wyciek",
+          "decision": "revise",
+          "candidateId": "batch122-wyciek",
+          "notes": "More like a leaking, half-broken hydraulic line. This looks like a faucet.",
+          "updatedAt": "2026-11-01T00:32:07.941Z"
+        },
+        "selectedSource": "candidates/batch-122/wyciek.png",
+        "sourceSha256": "a8879c5f44ca8faa39e101ca91993c1f7187a6219f56501ac76c8b218400d423"
+      },
+      "cell": 6
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    7,
+    8,
+    9
+  ]
+}

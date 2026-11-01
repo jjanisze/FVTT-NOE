@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31T10:45:11.192Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p02",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/references/spawacz-no15.png",
+      "role": "GM-provided Neuroshima 1.5 pencil anatomy/design reference; private input, not painting style",
+      "sha256": "56741b285efd150e18ae80826f66e2da52584192de8ef376cd8b61f1fa9f0b82"
+    },
+    {
+      "path": "tokens/portraits/szeryf.webp",
+      "role": "Painting, lighting, full-body framing and charcoal backdrop ONLY; do not copy this person's face, clothing, anatomy or equipment",
+      "sha256": "0c44a8263b73c020a53c1c25174f15c661526c9a7b36553012b25667fbf3da74"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p01",
+    "sha256": "4bbfa5984a966722d5270d95697216047b057c094f0e9897b77ddc1cf60cd88a",
+    "decision": "reject",
+    "rating": null,
+    "notes": "Use the GM-provided Neuroshima 1.5 Spawacz illustration as reference and regenerate.",
+    "updatedAt": "2026-10-31T10:40:53.781Z",
+    "notesSanitized": true
+  },
+  "prompt": "Use case: sketch-to-render. Asset: a single full-body portrait for a fictional tabletop game's Bestiary. Naturalistic HAND-PAINTED illustration, matching the supplied painting reference's grounded proportions, restrained brushwork and empty dark charcoal subtly painted backdrop. Soft neutral upper-left illumination, muted earthy palette, a small diffuse contact shadow only. Broad, calm light-to-shadow gradients on large surfaces; detail is selective at the face, silhouette and a few functional seams. Large folds and local damage rather than a uniform cracked-paint mesh or high-frequency surface noise. Entire subject, every foot, appendage, tool tip and tail comfortably inside a vertical 4:5 portrait with about 6% breathing room. No scenery, captions, letters, logos, frame, base disc or circular crop. A neutral standing/display pose, no combat scene, target, victim, blood or gore. Any style-only human reference supplies painting and lighting ONLY, never its person, clothes, weapons or anatomy.\nImage 1 is the GM's original Neuroshima 1.5 SPAWACZ sketch and fixes its mechanical design; image 2 is painting/backdrop ONLY. Create a coloured naturalistic painted full-body portrait of this maintenance robot: upright compact rounded/ovoid steel torso, cluster of round recessed lenses/ports on the front, rounded shoulder shells, SIX long articulated pointed walking legs beneath the torso and TWO separate smaller articulated TOOL ARMS from the shoulders. The walker looks like an approximately 1.5-metre-high steel mantis. Show three separated planted support legs on each side, all six feet visible; hold both tool arms above the ground, one ending in narrow cable-cutting pliers, the other in a welding tool. The tools are not weapons and are inactive, with no sparks or gun barrels. Preserve the sketch's port cluster, thin practical joints, compact dome and spindly lower silhouette, while making believable mechanisms. Dull grey steel with a muted olive cast, dark iron joints, a little local old oil around bearings and restrained edge wear. No organic parts, humanoid face, clothes, military emblems or oversized armour. No other machine or trailer in this first portrait, so the core six-leg/two-tool-arm anatomy stays clear. Three-quarter-front view with a slight offset to separate the legs, whole robot inside margins."
+}

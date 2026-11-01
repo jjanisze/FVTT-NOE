@@ -1,0 +1,13 @@
+{
+  "batch": 123,
+  "validatedMasks": 6,
+  "prospectiveDeliveryTargets": 6,
+  "candidateHashes": {
+    "akcja-bonusowa-a": "ff496b7f32f572297196a7266ae821707fd578edfaf32c69bdde66fa3ba168ef",
+    "akcja-bonusowa-b": "94416db2aa036f3543938e4aef909240fcfc80f3c9dcd40caf8de30a8aae7835",
+    "krwawienie-podstepny": "bf6772958ed46af81bb42f46d571a0151a7b774728f59b8153f5091366d62330",
+    "krwawienie-tetnica": "6b79b838cf1332cd33ff7d51cff3fed7229eef0b39e2a6c5d2bc2cf301210dec",
+    "krwawienie-kolory": "b9b82e2da96825e7225c164ec7beb253e4e74268d2cadba27e539059f8ecc18d",
+    "wyciek": "7b061bf422be4274163bd86eaf25e83abca08315c6fda361e36b6b4a10ee3571"
+  }
+}

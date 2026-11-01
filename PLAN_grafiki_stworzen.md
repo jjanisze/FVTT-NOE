@@ -5,14 +5,18 @@ istniejących par GM Craft Tavern. Generowanie przez wbudowane image_gen; nazwa 
 jest udostępniana. [Instrukcja i narzędzia](dev/art/creatures/README.md),
 [kolejka i wersje](dev/art/creatures/manifest.json).
 
-## Aktualny etap — wszystkie 23 pary dostarczone, tylko zasoby
+## Aktualny etap — NOE kompletne, tylko zasoby
 
 GM dopuścił rozbudowę i scalenie narzędzia oceny grafik. Kod mechaniki Foundry, buildy
 paczek i regresje Claude'a pozostają poza zakresem; sprawdzamy wyłącznie narzędzie grafik.
-Obowiązuje sekwencja **portret → akceptacja → żeton → akceptacja**. Wszystkie szesnaście par
+Obowiązuje sekwencja **portret → akceptacja → żeton → akceptacja**. Pierwotne szesnaście par
 Bestiariusza ma obie akceptacje i docelowe pliki; dostarczono też wszystkie trzy konie oraz
-czterech towarzyszy — razem **23 pary**. Ostatnie zatwierdzone pary to Neoniedźwiedź p07/t01
-(5/5, 4/5) i Mobsprzęt p01/t05 (4/5, 4/5). Kolejka grafik stworzeń jest zamknięta.
+czterech towarzyszy — początkowo **23 pary**. Pełny audyt Bestiariusza wykazał sześć pominiętych
+własnych żetonów. Gangus, Kitchin i Techmorwa mają już zatwierdzone i dostarczone pary p02/t02.
+Razem **29 par dostarczonych**. Bit-boy p03/t02 i Cyngiel p04/t02 mają wszystkie akceptacje 5/5
+i docelowe pliki. Spawacz p06/t10 został zatwierdzony 4/5 i 5/5, a następnie dostarczony.
+Kolejka obejmuje **29 par: wszystkie ukończone**. Pełny Bestiariusz ma **52/52 własnych
+portretów i 52/52 własnych żetonów**; nakładka Death Breath nie jest osobną istotą.
 Alternatywy pozostają w historii. GM dostarczył szkice
 Tarana, Korzca i gigantycznego pająka oraz wskazał istniejący koncept Mobsprzętu.
 Potwierdził brak ilustracji pozostałych wpisów, więc ich kierunki pochodzą z NOE / `bestiary.json`.
@@ -78,7 +82,7 @@ Panel uruchamia `npm run review:creatures`. Przy nowej generacji domyślnie poka
 nowszą od ostatniej oceny; poprzednia decyzja i uwagi są dostępne przy formularzu. Każda nowa
 wersja zaczyna bez oceny. Sam zapis oceny nie instaluje plików.
 
-## Bestiariusz — stan 16 par
+## Bestiariusz — pierwotne 16 dostarczonych par
 
 | ID | Portret | Żeton |
 |---|---|---|
@@ -98,6 +102,52 @@ wersja zaczyna bez oceny. Sam zapis oceny nie instaluje plików.
 | neoniedzwiedz | p07 zaakceptowany 5/5 | t01 zaakceptowany 4/5; para dostarczona |
 | pies-mutek | p03 zaakceptowany 5/5 | t01 zaakceptowany 5/5; para dostarczona |
 | konwojent-straznik | p02 zaakceptowany 3/5 | t02 zaakceptowany 5/5; para dostarczona |
+
+## Bestiariusz — sześć dodatkowych par
+
+Pełny audyt [52 istot](dev/art/creatures/bestiary-coverage.json) potwierdza **52 własne
+żetony i 52 własne portrety** po dostawie sześciu dodatkowych par. Nakładka Death Breath nie jest osobną istotą. Poprzednie
+„brak brakujących grafik” dotyczyło zamkniętej kolejki i nie oznaczało kompletnego Bestiariusza.
+
+| Wpis | Portret | Żeton |
+|---|---|---|
+| Bit-boy przewodnik | p03 zaakceptowany 5/5 | t02 zaakceptowany 5/5, para dostarczona |
+| Cyngiel | p04 zaakceptowany 5/5 | t02 zaakceptowany 5/5, para dostarczona |
+| Gangus żołnierz | p02 zaakceptowany 4/5 | t02 zaakceptowany 5/5, para dostarczona |
+| Kitchin | p02 zaakceptowany 5/5 | t02 zaakceptowany 5/5, para dostarczona |
+| Spawacz | p06 zaakceptowany 4/5 | t10 zaakceptowany 5/5, para dostarczona |
+| Techmorwa średnia | p02 zaakceptowany 5/5 | t02 zaakceptowany 5/5, para dostarczona |
+
+Portrety p01 zachowują oryginalne bajty, rozdzielczość i decyzje odrzucenia. Wszystkie nowe
+wersje mają wspólne malarskie tło; p03 Cyngla i Spawacza to miejscowe poprawki broni i liczby
+kończyn po nowych p02. Szkic Spawacza pozostaje prywatnym wejściem w `in/references/`.
+Przesunięcia statblocków, skale postaci, aliasy i kod Foundry nie są zmieniane.
+Żaden żeton tej szóstki nie powstaje przed akceptacją jego dokładnego portretu.
+Bit-boy p03 realizuje uwagę o „uncanny valley”, Cyngiel p04 o archetypie zabójcy i kamizelce,
+a Spawacz p04/p05 usuwa niepożądaną fakturę w dwóch kolejnych przebiegach. t01 Kitchina
+z pięcioma parami nóg oraz zbyt ukośne pierwsze żetony pozostają próbami pośrednimi;
+zatwierdzone wersje to t02. Oryginały i prompty są zachowane; ostatnia dostawa Spawacza czeka na ocenę żetonu.
+Kolejna ocena zatwierdziła trzy pierwsze żetony i dwa dalsze portrety. Dostawa p02/t02:
+Gangus 4/5 + 5/5, Kitchin 5/5 + 5/5, Techmorwa 5/5 + 5/5. Poprzednie portrety zachowano
+w kopiach dostaw. Bit-boy i Cyngiel mają nowe żetony t02 ze stromszą kamerą; Spawacz p06
+dodaje lokalne duże plamy smaru, długie rysy, wgniecenia i odpryski spawalnicze.
+Kolejna ocena zatwierdziła Bit-boya p03/t02 i Cyngla p04/t02 (wszystkie obrazy 5/5);
+obie pary dostarczono jako dokładnie ocenione bajty. Spawacz p06 uzyskał 4/5 i odblokował
+żeton t01: sześć podpór, dwa osobne narzędzia, głowa na południe, rzeczywista alfa.
+GM ocenił t01 na 2/5 z powodu błędnych miejsc mocowania kończyn i poprosił o wiele generacji.
+Pięć nowych prób powstało niezależnie z p06 i nowych schematów SVG: sześć gniazd nóg w dolnym
+stelażu, dwa gniazda narzędzi przy barkach. Drugi schemat dodatkowo rozsuwa rzut przednich nóg
+i ramion, by nie tworzyły wspólnego łokcia. W tej próbie przygotowania wyróżniono t05 oraz alternatywy t03/t04.
+t02 nadal zlewa kończyny, t06 sugeruje górne mocowania tylnych nóg — oznaczono je jako nieudane
+próby przygotowania. Nie nadano żadnych ocen GM ani nie instalowano nowych wersji.
+GM następnie wybrał t03 na **5/5, do poprawy**: usunąć parę podwiniętych szczątkowych
+stawów przy górnym/tylnym brzegu korpusu, zachować pełne tylne nogi w górnych rogach.
+Na prośbę o większą partię wykonano osiem niezależnych edycji tego samego oryginału t03:
+t07–t14 (F–M), z czterema parami miejscowych instrukcji. Każda usuwa wskazaną parę;
+różnice obejmują odtworzony brzeg i drobne zmiany malowania. GM wybrał t10 na 5/5;
+para p06/t10 jest dostarczona jako dokładnie ocenione WEBP. Pozostałe próby zachowano.
+Arkusze pełnych sylwetek i samej poprawki: `dev/art/creatures/out/spawacz-phantom-*.jpg`.
+Stan rejestru: **138 kandydatów w 29 parach**, wszystkie 29 par dostarczone, bez otwartych wpisów.
 
 ### Historia kolejnych tur
 

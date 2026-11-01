@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-31T14:59:09.170Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "token",
+  "candidateId": "t05",
+  "portraitId": "p06",
+  "variantLabel": "D",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/spawacz/portrait-p06.webp",
+      "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+      "role": "Approved identity, upright body, low six-leg undercarriage and two high shoulder-mounted tools; painting and controlled wear"
+    },
+    {
+      "path": "dev/art/creatures/in/references/spawacz-attachment-v2.png",
+      "sha256": "be07a00548822ada0aa7fca44eeb12d4d360afc0ec3add4cc497a47e99fa2ccd",
+      "role": "Revised attachment routing: ghosted torso reveals six low hip sockets; shoulder tools outboard, front support legs inboard, no crossed arm/leg chains. Diagram colors and text not final."
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p06",
+    "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+    "decision": "approve",
+    "rating": 4,
+    "updatedAt": "2026-10-31T14:32:01.286Z"
+  },
+  "triggerReview": {
+    "candidateId": "t01",
+    "decision": "revise",
+    "rating": 2,
+    "notes": "Utter fail. Legs coming out of shoulderpads, and arms coming out from under / splitting from front legs. Utter lack of limb comprehension. \nI expect we'll spend a while iterating. Do multiple generations. "
+  },
+  "prompt": "Use case: stylized-concept. Create ONE complete overhead battle-map token of the exact grey SPAWACZ maintenance robot in Image 1 on genuine transparent alpha.\nIMAGE 1 is the approved design and painting. IMAGE 2 is the authoritative limb-attachment diagram. Its LEFT panel gives the overhead routing; its RIGHT panel explains height. The ghosted torso lets you see six hip roots that will be hidden by opaque grey metal in the final art. Never paint transparent machinery, teal legs, orange arms, circles-as-labels, text or diagram panels into the final.\nKEY ROUTING CHANGE: keep the TWO TOOL ARMS OUTBOARD and the TWO FRONT WALKING LEGS INBOARD, exactly like the new diagram. This prevents the crossed/shared elbow problem. Left shoulder arm bends down the OUTER-LEFT corridor with pliers near lower-left; right shoulder arm bends down the OUTER-RIGHT corridor with inactive copper welding nozzle near lower-right. The two front support legs instead travel down the INNER-LEFT and INNER-RIGHT corridors near the bottom centre, each ending in its own pointed foot. They do not touch the forearms. Four other walking legs extend NW, W, NE, E from the same LOWER CHASSIS under the torso. Every foot inside frame.\nSIX independent walking-leg chains have SIX distinct sockets on the compact LOW PELVIC HUB BELOW the torso. They are not connected to shoulders, tool elbows, tool wrists or each other. TWO independent tool-arm chains have TWO sockets on the HIGH SHOULDERS. Each rounded shoulder cap carries ONLY its own upper arm, elbow, forearm and tool. Each limb has one unbranched chain. No leg growing out of a tool elbow, shoulder cap or another leg. Trace all six supports into lower hips under/behind the torso, and trace the two tools up to the shoulders. Preserve eight separate chains in total and actual occlusion, not a flat spider web.\nCamera near vertical overhead, front SOUTH/BOTTOM. Show top of compact upright domed torso; circular port cluster remains on its short foreshortened SOUTH face. Same grey/bronze steel, dark bearings and cables, rounded shoulders, small thin segmented legs and pointed feet as portrait. No invented turret/hatch on top. Broad smooth grey planes with a FEW large grease wipes, long isolated scratches and local dents; no uniform fine cracked-paint texture. Hand-painted naturalistic tabletop asset, upper-left soft light.\nEntire robot, all six feet, pliers and welding nozzle inside a square frame with generous padding, no floor, ground shadow, scenery, base disc, cart, people, weapons, sparks, annotations or lettering.\nFollow the left diagram's separated corridors closely at 88–90 degree overhead elevation. The front support feet are INSIDE the two outward-reaching tools. The central body hides some hip roots naturally. A gap of transparent background separates each front support leg from each shoulder-arm chain along their whole exposed lengths."
+}

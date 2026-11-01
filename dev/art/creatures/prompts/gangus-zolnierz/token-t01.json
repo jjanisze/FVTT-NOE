@@ -1,0 +1,32 @@
+{
+  "creatureId": "gangus-zolnierz",
+  "asset": "token",
+  "candidateId": "t01",
+  "portraitId": "p02",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/gangus-zolnierz/portrait-p02.webp",
+      "role": "Exact GM-approved subject identity and equipment",
+      "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe"
+    },
+    {
+      "path": "tokens/gangus-kapo.webp",
+      "role": "Camera and readable painted token format only; do not copy mohawk, tattoos, armour, bat, SMG or trousers",
+      "sha256": "8763b2c2aa6644d93a83cdda6d8e417961b4beb6bdd0022e7a2dd319e418adb4"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create one genuine transparent overhead battle-map token for the exact approved man in IMAGE 1. IMAGE 2 supplies ONLY the steep overhead camera and readable painted-token format; ignore its white background, identity, anatomy, clothing and equipment.\nThe subject is the broad heavy-set balding middle-aged gangster from image 1: stout body and large belly, worn charcoal suit jacket and trousers, dull cream shirt, loose dark tie and plain worn shoes. One long-barrel revolver in his RIGHT hand, held forward/down in a low ready pose appropriate to the overhead view, left hand relaxed and empty. Preserve the balding crown and dark hair at the sides, recognisable suit colours and weight distribution. No mohawk, tattoos, leather armour, camouflage, bat or automatic weapon.\nCamera approximately 80 degrees above the ground: prominent crown/shoulders, foreshortened torso and legs, not a front portrait. Head/front TOWARD BOTTOM / SOUTH, back toward TOP / NORTH, centred north-south stance. Two arms, two legs, natural hands, entire revolver and both shoes inside generous square margins. Naturalistic painterly finish, broad quiet shaded cloth, upper-left light, readable at 70 pixels. Genuine transparent alpha, no floor, ground, base, ring, checkerboard, white backdrop, text, logo or long shadow.",
+  "date": "2026-10-31T13:24:28.128Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "gangus-zolnierz",
+    "kind": "portrait",
+    "candidateId": "p02",
+    "sha256": "d2329c35c7e91062c9c4e81081f69d632dcb526e073bd9f8ef09f6790465b1fe",
+    "decision": "approve",
+    "rating": 4,
+    "notes": "",
+    "updatedAt": "2026-10-31T13:17:12.285Z"
+  }
+}

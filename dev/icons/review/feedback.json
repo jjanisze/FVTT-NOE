@@ -4004,6 +4004,76 @@
       "candidateId": "water-overlay-v1",
       "notes": "We build this separately.",
       "updatedAt": "2026-10-31T00:38:42.196Z"
+    },
+    "m7-status-reakcja": {
+      "itemId": "m7-status-reakcja",
+      "decision": "approve",
+      "candidateId": "batch121-reakcja",
+      "notes": "",
+      "updatedAt": "2026-11-01T00:30:09.801Z"
+    },
+    "m7-status-akcja-bonusowa": {
+      "itemId": "m7-status-akcja-bonusowa",
+      "decision": "approve",
+      "candidateId": "batch123-akcja-bonusowa-a",
+      "notes": "The star would be the action. Use this as the action icon, even though it isn't required yet. For the BONUS action, use something that feels secondary to the primary star action. I like the design language of the star being the primary action, but it does not suit the bonus. ",
+      "updatedAt": "2026-11-01T00:38:06.004Z"
+    },
+    "m7-status-stanowisko-snajperskie": {
+      "itemId": "m7-status-stanowisko-snajperskie",
+      "decision": "approve",
+      "candidateId": "batch121-stanowisko-snajperskie",
+      "notes": "",
+      "updatedAt": "2026-11-01T00:30:13.724Z"
+    },
+    "m7-status-krwawienie-hemofilia": {
+      "itemId": "m7-status-krwawienie-hemofilia",
+      "decision": "approve",
+      "candidateId": "batch121-krwawienie-hemofilia",
+      "notes": "",
+      "updatedAt": "2026-11-01T00:30:17.756Z"
+    },
+    "m7-status-krwawienie-podstepny": {
+      "itemId": "m7-status-krwawienie-podstepny",
+      "decision": "approve",
+      "candidateId": "batch123-krwawienie-podstepny",
+      "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+      "updatedAt": "2026-11-01T00:38:17.462Z"
+    },
+    "m7-status-krwawienie-tetnica": {
+      "itemId": "m7-status-krwawienie-tetnica",
+      "decision": "approve",
+      "candidateId": "batch123-krwawienie-tetnica",
+      "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+      "updatedAt": "2026-11-01T00:38:24.335Z"
+    },
+    "m7-status-krwawienie-kolory": {
+      "itemId": "m7-status-krwawienie-kolory",
+      "decision": "approve",
+      "candidateId": "batch123-krwawienie-kolory",
+      "notes": "All bleeding should use a common design language  - blood drop with something inside. This one needs something inside.",
+      "updatedAt": "2026-11-01T00:38:27.957Z"
+    },
+    "m7-status-krwawienie-pila": {
+      "itemId": "m7-status-krwawienie-pila",
+      "decision": "approve",
+      "candidateId": "batch121-krwawienie-pila",
+      "notes": "",
+      "updatedAt": "2026-11-01T00:31:36.737Z"
+    },
+    "m7-status-krwawienie-dumdum": {
+      "itemId": "m7-status-krwawienie-dumdum",
+      "decision": "approve",
+      "candidateId": "batch121-krwawienie-dumdum",
+      "notes": "",
+      "updatedAt": "2026-11-01T00:31:40.293Z"
+    },
+    "m7-status-wyciek": {
+      "itemId": "m7-status-wyciek",
+      "decision": "approve",
+      "candidateId": "batch123-wyciek",
+      "notes": "More like a leaking, half-broken hydraulic line. This looks like a faucet.",
+      "updatedAt": "2026-11-01T00:38:31.226Z"
     }
   }
 }

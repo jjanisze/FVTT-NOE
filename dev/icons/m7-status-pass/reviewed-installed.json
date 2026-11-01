@@ -1,0 +1,284 @@
+{
+  "date": "2026-11-01",
+  "approvedGlyphs": 10,
+  "explicitlyRequestedReuse": 1,
+  "installed": [
+    {
+      "itemId": "m7-status-reakcja",
+      "candidateId": "batch121-reakcja",
+      "source": "candidates/batch-121/reakcja.png",
+      "sourceSha256": "d9ddd13bd2f365db6d1c564e79fb3a2377f7f65ae94978d9fa4565c94b5f0169",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-reakcja",
+        "decision": "approve",
+        "candidateId": "batch121-reakcja",
+        "notes": "",
+        "updatedAt": "2026-11-01T00:30:09.801Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/reakcja.svg",
+          "sha256": "0b96c1d30fbd6399bab2d76ac0016b2560121a56882660b032180ea82ff7380e"
+        },
+        {
+          "path": "icons/statuses/reakcja.webp",
+          "sha256": "a70cede8d293ab23a6dd6d5a9a09f8f7d7f0fb8aa3d3d9b0f42a374187808d26"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-stanowisko-snajperskie",
+      "candidateId": "batch121-stanowisko-snajperskie",
+      "source": "candidates/batch-121/stanowisko-snajperskie.png",
+      "sourceSha256": "a0853e62bb041669685d4054b17a96d7cc80220cc74954f7b8da65dd4640fdd8",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-stanowisko-snajperskie",
+        "decision": "approve",
+        "candidateId": "batch121-stanowisko-snajperskie",
+        "notes": "",
+        "updatedAt": "2026-11-01T00:30:13.724Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/stanowisko-snajperskie.svg",
+          "sha256": "b6cecf36a0a64fb17b7031c6623df6f96f05f67cd602e37864326296e0e81ef4"
+        },
+        {
+          "path": "icons/statuses/stanowisko-snajperskie.webp",
+          "sha256": "47ceb92905f3db901091aba41bc68bce32cc48a22298567ed34e22230c9b1e0d"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-hemofilia",
+      "candidateId": "batch121-krwawienie-hemofilia",
+      "source": "candidates/batch-121/krwawienie-hemofilia.png",
+      "sourceSha256": "5c8784890f0c37aed38add16abae1be642e8f6bcf1043ec107a90de61369dbc4",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-hemofilia",
+        "decision": "approve",
+        "candidateId": "batch121-krwawienie-hemofilia",
+        "notes": "",
+        "updatedAt": "2026-11-01T00:30:17.756Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-hemofilia.svg",
+          "sha256": "e345b250d211e1ffbe6e57e9eec79590969c525eb40f017e43cbe42657985394"
+        },
+        {
+          "path": "icons/statuses/krwawienie-hemofilia.webp",
+          "sha256": "ee74ccd2e0be72495f504165ac6c5db0073bf73569882602fb4095348ca0e3f4"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-pila",
+      "candidateId": "batch121-krwawienie-pila",
+      "source": "candidates/batch-121/krwawienie-pila.png",
+      "sourceSha256": "e778c36ba0c15ec3bdfa65ea30e3ae4b6558fb384d2049b5370fe74fbe22cf02",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-pila",
+        "decision": "approve",
+        "candidateId": "batch121-krwawienie-pila",
+        "notes": "",
+        "updatedAt": "2026-11-01T00:31:36.737Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-pila.svg",
+          "sha256": "b8b08702cee46d18155c0024899d21364febde3016cdcf92ee16552ce2be1b09"
+        },
+        {
+          "path": "icons/statuses/krwawienie-pila.webp",
+          "sha256": "27e5a2e1ad5edaa30757a93ef70d1afa63f50834db3e3c70b731f18133b873f0"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-dumdum",
+      "candidateId": "batch121-krwawienie-dumdum",
+      "source": "candidates/batch-121/krwawienie-dumdum.png",
+      "sourceSha256": "3951804faf8d5fa721aa05e6c47678912a4b87595600b752abb5bde8a5d6d9ec",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-dumdum",
+        "decision": "approve",
+        "candidateId": "batch121-krwawienie-dumdum",
+        "notes": "",
+        "updatedAt": "2026-11-01T00:31:40.293Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-dumdum.svg",
+          "sha256": "64e2851365a88d1755937a812362a2e9207faa2f839c3b7ffa7848a346fe36ff"
+        },
+        {
+          "path": "icons/statuses/krwawienie-dumdum.webp",
+          "sha256": "9c28fcaf5d1a1da5db4c0a9e6e1c169e55e2363d87b6bc35622505f874fa755a"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-akcja",
+      "candidateId": "batch121-akcja-bonusowa",
+      "source": "candidates/batch-121/akcja-bonusowa.png",
+      "sourceSha256": "44fcd27bbd2627b00b8f1516b2e5b68457f6389639d7d2f8f79f29f5755c211e",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "explicit-gm-reuse-note",
+      "feedback": {
+        "itemId": "m7-status-akcja-bonusowa",
+        "decision": "revise",
+        "candidateId": "batch121-akcja-bonusowa",
+        "notes": "The star would be the action. Use this as the action icon, even though it isn't required yet. For the BONUS action, use something that feels secondary to the primary star action. I like the design language of the star being the primary action, but it does not suit the bonus. ",
+        "updatedAt": "2026-11-01T00:30:08.160Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/akcja.svg",
+          "sha256": "9b636d96c91afe5854e1e2599509c5155193cb2c1c34248a771a07d06ff54b87"
+        },
+        {
+          "path": "icons/statuses/akcja.webp",
+          "sha256": "0e86988fef6149361785e67ac1336f8bff525072b695530a3d014b097c3d66d8"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-akcja-bonusowa",
+      "candidateId": "batch123-akcja-bonusowa-a",
+      "source": "candidates/batch-123/akcja-bonusowa-a.png",
+      "sourceSha256": "ff496b7f32f572297196a7266ae821707fd578edfaf32c69bdde66fa3ba168ef",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-akcja-bonusowa",
+        "decision": "approve",
+        "candidateId": "batch123-akcja-bonusowa-a",
+        "notes": "The star would be the action. Use this as the action icon, even though it isn't required yet. For the BONUS action, use something that feels secondary to the primary star action. I like the design language of the star being the primary action, but it does not suit the bonus. ",
+        "updatedAt": "2026-11-01T00:38:06.004Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/akcja-bonusowa.svg",
+          "sha256": "55051d1e7bbf4b27213c57674080d26ddc1ce58d6f226564d18dd529126b5e39"
+        },
+        {
+          "path": "icons/statuses/akcja-bonusowa.webp",
+          "sha256": "f139d4f3c4d75fc0fdc071185fdc3866d30be14eb7049d14a34d2f68465caf39"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-podstepny",
+      "candidateId": "batch123-krwawienie-podstepny",
+      "source": "candidates/batch-123/krwawienie-podstepny.png",
+      "sourceSha256": "bf6772958ed46af81bb42f46d571a0151a7b774728f59b8153f5091366d62330",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-podstepny",
+        "decision": "approve",
+        "candidateId": "batch123-krwawienie-podstepny",
+        "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+        "updatedAt": "2026-11-01T00:38:17.462Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-podstepny.svg",
+          "sha256": "33420114a14083b453d3bfe8ccc9874692fb1ee10610090d045e55aa16981563"
+        },
+        {
+          "path": "icons/statuses/krwawienie-podstepny.webp",
+          "sha256": "7e6034447028d804fd5eaf5934e0296908c1b702b296f776fa2ecdb7ce5b5a11"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-tetnica",
+      "candidateId": "batch123-krwawienie-tetnica",
+      "source": "candidates/batch-123/krwawienie-tetnica.png",
+      "sourceSha256": "6b79b838cf1332cd33ff7d51cff3fed7229eef0b39e2a6c5d2bc2cf301210dec",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-tetnica",
+        "decision": "approve",
+        "candidateId": "batch123-krwawienie-tetnica",
+        "notes": "All bleeding should use a common design language  - blood drop with something inside.",
+        "updatedAt": "2026-11-01T00:38:24.335Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-tetnica.svg",
+          "sha256": "a6adc1998daa516e22bd8e0019375529d1b1c96d0d67ea14108d042f663e7977"
+        },
+        {
+          "path": "icons/statuses/krwawienie-tetnica.webp",
+          "sha256": "ffe620f1340a69153089f2cc1a99b07277dad1ef98b7ad346bfdc7eb7f38fa0c"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-krwawienie-kolory",
+      "candidateId": "batch123-krwawienie-kolory",
+      "source": "candidates/batch-123/krwawienie-kolory.png",
+      "sourceSha256": "b9b82e2da96825e7225c164ec7beb253e4e74268d2cadba27e539059f8ecc18d",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-krwawienie-kolory",
+        "decision": "approve",
+        "candidateId": "batch123-krwawienie-kolory",
+        "notes": "All bleeding should use a common design language  - blood drop with something inside. This one needs something inside.",
+        "updatedAt": "2026-11-01T00:38:27.957Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/krwawienie-kolory.svg",
+          "sha256": "45e5b0ddd719afd1d24eb97f14fc76886d6a2d25120bc4d2ed36a688453c2660"
+        },
+        {
+          "path": "icons/statuses/krwawienie-kolory.webp",
+          "sha256": "9aff2cb5ccc4535ae74bd4f78d8c731a1cb73a3239758609d500b568dec22742"
+        }
+      ]
+    },
+    {
+      "itemId": "m7-status-wyciek",
+      "candidateId": "batch123-wyciek",
+      "source": "candidates/batch-123/wyciek.png",
+      "sourceSha256": "7b061bf422be4274163bd86eaf25e83abca08315c6fda361e36b6b4a10ee3571",
+      "installedOn": "2026-11-01",
+      "approvalBasis": "approve",
+      "feedback": {
+        "itemId": "m7-status-wyciek",
+        "decision": "approve",
+        "candidateId": "batch123-wyciek",
+        "notes": "More like a leaking, half-broken hydraulic line. This looks like a faucet.",
+        "updatedAt": "2026-11-01T00:38:31.226Z"
+      },
+      "files": [
+        {
+          "path": "icons/statuses/wyciek.svg",
+          "sha256": "54f92b056d5bf5d9697493635f3525b5667c2de20ab7dc306a576c37450cfa02"
+        },
+        {
+          "path": "icons/statuses/wyciek.webp",
+          "sha256": "9a837f2d22aa11edc31f86f635633539ca7594eecb5a917fe42eb44237cb751c"
+        }
+      ]
+    }
+  ],
+  "updated": "2026-11-01",
+  "remainingSubjects": 0
+}

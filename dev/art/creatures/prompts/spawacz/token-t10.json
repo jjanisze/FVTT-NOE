@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-31T15:33:12.053Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "token",
+  "candidateId": "t10",
+  "portraitId": "p06",
+  "parentCandidateId": "t03",
+  "variantLabel": "I",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/spawacz/portrait-p06.webp",
+      "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+      "role": "Image 1: approved character identity only; do not replace the token's existing pose or camera with this portrait"
+    },
+    {
+      "path": "dev/art/creatures/in/spawacz/token-t03.png",
+      "sha256": "361584fede873a0a90098addf5daf64e970571f927309cd423297cf5fcdac6fb",
+      "role": "Image 2: EDIT TARGET, exact generator source of GM-rated t03 (5/5, revise only two phantom rear joints)"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p06",
+    "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+    "decision": "approve",
+    "rating": 4,
+    "updatedAt": "2026-10-31T14:32:01.286Z"
+  },
+  "triggerReview": {
+    "creatureId": "spawacz",
+    "kind": "token",
+    "candidateId": "t03",
+    "sha256": "e50bef8ca97622a09a064fed56d4bb7c436f18ae23b20dd25670676c7052b9ee",
+    "decision": "revise",
+    "rating": 5,
+    "notes": "ALMOST! At the top of the image, near the back, there's a pair of tucked extra legs. Not the full legs extending upper left and upper right - leave those. But two stray leg joints from phantom legs right at the upper side / back",
+    "updatedAt": "2026-10-31T15:29:03.486Z"
+  },
+  "prompt": "Use case: precise-object-edit.\nEDIT TARGET: IMAGE 2, the transparent overhead robot token. IMAGE 1 is only the approved portrait identity; do not adopt its frontal pose or backdrop.\nThe GM rated IMAGE 2 5/5, with ONE small remaining correction. Keep this exact token and do a conservative LOCAL CLEANUP at its NORTH/TOP rear torso edge.\nREMOVE ONLY the TWO EXTRA TUCKED PHANTOM LEG-JOINT ASSEMBLIES just inside the two real full-length rear legs. They look like two short bent upside-down-U knees/knuckles peeking from immediately behind the torso's upper rim: one upper-inner-left, one upper-inner-right. They have no real supporting feet and are duplicate anatomy.\nKEEP the TWO REAL, FULL-LENGTH REAR WALKING LEGS that reach far toward the UPPER-LEFT and UPPER-RIGHT corners, including all their existing joints and pointed feet. Those are correct legs and must not be removed, shortened, moved or re-rooted.\nAfter deleting the phantom parts, restore the natural smooth upper contour of the existing torso where they occluded it; outside the robot restore GENUINE TRANSPARENT ALPHA. Do not replace the extra knees with cables, stumps, aerials, brackets, substitute limbs or a new machine part. A continuous quiet grey/dark rear body edge is enough.\nPreserve the SIX actual walking legs and their six feet, the TWO proper SHOULDER TOOL ARMS (pliers and inactive copper welding nozzle), all attachment points, pose, body proportions, rounded shoulder pads, front circular ports, plate seams, grease smears, localized scratches, lighting, colours, painterly style, camera angle, scale and square framing of IMAGE 2. All other visible parts should remain as close to the original pixels as possible. No new general texture/detail pass and no all-over fine cracked webbing.\nDeliver the same single full robot token on real transparent alpha. No background, floor, shadows on a floor, ring, base, labels, annotations, coloured outlines or text. This is a tiny two-part deletion, not a redesign or new pose.\nRemove the two compact INVERTED-U protrusions immediately behind the upper-left and upper-right corners of the torso shell. Leave the two long diagonally spread rear supports untouched. Fill only those small local regions."
+}

@@ -1,0 +1,27 @@
+{
+  "creatureId": "spawacz",
+  "asset": "portrait",
+  "candidateId": "p06",
+  "portraitId": null,
+  "references": [
+    {
+      "path": "dev/art/creatures/in/spawacz/portrait-p05.png",
+      "role": "Exact cleaned p05 geometry and smooth surfaces; add controlled localized coarse wear only",
+      "sha256": "b423b53ffe00e512a9f065c9b85c77e1e016bccb98555172de881a9bfdf38c64"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. Age this exact cleaned fictional maintenance robot with CONTROLLED LOCALIZED WEAR. The GM likes the clean broad surfaces and wants it dirty again using LARGE READABLE MARKS, not an all-over surface pattern. Preserve the same body shape, SIX supporting legs, TWO tool arms, ports, cables, pose, framing, colours, light direction, painterly medium and charcoal backdrop.\nAdd about FOUR OR FIVE broad dark black/brown GREASE SMEARS: a large irregular oily patch and a couple of long downward drips under the lower chest port, one broad wiped grease streak on a shoulder near a bearing, and dark local smudges at two leg/hip joints. Make stains visibly larger than bolts, with smoothly softened edges and coherent gravity streaks. Add THREE long isolated shallow METAL SCRATCHES, one across a shoulder and two along selected shin panels, exposing a narrow darker/lighter metal line over a meaningful distance. Add TWO broad shallow dents as simple quiet changes in form/shading on separate outer plates. Add WELDING SPATTER only in ONE OR TWO small localized clusters near actual repaired seams by the tool-side shoulder/forearm: a few distinct medium-sized cooled metal beads, not hundreds of pinpricks.\nKeep at least seventy-five percent of each large panel interior as the existing quiet smooth grey gradient between these marks. The surface has a few coarse stains, a few long scratches and sparse localized repair details. It must NOT become a repeating pale vein web, craquelure, mottled carpet, tiny cracks, speckle/grain, cloudy noise or uniform grunge across every panel. No crossed networks of scratch lines. Keep real seams and port rims crisp. Do not change anatomy, soften the whole image, add weapons, active sparks, people, lettering or scenery.",
+  "date": "2026-10-31T14:11:56.351Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p05",
+    "sha256": "f22c82380c1cccafabeaaad79c7e7dfa278268e3d7543d8b35cf5eca7b55e944",
+    "decision": "revise",
+    "rating": 4,
+    "notes": "Okay, now that we've cleaned it up, we schmutz it back up again. The goal is to add LOW FREQUENCY texture - black grease stains, long scratches, and some medium frequency - welding spatter, dents.\n\nPreferrably without reintroducing the old webbing / detail overload effect ",
+    "updatedAt": "2026-10-31T14:08:17.624Z"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31T14:18:05.092Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "cyngiel",
+  "asset": "token",
+  "candidateId": "t02",
+  "portraitId": "p04",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/cyngiel/portrait-p04.webp",
+      "role": "Exact GM-approved portrait identity",
+      "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab"
+    },
+    {
+      "path": "dev/art/creatures/in/cyngiel/token-t01.png",
+      "role": "Edit target: t01 with overly oblique camera",
+      "sha256": "29fb0baa0c903db719a0823fad2c92dc4c957348321909116d9ec36d498dfed2"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "cyngiel",
+    "kind": "portrait",
+    "candidateId": "p04",
+    "sha256": "6ad12237501451667b96876eeeff2ec806283132f69efed4e7490f0fbe0611ab",
+    "decision": "approve",
+    "rating": 5,
+    "notes": "",
+    "updatedAt": "2026-10-31T14:06:12.020Z"
+  },
+  "preparationIssue": "Raise the camera to match the steeper overhead token convention.",
+  "prompt": "Use case: precise-object-edit. Image 2 is the CURRENT TOKEN draft to improve; image 1 fixes the approved identity. Change ONLY the CAMERA to nearly straight overhead, about 85 degrees above the ground. Show predominantly the crown, upper surfaces of shoulders/coat sleeves, hands and shoes. Strongly shorten the visible face, chest-front, tie/cardigan and legs through foreshortening: the current draft still shows a long frontal torso. The subject looks forward/down toward SOUTH/bottom, not up at the observer. A small face sliver is enough. Same centred north-south stance and complete genuine transparent alpha silhouette. This must be a battle-map token viewed from almost directly above, not an elevated front portrait.\nKeep the exact lean man with very short dark hair, dark tailored overcoat, grey shirt, burgundy tie, concealed vest under clothing, dark trousers, brown boots, plain belt knife sheath and ONE lowered black SEMI-AUTOMATIC pistol in the right hand. Left hand empty. Preserve his face identity where visible; no revolver, bald head, extra equipment or external tactical armour. Preserve colours and restrained painterly shading.\nKeep all hands, feet and weapon/fabric tips safely inside the square. No ground, scene, base, ring, long shadow, letters, checkerboard or coloured backdrop."
+}

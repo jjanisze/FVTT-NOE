@@ -1,9 +1,10 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
-> Status (2026-10-30): **M4 ZROBIONE** — część 1 i 1b (E0–E11), grafika (14 pojazdów, 7 wnętrz, 14 wraków, 2 wieże),
+> Status (2026-11-01): **M4 ZROBIONE** — część 1 i 1b (E0–E11), grafika (14 pojazdów, 7 wnętrz, 14 wraków, 2 wieże),
 > część 2 (P1–P6), część 3 — wierzchowce (W0–W5) i całe przejście końcowe (§0.1: S0–S1, K1–K3, KT, P5a–P5e, P6,
-> W0–W5); przebieg i bramka — §11. Do weta MG na Poligonie: Garaż, Pościg (Start–meta), Stajnia (§10). Zostały zasoby:
-> 7 dźwięków (§8); żetony koni z góry dostarczone 2026-10-31. Decyzje MG D1–D45 (§1). Rozmiar: **XL**.
+> W0–W5); przebieg i bramka — §11. Do weta MG na Poligonie: Garaż, Pościg (Start–meta), Stajnia (§10).
+> 7 dźwięków dostarczone i zaakceptowane 2026-11-01 ([AUDIO.md](dev/art/m4/AUDIO.md)); konie z góry dostarczone 2026-10-31.
+> Decyzje MG D1–D45 (§1). Rozmiar: **XL**.
 > Wywołanie: `PLAN_beta.md` §0, krok 4 (przesunięty przed M6, MG 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie), a od 2026-10-19 także geometrię planszy
 > (tamten §2.1, §2.3–§2.6 i D2) — §6.2 tutaj. Grafika planszy (motywy, pustynia, kołysanie — tamten §2.2) zostaje.
@@ -24,7 +25,7 @@
 |---|---|---|---|
 | **1. Pojazdy** | katalog 14 pojazdów (paczka), karta pojazdu, wsiadanie na miejsca z żetonami jadącymi razem z pojazdem, prześwietlenie i kropki, silnik (uruchom/zgaś, dym, drgania, dźwięk), jazda w turze kierowcy, skręty, potrącenia, awarie k20 ze skutkami i naprawami, Wojownik autostrady, stanowisko Poligonu | ✅ E0–E8 (weto MG i znane braki — §10) | §4–§6 |
 | **1b. Między scenami** | jedna reguła skali (obrys w metrach, znacznik na mapach w km), pamięć obsady i karta „Posadzić?”, Ctrl+X / Ctrl+V z załogą | ✅ E9–E11 | §4.14–§4.16 |
-| **Grafika** | 14 żetonów z góry i portretów, 7 wnętrz (prześwietlenie), 14 wraków, osobne wieże Bradleya i Abramsa (oś pod przyszłe celowanie), Garaż z podglądami | ✅ (brak 7 dźwięków; 13 wraków do oceny MG) | §8, §11 |
+| **Grafika** | 14 żetonów z góry i portretów, 7 wnętrz (prześwietlenie), 14 wraków, osobne wieże Bradleya i Abramsa (oś pod przyszłe celowanie), Garaż z podglądami | ✅ (13 wraków do oceny MG) | §8, §11 |
 | **2. Pościgi** | plansza od nowa — złożona droga (pojazdy w prawdziwej skali, tor = 36 m), metryka drogi dla zasięgów i obszarów, serie z celowaniem, jadący na planszy; paleta manewrów, Test Pościgu, komplikacje k20, ataki, wypadanie, koniec pościgu | ✅ P1–P6 | §6.2 |
 | **3. Wierzchowce** (z M6, 2026-10-25) | nośnik = pojazd albo istota: koń wiezie widocznego jeźdźca tym samym kodem co pickup; Inicjatywa jeźdźca, spadanie z siodła, atak z grzbietu; Jeździec, Rodeo, Zawsze w siodle | ✅ W0–W5 (żetony koni z góry — 2026-10-31) | §6.3 |
 | **Przejście końcowe** (2026-10-29) | skala grafiki istot i jadących, paleta kierowcy, kotwica tury, braki części 1, P5–P6, W0–W5 | ✅ 2026-10-30 | §0.1, §11 |
@@ -105,7 +106,7 @@ flowchart LR
 | **P5a–P5e** | Mechanika pościgu (§6.2.5) | L | K1, KT | e2e `poscig-p5`: pościg od startu do mety bez notatek MG (`PLAN_beta.md`, M4) |
 | **P6** | Poligon i bramka części 2: sondy D34–D41 na stanowisku Pościg | M | P5 | stanowisko z sondami; e2e w obu światach |
 | **W0–W5** | Wierzchowce (§6.3) | L | S1, K1, KT | e2e `wierzchowiec`; stanowisko Stajnia |
-| **Zasoby** | 7 dźwięków (MISSING §P); żetony koni z góry ×3 (✅ 2026-10-31, §8); ocena MG 13 wraków | — | — | MISSING §P bez pozycji M4 |
+| **Zasoby** | 7 dźwięków (✅ 2026-11-01, zatwierdzone i zintegrowane); żetony koni z góry ×3 (✅ 2026-10-31, §8); ocena MG 13 wraków | pliki dostarczone | — | MISSING bez pozycji M4 |
 
 **Zamknięcie M4:** `release:check` zielony; macierz `IMPLEMENTATION.md` (wiersze „Walka na wierzchowcu”, „Pojazdy
 i pościgi”, „Pojazdy poza pościgiem”, „Manewry pościgu…”) i `PLAN_beta.md` (M4) zaktualizowane; M7 dostaje sygnał,
@@ -969,10 +970,11 @@ Ciężarówka, Wóz strażacki, BWP, Czołg), osobne kadłuby i wieże BWP i Czo
 (`tokens/wraki/pojazd-*.webp`, `GRAFIKI_WRAKOW`); źródła, prompty i pomiary w `dev/art/m4/<pojazd>/README.md`.
 Atrapy w `tokens/pojazdy/_placeholder/` zostają jako awaryjne.
 
-**Brakuje:**
-- **7 dźwięków** (`dev/icons/MISSING.md` §P): `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
-  `zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, `syrena.ogg` → `sounds/pojazdy/` (katalogu jeszcze nie
-  ma). Kod gra je, gdy plik istnieje — bez zmian w kodzie. Źródło z licencją wpisać do `CREDITS.md`.
+**Dostawy zasobów:**
+- ✅ **7 dźwięków dostarczonych i zatwierdzonych 2026-11-01:** `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
+  `zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, opcjonalna `syrena.ogg` → `sounds/pojazdy/`.
+  Sześć oryginalnych nagrań CC0, mono 44,1 kHz Vorbis; normalizacja istniejącym pipeline M5.
+  Kod już zna te ścieżki. Źródła w `CREDITS.md`, cięcia i wyniki w [AUDIO.md](dev/art/m4/AUDIO.md).
 - ✅ **Konie z góry (D43), dostarczone 2026-10-31** (Codex; siodło zmierzone: siedzisko 0,60 od przodu, poduszka
   pasażera 0,69 — `STREFY_SIODLA`). Zamówienie było takie: trzy żetony (zdrowy, skażony, teksańczyk) w konwencji pojazdów —
   przodem w dół, przezroczyste tło, kadr kwadratowy 2 × 2 (800 × 800 przy 400 px na pole, jak `tokens/README.md`),
@@ -1048,7 +1050,6 @@ nocy 2026-10-19, nadal bez formalnego weta; każde na Poligonie, stanowisko Gara
 | **Skala jadących** — grafika jadącego zmniejszona razem z miejscem | ✅ **S0–S1** (f = 0,8, D45) | §4.1 |
 | **Paka** (Akrobatyka stojących na początku tury) — tekst cechy | zostaje (D44) | — |
 | **TT w bezruchu** — tylko w walce; **spalanie** z jazdy po mapie — nie (podróż liczy karta drużyny) | zostaje | — |
-| **Dźwięki** — cisza do dostawy 7 plików (MISSING §P) | zasoby | §8 |
 | **Etykiety rozmiarów**: NOE ma Dużą / Wielką / Ogromną maszynę (s. 262–264: Motocykl Duża, Osobówka Wielka, Autobus Ogromna), czyli dnd5e `lg` / `huge` / `grg`; tymczasem etykieta modułu dla `huge` brzmi „Ogromny” (`tokens/README.md` liczy Wielki = `huge` poprawnie). Rozjazd sprzed M4 dotyczy wszystkich istot | poza M4 — zgłosić jako globalną poprawkę etykiet; nagłówek zakładki Pojazd pisze po NOE | — |
 | **GMT400** jeździ na grafice Hammera — własny żeton z góry (Suburban, 1,5 × 3,5 kratki → 450 × 1050) | grafika kampanii | §8 |
 
@@ -1089,7 +1090,7 @@ siodło, jeździec jak na mapie, kotwica) pokrywa e2e `wierzchowiec`; pierście�
   GMT400 na trzech mapach taktycznych w obrysie ×1,1, Lorentz dostał harmonijkę (Sesja 11).
 - **Poligon:** stanowiska Garaż, Pościg i Stajnia zasiane na nowych paczkach; sondy czekają na weto MG.
 
-Zostały: 7 dźwięków (MISSING §P), ocena MG 13 wraków, weto sond Garażu, Pościgu i Stajni.
+Zostały: ocena MG 13 wraków, weto sond Garażu, Pościgu i Stajni. Siedem plików dźwiękowych dostarczono 2026-11-01 (§8).
 
 **2026-10-29 — runda 6: przegląd planu przed przejściem końcowym.** Przejrzane: plan, kod (`scripts/pojazdy/`,
 `scenes/poscig*.mjs`, `scenes/droga.mjs`), zasoby, RAW (s. 29–30, 61, 88–89, 97, 106, 257, 260–268) oraz źródła

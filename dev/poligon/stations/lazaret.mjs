@@ -76,7 +76,7 @@ export default {
   ],
   proby: [
     p("stan-2s", "Stan", "Panel Stan: czy MG odczyta stan pacjenta w dwie sekundy?", "Karty łóżek po kolei."),
-    p("ikony", "Stan", "Ikony stanów na żetonach przy 50% i 100% zbliżenia; poziomowane ikony w HUD", "Zoom; prawy klik na żeton."),
+    p("ikony", "Stan", "Ikony stanów na żetonach przy 50% i 100% zbliżenia; poziomowane ikony w HUD", "Zoom; prawy klik na żeton. Sprawdź nowe glify M7: Reakcja, Akcja bonusowa (mała czteroramienna gwiazda), Stanowisko snajperskie i siedem krwawień/wycieku. Podstępny: cięcie w kropli; tętnica: rozgałęzione naczynie; Kolory: minus; Wyciek: przerwany przewód. Pełna pięcioramienna gwiazda to rezerwa zwykłej akcji, bez nowego stanu."),
     p("umieranie", "Umieranie", "Umieranie z miejsca gracza (karty rzutów przeciw śmierci) i potwierdzenie MG „Śmierć”", "Przypisz Umierającego Graczowi 2 (Widok gracza → przypisz zaznaczony)."),
     p("do-wariant", "Rekonwalescencja", "Okno DO z Rekonwalescencją — NOE, RAI i WKK obok siebie (Wyczerpanie z Krytycznego); kalendarzyk", "Zranienie: Krytyczny; Wariant NOE → DO; WKK → DO.", "RAI"),
     p("e7", "Zagrożenia", "Zaległy ręczny przebieg E7 narzędzia Zagrożenia (PLAN_m1_walka) — tutaj, nie w kampanii", "Narzędzie MG → Przemarznięcie, doba bez snu, Uduszenie na łóżkach."),

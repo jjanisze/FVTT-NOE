@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-31T14:53:30.995Z",
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "creatureId": "spawacz",
+  "asset": "token",
+  "candidateId": "t04",
+  "portraitId": "p06",
+  "variantLabel": "C",
+  "references": [
+    {
+      "path": "dev/art/creatures/candidates/spawacz/portrait-p06.webp",
+      "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+      "role": "Approved identity, upright body, low six-leg undercarriage and two high shoulder-mounted tools; painting and controlled wear"
+    },
+    {
+      "path": "dev/art/creatures/in/references/spawacz-attachment-v1.png",
+      "sha256": "e2b7dd86d094afcd6d3fb78001768dd4219d838aed0cf6cb2a014242844cb706",
+      "role": "Construction only: six independent hip chains on lower chassis and two independent tool chains on upper shoulders; colors/labels are not final paint"
+    }
+  ],
+  "gmReview": {
+    "creatureId": "spawacz",
+    "kind": "portrait",
+    "candidateId": "p06",
+    "sha256": "8f50753d11a1dbfe55a214507c93e0f9e0373fa49ebcd363aa50d014ba81b094",
+    "decision": "approve",
+    "rating": 4,
+    "updatedAt": "2026-10-31T14:32:01.286Z"
+  },
+  "triggerReview": {
+    "candidateId": "t01",
+    "decision": "revise",
+    "rating": 2,
+    "notes": "Utter fail. Legs coming out of shoulderpads, and arms coming out from under / splitting from front legs. Utter lack of limb comprehension. \nI expect we'll spend a while iterating. Do multiple generations. "
+  },
+  "prompt": "Use case: stylized-concept. Asset: one transparent top-down battle-map token of the approved SPAWACZ fictional maintenance robot.\nImage 1: exact approved p06 design, anatomy, proportions, grey paint and localized grease. Image 2: CONSTRUCTION DIAGRAM ONLY. Its left panel is the overhead pose and its right panel explains the vertical attachment heights. Do not reproduce diagram colors, typography, panels, or flat line drawing.\nThe upright robot has two mechanically separate systems:\nSIX walking legs are attached to SIX distinct hip sockets on the LOW undercarriage/pelvic hub BENEATH the torso. There are three supports per side. Their upper links pass UNDER or BEHIND the upper torso/shoulders; some roots are naturally occluded by the torso overhead. Trace each visible support continuously back toward that lower chassis. No walking leg is attached to a shoulder pad.\nTWO tool arms are attached to the TWO UPPER SHOULDER JOINTS, one arm from each rounded shoulder shell, as in the portrait. The left arm has pliers, the right arm an inactive bent copper welding nozzle. Each arm has its own upper arm, elbow, forearm, wrist and tool, reaching forward toward SOUTH. Neither tool grows from a knee or shin, neither branches off a walking leg. No shared proximal segment, fork, fused joint, merged limbs or detached floating tool. Keep visible separation between arm and leg contours even where their projections overlap. Six independent support chains plus two independent shoulder-arm chains.\nRetain the portrait's tall compact domed torso, rounded shoulder shells, circular FRONT port cluster and thin articulated pointed steel supports, bronze/dark joint bearings and cables. At an overhead angle the torso TOP occupies most of its area and its front face is strongly foreshortened toward SOUTH. Do not flatten the full frontal portrait onto the roof of the body. No new circular roof hatch. Do not turn this into a low flat spider: its lower legs remain a separate lower stratum under an upright body.\nMuted grey plate surfaces, broad smooth light-to-shadow gradients, a few broad black/brown grease wipes and long sparse scratches, local dents and tiny localized weld-spatter only. Quiet metal between marks, no all-over craquelure, mesh, grain or fine repetitive mottling. Grounded hand-painted rendering, softly lit from upper-left. Whole robot and every pointed foot/tool comfortably inside a square frame. Front and tools toward BOTTOM/SOUTH.\nDeliver ONE painted robot on genuine transparent alpha, with no background, ground, ring, base, annotations, colored diagram traces, text, number labels, cart, gun, active sparks or long floor shadow.\nCamera: orthographic near-vertical overhead, about 87 degrees elevation. Use a slightly staggered stable six-foot stance rather than exact bilateral symmetry, while retaining three legs from each side of the LOWER pelvic hub. Tool arms are raised at shoulder level, elbows bent and tools extending toward SOUTH, with a generous transparent gap between each tool forearm and the nearest front support leg. Keep rounded shoulder pads dedicated to the tool arms alone."
+}
