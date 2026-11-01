@@ -88,7 +88,8 @@ flowchart LR
    Pochodzenia pregenów (D3 — testerzy dojdą do poziomu 3). XL, etapy E0–E8, dziesięć rodzin zamiast zdolności po
    jednej. Status: **zamknięte 2026-11-01** — E0–E8, pokrycie zdolności klasowych i profesji 100/133, Pochodzeń 34/36,
    Sztuczek 41/53; `resync` kopii w kampanii zrobiony (kopia zapasowa przed); dla graczy `docs/Zdolnosci.md`. Zostaje:
-   pregeni Jazdy Próbnej od nowa kreatorem (D17) i zdolności czekające na warstwę ruchu (handoff).
+   zdolności czekające na warstwę ruchu (handoff); pregeni Jazdy Próbnej zbudowani od nowa kreatorem (D17,
+   2026-11-01).
 9. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
    dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5

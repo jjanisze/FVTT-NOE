@@ -1,7 +1,7 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
 > Status: **ZAMKNIĘTY 2026-11-01** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”); E0–E8 w §8,
-> pregeni od nowa (D17) — osobna robota po M7. Decyzje MG D1–D17
+> pregeni od nowa (D17) — zrobione 2026-11-01 (§8). Decyzje MG D1–D17
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
 > etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
@@ -833,3 +833,24 @@ rodzaj.
   Stanowisko **Sala prób** (`stations/sala-prob.mjs`): pięć miejsc z personami M7, nocny ghul 15 m dalej, manekin,
   pacjent do reanimacji, 12 prób; zresetowane w Poligonie bez braków.
 - **Pregeni (D17):** zbudować od nowa kreatorem — osobna robota zaraz po M7.
+
+### D17 — pregeni Jazdy Próbnej od nowa (2026-11-01)
+
+- **Kreator, nie łatanie:** sześć postaci przez prawdziwy AdvancementManager (sterownik Poligonu
+  `dev/poligon/lib/advancement.mjs`): klasa na 1. poziomie z wyborami, Pochodzenie (+1/+1, zdolność), Sztuczka
+  z D16 (Rozwój Cechy, biegłości). Budowniczy i dane postaci są w skarbcu (`Neuro 5e/Integracje/pregeny/`) — to
+  treść kampanii, nie modułu; po budowie porównuje kartę z oczekiwaniami (Cechy, umiejętności, narzędzia,
+  zdolności) — w kampanii zero różnic.
+- **Sterownik:** krok `AbilityScoreImprovement` z punktami do rozdania (Pan Plaster: INT albo MDR — przyciski +
+  okna, jak gracz); przedmiot bez awansów (Mistrz walki wręcz) dnd5e planuje jako jeden automatyczny krok bez okna,
+  który zamyka menedżera, zanim sterownik zobaczy go otwartego — teraz tworzony wprost, jak przedmiot bez kroków.
+- **Odczyty:** Cechy = stara karta minus Pochodzenie (D17), Iris INT 16 (D16), plus Rozwój Cechy Sztuczki (Buźka
+  CHA 17, Carson, Góra ZRC 17, Iris INT 17, Kluczyk ZRC 19). Umiejętności z alfy na klucze NOE według notatek ze
+  starych kart; czego nie ma w puli klasy, daje zdolność Pochodzenia (Kluczyk — Pojazdy z Siódmych potów, więc
+  Pochodzenie przed klasą, by Specjalizacja mogła je wybrać; Carson — Technika; Iris — Medycyna z Doktora Quinn).
+  Broń z katalogu podręcznika (H&K UMP → HK Universal na .45 ACP, Winchester → Deer Hunter na .44 Mag — naboje
+  zgodne ze starą kartą, berdysz → topór strażacki), załadowana z puli naboi (suma bez zmian); choroby przewlekłe
+  i fobie przeniesione, lek wskazuje nowy przedmiot; zatwierdzone portrety i żetony z pracowni grafik.
+- **Kampania:** pełna kopia zapasowa przed zapisem (CRC OK, świat otwarty), budowa, stare karty do folderu
+  „alfa” (Postacie › PC), żetony na scenie szablonów podmienione na nowe w tych samych miejscach. Serwer kampanii
+  z powrotem zatrzymany.

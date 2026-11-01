@@ -6,8 +6,10 @@
  * Kość Wytrzymałości, skill choices, granted and chosen features, scale values, the profession's picks.
  *
  * `picks[stepTitle]` names what to choose: skill labels in a Trait step, item names in an ItemChoice
- * step, the subclass name in the Subclass step; anything unnamed takes the first options. Returns every
- * step seen as "Type:title" — what the Obsada build log shows.
+ * step, the subclass name in the Subclass step, ability keys in an AbilityScoreImprovement step that
+ * has points to spend (a Sztuczka's „Rozwój Cechy” with a choice, Pan Plaster: `"int"`); anything
+ * unnamed takes the first options. Returns every step seen as "Type:title" — what the Obsada build log
+ * shows.
  */
 
 /**
@@ -45,8 +47,9 @@ export async function addWithAdvancement(actor, itemData, { picks = {} } = {}) {
   const AM = dnd5e.applications.advancement.AdvancementManager;
   const before = new Set(managers());
   const mgr = AM.forNewItem(actor, itemData);
-  if (!mgr.steps.length) {
-    // Nothing to advance (a Sztuczka, a plain feat): the manager would do nothing — create directly.
+  if (!mgr.steps.some(s => s.flow)) {
+    // Nothing to advance (a Sztuczka without „Rozwój Cechy”, a plain feat): dnd5e still plans one automatic
+    // step without a window that only creates the item, and closes before a walk sees it open — create directly.
     const [doc] = await actor.createEmbeddedDocuments("Item", [itemData]);
     return { steps: [], item: doc?.id ?? null };
   }
@@ -115,6 +118,19 @@ async function walk(mgr, picks, before) {
       if (avg && !avg.checked) {
         avg.checked = true;
         avg.dispatchEvent(new Event("change", { bubbles: true }));
+        await sleep(250);
+      }
+    } else if (type === "AbilityScoreImprovementAdvancement") {
+      // Fixed increases (Pochodzenie +1/+1, most Sztuczki) apply themselves; a choice is spent point by point
+      // with the step's own + buttons, so dnd5e checks the cap and the locked abilities as for a player.
+      let points = flow.advancement.configuration.points ?? 0;
+      const order = [...want, ...[...el.querySelectorAll("li[data-score]")].map(li => li.dataset.score)];
+      for (const key of order) {
+        if (points <= 0) break;
+        const plus = mgr.element.querySelector(`li[data-score="${key}"] button[data-action="increase"]`);
+        if (!plus) continue;
+        plus.click();
+        points--;
         await sleep(250);
       }
     } else if (type === "SubclassAdvancement") {
