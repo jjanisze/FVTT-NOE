@@ -142,7 +142,7 @@ export function odlegloscKrawedzi(a, b) {
 }
 
 /** Przeciwnicy: obie dyspozycje niezerowe i różne (wrogie wobec przyjaznych). */
-function _wrogowie(a, b) {
+export function wrogowie(a, b) {
   const da = a?.document?.disposition ?? a?.disposition;
   const db = b?.document?.disposition ?? b?.disposition;
   const D = CONST.TOKEN_DISPOSITIONS;
@@ -210,7 +210,7 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
   const jeden = targets.length === 1 ? targets[0] : null;
 
   const wrogowieObok = attackerToken ? zetony
-    .filter(t => t !== attackerToken && t.actor && !t.document.hidden && _wrogowie(attackerToken, t))
+    .filter(t => t !== attackerToken && t.actor && !t.document.hidden && wrogowie(attackerToken, t))
     .filter(t => (odlegloscKrawedzi(attackerToken, t) ?? Infinity) <= OBOK)
     .map(t => uczestnik(t.actor, t.name)) : [];
 

@@ -35,7 +35,8 @@ import { gra, esc, stylPrzycisku, STYL_SZARY } from "./zdolnosci-wspolne.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_ZAPOWIEDZ = "zapowiedzianyAtak";
 const FLAGA_GADKA = "zajebistaGadka";
-const PROSBA_POWALENIE = "sztuczki.powalenie";
+/** Przekaźnik MG: RO na Siłę celu i Powalenie — Wyjaśnić ci? (Barbarka), Przygniecenie (Ławnik, 8c). */
+export const PROSBA_POWALENIE = "sztuczki.powalenie";
 const KOLOR = "#7d3c98";
 const PATCH = Symbol("neuro-cechy-ataku");
 /** Przyciski użyte na tym kliencie: `${messageId}:${rodzaj}`. */
@@ -117,7 +118,7 @@ function _trafienieGlowa(message) {
   return { actor, celActor, st, powod };
 }
 
-async function _powalenie(_nosiciel, { celUuid, st, kto }) {
+async function _powalenie(_nosiciel, { celUuid, st, kto, zdolnosc = "Wyjaśnić ci?" }) {
   const cel = await fromUuid(celUuid);
   if (!cel) return null;
   const rolls = await cel.rollSavingThrow({ ability: "str", target: st }, { configure: false },
@@ -128,7 +129,7 @@ async function _powalenie(_nosiciel, { celUuid, st, kto }) {
   if (powalony) await cel.toggleStatusEffect("prone", { active: true });
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: cel }),
-    content: `<div class="neuro-maneuver-result"><strong>Wyjaśnić ci?</strong> — ${esc(cel.name)} `
+    content: `<div class="neuro-maneuver-result"><strong>${esc(zdolnosc)}</strong> — ${esc(cel.name)} `
       + `${powalony ? `oblał RO na Siłę (${roll.total} vs ST ${st}) i zostaje <b>Powalony</b>` : `zdał RO na Siłę (${roll.total} vs ST ${st})`}`
       + ` (${esc(kto)}).</div>`
   });

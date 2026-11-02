@@ -17,6 +17,7 @@ import { slotLabel } from "../actors/doll-model.mjs";
 import { freeHandCheck } from "./grip.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
 import { cardButtonHost } from "../config/chat-card-dom.mjs";
+import { najwyzejDuzy } from "../config/sztuczki-walka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -102,6 +103,21 @@ function _isImmuneToCondition(actor, statusId) {
 export function hasAramis(actor) {
   return !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "aramis"
     || (i.type === "feat" && i.name?.trim().toLowerCase() === "aramis"));
+}
+
+/**
+ * Wrestler, Rzut na matę (s. 108): przewracasz istotę, którą sam trzymasz (Pochwycona przez ciebie), dużą albo mniejszą —
+ * jej RO z Utrudnieniem (PLAN_m7 8c). ST bez zmian: 8 + SIŁ + PB, jak Odepchnięcia.
+ */
+export function rzutNaMate(attacker, target) {
+  if (!attacker?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "wrestler")) return false;
+  return trzymaPochwyconego(attacker, target) && najwyzejDuzy(target?.system?.traits?.size);
+}
+
+/** Czy `attacker` trzyma `target` — lokator ręki `grapple` z Pochwycenia (`_occupyHand`). */
+export function trzymaPochwyconego(attacker, target) {
+  if (!target?.uuid) return false;
+  return (attacker?.getFlag?.(MODULE_ID, HAND_OCCUPANTS_FLAG) ?? []).some(o => o?.kind === "grapple" && o.actorUuid === target.uuid);
 }
 
 /* -------------------------------------------- */
@@ -274,10 +290,11 @@ async function _resolveTarget(attacker, attackerToken, target, maneuverId, dc, o
     content: `<div class="neuro-maneuver-result">${head} — ${content}</div>`
   });
 
+  const mata = maneuverId === "odepchniecie" && options.effect !== "push" && rzutNaMate(attacker, actor);
   if (!actor.canUserModify(game.user, "update")) {
     ui.notifications.warn(`${def.label}: brak uprawnień do ${target.name} — rozstrzygnięcie po stronie MG.`);
     await say(`<b>${attacker.name}</b> próbuje wobec <b>${target.name}</b>. <b>ST ${dc}</b>, `
-      + "RO na Siłę lub Zręczność (wybiera cel). Rozstrzyga MG.");
+      + `RO na Siłę lub Zręczność (wybiera cel)${mata ? " <b>z Utrudnieniem</b> (Rzut na matę, Wrestler)" : ""}. Rozstrzyga MG.`);
     return;
   }
 
@@ -310,14 +327,15 @@ async function _resolveTarget(attacker, attackerToken, target, maneuverId, dc, o
 
   const ability = _targetSaveAbility(actor);
   const rolls = await actor.rollSavingThrow(
-    { ability, target: dc, advantage: options.advantage === true, disadvantage: options.disadvantage === true },
+    { ability, target: dc, advantage: options.advantage === true, disadvantage: options.disadvantage === true || mata },
     { configure: false },
     { create: true }
   );
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!roll) return;
 
-  const abbr = CONFIG.DND5E.abilities?.[ability]?.abbreviation?.toUpperCase() ?? ability.toUpperCase();
+  const abbr = (CONFIG.DND5E.abilities?.[ability]?.abbreviation?.toUpperCase() ?? ability.toUpperCase())
+    + (mata ? " z Utrudnieniem — Rzut na matę" : "");
   if ((roll.total ?? 0) >= dc) {
     await say(`<b>${target.name}</b> zdał RO ${abbr} (${roll.total} vs ST ${dc}) — bez efektu.`);
     return;

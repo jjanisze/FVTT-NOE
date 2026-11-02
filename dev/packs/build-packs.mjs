@@ -642,14 +642,27 @@ function aktywnoscSztuczki(aid, a) {
     consumption: { targets: [], scaling: { allowed: false, max: "" }, spellSlot: false },
     description: { chatFlavor: "" }
   };
-  if (a.typ !== "attack") return base;
-  return {
-    ...base,
+  const zasieg = {
     range: { value: "1.5", long: "", units: "m", special: "", override: true },
     target: {
       template: { count: "", contiguous: false, type: "", size: "", width: "", height: "", units: "" },
       affects: { count: "1", type: "creature", choice: false, special: "" }, prompt: true, override: false
-    },
+    }
+  };
+  // Obrażenia bez Testu Ataku (Wrestler, Duszenie): wzór z karty postaci, jeden typ.
+  if (a.typ === "damage") {
+    return {
+      ...base, ...zasieg,
+      damage: {
+        critical: { allow: false, bonus: "" },
+        parts: [{ number: null, denomination: null, bonus: "", types: [a.typObrazen],
+          custom: { enabled: true, formula: a.formula }, scaling: { mode: "", number: null, formula: "" } }]
+      }
+    };
+  }
+  if (a.typ !== "attack") return base;
+  return {
+    ...base, ...zasieg,
     attack: {
       // Jedna cecha — wprost; kilka (Karateka) — dnd5e bierze wyższą, okno ataku pozwala wybrać (`cechyAtaku`).
       ability: a.cechy?.length === 1 ? a.cechy[0] : "", bonus: "", critical: { threshold: null }, flat: false,
@@ -675,8 +688,9 @@ function buildSztuczka(key) {
   // Patriota: „dodatkowa zdolność z listy zdolności swojego Pochodzenia” — the pool of all 36, like Spec 5 (the
   // advancement cannot narrow it to the background the character carries).
   if (key === "patriota") {
+    // Bez upuszczania spoza puli: krok wyszarza zdolności cudzych Pochodzeń (`combat/sztuczki-walka.mjs`, PLAN_m7 8c).
     adv.push(advancement("ItemChoice", 0, "Zdolność z Twojego Pochodzenia", {
-      allowDrops: true, choices: { 0: { count: 1 } }, pool: ORIGIN_ABILITIES_POOL, restriction: { type: "feat" }, type: "feat"
+      allowDrops: false, choices: { 0: { count: 1 } }, pool: ORIGIN_ABILITIES_POOL, restriction: { type: "feat" }, type: "feat"
     }, "sztuczka-patriota-pochodzenie"));
   }
   if (adv.length) doc.system.advancement = advancementById(adv);

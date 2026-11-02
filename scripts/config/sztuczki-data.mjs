@@ -277,8 +277,10 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ; Stalowe jaja [R] — podbiegnięcie do granatu (4,5 m) i rzut w Reakcji "
       + "bez ataków okazyjnych; dwukrotny zasięg rzutu granatem.",
     category: "granaty",
-    auto: [],
-    manual: "Stalowe jaja [R] (podbiegnięcie do granatu i rzut w Reakcji) i dwukrotny zasięg rzutu granatem — MG."
+    auto: [{ what: "Prawidłowy rzut — zasięg rzutu granatem ×2 (wybór punktu i karta; mina się kładzie, bez zmian).",
+      where: "actors/grenade-inventory.mjs" }],
+    manual: "Stalowe jaja [R] — podbiegnięcie do granatu i rzut w Reakcji bez ataków okazyjnych: moduł nie liczy Reakcji "
+      + "ani ruchu w turze (M8)."
   },
   gunfight: {
     label: "Gunfight",
@@ -298,11 +300,13 @@ export const SZTUCZKI = Object.freeze({
     req: "KON 13+, biegłość Medycyna",
     text: "+1 KON; nigdy nie złapiesz nowej choroby; Ułatwienie w RO przeciw chorobom już posiadanym.",
     category: "wsparcie",
-    auto: [{
-      what: "Ułatwienie w RO, których źródłem jest choroba — wiersz rejestru ułatwień w oknie rzutu.",
-      where: "combat/ulatwienia-testow.mjs"
-    }],
-    manual: "„Nigdy nie złapiesz nowej choroby” — MG nie nakłada nowych chorób; moduł nie blokuje zarażenia."
+    auto: [
+      { what: "Ułatwienie w RO, których źródłem jest choroba — wiersz rejestru ułatwień w oknie rzutu.", where: "combat/ulatwienia-testow.mjs" },
+      { what: "Nowa choroba z zarażenia (brudna woda, WKK) nie wchodzi — gracz dostaje kartę z plakietką IMMUNITET.",
+        where: "actors/health-panel.mjs" }
+    ],
+    manual: "Choroba popromienna ze skażenia (to nie zarażenie) wchodzi, a MG dostaje ostrzeżenie; choroba dodana ręcznie na "
+      + "zakładce — okno z ostrzeżeniem, MG może ją dodać mimo to (MG, 2026-11-02)."
   },
   jestZajebiscie: {
     label: "Jest zajebiście",
@@ -349,8 +353,13 @@ export const SZTUCZKI = Object.freeze({
       + "Ułatwienie przy ataku ciężkim przedmiotem; możliwość Powalenia.",
     category: "wrecz",
     bieglosci: [{ nadania: ["weapon:improwizowana"], tryb: "default", tytul: "Broń improwizowana" }],
-    auto: [{ what: "Biegłość w broni improwizowanej — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" }],
-    manual: "Ciężki przedmiot 10 kg+ (3k4 obrażeń obuchowych), Ułatwienie przy ataku nim i Powalenie — MG."
+    auto: [
+      { what: "Biegłość w broni improwizowanej — awans przy wzięciu Sztuczki.", where: "actors/bieglosci.mjs" },
+      { what: "Przedmiot 10 kg+ w ręku — 3k4 obuch.; naturalna 1 — karta z przyciskiem zniszczenia (po przerzutach).",
+        where: "actors/improwizacja.mjs" },
+      { what: "Rozbijanie czaszek — Ułatwienie w ataku ciężkim przedmiotem; Przygniecenie — przycisk pod trafieniem: RO na "
+        + "Siłę celu (duży albo mniejszy) i Powalenie wykonuje MG.", where: "combat/sztuczki-walka.mjs" }
+    ]
   },
   miotacz: {
     label: "Miotacz",
@@ -369,9 +378,13 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 INT lub ZRC; Fechmistrz — wybrana broń biała zadaje dodatkową kostkę obrażeń "
       + "(zmiana po Długim Odpoczynku z treningiem).",
     category: "wrecz",
-    auto: [],
-    manual: "Fechmistrz — dodatkowa kość obrażeń wybraną bronią białą i jej zmiana po Długim odpoczynku: "
-      + "gracz dorzuca kość, wybór pilnuje MG."
+    aktywnosci: [{ id: "fechmistrz", typ: "utility", nazwa: "Fechmistrz — wybór broni", aktywacja: "special" }],
+    auto: [
+      { what: "Fechmistrz — wybór modelu broni białej zaraz po wzięciu Sztuczki (karta z przyciskiem); wybraną bronią kość "
+        + "obrażeń więcej.", where: "combat/sztuczki-walka.mjs" },
+      { what: "Zmiana broni — zajęcie Długiego odpoczynku (RAW: po tym odpoczynku; WKK: 30 h treningu w godzinach pracy).",
+        where: "combat/sztuczki-walka.mjs" }
+    ]
   },
   mistrzWalkiWrecz: {
     label: "Mistrz walki wręcz",
@@ -493,10 +506,10 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 dowolna Cecha; dodatkowa zdolność z listy zdolności swojego Pochodzenia.",
     category: "rozwoj",
     auto: [{
-      what: "Dodatkowa zdolność Pochodzenia — awans przy wzięciu Sztuczki (wybór z puli zdolności Pochodzeń).",
-      where: "config/sztuczki-data.mjs"
-    }],
-    manual: "Awans nie zawęża puli do Pochodzenia postaci — wybór sprawdza MG."
+      what: "Dodatkowa zdolność Pochodzenia — awans przy wzięciu Sztuczki; do wyboru tylko zdolności własnego Pochodzenia, "
+        + "których postać jeszcze nie ma.",
+      where: "combat/sztuczki-walka.mjs"
+    }]
   },
   pewnaReka: {
     label: "Pewna ręka",
@@ -505,9 +518,14 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC; Pewny strzał [B] — Szybkość spada do 0, ale Ułatwienie do 1 ataku dystansowego "
       + "(nie przy seriach); brak Utrudnienia za niestabilne podłoże.",
     category: "dystans",
-    auto: [],
-    manual: "Pewny strzał [B] (Szybkość 0, Ułatwienie do jednego ataku dystansowego, nie przy seriach) i brak "
-      + "Utrudnienia za niestabilne podłoże — gracz zaznacza w oknie rzutu, MG pilnuje."
+    aktywnosci: [{ id: "pewny-strzal", typ: "utility", nazwa: "Pewny strzał", aktywacja: "bonus" }],
+    auto: [
+      { what: "Pewny strzał [B] — aktywność: Szybkość 0 do początku twojej tury i Ułatwienie w pierwszym ataku bronią "
+        + "dystansową (nie serią); ruch w tej turze — sygnał dla MG.", where: "combat/sztuczki-walka.mjs" },
+      { what: "Stabilizacja — strzał z jadącego pojazdu i z grzbietu wierzchowca bez Utrudnienia z niestabilnego podłoża.",
+        where: "pojazdy/jazda.mjs" }
+    ],
+    manual: "„Zanim wykonasz atak” — czy w tej turze padł już atak, pilnuje gracz (ruch sprawdza moduł)."
   },
   pierwotnyInstynkt: {
     label: "Pierwotny instynkt",
@@ -605,9 +623,9 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub KON; Młynek [B] — gdy co najmniej 3 wrogów jest w zasięgu 1,5 m, "
       + "w Akcji Bonusowej jeden atak wręcz bronią białą przeciw każdemu z nich.",
     category: "wrecz",
-    auto: [],
-    manual: "Młynek [B] — atak wręcz przeciw każdemu z co najmniej 3 wrogów w zasięgu 1,5 m: gracz atakuje "
-      + "po kolei, warunek pilnuje MG."
+    aktywnosci: [{ id: "mlynek", typ: "utility", nazwa: "Młynek", aktywacja: "bonus" }],
+    auto: [{ what: "Młynek [B] — aktywność: co najmniej 3 wrogów w 1,5 m (żetony o przeciwnej dyspozycji), po jednym ataku "
+      + "trzymaną bronią białą w każdego, Test Ataku i obrażenia osobno.", where: "combat/sztuczki-walka.mjs" }]
   },
   ruchomeGniazdoCkm: {
     label: "Ruchome gniazdo CKM",
@@ -732,10 +750,10 @@ export const SZTUCZKI = Object.freeze({
     category: "dystans",
     legacyAbilityKeys: ["szturmowiec"],
     auto: [{
-      what: "Krótka seria domyślnie nie ustawia Utrudnienia w oknie rzutu ataku.",
+      what: "Krótka seria bez Utrudnienia, gdy cel jest w normalnym zasięgu broni (dalej — Utrudnienie wraca; bez celu — "
+        + "Sztuczka działa).",
       where: "weapons/fire-modes.mjs"
-    }],
-    manual: "Warunek „w normalnym zasięgu” — MG może ręcznie przywrócić Utrudnienie w dialogu."
+    }]
   },
   szybkiBill: {
     label: "Szybki Bill",
@@ -794,8 +812,16 @@ export const SZTUCZKI = Object.freeze({
       + "1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, "
       + "z Utrudnieniem → Powalenie).",
     category: "wrecz",
-    auto: [],
-    manual: "Ułatwienie wobec Pochwyconego, Duszenie i Rzut na matę — MG."
+    aktywnosci: [{ id: "duszenie", typ: "damage", nazwa: "Duszenie", aktywacja: "special", formula: "1 + @abilities.str.mod",
+      typObrazen: "bludgeoning" }],
+    auto: [
+      { what: "Chwyt zapaśnika — Ułatwienie w Teście Ataku wobec istoty, którą trzymasz (Pochwycenie z manewru).",
+        where: "combat/sztuczki-walka.mjs" },
+      { what: "Duszenie — aktywność obrażeń 1 + SIŁ obuch.; cel, którego nie trzymasz — sygnał dla MG.", where: "combat/sztuczki-walka.mjs" },
+      { what: "Rzut na matę — przewrócenie (Odepchnięcie) trzymanej istoty dużej albo mniejszej: RO z Utrudnieniem.",
+        where: "combat/melee-maneuvers.mjs" }
+    ],
+    manual: "Duszenie „zamiast jednego z ataków” — limit ataków w turze pilnuje gracz (M8)."
   },
   zlomiarz: {
     label: "Złomiarz",

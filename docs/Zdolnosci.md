@@ -35,14 +35,18 @@ sam — pierwsza naturalna 1 po odpoczynku. **Urodzony morderca** przerzuca jedy
 Okno Testu Ataku samo zaznacza Ułatwienia i Utrudnienia z okoliczności (zasięg, zwarcie, stany, osłona) i ze zdolności:
 **Mój wróg**, **Rzeźnik**, **Zabójcza spluwa**, **Dwóch na jednego**, **Sokole oko**, **Zawołajcie kolegów**, **Ja i mój
 gang!**, **Zasadzka**, **Jeden strzał**, **Słaby punkt**, **Zwód**, Strzelec na stanowisku snajperskim; ze Sztuczek —
-**Gunfight**, **Snajper**, **Samuraj**, **Pulp Fiction**, **Szturmowiec**, **Ukryty cel** (bez Utrudnienia, gdy cel
-Unika). Dymek przy plakietce mówi, skąd się wzięły. Zostawiasz albo zmieniasz — to twoje okno.
+**Gunfight**, **Snajper**, **Samuraj**, **Pulp Fiction**, **Szturmowiec** (krótka seria bez Utrudnienia — w normalnym
+zasięgu broni), **Ukryty cel** (bez Utrudnienia, gdy cel Unika), **Wrestler** (Ułatwienie wobec istoty, którą trzymasz),
+**Ławnik** (Ułatwienie przy ataku ciężkim przedmiotem). Dymek przy plakietce mówi, skąd się wzięły. Zostawiasz albo
+zmieniasz — to twoje okno.
 
 **Celowanie** (Robin Hood, Akcja Bonusowa przy jednym celu) zaznacza Ułatwienie w najbliższym ataku z łuku albo kuszy
-w ten cel; **Zajebista gadka** — w najbliższym ataku tego, kto ją oblał.
+w ten cel; **Zajebista gadka** — w najbliższym ataku tego, kto ją oblał. **Pewny strzał** (Pewna ręka, Akcja Bonusowa
+przed ruchem i atakiem) — Szybkość 0 do początku twojej tury i Ułatwienie w pierwszym ataku bronią dystansową, nie
+serią; **Stabilizacja** zdejmuje Utrudnienie za strzał z jadącego pojazdu albo wierzchowca.
 
 **Miotacz** dokłada +2 do ataku bronią rzucaną (siekierka, oszczep, nóż do rzucania, bolas…) i podwaja jej zasięgi;
-**Siekierezada** podwaja zasięgi rzutu siekierką. **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
+**Siekierezada** podwaja zasięgi rzutu siekierką; **Grenadier** podwaja zasięg rzutu granatem. **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
 osłona dalej blokuje.
 
 **Celuję w…** (Przycelowanie Twardziela i Sztuczki): pole w oknie ataku. Część ciała podnosi TT celu; przy trafieniu pod
@@ -59,6 +63,8 @@ krwawienie z tętnicy albo wyciek z układu hydraulicznego maszyny.
   krytyczne (noże: taktyczny, kamienny, do rzucania, sztylet).
 - **Wyjaśnić ci?** (Barbarka) — pod trafieniem atakiem głową, gdy cel jest twojego rozmiaru albo mniejszy: RO na Siłę
   celu rzuca MG, porażka — Powalenie.
+- **Przygniecenie** (Ławnik) — pod trafieniem ciężkim przedmiotem, gdy cel jest duży albo mniejszy: tak samo, RO na
+  Siłę i Powalenie.
 - Bestiariusz: ataki z dodatkowym skutkiem (np. piła tarczowa Juggernauta — krwawienie) mają przycisk pod trafieniem.
 
 Przyciski są pod kartą, bo cel może jeszcze zmienić werdykt reakcją. Skutek na cudzym aktorze zapisuje MG przez
@@ -70,6 +76,16 @@ przekaźnik — klikasz u siebie, dzieje się u wszystkich.
 wyższa podpowiedziana, w oknie ataku można zmienić) i Szybki cios w Akcji Bonusowej; Atak głową (1k4) i **Z baśki**
 w Akcji Bonusowej — trafienie zadaje obrażenia krytyczne (naturalna 20 niczego nie dubluje). Czy przeciwnik ma
 głowę — MG.
+
+**Wrestler** ma **Duszenie** (1 + SIŁ obrażeń obuchowych, bez Testu Ataku, zamiast jednego z ataków) — tylko na istotę,
+którą trzymasz; **Rzut na matę** to przewrócenie (Odepchnięcie) trzymanej istoty dużej albo mniejszej — jej RO
+z Utrudnieniem. **Rozróba** ma **Młynek** [B]: gdy obok stoi co najmniej trzech przeciwników, po jednym ataku trzymaną
+bronią białą w każdego, każdy rzut osobno.
+
+**Ławnik**: przedmiot 10 kg i cięższy w rękach zadaje 3k4 obuchowych; naturalna 1 nim — karta z przyciskiem zniszczenia
+(po przerzutach). **Mistrz broni białej**: zaraz po wzięciu Sztuczki karta z wyborem broni (Fechmistrz) — nią kostka
+obrażeń więcej; zmiana — zajęcie Długiego odpoczynku „Fechmistrz — trening z nową bronią” (z Kobaltem 30 h treningu,
+[zasada 44](Kobalt.md)).
 
 ## Reakcje celu
 
@@ -126,6 +142,10 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
   podpowiedź Utrudnienia — MG zaznacza, jeśli test szuka właśnie jej.
 - **Pan Plaster** — lek na chorobę wydziela w połowie dawki, sobie i innym. Podawanie leku innej postaci —
   [Umieranie i powrót do zdrowia](Umieranie-i-zdrowie.md#podanie-leku-innej-postaci).
+- **Immunitet** — nowa choroba z zarażenia (brudna woda w Kobalcie) nie wchodzi: zamiast niej karta z plakietką
+  IMMUNITET. Choroba popromienna ze skażenia to nie zarażenie — wchodzi, a MG dostaje ostrzeżenie; chorobę dodawaną na
+  zakładce poprzedza okno z ostrzeżeniem.
+- **Patriota** — w oknie awansu do wyboru są tylko zdolności twojego Pochodzenia, których jeszcze nie masz.
 
 ## Co zostaje przy stole
 

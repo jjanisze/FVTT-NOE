@@ -161,6 +161,15 @@ export function weaponIdOf(item) {
   return null;
 }
 
+/**
+ * Model broni do zapamiętanych wyborów (Ulubiona broń, Fechmistrz): id z katalogu, inaczej nazwa — broń spoza katalogu
+ * (stare karty) też da się wybrać.
+ */
+export function modelBroni(item) {
+  if (item?.type !== "weapon") return null;
+  return weaponIdOf(item) ?? `nazwa:${String(item.name ?? "").trim().toLowerCase()}`;
+}
+
 /** Wpis z `WEAPONS` dla tej broni, albo `null`. */
 export function weaponEntry(item) {
   const id = weaponIdOf(item);

@@ -111,6 +111,7 @@ wyłączeniu; „—” znaczy: to samo, bo zasada działa zawsze.
 | 41 | Pojazdy: cechy domowe | Gąsienice, Otwarta rama, Wieżyczka i inne | — | zawsze |
 | 42 | Smaczki postaci: Żeton Luxor i gadżety | żeton kasyna za 10 gb, cztery przedmioty, które hałasują | — | zawsze |
 | 43 | Lek na Hemofilię zatrzymuje każde krwawienie | dawka Desmopresyny albo preparatów krwiopochodnych zatrzymuje jedno wybrane krwawienie dowolnego rodzaju | lek zatrzymuje tylko Krwawienie (Hemofilia) | Kolor Kobaltu |
+| 44 | Fechmistrz: 30 h treningu na zmianę broni | zmiana broni Mistrza broni białej to 30 h treningu z nową bronią w godzinach pracy postoju | zmiana po jednym Długim odpoczynku z treningiem | Kolor Kobaltu |
 
 ## Zasady
 
@@ -635,6 +636,19 @@ rana). Lek bierze się z ekwipunku krwawiącego, potem medyka.
 Bez Kobaltu lek zatrzymuje tylko Krwawienie (Hemofilia). Reszta zasad krwawienia — osobne efekty, Test narzędzi
 małego medyka ST 10 z ładunkiem za każdą próbę, Dno torby, krwawienie przy 0 PW, przypomnienie poza walką — działa
 zawsze: to odczyt podręcznika przez MG, nie zasada domowa ([Krwawienia](Krwawienia.md)).
+
+✅ *Zaimplementowane.*
+
+### 44. Fechmistrz: 30 h treningu na zmianę broni
+<!-- kod: scripts/wkk/config/fechmistrz-kobalt.mjs (FECHMISTRZ_KOBALT_H), scripts/config/sztuczki-walka.mjs, scripts/combat/sztuczki-walka.mjs -->
+
+Sztuczka Mistrz broni białej (s. 104) pozwala zmienić broń Fechmistrza po Długim odpoczynku, w czasie którego trenujesz
+z nową bronią. Z Kobaltem trening trwa **30 godzin** — jedna dziesiąta Treningu/Nauki nowej biegłości (300 h, s. 47):
+mistrz przestawia się na nową broń, nie uczy się od zera. Godziny idą z budżetu pracy postoju (do 10 h na dobę), przez
+kolejne Długie odpoczynki — zajęcie „Fechmistrz — trening z nową bronią”; postęp zostaje na Sztuczce.
+
+Bez Kobaltu to samo zajęcie zmienia broń po tym jednym odpoczynku. Pierwszy wybór (zaraz po wzięciu Sztuczki) działa
+tak samo w obu.
 
 ✅ *Zaimplementowane.*
 

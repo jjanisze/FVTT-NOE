@@ -50,7 +50,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Automatyka zdolności | 🟡 | 103/133 — 48 pełnych, 55 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`); reszta — fabuła albo warstwa ruchu (handoff). M7, `docs/Zdolnosci.md` |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 53/53 — 29 pełnych, 24 częściowe (`game.neuroshima.sztuczki.report()`); Rozwój Cechy i biegłości — awanse przy wyborze; sam ASI nie daje plakietki „pełne” (`validate-packs`). M7 |
+| | Automatyka | 🟡 | 53/53 — 34 pełne, 19 częściowych (`game.neuroshima.sztuczki.report()`); Rozwój Cechy i biegłości — awanse przy wyborze; sam ASI nie daje plakietki „pełne” (`validate-packs`). M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | ✅ | `dluga`, `ciezka`, `jednorazowa` — `weapons/wlasciwosci.mjs`, wiersze silnika okoliczności (M6 E2); `ppanc`/`przebijająca` — `combat/armour-piercing.mjs`; `burząca`/`karczująca` na obiektach i pojazdach — `scenes/obiekty.mjs`; `PLAN_weapon_properties.md` |
@@ -170,6 +170,9 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/dawki-rules.mjs` | Ułamek dawki leku (napoczęta połowa na przedmiocie), lista pacjentów leku — czyste funkcje |
 | `scripts/combat/sztuczki-ataki.mjs` | Sztuczki z atakami i przyciskami: Karateka (SIŁ albo ZRC), zapowiedziany atak (Nożownik, Celowanie), Barbarka (Z baśki, Wyjaśnić ci?), Zajebista gadka, Benzyna zamiast krwi |
 | `scripts/config/sztuczki-ataki.mjs` | Ich czyste zasady: noże (D19), łuki i kusze, rozmiar i ST Powalenia, sporny test, zapowiedź, Grigorij |
+| `scripts/combat/sztuczki-walka.mjs` | Dogrywka Sztuczek 8c: Wrestler (Chwyt zapaśnika, Duszenie), Ławnik (Rozbijanie czaszek, Przygniecenie), Młynek, Pewny strzał, Fechmistrz (wybór, zajęcie odpoczynku), krok awansu Patrioty |
+| `scripts/config/sztuczki-walka.mjs` | Ich czyste zasady: Immunitet (co zatrzymuje), zasięg Szturmowca, Grenadier ×2, ciężki przedmiot Ławnika, ST z SIŁ, trening Fechmistrza (RAW i WKK) |
+| `scripts/wkk/config/fechmistrz-kobalt.mjs` | WKK zasada 44: 30 h treningu na zmianę broni Fechmistrza |
 | `scripts/config/krwawienia-data.mjs` | Krwawienia jako osobne efekty — dane (`docs/Krwawienia.md`); silnik `combat/bleeding.mjs` |
 | `scripts/combat/sygnal-naruszenia.mjs` | Sygnał naruszenia „oznaczać, nie zakazywać”: szept do MG i właścicieli z powodami + dźwięk porażki (M6 D1, D11; M7) |
 | `scripts/config/rekonwalescencja-rules.mjs` | Powrót do zdrowia — czyste zasady: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, widok pipek, licznik Regeneracji, szansa RO, prognoza kalendarzyka |
@@ -1209,6 +1212,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Dogrywka Sztuczek — krok 8c (2026-11-02)
+
+Dziewięć Sztuczek z częściową albo żadną automatyką: Immunitet (zarażenie nie wchodzi — karta z plakietką; skażenie i dodanie ręczne — ostrzeżenie, decyzje MG 2026-11-02), Szturmowiec (KS bez Utrudnienia tylko w normalnym zasięgu), Grenadier (rzut granatem ×2), Pewna ręka (Pewny strzał [B], Stabilizacja), Wrestler (Chwyt zapaśnika, Duszenie, Rzut na matę), Ławnik (3k4, naturalna 1 niszczy, Rozbijanie czaszek, Przygniecenie), Rozróba (Młynek), Patriota (krok awansu tylko z własnego Pochodzenia), Mistrz broni białej (Fechmistrz: wybór zaraz po wzięciu, kość obrażeń, zmiana jako zajęcie Długiego odpoczynku — RAW; WKK zasada 44: 30 h). Sztuczki 53/53 — 34 pełne. `modelBroni` przeniesiony do `weapons/magazine-model.mjs`. Notatki: `PLAN_m7_zdolnosci.md` §8 „8c”. Quench `dogrywka-m7` (+8), e2e `sztuczki-8c`.
 
 ### TT bez ręcznych wartości — ocena PM1 (2026-11-02)
 

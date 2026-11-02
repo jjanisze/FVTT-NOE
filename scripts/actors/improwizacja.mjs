@@ -30,12 +30,15 @@ import { WEAPONS } from "../config/weapons-data.mjs";
 import { isDollActor, handOf, place, drop, registerDoReki, SLOTS_FLAG } from "./doll.mjs";
 import { registerPrimaryAction, registerSlotMenu } from "./doll-panel.mjs";
 import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
+import { jestCiezki, LAWNIK_KOSC } from "../config/sztuczki-walka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Stałe id aktywności ataku bliźniaka — przepięcie bliźniaka zachowuje ją. */
 export const AKTYWNOSC_ATAKU = "neuroImprowAtak1";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+/** Sztuczka Ławnik (s. 104). */
+const maSztuczkeLawnik = actor => !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "lawnik");
 const TYPY_FIZYCZNE = new Set(["loot", "consumable", "tool", "container", "equipment"]);
 
 /* -------------------------------------------- */
@@ -125,6 +128,14 @@ export function daneBlizniaka(actor, zrodlo, reka) {
     if (jak.range?.value) zasieg = { value: jak.range.value, long: jak.range.long ?? null };
     nazwa = `${zrodlo.name} (jak ${jak.name})`;
   } else if (liczby.chwyt === 2) wlasciwosci.push("two");
+  // Ławnik (s. 104): ciężki przedmiot (10 kg+) w twoich rękach — 3k4 obuchowych, także gdy „działa jak…” (do 1k6).
+  // Technika Łyżeczki to osobne zasady (autor, 2026-10-27) — Ławnik ich nie zmienia.
+  const lawnik = !lyzeczka && maSztuczkeLawnik(actor) && jestCiezki(wagaPrzedmiotu(zrodlo));
+  if (lawnik) {
+    kosc = { ...LAWNIK_KOSC };
+    typy = ["bludgeoning"];
+    nazwa = `${zrodlo.name} (ławnik)`;
+  }
 
   return {
     name: nazwa, type: "weapon", img: zrodlo.img,
@@ -146,7 +157,7 @@ export function daneBlizniaka(actor, zrodlo, reka) {
     },
     flags: {
       [MODULE_ID]: {
-        [FLAGA_BLIZNIAKA]: { zrodlo: zrodlo.id, reka, jak: jak?.id ?? null, lyzeczka, ponadSile: liczby.ponadSile },
+        [FLAGA_BLIZNIAKA]: { zrodlo: zrodlo.id, reka, jak: jak?.id ?? null, lyzeczka, lawnik, ponadSile: liczby.ponadSile },
         dollSlot: "none"
       }
     }
@@ -216,6 +227,7 @@ function _onRollAttack(rolls, { subject, ammoUpdate } = {}) {
   const zrodlo = actor?.items.get(f.zrodlo);
   const roll = rolls?.[0];
   if (f.lyzeczka && zrodlo && roll?.isFumble) void _kartaPekniecia(actor, zrodlo);
+  if (f.lawnik && zrodlo && roll?.isFumble) void _kartaZniszczenia(actor, zrodlo);
   if (!String(roll?.options?.attackMode ?? "").startsWith("thrown")) return;
   // Bliźniak nie jest amunicją — leci przedmiot, który reprezentuje.
   if (ammoUpdate?.id === twin.id) {
@@ -243,6 +255,25 @@ async function _kartaPekniecia(actor, zrodlo) {
   });
 }
 
+/** Ławnik (s. 104): naturalna 1 ciężkim przedmiotem — ulega zniszczeniu. Przycisk, bo przerzut może jeszcze zmienić wynik. */
+async function _kartaZniszczenia(actor, zrodlo) {
+  await ChatMessage.implementation.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-improw-karta"><p><strong>${esc(zrodlo.name)}</strong>: naturalna 1 ciężkim przedmiotem — Ławnik
+      go niszczy (s. 104). Po przerzutach:</p>
+      <button type="button" data-neuro-improw="zniszczenie" data-item="${zrodlo.uuid}"><i class="fa-solid fa-burst"></i> Przedmiot zniszczony</button></div>`
+  });
+}
+
+/** Ławnik: zniszczony przedmiot znika (jedna sztuka ze stosu). */
+export async function zniszcz(zrodlo) {
+  if (!zrodlo?.actor) return null;
+  const ilosc = Number(zrodlo.system?.quantity) || 1;
+  if (ilosc > 1) await zrodlo.update({ "system.quantity": ilosc - 1 });
+  else await zrodlo.delete();
+  return true;
+}
+
 /** Naturalna 1 Łyżeczki: przedmiot → dwie połówki (jedna zostaje w ręce, druga do plecaka). */
 export async function rozpolow(zrodlo) {
   const actor = zrodlo?.actor;
@@ -264,14 +295,14 @@ export async function rozpolow(zrodlo) {
 }
 
 function _onRenderChatMessageHTML(_message, html) {
-  for (const btn of html.querySelectorAll('button[data-neuro-improw="pekniecie"]')) {
+  for (const btn of html.querySelectorAll('button[data-neuro-improw="pekniecie"], button[data-neuro-improw="zniszczenie"]')) {
     btn.addEventListener("click", async ev => {
       ev.preventDefault();
       const item = await fromUuid(btn.dataset.item);
       if (!item) return ui.notifications.warn("Tego przedmiotu już nie ma.");
       if (!game.user.isGM && !item.isOwner) return;
       btn.disabled = true;
-      await rozpolow(item);
+      await (btn.dataset.neuroImprow === "zniszczenie" ? zniszcz(item) : rozpolow(item));
     });
   }
 }

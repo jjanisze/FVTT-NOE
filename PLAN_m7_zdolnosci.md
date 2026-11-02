@@ -926,3 +926,35 @@ osądu MG i plakietki, potem siedem Sztuczek z nowymi atakami albo przyciskami (
   „alfa” (historia, D17 — kopie alfy mają te same nazwy, więc lista aktorów po id): 6 zmian — plakietki Mój wróg
   i Wyjadacz (Victor, Carson, Góra), Pan Plaster (Iris), Ciszej niż cień (Kluczyk); drugi przebieg — 0. Drużyna
   kampanii: żadnej zdolności z plakietką „brak” — kryterium M7 spełnione w całości.
+
+### 8c — dogrywka Sztuczek (2026-11-02, PLAN_beta §0)
+
+Dziewięć Sztuczek, których brakująca część nie czekała na M8 ani nie była decyzją przy stole. Decyzje MG (2026-11-02):
+
+- **Immunitet** — gdzie Sztuczka działa jednoznacznie (zarażenie: brudna woda w Kobalcie), choroba nie wchodzi, a gracz
+  dostaje kartę „Przez chwilę czujesz, jakby łapało cię jakieś choróbsko. Ale tylko przez chwilę.” z plakietką IMMUNITET.
+  Choroba dodawana ręcznie — ostrzeżenie dla MG, który może ją dodać mimo to („kijanka z BG3”). Choroba popromienna ze
+  skażenia (s. 258) to nie zarażenie — wchodzi, MG dostaje ostrzeżenie (odczyt agenta, do potwierdzenia przez MG).
+- **Fechmistrz** — RAW: wybór zaraz po wzięciu Sztuczki, zmiana jako czynność odpoczynku (zajęcie Długiego odpoczynku,
+  rejestr `actors/rest-activities.mjs` — okno odpoczynku, doba postoju i przeskok). WKK: czas treningu wybrał agent —
+  30 h (10% Treningu/Nauki, s. 47), zasada 44 w `docs/Kobalt.md`.
+
+Reszta bez osobnych decyzji: Szturmowiec — warunek normalnego zasięgu (różnica widoczna tylko przy Snajperze i Strzelcu,
+bo poza zasięgiem daleki dystans daje swoje Utrudnienie); Grenadier — rzut ×2 (mina bez zmian); Pewna ręka — aktywność
+[B] z efektem do początku tury (Szybkość 0, jedno Ułatwienie w ataku dystansowym, nie serią), Stabilizacja obok Ale jazda!
+w obu źródłach niestabilnego podłoża; Wrestler — Chwyt zapaśnika w silniku okoliczności (lokator ręki `grapple`),
+Duszenie jako aktywność obrażeń, Rzut na matę jako Utrudnienie RO przy przewracaniu trzymanego; Ławnik — bliźniak 3k4
+dla 10 kg+, karta zniszczenia po naturalnej 1, Rozbijanie czaszek, Przygniecenie przez przekaźnik Barbarki; Rozróba —
+Młynek: co najmniej 3 wrogów w 1,5 m, po jednym ataku w każdego (rzut czekany przed zmianą celu — e2e złapał, że `use()`
+oddaje sterowanie przed Testem Ataku); Patriota — krok awansu wyszarza zdolności cudzych Pochodzeń i te, które postać
+już ma (bez upuszczania spoza puli).
+
+- **Pokrycie:** Sztuczki **53/53 — 34 pełne, 19 częściowych**. Częściowe zostają: 10 czeka na M8 (Akcja Bonusowa,
+  limit ataków, ruch, ataki okazyjne, Reakcje — Aramis, Mistrz walki wręcz, Szybki Bill, Grad ołowiu, Padnij/Powstań,
+  Szachista, Benzyna, Pakowanie, Samuraj, Grenadier — Stalowe jaja), 8 to decyzja przy stole (głowa celu, kogo szuka
+  Percepcja, warunki wspinaczki i jazdy bez rąk, panel i Konsolka, wycena), a Immunitet, Pewna ręka i Wrestler mają po
+  jednym zdaniu dla stołu albo M8.
+- **Testy:** Quench `dogrywka-m7` (31, +8); e2e `sztuczki-8c` (Pewny strzał z rzutem nożem, Młynek w trzech wrogów,
+  beczka Ławnika z Przygnieceniem przez MG).
+- **Kampania:** z dziewięciu ma je tylko Laffitte (Patriota) — `resync` po kopii zapasowej przestawia jego plakietkę na
+  pełną.

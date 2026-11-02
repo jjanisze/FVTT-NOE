@@ -495,8 +495,8 @@ async function _handlerWodaRO(actor, request, data, { event } = {}) {
   const [roll] = (await actor.rollSavingThrow({ ability: "con", target: skutek.st, event }, { configure: false }, { data: md })) ?? [];
   if (roll && !roll.isSuccess) {
     if (skutek.choroba) {
-      const { addDisease } = await import("../actors/health-panel.mjs");
-      await addDisease(actor, skutek.choroba, { notes: skutek.opisChoroby ?? "" });
+      const { nowaChoroba } = await import("../actors/health-panel.mjs");
+      await nowaChoroba(actor, skutek.choroba, { notes: skutek.opisChoroby ?? "" }, { zrodlo: "zarazenie" });
     }
     if (skutek.obrazenia) {
       const r = await new Roll(skutek.obrazenia).evaluate();

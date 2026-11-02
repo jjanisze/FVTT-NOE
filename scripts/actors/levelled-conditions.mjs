@@ -33,7 +33,7 @@ import { LEVELLED_CONDITIONS, UPOJENIE_LEVELS, SKAZENIE_LEVELS,
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { normalizeChanges } from "../config/effect-changes.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
-import { addDisease, getChoroby } from "./health-panel.mjs";
+import { nowaChoroba, getChoroby } from "./health-panel.mjs";
 import { STATE_COLORS } from "../config/state-colors.mjs";
 import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
 
@@ -609,7 +609,7 @@ async function radiationSave(actor, dc) {
       if (already) {
         note = "<br><strong>Trzecia porażka</strong> — choroba popromienna już się rozwija, licznik wraca do zera.";
       } else {
-        await addDisease(actor, "popromienna");
+        await nowaChoroba(actor, "popromienna", {}, { zrodlo: "skazenie" });
         disease = true;
         note = "<br><strong>Trzecia porażka — choroba popromienna.</strong> Dodana na zakładce Stan zdrowia.";
       }

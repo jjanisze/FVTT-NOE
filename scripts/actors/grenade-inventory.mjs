@@ -92,6 +92,7 @@ import { isMolotov, isLit, lightMolotov, clearLit, roundsLeft, molotovLight, MAX
 import { igniteFor, ignite as igniteDefault } from "../combat/podpalenie.mjs";
 import { chargeCaption, PLANT_DC, PLANT_RANGE_M } from "./charge-rules.mjs";
 import { formatWorldClock, formatWorldTime } from "../world-clock.mjs";
+import { GRENADIER_MNOZNIK } from "../config/sztuczki-walka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Actor flag — GM-consumed, mirrors flara.mjs's FLAG_PENDING idiom. Payload:
@@ -608,6 +609,7 @@ async function _throwExplosive(actor, item, def) {
     distance: throwContext.distance,
     rangeMax: throwContext.range.max,
     rangeMod: throwContext.range.mod,
+    grenadier: !!throwContext.range.grenadier,
     throwColor,
     remaining: qty - 1
   };
@@ -643,7 +645,7 @@ function _signed(n) {
 }
 
 function _rangeLine(card) {
-  return `<div><strong>Odległość rzutu:</strong> <span style="color:${card.throwColor}; font-weight:700;">${card.distance.toFixed(1)} m</span> / ${card.rangeMax.toFixed(1)} m (9 + 9 × mod. SIŁ ${_signed(card.rangeMod)}, min. 18)</div>`;
+  return `<div><strong>Odległość rzutu:</strong> <span style="color:${card.throwColor}; font-weight:700;">${card.distance.toFixed(1)} m</span> / ${card.rangeMax.toFixed(1)} m (9 + 9 × mod. SIŁ ${_signed(card.rangeMod)}, min. 18${card.grenadier ? "; Grenadier ×2" : ""})</div>`;
 }
 
 /** Krótka karta w chwili rzutu, gdy wybuch czeka na koniec tury. */
@@ -1330,9 +1332,15 @@ function _throwRangeMeters(strMod) {
   return 9 + Math.max(9, 9 * (Number(strMod) || 0));
 }
 
-function _computeThrowRange(actor) {
+/**
+ * Zasięg rzutu postaci. Grenadier, Prawidłowy rzut (s. 103): rzut granatem ×2 — tylko rzut; minę się kładzie.
+ * @param {Actor} actor
+ * @param {{rzut?: boolean}} [opts]
+ */
+function _computeThrowRange(actor, { rzut = true } = {}) {
   const mod = Number(actor.system?.abilities?.str?.mod ?? 0);
-  return { mod, max: _throwRangeMeters(mod) };
+  const grenadier = rzut && actor.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "grenadier");
+  return { mod, max: _throwRangeMeters(mod) * (grenadier ? GRENADIER_MNOZNIK : 1), grenadier };
 }
 
 function _getThrowBandClass(distance, max) {
@@ -1351,12 +1359,12 @@ async function _selectExplosionPoint(actor, item, def, areaSpec) {
   }
 
   const origin = { x: originToken.center.x, y: originToken.center.y };
-  const range = _computeThrowRange(actor);
 
   // Same footprint `_spawnExplosiveMarker` will draw, same bands `_getThrowBandClass` colours
   // the chat card with — the preview must not disagree with what lands.
   const subtype = item?.system?.type?.subtype;
   const isMine = subtype === "grenade-antipersonnel-mine" || subtype === "grenade-antivehicle-mine";
+  const range = _computeThrowRange(actor, { rzut: !isMine });
   let shape;
   if (isMine || areaSpec.kind === "cube") {
     const side = metersToPx(isMine ? 1.5 : Math.max(0.5, Number(areaSpec.side ?? 3)));
@@ -1668,6 +1676,7 @@ export const __testing = Object.freeze({
   getThrowBandClass: _getThrowBandClass,
   getThrowBandColor: _getThrowBandColor,
   throwRangeMeters: _throwRangeMeters,
+  computeThrowRange: _computeThrowRange,
   anchorPassed: _anchorPassed,
   parseIgniteSpec: _parseIgniteSpec,
   computeTargetSquares: _computeTargetSquares

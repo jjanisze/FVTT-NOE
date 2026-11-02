@@ -14,6 +14,9 @@ import { tracerFire, tracerFireArea } from "./tracer-vfx.mjs";
 import { describeCoverDecision, promptCoverDecision } from "../combat/cover.mjs";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { migawkaAtaku } from "../combat/okolicznosci.mjs";
+import { zasiegNormalny } from "../config/okolicznosci-ataku.mjs";
+import { szturmDziala } from "../config/sztuczki-walka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KS_ACTIVITY_TYPE = "neuroKs";
@@ -143,10 +146,11 @@ function registerShortBurstActivityType() {
     }
 
     async rollAttack(config = {}, dialog = {}, message = {}) {
-      const defaultAdvantageMode = _hasAssaulter(this.item)
+      const szturm = _szturm(this);
+      const defaultAdvantageMode = szturm
         ? CONFIG.Dice.D20Roll.ADV_MODE.NORMAL
         : CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
-      const defaultButton = _hasAssaulter(this.item) ? "normal" : "disadvantage";
+      const defaultButton = szturm ? "normal" : "disadvantage";
       const firstRoll = foundry.utils.deepClone(config.rolls?.[0] ?? {});
       const forcedFirstRoll = foundry.utils.mergeObject(firstRoll, {
         options: {
@@ -156,7 +160,7 @@ function registerShortBurstActivityType() {
 
       const nextConfig = foundry.utils.mergeObject(
         foundry.utils.deepClone(config),
-        _hasAssaulter(this.item)
+        szturm
           ? { rolls: [forcedFirstRoll, ...(config.rolls?.slice(1) ?? [])] }
           : { disadvantage: true, rolls: [forcedFirstRoll, ...(config.rolls?.slice(1) ?? [])] },
         { inplace: false }
@@ -1612,6 +1616,21 @@ function _hasMobileHmgNest(item) {
 
 function _hasAssaulter(item) {
   return hasAbility(item?.actor, ABILITY_KEYS.SZTURMOWIEC);
+}
+
+/**
+ * Szturmowiec (s. 107): KS bez Utrudnienia — tylko w normalnym zasięgu broni (PLAN_m7 8c). Odległość i zasięg z migawki
+ * silnika okoliczności; bez jednego celu albo żetonu — Sztuczka działa (`szturmDziala`).
+ */
+function _szturm(activity) {
+  if (!_hasAssaulter(activity?.item)) return false;
+  try {
+    const { migawka } = migawkaAtaku(activity);
+    return szturmDziala({ odleglosc: migawka.odleglosc, normalny: zasiegNormalny(migawka) });
+  } catch (err) {
+    console.error("Neuroshima 5e | Szturmowiec: zasięg", err);
+    return true;
+  }
 }
 
 async function _announceLeadHailUse(item, results) {

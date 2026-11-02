@@ -47,6 +47,7 @@ import { addExhaustion, poziomWyczerpania } from "../config/exhaustion.mjs";
 import { KARA_ZA_WYCZERPANIE } from "../config/rekonwalescencja-rules.mjs";
 import { dzienSwiata, sekundyDoby, formatWorldDate, formatWorldTime } from "../world-clock.mjs";
 import { POL_DAWKI_FLAG, dawkaNaRaz, pozostaleDawki, krokDawki, fmtDawki, slowoDawki } from "../config/dawki-rules.mjs";
+import { IMMUNITET_BLOKUJE, IMMUNITET_TEKST } from "../config/sztuczki-walka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PANEL_CLASS = "neuro-health-panel";
@@ -199,6 +200,57 @@ export async function addDisease(actor, key = null, overrides = {}) {
   entries.push(entry);
   await _setChoroby(actor, entries);
   return entry;
+}
+
+/** Sztuczka Immunitet (s. 103): „nigdy nie złapiesz nowej choroby”. */
+export function maImmunitet(actor) {
+  return !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "immunitet");
+}
+
+const _odbiorcy = actor => game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id);
+const _escH = s => foundry.utils.escapeHTML(String(s ?? ""));
+
+/**
+ * Nowa choroba z zasad (nie z zakładki) — przez Immunitet (PLAN_m7 8c, MG 2026-11-02). Zarażenie Sztuczka zatrzymuje:
+ * zamiast choroby gracz dostaje kartę z plakietką IMMUNITET. Źródło, przy którym Sztuczka nie działa jednoznacznie
+ * (choroba popromienna ze skażenia — to nie zarażenie), wchodzi, a MG dostaje ostrzeżenie.
+ * @param {"zarazenie"|"skazenie"} zrodlo  klucz `IMMUNITET_BLOKUJE`
+ * @returns {Promise<object|null>} wpis choroby albo `null`, gdy Immunitet ją zatrzymał
+ */
+export async function nowaChoroba(actor, key, overrides = {}, { zrodlo } = {}) {
+  if (!maImmunitet(actor)) return addDisease(actor, key, overrides);
+  if (IMMUNITET_BLOKUJE[zrodlo]) {
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      whisper: _odbiorcy(actor),
+      content: `<div class="neuro-immunitet"><span class="neuro-disease-tag is-adv"><i class="fa-solid fa-shield-virus" inert></i> IMMUNITET</span>
+        <p><em>${_escH(IMMUNITET_TEKST)}</em></p></div>`
+    });
+    return null;
+  }
+  const entry = await addDisease(actor, key, overrides);
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    whisper: game.users.filter(u => u.isGM).map(u => u.id),
+    content: `<div class="neuro-immunitet"><span class="neuro-disease-tag is-dis"><i class="fa-solid fa-triangle-exclamation" inert></i> IMMUNITET</span>
+      <p>${_escH(actor.name)} ma Immunitet, a na zakładce Stan zdrowia pojawiła się <strong>${_escH(entry.name)}</strong>. To nie
+      zarażenie, więc Sztuczka jej sama nie zatrzymuje. Jeśli uznajesz inaczej — usuń ją z zakładki.</p></div>`
+  });
+  return entry;
+}
+
+/** Zakładka: choroba dodana ręcznie. Posiadacz Immunitetu — ostrzeżenie; wolno mimo to (MG, 2026-11-02). */
+async function _dodajRecznie(actor, key) {
+  if (maImmunitet(actor)) {
+    const ok = await foundry.applications.api.DialogV2.confirm({
+      window: { title: `${actor.name} — Immunitet` },
+      content: `<p><strong>${_escH(actor.name)}</strong> ma Sztuczkę <strong>Immunitet</strong> — nigdy nie łapie nowej choroby (s. 103).</p>
+        <p>Dodać chorobę mimo to?</p>`,
+      yes: { label: "Dodaj mimo to" }, no: { label: "Nie" }, rejectClose: false
+    });
+    if (!ok) return null;
+  }
+  return addDisease(actor, key);
 }
 
 /**
@@ -1176,7 +1228,7 @@ function _injectPanel(root, actor, editable) {
     entries: getChoroby(actor),
     rowBuilder: entry => _buildDiseaseRow(actor, entry, editable),
     options: diseaseOptions(),
-    onAdd: key => addDisease(actor, key),
+    onAdd: key => _dodajRecznie(actor, key),
     editable,
     emptyText: "Brak chorób. Wybierz z listy albo dodaj własną."
   }));

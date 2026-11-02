@@ -9,6 +9,10 @@
  *
  * Krok 8b — siedem Sztuczek z atakami i przyciskami: czyste zasady, aktywności z paczki (Karateka, Barbarka), zapowiedź
  * ataku (Nożownik, Celowanie), Zajebista gadka i jej zdjęcie po rzucie, Powalenie z Wyjaśnić ci? (u MG), Stalowe palce.
+ *
+ * Krok 8c — dogrywka Sztuczek: czyste zasady, plakietki, Immunitet (zarażenie, skażenie), Grenadier, Pewny strzał,
+ * Wrestler (trzymany, Rzut na matę), Ławnik (bliźniak 3k4), Fechmistrz (kość, zajęcie odpoczynku RAW i WKK).
+ * Młynek, Przygniecenie i krok Patrioty potrzebują sceny albo okna awansu — e2e i Poligon.
  */
 
 import { pozostaleDawki, krokDawki, fmtDawki, slowoDawki, pacjenciLeku, dawkaNaRaz, POL_DAWKI_FLAG } from "../config/dawki-rules.mjs";
@@ -23,7 +27,14 @@ import { wykonajPodanie } from "../actors/podaj-dawke.mjs";
 import { NOZE, LUKI_I_KUSZE, mozeObalic, stWyjasnicCi, oblalGadke, zapowiedzPasuje, grigorij } from "../config/sztuczki-ataki.mjs";
 import { zapowiedz, zapowiedziDla, __testing as sa } from "../combat/sztuczki-ataki.mjs";
 import { __testing as mag } from "../weapons/magazine.mjs";
-import { MODULE_ID, scratchActor, scratchCleanup, sztuczkaItem } from "./helpers.mjs";
+import { szturmDziala, najwyzejDuzy, stZSily, jestCiezki, fechmistrzPostep, FECHMISTRZ_WKK_H } from "../config/sztuczki-walka.mjs";
+import { __testing as sw } from "../combat/sztuczki-walka.mjs";
+import { nowaChoroba } from "../actors/health-panel.mjs";
+import { __testing as gi } from "../actors/grenade-inventory.mjs";
+import { trzymaPochwyconego, rzutNaMate } from "../combat/melee-maneuvers.mjs";
+import { daneBlizniaka } from "../actors/improwizacja.mjs";
+import { premieObrazen } from "../combat/zdolnosci-walka.mjs";
+import { MODULE_ID, scratchActor, scratchCleanup, sztuczkaItem, stub } from "./helpers.mjs";
 
 const U = (stany = []) => ({ stany: new Set(stany), szybkosc0: false, nazwa: null });
 const m = o => ({
@@ -305,6 +316,122 @@ export function registerDogrywkaM7Tests(quench) {
         expect(await wykonajPodanie(null, dane(p2), game.user)).to.equal(true);
         expect(dosesRemaining(dawca.items.get(item.id)), "Pan Plaster — pół").to.equal(0.5);
         expect(dosedToday(getChoroby(p2)[0])).to.equal(true);
+      });
+    });
+
+    describe("8c — dogrywka Sztuczek", function () {
+      this.timeout(15000);
+
+      it("czyste: zasięg Szturmowca, rozmiar, ST z SIŁ, ciężki przedmiot, trening Fechmistrza (RAW i WKK)", function () {
+        expect([szturmDziala({}), szturmDziala({ odleglosc: 20, normalny: 20 }), szturmDziala({ odleglosc: 21, normalny: 20 })])
+          .to.deep.equal([true, true, false]);
+        expect([najwyzejDuzy("lg"), najwyzejDuzy("huge"), najwyzejDuzy(undefined)]).to.deep.equal([true, false, true]);
+        expect(stZSily({ pb: 2, sila: 4 })).to.equal(14);
+        expect([jestCiezki(10), jestCiezki(9.9)]).to.deep.equal([true, false]);
+        expect(fechmistrzPostep({ godziny: 0 }).gotowe, "RAW — ten odpoczynek").to.equal(true);
+        expect(fechmistrzPostep({ dotychczas: 20, godziny: 10, kobalt: true })).to.deep.equal({ gotowe: true, godziny: FECHMISTRZ_WKK_H });
+        expect(fechmistrzPostep({ dotychczas: 10, godziny: 5, kobalt: true })).to.deep.equal({ gotowe: false, godziny: 15 });
+      });
+
+      it("plakietki po 8c: pełne i częściowe", function () {
+        for (const k of ["szturmowiec", "lawnik", "rozroba", "patriota", "mistrzBroniBialej"]) expect(sztuczkaStatus(k), k).to.equal("auto");
+        for (const k of ["immunitet", "grenadier", "pewnaReka", "wrestler"]) expect(sztuczkaStatus(k), k).to.equal("partial");
+      });
+
+      it("Immunitet: zarażenie nie wchodzi, choroba popromienna wchodzi (ostrzeżenie MG); bez Sztuczki — wchodzi", async function () {
+        const a = await scratchActor();
+        await a.createEmbeddedDocuments("Item", [sztuczkaItem("immunitet", "Immunitet")]);
+        expect(await nowaChoroba(a, "zakazna", {}, { zrodlo: "zarazenie" })).to.equal(null);
+        expect(getChoroby(a)).to.be.empty;
+        await nowaChoroba(a, "popromienna", {}, { zrodlo: "skazenie" });
+        expect(getChoroby(a).map(c => c.key)).to.deep.equal(["popromienna"]);
+        const b = await scratchActor({ name: "[Quench] bez Immunitetu" });
+        await nowaChoroba(b, "zakazna", {}, { zrodlo: "zarazenie" });
+        expect(getChoroby(b).map(c => c.key)).to.deep.equal(["zakazna"]);
+      });
+
+      it("Grenadier: zasięg rzutu granatem ×2; mina bez zmian", async function () {
+        const a = await scratchActor({ system: { abilities: { str: { value: 14 } } } });
+        const bez = gi.computeThrowRange(a).max;
+        await a.createEmbeddedDocuments("Item", [sztuczkaItem("grenadier", "Grenadier")]);
+        expect(gi.computeThrowRange(a).max).to.equal(bez * 2);
+        expect(gi.computeThrowRange(a, { rzut: false }).max).to.equal(bez);
+      });
+
+      it("Pewny strzał: Szybkość 0 do początku tury, Ułatwienie jeszcze nie zużyte", async function () {
+        const a = await scratchActor({ system: { attributes: { movement: { walk: 9 } } } });
+        await sw.pewnyStrzal(a, null);
+        const e = a.effects.find(x => x.getFlag(MODULE_ID, "pewnyStrzal"));
+        expect(e?.getFlag(MODULE_ID, "pewnyStrzal")).to.deep.equal({ uzyty: false });
+        expect(Number(a.system.attributes.movement.speeds?.walk ?? a.system.attributes.movement.walk) || 0).to.equal(0);
+      });
+
+      it("Wrestler: kogo trzymasz; Rzut na matę wobec trzymanej istoty dużej albo mniejszej", async function () {
+        const a = await scratchActor();
+        const cel = await scratchActor({ name: "[Quench] trzymany" });
+        const olbrzym = await scratchActor({ name: "[Quench] olbrzym", system: { traits: { size: "huge" } } });
+        await a.createEmbeddedDocuments("Item", [sztuczkaItem("wrestler", "Wrestler")]);
+        expect(trzymaPochwyconego(a, cel)).to.equal(false);
+        await a.setFlag(MODULE_ID, "handOccupants", [
+          { slot: "hand.1", label: "trzyma", actorUuid: cel.uuid, kind: "grapple" },
+          { slot: "hand.0", label: "trzyma", actorUuid: olbrzym.uuid, kind: "grapple" }
+        ]);
+        expect(trzymaPochwyconego(a, cel)).to.equal(true);
+        expect([rzutNaMate(a, cel), rzutNaMate(a, olbrzym)]).to.deep.equal([true, false]);
+      });
+
+      it("Ławnik: przedmiot 10 kg+ — 3k4 obuchowe; lżejszy — zwykłe 1k4", async function () {
+        const a = await scratchActor();
+        await a.createEmbeddedDocuments("Item", [sztuczkaItem("lawnik", "Ławnik")]);
+        const made = await a.createEmbeddedDocuments("Item", [
+          { name: "[Quench] beczka", type: "loot", system: { weight: { value: 30, units: "kg" } } },
+          { name: "[Quench] kubek", type: "loot", system: { weight: { value: 0.3, units: "kg" } } }
+        ]);
+        const beczka = made.find(i => i.name.includes("beczka"));
+        const kubek = made.find(i => i.name.includes("kubek"));
+        const ciezki = daneBlizniaka(a, beczka, "hand.0");
+        const b = ciezki.system.damage.base;
+        expect([b.number, b.denomination, b.types, ciezki.flags[MODULE_ID].improwizacja.lawnik]).to.deep.equal([3, 4, ["bludgeoning"], true]);
+        const lekki = daneBlizniaka(a, kubek, "hand.0");
+        expect([lekki.system.damage.base.number, lekki.system.damage.base.denomination, lekki.flags[MODULE_ID].improwizacja.lawnik])
+          .to.deep.equal([1, 4, false]);
+      });
+
+      it("Fechmistrz: wybrany model — kość obrażeń więcej; zmiana w odpoczynku: RAW od razu, WKK po 30 h", async function () {
+        const katana = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "katana");
+        const noz = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "noz-taktyczny");
+        if (!katana || !noz) this.skip();
+        const a = await scratchActor();
+        const made = await a.createEmbeddedDocuments("Item", [sztuczkaItem("mistrzBroniBialej", "Mistrz broni białej"),
+          game.items.fromCompendium(katana), game.items.fromCompendium(noz)]);
+        const sz = made.find(i => i.type === "feat");
+        const k = made.find(i => i.getFlag(MODULE_ID, "weaponId") === "katana");
+        const n = made.find(i => i.getFlag(MODULE_ID, "weaponId") === "noz-taktyczny");
+        const akt = w => w.system.activities.find(x => x.type === "attack");
+        await sz.setFlag(MODULE_ID, "fechmistrz", { model: "katana", nazwa: "Katana" });
+        expect(premieObrazen(akt(k), { formula: "1d10 + 3" }).map(p => [p.id, p.czesc])).to.deep.include(["fechmistrz", "1d10"]);
+        expect(premieObrazen(akt(n), { formula: "1d4 + 3" }).map(p => p.id)).to.not.include("fechmistrz");
+
+        const original = game.settings.get.bind(game.settings);
+        const kobalt = on => stub(game.settings, "get", (ns, key) => ((ns === MODULE_ID && key === "kobaltEnabled") ? on : original(ns, key)));
+        let restore = kobalt(true);
+        try {
+          await sw.FECHMISTRZ_ZAJECIE.apply(a, { model: "noz-taktyczny", godziny: 10 });
+          expect(sz.getFlag(MODULE_ID, "fechmistrz")).to.deep.include({ model: "katana" });
+          expect(sz.getFlag(MODULE_ID, "fechmistrz").trening).to.deep.include({ model: "noz-taktyczny", godziny: 10 });
+          await sw.FECHMISTRZ_ZAJECIE.apply(a, { model: "noz-taktyczny", godziny: 10 });
+          await sw.FECHMISTRZ_ZAJECIE.apply(a, { model: "noz-taktyczny", godziny: 10 });
+          expect(sz.getFlag(MODULE_ID, "fechmistrz").model, "WKK — 30 h").to.equal("noz-taktyczny");
+        } finally {
+          restore();
+        }
+        restore = kobalt(false);
+        try {
+          await sw.FECHMISTRZ_ZAJECIE.apply(a, { model: "katana" });
+          expect(sz.getFlag(MODULE_ID, "fechmistrz").model, "RAW — ten odpoczynek").to.equal("katana");
+        } finally {
+          restore();
+        }
       });
     });
   });

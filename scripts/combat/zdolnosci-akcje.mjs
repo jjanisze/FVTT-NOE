@@ -33,7 +33,7 @@ import {
 } from "./zdolnosci-wspolne.mjs";
 import { zadeklaruj } from "../actors/actions.mjs";
 import { heldItems } from "../actors/doll.mjs";
-import { weaponIdOf } from "../weapons/magazine-model.mjs";
+import { weaponIdOf, modelBroni } from "../weapons/magazine-model.mjs";
 import { magazineReadiness } from "../weapons/magazine.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
@@ -67,11 +67,8 @@ const _klikniete = new Set();
 /*  Ulubiona broń — wybór                        */
 /* -------------------------------------------- */
 
-/** Model broni (U11): wpis katalogu, inaczej nazwa — dowolny egzemplarz tego samego modelu. */
-export function modelBroni(item) {
-  if (item?.type !== "weapon") return null;
-  return weaponIdOf(item) ?? `nazwa:${String(item.name ?? "").trim().toLowerCase()}`;
-}
+/** Model broni (U11): wpis katalogu, inaczej nazwa — dowolny egzemplarz tego samego modelu (`weapons/magazine-model.mjs`). */
+export { modelBroni };
 
 const _lista = item => item?.getFlag(MODULE_ID, FLAG_ULUBIONE) ?? [];
 

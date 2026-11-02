@@ -416,8 +416,9 @@ function _zrodloAtakuZPojazdu({ attackerToken, wrecz }) {
   const p = doc ? pojazdJadacego(doc) : null;
   if (!p || !jedzie(p) || _zdalAkrobatyke(doc)) return null;
   if (maZdolnosc(doc.actor, ZDOLNOSCI.drzwi)) return null; // Konwojent (s. 88)
-  // Ale jazda! (Pochodzenie, s. 61): strzelając z jadącego pojazdu — bez Utrudnienia z niestabilnego podłoża.
-  if (!wrecz && doc.actor?.items?.some(i => i.flags?.[MODULE_ID]?.originAbilityId === "ale-jazda")) return null;
+  // Ale jazda! (Pochodzenie, s. 61) i Pewna ręka, Stabilizacja (Sztuczka, s. 105): atak dystansowy z jadącego pojazdu —
+  // bez Utrudnienia z niestabilnego podłoża.
+  if (!wrecz && _stabilnyStrzal(doc.actor)) return null;
   return [{ rodzaj: "utrudnienie", label: "Atak z jadącego pojazdu — ZRC (Akrobatyka) ST 10 w tej turze to znosi (s. 261)", strona: "atakujący" }];
 }
 
@@ -436,7 +437,12 @@ export async function akrobatykaPrzedAtakiem(tokenDoc) {
  */
 export function utrudnienieZGrzbietu(actor, { jedzie: wRuchu = true, wrecz = false } = {}) {
   if (!wRuchu || (Number(actor?.system?.skills?.tre?.value) || 0) >= 1) return false;
-  return wrecz || !(maJezdzca(actor) || actor?.items?.some(i => i.flags?.[MODULE_ID]?.originAbilityId === "ale-jazda"));
+  return wrecz || !(maJezdzca(actor) || _stabilnyStrzal(actor));
+}
+
+/** Atak dystansowy bez Utrudnienia z niestabilnego podłoża: Ale jazda! (s. 61), Pewna ręka — Stabilizacja (s. 105). */
+function _stabilnyStrzal(actor) {
+  return !!actor?.items?.some(i => i.flags?.[MODULE_ID]?.originAbilityId === "ale-jazda" || i.flags?.[MODULE_ID]?.sztuczka === "pewnaReka");
 }
 
 function _zrodloAtakuZGrzbietu({ attackerToken, wrecz }) {

@@ -46,19 +46,20 @@ są zmienione, `resync` kampanii zrobiony, `master` ma 19 commitów po v0.21.0.
 **Decyzje MG 2026-11-02:** testerzy bety **budują własne postacie** — każda Sztuczka jest osiągalna na 1. poziomie,
 więc Sztuczki bez automatyki wchodzą przed betę. Kolejność do ruchu: **8a. dogrywka M7** (plakietki zdolności-parasoli
 i tanie reguły bez osądu MG), **8b. siedem Sztuczek z nowymi atakami albo przyciskami**, potem krok 6 (PM1, PM7) — odpadł 2026-11-02 po ocenie TT (D17 w `PLAN_tt.md`).
-Ruch (krok 7) i style (krok 9) dostają **własne plany M — M8 i M9** (§3); ruch robi osobna sesja, a oba plany są do
-napisania — ten plik ich nie zastępuje.
+Ruch (krok 7) i style (krok 9) dostają **własne plany M — M8 i M9** (§3). Plan ruchu:
+[PLAN_m8_ruch.md](PLAN_m8_ruch.md) (szkic przekazania 2026-11-02; RAW/WKK, teren ręczny, ocena liczników akcji);
+M9 pozostaje do napisania — ten plik nie zastępuje tych planów.
 
 ```mermaid
 flowchart LR
   DONE["1–5. Zrobione<br/>v0.19.1 → v0.21.0"] --> M7["8. M7 Zdolności poz. 1–3<br/>zrobione 2026-11-01"]
   M7 --> M7B["8a–8b. Dogrywka M7,<br/>siedem Sztuczek"]
   M7B --> PM["6. PM1, PM7 odpadły → TT D17<br/>(zrobione 2026-11-02)"]
-  PM --> RU["7. M8 Ruch w turze, Skakanie,<br/>pasek walki — plan do napisania"]
+  PM --> RU["7. M8 Ruch w turze, Skakanie,<br/>pasek walki — PLAN_m8_ruch.md"]
   RU --> ST["9. M9 Style i motywy<br/>— plan do napisania"]
   ST --> RC{{"10. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
   RC --> GG["11. Styczeń: kampania testowa<br/>„Za garść gambli”"]
-  MG["Tor MG: weto Poligonu (M4, Sala prób),<br/>decyzje handoffu §10"] -.-> RC
+  MG["Tor MG: weto Poligonu (M4, Sala prób),<br/>decyzje M8 §0, §8 i §10"] -.-> RC
   ART["Tor grafiki: dźwięki, ilustracje,<br/>Garderoba i Galeria"] -.-> ST
 ```
 
@@ -95,15 +96,15 @@ flowchart LR
    kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po D17
    pełna bramka wydania i krótki obchód Poligonu (przy kandydacie).
 7. **M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25; własny plan M —
-   MG 2026-11-02, §3 M8, do napisania w osobnej sesji) — wejście:
-   [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md) (projekt i kolejność dostawy §8; dowody dostępności akcji —
+   [PLAN_m8_ruch.md](PLAN_m8_ruch.md), szkic przekazania 2026-11-02) — wejście historyczne:
+   [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md) (pierwotny projekt; dowody dostępności akcji —
    `AUDIT_shared_actions.md`; ruchu jeszcze nie ma). Przed betą z trzech powodów: Skakanie to jedyny ❌ w macierzy
    spoza listy §4 (B1); trzy zdolności M7 czekają na budżet ruchu — Skok Gladiatora, Skoczek, Szybkie nogi (warstwę
    akcji ze znacznikami R i B postawił już E0 M7: `config/actions-data.mjs`, `actors/actions.mjs`; handoff dokłada do
-   niej ruch); budżet ruchu i szablony paska to nowy zapisany stan (B2). **Przed kodem MG rozstrzyga §10 handoffu** —
-   przede wszystkim, czy czerwona trasa jest tylko kolorem, czy blokadą końca ruchu. Kroki 1–3 (budżet, akcje, skok)
-   i 4–6 (linijka zielono-czerwona, szablony paska sześciu klas, stanowisko Poligonu) przed kandydatem — pasek walki
-   to też materiał zwiastuna.
+   niej ruch); budżet ruchu i szablony paska to nowy zapisany stan (B2). Decyzje: **M8 §0, §8 i §10**. MG skłania się
+   ku trwałemu ostrzeżeniu bez blokady i licznikom zużyte/dostępne; to pomysł do oceny, nie zatwierdzony projekt UI.
+   Etapy E0–E6 i E9 obejmują ruch, skok, linijkę, szablony i Poligon; E7–E8 (pełniejsze liczenie A/B/R/I i ataków)
+   są osobno bramkowane zakresem. Pasek walki to też materiał zwiastuna.
 8. **M7 — automatyka zdolności poziomów 1–3** (nowe 2026-10-31; zakres D2, MG 2026-10-25) —
    [PLAN_m7_zdolnosci.md](PLAN_m7_zdolnosci.md): wszystkie zdolności poziomów 1–3 klas i profesji oraz Sztuczki i
    Pochodzenia pregenów (D3 — testerzy dojdą do poziomu 3). XL, etapy E0–E8, dziesięć rodzin zamiast zdolności po
@@ -123,6 +124,10 @@ flowchart LR
      **zrobione 2026-11-02** — Sztuczki 53/53) —
      Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast krwi, Jest zajebiście, Plug & Play. Notatki obu kroków
      — `PLAN_m7_zdolnosci.md` §8.
+   - **8c. Dogrywka Sztuczek** (MG 2026-11-02; **zrobione 2026-11-02**) — dziewięć Sztuczek z częściową automatyką, które
+     dało się domknąć bez warstwy ruchu: Immunitet, Szturmowiec, Grenadier, Pewna ręka, Wrestler, Ławnik, Rozróba,
+     Patriota, Mistrz broni białej. Sztuczki 53/53 — 34 pełne; reszta częściowych czeka na M8 (ekonomia akcji, ruch,
+     ataki okazyjne) albo jest decyzją przy stole. Notatki — `PLAN_m7_zdolnosci.md` §8 „8c”.
 9. **M9 — Style i motywy (graficzne odświeżenie)** (własny plan M — MG 2026-11-02, §3 M9, do napisania) — przed
    betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
@@ -189,7 +194,7 @@ paczki e2e 21 → 44.
 | B2 | ⏳ | Przed zamrożeniem: stan ruchu (krok 7; PM1 i PM7 odpadły 2026-11-02). Dane paczek M7 (E3) i `resync` kampanii (E8) — zrobione 2026-11-01. Zamrożenie — krok 10 |
 | B3 | ✅ | 19 paczek; krok `packs` bramki v0.21.0; po M7 przebudowane (2026-11-01), `validate-packs` zielone |
 | B4 | ✅ | Bramka v0.21.0: Quench 1385/1385, e2e 44/44 w obu światach, `npm test`. Po M7 w piaskownicy: Quench 1510/1510, nowe paczki e2e M7 i regresja zielone — pełna bramka przy następnym wydaniu |
-| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7 i dogrywce (8a–8b): klasowe 103/133 (48 pełnych), Sztuczki 53/53 (29), Pochodzenia 35/36 (21) — przed M7 33/133, 19/53, 4/36 |
+| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7 i dogrywce (8a–8c): klasowe 103/133 (48 pełnych), Sztuczki 53/53 (34), Pochodzenia 35/36 (21) — przed M7 33/133, 19/53, 4/36 |
 | B6 | ✅ | `release:check` v0.21.0 — świat goły i zalecany, moduł z `module.zip` |
 | B7 | 🟡 | `docs/` bez pojazdów, wierzchowców i mechaniki pościgu; `docs/Zdolnosci.md` jest (M7 E8); nagłówek macierzy poprawiony 2026-10-31 |
 | B8 | ⏳ | Przegląd przy kandydacie; listy WKK pilnuje `kobalt-doc-check` od 2026-10-28; odczyty RAI M7 w tabeli `scripts/wkk/README.md` |
@@ -559,24 +564,25 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
   krwi, Jest zajebiście, Plug & Play (2026-11-02; Sztuczki 53/53 — 29 pełnych)
 - Zdolności częściowe z powodu ekonomii akcji i ruchu — do zakresu M8 (niżej)
 
-### M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki — plan do napisania
+### M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki — szkic przekazania
 
-> **Własny plan M — MG 2026-11-02; robi go osobna sesja.** Plik planu (`PLAN_m8_ruch.md`) jeszcze nie istnieje;
-> ten wpis tylko wyznacza zakres i wejścia. Wejście: [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md)
-> (projekt, kolejność dostawy §8, pytania do MG §10), [AUDIT_shared_actions.md](AUDIT_shared_actions.md) (dowody
+> **Własny plan M: [PLAN_m8_ruch.md](PLAN_m8_ruch.md), 2026-11-02 — szkic, bez kodu M8.** Ten wpis jest skrótem;
+> źródłem zakresu, etapów, decyzji RAW/WKK i kryteriów odbioru jest tamten plan. Historyczne wejście:
+> [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md), [AUDIT_shared_actions.md](AUDIT_shared_actions.md) (dowody
 > dostępności akcji), warstwa akcji z M7 E0 (`config/actions-data.mjs`, `actors/actions.mjs` — znaczniki Reakcji
 > i Akcji Bonusowej), budżet ruchu pojazdów i wierzchowców z M4.
 
-Zakres do zaplanowania (§0 krok 7):
+Zakres ruchu (§0 krok 7; M8 §3–§7, §9):
 
 - budżet ruchu w turze, akcje wrodzone przy pustym pasku, Skakanie (jedyny ❌ macierzy spoza §4 — B1), linijka
   zielono-czerwona, szablony paska sześciu klas, stanowisko Poligonu;
-- zdolności częściowe z powodu ekonomii akcji (propozycja agenta 2026-11-02): liczba ataków w akcji Atakowanie
+- osobno bramkowana propozycja rozszerzenia ekonomii akcji (MG rozważa, M8 §8): liczba ataków w akcji Atakowanie
   (Drugi atak, Trzeci atak, Grad ołowiu), koszt Akcji i Akcji Bonusowej (Zryw, Z bara!, manewry Mistrza walki wręcz,
   Szybki Bill, Aramis, Pancerna fura), darmowe interakcje (Samuraj, Pakowanie, Rewolwerowiec, Pistolero), ruch
   (Skok Gladiatora, Skoczek, Szybkie nogi, Padnij/Powstań).
 
-**Gotowe gdy:** — określi plan.
+**Gotowe gdy:** kryteria [M8 §12](PLAN_m8_ruch.md#12-acceptance-matrix-and-completion-definition); każda reguła ruchu ma
+automatykę albo konkretną ręczną ścieżkę, WKK nie udaje RAW, a wybrane etapy przechodzą testy i odbiór.
 
 ### M9 — Style i motywy (graficzne odświeżenie) — plan do napisania
 

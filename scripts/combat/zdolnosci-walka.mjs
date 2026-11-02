@@ -40,6 +40,8 @@ import {
   MIOTACZ, wOknieOdPoprzedniejTury, przedCelemWPierwszejRundzie, rzeznikDziala, koscZabojczejSpluwy
 } from "../config/zdolnosci-walka.mjs";
 import { jestRzucana } from "../config/okolicznosci-ataku.mjs";
+import { fechmistrzModel } from "../config/sztuczki-walka.mjs";
+import { modelBroni } from "../weapons/magazine-model.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Premie liczbowe na `roll.options` — plakietka na karcie ataku. */
@@ -312,6 +314,12 @@ export function premieObrazen(activity, { cel = null, formula = "" } = {}) {
   if (isRevolver(item) && _ma(actor, "clint")) {
     const kosc = koscZabojczejSpluwy(formula);
     if (kosc) out.push({ id: "zabojcza-spluwa", label: "Zabójcza spluwa", czesc: kosc });
+  }
+  // Fechmistrz (Mistrz broni białej, s. 104): wybrany model broni białej — jedna kość obrażeń więcej (PLAN_m7 8c).
+  const fech = fechmistrzModel(actor);
+  if (fech && item.system?.type?.value === "biala" && modelBroni(item) === fech) {
+    const kosc = koscZabojczejSpluwy(formula);
+    if (kosc) out.push({ id: "fechmistrz", label: "Fechmistrz", czesc: kosc });
   }
   return out;
 }
