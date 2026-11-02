@@ -33,13 +33,7 @@ Wszystko liczy się na bieżąco: zdejmiesz hełm w trakcie Berserka — Obłęd
 
 TT postaci **nie ustawia się ręcznie** — zmieniasz ją sprzętem w Oporządzeniu i zdolnościami. Okno TT
 (trybik na tarczy TT w trybie edycji) pokazuje tylko rozkład. Tarcza w ręce sama TT nie podnosi — jej
-wartość siedzi w Parowaniu.
-
-**Pomarańczowa tarcza TT** znaczy, że masz w ekwipunku pancerz, hełm albo ochraniacze, a nie nosisz niczego
-z tej rodziny, choć z nimi TT byłaby wyższa (hełm: daje Krytyczną ochronę i nie obniża TT). Dymek mówi, co
-i ile; przycisk **Napraw** zakłada to przez Oporządzenie (w walce — z jego kosztem). Kto nosi jakiś pancerz,
-a lepszy wozi w plecaku, uwagi nie dostaje — to jego wybór. MG przy starcie świata dostaje szeptem listę
-takich postaci graczy.
+wartość siedzi w Parowaniu. Ręczną TT mają tylko BN (ich statblock).
 
 ## Atak i obrażenia to dwa rzuty
 

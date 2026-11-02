@@ -15,10 +15,6 @@
  *     `preCreateActor` / `preUpdateActor` nie zapisuje ręcznych ustawień, MG przy starcie świata
  *     czyści stare (`oczyscRecznaTT`), okno TT postaci pokazuje rozkład zamiast formularza.
  *     BN, pojazdy i obiekty dalej mają natywne okno dnd5e (TT ze statblocku).
- *   - **Nie założona osłona (D17).** Postać, która ma pancerz, hełm albo ochraniacze, a nie nosi
- *     żadnego z tej rodziny, choć założenie podniosłoby TT (hełm: nie obniżyłoby), ma pomarańczową
- *     tarczę TT z przyciskiem „Napraw” (zakłada przez lalkę), wiersz w dymku i wpis w
- *     `game.neuroshima.tt.audit()`; MG dostaje listę szeptem przy starcie świata.
  *   - **Dymek TT** — owinięcie `Actor5e#_prepareArmorClassAttribution`: tabela w klasach
  *     natywnego `property-attribution` plus sekcja „nie liczy się” z powodem w linii.
  *   - **Okno TT** — „Domyślna” → „NOE (automatycznie)”, metody 5e (Mag, Smocza, Mnich,
@@ -34,8 +30,8 @@
 
 import { computeTT, TT_ABILITY_KEYS, permanentlyLosingMethods, _signed } from "../config/tt-rules.mjs";
 import { hasAbility, ABILITY_KEYS } from "./abilities.mjs";
-import { heldItems, familyOf, place } from "./doll.mjs";
-import { equippedArmor, isProficientIn, registerStealthExemption } from "./armor-rules.mjs";
+import { heldItems, familyOf } from "./doll.mjs";
+import { equippedArmor, registerStealthExemption } from "./armor-rules.mjs";
 import { isZaslonaWeapon } from "./samuraj.mjs";
 import { weaponIdOf } from "../weapons/magazine-model.mjs";
 import { zarejestrujEfektTuryWlasciciela } from "../combat/czas-efektu.mjs";
@@ -68,10 +64,7 @@ function _inBerserk(actor) {
 
 /** Pancerz korpusu dla silnika; `value` już po wytrzymałości (`production/naprawa.mjs`). */
 function _armorOf(actor) {
-  return _armorSnap(actor.system?.attributes?.ac?.equippedArmor ?? equippedArmor(actor));
-}
-
-function _armorSnap(item) {
+  const item = actor.system?.attributes?.ac?.equippedArmor ?? equippedArmor(actor);
   if (!item) return null;
   const value = _num(item.system?.armor?.value);
   const source = _num(item._source?.system?.armor?.value);
@@ -220,107 +213,22 @@ export async function oczyscRecznaTT({ commit = true, actors = null } = {}) {
     const reczna = recznaTT(actor._source.system?.attributes?.ac);
     if (!reczna) continue;
     out.push({ actor, opis: reczna.opis });
-    if (commit) await actor.update({ system: { attributes: { ac: reczna.zmiany } } });
+    // Dane sprzed dnd5e 6 trzymają w bazie `calc` / `formula`; dnd5e przy każdym wczytaniu robi z nich na nowo
+    // `override` / formułę (`_migrateArmorClass`), więc same `zmiany` by nie zostały — klucze trzeba skasować.
+    // Zapis `-=`, nie `ForcedDeletion`: migracja zmian wzięłaby operator za nazwę obliczenia.
+    if (commit) await actor.update({ system: { attributes: { ac: { ...reczna.zmiany, "-=calc": null, "-=formula": null } } } });
   }
   return out;
 }
 
-/* -------------------------------------------- */
-/*  Nie założona osłona (D17)                    */
-/* -------------------------------------------- */
-
-/** Rodziny lalki, które noszone podnoszą TT albo chronią głowę — w kolejności wierszy dymka. */
-const OSLONY = ["bodyArmor", "helmet", "armGuards", "legGuards"];
-
-/** TT z Efektów Aktywnych przedmiotu (ochraniacze: +1 na `ac.bonus`, działa, gdy założony). */
-function _premiaPrzedmiotu(item) {
-  let sum = 0;
-  for (const e of item.effects ?? []) {
-    for (const c of e.system?.changes ?? e.changes ?? []) {
-      if (c.key === "system.attributes.ac.bonus") sum += _num(c.value);
-    }
-  }
-  return sum;
-}
-
-/**
- * Osłona, którą postać ma, a nie nosi niczego z jej rodziny, choć powinna: pancerz i ochraniacze — założenie
- * podniosłoby TT; hełm — nie obniżyłby jej (daje Krytyczną ochronę; Goła klata gaśnie w hełmie, więc Brutalowi
- * hełmu nie podsuwamy). Tylko sprzęt, w którym postać jest wyszkolona. Z rodziny wybieramy najlepszy.
- * Postać, która nosi jakiś pancerz, a w plecaku ma lepszy, nie dostaje uwagi — to jej wybór.
- * @param {Actor5e} actor
- * @returns {{item: Item5e, family: string, teraz: number, z: number}[]}  `teraz` / `z` — TT na karcie bez i z
- *   przedmiotem (z efektami i osłoną, które dokładają się poza silnikiem)
- */
-export function nieZalozone(actor) {
-  // Zbrojownia to katalog sprzętu, nie postać — nosi wszystko naraz w plecaku.
-  if (actor?.type !== "character" || actor.getFlag(MODULE_ID, "isZbrojownia")) return [];
-  const own = actor.items.filter(i => OSLONY.includes(familyOf(i)));
-  if (!own.length) return [];
-  const snap = ttSnapshot(actor);
-  const ac = actor.system?.attributes?.ac ?? {};
-  const poza = _num(ac.bonus) + _num(ac.cover);
-  const teraz = computeTT(snap).total + poza;
-  const out = [];
-  for (const family of OSLONY) {
-    const rodzina = own.filter(i => familyOf(i) === family);
-    if (!rodzina.length || rodzina.some(i => i.system?.equipped)) continue;
-    let best = null;
-    for (const item of rodzina) {
-      if (!isProficientIn(actor, item)) continue;
-      const s = { ...snap };
-      if (family === "bodyArmor") s.armor = _armorSnap(item);
-      else if (family === "helmet") s.helmet = true;
-      else s.guards = true;
-      const z = computeTT(s).total + _premiaPrzedmiotu(item) + poza;
-      if (!best || z > best.z) best = { item, family, teraz, z };
-    }
-    if (best && (family === "helmet" ? best.z >= teraz : best.z > teraz)) out.push(best);
-  }
-  return out;
-}
-
-/** „Plate carrier typ I — nie założony; z nim TT 15”. */
-function _uwagaTekst(u) {
-  if (u.family === "helmet") return `${u.item.name} — nie założony; bez niego nie ma Krytycznej ochrony`;
-  return `${u.item.name} — nie założony; z nim TT ${u.z}`;
-}
-
-/**
- * Uwagi MG o TT postaci: nie założona osłona i ręczne ustawienie w źródle (przed oczyszczeniem przy starcie).
- * @param {object} [options]
- * @param {Actor5e[]} [options.actors]  domyślnie postacie graczy
- * @returns {{actor: Actor5e, uwagi: string[]}[]}
- */
-export function auditTT({ actors = null } = {}) {
-  const lista = actors ?? game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
-  const out = [];
-  for (const actor of lista) {
-    const uwagi = nieZalozone(actor).map(_uwagaTekst);
-    const reczna = recznaTT(actor._source.system?.attributes?.ac);
-    if (reczna) uwagi.unshift(`TT ustawiona ręcznie (${reczna.opis})`);
-    if (uwagi.length) out.push({ actor, uwagi });
-  }
-  return out;
-}
-
-/** Szept do MG przy starcie świata: co oczyszczono i kto ma nie założoną osłonę. */
+/** Szept do MG przy starcie świata, tylko gdy coś oczyszczono — ślad, co było wpisane. */
 async function _raportStartowy() {
   const oczyszczone = await oczyscRecznaTT();
-  const audyt = auditTT();
-  if (!oczyszczone.length && !audyt.length) return;
-  const li = (actor, tekst) => `<li>@UUID[${actor.uuid}]{${esc(actor.name)}}: ${esc(tekst)}</li>`;
-  const sekcje = [];
-  if (oczyszczone.length) {
-    sekcje.push(`<p>Ręczna TT usunięta — liczą ją zasady NOE:</p><ul>${oczyszczone.map(o => li(o.actor,
-      `${o.opis} → teraz ${o.actor.system.attributes.ac.value}`)).join("")}</ul>`);
-  }
-  if (audyt.length) {
-    sekcje.push(`<p>Nie założona osłona (karta: pomarańczowa TT, „Napraw”):</p><ul>${audyt.map(r =>
-      r.uwagi.map(u => li(r.actor, u)).join("")).join("")}</ul>`);
-  }
+  if (!oczyszczone.length) return;
+  const li = o => `<li>@UUID[${o.actor.uuid}]{${esc(o.actor.name)}}: ${esc(o.opis)} → teraz ${o.actor.system.attributes.ac.value}</li>`;
   await ChatMessage.create({
-    content: `<div class="neuro-tt-raport"><p><strong><i class="fa-solid fa-shield-halved"></i> TT postaci</strong></p>${sekcje.join("")}</div>`,
+    content: `<div class="neuro-tt-raport"><p><strong><i class="fa-solid fa-shield-halved"></i> TT postaci</strong></p>`
+      + `<p>Ręczna TT usunięta — liczą ją zasady NOE:</p><ul>${oczyszczone.map(li).join("")}</ul></div>`,
     whisper: game.users.filter(u => u.isGM).map(u => u.id),
     speaker: { alias: "Trudność Trafienia" }
   });
@@ -390,7 +298,6 @@ function _ttTooltip(actor, title) {
   const tt = ac.neuroshima;
   const rows = [_row(tt.method.value, esc(_methodLabel(tt)))];
   for (const b of tt.bonuses) rows.push(_add(b.value, esc(b.label)));
-  if (_num(ac.shield)) rows.push(_add(ac.shield, esc(ac.equippedShield?.name ?? "Tarcza")));
   if (_num(ac.bonus)) {
     for (const a of actor._prepareActiveEffectAttributions("system.attributes.ac.bonus")) rows.push(_add(a.value, esc(a.label)));
   }
@@ -404,13 +311,6 @@ function _ttTooltip(actor, title) {
       rows.push(r.kind === "method" || value === ""
         ? _row(value, label, { cls: "neuro-tt-off" })
         : _add(value, label, { cls: "neuro-tt-off" }));
-    }
-  }
-  const uwagi = nieZalozone(actor);
-  if (uwagi.length) {
-    rows.push(`<tr class="neuro-tt-sep neuro-tt-uwaga"><td colspan="2">nie założone</td></tr>`);
-    for (const u of uwagi) {
-      rows.push(_row(u.family === "helmet" ? "" : u.z, esc(_uwagaTekst(u)), { cls: "neuro-tt-uwaga" }));
     }
   }
   const caption = title ? `<caption>${esc(game.i18n.localize(title))}</caption>` : "";
@@ -455,53 +355,6 @@ function _onRenderArmorClassConfig(app, element) {
     <p>Trudność Trafienia postaci liczy się z zasad NOE: pancerz, hełm, ochraniacze i tarcza z Oporządzenia,
       zdolności, stany i reakcje. Ręcznie się jej nie ustawia — zmieniasz ją sprzętem i zdolnościami.</p>
     ${_ttTooltip(actor, "DND5E.ArmorClass")}</div>`;
-}
-
-/* -------------------------------------------- */
-/*  Tarcza TT na karcie (D17)                    */
-/* -------------------------------------------- */
-
-/** Pomarańczowa tarcza TT i „Napraw” pod nią, gdy postać ma nie założoną osłonę. */
-function _onRenderCharacterSheet(app, element) {
-  const actor = app.document;
-  const badge = element.querySelector(".ac-badge");
-  if (!badge || actor?.type !== "character") return;
-  element.querySelector(".neuro-tt-napraw")?.remove();
-  const uwagi = nieZalozone(actor);
-  badge.classList.toggle("neuro-tt-uwaga", uwagi.length > 0);
-  if (!uwagi.length || !actor.isOwner) return;
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "neuro-tt-napraw";
-  btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation" inert></i> Napraw`;
-  btn.dataset.tooltip = uwagi.map(u => esc(_uwagaTekst(u))).join("<br>");
-  btn.addEventListener("click", ev => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    void napraw(actor);
-  });
-  badge.append(btn);
-}
-
-/**
- * „Napraw”: jedna rzecz — zakłada ją przez lalkę (koszty i pytania jak przy „Załóż”); kilka — okno z wyborem,
- * po jednej na kliknięcie (każde zakładanie to osobny ruch w Oporządzeniu).
- */
-export async function napraw(actor) {
-  const uwagi = nieZalozone(actor);
-  if (!uwagi.length) return false;
-  let u = uwagi[0];
-  if (uwagi.length > 1) {
-    const id = await foundry.applications.api.DialogV2.wait({
-      window: { title: `${actor.name}: nie założone` },
-      content: `<p>Co założyć? Każda rzecz to osobny ruch w Oporządzeniu.</p>`,
-      buttons: uwagi.map((x, i) => ({ action: x.item.id, label: _uwagaTekst(x), default: i === 0 })),
-      rejectClose: false
-    });
-    u = uwagi.find(x => x.item.id === id);
-    if (!u) return false;
-  }
-  return place(actor, u.item, "auto");
 }
 
 /* -------------------------------------------- */
@@ -568,7 +421,6 @@ export function registerTT() {
   Hooks.on("preCreateActor", _onPreCreateActor);
   Hooks.on("preUpdateActor", _onPreUpdateActor);
   Hooks.on("renderArmorClassConfig", _onRenderArmorClassConfig);
-  Hooks.on("renderCharacterActorSheet", _onRenderCharacterSheet);
 
   Hooks.once("ready", () => {
     if (!game.users.activeGM?.isSelf) return;
@@ -582,5 +434,5 @@ export function registerTT() {
 export const ttApi = Object.freeze({
   snapshot: ttSnapshot, compute: actor => computeTT(ttSnapshot(actor)), for: ttFor, source: ttSource,
   permanentlyLosing: actor => permanentlyLosingMethods(ttSnapshot(actor)), cleanupLegacy: cleanupLegacyTTEffects,
-  audit: auditTT, nieZalozone, napraw, oczyscReczna: oczyscRecznaTT
+  oczyscReczna: oczyscRecznaTT
 });

@@ -9,7 +9,7 @@
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, sztuczkaItem, namedFeat, stub, waitFor }
   from "./helpers.mjs";
 import { equip, place } from "../actors/doll.mjs";
-import { ttApi, recznaTT, nieZalozone, oczyscRecznaTT, auditTT, napraw } from "../actors/tt.mjs";
+import { ttApi, recznaTT, oczyscRecznaTT } from "../actors/tt.mjs";
 import { resolveExclusiveGroups } from "../actors/class-rules.mjs";
 
 /** Zdolność klasowa tak, jak leży na karcie po awansie (flaga paczki). */
@@ -271,68 +271,6 @@ export function registerTTKartaTests(quench) {
         } finally {
           await app.close();
         }
-      });
-    });
-
-    describe("Nie założona osłona (D17)", function () {
-      this.timeout(15000);
-      const WYSZKOLONY = { traits: { armorProf: { value: ["lgt", "med"] } } };
-
-      it("pancerz w plecaku: uwaga z TT po założeniu; po założeniu znika", async function () {
-        const { actor, made } = await pc("w plecaku", BRUTAL, [armour("Plate carrier", "light", 12)], WYSZKOLONY);
-        const [u] = nieZalozone(actor);
-        expect(u?.item.id).to.equal(gear(made)[0].id);
-        expect([u.teraz, u.z], "12 → 12 + ZRC 2").to.deep.equal([12, 14]);
-        await wear(gear(made)[0]);
-        expect(nieZalozone(actor)).to.be.empty;
-        expect(actor.system.attributes.ac.value).to.equal(14);
-      });
-
-      it("z kilku pancerzy podsuwa najlepszy; noszony słabszy — bez uwagi (wybór gracza)", async function () {
-        const { actor, made } = await pc("dwa", BRUTAL,
-          [armour("Kurtka", "light", 11), armour("Kamizelka", "medium", 14, 2)], WYSZKOLONY);
-        expect(nieZalozone(actor).map(u => u.z)).to.deep.equal([16]);
-        await wear(gear(made).find(i => i.system.type.value === "light"));
-        expect(nieZalozone(actor)).to.be.empty;
-      });
-
-      it("bez wyszkolenia: pancerza nie podsuwa", async function () {
-        const { actor } = await pc("bez wyszkolenia", BRUTAL, [armour("Kamizelka", "medium", 14, 2)]);
-        expect(nieZalozone(actor)).to.be.empty;
-      });
-
-      it("Goła klata: słabszego pancerza ani hełmu nie podsuwa; bez niej hełm tak", async function () {
-        const { actor } = await pc("Brutal", BRUTAL, [feature("gola-klata", "Goła klata"), armour("Kurtka", "light", 12),
-          HELMET], WYSZKOLONY);
-        expect(nieZalozone(actor), "Goła klata 15 > kurtka 14; hełm gasi Gołą klatę").to.be.empty;
-        const { actor: inny } = await pc("bez klaty", BRUTAL, [HELMET], WYSZKOLONY);
-        expect(nieZalozone(inny).map(u => u.family)).to.deep.equal(["helmet"]);
-      });
-
-      it("karta: pomarańczowa tarcza TT i „Napraw”; „Napraw” zakłada przez lalkę", async function () {
-        const { actor, made } = await pc("karta", BRUTAL, [armour("Plate carrier", "light", 12)], WYSZKOLONY);
-        // Świeżo otwarta karta z przedmiotem: obserwator rozmiaru ekwipunku dnd5e (`InventoryElement#_onResize`)
-        // chowa kolumny w trakcie układania i przeglądarka zgłasza „ResizeObserver loop…” — nieszkodliwe, ale Mocha
-        // łapie je przez `window.onerror` jako błąd testu. Na czas otwartej karty przepuszczamy tylko ten jeden.
-        const badge = async () => {
-          const prev = window.onerror;
-          window.onerror = (msg, ...rest) => (/ResizeObserver loop/.test(String(msg)) ? true : prev?.(msg, ...rest));
-          await actor.sheet.render({ force: true });
-          try {
-            const el = await waitFor(() => actor.sheet.element?.querySelector(".ac-badge"), { label: "tarcza TT" });
-            return { uwaga: el.classList.contains("neuro-tt-uwaga"), napraw: !!el.querySelector(".neuro-tt-napraw") };
-          } finally {
-            await actor.sheet.close();
-            await new Promise(r => setTimeout(r, 100));
-            window.onerror = prev;
-          }
-        };
-        expect(await badge()).to.deep.equal({ uwaga: true, napraw: true });
-        expect(auditTT({ actors: [actor] })[0]?.uwagi).to.deep.equal([`${gear(made)[0].name} — nie założony; z nim TT 14`]);
-        await napraw(actor);
-        await waitFor(() => actor.items.get(gear(made)[0].id)?.system.equipped, { label: "założony" });
-        expect(await badge()).to.deep.equal({ uwaga: false, napraw: false });
-        expect(auditTT({ actors: [actor] })).to.be.empty;
       });
     });
 

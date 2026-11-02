@@ -89,8 +89,8 @@ flowchart LR
    zamrożeniem modeli. *2026-11-02:* **PM7 nie dotyczy** (dnd5e 6.0.6 nie ma `identifier` aktora). **PM1 odrzucony** po ocenie
    poprawności TT (MG: poprawność bezwzględna): reguły i testy zgodne z podręcznikiem, błędne były dane kampanii
    (pancerze nie założone po wdrożeniu lalki, ręczna TT Piekarza). Port nie złapałby żadnego z tych przypadków, a
-   rozdzieliłby TT między dnd5e i moduł. Zamiast niego **D17** (`PLAN_tt.md`): bez ręcznej TT postaci, pomarańczowa
-   TT z „Napraw” przy nie założonej osłonie, szept MG przy starcie; sprzęt drużyny założony (kopia przed). P7
+   rozdzieliłby TT między dnd5e i moduł. Zamiast niego **D17** (`PLAN_tt.md`): bez ręcznej TT postaci (BN ją
+   mają), czyszczenie starych wartości przy starcie; sprzęt drużyny założony (kopia przed). P7
    (`hp.dt` Bestiariusza, `PLAN_m6_drobne_zasady.md`) szedł razem z PM1 — zostaje sam, po becie. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
    kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po D17
    pełna bramka wydania i krótki obchód Poligonu (przy kandydacie).
