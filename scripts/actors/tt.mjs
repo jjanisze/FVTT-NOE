@@ -213,10 +213,13 @@ export async function oczyscRecznaTT({ commit = true, actors = null } = {}) {
     const reczna = recznaTT(actor._source.system?.attributes?.ac);
     if (!reczna) continue;
     out.push({ actor, opis: reczna.opis });
-    // Dane sprzed dnd5e 6 trzymają w bazie `calc` / `formula`; dnd5e przy każdym wczytaniu robi z nich na nowo
-    // `override` / formułę (`_migrateArmorClass`), więc same `zmiany` by nie zostały — klucze trzeba skasować.
-    // Zapis `-=`, nie `ForcedDeletion`: migracja zmian wzięłaby operator za nazwę obliczenia.
-    if (commit) await actor.update({ system: { attributes: { ac: { ...reczna.zmiany, "-=calc": null, "-=formula": null } } } });
+    // Dane sprzed dnd5e 6 trzymają w bazie `calc: "flat"`, a dnd5e przy każdym wczytaniu robi z niego na nowo
+    // `override = flat` (`_migrateArmorClass`). `calc` jest w dnd5e 6 polem nietrwałym — klient go nie skasuje ani
+    // nie nadpisze (zmiana ginie w `cleanData`), a samo `override: null` serwer po pierwszym razie uznaje za brak
+    // zmiany. Puste `flat` daje puste `override` przy następnym wczytaniu; postaci `flat` do niczego nie służy.
+    // (`calc: "custom"` z `formula` klient też nie ruszy — w kampanii takich postaci nie było.)
+    const flat = reczna.zmiany.override === null ? { flat: null } : {};
+    if (commit) await actor.update({ system: { attributes: { ac: { ...reczna.zmiany, ...flat } } } });
   }
   return out;
 }
