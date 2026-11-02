@@ -86,7 +86,9 @@ flowchart LR
    wydane w v0.21.0**; notatki etapów — `PLAN_m6_drobne_zasady.md` §11. Zostaje przegląd biegłości istniejących BG
    (`HANDOFF_bieglosci_retro.md`) — sprawa kampanii, nie bramki.
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
-   zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
+   zamrożeniem modeli. *2026-11-02:* **PM7 nie dotyczy** (dnd5e 6.0.6 nie ma `identifier` aktora). **PM1** — port nie
+   usunie owinięcia (połowa reguł TT zależy od stanu modułu), MG: poprawność TT jest bezwzględna — ocena poprawności
+   TT (reguły, testy, dane kampanii) i decyzja MG w toku. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
    kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po PM1
    pełna bramka wydania i krótki obchód Poligonu.
 7. **M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25; własny plan M —

@@ -443,13 +443,13 @@ wyszło, i warunkiem wejścia. Kolejność — według stosunku zysku do kosztu 
 
 | # | Co | Dlaczego | Warunek wejścia | Rozmiar |
 |---|---|---|---|---|
-| PM1 | TT jako obliczenia KP dnd5e 6 (`ac.calcs`: 10 + ZRC, pancerz, Goła klata, Tarcza wiary; premie stałe jako premie KP) | koniec owinięcia `prepareDerivedData`; arkusz 5e pokazuje prawdziwe KP i okno konfiguracji | E3 zielone; dymek z rozkładem TT odtworzony z danych dnd5e | M |
+| PM1 | TT jako obliczenia KP dnd5e 6 (`ac.calcs`: 10 + ZRC, pancerz, Goła klata, Tarcza wiary; premie stałe jako premie KP) | koniec owinięcia `prepareDerivedData`; arkusz 5e pokazuje prawdziwe KP i okno konfiguracji | E3 zielone; dymek z rozkładem TT odtworzony z danych dnd5e | M — **ocena 2026-11-02:** owinięcie nie zniknie (połowa reguł TT zależy od lalki, hełmu, ochraniaczy i stanów, których dnd5e nie zna); decyzja MG po ocenie poprawności TT (`PLAN_beta.md` §0 krok 6) |
 | PM2 | Bieganie, okoliczności, warunkowe premie ulepszeń jako zmiany „rule” i czasy turowe; szybkość przez `movement.multiplier` | mniej hooków rzutów i ręcznego zdejmowania efektów | E4 zielone; testy wzorcowe na obecnym zachowaniu | M–L |
 | PM3 | Zranienie i Skażenie jako wielopoziomowe stany dnd5e | mniej własnych pipek i HUD-ów | E7 zielone; decyzja MG o wyglądzie | M |
 | PM4 | Grupy inicjatywy towarzyszy przez mechanizm dnd5e | mniej własnego porządku walki | wynik E9 | S–M |
 | PM5 | Noktowizor i termowizor przez zmysły aktora i `senseVisionSync` | mniej ręcznego ustawiania wzroku żetonu | wynik E9; `PLAN_nvg_thermal.md` | M |
 | PM6 | Dym, gaz, kolczatka, ogień jako obszary działania z zachowaniami regionów (efekt w strefie, trudny teren) | mniej kafelków i własnych stref; spójne z mapami (Tiled) | E5–E6 zielone | M |
-| PM7 | Identyfikatory istot Bestiariusza w `identifier` aktora | mniej flag, wyszukiwanie przez system | E8 | S |
+| PM7 | Identyfikatory istot Bestiariusza w `identifier` aktora | mniej flag, wyszukiwanie przez system | E8 | S — **nie dotyczy** (2026-11-02): dnd5e 6.0.6 nie ma pola `identifier` na aktorze (tylko przedmioty — klasy, podklasy, czary); id istoty zostaje we fladze `bestiary.id` |
 | PM8 | Prośby o RO przez handler `save` dnd5e + hook skutków | mniej własnych handlerów | E6 | S |
 | PM9 | Podział stosu w wymianie przez menu dnd5e | mniej kodu M5 | E7 | S |
 | PM10 | Wydajność Pościgu (doradcze progi z bramki v0.19.0) | odłożone z v0.19.0 | po E10 | S–M |
