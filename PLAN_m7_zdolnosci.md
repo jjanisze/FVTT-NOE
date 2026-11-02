@@ -958,3 +958,22 @@ już ma (bez upuszczania spoza puli).
   beczka Ławnika z Przygnieceniem przez MG).
 - **Kampania:** z dziewięciu ma je tylko Laffitte (Patriota) — `resync` po kopii zapasowej przestawia jego plakietkę na
   pełną.
+
+### Przegląd częściowych zdolności klasowych (2026-11-02, po 8c)
+
+56 z 103 zdolności klasowych ma plakietkę częściową. Co zostaje „przy stole”, według tego, co by to domknęło:
+
+- **Czeka na M8** (ekonomia akcji, liczba ataków, ruch, ataki okazyjne) — 8: Berserk (Szarża, zmęczenie po Berserku), Z bara
+  (Akcja Bonusowa), Drugi atak, Trzeci atak, Zryw (dodatkowa Akcja), Zew areny (Praca nóg, Skok Gladiatora), Zwinność
+  szczura (Skoczek), Pancerna fura (akcje pojazdu w Akcji Bonusowej). Razem z 10 Sztuczkami z 8c — lista wejściowa dla
+  planu ruchu.
+- **Kandydaci do automatyki bez M8** — 6, każdy do sprawdzenia z RAW przed robotą: Wściekły cios (przycisk tylko pod
+  trafieniem atakiem z SIŁ), Kocie kości (Cztery łapy przy upadku), Dziewięć żyć (Kocia kość jako przycisk „po rzucie”
+  pod RO), Pogromca (obrażenia krytyczne przeciw mutantom i potworom), Rewolwerowiec i Pistolero (Strzał z biodra +5 do
+  Inicjatywy; Powąchaj to — podpowiedź Ułatwienia w Zastraszaniu).
+- **Stół z założenia** — 42: fabuła i wiedza (Szósty zmysł, Spieprzysz to, Szybka gadka i Szybkie badanie, Mój biom,
+  Mój wróg i jego opcje, Kłusownik, Jeden z nich, Reputacja, Laska boża, Moja prawa ręka, Zawsze w siodle, Drzwi w drzwi,
+  Kaskader, Skrytka, Slang, Szary, Kamuflaż, Strzelec, Bez tajemnic, Oswajanie zwierząt, Jeden z nas, Partner, Emiter
+  EMP, Słaby punkt, A co mi tam, Łyżeczka, Za garść gambli, Mechanika, Jak dbasz tak masz, Przycelowanie, Skuteczny
+  cios, Dwóch na jednego poza walką, RO bez znanego źródła — Smakuje jak arszenik, Empiryk) oraz MG w pętli z założenia
+  (Truciciel — zatrucie nakłada MG; Łapiduch — minuta na zegarze MG).
