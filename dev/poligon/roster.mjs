@@ -211,5 +211,28 @@ for (const [k, poziom, prof, picks, sztuczka, origin, zdolnosc] of M7) {
   });
 }
 
+/**
+ * Dogrywka M7 (PLAN_beta 8a–8b, 2026-11-02): dwanaście Sztuczek i Człowiek-aligator stały się automatyką — po dwie
+ * Sztuczki na personie 5. poziomu (startowa i wybór klasy na 4.). Doklejone na końcu, nic wyżej się nie przesuwa.
+ */
+const DOGRYWKA = [
+  // [klasa, profesja, Sztuczka startowa, Sztuczka z 4. poziomu, pochodzenie, zdolność Pochodzenia]
+  ["brutal", "Gladiator", "Karateka", "Barbarka", "Miami", "Człowiek-aligator"],
+  ["zlodziej", "Zabójca", "Nożownik", "Ukryty cel", "Nowy Jork", null],
+  ["zwiadowca", "Łowca Mutantów", "Robin Hood", "Miotacz", "Teksas", null],
+  ["twardziel", "Żołnierz", "Pancerny", "Padnij/Powstań", "Vegas", null],
+  ["cwaniak", "Gwiazda", "Jest zajebiście", "Pierwotny instynkt", "Salt Lake City", null],
+  ["spec", "Monter", "Plug & Play", "Benzyna zamiast krwi", "Detroit", null]
+];
+for (const [k, prof, sztuczka, czwarty, origin, zdolnosc] of DOGRYWKA) {
+  roster.push({
+    id: `8b-${slug(sztuczka)}`, name: `${prof}: ${sztuczka}`,
+    rola: `${CLASS_LABEL[k]} 5 · ${prof} · Sztuczki ${sztuczka} i ${czwarty}${zdolnosc ? `, ${zdolnosc}` : ""} (pokrycie dogrywki M7)`,
+    klasa: k, poziom: 5, profesja: prof, pochodzenie: origin, cechy: CECHY[k],
+    picks: { Sztuczka: czwarty, ...(zdolnosc ? { "Zdolność z Pochodzenia": zdolnosc } : {}) },
+    sztuczka, ekwipunek: LOADOUTS[k], grupa: "pokrycie"
+  });
+}
+
 export const ROSTER = Object.freeze(roster);
 export const personaDef = id => ROSTER.find(p => p.id === id) ?? null;

@@ -151,10 +151,25 @@ export function przycelowanieZRzutu(roll, tokenUuid) {
  * Wpis celu na karcie ataku: TT wobec atakującego w chwili rzutu, osłona, werdykt.
  * @param {Token|TokenDocument} token
  */
+/** Premie TT celu z żetonu (Grigorij — pojazd z kierowcą z Benzyną zamiast krwi): `fn(tokenDoc)` → liczba. */
+const _premieTTCelu = [];
+export function zarejestrujPremieTTCelu(fn) {
+  _premieTTCelu.push(fn);
+}
+
+function _premiaTTCelu(doc) {
+  let n = 0;
+  for (const fn of _premieTTCelu) {
+    try { n += Number(fn(doc)) || 0; } catch (err) { console.error(`${MODULE_ID} | premia TT celu`, err); }
+  }
+  return n;
+}
+
 export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null, item = null, przycelowanie = null }) {
   const doc = token?.document ?? token;
   const actor = doc?.actor;
-  const tt = actor ? ttAgainst(actor, { attacker, melee: obrona.melee, item }) : null;
+  const ttBazowe = actor ? ttAgainst(actor, { attacker, melee: obrona.melee, item }) : null;
+  const tt = ttBazowe === null || ttBazowe === undefined ? ttBazowe : ttBazowe + _premiaTTCelu(doc);
   const glowa = przycelowanie?.skutek === "krytyk" ? `Przycelowanie: ${przycelowanie.label} — trafienie krytyczne` : null;
   const entry = {
     tokenUuid: doc?.uuid ?? null, actorUuid: actor?.uuid ?? null, name: doc?.name ?? actor?.name ?? "?",

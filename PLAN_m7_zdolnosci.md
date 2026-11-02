@@ -895,3 +895,30 @@ osądu MG i plakietki, potem siedem Sztuczek z nowymi atakami albo przyciskami (
   siedem z 8b), Pochodzenia 35/36 (21 pełnych).
 - **Testy:** Quench `dogrywka-m7` (16) — 1526/1526; e2e `dawki` (MG podaje lek z Panem Plastrem graczowi — okno
   u gracza, przyjęcie, pół dawki; pacjent offline — okno u MG, odmowa niczego nie zmienia).
+
+### 8b — siedem Sztuczek z atakami i przyciskami (2026-11-02, PLAN_beta §0)
+
+- **Ataki naturalne** (Karateka, Barbarka) to aktywności ataku na samej Sztuczce — jak ataki istot Bestiariusza, bez
+  potoku broni (zacięcia, magazynki, zużycie). Karateka: SIŁ albo ZRC — dnd5e daje atakowi z featu tylko SIŁ, więc
+  `flags.<mod>.cechyAtaku` poszerza listę cech (wąska łatka `availableAbilities`): wyższa domyślnie, wybór w oknie.
+- **Zapowiedziany atak** (`combat/sztuczki-ataki.mjs`): wpis na atakującym — cel, broń, Ułatwienie albo automatyczne TK —
+  który najbliższy pasujący atak czyta i zdejmuje. Nożownik (przycisk obok Ulubionej broni, ważny w tej turze,
+  noże — D19), Celowanie Robin Hooda (do użycia albo końca walki). Z baśki — automatyczne TK z flagi aktywności.
+  Silnik okoliczności i rozstrzygacz trafienia dostały rejestry: źródła automatycznego TK, dodatkowe stany celu,
+  premie TT celu.
+- **Barbarka, Wyjaśnić ci?** — przycisk pod trafieniem głową (cel nie większy od atakującego): RO na Siłę i Powalenie
+  wykonuje MG przez przekaźnik (gracz nie rzuca za cudzą istotę).
+- **Jest zajebiście** — aktywność [A]: test Oszustwa, karta z przyciskiem Intuicji dla drużyny głównej; niższy wynik
+  (remis — stan bez zmian) daje efekt „Zajebista gadka”: Ułatwienie w najbliższym Teście Cechy, Ataku albo RO,
+  zdejmowany po rzucie (haki `dnd5e.roll*`).
+- **Robin Hood** — Stalowe palce: broń miotana z ładowaniem gotowa po strzale (jak Szybkie palce dla przeładowania;
+  interakcji moduł nie liczy).
+- **Benzyna zamiast krwi** — Grigorij (TT pojazdu + mod. MDR kierowcy w werdykcie) i Slalom (Unikanie kierowcy —
+  pojazd „unika”); sprawdzone na ciężarówce Garażu Poligonu: TT 10 → 13 przy MDR 16, pojazd z Unikaniem. Lepiej we
+  mnie i Odstąpienie pojazdu — stół (częściowa).
+- **Plug & Play** — Hakowanie jako podpowiedź w Teście INT; Konsolka — stół (częściowa).
+- **Pokrycie:** Sztuczki **53/53 — 29 pełnych, 24 częściowe**; zdolności klasowe 103/133, Pochodzenia 35/36.
+- **Poligon:** sześć person dogrywki (5. poziom, po dwie Sztuczki: startowa i z 4. poziomu; Człowiek-aligator) —
+  niezmiennik pokrycia wymaga ich po 8a–8b.
+- **Testy:** Quench `dogrywka-m7` (23); e2e `sztuczki-ataki` (Nożownik — krytyk i znacznik B; Z baśki — krytyk,
+  Wyjaśnić ci? — Powalenie przez MG; Celowanie — zapowiedź).

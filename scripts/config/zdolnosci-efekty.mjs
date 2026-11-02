@@ -129,6 +129,8 @@ export const ULATWIENIA = Object.freeze([
   { id: "a-co-mi-tam", label: "A co mi tam", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba", "trucizna", "skazenie") },
   // Sztuczka Immunitet (klucz Sztuczki): Ułatwienie w RO przeciw chorobom.
   { id: "immunitet", label: "Immunitet", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba") },
+  // Sztuczka Plug & Play — Hakowanie (s. 105): Test INT przy przejmowaniu panelu urządzenia — podsuwane („stół”).
+  { id: "plugAndPlay", label: "Plug & Play — przejęcie panelu", rzut: ["check:int"], rodzaj: "ulatwienie", gdy: () => "stol" },
   // Pochodzenia.
   { id: "kwas-w-zylach", label: "Kwas w żyłach", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("trucizna", "kwas") },
   { id: "moloch-cos-slyszalem", label: "Moloch? Coś słyszałem", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("maszyna") },

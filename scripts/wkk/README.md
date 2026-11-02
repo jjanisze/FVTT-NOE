@@ -151,6 +151,12 @@ did not veto; the bleed decisions have their own page, `docs/Krwawienia.md`.
 | Pierwotny instynkt: the +5 to Perception also counts for passive Perception — a passive check is a Perception check (*agent*) | `config/sztuczki-data.mjs` |
 | Ciszej niż cień: a suggestion on an NPC's Perception while a character with it is Hiding or Invisible on that scene; the GM decides whether the test looks for them (*agent*) | `combat/ulatwienia-testow.mjs` |
 | Człowiek-aligator: "base Speed" read as the character's walking Speed, bonuses included (Padnij/Powstań) (*agent*) | `config/zdolnosci-efekty.mjs` |
+| Nożownik: a knife is any of the four catalog knives, a thrown throwing knife included (D19) | `config/sztuczki-ataki.mjs`, `combat/zdolnosci-akcje.mjs` |
+| Karateka: STR or DEX, the higher by default, the attack window lets the player pick (*agent*) | `combat/sztuczki-ataki.mjs` |
+| Barbarka, Wyjaśnić ci?: offered on a headbutt hit against a target of your size or smaller; the target's STR save and Prone are rolled and applied by the GM (*agent*) | `combat/sztuczki-ataki.mjs` |
+| Jest zajebiście: "the party" is the primary party (without it — player characters on the scene); a tie keeps the status quo, no advantage; the advantage covers one d20 roll — ability check, attack or save (*agent*) | `combat/sztuczki-ataki.mjs`, `config/sztuczki-ataki.mjs` |
+| Robin Hood: Stalowe palce make a bow or crossbow with loading ready after the shot (free interactions are not counted); Celowanie lasts until used or the end of combat (*agent*) | `weapons/magazine.mjs`, `combat/sztuczki-ataki.mjs` |
+| Benzyna zamiast krwi: Grigorij adds the driver's WIS modifier, never negative; Slalom covers Unikanie — Odstąpienie needs opportunity attacks, which the module does not track (*agent*) | `combat/sztuczki-ataki.mjs` |
 
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of

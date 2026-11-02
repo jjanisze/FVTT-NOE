@@ -1937,6 +1937,12 @@ function _getManualReloadMode(item) {
 }
 
 function _ignoresManualReloadMode(item, mode = _getManualReloadMode(item)) {
+  // Robin Hood, Stalowe palce (s. 106): broń miotana z właściwością ładowanie ładuje się w darmowej interakcji —
+  // moduł interakcji nie liczy, więc broń jest gotowa po strzale.
+  if (mode === "ladowanie") {
+    return item?.system?.type?.value === "miotana"
+      && !!item?.actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "robinHood");
+  }
   if (mode !== "przeladowanie") return false;
   return hasAbility(item?.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE);
 }

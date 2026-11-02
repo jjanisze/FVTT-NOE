@@ -6,6 +6,9 @@
  * Pancernego, Skradanie w pancerzu z Treningiem w zbroi, efekty z paczek (Pierwotny instynkt, Padnij/Powstań,
  * Człowiek-aligator, Człowiek-pająk), Pan Plaster przy „Weź dawkę” i podanie leku innej postaci (wykonanie u MG).
  * Okno pacjenta i odpowiedź przez gniazdo — e2e.
+ *
+ * Krok 8b — siedem Sztuczek z atakami i przyciskami: czyste zasady, aktywności z paczki (Karateka, Barbarka), zapowiedź
+ * ataku (Nożownik, Celowanie), Zajebista gadka i jej zdjęcie po rzucie, Powalenie z Wyjaśnić ci? (u MG), Stalowe palce.
  */
 
 import { pozostaleDawki, krokDawki, fmtDawki, slowoDawki, pacjenciLeku, dawkaNaRaz, POL_DAWKI_FLAG } from "../config/dawki-rules.mjs";
@@ -17,6 +20,9 @@ import { featureStatus } from "../config/class-features-coverage.mjs";
 import { sztuczkaStatus } from "../config/sztuczki-data.mjs";
 import { addDisease, getChoroby, takeDose, dosesRemaining, dosedToday } from "../actors/health-panel.mjs";
 import { wykonajPodanie } from "../actors/podaj-dawke.mjs";
+import { NOZE, LUKI_I_KUSZE, mozeObalic, stWyjasnicCi, oblalGadke, zapowiedzPasuje, grigorij } from "../config/sztuczki-ataki.mjs";
+import { zapowiedz, zapowiedziDla, __testing as sa } from "../combat/sztuczki-ataki.mjs";
+import { __testing as mag } from "../weapons/magazine.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup, sztuczkaItem } from "./helpers.mjs";
 
 const U = (stany = []) => ({ stany: new Set(stany), szybkosc0: false, nazwa: null });
@@ -133,6 +139,88 @@ export function registerDogrywkaM7Tests(quench) {
         }
         expect(sztuczkaStatus("padnijPowstan")).to.equal("partial");
         expect(sztuczkaStatus("ciszejNizCien")).to.equal("partial");
+      });
+    });
+
+    describe("8b — Sztuczki z atakami i przyciskami", function () {
+      it("czyste: noże (D19), łuki i kusze, rozmiar do obalenia, ST, sporny test, zapowiedź, Grigorij", function () {
+        expect(NOZE).to.have.members(["noz-taktyczny", "kamienny-noz", "noz-do-rzucania", "sztylet"]);
+        expect(LUKI_I_KUSZE).to.include.members(["luk-bloczkowy", "kusza-bloczkowa"]);
+        expect([mozeObalic("med", "med"), mozeObalic("med", "sm"), mozeObalic("med", "lg"), mozeObalic("lg", "lg")]).to.deep.equal([true, true, false, true]);
+        expect(stWyjasnicCi({ pb: 2, sila: 3 })).to.equal(13);
+        expect([oblalGadke(10, 15), oblalGadke(15, 15), oblalGadke(16, 15)]).to.deep.equal([true, false, false]);
+        expect(zapowiedzPasuje({ cel: "A", bronie: ["sztylet"] }, { celUuid: "A", bronId: "sztylet" })).to.equal(true);
+        expect(zapowiedzPasuje({ cel: "A", bronie: ["sztylet"] }, { celUuid: "B", bronId: "sztylet" })).to.equal(false);
+        expect(zapowiedzPasuje({ cel: "A", bronie: ["sztylet"] }, { celUuid: "A", bronId: "katana" })).to.equal(false);
+        expect(zapowiedzPasuje({ cel: "A" }, { celUuid: "A", bronId: null })).to.equal(true);
+        expect([grigorij(3), grigorij(-1)]).to.deep.equal([3, 0]);
+      });
+
+      it("Karateka: dwa ataki bez broni 1k6, SIŁ albo ZRC (wyższa), Szybki cios w Akcji Bonusowej", async function () {
+        const sz = await packDoc("sztuczki", d => d.getFlag(MODULE_ID, "sztuczka") === "karateka");
+        if (!sz?.system.activities?.size) this.skip();
+        const a = await scratchActor({ system: { abilities: { str: { value: 10 }, dex: { value: 16 } } } });
+        const [it] = await a.createEmbeddedDocuments("Item", [game.items.fromCompendium(sz)]);
+        const ataki = it.system.activities.filter(x => x.type === "attack");
+        expect(ataki.map(x => x.activation.type).sort()).to.deep.equal(["action", "bonus"]);
+        for (const x of ataki) {
+          expect([...x.attack.abilities].sort(), x.name).to.deep.equal(["dex", "str"]);
+          expect(x.ability, "wyższa").to.equal("dex");
+          expect(x.attack.type.classification).to.equal("unarmed");
+          expect(x.damage.parts[0].denomination).to.equal(6);
+        }
+      });
+
+      it("Barbarka: atak głową 1k4 z SIŁ; Z baśki w Akcji Bonusowej z automatycznym TK", async function () {
+        const sz = await packDoc("sztuczki", d => d.getFlag(MODULE_ID, "sztuczka") === "barbarka");
+        if (!sz?.system.activities?.size) this.skip();
+        const ataki = sz.system.activities.contents;
+        const zBaski = ataki.find(x => x.activation.type === "bonus");
+        expect(ataki.every(x => x.getFlag?.(MODULE_ID, "atakGlowa") ?? x.flags?.[MODULE_ID]?.atakGlowa)).to.equal(true);
+        expect(zBaski.flags[MODULE_ID].autoKrytyk).to.include("Z baśki");
+        expect(ataki.every(x => x.damage.parts[0].denomination === 4)).to.equal(true);
+      });
+
+      it("zapowiedź ataku: ten cel i ta broń; inny cel albo broń — nic", async function () {
+        const a = await scratchActor();
+        const noz = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "sztylet");
+        const katana = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "katana");
+        if (!noz || !katana) this.skip();
+        const [n, k] = await a.createEmbeddedDocuments("Item", [game.items.fromCompendium(noz), game.items.fromCompendium(katana)]);
+        await zapowiedz(a, { cel: "Scene.x.Token.cel", bronie: ["sztylet"], autoKrytyk: "Nożownik", zrodlo: "nozownik", tura: true });
+        expect(zapowiedziDla(a, n, "Scene.x.Token.cel").map(w => w.autoKrytyk)).to.deep.equal(["Nożownik"]);
+        expect(zapowiedziDla(a, k, "Scene.x.Token.cel")).to.deep.equal([]);
+        expect(zapowiedziDla(a, n, "Scene.x.Token.inny")).to.deep.equal([]);
+      });
+
+      it("Zajebista gadka: niższa Intuicja — efekt, raz na kartę; pierwszy rzut go zdejmuje", async function () {
+        this.timeout(10000);
+        const m = await scratchActor({ name: "[Quench] słuchacz" });
+        await sa.intuicja(m, 1000, "karta-1", { configure: false });
+        expect(m.effects.some(e => e.getFlag(MODULE_ID, "zajebistaGadka")), "oblał — efekt").to.equal(true);
+        await sa.intuicja(m, 1000, "karta-1", { configure: false });
+        expect(m.effects.filter(e => e.getFlag(MODULE_ID, "zajebistaGadka")).length, "drugi raz — nic").to.equal(1);
+        await m.rollAbilityCheck({ ability: "str" }, { configure: false }, { create: false });
+        const end = Date.now() + 3000;
+        while (m.effects.some(e => e.getFlag(MODULE_ID, "zajebistaGadka")) && Date.now() < end) await new Promise(r => setTimeout(r, 50));
+        expect(m.effects.some(e => e.getFlag(MODULE_ID, "zajebistaGadka")), "zdjęty po rzucie").to.equal(false);
+      });
+
+      it("Wyjaśnić ci? (u MG): oblany RO na Siłę — Powalenie", async function () {
+        const cel = await scratchActor({ name: "[Quench] cel", system: { abilities: { str: { value: 1 } } } });
+        const wynik = await sa.powalenie(null, { celUuid: cel.uuid, st: 40, kto: "Barbarka" });
+        expect(wynik).to.equal(true);
+        expect(cel.statuses.has("prone")).to.equal(true);
+      });
+
+      it("Robin Hood, Stalowe palce: kusza z ładowaniem gotowa po strzale; bez Sztuczki — nie", async function () {
+        const kusza = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "kusza-bloczkowa");
+        if (!kusza) this.skip();
+        const a = await scratchActor();
+        const [k] = await a.createEmbeddedDocuments("Item", [game.items.fromCompendium(kusza)]);
+        expect(mag.ignoresManualReloadMode(k, "ladowanie")).to.equal(false);
+        await a.createEmbeddedDocuments("Item", [sztuczkaItem("robinHood", "Robin Hood")]);
+        expect(mag.ignoresManualReloadMode(a.items.get(k.id), "ladowanie")).to.equal(true);
       });
     });
 

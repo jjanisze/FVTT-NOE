@@ -38,6 +38,9 @@ gang!**, **Zasadzka**, **Jeden strzał**, **Słaby punkt**, **Zwód**, Strzelec 
 **Gunfight**, **Snajper**, **Samuraj**, **Pulp Fiction**, **Szturmowiec**, **Ukryty cel** (bez Utrudnienia, gdy cel
 Unika). Dymek przy plakietce mówi, skąd się wzięły. Zostawiasz albo zmieniasz — to twoje okno.
 
+**Celowanie** (Robin Hood, Akcja Bonusowa przy jednym celu) zaznacza Ułatwienie w najbliższym ataku z łuku albo kuszy
+w ten cel; **Zajebista gadka** — w najbliższym ataku tego, kto ją oblał.
+
 **Miotacz** dokłada +2 do ataku bronią rzucaną (siekierka, oszczep, nóż do rzucania, bolas…) i podwaja jej zasięgi;
 **Siekierezada** podwaja zasięgi rzutu siekierką. **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
 osłona dalej blokuje.
@@ -52,10 +55,21 @@ krwawienie z tętnicy albo wyciek z układu hydraulicznego maszyny.
 - **Bolesny atak** — kości, gdy masz Ułatwienie albo przytomnego sojusznika obok celu; obok **Podstępny atak** z wyborem
   efektu (krwawienie, spowolnienie, oślepienie).
 - **Mój bóg kule nosi**, **Skuteczny cios** (odepchnięcie, wytrącenie, zamaszysty) — przyciski z kośćmi.
+- **Nożownik** [B] — po trafieniu nożem w swojej turze drugi atak tym nożem w ten cel; trafienie zadaje obrażenia
+  krytyczne (noże: taktyczny, kamienny, do rzucania, sztylet).
+- **Wyjaśnić ci?** (Barbarka) — pod trafieniem atakiem głową, gdy cel jest twojego rozmiaru albo mniejszy: RO na Siłę
+  celu rzuca MG, porażka — Powalenie.
 - Bestiariusz: ataki z dodatkowym skutkiem (np. piła tarczowa Juggernauta — krwawienie) mają przycisk pod trafieniem.
 
 Przyciski są pod kartą, bo cel może jeszcze zmienić werdykt reakcją. Skutek na cudzym aktorze zapisuje MG przez
 przekaźnik — klikasz u siebie, dzieje się u wszystkich.
+
+## Ataki bez broni ze Sztuczek
+
+**Karateka** i **Barbarka** mają ataki na samej Sztuczce (zakładka aktywności): Stalowe pięści (1k6, SIŁ albo ZRC —
+wyższa podpowiedziana, w oknie ataku można zmienić) i Szybki cios w Akcji Bonusowej; Atak głową (1k4) i **Z baśki**
+w Akcji Bonusowej — trafienie zadaje obrażenia krytyczne (naturalna 20 niczego nie dubluje). Czy przeciwnik ma
+głowę — MG.
 
 ## Reakcje celu
 
@@ -69,6 +83,10 @@ Stopnia Zranienia z krytyka.
 **Dobra rada**, **Łaska boża**, **Let's rock**, **Odważny**, **Kolejka** (pole w oknie Krótkiego odpoczynku),
 **Kakofonia**, **Rzuć broń i gleba**, **Pieśń otuchy** (Muzyk — Fuks dla sojuszników). Efekt na postaci innego gracza
 zakłada MG przez przekaźnik — wystarczy, że jest zalogowany.
+
+**Zajebista gadka** (Jest zajebiście, Akcja): test Oszustwa, a na czacie karta z przyciskiem Intuicji dla każdego
+z drużyny. Kto rzuci mniej (remis — nic), ma Ułatwienie w najbliższym Teście Cechy, Ataku albo Rzucie Obronnym;
+efekt znika po tym rzucie.
 
 ## Karty dla MG
 
@@ -99,6 +117,9 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
   (pływanie), Pierwotny instynkt (+5 do Inicjatywy i Percepcji, także biernej), Padnij/Powstań (Szybkość +3 m),
   Trening w zbroi (Skradanie się w pancerzu bez Utrudnienia), Pancerny (Próg obrażeń 10 w ciężkim pancerzu); TT bez
   pancerza (Kuloodporność) i przy Unikaniu (Szachista) liczy silnik TT.
+- **Benzyna zamiast krwi** — prowadzony pojazd ma TT wyższe o modyfikator Mądrości kierowcy, a gdy kierowca Unika,
+  atakujący pojazd mają Utrudnienie. **Robin Hood** — łuk albo kusza z właściwością ładowanie są gotowe po strzale
+  (Stalowe palce).
 - **Ułatwienia z warunkiem** — okno rzutu podsuwa je z nazwą zdolności. Pewne (walka trwa, źródło RO znane — trucizna,
   maszyna, choroba) są zaznaczone; fabularne („gdy rozmawiasz z półświatkiem”) — odznaczone, do decyzji.
   **Ciszej niż cień** działa w drugą stronę: gdy postać z tą Sztuczką się ukrywa, Percepcja BN na tej scenie dostaje
@@ -109,7 +130,8 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
 ## Co zostaje przy stole
 
 Reputacja, Renoma, Stylowa, Slang, Znajomości, Skrytka, Szary, Jeden z nas, Kamuflaż, Doktor Brain, Bezlitosny
-przywódca — fabuła, wycena luksusu, wybór rozmówcy. Ruch specjalny (Skok Gladiatora, Skoczek, Szybkie nogi, Szarża
+przywódca — fabuła, wycena luksusu, wybór rozmówcy. Ze Sztuczek: Lepiej we mnie (Benzyna zamiast krwi — przyjęcie ataku
+w pojazd), Konsolka (Plug & Play — maszyna sterowana laptopem); Hakowanie Plug & Play okno rzutu tylko podsuwa. Ruch specjalny (Skok Gladiatora, Skoczek, Szybkie nogi, Szarża
 Berserkera) czeka na warstwę ruchu. Plakietka każdej z nich mówi, co dokładnie.
 
 ## Postacie zrobione przed tymi zmianami

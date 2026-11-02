@@ -166,7 +166,17 @@ export const SZTUCZKI = Object.freeze({
     text: "Atak głową 1k4; atak głową w głowę w Akcji Bonusowej (trafienie krytyczne); "
       + "możliwość Powalenia przy ataku głową.",
     category: "wrecz",
-    auto: []
+    aktywnosci: [
+      { id: "glowa", typ: "attack", nazwa: "Atak głową", aktywacja: "action", kosc: 4, cechy: ["str"], flagi: { atakGlowa: true } },
+      { id: "z-baski", typ: "attack", nazwa: "Z baśki", aktywacja: "bonus", kosc: 4, cechy: ["str"],
+        flagi: { atakGlowa: true, autoKrytyk: "Z baśki — trafienie krytyczne" } }
+    ],
+    auto: [
+      { what: "Atak głową 1k4 obuch. + SIŁ — aktywność na Sztuczce.", where: "config/sztuczki-ataki.mjs" },
+      { what: "Z baśki [B] — atak głową w Akcji Bonusowej; trafienie = obrażenia krytyczne (bez dublowania przy 20).", where: "combat/sztuczki-ataki.mjs" },
+      { what: "Wyjaśnić ci? — przycisk pod trafieniem głową (cel twojego rozmiaru albo mniejszy): RO SIŁ ST 8 + PB + SIŁ celu przez MG, porażka — Powalenie.", where: "combat/sztuczki-ataki.mjs" }
+    ],
+    manual: "Czy cel ma głowę (Z baśki) — MG."
   },
   bezTrzymanki: {
     label: "Bez trzymanki",
@@ -183,7 +193,12 @@ export const SZTUCZKI = Object.freeze({
     text: "TT pojazdu +MDR; możliwość przyjęcia ataku w pojazd w Reakcji; "
       + "pojazd korzysta z Unikania / Odstąpienia jak kierowca.",
     category: "pojazdy",
-    auto: []
+    auto: [
+      { what: "Grigorij — TT prowadzonego pojazdu + mod. MDR kierowcy w werdykcie ataku.", where: "combat/sztuczki-ataki.mjs" },
+      { what: "Slalom — Unikanie kierowcy daje pojazdowi Utrudnienie atakujących (silnik okoliczności).", where: "combat/sztuczki-ataki.mjs" }
+    ],
+    manual: "Lepiej we mnie [R] (przyjęcie ataku w pojazd, gdy kierowca nie siedzi w środku) — przenosi MG; Odstąpienie "
+      + "pojazdu — moduł nie liczy ataków okazyjnych (M8)."
   },
   ciszejNizCien: {
     label: "Ciszej niż cień",
@@ -295,14 +310,25 @@ export const SZTUCZKI = Object.freeze({
     text: "Zajebista gadka [A] — sporny Test CHA (Oszustwo) vs. Intuicja drużyny; "
       + "ci, którzy polegli, dostają Ułatwienie w najbliższym teście.",
     category: "wsparcie",
-    auto: []
+    aktywnosci: [{ id: "gadka", typ: "utility", nazwa: "Zajebista gadka", aktywacja: "action" }],
+    auto: [
+      { what: "Zajebista gadka [A] — test Oszustwa i karta z przyciskiem Intuicji dla drużyny; niższy wynik (remis — bez zmian) "
+        + "daje Ułatwienie w najbliższym Teście Cechy, Ataku albo RO, zdejmowane po rzucie.", where: "combat/sztuczki-ataki.mjs" }
+    ]
   },
   karateka: {
     label: "Karateka",
     req: "Brak",
     text: "Ataki ręką/nogą 1k6 (SIŁ lub ZRC); Szybki cios [B] — jeden atak wręcz w Akcji Bonusowej.",
     category: "wrecz",
-    auto: []
+    aktywnosci: [
+      { id: "piesci", typ: "attack", nazwa: "Stalowe pięści", aktywacja: "action", kosc: 6, cechy: ["str", "dex"] },
+      { id: "szybki-cios", typ: "attack", nazwa: "Szybki cios", aktywacja: "bonus", kosc: 6, cechy: ["str", "dex"] }
+    ],
+    auto: [
+      { what: "Stalowe pięści 1k6 obuch. — aktywność na Sztuczce; SIŁ albo ZRC (wyższa domyślnie, wybór w oknie ataku).", where: "combat/sztuczki-ataki.mjs" },
+      { what: "Szybki cios [B] — ten sam atak w Akcji Bonusowej (znacznik B).", where: "config/sztuczki-ataki.mjs" }
+    ]
   },
   kuloodpornosc: {
     label: "Kuloodporność",
@@ -397,7 +423,10 @@ export const SZTUCZKI = Object.freeze({
     text: "Nożownik [B] — po trafieniu nożem w turze, w Akcji Bonusowej drugi atak nożem; "
       + "jeśli trafisz, zadajesz obrażenia krytyczne.",
     category: "wrecz",
-    auto: []
+    auto: [{
+      what: "Przycisk Nożownik [B] pod trafieniem nożem w swojej turze (Nóż taktyczny, Kamienny nóż, Nóż do rzucania, Sztylet — "
+        + "D19): drugi atak tym nożem w ten cel, trafienie = obrażenia krytyczne.", where: "combat/sztuczki-ataki.mjs"
+    }]
   },
   padnijPowstan: {
     label: "Padnij/Powstań",
@@ -501,7 +530,9 @@ export const SZTUCZKI = Object.freeze({
     text: "Ułatwienie przy przejmowaniu paneli sterowania urządzeń elektronicznych; "
       + "możliwość sterowania ciężkimi maszynami / wozami bojowymi laptopem.",
     category: "wsparcie",
-    auto: []
+    auto: [{ what: "Hakowanie — podpowiedź Ułatwienia w Teście INT (także Technika, narzędzia hakera) w oknie rzutu.", where: "config/zdolnosci-efekty.mjs" }],
+    manual: "Czy test to przejęcie panelu urządzenia — MG zaznacza. Konsolka (kierowanie ciężką maszyną laptopem, narzędzia "
+      + "hakera zamiast Pojazdów) — MG."
   },
   przycelowanie: {
     label: "Przycelowanie",
@@ -549,7 +580,11 @@ export const SZTUCZKI = Object.freeze({
     text: "Stalowe palce [I] — ładowanie broni miotanej w Darmowej Interakcji; "
       + "Celowanie [B] — Ułatwienie do ataku z łuku / kuszy po Akcji Bonusowej.",
     category: "dystans",
-    auto: []
+    aktywnosci: [{ id: "celowanie", typ: "utility", nazwa: "Celowanie", aktywacja: "bonus" }],
+    auto: [
+      { what: "Stalowe palce — broń miotana z właściwością ładowanie gotowa po strzale bez osobnej czynności.", where: "weapons/magazine.mjs" },
+      { what: "Celowanie [B] — aktywność na Sztuczce przy jednym celu: najbliższy atak z łuku albo kuszy w ten cel z Ułatwieniem.", where: "combat/sztuczki-ataki.mjs" }
+    ]
   },
   rodeo: {
     label: "Rodeo",

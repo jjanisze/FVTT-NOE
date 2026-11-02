@@ -107,14 +107,15 @@ flowchart LR
    w kampanii zrobiony (kopia zapasowa przed); dla graczy `docs/Zdolnosci.md`; Poligon — 23 persony M7 i stanowisko
    „Sala prób”; pregeni Jazdy Próbnej zbudowani od nowa kreatorem (D17), persony Poligonu dostają Sztuczkę tą samą
    drogą. Zostaje: trzy zdolności czekające na krok 7, obchód MG w „Sali prób”, wydanie. Kryterium końca — §3 M7.
-   - **8a. Dogrywka M7** (MG 2026-11-02, przed krokiem 6) — plakietki zdolności-parasoli (Mój wróg, Wyjadacz Twardziela
+   - **8a. Dogrywka M7** (MG 2026-11-02, przed krokiem 6; **zrobione 2026-11-02**) — plakietki zdolności-parasoli (Mój wróg, Wyjadacz Twardziela
      i Zwiadowcy: wybór wariantu to awans, mechanika w opcji); reguły bez osądu MG: Trening w zbroi (Skradanie bez kary
      z pancerza), Człowiek-aligator (pływanie = Szybkość), Pierwotny instynkt (+5 Inicjatywa i Percepcja), Miotacz
      i Siekierezada (zasięg broni rzucanej ×2, Miotacz +2 do ataku), Ukryty cel (osłona ½ i ¾, Unikanie), Pancerny
      (Próg obrażeń 10 w ciężkim pancerzu), Padnij/Powstań (Szybkość +3 m; reszta — M8); pod pregenów: Ciszej niż cień
      (podpowiedź Utrudnienia w Percepcji BN, gdy postać jest ukryta) i Pan Plaster (pół dawki leku przewlekłego).
      Przebudowa paczek i `resync` kampanii (kopia zapasowa przed).
-   - **8b. Siedem Sztuczek z nowymi atakami albo przyciskami** (MG 2026-11-02: testerzy budują własne postacie) —
+   - **8b. Siedem Sztuczek z nowymi atakami albo przyciskami** (MG 2026-11-02: testerzy budują własne postacie;
+     **zrobione 2026-11-02** — Sztuczki 53/53) —
      Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast krwi, Jest zajebiście, Plug & Play. Notatki obu kroków
      — `PLAN_m7_zdolnosci.md` §8.
 9. **M9 — Style i motywy (graficzne odświeżenie)** (własny plan M — MG 2026-11-02, §3 M9, do napisania) — przed
@@ -183,7 +184,7 @@ paczki e2e 21 → 44.
 | B2 | ⏳ | Przed zamrożeniem: PM1, PM7, stan ruchu (krok 7). Dane paczek M7 (E3) i `resync` kampanii (E8) — zrobione 2026-11-01. Zamrożenie — krok 10 |
 | B3 | ✅ | 19 paczek; krok `packs` bramki v0.21.0; po M7 przebudowane (2026-11-01), `validate-packs` zielone |
 | B4 | ✅ | Bramka v0.21.0: Quench 1385/1385, e2e 44/44 w obu światach, `npm test`. Po M7 w piaskownicy: Quench 1510/1510, nowe paczki e2e M7 i regresja zielone — pełna bramka przy następnym wydaniu |
-| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7: klasowe 100/133 (45 pełnych), Sztuczki 41/53 (19), Pochodzenia 34/36 (20) — przed M7 33/133, 19/53, 4/36 |
+| B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7 i dogrywce (8a–8b): klasowe 103/133 (48 pełnych), Sztuczki 53/53 (29), Pochodzenia 35/36 (21) — przed M7 33/133, 19/53, 4/36 |
 | B6 | ✅ | `release:check` v0.21.0 — świat goły i zalecany, moduł z `module.zip` |
 | B7 | 🟡 | `docs/` bez pojazdów, wierzchowców i mechaniki pościgu; `docs/Zdolnosci.md` jest (M7 E8); nagłówek macierzy poprawiony 2026-10-31 |
 | B8 | ⏳ | Przegląd przy kandydacie; listy WKK pilnuje `kobalt-doc-check` od 2026-10-28; odczyty RAI M7 w tabeli `scripts/wkk/README.md` |
@@ -548,9 +549,9 @@ awans), przebudową paczek i `resync`, jeśli MG chce.
 
 *Dalej (MG 2026-11-02, §0 kroki 8a–8b):*
 
-- [ ] 8a. Dogrywka M7 — plakietki parasoli, tanie reguły bez osądu MG, Ciszej niż cień i Pan Plaster; paczki, `resync`
-- [ ] 8b. Siedem Sztuczek dla własnych postaci testerów — Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast
-  krwi, Jest zajebiście, Plug & Play
+- [x] 8a. Dogrywka M7 — plakietki parasoli, tanie reguły bez osądu MG, Ciszej niż cień i Pan Plaster (2026-11-02); paczki, `resync`
+- [x] 8b. Siedem Sztuczek dla własnych postaci testerów — Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast
+  krwi, Jest zajebiście, Plug & Play (2026-11-02; Sztuczki 53/53 — 29 pełnych)
 - Zdolności częściowe z powodu ekonomii akcji i ruchu — do zakresu M8 (niżej)
 
 ### M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki — plan do napisania

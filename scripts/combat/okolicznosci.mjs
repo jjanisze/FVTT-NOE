@@ -54,6 +54,33 @@ export function zarejestrujZrodloOkolicznosci(id, fn) {
   _zrodla.set(id, fn);
 }
 
+/** Źródła automatycznego TK spoza stanów celu: `fn(ctx, token)` → powód albo null (Sztuczki — `combat/sztuczki-ataki.mjs`). */
+const _autoKrytyki = [];
+export function zarejestrujAutoKrytyk(fn) {
+  _autoKrytyki.push(fn);
+}
+
+/** Dodatkowe stany celu w migawce: `fn(token)` → lista id stanów (Slalom — pojazd „unika” z kierowcą). */
+const _stanyCelu = [];
+export function zarejestrujStanyCelu(fn) {
+  _stanyCelu.push(fn);
+}
+
+function _uczestnikCelu(token) {
+  const u = uczestnik(token.actor, token.name);
+  for (const fn of _stanyCelu) {
+    try { for (const s of fn(token) ?? []) u.stany.add(s); } catch (err) { console.error(`${MODULE_ID} | stany celu`, err); }
+  }
+  return u;
+}
+
+function _autoKrytykZeZrodel(ctx, token) {
+  for (const fn of _autoKrytyki) {
+    try { const r = fn(ctx, token); if (r) return r; } catch (err) { console.error(`${MODULE_ID} | automatyczne TK`, err); }
+  }
+  return null;
+}
+
 function _zewnetrzne(ctx) {
   const out = [];
   for (const [id, fn] of _zrodla) {
@@ -189,7 +216,7 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
 
   const migawka = {
     atakujacy: uczestnik(actor),
-    cel: jeden?.actor ? uczestnik(jeden.actor, jeden.name) : null,
+    cel: jeden?.actor ? _uczestnikCelu(jeden) : null,
     liczbaCelow: targets.length,
     wrecz,
     odleglosc: jeden && attackerToken ? odlegloscKrawedzi(attackerToken, jeden) : null,
@@ -240,8 +267,9 @@ function _onPreRollAttack(config) {
   // Automatyczne TK per cel — rozstrzygacz czyta to przy stemplu karty (pozycje z chwili rzutu).
   const cele = ctx.targets.map(t => ({
     tokenUuid: t.document.uuid,
-    autoKrytyk: ctx.attackerToken && t.actor
-      ? (autoKrytyk(uczestnik(t.actor), odlegloscKrawedzi(ctx.attackerToken, t))?.label ?? null) : null
+    autoKrytyk: (ctx.attackerToken && t.actor
+      ? (autoKrytyk(uczestnik(t.actor), odlegloscKrawedzi(ctx.attackerToken, t))?.label ?? null) : null)
+      ?? _autoKrytykZeZrodel(ctx, t)
   }));
   const zapis = {
     ulatwienia: wynik.ulatwienia.map(_plain), utrudnienia: wynik.utrudnienia.map(_plain),

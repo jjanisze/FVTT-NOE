@@ -633,6 +633,36 @@ function asiSztuczki(key, cechy) {
     `sztuczka-${key}-asi`);
 }
 
+/** Aktywność Sztuczki z `SZTUCZKI[key].aktywnosci`: atak naturalny (wręcz, bez broni) albo przycisk (utility). */
+function aktywnoscSztuczki(aid, a) {
+  const flags = { [MODULE_ID]: { sztuczkaAkcja: a.id, ...(a.cechy?.length > 1 ? { cechyAtaku: a.cechy } : {}), ...(a.flagi ?? {}) } };
+  const base = {
+    _id: aid, type: a.typ, name: a.nazwa, sort: 0, flags,
+    activation: { type: a.aktywacja, value: 1, condition: "", override: false },
+    consumption: { targets: [], scaling: { allowed: false, max: "" }, spellSlot: false },
+    description: { chatFlavor: "" }
+  };
+  if (a.typ !== "attack") return base;
+  return {
+    ...base,
+    range: { value: "1.5", long: "", units: "m", special: "", override: true },
+    target: {
+      template: { count: "", contiguous: false, type: "", size: "", width: "", height: "", units: "" },
+      affects: { count: "1", type: "creature", choice: false, special: "" }, prompt: true, override: false
+    },
+    attack: {
+      // Jedna cecha — wprost; kilka (Karateka) — dnd5e bierze wyższą, okno ataku pozwala wybrać (`cechyAtaku`).
+      ability: a.cechy?.length === 1 ? a.cechy[0] : "", bonus: "", critical: { threshold: null }, flat: false,
+      type: { value: "melee", classification: "unarmed" }
+    },
+    damage: {
+      critical: { bonus: "" }, includeBase: false,
+      parts: [{ number: 1, denomination: a.kosc, bonus: "@mod", types: ["bludgeoning"],
+        custom: { enabled: false, formula: "" }, scaling: { mode: "", number: null, formula: "" } }]
+    }
+  };
+}
+
 function buildSztuczka(key) {
   const doc = sztuczkaItemData(key, { _id: idFor("sztuczka", key) });
   const def = SZTUCZKI[key];
@@ -650,6 +680,12 @@ function buildSztuczka(key) {
     }, "sztuczka-patriota-pochodzenie"));
   }
   if (adv.length) doc.system.advancement = advancementById(adv);
+  // Activities (PLAN_beta 8b): natural attacks and buttons of the Sztuczka — feat activities, like the Bestiary's
+  // natural attacks (no weapon pipeline: jams, magazines, wear). Runtime: `combat/sztuczki-ataki.mjs`.
+  if (def.aktywnosci?.length) doc.system.activities = Object.fromEntries(def.aktywnosci.map(a => {
+    const aid = idFor("activity", `sztuczka-${key}-${a.id}`);
+    return [aid, aktywnoscSztuczki(aid, a)];
+  }));
   // Effects the Sztuczka carries (Szybki Bill — Inicjatywa, Człowiek-pająk — wspinaczka), shape of `EFEKTY`.
   if (def.efekty?.length) {
     doc.effects = def.efekty.map((e, i) => ({

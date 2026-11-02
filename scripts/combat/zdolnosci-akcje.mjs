@@ -19,7 +19,10 @@
  * bronią — cały potok (tryb ognia, amunicja, okoliczności); jego karta nie dostaje kolejnego przycisku.
  */
 
-import { obronaOf } from "./trafienie.mjs";
+import { obronaOf, verdictOfEntry } from "./trafienie.mjs";
+import { zapowiedz, maSztuczke } from "./sztuczki-ataki.mjs";
+import { NOZE } from "../config/sztuczki-ataki.mjs";
+import { isHitVerdict } from "../config/defense-rules.mjs";
 import { zastapionaPrzez, rootOf } from "./po-rzucie.mjs";
 import { kombatantWlasciciela, zarejestrujEfektTuryWlasciciela } from "./czas-efektu.mjs";
 import { sygnalNaruszenia } from "./sygnal-naruszenia.mjs";
@@ -265,6 +268,23 @@ export async function atakPromocja(actor, bron, { activity = null, event = null 
 
 const _promocjaDostepna = actor => !!_ma(actor, "maszyna-do-zabijania") && !!actor.statuses?.has("berserk");
 
+/** Nożownik (s. 105, D19): trafiony cel tej karty ataku nożem — `null`, gdy nóż nie trafił albo celów jest kilka. */
+function _celNozownika(actor, bron, message) {
+  if (!maSztuczke(actor, "nozownik") || !NOZE.includes(weaponIdOf(bron))) return null;
+  const obrona = obronaOf(message);
+  if (obrona?.targets?.length !== 1) return null;
+  const wpis = obrona.targets[0];
+  return isHitVerdict(verdictOfEntry(obrona, wpis).verdict) ? wpis.tokenUuid : null;
+}
+
+/** Nożownik [B]: drugi atak tym nożem w ten sam cel — trafienie zadaje obrażenia krytyczne (zapowiedź na tę turę). */
+export async function atakNozownika(actor, bron, celUuid, { activity = null, event = null } = {}) {
+  const cel = fromUuidSync(celUuid);
+  cel?.object?.setTarget?.(true, { releaseOthers: true, groupSelection: false });
+  await zapowiedz(actor, { cel: celUuid, bronie: [weaponIdOf(bron)], autoKrytyk: "Nożownik — trafienie krytyczne", zrodlo: "nozownik", tura: true });
+  return dodatkowyAtak(actor, bron, { activity, zrodlo: "Nożownik", rodzaj: "nozownik", event });
+}
+
 function _onRenderChatMessage(message, html) {
   if (rollTypeOf(message) !== "attack" || html.querySelector(".neuro-dodatkowy-atak")) return;
   const actor = message.getAssociatedActor?.();
@@ -277,6 +297,7 @@ function _onRenderChatMessage(message, html) {
     przyciski.push({ rodzaj: "ulubiona", label: ulubiona ? "⭐ Ulubiona broń [B]" : "⭐ Ulubiona broń [B] — ten model?" });
   }
   if (obronaOf(message)?.melee && _promocjaDostepna(actor)) przyciski.push({ rodzaj: "promocja", label: "⚔ Promocja [B]" });
+  if (_celNozownika(actor, bron, message)) przyciski.push({ rodzaj: "nozownik", label: "🔪 Nożownik [B]" });
   if (!przyciski.length) return;
   const uzyte = _klikniete.has(message.id);
   const div = document.createElement("div");
@@ -610,9 +631,11 @@ async function _onClick(event) {
   btn.disabled = true;
   _klikniete.add(message.id);
   const activity = message.getAssociatedActivity?.() ?? null;
-  const wynik = btn.dataset.neuroM7Dodatkowy === "promocja"
-    ? await atakPromocja(actor, bron, { activity, event })
-    : await atakUlubiona(actor, bron, { activity, event });
+  const rodzaj = btn.dataset.neuroM7Dodatkowy;
+  const celNoza = rodzaj === "nozownik" ? _celNozownika(actor, bron, message) : null;
+  const wynik = rodzaj === "promocja" ? await atakPromocja(actor, bron, { activity, event })
+    : rodzaj === "nozownik" ? (celNoza ? await atakNozownika(actor, bron, celNoza, { activity, event }) : null)
+      : await atakUlubiona(actor, bron, { activity, event });
   if (!wynik) {
     _klikniete.delete(message.id);
     btn.disabled = false;
