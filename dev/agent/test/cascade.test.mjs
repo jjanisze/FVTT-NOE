@@ -5,7 +5,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cascadeLayout } from "../lib/cdp.mjs";
+import { cascadeLayout, MIN_WINDOW } from "../lib/cdp.mjs";
 import { missingNoThrottleFlags, NO_THROTTLE_FLAGS } from "../lib/proc.mjs";
 
 test("no-throttle flags: all three present, or each one missing is named", () => {
@@ -24,13 +24,16 @@ const covers = (a, b) => a.left <= b.left && a.top <= b.top
 for (const [label, area] of [
   ["a 1440p screen", { left: 0, top: 0, width: 2560, height: 1392 }],
   ["a secondary screen left of the primary", { left: -2560, top: 0, width: 2560, height: 1392 }],
-  ["a laptop screen", { left: 0, top: 0, width: 1366, height: 728 }]
+  ["a laptop screen", { left: 0, top: 0, width: 1366, height: 728 }],
+  ["a portrait screen", { left: 0, top: 0, width: 1080, height: 1872 }]
 ]) {
   test(`cascade on ${label}: no window covers another, Foundry's minimum kept`, () => {
     for (let n = 1; n <= 6; n++) {
       const w = cascadeLayout(n, area);
       assert.equal(w.length, n);
-      for (const b of w) assert.ok(b.width >= 1024 && b.height >= 700, `${n} windows: ${b.width}×${b.height}`);
+      // Outer bounds: Foundry's 1024 × 768 is the viewport, the frame comes on top.
+      for (const b of w) assert.ok(b.width >= 1024 + 16 && b.height >= 768 + 110, `${n} windows: ${b.width}×${b.height}`);
+      assert.deepEqual(MIN_WINDOW, { width: 1040, height: 878 });
       for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
         if (i !== j) assert.ok(!covers(w[j], w[i]), `${n} windows: #${j} covers #${i}`);
       }

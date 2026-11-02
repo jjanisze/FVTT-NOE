@@ -186,7 +186,10 @@ export function registerDogrywkaM7Tests(quench) {
         const noz = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "sztylet");
         const katana = await packDoc("bron", d => d.getFlag(MODULE_ID, "weaponId") === "katana");
         if (!noz || !katana) this.skip();
-        const [n, k] = await a.createEmbeddedDocuments("Item", [game.items.fromCompendium(noz), game.items.fromCompendium(katana)]);
+        // Kolejność wyniku `createEmbeddedDocuments` nie jest stała — po id broni, nie po pozycji.
+        const made = await a.createEmbeddedDocuments("Item", [game.items.fromCompendium(noz), game.items.fromCompendium(katana)]);
+        const n = made.find(i => i.getFlag(MODULE_ID, "weaponId") === "sztylet");
+        const k = made.find(i => i.getFlag(MODULE_ID, "weaponId") === "katana");
         await zapowiedz(a, { cel: "Scene.x.Token.cel", bronie: ["sztylet"], autoKrytyk: "Nożownik", zrodlo: "nozownik", tura: true });
         expect(zapowiedziDla(a, n, "Scene.x.Token.cel").map(w => w.autoKrytyk)).to.deep.equal(["Nożownik"]);
         expect(zapowiedziDla(a, k, "Scene.x.Token.cel")).to.deep.equal([]);

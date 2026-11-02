@@ -148,16 +148,30 @@ async function advance({ picks = {} }) {
         chosen.add(row);
         await __e2e.sleep(250);
       }
+    } else if (type === "AbilityScoreImprovementAdvancement") {
+      // „Rozwój Cechy” of the chosen Sztuczka (PLAN_m7 E3) or the Pochodzenie bonus: spend the configured points
+      // on the first abilities that allow it; a fixed one has nothing to spend. Counted from the configuration —
+      // `flow.points` fills in only when the step renders — and each click confirmed against dnd5e's own count.
+      const total = flow.advancement.configuration.points ?? 0;
+      const assigned = () => mgr.step?.flow?.points?.assigned ?? 0;
+      for (let tries = 0; assigned() < total && tries < 40; tries++) {
+        const plus = [...mgr.element.querySelectorAll('li[data-score] button[data-action="increase"]')].find(b => !b.disabled);
+        if (!plus) break;
+        const before = assigned();
+        plus.click();
+        await __e2e.sleep(250);
+        if (assigned() === before) await __e2e.sleep(250);
+      }
+      if (assigned() < total) throw new Error(`Rozwój Cechy: ${assigned()}/${total} points spent`);
     }
     const btn = mgr.element.querySelector('button[data-action="complete"]') ?? mgr.element.querySelector('button[data-action="next"]');
     if (!btn) throw new Error(`no Next/Complete on step ${type}:${title}`);
-    const done = btn.dataset.action === "complete";
     btn.click();
-    if (done) {
-      await __e2e.until(() => !mgr.rendered, { timeoutMs: 15_000, message: "the manager to close" });
-      return seen;
-    }
-    await __e2e.until(() => mgr.step?.flow && mgr.step.flow !== flow, { timeoutMs: 8000, message: `the step after ${title}` });
+    // „Complete” on the Sztuczka choice is not the end: the chosen Sztuczka's own steps (its „Rozwój Cechy”) join
+    // the manager only once it is picked, and the manager moves on to them instead of closing.
+    await __e2e.until(() => !mgr.rendered || (mgr.step?.flow && mgr.step.flow !== flow),
+      { timeoutMs: 15_000, message: `the manager to close or move on after ${title}` });
+    if (!mgr.rendered) return seen;
     await __e2e.sleep(200);
   }
   throw new Error(`advancement did not finish: ${seen.join(" → ")}`);
@@ -291,8 +305,10 @@ export default {
       t.assert(pochodzenieKroki.length >= 1, "Pochodzenie went through the manager", pochodzenieKroki);
       await p2.eval(krokKlasy, { nazwa: "Agent · Lucky — tworzenie" });
       const kroki = await p2.eval(advance, {});
-      t.equal(kroki.join(" → "),
+      t.equal(kroki.slice(0, 3).join(" → "),
         "Trait:Rzuty obronne → Trait:Umiejętności lub zestawy narzędzi → ItemChoice:Sztuczka (której wymagania spełnia)", "class steps");
+      // The chosen Sztuczka brings its own „Rozwój Cechy” (PLAN_m7 E3) — nothing else after it.
+      t.assert(kroki.slice(3).every(k => k.startsWith("AbilityScoreImprovement:")), "after the Sztuczka only its Rozwój Cechy", kroki);
       const s = await p2.eval(stan, { nazwa: "Agent · Lucky — tworzenie" });
       t.equal(s.kreator, 0, "creator pills gone");
       t.equal(s.poziom, 3, "Towarzysz level = owner's Cwaniak level");

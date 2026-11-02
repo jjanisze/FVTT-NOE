@@ -198,14 +198,21 @@ export async function contextExists(browser, browserContextId) {
 }
 
 /**
+ * Smallest outer window: Foundry wants a 1024 × 768 viewport, and the bounds Chrome takes are the outer frame —
+ * 16 px wider than the viewport, about 110 px taller (tab strip, toolbar). At exactly 1024 every client logged
+ * „requires usable window dimensions” (1008 px viewport) once the screen got narrow enough to reach the floor (2026-11-02).
+ */
+export const MIN_WINDOW = Object.freeze({ width: 1024 + 16, height: 768 + 110 });
+
+/**
  * Cascade for `n` windows over one screen's work area: each offset by `step` from the previous, all the same size,
- * no smaller than Foundry's minimum (1024 × 700). A later window starts right and below an earlier one, so every
- * window keeps a visible strip on its left and top — never fully covered.
+ * no smaller than `MIN_WINDOW`. A later window starts right and below an earlier one, so every window keeps a
+ * visible strip on its left and top — never fully covered.
  * @returns {{left: number, top: number, width: number, height: number}[]}
  */
 export function cascadeLayout(n, area, step = { x: 160, y: 48 }) {
-  const width = Math.max(1024, area.width - step.x * (n - 1));
-  const height = Math.max(700, area.height - step.y * (n - 1));
+  const width = Math.max(MIN_WINDOW.width, area.width - step.x * (n - 1));
+  const height = Math.max(MIN_WINDOW.height, area.height - step.y * (n - 1));
   return Array.from({ length: n }, (_, i) => ({ left: area.left + step.x * i, top: area.top + step.y * i, width, height }));
 }
 
