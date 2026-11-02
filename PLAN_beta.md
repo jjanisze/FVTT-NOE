@@ -43,12 +43,19 @@ trzy zdolności M7 czekają na krok 7, a nie M7 na niego. Następne: krok 6 (PM1
 odblokowany. Wydanie z M7 przed kandydatem (jak v0.21.0 po M4 i M6) — propozycja agenta, do decyzji MG: paczki M7
 są zmienione, `resync` kampanii zrobiony, `master` ma 19 commitów po v0.21.0.
 
+**Decyzje MG 2026-11-02:** testerzy bety **budują własne postacie** — każda Sztuczka jest osiągalna na 1. poziomie,
+więc Sztuczki bez automatyki wchodzą przed betę. Kolejność do ruchu: **8a. dogrywka M7** (plakietki zdolności-parasoli
+i tanie reguły bez osądu MG), **8b. siedem Sztuczek z nowymi atakami albo przyciskami**, potem krok 6 (PM1, PM7).
+Ruch (krok 7) i style (krok 9) dostają **własne plany M — M8 i M9** (§3); ruch robi osobna sesja, a oba plany są do
+napisania — ten plik ich nie zastępuje.
+
 ```mermaid
 flowchart LR
   DONE["1–5. Zrobione<br/>v0.19.1 → v0.21.0"] --> M7["8. M7 Zdolności poz. 1–3<br/>zrobione 2026-11-01"]
-  M7 --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
-  PM --> RU["7. Ruch w turze, Skakanie,<br/>pasek walki"]
-  RU --> ST["9. Style i motywy"]
+  M7 --> M7B["8a–8b. Dogrywka M7,<br/>siedem Sztuczek"]
+  M7B --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
+  PM --> RU["7. M8 Ruch w turze, Skakanie,<br/>pasek walki — plan do napisania"]
+  RU --> ST["9. M9 Style i motywy<br/>— plan do napisania"]
   ST --> RC{{"10. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
   RC --> GG["11. Styczeń: kampania testowa<br/>„Za garść gambli”"]
   MG["Tor MG: weto Poligonu (M4, Sala prób),<br/>decyzje handoffu §10"] -.-> RC
@@ -82,7 +89,8 @@ flowchart LR
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
    kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po PM1
    pełna bramka wydania i krótki obchód Poligonu.
-7. **Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25) —
+7. **M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25; własny plan M —
+   MG 2026-11-02, §3 M8, do napisania w osobnej sesji) — wejście:
    [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md) (projekt i kolejność dostawy §8; dowody dostępności akcji —
    `AUDIT_shared_actions.md`; ruchu jeszcze nie ma). Przed betą z trzech powodów: Skakanie to jedyny ❌ w macierzy
    spoza listy §4 (B1); trzy zdolności M7 czekają na budżet ruchu — Skok Gladiatora, Skoczek, Szybkie nogi (warstwę
@@ -99,7 +107,18 @@ flowchart LR
    w kampanii zrobiony (kopia zapasowa przed); dla graczy `docs/Zdolnosci.md`; Poligon — 23 persony M7 i stanowisko
    „Sala prób”; pregeni Jazdy Próbnej zbudowani od nowa kreatorem (D17), persony Poligonu dostają Sztuczkę tą samą
    drogą. Zostaje: trzy zdolności czekające na krok 7, obchód MG w „Sali prób”, wydanie. Kryterium końca — §3 M7.
-9. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
+   - **8a. Dogrywka M7** (MG 2026-11-02, przed krokiem 6) — plakietki zdolności-parasoli (Mój wróg, Wyjadacz Twardziela
+     i Zwiadowcy: wybór wariantu to awans, mechanika w opcji); reguły bez osądu MG: Trening w zbroi (Skradanie bez kary
+     z pancerza), Człowiek-aligator (pływanie = Szybkość), Pierwotny instynkt (+5 Inicjatywa i Percepcja), Miotacz
+     i Siekierezada (zasięg broni rzucanej ×2, Miotacz +2 do ataku), Ukryty cel (osłona ½ i ¾, Unikanie), Pancerny
+     (Próg obrażeń 10 w ciężkim pancerzu), Padnij/Powstań (Szybkość +3 m; reszta — M8); pod pregenów: Ciszej niż cień
+     (podpowiedź Utrudnienia w Percepcji BN, gdy postać jest ukryta) i Pan Plaster (pół dawki leku przewlekłego).
+     Przebudowa paczek i `resync` kampanii (kopia zapasowa przed).
+   - **8b. Siedem Sztuczek z nowymi atakami albo przyciskami** (MG 2026-11-02: testerzy budują własne postacie) —
+     Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast krwi, Jest zajebiście, Plug & Play. Notatki obu kroków
+     — `PLAN_m7_zdolnosci.md` §8.
+9. **M9 — Style i motywy (graficzne odświeżenie)** (własny plan M — MG 2026-11-02, §3 M9, do napisania) — przed
+   betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
    dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
    (`dev/icons/MISSING.md`); **język ikon** (`PLAN_icon_design.md`) — na samym końcu tego etapu. Plan zdjęć do
@@ -187,6 +206,9 @@ Zostaje: PM1 + PM7 (1–2 dni), ruch (2–4 dni z decyzjami §10), style (1–2 
 tygodni, **kandydat na przełomie listopada i grudnia**; cel „przed świętami” z większym zapasem. Wariant B przestał
 być cięciem M7 — M7 jest w całym zakresie D2; zostaje jako „style tylko karty czatu i PM13”.
 
+*2026-11-02, decyzje MG:* przed PM1/PM7 wchodzą dogrywka M7 (ok. 1 dzień) i siedem Sztuczek (1–2 dni); ruch i style
+czekają na własne plany (M8, M9) — ich szacunek dopiero z planów.
+
 ---
 
 ## 1. Definicja wczesnej bety — bramki
@@ -237,6 +259,10 @@ flowchart LR
   M1 --> M6[M6 Drobne zasady RAW]
   M0 --> M7[M7 Automatyka zdolności poz. 1–3 — zrobione]
   M7 --> BETA
+  M1 --> M8[M8 Ruch w turze, Skakanie, pasek walki]
+  M7 --> M8
+  M8 --> BETA
+  M9[M9 Style i motywy] --> BETA
   M5 --> BETA{{Wczesna beta: B1–B8}}
   M3 --> BETA
   M4 --> BETA
@@ -519,6 +545,41 @@ pełnych, 22 częściowe, dwie z plakietką „brak” — **Mój wróg i Wyjada
 mechanika siedzi w opcji wybranej przy awansie (Mój wróg: grupa — częściowa; wariant Wyjadacza — pełna). Kryterium
 spełnione co do treści; same plakietki parasoli mówią „brak” — do poprawienia wpisem w rejestrze (wybór wariantu to
 awans), przebudową paczek i `resync`, jeśli MG chce.
+
+*Dalej (MG 2026-11-02, §0 kroki 8a–8b):*
+
+- [ ] 8a. Dogrywka M7 — plakietki parasoli, tanie reguły bez osądu MG, Ciszej niż cień i Pan Plaster; paczki, `resync`
+- [ ] 8b. Siedem Sztuczek dla własnych postaci testerów — Karateka, Barbarka, Nożownik, Robin Hood, Benzyna zamiast
+  krwi, Jest zajebiście, Plug & Play
+- Zdolności częściowe z powodu ekonomii akcji i ruchu — do zakresu M8 (niżej)
+
+### M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki — plan do napisania
+
+> **Własny plan M — MG 2026-11-02; robi go osobna sesja.** Plik planu (`PLAN_m8_ruch.md`) jeszcze nie istnieje;
+> ten wpis tylko wyznacza zakres i wejścia. Wejście: [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md)
+> (projekt, kolejność dostawy §8, pytania do MG §10), [AUDIT_shared_actions.md](AUDIT_shared_actions.md) (dowody
+> dostępności akcji), warstwa akcji z M7 E0 (`config/actions-data.mjs`, `actors/actions.mjs` — znaczniki Reakcji
+> i Akcji Bonusowej), budżet ruchu pojazdów i wierzchowców z M4.
+
+Zakres do zaplanowania (§0 krok 7):
+
+- budżet ruchu w turze, akcje wrodzone przy pustym pasku, Skakanie (jedyny ❌ macierzy spoza §4 — B1), linijka
+  zielono-czerwona, szablony paska sześciu klas, stanowisko Poligonu;
+- zdolności częściowe z powodu ekonomii akcji (propozycja agenta 2026-11-02): liczba ataków w akcji Atakowanie
+  (Drugi atak, Trzeci atak, Grad ołowiu), koszt Akcji i Akcji Bonusowej (Zryw, Z bara!, manewry Mistrza walki wręcz,
+  Szybki Bill, Aramis, Pancerna fura), darmowe interakcje (Samuraj, Pakowanie, Rewolwerowiec, Pistolero), ruch
+  (Skok Gladiatora, Skoczek, Szybkie nogi, Padnij/Powstań).
+
+**Gotowe gdy:** — określi plan.
+
+### M9 — Style i motywy (graficzne odświeżenie) — plan do napisania
+
+> **Własny plan M — MG 2026-11-02.** Plik planu (`PLAN_m9_style.md`) jeszcze nie istnieje; ten wpis tylko wyznacza
+> zakres i wejścia: §0 krok 9, [PLAN_icon_design.md](PLAN_icon_design.md) (język ikon — propozycja „emalia na stali”),
+> PM13 i wygląd kart czatu (`PLAN_migracja_dnd5e6.md` §9, D8), `dev/icons/MISSING.md`, stanowiska Poligonu Garderoba
+> i Galeria, plan zdjęć do zwiastuna. Kod stylów jest odblokowany od zamknięcia M7.
+
+**Gotowe gdy:** — określi plan.
 
 ---
 
