@@ -302,7 +302,7 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "1–2",
     label: "Człowiek-aligator",
     text: "Szybkość pływania = bazowa Szybkość.",
-    auto: []
+    auto: [{ what: "Szybkość pływania = Szybkość — Efekt Aktywny na zdolności.", where: "config/zdolnosci-efekty.mjs" }]
   },
   "ja-juz-swoje-odchorowalem": {
     id: "ja-juz-swoje-odchorowalem",

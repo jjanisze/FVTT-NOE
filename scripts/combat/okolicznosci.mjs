@@ -18,7 +18,7 @@
 
 import { mierzyDroga } from "../scenes/droga.mjs";
 import { METRY_KRATKI_POJAZDU } from "../pojazdy/stan.mjs";
-import { rozstrzygnijOkolicznosci, autoKrytyk, OBOK } from "../config/okolicznosci-ataku.mjs";
+import { rozstrzygnijOkolicznosci, autoKrytyk, OBOK, jestRzucana } from "../config/okolicznosci-ataku.mjs";
 import { isMeleeAttack } from "./trafienie.mjs";
 import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
@@ -26,6 +26,7 @@ import { cardPillList } from "../config/chat-card-dom.mjs";
 import { stanBroni } from "../weapons/wlasciwosci.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 import { hasAbility, ABILITY_KEYS } from "../actors/abilities.mjs";
+import { weaponIdOf } from "../weapons/magazine-model.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -141,6 +142,16 @@ function _celPochwytuje(atakujacy, cel, zetony) {
 export const STANOWISKO_SNAJPERSKIE = "stanowiskoSnajperskie";
 
 /** Strzelec na stanowisku snajperskim z bronią z celownikiem optycznym (PLAN_m7 E4). */
+/** Sztuczka po kluczu z paczki (`flags.<moduł>.sztuczka`). */
+const _maSztuczke = (actor, key) => !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === key);
+
+/** Miotacz — każda broń rzucana; Siekierezada — siekierka z katalogu. */
+function _rzutX2(actor, item, bron) {
+  if (!jestRzucana(bron)) return false;
+  if (_maSztuczke(actor, "miotacz")) return true;
+  return _maSztuczke(actor, "siekierezada") && weaponIdOf(item) === "siekierka";
+}
+
 function _snajper(actor, item) {
   if (!actor?.statuses?.has(STANOWISKO_SNAJPERSKIE) || !hasAddon(item, "celownik-optyczny")) return false;
   return !!actor.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === "strzelec");
@@ -192,7 +203,8 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
         ...stanBroni(item, actor), typ: item.system.type?.value ?? null, rzut: String(attackMode ?? "").startsWith("thrown"),
         snajper: _snajper(actor, item),
         snajperSztuczka: hasAbility(actor, ABILITY_KEYS.SNAJPER),
-        gunfight: hasAbility(actor, ABILITY_KEYS.GUNFIGHT)
+        gunfight: hasAbility(actor, ABILITY_KEYS.GUNFIGHT),
+        ukrytyCel: _maSztuczke(actor, "ukrytyCel")
       }
       : null
   };
@@ -200,6 +212,7 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     activity, item, actor, attackerToken, targets, wrecz, attackMode,
     ability: activity?.ability ?? item?.system?.ability ?? null
   };
+  if (migawka.bron) migawka.bron.rzutX2 = _rzutX2(actor, item, migawka.bron);
   migawka.zewnetrzne = _zewnetrzne(ctx);
   return { migawka, ctx };
 }

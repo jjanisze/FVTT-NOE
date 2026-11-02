@@ -46,9 +46,12 @@ const EFFECT_FLAG = "diseaseEffect";
 export function registerDiseaseEffects() {
   // A stage can only move by writing the flag — panel click, sunset routine,
   // migration and macros all funnel through it, so one hook covers every path.
-  Hooks.on("updateActor", (actor, changed) => {
+  // Only the client that wrote the flag syncs: with `isOwner` alone the GM and an online owner both rebuilt the
+  // effects and one deleted what the other had just deleted (MG writing a player's flag — Zachód słońca, a dose given
+  // by another character, `actors/podaj-dawke.mjs`).
+  Hooks.on("updateActor", (actor, changed, _options, userId) => {
     if (foundry.utils.getProperty(changed, `flags.${MODULE_ID}.choroby`) === undefined) return;
-    if (!actor.isOwner) return;
+    if (userId !== game.user.id) return;
     syncDiseaseEffects(actor);
   });
 

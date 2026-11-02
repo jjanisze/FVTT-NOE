@@ -537,13 +537,28 @@ COVERAGE = {
         ],
     },
     # ---- Trudność Trafienia i reakcje (PLAN_tt) ----
+    # Zdolności-parasole: sama zdolność to wybór wariantu (awans ItemChoice z puli CHOICE_POOLS), mechanika
+    # siedzi w wybranej opcji z własną plakietką (PLAN_beta §0 krok 8a, 2026-11-02).
+    "wyjadacz": {
+        "auto": [("wybór wariantu przy awansie (pula Wyjadacza); każdy wariant ma pełną automatykę — plakietka opcji",
+                  "config/class-features-data.mjs")],
+    },
+    "wyjadacz-zwiadowca": {
+        "auto": [("wybór wariantu przy awansie (pula Wyjadacza Zwiadowcy); każdy wariant ma pełną automatykę — "
+                  "plakietka opcji", "config/class-features-data.mjs")],
+    },
+    "moj-wrog": {
+        "auto": [("wybór grupy wrogów przy awansie (Mój wróg: …); premie z kolumny Mój wróg liczy wybrana opcja",
+                  "config/class-features-data.mjs")],
+        "manual": "Jak w wybranej opcji: czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
+    },
     "obsluga-pancerza": {
         "auto": [("+2 do TT w pancerzu (lekkim, średnim, ciężkim) albo w samych ochraniaczach; z dwóch klas liczy się raz",
                   "config/tt-rules.mjs")],
     },
     "trening-w-zbroi": {
-        "auto": [("limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", "config/tt-rules.mjs")],
-        "manual": "Brak kary do Skradania się w pancerzu — Utrudnienie z pancerza zdejmuje MG.",
+        "auto": [("limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", "config/tt-rules.mjs"),
+                 ("Skradanie się w pancerzu bez Utrudnienia — wyjątek w regule pancerza", "actors/tt.mjs")],
     },
     "inteligentna-obrona": {
         "auto": [

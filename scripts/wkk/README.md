@@ -145,6 +145,12 @@ did not veto; the bleed decisions have their own page, `docs/Krwawienia.md`.
 | Snajper with Strzelec: the larger magnification (×3), multipliers do not stack (*agent*) | `config/okolicznosci-ataku.mjs` |
 | Krwawy anioł: "level" is the Spec level, the class of the profession (*agent*) | `items/toolkit-medyk.mjs` |
 | Bez tajemnic: the three statistics default to TT, PW and Speed; the GM may pick others (*agent*) | `combat/zdolnosci-karty.mjs` |
+| Pan Plaster: half a dose counts for whoever dispenses, themselves included; the sick character hands the medicine over, there is no party-wide discount. Anyone may give a dose from their own inventory to another character, who accepts or refuses (D18) | `actors/podaj-dawke.mjs`, `config/dawki-rules.mjs` |
+| Miotacz: "thrown weapon" is the thrown property (s. 117) — a thrown melee weapon or a missile weapon with that property; bows, crossbows and grenades are not (*agent*) | `config/okolicznosci-ataku.mjs`, `combat/zdolnosci-walka.mjs` |
+| Ukryty cel: cover is ignored for attacks; the cover's bonus to DEX saves stays (*agent*) | `combat/cover.mjs` |
+| Pierwotny instynkt: the +5 to Perception also counts for passive Perception — a passive check is a Perception check (*agent*) | `config/sztuczki-data.mjs` |
+| Ciszej niż cień: a suggestion on an NPC's Perception while a character with it is Hiding or Invisible on that scene; the GM decides whether the test looks for them (*agent*) | `combat/ulatwienia-testow.mjs` |
+| Człowiek-aligator: "base Speed" read as the character's walking Speed, bonuses included (Padnij/Powstań) (*agent*) | `config/zdolnosci-efekty.mjs` |
 
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of

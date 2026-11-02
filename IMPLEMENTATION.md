@@ -44,13 +44,13 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
 | | **Lalka** (dla graczy: Oporządzenie): dwie ręce, 4 + 3 egzemplarze broni pod ręką, pas, noszone (pancerz, hełm, ochraniacze, Głowa/Twarz/Ramię/Strój); dobywanie, chwyt, koszty ruchów | ✅ | `actors/doll*.mjs`, `combat/grip.mjs`, `PLAN_paper_doll.md`. Migracja D9 zastosowana, przekaźnik sprawdzony z klientem gracza, paczki przebudowane, grafika zaakceptowana. Zostały ikony „śmieci sprzedawcy" (partia 42) |
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
-| | Automatyka zdolności | 🟡 | 34/36 — 20 pełnych, 14 częściowych (`game.neuroshima.pochodzenia.report()`); M7, `docs/Zdolnosci.md` |
+| | Automatyka zdolności | 🟡 | 35/36 — 21 pełnych, 14 częściowych (`game.neuroshima.pochodzenia.report()`); M7 i dogrywka, `docs/Zdolnosci.md` |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
 | | Biegłości profesji i klas: umiejętności, zestawy, instrumenty, broń, wieloklasowość (s. 69–101) | ✅ | awanse `Trait` w paczkach (`dev/packs/build-packs.mjs`, `validate-packs`), ostrzeżenie po awansie i audyt postaci — `actors/bieglosci.mjs` (M6 E1, e2e `postac`); przegląd istniejących BG — `HANDOFF_bieglosci_retro.md` |
-| | Automatyka zdolności | 🟡 | 100/133 — 45 pełnych, 55 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`); reszta — fabuła albo warstwa ruchu (handoff). M7, `docs/Zdolnosci.md` |
+| | Automatyka zdolności | 🟡 | 103/133 — 48 pełnych, 55 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`); reszta — fabuła albo warstwa ruchu (handoff). M7, `docs/Zdolnosci.md` |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 41/53 — 19 pełnych, 22 częściowe (`game.neuroshima.sztuczki.report()`); Rozwój Cechy i biegłości — awanse przy wyborze; sam ASI nie daje plakietki „pełne” (`validate-packs`). M7 |
+| | Automatyka | 🟡 | 46/53 — 25 pełnych, 21 częściowych (`game.neuroshima.sztuczki.report()`); Rozwój Cechy i biegłości — awanse przy wyborze; sam ASI nie daje plakietki „pełne” (`validate-packs`). M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | ✅ | `dluga`, `ciezka`, `jednorazowa` — `weapons/wlasciwosci.mjs`, wiersze silnika okoliczności (M6 E2); `ppanc`/`przebijająca` — `combat/armour-piercing.mjs`; `burząca`/`karczująca` na obiektach i pojazdach — `scenes/obiekty.mjs`; `PLAN_weapon_properties.md` |
@@ -166,6 +166,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/combat/zdolnosci-trafienie.mjs` | Przyciski pod trafieniem (Bolesny i Podstępny atak, Mój bóg kule nosi, Skuteczny cios) — M7 E5 |
 | `scripts/combat/przycelowanie.mjs` | Przycelowanie: „Celuję w…” w oknie ataku, TT części, skutek pod trafieniem — M7 E6 |
 | `scripts/combat/zdolnosci-karty.mjs` | Karty MG (Zryw, Kłusownik, Wierzę, Bez tajemnic, Coś mi tu śmierdzi, Łapiduch) — M7 E7; zasady `config/zdolnosci-karty-rules.mjs` |
+| `scripts/actors/podaj-dawke.mjs` | Podanie leku innej postaci: „Podaj” na liście Leków, okno pacjenta (Przyjmij/Odmów), wykonanie u MG; Pan Plaster — pół dawki (D18) |
+| `scripts/config/dawki-rules.mjs` | Ułamek dawki leku (napoczęta połowa na przedmiocie), lista pacjentów leku — czyste funkcje |
 | `scripts/config/krwawienia-data.mjs` | Krwawienia jako osobne efekty — dane (`docs/Krwawienia.md`); silnik `combat/bleeding.mjs` |
 | `scripts/combat/sygnal-naruszenia.mjs` | Sygnał naruszenia „oznaczać, nie zakazywać”: szept do MG i właścicieli z powodami + dźwięk porażki (M6 D1, D11; M7) |
 | `scripts/config/rekonwalescencja-rules.mjs` | Powrót do zdrowia — czyste zasady: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, widok pipek, licznik Regeneracji, szansa RO, prognoza kalendarzyka |
@@ -1205,6 +1207,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Dogrywka M7 — tanie reguły, plakietki, podanie leku (2026-11-02)
+
+PLAN_beta §0 krok 8a; notatki i decyzje (D18, D19) — `PLAN_m7_zdolnosci.md` §8 „8a”. Plakietki zdolności-parasoli (Wyjadacz, Mój wróg); Trening w zbroi (Skradanie w pancerzu), Pancerny (Próg obrażeń), Miotacz i Siekierezada (rzut ×2, Miotacz +2), Ukryty cel (osłona ½ i ¾, Unikanie), Pierwotny instynkt, Padnij/Powstań, Człowiek-aligator; Ciszej niż cień — podpowiedź Utrudnienia w Percepcji BN; podanie leku innej postaci z oknem pacjenta i Pan Plaster z połówkami dawek; efekty ruchu na `movement.speeds.*`; efekty chorób synchronizuje tylko klient, który zapisał flagę (wcześniej MG i gracz kasowali ten sam efekt). Pokrycie: klasowe 103/133, Sztuczki 46/53, Pochodzenia 35/36. Quench 1526/1526, e2e `dawki`.
 
 ### M7 — zdolności poziomów 1–3, Sztuczki i Pochodzenia (2026-10-31 – 2026-11-01)
 

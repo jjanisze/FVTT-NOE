@@ -26,9 +26,9 @@
  */
 
 import { computeTT, TT_ABILITY_KEYS, permanentlyLosingMethods, _signed } from "../config/tt-rules.mjs";
-import { hasAbility } from "./abilities.mjs";
+import { hasAbility, ABILITY_KEYS } from "./abilities.mjs";
 import { heldItems, familyOf } from "./doll.mjs";
-import { equippedArmor } from "./armor-rules.mjs";
+import { equippedArmor, registerStealthExemption } from "./armor-rules.mjs";
 import { isZaslonaWeapon } from "./samuraj.mjs";
 import { weaponIdOf } from "../weapons/magazine-model.mjs";
 import { zarejestrujEfektTuryWlasciciela } from "../combat/czas-efektu.mjs";
@@ -317,6 +317,8 @@ export function registerTT() {
 
   // Początek na właścicielu, skasowanie po wygaśnięciu, porządki po walce i odpoczynku — `combat/czas-efektu.mjs`.
   zarejestrujEfektTuryWlasciciela(isTurnLongTTEffect);
+  // Trening w zbroi (Żołnierz, s. 89): drugi skutek obok limitu ZRC — pancerz nie nakłada Utrudnienia do Skradania się.
+  registerStealthExemption(actor => hasAbility(actor, ABILITY_KEYS.TRENING_W_ZBROI));
 
   Hooks.once("ready", () => {
     if (game.users.activeGM?.isSelf) void cleanupLegacyTTEffects();

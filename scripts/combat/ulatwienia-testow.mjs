@@ -14,7 +14,7 @@
  *     jako osobna plakietka „do rozważenia”.
  */
 
-import { rozstrzygnijTest } from "../config/ulatwienia-testow.mjs";
+import { rozstrzygnijTest, ktoSieUkrywa } from "../config/ulatwienia-testow.mjs";
 import { kombatantWlasciciela } from "./czas-efektu.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 import { jestMaszyna } from "../actors/towarzysze.mjs";
@@ -159,11 +159,25 @@ function _maZdolnosc(actor, id) {
     || i.getFlag(MODULE_ID, "sztuczka") === id) ?? false;
 }
 
+/** Żetony sceny, na której stoi aktor (albo oglądanej), w kształcie `ktoSieUkrywa`. */
+function _zetonySceny(actor) {
+  const scene = actor?.token?.parent ?? actor?.getActiveTokens?.()[0]?.document?.parent ?? canvas?.scene ?? null;
+  return (scene?.tokens ?? []).filter(t => t.actor).map(t => ({
+    actorId: t.actor.id, nazwa: t.name, ciszejNizCien: _maZdolnosc(t.actor, "ciszejNizCien"), stany: t.actor.statuses ?? []
+  }));
+}
+
 export function registerUlatwieniaTestow() {
   // Wiersze ze zdolności jako dane (PLAN_m7 E3, `config/zdolnosci-efekty.mjs`); `klucz` — gdy zdolność ma ich kilka.
   for (const row of ULATWIENIA) {
     zarejestrujUlatwienieTestu({ ...row, id: row.klucz ?? row.id, ma: actor => _maZdolnosc(actor, row.id) });
   }
+  // Sztuczka Ciszej niż cień należy do ukrywającego się, a Utrudnienie dostaje szukający przeciwnik (BN): podpowiedź MG
+  // w jego Percepcji, gdy na scenie ukrywa się ktoś z tą Sztuczką — czy test szuka akurat tej postaci, rozstrzyga MG.
+  zarejestrujUlatwienieTestu({
+    id: "ciszejNizCien", label: "Ciszej niż cień — ktoś ukrywa się na scenie", rzut: ["skill:prc"], rodzaj: "utrudnienie",
+    gdy: () => "stol", ma: actor => !actor?.hasPlayerOwner && !!ktoSieUkrywa(_zetonySceny(actor), actor?.id)
+  });
   Hooks.on("dnd5e.preRollD20Test", _onPreRollD20Test);
   Hooks.on("dnd5e.renderChatMessage", _onRenderMessage);
   console.log(`${MODULE_ID} | Ułatwienia w testach i RO (rejestr §3.0.3) registered`);

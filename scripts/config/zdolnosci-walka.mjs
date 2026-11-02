@@ -42,6 +42,8 @@ export const ZASIEG_GANGU = 3;
 export const DWOCH_NA_JEDNEGO = 2;
 /** Rzeźnik (Wyjadacz, s. 86/98): premia do obrażeń. */
 export const RZEZNIK = 3;
+/** Sztuczka Miotacz (Celny rzut): premia do Testów Ataku bronią rzucaną. */
+export const MIOTACZ = 2;
 
 /* -------------------------------------------- */
 /*  Chwile walki                                 */

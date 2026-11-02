@@ -37,8 +37,9 @@ import { rollTypeOf } from "../config/chat-message-data.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 import {
   MOJ_WROG_KATEGORIE, MOJ_WROG_DOMYSLNIE, premiaMojegoWroga, ZAWOLAJCIE_ILU, ZASIEG_GANGU, DWOCH_NA_JEDNEGO, RZEZNIK,
-  wOknieOdPoprzedniejTury, przedCelemWPierwszejRundzie, rzeznikDziala, koscZabojczejSpluwy
+  MIOTACZ, wOknieOdPoprzedniejTury, przedCelemWPierwszejRundzie, rzeznikDziala, koscZabojczejSpluwy
 } from "../config/zdolnosci-walka.mjs";
+import { jestRzucana } from "../config/okolicznosci-ataku.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Premie liczbowe na `roll.options` — plakietka na karcie ataku. */
@@ -258,10 +259,16 @@ export function sojusznikZaatakowalWrecz(actor, celToken, combat = game.combat) 
 
 function _premieAtaku(activity, attackMode) {
   const actor = activity.actor;
+  const out = [];
+  // Miotacz (Celny rzut) — bez względu na cel.
+  const item = activity.item;
+  if (item?.type === "weapon" && actor.items.some(i => i.getFlag(MODULE_ID, "sztuczka") === "miotacz")
+    && jestRzucana({ rzut: String(attackMode ?? "").startsWith("thrown"), typ: item.system.type?.value, wlasciwosci: item.system.properties })) {
+    out.push({ id: "miotacz", label: "Miotacz — Celny rzut", wartosc: MIOTACZ });
+  }
   const targets = [...(game.user.targets ?? [])];
   const cel = targets.length === 1 ? targets[0] : null;
-  if (!cel?.actor) return [];
-  const out = [];
+  if (!cel?.actor) return out;
   const wrog = mojWrogPrzeciw(actor, cel.actor);
   if (wrog) out.push({ id: "moj-wrog", label: wrog.label, wartosc: wrog.atak });
   if (isMeleeAttack(activity, attackMode) && _ma(actor, "dwoch-na-jednego")) {

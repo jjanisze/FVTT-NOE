@@ -56,9 +56,11 @@ export const EFEKTY = Object.freeze({
   // Szczur — Szary, Mądra kryjówka: + mod. INT lub MDR do Skradania się — wyższy (wybór „lub” na korzyść gracza, §5.4).
   "szary": [{ name: "Szary — Mądra kryjówka", zmiany: [reg("check", "dnd5e.bonus", "max(@abilities.int.mod, @abilities.wis.mod)", naRzut("roll.skill", "skr"))] }],
   // Szczur — Zwinność szczura, Wspinacz: Szybkość wspinania równa Szybkości (Skoczek — handoff ruchu).
-  "zwinnosc-szczura": [{ name: "Zwinność szczura — Wspinacz", zmiany: [change("system.attributes.movement.climb", CHANGE_TYPE.upgrade, "@attributes.movement.walk")] }],
+  "zwinnosc-szczura": [{ name: "Zwinność szczura — Wspinacz", zmiany: [change("system.attributes.movement.speeds.climb", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] }],
 
   /* --- Pochodzenia (s. 60–65) --- */
+  // Miami — Człowiek-aligator: Szybkość pływania równa Szybkości.
+  "czlowiek-aligator": [{ name: "Człowiek-aligator", zmiany: [change("system.attributes.movement.speeds.swim", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] }],
   "ja-juz-swoje-odchorowalem": [{ name: "Ja już swoje odchorowałem", zmiany: [reg("save", "dnd5e.advantage", ULATWIENIE, naRzut("roll.ability", "con"))] }],
   "zdrowa-okolica": [{ name: "Zdrowa okolica", zmiany: [reg("save", "dnd5e.advantage", ULATWIENIE, naRzut("roll.ability", "con"))] }],
   "telepata": [{ name: "Telepata", zmiany: [reg("check", "dnd5e.advantage", ULATWIENIE, naRzut("roll.skill", "int"))] }],

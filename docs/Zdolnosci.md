@@ -1,6 +1,7 @@
 # Zdolności, Sztuczki i Pochodzenia
 
-> Dla graczy i MG. Co moduł robi sam, gdzie szukać przycisku i co zostaje przy stole. Stan na 2026-11-01 (etap M7).
+> Dla graczy i MG. Co moduł robi sam, gdzie szukać przycisku i co zostaje przy stole. Stan na 2026-11-02 (M7
+> i dogrywka).
 > Zasady — podręcznik; tu tylko to, jak działają w Foundry.
 
 ## Plakietka na przedmiocie
@@ -34,8 +35,12 @@ sam — pierwsza naturalna 1 po odpoczynku. **Urodzony morderca** przerzuca jedy
 Okno Testu Ataku samo zaznacza Ułatwienia i Utrudnienia z okoliczności (zasięg, zwarcie, stany, osłona) i ze zdolności:
 **Mój wróg**, **Rzeźnik**, **Zabójcza spluwa**, **Dwóch na jednego**, **Sokole oko**, **Zawołajcie kolegów**, **Ja i mój
 gang!**, **Zasadzka**, **Jeden strzał**, **Słaby punkt**, **Zwód**, Strzelec na stanowisku snajperskim; ze Sztuczek —
-**Gunfight**, **Snajper**, **Samuraj**, **Pulp Fiction**, **Szturmowiec**. Dymek przy plakietce mówi, skąd się wzięły.
-Zostawiasz albo zmieniasz — to twoje okno.
+**Gunfight**, **Snajper**, **Samuraj**, **Pulp Fiction**, **Szturmowiec**, **Ukryty cel** (bez Utrudnienia, gdy cel
+Unika). Dymek przy plakietce mówi, skąd się wzięły. Zostawiasz albo zmieniasz — to twoje okno.
+
+**Miotacz** dokłada +2 do ataku bronią rzucaną (siekierka, oszczep, nóż do rzucania, bolas…) i podwaja jej zasięgi;
+**Siekierezada** podwaja zasięgi rzutu siekierką. **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
+osłona dalej blokuje.
 
 **Celuję w…** (Przycelowanie Twardziela i Sztuczki): pole w oknie ataku. Część ciała podnosi TT celu; przy trafieniu pod
 kartą pojawia się przycisk skutku — upuszczenie broni, Powalenie, krytyk w głowę, spowolnienie po trafieniu w oponę,
@@ -90,10 +95,16 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
 - **Rozwój Cechy Sztuczek** (+1 do Cechy) i biegłości ze zdolności (instrumenty Muzyka, zestawy Fachowca, umiejętności
   „Ucz się, ucz”, pancerze, broń) — okno awansu dnd5e, gdy Sztuczka albo zdolność trafia na postać.
 - **Efekty stałe** — działają, dopóki postać ma zdolność: Sokole oko, Szósty zmysł, Głupi, Doping w Berserku, odporności
-  Pochodzeń, Wspinacz, Szybki Bill (biegłość w Inicjatywie), Człowiek-pająk (wspinaczka); TT bez pancerza
-  (Kuloodporność) i przy Unikaniu (Szachista) liczy silnik TT.
+  Pochodzeń, Wspinacz, Szybki Bill (biegłość w Inicjatywie), Człowiek-pająk (wspinaczka), Człowiek-aligator
+  (pływanie), Pierwotny instynkt (+5 do Inicjatywy i Percepcji, także biernej), Padnij/Powstań (Szybkość +3 m),
+  Trening w zbroi (Skradanie się w pancerzu bez Utrudnienia), Pancerny (Próg obrażeń 10 w ciężkim pancerzu); TT bez
+  pancerza (Kuloodporność) i przy Unikaniu (Szachista) liczy silnik TT.
 - **Ułatwienia z warunkiem** — okno rzutu podsuwa je z nazwą zdolności. Pewne (walka trwa, źródło RO znane — trucizna,
   maszyna, choroba) są zaznaczone; fabularne („gdy rozmawiasz z półświatkiem”) — odznaczone, do decyzji.
+  **Ciszej niż cień** działa w drugą stronę: gdy postać z tą Sztuczką się ukrywa, Percepcja BN na tej scenie dostaje
+  podpowiedź Utrudnienia — MG zaznacza, jeśli test szuka właśnie jej.
+- **Pan Plaster** — lek na chorobę wydziela w połowie dawki, sobie i innym. Podawanie leku innej postaci —
+  [Umieranie i powrót do zdrowia](Umieranie-i-zdrowie.md#podanie-leku-innej-postaci).
 
 ## Co zostaje przy stole
 

@@ -59,6 +59,7 @@ import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
 import { registerAmmoTests } from "./amunicja.test.mjs";
 import { registerKrwawieniaTests } from "./krwawienia.test.mjs";
 import { registerZdolnosciKartyTests } from "./zdolnosci-karty.test.mjs";
+import { registerDogrywkaM7Tests } from "./dogrywka-m7.test.mjs";
 import { registerMagazynkiTests } from "./magazynki.test.mjs";
 import { registerWeaponStateTests } from "./stany-broni.test.mjs";
 import { registerPartyTests } from "./party.test.mjs";
@@ -93,6 +94,7 @@ export function registerQuenchTests() {
     registerAmmoTests(quench);
     registerKrwawieniaTests(quench);
     registerZdolnosciKartyTests(quench);
+    registerDogrywkaM7Tests(quench);
     registerMagazynkiTests(quench);
     registerWeaponStateTests(quench);
     registerPartyTests(quench);

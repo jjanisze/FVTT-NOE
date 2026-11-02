@@ -102,6 +102,7 @@ import { registerZdolnosciWsparcie } from "./combat/zdolnosci-wsparcie.mjs";
 import { registerZdolnosciWalka } from "./combat/zdolnosci-walka.mjs";
 import { registerZdolnosciAkcje, ulubionaBronApi } from "./combat/zdolnosci-akcje.mjs";
 import { registerZdolnosciKarty, zdolnosciKartyApi } from "./combat/zdolnosci-karty.mjs";
+import { registerPodajDawke } from "./actors/podaj-dawke.mjs";
 import { registerZdolnosciTrafienie } from "./combat/zdolnosci-trafienie.mjs";
 import { registerPrzycelowanie, przycelowanieApi } from "./combat/przycelowanie.mjs";
 import { registerUlatwieniaTestow, ulatwieniaTestowApi } from "./combat/ulatwienia-testow.mjs";
@@ -392,6 +393,7 @@ Hooks.once("init", () => {
   registerZdolnosciWalka();
   registerZdolnosciAkcje();
   registerZdolnosciKarty();
+  registerPodajDawke();
   // Po trafieniu (PLAN_m7 E5, R6): Bolesny atak, Podstępny atak, Mój bóg kule nosi, Skuteczny cios.
   registerZdolnosciTrafienie();
   // Przycelowanie (PLAN_m7 E6, R8): „Celuję w…” w oknie ataku, TT celu w werdykcie, skutek trafienia z tabeli.

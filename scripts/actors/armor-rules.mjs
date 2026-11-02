@@ -86,10 +86,13 @@ export function isProficientIn(actor, item) {
   return owned instanceof Set ? owned.has(key) : !!owned?.includes?.(key);
 }
 
+/** Sztuczka Pancerny (s. 105): Próg obrażeń w ciężkim pancerzu, sumuje się z progiem pancerza. */
+export const PANCERNY_DT = 10;
+
 /**
  * Suma progów obrażeń założonego sprzętu. Tarcze i akcesoria progu nie mają,
  * więc realnie to zawsze próg jednego pancerza — sumujemy dla przyszłych
- * przedmiotów homebrew.
+ * przedmiotów homebrew. Do tego Pancerny, gdy założony pancerz jest ciężki.
  */
 export function armorDamageThreshold(actor) {
   let dt = 0;
@@ -97,6 +100,8 @@ export function armorDamageThreshold(actor) {
     if ((item.type !== "equipment") || !item.system?.equipped) continue;
     dt += item.getFlag(MODULE_ID, "armorDT") ?? 0;
   }
+  if ((equippedArmor(actor)?.system?.type?.value === "heavy")
+    && actor.items.some(i => i.getFlag(MODULE_ID, "sztuczka") === "pancerny")) dt += PANCERNY_DT;
   return dt;
 }
 

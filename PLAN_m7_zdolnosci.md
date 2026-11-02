@@ -1,7 +1,7 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
 > Status: **ZAMKNIĘTY 2026-11-01** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”); E0–E8 w §8,
-> pregeni od nowa (D17) — zrobione 2026-11-01 (§8). Decyzje MG D1–D17
+> pregeni od nowa (D17) — zrobione 2026-11-01 (§8); dogrywka 8a (PLAN_beta §0) — 2026-11-02. Decyzje MG D1–D19
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
 > etapach (§5.2); P1–P7 rozstrzygnięte (§5.3).
 > Wywołanie: `PLAN_beta.md` §3 M7 („ciągłe”) — **zakres przed betą rozszerzony decyzją D2**. Bramka B5 (plakietka na
@@ -376,6 +376,8 @@ Kolejność łączna: M6 E0–E1 → handoff ruchu kroki 1–3 → M7 E0 → M7 
 | D15 | (2026-10-31, po E3) Ławnik, resync, pregeni | **Ławnik: bez Rozwoju Cechy** — „+1 SIŁ lub KON” z tabeli kampanii usunięto z podręcznika, rację ma podręcznik październikowy (MG poprawił się po E4; ASI dodane w E4 i cofnięte); **resync kampanii w E8 — zgoda**, kampania pozostaje zamrożona; **Sztuczki pregenów (P5) odłożone** |
 | D16 | (2026-11-01, P5) Sztuczki pregenów | **Buźka — Muzyk, Carson — Przycelowanie, Dante — Mistrz walki wręcz, Góra — Szybkie palce, Iris — Pan Plaster, Kluczyk — Ciszej niż cień**; kryterium MG: automatyka widoczna przy stole, prosta dla nowych graczy (cztery wybrał agent, Dantego, Iris i Kluczyka — MG). **Kluczyk: Złodziej 1** (klasa-zaślepka „Wybierz” z alfy usunięta 2026-09-25; jej cechy były Złodzieja). **Iris: INT 18 → 16 → 17** — alfowe +2 z Ćwiczenia czyni mistrza cofnięte, +1 INT z Pana Plastra. Na kartach w E8 (kampania zamrożona) |
 | D17 | (2026-11-01, E8) Pregeni — łatać czy zbudować | **Zbudować od nowa kreatorem postaci** (te same Cechy, Pochodzenie i grafika; klasa 1. poziomu — Kluczyk: Złodziej; Sztuczka z D16; wybory z alfy przeniesione na klucze NOE); stare aktory do folderu „alfa”. Osobna robota zaraz po M7 — audyt M6 pokazał braki biegłości klasy i martwe klucze umiejętności u wszystkich sześciu. **Poligon:** persony i stanowisko M7 — zgoda na przebudowę |
+| D18 | (2026-11-02, 8a) Pan Plaster — kto wydziela pół dawki | **Liczy się wydzielający**: chory oddaje leki posiadaczowi Sztuczki, a ten aktywnie podaje pół dawki; sobie też (pół dawki przy „Weź dawkę”). Bez rabatu dla całej drużyny. **Podanie leku innej postaci — dla każdego** (pełna dawka z własnego ekwipunku, Pan Plaster — połowa). Pacjent dostaje okno „X podaje lek” bez nazwy Sztuczki i **przyjmuje albo odmawia**. Ułamek dawki na przedmiocie leku |
+| D19 | (2026-11-02, 8b) Nożownik — co jest nożem | **Wszystkie cztery** z katalogu: Nóż taktyczny, Kamienny nóż, Nóż do rzucania (także rzut), Sztylet |
 
 ### 5.2 Ustalenia projektu — weto MG w rundach
 
@@ -861,3 +863,35 @@ rodzaj.
   45 Sztuczek z krokami — wszystkie w dzienniku budowy, pokrycie 41/41, 101/101, 34/34, stanowiska bez braków
   (jedyny błąd konsoli — wycieczka nowego świata rdzenia przy zakładaniu świata, ta sama co 2026-10-19). Obsada
   Poligonu MG przebudowana, wszystkie 20 stanowisk zresetowanych bez braków.
+
+### 8a — dogrywka M7 (2026-11-02, PLAN_beta §0)
+
+MG: testerzy bety budują własne postacie — każda Sztuczka jest osiągalna na 1. poziomie; najpierw tanie reguły bez
+osądu MG i plakietki, potem siedem Sztuczek z nowymi atakami albo przyciskami (8b), potem PM1/PM7. Ruch — M8.
+
+- **Plakietki parasoli:** Wyjadacz (Twardziel, Zwiadowca) i Mój wróg — sama zdolność to wybór wariantu przy awansie,
+  mechanika w opcji: Wyjadacz pełny (każdy wariant pełny), Mój wróg częściowy jak jego opcje. W kampanii zostały „brak”
+  u Victora — kryterium M7 domknięte także co do plakietek.
+- **Reguły bez osądu:** Trening w zbroi — Skradanie się w pancerzu bez Utrudnienia (`registerStealthExemption`, obok
+  Cichego kroku); Pancerny — Próg obrażeń +10 w ciężkim pancerzu, sumowany z progiem pancerza (s. 105); Miotacz —
+  +2 do ataku bronią rzucaną i jej zasięgi ×2, Siekierezada — zasięgi rzutu siekierką ×2 (s. 104, 107; broń rzucana =
+  właściwość `rzucana`, s. 117 — nie łuk, kusza ani granat); Ukryty cel — osłona ½ i ¾ bez premii do TT we wszystkich
+  ścieżkach ataku i bez Utrudnienia z Unikania celu (s. 108); Pierwotny instynkt — +5 Inicjatywa i Percepcja (reguła
+  dnd5e 6, wliczana też do biernej); Padnij/Powstań — Szybkość +3 m (reszta — M8); Człowiek-aligator — pływanie =
+  Szybkość. Efekty ruchu na ścieżce dnd5e 6 `movement.speeds.*` — także Człowiek-pająk i Wspinacz (stara ścieżka
+  działała przez nakładkę zgodności).
+- **Ciszej niż cień** (s. 102): Utrudnienie należy do szukającego, więc wiersz rejestru ułatwień z własnym `ma` —
+  Percepcja BN dostaje podpowiedź, gdy na jego scenie ukrywa się (Ukrywanie się, Niewidoczność) postać z tą Sztuczką;
+  czy test szuka akurat jej — MG.
+- **Pan Plaster i podanie leku (D18):** przycisk „Podaj” na liście Leków przy leku na chorobę, wybór pacjenta,
+  okno u właściciela pacjenta (gniazdo modułu; gdy gracza nie ma — u MG) z Przyjmij/Odmów, wykonanie u MG przez
+  przekaźnik: dawka z zapasu dawcy, dzisiejsza dawka na wpisie pacjenta, karta. Ułamek: flaga „bieżąca dawka napoczęta
+  w połowie” na przedmiocie (`config/dawki-rules.mjs`) — ostatnia połówka nie znika z opakowaniem. Lek na Hemofilię
+  przy cudzym krwawieniu wymaga całej dawki.
+- **Znalezisko:** synchronizacja efektów chorób biegła u każdego właściciela aktora — MG zapisujący flagę chorób
+  gracza (Zachód słońca, podana dawka) przy zalogowanym graczu kasował ten sam efekt dwa razy (błąd serwera u gracza).
+  Teraz synchronizuje tylko klient, który zapisał.
+- **Pokrycie:** zdolności klasowe i profesji 103/133 (48 pełnych), Sztuczki 46/53 (25 pełnych, 21 częściowych; bez —
+  siedem z 8b), Pochodzenia 35/36 (21 pełnych).
+- **Testy:** Quench `dogrywka-m7` (16) — 1526/1526; e2e `dawki` (MG podaje lek z Panem Plastrem graczowi — okno
+  u gracza, przyjęcie, pół dawki; pacjent offline — okno u MG, odmowa niczego nie zmienia).

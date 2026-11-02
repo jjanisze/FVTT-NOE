@@ -84,6 +84,8 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  * @property {boolean} [snajper]             Strzelec na stanowisku snajperskim, broń z celownikiem optycznym (U20)
  * @property {boolean} [snajperSztuczka]     atakujący ma Sztuczkę Snajper
  * @property {boolean} [gunfight]            atakujący ma Sztuczkę Gunfight
+ * @property {boolean} [rzutX2]              zasięgi rzutu ×2 — Sztuczka Miotacz (broń rzucana) albo Siekierezada (siekierka)
+ * @property {boolean} [ukrytyCel]           atakujący ma Sztuczkę Ukryty cel (bez Utrudnienia z Unikania celu)
  */
 
 const ma = (u, id) => !!u?.stany?.has?.(id);
@@ -96,16 +98,29 @@ export const SNAJPER_ZASIEG = 3;
 /** Sztuczka Snajper: zasięg daleki broni dystansowej ×2. */
 export const SNAJPER_SZTUCZKA_ZASIEG = 2;
 
-/** Zasięg daleki w metrach z Powiększeniem Strzelca albo Sztuczki Snajper (większe z dwóch); `null` — nieznany. */
+/** Sztuczki Miotacz (Mocny zamach) i Siekierezada (Rzut siekierką): zasięg normalny i daleki rzutu ×2. */
+export const RZUT_ZASIEG = 2;
+
+/** Zasięg normalny w metrach (×2 przy `rzutX2`); `null` — nieznany. */
+export function zasiegNormalny(s) {
+  const d = _num(s.zasieg?.normalny);
+  if (d === null) return null;
+  return d * (s.bron?.rzutX2 ? RZUT_ZASIEG : 1);
+}
+
+/** Zasięg daleki w metrach z Powiększeniem Strzelca albo Sztuczki Snajper (większe z dwóch) i rzutem ×2; `null` — nieznany. */
 export function zasiegDaleki(s) {
   const d = _num(s.zasieg?.daleki);
   if (d === null) return null;
-  return d * (s.bron?.snajper ? SNAJPER_ZASIEG : s.bron?.snajperSztuczka ? SNAJPER_SZTUCZKA_ZASIEG : 1);
+  return d * (s.bron?.snajper ? SNAJPER_ZASIEG : s.bron?.snajperSztuczka ? SNAJPER_SZTUCZKA_ZASIEG : 1)
+    * (s.bron?.rzutX2 ? RZUT_ZASIEG : 1);
 }
 
 /** Broń palna i broń miotana albo rzucana — dla wierszy „pod wodą” (s. 255–256). */
 export const jestPalna = bron => String(bron?.typ ?? "").startsWith("palna");
 export const jestMiotana = bron => bron?.typ === "miotana" || !!bron?.rzut;
+/** Broń rzucana (s. 117, właściwość `rzucana` = `thr`): rzut bronią białą albo broń miotana z tą właściwością. */
+export const jestRzucana = bron => !!bron?.rzut || (bron?.typ === "miotana" && new Set(bron?.wlasciwosci ?? []).has("thr"));
 
 /** `długa` (s. 117): Utrudnienie do celu w odległości do 3 m. */
 export const DLUGA_DO = 3;
@@ -147,8 +162,8 @@ export const ZRODLA_OKOLICZNOSCI = _f([
   // Zasięg i zwarcie (s. 28)
   // Strzelec — Przewaga balistyczna (s. 94) i Sztuczka Snajper: bez Utrudnienia za daleki dystans.
   _f({ id: "zasiegDaleki", rodzaj: "utrudnienie", label: "Cel w zasięgu dalekim", strona: "s. 28", cel: true,
-    gdy: s => !s.wrecz && !s.bron?.snajper && !s.bron?.snajperSztuczka && _dist(s) !== null && _num(s.zasieg?.normalny) !== null
-      && _dist(s) > _num(s.zasieg.normalny) && (zasiegDaleki(s) === null || _dist(s) <= zasiegDaleki(s)) }),
+    gdy: s => !s.wrecz && !s.bron?.snajper && !s.bron?.snajperSztuczka && _dist(s) !== null && zasiegNormalny(s) !== null
+      && _dist(s) > zasiegNormalny(s) && (zasiegDaleki(s) === null || _dist(s) <= zasiegDaleki(s)) }),
   _f({ id: "pozaZasiegiem", rodzaj: "uwaga", label: "Cel poza zasięgiem dalekim — atak chybia", strona: "s. 28", cel: true,
     gdy: s => !s.wrecz && _dist(s) !== null && zasiegDaleki(s) !== null && _dist(s) > zasiegDaleki(s) }),
   _f({ id: "dystansowyWZwarciu", rodzaj: "utrudnienie", label: "Atak dystansowy w zwarciu", strona: "s. 28",
@@ -205,7 +220,9 @@ export const ZRODLA_OKOLICZNOSCI = _f([
   _f({ id: "celPowalonyDaleko", rodzaj: "utrudnienie", label: "Cel Powalony, dalej niż 1,5 m", strona: "s. 35", cel: true,
     gdy: s => ma(s.cel, "prone") && _dist(s) !== null && _dist(s) > OBOK }),
   _f({ id: "celNiewidoczny", rodzaj: "utrudnienie", label: "Cel Niewidoczny", strona: "s. 35", cel: true, gdy: s => ma(s.cel, "invisible") }),
-  _f({ id: "celUnika", rodzaj: "utrudnienie", label: "Cel Unika", strona: "s. 30", cel: true, gdy: s => _unikanieDziala(s.cel, s.atakujacy) }),
+  // Sztuczka Ukryty cel (Nic ci to nie da): bez Utrudnienia z Unikania celu.
+  _f({ id: "celUnika", rodzaj: "utrudnienie", label: "Cel Unika", strona: "s. 30", cel: true,
+    gdy: s => !s.bron?.ukrytyCel && _unikanieDziala(s.cel, s.atakujacy) }),
   _f({ id: "celBiegnie", rodzaj: "utrudnienie", label: "Cel Biegnie (jego tura)", strona: "s. 30", cel: true,
     gdy: s => !s.wrecz && ma(s.cel, "bieganie") && !!s.turaCelu })
 ]);

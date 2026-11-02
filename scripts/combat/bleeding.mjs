@@ -337,7 +337,7 @@ export async function opatrz(actor, rodzaj, medic = actor, { dialog = {}, event 
 function _lekNaHemofilie(actor) {
   const klucze = chemiaForDisease("hemofilia");
   return actor?.items?.find(i => i.type === "consumable" && i.isOwner
-    && klucze.includes(i.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(i.name)) && dosesRemaining(i) > 0) ?? null;
+    && klucze.includes(i.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(i.name)) && dosesRemaining(i) >= 1) ?? null; // cała dawka — napoczęta połówka (Pan Plaster) nie wystarczy
 }
 
 /**

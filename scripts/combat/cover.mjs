@@ -90,11 +90,25 @@ export function domyslnaOslona(token) {
   return null;
 }
 
+/** Sztuczka Ukryty cel (Wystarczy szparka): osłona ½ i ¾ celu nie podnosi TT; pełna dalej blokuje. */
+const UKRYTY_CEL_IGNORUJE = new Set([COVER_EXPOSURES.half.key, COVER_EXPOSURES.threeQuarters.key]);
+
+/** Atakujący ignoruje osłonę ½ i ¾ (Sztuczka Ukryty cel z paczki). */
+export function ignorujeOslone(actor) {
+  return !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "ukrytyCel");
+}
+
+/** Premia TT z osłony dla ataku wokół niej; `ukrytyCel` — atakujący ma Ukryty cel. */
+function _premiaTT(exposure, przez, ukrytyCel) {
+  if (przez || (ukrytyCel && UKRYTY_CEL_IGNORUJE.has(exposure.key))) return 0;
+  return exposure.acBonus;
+}
+
 export function coverAcBonus(neuroCover) {
   if (!neuroCover?.selection) return 0;
   const selection = COVER_SELECTIONS[neuroCover.selection] ?? COVER_SELECTIONS.none;
-  if (selection.shotMode === COVER_SHOT_MODES.through.key) return 0;
-  return (COVER_EXPOSURES[selection.exposure] ?? COVER_EXPOSURES.none).acBonus;
+  const exposure = COVER_EXPOSURES[selection.exposure] ?? COVER_EXPOSURES.none;
+  return _premiaTT(exposure, selection.shotMode === COVER_SHOT_MODES.through.key, !!neuroCover.ukrytyCel);
 }
 
 export function registerCoverSystem() {
@@ -204,7 +218,8 @@ export function describeCoverDecision(decision, { includeReduction = true } = {}
   }
 
   if ((decision.shotMode !== COVER_SHOT_MODES.through.key) && (decision.exposure?.key !== COVER_EXPOSURES.none.key)) {
-    parts.push(decision.exposure.label);
+    parts.push(decision.ukrytyCel && UKRYTY_CEL_IGNORUJE.has(decision.exposure.key)
+      ? `${decision.exposure.label} — bez premii do TT (Ukryty cel)` : decision.exposure.label);
   }
 
   return parts.join("; ");
@@ -246,6 +261,7 @@ export async function promptCoverDecision({
   const damageReduction = usesThroughCover && penetrationLevel.level > 0
     ? penetrationLevel.reduction : 0;
 
+  const ukrytyCel = ignorujeOslone(activity?.actor ?? attacker?.actor ?? attacker);
   const decision = {
     attackerName: resolvedAttacker,
     targetName: resolvedTarget,
@@ -254,7 +270,8 @@ export async function promptCoverDecision({
     shotMode,
     penetrationLevel,
     damageReduction,
-    adjustedAcBonus: usesThroughCover ? 0 : exposure.acBonus,
+    ukrytyCel,
+    adjustedAcBonus: _premiaTT(exposure, usesThroughCover, ukrytyCel),
     adjustedDexSaveBonus: usesThroughCover ? 0 : exposure.dexSaveBonus,
     blocksAttack: !usesThroughCover && exposure.blocksAround,
     applyDamageReduction: damageReduction > 0,
@@ -342,6 +359,7 @@ function registerAttackCoverIntegration() {
       const damageReduction = usesThroughCover && penetrationLevel.level > 0
         ? penetrationLevel.reduction : 0;
 
+      const ukrytyCel = !!neuroCoverRaw.ukrytyCel;
       const decision = {
         attackerName: this.actor?.name ?? "Atakujący",
         targetName: coverContext.targetName,
@@ -350,7 +368,8 @@ function registerAttackCoverIntegration() {
         shotMode,
         penetrationLevel,
         damageReduction,
-        adjustedAcBonus: usesThroughCover ? 0 : exposure.acBonus,
+        ukrytyCel,
+        adjustedAcBonus: _premiaTT(exposure, usesThroughCover, ukrytyCel),
         adjustedDexSaveBonus: usesThroughCover ? 0 : exposure.dexSaveBonus,
         blocksAttack: false,
         applyDamageReduction: damageReduction > 0,
@@ -505,13 +524,14 @@ function _patchAttackConfigDialog() {
     const selKey = formData.get("neuroCoverSelection") ?? "none";
     const penLevel = Number(formData.get("neuroPenetrationLevel") ?? 0);
 
+    const ukrytyCel = ignorujeOslone(this.config?.subject?.actor);
     config.options ??= {};
-    config.options.neuroCover = { selection: selKey, penetrationLevel: penLevel };
+    config.options.neuroCover = { selection: selKey, penetrationLevel: penLevel, ...(ukrytyCel ? { ukrytyCel } : {}) };
 
     const cvSelection = _resolveCoverSelection(selKey, coverCtx.allowThrough);
     const exposure = COVER_EXPOSURES[cvSelection.exposure] ?? COVER_EXPOSURES.none;
     const isThroughShot = cvSelection.shotMode === COVER_SHOT_MODES.through.key;
-    const acBonus = isThroughShot ? 0 : exposure.acBonus;
+    const acBonus = _premiaTT(exposure, isThroughShot, ukrytyCel);
 
     if (Number.isFinite(coverCtx.baseAc) && acBonus > 0) {
       config.options.target = coverCtx.baseAc + acBonus;

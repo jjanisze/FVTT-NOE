@@ -191,9 +191,11 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 15+, biegłość Skradanie się",
     text: "+1 ZRC; przeciwnicy mają Utrudnienie w Testach Percepcji dotyczących wykrycia obecności.",
     category: "mobilnosc",
-    auto: [],
-    manual: "Utrudnienie dotyczy Testów przeciwnika, a nie posiadacza Sztuczki — "
-      + "system nie wie, który Test Percepcji szuka akurat tej postaci."
+    auto: [{
+      what: "Podpowiedź Utrudnienia w Percepcji BN, gdy na jego scenie ukrywa się postać z tą Sztuczką (Ukrywanie się, Niewidoczność).",
+      where: "combat/ulatwienia-testow.mjs"
+    }],
+    manual: "Czy Test Percepcji szuka akurat tej postaci — MG zaznacza Utrudnienie w oknie rzutu."
   },
   czlowiekPajak: {
     label: "Człowiek-pająk",
@@ -202,7 +204,7 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub ZRC; Szybkość wspinaczki = Szybkość (wolne ręce / zestaw wspinaczkowy); "
       + "pochylony teren nie jest trudnym terenem; Ułatwienie w RO przy upadku.",
     category: "mobilnosc",
-    efekty: [{ name: "Człowiek-pająk — wspinaczka", zmiany: [change("system.attributes.movement.climb", CHANGE_TYPE.upgrade, "@attributes.movement.walk")] }],
+    efekty: [{ name: "Człowiek-pająk — wspinaczka", zmiany: [change("system.attributes.movement.speeds.climb", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] }],
     auto: [{ what: "Szybkość wspinaczki = Szybkość — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }],
     manual: "Warunek „wolne ręce albo zestaw wspinaczkowy”, pochylony teren bez trudnego terenu i Ułatwienie w RO przy "
       + "upadku — MG."
@@ -329,7 +331,10 @@ export const SZTUCZKI = Object.freeze({
     req: "SIŁ 15+, biegłość broń miotana",
     text: "Zasięg broni rzucanej ×2; +2 do Testów Ataku bronią rzucaną.",
     category: "granaty",
-    auto: []
+    auto: [
+      { what: "Zasięg normalny i daleki broni rzucanej ×2 w silniku okoliczności ataku (zasięg daleki, poza zasięgiem).", where: "config/okolicznosci-ataku.mjs" },
+      { what: "+2 do Testu Ataku bronią rzucaną — część rzutu z plakietką.", where: "combat/zdolnosci-walka.mjs" }
+    ]
   },
   mistrzBroniBialej: {
     label: "Mistrz broni białej",
@@ -400,7 +405,10 @@ export const SZTUCZKI = Object.freeze({
     text: "Wstawanie nie kosztuje Szybkości; Szybkość +3 m; "
       + "wyjście z zasięgu ataku wręcz bez ataków okazyjnych.",
     category: "mobilnosc",
-    auto: []
+    efekty: [{ name: "Padnij/Powstań — Szybkonogi", zmiany: [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.add, 3)] }],
+    auto: [{ what: "Szybkość +3 m — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }],
+    manual: "Wstawanie bez kosztu Szybkości i wyjście z zasięgu bez ataków okazyjnych — moduł nie liczy ruchu w turze "
+      + "(M8)."
   },
   pakowanie: {
     label: "Pakowanie",
@@ -431,7 +439,7 @@ export const SZTUCZKI = Object.freeze({
     text: "W ciężkim pancerzu: Próg obrażeń 10 przeciwko obrażeniom ciętym, kłutym i obuchowym "
       + "(sumuje się z progiem pancerza).",
     category: "rozwoj",
-    auto: []
+    auto: [{ what: "Próg obrażeń +10 (cięte, kłute, obuchowe) w ciężkim pancerzu, dodany do progu pancerza.", where: "actors/armor-rules.mjs" }]
   },
   panPlaster: {
     label: "Pan Plaster",
@@ -443,9 +451,11 @@ export const SZTUCZKI = Object.freeze({
     auto: [{
       what: "Dodatkowa kostka PW przy leczeniu zestawem małego medyka.",
       where: "items/toolkit-medyk.mjs"
-    }],
-    manual: "„Połowa dawki leku zaspokaja dzienne zapotrzebowanie” nie jest wpięta w licznik "
-      + "dawek chorób przewlekłych — zapas zużywa się normalnie."
+    }, {
+      what: "Pół dawki leku na chorobę: podając lek innej postaci (Podaj na liście Leków, pacjent przyjmuje) i biorąc "
+        + "własną dawkę (Weź dawkę) — napoczęta połowa zapamiętana na opakowaniu (D18).",
+      where: "actors/podaj-dawke.mjs"
+    }]
   },
   patriota: {
     label: "Patriota",
@@ -475,7 +485,15 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 15+, MDR 15+, biegłość Percepcja",
     text: "+5 do Inicjatywy; +5 do Testów Percepcji.",
     category: "rekonesans",
-    auto: []
+    // Percepcja: reguła dnd5e 6 na rzucie (jak Szary) — dnd5e wlicza ją też do biernej Percepcji.
+    efekty: [{
+      name: "Pierwotny instynkt",
+      zmiany: [
+        change("system.attributes.init.bonus", CHANGE_TYPE.add, 5),
+        { key: "check", type: "dnd5e.bonus", value: "5", conditions: [{ k: "roll.skill", v: "prc" }] }
+      ]
+    }],
+    auto: [{ what: "+5 do Inicjatywy, +5 do Testów Percepcji (także biernej) — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }]
   },
   plugAndPlay: {
     label: "Plug & Play",
@@ -615,8 +633,10 @@ export const SZTUCZKI = Object.freeze({
     }, {
       what: "Tańczący z siekierkami — TT +1 z siekierką z katalogu w każdej ręce (silnik TT).",
       where: "config/tt-rules.mjs"
-    }],
-    manual: "Zasięg rzutu siekierkami ×2 — MG."
+    }, {
+      what: "Rzut siekierką: zasięg normalny i daleki ×2 w silniku okoliczności ataku.",
+      where: "config/okolicznosci-ataku.mjs"
+    }]
   },
   snajper: {
     label: "Snajper",
@@ -726,7 +746,10 @@ export const SZTUCZKI = Object.freeze({
     req: "MDR 15+, biegłość Percepcja",
     text: "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
     category: "rekonesans",
-    auto: []
+    auto: [
+      { what: "Osłona ½ i ¾ bez premii do TT celu we wszystkich ścieżkach ataku (okno ataku, KS i DS).", where: "combat/cover.mjs" },
+      { what: "Bez Utrudnienia z Unikania celu w silniku okoliczności ataku.", where: "config/okolicznosci-ataku.mjs" }
+    ]
   },
   wrestler: {
     label: "Wrestler",

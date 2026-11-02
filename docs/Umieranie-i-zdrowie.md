@@ -129,6 +129,18 @@ Długiego odpoczynku mówi o tym, zanim klikniesz.
 Dni liczy zegar świata (ten sam, co pokazuje kalendarz w Foundry) — MG przesuwa go odpoczynkami albo
 narzędziem zegara; „Zachód słońca” kończy dzień, który pokazuje zegar.
 
+### Podanie leku innej postaci
+
+Lek na chorobę można dać komuś innemu z własnego ekwipunku: na liście **Leki** przy takim leku jest przycisk
+**Podaj**. Wybierasz pacjenta (postacie graczy, drużyna i postacie na scenie, które chorują na to, co lek leczy), a jego
+gracz — albo MG, gdy gracza nie ma — dostaje okno „Lekarstwo” z przyciskami **Przyjmij** i **Odmów**. Po przyjęciu
+dawka schodzi z twojego zapasu, a pacjentowi liczy się dzisiejsza dawka — „Zachód słońca” traktuje ją jak wziętą
+samemu. Odmowa niczego nie zużywa.
+
+Postać ze Sztuczką **Pan Plaster** wydziela pół dawki: podając lek i biorąc własny („Weź dawkę”). Napoczęta połowa
+zostaje w opakowaniu — zapas pokazuje wtedy na przykład „2,5 dawki”. Pół dawki działa tylko u tego, kto wydziela:
+chory oddaje mu leki, a on je podaje.
+
 ## Zagrożenia — narzędzie MG
 
 MG zaznacza żetony i klika **Zagrożenia** (termometr w kontrolkach żetonów, obok Zachodu słońca i

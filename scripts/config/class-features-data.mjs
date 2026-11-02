@@ -454,7 +454,7 @@ export const CLASS_FEATURES = {
     level: 1,
     label: "Wyjadacz",
     action: null,
-    auto: [],
+    auto: [{ what: "wybór wariantu przy awansie (pula Wyjadacza); każdy wariant ma pełną automatykę — plakietka opcji", where: "config/class-features-data.mjs" }],
     text: "Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka."
   },
   "przycelowanie": {
@@ -665,7 +665,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     resource: { value: "@scale.zwiadowca.mojWrog" },
-    auto: [],
+    auto: [{ what: "wybór grupy wrogów przy awansie (Mój wróg: …); premie z kolumny Mój wróg liczy wybrana opcja", where: "config/class-features-data.mjs" }],
+    manual: "Jak w wybranej opcji: czy test dotyczy tropienia albo wiedzy o twoich wrogach — stół.",
     text: "Masz doświadczenie w zabijaniu określonego typu przeciwników. Wybierasz, czy specjalizujesz się w tropieniu i zabijaniu Ludzi, Maszyn, Mutantów, Potworów czy Zwierząt. Masz Ułatwienie w Testach Mądrości (Survival), kiedy tropisz swoich wrogów i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg w tabeli Zdolności klasowych Zwiadowcy. PRZYKŁAD: Pierwszopoziomowy Zwiadowca, którego wrogiem są Potwory, dodaje +1 do Testów Ataków wykonywanych przeciwko wszelkim potworom oraz każdy jego atak zadaje im dodatkowo 1k6 obrażeń. Na 5. i 9. poziomie, możesz wybrać kolejny typ wroga."
   },
   "ulubiona-bron-zwiadowca": {
@@ -700,7 +701,7 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Wyjadacz",
     action: null,
-    auto: [],
+    auto: [{ what: "wybór wariantu przy awansie (pula Wyjadacza Zwiadowcy); każdy wariant ma pełną automatykę — plakietka opcji", where: "config/class-features-data.mjs" }],
     text: "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. PRZYKŁADOWE PUŁAPKI PUŁAPKA ST DZIAŁANIE POTRZEBNE MATERIAŁY Potykacz 5 Istota otrzymuje stan Powalenie Brak Alarm 5 Wywołanie hałasu w promieniu 36 m Metalowe puszki lub naczynia Wnyki 10 Istota otrzymuje stan Pochwycenie Brak Sieć 10 Istota jest pod wpływem stanu Pochwycenie i Unieruchomienie Sieć Pułapka z granatem 15 Granat eksploduje po uruchomieniu wyzwalacza Granat Pułapka z bronią białą 15 Cel musi zdać RO na Zręczność, lub zostaje trafiony. Pułapka zadaje podstawowe obrażenia użytej broni Broń biała Pułapka z bronią samoczynną 20 Obszar zostaje ostrzelany długą serią. Obrażenia zależne od użytej broni i pojemności magazynka Karabin lub pistolet umożliwiający strzelanie serią. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka. Zasadzka Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury."
   },
   "cichy-krok": {
@@ -1237,8 +1238,7 @@ export const CLASS_FEATURES = {
     label: "Trening w zbroi",
     action: null,
     legacyAbilityKey: "treningWZbroi",
-    auto: [{ what: "limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", where: "config/tt-rules.mjs" }],
-    manual: "Brak kary do Skradania się w pancerzu — Utrudnienie z pancerza zdejmuje MG.",
+    auto: [{ what: "limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", where: "config/tt-rules.mjs" }, { what: "Skradanie się w pancerzu bez Utrudnienia — wyjątek w regule pancerza", where: "actors/tt.mjs" }],
     text: "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1."
   },
   "skrytka": {

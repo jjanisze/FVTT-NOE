@@ -18,6 +18,8 @@
 
 import { handyToggleHtml, bindHandyToggle, registerHandyFamily } from "./handy-items.mjs";
 import { CHEMIA, CHEMIA_SUBTYPES, chemiaItemData } from "../config/chemia-data.mjs";
+import { lekNaChorobe, oknoPodajDawke } from "./podaj-dawke.mjs";
+import { fmtDawki } from "../config/dawki-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const WRAPPER_CLASS = "neuro-leki-wrapper";
@@ -83,9 +85,15 @@ function _onRenderActorSheetInjectLeki(app, html) {
     // Units are fungible — every per-dose state (daily doses, tolerance, pending effects) lives
     // on the actor — so quantity is a plain stack count, same as Prowiant. Only a multi-dose
     // package has something worth showing beyond it: what's left in the open one.
+    // Pół dawki napoczętej (Pan Plaster, `config/dawki-rules.mjs`) widać w tej samej linii.
     const uses = item.system.uses ?? {};
-    const doseLine = Number(uses.max) > 1
-      ? `<span class="neuro-leki-doses" style="font-size:0.8em; color:#8fa892;">${Number(uses.max) - Number(uses.spent ?? 0)}/${uses.max} dawek w opak.</span>`
+    const polowa = !!item.getFlag(MODULE_ID, "polowaDawki");
+    const wOpak = Number(uses.max) - Number(uses.spent ?? 0) - (polowa ? 0.5 : 0);
+    const doseLine = Number(uses.max) > 1 || polowa
+      ? `<span class="neuro-leki-doses" style="font-size:0.8em; color:#8fa892;">${fmtDawki(Math.max(0, wOpak))}/${uses.max || 1} dawek w opak.</span>`
+      : "";
+    const podaj = actor.isOwner && lekNaChorobe(item)
+      ? `<button type="button" class="unbutton config-button item-control item-give" title="Podaj innej postaci" style="color:#9fc4d3;"><i class="fas fa-hand-holding-medical" inert></i></button>`
       : "";
 
     const activity = item.system.activities?.contents?.[0] ?? [...(item.system.activities ?? [])][0];
@@ -114,9 +122,10 @@ function _onRenderActorSheetInjectLeki(app, html) {
             data-dtype="Number" inputmode="numeric" pattern="^(\\+|-|=)?\\d*" min="0" aria-label="Ilość" style="width:36px; text-align:center;">
           <a class="adjustment-button always-interactive" data-action="increase"><i class="fa-solid fa-plus" inert></i></a>
         </div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 100px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+        <div class="item-detail item-controls always-visible" style="flex:0 0 124px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
           ${handyToggleHtml(item)}
           <button type="button" class="unbutton config-button item-control item-take" title="${useLabel}" style="color:#9fd39f;"><i class="fas fa-syringe" inert></i></button>
+          ${podaj}
           <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;"><i class="fas fa-edit" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-delete" title="Usuń" style="color:#ccc;"><i class="fas fa-trash" inert></i></button>
         </div>
@@ -146,6 +155,10 @@ function _onRenderActorSheetInjectLeki(app, html) {
       if (act) await act.use({}, { configure: false }, {});
       else await item.use?.({}, { configure: false });
     });
+    li.querySelector(".item-give")?.addEventListener("click", ev => {
+      ev.preventDefault();
+      void oknoPodajDawke(actor, item);
+    });
     li.querySelector(".item-edit").addEventListener("click", () => item.sheet.render(true));
     li.querySelector(".item-delete").addEventListener("click", () => item.deleteDialog());
 
@@ -161,7 +174,7 @@ function _onRenderActorSheetInjectLeki(app, html) {
       <div style="flex:0 0 70px; text-align:center;">Cena</div>
       <div style="flex:0 0 70px; text-align:center;">Waga</div>
       <div style="flex:0 0 90px; text-align:center;">Ilość</div>
-      <div style="flex:0 0 100px;"></div>
+      <div style="flex:0 0 124px;"></div>
     </div>
   `;
   panel.appendChild(uiList);

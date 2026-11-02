@@ -38,6 +38,21 @@ export function kluczeRzutu({ typ, ability, skill, tool }) {
   return out;
 }
 
+/** Stany, w których postać jest ukryta przed wzrokiem (Ukrywanie się — `hiding`, Niewidoczność). */
+export const STANY_UKRYCIA = Object.freeze(["hiding", "invisible"]);
+
+/**
+ * Sztuczka Ciszej niż cień (Jak cień, s. 102): kto na scenie szukającego ukrywa się z tą Sztuczką.
+ * @param {{actorId: string, nazwa: string, ciszejNizCien: boolean, stany: Iterable<string>}[]} zetony  żetony sceny
+ * @param {string} szukajacyId  aktor rzucający na Percepcję (sam siebie nie szuka)
+ * @returns {string|null} nazwa pierwszej takiej postaci
+ */
+export function ktoSieUkrywa(zetony, szukajacyId) {
+  const z = (zetony ?? []).find(t => t.ciszejNizCien && t.actorId !== szukajacyId
+    && STANY_UKRYCIA.some(s => new Set(t.stany ?? []).has(s)));
+  return z?.nazwa ?? null;
+}
+
 /** Czy wiersz dotyczy tego rzutu. */
 export function pasuje(row, klucze) {
   return (row.rzut ?? []).some(k => klucze.includes(k));

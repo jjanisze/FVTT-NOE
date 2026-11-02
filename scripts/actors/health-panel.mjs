@@ -46,6 +46,7 @@ import { effectsFor } from "../config/disease-effects.mjs";
 import { addExhaustion, poziomWyczerpania } from "../config/exhaustion.mjs";
 import { KARA_ZA_WYCZERPANIE } from "../config/rekonwalescencja-rules.mjs";
 import { dzienSwiata, sekundyDoby, formatWorldDate, formatWorldTime } from "../world-clock.mjs";
+import { POL_DAWKI_FLAG, dawkaNaRaz, pozostaleDawki, krokDawki, fmtDawki, slowoDawki } from "../config/dawki-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PANEL_CLASS = "neuro-health-panel";
@@ -156,8 +157,18 @@ function _today() {
 }
 
 /** True when this disease already got its dose for the current day. */
-function dosedToday(entry) {
+export function dosedToday(entry) {
   return Number.isInteger(entry?.lastDoseDay) && entry.lastDoseDay === _today();
+}
+
+/** Dzisiejsza dawka zapisana na wpisie choroby — także podana przez kogoś innego (`actors/podaj-dawke.mjs`). */
+export async function oznaczDawkeDzis(actor, entryId) {
+  await _patchDisease(actor, entryId, { lastDoseDay: _today() });
+}
+
+/** Sztuczka Pan Plaster (s. 105): wydziela leki w połowie dawki — sobie i innym (D18). */
+export function wydzielaPolDawki(actor) {
+  return !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "panPlaster");
 }
 
 /* -------------------------------------------- */
@@ -300,14 +311,29 @@ export function resolveMedicineItem(actor, entry) {
   }) ?? null;
 }
 
-/** How many doses the item still holds. */
+/** How many doses the item still holds — half of one when a dose was split (`config/dawki-rules.mjs`). */
 export function dosesRemaining(item) {
   if (!item) return 0;
-  const qty = Number(item.system?.quantity ?? 0);
-  const max = Number(item.system?.uses?.max ?? 0);
-  if (!max) return qty;
-  const left = max - Number(item.system.uses.spent ?? 0);
-  return Math.max(0, (qty - 1) * max + left);
+  return pozostaleDawki({
+    quantity: item.system?.quantity ?? 0, max: item.system?.uses?.max ?? 0, spent: item.system?.uses?.spent ?? 0,
+    polowa: !!item.getFlag?.(MODULE_ID, POL_DAWKI_FLAG)
+  });
+}
+
+/**
+ * Wydaj dawkę z przedmiotu: całą albo pół (Pan Plaster). Flaga połowy zmienia się przed zużyciem — zużycie ostatniego
+ * użycia może skasować przedmiot (`autoDestroy`).
+ * @param {Item} item
+ * @param {{polowa?: boolean}} [o]
+ * @returns {Promise<boolean>}
+ */
+export async function wydajDawke(item, { polowa = false } = {}) {
+  const napoczeta = !!item.getFlag(MODULE_ID, POL_DAWKI_FLAG);
+  const krok = krokDawki(polowa, napoczeta);
+  if (krok.flaga !== napoczeta) {
+    await (krok.flaga ? item.setFlag(MODULE_ID, POL_DAWKI_FLAG, true) : item.unsetFlag(MODULE_ID, POL_DAWKI_FLAG));
+  }
+  return krok.zuzyjUzycie ? _consumeOneDose(item) : true;
 }
 
 /**
@@ -369,12 +395,13 @@ export async function takeDose(actor, entryId) {
     await _patchDisease(actor, entryId, { itemId: item.id });
   }
 
-  if (dosesRemaining(item) <= 0) {
+  const polowa = wydzielaPolDawki(actor);
+  if (dosesRemaining(item) < dawkaNaRaz(polowa)) {
     ui.notifications.warn(`${item.name}: brak dawek. O zachodzie słońca czeka RO na Kondycję ST ${SUNSET_SAVE.dc}.`);
     return;
   }
 
-  const consumed = await _consumeOneDose(item);
+  const consumed = await wydajDawke(item, { polowa });
   if (!consumed) return;
 
   await _patchDisease(actor, entryId, { itemId: item.id, lastDoseDay: _today() });
@@ -422,8 +449,8 @@ async function _postDoseMessage(actor, entry, item, left) {
     .replace("{m}", entry.medicine || item.name);
 
   const lowSupply = left <= 1
-    ? `<div class="neuro-dose-warn">Zostało ${left === 0 ? "0 dawek" : "1 dawka"} — jutro o zachodzie słońca czeka RO na Kondycję ST ${SUNSET_SAVE.dc}.</div>`
-    : `<div class="neuro-dose-left">Zapas: ${left} ${_dosesWord(left)}</div>`;
+    ? `<div class="neuro-dose-warn">Zostało ${fmtDawki(left)} ${_dosesWord(left)} — jutro o zachodzie słońca czeka RO na Kondycję ST ${SUNSET_SAVE.dc}.</div>`
+    : `<div class="neuro-dose-left">Zapas: ${fmtDawki(left)} ${_dosesWord(left)}</div>`;
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
@@ -436,13 +463,7 @@ async function _postDoseMessage(actor, entry, item, left) {
   });
 }
 
-function _dosesWord(n) {
-  if (n === 1) return "dawka";
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "dawki";
-  return "dawek";
-}
+const _dosesWord = slowoDawki;
 
 /* -------------------------------------------- */
 /*  Zachód słońca — daily disease progression    */
@@ -742,9 +763,9 @@ function _buildDiseaseRow(actor, entry, editable) {
   med.appendChild(medName);
 
   const supply = _el("span", `neuro-health-supply ${left === 0 ? "is-empty" : left <= 1 ? "is-low" : ""}`.trim(),
-    `×${left}`);
+    `×${fmtDawki(left)}`);
   supply.dataset.tooltip = item
-    ? `${item.name} — ${left} ${_dosesWord(left)}`
+    ? `${item.name} — ${fmtDawki(left)} ${_dosesWord(left)}`
     : "Brak lekarstwa w ekwipunku";
   med.appendChild(supply);
 
@@ -864,7 +885,7 @@ function _buildDiseaseRow(actor, entry, editable) {
       const link = _el("label", "neuro-health-link");
       link.append("Zapas: ");
       const sel = _select(
-        consumables.map(i => ({ key: i.id, label: `${i.name} (${dosesRemaining(i)})` })),
+        consumables.map(i => ({ key: i.id, label: `${i.name} (${fmtDawki(dosesRemaining(i))})` })),
         entry.itemId ?? "",
         { blank: "— dopasuj po nazwie —" }
       );
@@ -1083,8 +1104,8 @@ export function buildHealthStrip(actor) {
     const left = dosesRemaining(item);
     const supply = _el("span",
       `neuro-health-stripsupply ${left === 0 ? "is-empty" : left <= 1 ? "is-low" : ""}`.trim(),
-      `×${left}`);
-    supply.dataset.tooltip = `${entry.medicine || "brak leku"} — ${left} ${_dosesWord(left)}`
+      `×${fmtDawki(left)}`);
+    supply.dataset.tooltip = `${entry.medicine || "brak leku"} — ${fmtDawki(left)} ${_dosesWord(left)}`
       + (dosedToday(entry) ? " · dawka wzięta dzisiaj" : " · dawka NIE wzięta");
     if (dosedToday(entry)) supply.classList.add("is-dosed");
     row.appendChild(supply);
