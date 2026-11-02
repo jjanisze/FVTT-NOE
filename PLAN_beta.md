@@ -543,9 +543,8 @@ częściowych (`PLAN_m7_zdolnosci.md` §6, E8).
 
 *Wynik 2026-11-02:* w zakresie D2 75 % (100/133). Drużyna kampanii (odczyt świata po `resync`): 53 zdolności, 29
 pełnych, 22 częściowe, dwie z plakietką „brak” — **Mój wróg i Wyjadacz u Victora**, zdolności-parasole, których
-mechanika siedzi w opcji wybranej przy awansie (Mój wróg: grupa — częściowa; wariant Wyjadacza — pełna). Kryterium
-spełnione co do treści; same plakietki parasoli mówią „brak” — do poprawienia wpisem w rejestrze (wybór wariantu to
-awans), przebudową paczek i `resync`, jeśli MG chce.
+mechanika siedzi w opcji wybranej przy awansie. *Po dogrywce (8a, `resync` 2026-11-02):* plakietki parasoli
+poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; kryterium spełnione w całości.
 
 *Dalej (MG 2026-11-02, §0 kroki 8a–8b):*
 

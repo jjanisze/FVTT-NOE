@@ -922,3 +922,7 @@ osądu MG i plakietki, potem siedem Sztuczek z nowymi atakami albo przyciskami (
   niezmiennik pokrycia wymaga ich po 8a–8b.
 - **Testy:** Quench `dogrywka-m7` (23); e2e `sztuczki-ataki` (Nożownik — krytyk i znacznik B; Z baśki — krytyk,
   Wyjaśnić ci? — Powalenie przez MG; Celowanie — zapowiedź).
+- **Kampania (8a–8b):** pełna kopia zapasowa przed zapisem (CRC OK, świat otwarty, 95 aktorów), `resync` bez folderu
+  „alfa” (historia, D17 — kopie alfy mają te same nazwy, więc lista aktorów po id): 6 zmian — plakietki Mój wróg
+  i Wyjadacz (Victor, Carson, Góra), Pan Plaster (Iris), Ciszej niż cień (Kluczyk); drugi przebieg — 0. Drużyna
+  kampanii: żadnej zdolności z plakietką „brak” — kryterium M7 spełnione w całości.
