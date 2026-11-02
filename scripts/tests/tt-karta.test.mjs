@@ -9,7 +9,7 @@
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, sztuczkaItem, namedFeat, stub, waitFor }
   from "./helpers.mjs";
 import { equip, place } from "../actors/doll.mjs";
-import { ttApi } from "../actors/tt.mjs";
+import { ttApi, recznaTT, nieZalozone, oczyscRecznaTT, auditTT, napraw } from "../actors/tt.mjs";
 import { resolveExclusiveGroups } from "../actors/class-rules.mjs";
 
 /** Zdolność klasowa tak, jak leży na karcie po awansie (flaga paczki). */
@@ -213,16 +213,131 @@ export function registerTTKartaTests(quench) {
       });
     });
 
-    describe("Furtka MG i efekty trwające turę", function () {
+    describe("Bez ręcznej TT (D17)", function () {
       this.timeout(15000);
-      it("metoda „Stała”: silnik nie rusza niczego", async function () {
-        const { actor } = await pc("stała", BRUTAL, [feature("gola-klata", "Goła klata")],
-          { attributes: { ac: { calc: "flat", flat: 17 } } });
-        expect(actor.system.attributes.ac.value).to.equal(17);
-        expect(actor.system.attributes.ac.neuroshima).to.equal(null);
-        expect(ttApi.source(actor, "golaKlata")).to.include({ active: true, manual: true });
+      const src = actor => actor._source.system.attributes.ac;
+
+      it("recznaTT: stała, formuła, inne obliczenia — i nic przy domyślnych", function () {
+        expect(recznaTT({ calcs: ["unarmored", "armored"], formulas: [], override: null, flat: 13 })).to.equal(null);
+        expect(recznaTT({ flat: 17 }), "sam `flat` przy domyślnych obliczeniach nic nie robi").to.equal(null);
+        expect(recznaTT({ override: 18 })).to.deep.include({ zmiany: { override: null } });
+        expect(recznaTT({ formulas: [{ formula: "12 + @prof" }] }).zmiany).to.deep.equal({ formulas: [] });
+        expect(recznaTT({ calcs: ["natural"] }).zmiany).to.deep.equal({ calcs: ["unarmored", "armored"] });
+        expect(recznaTT({ calcs: [] }).opis).to.equal("bez obliczeń");
       });
 
+      it("przy tworzeniu: „Stała” 17 nie zapisana, silnik liczy Gołą klatę", async function () {
+        const { actor } = await pc("stała", BRUTAL, [feature("gola-klata", "Goła klata")],
+          { attributes: { ac: { calc: "flat", flat: 17 } } });
+        expect(src(actor).override).to.equal(null);
+        expect(tt(actor).method.id).to.equal("golaKlata");
+        expect(actor.system.attributes.ac.value).to.equal(15);
+      });
+
+      it("w zmianie: wpisana wartość i formuła nie zapisane", async function () {
+        const { actor } = await pc("wpisana", BRUTAL);
+        await actor.update({ "system.attributes.ac.override": 18, "system.attributes.ac.formulas": [{ formula: "20" }] });
+        expect(src(actor).override).to.equal(null);
+        expect(src(actor).formulas).to.deep.equal([]);
+        expect(actor.system.attributes.ac.value, "10 + ZRC 2").to.equal(12);
+      });
+
+      it("stare dane: oczyszczenie zdejmuje ręczną TT, drugi przebieg pusty", async function () {
+        const { actor } = await pc("stare dane", BRUTAL, [feature("gola-klata", "Goła klata")]);
+        await actor.update({ "system.attributes.ac.override": 18 }, { noHook: true });
+        expect(src(actor).override, "zapis z pominięciem strażnika").to.equal(18);
+        const raport = await oczyscRecznaTT({ actors: [actor] });
+        expect(raport.map(r => r.opis)).to.deep.equal(["stała 18"]);
+        expect(src(actor).override).to.equal(null);
+        expect(actor.system.attributes.ac.value).to.equal(15);
+        expect(await oczyscRecznaTT({ actors: [actor] })).to.be.empty;
+      });
+
+      it("tarcza z importu (`ac.shield` 2) nie podnosi TT — w dymku „nie liczy się”", async function () {
+        const { actor, made } = await pc("tarcza", BRUTAL, [armour("Tarcza", "shield", 2)]);
+        await wear(gear(made)[0]);
+        expect(actor.system.attributes.ac.shield).to.equal(0);
+        expect(actor.system.attributes.ac.value, "10 + ZRC 2").to.equal(12);
+        expect(reason(actor, "tarczaTT")).to.equal("tarcza sama nie podnosi TT");
+      });
+
+      it("okno TT postaci: rozkład zamiast formularza", async function () {
+        const { actor } = await pc("okno", BRUTAL);
+        const app = new dnd5e.applications.actor.ArmorClassConfig({ document: actor });
+        await app.render({ force: true });
+        try {
+          expect(app.element.querySelector(".neuro-tt-okno")).to.not.equal(null);
+          expect(app.element.querySelector("[name*='override'], [name*='calcs']")).to.equal(null);
+        } finally {
+          await app.close();
+        }
+      });
+    });
+
+    describe("Nie założona osłona (D17)", function () {
+      this.timeout(15000);
+      const WYSZKOLONY = { traits: { armorProf: { value: ["lgt", "med"] } } };
+
+      it("pancerz w plecaku: uwaga z TT po założeniu; po założeniu znika", async function () {
+        const { actor, made } = await pc("w plecaku", BRUTAL, [armour("Plate carrier", "light", 12)], WYSZKOLONY);
+        const [u] = nieZalozone(actor);
+        expect(u?.item.id).to.equal(gear(made)[0].id);
+        expect([u.teraz, u.z], "12 → 12 + ZRC 2").to.deep.equal([12, 14]);
+        await wear(gear(made)[0]);
+        expect(nieZalozone(actor)).to.be.empty;
+        expect(actor.system.attributes.ac.value).to.equal(14);
+      });
+
+      it("z kilku pancerzy podsuwa najlepszy; noszony słabszy — bez uwagi (wybór gracza)", async function () {
+        const { actor, made } = await pc("dwa", BRUTAL,
+          [armour("Kurtka", "light", 11), armour("Kamizelka", "medium", 14, 2)], WYSZKOLONY);
+        expect(nieZalozone(actor).map(u => u.z)).to.deep.equal([16]);
+        await wear(gear(made).find(i => i.system.type.value === "light"));
+        expect(nieZalozone(actor)).to.be.empty;
+      });
+
+      it("bez wyszkolenia: pancerza nie podsuwa", async function () {
+        const { actor } = await pc("bez wyszkolenia", BRUTAL, [armour("Kamizelka", "medium", 14, 2)]);
+        expect(nieZalozone(actor)).to.be.empty;
+      });
+
+      it("Goła klata: słabszego pancerza ani hełmu nie podsuwa; bez niej hełm tak", async function () {
+        const { actor } = await pc("Brutal", BRUTAL, [feature("gola-klata", "Goła klata"), armour("Kurtka", "light", 12),
+          HELMET], WYSZKOLONY);
+        expect(nieZalozone(actor), "Goła klata 15 > kurtka 14; hełm gasi Gołą klatę").to.be.empty;
+        const { actor: inny } = await pc("bez klaty", BRUTAL, [HELMET], WYSZKOLONY);
+        expect(nieZalozone(inny).map(u => u.family)).to.deep.equal(["helmet"]);
+      });
+
+      it("karta: pomarańczowa tarcza TT i „Napraw”; „Napraw” zakłada przez lalkę", async function () {
+        const { actor, made } = await pc("karta", BRUTAL, [armour("Plate carrier", "light", 12)], WYSZKOLONY);
+        // Świeżo otwarta karta z przedmiotem: obserwator rozmiaru ekwipunku dnd5e (`InventoryElement#_onResize`)
+        // chowa kolumny w trakcie układania i przeglądarka zgłasza „ResizeObserver loop…” — nieszkodliwe, ale Mocha
+        // łapie je przez `window.onerror` jako błąd testu. Na czas otwartej karty przepuszczamy tylko ten jeden.
+        const badge = async () => {
+          const prev = window.onerror;
+          window.onerror = (msg, ...rest) => (/ResizeObserver loop/.test(String(msg)) ? true : prev?.(msg, ...rest));
+          await actor.sheet.render({ force: true });
+          try {
+            const el = await waitFor(() => actor.sheet.element?.querySelector(".ac-badge"), { label: "tarcza TT" });
+            return { uwaga: el.classList.contains("neuro-tt-uwaga"), napraw: !!el.querySelector(".neuro-tt-napraw") };
+          } finally {
+            await actor.sheet.close();
+            await new Promise(r => setTimeout(r, 100));
+            window.onerror = prev;
+          }
+        };
+        expect(await badge()).to.deep.equal({ uwaga: true, napraw: true });
+        expect(auditTT({ actors: [actor] })[0]?.uwagi).to.deep.equal([`${gear(made)[0].name} — nie założony; z nim TT 14`]);
+        await napraw(actor);
+        await waitFor(() => actor.items.get(gear(made)[0].id)?.system.equipped, { label: "założony" });
+        expect(await badge()).to.deep.equal({ uwaga: false, napraw: false });
+        expect(auditTT({ actors: [actor] })).to.be.empty;
+      });
+    });
+
+    describe("Efekty trwające turę", function () {
+      this.timeout(15000);
       it("w walce efekt trwający do początku tury dostaje kombatanta właściciela, nie tego na ruchu", async function () {
         const { actor } = await pc("Unikający", BRUTAL);
         const ownerId = "neuroTTowner0000";

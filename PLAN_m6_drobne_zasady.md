@@ -535,7 +535,7 @@ tabela wagi zostają przy Łyżeczce, nie przy każdej broni improwizowanej (§5
 | P4 | ~~Pościg konny~~ | `PLAN_m4_pojazdy.md` §6.3, W-P1 | — |
 | P5 | Materiał przegród z encji CDDA (opcja C) | Po becie; pole `material` w fladze ściany i tak zarezerwowane | **Jawny plan wydania 1.0 — [`PLAN_1_0.md`](PLAN_1_0.md) §2** |
 | P6 | ~~Wierzchowce poza koniem~~ | `PLAN_m4_pojazdy.md` §6.3, W-P2 | — |
-| P7 | Bestiariusz na natywny `hp.dt` zamiast flagi | PM — razem z PM1 (TT), bo zmienia dane | MG poprosił o wyjaśnienie — niżej; bez zmiany kolejności |
+| P7 | Bestiariusz na natywny `hp.dt` zamiast flagi | PM, po becie — PM1 (TT) odrzucony 2026-11-02, P7 idzie sam | MG poprosił o wyjaśnienie — niżej; bez zmiany kolejności |
 | P8 | Obiekt widoczny dla graczy przed zniszczeniem (ramka) czy tylko po wycelowaniu | Widoczny — gracze muszą móc go wskazać | **Licznik PW/odporności bez grafiki, tylko ramka na czymś, co już jest w świecie; MG tworzy go na żądanie, dla tego, co gracze chcą zaatakować** (§5.4) |
 
 **P7 — co to jest `hp.dt`.** dnd5e 6.0 dał każdemu typowi aktora pole `system.attributes.hp.dt` — Próg obrażeń (5.3
@@ -560,7 +560,7 @@ razem jednym przebudowaniem i jedną migracją, przed zamrożeniem modeli (B2).
 | P4 | ~~Pościg konny~~ | `PLAN_m4_pojazdy.md` §6.3, W-P1 |
 | P5 | Materiał przegród z encji CDDA (opcja C) | Po becie; pole `material` w fladze ściany i tak zarezerwowane |
 | P6 | ~~Wierzchowce poza koniem~~ | `PLAN_m4_pojazdy.md` §6.3, W-P2 |
-| P7 | Bestiariusz na natywny `hp.dt` zamiast flagi | PM — razem z PM1 (TT), bo zmienia dane |
+| P7 | Bestiariusz na natywny `hp.dt` zamiast flagi | PM, po becie — PM1 (TT) odrzucony 2026-11-02, P7 idzie sam |
 | P8 | Obiekt widoczny dla graczy przed zniszczeniem (ramka) czy tylko po wycelowaniu | Widoczny — gracze muszą móc go wskazać |
 
 ---

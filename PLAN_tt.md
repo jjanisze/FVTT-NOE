@@ -81,10 +81,10 @@ Kategoria wg `scripts/wkk/README.md`: **NOE** = dosłowna lektura, **RAI** = zam
 |---|---|---|---|
 | D1 | Jak łączą się zdolności TT bez pancerza? | **Metody konkurują, premie się sumują.** Metody: 10 + ZRC, pancerz, Goła klata, Tarcza wiary (10 + ZRC + CHA). „Podobne” z klauzul Gołej klaty i Tarczy wiary = inne **metody**. Obłęd, Kuloodporność i reszta §1.3 stoją obok każdej wygranej metody. | RAI |
 | D2 | Obłęd Berserkera a Goła klata | Kumulują się (wynika z D1). | RAI |
-| D3 | Kto wybiera metodę? | Zawsze najwyższa, **bez przypinania**. Furtka = „Stała” / „Własna formuła” w oknie TT (D6). | NOE |
+| D3 | Kto wybiera metodę? | Zawsze najwyższa, **bez przypinania**. ~~Furtka = „Stała” / „Własna formuła” w oknie TT (D6).~~ Bez furtki (D17). | NOE |
 | D4 | Co to „pancerz” w warunkach zdolności? | **Pancerz lekki, średni, ciężki i ochraniacze rąk / nóg.** Autor systemu (Nicram, 2026-10-03): „Nałokietniki i nagolenniki są pancerzem, ponieważ dają premie do TT i są w tabeli Pancerze. Goła klata zaś bezpośrednio zakazuje Hełmu, bo ma go w opisie.” Ochraniacze gaszą więc Gołą klatę, Tarczę wiary, Obłęd i Kuloodporność i włączają Obsługę pancerza; metoda podstawowa (10 + ZRC) zostaje, ochraniacze dokładają do niej swoje +1. Hełm i tarcza wyłączają tylko tam, gdzie są wymienione z nazwy (Goła klata, Obłęd, Kuloodporność) — Tarcza wiary działa w hełmie i z tarczą. *(Pierwotnie: ochraniacze niczego nie wyłączają — zmienione po rozstrzygnięciu autora.)* | RAI |
 | D5 | Trening w zbroi w ciężkim pancerzu | Tak: limit 0 → 1 (potwierdzone przez MG 2026-10-03). Same ochraniacze nie mają limitu ZRC — Trening nic nie zmienia. | NOE |
-| D6 | Natywne okno TT dnd5e | „Domyślna” → **„NOE (automatycznie)”**; metody 5e (Mag, Smocza, Mnich, Barbarzyńca, Bard) ukryte; zostają Stała, Naturalna, Własna formuła jako furtka MG. | — |
+| D6 | Natywne okno TT dnd5e | „Domyślna” → **„NOE (automatycznie)”**; metody 5e (Mag, Smocza, Mnich, Barbarzyńca, Bard) ukryte; zostają Stała, Naturalna, Własna formuła — od D17 tylko dla BN, pojazdów i obiektów. | — |
 | D7 | Kogo liczy silnik TT? | Aktorzy `character`. BN: TT ze statblocku / natywnego dnd5e. Okno „Reakcje celu” działa dla każdego celu (D13). | — |
 | D8 | Auto-obrażenia (Z3) | **Usunąć.** Rzut ataku i rzut obrażeń rozdzielone globalnie — obrażenia zawsze rzuca atakujący przyciskiem, jak w natywnej karcie dnd5e. Nakładanie **ręczne**: natywna tacka dnd5e na karcie obrażeń. | — |
 | D9 | Gdzie gracz widzi swoje reakcje? | Sekcja **„Reakcje celu”** na karcie ataku: widzą wszyscy, przyciski aktywne dla właściciela celu i MG; właściciel celu dostaje powiadomienie. | — |
@@ -96,6 +96,7 @@ Kategoria wg `scripts/wkk/README.md`: **NOE** = dosłowna lektura, **RAI** = zam
 | D14 | Klasyfikacja D1/D2 | RAI — jeden wiersz w tabeli RAI `scripts/wkk/README.md`. | — |
 | D15 | Krytyk, który nie zadał obrażeń (próg obrażeń, niewrażliwość, mnożnik 0) — Stopień Zranienia? (2026-10-04) | **Nie** — „jeśli nie zadano obrażeń, nie ma czego zranić”. Interpretacja MG, **czeka na potwierdzenie autora systemu**; RAW wiąże Stopień z samym krytykiem (s. 32). | do potwierdzenia |
 | D16 | `oznaczReakcjeBN` — kogo oznaczyć? (2026-10-04) | Tylko Pustaka („Ofiara” — Reakcja na atak na niego). Wilhelm Yarborough („Zasłona Własnym Ciałem”) — nie: jego Reakcja dotyczy sojusznika obok, a przypomnienie w oknie pojawia się, gdy celem jest on sam. | — |
+| D17 | Ręczna TT postaci (MG, 2026-11-02, po ocenie PM1) | **Nie ma jej.** Zasady TT są kompletne (NOE, jedyny homebrew to WKK), a wpisana liczba po cichu wyłączała silnik — w kampanii Piekarz miał „18” zamiast Gołej klaty. Postać liczy TT tylko silnikiem: strażnik `preCreateActor` / `preUpdateActor` nie zapisuje `override`, formuł ani innych obliczeń; MG przy starcie świata czyści stare (`oczyscRecznaTT`); okno TT postaci pokazuje rozkład zamiast formularza. Tarcza sama TT nie podnosi — `ac.shield` z importu idzie do „nie liczy się”. **Nie założona osłona** (pancerz, hełm, ochraniacze w ekwipunku, nic z rodziny na sobie, a założenie podniosłoby TT; hełm — nie obniżyłoby): pomarańczowa tarcza TT z „Napraw” (zakłada przez lalkę), wiersz w dymku, `game.neuroshima.tt.audit()`, szept do MG przy starcie świata. Usterka danych, którą to łapie: wdrożenie lalki (D9 lalki) zdjęło wszystkim sprzęt, a nikt go nie założył. | — |
 
 ### 2.2 Ustalone w projekcie (jedno sensowne wyjście, bez osobnego pytania)
 
@@ -217,6 +218,9 @@ Pancerz pokazuje uszkodzenie: „Kurtka ćwiekowana 11 + ZRC 3 (−1 uszkodzenie
 `init`: `CONFIG.DND5E.armorClasses.default.label = "NOE (automatycznie)"`; usunąć `mage`, `draconic`,
 `unarmoredMonk`, `unarmoredBarb`, `unarmoredBard`. Aktor z usuniętą metodą spada w dnd5e na „Stała”
 z bieżącą wartością (`prepareArmorClass`, gałąź migracji) — E1 zaczyna od raportu, kto ich używa.
+
+*D17 (2026-11-02):* postać nie ma formularza — okno TT postaci (`renderArmorClassConfig`) pokazuje rozkład silnika
+i zdanie, że TT zmienia się sprzętem i zdolnościami. Formularz zostaje dla BN, pojazdów i obiektów.
 
 ### 4.5 Efekty chwilowe i wygasanie
 

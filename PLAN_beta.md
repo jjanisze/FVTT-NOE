@@ -5,7 +5,7 @@
 > 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**; **v0.21.0 2026-10-31 — M4 (pojazdy,
 > pościgi, wierzchowce) i M6 wydane**; przegląd 2026-10-31 — §0.1; **2026-11-01 — M7 (automatyka zdolności poziomów
 > 1–3) zamknięte, w `master` bez wydania**). Etap bieżący: **późna alfa** — każdy rozdział RAW ma narzędzia w Foundry;
-> przed betą zostają ruch w turze ze skakaniem, PM1/PM7, style i dokumentacja. Bramki spełnione: B3, B4, B5, B6 — bramka wydania v0.21.0 zielona na `5ac17bb` (e2e 44/44 w świecie
+> przed betą zostają ruch w turze ze skakaniem, style i dokumentacja (PM1 i PM7 odpadły 2026-11-02). Bramki spełnione: B3, B4, B5, B6 — bramka wydania v0.21.0 zielona na `5ac17bb` (e2e 44/44 w świecie
 > gołym i zalecanym, Quench 1385/1385, 0 ostrzeżeń zgodności z naszego kodu). Otwarte: B1 (Skakanie), B2 (zamrożenie
 > przy kandydacie), B7 (dokumentacja dla graczy pojazdów i pościgu), B8 (przegląd przy kandydacie) — §0.1.
 > **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12; weto M3 i M5: MG przeszedł je slice po
@@ -39,13 +39,13 @@ style przesuwają się za M7. Kolejność kroków 6–11 i harmonogram (§0.1) t
 **2026-11-02 — po M7:** MG puścił M7 przed krokami 6–7 (`PLAN_m7_zdolnosci.md` D10, 2026-10-31) i M7 zamknął się
 w dwa dni (E0–E8, pregeni Jazdy Próbnej — D17), zamiast szacowanych 4–7. E0 postawił warstwę akcji w minimalnym
 kształcie (znaczniki Reakcji i Akcji Bonusowej, bez budżetu ruchu), którą handoff ruchu rozbuduje — więc to teraz
-trzy zdolności M7 czekają na krok 7, a nie M7 na niego. Następne: krok 6 (PM1, PM7), potem 7 i 9; kod stylów jest
+trzy zdolności M7 czekają na krok 7, a nie M7 na niego. Następne: ~~krok 6 (PM1, PM7)~~ (odpadł 2026-11-02, w zamian TT D17), potem 7 i 9; kod stylów jest
 odblokowany. Wydanie z M7 przed kandydatem (jak v0.21.0 po M4 i M6) — propozycja agenta, do decyzji MG: paczki M7
 są zmienione, `resync` kampanii zrobiony, `master` ma 19 commitów po v0.21.0.
 
 **Decyzje MG 2026-11-02:** testerzy bety **budują własne postacie** — każda Sztuczka jest osiągalna na 1. poziomie,
 więc Sztuczki bez automatyki wchodzą przed betę. Kolejność do ruchu: **8a. dogrywka M7** (plakietki zdolności-parasoli
-i tanie reguły bez osądu MG), **8b. siedem Sztuczek z nowymi atakami albo przyciskami**, potem krok 6 (PM1, PM7).
+i tanie reguły bez osądu MG), **8b. siedem Sztuczek z nowymi atakami albo przyciskami**, potem krok 6 (PM1, PM7) — odpadł 2026-11-02 po ocenie TT (D17 w `PLAN_tt.md`).
 Ruch (krok 7) i style (krok 9) dostają **własne plany M — M8 i M9** (§3); ruch robi osobna sesja, a oba plany są do
 napisania — ten plik ich nie zastępuje.
 
@@ -53,7 +53,7 @@ napisania — ten plik ich nie zastępuje.
 flowchart LR
   DONE["1–5. Zrobione<br/>v0.19.1 → v0.21.0"] --> M7["8. M7 Zdolności poz. 1–3<br/>zrobione 2026-11-01"]
   M7 --> M7B["8a–8b. Dogrywka M7,<br/>siedem Sztuczek"]
-  M7B --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
+  M7B --> PM["6. PM1, PM7 odpadły → TT D17<br/>(zrobione 2026-11-02)"]
   PM --> RU["7. M8 Ruch w turze, Skakanie,<br/>pasek walki — plan do napisania"]
   RU --> ST["9. M9 Style i motywy<br/>— plan do napisania"]
   ST --> RC{{"10. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
@@ -86,11 +86,14 @@ flowchart LR
    wydane w v0.21.0**; notatki etapów — `PLAN_m6_drobne_zasady.md` §11. Zostaje przegląd biegłości istniejących BG
    (`HANDOFF_bieglosci_retro.md`) — sprawa kampanii, nie bramki.
 6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
-   zamrożeniem modeli. *2026-11-02:* **PM7 nie dotyczy** (dnd5e 6.0.6 nie ma `identifier` aktora). **PM1** — port nie
-   usunie owinięcia (połowa reguł TT zależy od stanu modułu), MG: poprawność TT jest bezwzględna — ocena poprawności
-   TT (reguły, testy, dane kampanii) i decyzja MG w toku. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
-   kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po PM1
-   pełna bramka wydania i krótki obchód Poligonu.
+   zamrożeniem modeli. *2026-11-02:* **PM7 nie dotyczy** (dnd5e 6.0.6 nie ma `identifier` aktora). **PM1 odrzucony** po ocenie
+   poprawności TT (MG: poprawność bezwzględna): reguły i testy zgodne z podręcznikiem, błędne były dane kampanii
+   (pancerze nie założone po wdrożeniu lalki, ręczna TT Piekarza). Port nie złapałby żadnego z tych przypadków, a
+   rozdzieliłby TT między dnd5e i moduł. Zamiast niego **D17** (`PLAN_tt.md`): bez ręcznej TT postaci, pomarańczowa
+   TT z „Napraw” przy nie założonej osłonie, szept MG przy starcie; sprzęt drużyny założony (kopia przed). P7
+   (`hp.dt` Bestiariusza, `PLAN_m6_drobne_zasady.md`) szedł razem z PM1 — zostaje sam, po becie. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18). *2026-10-31:* następne w
+   kolejce, nie czekają na decyzje MG (projekt w `PLAN_migracja_dnd5e6.md` §9). TT liczy się wszędzie — po D17
+   pełna bramka wydania i krótki obchód Poligonu (przy kandydacie).
 7. **M8 — Ruch w turze, akcje wrodzone, Skakanie i pasek walki** (nowe 2026-10-31; MG 2026-10-25; własny plan M —
    MG 2026-11-02, §3 M8, do napisania w osobnej sesji) — wejście:
    [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md) (projekt i kolejność dostawy §8; dowody dostępności akcji —
@@ -183,7 +186,7 @@ paczki e2e 21 → 44.
 | # | Stan | Co zostaje |
 |---|:-:|---|
 | B1 | 🟡 | W macierzy dwa ❌: Kolory Neuroshimy (na liście §4 — w porządku) i **Skakanie** (krok 7 — albo MG przenosi je do §4) |
-| B2 | ⏳ | Przed zamrożeniem: PM1, PM7, stan ruchu (krok 7). Dane paczek M7 (E3) i `resync` kampanii (E8) — zrobione 2026-11-01. Zamrożenie — krok 10 |
+| B2 | ⏳ | Przed zamrożeniem: stan ruchu (krok 7; PM1 i PM7 odpadły 2026-11-02). Dane paczek M7 (E3) i `resync` kampanii (E8) — zrobione 2026-11-01. Zamrożenie — krok 10 |
 | B3 | ✅ | 19 paczek; krok `packs` bramki v0.21.0; po M7 przebudowane (2026-11-01), `validate-packs` zielone |
 | B4 | ✅ | Bramka v0.21.0: Quench 1385/1385, e2e 44/44 w obu światach, `npm test`. Po M7 w piaskownicy: Quench 1510/1510, nowe paczki e2e M7 i regresja zielone — pełna bramka przy następnym wydaniu |
 | B5 | ✅ | Plakietka na każdej zdolności. Pokrycie po M7 i dogrywce (8a–8b): klasowe 103/133 (48 pełnych), Sztuczki 53/53 (29), Pochodzenia 35/36 (21) — przed M7 33/133, 19/53, 4/36 |
@@ -210,7 +213,8 @@ tygodni, **kandydat na przełomie listopada i grudnia**; cel „przed świętami
 być cięciem M7 — M7 jest w całym zakresie D2; zostaje jako „style tylko karty czatu i PM13”.
 
 *2026-11-02, decyzje MG:* przed PM1/PM7 wchodzą dogrywka M7 (ok. 1 dzień) i siedem Sztuczek (1–2 dni); ruch i style
-czekają na własne plany (M8, M9) — ich szacunek dopiero z planów.
+czekają na własne plany (M8, M9) — ich szacunek dopiero z planów. *Tego samego dnia:* dogrywka i Sztuczki zrobione,
+PM1 i PM7 odpadły (ocena TT → D17 w `PLAN_tt.md`, pół dnia) — z harmonogramu schodzi 1–2 dni.
 
 ---
 

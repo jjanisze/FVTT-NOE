@@ -250,13 +250,12 @@ function _findAbilityItem(actor, abilityId) {
 
 /**
  * Obłęd Berserkera na karcie „on”: stan z silnika TT, policzony już z nowym efektem Berserka
- * (karta powstaje po jego utworzeniu). Postać z TT ustawioną ręcznie — premię dolicza MG.
+ * (karta powstaje po jego utworzeniu).
  */
 function _obledNote(actor) {
   const src = ttSource(actor, "obled");
   if (!src) return "TT + mod. SIŁ bez pancerza, hełmu i tarczy.";
   const value = `TT +${src.value}`;
-  if (src.manual) return `${value} bez pancerza, hełmu i tarczy — TT tej postaci jest ustawiona ręcznie, dolicz sam.`;
   return src.active
     ? `${value} (bez pancerza, hełmu i tarczy; liczy się, dopóki nic z tego nie założysz).`
     : `${value} — teraz nie działa: ${src.reason}.`;

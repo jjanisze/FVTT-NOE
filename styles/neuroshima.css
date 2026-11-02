@@ -4579,6 +4579,44 @@ tr.neuro-tt-off td {
 tr.neuro-tt-off td.attribution-value {
   font-weight: 400;
 }
+tr.neuro-tt-uwaga td {
+  color: #e08a58;
+  font-size: var(--font-size-12, 12px);
+}
+tr.neuro-tt-sep.neuro-tt-uwaga td {
+  font-style: normal;
+  font-weight: bold;
+  opacity: 1;
+}
+
+/* ── Nie założona osłona (D17, actors/tt.mjs): pomarańczowa tarcza TT i „Napraw” pod nią. ── */
+.dnd5e2.sheet.actor .ac-badge.neuro-tt-uwaga {
+  position: relative;
+  color: #ffb27a;
+  filter: drop-shadow(0 0 2px #e08a58) drop-shadow(0 0 5px #e08a58) drop-shadow(0 0 8px #c4682f);
+}
+.dnd5e2.sheet.actor .neuro-tt-napraw {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  z-index: 2;
+  width: auto;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 16px;
+  white-space: nowrap;
+  color: #fff;
+  background: #c4682f;
+  border: 1px solid #e08a58;
+  border-radius: 9px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.dnd5e2.sheet.actor .neuro-tt-napraw:hover { background: #e08a58; }
+.neuro-tt-okno { padding: 0 4px; }
+.neuro-tt-okno .neuro-tt-tooltip { width: 100%; }
 
 /* ── Reakcje celu na karcie ataku (PLAN_tt E3, combat/obrona.mjs). Kolory werdyktu jak w natywnej
    tacce celów dnd5e: trafienie = sukces atakującego. ── */

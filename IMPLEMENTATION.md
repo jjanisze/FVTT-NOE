@@ -7,8 +7,8 @@ zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5
 v0.19.0; migracja na dnd5e 6 — v0.20.0; M4 (pojazdy, pościgi, wierzchowce) i M6 (drobne zasady RAW z biegłościami
 profesji) — v0.21.0. Walka, ekwipunek, stany i przetrwanie grały się przy żywym stole; produkcja, towarzysze, drony,
 handel, postój, pojazdy i pościgi czekają na pierwsze sesje (kampania testowa w styczniu). Czysta instalacja (B6)
-sprawdzana przy każdym wydaniu. M7 (zdolności poziomów 1–3) — zamknięte 2026-11-01. Przed betą: PM1 i PM7, ruch w turze
-ze skakaniem, style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+sprawdzana przy każdym wydaniu. M7 (zdolności poziomów 1–3) — zamknięte 2026-11-01. PM1 i PM7 odpadły 2026-11-02 (TT — D17 w
+`PLAN_tt.md`). Przed betą: ruch w turze ze skakaniem, style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -25,7 +25,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Przerzuty, Fuksy, Forsowanie | ✅ | `combat/rerolls.mjs`, `actors/fuks-pips.mjs` |
 | Walka | Inicjatywa, Zaskoczenie, Niespodziewany atak | ✅ | natywne dnd5e + stan `ambush` (§1.12) |
 | | Osłona, przebijanie osłony | ✅ | `combat/cover.mjs` (§1.10); premia osłony wchodzi do rozstrzygacza trafienia (`combat/trafienie.mjs`). Ataki dystansowe i wręcz (wręcz: wiersz w oknie, domyślnie „Brak”, bez przebijania — `PLAN_m1_walka.md` U9) |
-| | TT postaci: jedna metoda (TT podstawowa, pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami, Zasłona, ochraniacze) | ✅ | `config/tt-rules.mjs`, `actors/tt.mjs` — metoda „NOE (automatycznie)”, dymek z rozkładem i „nie liczy się”; ochraniacze to pancerz w warunkach zdolności (autor systemu) — `PLAN_tt.md` |
+| | TT postaci: jedna metoda (TT podstawowa, pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami, Zasłona, ochraniacze) | ✅ | `config/tt-rules.mjs`, `actors/tt.mjs` — dymek z rozkładem i „nie liczy się”; ochraniacze to pancerz w warunkach zdolności (autor systemu); bez ręcznej TT postaci, nie założona osłona → pomarańczowa TT z „Napraw” (D17) — `PLAN_tt.md` |
 | | Rzut ataku oddzielony od rzutu obrażeń; reakcje po trafieniu (Inteligentna obrona, Unik łowcy, Empiryk, Bullet time, Parowanie, Parowanie tarczą, Koci odskok, Krytyczna ochrona hełmu; reakcje BN z Bestiariusza) | ✅ | `combat/trafienie.mjs` (jeden rozstrzygacz, werdykt na karcie ataku), `combat/obrona.mjs` (okno „Reakcje celu”); obrażenia rzuca atakujący, nakłada MG tacką — `PLAN_tt.md` |
 | | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
 | | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs`. Stany atakującego i celu w Teście Ataku i automatyczne TK ≤ 1,5 m — silnik okoliczności ataku (`config/okolicznosci-ataku.mjs`, `combat/okolicznosci.mjs`, M1 E3); Nieprzytomność z 0 PW kończy się przy leczeniu (E1) |
@@ -114,7 +114,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/coverage-ledger.mjs` | Wspólna fabryka rejestru automatyki (`status`/`html`/`coverage`/`report`) dla Sztuczek i Pochodzeń |
 | `scripts/config/class-features-coverage.mjs` | Rejestr automatyki 133 zdolności klasowych i profesji (B5) — czyta `auto`/`manual` z danych, `game.neuroshima.zdolnosci` |
 | `scripts/config/tt-rules.mjs` | Silnik TT (czysty): metody, limit Treningu w zbroi, premie, `computeTT` z odrzuconymi źródłami i powodami (PLAN_tt) |
-| `scripts/actors/tt.mjs` | TT na karcie: migawka z lalki, dane pochodne (`ac.neuroshima`), dymek, okno TT, efekty do początku tury właściciela, porządki po starych efektach — `game.neuroshima.tt` |
+| `scripts/actors/tt.mjs` | TT na karcie: migawka z lalki, dane pochodne (`ac.neuroshima`), dymek, okno TT, efekty do początku tury właściciela, porządki po starych efektach; bez ręcznej TT postaci (strażnik, czyszczenie przy starcie), nie założona osłona — tarcza TT, „Napraw”, `audit()`, szept MG (D17) — `game.neuroshima.tt` |
 | `scripts/config/defense-rules.mjs` | Rozstrzygacz trafienia `resolveHit`, katalog reakcji `DEFENSE_REACTIONS`, stany przycisków `reactionState` (czyste) |
 | `scripts/combat/trafienie.mjs` | `ttAgainst`, werdykt stemplowany na karcie ataku, tacka celów; odczyt werdyktu dla dźwięków, smugacza, Dozownika, olejku |
 | `scripts/combat/obrona.mjs` | Okno „Reakcje celu”: przyciski per widz, prośba gracza → MG, efekty reakcji, ⏳, „Ustaw cel”, Krytyczna ochrona hełmu, reakcje BN — `game.neuroshima.obrona` |
@@ -1210,6 +1210,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### TT bez ręcznych wartości, nie założona osłona — ocena PM1 (2026-11-02)
+
+Ocena PM1: reguły TT zgodne z podręcznikiem (wszystkie metody, premie, reakcje, hełm, osłona), ~94 testy; błędne były dane kampanii — po wdrożeniu lalki pięć postaci nie nosiło swoich pancerzy, a Piekarz miał TT wpisaną ręcznie (18 zamiast Gołej klaty). Decyzja MG (D17 w `PLAN_tt.md`): postać nie ma ręcznej TT — strażnik zapisu, czyszczenie przy starcie świata, okno TT postaci pokazuje rozkład; tarcza sama TT nie podnosi (`ac.shield` z importu w „nie liczy się”). Nie założona osłona (pancerz, hełm, ochraniacze, które podniosłyby TT) — pomarańczowa tarcza TT z „Napraw”, wiersz w dymku, `game.neuroshima.tt.audit()`, szept do MG przy starcie. PM1 (port na obliczenia KP dnd5e) odrzucony — nie łapie złych danych, a rozdziela logikę TT; PM7 nie dotyczy. Quench `tt-karta`.
+
 ### Sztuczki z atakami i przyciskami — krok 8b (2026-11-02)
 
 Karateka i Barbarka — ataki naturalne na Sztuczce (Karateka z SIŁ albo ZRC); Nożownik — przycisk [B] i krytyk z zapowiedzi; Barbarka — Z baśki (krytyk), Wyjaśnić ci? (Powalenie przez MG); Robin Hood — Stalowe palce, Celowanie; Jest zajebiście — sporny test z kartą Intuicji i jednorazowe Ułatwienie; Benzyna zamiast krwi — TT pojazdu i Slalom; Plug & Play — podpowiedź. Rejestry silnika okoliczności (automatyczne TK, stany celu) i premii TT celu. Sztuczki 53/53 (29 pełnych). Notatki: `PLAN_m7_zdolnosci.md` §8 „8b”. Quench `dogrywka-m7` (23), e2e `sztuczki-ataki`.
@@ -1744,7 +1748,7 @@ przebudowane 2026-10-04; kopie zdolności na kartach dosyła `game.neuroshima.zd
   Mnicha itd. usunięte — nikt ich nie używał): metody konkurują — TT podstawowa, pancerz, Goła klata,
   Tarcza wiary — a premie się sumują: Obłęd, Kuloodporność, Obsługa pancerza, Zasłona, Tańczący
   z siekierkami, Roszada, Trening w zbroi (limit ZRC +1, także ciężki 0 → 1). Dymek TT pokazuje rozkład
-  i to, co nie liczy się, z powodem. „Stała” / „Własna formuła” zostają jako furtka MG.
+  i to, co nie liczy się, z powodem. ~~„Stała” / „Własna formuła” zostają jako furtka MG.~~ Od 2026-11-02 bez furtki (D17).
 - **Ochraniacze to pancerz** w warunkach zdolności — rozstrzygnięcie autora systemu: gaszą Gołą klatę,
   Tarczę wiary, Obłęd i Kuloodporność, włączają Obsługę pancerza. Hełm gasi tylko to, co go wymienia.
 - Obłęd i Zasłona nie są już Efektami Aktywnymi (Obłęd był liczony raz, przy włączeniu Berserka);
