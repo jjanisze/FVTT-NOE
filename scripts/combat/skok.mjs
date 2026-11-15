@@ -10,13 +10,17 @@
  *     z RO SIŁ celu, porażka: Powalenie i k6 obuchowych za każde pełne 3 m (D33); sam skok nie wydaje A/B/R;
  *   - **Region `skok`** (`scenes/transitions.mjs`) i **okno kalkulatora** na karcie albo w makrze
  *     (`game.neuroshima.skok.okno(actor)`).
- * BN: ludzki wzór SIŁ tylko dla ludzi; istota ze skokiem w opisie albo inna — rozstrzygnięcie ręczne z tym opisem
- * (§9: nie ograniczaj stworzeń ludzkim wzorem). Złożonej trajektorii ani prześwitu nie zgadujemy (§2.2).
+ * BN: ludzki wzór SIŁ tylko dla ludzi; istota ze stałym skokiem w cesze („skok długości 6 m lub wysokości do 3 m”,
+ * „na odległość 18 m” — automatyka Bestiariusza `kind: "skok"` albo ten sam opis na starszej kopii) dostaje zasięg z
+ * tych liczb; istota bez liczb — rozstrzygnięcie ręczne z opisem (§9: nie ograniczaj stworzeń ludzkim wzorem).
+ * Złożonej trajektorii ani prześwitu nie zgadujemy (§2.2). Zejście z krawędzi w dół nie jest wysokością skoku (liczy się
+ * tylko wybicie w górę) — upadek po skoku rozstrzyga dnd5e/M6 kartą obrażeń od upadku (`config/spadanie.mjs`).
  */
 
 import * as S from "../config/skok-data.mjs";
 import { metry } from "../config/ekonomia-data.mjs";
 import { creatureKindOf } from "../config/defense-rules.mjs";
+import { jednostkiSceny } from "../config/teren-data.mjs";
 import { przedmiotZdolnosci, esc } from "./zdolnosci-wspolne.mjs";
 import { kombatant, ledger, chwila, zatwierdz, kluczTury, budzetDotyczy, ruchSieLiczy, zarejestrujUwagiRuchu } from "./ekonomia.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
@@ -39,16 +43,27 @@ function _wzrost(raw) {
   return n;
 }
 
-/** BN: opis skoku istoty (cecha „Skok…”, „Skakun…”) albo `null` dla człowieka — ten skacze ludzkim wzorem. */
+/**
+ * BN: skok istoty albo `null` dla człowieka — ten skacze ludzkim wzorem. `{opis, cecha, skok}`: `skok` — stały zasięg
+ * z cechy (`{dal, wzwyz}`; automatyka Bestiariusza albo ten sam opis), `null` — tylko opis do stołu.
+ */
 function _skokIstoty(actor) {
   if (actor?.type !== "npc") return null;
-  const cecha = actor.items?.find(i => i.type === "feat" && /^(skok|skakun|skoczek|susy)/i.test(i.name ?? ""));
+  const cechy = actor.items?.filter(i => i.type === "feat" && /^(skok|skakun|skoczek|susy)/i.test(i.name ?? "")) ?? [];
+  const tekstCechy = c => String(c.system?.description?.value ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const zLiczbami = cechy.map(c => {
+    const a = c.flags?.[MODULE_ID]?.bestiary?.automation;
+    const skok = a?.kind === "skok" ? { dal: a.dal ?? null, wzwyz: a.wzwyz ?? null } : S.skokIstotyZOpisu(tekstCechy(c));
+    return { c, skok };
+  }).find(x => x.skok);
+  if (zLiczbami) return { opis: `skok istoty — „${zLiczbami.c.name}”: ${tekstCechy(zLiczbami.c)}`, cecha: zLiczbami.c.name, skok: zLiczbami.skok };
+  const cecha = cechy[0];
   if (cecha) {
-    const tekst = String(cecha.system?.description?.value ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-    return `skok wg opisu istoty — „${cecha.name}”${tekst ? `: ${tekst}` : ""}`;
+    const tekst = tekstCechy(cecha);
+    return { opis: `skok wg opisu istoty — „${cecha.name}”${tekst ? `: ${tekst}` : ""}`, cecha: cecha.name, skok: null };
   }
   if (creatureKindOf(actor.system?.details?.type?.value) === "czlowiek") return null;
-  return "istota — skok wg jej opisu albo decyzji MG (bez ludzkiego wzoru SIŁ)";
+  return { opis: "istota — skok wg jej opisu albo decyzji MG (bez ludzkiego wzoru SIŁ)", cecha: null, skok: null };
 }
 
 /**
@@ -75,7 +90,9 @@ export function daneSkoku(actor) {
  */
 export function zasiegi(actor) {
   const d = daneSkoku(actor);
-  if (d.istota) return { reczny: d.istota, dane: d };
+  // Bez długości w opisie (sama wysokość) — szczeliny i zasięgu w dal nie zgadujemy: opis do stołu.
+  if (d.istota?.skok?.dal != null) return { ...S.zasiegIstoty(d.istota.skok, d.istota.cecha), dane: d };
+  if (d.istota) return { reczny: d.istota.opis, dane: d };
   const wspolne = { sila: d.sila, zrc: d.zrc, modSily: d.modSily, skoczek: d.skoczek, gladiator: d.gladiator, wzrost: d.wzrost };
   return { zRozbiegu: S.zasiegSkoku({ ...wspolne, rozbieg: true }), zMiejsca: S.zasiegSkoku({ ...wspolne, rozbieg: false }), dane: d };
 }
@@ -85,7 +102,7 @@ export function zasiegi(actor) {
 /* -------------------------------------------- */
 
 /** Jednostki sceny w metrach — inaczej wzory NOE nie mają sensu (§3.1: waliduj jednostki). */
-const _wMetrach = scene => /^m\.?$|^metr/i.test(String(scene?.grid?.units ?? "").trim());
+const _wMetrach = scene => jednostkiSceny(scene?.grid?.units).metry;
 
 /**
  * Odcinki trasy tej tury: historia tokenu (wcześniejsze dragi) i przebyta część ruchu, każdy z akcją ruchu,
@@ -251,6 +268,12 @@ export function opisZasiegu(actor) {
   const z = zasiegi(actor);
   if (z.reczny) return `<p>${esc(actor.name)}: ${esc(z.reczny)}.</p><p>Koszt skoku 1:1 z ruchu.</p>`;
   const r = z.zRozbiegu, m = z.zMiejsca, d = z.dane;
+  if (z.istota) {
+    const w = v => (v == null ? "—" : `${metry(v)} m`);
+    return `<p>${esc(actor.name)} — stały skok z cechy <strong>${esc(d.istota.cecha)}</strong> (bez ludzkiego wzoru SIŁ, s. 256): `
+      + `w dal ${w(r.dal)}, wzwyż ${w(r.wzwyz)}.</p><p class="hint">${esc(d.istota.opis)}</p>`
+      + `<p class="hint">Koszt skoku 1:1 z ruchu. Ponad zasięg — ostrzeżenie, nie blokada.</p>`;
+  }
   return `<table class="neuro-skok-tabela"><thead><tr><th></th><th>z rozbiegu (≥ 3 m)</th><th>z miejsca</th></tr></thead><tbody>`
     + `<tr><th>w dal</th><td>${metry(r.dal)} m</td><td>${metry(m.dal)} m</td></tr>`
     + `<tr><th>wzwyż</th><td>${metry(r.wzwyz)} m</td><td>${metry(m.wzwyz)} m</td></tr>`

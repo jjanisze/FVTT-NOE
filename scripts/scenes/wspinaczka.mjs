@@ -90,7 +90,8 @@ function _onRenderKarty(message, html) {
     btn.addEventListener("click", async ev => {
       ev.preventDefault();
       const st = Number(btn.dataset.neuroWspinaczka) || ST_WSPINACZKI;
-      await actor.rollSkill({ skill: "atl", target: st, disadvantage: !!k.utrudnienie }, {},
+      // Źródło „wspinaczka” — Ułatwienia ze zdolności (Sportowiec, PLAN_m7 §3.0.3).
+      await actor.rollSkill({ skill: "atl", target: st, disadvantage: !!k.utrudnienie, neuroKontekst: ["wspinaczka"] }, {},
         { data: { flavor: `Wspinaczka — Test Siły (Atletyka) ST ${st}` } });
     });
   }

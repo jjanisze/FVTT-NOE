@@ -1214,6 +1214,25 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — skoki istot, Sportowiec, upadek po skoku (E3, reszta) (2026-11-15)
+
+- **Stały skok istoty** w generatorze Bestiariusza (`dev/bestiary/gen_bestiary.py`, `rule_skok_istoty`): cecha
+  „Skok…”/„Skakun…” z liczbami → automatyka `{kind: "skok", dal, wzwyz, zamiastRuchu}` (Bit-boy 6/3 — wcześniej
+  `descriptive`, Gigantyczny pająk 18); skok warunkowy („co najmniej 9 m”, Skok łowcy) zostaje opisowy. Kalkulator
+  (`combat/skok.mjs`) czyta automatykę, a na starszych kopiach ten sam opis (`skokIstotyZOpisu` w `config/skok-data.mjs`);
+  `zasiegIstoty` — ten sam kształt co ludzki zasięg, z rozbiegu i z miejsca jednakowo, ostrzeżenie „stały skok
+  istoty”; bez liczby wzwyż — bez ostrzeżenia wysokości; bez długości — opis do stołu (także w Regionie `skok`).
+- **Sportowiec** (Zwiadowca 7, s. 98): `EFEKTY` — Szybkość +3 m; `ULATWIENIA` — Ułatwienie Atletyki przy źródłach
+  testu „wspinaczka”/„pływanie”/„skok” (`KONTEKSTY_RO`), karty wspinaczki i pływania podają `neuroKontekst`; skok bez
+  testu — podpowiedź w kalkulatorze. Opis automatyki w `dev/classes/gen_features.py` (COVERAGE), generator uruchomiony.
+- **Upadek po skoku**: ruch `fall` (mimowolny, dnd5e 6) nie trafia do ledgera (`ruchSieLiczy`); zejście w dół nie jest
+  wysokością skoku ani Skoku Gladiatora (test). Kontrola jednostek skoku — wspólne `jednostkiSceny`.
+- Paczki `bestiariusz` i `zdolnosci-klasowe` przebudowane w repo i piaskownicy. Testy: Quench `skok` 23/23 (skoki istot
+  z opisu i z paczki, Sportowiec z paczki, upadek), zielone `teren-m8`, `ekonomia`, `zdolnosci-*`,
+  `ulatwienia-testow`, `woda`, `poziomy`, `dogrywka-m7`, `obrona`. Poligon: persona `zwiadowca-7-sportowiec` (obsada,
+  doklejona na końcu), stanowisko `ruch` — Bit-boy, próby `skok-istoty` i `sportowiec`. Dokumentacja:
+  `docs/Ruch-i-teren.md`, `docs/Zdolnosci.md`.
+
 ### M8 — teren bez Tiled, odporności, ciągnięcie, wsiadanie w budżecie, jednostki sceny (E2) (2026-11-15)
 
 - **Przyczyny trudnego terenu z NOE** (`config/teren-data.mjs`, `scenes/teren-preset.mjs`): etykiety

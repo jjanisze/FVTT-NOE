@@ -234,5 +234,15 @@ for (const [k, prof, sztuczka, czwarty, origin, zdolnosc] of DOGRYWKA) {
   });
 }
 
+// M8 E3 (2026-11-15): Sportowiec (Zwiadowca 7) stał się automatyką — Szybkość +3 m i Ułatwienie Atletyki przy
+// wspinaczce i pływaniu. Doklejone na końcu, nic wyżej się nie przesuwa; stanowisko `ruch`.
+roster.push({
+  id: "zwiadowca-7-sportowiec", name: "Zwiadowca 7: Sportowiec",
+  rola: "Zwiadowca 7 · Łowca Mutantów · Sportowiec, Wyczulone zmysły (pokrycie M8)",
+  klasa: "zwiadowca", poziom: 7, profesja: "Łowca Mutantów", pochodzenie: "Missisipi", cechy: CECHY.zwiadowca,
+  picks: { "Zdolność z profesji": "Bez tajemnic", "Mój wróg — wybierz jedną": "Mój wróg: Mutanty", "Wyjadacz — wybierz jedną": "Sokole oko" },
+  ekwipunek: LOADOUTS.zwiadowca, grupa: "pokrycie"
+});
+
 export const ROSTER = Object.freeze(roster);
 export const personaDef = id => ROSTER.find(p => p.id === id) ?? null;

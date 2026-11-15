@@ -18,7 +18,9 @@
 /** Źródła RO, które karty żądające rzutu wpisują w `kontekst` (E0). */
 export const KONTEKSTY_RO = Object.freeze({
   trucizna: "trucizna", kwas: "kwas", skazenie: "skażenie radioaktywne", choroba: "choroba", maszyna: "maszyna",
-  przerazenie: "Przerażenie", obszar: "efekt obszarowy", pulapka: "pułapka", upadek: "upadek", srodowisko: "środowisko"
+  przerazenie: "Przerażenie", obszar: "efekt obszarowy", pulapka: "pułapka", upadek: "upadek", srodowisko: "środowisko",
+  // Testy ruchu M6/M8 (`neuroKontekst` w rzucie): Sportowiec — Ułatwienie Atletyki przy wspinaniu, pływaniu, skakaniu.
+  wspinaczka: "wspinaczka", plywanie: "pływanie", skok: "skok"
 });
 
 /**

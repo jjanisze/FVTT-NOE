@@ -211,7 +211,14 @@ kosztuje). Potem zwykłe przeciąganie: skok dalej niż zasięg albo bez rozbieg
 ostrzeżenie na karcie. Po skoku w dal na **trudny teren** przychodzi karta z testem Akrobatyki ST 10 (porażka —
 Powalenie). Skok Gladiatora na pole istoty (najwyżej o rozmiar większej) daje MG kartę RO na Siłę celu: porażka —
 Powalenie i obrażenia (z Kolorem Kobaltu 1k6 za każde pełne 3 m; zasada 46 w [Kobalt.md](Kobalt.md)). Sam skok nie
-wydaje Akcji. Istoty z Bestiariusza skaczą według swojego opisu — moduł nie przykłada do nich ludzkiego wzoru.
+wydaje Akcji. Istoty z Bestiariusza skaczą według swojego opisu — moduł nie przykłada do nich ludzkiego wzoru:
+stały skok z cechy (Bit-boy — „skok długości 6 m lub wysokości do 3 m”, Gigantyczny pająk — Skakun, 18 m) to zasięg
+w tabeli i w ostrzeżeniu; cecha bez liczb (albo skok warunkowy, jak Skok łowcy) zostaje opisem do stołu.
+
+**Sportowiec** (Zwiadowca 7): Szybkość +3 m i Ułatwienie w testach Atletyki z kart wspinaczki i pływania (plakietka w
+oknie rzutu); przy skoku moduł testu nie prosi — kalkulator przypomina o Ułatwieniu. **Zejście z krawędzi** w trakcie
+skoku nie jest wysokością skoku (liczy się tylko wybicie w górę, także dla Skoku Gladiatora); upadek po nim
+rozstrzyga karta upadku dnd5e z liczbami NOE i nie schodzi z licznika ruchu.
 
 Region **Skok** nad zaprojektowaną wyrwą liczy to samo: okno pokazuje zasięg z rozbiegu i z miejsca (rozbieg
 zaznaczony, gdy był), **Skocz** — doskok na lądowisko albo, gdy zasięg za krótki, lądowanie w tym polu wyrwy, do

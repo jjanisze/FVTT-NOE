@@ -720,7 +720,8 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Sportowiec",
     action: null,
-    auto: [],
+    auto: [{ what: "Szybkość +3 m — Efekt Aktywny na zdolności", where: "config/zdolnosci-efekty.mjs" }, { what: "Ułatwienie Atletyki w testach wspinaczki i pływania z kart modułu (źródło testu, PLAN_m7 §3.0.3)", where: "combat/ulatwienia-testow.mjs" }],
+    manual: "Test Atletyki przy skoku — moduł go nie prosi (podpowiedź w kalkulatorze skoku); MG zaznacza Ułatwienie.",
     text: "Twoja Szybkość rośnie o 3 metry. Zyskujesz również Ułatwienie w testach Atletyki, kiedy się wspinasz, pływasz lub skaczesz."
   },
   "wyczulone-zmysly": {

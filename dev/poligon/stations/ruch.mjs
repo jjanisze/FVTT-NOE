@@ -18,7 +18,8 @@ const pole = (c, r, w = 1, h = 1) => ({ type: "rectangle", x: c * G, y: r * G, w
 export default {
   id: "ruch", name: "Ruch", prio: "P1", icon: "fa-solid fa-person-running",
   opis: "Ekonomia tury M8: Twardziel 1 (Gracz 1), Kowboj ze Zrywem (Gracz 2), Gladiator 5 z Berserkiem i Zewem areny (Gracz 3), Spec 5 "
-    + "z Szybkimi rękami (Gracz 4), Kurier z Człowiekiem-pająkiem i Włóczykijem (MG). Gruz, schody na gruzie, osobne schody, "
+    + "z Szybkimi rękami (Gracz 4), Kurier z Człowiekiem-pająkiem i Włóczykijem oraz Zwiadowca 7 ze Sportowcem (MG), "
+    + "Bit-boy ze stałym skokiem. Gruz, schody na gruzie, osobne schody, "
     + "bagno i teren bez przyczyny — natywne Regiony bez Tiled. Walka gotowa — MG zaczyna.",
   gracze: 4,
   klucz: ["goly"],
@@ -37,6 +38,9 @@ export default {
     const kurier = await k.persona("kurier", "m7-slang", { name: "Kurier (Człowiek-pająk, Włóczykij)" });
     const zestaw = REAL_GEAR.find(g => g.id === "sprzet_wspinaczkowy");
     if (kurier && zestaw) await kurier.createEmbeddedDocuments("Item", [buildRealGearItemData(zestaw)]);
+    // E3: Sportowiec (Zwiadowca 7, MG) i stały skok istoty z cechy (Bit-boy: 6 m / 3 m).
+    const sportowiec = await k.persona("sportowiec", "zwiadowca-7-sportowiec", { name: "Zwiadowca 7 (Sportowiec)" });
+    const bitboy = await k.fromPack("bitboy", "bestiariusz", "bit-boys");
 
     await s.createEmbeddedDocuments("Region", [
       { name: "Gruz", color: "#8a6a4a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(12, 2, 4, 14)],
@@ -57,12 +61,13 @@ export default {
         flags: k.flags({ role: "region" }) }
     ]);
     const gracze = [goly, kowboj, gladiator, spec];
-    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [kurier, 3, 18],
-      [ghul, 24, 9, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }]]);
+    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [kurier, 3, 18], [sportowiec, 1, 18],
+      [ghul, 24, 9, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }], [bitboy, 27, 15, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }]]);
     for (const [i, a] of gracze.entries()) await k.seat(`Gracz ${i + 1}`, a);
     await k.party(gracze);
-    await k.combat(s, [...gracze, kurier, ghul].filter(Boolean));
-    return { gracze: gracze.filter(Boolean).map(a => a.name), kurier: kurier?.name ?? null, ghul: ghul?.name ?? null };
+    await k.combat(s, [...gracze, kurier, sportowiec, ghul, bitboy].filter(Boolean));
+    return { gracze: gracze.filter(Boolean).map(a => a.name), kurier: kurier?.name ?? null, sportowiec: sportowiec?.name ?? null,
+      ghul: ghul?.name ?? null, bitboy: bitboy?.name ?? null };
   },
   proby: [
     p("licznik", "Karta", "Panel Stan w walce: ruch pozostałe/pojemność (np. 9/9 m) i A/B/R/I 1/1 — czytelne, z dymkami źródeł; poza walką z panelu zostaje sam przycisk „Ułóż pasek”",
@@ -105,6 +110,10 @@ export default {
       "Gracz 1: zagraj akcję słownie, zakończ turę."),
     p("skok", "Skok", "[Skok] na karcie: tabela zasięgu (Twardziel SIŁ 15: w dal 4,5 m z rozbiegu, 2,25 m z miejsca); „Tryb Skok na żetonie” niczego nie wydaje; skok kosztuje 1:1, bez dopłaty gruzu pod lotem; dalej niż zasięg albo bez 3 m rozbiegu — ostrzeżenie, ruch zostaje (T15, T18)",
       "Gracz 1: Skok → Tryb Skok; rozbieg 2 pola chodem, potem skok 3 pola nad gruzem; drugi raz z miejsca."),
+    p("skok-istoty", "Skok", "Bit-boy: [Skok] (karta BN albo game.neuroshima.skok.okno) — stały skok z cechy „Skok”: w dal 6 m, wzwyż 3 m, bez wzoru SIŁ; skok 7,5 m — ostrzeżenie „ponad zasięg 6 m (stały skok istoty)”, ruch zostaje; zejście z krawędzi nie liczy się jako wysokość skoku",
+      "Tura Bit-boya (MG): Tryb Skok, skok 5 pól; potem 3 pola.", "NOE"),
+    p("sportowiec", "Skok", "Zwiadowca 7 ze Sportowcem: Szybkość 12 m na karcie (9 + 3); test wspinaczki i pływania z kart modułu — okno z Ułatwieniem i plakietką „Sportowiec”, zwykła Atletyka bez niej; kalkulator skoku: podpowiedź Ułatwienia",
+      "Tura Zwiadowcy 7 (MG): karta → Szybkości; HUD żetonu → tryb Wspinanie, przeciągnij 1 pole — karta wspinaczki, rzuć test; zwykły test Atletyki z karty; [Skok]."),
     p("skok-ladowanie", "Skok", "Skok w dal kończący się na gruzie: karta „Akrobatyka ST 10”; porażka — Powalenie, sukces — nic (NOE s. 256)",
       "Gracz 1: skok, który ląduje w Gruzie; w karcie rzuć nisko i wysoko.", "NOE"),
     p("skok-gladiator", "Skok", "Gladiator w Berserku: zasięg ×2 w tabeli; skok na pole ghula — karta MG: RO SIŁ ST 8 + SIŁ + PB, porażka: Powalenie i 1k6 obuchowych za każde pełne 3 m (2,9 m → 0k6); sam skok bez A/B/R (D33)",

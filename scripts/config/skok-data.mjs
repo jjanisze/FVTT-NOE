@@ -53,6 +53,39 @@ export function zasiegSkoku({ sila = 10, zrc = 10, modSily = 0, rozbieg = true, 
   };
 }
 
+const _SKOK_DAL = /(?:długości|na odległość|w dal)\s+(?:do\s+)?([\d,]+)\s*m/i;
+const _SKOK_WZWYZ = /wysokości\s+(?:do\s+)?([\d,]+)\s*m/i;
+
+/**
+ * Stały skok istoty z opisu cechy (s. 256: istoty skaczą wg opisu, §9: bez ludzkiego wzoru SIŁ) — „skok długości 6 m
+ * lub wysokości do 3 m” (Bit-boy), „skok na odległość 18 m” (Skakun). To samo co reguła generatora Bestiariusza
+ * (`dev/bestiary/gen_bestiary.py`, `kind: "skok"`), więc działa też na kopiach sprzed przebudowy paczki. Skok warunkowy
+ * („co najmniej 9 m” — Skok łowcy) nie jest zasięgiem: `null`.
+ * @param {string} tekst
+ * @returns {{dal: number|null, wzwyz: number|null}|null}
+ */
+export function skokIstotyZOpisu(tekst) {
+  const t = String(tekst ?? "");
+  const d = _SKOK_DAL.exec(t), w = _SKOK_WZWYZ.exec(t);
+  if (!d && !w) return null;
+  const n = m => (m ? Number(m[1].replace(",", ".")) : null);
+  return { dal: n(d), wzwyz: n(w) };
+}
+
+/**
+ * Zasięgi istoty ze stałego skoku — ten sam kształt co `zasiegSkoku` (z rozbiegu i z miejsca jednakowo: opis nie
+ * zna rozbiegu). Brak liczby wzwyż — `null` (bez ostrzeżenia, rozstrzyga stół).
+ * @param {{dal: number|null, wzwyz: number|null}} skok
+ * @param {string} cecha  nazwa cechy do wzoru („Skok”)
+ */
+export function zasiegIstoty(skok, cecha) {
+  const z = {
+    dal: skok?.dal ?? null, wzwyz: skok?.wzwyz ?? null, rozbieg: true, siegniecie: null,
+    wzorDal: `cecha „${cecha}”`, wzorWzwyz: `cecha „${cecha}”`
+  };
+  return { zRozbiegu: z, zMiejsca: { ...z, rozbieg: false }, istota: true };
+}
+
 /**
  * Skoki w trasie: odcinki „Skok” idące po sobie to jeden skok; rozbieg to zwykły chód tuż przed nim (także z
  * wcześniejszych ruchów tej tury — „kilka dragów”, §4.5), nie koszt terenu.
@@ -93,12 +126,12 @@ export function ocenSkok(skok, zasiegi) {
   }
   const zRozbiegu = skok.rozbieg + EPS >= ROZBIEG_M;
   const z = zRozbiegu ? zasiegi.zRozbiegu : zasiegi.zMiejsca;
-  const jak = zRozbiegu ? "z rozbiegu" : `z miejsca — rozbieg ${metry(skok.rozbieg)} m < 3 m`;
+  const jak = zasiegi.istota ? "stały skok istoty" : zRozbiegu ? "z rozbiegu" : `z miejsca — rozbieg ${metry(skok.rozbieg)} m < 3 m`;
   const ostrz = [];
-  if (skok.poziomo > z.dal + EPS) {
+  if (z.dal != null && skok.poziomo > z.dal + EPS) {
     ostrz.push(`Skok ${metry(skok.poziomo)} m — ponad zasięg ${metry(z.dal)} m (${jak}; ${z.wzorDal}).`);
   }
-  if (skok.wzwyz > z.wzwyz + EPS) {
+  if (z.wzwyz != null && skok.wzwyz > z.wzwyz + EPS) {
     ostrz.push(`Skok wzwyż ${metry(skok.wzwyz)} m — ponad ${metry(z.wzwyz)} m (${jak}; ${z.wzorWzwyz}).`);
   }
   return ostrz;

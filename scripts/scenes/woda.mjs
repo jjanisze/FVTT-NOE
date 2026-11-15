@@ -194,7 +194,7 @@ export async function kartaTestu(token, { st, nurt = null, powod = "mg" }) {
  */
 export async function rzutPlywania(actor, st) {
   const rolls = await actor.rollSkill(
-    { skill: "atl", target: st, disadvantage: _pancerzUtrudnia(actor) }, {},
+    { skill: "atl", target: st, disadvantage: _pancerzUtrudnia(actor), neuroKontekst: ["plywanie"] }, {},
     { data: { flavor: `Pływanie — Test Siły (Atletyka) ST ${st}`, flags: { [MODULE_ID]: { [RZUT]: { actorUuid: actor.uuid, st } } } } }
   );
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;

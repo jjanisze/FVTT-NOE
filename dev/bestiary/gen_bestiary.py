@@ -126,6 +126,32 @@ def rule_atak_wielokrotny(cid, feat):
     return {"kind": "multiattack"}
 
 
+SKOK_NAME = re.compile(r"^(skok|skakun)", re.I)
+SKOK_DAL = re.compile(r"(?:długości|na odległość|w dal)\s+(?:do\s+)?([\d,]+)\s*m", re.I)
+SKOK_WZWYZ = re.compile(r"wysokości\s+(?:do\s+)?([\d,]+)\s*m", re.I)
+
+
+def rule_skok_istoty(cid, feat):
+    """Stały skok istoty (NOE s. 256: istoty skaczą wg opisu, nie ludzkim wzorem SIŁ) — „skok długości 6 m lub
+    wysokości do 3 m”, „skok na odległość 18 m”. Kalkulator skoku M8 (`scripts/combat/skok.mjs`) bierze te liczby
+    jako zasięg (ostrzeżenie ponad zasięg, tabela); bez liczby — opis przy stole. Skok warunkowy („co najmniej 9 m” —
+    Skok łowcy) nie jest zasięgiem: zostaje opisowy."""
+    t = feat["text"]
+    dal = SKOK_DAL.search(t)
+    wzwyz = SKOK_WZWYZ.search(t)
+    if not dal and not wzwyz:
+        return None
+    out = {"kind": "skok"}
+    if dal:
+        out["dal"] = float(dal.group(1).replace(",", "."))
+    if wzwyz:
+        out["wzwyz"] = float(wzwyz.group(1).replace(",", "."))
+    # „Zamiast przemieścić się o 6 m…” — skok zastępuje ruch (koszt 1:1 i tak z ruchu, s. 256).
+    if re.search(r"zamiast przemie", t, re.I):
+        out["zamiastRuchu"] = True
+    return out
+
+
 AUTODESTRUKCJA_NAME = re.compile(r"^autodestrukcja\s*\((\d{1,3})\s*%\)$", re.I)
 STAN_WORDS = {"powalenie": "prone", "ogłuchnięcie": "deafened", "oślepienie": "blinded", "unieruchomienie": "restrained"}
 
@@ -215,7 +241,6 @@ AUTOMATION = {
         "onFail": {"condition": "restrained", "escapeDC": 12},
         "requires": "grappled",
     },
-    "bit-boys.skok": {"kind": "descriptive"},
 
     # ---- Kurczak wybuchowy (własny, Podrecznik/Bestiariusz/Własne) ----
     # Akcja MG: wybuch od razu, bez k100 i odliczania — ta sama ścieżka co Autodestrukcja przy awarii 20
@@ -302,6 +327,8 @@ def automate(cid, feat):
         return None if set(auto) <= ATTACK_ONLY_KEYS else auto
     if AUTODESTRUKCJA_NAME.match(feat["name"].strip()):
         return rule_autodestrukcja(cid, feat)
+    if SKOK_NAME.match(feat["name"].strip()):
+        return rule_skok_istoty(cid, feat)
     rule = RULES.get(slug(feat["name"]))
     return rule(cid, feat) if rule else None
 

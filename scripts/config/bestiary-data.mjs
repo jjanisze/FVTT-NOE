@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 53 creatures, 265 features (104 automated), 2 attack riders.
+ * 53 creatures, 265 features (105 automated), 2 attack riders.
  */
 
 export const BESTIARY = {
@@ -602,7 +602,10 @@ export const BESTIARY = {
       },
       {
         "automation": {
-          "kind": "descriptive"
+          "dal": 6.0,
+          "kind": "skok",
+          "wzwyz": 3.0,
+          "zamiastRuchu": true
         },
         "id": "skok",
         "name": "Skok",
@@ -2529,7 +2532,10 @@ export const BESTIARY = {
         "text": "Ignoruje utrudnienia związane z poruszaniem się po sieci i zna położenie każdej istoty, która jest z nią w kontakcie. W ciągu doby mogą stworzyć sieć o rozpiętości do 20 m. Duża lub mniejsza istota, która dotknie sieci, natychmiast się przykleja i jest Pochwycona (Wyzwalanie się to ST 14). Sieć może zostać zniszczona (TT 10, PW 5, wrażliwość na obrażenia od ognia, niewrażliwość na obrażenia obuchowe, psychiczne i od trucizny)."
       },
       {
-        "automation": null,
+        "automation": {
+          "dal": 18.0,
+          "kind": "skok"
+        },
         "id": "skakun-opcjonalnie",
         "name": "Skakun (opcjonalnie)",
         "section": "traits",

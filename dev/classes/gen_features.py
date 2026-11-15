@@ -404,6 +404,13 @@ COVERAGE = {
         "manual": "Czy test dotyczy twojego biomu, brak zaskoczenia (moduł tylko przypomina), skradanie w tempie ruchu "
                   "i wiedza z tropienia — przy stole.",
     },
+    "sportowiec": {
+        "auto": [
+            ("Szybkość +3 m — Efekt Aktywny na zdolności", "config/zdolnosci-efekty.mjs"),
+            ("Ułatwienie Atletyki w testach wspinaczki i pływania z kart modułu (źródło testu, PLAN_m7 §3.0.3)", "combat/ulatwienia-testow.mjs"),
+        ],
+        "manual": "Test Atletyki przy skoku — moduł go nie prosi (podpowiedź w kalkulatorze skoku); MG zaznacza Ułatwienie.",
+    },
     "cichy-krok": {
         "auto": [
             ("bez Utrudnienia do Skradania się za noszenie pancerza", "actors/cichy-krok.mjs"),

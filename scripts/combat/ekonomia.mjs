@@ -357,10 +357,13 @@ export function budzetDotyczy(doc) {
   return !_wykluczenia.some(fn => { try { return fn(doc); } catch (_e) { return false; } });
 }
 
-/** Ruch postaci w walce — tylko jej własna tura albo trwająca reakcja; `displace` (przestawienie) się nie liczy. */
+/**
+ * Ruch postaci w walce — tylko jej własna tura albo trwająca reakcja; `displace` (przestawienie) i `fall` (upadek, także
+ * po skoku z krawędzi — mimowolny, §3.2: 0 z dobrowolnego budżetu; obrażenia — karta upadku dnd5e/M6) się nie liczą.
+ */
 export function ruchSieLiczy(doc, movement) {
   if (!movement?.passed?.waypoints?.length) return false;
-  if (movement.passed.waypoints.every(w => w.action === "displace" || CONFIG.Token.movement.actions[w.action]?.teleport)) return false;
+  if (movement.passed.waypoints.every(w => w.action === "displace" || w.action === "fall" || CONFIG.Token.movement.actions[w.action]?.teleport)) return false;
   return budzetDotyczy(doc);
 }
 

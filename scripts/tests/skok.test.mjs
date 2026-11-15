@@ -9,7 +9,8 @@
 
 import { SCRATCH_PREFIX, scratchActor, scratchCleanup, stub, walkaTestowa, waitFor } from "./helpers.mjs";
 import * as S from "../config/skok-data.mjs";
-import { ledger, kombatant, stan } from "../combat/ekonomia.mjs";
+import { ledger, kombatant, stan, __testing as TE } from "../combat/ekonomia.mjs";
+import { rozstrzygnijRzut } from "../combat/ulatwienia-testow.mjs";
 import { zasiegi, zaplacSkok, __testing as T } from "../combat/skok.mjs";
 import { __testing as TR } from "../scenes/transitions.mjs";
 
@@ -54,7 +55,20 @@ export function registerSkokTests(quench) {
         await istota.createEmbeddedDocuments("Item", [{ name: "Skok", type: "feat",
           system: { description: { value: "<p>Zamiast przemieścić się o 6 m, może wykonać skok długości 6 m lub wysokości do 3 m.</p>" } } }]);
         const z = zasiegi(istota);
-        expect(z.reczny, "opis cechy, nie wzór SIŁ").to.match(/Skok.*6 m/);
+        expect(z.istota, "stały skok z cechy, nie wzór SIŁ").to.equal(true);
+        expect([z.zRozbiegu.dal, z.zRozbiegu.wzwyz, z.zMiejsca.dal]).to.deep.equal([6, 3, 6]);
+        const bez = await scratchActor({ name: `${SCRATCH_PREFIX} Skoczek bez liczb`, type: "npc" });
+        await bez.createEmbeddedDocuments("Item", [{ name: "Susy", type: "feat", system: { description: { value: "<p>Skacze daleko.</p>" } } }]);
+        expect(zasiegi(bez).reczny, "bez liczb — opis do stołu").to.match(/Susy/);
+      });
+
+      it("E3: skoki istot z opisu — Bit-boy 6/3, Skakun 18 bez wysokości, Skok łowcy (warunek) nie jest zasięgiem", function () {
+        expect(S.skokIstotyZOpisu("Zamiast przemieścić się o 6 m, może wykonać skok długości 6 m lub wysokości do 3 m.")).to.deep.equal({ dal: 6, wzwyz: 3 });
+        expect(S.skokIstotyZOpisu("Gigantyczny pająk może wykonać skok na odległość 18 m.")).to.deep.equal({ dal: 18, wzwyz: null });
+        expect(S.skokIstotyZOpisu("Jeśli łowca wykona skok o długości co najmniej 9 m i zakończy go udanym Testem Ataku…")).to.equal(null);
+        const z = S.zasiegIstoty({ dal: 18, wzwyz: null }, "Skakun");
+        expect(S.ocenSkok({ poziomo: 19.5, wzwyz: 4, rozbieg: 0 }, z).join(" ")).to.match(/ponad zasięg 18 m \(stały skok istoty; cecha „Skakun”\)/);
+        expect(S.ocenSkok({ poziomo: 18, wzwyz: 30, rozbieg: 0 }, z), "bez liczby wzwyż — bez ostrzeżenia").to.deep.equal([]);
       });
 
       it("T17: Gladiator D33 — 2,9 → 0k6, 3 → 1k6, 6 → 2k6, 4,5 + 3 → 1k6; ST 8 + SIŁ + PB; rozmiar celu", function () {
@@ -99,6 +113,31 @@ export function registerSkokTests(quench) {
           .to.deep.equal({ x: 800, y: 600, elevation: -6 });
         expect(TR.poleWSzczelinie(zeton, { bounds: { top: 800, bottom: 900, left: 800, right: 1000 } }, "N", 1, { x: 830, y: 850, elevation: -6 }).x,
           "wejście po skosie — dociągnięte do siatki").to.equal(800);
+      });
+
+      it("E3: Bit-boy z paczki — automatyka `skok` (6/3), bez ludzkiego wzoru; Sportowiec +3 m i Ułatwienie Atletyki wspinaczki/pływania", async function () {
+        const bb = (await game.packs.get(`${MODULE_ID}.bestiariusz`)?.getDocuments() ?? []).find(d => d.getFlag(MODULE_ID, "bestiary")?.id === "bit-boys");
+        const sp = (await game.packs.get(`${MODULE_ID}.zdolnosci-klasowe`)?.getDocuments() ?? []).find(d => d.getFlag(MODULE_ID, "abilityId") === "sportowiec");
+        if (!bb?.items?.some(i => i.getFlag(MODULE_ID, "bestiary")?.automation?.kind === "skok") || !sp?.effects?.size) this.skip(); // paczki sprzed przebudowy
+        const istota = await scratchActor({ ...game.actors.fromCompendium(bb), name: `${SCRATCH_PREFIX} Bit-boy` });
+        const z = zasiegi(istota);
+        expect([z.istota, z.zRozbiegu.dal, z.zRozbiegu.wzwyz]).to.deep.equal([true, 6, 3]);
+        const zw = await scratchActor({ name: `${SCRATCH_PREFIX} Sportowiec`, system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } });
+        await zw.createEmbeddedDocuments("Item", [game.items.fromCompendium(sp)]);
+        expect(zw.system.attributes.movement.speeds.walk, "Szybkość +3 m").to.equal(12);
+        const cfg = k => ({ subject: zw, hookNames: ["skill", "abilityCheck", "d20Test"], skill: "atl", ability: "str", neuroKontekst: k });
+        expect(rozstrzygnijRzut(cfg(["wspinaczka"])).wynik.ulatwienia.map(x => x.id)).to.include("sportowiec");
+        expect(rozstrzygnijRzut(cfg(["plywanie"])).wynik.ulatwienia.map(x => x.id)).to.include("sportowiec");
+        expect(rozstrzygnijRzut(cfg([]))?.wynik.ulatwienia.map(x => x.id) ?? [], "zwykły test Atletyki — nie").to.not.include("sportowiec");
+      });
+
+      it("E3: upadek (także po skoku z krawędzi) nie liczy się do ruchu; skok w dół nie jest wysokością skoku", function () {
+        const tok = { actor: { type: "character" }, parent: { getFlag: () => null } };
+        expect(TE.ruchSieLiczy(tok, { passed: { waypoints: [{ action: "fall" }] } }), "upadek — mimowolny").to.equal(false);
+        expect(TE.ruchSieLiczy(tok, { passed: { waypoints: [{ action: "jump" }, { action: "fall" }] } }), "skok przed upadkiem — liczy się").to.equal(true);
+        const [s] = S.skokiWTrasie([{ akcja: "walk", poziomo: 3, pionowo: 0 }, { akcja: "jump", poziomo: 3, pionowo: -6 }]);
+        expect([s.poziomo, s.wzwyz], "zejście w dół — wzwyż 0").to.deep.equal([3, 0]);
+        expect(S.kosciGladiatora(s), "Gladiator liczy 3 m skoku, nie 6 m spadku").to.equal(1);
       });
 
       it("wzrost z karty: „180 cm”, „1,8 m”, „180”; pusty — brak", function () {

@@ -30,6 +30,8 @@ export const EFEKTY = Object.freeze({
   /* --- klasy, profesje, opcje --- */
   // Wyjadacz (Twardziel 1, Zwiadowca 2): +3 do Testów Ataku bronią palną, dystansową i rzucaną (U29).
   "sokole-oko": [{ name: "Sokole oko", zmiany: [reg("attack", "dnd5e.bonus", 3, naRzut("roll.attack.type", "ranged"))] }],
+  // Zwiadowca 7 — Sportowiec (s. 98): Szybkość +3 m (Ułatwienie Atletyki przy wspinaniu/pływaniu/skoku — `ULATWIENIA`).
+  "sportowiec": [{ name: "Sportowiec", zmiany: [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.add, 3)] }],
   // Brutal 3 (D14): każdy RO na ZRC; nie przy Oślepieniu, Ogłuszeniu, Nieprzytomności — stockowy Danger Sense.
   "szosty-zmysl": [{
     name: "Szósty zmysł",
@@ -135,6 +137,9 @@ export const ULATWIENIA = Object.freeze([
   { id: "a-co-mi-tam", label: "A co mi tam", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba", "trucizna", "skazenie") },
   // Sztuczka Immunitet (klucz Sztuczki): Ułatwienie w RO przeciw chorobom.
   { id: "immunitet", label: "Immunitet", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba") },
+  // Zwiadowca 7 — Sportowiec (s. 98): Ułatwienie w testach Atletyki przy wspinaniu, pływaniu i skakaniu — źródło testu
+  // z karty wspinaczki/pływania (`neuroKontekst`); skok bez testu w module — podpowiedź w kalkulatorze skoku.
+  { id: "sportowiec", label: "Sportowiec", rzut: ["skill:atl"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("wspinaczka", "plywanie", "skok") },
   // Sztuczka Człowiek-pająk — Zabezpieczenie (s. 102): RO, w których porażka to odpadnięcie od ściany albo upadek z
   // wysokości — źródło „upadek” (przejścia drabin i wspinaczki, `scenes/transitions.mjs`).
   { id: "czlowiekPajak", label: "Człowiek-pająk — Zabezpieczenie", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("upadek") },
