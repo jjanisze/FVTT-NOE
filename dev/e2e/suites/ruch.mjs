@@ -276,6 +276,68 @@ function kartaManewru() {
   return m ? new DOMParser().parseFromString(m.content, "text/html").querySelector(".neuro-maneuver-koszt")?.textContent ?? null : null;
 }
 
+/**
+ * GM (E4): sztylet w pochwie, drugi w plecaku, Pakowanie i Szybkie nogi dla PC Gracz 1; B 92 do kabury mimowolnie
+ * (bez kosztu po stronie postaci) — obie ręce wolne.
+ */
+async function przygotujLalke() {
+  const M = "neuroshima-2026-overrides";
+  const a = game.actors.getName("PC Gracz 1");
+  const lalka = game.neuroshima.lalka;
+  const bron = await game.packs.get(`${M}.bron`).getDocuments();
+  const sztylet = bron.find(d => d.getFlag(M, "weaponId") === "sztylet");
+  const nogi = (await game.packs.get(`${M}.zdolnosci-klasowe`).getDocuments()).find(d => d.getFlag(M, "abilityId") === "szybkie-nogi");
+  for (const i of lalka.heldItems(a).map(h => h.item).filter(Boolean)) await lalka.place(a, i, "pack", { quiet: true, involuntary: true });
+  const [pochwa, plecak] = await a.createEmbeddedDocuments("Item", [
+    { ...game.items.fromCompendium(sztylet), name: "Sztylet (pochwa)" },
+    { ...game.items.fromCompendium(sztylet), name: "Sztylet (plecak)" },
+    { name: "Pakowanie", type: "feat", flags: { [M]: { sztuczka: "pakowanie" } } },
+    game.items.fromCompendium(nogi)
+  ]);
+  await lalka.place(a, a.items.get(pochwa.id), "melee.0", { quiet: true, involuntary: true });
+  await lalka.place(a, a.items.get(plecak.id), "pack", { quiet: true, involuntary: true });
+  return { wolne: lalka.freeHands(a), pochwa: lalka.locationOf(a.items.get(pochwa.id))?.kind, plecak: lalka.locationOf(a.items.get(plecak.id))?.kind };
+}
+
+/** Gracz 1: Pakowanie — sztylet z plecaka do ręki (przeniesienie na lalce; bez `quiet` — ciche niczego nie nalicza). */
+async function zPlecaka() {
+  const a = game.user.character;
+  return game.neuroshima.lalka.place(a, a.items.getName("Sztylet (plecak)"), "hand.1");
+}
+
+/** Gracz 1: prawdziwy klik w kafelek sztyletu w pochwie na panelu Oporządzenia — „dobądź i zatrzymaj się”. */
+async function klikPochwy() {
+  const a = game.user.character;
+  if (!a.sheet.rendered) await a.sheet.render({ force: true });
+  await window.__e2e.until(() => a.sheet.element, { message: "the sheet" });
+  const { openDoll, panelFor } = await import("/modules/neuroshima-2026-overrides/scripts/actors/doll-panel.mjs");
+  await openDoll(a.sheet);
+  const item = a.items.getName("Sztylet (pochwa)");
+  const tile = await window.__e2e.until(() => panelFor(a.sheet)?.element?.querySelector(`.neuro-doll-slot.is-filled[data-item-id="${item.id}"]`),
+    { message: "the sheathed dagger on the doll" });
+  tile.click();
+  await window.__e2e.until(() => (game.neuroshima.lalka.locationOf(a.items.get(item.id))?.kind === "hand" ? true : null), { message: "the dagger in hand" });
+  await new Promise(r => setTimeout(r, 400));
+  const atak = [...foundry.applications.instances.values()].some(x => x.rendered && x instanceof dnd5e.applications.dice.AttackRollConfigurationDialog);
+  return { wRece: true, oknoAtaku: atak };
+}
+
+/** Gracz 1: Szybkie nogi [B] — aktywność zdolności; plakietka kosztu na karcie w czacie gracza. */
+async function szybkieNogi() {
+  const a = game.user.character;
+  const it = a.items.find(i => i.getFlag("neuroshima-2026-overrides", "abilityId") === "szybkie-nogi");
+  await it.system.activities.contents[0].use({}, { configure: false });
+  const el = await window.__e2e.until(() => [...document.querySelectorAll("#chat .neuro-uzycie-m8")].at(-1), { message: "the cost pill on the use card" });
+  return el.textContent.trim();
+}
+
+/** Odczyt pul I/A i ostatnich źródeł operacji PC Gracz 1 (każdy klient). */
+function pulePC() {
+  const s = game.neuroshima.actions.stan(game.actors.getName("PC Gracz 1"));
+  if (!s) return null;
+  return { I: s.pule.I.pozostalo, A: s.pule.A.pozostalo, B: s.pule.B.pozostalo, wlasna: s.chwila.wlasna, zrodla: s.ledger.ops.slice(-3).map(o => o.zrodlo) };
+}
+
 /** GM: następna tura. */
 async function nastepna() {
   await game.combat.nextTurn();
@@ -330,8 +392,12 @@ export default {
       t.equal(s, 6, "6 m left");
       const st = await t.gm.eval(stanPC);
       t.equal(st.ruchy[0].niepelny, false, "native cost (token rendered for the mover)");
-      const p = await p1.eval(panel);
-      t.equal(p.ruch, "6/9 m", "sheet updated in place");
+      // Panel odświeża się w klatce animacji — w oknie w tle bywa to o chwilę później niż ledger.
+      const p = await t.waitFor(p1, () => {
+        const el = game.user.character?.sheet?.element?.querySelector(".neuro-m8-panel .neuro-m8-licznik.ruch");
+        return el?.textContent.trim() === "6/9 m" ? el.textContent.trim() : null;
+      }, { message: "the sheet updated in place (6/9 m)" });
+      t.equal(p, "6/9 m", "sheet updated in place");
     });
 
     await t.step("Gracz 1 clicks [Biegnij] → A 0/1, +18 m, Bieganie status → 24/27", async () => {
@@ -540,6 +606,43 @@ export default {
       t.assert(String(pasek[0]).startsWith("item:"), "slot 1 — weapon attack", pasek);
       t.equal(pasek.slice(6).join(" "), "skrot:dodging skrot:odstapienie skrot:ruch skrot:wiecej", "slots 7–0");
       await t.screenshot("Gracz 1", "pasek — po ułożeniu");
+    });
+
+    await t.step("E4, round 4: GM — a dagger in a sheath, another in the pack, Pakowanie, Szybkie nogi; hands free; PC on turn", async () => {
+      await t.gm.eval(nastepna);
+      await t.gm.eval(nastepna);
+      await t.waitFor(p1, () => (game.neuroshima.actions.stan(game.user.character)?.chwila.wlasna ? true : null), { message: "own turn again" });
+      const fx = await t.gm.eval(przygotujLalke);
+      t.equal(fx.wolne, 2, "both hands free");
+      t.equal(`${fx.pochwa}/${fx.plecak}`, "holster/pack", "dagger in a sheath, dagger in the pack");
+      const s = await t.waitFor(p1, pulePC, { message: "pools" });
+      t.equal(`${s.I}/${s.A}`, "1/1", "I and A untouched by the GM's involuntary moves");
+    });
+
+    await t.step("E4: Gracz 1 takes the dagger from the pack — Pakowanie (Mam pod ręką) makes it an [I], not an Action", async () => {
+      t.assert(await p1.eval(zPlecaka), "moved to hand");
+      const p = await t.waitFor(p1, () => {
+        const st = game.neuroshima.actions.stan(game.user.character);
+        return st && st.pule.I.pozostalo === 0 ? { I: st.pule.I.pozostalo, A: st.pule.A.pozostalo } : null;
+      }, { message: "the [I] spent by the pack draw" });
+      t.equal(`${p.I}/${p.A}`, "0/1", "I 0/1, A still 1/1");
+    });
+
+    await t.step("E4: Gracz 1 clicks the sheathed dagger on the doll — drawn and stops (no attack window); second interaction → Używanie [A]", async () => {
+      const k = await p1.eval(klikPochwy);
+      t.equal(k.oknoAtaku, false, "no attack dialog — draw and stop");
+      const p = await t.waitFor(p1, () => {
+        const st = game.neuroshima.actions.stan(game.user.character);
+        return st && st.pule.A.pozostalo === 0 ? { A: st.pule.A.pozostalo, zrodlo: st.ledger.ops.at(-1)?.zrodlo } : null;
+      }, { message: "the A spent by the second interaction" });
+      t.assert(/Używanie/.test(p.zrodlo ?? ""), "recorded as Używanie", p);
+      await t.screenshot("Gracz 1", "lalka — dobycie bez ataku");
+    });
+
+    await t.step("E4: Gracz 1 uses Szybkie nogi [B] — the use card carries the cost pill „Akcja Bonusowa [B]”", async () => {
+      const txt = await p1.eval(szybkieNogi);
+      t.assert(/Akcja Bonusowa \[B\]/.test(txt), "pill text", txt);
+      await t.screenshot("Gracz 1", "karta użycia — plakietka kosztu");
     });
   }
 };

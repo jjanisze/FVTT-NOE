@@ -28,6 +28,7 @@ import {
   oczekujace, ponowOczekujace
 } from "../combat/ekonomia.mjs";
 import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 import { zarejestrujEfektTuryWlasciciela } from "../combat/czas-efektu.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -71,17 +72,17 @@ async function _sygnal(actor, tytul, powody) {
  * @param {{zrodlo?: string, id?: string, cel?: string|null, sygnal?: boolean}} [o]
  * @returns {Promise<{poza?: boolean, oczekuje?: boolean, duplikat?: boolean, naruszenie?: boolean, powody?: string[]}|null>}
  */
-export async function zadeklaruj(actor, kind, { zrodlo = "?", id = null, cel = null, sygnal = true } = {}) {
+export async function zadeklaruj(actor, kind, { zrodlo = "?", id = null, cel = null, sygnal = true, tag = null } = {}) {
   if (!actor || !E.RODZAJE.includes(kind)) return null;
   const c = kombatant(actor);
   if (!c) return { poza: true };
-  const r = await zatwierdz(c, { ...(id ? { id } : {}), zrodlo, cel, koszt: { [kind]: 1 } });
+  const r = await zatwierdz(c, { ...(id ? { id } : {}), zrodlo, cel, koszt: { [kind]: 1 }, ...(tag ? { tag } : {}) });
   if (r.oczekuje) return { oczekuje: true, naruszenie: false, powody: [] };
   if (r.odmowa) return { odmowa: true, naruszenie: false, powody: [] };
   if (r.duplikat) return { duplikat: true, naruszenie: false, powody: [] };
   const powody = r.ostrz ?? [];
   if (sygnal) await _sygnal(actor, _tytul(actor, kind, zrodlo), powody);
-  return { naruszenie: powody.length > 0, powody };
+  return { naruszenie: powody.length > 0, powody, op: r.op ?? null };
 }
 
 /**
@@ -91,7 +92,7 @@ export async function zadeklaruj(actor, kind, { zrodlo = "?", id = null, cel = n
  * @param {Actor} actor
  * @param {{zrodlo?: string, cel?: string|null, tresc?: string, id?: string}} [o]
  */
-export async function akcja(actor, { zrodlo = "?", cel = null, tresc = "akcja", id = null, ile = 1 } = {}) {
+export async function akcja(actor, { zrodlo = "?", cel = null, tresc = "akcja", id = null, ile = 1, tag = null } = {}) {
   if (!actor) return null;
   const c = kombatant(actor);
   if (!c) return { poza: true };
@@ -101,7 +102,7 @@ export async function akcja(actor, { zrodlo = "?", cel = null, tresc = "akcja", 
   const wR = !ch.wlasna || uzbrojona;
   const z = wR ? E.zadanieWReakcji(l, ch, { zrodlo: `${zrodlo} (w Reakcji)`, cel, tresc })
     : { rodzaj: "akcja", zrodlo, koszt: { A: Math.max(1, Number(ile) || 1) }, ...(cel ? { cel } : {}) };
-  const r = await zatwierdz(c, { ...(id ? { id } : {}), ...z, chwila: ch });
+  const r = await zatwierdz(c, { ...(id ? { id } : {}), ...z, ...(tag ? { tag } : {}), chwila: ch });
   if (r?.oczekuje) return { oczekuje: true, naruszenie: false, powody: [], wR };
   if (r?.odmowa || r?.duplikat) return { ...r, wR };
   const powody = r?.ostrz ?? [];
@@ -115,13 +116,19 @@ export async function akcja(actor, { zrodlo = "?", cel = null, tresc = "akcja", 
  * @param {Actor} actor
  * @param {{zrodlo?: string, id?: string}} [o]
  */
-export async function interakcja(actor, { zrodlo = "?", id = null } = {}) {
+export async function interakcja(actor, { zrodlo = "?", id = null, tag = null } = {}) {
   const c = kombatant(actor);
   if (!c) return { poza: true };
   const l = ledger(c);
-  const p = E.pule(l, chwila(c, l), daneAktora(c.actor)).I;
-  if (p.pozostalo > 0 || p.zakaz) return zadeklaruj(actor, "I", { zrodlo, ...(id ? { id } : {}) });
-  return akcja(actor, { zrodlo: `${zrodlo} — Używanie (Darmowa interakcja już wykorzystana)`, cel: "uzywanie", ...(id ? { id } : {}) });
+  const ch = chwila(c, l);
+  // Druga siekierka z pary Siekierezady (s. 107): w tej samej czynności co pierwsza — zapis bez kosztu, żeby trzecia
+  // otworzyła nową parę.
+  if (tag && E.drugaZPary(l, ch, tag)) {
+    return zatwierdz(c, { ...(id ? { id } : {}), rodzaj: "akcja", zrodlo: `${zrodlo} — w tej samej interakcji (para)`, koszt: {}, tag, chwila: ch });
+  }
+  const p = E.pule(l, ch, daneAktora(c.actor)).I;
+  if (p.pozostalo > 0 || p.zakaz) return zadeklaruj(actor, "I", { zrodlo, tag, ...(id ? { id } : {}) });
+  return akcja(actor, { zrodlo: `${zrodlo} — Używanie (Darmowa interakcja już wykorzystana)`, cel: "uzywanie", tag, ...(id ? { id } : {}) });
 }
 
 /**
@@ -356,6 +363,39 @@ async function _onZnacznikRecznie(effect, options, zalozony) {
 /*  Natywne aktywności                           */
 /* -------------------------------------------- */
 
+/** Flaga karty użycia: koszt zapisanej operacji (§7.5) — `{op, koszt, cel, ogr, reakcja, zrodlo, ostrz}`. */
+const FLAGA_UZYCIA = "uzycieM8";
+
+/** Po zapisie kosztu: plakietka na oryginalnej karcie użycia (autor karty ją zmienia — jego wiadomość). */
+async function _plakietkaUzycia(message, r) {
+  const op = r?.op;
+  if (!message?.isOwner || !op || r.duplikat || r.oczekuje || r.odmowa || r.poza) return;
+  await message.setFlag(MODULE_ID, FLAGA_UZYCIA, {
+    op: op.id, koszt: op.koszt ?? {}, cel: op.cel ?? null, ogr: op.ogr ?? null, reakcja: !!op.reakcja, zrodlo: op.zrodlo,
+    ostrz: op.ostrz ?? []
+  });
+}
+
+function _onRenderUzycia(message, html) {
+  const d = message.getFlag(MODULE_ID, FLAGA_UZYCIA);
+  if (!d) return;
+  // Karta użycia dnd5e 6 składa wiersze plakietek po hakach renderowania — dokładamy po nich (jak Dozownik).
+  setTimeout(() => _wstawPlakietkeUzycia(html, d), 0);
+}
+
+function _wstawPlakietkeUzycia(html, d) {
+  if (html.querySelector?.(".neuro-uzycie-m8")) return;
+  const pills = cardPillList(html);
+  if (!pills) return;
+  const li = document.createElement("li");
+  li.className = `pill neuro-uzycie-m8${d.ostrz?.length ? " maroon" : ""}`;
+  const esc = t => foundry.utils.escapeHTML(String(t ?? ""));
+  li.innerHTML = `<i class="fa-solid fa-hourglass-half" inert></i> <span class="label">${esc(E.opisKosztuUzycia(d))}</span>`;
+  li.dataset.tooltip = [`Koszt w tej turze: ${E.opisKosztuUzycia(d)} — ${d.zrodlo}`, ...(d.ostrz ?? []),
+    "Pomyłka? [Skoryguj] w panelu Stan na karcie postaci."].map(esc).join("<br>");
+  pills.appendChild(li);
+}
+
 function _onPostUseActivity(activity, usageConfig, results) {
   const kind = AKTYWACJA_DO_AKCJI[activity?.activation?.type];
   const actor = activity?.actor;
@@ -369,8 +409,9 @@ function _onPostUseActivity(activity, usageConfig, results) {
   const zrodlo = activity.item?.name ?? activity.name ?? "?";
   // [A] poza własną turą (albo przy uzbrojonej Reakcji) to wykonanie wyczekanej akcji: R zamiast A (§6.4, T41).
   // B tak nie przechodzi — Wyczekanie nie zamienia zdolności wyłącznie B w dowolną R.
-  if (kind === "A") void akcja(actor, { zrodlo, cel, ...(id ? { id } : {}) });
-  else void zadeklaruj(actor, kind, { zrodlo, cel, ...(id ? { id } : {}) });
+  const zapis = kind === "A" ? akcja(actor, { zrodlo, cel, ...(id ? { id } : {}) })
+    : zadeklaruj(actor, kind, { zrodlo, cel, ...(id ? { id } : {}) });
+  void zapis.then(r => _plakietkaUzycia(results?.message, r)).catch(err => console.warn(`${MODULE_ID} | M8: plakietka użycia`, err));
 }
 
 /* -------------------------------------------- */
@@ -382,6 +423,7 @@ export function registerActions() {
   Hooks.on("createActiveEffect", (effect, options) => { void _onZnacznikRecznie(effect, options, true); });
   Hooks.on("deleteActiveEffect", (effect, options) => { void _onZnacznikRecznie(effect, options, false); });
   Hooks.on("dnd5e.postUseActivity", _onPostUseActivity);
+  Hooks.on("renderChatMessageHTML", _onRenderUzycia);
   console.log(`${MODULE_ID} | Warstwa akcji (ledger M8, znaczniki R/B) registered`);
 }
 

@@ -1214,6 +1214,22 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — plakietka kosztu na kartach użycia, Siekierezada w parze, wyjątki dobycia w e2e (E4, reszta) (2026-11-16)
+
+- **Plakietka kosztu na karcie użycia** (§7.5) — `actors/actions.mjs`: po zapisie kosztu natywnej aktywności (nie
+  ataku) autor karty dopisuje flagę `uzycieM8` (`{op, koszt, cel, ogr, reakcja, zrodlo, ostrz}`), a hak renderowania
+  dokłada plakietkę (`E.opisKosztuUzycia`: „Akcja [A]”, „Używanie [A] — Szybkie ręce”, „Reakcja [R]”, „w trwającej
+  Reakcji”), z ostrzeżeniami w dymku. Wstawiana po złożeniu wierszy karty przez dnd5e (`setTimeout`, jak Dozownik) —
+  synchroniczny dopisek w haku przepadał. `zadeklaruj` zwraca też operację.
+- **Siekierezada** (s. 107): druga siekierka dobyta w tym samym kontekście nie kosztuje drugiej [I] — znacznik `tag`
+  operacji ledgera (`zastosuj`), para `E.drugaZPary`, zapis bez kosztu w `interakcja`; trzecia otwiera nową parę. Wcześniej
+  linia lalki ją tylko nazywała, a ledger brał [I] i Używanie [A].
+- Opisy automatyki Pakowania („Mam pod ręką” — [I] zamiast Akcji), Siekierezady i Samuraja zaktualizowane do ledgera
+  M8 (bez „Darmowych Interakcji nikt nie liczy”); paczka `sztuczki` przebudowana w repo i piaskownicy.
+- Testy: Quench `atakowanie` 17/17 (Pakowanie z plecaka, para siekierek, trzecia płaci, plakietka [B] w czacie, opisy),
+  `sztuczki-walka` (rejestr Samuraja), `akcje`, `lalka`, `karty-czatu`; e2e `ruch` +4 kroki (runda 4: Pakowanie z
+  plecaka — [I]; klik w sztylet w pochwie — dobycie bez okna ataku, druga interakcja — Używanie [A]; plakietka [B]).
+
 ### M8 — skoki istot, Sportowiec, upadek po skoku (E3, reszta) (2026-11-15)
 
 - **Stały skok istoty** w generatorze Bestiariusza (`dev/bestiary/gen_bestiary.py`, `rule_skok_istoty`): cecha

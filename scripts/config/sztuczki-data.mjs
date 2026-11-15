@@ -485,11 +485,9 @@ export const SZTUCZKI = Object.freeze({
         + "zależnie od posiadania Sztuczki. Plakietka w widoku Ekwipunku.",
       where: "actors/bez-dna.mjs"
     }, {
-      what: "Mam pod ręką: Oporządzenie pokazuje wyciągnięcie z plecaka jako [I] na linii ruchu w walce.",
+      what: "Mam pod ręką: wyciągnięcie z plecaka w walce kosztuje Darmową interakcję [I] zamiast Akcji (ledger M8).",
       where: "actors/doll.mjs"
     }],
-    manual: "„Mam pod ręką [I]” jest tylko nazwane na linii ruchu Oporządzenia — ekonomii akcji moduł nie liczy "
-      + "(PLAN_paper_doll D7)."
   },
   pancerny: {
     label: "Pancerny",
@@ -681,12 +679,10 @@ export const SZTUCZKI = Object.freeze({
         where: "config/tt-rules.mjs"
       },
       {
-        what: "Dobycie: Oporządzenie pokazuje dobycie i schowanie takiej broni jako darmowe na linii ruchu w walce.",
+        what: "Dobycie: dobycie i schowanie takiej broni w walce nie kosztuje Darmowej interakcji (ledger M8).",
         where: "actors/doll.mjs"
       }
-    ],
-    manual: "Darmowe Interakcje nie są liczone (PLAN_paper_doll D7) — Dobycie jest tylko nazwane na linii "
-      + "ruchu Oporządzenia."
+    ]
   },
   siekierezada: {
     label: "Siekierezada",
@@ -697,7 +693,7 @@ export const SZTUCZKI = Object.freeze({
     category: "wrecz",
     legacyAbilityKeys: ["siekierezada"],
     auto: [{
-      what: "Podwójne dobycie: nazwane na linii ruchu Oporządzenia przy dobyciu siekierki.",
+      what: "Podwójne dobycie: druga siekierka dobyta w tej samej turze co pierwsza nie kosztuje drugiej [I] (para w ledgerze M8).",
       where: "actors/doll.mjs"
     }, {
       what: "Tańczący z siekierkami — TT +1 z siekierką z katalogu w każdej ręce (silnik TT).",

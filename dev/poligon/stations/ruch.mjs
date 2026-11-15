@@ -104,6 +104,8 @@ export default {
       "Tura Speca: Szybkie ręce, potem dwie akcje przedmiotów."),
     p("berserk", "Akcje", "Berserk kończy się po 10. własnej turze (nie na początku 11.), karta zmęczenia; do końca następnej tury A/B/R/I przekreślone, ruch zostaje (D24)",
       "Tura Gladiatora: Berserk; MG ustawia rundę 10 i kończy turę Gladiatora."),
+    p("dobycie-plakietka", "Akcje", "Oporządzenie w walce: klik w broń w kaburze — dobycie bez okna ataku, [I] 0/1; druga taka czynność — Używanie [A]; z plecaka — Akcja (z Pakowaniem — [I]; Siekierezada: dwie siekierki w jednej [I]). Karta użycia medpaka albo zdolności [B] ma plakietkę „Używanie [A]” / „Akcja Bonusowa [B]” z dymkiem (E4)",
+      "Tura Twardziela: B 93R do kabury (Oporządzenie), klik w nią; schowaj jeszcze raz; Spec: medpak z Szybkimi rękami — plakietka „— Szybkie ręce”."),
     p("hud", "Korekty", "Znacznik „Reakcja zużyta” zdjęty z HUD-u przez MG zwalnia R jako korekta; historia wydatku zostaje w dymku",
       "Gracz 1 zużywa R; MG zdejmuje znacznik w HUD żetonu."),
     p("slowna", "Korekty", "Akcja tylko słowna: A zostaje 1/1, koniec tury bez kary i bez pytań; [Skoryguj] A +1 zapisuje ją, jeśli stół chce (T42)",

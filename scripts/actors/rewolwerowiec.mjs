@@ -8,8 +8,8 @@
  *
  * Klauzule:
  *   • Niezawodny        — `weapons/jams.mjs` pyta `handgunPerkFor()` przed testem zacięcia.
- *   • Dobywanie         — lalka (`actors/doll.mjs`, `costContext`) pokazuje dobycie/schowanie jako
- *                         darmowe na linii ruchu; Darmowych Interakcji nikt nie liczy (D7).
+ *   • Dobywanie         — lalka (`actors/doll.mjs`, `costContext`): dobycie/schowanie darmowe na linii ruchu
+ *                         i w ledgerze tury M8 (bez Darmowej interakcji).
  *   • Jednoręki         — `combat/grip.mjs`: strzał jedną ręką bez Utrudnienia; rewolwer (pistolet)
  *                         liczy się jako lekki przy ataku drugą ręką.
  *   • Szybkoładowacz    — karta przelania szybkoładowarki zaznacza brak wolnej ręki (`magazine.mjs`).

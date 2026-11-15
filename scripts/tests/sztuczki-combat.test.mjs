@@ -413,9 +413,10 @@ export function registerSztuczkiCombatTests(quench) {
         await waitFor(zaslona, { label: "Zasłona wraca" });
       });
 
-      it("rejestr automatyki mówi `partial`: Dobycie jest tylko nazwane, Darmowych Interakcji nikt nie liczy", function () {
+      it("rejestr automatyki: Dobycie bez Darmowej interakcji liczy ledger M8 — bez części ręcznej", function () {
         expect(SZTUCZKI.samuraj.auto).to.have.lengthOf(4);
-        expect(SZTUCZKI.samuraj.manual).to.be.a("string").and.not.be.empty;
+        expect(SZTUCZKI.samuraj.auto.at(-1).what).to.match(/nie kosztuje Darmowej interakcji/);
+        expect(SZTUCZKI.samuraj.manual ?? null).to.equal(null);
       });
     });
   }, { displayName: "Neuroshima: Sztuczki — reguły walki" });

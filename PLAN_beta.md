@@ -579,7 +579,7 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
 > Skok Gladiatora), E5 (Pomaganie, Wyczekanie, Reakcja, ochrona Biegania w R), E6 (instancje Atakowania, „Sposób
 > ataku”, koszt przy rzucie, krótka seria jako osobna Akcja, manewry w slocie, Nożownik bez celu, korekta próby z karty),
 > E8 (panel gotowości z zegarem), E7 (panel na karcie, skróty i szablony paska z paletami Ruch/Więcej, trwałe usunięcia
-> z paska) oraz część E4 (Zryw, Szybkie ręce, zmęczenie po Berserku, koszty lalki). Zostają: reszta E4–E5, E7–E8,
+> z paska) oraz E4 (Zryw, Szybkie ręce, zmęczenie po Berserku, koszty lalki, plakietki kosztu na kartach użycia). Zostają: reszta E5, E7–E8,
 > migracja M4 i odrębny krok migracji światów na koniec.
 > Szczegóły i lista „co zostaje”: [§13 planu](PLAN_m8_ruch_i_ekonomia_akcji.md#progress).
 

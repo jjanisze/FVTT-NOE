@@ -677,13 +677,13 @@ function _moveLines(actor, moves, options) {
     if (!item) continue;
     const cost = moveCost(m, costContext(actor, item, m, options));
     const notes = [...cost.notes];
-    if (item.name.match(/siekier/i) && tierOf(m.from) === "stowed" && groupOf(m.to) === "hand"
-      && ABILITY_KEYS.SIEKIEREZADA && hasAbility(actor, ABILITY_KEYS.SIEKIEREZADA)) {
-      notes.push("Podwójne dobycie: druga siekierka w tej samej [I]");
-    }
+    // Siekierezada (s. 107): dwie siekierki w jednej [I] — para liczona w ledgerze (`interakcja`, tag).
+    const para = cost.kind === "interaction" && /siekier/i.test(item.name) && tierOf(m.from) === "stowed" && groupOf(m.to) === "hand"
+      && ABILITY_KEYS.SIEKIEREZADA && hasAbility(actor, ABILITY_KEYS.SIEKIEREZADA);
+    if (para) notes.push("Podwójne dobycie: druga siekierka w tej samej [I]");
     lines.push({
       item: item.name, img: item.img, from: _placeText(m.from), to: _placeText(m.to),
-      cost: cost.label, why: cost.why, notes, displaced: !!m.displaced, kind: cost.kind, actions: cost.actions,
+      cost: cost.label, why: cost.why, notes, displaced: !!m.displaced, kind: cost.kind, actions: cost.actions, ...(para ? { tag: "siekierezada" } : {}),
       uzywanie: m.from === "pack" && !["body", "head", "arms", "legs"].includes(groupOf(m.to) ?? "")
     });
   }
@@ -700,7 +700,7 @@ function _placeText(where) {
 async function _zaplac(actor, lines) {
   for (const l of lines) {
     const zrodlo = `${l.item}: ${l.from} → ${l.to}`;
-    if (l.kind === "interaction") await interakcja(actor, { zrodlo });
+    if (l.kind === "interaction") await interakcja(actor, { zrodlo, ...(l.tag ? { tag: l.tag } : {}) });
     else if (l.kind === "action" && l.actions > 0) {
       await akcja(actor, { zrodlo: l.actions > 1 ? `${zrodlo} (${l.actions} Akcje)` : zrodlo, ile: l.actions, ...(l.uzywanie ? { cel: "uzywanie" } : {}) });
     }

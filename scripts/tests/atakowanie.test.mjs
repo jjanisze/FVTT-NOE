@@ -258,6 +258,79 @@ export function registerAtakowanieTests(quench) {
         }
       });
 
+      it("E4: Pakowanie (Mam pod ręką) — z plecaka [I], nie Akcja; Siekierezada — dwie siekierki w jednej [I], trzecia płaci", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Pakowanie M8` });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Obok Pakowania M8` });
+        await pc.createEmbeddedDocuments("Item", [sztuczkaItem("pakowanie", SZTUCZKI.pakowanie.label), sztuczkaItem("siekierezada", SZTUCZKI.siekierezada.label)]);
+        const siek = bronie.find(i => i.getFlag(MODULE_ID, "weaponId") === "siekierka");
+        const sztylet = bronie.find(i => i.getFlag(MODULE_ID, "weaponId") === "sztylet");
+        if (!siek || !sztylet) this.skip();
+        const [s1, s2, s3] = await pc.createEmbeddedDocuments("Item", [siek, siek, siek].map(d => game.items.fromCompendium(d)));
+        const [noz] = await pc.createEmbeddedDocuments("Item", [game.items.fromCompendium(sztylet)]);
+        const lalka = game.neuroshima.lalka;
+        expect(await lalka.place(pc, pc.items.get(s1.id), "melee.0", { quiet: true }), "pierwsza w pochwie").to.equal(true);
+        expect(await lalka.place(pc, pc.items.get(s2.id), "melee.1", { quiet: true }), "druga w pochwie").to.equal(true);
+        await lalka.place(pc, pc.items.get(s3.id), "pack", { quiet: true });
+        await lalka.place(pc, pc.items.get(noz.id), "pack", { quiet: true });
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-pakowanie" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          await waitFor(() => ledger(kombatant(tok)).tury.length > 0, { label: "tura" });
+          // Siekierezada: dwie siekierki z pochew — jedna [I].
+          await lalka.place(pc, pc.items.get(s1.id), "hand.0");
+          await waitFor(() => stan(tok).pule.I.wydane === 1, { label: "pierwsza siekierka = [I]" });
+          await lalka.place(pc, pc.items.get(s2.id), "hand.1");
+          await waitFor(() => stan(tok).ledger.ops.filter(o => o.tag === "siekierezada").length === 2, { label: "druga siekierka w parze" });
+          expect([stan(tok).pule.I.wydane, stan(tok).pule.A.wydane], "druga bez kosztu").to.deep.equal([1, 0]);
+          expect(stan(tok).ledger.ops.at(-1).zrodlo).to.match(/w tej samej interakcji/);
+          // Ręce wolne (schowanie — Używanie, bo [I] już zużyta), potem Pakowanie: sztylet z plecaka — interakcja, nie Akcja.
+          await lalka.place(pc, pc.items.get(s1.id), "melee.0");
+          await lalka.place(pc, pc.items.get(s2.id), "melee.1");
+          await waitFor(() => stan(tok).ledger.ops.length >= 4, { label: "schowania" });
+          const a0 = stan(tok).pule.A.wydane;
+          await lalka.place(pc, pc.items.get(noz.id), "hand.0");
+          await waitFor(() => stan(tok).ledger.ops.some(o => /Sztylet|sztylet/.test(o.zrodlo) && /plecak/.test(o.zrodlo)), { label: "sztylet z plecaka" });
+          const op = stan(tok).ledger.ops.findLast(o => /plecak/.test(o.zrodlo));
+          expect(op.zrodlo, "Mam pod ręką — jak interakcja (zużyta → Używanie), nie zwykła Akcja wyciągnięcia").to.match(/Używanie \(Darmowa interakcja już wykorzystana\)/);
+          expect(stan(tok).pule.A.wydane).to.equal(a0 + 1);
+          expect(E.drugaZPary(stan(tok).ledger, stan(tok).chwila), "para zamknięta — trzecia płaci").to.equal(false);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
+      it("E4: plakietka kosztu na karcie użycia aktywności [B] — „Akcja Bonusowa [B]”; opisy kosztu użycia", async function () {
+        expect(E.opisKosztuUzycia({ koszt: { A: 1 }, cel: "uzywanie" })).to.equal("Używanie [A]");
+        expect(E.opisKosztuUzycia({ koszt: { A: 1 }, cel: "uzywanie", ogr: "uzywanie" })).to.equal("Używanie [A] — Szybkie ręce");
+        expect(E.opisKosztuUzycia({ koszt: { R: 1 } })).to.equal("Reakcja [R]");
+        expect(E.opisKosztuUzycia({ koszt: {}, reakcja: true })).to.equal("w trwającej Reakcji");
+        const doc = (await game.packs.get(`${MODULE_ID}.zdolnosci-klasowe`)?.getDocuments() ?? []).find(d => d.getFlag(MODULE_ID, "abilityId") === "szybkie-nogi");
+        if (!doc?.system?.activities?.size) this.skip();
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Plakietka M8` });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Obok plakietki M8` });
+        const [it] = await pc.createEmbeddedDocuments("Item", [game.items.fromCompendium(doc)]);
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-plakietka" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          await waitFor(() => ledger(kombatant(tok)).tury.length > 0, { label: "tura" });
+          const wynik = await pc.items.get(it.id).system.activities.contents[0].use({}, { configure: false });
+          const msg = game.messages.get(wynik?.message?.id ?? "") ?? game.messages.contents.at(-1);
+          const d = await waitFor(() => msg?.getFlag(MODULE_ID, "uzycieM8"), { label: "flaga kosztu na karcie" });
+          expect(d.koszt).to.deep.equal({ B: 1 });
+          expect(d.op).to.equal(`uzycie-${msg.id}`);
+          // Plakietkę dokłada hak renderowania wiadomości w czacie (`renderChatMessageHTML`), nie samo `renderHTML`.
+          const pill = await waitFor(() => document.querySelector(`#chat [data-message-id="${msg.id}"] .neuro-uzycie-m8`)
+            ?? ui.chat?.element?.querySelector?.(`[data-message-id="${msg.id}"] .neuro-uzycie-m8`), { label: "plakietka w czacie" });
+          expect(pill.textContent).to.match(/Akcja Bonusowa \[B\]/);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
       it("Nożownik wybrany w oknie: TK tej próby wobec celu bez zapowiedzi na turę; bez celu — krytyk obrażeń z tej karty", async function () {
         const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Nożownik M8` });
         const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Cel noża M8` });

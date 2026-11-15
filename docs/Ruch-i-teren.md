@@ -37,7 +37,13 @@ pomocą, nie sędzią.
   zapisuje reakcję zagraną bez kliknięć.
 - **Oporządzenie w walce** liczy się samo: dobycie albo schowanie broni, podniesienie — Darmowa interakcja [I]; druga
   taka czynność w turze — Używanie [A] (pokrywa je też Szybkie ręce); wyjęcie z plecaka — Akcja; pancerz — tyle Akcji,
-  ile trwa zakładanie. Wytrącenie i inne mimowolne przenosiny nic nie kosztują.
+  ile trwa zakładanie. Wytrącenie i inne mimowolne przenosiny nic nie kosztują. Kliknięcie broni w kaburze albo
+  pochwie dobywa ją i na tym kończy (bez okna ataku). Wyjątki ze zdolności: **Pakowanie** (Mam pod ręką) — wyjęcie z
+  plecaka to [I], nie Akcja; **Siekierezada** — dwie siekierki w jednej [I] (trzecia znowu kosztuje); **Samuraj**,
+  **Rewolwerowiec/Pistolero** — dobycie i schowanie swojej broni bez [I].
+- **Karta użycia** przedmiotu albo zdolności z kosztem (medpak, [B] zdolności) ma plakietkę z tym, co zapłacono:
+  „Akcja [A]”, „Używanie [A]” (z dopiskiem Szybkich rąk, gdy z ich puli), „Akcja Bonusowa [B]”, „Reakcja [R]” albo „w
+  trwającej Reakcji”. Ataki mają swoją plakietkę „Sposób ataku”.
 - **Przedmiot użyty poza swoją turą** (medpak, granat) to wykonanie wyczekanej akcji — liczy się Reakcja, nie Akcja.
   Reakcja kończy się [Zakończ reakcję] albo najpóźniej z końcem tury, w której się wydarzyła.
 - **Zryw** pyta najpierw: Akcja czy Akcja Bonusowa — dopiero wybór zużywa użycie. Poza własną turą karta ostrzega

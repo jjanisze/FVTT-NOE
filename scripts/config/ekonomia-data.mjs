@@ -412,6 +412,8 @@ export function zastosuj(ledger, chwila, z, aktor = {}) {
   }
   if (z.cel) op.cel = z.cel;
   if (z.deklaracja) op.deklaracja = String(z.deklaracja);
+  // Znacznik rodzaju czynności (np. dobycie siekierki — para Siekierezady), bez wpływu na pule.
+  if (z.tag) op.tag = String(z.tag);
   if (Number(z.ruch) > 0) op.ruch = _zaokr(z.ruch);
   if (op.rodzaj === "korektaRuchu") op.ileRuchu = _zaokr(z.ileRuchu);
   if (z.powod) op.powod = String(z.powod);
@@ -522,6 +524,35 @@ export function cofnijRuchy(ledger, wHistorii, zt) {
 /* -------------------------------------------- */
 /*  Opisy                                        */
 /* -------------------------------------------- */
+
+/**
+ * Plakietka kosztu na karcie użycia przedmiotu albo zdolności (§7.5: oryginalna wiadomość pokazuje koszt wykonanej
+ * akcji; ataki mają własną — `combat/atakowanie.mjs`). Z zapisanej operacji: „Akcja [A]”, „Używanie [A] — Szybkie
+ * ręce” (ograniczony grant), „Reakcja [R]”, „w trwającej Reakcji” (bez drugiej R).
+ * @param {{koszt?: Record<string, number>, cel?: string|null, ogr?: string|null, reakcja?: boolean}} d
+ *   `cel` — zamiar operacji (Używanie przedmiotu, s. 31), `ogr` — pula, z której faktycznie zapłacono
+ */
+export function opisKosztuUzycia(d) {
+  const k = Object.entries(d?.koszt ?? {}).filter(([, n]) => n);
+  if (!k.length) return d?.reakcja ? "w trwającej Reakcji" : "bez kosztu";
+  return k.map(([r, n]) => {
+    const nazwa = r === "A" && (d?.cel === "uzywanie" || d?.ogr === "uzywanie") ? "Używanie" : NAZWY[r] ?? r;
+    return `${nazwa} [${n === 1 ? r : `${n}${r}`}]`;
+  }).join(" + ") + (d?.ogr === "uzywanie" ? " — Szybkie ręce" : "");
+}
+
+/**
+ * Siekierezada (s. 107): „wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji” — dobycie siekierki, które
+ * dopełnia parę: w tym kontekście (tura albo reakcja) nieparzysta liczba zapisanych dobyć siekierek. Druga z pary
+ * nic nie kosztuje (należy do tej samej [I] albo Używania [A]), trzecia otwiera nową parę.
+ * @param {object} l
+ * @param {Chwila} ch
+ * @param {string} [tag]
+ */
+export function drugaZPary(l, ch, tag = "siekierezada") {
+  const ops = (l?.ops ?? []).filter(o => o.tag === tag && (ch.reakcja ? o.reakcja === ch.reakcja : o.cykl === ch.cykl && !o.reakcja));
+  return ops.length % 2 === 1;
+}
 
 /** „1/1”, „0/1”, „−1/1” — pozostałe/pojemność (D6). */
 export function licznik(p) {
