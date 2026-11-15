@@ -125,4 +125,4 @@ The JSON keeps preliminary/invalid probes separate from verified observations. T
 
 Removed the two audit PCs, scene, player account, six generated macros and 28 audit messages. The audit combat was removed; no audit actors, scene or user remained. The existing GM's viewed scene was unchanged. The campaign was not used for tests.
 
-Follow-up implementation: [HANDOFF_movement_hotbar.md](HANDOFF_movement_hotbar.md). This audit records current behavior; it does not implement the proposed action catalogue or movement budget.
+Follow-up implementation: [PLAN_m8_ruch_i_ekonomia_akcji.md](PLAN_m8_ruch_i_ekonomia_akcji.md). This audit records behavior at its dated inspection; it does not implement the action catalogue or movement budget.

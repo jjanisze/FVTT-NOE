@@ -1,5 +1,11 @@
 # Movement, innate actions and the combat hotbar
 
+> **Historical document. Current implementation handoff (2026-11-15):
+> [PLAN_m8_ruch_i_ekonomia_akcji.md](PLAN_m8_ruch_i_ekonomia_akcji.md).**
+> The current plan includes approved movement and full action accounting, resolved RAW/WKK interpretations,
+> manual fallbacks and delivery gates. This document preserves the original 2026-10-25 discussion; its exclusions
+> and estimates do not restrict the subsequently approved M8 scope.
+
 Date: 2026-10-25. Status: implementation handoff / design draft. **No movement implementation has been delivered by this handoff.** Baseline inspected: Foundry 14.369, dnd5e 6.0.6.
 
 The subsequent [verified shared-action audit](AUDIT_shared_actions.md) is the current evidence for sheet/hotbar access. In particular, skill drags are **not native hotbar macros**, Bieganie/Unikanie live in a combat-only sidebar row, and weapon activities require an expanded row before dragging. Use that audit and its runtime observations rather than assuming every visible or draggable element is an executable action shortcut.

@@ -1,5 +1,8 @@
 # PLAN — M6: Biegłości profesji, broń improwizowana, obiekty i woda
 
+> Aktualny kontrakt integracji ruchu, skoków i kosztów: [plan M8](PLAN_m8_ruch_i_ekonomia_akcji.md).
+> M6 zachowuje rozstrzygnięcia wody/wspinaczki/upadków; starszy handoff nie nadpisuje nowych ustaleń M8.
+
 > Status: **ZREALIZOWANY** (2026-10-26 → 2026-10-27, E0–E8; bez wydania — notatki etapów w §11). Decyzje MG D1–D12 z dwóch rund pytań (§4); ustalenia U1–U24 przeszły
 > weto MG 2026-10-26 (kolumna „Decyzja MG” w §6, poprawki w §5); P1–P8 rozstrzygnięte tego samego dnia (§7); Łyżeczka
 > — RAW z wyjaśnieniem autora NOE, wariant WKK wycofany (§5.2.1, 2026-10-27). Spiki E0 — §11. Wywołanie: `PLAN_beta.md` §0 krok 5 i §3 M6. **Rozmiar: L** — `PLAN_beta.md` zakładał

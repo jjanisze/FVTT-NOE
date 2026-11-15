@@ -1,5 +1,8 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
+> Integracja ze wspólnym ruchem i ekonomią akcji: [aktualny plan M8](PLAN_m8_ruch_i_ekonomia_akcji.md).
+> M4 zachowuje pojazdy/pościgi; przejęcie zwykłego budżetu wierzchowca wymaga jednoczesnego wyłączenia starej ścieżki.
+
 > Status (2026-11-01): **M4 ZROBIONE** — część 1 i 1b (E0–E11), grafika (14 pojazdów, 7 wnętrz, 14 wraków, 2 wieże),
 > część 2 (P1–P6), część 3 — wierzchowce (W0–W5) i całe przejście końcowe (§0.1: S0–S1, K1–K3, KT, P5a–P5e, P6,
 > W0–W5); przebieg i bramka — §11. Do weta MG na Poligonie: Garaż, Pościg (Start–meta), Stajnia (§10).

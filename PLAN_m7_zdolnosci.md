@@ -1,5 +1,8 @@
 # PLAN — M7: Automatyka zdolności — poziomy 1–3, Sztuczki i Pochodzenia drużyny
 
+> Dalsza implementacja ruchu i wspólnej ekonomii akcji: [aktualny plan M8](PLAN_m8_ruch_i_ekonomia_akcji.md).
+> Obejmuje zatwierdzone A/B/R/I, źródła ataków i migrację writerów M7; starsze odwołania do handoffu są historyczne.
+
 > Status: **ZAMKNIĘTY 2026-11-01** (projekt 2026-10-25; start 2026-10-31 — MG: „misja na najbliższe dni”); E0–E8 w §8,
 > pregeni od nowa (D17) — zrobione 2026-11-01 (§8); dogrywka 8a (PLAN_beta §0) — 2026-11-02. Decyzje MG D1–D19
 > (§5.1); ustalenia U1–U30 — weto w rundach wg etapów: runda 1 (2026-10-31) zamknęła U1–U8 i P1–P7, reszta przy swoich
