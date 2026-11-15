@@ -581,7 +581,10 @@ export const DEKLARACJE = Object.freeze({
   unikanie: Object.freeze({ id: "unikanie", nazwa: "Unikanie", koszt: { A: 1 }, status: "dodging", strona: "s. 30" }),
   odstapienie: Object.freeze({ id: "odstapienie", nazwa: "Odstąpienie", koszt: { A: 1 }, strona: "s. 30" }),
   padnij: Object.freeze({ id: "padnij", nazwa: "Padnij", koszt: {}, ruch: "reszta", status: "prone", strona: "s. 26", tylkoWlasna: true }),
-  powstan: Object.freeze({ id: "powstan", nazwa: "Powstań", koszt: {}, ruch: "polowa", zdejmij: "prone", strona: "s. 37" })
+  powstan: Object.freeze({ id: "powstan", nazwa: "Powstań", koszt: {}, ruch: "polowa", zdejmij: "prone", strona: "s. 37" }),
+  // Grenadier, Stalowe jaja [R] (s. 103): podbiegnięcie do granatu w 4,5 m bez ataków okazyjnych, podniesienie i rzut —
+  // jedna drukowana reakcja (§9): R raz, stały grant 4,5 m tylko tej reakcji (bez świeżej bazy, D30), bez osobnych I/A.
+  staloweJaja: Object.freeze({ id: "staloweJaja", nazwa: "Stalowe jaja", koszt: { R: 1 }, grantStaly: 4.5, strona: "s. 103" })
 });
 
 /**
@@ -611,7 +614,10 @@ export function zadanieDeklaracji(id, l, ch, aktor, { tryb = "walk", koszt = nul
     if (p) z.wykonaj = p.id;
   }
   if (def.bezPowalenia && stany.has("prone")) ostrz.push(`${def.nazwa}: nie przy Powaleniu (${def.strona}).`);
-  if (def.grant) {
+  if (def.grantStaly) {
+    // Stała długość z opisu zdolności — nie zależy od Szybkości (D14 nie dotyczy).
+    z.grant = { typ: "ruch", ile: def.grantStaly, tryb: "walk", deklaracja: id };
+  } else if (def.grant) {
     const g = grantDeklaracji(def.grant, aktor.szybkosci, tryb);
     if (g) z.grant = { typ: "ruch", ile: g.ile, tryb: g.tryb, deklaracja: id, szybkosc: Number(aktor.szybkosci?.[g.tryb]) || 0 };
     else ostrz.push(`${def.nazwa}: brak Szybkości dla wybranego trybu.`);

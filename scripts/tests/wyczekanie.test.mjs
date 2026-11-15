@@ -151,6 +151,58 @@ export function registerWyczekanieTests(quench) {
         }
       });
 
+      it("T12: zagnieżdżona reakcja przeciwnika (R i ruch w jego ledgerze) nie kończy reakcji biegnącego ani jego ochrony", async function () {
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Na turze T12`, ...szybki });
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Biegnie T12`, ...szybki });
+        const wrog = await scratchActor({ name: `${SCRATCH_PREFIX} Wróg T12`, ...szybki });
+        const w = await walkaTestowa([inny, pc, wrog], { kto: inny, nazwa: "m8-r-zagn" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          const tw = w.zetony.find(t => t.actorId === wrog.id);
+          await deklaruj(pc, "bieganie");
+          await waitFor(() => ochronaBieguWReakcji(tok), { label: "ochrona w reakcji" });
+          const rId = stan(tok).chwila.reakcja;
+          // Przeciwnik reaguje w trakcie (atak okazyjny słownie, potem Przyspieszenie w tej samej reakcji).
+          await reaguj(wrog, { slowna: false, zrodlo: "Atak okazyjny (test)" });
+          await deklaruj(wrog, "przyspieszenie");
+          await waitFor(() => stan(tw).pule.R.wydane === 1, { label: "R przeciwnika" });
+          expect(stan(tok).chwila.reakcja, "reakcja biegnącego trwa").to.equal(rId);
+          expect(ochronaBieguWReakcji(tok), "ochrona biegnącego trwa").to.equal(true);
+          expect(stan(tok).ruch.pojemnosc, "jego ruch — tylko świeże 18 m tej reakcji").to.equal(18);
+          expect(stan(tok).pule.R.wydane, "bez drugiej R biegnącego").to.equal(1);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
+      it("Grenadier, Stalowe jaja [R] (s. 103): poza turą R raz, 4,5 m tylko tej reakcji, bez A/I; karta z resztą", async function () {
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Rzucający T5`, ...szybki });
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Grenadier M8`, ...szybki });
+        await pc.createEmbeddedDocuments("Item", [{ name: "Grenadier", type: "feat", flags: { [MODULE_ID]: { sztuczka: "grenadier" } } }]);
+        const w = await walkaTestowa([inny, pc], { kto: inny, nazwa: "m8-jaja" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          const K = await import("../actors/ekonomia-karta.mjs");
+          expect(K.opcjePalety(pc, "wiecej").map(o => o.id), "paleta Więcej Grenadiera").to.include("jaja");
+          const przed = game.messages.size;
+          await K.staloweJaja(pc);
+          const s = await waitFor(() => (stan(tok).pule.R.wydane === 1 ? stan(tok) : null), { label: "R zapisana" });
+          expect(s.chwila.reakcja, "otwarta reakcja").to.be.a("string");
+          expect([s.ruch.pojemnosc, s.ruch.baza], "4,5 m z chodu, bez świeżej bazy 9 m").to.deep.equal([4.5, "walk"]);
+          expect([s.pule.A.wydane, s.pule.I.wydane], "bez osobnych A/I").to.deep.equal([0, 0]);
+          const karta = game.messages.contents.slice(przed).find(m => /Stalowe jaja/.test(m.content ?? ""));
+          expect(karta?.content ?? "").to.match(/bez prowokowania ataków okazyjnych/);
+          const bez = await scratchActor({ name: `${SCRATCH_PREFIX} Bez Grenadiera M8`, ...szybki });
+          expect(K.opcjePalety(bez, "wiecej").map(o => o.id), "bez Sztuczki — bez opcji").to.not.include("jaja");
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
       it("T41/§6.4: akcja przedmiotu we własnej turze — A, poza nią — R; Wyczekanie + Reaguj → przygotowanie wykonane raz", async function () {
         const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Przedmiot M8`, ...szybki });
         const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Drugi przedmiot M8`, ...szybki });

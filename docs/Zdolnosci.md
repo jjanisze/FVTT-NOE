@@ -46,7 +46,9 @@ przed ruchem i atakiem) — Szybkość 0 do początku twojej tury i Ułatwienie 
 serią; **Stabilizacja** zdejmuje Utrudnienie za strzał z jadącego pojazdu albo wierzchowca.
 
 **Miotacz** dokłada +2 do ataku bronią rzucaną (siekierka, oszczep, nóż do rzucania, bolas…) i podwaja jej zasięgi;
-**Siekierezada** podwaja zasięgi rzutu siekierką; **Grenadier** podwaja zasięg rzutu granatem. **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
+**Siekierezada** podwaja zasięgi rzutu siekierką; **Grenadier** podwaja zasięg rzutu granatem, a **Stalowe jaja** są w
+oknie Reaguj i palecie Więcej: jedna Reakcja, 4,5 m ruchu tylko na podbiegnięcie do granatu, bez osobnych [I]/[A], karta
+z resztą (bez ataków okazyjnych, rzut ×2; wybuch przenosi MG). **Ukryty cel** sprawia, że osłona ½ i ¾ nie podnosi TT celu — pełna
 osłona dalej blokuje.
 
 **Celuję w…** (Przycelowanie Twardziela i Sztuczki): pole w oknie ataku. Część ciała podnosi TT celu; przy trafieniu pod

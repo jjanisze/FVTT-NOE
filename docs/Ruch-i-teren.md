@@ -25,7 +25,9 @@ pomocą, nie sędzią.
   (Bieganie: dwukrotności, tylko na nogach) z chwili wykonania i stan na żetonie. **Padnij** zjada resztę ruchu,
   **Powstań** kosztuje połowę Szybkości.
 - **Poza swoją turą** te same przyciski działają jako wykonanie przygotowanej akcji w **Reakcji**: R zamiast A, świeży
-  ruch tylko z tej akcji (Bieganie przy Szybkości 9 — 18 m). Gdy ruch się urwie, **[Zakończ reakcję]**.
+  ruch tylko z tej akcji (Bieganie przy Szybkości 9 — 18 m). Gdy ruch się urwie, **[Zakończ reakcję]**. Reakcja
+  przeciwnika w trakcie (np. atak okazyjny) jest jego własną — twojej reakcji ani ochrony Biegania nie kończy.
+  **Grenadier — Stalowe jaja** (Reaguj albo paleta Więcej): R i 4,5 m tylko na podbiegnięcie do granatu.
 - **Pomóż** (s. 30): w teście — wybierasz sojusznika i swoją biegłość, robisz test ST 10; sukces daje mu Ułatwienie
   w następnym teście tej samej umiejętności (najpóźniej do początku twojej następnej tury), porażka — Akcja przepada.
   W ataku — wyceluj we wroga do 1,5 m od siebie: sojusznik ma Ułatwienie w następnym ataku na niego. Albo słownie —

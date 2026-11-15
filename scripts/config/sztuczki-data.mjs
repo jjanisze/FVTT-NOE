@@ -291,9 +291,10 @@ export const SZTUCZKI = Object.freeze({
       + "bez ataków okazyjnych; dwukrotny zasięg rzutu granatem.",
     category: "granaty",
     auto: [{ what: "Prawidłowy rzut — zasięg rzutu granatem ×2 (wybór punktu i karta; mina się kładzie, bez zmian).",
-      where: "actors/grenade-inventory.mjs" }],
-    manual: "Stalowe jaja [R] — podbiegnięcie do granatu i rzut w Reakcji bez ataków okazyjnych: moduł nie liczy Reakcji "
-      + "ani ruchu w turze (M8)."
+      where: "actors/grenade-inventory.mjs" },
+    { what: "Stalowe jaja [R] — w oknie Reaguj i palecie Więcej: jedna Reakcja z 4,5 m ruchu tylko na podbiegnięcie, bez osobnych [I]/[A]; karta z resztą.",
+      where: "actors/ekonomia-karta.mjs" }],
+    manual: "Czy granat upadł w 4,5 m, ataki okazyjne (moduł ich nie śledzi) i przeniesienie wybuchu — MG."
   },
   gunfight: {
     label: "Gunfight",

@@ -1214,6 +1214,20 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — Stalowe jaja i zagnieżdżona reakcja (E5, reszta) (2026-11-16)
+
+- **Grenadier, Stalowe jaja [R]** (s. 103) — deklaracja `staloweJaja` (`DEKLARACJE`, `grantStaly: 4.5`): R raz (poza
+  turą z nowym `reakcjaStart`, w otwartej reakcji bez akcji — do niej), stały grant 4,5 m tylko tej reakcji (bez świeżej
+  bazy, D30; bez D14 — długość nie zależy od Szybkości), bez osobnych [I]/[A]. `staloweJaja(actor)` w
+  `actors/ekonomia-karta.mjs`: przycisk w oknie Reaguj i w palecie Więcej (posiadacze Sztuczki), karta z resztą (bez
+  ataków okazyjnych — moduł ich nie śledzi; rzut ×2 z Prawidłowym rzutem; wybuch przenosi MG — bez wymaganej strefy
+  granatu na mapie, §9). Opis automatyki Grenadiera i paczka `sztuczki` zaktualizowane.
+- **T12 — zagnieżdżona reakcja przeciwnika**: R i ruch przeciwnika w jego ledgerze nie zamykają reakcji biegnącego
+  ani jego ochrony; jego ruch zostaje świeżym 18 m tej reakcji, bez drugiej R (test).
+- Testy: Quench `wyczekanie` 13/13 (Stalowe jaja: R, 4,5 m z chodu, bez A/I, karta, paleta; T12 zagnieżdżona),
+  `ekonomia`, `sztuczki-dane`, `pasek-m8`, `akcje`. Poligon `ruch`: persona `m7-lyzeczka` (Grenadier, MG), próba
+  `stalowe-jaja`.
+
 ### M8 — plakietka kosztu na kartach użycia, Siekierezada w parze, wyjątki dobycia w e2e (E4, reszta) (2026-11-16)
 
 - **Plakietka kosztu na karcie użycia** (§7.5) — `actors/actions.mjs`: po zapisie kosztu natywnej aktywności (nie

@@ -18,7 +18,7 @@ const pole = (c, r, w = 1, h = 1) => ({ type: "rectangle", x: c * G, y: r * G, w
 export default {
   id: "ruch", name: "Ruch", prio: "P1", icon: "fa-solid fa-person-running",
   opis: "Ekonomia tury M8: Twardziel 1 (Gracz 1), Kowboj ze Zrywem (Gracz 2), Gladiator 5 z Berserkiem i Zewem areny (Gracz 3), Spec 5 "
-    + "z Szybkimi rękami (Gracz 4), Kurier z Człowiekiem-pająkiem i Włóczykijem oraz Zwiadowca 7 ze Sportowcem (MG), "
+    + "z Szybkimi rękami (Gracz 4), Kurier z Człowiekiem-pająkiem i Włóczykijem Zwiadowca 7 ze Sportowcem i Gladiator z Grenadierem (MG), "
     + "Bit-boy ze stałym skokiem. Gruz, schody na gruzie, osobne schody, "
     + "bagno i teren bez przyczyny — natywne Regiony bez Tiled. Walka gotowa — MG zaczyna.",
   gracze: 4,
@@ -41,6 +41,8 @@ export default {
     // E3: Sportowiec (Zwiadowca 7, MG) i stały skok istoty z cechy (Bit-boy: 6 m / 3 m).
     const sportowiec = await k.persona("sportowiec", "zwiadowca-7-sportowiec", { name: "Zwiadowca 7 (Sportowiec)" });
     const bitboy = await k.fromPack("bitboy", "bestiariusz", "bit-boys");
+    // E5: Grenadier (Stalowe jaja [R]) — persona pokrycia M7 z tą Sztuczką (MG).
+    const grenadier = await k.persona("grenadier", "m7-lyzeczka", { name: "Gladiator 3 (Grenadier)" });
 
     await s.createEmbeddedDocuments("Region", [
       { name: "Gruz", color: "#8a6a4a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(12, 2, 4, 14)],
@@ -61,11 +63,11 @@ export default {
         flags: k.flags({ role: "region" }) }
     ]);
     const gracze = [goly, kowboj, gladiator, spec];
-    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [kurier, 3, 18], [sportowiec, 1, 18],
+    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [kurier, 3, 18], [sportowiec, 1, 18], [grenadier, 1, 16],
       [ghul, 24, 9, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }], [bitboy, 27, 15, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }]]);
     for (const [i, a] of gracze.entries()) await k.seat(`Gracz ${i + 1}`, a);
     await k.party(gracze);
-    await k.combat(s, [...gracze, kurier, sportowiec, ghul, bitboy].filter(Boolean));
+    await k.combat(s, [...gracze, kurier, sportowiec, grenadier, ghul, bitboy].filter(Boolean));
     return { gracze: gracze.filter(Boolean).map(a => a.name), kurier: kurier?.name ?? null, sportowiec: sportowiec?.name ?? null,
       ghul: ghul?.name ?? null, bitboy: bitboy?.name ?? null };
   },
@@ -104,6 +106,8 @@ export default {
       "Tura Speca: Szybkie ręce, potem dwie akcje przedmiotów."),
     p("berserk", "Akcje", "Berserk kończy się po 10. własnej turze (nie na początku 11.), karta zmęczenia; do końca następnej tury A/B/R/I przekreślone, ruch zostaje (D24)",
       "Tura Gladiatora: Berserk; MG ustawia rundę 10 i kończy turę Gladiatora."),
+    p("stalowe-jaja", "Reakcja", "Grenadier poza swoją turą: Reaguj → „Stalowe jaja” (albo paleta Więcej) — R 0/1, ruch 4,5 m tylko w tej reakcji (bez 9 m bazy), A/I nietknięte; karta: bez ataków okazyjnych, podnieś i rzuć ×2; wybuch przenosi MG",
+      "Tura ghula (MG): karta Grenadiera → Reaguj → Stalowe jaja; przeciągnij 4 pola (ponad 4,5 m — ostrzeżenie); Zakończ reakcję.", "NOE"),
     p("dobycie-plakietka", "Akcje", "Oporządzenie w walce: klik w broń w kaburze — dobycie bez okna ataku, [I] 0/1; druga taka czynność — Używanie [A]; z plecaka — Akcja (z Pakowaniem — [I]; Siekierezada: dwie siekierki w jednej [I]). Karta użycia medpaka albo zdolności [B] ma plakietkę „Używanie [A]” / „Akcja Bonusowa [B]” z dymkiem (E4)",
       "Tura Twardziela: B 93R do kabury (Oporządzenie), klik w nią; schowaj jeszcze raz; Spec: medpak z Szybkimi rękami — plakietka „— Szybkie ręce”."),
     p("hud", "Korekty", "Znacznik „Reakcja zużyta” zdjęty z HUD-u przez MG zwalnia R jako korekta; historia wydatku zostaje w dymku",

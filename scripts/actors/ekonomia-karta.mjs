@@ -123,10 +123,33 @@ async function _oknoWyczekania(actor) {
   return wyczekaj(actor, { opis: String(dane.opis || dane.akcja || ""), akcja: dane.akcja || null });
 }
 
+/** Grenadier (Sztuczka, s. 103) — posiadanie po kluczu Sztuczki albo nazwie (postacie sprzed paczek). */
+const _grenadier = actor => !!actor?.items?.some(i => i.getFlag(MODULE_ID, "sztuczka") === "grenadier" || i.name === "Grenadier");
+
+/**
+ * Stalowe jaja [R] (s. 103): jedna reakcja — R, 4,5 m ruchu tylko tej reakcji, karta z resztą (bez ataków okazyjnych,
+ * podniesienie i rzut granatu; zasięg ×2 z Prawidłowym rzutem). Wybuch i nowy punkt granatu przenosi MG — moduł nie
+ * wymaga strefy granatu na mapie (§9).
+ */
+export async function staloweJaja(actor) {
+  const r = await deklaruj(actor, "staloweJaja");
+  if (!r || r.poza || r.duplikat || r.odmowa) return r;
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-robota-card neuro-postoj-card is-info"><header class="neuro-robota-head"><img src="${foundry.utils.escapeHTML(actor.img)}" alt="">`
+      + `<div class="neuro-robota-tytul"><strong>Stalowe jaja [R]</strong><span>Grenadier, s. 103</span></div></header>`
+      + `<p class="neuro-robota-linia">${foundry.utils.escapeHTML(actor.name)} podbiega do granatu (do 4,5 m) <strong>bez prowokowania ataków okazyjnych</strong>, `
+      + `podnosi go i rzuca w wybranym kierunku — zasięg rzutu ×2 (Prawidłowy rzut). Jedna Reakcja: ruch, podniesienie i rzut bez osobnych [I]/[A].</p>`
+      + `<p class="neuro-robota-linia">MG przenosi wybuch w nowe miejsce (szablon granatu), jak przy zwykłym rzucie.</p></div>`
+  });
+  return r;
+}
+
 /** Okno Reakcji: wykonanie przygotowania, uzbrojenie następnej akcji albo reakcja zagrana słownie. */
 async function _oknoReakcji(actor, przygotowania) {
   const buttons = [
     ...przygotowania.map((p, i) => ({ action: `p${i}`, label: `Wykonaj: ${p.opis || "przygotowana akcja"}`, icon: "fa-solid fa-bolt" })),
+    ...(_grenadier(actor) ? [{ action: "jaja", label: "Stalowe jaja — do granatu (4,5 m), podnieś i rzuć", icon: "fa-solid fa-bomb" }] : []),
     { action: "uzbroj", label: "Uzbrój — następna akcja w Reakcji", icon: "fa-solid fa-crosshairs" },
     { action: "slowna", label: "Reakcja zagrana słownie", icon: "fa-solid fa-comment" }
   ];
@@ -141,6 +164,7 @@ async function _oknoReakcji(actor, przygotowania) {
   if (!wybor) return null;
   if (wybor === "uzbroj") { uzbroj(actor); odswiezPanele([actor]); return { uzbrojona: true }; }
   if (wybor === "slowna") return reaguj(actor, { slowna: true });
+  if (wybor === "jaja") return staloweJaja(actor);
   const p = przygotowania[Number(String(wybor).slice(1))];
   return p ? reaguj(actor, { przygotowanie: p.id }) : null;
 }
@@ -357,6 +381,7 @@ export function opcjePalety(actor, rodzaj) {
   if (s) {
     out.push({ id: "wyczekaj", label: "Wyczekaj [A]", icon: "fa-solid fa-hourglass-half", run: () => _oknoWyczekania(actor) });
     out.push({ id: "reaguj", label: "Reaguj", icon: "fa-solid fa-bolt", run: () => _oknoReakcji(actor, E.aktywnePrzygotowania(s.ledger, s.chwila)) });
+    if (_grenadier(actor)) out.push({ id: "jaja", label: "Stalowe jaja [R]", icon: "fa-solid fa-bomb", run: () => staloweJaja(actor) });
     if (s.reakcja) out.push({ id: "koniec", label: "Zakończ reakcję", icon: "fa-solid fa-flag-checkered", run: () => zakonczReakcje(actor) });
   }
   return out;
