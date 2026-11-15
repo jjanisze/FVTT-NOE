@@ -302,7 +302,12 @@ async function nalozJakTacka({ messageId, actorName }) {
 }
 
 async function turaGracza({ name }) {
-  await game.combat.update({ turn: game.combat.turns.findIndex(c => c.name === name) });
+  // Zawsze do przodu: gdy postać jest w kolejności przed bieżącą turą, następna runda. Cofnięcie w tej samej rundzie
+  // stawiało wcześniejszy atak sojusznika „w przyszłości” (okno Dwóch na jednego go odrzucało), a kolejność inicjatywy
+  // zależy od kolejności żetonów sceny, która nie jest stała.
+  const c = game.combat;
+  const i = c.turns.findIndex(x => x.name === name);
+  await c.update(i <= c.turn ? { round: c.round + 1, turn: i } : { turn: i });
   return { naRuchu: game.combat.combatant?.name, runda: game.combat.round };
 }
 

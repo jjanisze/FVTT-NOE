@@ -15,18 +15,14 @@ import { atakiDrona, cechyDrona } from "./drony-sterowanie.mjs";
 import { stanZasilania } from "./drony-stan.mjs";
 import { RODZAJE } from "../config/towarzysze-data.mjs";
 import { AWARIE, rssiOsd, zakresAktywacji } from "../config/towarzysze-rules.mjs";
-import { ukladOsd, ostrzezeniaOsd } from "../config/osd.mjs";
+import { ukladOsd, ostrzezeniaOsd, siatkaOsd, ZNAK_W, ZNAK_H } from "../config/osd.mjs";
 import { weaponEntry, readState } from "../weapons/magazine-model.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const ATLAS_OSD = `modules/${MODULE_ID}/fonts/osd/betaflight-default.webp`;
-const ZNAK_W = 12;
-const ZNAK_H = 18;
 /** Ekran powitalny kontrolera (D23). */
 const POWITANIE_MS = 2500;
-/** Wysokość znaku: tyle wierszy mieści ekran (analogowe OSD ma ich kilkanaście). */
-const WIERSZE_EKRANU = 24;
 /** Tempo szumu RSSI — „wolno płynący” (D34). */
 const TEMPO_RSSI = 0.7;
 
@@ -109,14 +105,11 @@ let _osd = null;
 
 /**
  * Siatka OSD w wolnej części kanwy: między kolumną narzędzi sceny a prawą kolumną (pasek boczny i karty czatu),
- * nad paskiem makr. Prawdziwe OSD leży w obrazie — tu obraz zasłania interfejs Foundry, więc OSD go omija.
+ * pod nawigacją scen, nad paskiem makr. Prawdziwe OSD leży w obrazie — tu obraz zasłania interfejs Foundry, więc OSD go omija.
  * Wysokość znaku z całego ekranu, żeby nie skakała, gdy interfejs się zwija.
  */
 function _rozmiar() {
   const { width: w, height: h } = canvas.app.renderer.screen;
-  const ch = Math.max(18, Math.min(64, h / WIERSZE_EKRANU));
-  const skala = ch / ZNAK_H;
-  const cw = ZNAK_W * skala;
   const rect = id => {
     const r = document.getElementById(id)?.getBoundingClientRect();
     return r && r.width > 0 && r.height > 0 ? r : null;
@@ -124,9 +117,12 @@ function _rozmiar() {
   const x0 = Math.min(w / 3, rect("ui-left-column-1")?.right ?? 0);
   const x1 = Math.max((2 * w) / 3, rect("ui-right")?.left ?? w);
   const y1 = Math.max(h / 2, rect("hotbar")?.top ?? h);
-  const kolumny = Math.floor((x1 - x0) / cw);
-  const wiersze = Math.floor(y1 / ch);
-  return { ch, cw, skala, kolumny, wiersze, ox: x0 + ((x1 - x0) - kolumny * cw) / 2, oy: (y1 - wiersze * ch) / 2 };
+  // Nawigacja scen v14 stoi u góry obok narzędzi — górny wiersz (RSSI) chował się pod nią. Kolumna `<nav>` jest
+  // wyższa niż jej widoczne przyciski: liczą się przyciski scen, nie sam kontener; rozwinięta lista najwyżej h/6.
+  const nav = [...document.querySelectorAll("#scene-navigation .ui-control")]
+    .map(e => e.getBoundingClientRect()).filter(r => r.width > 0 && r.height > 0 && r.right > x0 && r.left < x1);
+  const y0 = nav.length ? Math.min(h / 6, Math.max(...nav.map(r => r.bottom))) : 0;
+  return siatkaOsd({ h, x0, x1, y0, y1 });
 }
 
 function _rysuj() {

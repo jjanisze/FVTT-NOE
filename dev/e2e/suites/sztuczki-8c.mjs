@@ -49,7 +49,9 @@ async function przygotuj() {
 /** Gracz 1: aktywność Sztuczki po nazwie (Pewny strzał, Młynek). */
 async function aktywnosc({ sztuczka, nazwa }) {
   const actor = game.user.character;
-  const it = actor.items.find(i => i.getFlag("neuroshima-2026-overrides", "sztuczka") === sztuczka);
+  // Przedmioty dodał MG — klient gracza dostaje je chwilę później.
+  const it = await window.__e2e.until(() => actor.items.find(i => i.getFlag("neuroshima-2026-overrides", "sztuczka") === sztuczka),
+    { message: `the ${sztuczka} item on the player's client` });
   await it.system.activities.find(a => a.name === nazwa).use({}, { configure: false }, {});
   return true;
 }

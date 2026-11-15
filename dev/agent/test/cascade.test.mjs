@@ -25,14 +25,18 @@ for (const [label, area] of [
   ["a 1440p screen", { left: 0, top: 0, width: 2560, height: 1392 }],
   ["a secondary screen left of the primary", { left: -2560, top: 0, width: 2560, height: 1392 }],
   ["a laptop screen", { left: 0, top: 0, width: 1366, height: 728 }],
-  ["a portrait screen", { left: 0, top: 0, width: 1080, height: 1872 }]
+  ["a portrait screen", { left: 0, top: 0, width: 1080, height: 1872 }],
+  ["a 1440 × 2560 portrait screen right of the primary", { left: 2560, top: 0, width: 1440, height: 2512 }]
 ]) {
-  test(`cascade on ${label}: no window covers another, Foundry's minimum kept`, () => {
+  test(`cascade on ${label}: no window covers another, Foundry's minimum kept, viewport landscape`, () => {
     for (let n = 1; n <= 6; n++) {
       const w = cascadeLayout(n, area);
       assert.equal(w.length, n);
       // Outer bounds: Foundry's 1024 × 768 is the viewport, the frame comes on top.
       for (const b of w) assert.ok(b.width >= 1024 + 16 && b.height >= 768 + 110, `${n} windows: ${b.width}×${b.height}`);
+      // Never taller than 4:3 — a portrait viewport is not how anyone plays (2026-11-15: 1104 × 2306 broke the OSD).
+      for (const b of w) assert.ok((b.height - 110) <= Math.round((b.width - 16) * 3 / 4) || b.height === MIN_WINDOW.height,
+        `${n} windows: viewport ${b.width - 16}×${b.height - 110} is portrait`);
       assert.deepEqual(MIN_WINDOW, { width: 1040, height: 878 });
       for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
         if (i !== j) assert.ok(!covers(w[j], w[i]), `${n} windows: #${j} covers #${i}`);

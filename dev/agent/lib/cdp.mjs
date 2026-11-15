@@ -202,17 +202,21 @@ export async function contextExists(browser, browserContextId) {
  * 16 px wider than the viewport, about 110 px taller (tab strip, toolbar). At exactly 1024 every client logged
  * „requires usable window dimensions” (1008 px viewport) once the screen got narrow enough to reach the floor (2026-11-02).
  */
-export const MIN_WINDOW = Object.freeze({ width: 1024 + 16, height: 768 + 110 });
+const FRAME = Object.freeze({ width: 16, height: 110 });
+export const MIN_WINDOW = Object.freeze({ width: 1024 + FRAME.width, height: 768 + FRAME.height });
 
 /**
  * Cascade for `n` windows over one screen's work area: each offset by `step` from the previous, all the same size,
  * no smaller than `MIN_WINDOW`. A later window starts right and below an earlier one, so every window keeps a
  * visible strip on its left and top — never fully covered.
+ * The viewport is never taller than 4:3 of its width: on a portrait monitor the cascade gave 1104 × 2306 viewports,
+ * a shape nobody plays Foundry in, and layout sized from the height (the drone OSD) broke only there (2026-11-15).
  * @returns {{left: number, top: number, width: number, height: number}[]}
  */
 export function cascadeLayout(n, area, step = { x: 160, y: 48 }) {
   const width = Math.max(MIN_WINDOW.width, area.width - step.x * (n - 1));
-  const height = Math.max(MIN_WINDOW.height, area.height - step.y * (n - 1));
+  const landscape = Math.round((width - FRAME.width) * 3 / 4) + FRAME.height;
+  const height = Math.max(MIN_WINDOW.height, Math.min(landscape, area.height - step.y * (n - 1)));
   return Array.from({ length: n }, (_, i) => ({ left: area.left + step.x * i, top: area.top + step.y * i, width, height }));
 }
 

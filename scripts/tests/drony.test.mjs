@@ -52,7 +52,7 @@ import { torX } from "../scenes/poscig.mjs";
 import { pxNaMetr } from "../scenes/droga.mjs";
 import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
 import { KAMERA_ID, celObrazu, strojenie, STROJENIE_MS } from "../actors/drony-obraz.mjs";
-import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, ZNAK } from "../config/osd.mjs";
+import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, siatkaOsd, MIN_KOLUMNY, ZNAK } from "../config/osd.mjs";
 import { stanOsd, ATLAS_OSD } from "../actors/drony-osd.mjs";
 import { naprawPWDrona, naprawAwarieDrona, planNaprawyAwarii } from "../actors/drony-naprawa.mjs";
 import { AKT_NAPRAW_PW, AKT_NAPRAW_AWARIE, jestWrakiem } from "../actors/drony.mjs";
@@ -986,6 +986,37 @@ export function registerDronyTests(quench) {
           expect(e.x, e.id).to.be.at.least(0);
           expect(e.x + e.tekst.length, e.id).to.be.at.most(siatka.kolumny);
           expect(e.y, e.id).to.be.within(0, siatka.wiersze - 1);
+        }
+      });
+
+      it("siatka: znak z wysokości ekranu, ale nie mniej niż MIN_KOLUMNY — także w pionowym oknie", function () {
+        // Monitor poziomy 1920×1080: wolne 90–1610 px, znak z wysokości (45 px), kolumn z zapasem.
+        const poziomy = siatkaOsd({ h: 1080, x0: 90, x1: 1610, y1: 1000 });
+        expect(poziomy.ch).to.equal(45);
+        expect(poziomy.kolumny).to.be.at.least(MIN_KOLUMNY);
+        // Okno na monitorze pionowym (e2e 2026-11-15): 1104×2306, wolne 90–740 px — wcześniej 15 kolumn.
+        const pionowy = siatkaOsd({ h: 2306, x0: 90, x1: 740, y1: 2200 });
+        expect(pionowy.kolumny).to.be.at.least(MIN_KOLUMNY);
+        expect(pionowy.ch).to.be.below(2306 / 24);
+        expect(pionowy.ox + pionowy.kolumny * pionowy.cw).to.be.at.most(740 + 1e-6);
+        // Najmniej 1:1 z atlasem, nawet gdy miejsca brak.
+        expect(siatkaOsd({ h: 768, x0: 0, x1: 200, y1: 700 }).ch).to.equal(18);
+        // Górny wiersz pod nawigacją scen (y0), nie pod nią.
+        const podNav = siatkaOsd({ h: 1080, x0: 90, x1: 1610, y0: 50, y1: 1000 });
+        expect(podNav.oy).to.be.at.least(50);
+        expect(podNav.oy + podNav.wiersze * podNav.ch).to.be.at.most(1000 + 1e-6);
+      });
+
+      it("przy MIN_KOLUMNY najdłuższe napisy nie nachodzą na siebie, a nazwa jest cała", function () {
+        const u = ukladOsd({
+          ...STAN, nazwa: "Dron kroczący", aktywacja: "B", akcje: ["PRZYSPIESZENIE", "ODEPCHNIECIE", "POCHWYCENIE"],
+          pw: [100, 100], zasilanie: { procent: 50, minuty: 605 }
+        }, { kolumny: MIN_KOLUMNY, wiersze: 16 });
+        expect(el(u, "nazwa").tekst).to.equal("DRON KROCZACY");
+        for (const a of u) for (const b of u) {
+          if (a === b || a.y !== b.y) continue;
+          const rozlaczne = a.x + a.tekst.length <= b.x || b.x + b.tekst.length <= a.x;
+          expect(rozlaczne, `${a.id} „${a.tekst}” × ${b.id} „${b.tekst}”`).to.equal(true);
         }
       });
 

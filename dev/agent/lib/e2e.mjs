@@ -153,7 +153,17 @@ export class Client {
    */
   async clickCanvas(point) {
     await this.front(); // a tab just made visible starts its ticker and resizes — let that land first
-    const at = await this.eval(p => {
+    // A page no real mouse has touched keeps its pointer at (0, 0) — the corner. While a placement (dnd5e token
+    // preview, a picker) is live, core edge-pans on every pointer move there (`Canvas#_onDragCanvasPan`: a 200 ms
+    // `animatePan`), and a running pan animation overwrites our `pan` frame by frame: the click then hit a
+    // square off the target (2026-11-15). Bring the pointer to the middle first, let the animation finish.
+    const middle = await this.eval(() => {
+      const r = canvas.app.view.getBoundingClientRect();
+      return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2) };
+    });
+    await this.send("Input.dispatchMouseEvent", { type: "mouseMoved", x: middle.x + 7, y: middle.y + 7, button: "none", buttons: 0 });
+    const at = await this.eval(async p => {
+      await foundry.canvas.animation.CanvasAnimation.getAnimation("canvas.animatePan")?.promise;
       canvas.pan({ x: p.x, y: p.y });
       // `pan` only moves the pivot; world transforms follow on the next render, which a hidden tab (every
       // isolated context but the front one) has not had — and the click arrives before one. Pickers read
@@ -167,6 +177,8 @@ export class Client {
     // `button` on a `mouseMoved` means "held during the move": "left" there made Chrome treat the press as
     // part of a drag (a `pointermove` with `buttons: 1`, no `pointerdown`) whenever the two were processed
     // together — the grenade picker then never heard the click.
+    // The pointer waits 7 px off the middle, where `pan` puts the target: Chrome fires no `pointermove` for a move
+    // that goes nowhere, and a preview would stay where it was before the pan.
     await this.send("Input.dispatchMouseEvent", { type: "mouseMoved", x: at.x, y: at.y, button: "none", buttons: 0 });
     await sleep(30);
     await this.send("Input.dispatchMouseEvent", { type: "mousePressed", x: at.x, y: at.y, button: "left", buttons: 1, clickCount: 1 });

@@ -52,6 +52,35 @@ export function liniaZasilania({ procent = 100, minuty = null } = {}) {
   return `${C(bat)}${czas}`;
 }
 
+/** Znak MAX7456 w atlasie (px). */
+export const ZNAK_W = 12;
+export const ZNAK_H = 18;
+/** Wysokość znaku: tyle wierszy mieści ekran (analogowe OSD ma ich kilkanaście). */
+export const WIERSZE_EKRANU = 24;
+/**
+ * Najmniej kolumn siatki: dolny wiersz mieści najdłuższą akcję (PRZYSPIESZENIE, od kolumny 1), wyśrodkowany
+ * tryb (WALK BONUS) i PW 100/100 bez nakładania; nazwa ma wtedy do 24 znaków (`kolumny − 20`). W wysokim,
+ * wąskim oknie (monitor pionowy) znak liczony z samej wysokości dawał ~16 kolumn: nazwa znikała, akcje
+ * nachodziły na PW (e2e `dron`, 2026-11-15).
+ */
+export const MIN_KOLUMNY = 44;
+
+/**
+ * Siatka OSD w wolnym prostokącie kanwy `[x0, x1] × [y0, y1]` ekranu o wysokości `h`. Wysokość znaku z wysokości
+ * ekranu (nie skacze, gdy interfejs się zwija), ale nie większa, niż pozwala `MIN_KOLUMNY` w wolnej szerokości;
+ * najmniej 1:1 z atlasem.
+ */
+export function siatkaOsd({ h, x0, x1, y0 = 0, y1 }) {
+  const szer = Math.max(0, x1 - x0);
+  const wys = Math.max(0, y1 - y0);
+  const ch = Math.max(ZNAK_H, Math.min(64, h / WIERSZE_EKRANU, (szer * ZNAK_H) / (ZNAK_W * MIN_KOLUMNY)));
+  const skala = ch / ZNAK_H;
+  const cw = ZNAK_W * skala;
+  const kolumny = Math.floor(szer / cw);
+  const wiersze = Math.floor(wys / ch);
+  return { ch, cw, skala, kolumny, wiersze, ox: x0 + (szer - kolumny * cw) / 2, oy: y0 + (wys - wiersze * ch) / 2 };
+}
+
 /** Progi ostrzeżeń OSD. RSSI LOW liczy się z prawdziwej jakości, nie z pływającej liczby. */
 export const PROG_RSSI_LOW = 0.25;
 export const PROG_BAT_LOW = 20;
