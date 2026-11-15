@@ -4,7 +4,7 @@
  * wagi (rozstrzyga MG), otwór w podłodze (spadanie dnd5e, „Opuść bezpiecznie”), szlam ze skokiem
  * i kładką, znaczniki FX Detonuj i Odsłoń. Mały bunkier na trzech poziomach, nie mapa kampanii —
  * te same zachowania, które eksport stosu map stawia na Silosie, ułożone tak, żeby każdą próbę dało
- * się zrobić w minutę. Trzy osoby: SIŁ 15, 13 i 10 (progi skoku przez 4,5 m szlamu).
+ * się zrobić w minutę. Trzy osoby: SIŁ 15, 13 i 10 (zasięg skoku przez 4,5 m szlamu: doskakuje / 3. pole / z miejsca 2. pole).
  */
 
 import { MOD, p } from "./_wspolne.mjs";
@@ -168,9 +168,9 @@ export default {
     p("kanal", "Przejścia", "Kanał: okno prędkości (bardzo powoli ST 13 / połowa 16 / pełna 19, Akrobatyka); porażka = utknięcie na turę na polu wylotu, bez obrażeń; duża istota się nie mieści", "Ktokolwiek na Dole wchodzi w wylot (14,5) albo z drugiej strony ściany w (15,5)."),
     p("otwor", "Spadanie", "Otwór w podłodze Góry: status Spadanie, MG spuszcza token, karta obrażeń; HUD MG „Opuść bezpiecznie” zamiast tego — bez karty", "Ktokolwiek wchodzi w otwór (12–13, 7–8).", "NOE"),
     p("szlam-wejscie", "Skażenie", "Wejście w szlam: szeptana karta MG z guzikiem RO KON ST 15; guzik rzuca i nalicza Wyczerpanie i licznik choroby popromiennej", "Ktokolwiek wchodzi w szlam z boku albo wybiera „Wejdź w szlam”.", "NOE"),
-    p("skok-auto", "Skok", "SIŁ 15 z rozbiegiem: pole „Rozbieg?” zaznaczone samo (3 pola prosto przed pierwszym rzędem), „doskakuje bez rzutu”, ląduje za szlamem", "Gracz 1: z (8,2) prosto w dół do (8,6) jednym ruchem.", "NOE"),
-    p("skok-st", "Skok", "SIŁ 13 z rozbiegiem: Atletyka ST 10; porażka o 1–4 = ostatni rząd szlamu i karta ST 15; o 5+ = twarzą w pierwszy rząd i karta ST 20", "Gracz 2: rozbieg jak wyżej; Kości → ustaw wynik (np. 7 i 2).", "NOE"),
-    p("skok-z-miejsca", "Skok", "SIŁ 10 albo bez rozbiegu: „nie doskoczy”; „Zostań” wraca na półkę; próba mimo to = upadek twarzą", "Gracz 3: z półki (8,5) krok w dół.", "NOE"),
+    p("skok-auto", "Skok", "SIŁ 15 z rozbiegiem: pole „Rozbieg” zaznaczone samo (≥ 3 m chodu tuż przed skokiem, także po zakręcie albo skosem), zasięg 4,5 m — „doskakuje”, ląduje za szlamem; ruch −4,5 m za skok (M8)", "Gracz 1: z (8,2) w dół do (8,6) — jednym ruchem albo dwoma dragami.", "NOE"),
+    p("skok-krotki", "Skok", "SIŁ 13 z rozbiegiem: zasięg 3,9 m, bez rzutu — ląduje w 3. polu szlamu (ostatni rząd): karta strefy ST 15 i karta lądowania (Akrobatyka ST 10, porażka — Powalenie); ruch −3,9 m", "Gracz 2: rozbieg jak wyżej; w karcie lądowania rzuć niski wynik.", "NOE"),
+    p("skok-z-miejsca", "Skok", "SIŁ 10 z miejsca (1,5 m): okno pokazuje „ląduje w 2. polu”; „Zostań” wraca na półkę; „Skocz” — środek szlamu z kartami", "Gracz 3: z półki (8,5) krok w dół.", "NOE"),
     p("skok-powrot", "Skok", "Skok na północ z lądowiska (8,9) działa tak samo; brodzenie w drugą stronę przez rząd skoku nie otwiera okna", "Ktokolwiek w szlamie idzie na północ."),
     p("kladka", "Skok", "Kładka (narzędzie stanowiska): przejście przez szlam bez okna i bez karty; trudny teren zostaje", "MG: Kładka wł., potem przejście; Kładka wył."),
     p("poswiata", "Widok", "Zielona pulsująca poświata nad szlamem na ciemnym Dole; nie widać jej z innych poziomów", "Widok gracza na Dole i na Górze."),

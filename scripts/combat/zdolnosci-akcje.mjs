@@ -10,8 +10,9 @@
  * | Szybka gadka [B] (Cwaniak 3, s. 73), Szybkie badanie [B] (Spec 2, s. 78) | Wpływanie / Badanie (s. 41) w Akcji Bonusowej | aktywność → wybór umiejętności |
  * | Strzelec (Zabójca, s. 94; U20) | gracz deklaruje stanowisko; w walce moduł liczy 5 rund mierzenia bez ruchu, poza walką — od razu; status nakłada MG przyciskiem | aktywność „Stanowisko snajperskie”, karta MG |
  *
- * Akcję Bonusową deklaruje warstwa akcji (`actors/actions.mjs`): aktywność [B] — sama przy użyciu; przycisk na karcie —
- * `zadeklaruj` przed atakiem. Druga Akcja Bonusowa w turze → sygnał MG (D5), atak idzie dalej.
+ * Akcję Bonusową liczy ledger M8: aktywność [B] — przy użyciu (`actors/actions.mjs`); przycisk na karcie — dopiero
+ * zapis ataku po konfiguracji okna (`combat/atakowanie.mjs`, §5.2: zamknięte okno nic nie kosztuje). Tu rejestrujemy
+ * te źródła B dla pola „Sposób ataku” (z weryfikacją warunku). Druga Akcja Bonusowa w turze → sygnał MG, atak idzie dalej.
  *
  * **Ulubiona broń — zapamiętany wybór (§3.0.5, U11):** model z katalogu (`weaponIdOf`, inaczej nazwa) w fladze
  * przedmiotu zdolności. Pierwszy wybór — przy pierwszym użyciu (pytanie na przycisku karty albo okno aktywności);
@@ -31,7 +32,7 @@ import { STANOWISKO_SNAJPERSKIE } from "./okolicznosci.mjs";
 import {
   esc, przedmiotZdolnosci, gra, zeton, kategoria, nalozEfekt, usunEfekty, flavorKarty, stylPrzycisku, STYL_SZARY
 } from "./zdolnosci-wspolne.mjs";
-import { zadeklaruj } from "../actors/actions.mjs";
+import { zarejestrujZrodloAtakuB } from "./atakowanie.mjs";
 import { heldItems } from "../actors/doll.mjs";
 import { weaponIdOf, modelBroni } from "../weapons/magazine-model.mjs";
 import { magazineReadiness } from "../weapons/magazine.mjs";
@@ -46,8 +47,10 @@ const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAG_ULUBIONE = "ulubione";
 /** Po Długim odpoczynku wolno zamienić jedną Ulubioną broń. */
 export const FLAG_ZMIANA = "zmianaUlubionej";
-/** Karta użycia dodatkowego ataku: `"ulubiona-bron"` | `"promocja"`. */
+/** Karta użycia dodatkowego ataku: `"ulubiona-bron"` | `"promocja"` | `"nozownik"` | `"zamaszysty"`. */
 export const FLAG_DODATKOWY = "dodatkowyAtak";
+/** …i jej koszt już zapłacony (aktywność [B], zdolność bez kosztu akcji) — zapis ataku nie płaci drugi raz. */
+export const FLAG_OPLACONY = "dodatkowyOplacony";
 /** Rzut Testu Słabego punktu: `{ targetUuid, st }` — efekt i przy późniejszej modyfikacji rzutu. */
 const FLAG_TEST_SLABY = "slabyPunktTest";
 /** Słaby punkt znaleziony w walce: id walki (sprzątanie po walce; poza walką — Długi odpoczynek, U18). */
@@ -244,11 +247,13 @@ function _klawisze(event) {
  */
 export async function dodatkowyAtak(actor, bron, { activity = null, zrodlo, rodzaj, deklaruj = true, event = null }) {
   if (await _bezAmunicji(actor, bron, zrodlo)) return null;
-  if (deklaruj) await zadeklaruj(actor, "B", { zrodlo });
+  // Koszt B nalicza zapis ataku po konfiguracji okna (M8 §5.2, §7.5) — z jawnym zamiarem z tej karty użycia.
+  // `deklaruj: false` — już zapłacone (aktywność [B], zdolność bez kosztu akcji): zapis ataku nie płaci drugi raz.
   const akt = activity?.item?.id === bron.id ? activity : bron.system.activities?.find(a => a.type === "attack");
   if (!akt) return null;
   const ev = _klawisze(event);
-  return akt.use({ event: ev }, { configure: !ev?.shiftKey }, { data: { flags: { [MODULE_ID]: { [FLAG_DODATKOWY]: rodzaj } } } });
+  const flagi = { [FLAG_DODATKOWY]: rodzaj, ...(deklaruj ? {} : { [FLAG_OPLACONY]: true }) };
+  return akt.use({ event: ev }, { configure: !ev?.shiftKey }, { data: { flags: { [MODULE_ID]: flagi } } });
 }
 
 /** Ulubiona broń z przycisku karty (pierwszy wybór — z pytaniem). */
@@ -639,7 +644,50 @@ async function _onClick(event) {
   }
 }
 
+/** Trafiony jedyny cel karty ataku (UUID tokenu) albo `null`. */
+function _trafionyCel(message) {
+  const obrona = obronaOf(message);
+  if (obrona?.targets?.length !== 1) return null;
+  const wpis = obrona.targets[0];
+  return isHitVerdict(verdictOfEntry(obrona, wpis).verdict) ? wpis.tokenUuid : null;
+}
+
+/** Klawisz celowania z ustawień (nie wpisany na sztywno). */
+function _klawiszCelu() {
+  const b = game.keybindings?.get?.("core", "target")?.[0];
+  try { return b ? foundry.applications.sidebar.apps.ControlsConfig.humanizeBinding(b) : "T"; } catch (_e) { return "T"; }
+}
+
+/** Źródła B ataku dla pola „Sposób ataku” (M8 §7.2–§7.3): posiadane i pasujące; niespełniony warunek — opcja z ostrzeżeniem. */
+function _zrodlaB() {
+  zarejestrujZrodloAtakuB({
+    id: "nozownik", label: "Nożownik",
+    pasuje: ctx => maSztuczke(ctx.actor, "nozownik") && ctx.item?.type === "weapon" && NOZE.includes(weaponIdOf(ctx.item)),
+    weryfikuj: ctx => {
+      if (!ctx.cel) return { ok: false, ostrz: [`Nożownik: brak celu — wyceluj we wroga (klawisz ${_klawiszCelu()}), żeby sprawdzić wcześniejsze trafienie nożem.`] };
+      const t = _ostatniAtak(ctx.actor, (bron, m) => NOZE.includes(weaponIdOf(bron)) && _trafionyCel(m) === ctx.cel.uuid);
+      return t ? { ok: true } : { ok: false, ostrz: [`Nożownik: brak zapisu trafienia nożem w ${ctx.cel.name} w tej turze (s. 105).`] };
+    },
+    // Trafienie tej próby w ten cel — obrażenia krytyczne (zapowiedź na tę turę, jak przycisk pod kartą).
+    przyZatwierdzeniu: async ctx => {
+      if (ctx.cel) await zapowiedz(ctx.actor, { cel: ctx.cel.uuid, bronie: [weaponIdOf(ctx.item)], autoKrytyk: "Nożownik — trafienie krytyczne", zrodlo: "nozownik", tura: true });
+    }
+  });
+  zarejestrujZrodloAtakuB({
+    id: "promocja", label: "Promocja",
+    pasuje: ctx => !!_ma(ctx.actor, "maszyna-do-zabijania") && ctx.wrecz,
+    weryfikuj: ctx => (ctx.actor.statuses?.has("berserk") ? { ok: true } : { ok: false, ostrz: ["Promocja — tylko w Berserku (s. 70)."] })
+  });
+  zarejestrujZrodloAtakuB({
+    id: "ulubiona-bron", label: "Ulubiona broń",
+    pasuje: ctx => ctx.item?.type === "weapon" && !!ulubionaDla(ctx.actor, ctx.item),
+    weryfikuj: ctx => (_ostatniAtak(ctx.actor, bron => modelBroni(bron) === modelBroni(ctx.item))
+      ? { ok: true } : { ok: false, ostrz: ["Ulubiona broń: najpierw zwykły atak tą bronią w tej turze (s. 86)."] })
+  });
+}
+
 export function registerZdolnosciAkcje() {
+  _zrodlaB();
   zarejestrujEfektTuryWlasciciela(e => !!e.getFlag?.(MODULE_ID, FLAG_CELOWANIE) || !!e.flags?.[MODULE_ID]?.[FLAG_CELOWANIE]);
   Hooks.on("dnd5e.preUseActivity", _onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", _onPostUseActivity);

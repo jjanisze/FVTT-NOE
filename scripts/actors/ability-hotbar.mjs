@@ -16,6 +16,11 @@
  * Ownership: this module only ever touches macros carrying
  * `flags.neuroshima-2026-overrides.abilityId`. User-placed macros are never moved
  * or deleted, and occupied slots are skipped when placing new ones.
+ *
+ * Removals stick (PLAN_m8 §8.3, E7): an ability macro the user takes off the bar (or deletes) is recorded on the
+ * user (`flags.<mod>.hotbarUsuniete`, found against a snapshot of the bar in `updateUser`) and the sync no longer re-adds it — a deliberately trimmed or empty bar stays
+ * so. Moving a macro to another slot is not a removal. `restoreHotbar()` clears the list explicitly and reports what
+ * came back and what found no free slot. Newly gained abilities are still placed.
  */
 
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
@@ -72,6 +77,10 @@ function _iconFor(feature, active) {
  * row (the Poligon's station resets, PLAN_human_testing.md §12).
  */
 const HOTBAR = "hotbar";
+/** User flag: ability ids the user removed from the bar on purpose — the sync leaves them off. */
+export const FLAG_REMOVED = "hotbarUsuniete";
+/** Our own sync is unassigning/deleting — those are not the user's removals. */
+let _syncing = 0;
 const _syncChain = new Map();   // HOTBAR -> tail promise
 const _syncTimer = new Map();   // actorId -> debounce timeout
 
@@ -107,76 +116,125 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
 
   const eligible = _eligibleAbilities(actor);
   const wanted = new Map(eligible.map(e => [e.abilityId, e]));
+  const removed = new Set(user.getFlag(MODULE_ID, FLAG_REMOVED) ?? []);
+  _syncing += 1;
+  try {
 
-  const slots = user.hotbar ?? {};
-  const owned = new Map();          // abilityId -> slot
-  const occupied = new Set();
+    const slots = user.hotbar ?? {};
+    const owned = new Map();          // abilityId -> slot
+    const occupied = new Set();
 
-  for (const [slot, macroId] of Object.entries(slots)) {
-    if (!macroId) continue;
-    occupied.add(Number(slot));
-    const macro = game.macros.get(macroId);
-    const abilityId = macro?.getFlag(MODULE_ID, FLAG_ABILITY);
-    if (abilityId && !belongsToUser(macro, user)) {
-      // Replace a legacy shared automatic macro on this user's bar, without touching its author.
-      await user.assignHotbarMacro(null, Number(slot));
-      occupied.delete(Number(slot));
-    } else if (abilityId) owned.set(abilityId, Number(slot));
-  }
-
-  // Remove macros for abilities the actor no longer has.
-  for (const [abilityId, slot] of owned) {
-    if (wanted.has(abilityId)) continue;
-    const macro = game.macros.get(slots[slot]);
-    await user.assignHotbarMacro(null, slot);
-    if (isDocumentLive(macro) && belongsToUser(macro, user) && macro.canUserModify(game.user, "delete")) await macro.delete();
-    occupied.delete(slot);
-  }
-
-  // Add macros for newly-gained abilities, into the first free slot.
-  for (const { abilityId, item, feature } of eligible) {
-    if (!isDocumentLive(actor) || !isDocumentLive(item)) return;
-    if (owned.has(abilityId)) continue;
-
-    let slot = null;
-    for (let i = 1; i <= 50; i++) {
-      if (!occupied.has(i)) { slot = i; break; }
-    }
-    if (slot === null) {
-      ui.notifications?.warn(`Brak wolnego miejsca na pasku dla zdolności: ${feature.label}`);
-      break;
+    for (const [slot, macroId] of Object.entries(slots)) {
+      if (!macroId) continue;
+      occupied.add(Number(slot));
+      const macro = game.macros.get(macroId);
+      const abilityId = macro?.getFlag(MODULE_ID, FLAG_ABILITY);
+      if (abilityId && !belongsToUser(macro, user)) {
+        // Replace a legacy shared automatic macro on this user's bar, without touching its author.
+        await user.assignHotbarMacro(null, Number(slot));
+        occupied.delete(Number(slot));
+      } else if (abilityId) owned.set(abilityId, Number(slot));
     }
 
-    // Reuse an existing macro for this ability if one is lying around unplaced
-    // (and delete any extras), so a lost race can never leave duplicates behind.
-    const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId
-      && belongsToUser(m, user) && isDocumentLive(m));
-    let macro = existing[0] ?? null;
-    for (const dup of existing.slice(1)) {
-      if (isDocumentLive(dup) && dup.canUserModify(game.user, "delete")) await dup.delete();
+    // Remove macros for abilities the actor no longer has.
+    for (const [abilityId, slot] of owned) {
+      if (wanted.has(abilityId)) continue;
+      const macro = game.macros.get(slots[slot]);
+      await user.assignHotbarMacro(null, slot);
+      if (isDocumentLive(macro) && belongsToUser(macro, user) && macro.canUserModify(game.user, "delete")) await macro.delete();
+      occupied.delete(slot);
     }
 
-    if (macro) {
-      await macro.update({ name: feature.label, img: item.img ?? _iconFor(feature, false) });
-    } else {
-      macro = await Macro.create({
-        name: feature.label,
-        type: "script",
-        img: item.img ?? _iconFor(feature, false),
-        scope: "global",
-        author: user.id,
-        ownership: { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-        command: _macroCommand(abilityId),
-        flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id, userId: user.id } }
-      });
-    }
+    // Add macros for newly-gained abilities, into the first free slot.
+    for (const { abilityId, item, feature } of eligible) {
+      if (!isDocumentLive(actor) || !isDocumentLive(item)) return;
+      if (owned.has(abilityId) || removed.has(abilityId)) continue;
 
-    await user.assignHotbarMacro(macro, slot);
-    owned.set(abilityId, slot);
-    occupied.add(slot);
+      let slot = null;
+      for (let i = 1; i <= 50; i++) {
+        if (!occupied.has(i)) { slot = i; break; }
+      }
+      if (slot === null) {
+        ui.notifications?.warn(`Brak wolnego miejsca na pasku dla zdolności: ${feature.label}`);
+        break;
+      }
+
+      // Reuse an existing macro for this ability if one is lying around unplaced
+      // (and delete any extras), so a lost race can never leave duplicates behind.
+      const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId
+        && belongsToUser(m, user) && isDocumentLive(m));
+      let macro = existing[0] ?? null;
+      for (const dup of existing.slice(1)) {
+        if (isDocumentLive(dup) && dup.canUserModify(game.user, "delete")) await dup.delete();
+      }
+
+      if (macro) {
+        await macro.update({ name: feature.label, img: item.img ?? _iconFor(feature, false) });
+      } else {
+        macro = await Macro.create({
+          name: feature.label,
+          type: "script",
+          img: item.img ?? _iconFor(feature, false),
+          scope: "global",
+          author: user.id,
+          ownership: { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+          command: _macroCommand(abilityId),
+          flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id, userId: user.id } }
+        });
+      }
+
+      await user.assignHotbarMacro(macro, slot);
+      owned.set(abilityId, slot);
+      occupied.add(slot);
+    }
+  } finally {
+    _syncing -= 1;
   }
 
   ui.hotbar?.render();
+}
+
+/**
+ * Bring removed ability macros back (explicit onboarding/restore, §8.3): clears the user's removal list and syncs.
+ * @returns {Promise<{added: string[], noSlot: string[]}>} labels that came back / that found no free slot
+ */
+export async function restoreHotbar(actor = game.user.character, user = game.user) {
+  const before = new Set(Object.values(user.hotbar ?? {}).filter(Boolean));
+  if (user.getFlag(MODULE_ID, FLAG_REMOVED)?.length) await user.unsetFlag(MODULE_ID, FLAG_REMOVED);
+  await queueHotbarSync(actor, { user });
+  const after = Object.values(user.hotbar ?? {}).filter(id => id && !before.has(id)).map(id => game.macros.get(id)?.name).filter(Boolean);
+  const placed = new Set(Object.values(user.hotbar ?? {}).map(id => game.macros.get(id)?.getFlag(MODULE_ID, FLAG_ABILITY)).filter(Boolean));
+  const noSlot = _eligibleAbilities(actor ?? { items: [] }).filter(e => !placed.has(e.abilityId)).map(e => e.feature.label);
+  return { added: after, noSlot };
+}
+
+/** The bar as this client last saw it — `assignHotbarMacro` updates with `noHook` (no `preUpdateUser`), so removals
+ * are found by comparing against this snapshot in `updateUser`. */
+let _snapshot = null;
+
+/**
+ * `updateUser`: an ability macro that left this user's bar by the user's hand (not our sync, not a move to another
+ * slot) goes onto the removal list.
+ */
+function _onUpdateUser(user, changes) {
+  if (!user.isSelf || !("hotbar" in (changes ?? {}))) return;
+  const prev = _snapshot ?? {};
+  _snapshot = { ...(user.hotbar ?? {}) };
+  if (_syncing) return;
+  const stays = new Set(Object.values(_snapshot).filter(Boolean));
+  const gone = Object.values(prev).filter(id => id && !stays.has(id))
+    .map(id => game.macros.get(id)?.getFlag(MODULE_ID, FLAG_ABILITY)).filter(Boolean);
+  if (!gone.length) return;
+  const list = [...new Set([...(user.getFlag(MODULE_ID, FLAG_REMOVED) ?? []), ...gone])];
+  void user.setFlag(MODULE_ID, FLAG_REMOVED, list);
+}
+
+/** A managed macro deleted by its user (not by our sync) counts as a removal too. */
+function _onDeleteMacro(macro, _options, userId) {
+  const abilityId = macro.getFlag(MODULE_ID, FLAG_ABILITY);
+  if (!abilityId || _syncing || userId !== game.user.id || !belongsToUser(macro, game.user)) return;
+  const list = game.user.getFlag(MODULE_ID, FLAG_REMOVED) ?? [];
+  if (!list.includes(abilityId)) void game.user.setFlag(MODULE_ID, FLAG_REMOVED, [...list, abilityId]);
 }
 
 /* -------------------------------------------- */
@@ -284,6 +342,8 @@ function _decorateHotbar(html) {
 
 export function registerAbilityHotbar() {
   Hooks.on("renderHotbar", (_app, html) => _decorateHotbar(html));
+  Hooks.on("updateUser", _onUpdateUser);
+  Hooks.on("deleteMacro", _onDeleteMacro);
 
   // Re-sync when class levels change or ability items come and go.
   // Debounced + serialised: a level-up grants several items in one operation.
@@ -308,13 +368,14 @@ export function registerAbilityHotbar() {
   }
 
   Hooks.once("ready", () => {
+    _snapshot = { ...(game.user.hotbar ?? {}) };
     if (game.user.character) queueHotbarSync(game.user.character);
   });
 
   const mod = game.modules?.get(MODULE_ID);
   if (mod) {
     mod.api ??= {};
-    mod.api.hotbar = { use: useAbility, sync: queueHotbarSync };
+    mod.api.hotbar = { use: useAbility, sync: queueHotbarSync, restore: restoreHotbar };
   }
 
   console.log(`${MODULE_ID} | Ability hotbar registered`);

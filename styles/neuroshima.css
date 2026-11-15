@@ -5112,3 +5112,70 @@ tr.neuro-tt-off td.attribution-value {
   border-radius: 3px;
   font-family: inherit;
 }
+
+/* Ekonomia tury M8 (PLAN_m8 §8.1) — liczniki ruchu i A/B/R/I, przyciski deklaracji, trwałe ostrzeżenia. */
+.neuro-m8-panel { display: flex; flex-direction: column; gap: 3px; }
+.neuro-m8-liczniki { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+.neuro-m8-licznik {
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  font-size: var(--font-size-11, 11px);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.neuro-m8-licznik.ruch { font-weight: 700; }
+.neuro-m8-licznik.ponad { color: #ff7b6e; font-weight: 700; }
+.neuro-m8-licznik.zakaz { text-decoration: line-through; opacity: 0.7; }
+.neuro-m8-licznik.niedostepny { opacity: 0.6; }
+.neuro-m8-panel .neuro-stan-akcje { flex-wrap: wrap; }
+/* Szerokość wg treści, rzędy się wypełniają — „Przyspiesz” nie jest ucinany w wąskiej kolumnie karty. */
+.neuro-m8-panel .neuro-stan-akcje .neuro-akcja-btn { flex: 1 1 auto; justify-content: center; letter-spacing: 0.5px; }
+.neuro-m8-dol { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.neuro-m8-dol .neuro-akcja-btn { flex: 0 1 auto; }
+.neuro-m8-ostrz { flex: 1 1 100%; color: #ff7b6e; font-size: var(--font-size-11, 11px); }
+/* Przygotowania Wyczekania i pomoc od sojuszników — informacja, nie ostrzeżenie. */
+.neuro-m8-info { flex: 1 1 100%; color: #b9c7d6; font-size: var(--font-size-11, 11px); }
+/* Kalkulator skoku i okna M8. */
+.neuro-skok-tabela { width: 100%; border-collapse: collapse; margin: 4px 0; }
+.neuro-skok-tabela th, .neuro-skok-tabela td { padding: 2px 6px; text-align: center; }
+.neuro-skok-tabela tbody th { text-align: left; }
+
+/* Linijka ruchu M8: ile zostaje (tekst i ikona, nie tylko kolor). */
+.waypoint-label .neuro-m8-reszta { display: inline-flex; align-items: center; gap: 3px; margin-left: 4px; font-weight: 700; }
+.waypoint-label .neuro-m8-reszta.miesci { color: #7fe08f; }
+.waypoint-label .neuro-m8-reszta.ponad { color: #ff7b6e; }
+.waypoint-label .neuro-m8-reszta.reczne { color: #b9c7d6; }
+
+/* M8 E8 — panel gotowości do tury (combat/gotowosc.mjs): tekst i ikona niosą stan, kolor tylko uzupełnia. */
+#neuro-gotowosc {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #e8e4d8;
+  font-size: var(--font-size-14, 14px);
+  pointer-events: none;
+}
+#neuro-gotowosc[data-stan="nastepny"] { border-color: #e0b64a; color: #f3d98b; }
+#neuro-gotowosc[data-stan="tura"] { border-color: #7fe08f; color: #c9f5d0; }
+#neuro-gotowosc .zegar { min-width: 6ch; font-family: var(--font-mono, monospace); }
+#neuro-gotowosc[data-faza="zolty"] .zegar { color: #f3d98b; animation: neuro-got-puls 1.6s ease-in-out infinite; }
+#neuro-gotowosc[data-faza="czerwony"] .zegar { color: #ff7b6e; animation: neuro-got-puls 0.9s ease-in-out infinite; }
+#neuro-gotowosc.pauza { opacity: 0.75; }
+#neuro-gotowosc.pauza .zegar, #neuro-gotowosc.bez-animacji .zegar { animation: none; }
+#neuro-gotowosc.puls { animation: neuro-got-wejscie 1.4s ease-out 1; }
+#neuro-gotowosc.bez-animacji.puls { animation: none; }
+@keyframes neuro-got-puls { 50% { opacity: 0.45; } }
+@keyframes neuro-got-wejscie {
+  0% { box-shadow: 0 0 0 0 rgba(127, 224, 143, 0.8); }
+  100% { box-shadow: 0 0 0 14px rgba(127, 224, 143, 0); }
+}
+/* Tryb zdalny drona i panel gotowości naraz — pasek drona schodzi niżej. */
+body:has(#neuro-gotowosc) #neuro-dron-zdalny { top: 40px; }

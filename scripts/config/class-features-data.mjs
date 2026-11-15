@@ -365,7 +365,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@abilities.dex.mod", period: "sr" },
     hotbar: true,
-    auto: [],
+    auto: [{ what: "aktywność mod. ZRC /KO: jedna dodatkowa Akcja tylko do Używania — ograniczony grant w ledgerze M8; Używanie przedmiotu bierze go przed zwykłą A, Atakowanie nie (PLAN_m8 §6.2)", where: "combat/zdolnosci-karty.mjs" }],
     text: "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "wyksztalciuch": {
@@ -478,8 +478,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: 1, period: "sr" },
     hotbar: true,
-    auto: [{ what: "aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa i ogłoszenie; Akcja Bonusowa podnosi limit znacznika", where: "combat/zdolnosci-karty.mjs" }],
-    manual: "Dodatkowej Akcji moduł nie liczy (znaczniki ma tylko Reakcja i Akcja Bonusowa) — pilnuje stół.",
+    auto: [{ what: "aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa przed zużyciem użycia (zamknięcie okna niczego nie zużywa), grant jednej A albo B w puli tej tury (ledger M8, PLAN_m8 §6.2)", where: "combat/zdolnosci-karty.mjs" }],
     text: "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
   },
   "twardosc": {
@@ -823,8 +822,8 @@ export const CLASS_FEATURES = {
     label: "Zew areny",
     action: null,
     requiresState: "neuro-berserk",
-    auto: [{ what: "Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", where: "config/zdolnosci-efekty.mjs" }],
-    manual: "Praca nóg — moduł nie liczy ataków okazyjnych (U26); Skok Gladiatora — handoff ruchu.",
+    auto: [{ what: "Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", where: "config/zdolnosci-efekty.mjs" }, { what: "Skok Gladiatora: w Berserku zasięg skoku ×2; lądowanie na polu istoty — karta MG z RO SIŁ celu, Powalenie i 1k6 za każde 3 m (WKK, Kobalt 46)", where: "combat/skok.mjs" }],
+    manual: "Praca nóg — moduł nie liczy ataków okazyjnych (U26).",
     text: "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości."
   },
   "zawolajcie-kolegow": {
@@ -1322,8 +1321,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zwinność szczura",
     action: null,
-    auto: [{ what: "Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }],
-    manual: "Skoczek (Akrobatyka i ZRC przy skoku) — handoff ruchu.",
+    auto: [{ what: "Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", where: "config/zdolnosci-efekty.mjs" }, { what: "Skoczek: zasięg skoku w dal z ZRC zamiast SIŁ — kalkulator skoku (karta, Region, ruch Skok)", where: "combat/skok.mjs" }],
+    manual: "Akrobatyka zamiast Atletyki, gdy MG zażąda testu skakania — zwykły skok testu nie ma.",
     text: "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły."
   },
   "jeden-strzal": {

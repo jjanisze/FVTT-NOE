@@ -1,13 +1,12 @@
 /**
  * Neuroshima 5e — warstwa akcji i bramki (PLAN_m7 E0, §3.0.1 i §3.0.4).
  *
- * Warstwa 1: deklaracja R/B na zapisie znacznika (drugie użycie, Obezwładnienie, Stopnie Zranienia s. 32, Zryw),
- * bramka tura/runda/walka. Warstwa 4: znacznik w prawdziwej walce — powstaje u właściciela, drugie użycie zgłasza
+ * Warstwa 1: bramka tura/runda/walka (arytmetyka pul A/B/R/I — paczka `ekonomia`, ledger M8). Warstwa 4: znacznik w prawdziwej walce — powstaje u właściciela, drugie użycie zgłasza
  * naruszenie, `start.combatant` na właścicielu (efekt z cudzej tury), poza walką nic.
  */
 
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, stub, walkaTestowa } from "./helpers.mjs";
-import { AKCJE, zadeklarujAkcje, dodatkowaAkcja, ZRANIENIE_BLOKUJE } from "../config/actions-data.mjs";
+import { AKCJE, ZRANIENIE_BLOKUJE } from "../config/actions-data.mjs";
 import { bramkaZajeta } from "../config/bramki.mjs";
 import { zadeklaruj, znacznik, FLAG_ZNACZNIK } from "../actors/actions.mjs";
 import { jestEfektemTuryWlasciciela } from "../combat/czas-efektu.mjs";
@@ -23,45 +22,9 @@ export function registerAkcjeTests(quench) {
       if (msgs.length) await ChatMessage.implementation.deleteDocuments(msgs);
     });
 
-    describe("Deklaracja na zapisie znacznika (warstwa 1)", function () {
-      it("pierwsze użycie — bez naruszenia; drugie — powód z poprzednim źródłem", function () {
-        const a = zadeklarujAkcje(null, "R", "Motywacja");
-        expect(a.powody).to.deep.equal([]);
-        expect(a.znacznik).to.deep.equal({ uzycia: [{ zrodlo: "Motywacja" }], limit: 1 });
-        const b = zadeklarujAkcje(a.znacznik, "R", "Inteligentna obrona");
-        expect(b.powody).to.have.length(1);
-        expect(b.powody[0]).to.include("Motywacja").and.include("Inteligentna obrona").and.include("w tej rundzie");
-        expect(zadeklarujAkcje(null, "B", "x").znacznik.uzycia).to.have.length(1);
-        expect(zadeklarujAkcje({ uzycia: [{ zrodlo: "Berserk" }] }, "B", "Kondycha").powody[0]).to.include("w tej turze");
-      });
-
-      it("Obezwładnienie (i stany, które je nadają) — naruszenie już przy pierwszym użyciu (s. 35)", function () {
-        for (const s of ["incapacitated", "unconscious", "stunned", "paralyzed"]) {
-          expect(zadeklarujAkcje(null, "B", "x", { stany: [s] }).powody, s).to.have.length(1);
-        }
-        expect(zadeklarujAkcje(null, "B", "x", { stany: ["prone"] }).powody).to.deep.equal([]);
-      });
-
-      it("Stopnie Zranienia (s. 32): Znaczny zabiera Reakcję, Poważny — Akcję Bonusową, kumulują się", function () {
+    describe("Zasady znaczników (warstwa 1)", function () {
+      it("Stopnie Zranienia (s. 32): Znaczny zabiera Reakcję, Poważny — Akcję Bonusową; arytmetyka pul — paczka ekonomia", function () {
         expect(ZRANIENIE_BLOKUJE).to.deep.equal({ R: 2, B: 3 });
-        expect(zadeklarujAkcje(null, "R", "x", { zranienie: 1 }).powody).to.deep.equal([]);
-        expect(zadeklarujAkcje(null, "R", "x", { zranienie: 2 }).powody[0]).to.include("Znaczny");
-        expect(zadeklarujAkcje(null, "R", "x", { zranienie: 4 }).powody[0]).to.include("Krytyczny");
-        expect(zadeklarujAkcje(null, "B", "x", { zranienie: 2 }).powody).to.deep.equal([]);
-        expect(zadeklarujAkcje(null, "B", "x", { zranienie: 3 }).powody[0]).to.include("Poważny");
-      });
-
-      it("dodatkowa akcja (Zryw) — limit 2, drugie użycie bez naruszenia, trzecie z", function () {
-        const z = dodatkowaAkcja(zadeklarujAkcje(null, "B", "Kondycha").znacznik);
-        expect(z.limit).to.equal(2);
-        const b = zadeklarujAkcje(z, "B", "Ulubiona broń");
-        expect(b.powody).to.deep.equal([]);
-        expect(zadeklarujAkcje(b.znacznik, "B", "Berserk").powody).to.have.length(1);
-        expect(dodatkowaAkcja(null)).to.deep.equal({ uzycia: [], limit: 2 });
-      });
-
-      it("nieznany rodzaj akcji — wyjątek, nie cicha zgoda", function () {
-        expect(() => zadeklarujAkcje(null, "A", "x")).to.throw();
       });
     });
 

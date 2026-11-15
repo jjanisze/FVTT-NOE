@@ -5,8 +5,8 @@
  * Warstwa 3 (dokumenty) na scenie testowej, której nikt nie ogląda ani nie aktywuje: stos poziomów
  * tworzony i aktualizowany w miejscu (poziomy po `_id`, poziom z tokenem nie znika, rzeczy dodane
  * ręcznie zostają), rejestr i API trudnego przejścia, obejście błędu rdzenia z drzewem regionu,
- * „Opuść bezpiecznie”, strefa skażenia i skok (zasięg NOE, rozbieg, kładka, stan sesji i światła
- * przez re-eksport). Okna (rzut gracza, decyzja MG, progi wagi, okno skoku) — e2e i stacja Poligonu.
+ * „Opuść bezpiecznie”, strefa skażenia i skok (kierunek, kładka, stan sesji i światła przez re-eksport;
+ * zasięg, rozbieg i lądowanie — paczka `skok`). Okna (rzut gracza, decyzja MG, progi wagi, okno skoku) — e2e i stacja Poligonu.
  */
 
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup } from "./helpers.mjs";
@@ -149,33 +149,11 @@ export function registerPoziomyTests(quench) {
     });
 
     describe("strefa skażenia i skok", function () {
-      const aktor = (sil, cechy = []) => ({ system: { abilities: { str: { value: sil }, dex: { value: 14 } } },
-        items: cechy.map(id => ({ getFlag: (s, k) => (s === MODULE_ID && k === "abilityId" ? id : undefined) })) });
-
-      it("zasięg NOE przy szczelinie 4,5 m: SIŁ 15 bez rzutu, 13 ST 10, 11 ST 15, 10 nie doskoczy", function () {
-        expect(skok.liczSkok(aktor(15), 4.5, true)).to.include({ potrzeba: 15, st: 0, umiejetnosc: "atl" });
-        expect(skok.liczSkok(aktor(13), 4.5, true).st).to.equal(10);
-        expect(skok.liczSkok(aktor(11), 4.5, true).st).to.equal(15);
-        expect(skok.liczSkok(aktor(10), 4.5, true).st).to.be.null;
-        expect(skok.liczSkok(aktor(20), 4.5, false), "z miejsca nikt").to.include({ potrzeba: 30, st: null });
-        expect(skok.liczSkok(aktor(10), 3, true).st, "3 m = SIŁ 10").to.equal(0);
-      });
-
-      it("Zwinność szczura: ZRC i Akrobatyka zamiast SIŁ i Atletyki", function () {
-        expect(skok.liczSkok(aktor(8, ["zwinnosc-szczura"]), 4.5, true))
-          .to.include({ cecha: "dex", umiejetnosc: "akr", wynik: 14, st: 10 });
-      });
-
-      it("rozbieg: 3 pola prosto przed pierwszym rzędem, z obu stron; skos i postój go zrywają", function () {
-        const zeton = { parent: { grid: { size: G } } };
+      // Zasięg, rozbieg i miejsce lądowania skoku liczy wspólny kalkulator M8 — paczka `skok` (T15–T18).
+      it("kierunek: brodzący w drugą stronę przez rząd skoku nie dostaje okna", function () {
         const pt = (c, r) => ({ x: c * G, y: r * G });
-        // Ruch staje na krawędzi regionu: pół pola przed polem strefy (stąd .5 przy wejściu).
         const ruch = (start, ...wp) => ({ origin: start, passed: { waypoints: wp } });
-        expect(skok.wykryjRozbieg(zeton, ruch(pt(5, 1), pt(5, 4.5)), "S"), "z 1 do 5 na południe").to.be.true;
-        expect(skok.wykryjRozbieg(zeton, ruch(pt(5, 8), pt(5, 5.5)), "N"), "z 8 do 5 na północ").to.be.true;
-        expect(skok.wykryjRozbieg(zeton, ruch(pt(5, 3), pt(5, 4.5)), "S"), "z półki, jedno pole").to.be.false;
-        expect(skok.wykryjRozbieg(zeton, ruch(pt(2, 1), pt(5, 1), pt(5, 4.5)), "S"), "zakręt, 3 pola po nim").to.be.true;
-        expect(skok.wykryjRozbieg(zeton, ruch(pt(2, 3), pt(5.5, 4.5)), "S"), "skosem").to.be.false;
+        expect(skok.zgodnyKierunek(ruch(pt(5, 1), pt(5, 4.5)), "S"), "na południe").to.be.true;
         expect(skok.zgodnyKierunek(ruch(pt(5, 6), pt(5, 5.5)), "S"), "brodzi na północ przez rząd skoku na południe").to.be.false;
       });
 

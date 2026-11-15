@@ -41,6 +41,7 @@ import {
   gripOf, resolve, applyMoves, normalizeMoves, slotsAfterSpend, moveCost, governsEquipped, packCount
 } from "./doll-model.mjs";
 import { handyFamilyOf } from "./handy-items.mjs";
+import { interakcja, akcja } from "./actions.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { POWER_ARMOR_BLOCKS_KOBALT } from "../wkk/config/doll-kobalt.mjs";
 import { ABILITY_KEYS, hasAbility } from "./abilities.mjs";
@@ -483,7 +484,11 @@ async function _commit(actor, moves, options = {}) {
       count: 1, at: options.at, involuntary: options.involuntary, from: g.from, reason: options.reason
     });
   }
-  if (lines.length && !options.quiet && _inCombat(actor)) await _postLines(actor, lines, options);
+  if (lines.length && !options.quiet && _inCombat(actor)) {
+    await _postLines(actor, lines, options);
+    // M8 E4 (§6.2): koszt wykonanego przeniesienia do ledgera — [I] albo Akcje z `moveCost`; mimowolne nic nie kosztują.
+    if (!options.involuntary) await _zaplac(actor, lines);
+  }
   if (options.sound !== false && !options.involuntary && moves.some(m => m.to !== "ground")) playEquipSound(actor);
   return true;
 }
@@ -678,7 +683,8 @@ function _moveLines(actor, moves, options) {
     }
     lines.push({
       item: item.name, img: item.img, from: _placeText(m.from), to: _placeText(m.to),
-      cost: cost.label, why: cost.why, notes, displaced: !!m.displaced
+      cost: cost.label, why: cost.why, notes, displaced: !!m.displaced, kind: cost.kind, actions: cost.actions,
+      uzywanie: m.from === "pack" && !["body", "head", "arms", "legs"].includes(groupOf(m.to) ?? "")
     });
   }
   return lines;
@@ -688,6 +694,17 @@ function _placeText(where) {
   if (where === "pack") return "plecak";
   if (where === "ground") return "ziemia";
   return slotLabel(where).toLowerCase();
+}
+
+/** Koszt wykonanych przeniesień w ekonomii tury M8: [I] (zużyta — Używanie [A]), Akcja × n (pancerz 2/4 — z sygnałem). */
+async function _zaplac(actor, lines) {
+  for (const l of lines) {
+    const zrodlo = `${l.item}: ${l.from} → ${l.to}`;
+    if (l.kind === "interaction") await interakcja(actor, { zrodlo });
+    else if (l.kind === "action" && l.actions > 0) {
+      await akcja(actor, { zrodlo: l.actions > 1 ? `${zrodlo} (${l.actions} Akcje)` : zrodlo, ile: l.actions, ...(l.uzywanie ? { cel: "uzywanie" } : {}) });
+    }
+  }
 }
 
 async function _postLines(actor, lines, options) {

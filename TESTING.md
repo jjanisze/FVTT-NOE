@@ -230,6 +230,17 @@ stosem do `logs/e2e/<przebieg>/<paczka>-writes.json` — sonda „kto pisze do m
 Jednorazowe sprawdzenie w żywej karcie bez chrome-devtools: `npm run fvtt -- eval --profile=sandbox
 --user="Gracz 1" --expr="…"` albo `--file=<skrypt>`.
 
+Paczka `ruch` (MG + Gracz 1, `PLAN_m8_ruch_i_ekonomia_akcji.md` E1–E2, E7): gracz rusza swoim żetonem na oglądanej
+scenie (natywny koszt — rdzeń mierzy koszt tylko wyrenderowanego tokenu), ledger zapisuje MG przez `User#query`; panel
+ruchu i akcji na karcie (prawdziwy klik [Biegnij]); zaplanowana ścieżka w linijce (`_plannedMovement`, zrzut z
+„ponad pulę”); przekroczenie z trwałym ostrzeżeniem i natywne Undo; poza turą — R z powtórzonym id, znacznik R jako
+projekcja i korekta po zdjęciu z HUD; [Skok] — kalkulator na karcie (zrzut), tryb Skok bez kosztu, skok ponad zasięg z
+trwałym ostrzeżeniem; runda 2 — [Wyczekaj], [Pomóż] (zamknięte bez kosztu), w turze BN [Reaguj] → [Biegnij] w tej samej
+reakcji i zamknięcie reakcji ze zmianą tury. Quench `ekonomia` trzyma czysty model (wektory §11) i prawdziwą walkę;
+`skok` — kalkulator NOE i natywny ruch „Skok”; `wyczekanie` — Wyczekanie, Reakcja, Pomaganie i D32; `atakowanie` —
+instancje Atakowania, wybór źródła i prawdziwy rzut ataku (koszt przed oceną, anulowanie bez kosztu); `gotowosc` —
+panel gotowości, sygnały i zegar.
+
 **Reguła:** zmiana dotykająca UI, kanwy, walki, dialogów albo uprawnień graczy nie jest skończona,
 dopóki przebieg warstwy 6 (albo skryptowe sprawdzenie w piaskownicy) tego nie pokaże — ze zrzutem
 ekranu w przekazaniu.

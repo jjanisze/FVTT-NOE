@@ -20,7 +20,8 @@ import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 import { ttSource } from "./tt.mjs";
-import { zadeklaruj } from "./actions.mjs";
+import { zadeklaruj, zmeczenie } from "./actions.mjs";
+import { chwila as chwilaM8, kombatant as kombatantM8 } from "../combat/ekonomia.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -154,6 +155,23 @@ function _announceEnd(actor, effectId, { token } = {}) {
   _postStateCard(actor, cfg, "off");
 }
 
+/**
+ * Rzeczywisty koniec stanu z `afterEnd: "noActionNextTurn"` (Berserk, s. 67; PLAN_m8 D24): karta zmęczenia i zakaz
+ * A/B/I/R w ledgerze do końca następnej własnej tury. Tylko naturalny koniec i drukowane przerwanie — ręczne
+ * wyłączenie i sprzątanie po odpoczynku to korekta, bez świeżej kary.
+ */
+function _zmeczeniePoKoncu(actor, effect) {
+  if (effect.getFlag(MODULE_ID, "afterEnd") !== "noActionNextTurn") return;
+  ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: CARD_STYLE("#e74c3c", {
+      title: "⚠ Zmęczenie po Berserku",
+      body: `${actor.name} nie wykonuje żadnej akcji do końca swojej następnej tury.`
+    })
+  });
+  void zmeczenie(actor, { id: `zmeczenie-${effect.id}` });
+}
+
 /* -------------------------------------------- */
 /*  Public API                                   */
 /* -------------------------------------------- */
@@ -212,6 +230,10 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
     duration.rounds = toggle.duration.rounds;
     if (game.combat) duration.startRound = game.combat.round;
   }
+  // Cykl własnej tury przy wejściu w stan: „10 rund (do końca twojej ostatniej tury)” kończy się po turze cyklu
+  // start + 9 (PLAN_m8 §6.1) — `duration.remaining` sam tego nie wyznacza.
+  const cM8 = kombatantM8(actor);
+  const startCykl = cM8 && toggle.duration?.rounds ? chwilaM8(cM8).cykl : null;
 
   await ActiveEffect.create({
     name: cfg.label,
@@ -225,7 +247,8 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
         classState: effectId,
         abilityId,
         breaksOn: toggle.breaksOn ?? [],
-        afterEnd: toggle.afterEnd ?? null
+        afterEnd: toggle.afterEnd ?? null,
+        ...(startCykl ? { startCykl, rundy: toggle.duration.rounds } : {})
       }
     }
   }, { parent: actor });
@@ -313,6 +336,8 @@ export function registerClassState() {
         ui.notifications?.info(
           `${CLASS_FEATURES[abilityId]?.label ?? "Stan"} przerwany przez: ${status}.`);
         _announceEnd(actor, stateId);
+        // Drukowane przerwanie to też koniec Berserku — zmęczenie (s. 67).
+        _zmeczeniePoKoncu(actor, state);
       }
     }
   });
@@ -336,7 +361,26 @@ export function registerClassState() {
     }
   });
 
-  // Expire states whose duration has run out, and announce the end.
+  // Koniec po ostatniej własnej turze (PLAN_m8 §6.1): stan z `startCykl` kończy się, gdy mija tura cyklu
+  // start + rundy − 1 — na przejściu tury, nie na początku tury, w której `duration.remaining` spadnie do zera.
+  Hooks.on("combatTurnChange", async (combat, prior) => {
+    if (!game.users.activeGM?.isSelf || !prior?.combatantId) return;
+    const combatant = combat.combatants.get(prior.combatantId);
+    const actor = combatant?.actor;
+    if (!actor) return;
+    for (const effect of [...actor.effects]) {
+      const stateId = effect.getFlag(MODULE_ID, "classState");
+      const startCykl = Number(effect.getFlag(MODULE_ID, "startCykl")) || 0;
+      if (!stateId || !startCykl) continue;
+      const ostatnia = startCykl + (Number(effect.getFlag(MODULE_ID, "rundy")) || 10) - 1;
+      if ((Number(prior.round) || 0) < ostatnia) continue;
+      await effect.delete();
+      _announceEnd(actor, stateId, { token: combatant.token?.object });
+      _zmeczeniePoKoncu(actor, effect);
+    }
+  });
+
+  // Expire states whose duration has run out, and announce the end (stany bez `startCykl` — sprzed M8, poza walką).
   Hooks.on("updateCombat", async (combat, changed) => {
     if (!game.user.isGM) return;
     if (!("round" in changed) && !("turn" in changed)) return;
@@ -346,20 +390,11 @@ export function registerClassState() {
       if (!actor) continue;
       for (const effect of [...actor.effects]) {
         const stateId = effect.getFlag(MODULE_ID, "classState");
-        if (!stateId) continue;
+        if (!stateId || effect.getFlag(MODULE_ID, "startCykl")) continue;
         if (effect.duration?.remaining !== null && effect.duration?.remaining <= 0) {
-          const afterEnd = effect.getFlag(MODULE_ID, "afterEnd");
           await effect.delete();
           _announceEnd(actor, stateId, { token: combatant.token?.object });
-          if (afterEnd === "noActionNextTurn") {
-            ChatMessage.create({
-              speaker: ChatMessage.getSpeaker({ actor }),
-              content: CARD_STYLE("#e74c3c", {
-                title: "⚠ Zmęczenie po Berserku",
-                body: `${actor.name} nie wykonuje żadnej akcji do końca swojej następnej tury.`
-              })
-            });
-          }
+          _zmeczeniePoKoncu(actor, effect);
         }
       }
     }

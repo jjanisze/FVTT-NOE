@@ -27,6 +27,7 @@ import { wierszUduszenia } from "./zagrozenia.mjs";
 import { SKAZENIE_DISEASE_THRESHOLD, SKAZENIE_LEVELS } from "../config/levelled-conditions-data.mjs";
 import { dollSheetMixin } from "./doll-panel.mjs";
 import { pasekTowarzyszy } from "./towarzysze-karta.mjs";
+import { panelEkonomii } from "./ekonomia-karta.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ZASOBY_TEMPLATE = `modules/${MODULE_ID}/templates/tab-zasoby.hbs`;
@@ -456,52 +457,6 @@ function _buildFireRow(actor, editable) {
   return row;
 }
 
-/** Akcje ze stanem na żetonie (s. 30, PLAN_m1_walka U8): przełącznik na karcie obok HUD żetonu. */
-const AKCJE_STANU = Object.freeze([
-  { id: "dodging", label: "Unikanie", icon: "fa-person-falling-burst",
-    tip: "Akcja Unikanie: do początku twojej następnej tury ataki przeciw tobie mają Utrudnienie, jeśli widzisz napastnika; Ułatwienie do RO na Zręczność (s. 30)." },
-  { id: "bieganie", label: "Bieganie", icon: "fa-person-running",
-    tip: "Akcja Bieganie: do początku twojej następnej tury +2× Szybkość ruchu i Utrudnienie do twoich Testów Ataku; ataki dystansowe przeciw tobie z Utrudnieniem do końca tej tury (s. 30).",
-    blokada: actor => (actor.statuses?.has("prone") ? "Nie przy Powaleniu (s. 30)." : null) }
-]);
-
-/**
- * Unikanie i Bieganie — tylko w trwającej walce, w której aktor uczestniczy (poza nią nic nie znaczą).
- * Zdejmuje je początek następnej tury właściciela (`actors/tt.mjs`).
- * @param {Actor} actor
- * @param {boolean} editable
- * @returns {HTMLElement|null}
- */
-function _buildAkcjeRow(actor, editable) {
-  const combat = game.combat;
-  if (!combat?.started || !combat.getCombatantsByActor?.(actor)?.length) return null;
-  const row = document.createElement("div");
-  row.className = "neuro-stan-row neuro-stan-akcje";
-  for (const a of AKCJE_STANU) {
-    const on = actor.statuses?.has(a.id);
-    const blokada = !on ? a.blokada?.(actor) ?? null : null;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `neuro-akcja-btn${on ? " active" : ""}`;
-    btn.dataset.akcja = a.id;
-    btn.innerHTML = `<i class="fa-solid ${a.icon}" inert></i>`;
-    const label = document.createElement("span");
-    label.textContent = a.label;
-    btn.appendChild(label);
-    btn.setAttribute("data-tooltip", blokada ? `${a.tip}<br><strong>${blokada}</strong>` : a.tip);
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
-    btn.disabled = !editable || !!blokada;
-    if (editable && !blokada) btn.addEventListener("click", async ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      btn.disabled = true;
-      await actor.toggleStatusEffect(a.id);
-    });
-    row.appendChild(btn);
-  }
-  return row;
-}
-
 /**
  * BN przy 0 PW poza maszyną umierania (PLAN_m1_walka D2) — ten sam ruch co [Rzuty przeciw śmierci]
  * na karcie „BN pada”, na później („chcemy go przesłuchać”). Tylko MG.
@@ -562,7 +517,8 @@ function _buildStanPanel(actor, tracks) {
   const oddech = wierszUduszenia(actor, actor.isOwner);
   if (oddech) body.appendChild(oddech);
 
-  const akcje = _buildAkcjeRow(actor, actor.isOwner);
+  // Ekonomia tury M8 (PLAN_m8 §8.1): ruch, A/B/R/I i deklaracje — w walce, bez makr.
+  const akcje = panelEkonomii(actor, actor.isOwner);
   if (akcje) body.appendChild(akcje);
 
   if (game.user.isGM && actor.type === "npc" && !wMaszynie(actor) && (actor.system.attributes?.hp?.value ?? 1) <= 0) {

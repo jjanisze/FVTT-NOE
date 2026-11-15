@@ -8,7 +8,7 @@
  *   - **aktywność [B] Twardziela** (pasek skrótów) — okno wyboru części dla jedynego wycelowanego żetonu, zamiar na
  *     atakującym; Akcję Bonusową zaznacza warstwa akcji (`actors/actions.mjs`) przy użyciu aktywności;
  *   - **okno ataku** — pole „Celuję w…” (każdy z Przycelowaniem: Twardziel i Sztuczka), z zamiarem jako domyślnym;
- *     wybór bez wcześniejszego zamiaru zaznacza Akcję Bonusową przy rzucie;
+ *     wybór bez wcześniejszego zamiaru dokłada B do zapisu tej próby ataku (M8, `combat/atakowanie.mjs`);
  *   - **API** `game.neuroshima.przycelowanie.wyceluj(actor, czesc)` — makra i e2e (rzut bez okna bierze zamiar).
  * Zamiar dotyczy jednego żetonu i tej samej tury; pierwszy rzut ataku go zużywa.
  *
@@ -189,12 +189,13 @@ function _onPostConfig(rolls, config) {
   if (Number.isFinite(roll.options.target)) roll.options.target += d.tt;
 }
 
-/** `dnd5e.rollAttack` — Akcja Bonusowa, jeśli nikt jej jeszcze nie zaznaczył; zamiar zużyty. */
+/**
+ * `dnd5e.rollAttack` — zamiar zużyty. Akcję Bonusową wyboru z okna (bez wcześniejszego zamiaru) liczy zapis ataku M8
+ * razem ze źródłem ataku, przed oceną rzutu (`combat/atakowanie.mjs`, §7.4: A+B albo 2B), nie osobny debet po rzucie.
+ */
 async function _onRollAttack(rolls, { subject } = {}) {
   const actor = subject?.actor;
   if (!actor?.isOwner) return;
-  const p = rolls?.[0]?.options?.[PRZYCELOWANIE_OPT];
-  if (p?.czesc && !p.deklarowane) await zadeklaruj(actor, "B", { zrodlo: `Przycelowanie (${p.label})` });
   if (actor.getFlag(MODULE_ID, FLAG_ZAMIAR)) await actor.unsetFlag(MODULE_ID, FLAG_ZAMIAR);
 }
 

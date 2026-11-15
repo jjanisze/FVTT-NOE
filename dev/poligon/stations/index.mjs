@@ -25,10 +25,11 @@ import poziomy from "./poziomy.mjs";
 import poscig from "./poscig.mjs";
 import galeria from "./galeria.mjs";
 import salaProb from "./sala-prob.mjs";
+import ruch from "./ruch.mjs";
 
 export const STATIONS = Object.freeze([
   hangar, magazyn, plac, strzelnica, garderoba, ciemnia, lazaret, bazar, zlomowisko,
-  arena, bestiariusz, kuznia, kreator, droga, garaz, stajnia, poziomy, poscig, galeria, salaProb
+  arena, bestiariusz, kuznia, kreator, droga, garaz, stajnia, poziomy, poscig, galeria, salaProb, ruch
 ]);
 
 export const station = id => STATIONS.find(s => s.id === id) ?? null;

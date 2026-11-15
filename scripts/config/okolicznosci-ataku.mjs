@@ -72,6 +72,8 @@ const _num = v => (v === null || v === undefined || v === "" || !Number.isFinite
  * @property {Uczestnik[]} [wrogowieObok]  przeciwnicy ≤ 1,5 m od atakującego (filtr U7 robi silnik)
  * @property {boolean|null} [celPochwytuje] czy cel trzyma atakującego; null — nie wiadomo
  * @property {boolean} [turaCelu]          trwa tura celu
+ * @property {boolean} [biegWReakcji]      cel wykonuje Bieganie w trwającej Reakcji (D32 — ochrona do końca tej reakcji)
+ * @property {boolean} [wkkD32]            konwencja D32 (Kobalt, zasada 47); `false` — ochrona w Reakcji tylko jako uwaga
  * @property {StanBroni} [bron]            właściwości i oparcie broni (s. 117)
  * @property {{id: string, rodzaj: string, label: string, strona?: string}[]} [zewnetrzne]
  *
@@ -224,7 +226,13 @@ export const ZRODLA_OKOLICZNOSCI = _f([
   _f({ id: "celUnika", rodzaj: "utrudnienie", label: "Cel Unika", strona: "s. 30", cel: true,
     gdy: s => !s.bron?.ukrytyCel && _unikanieDziala(s.cel, s.atakujacy) }),
   _f({ id: "celBiegnie", rodzaj: "utrudnienie", label: "Cel Biegnie (jego tura)", strona: "s. 30", cel: true,
-    gdy: s => !s.wrecz && ma(s.cel, "bieganie") && !!s.turaCelu })
+    gdy: s => !s.wrecz && ma(s.cel, "bieganie") && !!s.turaCelu }),
+  // D32 (WKK, Kobalt 47): Bieganie wykonane w Reakcji chroni do końca tej reakcji — osobny dowód, nie udawana „tura
+  // celu”. Bez Kobaltu: uwaga do rozstrzygnięcia przy stole zamiast innej ukrytej interpretacji.
+  _f({ id: "celBiegnieReakcja", rodzaj: "utrudnienie", label: "Cel Biegnie (w swojej Reakcji)", strona: "s. 30", cel: true,
+    gdy: s => !s.wrecz && ma(s.cel, "bieganie") && !s.turaCelu && !!s.biegWReakcji && s.wkkD32 !== false }),
+  _f({ id: "celBiegnieReakcjaReczne", rodzaj: "uwaga", label: "Cel Biegnie w swojej Reakcji — ochronę rozstrzygnij ręcznie (Kolor Kobaltu wyłączony)",
+    strona: "s. 30", cel: true, gdy: s => !s.wrecz && ma(s.cel, "bieganie") && !s.turaCelu && !!s.biegWReakcji && s.wkkD32 === false })
 ]);
 
 /** Tryb jak `ADV_MODE` dnd5e: 1 Ułatwienie, −1 Utrudnienie, 0 zwykły (oba znoszą się). */

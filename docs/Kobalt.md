@@ -112,6 +112,9 @@ wyłączeniu; „—” znaczy: to samo, bo zasada działa zawsze.
 | 42 | Smaczki postaci: Żeton Luxor i gadżety | żeton kasyna za 10 gb, cztery przedmioty, które hałasują | — | zawsze |
 | 43 | Lek na Hemofilię zatrzymuje każde krwawienie | dawka Desmopresyny albo preparatów krwiopochodnych zatrzymuje jedno wybrane krwawienie dowolnego rodzaju | lek zatrzymuje tylko Krwawienie (Hemofilia) | Kolor Kobaltu |
 | 44 | Fechmistrz: 30 h treningu na zmianę broni | zmiana broni Mistrza broni białej to 30 h treningu z nową bronią w godzinach pracy postoju | zmiana po jednym Długim odpoczynku z treningiem | Kolor Kobaltu |
+| 45 | Ruch w walce: zbieg Szybkości i grantów | grant ruchu stały i przypisany do wybranej Szybkości; zmiana Szybkości odejmuje wspólny wcześniejszy koszt; ruch w Reakcji tylko ze świeżego grantu | w takiej sytuacji licznik ruchu „rozstrzygnij ręcznie”, bez zielonego potwierdzenia | Kolor Kobaltu |
+| 46 | Skok Gladiatora: obrażenia | 1k6 za każde pełne 3 m dłuższej składowej skoku (długość albo wysokość), bez sumowania i zaokrąglania w górę | RO i Powalenie działają, liczbę kości rozstrzyga stół | Kolor Kobaltu |
+| 47 | Bieganie w Reakcji: ochrona przed ostrzałem | Utrudnienie ataków dystansowych przeciw biegnącemu do końca reakcji, w której biegł | okno ataku pokazuje uwagę „rozstrzygnij ręcznie”, bez Utrudnienia | Kolor Kobaltu |
 
 ## Zasady
 
@@ -649,6 +652,54 @@ kolejne Długie odpoczynki — zajęcie „Fechmistrz — trening z nową broni�
 
 Bez Kobaltu to samo zajęcie zmienia broń po tym jednym odpoczynku. Pierwszy wybór (zaraz po wzięciu Sztuczki) działa
 tak samo w obu.
+
+✅ *Zaimplementowane.*
+
+### 45. Ruch w walce: zbieg Szybkości i grantów
+<!-- kod: scripts/wkk/config/ruch-kobalt.mjs (RUCH_KOBALT), scripts/config/ekonomia-data.mjs (budzetRuchu) -->
+
+Podręcznik (s. 26, 29–30) mówi, ile ruchu dają Szybkość, Przyspieszenie i Bieganie, ale nie, co się dzieje, gdy te
+źródła spotkają się w jednej turze. Licznik ruchu na karcie i linijka (`PLAN_m8_ruch_i_ekonomia_akcji.md`) przyjmują
+z Kobaltem cztery konwencje MG:
+
+- **grant zostaje liczbą z chwili wykonania** — po Przyspieszeniu przy Szybkości 9 (+9) rana −4,5 m zmienia tylko
+  bazę: 3 m przebyte, zostaje 10,5 z 13,5 (D14);
+- **zmiana rodzaju Szybkości odejmuje wspólny wcześniejszy koszt** — chód 9 / pływanie 18: po 6 m chodu zostaje 12 m
+  pływania (D17, jak SRD 5.2.1 s. 188);
+- **grant jest przypisany do wybranej Szybkości** — Przyspieszenie chodu +9 nie powiększa osobnej Szybkości pływania
+  (D31);
+- **ruch w Reakcji tylko ze świeżego grantu** — wyczekane Bieganie przy Szybkości 9 daje 18 m, bez starej reszty i
+  starszych grantów (D30).
+
+Bez Kobaltu nic nie jest podstawiane w zamian: w sytuacji, której dotyczy wyłączona konwencja, licznik ruchu pokazuje
+„rozstrzygnij ręcznie” (z opisem, czego dotyczy), a linijka nie koloruje trasy. Drukowane wartości — Szybkość,
++1× / +2× Szybkości, teren — liczą się zawsze.
+
+✅ *Zaimplementowane.*
+
+### 46. Skok Gladiatora: obrażenia
+<!-- kod: scripts/wkk/config/skok-kobalt.mjs (SKOK_KOBALT), scripts/config/skok-data.mjs (kosciGladiatora) -->
+
+Zew areny (s. 70) daje w Berserku Skok Gladiatora: istota na polu lądowania robi RO na Siłę, a przy porażce dostaje
+Powalenie i „1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości” skoku. Podręcznik nie mówi, czy długość i
+wysokość się sumują ani co z niepełnymi 3 m. Z Kobaltem liczy się **dłuższa składowa, w dół do pełnych 3 m**:
+2,9 m → 0k6, 3 m → 1k6, 4,5 m w dal i 3 m w górę → 1k6, 6 m → 2k6 (D33). Brak kości nie znosi Powalenia.
+
+Bez Kobaltu karta skoku nadal prowadzi RO i Powalenie (to jest w druku), a w miejscu liczby kości pisze „rozstrzygnij
+ręcznie” — moduł nie podstawia innego odczytu.
+
+✅ *Zaimplementowane.*
+
+### 47. Bieganie w Reakcji: ochrona przed ostrzałem
+<!-- kod: scripts/wkk/config/reakcja-kobalt.mjs (REAKCJA_KOBALT), scripts/config/okolicznosci-ataku.mjs (celBiegnieReakcja) -->
+
+Bieganie (s. 30) daje Utrudnienie atakom dystansowym przeciw biegnącemu „do końca twojej bieżącej tury”. Podręcznik nie
+mówi, co, gdy biegnie się jako wyczekana akcja w Reakcji — w cudzej turze. Z Kobaltem ochrona trwa **do końca tej
+reakcji**: [Zakończ reakcję] na karcie albo najpóźniej koniec tury, w której reakcja się wydarzyła. Nie do końca cudzej
+tury i nie dłużej (D32).
+
+Bez Kobaltu okno ataku na takiego biegacza pokazuje uwagę „rozstrzygnij ręcznie” i nie dokłada Utrudnienia. Ochrona we
+własnej turze biegnącego jest w druku i działa zawsze.
 
 ✅ *Zaimplementowane.*
 

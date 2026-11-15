@@ -68,7 +68,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Latanie | ✅ | `actors/latanie.mjs` (M6 E5, e2e `latanie`) |
 | | Pływanie, walka pod wodą, wspinaczka | 🟡 | `scenes/woda.mjs`, `wspinaczka.mjs` (M6 E6, e2e `woda`), `docs/Ruch-i-teren.md`; w walce karty same, poza walką na żądanie MG (U15); Regiony wody z eksportu map — `TODO.md` repo map, dziś MG rysuje je ręcznie |
 | | Walka na wierzchowcu | ✅ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3, W0–W5): koń z Bestiariusza to nośnik jak pojazd — jeździec widoczny w siodle (`pojazdy/stan.mjs`, `jadacy.mjs`), Inicjatywa jeźdźca przez kotwicę tury (`combat/kotwica-tury.mjs`), akcje wierzchowca w palecie (`pojazdy/paleta.mjs`), utrzymanie się w siodle i atak z grzbietu (`jadacy.mjs`, `jazda.mjs`), Jeździec, Rodeo i Zawsze w siodle (`pojazdy/jezdziec.mjs`); stanowisko Poligonu Stajnia; e2e `wierzchowiec`. żetony koni z góry z siodłem na dwoje (2026-10-31); pościg konny — po becie (W-P1) |
-| | Skakanie | ❌ | `HANDOFF_movement_hotbar.md` (Region `skok` już działa) |
+| | Ruch w turze i ekonomia akcji (M8) | 🟡 | Ledger walczącego: wspólne A/B/R/I, granty (Zryw, Szybkie ręce), zakazy (rany, Obezwładnienie, zmęczenie po Berserku), ruch z natywnej historii z Undo, Przyspieszenie/Bieganie/Unikanie/Odstąpienie/Padnij/Powstań z karty, ruch w Reakcji, linijka z budżetem, korekty — `config/ekonomia-data.mjs`, `combat/ekonomia*.mjs`, `actors/ekonomia-karta.mjs`, `actors/actions.mjs`. skok NOE (karta, Region, ruch „Skok”, lądowanie, Skok Gladiatora — `combat/skok.mjs`, `config/skok-data.mjs`), Pomaganie, Wyczekanie i Reakcja (`combat/pomaganie.mjs`, `actors/actions.mjs`), Atakowanie ze slotami i „Sposób ataku” (`combat/atakowanie.mjs`), panel gotowości z zegarem (`combat/gotowosc.mjs`). Zostaje: Nożownik bez celu, manewry w slocie, historia serii aktora, paleta i pasek — `PLAN_m8_ruch_i_ekonomia_akcji.md` §13 |
+| | Skakanie | ❌ | `PLAN_m8_ruch_i_ekonomia_akcji.md` (handoff do implementacji; Region `skok` już działa) |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
 | | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami (dym awarii 5 — Region i Oślepienie zakrytych), wrak i wybuch baku, broń montowana (ręce w lalce), paleta kierowcy (akcje cech, bieg wsteczny), Wojownik autostrady; jadący rysowany jak na mapie, skala grafiki istot (ustawienie świata, f = 0,8) i pojazdy ×1,1 | ✅ | `scripts/pojazdy/*`, `scenes/skala-istot.mjs`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`, `pojazd-paleta`, `pojazd-prezentacja`, `garaz-grafika`. Grafika gotowa; 7 dźwięków do dostawy (MISSING §P) |
 | | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ✅ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2.5, P5–P6): tura pościgu z budżetem w znacznikach i zapasem, karta Testu Pościgu, komplikacje k20 z [Zastosuj], atak na kierowcę, RO pojazdu ze Slalomem, wręcz na znaczniku, dryf drogi, Za kierowcą, koniec pościgu i meta (`scenes/poscig-tura.mjs`, `poscig-zasady.mjs`), manewry w palecie kierowcy (`pojazdy/paleta.mjs`); stanowisko Poligonu Pościg (Start–meta); e2e `poscig-p5` |
@@ -1212,6 +1213,138 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M8 — koszty oporządzenia w ledgerze (E4, lalka) (2026-11-15)
+
+- Wykonane przeniesienie na lalce w walce zapisuje koszt z `moveCost` (`actors/doll.mjs`, dawniej tylko pokazywany):
+  [I] — Darmowa interakcja, a gdy już zużyta w tej turze — Używanie [A] (`actions.interakcja`, pokrywa je ograniczony
+  grant Szybkich rąk); plecak → Akcja (Używanie); pancerz — `donTime` Akcji naraz z sygnałem przekroczenia. Ciche
+  (porządkowanie) i mimowolne (Wytrącenie) przenosiny nic nie kosztują.
+- Testy: Quench `atakowanie` (dobycie [I], druga interakcja [A], plecak [A]), `lalka` 61/61 bez zmian.
+- Końcowa weryfikacja M8 (2026-11-15): Quench 1610/1610; e2e `ruch`, `combat`, `aktywnosci`, `improwizacja`, `dron`,
+  `sztuczki-ataki`, `sztuczki-8c`, `zdolnosci-walka`, `poligon` zielone. Utrwalone dwa kruche kroki e2e: `turaGracza`
+  w `zdolnosci-walka` idzie zawsze do przodu (kolejność inicjatywy zależy od niestałej kolejności żetonów), `sztuczki-8c`
+  czeka na przedmioty dodane przez MG po stronie gracza.
+
+### M8 — pasek: skróty z panelu i trwałe usunięcia (E7, część) (2026-11-15)
+
+- **Przyciski panelu Stan** (Przyspiesz, Biegnij, Unik, Odstąp, Padnij/Powstań, Skok, Pomóż, Wyczekaj, Reaguj) dają się
+  przeciągnąć na pasek makr — makro `game.neuroshima.skroty.uzyj("…")` wykonuje tę samą operację dla przypisanej postaci.
+- **Usunięte makro zdolności nie wraca samo** (`actors/ability-hotbar.mjs`): zdjęcie z paska albo skasowanie makra przez
+  gracza zapisuje zdolność na liście użytkownika (w tej samej aktualizacji — `preUpdateUser`); przeniesienie na inne
+  pole to nie usunięcie; nowo zdobyte zdolności nadal trafiają na pasek. Jawne przywrócenie: `api.hotbar.restore()`
+  (zwraca, co wróciło i czemu zabrakło miejsca).
+- Testy: Quench `pasek-m8` (T43). Sześć szablonów paska z onboardingiem — jeszcze nie.
+
+### M8 — gotowość do tury: panel, dwa sygnały, zegar (E8) (2026-11-15)
+
+Plan: `PLAN_m8_ruch_i_ekonomia_akcji.md` §8.4, §13; dla graczy — [docs/Ruch-i-teren.md](docs/Ruch-i-teren.md).
+Testy: Quench `gotowosc` (T44, T45: pozycja w widocznej kolejności, sygnały raz na instancję, zegar minus pauzy, wyciszenie rdzenia, panel w prawdziwej walce).
+
+Co zobaczy stół:
+- **Pasek u góry ekranu** (gracz, podmiot — przypisana postać; inni własni bohaterowie — opcja klienta): „Twoja tura
+  za X” w widocznej kolejności (ukryci nie liczą się, pokonani pomijani przy „pomijaj pokonanych”), „Gotuj się, jesteś
+  następny” i „Twoja tura” z zegarem `m:ss.cc` (żółty po 30 s, czerwony po 60 s, bez syreny i kar).
+- **Dwa sygnały raz na instancję tury** (rerender, efekty, ruch nic nie powtarzają); wejście w środku tury pokazuje
+  zegar „od wejścia” bez fałszywego startu; po przeładowaniu w tej samej turze zegar wraca z pamięci sesji karty.
+- **Pauza** zatrzymuje zegar i animację; w pauzie bez świeżych sygnałów, po wznowieniu najwyżej aktualny.
+- **Dźwięki z motywu walki rdzenia**, ale M8 jest ich jedynym właścicielem: rdzeniowe „nextUp”/„yourTurn” są wyciszone
+  przy włączonym panelu (MG z wszystkimi BN nie słyszy sygnału przy każdym). Ustawienia klienta: panel, dźwięki,
+  głośność, animacja, inni bohaterowie.
+
+### M8 — Atakowanie: instancje, „Sposób ataku”, koszt przy rzucie (E6, rdzeń) (2026-11-15)
+
+Plan: `PLAN_m8_ruch_i_ekonomia_akcji.md` §7, §13; dla graczy — [docs/TT-i-reakcje.md](docs/TT-i-reakcje.md#ile-kosztuje-atak-atakowanie).
+Testy: Quench 1610/1610 (nowa paczka `atakowanie`: wektory T30–T34, T36, T41 i prawdziwy rzut — nowa A, kontynuacja przy Drugim ataku, anulowanie bez kosztu, atak w R); e2e `ruch` (okno ataku gracza: „Sposób ataku”, plakietka kosztu), `combat`, `zdolnosci-*`, `sztuczki-ataki`, `sztuczki-8c`, `dron`, `towarzysz`.
+
+Co zobaczy stół:
+- **Atak kosztuje teraz akcję w liczniku**: jedna A to instancja Atakowania z tyloma atakami, ile daje Drugi/Trzeci atak
+  (1/2/3, nie sumują się); kolejny atak w turze kontynuuje ją także po ruchu, zmianie celu albo innej A w środku (D22).
+- **Pole „Sposób ataku”** w oknie Testu Ataku: kontynuacja, nowa A, posiadane źródła B (Nożownik, Promocja, Ulubiona
+  broń — z weryfikacją; niespełniony warunek to opcja z ostrzeżeniem), R poza turą. Domyślny wybór (§7.2) ten sam
+  w szybkim rzucie; Nożownik ma pierwszeństwo wśród sprawdzonych B; niedozwolonego B moduł nie podstawia.
+- **Koszt liczy się przy rzucie**, po końcowej konfiguracji, przed oceną (opakowanie `D20Roll.buildEvaluate` dla
+  ataków): zamknięte okno albo anulowanie przez inny hak nic nie kosztuje; Fuks i obrażenia — bez nowej akcji.
+  Karta ataku ma plakietkę z kosztem i ostrzeżeniami.
+- **Przyciski [B] pod kartą** (Ulubiona broń, Promocja, Nożownik) nie płacą już przed oknem: B liczy zapis ataku z
+  jawnym zamiarem tej karty; aktywność [B] i Zamaszysty cios — „koszt już zapłacony”. Przycelowanie wybrane w oknie
+  dolicza B do tej samej próby (A+B, 2B przy Nożowniku) zamiast osobnego zapisu po rzucie.
+- Broń pojazdu i drona nie obciąża puli nośnika (to akcja strzelca/operatora).
+
+### M8 — Pomaganie, Wyczekanie i Reakcja (E5) (2026-11-15)
+
+Plan: `PLAN_m8_ruch_i_ekonomia_akcji.md` §4.3, §6.3–§6.4, §13; dla graczy — [docs/Ruch-i-teren.md](docs/Ruch-i-teren.md)
+(„Ruch i akcje w turze”). Testy: Quench `wyczekanie` (nowa paczka, 11), e2e `ruch` (12 kroków — w tym [Wyczekaj],
+[Pomóż], [Reaguj] → [Biegnij] w tej samej reakcji, zamknięcie reakcji ze zmianą tury).
+
+Co zobaczy stół:
+- **[Pomóż]** w panelu Stan (s. 30): test — biegłość pomagającego i sojusznik, test ST 10; sukces daje sojusznikowi
+  Ułatwienie w następnym teście tej samej umiejętności/narzędzia (najpóźniej do początku następnej tury pomagającego),
+  porażka — A przepada. Atak — wróg do 1,5 m od pomagającego (cel z celowania), Ułatwienie w następnym ataku sojusznika
+  na niego, bez wymyślonego terminu. Słownie — sama A. Pomoc zużywa faktyczny zgodny rzut sojusznika (także gdy
+  Utrudnienie ją znosi), nie otwarcie okna; plakietka „Pomaganie” w oknie testu i w silniku okoliczności ataku.
+- **[Wyczekaj]** (A, notatka i czynność opcjonalne, bez akceptacji MG) i **[Reaguj]**: wykonanie przygotowania za R,
+  uzbrojenie następnej akcji w R (także we własnej turze), reakcja zagrana słownie. Po wykonaniu przygotowania
+  Biegnij/Przyspiesz/przedmiot/Pomóż należą do tej reakcji — bez drugiej R; dwa przygotowania dzielą jedną R;
+  nowa tura kończy przygotowanie bez zwrotu A.
+- **Akcja przedmiotu poza własną turą** to wykonanie wyczekanej akcji: R zamiast A (T41). B tak nie przechodzi.
+- **Reakcja kończy się najpóźniej z końcem tury**, w której się wydarzyła (jeśli nikt nie kliknął [Zakończ reakcję]).
+- **Bieganie w Reakcji** chroni przed ostrzałem do końca tej reakcji (D32 — **WKK, zasada 47**; bez Kobaltu uwaga
+  „rozstrzygnij ręcznie” w oknie ataku). Własna tura biegnącego jak dotąd.
+- **Zryw poza własną turą** — ostrzeżenie na karcie Zrywu (D23).
+
+### M8 — skok (E3) (2026-11-15)
+
+Plan: `PLAN_m8_ruch_i_ekonomia_akcji.md` §4.5, §13; dla graczy — [docs/Ruch-i-teren.md](docs/Ruch-i-teren.md) („Skok”).
+Testy: Quench 1595/1595 (nowe paczki `skok` i `wyczekanie`), e2e `ruch` (krok skoku gracza, zrzut kalkulatora), `dron`, `poligon`.
+
+Co zobaczy stół:
+- **Jeden kalkulator skoku NOE** (s. 256, 70, 94) dla karty, Regionu, natywnego ruchu „Skok” i makr
+  (`game.neuroshima.skok`): w dal 0,3 m × SIŁ po ≥ 3 m rozbiegu (z miejsca połowa), wzwyż (2 + mod. SIŁ) × 0,3 m,
+  sięgnięcie z wzrostu; Skoczek — w dal z ZRC; Skok Gladiatora (Zew areny w Berserku) ×2. Bez zaokrąglania do pól.
+  Istoty z Bestiariusza skaczą według opisu — bez ludzkiego wzoru.
+- **[Skok] w panelu Stan**: tabela zasięgów i „Tryb Skok na żetonie” (wybór trybu nic nie kosztuje). Skok kosztuje
+  1:1 (dnd5e), rozbieg liczy się z dystansu zwykłego ruchu tuż przed skokiem, także z kilku przeciągnięć. Skok dalej
+  niż zasięg albo bez rozbiegu — trwałe ostrzeżenie w ledgerze i na karcie (poza walką wiadomość), ruch nieblokowany.
+- **Lądowanie po skoku w dal na trudnym terenie** — karta z testem Akrobatyki ST 10, porażka — Powalenie.
+- **Skok Gladiatora** na pole istoty (najwyżej o rozmiar większej) — karta MG: RO na Siłę ST 8 + SIŁ + PB, porażka:
+  Powalenie i karta obrażeń; sam skok nie wydaje akcji. **WKK, zasada 46**: z Kobaltem 1k6 za każde pełne 3 m dłuższej
+  składowej (D33); bez — RO i Powalenie, kości „rozstrzygnij ręcznie”.
+- **Region `skok`** liczy tym samym kalkulatorem: bez dawnych ST 10/15 za brakujący zasięg i marginesu porażki; za
+  krótki skok ląduje w tym polu wyrwy, do którego sięga (karta strefy i test lądowania), koszt skoku trafia do ruchu.
+- Plakietki Zewu areny i Zwinności szczura opisują nową automatykę (paczka `zdolnosci-klasowe` przebudowana).
+
+Przy okazji (e2e `dron`): OSD drona trzyma co najmniej 44 kolumny (w wąskim/pionowym oknie mniejszy znak zamiast
+zgubionej nazwy i akcji nachodzących na PW) i zaczyna się pod nawigacją scen; runner e2e nie robi okien wyższych niż
+4:3; `clickCanvas` czeka na koniec przewijania przy krawędzi (wskaźnik nowej karty stoi w rogu) — klik nie trafia już
+o pole obok.
+
+### M8 — ekonomia tury i ruch: etapy E1–E2, część E4 i E7 (2026-11-15)
+
+Przebieg, odkryte pułapki i co zostaje: `PLAN_m8_ruch_i_ekonomia_akcji.md` §13; dla graczy — [docs/Ruch-i-teren.md](docs/Ruch-i-teren.md)
+(„Ruch i akcje w turze”). Testy: Quench 1573/1573 (nowa paczka `ekonomia`), e2e `ruch` (nowa), `poligon` (wszystkie stanowiska) i regresja `combat`,
+`zdolnosci-*`, `sztuczki-*`, `towarzysz`, `umieranie` zielone; stanowisko Poligonu `ruch` (15 prób).
+
+Co zobaczy stół:
+- **Panel ruchu i akcji na karcie** (Stan, w walce): pozostały ruch w bieżącym trybie i A/B/R/I jako pozostałe/pojemność
+  (przekroczenie — wartość ujemna), przyciski Przyspiesz, Biegnij, Unik, Odstąp, Padnij/Powstań, [Skoryguj] i
+  [Zakończ reakcję]; trwałe ostrzeżenia ruchu. Dawne przełączniki Unikanie/Bieganie zastąpione deklaracjami (koszt,
+  grant, stan raz).
+- **Linijka przy przeciąganiu** w swojej turze albo reakcji: zielone pola w znanej puli, czerwone poza nią, etykieta
+  „zostaje X m” / „ponad pulę −X m”. Ruch nie jest skracany ani blokowany; ponad pulę — wiadomość u ruszającego.
+- **Ruch liczony z natywnej historii** (teren, czołganie, dopłaty dnd5e), Ctrl+Z ruchu zwraca koszt w swojej turze;
+  czyszczenie historii przez rdzeń na początku tury niczego nie odnawia. Poza własną turą zwykły ruch nie istnieje;
+  Biegnij/Przyspiesz poza turą idą w Reakcji ze świeżym grantem.
+- **Zryw:** najpierw wybór A albo B, potem zużycie (zamknięcie okna nic nie zużywa); **Szybkie ręce:** jedna A tylko do
+  Używania; **Berserk** kończy się po 10. własnej turze i zakazuje A/B/I/R do końca następnej tury (ruch zostaje).
+- **Znaczniki R/B** to widok ledgera; zdjęcie albo założenie ich w HUD-zie to korekta, nie nowa akcja. Teraz mają
+  `_id` stanu, więc HUD je widzi (wcześniej kliknięcie w HUD zakładało drugi znacznik).
+- **WKK, zasada 45** (Kolor Kobaltu): granty stałe i przypisane do Szybkości, wspólny koszt przy zmianie trybu, ruch w
+  Reakcji tylko ze świeżego grantu; bez Kobaltu — „rozstrzygnij ręcznie” zamiast cichej interpretacji.
+- Nowy rodzaj trudnego terenu „Schody” w Regionie dnd5e (obok gruzu itd.).
+
+Dla MG — kopie zdolności na kartach (plakietki Zrywu i Szybkich rąk): `await game.neuroshima.zdolnosci.resync()`, potem
+`resync({ commit: true })`.
 
 ### Dogrywka Sztuczek — krok 8c (2026-11-02)
 

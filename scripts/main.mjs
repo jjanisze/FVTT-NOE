@@ -52,6 +52,12 @@ import { registerMaszyny, maszynyApi } from "./combat/maszyny.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerActions, actionsApi } from "./actors/actions.mjs";
+import { registerEkonomiaLinijka } from "./combat/ekonomia-linijka.mjs";
+import { registerEkonomiaKarta, uzyjSkrotu } from "./actors/ekonomia-karta.mjs";
+import { registerSkok, skokApi } from "./combat/skok.mjs";
+import { registerPomaganie, pomaganieApi } from "./combat/pomaganie.mjs";
+import { registerAtakowanie, atakowanieApi } from "./combat/atakowanie.mjs";
+import { registerGotowosc, gotowoscApi } from "./combat/gotowosc.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
 import { registerClassMigration } from "./migration/migrate-classes.mjs";
 import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mjs";
@@ -295,6 +301,17 @@ Hooks.once("init", () => {
   registerClassState();
   // Znaczniki Reakcji i Akcji Bonusowej (PLAN_m7 §3.0.1) — natywne aktywności [R]/[B] i lejek dla przepływów modułu.
   registerActions();
+  // M8: linijka ruchu z budżetem ledgera (rozszerza linijkę dnd5e; podświetlenie terenu rozszerza ją dalej w `setup`).
+  registerEkonomiaLinijka();
+  registerEkonomiaKarta();
+  // M8 E3: skok NOE — zasięg i rozbieg natywnego ruchu „Skok”, lądowanie, Skok Gladiatora; Region `skok` z tego samego kalkulatora.
+  registerSkok();
+  // M8 E5: Pomaganie (s. 30) — test ST 10 albo atak; Ułatwienie na sojuszniku do zużycia zgodnym rzutem.
+  registerPomaganie();
+  // M8 E6: Atakowanie — instancje A ze slotami, „Sposób ataku” w oknie, koszt po konfiguracji, przed oceną rzutu.
+  registerAtakowanie();
+  // M8 E8: panel gotowości (Twoja tura za X / następny / zegar tury), dwa lokalne sygnały zamiast rdzeniowych.
+  registerGotowosc();
   registerClassResourceDice();
   registerAbilityHotbar();
   registerClassMigration();
@@ -606,8 +623,19 @@ Hooks.once("ready", () => {
   game.neuroshima.tt = ttApi;
   // Reakcje celu — game.neuroshima.obrona.setTargets(message), .execute(message, tokenUuid, id)
   game.neuroshima.obrona = obronaApi;
-  // Warstwa akcji (PLAN_m7 §3.0.1) — game.neuroshima.actions.zadeklaruj(actor, "R"|"B", { zrodlo }), .znacznik(actor, "R")
+  // Warstwa akcji (PLAN_m7 §3.0.1, ledger M8) — game.neuroshima.actions.zadeklaruj(actor, "A"|"B"|"R"|"I", { zrodlo }),
+  // .deklaruj(actor, "bieganie"), .stan(token), .koryguj(actor, {...}), .znacznik(actor, "R")
   game.neuroshima.actions = actionsApi;
+  // Skok (M8 §4.5) — game.neuroshima.skok.zasiegi(actor), .okno(actor), .opis(actor)
+  game.neuroshima.skok = skokApi;
+  // Pomaganie (M8 §6.3) — game.neuroshima.pomaganie.okno(actor), .pomoz(actor, { galaz, sojusznik, klucz, wrog })
+  game.neuroshima.pomaganie = pomaganieApi;
+  // Atakowanie (M8 §7) — game.neuroshima.atakowanie.slotyAtaku(actor), .mozliwosciAtaku(activity)
+  game.neuroshima.atakowanie = atakowanieApi;
+  // Gotowość do tury (M8 §8.4) — game.neuroshima.gotowosc.stan(), .odswiez()
+  game.neuroshima.gotowosc = gotowoscApi;
+  // Skróty M8 z paska (przeciągnięte przyciski panelu Stan) — game.neuroshima.skroty.uzyj("bieganie")
+  game.neuroshima.skroty = Object.freeze({ uzyj: uzyjSkrotu });
   // Rejestr „po rzucie” (PLAN_m7 §3.0.2) — game.neuroshima.poRzucie.uzyj("fuks", message), .zrodla(), .kontekst(message)
   game.neuroshima.poRzucie = poRzucieApi;
   // Ułatwienia w testach i RO (PLAN_m7 §3.0.3) — game.neuroshima.ulatwieniaTestow.wiersze(), .rozstrzygnij(config)

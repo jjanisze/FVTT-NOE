@@ -419,8 +419,9 @@ COVERAGE = {
         "manual": "Zagrożenie, którego postać nie mogła zarejestrować zmysłami — MG przełącza okno rzutu na zwykły.",
     },
     "zew-areny": {
-        "auto": [("Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", "config/zdolnosci-efekty.mjs")],
-        "manual": "Praca nóg — moduł nie liczy ataków okazyjnych (U26); Skok Gladiatora — handoff ruchu.",
+        "auto": [("Doping: w Berserku niewrażliwość na Przerażenie — warunek efektu na stanie Berserka", "config/zdolnosci-efekty.mjs"),
+                 ("Skok Gladiatora: w Berserku zasięg skoku ×2; lądowanie na polu istoty — karta MG z RO SIŁ celu, Powalenie i 1k6 za każde 3 m (WKK, Kobalt 46)", "combat/skok.mjs")],
+        "manual": "Praca nóg — moduł nie liczy ataków okazyjnych (U26).",
     },
     "smakuje-jak-arszenik": {
         "auto": [("odporność na obrażenia od kwasu i trucizny — efekt na przedmiocie", "config/zdolnosci-efekty.mjs"),
@@ -437,8 +438,9 @@ COVERAGE = {
         "manual": "Niewidoczność w tłumie i Nie widzisz mnie (Ułatwienie przy ukrywaniu na otwartym terenie) — stół.",
     },
     "zwinnosc-szczura": {
-        "auto": [("Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", "config/zdolnosci-efekty.mjs")],
-        "manual": "Skoczek (Akrobatyka i ZRC przy skoku) — handoff ruchu.",
+        "auto": [("Wspinacz: Szybkość wspinania równa Szybkości — efekt na przedmiocie", "config/zdolnosci-efekty.mjs"),
+                 ("Skoczek: zasięg skoku w dal z ZRC zamiast SIŁ — kalkulator skoku (karta, Region, ruch Skok)", "combat/skok.mjs")],
+        "manual": "Akrobatyka zamiast Atletyki, gdy MG zażąda testu skakania — zwykły skok testu nie ma.",
     },
     "rutyna": {"auto": [("Ułatwienie w RO na ZRC i MDR w trwającej walce (U27)", "combat/ulatwienia-testow.mjs")]},
     "jeden-z-nich": {
@@ -736,10 +738,14 @@ COVERAGE = {
         "manual": "Które 3 współczynniki zdradzić — MG.",
     },
     # ---- PLAN_m7 E7: R9 (karty MG) i R10 (krytyki, śmierć) ----
+    "szybkie-rece": {
+        "auto": [("aktywność mod. ZRC /KO: jedna dodatkowa Akcja tylko do Używania — ograniczony grant w ledgerze M8; "
+                  "Używanie przedmiotu bierze go przed zwykłą A, Atakowanie nie (PLAN_m8 §6.2)", "combat/zdolnosci-karty.mjs")],
+    },
     "zryw": {
-        "auto": [("aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa i ogłoszenie; Akcja "
-                  "Bonusowa podnosi limit znacznika", "combat/zdolnosci-karty.mjs")],
-        "manual": "Dodatkowej Akcji moduł nie liczy (znaczniki ma tylko Reakcja i Akcja Bonusowa) — pilnuje stół.",
+        "auto": [("aktywność 1 /KO, tylko w swojej turze w walce: wybór Akcja albo Akcja Bonusowa przed zużyciem użycia "
+                  "(zamknięcie okna niczego nie zużywa), grant jednej A albo B w puli tej tury (ledger M8, PLAN_m8 §6.2)",
+                  "combat/zdolnosci-karty.mjs")],
     },
     "klusownik": {
         "auto": [("aktywność „Pułapka” z narzędziami małego kłusownika: Test Survivalu albo narzędzi, karta z ST pułapki "

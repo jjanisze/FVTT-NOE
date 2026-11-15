@@ -488,7 +488,7 @@ export default {
         }]);
         await new Promise(r => setTimeout(r, 500));
       });
-      // Bieganie the way a player does it: the action toggle in the sheet's Stan panel (U8).
+      // Bieganie the way a player does it: the declaration button in the sheet's Stan panel (M8 — cost, grant, status).
       const sheet = await p1.eval(async () => {
         const actor = game.user.character;
         await actor.sheet.render(true);
@@ -504,8 +504,8 @@ export default {
         await actor.sheet.close();
         return { button: true, running: actor.statuses.has("bieganie"), pressed };
       });
-      t.equal(sheet.button, true, "Bieganie toggle in the Stan panel during combat");
-      t.equal(sheet.running, true, "Bieganie after the sheet toggle");
+      t.equal(sheet.button, true, "Bieganie button in the Stan panel during combat");
+      t.equal(sheet.running, true, "Bieganie after the sheet declaration");
       t.equal(sheet.pressed, "true", "toggle shown as pressed after re-render");
       const r = await p1.eval(shootCircumstances, { targetName: "CYWIL", uniform: 0.4 });
       for (const id of ["dystansowyWZwarciu", "zasiegDaleki", "celUnika", "bieganie", "udzwig"]) {

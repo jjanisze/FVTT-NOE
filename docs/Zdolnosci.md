@@ -56,6 +56,8 @@ krwawienie z tętnicy albo wyciek z układu hydraulicznego maszyny.
 ## Pod kartą ataku, który trafił
 
 - **Ulubiona broń** i **Promocja** — przycisk [B] na dodatkowy atak; za pierwszym razem moduł pyta, który to model.
+  Akcja Bonusowa liczy się dopiero przy rzucie tego ataku (zamknięte okno nic nie kosztuje); te same źródła są też
+  w polu „Sposób ataku” w oknie ataku ([TT-i-reakcje](TT-i-reakcje.md#ile-kosztuje-atak-atakowanie)).
 - **Bolesny atak** — kości, gdy masz Ułatwienie albo przytomnego sojusznika obok celu; obok **Podstępny atak** z wyborem
   efektu (krwawienie, spowolnienie, oślepienie).
 - **Mój bóg kule nosi**, **Skuteczny cios** (odepchnięcie, wytrącenie, zamaszysty) — przyciski z kośćmi.
@@ -151,8 +153,8 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
 
 Reputacja, Renoma, Stylowa, Slang, Znajomości, Skrytka, Szary, Jeden z nas, Kamuflaż, Doktor Brain, Bezlitosny
 przywódca — fabuła, wycena luksusu, wybór rozmówcy. Ze Sztuczek: Lepiej we mnie (Benzyna zamiast krwi — przyjęcie ataku
-w pojazd), Konsolka (Plug & Play — maszyna sterowana laptopem); Hakowanie Plug & Play okno rzutu tylko podsuwa. Ruch specjalny (Skok Gladiatora, Skoczek, Szybkie nogi, Szarża
-Berserkera) czeka na warstwę ruchu. Plakietka każdej z nich mówi, co dokładnie.
+w pojazd), Konsolka (Plug & Play — maszyna sterowana laptopem); Hakowanie Plug & Play okno rzutu tylko podsuwa. Skok Gladiatora i Skoczek liczy już kalkulator skoku
+([Ruch-i-teren](Ruch-i-teren.md#skok-s-256-70-94)); Szybkie nogi i Szarża Berserkera czekają na kolejne etapy warstwy ruchu. Plakietka każdej z nich mówi, co dokładnie.
 
 ## Postacie zrobione przed tymi zmianami
 

@@ -34,12 +34,14 @@
  * Kładka (`bridged`, API `kladka`) wycisza strefę i skoki — gracze ułożyli przejście z gratów.
  *
  * Skok leży na pierwszym rzędzie strefy od strony odbicia. Wejście w niego w kierunku `dir`
- * zatrzymuje ruch i otwiera okno: zasięg wg NOE (30 cm × SIŁ z rozbiegiem 3 m, połowa z miejsca;
- * Zwinność szczura: ZRC i Akrobatyka, Sportowiec: ułatwienie), rozbieg zaznaczony, gdy droga
- * kończyła się prostym odcinkiem. Do 2 punktów braku ST 10, do 4 ST 15, dalej się nie da.
- * Wynik: lądowisko (`land`); porażka o mniej niż 5 — ostatni rząd strefy (`short`) i karta z ST
- * strefy; o 5 i więcej albo skok niemożliwy — zostaje w pierwszym rzędzie, karta z `dcFall`
- * (twarzą w szlam). „Wejdź” — karta i dalszy ruch, „Zostań” — z powrotem (`back`).
+ * zatrzymuje ruch i otwiera okno ze wspólnym kalkulatorem skoku (`combat/skok.mjs`, M8 §4.5 E3):
+ * zasięg NOE z rozbiegiem i z miejsca, rozbieg zaznaczony, gdy tuż przed wejściem było ≥ 3 m zwykłego
+ * ruchu (z dystansu, także z wcześniejszych dragów — bez wymogu prostej linii). Bez testu za brakujący
+ * zasięg i bez marginesu porażki (dawne ST 10/15 nie miały oparcia w RAW). Doskok — lądowisko (`land`);
+ * za krótki — token ląduje w tym polu szczeliny, do którego sięga skok (bez zaokrąglania w górę), z kartą
+ * strefy i testem lądowania na trudnym terenie. Koszt skoku 1:1 trafia do zapisu ruchu M8.
+ * „Wejdź” — karta i dalszy ruch, „Zostań” — z powrotem (`back`). Pola `short` i `dcFall` zostają w danych
+ * (import z Tiled), ale miejsce lądowania liczy się z zasięgu.
  *
  * ## „Opuść bezpiecznie”
  *
@@ -56,8 +58,13 @@
  * getter — tanie i bez skutków ubocznych.
  */
 
+import { metry } from "../config/ekonomia-data.mjs";
+import { ROZBIEG_M, skokPrzezSzczeline } from "../config/skok-data.mjs";
+import { zasiegi, rozbiegPrzed, trudnyTerenPod, zaplacSkok, kartaLadowania } from "../combat/skok.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const TYP = `${MODULE_ID}.trudnePrzejscie`;
+const escapeHTML = s => foundry.utils.escapeHTML(String(s ?? ""));
 const ZAPYTANIE_MG = `${MODULE_ID}.przejscieMG`;
 
 /** Progi wagi szybu ewakuacyjnego (HANDOFF par. 4.5 — zatwierdzone przez MG). */
@@ -349,10 +356,6 @@ const TYP_STREFA = `${MODULE_ID}.strefaSkazenia`;
 const TYP_SKOK = `${MODULE_ID}.skok`;
 const FLAGA_KARTY = "strefaSkazenia";
 const KIERUNKI = Object.freeze({ N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] });
-/** NOE „Skok w dal” (s. 256–257): 30 cm × SIŁ z rozbiegiem 3 m, połowa z miejsca. */
-const CM_ZA_PUNKT = 30;
-/** Ile punktów brakuje → ST Atletyki (propozycja handoffu, D59); więcej = nie doskoczysz. */
-const ST_ZA_BRAK = Object.freeze([[2, 10], [4, 15]]);
 
 function utworzKlasyStref() {
   const { RegionBehaviorType } = foundry.data.regionBehaviors;
@@ -438,22 +441,6 @@ function zgodnyKierunek(movement, dir) {
   return (b.x - a.x) * dx + (b.y - a.y) * dy > 0;
 }
 
-/** Rozbieg: ostatni prosty odcinek ruchu w kierunku skoku ma co najmniej 3 pola (2 pola + odbicie). */
-function wykryjRozbieg(token, movement, dir) {
-  const G = token.parent.grid.size;
-  const [dx, dy] = KIERUNKI[dir] ?? [0, 0];
-  const pts = droga(movement);
-  const wejscie = pts.at(-1);
-  if (!wejscie) return false;
-  const wLinii = p => dx === 0 ? Math.round(p.x / G) === Math.round(wejscie.x / G)
-    : Math.round(p.y / G) === Math.round(wejscie.y / G);
-  let start = wejscie;
-  for (let i = pts.length - 2; i >= 0 && wLinii(pts[i]); i--) start = pts[i];
-  // Ruch staje na krawędzi regionu, pół pola przed środkiem pierwszego pola strefy — liczymy pola.
-  const pol = ((wejscie.x - start.x) * dx + (wejscie.y - start.y) * dy) / G;
-  return Math.floor(pol + 0.5) >= 3;
-}
-
 /** Skok z tej strefy czeka na token w miejscu, do którego doszedł — wtedy kartę wystawia skok. */
 function skokPrzejmuje(token, movement, strefaRegion) {
   const w = movement.passed.waypoints.at(-1);
@@ -464,48 +451,56 @@ function skokPrzejmuje(token, movement, strefaRegion) {
     && r.testPoint(punkt));
 }
 
-/** Metry po polsku: „4,5 m”. */
-const wMetrach = v => `${v.toLocaleString("pl-PL", { maximumFractionDigits: 1 })} m`;
+/** Metry po polsku: „4,5 m”, „4,2 m”, „3,9 m”. */
+const wMetrach = v => `${metry(v)} m`;
 
-function maCeche(actor, abilityId) {
-  return !!actor?.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === abilityId);
+/**
+ * Pole w szczelinie, w którym kończy się za krótki skok: `k`-te pole od krawędzi odbicia (1 = pierwsze).
+ * Krawędź to brzeg Regionu skoku (pierwszy rząd strefy) od strony, z której przyszedł token; współrzędna
+ * w poprzek — z punktu wejścia, dociągnięta do siatki (wejście po skosie staje między polami).
+ */
+function poleWSzczelinie(token, regionSkoku, dir, k, wejscie) {
+  const G = token.parent.grid.size;
+  const b = regionSkoku.bounds;
+  const w = token.width * G, h = token.height * G;
+  const snap = v => Math.round(v / G) * G;
+  const x = snap(wejscie?.x ?? token.x), y = snap(wejscie?.y ?? token.y);
+  const elevation = wejscie?.elevation ?? token.elevation;
+  switch (dir) {
+    case "N": return { x, y: b.bottom - (k - 1) * G - h, elevation };
+    case "E": return { x: b.left + (k - 1) * G, y, elevation };
+    case "W": return { x: b.right - (k - 1) * G - w, y, elevation };
+    default: return { x, y: b.top + (k - 1) * G, elevation };
+  }
 }
 
 /**
- * Skok przez `metry` szczeliny: {cecha, umiejetnosc, wynik, potrzeba, brak, st, zasieg}.
- * `st` 0 = doskakuje bez rzutu, liczba = ST testu, null = nie doskoczy.
+ * Skok przez szczelinę (M8 §4.5, E3) — wspólny kalkulator `combat/skok.mjs`. Bez testu za brakujący zasięg i bez
+ * marginesu porażki; doskok → lądowisko, za krótki → pole szczeliny, do którego sięga skok. Koszt skoku 1:1 do
+ * zapisu tego ruchu (ten sam id — natywne Undo zwraca też skok). Istota bez ludzkiego wzoru: deklaracja przy stole.
  */
-function liczSkok(actor, metry, rozbieg) {
-  const skoczek = maCeche(actor, "zwinnosc-szczura");            // Złodziej: ZRC i Akrobatyka
-  const cecha = skoczek ? "dex" : "str";
-  const wynik = actor?.system?.abilities?.[cecha]?.value ?? 10;
-  const cmZaPunkt = rozbieg ? CM_ZA_PUNKT : CM_ZA_PUNKT / 2;
-  const potrzeba = Math.ceil((metry * 100) / cmZaPunkt);
-  const brak = potrzeba - wynik;
-  const st = brak <= 0 ? 0 : (ST_ZA_BRAK.find(([do_]) => brak <= do_)?.[1] ?? null);
-  return { cecha, umiejetnosc: skoczek ? "akr" : "atl", wynik, potrzeba, brak, st,
-    zasieg: (wynik * cmZaPunkt) / 100 };
-}
-
 async function skocz(beh, token, movement, wznow) {
   const actor = token.actor;
-  const metry = beh.gap * (token.parent.grid.distance ?? 1.5);
+  const pole = token.parent.grid.distance ?? 1.5;
+  const szczelina = beh.gap * pole;
   const nazwaStrefy = beh.strefa?.label ?? "strefę";
-  const rozbiegDomyslny = wykryjRozbieg(token, movement, beh.dir);
+  const rozbiegM = rozbiegPrzed(token, movement);
+  const z = actor ? zasiegi(actor) : { reczny: "brak aktora — rozstrzygnij przy stole" };
+  const wynik = r => skokPrzezSzczeline(szczelina, (r ? z.zRozbiegu : z.zMiejsca).dal, pole);
   const opis = r => {
-    const s = liczSkok(actor, metry, r);
-    const co = s.st === 0 ? "doskakuje bez rzutu" : s.st ? `${CONFIG.DND5E.skills?.[s.umiejetnosc]?.label ?? s.umiejetnosc} ST ${s.st}`
-      : `nie doskoczy (próba = upadek twarzą w ${foundry.utils.escapeHTML(nazwaStrefy)})`;
-    return `${r ? "Z rozbiegiem" : "Z miejsca"}: zasięg ${wMetrach(s.zasieg)} — ${co}`;
+    const zz = r ? z.zRozbiegu : z.zMiejsca, s = wynik(r);
+    return `${r ? "Z rozbiegu" : "Z miejsca"}: zasięg ${wMetrach(zz.dal)} (${escapeHTML(zz.wzorDal)}) — `
+      + (s.doskakuje ? "doskakuje" : `nie doskoczy, ląduje w ${s.polaWglab}. polu szczeliny`);
   };
   const wybor = await foundry.applications.api.DialogV2.wait({
     window: { title: "Skok", icon: "fa-solid fa-person-running" },
-    content: `<p>Szczelina ${wMetrach(metry)} (${beh.gap} ${beh.gap === 1 ? "pole" : beh.gap < 5 ? "pola" : "pól"}).</p>
-      <p>${opis(true)}<br>${opis(false)}</p>
-      <div class="form-group"><label>Rozbieg? (3 m w linii prostej)</label>
-        <input type="checkbox" name="rozbieg" ${rozbiegDomyslny ? "checked" : ""}></div>`,
+    content: `<p>Szczelina ${wMetrach(szczelina)} (${beh.gap} ${beh.gap === 1 ? "pole" : beh.gap < 5 ? "pola" : "pól"}).</p>`
+      + (z.reczny ? `<p>${escapeHTML(actor?.name ?? "")}: ${escapeHTML(z.reczny)}. „Skocz” — doskakuje (deklaracja przy stole).</p>`
+        : `<p>${opis(true)}<br>${opis(false)}</p>`)
+      + `<div class="form-group"><label>Rozbieg — co najmniej 3 m zwykłego ruchu tuż przed skokiem (teraz ${wMetrach(rozbiegM)})</label>`
+      + `<input type="checkbox" name="rozbieg" ${rozbiegM >= ROZBIEG_M ? "checked" : ""}></div>`,
     buttons: [
-      { action: "skok", label: "Skok", default: true, callback: (_e, b) => b.form.elements.rozbieg.checked ? "skok+" : "skok" },
+      { action: "skok", label: "Skocz", default: true, callback: (_e, b) => b.form.elements.rozbieg.checked ? "skok+" : "skok" },
       { action: "wejdz", label: `Wejdź w ${nazwaStrefy}` },
       { action: "zostan", label: "Zostań" }
     ],
@@ -522,33 +517,25 @@ async function skocz(beh, token, movement, wznow) {
     if (wroc) await wroc.teleportToken(token); else token.stopMovement();
     return;
   }
-  const s = liczSkok(actor, metry, wybor === "skok+");
-  let margines = s.st === null ? 99 : 0;
-  if (s.st) {
-    const rzuty = await actor.rollSkill({ skill: s.umiejetnosc, target: s.st,
-      advantage: maCeche(actor, "sportowiec") && s.umiejetnosc === "atl" });
-    const rzut = Array.isArray(rzuty) ? rzuty[0] : rzuty;
-    if (!rzut) { const wroc = beh.region("back"); if (wroc) await wroc.teleportToken(token); else token.stopMovement(); return; }
-    margines = s.st - rzut.total;
-  }
+  const s = z.reczny ? { doskakuje: true, dlugosc: szczelina, polaWglab: 0 } : wynik(wybor === "skok+");
   const strefa = beh.strefa;
-  if (margines <= 0) {
+  if (s.doskakuje) {
     const cel = beh.region("land");
-    if (cel) await cel.teleportToken(token);
+    const po = cel ? await cel.teleportToken(token) : null;
+    await zaplacSkok(token, movement.id, s.dlugosc);
+    const t = po ?? token;
+    if (trudnyTerenPod(t, { x: t.x, y: t.y, elevation: t.elevation })) await kartaLadowania(t);
     return;
   }
-  if (margines < 5) {                                            // nogami w ostatni rząd szlamu
-    const krotki = beh.region("short");
-    const po = krotki ? await krotki.teleportToken(token) : token;
-    if (strefa) await kartaStrefy(po ?? token, strefa, strefa.dc, "wpada nogami w");
-    return;
-  }
-  // Twarzą w pierwszy rząd: ruch stanął na krawędzi regionu (po skosie — między polami),
-  // więc token ląduje na polu samego regionu skoku.
+  // Za krótki: ląduje tam, dokąd sięga skok — w szczelinie (strefa i jej trudny teren).
   token.stopMovement();
-  const po = await beh.parent.parent.teleportToken(token);
-  if (strefa) await kartaStrefy(po ?? token, strefa, strefa.dcFall, "pada twarzą w");
+  const cel = poleWSzczelinie(token, beh.parent.parent, beh.dir, s.polaWglab, movement.passed.waypoints.at(-1));
+  await token.move({ ...cel, action: "displace" }, { animate: false });
+  await zaplacSkok(token, movement.id, s.dlugosc);
+  if (strefa) await kartaStrefy(token, strefa, strefa.dc, "ląduje w");
+  if (trudnyTerenPod(token, cel)) await kartaLadowania(token);
 }
+
 
 /** Karta dla MG: kto i w co wszedł, guzik rzutu obronnego (RO KON przez `radiationSave`). */
 async function kartaStrefy(token, strefa, dc, jak) {
@@ -661,7 +648,7 @@ async function lina(regionId, jest, scene = canvas?.scene) {
 export const transitionsApi = { przejscia, przelacz, lina, kladka, opuscBezpiecznie };
 
 /** Czyste funkcje skoku wystawione dla testów Quench (`scripts/tests/poziomy.test.mjs`). */
-export const __testing = Object.freeze({ liczSkok, wykryjRozbieg, zgodnyKierunek });
+export const __testing = Object.freeze({ zgodnyKierunek, poleWSzczelinie });
 
 /* -------------------------------------------- */
 /*  Rejestracja (init)                           */

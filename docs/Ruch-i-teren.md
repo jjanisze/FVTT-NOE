@@ -1,4 +1,4 @@
-# Ruch i teren: spadanie, latanie, woda, wspinaczka
+# Ruch i teren: ruch w turze, spadanie, latanie, woda, wspinaczka
 
 Jak moduł prowadzi upadki, lotników, pływanie, walkę pod wodą i wspinaczkę. Strony w nawiasach to
 *Neuroshima: Ostatnia Era* (wydanie październikowe). Koszt ruchu — trudny teren, pływanie i wspinanie
@@ -8,6 +8,63 @@ podręcznikiem, więc moduł go nie rusza.
 **Zasada ogólna:** moduł oznacza i podsuwa kartę, a decyduje MG. Testy wody i wspinaczki pojawiają się
 same **tylko w walce**. Poza walką MG prosi o test sam (przycisk w HUD żetonu albo zwykły rzut) —
 woda czy ściana nie muszą zatrzymywać gry, kiedy nikt nie liczy tur.
+
+## Ruch i akcje w turze (s. 21–30, 37)
+
+W walce karta postaci (panel **Stan**) pokazuje, co zostało w tej turze: **ruch** w metrach w bieżącym trybie
+(chodzenie, pływanie…) oraz **A / B / R / I** — Akcja, Akcja Bonusowa, Reakcja, Darmowa interakcja — jako
+„zostało / ile w ogóle”. Przekroczenie to liczba ujemna i czerwony napis; nic nie jest blokowane, a gra słowna jest
+w porządku — akcja zagrana bez kliknięcia zostawia licznik 1/1 i nikt nie każe jej potem wpisywać. Liczniki są
+pomocą, nie sędzią.
+
+- **Ruch** liczy się z prawdziwej drogi żetonu (z trudnym terenem i czołganiem, jak liczy dnd5e). Ctrl+Z na mapie
+  cofa ruch razem z kosztem. Przy przeciąganiu linijka jest **zielona** w znanej puli i **czerwona** poza nią, a
+  etykieta mówi „zostaje X m” albo „ponad pulę −X m”. Zwykły ruch jest tylko w twojej turze — nie przechodzi na
+  później (s. 26).
+- **Przyspiesz, Biegnij, Unik, Odstąp** — przyciski w panelu: koszt (zwykle Akcja), dodatkowy ruch równy Szybkości
+  (Bieganie: dwukrotności, tylko na nogach) z chwili wykonania i stan na żetonie. **Padnij** zjada resztę ruchu,
+  **Powstań** kosztuje połowę Szybkości.
+- **Poza swoją turą** te same przyciski działają jako wykonanie przygotowanej akcji w **Reakcji**: R zamiast A, świeży
+  ruch tylko z tej akcji (Bieganie przy Szybkości 9 — 18 m). Gdy ruch się urwie, **[Zakończ reakcję]**.
+- **Pomóż** (s. 30): w teście — wybierasz sojusznika i swoją biegłość, robisz test ST 10; sukces daje mu Ułatwienie
+  w następnym teście tej samej umiejętności (najpóźniej do początku twojej następnej tury), porażka — Akcja przepada.
+  W ataku — wyceluj we wroga do 1,5 m od siebie: sojusznik ma Ułatwienie w następnym ataku na niego. Albo słownie —
+  sama Akcja. Pomoc zużywa się dopiero faktycznym rzutem sojusznika, nie otwarciem okna.
+- **Wyczekaj** (s. 30): Akcja teraz, notatka i czynność opcjonalne — wystarczy słowo przy stole. Gdy przyjdzie
+  okazja, **Reaguj → Wykonaj** (Reakcja); pominięta okazja nic nie kosztuje, a początek twojej tury kończy
+  przygotowanie bez zwrotu Akcji. Po wykonaniu Biegnij, Przyspiesz, przedmiot albo Pomóż należą do tej samej reakcji
+  — bez drugiej R. **Reaguj → Uzbrój** kieruje następną akcję w Reakcję także w twojej turze; **Reaguj → słownie**
+  zapisuje reakcję zagraną bez kliknięć.
+- **Oporządzenie w walce** liczy się samo: dobycie albo schowanie broni, podniesienie — Darmowa interakcja [I]; druga
+  taka czynność w turze — Używanie [A] (pokrywa je też Szybkie ręce); wyjęcie z plecaka — Akcja; pancerz — tyle Akcji,
+  ile trwa zakładanie. Wytrącenie i inne mimowolne przenosiny nic nie kosztują.
+- **Przedmiot użyty poza swoją turą** (medpak, granat) to wykonanie wyczekanej akcji — liczy się Reakcja, nie Akcja.
+  Reakcja kończy się [Zakończ reakcję] albo najpóźniej z końcem tury, w której się wydarzyła.
+- **Zryw** pyta najpierw: Akcja czy Akcja Bonusowa — dopiero wybór zużywa użycie. Poza własną turą karta ostrzega
+  (Zryw jest tylko we własnej turze, s. 87). **Szybkie ręce** dają Akcję tylko
+  do Używania przedmiotu. Po **Berserku** liczniki są przekreślone do końca twojej następnej tury (ruch zostaje).
+- **[Skoryguj]** dopisuje albo zwalnia wydatek i dodaje lub odejmuje ruch — z powodem, bez kasowania historii. MG może
+  też zdjąć znacznik „Reakcja zużyta” z żetonu: to korekta, nie nowa akcja.
+- Z **Kolorem Kobaltu** (zasada 45 w [Kobalt.md](Kobalt.md)) licznik rozstrzyga sam zbiegi, o których podręcznik
+  milczy: ruch po zmianie Szybkości w trakcie tury, przejście z chodu na pływanie, ruch w Reakcji. Bez Kobaltu w takiej
+  sytuacji pokazuje „rozstrzygnij ręcznie”.
+
+**Skróty na pasku.** Przyciski panelu (Przyspiesz, Biegnij, Unik, Odstąp, Padnij/Powstań, Skok, Pomóż, Wyczekaj,
+Reaguj) można przeciągnąć na pasek makr — powstaje działający skrót tej samej operacji. Pusty pasek niczego nie
+odbiera: wszystko jest też na karcie. Makro zdolności zdjęte z paska ręką gracza nie wraca samo przy następnej
+synchronizacji (przeniesienie na inne pole to nie usunięcie); przywraca je jawnie
+`game.modules.get("neuroshima-2026-overrides").api.hotbar.restore()`.
+
+**Gotowość do tury.** U góry ekranu gracz widzi pasek: „Twoja tura za X” (X — ilu widocznych uczestników jest
+przed tobą; ukrytych moduł nie liczy i nie zdradza), „Gotuj się, jesteś następny” z krótkim dźwiękiem i „Twoja tura” z
+dźwiękiem startu i zegarem `m:ss.cc` — po 30 s żółtym, po 60 s czerwonym. Zegar liczy cały niepauzowany czas tury
+(decyzje, reakcje, szukanie reguły), niczego nie karze i nigdzie nie wysyła; w pauzie stoi. Dźwięki biorą się z motywu
+walki (ustawienia walki rdzenia); głośność, wyciszenie, animację i „licz też moich innych bohaterów” zmienisz w
+ustawieniach modułu (klient). MG dostaje sygnały tylko dla przypisanej sobie postaci.
+
+Trudny teren bez Tiled: narysuj Region i dodaj mu zachowanie **Trudny teren** dnd5e — z rodzajem (gruz, schody,
+stok, błoto, piasek, śnieg, lód…), żeby wyjątki zdolności wiedziały, co ignorują. Dwa nachodzące trudne tereny to
+dalej 3 m za 1,5 m (s. 26). Na samym obrazku mapy wystarczy [Skoryguj] → Ruch.
 
 ## Spadanie (s. 43)
 
@@ -94,7 +151,22 @@ Pierwszy odcinek wspinaczki w turze (ruch „wspinaczka”) wystawia kartę z Te
 
 Drabiny, schody i trudne przejścia między poziomami mają własne zasady i karty — wspinaczką tu nie są.
 
-## Skok
+## Skok (s. 256, 70, 94)
 
-Skok (zasięg wzwyż i w dal, rozbieg, lądowanie) jest w przygotowaniu jako osobna operacja ruchu. Na
-mapach już dziś działa Region **Skok** nad zaprojektowanymi wyrwami.
+Skok jest częścią ruchu i kosztuje go **1:1** — trudny teren pod lotem się nie liczy. Zasięg:
+
+- **w dal** — 0,3 m × SIŁ po co najmniej **3 m rozbiegu** (zwykłego ruchu tuż przed skokiem, także z kilku
+  przeciągnięć); z miejsca połowa. SIŁ 14: 4,2 m albo 2,1 m — bez zaokrąglania do pól;
+- **wzwyż** — (2 + mod. SIŁ) × 0,3 m, z miejsca połowa; sięgnięcie to wysokość skoku + 1,5 × wzrost;
+- **Skoczek** (Zwinność szczura) liczy skok w dal z ZRC; **Skok Gladiatora** (Zew areny w Berserku) podwaja oba.
+
+Przycisk **[Skok]** w panelu Stan pokazuje tabelę zasięgów i ustawia żetonowi tryb ruchu **Skok** (sam wybór nic nie
+kosztuje). Potem zwykłe przeciąganie: skok dalej niż zasięg albo bez rozbiegu jest wykonany, ale zostaje trwałe
+ostrzeżenie na karcie. Po skoku w dal na **trudny teren** przychodzi karta z testem Akrobatyki ST 10 (porażka —
+Powalenie). Skok Gladiatora na pole istoty (najwyżej o rozmiar większej) daje MG kartę RO na Siłę celu: porażka —
+Powalenie i obrażenia (z Kolorem Kobaltu 1k6 za każde pełne 3 m; zasada 46 w [Kobalt.md](Kobalt.md)). Sam skok nie
+wydaje Akcji. Istoty z Bestiariusza skaczą według swojego opisu — moduł nie przykłada do nich ludzkiego wzoru.
+
+Region **Skok** nad zaprojektowaną wyrwą liczy to samo: okno pokazuje zasięg z rozbiegu i z miejsca (rozbieg
+zaznaczony, gdy był), **Skocz** — doskok na lądowisko albo, gdy zasięg za krótki, lądowanie w tym polu wyrwy, do
+którego sięga skok (z kartą strefy i testem lądowania). Nie ma rzutu za brakujący zasięg.

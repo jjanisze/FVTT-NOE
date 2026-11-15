@@ -27,6 +27,9 @@ import { stanBroni } from "../weapons/wlasciwosci.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 import { hasAbility, ABILITY_KEYS } from "../actors/abilities.mjs";
 import { weaponIdOf } from "../weapons/magazine-model.mjs";
+import { ochronaBieguWReakcji } from "./ekonomia.mjs";
+import { isKobaltEnabled } from "../config/settings.mjs";
+import { konwencjeReakcji } from "../wkk/config/reakcja-kobalt.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -224,6 +227,8 @@ export function migawkaAtaku(activity, { attackMode } = {}) {
     wrogowieObok,
     celPochwytuje: jeden?.actor && actor?.statuses?.has("grappled") ? _celPochwytuje(actor, jeden.actor, zetony) : null,
     turaCelu: !!(jeden && game.combat?.started && game.combat.combatant?.tokenId === jeden.id),
+    biegWReakcji: !!(jeden && ochronaBieguWReakcji(jeden.document)),
+    wkkD32: (() => { try { return konwencjeReakcji(isKobaltEnabled()).d32; } catch (_e) { return true; } })(),
     // `długa`, `ciężka` (s. 117) — właściwości i oparcie broni (PLAN_m6 §5.3); typ i rzut — wiersze „pod wodą” (§5.6).
     bron: item?.type === "weapon"
       ? {

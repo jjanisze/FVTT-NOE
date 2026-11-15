@@ -72,6 +72,12 @@ import { registerProdukcjaTests } from "./produkcja.test.mjs";
 import { registerLalkaTests } from "./lalka.test.mjs";
 import { registerPoziomyTests } from "./poziomy.test.mjs";
 import { registerAkcjeTests } from "./akcje.test.mjs";
+import { registerEkonomiaTests } from "./ekonomia.test.mjs";
+import { registerSkokTests } from "./skok.test.mjs";
+import { registerWyczekanieTests } from "./wyczekanie.test.mjs";
+import { registerAtakowanieTests } from "./atakowanie.test.mjs";
+import { registerGotowoscTests } from "./gotowosc.test.mjs";
+import { registerPasekM8Tests } from "./pasek-m8.test.mjs";
 import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
 import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
 import { registerZdolnosciPoRzucieTests } from "./zdolnosci-po-rzucie.test.mjs";
@@ -139,6 +145,12 @@ export function registerQuenchTests() {
     registerKartyCzatuTests(quench);
     // PLAN_m7 E0: warstwa akcji i bramki, rejestr „po rzucie”, Ułatwienia w testach i RO.
     registerAkcjeTests(quench);
+    registerEkonomiaTests(quench);
+    registerSkokTests(quench);
+    registerWyczekanieTests(quench);
+    registerAtakowanieTests(quench);
+    registerGotowoscTests(quench);
+    registerPasekM8Tests(quench);
     registerPoRzucieTests(quench);
     registerUlatwieniaTestowTests(quench);
     // PLAN_m7 E1: zdolności po rzucie (R3).

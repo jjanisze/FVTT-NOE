@@ -136,10 +136,10 @@ export function registerZdolnosciKartyTests(quench) {
     });
 
     describe("Plakietki E7", function () {
-      it("Nie do zdarcia i Krwawy anioł — pełne; Łapiduch, Zryw, Kłusownik, Bez tajemnic, Łyżeczka — częściowe", function () {
-        expect(["nie-do-zdarcia", "krwawy-aniol"].map(featureStatus)).to.deep.equal(["auto", "auto"]);
-        expect(["lapiduch", "zryw", "klusownik", "bez-tajemnic", "lyzeczka"].map(featureStatus))
-          .to.deep.equal(["partial", "partial", "partial", "partial", "partial"]);
+      it("Nie do zdarcia, Krwawy anioł i Zryw (ledger M8) — pełne; Łapiduch, Kłusownik, Bez tajemnic, Łyżeczka — częściowe", function () {
+        expect(["nie-do-zdarcia", "krwawy-aniol", "zryw"].map(featureStatus)).to.deep.equal(["auto", "auto", "auto"]);
+        expect(["lapiduch", "klusownik", "bez-tajemnic", "lyzeczka"].map(featureStatus))
+          .to.deep.equal(["partial", "partial", "partial", "partial"]);
       });
     });
   }, { displayName: "Neuroshima: zdolności — karty MG i śmierć (M7 E7)" });

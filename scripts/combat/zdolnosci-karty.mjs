@@ -4,7 +4,7 @@
  *
  * | Zdolność | Działanie | Nośnik |
  * |---|---|---|
- * | Zryw (Twardziel 2) | 1 /KO, w swojej turze: jeszcze jedna Akcja albo Akcja Bonusowa — ogłoszenie; Akcja Bonusowa podnosi limit znacznika (`actions.dodatkowa`) | aktywność, karta |
+ * | Zryw (Twardziel 2) | 1 /KO, w swojej turze: wybór Akcja albo Akcja Bonusowa przed zużyciem użycia, grant w ledgerze M8 (`actions.dodatkowa`) | aktywność, karta |
  * | Kłusownik (Zwiadowca 2) | z narzędziami małego kłusownika: Test Survivalu albo narzędzi, karta z ST pułapki (8 + MDR + PB); ST zakładania i skutek — MG | aktywność, karta MG |
  * | Wierzę (Salt Lake City) | 1 /DO: gracz wpisuje drobny przedmiot, MG dostaje kartę z [Do ekwipunku] | aktywność, karta MG |
  * | Bez tajemnic [A] (Łowca mutantów) | Test INT (Przyroda) wobec mutanta albo potwora; karta MG z tym, co zdradza próg (nazwa, podatności, TT/PW/Szybkość), i [Powiedz graczowi] | aktywność, karta MG |
@@ -54,19 +54,46 @@ function _walidujZryw(actor) {
   return null;
 }
 
-async function _zryw(actor) {
+/**
+ * Zryw (s. 87; PLAN_m8 §6.2): wybór **przed** zużyciem — pierwsze natywne użycie jest wstrzymane w `preUseActivity`,
+ * po wyborze A albo B wznawiane z `neuroZryw`. Zamknięcie okna nic nie wybiera i niczego nie zużywa.
+ */
+async function _wybierzZryw(activity) {
+  const actor = activity.actor;
   const rodzaj = await DialogV2.wait({
     window: { title: `Zryw — ${actor.name}` },
     content: "<p>Jeszcze jedna w tej turze:</p>",
-    buttons: [{ action: "A", label: "Akcja", default: true }, { action: "B", label: "Akcja Bonusowa" }],
+    buttons: [{ action: "A", label: "Akcja" }, { action: "B", label: "Akcja Bonusowa" }],
     rejectClose: false
-  }) ?? "A";
-  if (rodzaj === "B") await dodatkowa(actor, "B");
+  });
+  if (rodzaj !== "A" && rodzaj !== "B") return null;
+  return activity.use({ neuroZryw: rodzaj }, { configure: false });
+}
+
+/** Po zużyciu użycia: grant wybranej akcji (ledger M8) — id z wiadomości, więc ponowienie nie daje drugiego. */
+async function _zryw(actor, _item, usageConfig, results) {
+  const rodzaj = usageConfig?.neuroZryw;
+  if (rodzaj !== "A" && rodzaj !== "B") return;
+  const id = results?.message?.id ? `zryw-${results.message.id}` : null;
+  const r = await dodatkowa(actor, rodzaj, { zrodlo: "Zryw", ...(id ? { id } : {}) });
+  // D23: Zryw tylko we własnej turze (s. 87) — także przy wyczekanej akcji. Ostrzeżenie zostaje na karcie, nie blokada.
+  const ostrz = r?.duplikat ? [] : (r?.ostrz ?? []);
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: flavorKarty(KOLOR, `⚡ Zryw — ${esc(actor.name)}`,
-      `W tej turze jeszcze jedna ${rodzaj === "B" ? "Akcja Bonusowa" : "Akcja"}. Wraca po Krótkim albo Długim odpoczynku.`)
+      `W tej turze jeszcze jedna ${rodzaj === "B" ? "Akcja Bonusowa" : "Akcja"}. Wraca po Krótkim albo Długim odpoczynku.`
+      + ostrz.map(o => `<br>⚠ ${esc(o)} (s. 87)`).join(""))
   });
+}
+
+/**
+ * Szybkie ręce (Spec 4, s. 79; PLAN_m8 §6.2): użycie zdolności (mod. ZRC /KO) daje jedną dodatkową A **wyłącznie do
+ * Używania** — ograniczony grant w ledgerze, nie zwykła A. Trzecie Atakowanie przy podstawowej A, Zrywie i tym grancie
+ * nadal ostrzega; grant zostaje dla Używania. Poza własną turą — ostrzeżenie, nie blokada.
+ */
+async function _szybkieRece(actor, _item, _usageConfig, results) {
+  const id = results?.message?.id ? `szybkie-rece-${results.message.id}` : null;
+  await dodatkowa(actor, "A", { zrodlo: "Szybkie ręce", ogr: "uzywanie", ...(id ? { id } : {}) });
 }
 
 /* -------------------------------------------- */
@@ -358,21 +385,28 @@ const WALIDACJA = Object.freeze({
   "bez-tajemnic": () => _walidujBezTajemnic()
 });
 
-const UZYCIE = Object.freeze({ zryw: _zryw, klusownik: _klusownik, wierze: _wierze, "bez-tajemnic": _bezTajemnic });
+const UZYCIE = Object.freeze({ zryw: _zryw, "szybkie-rece": _szybkieRece, klusownik: _klusownik, wierze: _wierze, "bez-tajemnic": _bezTajemnic });
 
 /** Synchronicznie — `false` z obietnicy nie zatrzymałby użycia. */
-function _onPreUseActivity(activity) {
+function _onPreUseActivity(activity, usageConfig) {
   const actor = activity?.actor;
-  const powod = actor ? WALIDACJA[_id(activity.item)]?.(actor) : null;
-  if (!powod) return;
-  ui.notifications.warn(powod);
-  return false;
+  const id = _id(activity?.item);
+  const powod = actor ? WALIDACJA[id]?.(actor) : null;
+  if (powod) {
+    ui.notifications.warn(powod);
+    return false;
+  }
+  // Zryw: najpierw wybór, potem zużycie (PLAN_m8 §6.2).
+  if (id === "zryw" && actor && !usageConfig?.neuroZryw) {
+    void _wybierzZryw(activity);
+    return false;
+  }
 }
 
-function _onPostUseActivity(activity) {
+function _onPostUseActivity(activity, usageConfig, results) {
   const actor = activity?.actor;
   const fn = actor ? UZYCIE[_id(activity.item)] : null;
-  if (fn) void fn(actor, activity.item);
+  if (fn) void fn(actor, activity.item, usageConfig, results);
 }
 
 async function _onClick(event) {
@@ -416,4 +450,4 @@ export function registerZdolnosciKarty() {
 /** `game.neuroshima.zdolnosciKarty` */
 export const zdolnosciKartyApi = Object.freeze({ sprawdzSmrod, reanimuj, wiedzaBezTajemnic });
 
-export const __testing = Object.freeze({ _walidujZryw, _maKlusownika, _wZasiegu });
+export const __testing = Object.freeze({ _walidujZryw, _maKlusownika, _wZasiegu, _wybierzZryw });

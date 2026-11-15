@@ -49,6 +49,23 @@ wartość siedzi w Parowaniu. Ręczną TT mają tylko BN (ich statblock).
    PW do 0; krytyk zamieniony Krytyczną ochroną nie rani, a krytyk, który nie zadał obrażeń (próg,
    niewrażliwość), też nie — tak rozstrzyga MG, do potwierdzenia przez autora systemu.
 
+## Ile kosztuje atak (Atakowanie)
+
+W walce okno Testu Ataku ma pole **Sposób ataku** — moduł podpowiada, gracz może zmienić:
+
+- **Nowe Atakowanie [A]** — jedna Akcja daje tyle ataków, ile masz: zwykle 1, z **Drugim atakiem** 2, z **Trzecim**
+  3 (nie sumują się). Kolejny atak w tej turze sam wybiera **„Atakowanie — atak 2/2 (ta sama Akcja)”** — także po
+  ruchu, pudle, zmianie celu albo broni i gdy w międzyczasie wydałeś inną Akcję. Po wyczerpaniu ataków — nowa Akcja.
+- **Źródła [B]**, które masz i które pasują do ataku: **Nożownik**, **Promocja**, **Ulubiona broń**. Niespełniony
+  warunek (brak celu, brak wcześniejszego trafienia, Promocja poza Berserkiem) — opcja zostaje do wyboru z
+  ostrzeżeniem; moduł sam wybiera tylko sprawdzone. Nożownik ma pierwszeństwo przed innym B.
+- **W Reakcji [R]** — atak poza swoją turą (albo po **Reaguj → Uzbrój**). Drugi atak nie przechodzi do reakcji.
+
+Przycelowanie wybrane w tym samym oknie dolicza Akcję Bonusową do tej samej próby (Atakowanie + Przycelowanie = A+B,
+Nożownik + Przycelowanie = 2B). Koszt liczy się dopiero przy rzucie — zamknięte okno nic nie kosztuje; pudło już tak.
+Przerzut (Fuks) i obrażenia to ta sama próba, bez nowej akcji. Karta ataku ma plakietkę z kosztem; ostrzeżenia
+(przekroczenie, niespełniony warunek) są w jej dymku i u MG. Nic nie jest blokowane.
+
 ## Ułatwienie i Utrudnienie w Teście Ataku
 
 Okno Testu Ataku samo podświetla **Ułatwienie** albo **Utrudnienie**, kiedy wynikają z zasad — możesz
@@ -62,14 +79,15 @@ ze stroną podręcznika.
 | atak dystansowy, gdy w 1,5 m jest wróg, który cię widzi i może działać (s. 28) | jesteś Niewidoczny (chyba że cel cię widzi) |
 | jesteś Oślepiony, Przerażony, Zatruty, Unieruchomiony, Powalony (wręcz) albo Pochwycony przez kogoś innego niż cel | |
 | cel Powalony dalej niż 1,5 m, Niewidoczny albo **Unika** (s. 30) | |
-| **Biegniesz**; atak dystansowy w biegnącego w jego turze (s. 30) | |
+| **Biegniesz**; atak dystansowy w biegnącego w jego turze albo w trakcie jego Reakcji z Bieganiem (s. 30; Reakcja — Kobalt 47) | |
 | pancerz bez wyszkolenia, Udźwig, strzał z broni palnej jedną ręką, choroby, Upojenie 3 | Współpraca |
 
 **Automatyczne Trafienie Krytyczne:** trafienie Nieprzytomnego albo Sparaliżowanego z 1,5 m to zawsze
 krytyk (s. 35) — werdykt na karcie ataku, krytyczne kości obrażeń i Stopień Zranienia idą same.
 
-**Unikanie i Bieganie** to akcje: przełącza się je w panelu Stan na karcie (w trwającej walce) albo w
-HUD żetonu; schodzą na początku twojej następnej tury. Biegać nie można, leżąc. Unikanie daje też Ułatwienie w Rzutach
+**Unikanie i Bieganie** to akcje: przyciski w panelu Stan na karcie (w trwającej walce); schodzą na początku twojej
+następnej tury. Bieganie w Reakcji chroni przed ostrzałem tylko do końca tej reakcji ([Zakończ reakcję] albo koniec
+tury, w której się wydarzyła). Biegać nie można, leżąc. Unikanie daje też Ułatwienie w Rzutach
 Obronnych na Zręczność (s. 30) — gaśnie przy Obezwładnieniu i przy Szybkości 0 (także przy Udźwigu maksymalnym).
 
 **Osłona** pytana jest też przy ataku wręcz — wiersz w oknie ataku, domyślnie „Brak”.
