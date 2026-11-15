@@ -159,30 +159,7 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
         break;
       }
 
-      // Reuse an existing macro for this ability if one is lying around unplaced
-      // (and delete any extras), so a lost race can never leave duplicates behind.
-      const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId
-        && belongsToUser(m, user) && isDocumentLive(m));
-      let macro = existing[0] ?? null;
-      for (const dup of existing.slice(1)) {
-        if (isDocumentLive(dup) && dup.canUserModify(game.user, "delete")) await dup.delete();
-      }
-
-      if (macro) {
-        await macro.update({ name: feature.label, img: item.img ?? _iconFor(feature, false) });
-      } else {
-        macro = await Macro.create({
-          name: feature.label,
-          type: "script",
-          img: item.img ?? _iconFor(feature, false),
-          scope: "global",
-          author: user.id,
-          ownership: { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-          command: _macroCommand(abilityId),
-          flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id, userId: user.id } }
-        });
-      }
-
+      const macro = await makroZdolnosci(actor, { abilityId, item, feature }, user);
       await user.assignHotbarMacro(macro, slot);
       owned.set(abilityId, slot);
       occupied.add(slot);
@@ -192,6 +169,59 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
   }
 
   ui.hotbar?.render();
+}
+
+/**
+ * The user's macro for one ability: reuse the existing one (deleting extras, so a lost race never leaves duplicates)
+ * or create it. Does not place it — the sync and the bar templates (`pasek-szablony.mjs`) decide the slot.
+ * @param {Actor} actor
+ * @param {{abilityId: string, item: Item, feature: object}} e  an entry of `_eligibleAbilities`
+ * @param {User} user
+ */
+export async function makroZdolnosci(actor, { abilityId, item, feature }, user = game.user) {
+  const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId
+    && belongsToUser(m, user) && isDocumentLive(m));
+  const macro = existing[0] ?? null;
+  for (const dup of existing.slice(1)) {
+    if (isDocumentLive(dup) && dup.canUserModify(game.user, "delete")) await dup.delete();
+  }
+  if (macro) {
+    await macro.update({ name: feature.label, img: item.img ?? _iconFor(feature, false) });
+    return macro;
+  }
+  return Macro.create({
+    name: feature.label,
+    type: "script",
+    img: item.img ?? _iconFor(feature, false),
+    scope: "global",
+    author: user.id,
+    ownership: { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
+    command: _macroCommand(abilityId),
+    flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id, userId: user.id } }
+  });
+}
+
+/** Abilities on this actor that own a hotbar macro: `{abilityId, item, feature}` (bar templates read the same list). */
+export function zdolnosciPaska(actor) {
+  return _eligibleAbilities(actor);
+}
+
+/** Whether `macro` is this user's managed ability macro (its ability id) — `null` otherwise. */
+export function zdolnoscMakra(macro, user = game.user) {
+  const id = macro?.getFlag?.(MODULE_ID, FLAG_ABILITY);
+  return id && belongsToUser(macro, user) ? id : null;
+}
+
+/**
+ * An explicit template placement brings removed abilities back (§8.3 — onboarding/restore is explicit): drop them
+ * from the user's removal list.
+ * @param {User} user
+ * @param {string[]} ids
+ */
+export async function odblokujZdolnosci(user, ids) {
+  const list = user.getFlag(MODULE_ID, FLAG_REMOVED) ?? [];
+  const zostaja = list.filter(id => !ids.includes(id));
+  if (zostaja.length !== list.length) await user.setFlag(MODULE_ID, FLAG_REMOVED, zostaja);
 }
 
 /**

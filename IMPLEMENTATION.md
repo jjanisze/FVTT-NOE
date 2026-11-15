@@ -1214,6 +1214,30 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — szablony paska i palety Ruch/Więcej (E7) (2026-11-15)
+
+- **„Ułóż pasek”** w panelu Stan (w walce i poza nią — poza walką sam przycisk; decyzja MG: przycisk, nie pytanie
+  przy przypisaniu postaci): podgląd slotów 1–0, potem jeden zapis paska (`user.update`, `diff: false, recursive:
+  false`) — przesunięte makra zdolności zostają na pasku, więc synchronizator nie bierze ich za usunięte. Model i planer
+  czysto w `config/pasek-data.mjs` (`SLOTY_SZABLONU`, `SZABLONY`, `decyzjeKlasowe`, `planPaska`): makra użytkownika
+  nietknięte (konflikt — element za dziesiątką), makra modułu przesuwane, „jest” bez zmian. Wykonanie w
+  `actors/pasek-szablony.mjs` (`ulozPasek`, `wpisySzablonu`, `tozsamoscMakra`; makra przedmiotów wołają
+  `game.neuroshima.pasek.uzyj(uuid, aktywność)`). Ułożenie zdejmuje zdolności szablonu z listy usuniętych
+  (`odblokujZdolnosci`) i zapisuje wersję na użytkowniku (`flags.<mod>.pasekSzablon[actorId]`).
+- Sloty: broń w ręce/rozmieszczona (albo posiadana), zapasowa, obsługa broni (`neuroMagSwap` → `neuroReload` →
+  `neuroLoadOne`), dwie decyzje klasowe (listy klas w `SZABLONY`, potem inne posiadane z akcją; Ulubiona broń i Szybkie
+  nogi pominięte), ekwipunek (zużywalny z akcją), Unik, Odstąp, palety. Wygląd — istniejące ikony (M9 zmieni oprawę).
+- **Palety** (`skrot:ruch`, `skrot:wiecej` → `paleta`/`opcjePalety` w `ekonomia-karta.mjs`): Ruch — Przyspiesz,
+  Biegnij, Skok, Padnij/Powstań, Złodziej z Szybkimi nogami — Przyspiesz [B] (grant), Odstąp [B], Ukryj się [B]
+  (Skradanie się); Więcej — Pomóż, Manewr, kalkulator skoku, w walce Wyczekaj, Reaguj, Zakończ reakcję. Poza walką
+  tylko to, co bez budżetu.
+- `ability-hotbar.mjs`: `makroZdolnosci` (wspólne z synchronizacją), `zdolnosciPaska`, `zdolnoscMakra`,
+  `odblokujZdolnosci`; `SKROTY` przeniesione do `config/pasek-data.mjs`, makro skrótu przez `makroSkrotu` (też przy
+  przeciąganiu przycisku). Szybkie nogi: plakietka w generatorze (paleta Ruch), paczka `zdolnosci-klasowe` w repo.
+- Testy: Quench `pasek-m8` 6/6 (decyzje klasowe, planer — konflikt/przesunięcia/„jest”, prawdziwe ułożenie z makrem
+  użytkownika na 7, drugi raz bez zmian, palety poza walką i Szybkie nogi za B w walce); e2e `ruch` 16 kroków (klik
+  „Ułóż pasek”, podgląd, pasek gracza). Poligon `ruch`: próba `szablon-paska`. Dokumentacja: `docs/Ruch-i-teren.md`.
+
 ### M8 — reszta Atakowania: serie, manewry, Nożownik, korekta (E6) (2026-11-15)
 
 - **Tryby ognia z Testem Ataku płacą przy rzucie** (`E.AKTYWNOSCI_ATAKU`: `attack`, `neuroKs`, `neuroDublet`):
@@ -1243,6 +1267,8 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   KS z Gradem), `sztuczki-walka` 31/31 (Grad ołowiu — ostrzeżenie zamiast odmowy, historia na aktorze); e2e `ruch`
   15 kroków (korekta z plakietki, manewr z „Sposobem ataku”). Pełny Quench 1617/1617, bez ostrzeżeń zgodności modułu.
 - Atak z okna i manewr dzielą jeden zapis próby (`_zapiszProbe`: wybór, ostrzeżenia, R, ledger, sygnał MG).
+- e2e `combat` (krok KS z B 93R) przepisany na T39: druga KS w rundzie idzie, wydaje 3 naboje, karta ma ostrzeżenie
+  „drugi raz w tej rundzie”, historia na aktorze liczy 2 (wcześniej krok oczekiwał odmowy i flagi na broni).
 - Testy, poprawki: `walkaTestowa` nadaje inicjatywę wg kolejności aktorów, nie zwróconych żetonów (kolejność
   `createEmbeddedDocuments` bywa inna — `gotowosc` padał losowo w pełnym przebiegu); `pasek-m8` usuwa slot paska przez
   `_del` zamiast `-=` (skan dnd5e6 w `npm test` kończył się kodem 1).

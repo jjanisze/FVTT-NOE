@@ -5137,6 +5137,16 @@ tr.neuro-tt-off td.attribution-value {
 /* Plakietka kosztu próby ataku — autor i MG klikają, żeby poprawić sposób (korekta po fakcie). */
 .chat-message .pill.neuro-atak-m8-korekta { cursor: pointer; }
 .chat-message .pill.neuro-atak-m8-korekta:hover { filter: brightness(1.25); }
+/* Szablon paska (E7): podgląd ułożenia i palety Ruch / Więcej. */
+.neuro-pasek-podglad { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: var(--font-size-12, 12px); }
+.neuro-pasek-podglad th, .neuro-pasek-podglad td { padding: 2px 6px; text-align: left; }
+.neuro-pasek-podglad tbody th { width: 2.5em; text-align: center; }
+.neuro-pasek-podglad tr.konflikt td:last-child { color: #ff7b6e; }
+.neuro-pasek-podglad tr.brak td { opacity: 0.6; }
+.neuro-m8-pasek-row { display: flex; align-items: center; gap: 6px; }
+.neuro-m8-pasek-row .neuro-m8-info { flex: 1 1 auto; }
+.application.neuro-paleta .form-footer { flex-wrap: wrap; }
+.application.neuro-paleta .form-footer button { flex: 1 1 45%; }
 /* Koszt manewru zamiast ataku na karcie wyniku. */
 .neuro-maneuver-koszt { display: block; margin-top: 2px; opacity: 0.8; font-size: var(--font-size-11, 11px); }
 /* Kalkulator skoku i okna M8. */

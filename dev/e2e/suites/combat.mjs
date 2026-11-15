@@ -119,7 +119,8 @@ async function armBurst({ actorName }) {
 /**
  * Player: one KS (krótka seria) with the B 93R at `targetName`, as the sheet fires it: the attack
  * dialog opens with Utrudnienie preselected and the player confirms it. Then a second KS in the same
- * round, which must be refused without a dialog.
+ * round: „raz w rundzie” warns, it does not refuse (M8 T39, GM 2026-11-15) — the shot goes, the card
+ * carries the warning, and the burst history (on the actor) counts two.
  */
 async function burst({ targetName }) {
   const MOD = "neuroshima-2026-overrides";
@@ -149,15 +150,19 @@ async function burst({ targetName }) {
     await __e2e.quiet();
     const attack = game.messages.contents.slice(since).findLast(m => m.type === "attack");
     const afterFirst = mag();
-    // Same round again: refused before any dialog (use() returns nothing). Were it accepted, its
-    // dialog is answered so nothing hangs, and the spent rounds show it.
+    const usedFirst = actor.getFlag(MOD, "lastBurstUse")?.tryby?.ks ?? null;
+    // Same round again: warned, not refused — its dialog is answered and the rounds go.
+    const since2 = game.messages.size;
     const again = await ks.use({}, { configure: false }, {});
-    if (again) await __e2e.pressRollDialog("normal", { timeoutMs: 3000 });
+    if (again) await __e2e.pressRollDialog("normal", { timeoutMs: 5000 });
+    await __e2e.until(() => mag() < afterFirst, { timeoutMs: 8000, message: "the second burst's rounds" }).catch(() => {});
     await __e2e.quiet();
+    const attack2 = game.messages.contents.slice(since2).findLast(m => m.type === "attack");
     return {
-      gate, pressed, spent: before - afterFirst, spentAgain: afterFirst - mag(), secondRefused: !again,
+      gate, pressed, spent: before - afterFirst, spentAgain: afterFirst - mag(), secondWent: !!again,
       advantageMode: attack?.rolls?.[0]?.options?.advantageMode ?? null, flavor: attack?.flavor ?? null,
-      used: gun.getFlag(MOD, "lastBurstUse")?.mode ?? null
+      usedFirst, used: actor.getFlag(MOD, "lastBurstUse")?.tryby?.ks ?? null,
+      warning: (attack2?.getFlag(MOD, "atakM8")?.ostrz ?? []).join(" ")
     };
   } finally {
     __e2e.restoreDice();
@@ -524,7 +529,7 @@ export default {
       });
     });
 
-    await t.step("player: KS with the B 93R — Utrudnienie by default, 3 rounds, once per round", async () => {
+    await t.step("player: KS with the B 93R — Utrudnienie by default, 3 rounds; a second KS in the round warns, not refused", async () => {
       const armed = await t.gm.eval(armBurst, { actorName: "PC Gracz 1" });
       t.equal(armed.current, 20, "rounds in the B 93R's magazine");
       await t.waitFor(p1, () => game.user.character.items.some(i => i.system.activities?.some?.(a => a.type === "neuroKs")),
@@ -533,9 +538,11 @@ export default {
       t.equal(r.pressed, true, "attack dialog for the burst");
       t.equal(r.advantageMode, -1, "KS attack roll mode (ADV_MODE.DISADVANTAGE)");
       t.equal(r.spent, 3, "rounds spent by one KS");
-      t.equal(r.used, "ks", "burst marked as used this round");
-      t.equal(r.secondRefused, true, "a second KS in the same round was allowed");
-      t.equal(r.spentAgain, 0, "rounds spent by the refused second KS");
+      t.equal(r.usedFirst, 1, "burst history on the actor after the first KS");
+      t.equal(r.secondWent, true, "a second KS in the same round goes (warning, not refusal — T39)");
+      t.equal(r.spentAgain, 3, "rounds spent by the second KS");
+      t.equal(r.used, 2, "two KS this round on the actor");
+      t.assert(/drugi raz w tej rundzie/.test(r.warning), "the second card carries the once-per-round warning", r.warning);
       await t.quiet();
     });
     await t.step("player: LAW (jednorazowa) — one shot, a spent launcher in the same hand, the card's damage still rolls (M6 D8)", async () => {

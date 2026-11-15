@@ -54,6 +54,7 @@ import { registerClassState } from "./actors/class-state.mjs";
 import { registerActions, actionsApi } from "./actors/actions.mjs";
 import { registerEkonomiaLinijka } from "./combat/ekonomia-linijka.mjs";
 import { registerEkonomiaKarta, uzyjSkrotu } from "./actors/ekonomia-karta.mjs";
+import { pasekApi } from "./actors/pasek-szablony.mjs";
 import { registerSkok, skokApi } from "./combat/skok.mjs";
 import { registerPomaganie, pomaganieApi } from "./combat/pomaganie.mjs";
 import { registerAtakowanie, atakowanieApi } from "./combat/atakowanie.mjs";
@@ -636,6 +637,8 @@ Hooks.once("ready", () => {
   game.neuroshima.gotowosc = gotowoscApi;
   // Skróty M8 z paska (przeciągnięte przyciski panelu Stan) — game.neuroshima.skroty.uzyj("bieganie")
   game.neuroshima.skroty = Object.freeze({ uzyj: uzyjSkrotu });
+  // Szablony paska (M8 §8.3) — game.neuroshima.pasek.uloz(actor), .wpisy(actor), .uzyj(uuid, aktywność)
+  game.neuroshima.pasek = pasekApi;
   // Rejestr „po rzucie” (PLAN_m7 §3.0.2) — game.neuroshima.poRzucie.uzyj("fuks", message), .zrodla(), .kontekst(message)
   game.neuroshima.poRzucie = poRzucieApi;
   // Ułatwienia w testach i RO (PLAN_m7 §3.0.3) — game.neuroshima.ulatwieniaTestow.wiersze(), .rozstrzygnij(config)

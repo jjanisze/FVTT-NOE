@@ -55,6 +55,28 @@ odbiera: wszystko jest też na karcie. Makro zdolności zdjęte z paska ręką g
 synchronizacji (przeniesienie na inne pole to nie usunięcie); przywraca je jawnie
 `game.modules.get("neuroshima-2026-overrides").api.hotbar.restore()`.
 
+**Szablon paska.** Przycisk **Ułóż pasek** w panelu Stan (w walce i poza nią) układa sloty 1–0 z tego, co postać
+ma: 1 — broń w ręce (albo pierwsza rozmieszczona), 2 — broń zapasowa, 3 — obsługa broni (wymiana magazynka,
+przeładowanie albo ładowanie po naboju), 4–5 — dwie decyzje klasowe, 6 — przedmiot z akcją (medpak, granat), 7 — Unik,
+8 — Odstąp, 9 — paleta **Ruch**, 0 — paleta **Więcej**. Czego postać nie ma, zostaje puste. Najpierw podgląd; twoich
+makr moduł nie rusza — zajęty slot to konflikt, a element idzie za dziesiątkę. Makra modułu (zdolności, skróty) mogą
+się przesunąć. Ułożenie przywraca zdolności szablonu zdjęte wcześniej z paska.
+
+| Klasa | Decyzje klasowe (posiadane, w tej kolejności) |
+| --- | --- |
+| Brutal | Berserk, Z bara!, Solówa |
+| Cwaniak | Szybka gadka, Cwaniacki zwód, Obelga, Głowa do góry!, Motywacja |
+| Spec | Dobra rada, Szybkie badanie, Szybkie ręce, Inteligentna obrona |
+| Twardziel | Przycelowanie, Kondycha, Zryw |
+| Złodziej | Kocie kości, Matrix — Szybkie nogi są w palecie Ruch |
+| Zwiadowca | Kłusownik |
+
+Brak dwóch z listy — inne posiadane zdolności paska z akcją. Wybór Ulubionej broni to ustawienie, nie decyzja w turze
+(atak za B wybierasz w „Sposobie ataku”). **Paleta Ruch:** Przyspiesz, Biegnij, Skok, Padnij/Powstań; Złodziej z
+**Szybkimi nogami** dostaje ich warianty za Akcję Bonusową — Przyspiesz [B], Odstąp [B], Ukryj się [B] (Skradanie się).
+**Paleta Więcej:** Pomóż, Manewr, kalkulator skoku, w walce też Wyczekaj, Reaguj i Zakończ reakcję. Otwarcie palety
+nic nie kosztuje; poza walką zostają tylko rzeczy bez budżetu.
+
 **Gotowość do tury.** U góry ekranu gracz widzi pasek: „Twoja tura za X” (X — ilu widocznych uczestników jest
 przed tobą; ukrytych moduł nie liczy i nie zdradza), „Gotuj się, jesteś następny” z krótkim dźwiękiem i „Twoja tura” z
 dźwiękiem startu i zegarem `m:ss.cc` — po 30 s żółtym, po 60 s czerwonym. Zegar liczy cały niepauzowany czas tury

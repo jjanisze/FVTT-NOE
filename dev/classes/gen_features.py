@@ -776,8 +776,9 @@ COVERAGE = {
         "manual": "Rodzaj obrażeń wybiera gracz w oknie obrażeń; czy przedmiot się nadaje — MG.",
     },
     "szybkie-nogi": {
-        "manual": "Odstąpienie, Przyspieszenie i Ukrywanie się w Akcji Bonusowej — aktywność stawia znacznik Akcji "
-                  "Bonusowej, sam ruch czeka na handoff ruchu.",
+        "auto": [("paleta Ruch na pasku (szablon M8): Przyspiesz [B] z grantem ruchu, Odstąp [B], Ukryj się [B] z testem "
+                  "Skradania się — w ledgerze tury za Akcję Bonusową", "actors/ekonomia-karta.mjs")],
+        "manual": "Aktywność zdolności stawia sam znacznik Akcji Bonusowej — wariant z ruchem wybierz w palecie Ruch.",
     },
     "renoma": {
         "manual": "+1 do Wpływania za każde 50 gambli towarów luksusowych na sobie — gracz dolicza w oknie rzutu "

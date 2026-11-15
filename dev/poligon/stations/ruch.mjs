@@ -4,7 +4,7 @@
  * Tiled (natywne Regiony dnd5e: gruz i schody nachodzące na siebie), walka gotowa, nierozpoczęta.
  *
  * Próby obejmują to, co M8 już robi (E1–E3, E5, E6, E8, części E4 i E7): także krótką serię jako osobną Akcję (B 93R
- * Twardziela), manewr zamiast ataku i korektę próby z karty. Szablony paska dojdą z kolejnym krokiem — wtedy i ich próby.
+ * Twardziela), manewr zamiast ataku, korektę próby z karty i szablon paska z paletami Ruch/Więcej.
  */
 
 import { p } from "./_wspolne.mjs";
@@ -46,7 +46,7 @@ export default {
     return { gracze: gracze.filter(Boolean).map(a => a.name), ghul: ghul?.name ?? null };
   },
   proby: [
-    p("licznik", "Karta", "Panel Stan w walce: ruch pozostałe/pojemność (np. 9/9 m) i A/B/R/I 1/1 — czytelne, z dymkami źródeł; poza walką panelu nie ma",
+    p("licznik", "Karta", "Panel Stan w walce: ruch pozostałe/pojemność (np. 9/9 m) i A/B/R/I 1/1 — czytelne, z dymkami źródeł; poza walką z panelu zostaje sam przycisk „Ułóż pasek”",
       "Zacznij walkę, otwórz kartę Twardziela."),
     p("podziel-ruch", "Ruch", "Dwa ruchy po 3 m → 3/9; Ctrl+Z ostatniego → 6/9; Akcja Bonusowa i Bieganie nie cofają się z ruchem (T01)",
       "Gracz 1: dwa przeciągnięcia po 2 pola, potem Ctrl+Z na mapie."),
@@ -96,6 +96,8 @@ export default {
       "Tura Gladiatora: atak maczetą w ghula, potem Manewry → Wytrącenie; w Berserku Z bara! i przycisk z jej karty."),
     p("korekta-ataku", "Korekty", "Klik w plakietkę kosztu na karcie ataku (autor albo MG): „Popraw próbę” — kontynuacja / nowa A / posiadane B / bez kosztu; licznik na karcie postaci się zmienia, plakietka mówi nowy sposób, dymek — co poprawiono i kto",
       "Gracz 3 po ataku klika plakietkę i wybiera „Bez kosztu”, potem z powrotem „Nowe Atakowanie”."),
+    p("szablon-paska", "Pasek", "„Ułóż pasek” (panel Stan, też poza walką): podgląd slotów 1–0 — broń, obsługa broni, dwie decyzje klasowe (Gladiator: Berserk, Z bara!), ekwipunek, Unik, Odstąp, paleta Ruch, paleta Więcej; makro gracza w slocie zostaje (konflikt — za dziesiątką); drugi raz — bez zmian; palety: otwarcie nic nie kosztuje",
+      "Gracz 3: połóż własne makro na slocie 7, potem Ułóż pasek → Ułóż; użyj Ruch → Biegnij i Więcej → Manewr. Gracz 1 poza walką: Ułóż pasek."),
     p("pusty-pasek", "Pasek", "Przycisk panelu przeciągnięty na pasek działa jak na karcie; makro zdolności zdjęte z paska nie wraca po zmianie poziomu; pusty pasek niczego nie odbiera (T43)",
       "Gracz 1: przeciągnij Biegnij i Skok na pasek, użyj; zdejmij makro zdolności; MG daje poziom."),
     p("gotowosc", "Gotowość", "Pasek u góry: „Twoja tura za 2”, „Gotuj się, jesteś następny” z krótkim dźwiękiem, „Twoja tura” z dźwiękiem i zegarem; ukryty BN nie liczy się w „za X”; MG bez sygnałów przy każdym BN (T45)",

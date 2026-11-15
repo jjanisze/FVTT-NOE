@@ -548,8 +548,8 @@ export const CLASS_FEATURES = {
     label: "Szybkie nogi",
     action: "B",
     hotbar: true,
-    auto: [],
-    manual: "Odstąpienie, Przyspieszenie i Ukrywanie się w Akcji Bonusowej — aktywność stawia znacznik Akcji Bonusowej, sam ruch czeka na handoff ruchu.",
+    auto: [{ what: "paleta Ruch na pasku (szablon M8): Przyspiesz [B] z grantem ruchu, Odstąp [B], Ukryj się [B] z testem Skradania się — w ledgerze tury za Akcję Bonusową", where: "actors/ekonomia-karta.mjs" }],
+    manual: "Aktywność zdolności stawia sam znacznik Akcji Bonusowej — wariant z ruchem wybierz w palecie Ruch.",
     text: "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się."
   },
   "kocie-kosci": {

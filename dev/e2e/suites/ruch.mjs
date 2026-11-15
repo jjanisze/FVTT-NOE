@@ -252,6 +252,24 @@ async function oknoManewru() {
   return { opcje: sel ? [...sel.options].map(o => o.value) : null, wybrana: sel?.value ?? null };
 }
 
+/** Gracz 1: prawdziwy klik „Ułóż pasek” w panelu; zwraca wiersze podglądu (slot, zmiana). */
+async function ulozPasekKlik() {
+  const a = game.user.character;
+  a.sheet.render(true);
+  const el = await window.__e2e.until(() => [...(a.sheet.element?.querySelectorAll(".neuro-m8-panel .neuro-akcja-btn") ?? [])]
+    .find(b => /Ułóż pasek/.test(b.textContent)), { message: "the „Ułóż pasek” button" });
+  el.click();
+  const app = await window.__e2e.until(() => [...foundry.applications.instances.values()]
+    .find(x => x.rendered && String(x.title ?? "").startsWith("Ułóż pasek")), { message: "the preview" });
+  return [...app.element.querySelectorAll(".neuro-pasek-podglad tbody tr")].map(tr => [...tr.children].map(c => c.textContent.trim()));
+}
+
+/** Gracz 1: tożsamości makr w slotach 1–10 po ułożeniu. */
+function pasekGracza() {
+  const p = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(s => game.neuroshima.pasek.tozsamosc(game.macros.get(game.user.hotbar?.[s])) ?? null);
+  return p[9] === "skrot:wiecej" ? p : null;
+}
+
 /** Ostatnia karta wyniku manewru z kosztem (każdy klient). */
 function kartaManewru() {
   const m = game.messages.contents.findLast(x => /neuro-maneuver-koszt/.test(x.content ?? ""));
@@ -508,6 +526,20 @@ export default {
       }, { message: "the maneuver spent the A" });
       t.equal(s.ledger.ataki.at(-1)?.uzyte, 1, "a slot of the new Atakowanie");
       await t.screenshot("Gracz 1", "manewr — koszt na karcie");
+    });
+
+    await t.step("Gracz 1: [Ułóż pasek] → preview of slots 1–0 → „Ułóż”: weapon in slot 1, Unik/Odstąp/Ruch/Więcej in 7–0", async () => {
+      const wiersze = await p1.eval(ulozPasekKlik);
+      t.equal(wiersze.length, 10, "ten template rows");
+      t.assert((wiersze[0][2] ?? "").length > 0 && !/nic do postawienia/.test(wiersze[0][3] ?? ""), "a weapon goes to slot 1", wiersze[0]);
+      t.assert(/^B 92: /.test(wiersze[2][2] ?? ""), "weapon handling (magazine swap) in slot 3", wiersze[2]);
+      await t.screenshot("Gracz 1", "pasek — podgląd szablonu");
+      const o = await p1.eval(okno, { tytul: "Ułóż pasek", przycisk: "yes" });
+      t.assert(o.klik, "confirmed", o);
+      const pasek = await t.waitFor(p1, pasekGracza, { message: "the template on the player's bar" });
+      t.assert(String(pasek[0]).startsWith("item:"), "slot 1 — weapon attack", pasek);
+      t.equal(pasek.slice(6).join(" "), "skrot:dodging skrot:odstapienie skrot:ruch skrot:wiecej", "slots 7–0");
+      await t.screenshot("Gracz 1", "pasek — po ułożeniu");
     });
   }
 };

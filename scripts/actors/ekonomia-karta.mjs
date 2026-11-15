@@ -14,9 +14,12 @@
 
 import * as E from "../config/ekonomia-data.mjs";
 import { stan, FLAGA_LEDGER } from "../combat/ekonomia.mjs";
-import { deklaruj, koryguj, zakonczReakcje, wyczekaj, reaguj, uzbroj, uzbrojona } from "./actions.mjs";
+import { deklaruj, koryguj, zakonczReakcje, wyczekaj, reaguj, uzbroj, uzbrojona, zadeklaruj } from "./actions.mjs";
 import { oknoPomocy, pomoce } from "../combat/pomaganie.mjs";
 import { oknoSkoku } from "../combat/skok.mjs";
+import { openManeuverDialog } from "../combat/melee-maneuvers.mjs";
+import { SKROTY, WARIANTY_SZYBKICH_NOG, SZABLONY } from "../config/pasek-data.mjs";
+import { makroSkrotu, ulozPasek, klasaSzablonu } from "./pasek-szablony.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KLASA = "neuro-m8-panel";
@@ -50,18 +53,6 @@ function _licznik(kind, p, ops) {
 }
 
 /** Operacje panelu, które dają się przeciągnąć na pasek jako działający skrót (§8.3). */
-const SKROTY = Object.freeze({
-  przyspieszenie: { label: "Przyspiesz", img: "icons/svg/wingfoot.svg" },
-  bieganie: { label: "Biegnij", img: "icons/svg/wingfoot.svg" },
-  dodging: { label: "Unik", img: "icons/svg/shield.svg" },
-  odstapienie: { label: "Odstąp", img: "icons/svg/door-exit.svg" },
-  padnij: { label: "Padnij / Powstań", img: "icons/svg/falling.svg" },
-  powstan: { label: "Padnij / Powstań", img: "icons/svg/falling.svg" },
-  pomoz: { label: "Pomóż", img: "icons/svg/regen.svg" },
-  wyczekaj: { label: "Wyczekaj", img: "icons/svg/clockwork.svg" },
-  reaguj: { label: "Reaguj", img: "icons/svg/lightning.svg" },
-  skok: { label: "Skok", img: "icons/svg/jump.svg" }
-});
 const TYP_SKROTU = "neuroM8Skrot";
 
 function _przycisk({ label, icon, tip, aktywny = false, editable = true, akcja = null, onClick }) {
@@ -162,7 +153,7 @@ async function _oknoReakcji(actor, przygotowania) {
  */
 export function panelEkonomii(actor, editable) {
   const s = stan(actor);
-  if (!s) return null;
+  if (!s) return _rzadPaska(actor, editable);
   const { pule, ruch, chwila, ledger: l } = s;
   const panel = document.createElement("div");
   panel.className = `neuro-stan-row ${KLASA}`;
@@ -261,6 +252,7 @@ export function panelEkonomii(actor, editable) {
   }
   dol.appendChild(_przycisk({ label: "Skoryguj", icon: "fa-pen-to-square", editable,
     tip: "Dopisz albo zwolnij wydatek (akcja słowna, pomyłka klasyfikacji) albo popraw ruch.", onClick: () => _oknoKorekty(actor) }));
+  if (actor.type === "character") dol.appendChild(_przyciskPaska(actor, editable));
   panel.appendChild(dol);
   return panel;
 }
@@ -308,6 +300,7 @@ export async function uzyjSkrotu(akcja) {
     case "reaguj": return c ? _oknoReakcji(actor, E.aktywnePrzygotowania(c.ledger, c.chwila)) : ui.notifications.info("Reakcja — tylko w walce.");
     case "padnij": case "powstan": return deklaruj(actor, actor.statuses?.has("prone") ? "powstan" : "padnij");
     case "dodging": return deklaruj(actor, "unikanie");
+    case "ruch": case "wiecej": return paleta(actor, akcja);
     default: return E.DEKLARACJE[akcja] ? deklaruj(actor, akcja) : null;
   }
 }
@@ -315,17 +308,92 @@ export async function uzyjSkrotu(akcja) {
 /** Upuszczenie przycisku panelu na pasek: makro wołające `uzyjSkrotu` (jedno na akcję i użytkownika). */
 function _onHotbarDrop(_bar, data, slot) {
   if (data?.type !== TYP_SKROTU || !SKROTY[data.akcja]) return;
-  const def = SKROTY[data.akcja];
   void (async () => {
-    const istniejace = game.macros.find(m => m.getFlag(MODULE_ID, "skrotM8") === data.akcja && m.isOwner && m.author?.id === game.user.id);
-    const macro = istniejace ?? await Macro.create({
-      name: def.label, type: "script", img: def.img, scope: "global", author: game.user.id,
-      command: `game.neuroshima.skroty.uzyj("${data.akcja}");`,
-      flags: { [MODULE_ID]: { skrotM8: data.akcja } }
-    });
-    await game.user.assignHotbarMacro(macro, slot);
+    const macro = await makroSkrotu(data.akcja);
+    if (macro) await game.user.assignHotbarMacro(macro, slot);
   })();
   return false;
+}
+
+/* -------------------------------------------- */
+/*  Palety Ruch i Więcej, szablon paska (§8.3)   */
+/* -------------------------------------------- */
+
+const _ma = (actor, id) => actor.items?.some(i => i.getFlag(MODULE_ID, "abilityId") === id);
+
+/**
+ * Opcje palety. Ruch: Przyspiesz, Biegnij, Skok, Padnij/Powstań; Złodziej z Szybkimi nogami — ich warianty B
+ * (Przyspieszenie, Odstąpienie, Ukrywanie się, s. 89) zamiast klasowego „B Bieganie”. Więcej: Pomóż, Wyczekaj, Reaguj,
+ * Manewr, kalkulator Skoku, Zakończ reakcję; poza walką — tylko to, co ma sens bez budżetu (eksploracja).
+ * @returns {{id: string, label: string, icon: string, run: () => any}[]}
+ */
+export function opcjePalety(actor, rodzaj) {
+  const s = stan(actor);
+  const prone = actor.statuses?.has("prone");
+  if (rodzaj === "ruch") {
+    const out = [
+      { id: "przyspieszenie", label: "Przyspiesz [A]", icon: "fa-solid fa-person-walking-arrow-right", run: () => deklaruj(actor, "przyspieszenie") },
+      { id: "bieganie", label: "Biegnij [A]", icon: "fa-solid fa-person-running", run: () => deklaruj(actor, "bieganie") },
+      { id: "skok", label: "Skok", icon: "fa-solid fa-person-falling", run: () => oknoSkoku(actor) },
+      { id: "padnij", label: prone ? "Powstań" : "Padnij", icon: "fa-solid fa-person-praying", run: () => deklaruj(actor, prone ? "powstan" : "padnij") }
+    ];
+    if (_ma(actor, SZABLONY.zlodziej.ruchB)) {
+      for (const w of WARIANTY_SZYBKICH_NOG) {
+        out.push({ id: `nogi-${w.id}`, label: `${w.label} — Szybkie nogi`, icon: "fa-solid fa-shoe-prints",
+          run: async () => {
+            if (w.deklaracja) return deklaruj(actor, w.deklaracja, { koszt: { B: 1 }, zrodlo: `Szybkie nogi — ${w.label.replace(/ \[B\]$/, "")}` });
+            await zadeklaruj(actor, "B", { zrodlo: "Szybkie nogi — Ukrywanie się" });
+            return actor.rollSkill?.({ skill: w.umiejetnosc });
+          } });
+      }
+    }
+    return s ? out : out.filter(o => o.id === "skok");
+  }
+  const out = [
+    { id: "pomoz", label: "Pomóż", icon: "fa-solid fa-handshake-angle", run: () => oknoPomocy(actor) },
+    { id: "manewr", label: "Manewr", icon: "fa-solid fa-hand-fist", run: () => openManeuverDialog({ actor }) },
+    { id: "skok", label: "Kalkulator skoku", icon: "fa-solid fa-person-falling", run: () => oknoSkoku(actor) }
+  ];
+  if (s) {
+    out.push({ id: "wyczekaj", label: "Wyczekaj [A]", icon: "fa-solid fa-hourglass-half", run: () => _oknoWyczekania(actor) });
+    out.push({ id: "reaguj", label: "Reaguj", icon: "fa-solid fa-bolt", run: () => _oknoReakcji(actor, E.aktywnePrzygotowania(s.ledger, s.chwila)) });
+    if (s.reakcja) out.push({ id: "koniec", label: "Zakończ reakcję", icon: "fa-solid fa-flag-checkered", run: () => zakonczReakcje(actor) });
+  }
+  return out;
+}
+
+/** Paleta z paska (`skrot:ruch`, `skrot:wiecej`): wybór niczego nie wydaje, koszt ma dopiero wybrana operacja. */
+export async function paleta(actor, rodzaj) {
+  const opcje = opcjePalety(actor, rodzaj);
+  const wybor = await foundry.applications.api.DialogV2.wait({
+    window: { title: `${rodzaj === "ruch" ? "Ruch" : "Więcej"} — ${actor.name}` },
+    classes: ["neuro-paleta"],
+    position: { width: 380 },
+    content: `<p class="hint">${stan(actor) ? "Otwarcie palety nic nie kosztuje — koszt ma wybrana czynność." : "Poza walką — bez budżetu tury."}</p>`,
+    buttons: opcje.map(o => ({ action: o.id, label: o.label, icon: o.icon })),
+    rejectClose: false
+  });
+  return opcje.find(o => o.id === wybor)?.run();
+}
+
+function _przyciskPaska(actor, editable) {
+  const klasa = SZABLONY[klasaSzablonu(actor)]?.label;
+  return _przycisk({ label: "Ułóż pasek", icon: "fa-table-cells", editable,
+    tip: `Szablon paska${klasa ? ` (${klasa})` : ""}: broń, przeładowanie, decyzje klasowe, ekwipunek, Unik, Odstąp, Ruch, Więcej — sloty 1–0. `
+      + "Najpierw podgląd; twoich makr nie rusza.",
+    onClick: () => ulozPasek(actor) });
+}
+
+/** Poza walką: sam przycisk szablonu paska (panel tury pojawia się w walce). */
+function _rzadPaska(actor, editable) {
+  if (actor?.type !== "character" || !editable) return null;
+  const row = document.createElement("div");
+  row.className = "neuro-stan-row neuro-m8-pasek-row";
+  const label = document.createElement("span");
+  label.className = "neuro-m8-info";
+  label.textContent = "Pasek walki";
+  row.append(label, _przyciskPaska(actor, editable));
+  return row;
 }
 
 export function registerEkonomiaKarta() {
