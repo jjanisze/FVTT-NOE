@@ -1214,6 +1214,14 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — wąski widok i klawiatura panelu w e2e (E7, reszta) (2026-11-16)
+
+- e2e `ruch` +2 kroki: wąski widok — karta zwężona do minimum arkusza dnd5e (800 px), panel M8 w kolumnie Stan (212 px)
+  bez poziomego przewijania, każdy przycisk w obrysie; klawiatura — fokus na [Skok], Tab przenosi na następny element
+  panelu, Spacja otwiera kalkulator skoku, Escape zamyka, nic nie zostaje wydane.
+- Runner e2e: `pressKey` zna Tab, Enter i Spację (Enter/Spacja ze znakiem — aktywacja przycisku z fokusem).
+- Zostaje ocena list decyzji klasowych szablonu paska przez MG (Poligon, próba `szablon-paska`).
+
 ### M8 — Stalowe jaja i zagnieżdżona reakcja (E5, reszta) (2026-11-16)
 
 - **Grenadier, Stalowe jaja [R]** (s. 103) — deklaracja `staloweJaja` (`DEKLARACJE`, `grantStaly: 4.5`): R raz (poza

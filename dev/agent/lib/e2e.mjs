@@ -194,13 +194,17 @@ export class Client {
   async pressKey(code) {
     const KEYS = {
       Escape: ["Escape", 27], ArrowLeft: ["ArrowLeft", 37], ArrowUp: ["ArrowUp", 38], ArrowRight: ["ArrowRight", 39],
-      ArrowDown: ["ArrowDown", 40], KeyW: ["w", 87], KeyA: ["a", 65], KeyS: ["s", 83], KeyD: ["d", 68]
+      ArrowDown: ["ArrowDown", 40], KeyW: ["w", 87], KeyA: ["a", 65], KeyS: ["s", 83], KeyD: ["d", 68],
+      Tab: ["Tab", 9], Enter: ["Enter", 13], Space: [" ", 32]
     };
+    // Activation keys need their character for a focused button to fire `click` (Enter on keypress, Space on keyup);
+    // the suite focuses a button first, so nothing gets typed into a field.
+    const TEXT = { Enter: "\r", Space: " " };
     const [key, kc] = KEYS[code] ?? [code, 0];
     await this.front();
-    // No `text`: a character would also be typed into whatever input has focus.
+    // No `text` otherwise: a character would also be typed into whatever input has focus.
     const base = { key, code, windowsVirtualKeyCode: kc, nativeVirtualKeyCode: kc };
-    await this.send("Input.dispatchKeyEvent", { type: "rawKeyDown", ...base });
+    await this.send("Input.dispatchKeyEvent", TEXT[code] ? { type: "keyDown", ...base, text: TEXT[code] } : { type: "rawKeyDown", ...base });
     await sleep(60);
     await this.send("Input.dispatchKeyEvent", { type: "keyUp", ...base });
   }

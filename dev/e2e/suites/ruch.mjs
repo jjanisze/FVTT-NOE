@@ -338,6 +338,39 @@ function pulePC() {
   return { I: s.pule.I.pozostalo, A: s.pule.A.pozostalo, B: s.pule.B.pozostalo, wlasna: s.chwila.wlasna, zrodla: s.ledger.ops.slice(-3).map(o => o.zrodlo) };
 }
 
+/**
+ * Gracz 1 (E7): wąski widok — karta zwężona do minimum, na jakie pozwala arkusz dnd5e (ma własną minimalną szerokość);
+ * panel M8 siedzi w wąskiej kolumnie Stan. Bez poziomego przewijania, każdy przycisk w obrysie panelu.
+ */
+async function waskaKarta({ szer = 360 } = {}) {
+  const a = game.user.character;
+  if (!a.sheet.rendered) await a.sheet.render({ force: true });
+  await window.__e2e.until(() => a.sheet.element?.querySelector(".neuro-m8-panel"), { message: "panel" });
+  a.sheet.setPosition({ width: szer });
+  await new Promise(r => setTimeout(r, 400));
+  const el = a.sheet.element.querySelector(".neuro-m8-panel");
+  const p = el.getBoundingClientRect();
+  const poza = [...el.querySelectorAll(".neuro-akcja-btn")].filter(b => {
+    const r = b.getBoundingClientRect();
+    return r.width > 0 && (r.left < p.left - 1 || r.right > p.right + 1);
+  }).map(b => b.textContent.trim());
+  return { karta: Math.round(a.sheet.element.getBoundingClientRect().width), panel: Math.round(p.width),
+    przewija: el.scrollWidth > el.clientWidth + 1, poza, przyciski: el.querySelectorAll(".neuro-akcja-btn").length };
+}
+
+/** Gracz 1 (E7): fokus na [Skok] w panelu — klawiatura zaczyna od niego. */
+function fokusSkok() {
+  const b = game.user.character.sheet.element.querySelector('.neuro-m8-panel .neuro-akcja-btn[data-akcja="skok"]');
+  b?.focus();
+  return document.activeElement === b ? b.dataset.akcja : null;
+}
+
+/** Gracz 1: który przycisk panelu ma fokus. */
+function fokus() {
+  const el = document.activeElement;
+  return el?.closest?.(".neuro-m8-panel") ? (el.dataset.akcja ?? el.textContent.trim()) : null;
+}
+
 /** GM: następna tura. */
 async function nastepna() {
   await game.combat.nextTurn();
@@ -643,6 +676,35 @@ export default {
       const txt = await p1.eval(szybkieNogi);
       t.assert(/Akcja Bonusowa \[B\]/.test(txt), "pill text", txt);
       await t.screenshot("Gracz 1", "karta użycia — plakietka kosztu");
+    });
+
+    await t.step("E7: narrow view — sheet at its minimum width, the M8 panel in the narrow Stan column wraps without horizontal scroll, every button inside it", async () => {
+      const w = await p1.eval(waskaKarta, { szer: 360 });
+      t.log(`sheet ${w.karta} px, panel ${w.panel} px`);
+      t.assert(w.przyciski >= 8, "panel buttons rendered", w);
+      t.assert(w.panel <= 280, "the panel lives in a narrow column", w);
+      t.equal(w.przewija, false, "no horizontal scroll in the panel");
+      t.equal(w.poza.length, 0, `buttons outside the panel: ${w.poza.join(", ")}`);
+      await t.screenshot("Gracz 1", "karta wąska — panel M8");
+    });
+
+    await t.step("E7: keyboard — Tab moves between panel buttons, Space on [Skok] opens the calculator, Escape closes it; nothing spent", async () => {
+      const przed = await p1.eval(pulePC);
+      t.equal(await p1.eval(fokusSkok), "skok", "focus on [Skok]");
+      await p1.pressKey("Tab");
+      const nast = await t.waitFor(p1, () => {
+        const el = document.activeElement;
+        return el?.closest?.(".neuro-m8-panel") && el.dataset.akcja !== "skok" ? (el.dataset.akcja ?? el.textContent.trim()) : null;
+      }, { message: "Tab moved the focus to another panel control" });
+      t.assert(nast, "next focused control", nast);
+      t.equal(await p1.eval(fokusSkok), "skok", "focus back on [Skok]");
+      await p1.pressKey("Space");
+      await t.waitFor(p1, () => (document.querySelector(".neuro-skok-okno") ? true : null), { message: "the jump calculator opened from the keyboard" });
+      await t.screenshot("Gracz 1", "klawiatura — kalkulator skoku");
+      await p1.pressKey("Escape");
+      await t.waitFor(p1, () => (document.querySelector(".neuro-skok-okno") ? null : true), { message: "Escape closed the calculator" });
+      const po = await p1.eval(pulePC);
+      t.equal(JSON.stringify([po.A, po.B, po.I]), JSON.stringify([przed.A, przed.B, przed.I]), "the calculator spends nothing");
     });
   }
 };

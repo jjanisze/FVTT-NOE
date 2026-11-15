@@ -862,9 +862,9 @@ Stanowisko Poligonu `ruch` — 39 prób dla tego, co powyżej (w tym pięć skok
   manewry w slocie, Nożownik bez celu, jawna nowa A obok kontynuacji (od rdzenia E6), korekta po fakcie. T40 (Rzeźnik)
   pokrywa test `okolicznosci` (ta sama broń oburącz nie jest „inną bronią”); premia liczona z trzymanych broni w
   `premieObrazen`, które nie czyta źródła ataku — zmiana źródła jej nie dotyka.
-- **E7 (reszta):** wąski widok karty i obsługa klawiaturą w e2e; ocena list decyzji klasowych przez MG na Poligonie
-  (próba `szablon-paska`). Szablony i palety — zrobione 2026-11-15 (wiersz „E7 (szablony)” w §13.1); wygląd slotów
-  należy do M9.
+- **E7 (reszta):** ocena list decyzji klasowych przez MG na Poligonie (próba `szablon-paska`). Wąski widok (panel w
+  kolumnie Stan przy minimalnej szerokości arkusza) i klawiatura (Tab, Spacja, Escape) — e2e `ruch`, 2026-11-16.
+  Szablony i palety — zrobione 2026-11-15; wygląd slotów należy do M9.
 - **E8 (reszta):** kotwice tur M3/M4 (towarzysz w turze właściciela) w liczeniu „za X”, e2e z dwoma klientami i
   odtworzeniem po przeładowaniu, zrzuty paska.
 - **E9:** migracja M4 (budżet wierzchowca/pojazdu obok ledgera), pełna macierz §11, `PLAN_beta.md`, pokrycie M7.
