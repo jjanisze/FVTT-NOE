@@ -17,6 +17,9 @@ import { isDocumentLive } from "../doc-liveness.mjs";
 import { migawkaAtaku } from "../combat/okolicznosci.mjs";
 import { zasiegNormalny } from "../config/okolicznosci-ataku.mjs";
 import { szturmDziala } from "../config/sztuczki-walka.mjs";
+import { historiaSerii, naruszenieSerii } from "../config/ekonomia-data.mjs";
+import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
+import { zarejestrujOstrzezenieAtaku } from "../combat/atakowanie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KS_ACTIVITY_TYPE = "neuroKs";
@@ -89,6 +92,9 @@ let suppressiveHooksRegistered = false;
 const _burstSelectionCache = new Map();
 
 export function registerFireModes() {
+  // Druga KS w rundzie — ostrzeżenie w oknie „Sposób ataku” i w wyniku próby (M8, T39).
+  zarejestrujOstrzezenieAtaku(activity => (activity?.type === KS_ACTIVITY_TYPE
+    ? naruszenieSeriiDla(_getLiveItem(activity.item), KS_FIRE_MODE) : null));
   registerShortBurstActivityType();
   registerDubletActivityType();
   registerLongBurstActivityType();
@@ -130,7 +136,7 @@ function registerShortBurstActivityType() {
     static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
       type: KS_ACTIVITY_TYPE,
       title: "Krótka seria",
-      hint: "Neuroshima: 3 naboje, atak z utrudnieniem, raz na rundę. Grad ołowiu pozwala wykonać kolejną KS w tej samej rundzie; limit ataków pilnuje gracz lub MG.",
+      hint: "Neuroshima: 3 naboje, atak z utrudnieniem, osobna Akcja raz na rundę (druga — z ostrzeżeniem). Grad ołowiu: KS jest częścią Atakowania i zajmuje slot ataku.",
       img: "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
     }, { inplace: false }));
 
@@ -1522,36 +1528,45 @@ function _canUseBurstMode(item, mode, minBullets) {
     return false;
   }
 
-  const combat = game.combat;
-  if (!combat?.started || !item.actor?.inCombat) return true;
-
-  const lastUse = item.getFlag(MODULE_ID, BURST_STATE_FLAG) ?? {};
-  const sameCombat = lastUse.combatId === combat.id;
-  const sameRound = lastUse.round === combat.round;
-  if (sameCombat && sameRound && mode === KS_FIRE_MODE && lastUse.mode === KS_FIRE_MODE) {
-    if (_hasLeadHail(item)) return true;
-    ui.notifications.warn(`${item.name}: w tej rundzie wykorzystano już krótką serię.`);
-    return false;
-  }
-
-  if (sameCombat && sameRound && [KS_FIRE_MODE, DS_FIRE_MODE, MS_FIRE_MODE].includes(lastUse.mode)) {
-    ui.notifications.warn(`${item.name}: w tej rundzie wykorzystano już serię (${String(lastUse.mode).toUpperCase()}).`);
-    return false;
-  }
-
+  // „Raz w rundzie” (s. 119–120) ostrzega, nie blokuje (PLAN_m8 T39, MG 2026-11-15): strzał się wykonuje, ostrzeżenie
+  // trafia do okna/karty ataku (KS) albo do MG przy zapisie serii (DS/MS). Amunicja, zacięcie, uszkodzenie — wyżej, blokują.
+  const naruszenie = naruszenieSeriiDla(item, mode);
+  if (naruszenie) ui.notifications.warn(`${item.name}: ${naruszenie} Strzał się wykonuje — rozstrzyga stół.`);
   return true;
 }
 
+/**
+ * Serie aktora w tej rundzie. Historia należy do **aktora**, nie do broni (PLAN_m8 §7.5): zmiana broni nie zeruje limitu.
+ * Dawny zapis na broni z tej samej rundy też się liczy (przejście w trakcie walki).
+ */
+function _serieWRundzie(item) {
+  const s = _getCurrentRoundStamp();
+  const tryby = historiaSerii(item?.actor?.getFlag(MODULE_ID, BURST_STATE_FLAG), s);
+  for (const [k, n] of Object.entries(historiaSerii(item?.getFlag(MODULE_ID, BURST_STATE_FLAG), s))) tryby[k] = (tryby[k] ?? 0) + n;
+  return tryby;
+}
+
+/** Naruszenie „raz w rundzie” dla tej broni i trybu albo `null` (poza walką — brak limitu rundy). */
+function naruszenieSeriiDla(item, mode) {
+  const combat = game.combat;
+  if (!combat?.started || !item?.actor?.inCombat) return null;
+  return naruszenieSerii(_serieWRundzie(item), mode, { grad: _hasLeadHail(item) });
+}
+
 async function _markBurstModeUsed(item, mode, bullets) {
-  const current = item.getFlag(MODULE_ID, BURST_STATE_FLAG) ?? {};
-  const stamp = _getCurrentRoundStamp();
-  const sameRound = current.combatId === stamp.combatId && current.round === stamp.round && current.mode === mode;
-  await item.setFlag(MODULE_ID, BURST_STATE_FLAG, {
-    ...stamp,
-    mode,
-    bullets,
-    uses: sameRound ? Math.max(Number(current.uses ?? 1), 1) + 1 : 1
-  });
+  const actor = item?.actor;
+  if (!actor) return;
+  // DS/MS nie mają okna ataku: druga seria w rundzie idzie do MG tutaj. KS — przy zapisie ataku (plakietka, sygnał).
+  if (mode !== KS_FIRE_MODE) {
+    const n = naruszenieSeriiDla(item, mode);
+    if (n) await sygnalNaruszenia(actor, { tytul: `${actor.name} — ${item.name}`, linie: [n] });
+  }
+  const tryby = _serieWRundzie(item);
+  tryby[mode] = (tryby[mode] ?? 0) + 1;
+  await actor.setFlag(MODULE_ID, BURST_STATE_FLAG, { ..._getCurrentRoundStamp(), tryby, ostatnia: { mode, bron: item.id, bullets } });
+  // Dawny zapis tej rundy na broni jest już wliczony do aktora — bez podwójnego liczenia (starsze rundy zostają dla migracji).
+  const stary = item.getFlag(MODULE_ID, BURST_STATE_FLAG);
+  if (stary && Object.keys(historiaSerii(stary, _getCurrentRoundStamp())).length) await item.unsetFlag(MODULE_ID, BURST_STATE_FLAG);
 }
 
 function _getCurrentRoundStamp() {
@@ -1635,12 +1650,10 @@ function _szturm(activity) {
 
 async function _announceLeadHailUse(item, results) {
   if (!_hasLeadHail(item) || !results?.message) return;
-  const usage = item.getFlag(MODULE_ID, BURST_STATE_FLAG) ?? {};
-  const used = Math.max(Number(usage.uses ?? 1), 1);
-  if (used < 2) return;
+  if ((_serieWRundzie(item)[KS_FIRE_MODE] ?? 0) < 2) return;
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: item.actor }),
-    content: buildAbilityRuleChangeNotice(ABILITY_KEYS.GRAD_OLOWIU, `Tratata! Kolejna krótka seria w tej samej rundzie jest dozwolona. Limit ataków w turze nadal pilnuje gracz lub MG.`, { standalone: true })
+    content: buildAbilityRuleChangeNotice(ABILITY_KEYS.GRAD_OLOWIU, `Tratata! Kolejna krótka seria w tej samej rundzie jest dozwolona — KS jest częścią Atakowania i zajmuje slot ataku.`, { standalone: true })
   });
 }
 
@@ -2326,6 +2339,8 @@ export const __testing = Object.freeze({
   KS_BULLET_COST,
   BURST_STATE_FLAG,
   canUseBurstMode: _canUseBurstMode,
+  markBurstModeUsed: _markBurstModeUsed,
+  serieWRundzie: _serieWRundzie,
   longBurstSelection: _getLongBurstSelectionOption,
   longBurstOptionLabel: _getLongBurstOptionLabel,
   hasLeadHail: _hasLeadHail,

@@ -234,6 +234,30 @@ function kartaAtaku() {
   return m ? m.flags["neuroshima-2026-overrides"].atakM8 : null;
 }
 
+/** Gracz 1: prawdziwy klik w plakietkę kosztu ostatniej karty ataku (korekta po fakcie). */
+async function klikPlakietki() {
+  const el = await window.__e2e.until(() => [...document.querySelectorAll("#chat .neuro-atak-m8-korekta")].at(-1), { message: "the clickable cost pill" });
+  el.click();
+  return true;
+}
+
+/** Gracz 1: cel na BN i okno manewru (Wytrącenie) — co oferuje „Sposób ataku”. */
+async function oknoManewru() {
+  const npc = canvas.tokens.placeables.find(t => t.actor?.type === "npc");
+  npc.setTarget(true, { releaseOthers: true });
+  void game.neuroshima.manewry.wytracenie({ actor: game.user.character });
+  const app = await window.__e2e.until(() => [...foundry.applications.instances.values()]
+    .find(x => x.rendered && String(x.title ?? "").startsWith("Manewr")), { message: "the maneuver window" });
+  const sel = app.element.querySelector('[name="sposob"]');
+  return { opcje: sel ? [...sel.options].map(o => o.value) : null, wybrana: sel?.value ?? null };
+}
+
+/** Ostatnia karta wyniku manewru z kosztem (każdy klient). */
+function kartaManewru() {
+  const m = game.messages.contents.findLast(x => /neuro-maneuver-koszt/.test(x.content ?? ""));
+  return m ? new DOMParser().parseFromString(m.content, "text/html").querySelector(".neuro-maneuver-koszt")?.textContent ?? null : null;
+}
+
 /** GM: następna tura. */
 async function nastepna() {
   await game.combat.nextTurn();
@@ -451,6 +475,39 @@ export default {
       await t.waitFor(p1, () => (document.querySelector("#chat .neuro-atak-m8") ? true : null), { message: "the cost pill on the card" });
       await p1.eval(() => game.user.character.sheet.close());
       await t.screenshot("Gracz 1", "karta ataku — koszt Atakowania");
+    });
+
+    await t.step("Gracz 1 clicks the cost pill → „Popraw próbę” → „Bez kosztu”: a ledger correction gives the A back, the card says what changed", async () => {
+      t.assert(await p1.eval(klikPlakietki), "pill clicked");
+      const o = await p1.eval(okno, { tytul: "Popraw próbę", pola: { na: "brak" }, przycisk: "ok" });
+      t.assert(o.klik, "correction confirmed", o);
+      const k = await t.waitFor(t.gm, () => {
+        const m = game.messages.contents.findLast(x => x.flags?.["neuroshima-2026-overrides"]?.atakM8?.korekta);
+        return m ? m.flags["neuroshima-2026-overrides"].atakM8 : null;
+      }, { message: "the card flag corrected" });
+      t.equal(JSON.stringify(k.koszt), "{}", "no cost left on the card");
+      const s = await t.waitFor(t.gm, () => {
+        const st = game.neuroshima.actions.stan(game.actors.getName("PC Gracz 1"));
+        return st && st.pule.A.wydane === 0 ? st.ledger.ops.at(-1) : null;
+      }, { message: "the A given back" });
+      t.equal(s.rodzaj, "korekta", "a correction, not a deleted spend");
+      t.assert(s.atakKorekta, "the correction points at the attempt", s);
+    });
+
+    await t.step("Gracz 1: maneuver window (Wytrącenie) offers „Sposób ataku”; the attempt takes a new Atakowanie [A] before the target's save", async () => {
+      const o = await p1.eval(oknoManewru);
+      t.equal(o.wybrana, "nowaA", "default: a new Atakowanie", o);
+      t.assert(!o.opcje.includes("R"), "no Reaction on own turn", o);
+      const k = await p1.eval(okno, { tytul: "Manewr", przycisk: "ok" });
+      t.assert(k.klik, "maneuver confirmed", k);
+      const tekst = await t.waitFor(t.gm, kartaManewru, { message: "the maneuver card with its cost" });
+      t.assert(/Nowe Atakowanie \[A\] · atak 1 \(A\)/.test(tekst), "the card names the cost", tekst);
+      const s = await t.waitFor(t.gm, () => {
+        const st = game.neuroshima.actions.stan(game.actors.getName("PC Gracz 1"));
+        return st?.pule.A.wydane === 1 ? st : null;
+      }, { message: "the maneuver spent the A" });
+      t.equal(s.ledger.ataki.at(-1)?.uzyte, 1, "a slot of the new Atakowanie");
+      await t.screenshot("Gracz 1", "manewr — koszt na karcie");
     });
   }
 };

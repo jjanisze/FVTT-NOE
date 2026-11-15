@@ -20,8 +20,10 @@ import * as E from "../config/ekonomia-data.mjs";
 import { kombatant, ledger, chwila, zatwierdz, daneAktora } from "./ekonomia.mjs";
 import { uzbrojona, uzbroj } from "../actors/actions.mjs";
 import { sygnalNaruszenia } from "./sygnal-naruszenia.mjs";
-import { isMeleeAttack } from "./trafienie.mjs";
+import { isMeleeAttack, obronaOf } from "./trafienie.mjs";
+import { dopiszAutoKrytyk } from "./okolicznosci.mjs";
 import { PRZYCELOWANIE_OPT } from "../config/zdolnosci-walka.mjs";
+import { ABILITY_KEYS, hasAbility } from "../actors/abilities.mjs";
 import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -80,6 +82,35 @@ function _kontekst(activity, attackMode = null) {
   return { actor, item: activity?.item ?? null, activity, wrecz: isMeleeAttack(activity, attackMode), cel: cele.length === 1 ? cele[0].document : null };
 }
 
+/** @type {((activity: Activity) => string|string[]|null)[]} */
+const _ostrzezeniaProby = [];
+
+/**
+ * Ostrzeżenie samej próby, niezależne od źródła — np. druga seria w rundzie (`weapons/fire-modes.mjs`, T39). Pokazane
+ * w oknie, zamrożone w wyniku i w sygnale dla MG; niczego nie blokuje.
+ * @param {(activity: Activity) => string|string[]|null} fn
+ */
+export function zarejestrujOstrzezenieAtaku(fn) {
+  _ostrzezeniaProby.push(fn);
+}
+
+function _ostrzProby(activity) {
+  const out = [];
+  for (const fn of _ostrzezeniaProby) {
+    try { out.push(...[fn(activity)].flat().filter(Boolean).map(String)); } catch (err) { console.warn(`${MODULE_ID} | M8: ostrzeżenie ataku`, err); }
+  }
+  return out;
+}
+
+/**
+ * Tryb całej akcji dla aktywności (§7.1 pkt 3): krótka seria to osobna [A] (s. 119), chyba że postać ma Grad ołowiu —
+ * wtedy KS jest częścią Atakowania i zajmuje zwykły slot (tyle KS, ile ataków).
+ */
+function _trybCalejAkcji(activity) {
+  if (activity?.type !== "neuroKs") return null;
+  return hasAbility(activity.actor, ABILITY_KEYS.GRAD_OLOWIU) ? null : "Krótka seria";
+}
+
 /** Źródła B dla tej próby: tylko pasujące; z wynikiem weryfikacji. */
 function _zrodlaBDla(ctx) {
   const out = [];
@@ -101,7 +132,13 @@ function _zrodlaBDla(ctx) {
  * @returns {{c: Combatant, l: object, ch: object, opcje: object[], domyslna: string, sloty: number, wReakcji: boolean}|null}
  */
 export function mozliwosciAtaku(activity, { attackMode = null, jawne = null, dodatkiB = 0 } = {}) {
-  const actor = activity?.actor;
+  const calaAkcja = _trybCalejAkcji(activity);
+  return _mozliwosci(activity?.actor, calaAkcja ? null : _kontekst(activity, attackMode),
+    { calaAkcja, jawne, dodatkiB, ostrzProby: _ostrzProby(activity) });
+}
+
+/** Wspólne dla okna ataku i manewru: `ctx` — kontekst źródeł B (`null` — bez źródeł B). */
+function _mozliwosci(actor, ctx, { calaAkcja = null, jawne = null, dodatkiB = 0, ostrzProby = [] } = {}) {
   // Broń pojazdu albo drona to akcja strzelca/operatora (M4, M3), nie pula samego nośnika — bez zapisu tutaj.
   if (!["character", "npc"].includes(actor?.type)) return null;
   const c = kombatant(actor);
@@ -110,10 +147,44 @@ export function mozliwosciAtaku(activity, { attackMode = null, jawne = null, dod
   const ch = chwila(c, l);
   const sloty = slotyAtaku(actor);
   const wReakcji = uzbrojona(actor);
-  const opcje = E.zrodlaAtaku(l, ch, { sloty, wReakcji, zrodlaB: _zrodlaBDla(_kontekst(activity, attackMode)),
+  const opcje = E.zrodlaAtaku(l, ch, { sloty, wReakcji, calaAkcja, zrodlaB: ctx ? _zrodlaBDla(ctx) : [],
     oplacone: jawne?.oplacone ? { label: jawne.oplacone } : null });
   const domyslna = E.domyslneZrodlo(opcje, { jawne: jawne?.opcja ?? null, pule: E.pule(l, ch, daneAktora(actor)), dodatkiB });
-  return { c, l, ch, opcje, domyslna, sloty, wReakcji };
+  return { c, l, ch, opcje, domyslna, sloty, wReakcji, calaAkcja, ostrzProby };
+}
+
+/**
+ * Manewr zamiast ataku — Pochwycenie, Odepchnięcie (atak bez broni, s. 252), Wytrącenie (zastępuje atak, s. 252–253):
+ * bez Testu Ataku, a zajmuje slot Atakowania jak atak wręcz (§7.1, T30). `oplacone` — manewr z karty zdolności, która
+ * już zapłaciła (Z bara! [B]). Poza walką — `null`.
+ * @param {Actor} actor
+ * @param {{oplacone?: string|null}} [o]
+ */
+export function mozliwosciManewru(actor, { oplacone = null } = {}) {
+  const cele = [...(game.user.targets ?? [])];
+  const ctx = { actor, item: null, activity: null, wrecz: true, cel: cele.length === 1 ? cele[0].document : null };
+  return _mozliwosci(actor, ctx, { jawne: oplacone ? { opcja: "oplacone", oplacone } : null });
+}
+
+/**
+ * Zapis próby manewru: raz na próbę (cel), po potwierdzeniu w oknie i przed RO celu — przegrany manewr nadal był próbą
+ * (§7.1). Wybór z okna obowiązuje pierwszą próbę, gdy nadal jest możliwy; kolejne (kilka celów) — domyślny.
+ * @param {Actor} actor
+ * @param {{opcja?: string|null, nazwa: string, oplacone?: string|null}} o
+ * @returns {Promise<{label: string, koszt: object, ostrz: string[], atak: object|null}|null>}
+ */
+export async function zaplacManewr(actor, { opcja = null, nazwa, oplacone = null }) {
+  const m = mozliwosciManewru(actor, { oplacone });
+  if (!m) return null;
+  const s = await _zapiszProbe(actor, m, { opcja, nazwa, id: `manewr-${foundry.utils.randomID()}` });
+  return { label: s.wybrana?.label ?? s.opcja, koszt: s.z.koszt, ostrz: s.ostrz, atak: s.r?.op?.atak ?? null };
+}
+
+/** Krótki opis kosztu próby do karty wyniku (manewr): „Atakowanie · atak 2 (bez nowej akcji)”. */
+export function opisKosztuProby(d) {
+  if (!d) return "";
+  const slot = d.atak?.slot ? ` · atak ${d.atak.slot}` : "";
+  return `${String(d.label ?? "").replace(/ — .*$/, "")}${slot} (${_koszt(d.koszt)})`;
 }
 
 /** Nazwy dodatkowych ataków z kart użycia (`combat/zdolnosci-akcje.mjs`, `FLAG_DODATKOWY`). */
@@ -147,12 +218,14 @@ function _patchOkna() {
   AttackDialog.prototype._prepareConfigurationContext = async function (context, options) {
     context = await prep.call(this, context, options);
     const activity = this.config?.subject;
-    const m = activity?.type === "attack" ? mozliwosciAtaku(activity, { attackMode: this.config?.attackMode, jawne: _jawneZKarty(this.config) }) : null;
+    const m = E.AKTYWNOSCI_ATAKU.includes(activity?.type)
+      ? mozliwosciAtaku(activity, { attackMode: this.config?.attackMode, jawne: _jawneZKarty(this.config) }) : null;
     this._neuroAtak = m;
     if (!m) return context;
     const opcje = m.opcje.map(o => ({ value: o.id, label: `${o.label}${o.zweryfikowane ? "" : " — ⚠ " + o.ostrz.join("; ")}` }));
+    const hint = m.ostrzProby.length ? m.ostrzProby.map(w => `⚠ ${w}`).join(" ") : undefined;
     context.fields = [...context.fields, {
-      field: new foundry.data.fields.StringField({ label: "Sposób ataku", blank: false, required: true }),
+      field: new foundry.data.fields.StringField({ label: "Sposób ataku", hint, blank: false, required: true }),
       name: POLE, options: opcje, value: this._neuroAtakWybor ?? m.domyslna
     }];
     return context;
@@ -174,10 +247,32 @@ function _patchOkna() {
 /*  Zatwierdzenie: po konfiguracji, przed oceną  */
 /* -------------------------------------------- */
 
+/**
+ * Wspólny zapis próby — atak z okna i manewr (§7.5): wybór gracza zostaje, gdy nadal jest możliwy, inaczej domyślny z
+ * powodem; ostrzeżenia niezweryfikowanego źródła i samej próby zamrożone w wyniku; R zużywa uzbrojenie; koszt do
+ * ledgera; sygnał dla MG. `skutek(wybrana)` — skutek źródła przed zapisem (Nożownik: krytyk tej próby).
+ * @returns {Promise<{opcja: string, wybrana: object|undefined, z: object, r: object|null, ostrz: string[]}>}
+ */
+async function _zapiszProbe(actor, m, { opcja = null, nazwa = "", dodatkiB = 0, ostrz: dodatkowe = [], id, skutek = null }) {
+  const ostrz = [...dodatkowe];
+  const wyb = opcja && m.opcje.some(o => o.id === opcja) ? opcja : m.domyslna;
+  if (opcja && wyb !== opcja) ostrz.push(`Wybór z okna („${opcja}”) nieaktualny przy zapisie — policzono: ${m.opcje.find(o => o.id === wyb)?.label}.`);
+  const wybrana = m.opcje.find(o => o.id === wyb);
+  if (wybrana && !wybrana.zweryfikowane) ostrz.push(...wybrana.ostrz);
+  if (wyb === "R" && m.wReakcji) uzbroj(actor, false);
+  if (skutek) await skutek(wybrana);
+  const label = wyb === "calaA" ? m.calaAkcja : wybrana?.label?.replace(/ \[B\]$/, "").replace(/ — koszt już zapłacony$/, "");
+  const z = E.zadanieAtaku(m.l, m.ch, { opcja: wyb, sloty: m.sloty, label, dodatkiB, bron: nazwa });
+  const r = await zatwierdz(m.c, { ...z, id, chwila: m.ch, ostrz: [...(z.ostrz ?? []), ...ostrz] });
+  const wszystkie = [...new Set([...(r?.ostrz ?? []), ...ostrz])];
+  if (wszystkie.length) await sygnalNaruszenia(actor, { tytul: `${actor.name} — ${wybrana?.label ?? nazwa}`, linie: wszystkie });
+  return { opcja: wyb, wybrana, z, r, ostrz: wszystkie };
+}
+
 async function _zatwierdz(rolls, config, message) {
   const activity = config?.subject;
   const actor = activity?.actor;
-  if (activity?.type !== "attack" || !actor?.isOwner) return;
+  if (!E.AKTYWNOSCI_ATAKU.includes(activity?.type) || !actor?.isOwner) return;
   const roll = rolls[0];
   roll.options ??= {};
   if (roll.options[OPT]?.id) return;   // ta sama próba drugi raz (np. ponowne wejście) — bez drugiego kosztu
@@ -185,28 +280,26 @@ async function _zatwierdz(rolls, config, message) {
   const dodatkiB = p?.czesc && !p.deklarowane ? 1 : 0;
   const m = mozliwosciAtaku(activity, { attackMode: roll.options.attackMode, jawne: _jawneZKarty(config), dodatkiB });
   if (!m) return;
-  // Rewalidacja przy zatwierdzeniu (§7.5): wybór gracza zostaje, gdy nadal jest możliwy; inaczej domyślny + powód.
   const zOkna = roll.options[OPT]?.opcja ?? null;
-  const ostrz = [];
-  let opcja = zOkna && m.opcje.some(o => o.id === zOkna) ? zOkna : m.domyslna;
-  if (zOkna && opcja !== zOkna) ostrz.push(`Wybór z okna („${zOkna}”) nieaktualny przy rzucie — policzono: ${m.opcje.find(o => o.id === opcja)?.label}.`);
-  const wybrana = m.opcje.find(o => o.id === opcja);
-  if (wybrana && !wybrana.zweryfikowane) ostrz.push(...wybrana.ostrz);
-  if (opcja === "R" && m.wReakcji) uzbroj(actor, false);
-  if (wybrana?.rodzaj === "B") {
-    const def = _zrodlaB.get(opcja.slice(2));
-    try { await def?.przyZatwierdzeniu?.(_kontekst(activity, roll.options.attackMode)); } catch (err) { console.warn(`${MODULE_ID} | M8: ${opcja}`, err); }
-  }
-  const z = E.zadanieAtaku(m.l, m.ch, { opcja, sloty: m.sloty, label: wybrana?.label?.replace(/ \[B\]$/, "").replace(/ — koszt już zapłacony$/, ""), dodatkiB,
-    bron: activity.item?.name ?? "" });
+  let krytyk = null;
+  // Krytyk tej próby ze źródła B (§7.3): z celem — automatyczne TK w rzucie; bez celu — kontekst karty dla obrażeń.
+  const skutek = async wybrana => {
+    if (wybrana?.rodzaj !== "B") return;
+    const ctx = _kontekst(activity, roll.options.attackMode);
+    try {
+      const s = await _zrodlaB.get(wybrana.id.slice(2))?.przyZatwierdzeniu?.(ctx);
+      if (s?.autoKrytyk && ctx.cel) dopiszAutoKrytyk(rolls, ctx.cel.uuid, s.autoKrytyk);
+      else if (s?.autoKrytyk) krytyk = s.autoKrytyk;
+    } catch (err) { console.warn(`${MODULE_ID} | M8: ${wybrana.id}`, err); }
+  };
   const id = `atak-${foundry.utils.randomID()}`;
-  const r = await zatwierdz(m.c, { ...z, id, chwila: m.ch, ostrz: [...(z.ostrz ?? []), ...ostrz] });
+  const s = await _zapiszProbe(actor, m, { opcja: zOkna, nazwa: activity.item?.name ?? "", dodatkiB, ostrz: m.ostrzProby, id, skutek });
   if (p && dodatkiB) p.deklarowane = true;
-  const wszystkie = [...new Set([...(r?.ostrz ?? []), ...ostrz])];
-  roll.options[OPT] = { id, opcja, zOkna: !!zOkna };
-  const dane = { opcja, label: wybrana?.label ?? opcja, koszt: z.koszt, ostrz: wszystkie, atak: r?.op?.atak ?? null, oczekuje: !!r?.oczekuje };
-  foundry.utils.setProperty(message, `data.flags.${MODULE_ID}.${FLAGA_ATAKU}`, dane);
-  if (wszystkie.length) await sygnalNaruszenia(actor, { tytul: `${actor.name} — ${dane.label}`, linie: wszystkie });
+  roll.options[OPT] = { id, opcja: s.opcja, zOkna: !!zOkna };
+  foundry.utils.setProperty(message, `data.flags.${MODULE_ID}.${FLAGA_ATAKU}`, {
+    op: id, opcja: s.opcja, label: s.wybrana?.label ?? s.opcja, koszt: s.z.koszt, ostrz: s.ostrz, atak: s.r?.op?.atak ?? null,
+    oczekuje: !!s.r?.oczekuje, ...(krytyk ? { krytyk } : {})
+  });
 }
 
 function _patchEval() {
@@ -220,6 +313,37 @@ function _patchEval() {
     }
     return orig.call(this, rolls, config, message);
   };
+}
+
+/* -------------------------------------------- */
+/*  Krytyk tej próby bez celu (Nożownik)         */
+/* -------------------------------------------- */
+
+/** Karta ataku M8 dla wiadomości: ona sama albo ostatni Test Ataku z karty użycia (rzut obrażeń, karta użycia). */
+function _kartaAtaku(message) {
+  if (!message) return null;
+  if (message.getFlag?.(MODULE_ID, FLAGA_ATAKU)) return message;
+  const origin = message.getOriginatingMessage?.() ?? message;
+  return (origin?.getAssociatedRolls?.("attack") ?? []).filter(m => m.getFlag?.(MODULE_ID, FLAGA_ATAKU)).pop() ?? null;
+}
+
+/**
+ * Bezcelowy Nożownik (§7.3): kontekst krytyka należy do **tej** próby. Trafienie rozstrzyga stół (bez celu moduł go nie
+ * zna), więc obrażenia rzucone z tej karty są domyślnie krytyczne; pudło po prostu nie rzuca obrażeń. Karty z celem
+ * liczy rozstrzygacz trafienia (`dopiszAutoKrytyk`), tu ich nie ruszamy. Fuks to ta sama karta — ten sam kontekst.
+ */
+function _onPreRollDamage(config, dialog, message) {
+  const messageId = config?.event?.target?.closest?.("[data-message-id]")?.dataset?.messageId
+    ?? foundry.utils.getProperty(message ?? {}, "data.system.origin") ?? null;
+  const karta = _kartaAtaku(messageId ? game.messages.get(messageId) : null);
+  const krytyk = karta?.getFlag(MODULE_ID, FLAGA_ATAKU)?.krytyk;
+  if (!krytyk || obronaOf(karta)?.targets?.length) return;
+  config.isCritical = true;
+  for (const r of config.rolls ?? []) { r.options ??= {}; r.options.isCritical = true; }
+  if (dialog) {
+    dialog.options ??= {};
+    dialog.options.defaultButton = "critical";
+  }
 }
 
 /* -------------------------------------------- */
@@ -238,17 +362,93 @@ function _onRender(message, html) {
   if (!pills) return;
   const li = document.createElement("li");
   li.className = `pill neuro-atak-m8${d.ostrz?.length ? " maroon" : ""}`;
-  const slot = d.atak?.slot ? ` · atak ${d.atak.slot}` : "";
-  li.innerHTML = `<i class="fa-solid fa-hand-fist" inert></i> <span class="label">${esc(d.label.replace(/ — .*$/, ""))}${slot} (${esc(_koszt(d.koszt))})</span>`;
-  li.dataset.tooltip = [`Koszt tej próby: ${_koszt(d.koszt)}`, ...(d.ostrz ?? [])].map(esc).join("<br>");
+  li.innerHTML = `<i class="fa-solid fa-hand-fist" inert></i> <span class="label">${esc(opisKosztuProby(d))}</span>`;
+  const moze = !!d.op && (message.isOwner || game.user.isGM);
+  li.dataset.tooltip = [`Koszt tej próby: ${_koszt(d.koszt)}`, ...(d.ostrz ?? []),
+    ...(d.korekta ? [`Poprawione: ${d.korekta.z} → ${d.label} (${d.korekta.kto})`] : []),
+    ...(moze ? ["Kliknij, żeby poprawić sposób tej próby."] : [])].map(esc).join("<br>");
+  if (moze) {
+    li.classList.add("neuro-atak-m8-korekta");
+    li.setAttribute("role", "button");
+    li.addEventListener("click", ev => { ev.preventDefault(); ev.stopPropagation(); void oknoKorektyAtaku(message); });
+  }
   pills.appendChild(li);
+  if (d.krytyk) {
+    const k = document.createElement("li");
+    k.className = "pill neuro-atak-m8-krytyk";
+    k.innerHTML = `<i class="fa-solid fa-crosshairs" inert></i> <span class="label">${esc(d.krytyk)}</span>`;
+    k.dataset.tooltip = esc("Bez celu: trafienie rozstrzyga stół; obrażenia z tej karty są krytyczne.");
+    pills.appendChild(k);
+  }
+}
+
+/* -------------------------------------------- */
+/*  Korekta po fakcie (§7.1)                     */
+/* -------------------------------------------- */
+
+/**
+ * Poprawka sposobu próby z karty ataku: nieoznaczony atak B zaliczony do A, świadomie osobne A połączone zbyt oszczędnie
+ * albo pomyłka. Ledger dostaje korektę (różnica kosztu, przepięty slot), karta — nowy opis z historią zmiany.
+ * @param {ChatMessage} message
+ * @param {{na?: string}} [o]  bez okna (testy, makro): docelowy przydział
+ */
+export async function oknoKorektyAtaku(message, { na = null } = {}) {
+  const d = message?.getFlag(MODULE_ID, FLAGA_ATAKU);
+  const activity = message?.getAssociatedActivity?.() ?? null;
+  const actor = activity?.actor ?? message?.getAssociatedActor?.() ?? null;
+  const c = actor ? kombatant(actor) : null;
+  if (!d?.op || !c) {
+    ui.notifications.warn("Korekta ataku: ta karta nie jest już powiązana z walką.");
+    return null;
+  }
+  const l = ledger(c);
+  const sloty = slotyAtaku(actor);
+  const zrodlaB = activity ? _zrodlaBDla({ ..._kontekst(activity, null), cel: null }) : [];
+  const op = E.opcjeKorektyAtaku(l, d.op, { sloty, zrodlaB });
+  if (!op.ok) {
+    ui.notifications.warn(`Korekta ataku: ${op.powod}`);
+    return null;
+  }
+  let wybor = na;
+  if (!wybor) {
+    const opts = op.opcje.map(o => `<option value="${esc(o.id)}"${o.obecna ? " selected" : ""}>${esc(o.label)}${o.obecna ? " — obecnie" : ""}</option>`).join("");
+    wybor = await foundry.applications.api.DialogV2.prompt({
+      window: { title: `Popraw próbę — ${actor.name}` },
+      position: { width: 460 },
+      content: `<p>${esc(d.label)} (${esc(_koszt(d.koszt))})</p>
+        <div class="form-group"><label>Ta próba to</label><div class="form-fields"><select name="na">${opts}</select></div></div>
+        <p class="hint">Zmienia zapis tury (koszt i slot Atakowania); skutków ataku nie cofa.</p>`,
+      ok: { label: "Popraw", callback: (_ev, button) => button.form.elements.na.value },
+      rejectClose: false
+    });
+  }
+  const cel = op.opcje.find(o => o.id === wybor);
+  if (!cel || cel.obecna) return null;
+  const z = E.zadanieKorektyAtaku(l, d.op, wybor, { sloty, label: cel.label, kto: game.user.name });
+  if (!z) return null;
+  const r = await zatwierdz(c, { ...z, id: `korekta-${foundry.utils.randomID()}`, chwila: chwila(c, l) });
+  const koszt = { ...(d.koszt ?? {}) };
+  for (const [k, n] of Object.entries(z.koszt)) {
+    koszt[k] = (Number(koszt[k]) || 0) + n;
+    if (!koszt[k]) delete koszt[k];
+  }
+  // Zastąpienie, nie scalenie: `setFlag` scaliłby pusty `koszt` z dawnym `{A: 1}` (§7.1 — karta pokazuje prawdziwy koszt).
+  await message.update({
+    [`flags.${MODULE_ID}.${FLAGA_ATAKU}`]: foundry.data.operators.ForcedReplacement.create({
+      ...d, opcja: wybor, label: cel.krotko ?? cel.label, koszt, atak: cel.slot ? { slot: cel.slot } : null,
+      korekta: { z: d.label, kto: game.user.name }
+    })
+  });
+  return r;
 }
 
 export function registerAtakowanie() {
   _patchOkna();
   _patchEval();
   Hooks.on("dnd5e.renderChatMessage", _onRender);
+  Hooks.on("dnd5e.preRollDamage", _onPreRollDamage);
 }
 
-export const atakowanieApi = Object.freeze({ slotyAtaku, mozliwosciAtaku, zarejestrujZrodloAtakuB });
-export const __testing = Object.freeze({ zatwierdz: _zatwierdz, jawneZKarty: _jawneZKarty });
+export const atakowanieApi = Object.freeze({ slotyAtaku, mozliwosciAtaku, mozliwosciManewru, zaplacManewr, korekta: oknoKorektyAtaku,
+  zarejestrujZrodloAtakuB, zarejestrujOstrzezenieAtaku });
+export const __testing = Object.freeze({ zatwierdz: _zatwierdz, jawneZKarty: _jawneZKarty, preRollDamage: _onPreRollDamage, kartaAtaku: _kartaAtaku });

@@ -443,6 +443,8 @@ export function zastosuj(ledger, chwila, z, aktor = {}) {
       if (a.uzyte > a.sloty) op.ostrz.push(`Atakowanie: ${a.uzyte}. atak w Akcji z ${a.sloty} — potrzebna nowa Akcja.`);
     }
   } else if (z.atak?.zrodlo) op.atak = { zrodlo: String(z.atak.zrodlo) };
+  else if (z.atak?.tryb) op.atak = { tryb: String(z.atak.tryb) };
+  if (z.atakKorekta) _zastosujKorekteAtaku(ledger, op, z.atakKorekta, chwila.cykl);
   if (z.reakcjaKoniec) {
     const r = ledger.reakcje.find(x => x.id === z.reakcjaKoniec);
     if (r) r.koniec = true;
@@ -651,6 +653,13 @@ export function zadanieWReakcji(l, ch, { zrodlo, cel = null, tresc = "akcja" } =
 /* -------------------------------------------- */
 
 /**
+ * Typy aktywności z Testem Ataku, których koszt zapisuje się przy rzucie (opakowanie `buildEvaluate`), nie przy
+ * `postUseActivity`: zwykły atak, Dublet (jeden Test Ataku za dwa pociski, s. 118 — zwykły atak w slocie) i krótka
+ * seria (osobna [A] albo, z Gradem ołowiu, atak w slocie Atakowania). DS/MS/OZ to rzuty obronne celów — [A] przy użyciu.
+ */
+export const AKTYWNOSCI_ATAKU = Object.freeze(["attack", "neuroKs", "neuroDublet"]);
+
+/**
  * Otwarta instancja Atakowania we własnej turze tego cyklu z wolnym slotem — najnowsza (D22: inna opłacona A w środku
  * nie zamyka instancji). Reakcja nie kontynuuje Atakowania z tury (Drugi atak tylko we własnej turze, §6.4).
  */
@@ -665,14 +674,20 @@ export function otwartaInstancja(ledger, chwila) {
  * @param {object} l
  * @param {Chwila} ch
  * @param {{sloty?: number, wReakcji?: boolean, zrodlaB?: {id: string, label: string, zweryfikowane: boolean, ostrz?: string[]}[],
- *   oplacone?: {label: string}|null}} o  `oplacone` — atak, którego koszt zapłaciła już aktywność [B] albo zdolność
- * @returns {{id: string, rodzaj: "oplacone"|"kontynuacja"|"nowaA"|"B"|"R", label: string, zweryfikowane: boolean, ostrz: string[]}[]}
+ *   oplacone?: {label: string}|null, calaAkcja?: string|null}} o  `oplacone` — atak, którego koszt zapłaciła już
+ *   aktywność [B] albo zdolność; `calaAkcja` — tryb całej akcji (krótka seria bez Gradu ołowiu, §7.1 pkt 3): osobna A poza
+ *   slotami Atakowania, bez kontynuacji i bez źródeł B
+ * @returns {{id: string, rodzaj: "oplacone"|"kontynuacja"|"nowaA"|"calaA"|"B"|"R", label: string, zweryfikowane: boolean, ostrz: string[]}[]}
  */
-export function zrodlaAtaku(l, ch, { sloty = 1, wReakcji = false, zrodlaB = [], oplacone = null } = {}) {
+export function zrodlaAtaku(l, ch, { sloty = 1, wReakcji = false, zrodlaB = [], oplacone = null, calaAkcja = null } = {}) {
   const out = [];
   if (oplacone) out.push({ id: "oplacone", rodzaj: "oplacone", label: `${oplacone.label} — koszt już zapłacony`, zweryfikowane: true, ostrz: [] });
   const r = wReakcji || !ch.wlasna;
   if (r) out.push({ id: "R", rodzaj: "R", label: "W Reakcji [R]", zweryfikowane: true, ostrz: [] });
+  if (calaAkcja) {
+    if (!r) out.push({ id: "calaA", rodzaj: "calaA", label: `${calaAkcja} [A] — osobna Akcja`, zweryfikowane: true, ostrz: [] });
+    return out;
+  }
   const inst = r ? null : otwartaInstancja(l, ch);
   if (inst) {
     out.push({ id: "kontynuacja", rodzaj: "kontynuacja", label: `Atakowanie — atak ${inst.uzyte + 1}/${inst.sloty} (ta sama Akcja)`,
@@ -703,6 +718,7 @@ export function domyslneZrodlo(opcje, { jawne = null, pule: p, dodatkiB = 0 } = 
   if (jawne && ma(jawne)) return jawne;
   if (ma("oplacone")) return "oplacone";
   if (ma("R")) return "R";
+  if (ma("calaA")) return "calaA";
   if (ma("kontynuacja")) return "kontynuacja";
   if ((p?.A?.pozostalo ?? 1) > 0 && !p?.A?.zakaz) return "nowaA";
   const b = opcje.filter(o => o.rodzaj === "B" && o.zweryfikowane);
@@ -735,5 +751,149 @@ export function zadanieAtaku(l, ch, { opcja, sloty = 1, label = null, dodatkiB =
   if (String(opcja).startsWith("B:")) {
     return { rodzaj: "akcja", zrodlo: `${label ?? opcja.slice(2)}${co}`, koszt: { B: 1 + dodatkiB }, atak: { zrodlo: opcja } };
   }
+  // Tryb całej akcji: A poza slotami, otwarta instancja Atakowania zostaje otwarta (D22).
+  if (opcja === "calaA") return { rodzaj: "akcja", zrodlo: `${label ?? "Seria"}${co}`, koszt: { A: 1, ...plusB(dodatkiB) }, atak: { tryb: label ?? "seria" } };
   return { rodzaj: "akcja", zrodlo: `Atakowanie${co}`, koszt: { A: 1, ...plusB(dodatkiB) }, atak: { nowa: sloty } };
+}
+
+/* -------------------------------------------- */
+/*  Korekta próby ataku po fakcie (§7.1)         */
+/* -------------------------------------------- */
+
+/** Bazowy koszt przydziału próby (bez dodatków, np. Przycelowania): A za otwarcie instancji / tryb całej akcji, B za źródło B. */
+function _bazaPrzydzialu(ledger, o) {
+  const a = o?.atak ?? {};
+  if (a.instancja) return ledger.ataki.find(x => x.id === a.instancja)?.op === (a.korekta ?? o.id) && a.slot === 1 ? { A: 1 } : {};
+  if (a.tryb) return { A: 1 };
+  if (String(a.zrodlo ?? "").startsWith("B:")) return { B: 1 };
+  if (a.zrodlo === "R") return { R: Number(o.koszt?.R) || 0 };
+  return {};
+}
+
+/**
+ * Możliwe przydziały próby ataku przy korekcie: kontynuacja najnowszej otwartej instancji tego cyklu (nie tej, którą
+ * otworzyła sama próba), nowe Atakowanie, posiadane źródła B, „bez kosztu”. Obecny przydział jest oznaczony.
+ * @param {object} l
+ * @param {string} opId  operacja próby (id żądania z karty ataku)
+ * @param {{sloty?: number, zrodlaB?: {id: string, label: string}[]}} [o]
+ * @returns {{ok: boolean, powod?: string, opcje?: {id: string, label: string, obecna: boolean}[]}}
+ */
+export function opcjeKorektyAtaku(l, opId, { sloty = 1, zrodlaB = [] } = {}) {
+  const o = l?.ops?.find(x => x.id === opId);
+  if (!o?.atak) return { ok: false, powod: "Tej próby nie ma już w zapisie tury (inna walka albo dawna runda)." };
+  const wlasna = o.atak.instancja ? l.ataki.find(x => x.id === o.atak.instancja) : null;
+  if (wlasna && wlasna.op === (o.atak.korekta ?? o.id) && o.atak.slot === 1 && wlasna.uzyte > 1) {
+    return { ok: false, powod: "Ta próba otworzyła Atakowanie, które kontynuowały kolejne ataki — popraw najpierw je." };
+  }
+  const obecna = o.atak.instancja ? (_bazaPrzydzialu(l, o).A ? "nowaA" : "kontynuacja")
+    : o.atak.tryb ? "calaA" : o.atak.zrodlo === "R" ? "R" : String(o.atak.zrodlo ?? "brak");
+  const out = [];
+  const inna = [...l.ataki].reverse().find(a => a.cykl === o.cykl && a.id !== wlasna?.id && a.uzyte < a.sloty);
+  // `krotko` — opis na karcie po korekcie (plakietka), `label` — pełny opis w oknie wyboru.
+  if (inna) {
+    out.push({ id: `kontynuacja:${inna.id}`, label: `Kontynuacja Atakowania — atak ${inna.uzyte + 1}/${inna.sloty} (bez nowej A)`,
+      krotko: "Atakowanie", obecna: false, slot: inna.uzyte + 1 });
+  }
+  if (obecna === "kontynuacja") {
+    out.push({ id: "kontynuacja", label: "Kontynuacja Atakowania (bez zmian)", krotko: "Atakowanie", obecna: true, slot: o.atak.slot ?? null });
+  }
+  out.push({ id: "nowaA", label: `Nowe Atakowanie [A]${sloty > 1 ? ` — ${sloty} ataki` : ""}`, krotko: "Nowe Atakowanie [A]", obecna: obecna === "nowaA", slot: 1 });
+  for (const b of zrodlaB) out.push({ id: `B:${b.id}`, label: `${b.label} [B]`, krotko: `${b.label} [B]`, obecna: obecna === `B:${b.id}`, slot: null });
+  out.push({ id: "brak", label: "Bez kosztu (pomyłka, akcja słowna albo już opłacona)", krotko: "Bez kosztu", obecna: obecna === "brak" || obecna === "oplacone", slot: null });
+  if (!out.some(x => x.obecna)) {
+    out.unshift({ id: obecna, label: `Bez zmian (${obecna === "R" ? "W Reakcji [R]" : obecna === "calaA" ? "osobna Akcja" : obecna})`, obecna: true, slot: null });
+  }
+  return { ok: true, opcje: out };
+}
+
+/**
+ * Żądanie korekty przydziału próby (§7.1: „tania korekta instancji/źródła”): różnica bazowego kosztu i przepięcie slotu.
+ * Dodatki tej próby (Przycelowanie) zostają. Zwraca `null`, gdy nic się nie zmienia albo próby nie da się poprawić.
+ * @param {object} l
+ * @param {string} opId
+ * @param {string} na  `kontynuacja:<instancja>` | `nowaA` | `B:<id>` | `brak`
+ * @param {{sloty?: number, label?: string, kto?: string}} [o]
+ */
+export function zadanieKorektyAtaku(l, opId, na, { sloty = 1, label = null, kto = null } = {}) {
+  const o = l?.ops?.find(x => x.id === opId);
+  if (!o?.atak || !opcjeKorektyAtaku(l, opId).ok) return null;
+  const stara = _bazaPrzydzialu(l, o);
+  let przydzial;
+  let nowa = {};
+  if (String(na).startsWith("kontynuacja:")) przydzial = { instancja: na.slice("kontynuacja:".length) };
+  else if (na === "nowaA") { przydzial = { nowa: sloty }; nowa = { A: 1 }; }
+  else if (String(na).startsWith("B:")) { przydzial = { zrodlo: na }; nowa = { B: 1 }; }
+  else if (na === "brak") przydzial = { brak: true };
+  else return null;
+  const koszt = {};
+  for (const k of RODZAJE) {
+    const d = (Number(nowa[k]) || 0) - (Number(stara[k]) || 0);
+    if (d) koszt[k] = d;
+  }
+  return { rodzaj: "korekta", zrodlo: "Korekta ataku", powod: `${o.zrodlo} → ${label ?? na}`, koszt, kto, atakKorekta: { op: opId, przydzial } };
+}
+
+/** Zastosowanie `atakKorekta` w `zastosuj`: zwolnienie starego slotu, nowy przydział próby (instancja ma `op` korekty). */
+function _zastosujKorekteAtaku(ledger, op, k, cykl) {
+  const o = ledger.ops.find(x => x.id === k.op);
+  if (!o?.atak) return;
+  if (o.atak.instancja) {
+    const a = ledger.ataki.find(x => x.id === o.atak.instancja);
+    if (a) {
+      a.uzyte = Math.max(0, a.uzyte - 1);
+      if (a.uzyte === 0) ledger.ataki = ledger.ataki.filter(x => x !== a);
+    }
+  }
+  const p = k.przydzial ?? {};
+  if (p.nowa) {
+    const id = `${op.id}-a`;
+    ledger.ataki.push({ id, cykl: o.cykl ?? cykl, op: op.id, sloty: Math.max(1, Number(p.nowa) || 1), uzyte: 1 });
+    o.atak = { instancja: id, slot: 1, korekta: op.id };
+  } else if (p.instancja) {
+    const a = ledger.ataki.find(x => x.id === p.instancja);
+    if (a) {
+      a.uzyte += 1;
+      o.atak = { instancja: a.id, slot: a.uzyte, korekta: op.id };
+    } else o.atak = { brak: true, korekta: op.id };
+  } else if (p.zrodlo) o.atak = { zrodlo: String(p.zrodlo), korekta: op.id };
+  else o.atak = { brak: true, korekta: op.id };
+  op.atakKorekta = { op: o.id };
+}
+
+/* -------------------------------------------- */
+/*  Serie: raz w rundzie (NOE s. 119–120, T39)   */
+/* -------------------------------------------- */
+
+const SERIE = Object.freeze({ ks: "krótka seria", ds: "długa seria", ms: "miażdżąca seria" });
+/** Miejscownik — „po krótkiej serii”. */
+const SERIE_PO = Object.freeze({ ks: "krótkiej serii", ds: "długiej serii", ms: "miażdżącej serii" });
+const _wielka = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * Serie tej rundy z zapisu: aktora `{combatId, round, tryby}` albo dawnego zapisu na broni `{combatId, round, mode, uses}`.
+ * Inna walka albo runda — pusto.
+ * @param {object|null|undefined} zapis
+ * @param {{combatId: string|null, round: number|null}} stempel
+ * @returns {Record<string, number>}
+ */
+export function historiaSerii(zapis, { combatId, round }) {
+  if (!zapis || !combatId || zapis.combatId !== combatId || zapis.round !== round) return {};
+  if (zapis.tryby) return { ...zapis.tryby };
+  return zapis.mode ? { [zapis.mode]: Math.max(1, Number(zapis.uses) || 1) } : {};
+}
+
+/**
+ * Naruszenie „raz w rundzie” dla serii `mode` przy dotychczasowych seriach rundy — ostrzeżenie, nie blokada (T39).
+ * KS, DS i MS wzajemnie się wykluczają w rundzie; każda raz w rundzie; Grad ołowiu zdejmuje tylko limit KS po KS.
+ * @param {Record<string, number>} tryby
+ * @param {string} mode  `ks` | `ds` | `ms` (inne tryby nie mają limitu rundy)
+ * @param {{grad?: boolean}} [o]
+ * @returns {string|null}
+ */
+export function naruszenieSerii(tryby, mode, { grad = false } = {}) {
+  if (!SERIE[mode]) return null;
+  const inna = Object.keys(SERIE).find(k => k !== mode && (tryby?.[k] ?? 0) > 0);
+  if (inna) return `${_wielka(SERIE[mode])} po ${SERIE_PO[inna]} w tej samej rundzie — w rundzie tylko jeden rodzaj serii (NOE s. 119–120).`;
+  if ((tryby?.[mode] ?? 0) > 0 && !(mode === "ks" && grad)) return `${_wielka(SERIE[mode])} drugi raz w tej rundzie — raz w rundzie (NOE s. 119–120).`;
+  return null;
 }

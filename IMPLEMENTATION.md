@@ -1214,6 +1214,39 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — reszta Atakowania: serie, manewry, Nożownik, korekta (E6) (2026-11-15)
+
+- **Tryby ognia z Testem Ataku płacą przy rzucie** (`E.AKTYWNOSCI_ATAKU`: `attack`, `neuroKs`, `neuroDublet`):
+  `postUseActivity` nie bierze już A za KS i Dublet przed oknem — zamknięte okno KS przestało kosztować. Dublet (s. 118)
+  to zwykły atak w slocie. **Krótka seria** bez Gradu ołowiu to tryb całej akcji (§7.1 pkt 3): w „Sposobie ataku”
+  jedyna opcja „Krótka seria [A] — osobna Akcja” (poza turą — R), `op.atak.tryb`, otwarte Atakowanie zostaje (D22).
+  Z Gradem ołowiu KS ma zwykłe opcje i zajmuje slot.
+- **„Raz w rundzie” ostrzega, nie blokuje** (T39, MG 2026-11-15): `E.naruszenieSerii` (KS/DS/MS wzajemnie i każda raz;
+  Grad zdejmuje tylko KS po KS). KS — ostrzeżenie w oknie (rejestr `zarejestrujOstrzezenieAtaku`), na karcie i u MG;
+  DS/MS — sygnał przy zapisie serii. Amunicja, zacięcie i uszkodzenie nadal blokują. **Historia serii na aktorze**
+  (`flags.<mod>.lastBurstUse = {combatId, round, tryby}`); dawny zapis tej rundy na broni wliczony i zdjęty.
+  Opis KS w aktywności broni (`chatFlavor`) celowo bez zmian — synchronizator przepisałby każdą broń z KS
+  (do kroku migracji światów).
+- **Manewr zamiast ataku** (`melee-maneuvers.mjs`): okno manewru ma „Sposób ataku” (`mozliwosciManewru`), próba płaci
+  raz na cel po potwierdzeniu, przed RO celu (`zaplacManewr`; przegrana i wobec odpornego celu też), koszt na karcie
+  wyniku. Przycisk z karty Z bara! — „koszt już zapłacony”. Skuteczny cios wywołuje manewr bez kosztu.
+- **Nożownik** z okna: `przyZatwierdzeniu` zwraca skutek zamiast zapowiedzi na turę. Z celem — `dopiszAutoKrytyk` w
+  opcjach rzutu (wcześniej krytyk tej próby przepadał, bo `preRollAttack` liczył TK przed wyborem w oknie); bez celu —
+  `atakM8.krytyk` na karcie i `dnd5e.preRollDamage` z tej karty krytyczny (z celem — tylko rozstrzygacz trafienia).
+- **Korekta po fakcie** (§7.1): klik w plakietkę kosztu (autor, MG) → `opcjeKorektyAtaku`/`zadanieKorektyAtaku`:
+  różnica bazowego kosztu i przepięcie slotu (`atakKorekta` w `zastosuj`), dodatki zostają; próby, która otworzyła
+  kontynuowane Atakowanie, nie poprawia. Karta: `ForcedReplacement` flagi (scalenie zostawiało dawny `koszt`).
+- Opisy Gradu ołowiu i Nożownika w `sztuczki-data.mjs`, paczka `sztuczki` przebudowana w repo. Dokumentacja:
+  `docs/TT-i-reakcje.md` (Ile kosztuje atak), `docs/Zdolnosci.md`. Poligon `ruch`: próby `ks-akcja`, `manewr`,
+  `korekta-ataku`, Twardziel z B 93R (po przebudowie stanowiska).
+- Testy: Quench `atakowanie` 15/15 (+6: KS/Dublet, raz w rundzie, korekta, Nożownik z celem i bez, manewr w slocie,
+  KS z Gradem), `sztuczki-walka` 31/31 (Grad ołowiu — ostrzeżenie zamiast odmowy, historia na aktorze); e2e `ruch`
+  15 kroków (korekta z plakietki, manewr z „Sposobem ataku”). Pełny Quench 1617/1617, bez ostrzeżeń zgodności modułu.
+- Atak z okna i manewr dzielą jeden zapis próby (`_zapiszProbe`: wybór, ostrzeżenia, R, ledger, sygnał MG).
+- Testy, poprawki: `walkaTestowa` nadaje inicjatywę wg kolejności aktorów, nie zwróconych żetonów (kolejność
+  `createEmbeddedDocuments` bywa inna — `gotowosc` padał losowo w pełnym przebiegu); `pasek-m8` usuwa slot paska przez
+  `_del` zamiast `-=` (skan dnd5e6 w `npm test` kończył się kodem 1).
+
 ### M8 — koszty oporządzenia w ledgerze (E4, lalka) (2026-11-15)
 
 - Wykonane przeniesienie na lalce w walce zapisuje koszt z `moveCost` (`actors/doll.mjs`, dawniej tylko pokazywany):

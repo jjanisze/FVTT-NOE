@@ -62,7 +62,10 @@ krwawienie z tętnicy albo wyciek z układu hydraulicznego maszyny.
   efektu (krwawienie, spowolnienie, oślepienie).
 - **Mój bóg kule nosi**, **Skuteczny cios** (odepchnięcie, wytrącenie, zamaszysty) — przyciski z kośćmi.
 - **Nożownik** [B] — po trafieniu nożem w swojej turze drugi atak tym nożem w ten cel; trafienie zadaje obrażenia
-  krytyczne (noże: taktyczny, kamienny, do rzucania, sztylet).
+  krytyczne (noże: taktyczny, kamienny, do rzucania, sztylet). Wybrany w polu „Sposób ataku” daje krytyk tej próbie;
+  bez celu — z ostrzeżeniem, trafienie rozstrzyga stół, obrażenia z tej karty są krytyczne.
+- **Grad ołowiu** — krótka seria jest zwykłym atakiem w Atakowaniu (zajmuje atak z Drugiego/Trzeciego ataku), bez
+  limitu „raz w rundzie” dla KS po KS; bez tej Sztuczki KS to osobna Akcja.
 - **Wyjaśnić ci?** (Barbarka) — pod trafieniem atakiem głową, gdy cel jest twojego rozmiaru albo mniejszy: RO na Siłę
   celu rzuca MG, porażka — Powalenie.
 - **Przygniecenie** (Ławnik) — pod trafieniem ciężkim przedmiotem, gdy cel jest duży albo mniejszy: tak samo, RO na

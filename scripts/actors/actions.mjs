@@ -360,8 +360,9 @@ function _onPostUseActivity(activity, usageConfig, results) {
   const kind = AKTYWACJA_DO_AKCJI[activity?.activation?.type];
   const actor = activity?.actor;
   if (!kind || !actor) return;
-  // Atakowanie to instancja z kilkoma slotami (§7.1) — nie liczy się jako „jedna aktywność = jedna A”.
-  if (kind === "A" && activity.type === "attack") return;
+  // Atakowanie to instancja z kilkoma slotami (§7.1) — nie liczy się jako „jedna aktywność = jedna A”. Ataki z Testem
+  // Ataku (także Dublet i krótka seria) płacą przy rzucie: zamknięte okno ataku nic nie kosztuje (`combat/atakowanie.mjs`).
+  if (kind === "A" && E.AKTYWNOSCI_ATAKU.includes(activity.type)) return;
   const id = results?.message?.id ? `uzycie-${results.message.id}` : null;
   // Akcja przedmiotu (nie zdolności ani broni) to Używanie [A] (s. 31) — pierwsza w kolejce do grantu Szybkich rąk.
   const cel = kind === "A" && !["feat", "weapon", "spell"].includes(activity.item?.type) ? "uzywanie" : null;

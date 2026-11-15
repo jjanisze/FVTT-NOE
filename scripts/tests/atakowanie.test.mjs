@@ -5,12 +5,17 @@
  * (posiadane/zweryfikowane), łączny koszt z Przycelowaniem, R poza turą, koszt już zapłacony.
  * Warstwa 4: prawdziwy rzut ataku dnd5e w walce — koszt zapisany po konfiguracji i przed oceną (opakowanie
  * `buildEvaluate`), plakietka na karcie, kontynuacja przy Drugim ataku, anulowanie bez kosztu, sloty z kompendium.
+ * Reszta E6: krótka seria jako osobna A (Grad ołowiu — slot), Dublet w slocie, „raz w rundzie” ostrzega (T39), korekta
+ * próby po fakcie, Nożownik wybrany w oknie (krytyk tej próby, także bez celu), manewr zamiast ataku w slocie (T30).
  */
 
-import { SCRATCH_PREFIX, scratchActor, scratchCleanup, stub, walkaTestowa, waitFor } from "./helpers.mjs";
+import { SCRATCH_PREFIX, scratchActor, scratchCleanup, stub, walkaTestowa, waitFor, sztuczkaItem } from "./helpers.mjs";
 import * as E from "../config/ekonomia-data.mjs";
 import { ledger, kombatant, stan } from "../combat/ekonomia.mjs";
-import { slotyAtaku, FLAGA_ATAKU } from "../combat/atakowanie.mjs";
+import { slotyAtaku, FLAGA_ATAKU, mozliwosciAtaku, zaplacManewr, __testing as T } from "../combat/atakowanie.mjs";
+import { OKOLICZNOSCI_OPT } from "../combat/okolicznosci.mjs";
+import { FLAGA_ZAPOWIEDZ } from "../combat/sztuczki-ataki.mjs";
+import { SZTUCZKI } from "../config/sztuczki-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const wl = r => ({ runda: r, cykl: r, wlasna: true, reakcja: null });
@@ -19,11 +24,11 @@ let _n = 0;
 const id = () => `a${++_n}`;
 const zCh = (l, ch) => ({ ...ch, reakcja: ch.reakcja ?? E.aktywnaReakcja(l, ch.cykl)?.id ?? null });
 /** Jedna próba ataku z domyślnym wyborem; zwraca `{opcja, z, w}`. */
-function atak(l, ch, { sloty = 1, zrodlaB = [], dodatkiB = 0, jawne = null, oplacone = null } = {}) {
+function atak(l, ch, { sloty = 1, zrodlaB = [], dodatkiB = 0, jawne = null, oplacone = null, calaAkcja = null } = {}) {
   const c = zCh(l, ch);
-  const opcje = E.zrodlaAtaku(l, c, { sloty, zrodlaB, oplacone });
+  const opcje = E.zrodlaAtaku(l, c, { sloty, zrodlaB, oplacone, calaAkcja });
   const opcja = E.domyslneZrodlo(opcje, { jawne, pule: E.pule(l, c), dodatkiB });
-  const z = E.zadanieAtaku(l, c, { opcja, sloty, dodatkiB, label: opcje.find(o => o.id === opcja)?.label });
+  const z = E.zadanieAtaku(l, c, { opcja, sloty, dodatkiB, label: calaAkcja ?? opcje.find(o => o.id === opcja)?.label });
   const w = E.zastosuj(l, c, { id: id(), ...z }).wynik;
   return { opcja, z, w, opcje };
 }
@@ -120,6 +125,63 @@ export function registerAtakowanieTests(quench) {
         const o = atak(l3, wl(1), { oplacone: { label: "Zamaszysty cios" } });
         expect([o.opcja, o.z.koszt]).to.deep.equal(["oplacone", {}]);
       });
+
+      it("T39: krótka seria bez Gradu — osobna A poza slotami (atak 1/2, KS, atak 2/2 = dwie A); Dublet i KS płacą przy rzucie", function () {
+        const l = E.pustyLedger("w");
+        atak(l, wl(1), { sloty: 2 });
+        const ks = atak(l, wl(1), { sloty: 2, calaAkcja: "Krótka seria" });
+        expect(ks.opcje.map(o => o.id), "bez kontynuacji, nowej instancji i B").to.deep.equal(["calaA"]);
+        expect([ks.opcja, ks.z.koszt, ks.w.op.atak]).to.deep.equal(["calaA", { A: 1 }, { tryb: "Krótka seria" }]);
+        expect(l.ataki.length, "KS nie otwiera i nie zamyka instancji (D22)").to.equal(1);
+        expect(atak(l, wl(1), { sloty: 2 }).opcja, "drugi zwykły atak dalej w pierwszej A").to.equal("kontynuacja");
+        expect(E.pule(l, wl(1)).A.wydane).to.equal(2);
+        expect(E.zrodlaAtaku(l, po(1), { calaAkcja: "Krótka seria" }).map(o => o.id), "poza turą — w Reakcji").to.deep.equal(["R"]);
+        expect(E.AKTYWNOSCI_ATAKU).to.include.members(["attack", "neuroKs", "neuroDublet"]);
+        expect(E.AKTYWNOSCI_ATAKU, "DS/MS/OZ to rzuty obronne — [A] przy użyciu").to.not.include("neuroDs");
+      });
+
+      it("T39: „raz w rundzie” — historia z aktora i z dawnego zapisu broni; ostrzeżenia, Grad zdejmuje tylko KS po KS", function () {
+        const s = { combatId: "c", round: 2 };
+        expect(E.historiaSerii({ combatId: "c", round: 2, mode: "ks", uses: 1 }, s), "dawny zapis na broni").to.deep.equal({ ks: 1 });
+        expect(E.historiaSerii({ combatId: "c", round: 1, tryby: { ks: 1 } }, s), "inna runda").to.deep.equal({});
+        expect(E.historiaSerii({ combatId: "c", round: 2, tryby: { ks: 1, ds: 1 } }, s)).to.deep.equal({ ks: 1, ds: 1 });
+        expect(E.naruszenieSerii({}, "ks")).to.equal(null);
+        expect(E.naruszenieSerii({ ks: 1 }, "ks")).to.match(/drugi raz w tej rundzie/);
+        expect(E.naruszenieSerii({ ks: 2 }, "ks", { grad: true }), "Grad ołowiu").to.equal(null);
+        expect(E.naruszenieSerii({ ks: 1 }, "ds", { grad: true })).to.match(/Długa seria po krótkiej serii/);
+        expect(E.naruszenieSerii({ ms: 1 }, "ks")).to.match(/po miażdżącej serii/);
+        expect(E.naruszenieSerii({ ks: 1 }, "dublet"), "Dublet bez limitu rundy").to.equal(null);
+      });
+
+      it("§7.1: korekta po fakcie — A→B (Nożownik), kontynuacja→nowa A, z powrotem; otwierającej z kontynuacją nie ruszamy", function () {
+        const l = E.pustyLedger("w");
+        const a1 = atak(l, wl(1), { sloty: 2 });
+        const k = E.zadanieKorektyAtaku(l, a1.w.op.id, "B:nozownik", { sloty: 2, label: "Nożownik [B]" });
+        expect(k.koszt).to.deep.equal({ A: -1, B: 1 });
+        E.zastosuj(l, wl(1), { id: id(), ...k });
+        expect(l.ataki, "instancja tej próby znika").to.deep.equal([]);
+        expect([E.pule(l, wl(1)).A.wydane, E.pule(l, wl(1)).B.wydane]).to.deep.equal([0, 1]);
+        expect(l.ops[0].atak).to.include({ zrodlo: "B:nozownik" });
+
+        const l2 = E.pustyLedger("w");
+        atak(l2, wl(1), { sloty: 2 });
+        const b = atak(l2, wl(1), { sloty: 2 });
+        expect(E.opcjeKorektyAtaku(l2, l2.ops[0].id).ok, "otwierająca, którą kontynuowano").to.equal(false);
+        const kb = E.zadanieKorektyAtaku(l2, b.w.op.id, "nowaA", { sloty: 2 });
+        expect(kb.koszt).to.deep.equal({ A: 1 });
+        E.zastosuj(l2, wl(1), { id: id(), ...kb });
+        expect(l2.ataki.map(a => a.uzyte), "dwie świadomie osobne A").to.deep.equal([1, 1]);
+        expect(E.pule(l2, wl(1)).A.wydane).to.equal(2);
+        const op = E.opcjeKorektyAtaku(l2, b.w.op.id, { sloty: 2 });
+        expect(op.opcje.find(o => o.obecna)?.id).to.equal("nowaA");
+        const kont = op.opcje.find(o => o.id.startsWith("kontynuacja:"));
+        expect(kont?.slot).to.equal(2);
+        E.zastosuj(l2, wl(1), { id: id(), ...E.zadanieKorektyAtaku(l2, b.w.op.id, kont.id, { sloty: 2 }) });
+        expect(E.pule(l2, wl(1)).A.wydane, "z powrotem jedna A").to.equal(1);
+        expect(l2.ataki.map(a => a.uzyte)).to.deep.equal([2]);
+        const brak = E.zadanieKorektyAtaku(l2, b.w.op.id, "brak", { sloty: 2 });
+        expect(brak.koszt, "kontynuacja → bez kosztu: nic do zwrotu").to.deep.equal({});
+      });
     });
 
     describe("Prawdziwy rzut ataku (warstwa 4)", function () {
@@ -190,6 +252,97 @@ export function registerAtakowanieTests(quench) {
           const przed = stan(tok).pule.A.wydane;
           await lalka.place(pc, pc.items.get(noz.id), "hand.1");
           await waitFor(() => stan(tok).pule.A.wydane === przed + 1, { label: "z plecaka = Akcja" });
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
+      it("Nożownik wybrany w oknie: TK tej próby wobec celu bez zapowiedzi na turę; bez celu — krytyk obrażeń z tej karty", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Nożownik M8` });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Cel noża M8` });
+        await pc.createEmbeddedDocuments("Item", [sztuczkaItem("nozownik", SZTUCZKI.nozownik.label)]);
+        const sztylet = await noz(pc);
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-noz" });
+        const r = stub(game, "combat", w.combat);
+        const cel = w.zetony.find(t => t.actorId === inny.id);
+        const zatwierdz = async cele => {
+          const t = stub(game.user, "targets", cele);
+          try {
+            const roll = new CONFIG.Dice.D20Roll("1d20", {}, { neuroAtak: { opcja: "B:nozownik" } });
+            const message = {};
+            await T.zatwierdz([roll], { subject: aktywnosc(sztylet), hookNames: ["attack"] }, message);
+            return { roll, flaga: foundry.utils.getProperty(message, `data.flags.${MODULE_ID}.${FLAGA_ATAKU}`) };
+          } finally { t(); }
+        };
+        try {
+          await waitFor(() => ledger(kombatant(w.zetony.find(t => t.actorId === pc.id))).tury.length > 0, { label: "tura" });
+          const z = await zatwierdz([{ document: cel }]);
+          expect(z.flaga.opcja).to.equal("B:nozownik");
+          expect(z.roll.options[OKOLICZNOSCI_OPT].cele.find(c => c.tokenUuid === cel.uuid)?.autoKrytyk).to.match(/Nożownik/);
+          expect(pc.getFlag(MODULE_ID, FLAGA_ZAPOWIEDZ) ?? [], "bez zapowiedzi, która przeszłaby na następny atak").to.deep.equal([]);
+          expect(z.flaga.krytyk, "z celem krytyk liczy rozstrzygacz trafienia").to.be.undefined;
+
+          const bez = await zatwierdz([]);
+          expect(bez.flaga.krytyk).to.match(/Nożownik/);
+          expect(bez.flaga.ostrz.join(" "), "ostrzeżenie o braku celu").to.match(/brak celu/);
+          const [karta] = await ChatMessage.implementation.create([{ content: "M8 Nożownik bez celu",
+            flags: { [MODULE_ID]: { [FLAGA_ATAKU]: bez.flaga } } }]);
+          const config = { rolls: [{}] };
+          const dialog = {};
+          T.preRollDamage(config, dialog, { data: { system: { origin: karta.id } } });
+          expect([config.isCritical, config.rolls[0].options?.isCritical, dialog.options?.defaultButton]).to.deep.equal([true, true, "critical"]);
+          const [zCelem] = await ChatMessage.implementation.create([{ content: "M8 z celem",
+            flags: { [MODULE_ID]: { [FLAGA_ATAKU]: bez.flaga, obrona: { targets: [{ tokenUuid: cel.uuid }] } } } }]);
+          const config2 = { rolls: [{}] };
+          T.preRollDamage(config2, {}, { data: { system: { origin: zCelem.id } } });
+          expect(config2.isCritical, "karta z celem — tylko rozstrzygacz trafienia").to.be.undefined;
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
+      it("T30: manewr zamiast ataku zajmuje slot — Wytrącenie + Pochwycenie przy Drugim ataku to jedna A; trzeci — nowa A; Z bara! już opłacone", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Zapaśnik M8` });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Manekin M8` });
+        await cecha(pc, "drugi-atak");
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-manewr" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          await waitFor(() => ledger(kombatant(tok)).tury.length > 0, { label: "tura" });
+          const m1 = await zaplacManewr(pc, { nazwa: "Wytrącenie" });
+          expect([m1.koszt, m1.atak?.slot]).to.deep.equal([{ A: 1 }, 1]);
+          const m2 = await zaplacManewr(pc, { nazwa: "Pochwycenie" });
+          expect([m2.koszt, m2.atak?.slot]).to.deep.equal([{}, 2]);
+          const zb = await zaplacManewr(pc, { nazwa: "Odepchnięcie", oplacone: "Z bara!" });
+          expect(zb.koszt, "zdolność [B] zapłaciła przy użyciu").to.deep.equal({});
+          const m3 = await zaplacManewr(pc, { nazwa: "Odepchnięcie" });
+          expect(m3.koszt).to.deep.equal({ A: 1 });
+          expect(m3.ostrz.join(" ")).to.match(/ponad pulę/);
+          await waitFor(() => stan(tok).pule.A.wydane === 2, { label: "dwie A" });
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
+      it("T39: krótka seria — „Sposób ataku” to osobna Akcja; z Gradem ołowiu zwykły slot Atakowania", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Seria M8` });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Pod ostrzałem M8` });
+        const sztylet = await noz(pc);
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-ks" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          await waitFor(() => ledger(kombatant(w.zetony.find(t => t.actorId === pc.id))).tury.length > 0, { label: "tura" });
+          const ks = { type: "neuroKs", actor: pc, item: sztylet };
+          const m = mozliwosciAtaku(ks);
+          expect([m.opcje.map(o => o.id), m.domyslna]).to.deep.equal([["calaA"], "calaA"]);
+          await pc.createEmbeddedDocuments("Item", [sztuczkaItem("gradOlowiu", SZTUCZKI.gradOlowiu.label)]);
+          const g = mozliwosciAtaku(ks);
+          expect(g.calaAkcja, "Grad ołowiu: KS częścią Atakowania").to.equal(null);
+          expect(g.domyslna).to.equal("nowaA");
         } finally {
           r();
           await w.sprzatnij();

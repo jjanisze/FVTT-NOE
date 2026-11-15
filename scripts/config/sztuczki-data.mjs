@@ -264,11 +264,12 @@ export const SZTUCZKI = Object.freeze({
     category: "dystans",
     legacyAbilityKeys: ["gradOlowiu"],
     auto: [{
-      what: "Zdjęcie blokady „jedna KS na rundę” — kolejna krótka seria w tej samej rundzie "
-        + "przechodzi, z komunikatem wyjątku reguły.",
+      what: "Kolejna krótka seria w tej samej rundzie bez ostrzeżenia „raz w rundzie”, z komunikatem wyjątku reguły.",
       where: "weapons/fire-modes.mjs"
-    }],
-    manual: "Limit ataków w turze — karta go nie śledzi, pilnuje gracz lub MG."
+    }, {
+      what: "KS jako zwykły atak w Atakowaniu — zajmuje slot (Drugi/Trzeci atak), ponad liczbę ataków ostrzega (M8).",
+      where: "combat/atakowanie.mjs"
+    }]
   },
   grenadier: {
     label: "Grenadier",
@@ -439,6 +440,9 @@ export const SZTUCZKI = Object.freeze({
     auto: [{
       what: "Przycisk Nożownik [B] pod trafieniem nożem w swojej turze (Nóż taktyczny, Kamienny nóż, Nóż do rzucania, Sztylet — "
         + "D19): drugi atak tym nożem w ten cel, trafienie = obrażenia krytyczne.", where: "combat/sztuczki-ataki.mjs"
+    }, {
+      what: "Nożownik [B] w polu „Sposób ataku”: krytyk tej próby; bez celu — z ostrzeżeniem, obrażenia z tej karty krytyczne (M8 §7.3).",
+      where: "combat/atakowanie.mjs"
     }]
   },
   padnijPowstan: {

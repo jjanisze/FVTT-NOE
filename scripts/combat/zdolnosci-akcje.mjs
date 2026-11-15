@@ -668,10 +668,10 @@ function _zrodlaB() {
       const t = _ostatniAtak(ctx.actor, (bron, m) => NOZE.includes(weaponIdOf(bron)) && _trafionyCel(m) === ctx.cel.uuid);
       return t ? { ok: true } : { ok: false, ostrz: [`Nożownik: brak zapisu trafienia nożem w ${ctx.cel.name} w tej turze (s. 105).`] };
     },
-    // Trafienie tej próby w ten cel — obrażenia krytyczne (zapowiedź na tę turę, jak przycisk pod kartą).
-    przyZatwierdzeniu: async ctx => {
-      if (ctx.cel) await zapowiedz(ctx.actor, { cel: ctx.cel.uuid, bronie: [weaponIdOf(ctx.item)], autoKrytyk: "Nożownik — trafienie krytyczne", zrodlo: "nozownik", tura: true });
-    }
+    // Trafienie **tej próby** — obrażenia krytyczne (§7.3): z celem — automatyczne TK wobec niego w rzucie; bez celu —
+    // kontekst krytyka tej próby na karcie (trafienie rozstrzyga stół, obrażenia z tej karty są krytyczne). Bez zapowiedzi
+    // na turę: wybór w oknie nie może przejść na niepowiązany następny atak.
+    przyZatwierdzeniu: () => ({ autoKrytyk: "Nożownik — trafienie krytyczne" })
   });
   zarejestrujZrodloAtakuB({
     id: "promocja", label: "Promocja",

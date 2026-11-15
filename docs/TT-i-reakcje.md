@@ -66,6 +66,24 @@ Nożownik + Przycelowanie = 2B). Koszt liczy się dopiero przy rzucie — zamkni
 Przerzut (Fuks) i obrażenia to ta sama próba, bez nowej akcji. Karta ataku ma plakietkę z kosztem; ostrzeżenia
 (przekroczenie, niespełniony warunek) są w jej dymku i u MG. Nic nie jest blokowane.
 
+- **Krótka seria** (s. 119) to osobna Akcja — w oknie „Krótka seria [A] — osobna Akcja”; nie zajmuje ataku z
+  Drugiego ataku i nie zamyka rozpoczętego Atakowania. Z **Gradem ołowiu** KS jest zwykłym atakiem w Atakowaniu (tyle
+  KS, ile ataków). **Dublet** (s. 118) to jeden Test Ataku — zwykły atak. Długa i miażdżąca seria oraz ogień zaporowy
+  (rzuty obronne celów) to Akcja przy użyciu.
+- **Raz w rundzie** (KS, DS, MS — s. 119–120): druga seria w tej rundzie albo inny rodzaj serii po pierwszej
+  wykonuje się z ostrzeżeniem w oknie, na karcie i u MG; brak amunicji, zacięcie i uszkodzenie nadal blokują strzał.
+  Historia serii jest na postaci — zmiana broni jej nie zeruje.
+- **Manewr zamiast ataku** — Pochwycenie, Odepchnięcie (atak bez broni) i Wytrącenie (s. 252–253) z narzędzia
+  *Manewry* mają to samo pole **Sposób ataku** i zajmują atak w Atakowaniu (z Drugim atakiem: cios + Wytrącenie = jedna
+  Akcja). Koszt liczy się przed rzutem obronnym celu — przegrany manewr też był próbą. Przycisk z karty **Z bara!**
+  jest już opłacony (B przy użyciu zdolności). Odepchnięcie i Wytrącenie ze **Skutecznego ciosu** to skutek trafienia,
+  bez kosztu.
+- **Nożownik** wybrany w oknie daje krytyk **tej** próbie. Bez celu (opcja z ostrzeżeniem) trafienie rozstrzyga stół,
+  a obrażenia rzucone z tej karty są domyślnie krytyczne; na następny atak nic nie przechodzi.
+- **Korekta po fakcie:** autor karty albo MG klika plakietkę kosztu — okno *Popraw próbę* (kontynuacja, nowa Akcja,
+  posiadane B, bez kosztu). Licznik postaci dostaje korektę, plakietka nowy opis, dymek — co i kto poprawił. Próby,
+  która otworzyła Atakowanie kontynuowane później, nie poprawisz — najpierw popraw te późniejsze.
+
 ## Ułatwienie i Utrudnienie w Teście Ataku
 
 Okno Testu Ataku samo podświetla **Ułatwienie** albo **Utrudnienie**, kiedy wynikają z zasad — możesz

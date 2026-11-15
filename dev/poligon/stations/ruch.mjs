@@ -3,8 +3,8 @@
  * linijka z budżetem, deklaracje, Zryw, Szybkie ręce, zmęczenie po Berserku, korekty. Cztery persony, trudny teren bez
  * Tiled (natywne Regiony dnd5e: gruz i schody nachodzące na siebie), walka gotowa, nierozpoczęta.
  *
- * Próby obejmują to, co M8 już robi (E1–E3, E5, E8, rdzeń E6, części E4 i E7). Szablony paska, Nożownik bez celu i
- * manewry w slocie dojdą z kolejnymi krokami — wtedy i ich próby.
+ * Próby obejmują to, co M8 już robi (E1–E3, E5, E6, E8, części E4 i E7): także krótką serię jako osobną Akcję (B 93R
+ * Twardziela), manewr zamiast ataku i korektę próby z karty. Szablony paska dojdą z kolejnym krokiem — wtedy i ich próby.
  */
 
 import { p } from "./_wspolne.mjs";
@@ -22,7 +22,9 @@ export default {
   async build(k) {
     const s = await k.scene("ruch", { name: "Ruch · Ekonomia tury", w: 30, h: 20, color: "#4a4636", main: true,
       grid: { distance: 1.5, units: "m" } });
-    const goly = await k.persona("goly", "goly", { owner: "Gracz 1", name: "Twardziel (ruch)" });
+    // B 93R — pistolet z krótką serią (próba `ks-akcja`); reszta karty pusta jak u Gołego.
+    const goly = await k.persona("goly", "goly", { owner: "Gracz 1", name: "Twardziel (ruch)",
+      loadout: [{ ref: "bron:B 93R", place: "ranged", load: true }] });
     const kowboj = await k.persona("kowboj", "m7-clint", { owner: "Gracz 2", name: "Kowboj (Zryw)" });
     const gladiator = await k.persona("gladiator", "gladiator-5", { owner: "Gracz 3", name: "Gladiator (Berserk, Zew areny)" });
     const spec = await k.persona("spec", "warsztat", { owner: "Gracz 4", name: "Spec (Szybkie ręce)" });
@@ -88,6 +90,12 @@ export default {
       "Tura Gladiatora: trzy ataki maczetą w ghula, między nimi ruch; raz zamknij okno ataku krzyżykiem."),
     p("zrodla-b", "Ataki", "Pole „Sposób ataku” pokazuje tylko posiadane źródła B; Promocja poza Berserkiem — z ostrzeżeniem, nie domyślna; przycisk [B] pod kartą płaci dopiero przy rzucie; atak poza turą — „W Reakcji [R]” (T33, T41)",
       "Najemnik z Promocją (jeśli jest w obsadzie) albo Gladiator: atak wręcz poza Berserkiem; potem w turze ghula atak okazyjny."),
+    p("ks-akcja", "Ataki", "Krótka seria z B 93R: „Sposób ataku” — „Krótka seria [A] — osobna Akcja”; zwykły atak po niej otwiera własne Atakowanie (KS go nie kontynuuje ani nie zamyka); zamknięte okno KS nic nie kosztuje; druga KS w tej rundzie wykonuje się z ostrzeżeniem w oknie, na karcie i w szepcie do MG (T39)",
+      "Tura Twardziela (po przebudowie stanowiska): KS w ghula, raz zamknij okno krzyżykiem; strzał zwykły; druga KS."),
+    p("manewr", "Ataki", "Manewr zamiast ataku (narzędzia żetonu → Manewry): pole „Sposób ataku”; próba kosztuje przed RO celu, przegrana też; z Drugim atakiem atak maczetą + Wytrącenie to jedna A; przycisk Odepchnięcia z karty Z bara! — „koszt już zapłacony” (T30)",
+      "Tura Gladiatora: atak maczetą w ghula, potem Manewry → Wytrącenie; w Berserku Z bara! i przycisk z jej karty."),
+    p("korekta-ataku", "Korekty", "Klik w plakietkę kosztu na karcie ataku (autor albo MG): „Popraw próbę” — kontynuacja / nowa A / posiadane B / bez kosztu; licznik na karcie postaci się zmienia, plakietka mówi nowy sposób, dymek — co poprawiono i kto",
+      "Gracz 3 po ataku klika plakietkę i wybiera „Bez kosztu”, potem z powrotem „Nowe Atakowanie”."),
     p("pusty-pasek", "Pasek", "Przycisk panelu przeciągnięty na pasek działa jak na karcie; makro zdolności zdjęte z paska nie wraca po zmianie poziomu; pusty pasek niczego nie odbiera (T43)",
       "Gracz 1: przeciągnij Biegnij i Skok na pasek, użyj; zdejmij makro zdolności; MG daje poziom."),
     p("gotowosc", "Gotowość", "Pasek u góry: „Twoja tura za 2”, „Gotuj się, jesteś następny” z krótkim dźwiękiem, „Twoja tura” z dźwiękiem i zegarem; ukryty BN nie liczy się w „za X”; MG bez sygnałów przy każdym BN (T45)",

@@ -299,6 +299,24 @@ export function autoKrytykZRzutu(roll, tokenUuid) {
   return roll?.options?.[OKOLICZNOSCI_OPT]?.cele?.find(c => c.tokenUuid === tokenUuid)?.autoKrytyk ?? null;
 }
 
+/**
+ * Automatyczne TK tej próby wobec celu dopisane po konfiguracji — źródło wybrane w oknie rzutu (Nożownik, PLAN_m8 §7.3)
+ * znane jest dopiero po `preRollAttack`, który liczy resztę. Pierwszy powód wygrywa; wielu źródeł krytyka nie mnożymy.
+ * @param {Roll[]} rolls
+ * @param {string} tokenUuid
+ * @param {string} label
+ */
+export function dopiszAutoKrytyk(rolls, tokenUuid, label) {
+  for (const roll of rolls ?? []) {
+    roll.options ??= {};
+    const z = roll.options[OKOLICZNOSCI_OPT] ??= { ulatwienia: [], utrudnienia: [], uwagi: [], tryb: null, cele: [] };
+    z.cele ??= [];
+    const c = z.cele.find(x => x.tokenUuid === tokenUuid);
+    if (c) c.autoKrytyk ??= label;
+    else z.cele.push({ tokenUuid, autoKrytyk: label });
+  }
+}
+
 /* -------------------------------------------- */
 /*  Plakietki na karcie ataku                    */
 /* -------------------------------------------- */

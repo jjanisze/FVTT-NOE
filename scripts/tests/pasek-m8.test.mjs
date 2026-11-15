@@ -52,7 +52,7 @@ export function registerPasekM8Tests(quench) {
           const p = pole();
           const macroId = Number.isFinite(p) ? user.hotbar[p] : null;
           for (const [slot, id] of Object.entries(user.hotbar ?? {})) {
-            if (id && !(slot in przed)) await user.update({ [`hotbar.-=${slot}`]: null });
+            if (id && !(slot in przed)) await user.update({ [`hotbar.${slot}`]: _del });
           }
           const m = macroId ? game.macros.get(macroId) : null;
           if (m) await m.delete();

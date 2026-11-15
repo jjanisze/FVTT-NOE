@@ -90,21 +90,41 @@ export function registerSztuczkiCombatTests(quench) {
         { combatId: combat.id, round: combat.round, mode: KS, bullets: fire.KS_BULLET_COST, uses: 1 });
     }
 
-    describe("Grad ołowiu — zdjęcie blokady „jedna KS na rundę\"", function () {
+    describe("Grad ołowiu i „raz w rundzie” — ostrzeżenie, nie blokada (M8 T39)", function () {
       it("poza walką limit rundy w ogóle nie obowiązuje", function () {
         restores.push(stub(game, "combat", null));
         expect(fire.canUseBurstMode(seria, KS, fire.KS_BULLET_COST)).to.be.true;
       });
 
-      it("bez Sztuczki druga KS w tej samej rundzie jest odrzucana z ostrzeżeniem", async function () {
+      it("bez Sztuczki druga KS w tej samej rundzie wykonuje się z ostrzeżeniem", async function () {
         const combat = fakeCombat();
         await markKsUsed(seria, combat);
         const warnings = captureWarnings();
         restores.push(warnings.restore);
 
         expect(fire.hasLeadHail(seria), "postać nie ma jeszcze Sztuczki").to.be.false;
-        expect(fire.canUseBurstMode(seria, KS, fire.KS_BULLET_COST)).to.be.false;
-        expect(warnings.messages.join(" ")).to.match(/krótk[aą] seri/i);
+        expect(fire.canUseBurstMode(seria, KS, fire.KS_BULLET_COST), "strzał się wykonuje").to.be.true;
+        expect(warnings.messages.join(" ")).to.match(/krótk[aą] seri/i).and.to.match(/raz w rundzie/i);
+      });
+
+      it("historia należy do aktora: KS z innej broni w tej rundzie też się liczy; zapis przenosi dawny stan z broni", async function () {
+        const combat = fakeCombat();
+        await actor.setFlag(MODULE_ID, fire.BURST_STATE_FLAG, { combatId: combat.id, round: combat.round, tryby: { ks: 1 } });
+        try {
+          const warnings = captureWarnings();
+          restores.push(warnings.restore);
+          expect(fire.canUseBurstMode(seria, KS, fire.KS_BULLET_COST)).to.be.true;
+          expect(warnings.messages.join(" "), "zmiana broni nie zeruje limitu").to.match(/raz w rundzie/i);
+
+          await markKsUsed(seria, combat);
+          expect(fire.serieWRundzie(seria).ks, "aktor 1 + dawny zapis broni 1").to.equal(2);
+          await fire.markBurstModeUsed(seria, KS, fire.KS_BULLET_COST);
+          expect(actor.getFlag(MODULE_ID, fire.BURST_STATE_FLAG)?.tryby?.ks, "trzecia KS na aktorze").to.equal(3);
+          expect(seria.getFlag(MODULE_ID, fire.BURST_STATE_FLAG), "dawny zapis tej rundy zdjęty z broni").to.be.undefined;
+          expect(fire.serieWRundzie(seria).ks, "bez podwójnego liczenia").to.equal(3);
+        } finally {
+          await actor.unsetFlag(MODULE_ID, fire.BURST_STATE_FLAG);
+        }
       });
 
       it("z Gradem ołowiu ta sama sytuacja przechodzi, bez ostrzeżenia", async function () {
@@ -119,23 +139,26 @@ export function registerSztuczkiCombatTests(quench) {
         expect(warnings.messages).to.be.empty;
       });
 
-      it("Grad ołowiu nie odblokowuje długiej serii — wyjątek dotyczy tylko KS", async function () {
+      it("Grad ołowiu nie zdejmuje wykluczenia długiej serii po KS — wyjątek dotyczy tylko KS po KS", async function () {
         const combat = fakeCombat();
         await markKsUsed(seria, combat);
         await grant("gradOlowiu");
         const warnings = captureWarnings();
         restores.push(warnings.restore);
 
-        expect(fire.canUseBurstMode(seria, "ds", fire.DS_THRESHOLDS[0].bullets)).to.be.false;
-        expect(warnings.messages.join(" ")).to.match(/seri/i);
+        expect(fire.canUseBurstMode(seria, "ds", fire.DS_THRESHOLDS[0].bullets), "wykonuje się").to.be.true;
+        expect(warnings.messages.join(" ")).to.match(/długa seria po krótkiej serii/i);
       });
 
-      it("nowa runda kasuje blokadę także bez Sztuczki", async function () {
+      it("nowa runda — bez ostrzeżenia także bez Sztuczki", async function () {
         const combat = fakeCombat(3);
         await markKsUsed(seria, combat);
         while (restores.length) restores.pop()();
         fakeCombat(4);
+        const warnings = captureWarnings();
+        restores.push(warnings.restore);
         expect(fire.canUseBurstMode(seria, KS, fire.KS_BULLET_COST)).to.be.true;
+        expect(warnings.messages).to.be.empty;
       });
     });
 

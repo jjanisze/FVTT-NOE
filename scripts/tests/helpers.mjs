@@ -55,8 +55,13 @@ export async function walkaTestowa(aktorzy, { kto = aktorzy[0], nazwa = "walka" 
   const tokeny = [];
   for (const [i, a] of aktorzy.entries()) tokeny.push((await a.getTokenDocument({ x: 100 + i * 200, y: 100, actorLink: !a.isToken })).toObject());
   const docs = await scena.createEmbeddedDocuments("Token", tokeny);
+  // Kolejność zwróconych dokumentów bywa inna niż podanych — inicjatywa wg kolejności `aktorzy`, nie `docs`.
+  const pozycja = t => {
+    const i = aktorzy.findIndex(a => a.id === t.actorId);
+    return i < 0 ? docs.indexOf(t) : i;
+  };
   const combat = await Combat.implementation.create({ scene: scena.id, active: true });
-  await combat.createEmbeddedDocuments("Combatant", docs.map((t, i) => ({ tokenId: t.id, sceneId: scena.id, actorId: t.actorId, initiative: 20 - i })));
+  await combat.createEmbeddedDocuments("Combatant", docs.map(t => ({ tokenId: t.id, sceneId: scena.id, actorId: t.actorId, initiative: 20 - pozycja(t) })));
   await combat.startCombat();
   const idx = combat.turns.findIndex(c => c.actor === kto || c.actorId === kto.id);
   if (idx > 0) await combat.update({ turn: idx });

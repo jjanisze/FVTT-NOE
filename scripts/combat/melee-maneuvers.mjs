@@ -18,6 +18,7 @@ import { freeHandCheck } from "./grip.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
 import { cardButtonHost } from "../config/chat-card-dom.mjs";
 import { najwyzejDuzy } from "../config/sztuczki-walka.mjs";
+import { mozliwosciManewru, zaplacManewr, opisKosztuProby } from "./atakowanie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -256,6 +257,9 @@ async function _releaseGrapple(effect) {
  * @param {boolean} [options.advantage]       Ułatwienie do RO celu (przedmiot trzymany oburącz).
  * @param {"push"|"prone"} [options.effect]   Wybór atakującego przy Odepchnięciu.
  * @param {Token} [options.attackerToken]
+ * @param {{opcja?: string|null, oplacone?: string|null}|null} [options.zaplac]  manewr wybrany przez gracza zamiast ataku
+ *   (okno manewru): każda próba zajmuje slot Atakowania (M8 §7.1). Bez tego — skutek innej mechaniki (Skuteczny cios),
+ *   bez kosztu.
  */
 export async function resolveManeuver(attacker, maneuverId, options = {}) {
   const def = MANEUVERS[maneuverId];
@@ -273,8 +277,16 @@ export async function resolveManeuver(attacker, maneuverId, options = {}) {
     ?? canvas.tokens?.controlled?.[0]
     ?? null;
 
+  let pierwsza = true;
+  const _zaplac = options.zaplac
+    ? async () => {
+      const r = await zaplacManewr(attacker, { nazwa: def.label, ...(pierwsza ? options.zaplac : {}) });
+      pierwsza = false;
+      return r;
+    }
+    : null;
   for (const target of targets) {
-    await _resolveTarget(attacker, attackerToken, target, maneuverId, dc, options);
+    await _resolveTarget(attacker, attackerToken, target, maneuverId, dc, { ...options, _zaplac });
   }
 }
 
@@ -285,13 +297,16 @@ async function _resolveTarget(attacker, attackerToken, target, maneuverId, dc, o
 
   const speaker = ChatMessage.getSpeaker({ actor: attacker });
   const head = `<i class="fas ${def.icon}" style="color:${def.color}"></i> <strong>${def.label}</strong>`;
+  let koszt = null;
   const say = content => ChatMessage.create({
     speaker,
-    content: `<div class="neuro-maneuver-result">${head} — ${content}</div>`
+    content: `<div class="neuro-maneuver-result">${head} — ${content}`
+      + `${koszt ? ` <span class="neuro-maneuver-koszt">${foundry.utils.escapeHTML(opisKosztuProby(koszt))}</span>` : ""}</div>`
   });
 
   const mata = maneuverId === "odepchniecie" && options.effect !== "push" && rzutNaMate(attacker, actor);
   if (!actor.canUserModify(game.user, "update")) {
+    koszt = await options._zaplac?.() ?? null;
     ui.notifications.warn(`${def.label}: brak uprawnień do ${target.name} — rozstrzygnięcie po stronie MG.`);
     await say(`<b>${attacker.name}</b> próbuje wobec <b>${target.name}</b>. <b>ST ${dc}</b>, `
       + `RO na Siłę lub Zręczność (wybiera cel)${mata ? " <b>z Utrudnieniem</b> (Rzut na matę, Wrestler)" : ""}. Rozstrzyga MG.`);
@@ -314,6 +329,8 @@ async function _resolveTarget(attacker, attackerToken, target, maneuverId, dc, o
       if (!proceed) return;
     }
   }
+  // Próba się odbywa (także przegrana albo wobec odpornego celu) — koszt raz, przed RO celu.
+  koszt = await options._zaplac?.() ?? null;
 
   const status = maneuverId === "pochwycenie" ? "grappled"
     : (maneuverId === "odepchniecie" && options.effect !== "push") ? "prone"
@@ -387,7 +404,7 @@ function _currentActor() {
  * Jedno okno na trzy manewry. ST jest polem edytowalnym, bo istoty z Bestiariusza
  * mają je podane wprost (nocny ghul ST 13) zamiast liczyć z 8 + SIŁ + PB.
  */
-export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {}) {
+export async function openManeuverDialog({ maneuver = "pochwycenie", actor, oplacone = null } = {}) {
   const attacker = actor ?? _currentActor();
   if (!attacker) {
     ui.notifications.warn("Zaznacz żeton wykonującego manewr.");
@@ -406,6 +423,11 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
   const noHand = grip && !grip.ok;
   const opts = Object.entries(MANEUVERS)
     .map(([id, d]) => `<option value="${id}"${id === maneuver ? " selected" : ""}>${d.label}</option>`).join("");
+  // M8 §7.1: manewr zastępuje atak — ten sam „Sposób ataku” co w oknie Testu Ataku (w walce).
+  const sposob = mozliwosciManewru(attacker, { oplacone });
+  const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+  const sposobOpts = sposob?.opcje.map(o => `<option value="${esc(o.id)}"${o.id === sposob.domyslna ? " selected" : ""}>`
+    + `${esc(o.label)}${o.zweryfikowane ? "" : esc(" — ⚠ " + o.ostrz.join("; "))}</option>`).join("") ?? "";
 
   const content = `
     <fieldset class="neuro-maneuver-form">
@@ -426,6 +448,9 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
       <div class="form-group"><label>Utrudnienie w RO celu</label>
         <div class="form-fields"><input type="checkbox" name="disadvantage"${aramis ? " checked" : ""}></div>
         ${aramis ? '<p class="hint">Aramis: Rozbrajanie daje celowi Utrudnienie.</p>' : ""}</div>
+      ${sposob ? `<div class="form-group"><label>Sposób ataku</label>
+        <div class="form-fields"><select name="sposob">${sposobOpts}</select></div>
+        <p class="hint">Manewr zastępuje atak w Atakowaniu (zajmuje slot); przegrany też był próbą.</p></div>` : ""}
       <p class="notes" data-rule>${MANEUVERS[maneuver].rule}</p>
     </fieldset>`;
 
@@ -459,7 +484,8 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
     dc: Number(data.dc),
     effect: data.effect,
     advantage: data.advantage === true,
-    disadvantage: data.disadvantage === true
+    disadvantage: data.disadvantage === true,
+    zaplac: sposob ? { opcja: data.sposob ?? null, oplacone } : null
   });
 }
 
@@ -504,6 +530,7 @@ export function registerMeleeManeuvers() {
     const container = cardButtonHost(el);
     container?.insertAdjacentHTML("beforeend", `
       <button class="neuro-maneuver-btn" data-maneuver="${maneuverId}" data-actor="${item.actor?.id ?? ""}"
+        data-oplacone="${foundry.utils.escapeHTML(item.name ?? "")}"
         style="margin-top:5px;color:${def.color};border:1px solid ${def.color};background:rgba(139,69,19,0.1);">
         <i class="fas ${def.icon}"></i> ${def.label} [ST ${maneuverDC(item.actor, maneuverId)}]
       </button>`);
@@ -517,7 +544,9 @@ export function registerMeleeManeuvers() {
       event.preventDefault();
       openManeuverDialog({
         maneuver: btn.dataset.maneuver,
-        actor: game.actors.get(btn.dataset.actor) ?? undefined
+        actor: game.actors.get(btn.dataset.actor) ?? undefined,
+        // Zdolność z karty (Z bara! [B]) zapłaciła już przy użyciu — manewr bez drugiego kosztu.
+        oplacone: btn.dataset.oplacone || null
       });
     });
   });
