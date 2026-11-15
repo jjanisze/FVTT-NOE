@@ -4,10 +4,13 @@
  * Tiled (natywne Regiony dnd5e: gruz i schody nachodzące na siebie), walka gotowa, nierozpoczęta.
  *
  * Próby obejmują to, co M8 już robi (E1–E3, E5, E6, E8, części E4 i E7): także krótką serię jako osobną Akcję (B 93R
- * Twardziela), manewr zamiast ataku, korektę próby z karty i szablon paska z paletami Ruch/Więcej.
+ * Twardziela), manewr zamiast ataku, korektę próby z karty i szablon paska z paletami Ruch/Więcej. E2 (teren bez Tiled):
+ * Kurier z Człowiekiem-pająkiem i Włóczykijem (MG), osobne Schody, Bagno i Region bez przyczyny, preset MG, Alpinista,
+ * tryb „Ciągnięcie”, scena w ft.
  */
 
 import { p } from "./_wspolne.mjs";
+import { REAL_GEAR, buildRealGearItemData } from "../../modules/neuroshima-2026-overrides/scripts/config/gear-data.mjs";
 
 const G = 100;
 const pole = (c, r, w = 1, h = 1) => ({ type: "rectangle", x: c * G, y: r * G, width: w * G, height: h * G, rotation: 0, hole: false });
@@ -15,8 +18,8 @@ const pole = (c, r, w = 1, h = 1) => ({ type: "rectangle", x: c * G, y: r * G, w
 export default {
   id: "ruch", name: "Ruch", prio: "P1", icon: "fa-solid fa-person-running",
   opis: "Ekonomia tury M8: Twardziel 1 (Gracz 1), Kowboj ze Zrywem (Gracz 2), Gladiator 5 z Berserkiem i Zewem areny (Gracz 3), Spec 5 "
-    + "z Szybkimi rękami (Gracz 4). Gruz (trudny teren) i schody nachodzące na gruz — natywne Regiony bez Tiled. "
-    + "Walka gotowa — MG zaczyna.",
+    + "z Szybkimi rękami (Gracz 4), Kurier z Człowiekiem-pająkiem i Włóczykijem (MG). Gruz, schody na gruzie, osobne schody, "
+    + "bagno i teren bez przyczyny — natywne Regiony bez Tiled. Walka gotowa — MG zaczyna.",
   gracze: 4,
   klucz: ["goly"],
   async build(k) {
@@ -29,6 +32,11 @@ export default {
     const gladiator = await k.persona("gladiator", "gladiator-5", { owner: "Gracz 3", name: "Gladiator (Berserk, Zew areny)" });
     const spec = await k.persona("spec", "warsztat", { owner: "Gracz 4", name: "Spec (Szybkie ręce)" });
     const ghul = await k.fromPack("ghul", "bestiariusz", "generacja-i-nocny-ghul");
+    // Kurier (pokrycie M7): Sztuczka Człowiek-pająk i Włóczykij z Miami — odporności terenu i Alpinista (E2). Sprzęt do
+    // wspinaczki w plecaku: z katalogu Zbrojowni (nie z paczki).
+    const kurier = await k.persona("kurier", "m7-slang", { name: "Kurier (Człowiek-pająk, Włóczykij)" });
+    const zestaw = REAL_GEAR.find(g => g.id === "sprzet_wspinaczkowy");
+    if (kurier && zestaw) await kurier.createEmbeddedDocuments("Item", [buildRealGearItemData(zestaw)]);
 
     await s.createEmbeddedDocuments("Region", [
       { name: "Gruz", color: "#8a6a4a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(12, 2, 4, 14)],
@@ -36,14 +44,25 @@ export default {
         flags: k.flags({ role: "region" }) },
       { name: "Schody na gruzie", color: "#4a7a9a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(14, 2, 4, 6)],
         behaviors: [{ type: "dnd5e.difficultTerrain", name: "Trudny teren (schody)", system: { magical: false, types: ["stairs"] } }],
+        flags: k.flags({ role: "region" }) },
+      // E2: przyczyny pod odporności Kuriera — same schody, bagno, teren bez przyczyny („inne”).
+      { name: "Schody", color: "#6a8aba", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(20, 2, 2, 4)],
+        behaviors: [{ type: "dnd5e.difficultTerrain", name: "Trudny teren — Schody", system: { magical: false, types: ["stairs"] } }],
+        flags: k.flags({ role: "region" }) },
+      { name: "Bagno", color: "#5a6a3a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(20, 13, 4, 4)],
+        behaviors: [{ type: "dnd5e.difficultTerrain", name: "Trudny teren — Mokradło / bagno", system: { magical: false, types: ["mud"] } }],
+        flags: k.flags({ role: "region" }) },
+      { name: "Inne (bez przyczyny)", color: "#7a5a7a", visibility: CONST.REGION_VISIBILITY.ALWAYS, shapes: [pole(6, 16, 4, 3)],
+        behaviors: [{ type: "dnd5e.difficultTerrain", name: "Trudny teren", system: { magical: false, types: [] } }],
         flags: k.flags({ role: "region" }) }
     ]);
     const gracze = [goly, kowboj, gladiator, spec];
-    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [ghul, 24, 9, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }]]);
+    await k.tokens(s, [...gracze.map((a, i) => [a, 3, 3 + i * 4]), [kurier, 3, 18],
+      [ghul, 24, 9, { disposition: CONST.TOKEN_DISPOSITIONS.HOSTILE }]]);
     for (const [i, a] of gracze.entries()) await k.seat(`Gracz ${i + 1}`, a);
     await k.party(gracze);
-    await k.combat(s, [...gracze, ghul]);
-    return { gracze: gracze.filter(Boolean).map(a => a.name), ghul: ghul?.name ?? null };
+    await k.combat(s, [...gracze, kurier, ghul].filter(Boolean));
+    return { gracze: gracze.filter(Boolean).map(a => a.name), kurier: kurier?.name ?? null, ghul: ghul?.name ?? null };
   },
   proby: [
     p("licznik", "Karta", "Panel Stan w walce: ruch pozostałe/pojemność (np. 9/9 m) i A/B/R/I 1/1 — czytelne, z dymkami źródeł; poza walką z panelu zostaje sam przycisk „Ułóż pasek”",
@@ -58,6 +77,16 @@ export default {
       "Gracz 1: Biegnij na karcie, potem Przyspiesz."),
     p("teren", "Teren", "Gruz bez Tiled: pole gruzu kosztuje 3 m; schody nachodzące na gruz nadal 3 m, nie 6 (jedna trudność, NOE s. 26)",
       "Gracz 1: przejdź przez Gruz i przez Schody na gruzie; patrz na linijkę i licznik."),
+    p("teren-preset", "Teren", "Regiony → „Trudny teren — preset”: wybór przyczyn NOE (schody, stok, gruz, mokradło, piasek…); narysowany Region dostaje „Trudny teren — Schody”, widoczność MG, a gracz widzi go przy planowaniu ruchu; zaznaczony Region + preset dopisuje przyczynę do tego samego zachowania; „Wyłącz preset” — zwykłe Regiony",
+      "MG: warstwa Regionów, przycisk ze zboczem → Schody → Rysuj; narysuj prostokąt. Gracz 1 najeżdża na swój żeton obok. MG: zaznacz Region, preset → Gruz."),
+    p("odpornosci", "Teren", "Kurier (Człowiek-pająk, Włóczykij): Schody 1,5 m na pole, Schody na gruzie 3 m (gruz dalej spowalnia), Bagno 1,5 m, „Inne (bez przyczyny)” 3 m; Twardziel — wszędzie 3 m (NOE s. 26, 62, 102)",
+      "Tura Kuriera (MG): przejdź przez Schody, Schody na gruzie, Bagno i Inne; patrz na linijkę. Potem Gracz 1 przez Bagno.", "NOE"),
+    p("alpinista", "Teren", "Alpinista: Szybkość wspinania Kuriera = Szybkość przy pustych rękach; broń w ręce — wspinanie znika; Sprzęt do wspinaczki w ręce — wraca; w plecaku nie wystarcza (T20)",
+      "MG: karta Kuriera, Szybkości; weź broń do ręki, potem schowaj i weź Sprzęt do wspinaczki z plecaka."),
+    p("ciagniecie", "Ruch", "Tryb ruchu „Ciągnięcie” (HUD żetonu, obok Czołgania): z pochwyconym ghulem 1,5 m kosztuje 3 m, na gruzie 4,5 m, leżąc na gruzie 6 m (D34); bez pochwyconego — dopłata zostaje",
+      "Tura Gladiatora: Manewry → Pochwycenie ghula; HUD żetonu → Ciągnięcie; przeciągnij po zwykłym polu i po Gruzie; Padnij i jeszcze raz.", "WKK"),
+    p("jednostki", "Ruch", "Scena w ft: linijka bez koloru z „scena w ft — rozlicz ręcznie”; ruch zapisany, licznik ruchu go nie odejmuje, ostrzeżenie na karcie; z powrotem w m — zwykłe liczenie",
+      "MG: konfiguracja sceny → jednostki siatki „ft”; Gracz 1 rusza; MG przywraca „m”."),
     p("padnij-powstan", "Ruch", "Padnij: Powalenie, zjada resztę ruchu (po 3/9 kosztuje 6); Powstań: połowa Szybkości; Bieganie przy Powaleniu — ostrzeżenie, nie blokada (T13)",
       "Gracz 1: rusz 2 pola, Padnij, potem Powstań w następnej turze."),
     p("reakcja", "Reakcja", "Poza swoją turą Biegnij idzie w Reakcji: R 0/1, świeże 18 m (Szybkość 9) bez starej reszty; [Zakończ reakcję] zamyka ruch (D30)",

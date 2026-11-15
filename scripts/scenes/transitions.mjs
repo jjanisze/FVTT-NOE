@@ -341,7 +341,8 @@ async function progiWagi(behavior, token, cel) {
     return { decyzja: prog.id, przeniesiony: true };
   }
   if (prog.st && token.actor) {
-    const rzuty = await token.actor.rollSavingThrow({ ability: "dex", target: prog.st + plus });
+    // Źródło „upadek” — Ułatwienia ze zdolności (Człowiek-pająk, Zabezpieczenie; PLAN_m7 §3.0.3).
+    const rzuty = await token.actor.rollSavingThrow({ ability: "dex", target: prog.st + plus, neuroKontekst: ["upadek"] });
     const rzut = Array.isArray(rzuty) ? rzuty[0] : rzuty;
     if (rzut && rzut.total < prog.st + plus) await kartaUpadku(po ?? token, prog.kosci, `${prog.opis}, zsuwa się`);
   }

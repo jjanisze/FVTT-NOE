@@ -219,10 +219,22 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub ZRC; Szybkość wspinaczki = Szybkość (wolne ręce / zestaw wspinaczkowy); "
       + "pochylony teren nie jest trudnym terenem; Ułatwienie w RO przy upadku.",
     category: "mobilnosc",
-    efekty: [{ name: "Człowiek-pająk — wspinaczka", zmiany: [change("system.attributes.movement.speeds.climb", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] }],
-    auto: [{ what: "Szybkość wspinaczki = Szybkość — Efekt Aktywny na Sztuczce.", where: "config/sztuczki-data.mjs" }],
-    manual: "Warunek „wolne ręce albo zestaw wspinaczkowy”, pochylony teren bez trudnego terenu i Ułatwienie w RO przy "
-      + "upadku — MG."
+    efekty: [
+      // Alpinista: tylko przy obu rękach wolnych albo zajętych zestawem wspinaczkowym (`@neuro.rece`, `actors/rece-dane.mjs`).
+      { name: "Człowiek-pająk — Alpinista", warunki: [{ k: "neuro.rece.wspinaczka", v: true }],
+        zmiany: [change("system.attributes.movement.speeds.climb", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] },
+      // Po dwa naraz: przyczyny „Schody” i „Stok” Regionu trudnego terenu (`config/teren-data.mjs`); gruz obok — dalej trudny.
+      { name: "Człowiek-pająk — Po dwa naraz", zmiany: [
+        change("system.attributes.movement.ignoredDifficultTerrain", CHANGE_TYPE.add, "stairs"),
+        change("system.attributes.movement.ignoredDifficultTerrain", CHANGE_TYPE.add, "slope")
+      ] }
+    ],
+    auto: [
+      { what: "Alpinista: Szybkość wspinaczki = Szybkość, gdy obie ręce są wolne albo trzymają Sprzęt do wspinaczki — Efekt Aktywny z warunkiem.", where: "actors/rece-dane.mjs" },
+      { what: "Po dwa naraz: Regiony trudnego terenu z przyczyną Schody albo Stok nie spowalniają.", where: "config/teren-data.mjs" },
+      { what: "Zabezpieczenie: Ułatwienie w RO, którego źródłem jest upadek (zsuwanie się po drabinie/ścianie).", where: "config/zdolnosci-efekty.mjs" }
+    ],
+    manual: "Trudny teren bez przyczyny („inne”) i upadek bez karty modułu — MG."
   },
   cwiczenieCzyniMistrza: {
     label: "Ćwiczenie czyni mistrza",

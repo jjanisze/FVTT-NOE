@@ -160,6 +160,8 @@ import { registerWoda, wodaApi } from "./scenes/woda.mjs";
 import { registerWspinaczka, wspinaczkaApi } from "./scenes/wspinaczka.mjs";
 import { registerFxMarkers, fxMarkersApi } from "./scenes/fx-markers.mjs";
 import { registerDifficultTerrainHint, difficultTerrainHintApi } from "./scenes/difficult-terrain-hint.mjs";
+import { registerTerenPreset, terenApi } from "./scenes/teren-preset.mjs";
+import { registerReceDane } from "./actors/rece-dane.mjs";
 import { poscigApi } from "./scenes/poscig.mjs";
 import { registerPoscigCanvas, poscigCanvasApi } from "./scenes/poscig-canvas.mjs";
 import { registerPoscigUI, poscigUiApi } from "./scenes/poscig-ui.mjs";
@@ -484,6 +486,11 @@ Hooks.once("init", () => {
 
   // Trudny teren zapalany razem z miarką ruchu (ustawienie klienta).
   registerDifficultTerrainHint();
+  // M8 E2: przyczyny trudnego terenu z NOE, preset Regionu MG i tryb ruchu „Ciągnięcie” (D34). W `init` — przed
+  // `preLocalize` przyczyn w dnd5e i przed zamrożeniem trybów ruchu przez rdzeń.
+  registerTerenPreset();
+  // Stan rąk w roll data (`@neuro.rece`) — warunek Alpinisty Człowieka-pająka (wolne ręce albo zestaw wspinaczkowy).
+  registerReceDane();
 
   // Phase 2: Damage application UI
   registerDamageReductionUI();
@@ -752,6 +759,7 @@ Hooks.once("ready", () => {
   registerMapSync();
   game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi, ...transitionsApi, ...fxMarkersApi };
   game.neuroshima.trudnyTeren = difficultTerrainHintApi;
+  game.neuroshima.teren = terenApi;
 
   // Plansza pościgu — game.neuroshima.poscig.start({ scigani: ["GMT400"], ... })
   // Warstwa graficzna (przewijana pustynia + tory) budzi się sama na scenie z flagą pościgu.

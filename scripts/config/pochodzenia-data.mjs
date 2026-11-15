@@ -321,9 +321,10 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Włóczykij",
     text: "Podmokłe tereny i rozległe piaski to nie trudny teren + biegłość m. kartograf.",
     auto: [
-      { what: "biegłość w narzędziach małego kartografa — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" }
+      { what: "biegłość w narzędziach małego kartografa — awans przy wyborze zdolności (PLAN_m7 E3)", where: "config/zdolnosci-efekty.mjs" },
+      { what: "Regiony trudnego terenu z przyczyną Mokradło albo Piasek nie spowalniają — Efekt Aktywny", where: "config/zdolnosci-efekty.mjs" }
     ],
-    manual: "Podmokłe tereny i piaski bez trudnego terenu — stół."
+    manual: "Trudny teren bez przyczyny albo z kilkoma przyczynami naraz (np. piasek i gruz) — spowalnia; MG rozstrzyga, czy to „rozległe piaski”."
   },
 
   /* --- Missisipi --- */

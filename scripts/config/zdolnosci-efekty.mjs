@@ -61,6 +61,12 @@ export const EFEKTY = Object.freeze({
   /* --- Pochodzenia (s. 60–65) --- */
   // Miami — Człowiek-aligator: Szybkość pływania równa Szybkości.
   "czlowiek-aligator": [{ name: "Człowiek-aligator", zmiany: [change("system.attributes.movement.speeds.swim", CHANGE_TYPE.upgrade, "@attributes.movement.speeds.walk")] }],
+  // Miami — Włóczykij: podmokłe tereny i rozległe piaski nie są trudnym terenem — przyczyny Regionu `mud` i `sand`
+  // (MG 2026-11-15: przeszkoda wodna dalej spowalnia; `config/teren-data.mjs`).
+  "wloczykij": [{ name: "Włóczykij", zmiany: [
+    change("system.attributes.movement.ignoredDifficultTerrain", CHANGE_TYPE.add, "mud"),
+    change("system.attributes.movement.ignoredDifficultTerrain", CHANGE_TYPE.add, "sand")
+  ] }],
   "ja-juz-swoje-odchorowalem": [{ name: "Ja już swoje odchorowałem", zmiany: [reg("save", "dnd5e.advantage", ULATWIENIE, naRzut("roll.ability", "con"))] }],
   "zdrowa-okolica": [{ name: "Zdrowa okolica", zmiany: [reg("save", "dnd5e.advantage", ULATWIENIE, naRzut("roll.ability", "con"))] }],
   "telepata": [{ name: "Telepata", zmiany: [reg("check", "dnd5e.advantage", ULATWIENIE, naRzut("roll.skill", "int"))] }],
@@ -129,6 +135,9 @@ export const ULATWIENIA = Object.freeze([
   { id: "a-co-mi-tam", label: "A co mi tam", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba", "trucizna", "skazenie") },
   // Sztuczka Immunitet (klucz Sztuczki): Ułatwienie w RO przeciw chorobom.
   { id: "immunitet", label: "Immunitet", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("choroba") },
+  // Sztuczka Człowiek-pająk — Zabezpieczenie (s. 102): RO, w których porażka to odpadnięcie od ściany albo upadek z
+  // wysokości — źródło „upadek” (przejścia drabin i wspinaczki, `scenes/transitions.mjs`).
+  { id: "czlowiekPajak", label: "Człowiek-pająk — Zabezpieczenie", rzut: ["save:*"], rodzaj: "ulatwienie", gdy: zeZrodlaKtx("upadek") },
   // Sztuczka Plug & Play — Hakowanie (s. 105): Test INT przy przejmowaniu panelu urządzenia — podsuwane („stół”).
   { id: "plugAndPlay", label: "Plug & Play — przejęcie panelu", rzut: ["check:int"], rodzaj: "ulatwienie", gdy: () => "stol" },
   // Pochodzenia.

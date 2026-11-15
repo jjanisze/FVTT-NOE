@@ -15,6 +15,7 @@
 
 import { budzetDotyczy, ledger, stan, kombatant } from "./ekonomia.mjs";
 import { metry } from "../config/ekonomia-data.mjs";
+import { jednostkiSceny, opisJednostek } from "../config/teren-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KOLOR = Object.freeze({ miesci: 0x33BC4E, ponad: 0xE72124 });
@@ -30,6 +31,9 @@ function _budzet(token, tryb) {
   if (!doc || !game.combat?.started || !budzetDotyczy(doc)) return null;
   const s = stan(doc, { tryb });
   if (!s || (!s.chwila.wlasna && !s.chwila.reakcja)) return null;
+  // Scena w ft/km (§3.1): pomiar jest w jej jednostkach, Szybkość w metrach — bez koloru, etykieta „rozlicz ręcznie”.
+  const j = jednostkiSceny(doc.parent?.grid?.units);
+  if (!j.metry) return { ...s.ruch, reczne: [opisJednostek(j.jednostka), ...(s.ruch.reczne ?? [])], jednostki: j.jednostka };
   return s.ruch;
 }
 
@@ -84,7 +88,8 @@ function _rozszerz(Bazowa) {
       const m = waypoint.neuroM8;
       if (!context || !m || waypoint.next) return context;
       const j = canvas.grid.units || "m";
-      if (m.reczne) context.neuroM8 = { klasa: "reczne", ikona: "fa-scale-balanced", tekst: "rozstrzygnij ręcznie" };
+      if (m.reczne && m.budzet?.jednostki) context.neuroM8 = { klasa: "reczne", ikona: "fa-scale-balanced", tekst: `scena w ${m.budzet.jednostki} — rozlicz ręcznie` };
+      else if (m.reczne) context.neuroM8 = { klasa: "reczne", ikona: "fa-scale-balanced", tekst: "rozstrzygnij ręcznie" };
       else if (m.pozostalo === -Infinity) context.neuroM8 = { klasa: "ponad", ikona: "fa-triangle-exclamation", tekst: "koszt nieznany" };
       else if (m.pozostalo >= -0.001) context.neuroM8 = { klasa: "miesci", ikona: "fa-person-walking", tekst: `zostaje ${metry(m.pozostalo)} ${j}` };
       else context.neuroM8 = { klasa: "ponad", ikona: "fa-triangle-exclamation", tekst: `ponad pulę ${metry(m.pozostalo)} ${j}` };

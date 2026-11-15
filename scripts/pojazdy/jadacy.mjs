@@ -4,12 +4,16 @@
  * Każda zmiana składu jadących idzie przez aktywnego MG (`doMG` z przekaźnika M5): MG zmienia cudze
  * żetony (rozmiar, pozycję), listy `crew`/`passengers` pojazdu i jego własność. Gracz prosi.
  *
- * ## Koszty — oznaczane, nie pobierane (zasady planu)
+ * ## Koszty — na karcie i w budżecie ruchu M8
  *
  * RAW s. 260–261, 266: kierowca wsiada za połowę Szybkości (w dół) i resztę ruchu traci; pasażer bez
  * dodatkowego kosztu, chyba że drzwi, fotel, okno — połowa Szybkości. Przesiadka w jadącym pojeździe:
  * odległość ×2 bez testu albo ×1 z ZRC (Akrobatyka) ST 10, porażka o 5+ — Powalenie (D15); WKK: zmiana
- * rzędu zawsze z testem. Moduł pisze koszt na karcie; MG cofa, co się nie wydarzyło (D7).
+ * rzędu zawsze z testem. Wierzchowiec (s. 257): połowa Szybkości bez zaokrąglania (9 m → 4,5 m), Jeździec 1,5 m.
+ * Moduł pisze koszt na karcie i — w walce, we własnej turze albo w reakcji — pobiera go z budżetu ruchu M8
+ * (`zaplacRuch`, PLAN_m8 §4.4); przesadzenie żetonu to `displace`, więc nie liczy się drugi raz. Pasażer: 0 m, a
+ * zamknięte drzwi, fotel albo okno dolicza przycisk na karcie (MG 2026-11-15). MG cofa, co się nie wydarzyło (D7),
+ * tak samo jak koryguje budżet ([Skoryguj] na karcie postaci).
  *
  * ## Dostęp z obecności (D11, §4.4)
  *
@@ -27,6 +31,7 @@ import {
   skalaPojazdu, trybSceny, wierzchowiecAktora
 } from "./stan.mjs";
 import { freeHands } from "../actors/doll.mjs";
+import { zaplacRuch } from "../combat/ekonomia.mjs";
 import {
   naroznikDlaSrodka, normalizujKat, obroc, srodekMiejsca
 } from "./geometria.mjs";
@@ -112,8 +117,33 @@ function szybkoscPostaci(actor) {
   return Math.max(0, Number(actor?.system?.attributes?.movement?.speeds?.walk) || 0);
 }
 
-/** Połowa Szybkości w dół do pełnych metrów (RAW: zaokrąglonej w dół). */
+/** Połowa Szybkości w dół do pełnych metrów (RAW s. 260–261, pojazdy: zaokrąglonej w dół). */
 const polowa = actor => Math.floor(szybkoscPostaci(actor) / 2);
+
+/** Wierzchowiec (s. 257): połowa Szybkości bez zaokrąglania pojazdów — 9 m → 4,5 m (PLAN_m8 §4.4); Jeździec — 1,5 m. */
+export function kosztDosiadania(szybkosc, { jezdziec = false } = {}) {
+  if (jezdziec) return 1.5;
+  return Math.round((Math.max(0, Number(szybkosc) || 0) / 2) * 100) / 100;
+}
+
+/** Metry po polsku na kartach („4,5”). */
+const _m = n => String(Math.round((Number(n) || 0) * 100) / 100).replace(".", ",");
+
+/**
+ * Pobranie kosztu z budżetu ruchu M8 i dopisek na karcie, gdy coś nie pasuje. Poza walką albo poza turą jadącego —
+ * nic (koszt zostaje opisem na karcie).
+ * @returns {Promise<string[]>} ostrzeżenia do karty
+ */
+async function _pobierz(jadacy, { ile, reszta = false, zrodlo, id = null }) {
+  try {
+    const r = await zaplacRuch(jadacy, { ile, reszta, zrodlo, id });
+    if (r?.oczekuje) return ["Koszt ruchu czeka na zapis w budżecie — rozlicz ręcznie, jeśli nie wróci."];
+    return r?.ostrz ?? [];
+  } catch (err) {
+    console.warn(`${MODULE_ID} | M4 → M8: koszt ruchu`, err);
+    return [];
+  }
+}
 
 /**
  * Koszt przesiadki (D15). Odległość między miejscami w metrach, co najmniej jedna kratka.
@@ -343,9 +373,32 @@ function _moze(user, jadacy) {
   return !user || user.isGM || jadacy?.actor?.testUserPermission(user, "OWNER");
 }
 
-async function _karta(jadacy, tytul, linie, ostrzezenia = [], rodzaj = "info") {
-  const html = kartaPostoju({ ikona: jadacy.texture?.src ?? jadacy.actor?.img, tytul, rodzaj, linie, ostrzezenia });
+async function _karta(jadacy, tytul, linie, ostrzezenia = [], rodzaj = "info", przyciski = []) {
+  const html = kartaPostoju({ ikona: jadacy.texture?.src ?? jadacy.actor?.img, tytul, rodzaj, linie, ostrzezenia, przyciski });
   return wyslijKarte(html, { actor: jadacy.actor });
+}
+
+/** Przycisk „Drzwi, fotel albo okno” na karcie pasażera (s. 261) — tylko w walce; dolicza połowę Szybkości. */
+function _przyciskDrzwi(jadacy, pol, zrodlo) {
+  if (!game.combat?.started || !(pol > 0)) return [];
+  return [{ akcja: "pojazd.drzwi", label: `Drzwi, fotel albo okno: +${_m(pol)} m`, ikona: "fa-solid fa-door-open", wlasciciel: true,
+    dane: { jadacy: jadacy.uuid, ile: pol, zrodlo } }];
+}
+
+/** Klik „Drzwi…”: koszt w budżecie ruchu M8, raz na kartę (id z wiadomości). */
+async function _drzwi(_ev, btn) {
+  const t = await fromUuid(btn.dataset.jadacy);
+  if (!t?.actor?.isOwner) return ui.notifications.warn("Koszt dolicza właściciel postaci albo MG.");
+  const msg = btn.closest("[data-message-id]")?.dataset?.messageId ?? foundry.utils.randomID(8);
+  const ile = Number(btn.dataset.ile) || 0;
+  const r = await zaplacRuch(t, { ile, zrodlo: btn.dataset.zrodlo || "Drzwi, fotel albo okno", id: `m4-drzwi-${msg}` });
+  if (r?.poza) return ui.notifications.info("Poza walką — bez budżetu ruchu.");
+  if (r?.pominiety) return ui.notifications.info(`Nie doliczono (${r.powod}).`);
+  if (r?.duplikat) return ui.notifications.info("Ten koszt jest już doliczony.");
+  if (r?.ok) {
+    btn.disabled = true;
+    ui.notifications.info(`${t.name}: +${_m(ile)} m ruchu (drzwi, fotel albo okno).`);
+  }
 }
 
 async function _wsiadz(_n, dane, user) {
@@ -373,15 +426,18 @@ async function _wsiadz(_n, dane, user) {
   if (zacieteDrzwi(pojazd)) ostrz.push(ZACIETE_DRZWI);
   const pol = polowa(jadacy.actor);
   const linie = [`Wsiada do <strong>${esc(pojazd.name)}</strong> — ${miejsce.kierowca ? "<strong>za kierownicę</strong>" : `miejsce: ${esc(opisMiejsca(pojazd.actor, miejsce))}`}.`];
+  let przyciski = [];
   if (miejsce.kierowca) {
     const v = Number(pojazd.actor.system.attributes.movement?.speeds?.walk) || 0;
     linie.push(`Koszt (s. 260): połowa Szybkości — <strong>${pol} m</strong>; reszta ruchu w tej turze przepada. Odtąd jedziesz Szybkością pojazdu${v ? ` (${v} m)` : ""}.`);
     if (danePojazdu(pojazd.actor).katalog.silnik) linie.push("Silnik: uruchomienie to <strong>akcja</strong> (Uruchom na karcie pojazdu). Kierownica wymaga dwóch wolnych rąk.");
     else linie.push("Pojazd mięśniowy: jedzie ruchem kierowcy (Przyspieszenie daje więcej).");
+    ostrz.push(...await _pobierz(jadacy, { ile: pol, reszta: true, zrodlo: `Wsiadanie za kierownicę (${pojazd.name})` }));
   } else {
     linie.push(`Koszt (s. 261): bez dodatkowego ruchu; drzwi, fotel albo okno — połowa Szybkości (<strong>${pol} m</strong>).`);
+    przyciski = _przyciskDrzwi(jadacy, pol, `Wsiadanie — drzwi (${pojazd.name})`);
   }
-  await _karta(jadacy, "Wsiadanie", linie, ostrz);
+  await _karta(jadacy, "Wsiadanie", linie, ostrz, "info", przyciski);
 }
 
 async function _wysiadz(_n, dane, user) {
@@ -394,8 +450,11 @@ async function _wysiadz(_n, dane, user) {
   await wysadzGM(jadacy);
   const pol = polowa(jadacy.actor);
   if (profilNosnika(pojazd.actor) === "wierzchowiec") {
+    const jezdziec = maJezdzca(jadacy.actor);
+    const koszt = kosztDosiadania(szybkoscPostaci(jadacy.actor), { jezdziec });
+    const ostrz = await _pobierz(jadacy, { ile: koszt, zrodlo: `Zsiadanie (${pojazd.name})` });
     return _karta(jadacy, "Zsiadanie", [`Zsiada z <strong>${esc(pojazd.name)}</strong>.`,
-      maJezdzca(jadacy.actor) ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${pol} m</strong>.`]);
+      jezdziec ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${_m(koszt)} m</strong>.`], ostrz);
   }
   const linie = [`Wysiada z <strong>${esc(pojazd.name)}</strong>.`,
     miejsce?.kierowca
@@ -403,7 +462,9 @@ async function _wysiadz(_n, dane, user) {
       : `Koszt (s. 261): bez dodatkowego ruchu; zamknięte drzwi — połowa Szybkości (<strong>${pol} m</strong>).`];
   const ostrz = wRuchu ? ["Pojazd jedzie — wyskoczenie z jadącego pojazdu to Wypadanie (3k6, Powalenie). MG: przycisk Wypadnięcie na karcie pojazdu."] : [];
   if (zacieteDrzwi(pojazd)) ostrz.push(ZACIETE_DRZWI);
-  await _karta(jadacy, "Wysiadanie", linie, ostrz);
+  if (miejsce?.kierowca) ostrz.push(...await _pobierz(jadacy, { ile: pol, zrodlo: `Wysiadanie zza kierownicy (${pojazd.name})` }));
+  const przyciski = miejsce?.kierowca ? [] : _przyciskDrzwi(jadacy, pol, `Wysiadanie — drzwi (${pojazd.name})`);
+  await _karta(jadacy, "Wysiadanie", linie, ostrz, "info", przyciski);
 }
 
 async function _przesiadz(_n, dane, user) {
@@ -423,9 +484,11 @@ async function _przesiadz(_n, dane, user) {
   const linie = [`Przesiada się w <strong>${esc(pojazd.name)}</strong>: ${esc(opisMiejsca(pojazd.actor, z))} → ${esc(opisMiejsca(pojazd.actor, na))}.`];
   const ostrz = [];
   let rodzaj = "info";
+  let pobrane = k.ostroznie;
   if (!wRuchu) linie.push(`Pojazd stoi — koszt <strong>${k.ostroznie} m</strong> (odległość ×2), bez testu.`);
   else if (dane.tryb === "szybko" || k.wymagaTestu) {
     const koszt = dane.tryb === "szybko" ? k.szybko : k.ostroznie;
+    pobrane = koszt;
     linie.push(`Pojazd jedzie — koszt <strong>${koszt} m</strong>${k.zmianaRzedu ? ", zmiana rzędu (WKK: test zawsze)" : ""}; ZRC (Akrobatyka) ST ${ST_PRZESIADKI}: ${test ?? "—"}.`);
     if (test !== null && test < ST_PRZESIADKI) {
       rodzaj = "porazka";
@@ -436,6 +499,7 @@ async function _przesiadz(_n, dane, user) {
     } else if (test !== null) rodzaj = "sukces";
     if (test === null) ostrz.push("Brak wyniku testu — MG rozstrzyga.");
   } else linie.push(`Pojazd jedzie — ostrożnie: koszt <strong>${k.ostroznie} m</strong> (odległość ×2), bez testu.`);
+  ostrz.push(...await _pobierz(jadacy, { ile: pobrane, zrodlo: `Przesiadka (${pojazd.name})` }));
   await _karta(jadacy, "Przesiadka", linie, ostrz, rodzaj);
 }
 
@@ -501,8 +565,10 @@ async function _kartaDosiadania(nosnik, jadacy, miejsce, odl) {
   const ostrz = oznaczeniaDosiadania(nosnik.actor, jadacy.actor,
     { kierujacy: !!miejsce.kierowca, wolneRece: freeHands(jadacy.actor), jezdziecZdolnosc: jezdziec });
   if (odl > zasieg + 0.2) ostrz.push(`Postać stała ${odl.toFixed(1)} m od wierzchowca (RAW: w zasięgu 1,5 m) — MG cofa, jeśli to się nie wydarzyło.`);
+  const koszt = kosztDosiadania(szybkoscPostaci(jadacy.actor), { jezdziec });
+  ostrz.push(...await _pobierz(jadacy, { ile: koszt, zrodlo: `Dosiadanie (${nosnik.name})` }));
   const linie = [`Dosiada <strong>${esc(nosnik.name)}</strong> — ${miejsce.kierowca ? "<strong>jako jeździec</strong>" : "jako pasażer"}.`,
-    jezdziec ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${polowa(jadacy.actor)} m</strong>.`];
+    jezdziec ? "Koszt (Jeździec, s. 97): <strong>1,5 m</strong> ruchu." : `Koszt (s. 257): połowa Szybkości — <strong>${_m(koszt)} m</strong>.`];
   if (miejsce.kierowca && wyszkolonyDla(nosnik.actor, jadacy.actor?.uuid)) {
     linie.push("Wyszkolony wierzchowiec: Inicjatywa jeźdźca, rusza się w jego turze i ma tylko Bieganie, Przyspieszenie, Odstąpienie albo Unikanie (s. 29–30, 257) — paleta na HUD-zie. Może działać już w turze dosiadania.");
   }
@@ -624,6 +690,8 @@ export function registerJadacy() {
   zarejestrujProsbe("pojazd.przesiadz", _przesiadz);
   // W4: utrzymanie się w siodle po Powaleniu jeźdźca albo wierzchowca i przy 0 PW wierzchowca.
   zarejestrujAkcje("pojazd.utrzymanie", _utrzymanie);
+  // Pasażer: zamknięte drzwi, fotel albo okno — połowa Szybkości do budżetu ruchu M8 (s. 261).
+  zarejestrujAkcje("pojazd.drzwi", _drzwi);
   Hooks.on("createActiveEffect", e => {
     if (e.parent instanceof Actor && e.statuses?.has?.("prone")) _poPowaleniu(e.parent, "Powalenie");
   });

@@ -84,9 +84,33 @@ dźwiękiem startu i zegarem `m:ss.cc` — po 30 s żółtym, po 60 s czerwonym.
 walki (ustawienia walki rdzenia); głośność, wyciszenie, animację i „licz też moich innych bohaterów” zmienisz w
 ustawieniach modułu (klient). MG dostaje sygnały tylko dla przypisanej sobie postaci.
 
-Trudny teren bez Tiled: narysuj Region i dodaj mu zachowanie **Trudny teren** dnd5e — z rodzajem (gruz, schody,
-stok, błoto, piasek, śnieg, lód…), żeby wyjątki zdolności wiedziały, co ignorują. Dwa nachodzące trudne tereny to
-dalej 3 m za 1,5 m (s. 26). Na samym obrazku mapy wystarczy [Skoryguj] → Ruch.
+### Trudny teren bez Tiled (s. 26)
+
+Region z zachowaniem **Trudny teren** dnd5e i **przyczyną**: schody, stok / pochyły teren, gruz / kamienie,
+zagracenie, niski strop, mokradło / bagno, piasek, śnieg, lód, woda (przeszkoda wodna), zarośla, sieci. Przyczyna mówi
+zdolnościom, co ignorują; Region bez przyczyny („inne”) spowalnia każdego poza Cichym krokiem. Dwa nachodzące trudne
+tereny to dalej 3 m za 1,5 m.
+
+- **Preset MG.** W warstwie Regionów przycisk ze zboczem (**Trudny teren — preset**): wybierz przyczyny i rysuj — każdy
+  nowy Region dostaje zachowanie, nazwę („Trudny teren — Schody”) i widoczność MG; gracz widzi go, gdy planuje ruch
+  swoim żetonem (jak strefy z map Tiled), chyba że Region jest ukryty. Z zaznaczonym Regionem preset dopisuje
+  przyczyny do jego zachowania. „Wyłącz preset” — znowu zwykłe Regiony. Preset żyje tylko w twojej przeglądarce.
+- **Odporności zdolności** (liczy sam dnd5e): **Cichy krok** — każdy trudny teren; **Człowiek-pająk** (Po dwa naraz) —
+  schody i stok, ale gruz na schodach dalej spowalnia; **Włóczykij** — mokradło i piasek, przeszkoda wodna nie.
+- **Człowiek-pająk, Alpinista:** Szybkość wspinania równa Szybkości tylko przy obu rękach wolnych albo zajętych
+  Sprzętem do wspinaczki (sprzęt w plecaku nie wystarcza) — przeliczane z lalki. **Zabezpieczenie:** Ułatwienie w RO,
+  gdy porażka to upadek (zsuwanie się po drabinie i ścianie na przejściach).
+- **Ciągnięcie** (s. 35) — tryb ruchu żetonu obok Czołgania (HUD żetonu, linijka): każde 1,5 m kosztuje +1,5 m, chyba
+  że trzymasz pochwyconego o co najmniej dwa rozmiary mniejszego; leżąc — jeszcze czołganie. Dopłaty się sumują:
+  czołganie, trudny teren i ciągnięcie to 6 m za 1,5 m.
+- **Sam obrazek mapy:** [Skoryguj] → Ruch.
+- **Scena w innych jednostkach niż metry** (ft, km): moduł nie przelicza po cichu — linijka bez koloru z „scena w ft —
+  rozlicz ręcznie”, a ruch nie schodzi z licznika (zostaje na karcie jako ostrzeżenie).
+
+**Wsiadanie i dosiadanie w walce** (s. 257, 260–261) schodzi z licznika ruchu we własnej turze: kierowca — połowa
+Szybkości i reszta przepada; pasażer — nic, a zamknięte drzwi, fotel albo okno dolicza przycisk **Drzwi, fotel albo
+okno** na karcie wsiadania (raz); wierzchowiec — połowa Szybkości bez zaokrąglania (9 m → 4,5 m), Jeździec 1,5 m;
+przesiadka — swój koszt z karty. Poza swoją turą zostaje sam opis na karcie.
 
 ## Spadanie (s. 43)
 

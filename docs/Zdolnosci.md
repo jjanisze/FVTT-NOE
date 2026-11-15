@@ -134,8 +134,9 @@ Niektóre zdolności kończą się kartą: moduł liczy, MG decyduje.
 - **Rozwój Cechy Sztuczek** (+1 do Cechy) i biegłości ze zdolności (instrumenty Muzyka, zestawy Fachowca, umiejętności
   „Ucz się, ucz”, pancerze, broń) — okno awansu dnd5e, gdy Sztuczka albo zdolność trafia na postać.
 - **Efekty stałe** — działają, dopóki postać ma zdolność: Sokole oko, Szósty zmysł, Głupi, Doping w Berserku, odporności
-  Pochodzeń, Wspinacz, Szybki Bill (biegłość w Inicjatywie), Człowiek-pająk (wspinaczka), Człowiek-aligator
-  (pływanie), Pierwotny instynkt (+5 do Inicjatywy i Percepcji, także biernej), Padnij/Powstań (Szybkość +3 m),
+  Pochodzeń, Wspinacz, Szybki Bill (biegłość w Inicjatywie), Człowiek-pająk (wspinaczka przy obu rękach wolnych albo
+  ze Sprzętem do wspinaczki w ręce; schody i stok bez trudnego terenu; Ułatwienie w RO przy upadku), Włóczykij (mokradło
+  i piasek bez trudnego terenu), Człowiek-aligator (pływanie), Pierwotny instynkt (+5 do Inicjatywy i Percepcji, także biernej), Padnij/Powstań (Szybkość +3 m),
   Trening w zbroi (Skradanie się w pancerzu bez Utrudnienia), Pancerny (Próg obrażeń 10 w ciężkim pancerzu); TT bez
   pancerza (Kuloodporność) i przy Unikaniu (Szachista) liczy silnik TT.
 - **Benzyna zamiast krwi** — prowadzony pojazd ma TT wyższe o modyfikator Mądrości kierowcy, a gdy kierowca Unika,

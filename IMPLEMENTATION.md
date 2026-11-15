@@ -1214,6 +1214,37 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — teren bez Tiled, odporności, ciągnięcie, wsiadanie w budżecie, jednostki sceny (E2) (2026-11-15)
+
+- **Przyczyny trudnego terenu z NOE** (`config/teren-data.mjs`, `scenes/teren-preset.mjs`): etykiety
+  `CONFIG.DND5E.difficultTerrainTypes` po polsku (klucze dnd5e zostają) plus `stairs`, `clutter`, `lowCeiling`, których
+  system nie ma; rejestracja w `init`, przed `preLocalize`. Rejestracja Schodów przeniesiona z `combat/ekonomia.mjs`.
+- **Preset MG** — przycisk w kontrolkach Regionów: wybór przyczyn, uzbrojenie na kliencie, `preCreateRegion` dokłada
+  zachowanie `dnd5e.difficultTerrain`, nazwę, kolor, widoczność MG i flagę `source: "preset"` (podświetlenie przy
+  planowaniu ruchu — `difficult-terrain-hint.mjs`); zaznaczone Regiony dostają przyczyny w istniejącym zachowaniu
+  (`zastosuj`, bez drugiego zachowania). API `game.neuroshima.teren`.
+- **Odporności** jako Efekty Aktywne (`ignoredDifficultTerrain`, liczy dnd5e): Człowiek-pająk — `stairs`, `slope`
+  (Sztuczka, „Po dwa naraz”), Włóczykij — `mud`, `sand` (MG: bez wody); Cichy krok bez zmian (`all`). Region bez
+  przyczyny ignoruje tylko „all” (§8.2).
+- **Alpinista warunkowy** (T20): efekt Sztuczki z warunkiem dnd5e 6 na `@neuro.rece.wspinaczka` — nowy getter roll data
+  `actors/rece-dane.mjs` (`stanRak`: każda ręka pusta albo ze Sprzętem do wspinaczki; BN — dwie wolne). **Zabezpieczenie**
+  — wiersz `czlowiekPajak` w `ULATWIENIA` (źródło RO „upadek”), RO zsuwania się na przejściach z `neuroKontekst`.
+- **Tryb ruchu „Ciągnięcie”** (`drag`, D34, MG: tryb natywny): koszt odcinka + dystans, bez dopłaty przy chwytającym
+  dwa rozmiary większym od pochwyconego (lokator ręki `grapple`), leżąc + czołganie; Szybkość z chodu (`Z_CHODU`).
+- **Wsiadanie M4 w budżecie** (§4.4): `zaplacRuch` (ekonomia) i czyste `zadanieKosztuRuchu` — tylko we własnej turze
+  albo w reakcji; kierowca „reszta” (co najmniej połowa w dół), wierzchowiec — połowa bez zaokrąglania (9 → 4,5,
+  `kosztDosiadania`), Jeździec 1,5, przesiadka — koszt z karty, pasażer 0 + przycisk **Drzwi, fotel albo okno**
+  (`pojazd.drzwi`, raz po id wiadomości; MG). Przesadzenie żetonu to `displace` — nie liczy się drugi raz.
+- **Jednostki sceny** (§3.1, MG: ręcznie): ruch na scenie w ft/km zapisany z `jednostki`, poza `wydane`, opis w
+  `reczne`; linijka bez koloru z „scena w ft — rozlicz ręcznie”.
+- Paczki `sztuczki` i `zdolnosci-pochodzenia` przebudowane w repo i piaskownicy. Testy: Quench `teren-m8` 12/12
+  (przyczyny, lustro odporności, jednostki, D34, wsiadanie „reszta”, Regiony z prawdziwymi zdolnościami z paczek,
+  Alpinista z lalki, Zabezpieczenie, „Ciągnięcie”, preset, ledger M4); `ekonomia`, `skok`, `dogrywka-m7`,
+  `zdolnosci-efekty`, `ulatwienia-testow`, `pojazdy`, `sztuczki-*`, `zdolnosci-dane`, `poziomy`, `woda` — zielone.
+  Poligon: `ruch` (Kurier z Człowiekiem-pająkiem i Włóczykijem, Schody, Bagno, „Inne”; próby `teren-preset`,
+  `odpornosci`, `alpinista`, `ciagniecie`, `jednostki`), `stajnia` (`dosiadanie-budzet`), `garaz` (`wsiadanie-budzet`).
+  Dokumentacja: `docs/Ruch-i-teren.md`, `docs/Zdolnosci.md`.
+
 ### M8 — szablony paska i palety Ruch/Więcej (E7) (2026-11-15)
 
 - **„Ułóż pasek”** w panelu Stan (w walce i poza nią — poza walką sam przycisk; decyzja MG: przycisk, nie pytanie

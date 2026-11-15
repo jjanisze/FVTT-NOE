@@ -51,11 +51,12 @@ const USTAWIENIE = "trudnyTerenPrzyRuchu";
 let podswietlone = false;
 
 /**
- * Czy ten region to trudny teren z eksportera map.
- * Ręcznie dorysowane regiony nie mają tej flagi i zachowują się normalnie.
+ * Czy ten region to trudny teren z eksportera map albo z presetu MG (`scenes/teren-preset.mjs`, widoczność MG).
+ * Ręcznie dorysowane regiony bez presetu nie mają tej flagi i zachowują się normalnie.
  */
 function trudnyTeren(region) {
-  return region?.document?.flags?.[MODULE_ID]?.source === "furniture";
+  const zrodlo = region?.document?.flags?.[MODULE_ID]?.source;
+  return zrodlo === "furniture" || zrodlo === "preset";
 }
 
 /** Ostatnia znana pozycja kursora — aktualizowana biernym nasłuchem. */

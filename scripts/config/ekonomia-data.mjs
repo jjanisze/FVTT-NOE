@@ -19,6 +19,7 @@
  */
 
 import { RUCH_KOBALT, konwencjeRuchu } from "../wkk/config/ruch-kobalt.mjs";
+import { opisJednostek } from "./teren-data.mjs";
 
 export const LEDGER_WERSJA = 1;
 /** Konwencje ruchu WKK (D14, D17, D30, D31) — domyślnie włączone; bez Kobaltu `konwencjeRuchu(false)`. */
@@ -34,8 +35,11 @@ export const ARCHIWUM_CYKLI = 2;
 /** Ile ostatnich identyfikatorów żądań pamiętamy do deduplikacji. */
 export const PAMIEC_ZADAN = 60;
 
-/** Tryby ruchu, które zawsze liczą się z bazy chodu (czołganie i skok to część chodu, s. 26, 37, 256). */
-const Z_CHODU = new Set(["walk", "crawl", "jump"]);
+/**
+ * Tryby ruchu, które zawsze liczą się z bazy chodu (czołganie i skok to część chodu, s. 26, 37, 256; ciągnięcie
+ * pochwyconego — chód z dopłatą, s. 35, tryb `drag` z `scenes/teren-preset.mjs`).
+ */
+const Z_CHODU = new Set(["walk", "crawl", "jump", "drag"]);
 /** Tryby, które bez własnej Szybkości korzystają z chodu z dopłatą (s. 255, 257) — dopłatę liczy natywny koszt. */
 const Z_CHODU_GDY_BRAK = new Set(["swim", "climb"]);
 
@@ -285,6 +289,7 @@ export function grantyRuchu(ledger, chwila) {
  */
 function _reczne(ledger, chwila, baza, szybkosci, wkk) {
   const out = [];
+  for (const j of new Set(_ruchyKontekstu(ledger, chwila).filter(r => r.jednostki).map(r => r.jednostki))) out.push(opisJednostek(j));
   if (!wkk.d17 && _ruchyKontekstu(ledger, chwila).some(r => trybBazowy(r.tryb, szybkosci) !== baza && r.koszt > 0)) out.push(RUCH_KOBALT.d17);
   const granty = grantyRuchu(ledger, chwila);
   if (!wkk.d31 && granty.some(g => (g.tryb ?? "walk") !== baza)) out.push(RUCH_KOBALT.d31);
@@ -314,7 +319,8 @@ function _reczne(ledger, chwila, baza, szybkosci, wkk) {
  */
 export function budzetRuchu(ledger, chwila, { szybkosci = {}, tryb = "walk", wkk = KONWENCJE_DOMYSLNE } = {}) {
   const baza = trybBazowy(tryb, szybkosci);
-  const wydane = _zaokr(_suma(_ruchyKontekstu(ledger, chwila), r => r.koszt) + _suma(_kosztyBezDrogi(ledger, chwila), o => o.ruch));
+  // Ruch na scenie w innych jednostkach niż metry (§3.1) nie miesza się z metrami — zostaje do ręcznego rozliczenia.
+  const wydane = _zaokr(_suma(_ruchyKontekstu(ledger, chwila).filter(r => !r.jednostki), r => r.koszt) + _suma(_kosztyBezDrogi(ledger, chwila), o => o.ruch));
   const korekty = _suma((ledger?.ops ?? []).filter(o => o.rodzaj === "korektaRuchu"
     && (chwila.reakcja ? o.reakcja === chwila.reakcja : o.cykl === chwila.cykl && !o.reakcja)), o => o.ileRuchu);
   const out = { tryb: tryb || "walk", baza, szybkosc: 0, granty: [], pojemnosc: 0, wydane, pozostalo: 0, dostepny: true, powod: null,
@@ -478,6 +484,7 @@ export function zapiszRuch(ledger, chwila, r, aktor = {}) {
   wpis.koszt = _zaokr(wpis.koszt + (Number(r.koszt) || 0));
   wpis.dyst = _zaokr(wpis.dyst + (Number(r.dyst) || 0));
   if (r.niepelny) wpis.niepelny = true;
+  if (r.jednostki) wpis.jednostki = String(r.jednostki);
   const po = budzetRuchu(ledger, chwila, opcje);
   const ostrz = [];
   if (!po.dostepny && po.powod) ostrz.push(po.powod);
@@ -590,6 +597,26 @@ export function zadanieDeklaracji(id, l, ch, aktor, { tryb = "walk", koszt = nul
   if (def.zdejmij) z.zdejmij = def.zdejmij;
   z.ostrz = ostrz;
   return { zadanie: z, ostrz };
+}
+
+/**
+ * Koszt ruchu bez przemieszczenia zgłoszony przez inny moduł (§4.4: wsiadanie, zsiadanie, przesiadka M4) — pobierany
+ * raz, w kontekście chwili, bez powtórnego liczenia przesadzenia żetonu (to `displace`). `reszta` — „zużywasz resztę
+ * swojej Szybkości” (kierowca, s. 260): koszt to co najmniej `ile`, a gdy zostało więcej — cała reszta.
+ * @param {object} l
+ * @param {Chwila} ch
+ * @param {{szybkosci?: Record<string, number>, wkk?: object}} aktor
+ * @param {{ile?: number, reszta?: boolean, zrodlo?: string, ostrz?: string[]}} [o]
+ * @returns {{zadanie: object, ostrz: string[]}}
+ */
+export function zadanieKosztuRuchu(l, ch, aktor = {}, { ile = 0, reszta = false, zrodlo = "Ruch", ostrz = [] } = {}) {
+  const n = Math.max(0, _zaokr(ile));
+  const b = budzetRuchu(l, ch, { szybkosci: aktor.szybkosci, tryb: "walk", ...(aktor.wkk ? { wkk: aktor.wkk } : {}) });
+  const zostalo = Math.max(0, b.pozostalo);
+  const ruch = reszta ? Math.max(n, zostalo) : n;
+  const o = [...ostrz];
+  if (b.dostepny && !b.reczne.length && ruch > zostalo + 0.001) o.push(`${zrodlo}: ${metry(ruch)} m przy ${metry(b.pozostalo)} m pozostałego ruchu.`);
+  return { zadanie: { rodzaj: "ruch", zrodlo, koszt: {}, ruch, ostrz: o }, ostrz: o };
 }
 
 /* -------------------------------------------- */

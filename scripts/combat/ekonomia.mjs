@@ -23,6 +23,7 @@ import * as E from "../config/ekonomia-data.mjs";
 import { getZranienieLvl } from "./zranienie.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { konwencjeRuchu } from "../wkk/config/ruch-kobalt.mjs";
+import { jednostkiSceny } from "../config/teren-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_LEDGER = "m8";
@@ -240,6 +241,24 @@ export async function zatwierdz(c, z) {
   return r;
 }
 
+/**
+ * Koszt ruchu bez drogi z innego modułu (M4: wsiadanie, zsiadanie, przesiadka, drzwi — §4.4). Pobierany tylko we
+ * własnej turze albo w trwającej reakcji — poza nimi (MG ustawia scenę, cudza tura) nic nie jest naliczane. Zero —
+ * bez zapisu. Id stabilne (np. z id wiadomości) — drugi klik nie nalicza drugi raz.
+ * @param {Actor|TokenDocument|Token|Combatant} cel
+ * @param {{ile?: number, reszta?: boolean, zrodlo?: string, id?: string|null, ostrz?: string[]}} [o]
+ */
+export async function zaplacRuch(cel, { ile = 0, reszta = false, zrodlo = "Ruch", id = null, ostrz = [] } = {}) {
+  const c = kombatant(cel);
+  if (!c) return { poza: true };
+  const l = ledger(c);
+  const ch = chwila(c, l);
+  if (!ch.wlasna && !ch.reakcja) return { pominiety: true, powod: "poza własną turą" };
+  const { zadanie } = E.zadanieKosztuRuchu(l, ch, daneAktora(c.actor), { ile, reszta, zrodlo, ostrz });
+  if (!(zadanie.ruch > 0)) return { pominiety: true, powod: "bez kosztu" };
+  return zatwierdz(c, { ...(id ? { id } : {}), ...zadanie, chwila: ch });
+}
+
 /** Obsługa zapytania u wykonawcy — nadawcę podaje rdzeń (`context.user`), nie ładunek. */
 async function _onZapytanie(dane, { user } = {}) {
   const c = await fromUuid(dane?.uuid);
@@ -398,8 +417,11 @@ async function _onMoveToken(doc, movement) {
   const uwagi = _uwagiRuchu.flatMap(fn => { try { return fn(doc, movement) ?? []; } catch (err) { console.warn(`${MODULE_ID} | M8: uwagi ruchu`, err); return []; } });
   // Część ruchu: ile punktów historii przebyto do tej chwili — kontynuacja po pauzie to nowa część, ponowienie nie.
   const czesc = `${movement.history?.recorded?.waypoints?.length ?? 0}+${movement.passed.waypoints.length}`;
+  // Scena w innych jednostkach niż metry (§3.1, MG 2026-11-15): zapis z jednostką, budżet „rozlicz ręcznie”.
+  const j = jednostkiSceny(doc.parent?.grid?.units);
   await zatwierdz(c, { typ: "ruch", id: `ruch-${movement.id}-${czesc}`, chwila: ch,
-    ruch: { ruchId: movement.id, czesc, koszt, dyst, tryb, niepelny, zt: kluczTury(combat), ...(uwagi.length ? { uwagi } : {}) } });
+    ruch: { ruchId: movement.id, czesc, koszt, dyst, tryb, niepelny, zt: kluczTury(combat), ...(j.metry ? {} : { jednostki: j.jednostka }),
+      ...(uwagi.length ? { uwagi } : {}) } });
 }
 
 /** Natywne Undo ruchu (Ctrl+Z, `revertRecordedMovement`) — koszt wraca w pierwotnym kontekście. */
@@ -414,11 +436,7 @@ async function _onUpdateToken(doc, changed, options) {
 
 export function registerEkonomia() {
   CONFIG.queries[ZAPYTANIE] = _onZapytanie;
-  // Schody — przyczyna trudnego terenu z NOE (s. 26), której dnd5e nie ma; potrzebna do wyjątków „schody i stoki”
-  // (Człowiek-pająk, s. 102) i do rozróżnienia schodów od gruzu na tym samym polu (§8.2).
-  if (CONFIG.DND5E?.difficultTerrainTypes && !CONFIG.DND5E.difficultTerrainTypes.stairs) {
-    CONFIG.DND5E.difficultTerrainTypes.stairs = { label: "Schody" };
-  }
+  // Przyczyny trudnego terenu (schody, gruz, mokradło…) i tryb „Ciągnięcie” — `scenes/teren-preset.mjs`.
   Hooks.on("combatTurnChange", (combat, prior, current) => { void _onCombatTurnChange(combat, prior, current); });
   Hooks.on("moveToken", (doc, movement) => { void _onMoveToken(doc, movement); });
   Hooks.on("updateToken", (doc, changed, options) => { void _onUpdateToken(doc, changed, options); });

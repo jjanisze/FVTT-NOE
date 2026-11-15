@@ -78,6 +78,7 @@ import { registerWyczekanieTests } from "./wyczekanie.test.mjs";
 import { registerAtakowanieTests } from "./atakowanie.test.mjs";
 import { registerGotowoscTests } from "./gotowosc.test.mjs";
 import { registerPasekM8Tests } from "./pasek-m8.test.mjs";
+import { registerTerenM8Tests } from "./teren-m8.test.mjs";
 import { registerPoRzucieTests } from "./po-rzucie.test.mjs";
 import { registerUlatwieniaTestowTests } from "./ulatwienia-testow.test.mjs";
 import { registerZdolnosciPoRzucieTests } from "./zdolnosci-po-rzucie.test.mjs";
@@ -151,6 +152,7 @@ export function registerQuenchTests() {
     registerAtakowanieTests(quench);
     registerGotowoscTests(quench);
     registerPasekM8Tests(quench);
+    registerTerenM8Tests(quench);
     registerPoRzucieTests(quench);
     registerUlatwieniaTestowTests(quench);
     // PLAN_m7 E1: zdolności po rzucie (R3).

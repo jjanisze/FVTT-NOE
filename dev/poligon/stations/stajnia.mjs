@@ -53,6 +53,8 @@ export default {
   proby: [
     p("dosiadanie", "Dosiadanie (W2, D43)", "Koń 2 × 2 (rozmiar dnd5e, bez zamiany obrysu); dosiadanie za ½ Szybkości (Jeździec — 1,5 m); rozmiar, wyszkolenie i jedna wolna ręka oznaczone, nie blokowane",
       "Medyk dosiada skażonego konia z bronią w obu rękach — karta oznacza wodze; Zwiadowca (Jeździec) — bez oznaczenia, koszt 1,5 m."),
+    p("dosiadanie-budzet", "Dosiadanie w walce (M8 E2)", "W walce, we własnej turze: dosiadanie i zsiadanie odejmują z licznika ruchu na karcie ½ Szybkości bez zaokrąglania (9 m → 4,5 m), Jeździec 1,5 m; poza swoją turą — tylko opis na karcie, licznik bez zmian",
+      "MG: zaznacz Medyka, Zwiadowcę i konie, Przełącz walkę, zacznij. W turze Medyka: Dosiądź zdrowego konia, patrz na Stan; potem zsiądź. W turze Zwiadowcy to samo."),
     p("jezdziec-widoczny", "Jeździec w siodle (S1, W-U1)", "Jeździec rysuje się tak duży jak obok konia, nad nim, bez kropki; pasażer za nim",
       "Kowboj w siodle zdrowego konia; dosiądź jako pasażer i porównaj z postacią obok. Przesuń i obróć konia."),
     p("kotwica", "Kotwica tury (D39, W-U6)", "Wyszkolony koń sortuje się tuż za jeźdźcem, z jego Inicjatywą; jego tura pomijana z kartą „jedzie z …”",
