@@ -49,7 +49,8 @@ i tanie reguły bez osądu MG), **8b. siedem Sztuczek z nowymi atakami albo przy
 Ruch (krok 7) i style (krok 9) dostają **własne plany M — M8 i M9** (§3). Plan ruchu:
 [PLAN_m8_ruch_i_ekonomia_akcji.md](PLAN_m8_ruch_i_ekonomia_akcji.md) (handoff do implementacji 2026-11-15;
 pełny zakres ruchu i ekonomii akcji zatwierdzony przez MG);
-M9 pozostaje do napisania — ten plik nie zastępuje tych planów.
+Plan wizualny M9: [PLAN_m9_style.md](PLAN_m9_style.md) — projekt zatwierdzony przez MG 2026-11-15, potok i implementacja przed nami;
+ten plik nie zastępuje tych planów.
 
 ```mermaid
 flowchart LR
@@ -57,7 +58,7 @@ flowchart LR
   M7 --> M7B["8a–8b. Dogrywka M7,<br/>siedem Sztuczek"]
   M7B --> PM["6. PM1, PM7 odpadły → TT D17<br/>(zrobione 2026-11-02)"]
   PM --> RU["7. M8 Ruch i ekonomia akcji,<br/>pasek walki — osobny plan M8"]
-  RU --> ST["9. M9 Style i motywy<br/>— plan do napisania"]
+  RU --> ST["9. M9 Przebudowa wizualna<br/>— projekt zatwierdzony, implementacja"]
   ST --> RC{{"10. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
   RC --> GG["11. Styczeń: kampania testowa<br/>„Za garść gambli”"]
   MG["Tor MG: weto Poligonu (M4, Sala prób),<br/>odbiór M8 według planu §10–11"] -.-> RC
@@ -129,7 +130,7 @@ flowchart LR
      dało się domknąć bez warstwy ruchu: Immunitet, Szturmowiec, Grenadier, Pewna ręka, Wrestler, Ławnik, Rozróba,
      Patriota, Mistrz broni białej. Sztuczki 53/53 — 34 pełne; reszta częściowych czeka na M8 (ekonomia akcji, ruch,
      ataki okazyjne) albo jest decyzją przy stole. Notatki — `PLAN_m7_zdolnosci.md` §8 „8c”.
-9. **M9 — Style i motywy (graficzne odświeżenie)** (własny plan M — MG 2026-11-02, §3 M9, do napisania) — przed
+9. **M9 — Style i motywy (graficzne odświeżenie)** ([PLAN_m9_style.md](PLAN_m9_style.md), projekt zatwierdzony przez MG 2026-11-15) — przed
    betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
    dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
@@ -602,14 +603,20 @@ są dowodem wdrożenia M8. Wcześniejszy szacunek movement-only nie wycenia peł
 [macierz odbioru](PLAN_m8_ruch_i_ekonomia_akcji.md#acceptance) mają dowody, każda pozycja inwentarza ma automatykę
 lub używalny fallback, migracje i generatory są poprawne, a dokumentacja i Poligon opisują dostarczony rezultat.
 
-### M9 — Style i motywy (graficzne odświeżenie) — plan do napisania
+### M9 — Przebudowa wizualna NOE — projekt zatwierdzony, implementacja przed nami
 
-> **Własny plan M — MG 2026-11-02.** Plik planu (`PLAN_m9_style.md`) jeszcze nie istnieje; ten wpis tylko wyznacza
-> zakres i wejścia: §0 krok 9, [PLAN_icon_design.md](PLAN_icon_design.md) (język ikon — propozycja „emalia na stali”),
-> PM13 i wygląd kart czatu (`PLAN_migracja_dnd5e6.md` §9, D8), `dev/icons/MISSING.md`, stanowiska Poligonu Garderoba
-> i Galeria, plan zdjęć do zwiastuna. Kod stylów jest odblokowany od zamknięcia M7.
+> **Plan: [PLAN_m9_style.md](PLAN_m9_style.md), 2026-11-15 — wybory proposal 07 zamknięte przez MG, bez wdrożenia.** Kierunek MG: użytkowy
+> charakter JA2 ze współczesnymi affordancjami, grafit/metal blisko obecnej karty. Przed betą własna oprawa NOE:
+> powierzchnie, typografia, nagłówki, zakładki, zasoby, wiersze, okna i czat. Ikony są częścią zakresu.
+> **Zamknięte:** Bone Pochodzenia, Neutral graphite, colored ground dla zdolności/tożsamości, goły kolorowy sprzęt,
+> no housing, 44 px, informacja w wierszu, shapes (kształt/kolor/litera), czerwony skos niedostępności z ciemnym obrysem.
+> Specyfikacja: [M9 §0](PLAN_m9_style.md#locked-style), [profil](dev/icons/finish/style-profile.json).
+> E0 zakończone; E1 audyt konsumentów i E2 potok/pilot odblokowane. Następne przeglądy dotyczą jakości eksportów i integracji.
+> Wejścia: [PLAN_icon_design.md](PLAN_icon_design.md), PM13/D8 z migracji, braki grafiki, Garderoba i Galeria.
+> M8 pozostaje właścicielem mechaniki kosztów i budżetów. Kod stylów jest odblokowany od zamknięcia M7.
 
-**Gotowe gdy:** — określi plan.
+**Gotowe gdy:** [macierz M9](PLAN_m9_style.md#7-macierz-odbioru-i-definicja-końca) ma dowody: zaakceptowany język,
+wdrożone powierzchnie kart i czatu, reprodukowalny potok ikon, testy sandbox/layer-6, sondy i odbiór MG.
 
 ---
 

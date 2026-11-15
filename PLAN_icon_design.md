@@ -1,6 +1,21 @@
 # NOE icon design language and finishing pipeline
 
-**Proposal, 2026-10-18.** Research and a visual study are complete. This document does not adopt a palette or change production assets, review decisions, item builders, packs, or world documents.
+**Historical study, 2026-10-18.** Current visual decisions were locked by the GM on **2026-11-15**:
+[M9 approved specification](PLAN_m9_style.md#locked-style), [versioned profile `noe-m9-r07-v1`](dev/icons/finish/style-profile.json).
+Those take precedence over the October recommendations and earlier review notes below. Asset export and Foundry integration remain implementation work.
+
+**2026-11-15 — M9 review:** [PLAN_m9_style.md](PLAN_m9_style.md) now owns the broader pre-beta visual overhaul,
+including sheet graphics, typography, surfaces, controls and chat. The GM's direction is JA2 equipment pragmatism
+with modern software affordances, using graphite/metal close to the current dark sheet. The local board now compares
+warm steel, neutral graphite and tactical steel, with independent frame, color, indicator and scale controls.
+**Design lock:** Bone Pochodzenia, Neutral graphite, colored grounds for character abilities/identities, bare colored
+equipment, no housing, 44 CSS px, row information, shape/color/letter action costs, and a red unavailable slash with
+dark outline. The explicit design approval unblocks the pipeline audit and pilot; it does not approve unreviewed asset replacements.
+
+**Same-day review correction:** the GM rejected the crowded icon overlays and framing; the dense approved glyphs
+also need roughly one-third more display size than 32 px. The current board therefore starts with bare 44 px glyphs
+and costs/charges/state in the row or shortcut label area. This supersedes this October study's recommendation
+for a small rim and on-icon state treatment. Size and row layout are now locked; the unavailable slash is the selected deliberate overlay exception.
 
 The recommendation is **enamel on steel**: the existing sober, broad silhouettes, colored with a small palette of muted inks and set into dark, restrained plates. Classes have recognizable accents; ordinary abilities use less color; equipment uses material families. Action costs, charges, and current conditions remain explicit interface information.
 
