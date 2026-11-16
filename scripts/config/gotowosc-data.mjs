@@ -3,7 +3,10 @@
  *
  *   - **Pozycja w widocznej kolejności** — „Twoja tura za X”: ilu widocznych kombatantów jest przed tobą (ukrytych nie
  *     liczymy i nie zdradzamy; pokonanych pomija się przy `skipDefeated`). 1 = „Gotuj się, jesteś następny”.
- *     „Następny w widocznej kolejności” nie obiecuje braku ukrytej tury po drodze.
+ *     „Następny w widocznej kolejności” nie obiecuje braku ukrytej tury po drodze. Kotwice tury M3/M4
+ *     (`combat/kotwica-tury.mjs`): uczestnik, którego tura jest pomijana (wierzchowiec prowadzony — działa w turze
+ *     jeźdźca), nie liczy się i nie daje sygnału; uczestnik z kotwicą, który gra własną turę tuż za kotwicą (pasażer
+ *     „Za kierowcą”, towarzysz), liczy się jak każda tura — towarzysz bez komendy bywa pominięty dopiero na starcie.
  *   - **Sygnały** — dwa: „następny” i „start własnej tury”, każdy raz na instancję tury (klucz walka:runda:kombatant).
  *     Rerender, zmiana tokenu, efekty i ruch niczego nie powtarzają. Pierwsze wejście w środku tury nie udaje startu.
  *     W pauzie — bez świeżych sygnałów; po wznowieniu najwyżej aktualny, bez kolejki zaległych.
@@ -17,7 +20,8 @@ export const PROG_CZERWONY_MS = 60_000;
 
 /**
  * Stan gotowości podmiotu.
- * @param {{id: string, widoczny: boolean, pokonany?: boolean}[]} kolejnosc  wszystkie tury w kolejności walki
+ * @param {{id: string, widoczny: boolean, pokonany?: boolean, pominiety?: boolean}[]} kolejnosc  wszystkie tury w
+ *   kolejności walki; `pominiety` — tura z kotwicą, która się nie odbywa (M4 wierzchowiec)
  * @param {number} indeks        indeks bieżącej tury
  * @param {Iterable<string>} moje  id kombatantów podmiotu (przypisana postać, opcjonalnie inni własni)
  * @param {{skipDefeated?: boolean}} [o]
@@ -35,6 +39,7 @@ export function stanGotowosci(kolejnosc, indeks, moje, { skipDefeated = false } 
   for (let k = 1; k < n; k++) {
     const c = kolejnosc[(i0 + k) % n];
     if (skipDefeated && c.pokonany) continue;
+    if (c.pominiety) continue;
     if (ja.has(c.id)) {
       const za = przed + 1;
       return { stan: za === 1 ? "nastepny" : "oczekiwanie", za, kto: c.id };

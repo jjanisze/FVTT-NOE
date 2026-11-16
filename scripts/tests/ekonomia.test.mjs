@@ -281,6 +281,27 @@ export function registerEkonomiaTests(quench) {
       this.timeout(20000);
       const szybki = { system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } };
 
+      it("zapis ledgera nie zmienia tury walki — ani lokalnie, ani w bazie (świeży odczyt z serwera); ledger we flagach walki", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Tura w bazie M8`, ...szybki });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Drugi w bazie M8`, ...szybki });
+        const w = await walkaTestowa([inny, pc], { kto: pc, nazwa: "m8-tura-baza" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          const c = kombatant(tok);
+          const turn = w.combat.turn;
+          expect(Number.isInteger(turn), "tura ustawiona").to.equal(true);
+          await zadeklaruj(pc, "R", { zrodlo: "test tury w bazie", id: "m8-tura-baza-1" });
+          expect(w.combat.getFlag(MODULE_ID, "m8")?.[c.id]?.rev, "ledger MG we flagach walki").to.be.above(0);
+          expect(w.combat.turn, "lokalnie").to.equal(turn);
+          const [zBazy] = await CONFIG.DatabaseBackend.get(Combat.implementation, { query: { _id: w.combat.id } });
+          expect(zBazy?.turn ?? zBazy?._source?.turn, "w bazie — klient, który przeładuje stronę, widzi tę samą turę").to.equal(turn);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
       it("ruch tokenu w swojej turze: koszt z natywnego ruchu, Undo cofa, czyszczenie historii nic nie zwraca", async function () {
         const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Biegacz M8`, ...szybki });
         const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Drugi M8`, ...szybki });

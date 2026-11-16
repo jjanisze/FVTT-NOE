@@ -16,6 +16,7 @@
  */
 
 import * as G from "../config/gotowosc-data.mjs";
+import { kotwicaWpisu } from "./kotwica-tury.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const US = Object.freeze({
@@ -47,10 +48,18 @@ function _moje(combat) {
     || (inni && c.isOwner && c.actor.type === "character"))).map(c => c.id);
 }
 
+/** Tura z kotwicą, która się nie odbywa (M4: wierzchowiec prowadzony rusza się w turze jeźdźca, `pomin`). */
+function _pominiety(c) {
+  try {
+    const w = kotwicaWpisu(c);
+    return !!w?.wpis?.pomin?.(c, w.kotwica);
+  } catch (_e) { return false; }
+}
+
 function _obecny() {
   const combat = game.combat;
   if (!combat?.started || !_ust("wl", true)) return { stan: null, za: null, kto: null, klucz: null };
-  const kolejnosc = combat.turns.map(c => ({ id: c.id, widoczny: !!c.visible, pokonany: !!c.isDefeated }));
+  const kolejnosc = combat.turns.map(c => ({ id: c.id, widoczny: !!c.visible, pokonany: !!c.isDefeated, pominiety: _pominiety(c) }));
   const s = G.stanGotowosci(kolejnosc, combat.turn ?? 0, _moje(combat), { skipDefeated: !!combat.settings?.skipDefeated });
   return { ...s, klucz: s.stan ? `${combat.id}:${combat.round}:${combat.combatant?.id ?? "?"}` : null };
 }

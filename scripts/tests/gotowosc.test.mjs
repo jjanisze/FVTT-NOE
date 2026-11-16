@@ -40,6 +40,13 @@ export function registerGotowoscTests(quench) {
         expect(G.stanGotowosci(kol, 0, []).stan, "bez podmiotu — nic").to.equal(null);
       });
 
+      it("E8: kotwice M3/M4 — tura pominięta (koń w turze jeźdźca) nie liczy się i nie daje sygnału; pasażer z własną turą — liczy się", function () {
+        const kol = [k("a"), k("jezdziec"), { ...k("kon"), pominiety: true }, k("pasazer"), k("ja")];
+        expect(G.stanGotowosci(kol, 0, ["ja"]), "jeździec i pasażer — koń nie").to.include({ stan: "oczekiwanie", za: 3 });
+        expect(G.stanGotowosci(kol, 1, ["ja"])).to.include({ stan: "oczekiwanie", za: 2 });
+        expect(G.stanGotowosci(kol, 0, ["kon"]).stan, "własny koń z pominiętą turą — bez sygnału").to.equal(null);
+      });
+
       it("T44: sygnał raz na instancję tury; pierwsza obserwacja bez startu; pauza — bez świeżych, po wznowieniu ten jeden", function () {
         const z = new Set();
         expect(G.sygnalDoZagrania({ stan: "tura", klucz: "w:1:ja" }, { zagrane: z, pierwsza: true }), "wejście w środku tury").to.equal(null);
@@ -116,6 +123,40 @@ export function registerGotowoscTests(quench) {
           odswiez();
         }
         expect(document.getElementById("neuro-gotowosc"), "bez walki — bez panelu").to.equal(null);
+      });
+
+      it("E8: prawdziwy koń z jeźdźcem w siodle (kotwica M4) — „za X” go nie liczy", async function () {
+        const kon = await game.packs.get(`${MODULE_ID}.bestiariusz`)?.getDocuments().then(d => d.find(x => x.getFlag(MODULE_ID, "bestiary")?.id === "kon-zdrowy"));
+        if (!kon || !game.neuroshima.pojazdy?.posadz) this.skip();
+        const a = await scratchActor({ name: `${SCRATCH_PREFIX} Na turze E8` });
+        const jezdziec = await scratchActor({ name: `${SCRATCH_PREFIX} Jeździec E8` });
+        const kd = game.actors.fromCompendium(kon);
+        const konA = await scratchActor({ ...kd, name: `${SCRATCH_PREFIX} Koń E8`, flags: { ...(kd.flags ?? {}), [MODULE_ID]: { ...(kd.flags?.[MODULE_ID] ?? {}), wierzchowiec: { wyszkolony: true } } } });
+        const ja = await scratchActor({ name: `${SCRATCH_PREFIX} Czekający E8` });
+        const w = await walkaTestowa([a, jezdziec, konA, ja], { kto: a, nazwa: "m8-gotowosc-kon" });
+        const rc = stub(game, "combat", w.combat);
+        const postac = game.user._source.character ?? null;
+        await game.user.update({ character: ja.id });
+        const rp = stub(game.audio, "play", () => null);
+        try {
+          T.reset();
+          expect(odswiez(), "przed dosiadaniem: jeździec i koń przed tobą").to.include({ stan: "oczekiwanie", za: 3 });
+          const tKon = w.zetony.find(t => t.actorId === konA.id);
+          const tJ = w.zetony.find(t => t.actorId === jezdziec.id);
+          await game.neuroshima.pojazdy.posadz(tKon, tJ, "siodlo-0-0");
+          const { kotwicaWpisu } = await import("../combat/kotwica-tury.mjs");
+          const cKon = w.combat.combatants.find(c => c.tokenId === tKon.id);
+          const wpis = kotwicaWpisu(cKon);
+          if (!wpis) this.skip(); // M4 nie zakotwiczył (np. scena bez obrysu) — nic do sprawdzenia
+          expect(wpis.id).to.equal("wierzchowiec");
+          expect(odswiez(), "koń w turze jeźdźca — nie liczy się").to.include({ stan: "oczekiwanie", za: 2 });
+        } finally {
+          rp(); rc();
+          await game.user.update({ character: postac });
+          await w.sprzatnij();
+          T.reset();
+          odswiez();
+        }
       });
     });
   });

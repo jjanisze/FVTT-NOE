@@ -426,6 +426,11 @@ export function registerEkonomiaKarta() {
   Hooks.on("updateCombatant", (c, changes) => {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.${FLAGA_LEDGER}`)) odswiezPanele([c.actor]);
   });
+  // Ledger MG we flagach walki (`combat/ekonomia.mjs`, `_zapiszLedger`) — klucze to id kombatantów.
+  Hooks.on("updateCombat", (combat, changes) => {
+    const zm = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.${FLAGA_LEDGER}`);
+    if (zm && typeof zm === "object") odswiezPanele(Object.keys(zm).map(id => combat.combatants.get(id)?.actor).filter(Boolean));
+  });
   // Panel istnieje tylko w walce: na początku walki (pierwsza zmiana tury) i po jej końcu karta przerysowuje się raz.
   const przerysuj = (combat, maMiec) => {
     for (const c of combat.combatants) {

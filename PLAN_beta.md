@@ -573,14 +573,15 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
 > Pełny zakres zatwierdzony przez MG; nie oznacza wdrożenia. Dowody i historia korekt:
 > [AUDIT_m8_action_economy.md](AUDIT_m8_action_economy.md). Starszy handoff pozostaje materiałem historycznym.
 >
-> **W toku (2026-11-15):** wdrożone i przetestowane — E1 (ledger, jeden wykonawca, zgodne API M7, znaczniki R/B jako
+> **W toku (2026-11-16):** wdrożone i przetestowane — E1 (ledger, jeden wykonawca, zgodne API M7, znaczniki R/B jako
 > projekcja), E2 (ruch z natywnej historii z Undo, budżet i linijka, przyczyny terenu NOE z presetem MG, odporności
-> zdolności, ciągnięcie, wsiadanie M4 w budżecie, sceny w ft), E3 (skok NOE: karta, Region, ruch „Skok”, stały skok istot, Sportowiec, lądowanie,
-> Skok Gladiatora), E5 (Pomaganie, Wyczekanie, Reakcja, ochrona Biegania w R, Stalowe jaja), E6 (instancje Atakowania, „Sposób
-> ataku”, koszt przy rzucie, krótka seria jako osobna Akcja, manewry w slocie, Nożownik bez celu, korekta próby z karty),
-> E8 (panel gotowości z zegarem), E7 (panel na karcie, skróty i szablony paska z paletami Ruch/Więcej, trwałe usunięcia
-> z paska) oraz E4 (Zryw, Szybkie ręce, zmęczenie po Berserku, koszty lalki, plakietki kosztu na kartach użycia). Zostają: reszta E7–E8,
-> migracja M4 i odrębny krok migracji światów na koniec.
+> zdolności, ciągnięcie, wsiadanie M4 w budżecie, sceny w ft), E3 (skok NOE: karta, Region, ruch „Skok”, stały skok
+> istot, Sportowiec, lądowanie, Skok Gladiatora), E4 (Zryw, Szybkie ręce, zmęczenie po Berserku, koszty lalki, plakietki
+> kosztu na kartach użycia), E5 (Pomaganie, Wyczekanie, Reakcja, ochrona Biegania w R, Stalowe jaja), E6 (instancje
+> Atakowania, „Sposób ataku”, koszt przy rzucie, krótka seria jako osobna Akcja, manewry w slocie, Nożownik bez celu,
+> korekta próby z karty), E7 (panel na karcie, skróty i szablony paska z paletami Ruch/Więcej, trwałe usunięcia z paska),
+> E8 (panel gotowości z zegarem, kotwice M3/M4 w „za X”, ledger we flagach walki). Zostają: ocena list decyzji
+> klasowych paska przez MG, migracja M4 i odrębny krok migracji światów na koniec.
 > Szczegóły i lista „co zostaje”: [§13 planu](PLAN_m8_ruch_i_ekonomia_akcji.md#progress).
 
 Zakres obejmuje ruch i skoki, A/B/R/I, granty ograniczone i Zryw, Pomaganie/Wyczekanie, grupowanie ataków,

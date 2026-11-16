@@ -3,7 +3,8 @@
  *
  * Czyste zasady — `config/ekonomia-data.mjs`. Fasada API — `game.neuroshima.actions` (`actors/actions.mjs`). Tutaj:
  *
- *   - **Zapis** — ledger walczącego na fladze jego kombatanta (`flags.<mod>.m8`): jeden kombatant to jeden token i jeden
+ *   - **Zapis** — ledger walczącego we flagach walki pod id kombatanta (`flags.<mod>.m8.<id>`; bez MG — na fladze
+ *     kombatanta, patrz `OPCJE_ZAPISU`): jeden kombatant to jeden token i jeden
  *     aktor (także syntetyczny, także kilka tokenów jednego aktora), a dokument znika z walką. Właściciel aktora może
  *     zapisać flagi swojego kombatanta (rdzeń: `BaseCombatant#canUpdate`), więc bez MG też jest kto pisze.
  *   - **Jeden wykonawca** (§5.1): aktywny MG; bez niego — deterministycznie pierwszy (po id) aktywny właściciel. Prośba
@@ -31,12 +32,26 @@ export const ZAPYTANIE = `${MODULE_ID}.ekonomia`;
 /** Opcja zapisów tej warstwy — haki projekcji je pomijają. */
 export const OPCJA = "neuroM8";
 /**
- * Opcje zapisu ledgera na kombatancie. Pułapka rdzenia v14: `Combatant._preUpdateOperation` dopisuje do każdej
- * aktualizacji kombatanta `combatTurn` = indeks bieżącego kombatanta **u zlecającego**, a każdy klient robi potem
- * `combat.updateSource({turn: combatTurn})`. Zapis zlecony tuż przed zmianą tury, a zastosowany po niej, cofa więc
- * lokalnie turę u wszystkich (baza ma już następną). `combatTurn: null` omija tę gałąź; zapis flag nie zmienia kolejności.
+ * Gdzie żyje ledger. Pułapka rdzenia v14 przy aktualizacji **kombatanta**: klient dopisuje `combatTurn` (indeks
+ * bieżącego kombatanta u zlecającego), każdy klient robi `combat.updateSource({turn})`, a **serwer zapisuje go do bazy
+ * jako turę walki**, gdy różni się od zapisanej (`dist/database/documents/combatant.mjs`). Zapis zlecony przed zmianą
+ * tury, a zastosowany po niej, cofał więc turę; `combatTurn: null` (poprzednie obejście) zerował turę w bazie przy
+ * każdym zapisie — klient, który przeładował stronę albo dołączył, widział walkę bez bieżącego uczestnika.
+ * Aktualizacja samej **walki** (flagi) tury nie dotyka — MG zapisuje ledger tam. Bez MG wykonawca-właściciel nie może
+ * zmieniać walki: zapis na kombatancie z `combatTurn` równym bieżącej turze (liczba — serwer nic nie zmienia).
  */
-const OPCJE_ZAPISU = Object.freeze({ [OPCJA]: true, combatTurn: null, turnEvents: false });
+const OPCJE_ZAPISU = Object.freeze({ [OPCJA]: true });
+
+/** Zapis ledgera u wykonawcy (MG — flagi walki, inaczej — flaga kombatanta). */
+async function _zapiszLedger(c, l) {
+  const combat = c.parent;
+  if (game.user.isGM) {
+    await combat.update({ [`flags.${MODULE_ID}.${FLAGA_LEDGER}.${c.id}`]: l }, { ...OPCJE_ZAPISU });
+    return;
+  }
+  const turn = Number.isInteger(combat.turn) ? combat.turn : undefined;
+  await c.update({ [`flags.${MODULE_ID}.${FLAGA_LEDGER}`]: l }, { ...OPCJE_ZAPISU, turnEvents: false, ...(turn !== undefined ? { combatTurn: turn } : {}) });
+}
 /** Ile czekamy na wykonawcę (§5.2 „ograniczone oczekiwanie”). */
 const LIMIT_MS = 6000;
 
@@ -62,9 +77,15 @@ export function kombatant(cel, combat = game.combat) {
   return lista.find(c => kontrolowane.has(c.tokenId)) ?? lista.find(c => c === combat.combatant) ?? lista[0];
 }
 
-/** Ledger kombatanta (kopia, do odczytu albo zmiany u wykonawcy). */
+/**
+ * Ledger kombatanta (kopia, do odczytu albo zmiany u wykonawcy): flagi walki albo flaga kombatanta (zapis bez MG, walki
+ * sprzed przeniesienia) — nowszy po `rev`.
+ */
 export function ledger(c) {
-  return E.ledgerZ(c?.getFlag?.(MODULE_ID, FLAGA_LEDGER), c?.parent?.id);
+  const wWalce = c?.parent?.getFlag?.(MODULE_ID, FLAGA_LEDGER)?.[c?.id];
+  const naKombatancie = c?.getFlag?.(MODULE_ID, FLAGA_LEDGER);
+  const zapis = (Number(naKombatancie?.rev) || 0) > (Number(wWalce?.rev) || 0) ? naKombatancie : (wWalce ?? naKombatancie);
+  return E.ledgerZ(zapis, c?.parent?.id);
 }
 
 /**
@@ -178,7 +199,7 @@ async function _wykonaj(c, z, user) {
     if (zmiana) {
       E.przytnij(l, ch.cykl);
       // Kopia: rdzeń dopisuje do obiektu operacji własne pola (zamrożony obiekt wywala zapis).
-      await c.update({ [`flags.${MODULE_ID}.${FLAGA_LEDGER}`]: l }, { ...OPCJE_ZAPISU });
+      await _zapiszLedger(c, l);
     }
     // Projekcje także przy duplikacie: nieudana projekcja poprzedniej próby nadrabia się przy ponowieniu.
     for (const p of _poZapisie) {

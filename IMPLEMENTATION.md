@@ -1214,6 +1214,24 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — ledger we flagach walki (tura w bazie), kotwice w „za X”, e2e gotowości (E8, reszta) (2026-11-16)
+
+- **Błąd: zapis ledgera zerował turę walki w bazie.** Serwer v14 (`dist/database/documents/combatant.mjs`) zapisuje
+  `combatTurn` z aktualizacji kombatanta jako turę walki, gdy różni się od zapisanej — także `null`, które ledger
+  podawał (obejście cofania tury z E1). Połączeni klienci trzymali turę w pamięci; przeładowany albo dołączający widział
+  walkę bez bieżącego uczestnika (panel gotowości: „następny” zamiast „Twoja tura”). Teraz MG zapisuje ledger we flagach
+  walki pod id kombatanta (`_zapiszLedger`: aktualizacja walki nie dotyka tury); bez MG — flaga kombatanta z
+  `combatTurn` = bieżąca tura (liczba, serwer nic nie zmienia). `ledger(c)` czyta nowszą kopię po `rev` (trwające walki
+  i zapis bez MG). Panel karty słucha też `updateCombat`. Inne haki `updateCombat` sprawdzone: reagują na turę/rundę
+  albo są idempotentne. Walka, której tura jest dziś `null` w bazie, naprawia się przy następnej zmianie tury.
+- **„Za X” z kotwicami M3/M4**: `stanGotowosci` pomija wpisy `pominiety` (kotwica z `pomin` — wierzchowiec prowadzony
+  działa w turze jeźdźca): nie liczą się i nie dają sygnału; pasażer „Za kierowcą” i towarzysz z własną turą liczą się.
+- e2e `gotowosc` (nowa seria: MG + Gracz 1 + Gracz 2): ukryty BN nie liczy się i nie jest zdradzany, MG bez paska,
+  start tury z zegarem, przeładowanie Gracza 1 w środku tury — ten sam start zegara, bez nowego startu; zrzuty paska.
+- Testy: Quench `ekonomia` 32 (tura w bazie po zapisie ledgera, świeży odczyt z serwera), `gotowosc` 7 (model z kotwicą,
+  prawdziwy koń z jeźdźcem w siodle), zielone `wyczekanie`, `atakowanie`, `akcje`, `pasek-m8`, `teren-m8`, `skok`,
+  `pojazdy`, `sztuczki-walka`, `zdolnosci-karty`; e2e `gotowosc`, `ruch`.
+
 ### M8 — wąski widok i klawiatura panelu w e2e (E7, reszta) (2026-11-16)
 
 - e2e `ruch` +2 kroki: wąski widok — karta zwężona do minimum arkusza dnd5e (800 px), panel M8 w kolumnie Stan (212 px)
