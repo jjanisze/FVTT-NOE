@@ -25,6 +25,7 @@ import { getZranienieLvl } from "./zranienie.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { konwencjeRuchu } from "../wkk/config/ruch-kobalt.mjs";
 import { jednostkiSceny } from "../config/teren-data.mjs";
+import { kotwicaWpisu } from "./kotwica-tury.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const FLAGA_LEDGER = "m8";
@@ -96,11 +97,22 @@ export function ledger(c) {
  */
 export function chwila(c, l = ledger(c)) {
   const combat = c.parent;
+  // Wierzchowiec prowadzony (kotwica M4 z pomijaną turą, s. 257) działa w turze jeźdźca — to jego własna chwila (E9).
+  const biezacy = combat.combatant?.id ?? null;
+  const wTurzeKotwicy = biezacy && biezacy !== c.id && _kotwicaPomijana(c)?.id === biezacy;
   const ch = E.chwilaKombatanta(l, {
-    runda: combat.round, biezacyId: combat.combatant?.id ?? null, id: c.id,
+    runda: combat.round, biezacyId: wTurzeKotwicy ? c.id : biezacy, id: c.id,
     kolejnosc: combat.turns.map(t => t.id), indeks: combat.turn ?? 0
   });
   return { ...ch, reakcja: E.aktywnaReakcja(l, ch.cykl)?.id ?? null, walka: combat.id };
+}
+
+/** Kotwica uczestnika, gdy jego tura jest pomijana (wierzchowiec w turze jeźdźca), albo `null`. */
+function _kotwicaPomijana(c) {
+  try {
+    const w = kotwicaWpisu(c);
+    return w?.wpis?.pomin?.(c, w.kotwica) ? w.kotwica : null;
+  } catch (_e) { return null; }
 }
 
 /** Szybkości i stan aktora dla czystych zasad. Szybkość pochodna (rany, udźwig, stany) — z danych dnd5e. */
@@ -364,6 +376,12 @@ async function _onCombatTurnChange(combat, _prior, current) {
   const c = combat.combatants.get(current?.combatantId);
   if (!c || !wykonawca(c)?.isSelf) return;
   await zatwierdz(c, { typ: "tura", id: `tura-${combat.id}-${c.id}-${combat.round}`, chwila: { ...chwila(c), walka: combat.id } });
+  // Wierzchowce prowadzone przez tego uczestnika zaczynają turę razem z nim (jego tura — ich chwila, E9); ten sam id co
+  // przy ich własnym, zaraz pominiętym starcie — bez drugiej instancji.
+  for (const k of combat.combatants) {
+    if (k.id === c.id || _kotwicaPomijana(k)?.id !== c.id || !wykonawca(k)?.isSelf) continue;
+    await zatwierdz(k, { typ: "tura", id: `tura-${combat.id}-${k.id}-${combat.round}`, chwila: { ...chwila(k), walka: combat.id } });
+  }
 }
 
 /**

@@ -1582,7 +1582,7 @@ function _getShortBurstLabel(item) {
 }
 
 function _getShortBurstSummary() {
-  return "Atak krótką serią. Koszt: 3 naboje. Domyślnie: utrudnienie. Grad ołowiu znosi ograniczenie KS -> kolejna KS w tej samej rundzie; limit ataków pilnuje gracz lub MG.";
+  return "Atak krótką serią. Koszt: 3 naboje. Domyślnie: utrudnienie. Bez Gradu ołowiu — osobna Akcja, raz na rundę (druga KS z ostrzeżeniem); z Gradem ołowiu — jeden z ataków Atakowania (koszt liczy karta postaci).";
 }
 
 /**

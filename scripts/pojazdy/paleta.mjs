@@ -4,8 +4,10 @@
  * Jeden przycisk na HUD-zie pojazdu i kierowcy otwiera okno z tym, co kierowca może zrobić pojazdem: akcje cech z
  * katalogu (Gaz do dechy, Szósty bieg, Przerzutka, Akrobacja, Skok, Syrena, Działko wodne, Lemiesz, Uciąg, Ollie;
  * Slalom jako Reakcja), bieg wsteczny, a na planszy pościgu — manewry (P5c dopisuje je do `POZYCJE`). Wybór = karta
- * na czacie + efekt na aktorze pojazdu, który zmienia budżet jazdy, ST i Utrudnienia. Koszt akcji oznaczany, nie
- * pobierany (D7); nie-kierowca widzi paletę tylko do odczytu.
+ * na czacie + efekt na aktorze pojazdu, który zmienia budżet jazdy, ST i Utrudnienia. Koszt akcji idzie do ledgera M8
+ * (MG 2026-11-16, zastępuje oznaczanie D7): pozycja kierowcy — jego A/B/R (poza turą [A] w Reakcji); akcja
+ * wierzchowca — deklaracja w ledgerze konia, który działa w turze jeźdźca (kotwica, `combat/ekonomia.mjs`), więc
+ * jeździec za Bieganie konia nie płaci. Nic nie jest blokowane; nie-kierowca widzi paletę tylko do odczytu.
  *
  * ## Efekt palety
  *
@@ -38,6 +40,9 @@ import {
 import { xNaTor } from "../scenes/poscig.mjs";
 import { kierowcaPojazdu, wyszkolonyDla } from "./jadacy.mjs";
 import { aktywneAwariePojazdu } from "./awarie.mjs";
+
+import { akcja as akcjaM8, deklaruj as deklarujM8, zadeklaruj as zadeklarujM8 } from "../actors/actions.mjs";
+import { DEKLARACJE } from "../config/ekonomia-data.mjs";
 
 export const FLAGA_PALETY = "paleta";
 export const FLAGA_PRZERZUTKI = "przerzutka";
@@ -389,13 +394,46 @@ export async function uzyjPalety(pojazdDoc, id) {
   if (id === "wsteczny" && _cofanie(actor).cofanie) linie.push(`Cecha Cofanie: ${_cofanie(actor).cwierc ? "jedna czwarta Szybkości" : "połowa Szybkości"}, Testy (Pojazdy) z Utrudnieniem.`);
 
   if (!def.bezEfektu) await nalozEfektPalety(actor, id);
+  const koszt = await _kosztPalety(pojazdDoc, def, id, kier);
+  ostrz.push(...koszt.ostrz);
   await wyslijKarte(kartaPostoju({ ikona: pojazdDoc.texture.src, tytul: `${def.nazwa} — ${pojazdDoc.name}`,
-    podtytul: def.czas === "przelacznik" ? "przełącznik kierowcy" : `[${CZAS[def.czas]}] ${{ akcja: "akcja", bonus: "akcja bonusowa", reakcja: "reakcja" }[def.czas]} kierowcy — koszt oznaczony (D7)`,
+    podtytul: def.czas === "przelacznik" ? "przełącznik kierowcy" : koszt.opis,
     rodzaj: ostrz.length ? "test" : "info", linie, ostrzezenia: ostrz, przyciski }), {
     actor: kier?.actor ?? actor,
     flagi: id === "syrena" ? { pojazdDzwiek: { pojazd: pojazdDoc.uuid, rodzaj: "syrena" } } : {}
   });
   return { id };
+}
+
+/**
+ * Koszt pozycji palety w ledgerze M8 (E9): akcja wierzchowca — deklaracja konia (jego jedna akcja w turze jeźdźca,
+ * s. 257; Bieganie/Przyspieszenie dają grant ruchu konia); pozycja kierowcy — A ([A] poza turą — R), B albo R kierowcy.
+ * Poza walką albo bez kierowcy — tylko opis.
+ * @returns {Promise<{opis: string, ostrz: string[]}>}
+ */
+async function _kosztPalety(pojazdDoc, def, id, kier) {
+  const nazwa = { akcja: "akcja", bonus: "akcja bonusowa", reakcja: "reakcja" }[def.czas] ?? "";
+  const kto = def.wierzchowiec ? "wierzchowca" : "kierowcy";
+  const opis = `[${CZAS[def.czas]}] ${nazwa} ${kto}`;
+  if (!game.combat?.started || def.czas === "przelacznik") return { opis, ostrz: [] };
+  try {
+    let r = null;
+    if (def.wierzchowiec && DEKLARACJE[id]) {
+      r = await deklarujM8(pojazdDoc.actor, id, { zrodlo: `${def.nazwa} (wierzchowiec)` });
+    } else if (kier?.actor) {
+      const zrodlo = `${def.nazwa} (${pojazdDoc.name})`;
+      if (def.czas === "akcja") r = await akcjaM8(kier.actor, { zrodlo });
+      else if (def.czas === "bonus") r = await zadeklarujM8(kier.actor, "B", { zrodlo });
+      else if (def.czas === "reakcja") r = await zadeklarujM8(kier.actor, "R", { zrodlo });
+    }
+    if (!r || r.poza) return { opis, ostrz: [] };
+    if (r.oczekuje) return { opis: `${opis} — koszt czeka na zapis`, ostrz: [] };
+    const w = r.wR ? " (w Reakcji)" : "";
+    return { opis: `${opis}${w} — w liczniku na karcie`, ostrz: (r.ostrz ?? r.powody ?? []).map(String) };
+  } catch (err) {
+    console.warn(`${MODULE_ID} | paleta → M8`, err);
+    return { opis, ostrz: [] };
+  }
 }
 
 /**

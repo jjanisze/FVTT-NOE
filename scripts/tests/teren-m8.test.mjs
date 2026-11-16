@@ -224,6 +224,41 @@ export function registerTerenM8Tests(quench) {
         }
       });
 
+      it("E9: wierzchowiec prowadzony działa w turze jeźdźca — Bieganie z palety w ledgerze konia (A, 2× Szybkości), jeździec nie płaci; druga akcja konia ostrzega", async function () {
+        const kon = await packDoc("bestiariusz", d => d.getFlag(MODULE_ID, "bestiary")?.id === "kon-zdrowy");
+        if (!kon || !game.neuroshima.pojazdy?.posadz) this.skip();
+        const jezdziec = await scratchActor({ name: `${SCRATCH_PREFIX} Jeździec E9`, system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } });
+        const kd = game.actors.fromCompendium(kon);
+        const konA = await scratchActor({ ...kd, name: `${SCRATCH_PREFIX} Koń E9`,
+          flags: { ...(kd.flags ?? {}), [MODULE_ID]: { ...(kd.flags?.[MODULE_ID] ?? {}), wierzchowiec: { wyszkolony: true } } } });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Obok E9` });
+        const w = await walkaTestowa([jezdziec, konA, inny], { kto: jezdziec, nazwa: "m8-kon" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tKon = w.zetony.find(t => t.actorId === konA.id);
+          const tJ = w.zetony.find(t => t.actorId === jezdziec.id);
+          await game.neuroshima.pojazdy.posadz(tKon, tJ, "siodlo-0-0");
+          const { kotwicaWpisu } = await import("../combat/kotwica-tury.mjs");
+          const cKon = w.combat.combatants.find(c => c.tokenId === tKon.id);
+          if (kotwicaWpisu(cKon)?.id !== "wierzchowiec") this.skip(); // M4 nie zakotwiczył konia na tej scenie
+          // Tura jeźdźca: chwila konia jest jego własną (kotwica z pominiętą turą).
+          await waitFor(() => stan(tJ)?.chwila.wlasna, { label: "tura jeźdźca" });
+          expect(stan(tKon).chwila.wlasna, "koń działa w turze jeźdźca").to.equal(true);
+          const vKon = Number(konA.system.attributes.movement.speeds.walk) || 0;
+          const { uzyjPalety } = await import("../pojazdy/paleta.mjs");
+          await uzyjPalety(tKon, "bieganie");
+          const s = await waitFor(() => (stan(tKon).pule.A.wydane === 1 ? stan(tKon) : null), { label: "A konia" });
+          expect(s.ruch.pojemnosc, "Szybkość konia + Bieganie 2×").to.equal(vKon * 3);
+          expect(stan(tJ).pule.A.wydane, "jeździec nie płaci za Bieganie konia").to.equal(0);
+          await uzyjPalety(tKon, "unikanie");
+          await waitFor(() => stan(tKon).pule.A.wydane === 2, { label: "druga akcja konia" });
+          expect(stan(tKon).pule.A.pozostalo, "jedna akcja wierzchowca — druga ponad pulę").to.equal(-1);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+
       it("M4 → ledger: wsiadanie we własnej turze pobiera ruch (raz po id), poza turą — nic; budżet maleje", async function () {
         const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Wsiadający M8`, system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } });
         const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Czekający M8`, system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } });

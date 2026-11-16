@@ -235,6 +235,7 @@ import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
 import { zdolnosciApi } from "./config/class-features-coverage.mjs";
 import { resyncClassFeatures } from "./migration/resync-class-features.mjs";
+import { migrateM8 } from "./migration/migrate-m8.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 import { registerProdukcja, produkcjaApi } from "./production/index.mjs";
 import { registerPostoj, handelApi, postojApi, fuksyApi, fantyApi } from "./postoj/index.mjs";
@@ -704,6 +705,8 @@ Hooks.once("ready", () => {
   // Zdolności klasowe i profesji — ten sam rejestr dla 133 zdolności (PLAN_beta B5);
   // .resync() dosyła zmiany paczki do kopii na kartach (najpierw na sucho).
   game.neuroshima.zdolnosci = { ...zdolnosciApi, resync: resyncClassFeatures };
+  // Migracja świata po M8 (najpierw na sucho): game.neuroshima.migracje.m8({ commit: true }).
+  game.neuroshima.migracje = { ...(game.neuroshima.migracje ?? {}), m8: migrateM8 };
 
   // Manewry wręcz — game.neuroshima.manewry.pochwycenie(), .odepchniecie(), .wytracenie()
   game.neuroshima.manewry = maneuversApi;

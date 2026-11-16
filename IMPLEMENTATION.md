@@ -1214,6 +1214,25 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M8 — M4 w ledgerze, migracja świata (E9) (2026-11-16)
+
+- **Paleta M4 w ledgerze** (MG: zastępuje oznaczanie D7): pozycja kierowcy pobiera jego A (poza turą — w Reakcji), B albo
+  R (`_kosztPalety` w `pojazdy/paleta.mjs`); podtytuł karty mówi, kto zapłacił, ostrzeżenia ledgera idą na kartę.
+- **Wierzchowiec w turze jeźdźca** (MG: ledger konia): uczestnik z kotwicą i pomijaną turą ma w turze kotwicy własną
+  chwilę (`chwila`, `_kotwicaPomijana` w `combat/ekonomia.mjs`), a jego instancja tury zapisuje się na starcie tury
+  jeźdźca (ten sam id co przy własnym, zaraz pominiętym starcie). Akcje wierzchowca z palety (Bieganie, Przyspieszenie,
+  Odstąpienie, Unikanie) to deklaracje w ledgerze konia: jedna akcja na turę jeźdźca, grant ruchu konia; jeździec nie
+  płaci; druga akcja konia — ponad pulę z ostrzeżeniem.
+- **Migracja świata** `game.neuroshima.migracje.m8({ commit })` (`migration/migrate-m8.mjs`, na sucho — raport):
+  `resync` zdolności M7 (plakietki i efekty z danych M8), stare znaczniki R/B poza rozpoczętą walką, `lastBurstUse` na
+  broniach, `dcFall` w Regionach `skok`, `userId` w makrach skrótów. Zakres (`aktorzy`, `sceny`, `makra`) dla testów.
+- Opis krótkiej serii w aktywnościach broni (`chatFlavor`) mówi zasady M8 (osobna Akcja bez Gradu ołowiu, raz na
+  rundę z ostrzeżeniem; z Gradem — atak Atakowania) — odświeża się sam przy starcie świata (`syncAllWeaponFireModes`).
+- Testy: Quench `migracja-m8` (na sucho bez zmian, zapis, drugi przebieg pusty), `teren-m8` 13 (koń z jeźdźcem w
+  siodle: Bieganie w ledgerze konia, jeździec bez kosztu, druga akcja ostrzega), `pojazdy`, `ekonomia`, `gotowosc`,
+  `sztuczki-walka`; pełny Quench 1644/1644 przed E9; e2e `poligon` — wszystkie stanowiska (wyjątek rdzenia przy
+  zakładaniu świata: samouczek nowego świata przed gotową kanwą).
+
 ### M8 — ledger we flagach walki (tura w bazie), kotwice w „za X”, e2e gotowości (E8, reszta) (2026-11-16)
 
 - **Błąd: zapis ledgera zerował turę walki w bazie.** Serwer v14 (`dist/database/documents/combatant.mjs`) zapisuje

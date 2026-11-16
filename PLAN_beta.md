@@ -580,8 +580,9 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
 > kosztu na kartach użycia), E5 (Pomaganie, Wyczekanie, Reakcja, ochrona Biegania w R, Stalowe jaja), E6 (instancje
 > Atakowania, „Sposób ataku”, koszt przy rzucie, krótka seria jako osobna Akcja, manewry w slocie, Nożownik bez celu,
 > korekta próby z karty), E7 (panel na karcie, skróty i szablony paska z paletami Ruch/Więcej, trwałe usunięcia z paska),
-> E8 (panel gotowości z zegarem, kotwice M3/M4 w „za X”, ledger we flagach walki). Zostają: ocena list decyzji
-> klasowych paska przez MG, migracja M4 i odrębny krok migracji światów na koniec.
+> E8 (panel gotowości z zegarem, kotwice M3/M4 w „za X”, ledger we flagach walki), E9 (paleta M4 i wierzchowiec w
+> ledgerze, migracja świata `game.neuroshima.migracje.m8`). Zostają: ocena list decyzji klasowych paska przez MG,
+> macierz odbioru §11 i pokrycie M7.
 > Szczegóły i lista „co zostaje”: [§13 planu](PLAN_m8_ruch_i_ekonomia_akcji.md#progress).
 
 Zakres obejmuje ruch i skoki, A/B/R/I, granty ograniczone i Zryw, Pomaganie/Wyczekanie, grupowanie ataków,

@@ -115,6 +115,10 @@ tereny to dalej 3 m za 1,5 m.
 - **Scena w innych jednostkach niż metry** (ft, km): moduł nie przelicza po cichu — linijka bez koloru z „scena w ft —
   rozlicz ręcznie”, a ruch nie schodzi z licznika (zostaje na karcie jako ostrzeżenie).
 
+**Paleta pojazdu i wierzchowca** liczy koszt na karcie postaci: pozycja kierowcy (Gaz do dechy [A], Slalom [R]…)
+zabiera jego Akcję, Akcję Bonusową albo Reakcję; wyszkolony wierzchowiec działa w turze jeźdźca i jego jedna akcja
+(Bieganie, Przyspieszenie, Odstąpienie, Unikanie) schodzi z licznika konia — jeździec za nią nie płaci.
+
 **Wsiadanie i dosiadanie w walce** (s. 257, 260–261) schodzi z licznika ruchu we własnej turze: kierowca — połowa
 Szybkości i reszta przepada; pasażer — nic, a zamknięte drzwi, fotel albo okno dolicza przycisk **Drzwi, fotel albo
 okno** na karcie wsiadania (raz); wierzchowiec — połowa Szybkości bez zaokrąglania (9 m → 4,5 m), Jeździec 1,5 m;
