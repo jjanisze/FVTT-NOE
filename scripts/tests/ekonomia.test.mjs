@@ -567,6 +567,48 @@ export function registerEkonomiaTests(quench) {
       });
     });
 
+    describe("Macierz §11 — wektory bez osobnej etykiety (warstwa 4)", function () {
+      it("T03: metryka — 4,5/4,5 poziomo to 4,5 m, z wysokością 6 to 6 m (natywny pomiar siatki, przekątne równe)", async function () {
+        const scena = await Scene.implementation.create({ name: `${SCRATCH_PREFIX} T03`, width: 1500, height: 1500, padding: 0,
+          grid: { type: CONST.GRID_TYPES.SQUARE, size: 100, distance: 1.5, units: "m", diagonals: CONST.GRID_DIAGONALS.EQUIDISTANT } });
+        try {
+          const g = scena.grid;
+          const poziomo = g.measurePath([{ x: 50, y: 50 }, { x: 350, y: 350 }]).distance;
+          expect(poziomo, "3 pola po skosie = 4,5 m, nie √2").to.equal(4.5);
+          const wGore = g.measurePath([{ x: 50, y: 50, elevation: 0 }, { x: 350, y: 350, elevation: 6 }]).distance;
+          expect(wGore, "max(poziomo, pionowo)").to.equal(6);
+          const objazd = g.measurePath([{ x: 50, y: 50 }, { x: 350, y: 50 }, { x: 350, y: 350 }]).distance;
+          expect(objazd, "trasa z obejściem sumuje odcinki").to.equal(9);
+        } finally {
+          await scena.delete();
+        }
+      });
+
+      it("T05: dwa natywne trudne tereny naraz — ×2, nie ×4 (rozstrzyganie terenu dnd5e); T42: akcja słowna i koniec tury bez kary", async function () {
+        const szybki = { system: { attributes: { movement: { speeds: { walk: 9 }, units: "m" } } } };
+        const TD = CONFIG.Token.movement.TerrainData;
+        const dwa = TD.resolveTerrainEffects([{ name: "difficultTerrain" }, { name: "difficultTerrain" }]);
+        expect(dwa?.difficulty, "dwa Regiony trudnego terenu").to.equal(2);
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} T42`, ...szybki });
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} T42 drugi`, ...szybki });
+        const w = await walkaTestowa([pc, inny], { kto: pc, nazwa: "m8-t42" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          const tok = w.zetony.find(t => t.actorId === pc.id);
+          await waitFor(() => ledger(kombatant(tok)).tury.length > 0, { label: "tura" });
+          expect(stan(tok).pule.A.pozostalo, "akcja zagrana słownie — licznik 1/1").to.equal(1);
+          await w.combat.nextTurn();
+          await waitFor(() => !stan(tok).chwila.wlasna, { label: "koniec tury" });
+          const l = ledger(kombatant(tok));
+          expect(l.zakazy, "bez kary za niewydaną akcję").to.deep.equal([]);
+          expect(l.ops.filter(o => o.rodzaj !== "zdarzenie"), "bez pytań i zapisów").to.deep.equal([]);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
+      });
+    });
+
     describe("Pomocnicze (warstwa 4)", function () {
       it("koszt przebytej części pomija displace i bierze natywny koszt odcinków", function () {
         const m = { passed: { cost: 9, distance: 4.5, waypoints: [{ action: "walk", cost: 3 }, { action: "displace", cost: 3 }, { action: "crawl", cost: 3 }] } };

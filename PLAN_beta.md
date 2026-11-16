@@ -581,8 +581,9 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
 > Atakowania, „Sposób ataku”, koszt przy rzucie, krótka seria jako osobna Akcja, manewry w slocie, Nożownik bez celu,
 > korekta próby z karty), E7 (panel na karcie, skróty i szablony paska z paletami Ruch/Więcej, trwałe usunięcia z paska),
 > E8 (panel gotowości z zegarem, kotwice M3/M4 w „za X”, ledger we flagach walki), E9 (paleta M4 i wierzchowiec w
-> ledgerze, migracja świata `game.neuroshima.migracje.m8`). Zostają: ocena list decyzji klasowych paska przez MG,
-> macierz odbioru §11 i pokrycie M7.
+> ledgerze, migracja świata `game.neuroshima.migracje.m8`). Migracja światów wykonana 2026-11-16
+> (piaskownica, Poligon, kampania po kopii zapasowej); macierz odbioru — §13.5 planu. Zostaje ocena list decyzji
+> klasowych paska przez MG i merge do `master`.
 > Szczegóły i lista „co zostaje”: [§13 planu](PLAN_m8_ruch_i_ekonomia_akcji.md#progress).
 
 Zakres obejmuje ruch i skoki, A/B/R/I, granty ograniczone i Zryw, Pomaganie/Wyczekanie, grupowanie ataków,

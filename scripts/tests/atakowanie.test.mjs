@@ -230,6 +230,21 @@ export function registerAtakowanieTests(quench) {
         }
       });
 
+      it("T46: drukowany atak przed walką (zasadzka z ≥30 m) — bez zapisu kosztu i bez plakietki; zaskoczenie to rdzeń i MG", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Zasadzka M8` });
+        const sztylet = await noz(pc);
+        const r = stub(game, "combat", null);
+        try {
+          const przed = game.messages.size;
+          await aktywnosc(sztylet).rollAttack({}, { configure: false }, { create: true });
+          const nowe = game.messages.contents.slice(przed);
+          expect(nowe.length, "rzut wykonany").to.be.at.least(1);
+          expect(nowe.some(m => m.getFlag(MODULE_ID, FLAGA_ATAKU)), "poza walką — bez kosztu M8").to.equal(false);
+        } finally {
+          r();
+        }
+      });
+
       it("E4/T26: lalka w walce — dobycie z kabury [I]; druga interakcja to Używanie [A]; z plecaka — Akcja", async function () {
         const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Lalka M8` });
         const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Obok lalki M8` });

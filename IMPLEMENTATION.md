@@ -1232,6 +1232,9 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   siodle: Bieganie w ledgerze konia, jeździec bez kosztu, druga akcja ostrzega), `pojazdy`, `ekonomia`, `gotowosc`,
   `sztuczki-walka`; pełny Quench 1644/1644 przed E9; e2e `poligon` — wszystkie stanowiska (wyjątek rdzenia przy
   zakładaniu świata: samouczek nowego świata przed gotową kanwą).
+- **Migracja wykonana** (MG: od razu): piaskownica — nic; Poligon — 53 kopie zdolności; kampania `output` po kopii
+  zapasowej (`fvtt backup`) — 6 kopii zdolności i stare `lastBurstUse`; drugie przebiegi puste. Macierz odbioru §11 —
+  §13.5 planu (42 z 46 wektorów z testem, 4 częściowo; nowe testy T03, T05, T42, T46).
 
 ### M8 — ledger we flagach walki (tura w bazie), kotwice w „za X”, e2e gotowości (E8, reszta) (2026-11-16)
 

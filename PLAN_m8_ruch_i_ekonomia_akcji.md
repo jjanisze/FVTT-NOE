@@ -873,9 +873,69 @@ Stanowisko Poligonu `ruch` — 39 prób dla tego, co powyżej (w tym pięć skok
 - **E8:** zamknięte 2026-11-16 — kotwice M3/M4 w „za X” (tura pominięta — wierzchowiec w turze jeźdźca — nie liczy się
   i nie daje sygnału; pasażer i towarzysz z własną turą liczą się), e2e `gotowosc` (MG + dwaj gracze, ukryty BN,
   przeładowanie w środku tury, zrzuty paska).
-- **E9:** M4 w ledgerze i procedura migracji — zrobione 2026-11-16 (wiersz „E9” w §13.1). Migracja światów (MG
-  2026-11-16: od razu, także kampania i Poligon, po kopii zapasowej) — `game.neuroshima.migracje.m8`. Zostaje pełna
-  macierz §11 jako raport odbioru i pokrycie M7 w `PLAN_beta.md`.
+- **E9:** zamknięte 2026-11-16 — M4 w ledgerze, migracja światów wykonana (piaskownica, Poligon, kampania), macierz
+  odbioru §13.5. Zostaje pokrycie M7 w `PLAN_beta.md` (bez zmian po M8) i ocena list decyzji klasowych paska przez MG.
+
+### 13.5. Macierz odbioru §11 (2026-11-16)
+
+42 z 46 wektorów ma test automatyczny, 4 częściowy (reszta przypadku — próba na Poligonie). Pełny Quench przed E9:
+1644/1644, bez ostrzeżeń zgodności modułu; e2e `ruch`, `gotowosc`, `combat`, `poligon` zielone (`poligon` 2026-11-16: wszystkie
+stanowiska, jedyny wyjątek konsoli — samouczek nowego świata rdzenia przy zakładaniu świata).
+
+| Wektor | Pokrycie | Dowód |
+| --- | --- | --- |
+| T01 | tak | Quench `ekonomia`; e2e `ruch` |
+| T02 | tak | Quench `ekonomia`; e2e `ruch` |
+| T03 | tak | Quench `ekonomia` (natywny pomiar siatki: 4,5 m po skosie, 6 m z wysokością, objazd sumuje) |
+| T04 | tak | Quench `teren-m8` (D34: czołganie + teren + ciągnięcie = 6 m; tryb „Ciągnięcie”) |
+| T05 | tak | Quench `ekonomia` (dwa Regiony — ×2), `teren-m8` (schody + gruz przy odporności na schody) |
+| T06 | częściowo | Regiony natywne i preset — `teren-m8`; import z Tiled i ponowny import — dotychczasowe `maps.update`, bez testu M8 (Poligon, MG) |
+| T07 | tak | Quench `ekonomia`; e2e `ruch` |
+| T08 | tak | Quench `ekonomia` |
+| T09 | tak | Quench `ekonomia` |
+| T10 | tak | Quench `ekonomia` |
+| T11 | tak | Quench `ekonomia` |
+| T12 | tak | Quench `wyczekanie` (także zagnieżdżona reakcja przeciwnika); e2e `ruch` |
+| T13 | tak | Quench `ekonomia` |
+| T14 | częściowo | Koszt z natywnej drogi i deklaracja po fakcie — `ekonomia`; obejście ściany z wcześniejszym Przyspieszeniem bez osobnego testu (Poligon) |
+| T15 | tak | Quench `skok`, `poziomy`; e2e `ruch` |
+| T16 | tak | Quench `skok` (Skoczek, Gladiator, istota ze stałym skokiem, Sportowiec) |
+| T17 | tak | Quench `skok` |
+| T18 | tak | Quench `skok`, `poziomy` |
+| T19 | tak | Quench `teren-m8` (wsiadanie i dosiadanie w budżecie, koń w turze jeźdźca), `pojazdy`; Poligon `stajnia`, `garaz` |
+| T20 | tak | Quench `teren-m8` (Alpinista z lalki) |
+| T21 | tak | Quench `ekonomia`; e2e `ruch` |
+| T22 | tak | Quench `ekonomia`; e2e `ruch` |
+| T23 | tak | Quench `ekonomia` |
+| T24 | tak | Quench `ekonomia` |
+| T25 | częściowo | Ochraniacze na ciężki pancerz — `lalka` (D27); ochraniacze w aktywnym Berserku — Poligon |
+| T26 | tak | Quench `atakowanie` (T26, Pakowanie, para Siekierezady); e2e `ruch` (dobycie bez okna ataku) |
+| T27 | tak | Quench `wyczekanie` |
+| T28 | tak | Quench `wyczekanie`; e2e `ruch` |
+| T29 | tak | Quench `wyczekanie` |
+| T30 | tak | Quench `atakowanie` (także manewr w slocie); e2e `ruch` |
+| T31 | tak | Quench `atakowanie` |
+| T32 | tak | Quench `atakowanie` |
+| T33 | tak | Quench `atakowanie` |
+| T34 | tak | Quench `atakowanie` |
+| T35 | częściowo | Nożownik bez celu — krytyk z karty (`atakowanie`); Fuks na tej samej karcie i zmiana noża — Poligon |
+| T36 | tak | Quench `atakowanie` |
+| T37 | tak | Quench `atakowanie`; e2e `ruch` |
+| T38 | tak | Quench `ekonomia` (duplikat id, wykonawca, tura w bazie po zapisie); e2e `ruch` (gracz przez MG), `gotowosc` (dwa klienty) |
+| T39 | tak | Quench `atakowanie`, `sztuczki-walka`; e2e `combat` |
+| T40 | tak | Quench `okolicznosci`, `zdolnosci-walka` (Rzeźnik) |
+| T41 | tak | Quench `atakowanie`, `wyczekanie` |
+| T42 | tak | Quench `ekonomia` (akcja słowna, koniec tury bez kary) |
+| T43 | tak | Quench `pasek-m8` |
+| T44 | tak | Quench `gotowosc`; e2e `gotowosc` (przeładowanie w środku tury) |
+| T45 | tak | Quench `gotowosc` (ukryci, koń w siodle); e2e `gotowosc` (MG bez paska) |
+| T46 | tak | Quench `atakowanie` (atak przed walką bez kosztu; zaskoczenie — rdzeń i MG) |
+
+**Migracja światów — wykonana 2026-11-16** (decyzja MG): piaskownica (nic do zmiany), Poligon (53 kopie zdolności —
+plakietki i flagi pokrycia; drugi przebieg pusty), kampania `output` po kopii `2026-11-16_campaign-m8-migracja`
+(rejestr w sejfie, `Integracje/backups/README.md`): 6 kopii zdolności, stare flagi `lastBurstUse` na broniach świata i
+kart, opisy krótkiej serii odświeżone przy starcie; drugi przebieg pusty, log serwera bez ostrzeżeń, świat zatrzymany
+jak przed migracją.
 
 e2e `dron` padało 2026-11-15 na nazwie w OSD: Chrome stał na monitorze pionowym, kaskada okien dała widoki
 ~1104 × 2306, a OSD liczyło znak z samej wysokości (~16 kolumn — nazwa znikała, akcje wchodziły na PW). Poprawione
