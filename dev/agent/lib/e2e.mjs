@@ -400,6 +400,12 @@ async function settleBetweenSuites(clients) {
  */
 async function settle(client) {
   await client.eval(async () => {
+    // The seed's scene must be on every canvas before the suite reads `canvas.scene` (release gate 0.22.0:
+    // "Cannot read properties of null (reading 'tokens')" on a client still drawing the previous one).
+    const t0 = Date.now();
+    while (game.scenes.active && !(canvas.ready && canvas.scene?.id === game.scenes.active.id) && Date.now() - t0 < 15000) {
+      await new Promise(r => setTimeout(r, 100));
+    }
     // `tourInProgress` is a boolean; the tour itself is `activeTour` (the old call never closed anything).
     await foundry.nue?.Tour?.activeTour?.exit?.();
     for (const app of [...foundry.applications.instances.values()]) {

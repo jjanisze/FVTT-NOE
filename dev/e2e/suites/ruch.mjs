@@ -288,12 +288,15 @@ async function przygotujLalke() {
   const sztylet = bron.find(d => d.getFlag(M, "weaponId") === "sztylet");
   const nogi = (await game.packs.get(`${M}.zdolnosci-klasowe`).getDocuments()).find(d => d.getFlag(M, "abilityId") === "szybkie-nogi");
   for (const i of lalka.heldItems(a).map(h => h.item).filter(Boolean)) await lalka.place(a, i, "pack", { quiet: true, involuntary: true });
-  const [pochwa, plecak] = await a.createEmbeddedDocuments("Item", [
+  // `createEmbeddedDocuments` does not promise the input order back (seen in the release gate) — find by name.
+  const created = await a.createEmbeddedDocuments("Item", [
     { ...game.items.fromCompendium(sztylet), name: "Sztylet (pochwa)" },
     { ...game.items.fromCompendium(sztylet), name: "Sztylet (plecak)" },
     { name: "Pakowanie", type: "feat", flags: { [M]: { sztuczka: "pakowanie" } } },
     game.items.fromCompendium(nogi)
   ]);
+  const pochwa = created.find(i => i.name === "Sztylet (pochwa)");
+  const plecak = created.find(i => i.name === "Sztylet (plecak)");
   await lalka.place(a, a.items.get(pochwa.id), "melee.0", { quiet: true, involuntary: true });
   await lalka.place(a, a.items.get(plecak.id), "pack", { quiet: true, involuntary: true });
   // The gate's slower world: the fresh items' create hooks may still be settling — wait, don't read a mid-step.
