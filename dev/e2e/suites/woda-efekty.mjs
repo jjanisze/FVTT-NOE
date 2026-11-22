@@ -51,6 +51,9 @@ export default {
           const token = canvas.tokens.get(id);
           await token.document.update({ rotation }, { animate: false });
           await __e2e.quiet();
+          // The capture is screen-sized: the token must be on screen, wherever an earlier suite left the view.
+          canvas.pan({ x: token.center.x, y: token.center.y });
+          await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
           const mesh = token.mesh, renderer = canvas.app.renderer;
           const filter = mesh.filters.find(f => f.token === token);
           // Test the low-water extreme; the new upper extreme intentionally reaches above the midpoint.

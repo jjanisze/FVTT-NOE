@@ -40,6 +40,7 @@ import { disposeContexts } from "./browser.mjs";
 import { startServer } from "./server.mjs";
 import { agentWorldId } from "./guards.mjs";
 import { installE2E } from "./e2e-page.mjs";
+import { readLog } from "./logs.mjs";
 import { DEEP_STACKS, knownCoreError, parseCompatWarning, stripOrigins, summariseCompat } from "./compat.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -521,9 +522,15 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       report.boot = { ok: unexpected.length === 0, consoleErrors, allowedConsoleErrors: allowed, compat: drainAllCompat(clients, "boot") };
       if (unexpected.length) note(`FAIL boot: ${unexpected.length} console error(s) while the clients loaded`);
     }
-    if (quench) {
-      // The module's Quench batches (release gate: the "recommended" world), before the suites: their leftover
-      // actors and combats (Poligon personas, a running skirmish) are not part of what Quench tests (2026-11-22).
+    // The module's Quench batches (release gate: the "recommended" world): after the regular suites, before the ones
+    // that fill the world (RUN_LAST — the Poligon Obsada), with the suites' combats ended (2026-11-22).
+    let quenchDone = !quench;
+    const runQuench = async () => {
+      quenchDone = true;
+      // Server errors of the suites so far are a verdict; Quench's own provoked ones (after this point) are not.
+      const errors = readLog(ctx.profile.logs, { since: run.startedAt, level: "error" });
+      report.serverErrorsBeforeQuench = errors.slice(0, 10).map(e => e.message.slice(0, 300));
+      await clients.get("gm").eval(async () => { for (const c of [...game.combats]) await c.delete(); }).catch(() => null);
       const t0 = Date.now();
       try {
         const r = await clients.get("gm").eval(() => game.neuroshima.tests.run());
@@ -532,12 +539,16 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
         report.quench = { ok: false, error: err.message, ms: Date.now() - t0 };
       }
       // Quench provokes errors on purpose; its console is evidence, not a verdict.
+      await quietAll(clients.values()).catch(() => null);
       report.quench.consoleErrors = drainAllErrors(clients);
       report.quench.compat = drainAllCompat(clients, "quench");
       note(`${report.quench.ok ? "PASS" : "FAIL"} quench ${report.quench.passed ?? "?"}/${report.quench.total ?? "?"}`);
+      if (errors.length) note(`FAIL server log before Quench: ${errors.length} error(s)`);
+      run.startedAt = new Date();
       saveProgress();
-    }
+    };
     for (const [i, suite] of loaded.entries()) {
+      if (!quenchDone && RUN_LAST.has(suite.name)) await runQuench();
       const t0 = Date.now();
       if (i > 0) {
         try {
@@ -602,6 +613,7 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       chargeLate(report.suites.at(-1), loaded[report.suites.length - 1], drainAllErrors(clients), drainAllCompat(clients, "late"));
       saveProgress();
     }
+    if (!quenchDone) await runQuench();
   } finally {
     browser.close();
   }
@@ -611,7 +623,8 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
   // (PLAN_migracja_dnd5e6.md E10): every one is an API the next core or dnd5e removes. Core's, dnd5e's own and other
   // packages' warnings stay a note.
   report.compat.moduleOk = !((report.compat.byCaller?.module ?? 0) + (report.compat.byCaller?.harness ?? 0));
-  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true) && report.compat.moduleOk;
+  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true) && report.compat.moduleOk
+    && !report.serverErrorsBeforeQuench?.length;
   report.finishedAt = new Date().toISOString();
   report.reportFile = path.relative(MODULE_ROOT, path.join(run.dir, "report.json")).replaceAll("\\", "/");
   fs.writeFileSync(path.join(run.dir, "report.json"), JSON.stringify(report, null, 2));
