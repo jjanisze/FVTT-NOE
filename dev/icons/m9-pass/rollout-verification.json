@@ -1,0 +1,75 @@
+{
+  "schema": "noe-m9-rollout/v1",
+  "date": "2026-11-18",
+  "status": "complete",
+  "profile": "noe-m9-r07-v2",
+  "approval": "dev/icons/m9-pass/finish-approval.json",
+  "whiteMasterCorrections": 17,
+  "finalArtifactCleanup": {
+    "batch": 128,
+    "method": "GM-approved deterministic Python normalization after built-in image-service rejection",
+    "subjects": ["chemicals/trucizna", "weapon/beretta_b92", "weapon/k_22_revolver"],
+    "poisonObjectPixelsAndPlacementUnchanged": true,
+    "poisonDetachedAlphaPixelsRemoved": 25,
+    "pistolDetachedAlphaPixelsRemoved": 99,
+    "firearmSafeMarginNormalization": true,
+    "finishApprovalRevision": "dev/icons/review/candidates/batch-128/finish-approval.json",
+    "verification": "dev/icons/review/candidates/batch-128/closeout-verification.json",
+    "revisedSubjects": 3,
+    "unchangedFromPreviousApprovedSnapshot": 779,
+    "remainingConfirmedArtworkRequests": 0
+  },
+  "requestedCleanup": {
+    "batch": 127,
+    "subjects": ["neodrugs", "tornado", "narkotyki_latwe", "narkotyki_przedwojenne", "cygaro"],
+    "method": "Successful built-in OpenAI image edit; crop fallback not used",
+    "receipt": "dev/icons/review/candidates/batch-127/installed.json"
+  },
+  "finishes": {
+    "approved": 782,
+    "exported": 782,
+    "families": 22,
+    "assignmentGaps": 0,
+    "changedVariants": 10,
+    "unchangedVariants": 772,
+    "completeFinishCheck": "passed; 787 rasters including five banners, generated tokens, signs, status and runtime lookup",
+    "manifestCheck": "passed"
+  },
+  "packs": {
+    "sandboxBuildAndValidation": "passed",
+    "campaignBuildAndValidation": "passed",
+    "stagedPacks": 19,
+    "stagedRecords": 1835,
+    "liveManifestBindingsChecked": 1287,
+    "liveBindingMismatches": 0,
+    "worldItemMigration": "Not performed; separate explicit operation"
+  },
+  "sandbox": {
+    "exportedImagesDecoded": 782,
+    "decodeFailures": 0,
+    "rawSourceItemCreation": "Five corrected items selected chemical finishes and neutral activity finishes",
+    "resourcePanelFix": "Render WEBP with the shared image glyph; dnd5e-icon is SVG-only",
+    "visibleCorrectedIcons": 5,
+    "visibleIconDimensions": [44, 44],
+    "screenshot": "Attached in the conversation; screenshot-tool filesystem export was unavailable",
+    "scratchCleanup": "passed"
+  },
+  "browser": {
+    "approvedCards": 782,
+    "brokenImages": 0,
+    "horizontalOverflow": false
+  },
+  "tests": {
+    "finishRoutingAndRaster": { "passed": 12, "failed": 0 },
+    "graphicsBrowser": { "passed": 20, "failed": 0 },
+    "staticSuite": "passed",
+    "quenchM9": {
+      "total": 14,
+      "passed": 13,
+      "limitation": "The PC-sheet test repeatedly reports ResizeObserver loop completed with undelivered notifications and a secondary duplicate-completion error. Icon-specific sandbox rendering and decoding passed."
+    }
+  },
+  "remainingArtworkCleanup": [],
+  "m9CodingHandoff": "HANDOFF_m9_graphics_to_code.md",
+  "poligonRollout": "Pending coding continuation: refresh module manifest/packs and existing document image paths without resetting stations."
+}

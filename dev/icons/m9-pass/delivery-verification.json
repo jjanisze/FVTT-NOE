@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-17",
+  "approvedWhiteMastersDelivered": 9,
+  "exactSvgWebpFilesVerified": 18,
+  "oldVariantsArchived": 18,
+  "legacyPngSidecarsRetired": 9,
+  "savedFeedbackPreserved": true,
+  "remainingActiveArtworkReviews": 0,
+  "finishManifest": {
+    "check": "passed",
+    "assignedSubjects": 488,
+    "activeProfile": "noe-m9-r07-v1"
+  },
+  "finishEngine": {
+    "check": "passed",
+    "pillow": "12.2.0",
+    "libwebp": "1.6.0",
+    "previewOnlySubjects": 488,
+    "previewBrokenImages": 0
+  },
+  "graphicsReviewTests": {
+    "passed": 19,
+    "failed": 0
+  },
+  "sandboxRender": {
+    "servedFilesMatchingDeliveryHashes": 18,
+    "decodedSvgImages": 36,
+    "cssSizes": [64, 44, 32, 16],
+    "allImagesSquare": true,
+    "previewOverflow": false,
+    "temporaryDomPreviewRemoved": true,
+    "screenshot": "Returned inline by Chrome DevTools. No local screenshot path is claimed."
+  },
+  "nextStep": "Choose the proposed treatments for missing families before the full-library finish review.",
+  "familyProposalStatus": "proposed",
+  "remainingCleanupSubjectsWithUsableMasters": 7
+}

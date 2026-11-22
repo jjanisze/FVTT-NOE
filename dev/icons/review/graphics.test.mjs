@@ -17,6 +17,8 @@ async function fixture(t){
   for(const file of["index.html","app.mjs","style.css","queue.mjs","image-viewer.mjs"])put("dev/art/creatures/review/"+file,fs.readFileSync(path.join(SOURCE,"../../art/creatures/review",file),"utf8"));
   put("dev/icons/review/manifest.json",{items:[{id:"icon",name:"Icon",candidates:[{id:"i01",src:"icon.webp"}]}]});
   put("dev/icons/review/feedback.json",{version:1,items:{older:{decision:"approve",notes:"Preserve icon history"}}});
+  put("dev/finish/preview/index.html","<!doctype html><title>Finished icon preview</title>");
+  put("ui/noe/signs/action.svg","<svg></svg>");
   const p={id:"p01",src:"dev/art/creatures/candidates/portrait.webp",prompt:"dev/art/creatures/prompts/p01.json",sha256:createHash("sha256").update("portrait").digest("hex")};
   put(p.src,"portrait");put(p.prompt,{prompt:"Actual frozen prompt"});
   put("dev/art/creatures/manifest.json",{version:1,references:[],entries:[{id:"horse",title:"Horse",targets:{portrait:"tokens/portraits/horse.webp",token:"tokens/horse.webp"},candidates:{portrait:[p],token:[]}}]});
@@ -35,6 +37,14 @@ test("icons, creatures, references, overlay and shared tabs are served by one li
   const c=await(await fetch(f.url+"/creatures/api/catalog")).json();assert.equal(c.entries[0].id,"horse");
   assert.equal((await fetch(f.url+"/creatures/assets/"+encodeURIComponent(f.p.src))).status,200);
   assert.equal((await fetch(f.url+"/creatures/assets/"+encodeURIComponent("../private.json"))).status,404);
+});
+
+test("the completed finish gallery exposes only its fixed preview and public UI assets",async t=>{
+  const f=await fixture(t);
+  assert.equal((await fetch(f.url+"/m9-finishes.html")).status,200);
+  assert.equal((await fetch(f.url+"/ui/noe/signs/action.svg")).status,200);
+  assert.equal((await fetch(f.url+"/dev/finish/manifest.json")).status,404);
+  assert.equal((await fetch(f.url+"/ui/noe/..%2F..%2F..%2Fdev/finish/manifest.json")).status,400);
 });
 test("ratings stay isolated and retain prior decisions and creature provenance",async t=>{
   const f=await fixture(t),post=(route,body)=>fetch(f.url+route,{method:"POST",headers:{"content-type":"application/json",origin:f.url},body:JSON.stringify(body)});

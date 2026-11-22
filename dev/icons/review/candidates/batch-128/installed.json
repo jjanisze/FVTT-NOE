@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-18",
+  "batch": 128,
+  "method": "GM-approved deterministic cleanup after image-service rejection",
+  "authorization": "GM reported the lower-right dot on chemicals/trucizna and requested closing remaining opens before an M9 coding handoff; this includes the two queued minor firearm artifacts.",
+  "archive": "raw/before/",
+  "subjects": [
+    {
+      "key": "trucizna",
+      "wrapper": "icons/items/loot/trucizna.svg",
+      "finishId": "chemicals/trucizna",
+      "files": [
+        {
+          "path": "icons/items/loot/trucizna.svg",
+          "sha256": "3968b43e324f6f46b2e7d991b596b04734866c0ace40651d0a29ad4942da02d2"
+        },
+        {
+          "path": "icons/items/loot/trucizna.webp",
+          "sha256": "cf9ed1cdfe1d0cc74c86f062976ad45d4c604e680ad5edd9867b4bdd29ffbd46"
+        }
+      ],
+      "sourcePixelSha256": "77bbb1fc73a010242a30ab3797c6ff935a0306a13092eeee64f1ec689fcb5230",
+      "archived": [
+        {
+          "source": "icons/items/loot/trucizna.svg",
+          "sourceSha256": "3488a44ae07a0c9192ed2130195f8ed45d51fb4a9b106cc1505394fa19dec3b2"
+        },
+        {
+          "source": "icons/items/loot/trucizna.png",
+          "sourceSha256": "732d46a202fccf313fe8093a42626ab8674f90bb2e0af942a9b4617db34cb16c"
+        }
+      ]
+    },
+    {
+      "key": "beretta_b92",
+      "wrapper": "icons/weapons/beretta_b92.svg",
+      "finishId": "weapon/beretta_b92",
+      "files": [
+        {
+          "path": "icons/weapons/beretta_b92.svg",
+          "sha256": "f33ca078f073c304f3dacc1a54199c0ed44ac5ad1e995a853101a68e8cce059a"
+        },
+        {
+          "path": "icons/weapons/beretta_b92.webp",
+          "sha256": "66de3a69d08a0bc71255aa39f2a1e94204f5f6971dc24d052c5de9f02961466b"
+        }
+      ],
+      "sourcePixelSha256": "f9693bfc847cd238a24ada3a6b3d7a165b0689428af104df5ca9b8ecf8484b8b",
+      "archived": [
+        {
+          "source": "icons/weapons/beretta_b92.svg",
+          "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc"
+        }
+      ]
+    },
+    {
+      "key": "k_22_revolver",
+      "wrapper": "icons/weapons/k_22_revolver.svg",
+      "finishId": "weapon/k_22_revolver",
+      "files": [
+        {
+          "path": "icons/weapons/k_22_revolver.svg",
+          "sha256": "78831ddfd616698b030df9f4297e3bb1af3a866d3976d7531d1f132301dd61e3"
+        },
+        {
+          "path": "icons/weapons/k_22_revolver.webp",
+          "sha256": "0b6fb4727e1f7f6052eb7ec3678cca34f21032e0c07ff905ef1ff07477a7b6ac"
+        }
+      ],
+      "sourcePixelSha256": "442dacb09e2c5efb6b0c15b1d6b18281b9a8c49446dadc520eb5f7569913d5e5",
+      "archived": [
+        {
+          "source": "icons/weapons/k_22_revolver.svg",
+          "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "batch": 128,
+  "method": "GM-approved deterministic cleanup after image-service rejection",
+  "authorization": "normalization-authorization.json",
+  "subjects": [
+    {
+      "key": "trucizna",
+      "source": "icons/items/loot/trucizna.png",
+      "sourceSha256": "732d46a202fccf313fe8093a42626ab8674f90bb2e0af942a9b4617db34cb16c",
+      "removedAlphaPixels": 25,
+      "removalBox": [
+        194,
+        230,
+        203,
+        236
+      ],
+      "untouchedAlphaOutsideRemoval": true,
+      "safeMarginNormalization": false,
+      "outputPixelSha256": "77bbb1fc73a010242a30ab3797c6ff935a0306a13092eeee64f1ec689fcb5230",
+      "bounds": [
+        53,
+        20,
+        176,
+        210
+      ]
+    },
+    {
+      "key": "beretta_b92",
+      "source": "icons/weapons/beretta_b92.svg",
+      "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc",
+      "removedAlphaPixels": 99,
+      "removalBox": [
+        0,
+        81,
+        10,
+        94
+      ],
+      "untouchedAlphaOutsideRemoval": true,
+      "safeMarginNormalization": true,
+      "outputPixelSha256": "f9693bfc847cd238a24ada3a6b3d7a165b0689428af104df5ca9b8ecf8484b8b",
+      "bounds": [
+        20,
+        37,
+        236,
+        218
+      ]
+    },
+    {
+      "key": "k_22_revolver",
+      "source": "icons/weapons/k_22_revolver.svg",
+      "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95",
+      "removedAlphaPixels": 0,
+      "removalBox": null,
+      "untouchedAlphaOutsideRemoval": true,
+      "safeMarginNormalization": true,
+      "outputPixelSha256": "442dacb09e2c5efb6b0c15b1d6b18281b9a8c49446dadc520eb5f7569913d5e5",
+      "bounds": [
+        20,
+        69,
+        236,
+        187
+      ]
+    }
+  ]
+}

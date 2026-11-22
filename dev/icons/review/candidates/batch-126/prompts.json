@@ -1,0 +1,11 @@
+{
+  "tool": "OpenAI built-in image_gen",
+  "model": null,
+  "date": "2026-11-17",
+  "reference": "raw/style-reference.png",
+  "atlas": "Use case: stylized-concept. Asset type: monochrome inventory glyph atlas for a serious post-apocalyptic tabletop game.\nCreate ONE square 3-by-3 atlas. Nine equal cells in EXACT row-major order, without visible grid, borders or labels. Each active cell contains its ONE requested composition, fully inside that cell, with generous black padding on all sides. Pure solid WHITE silhouettes on perfectly clean BLACK. Flat stencil-like shapes with broad black negative-space cuts; never outline drawings. No gray, colour, gradient, shading, fine engraving, texture, noise, grain, dither or drop shadows. Avoid hairline internal detail: details must remain legible at 16 pixels. Match the restraint, solid coverage and large cutouts of reference image 1. Reference image 1 supplies STYLE ONLY, never its instrument subjects. Do not add backgrounds, frames, UI, words, numbers or logos.\nCELL 1 (row 1, column 1): ONE complete stout cigar, gently diagonal, with one broad plain band represented by a black gap and one blunt end. No smoke, burning particles, leaf veins, wrapper texture or small lines.\nCELL 2 (row 1, column 2): ONE complete Beretta-92-style service PISTOL in clean side profile, muzzle pointing LEFT: long low open-top slide, rounded trigger guard with a broad empty opening, angled grip and short exposed hammer. At most THREE broad black structural cuts. No bullets, floating specks, weapon diagram, exploded parts, lettering or engraving.\nCELL 3 (row 1, column 3): ONE complete small .22-calibre REVOLVER in clean side profile, muzzle pointing LEFT: slim moderate barrel, unmistakable round cylinder, short hammer, a broad empty trigger-guard opening and gently curved grip. At most THREE broad black cuts. No bullets, specks, engraving, fine cylinder grooves, lettering or exploded parts.\nCELLS 4, 5, 6, 7, 8, 9 MUST BE COMPLETELY EMPTY BLACK. No filler icons.\nKeep the scale and visual weight consistent across cells. Make physical objects immediately recognizable with a handful of bold shapes. No cheerful cartoon styling, decorative fantasy equipment or fine technical illustration.",
+  "targetedCorrections": [],
+  "referenceRoles": [
+    "Approved glyph style only; no drug subjects or reference imagery"
+  ]
+}

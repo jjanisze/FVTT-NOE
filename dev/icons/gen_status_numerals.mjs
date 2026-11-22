@@ -37,7 +37,12 @@ const SYSTEM_DIRS = [
   "C:/Git/fvtt-dnd5e/icons/svg/statuses"
 ];
 
-const OUT_DIR = path.resolve(fileURLToPath(new URL("../../icons/statuses", import.meta.url)));
+/** Ręczne sylwetki modułu (Upojenie, Skażenie) leżą tu i są wejściem, nie wynikiem. */
+const BASE_DIR = path.resolve(fileURLToPath(new URL("../../icons/statuses", import.meta.url)));
+// `--out=<katalog>`: silnik wykończeń (`npm run build:finish -- --check`) generuje obok i porównuje tekst.
+const OUT_ARG = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice(6);
+const OUT_DIR = OUT_ARG ? path.resolve(OUT_ARG) : BASE_DIR;
+const QUIET = process.argv.includes("--quiet");
 const ZRANIENIE_LEVELS = 4;
 const WYCZERPANIE_LEVELS = 6;
 
@@ -63,7 +68,7 @@ function read(dir, name) {
 
 function write(name, svg) {
   fs.writeFileSync(path.join(OUT_DIR, name), Buffer.from(svg, "utf8"));
-  console.log(name);
+  if (!QUIET) console.log(name);
 }
 
 function extract(svg, re, what, file) {
@@ -121,7 +126,7 @@ ${BANNER}
    Te same powody co wyżej: dnd5e 6.0 szuka `upojenie-N.svg` / `skazenie-N.svg` obok pliku bazowego. */
 
 for (const [id, levels] of [["upojenie", 4], ["skazenie", 4]]) {
-  const base = fs.readFileSync(path.join(OUT_DIR, `${id}.svg`), "utf8");
+  const base = fs.readFileSync(path.join(BASE_DIR, `${id}.svg`), "utf8");
   if (!/viewBox="0 0 512 512"/.test(base)) {
     console.error(`${id}.svg nie ma viewBox 0 0 512 512 — skala cyfry by się rozjechała.`);
     process.exit(1);

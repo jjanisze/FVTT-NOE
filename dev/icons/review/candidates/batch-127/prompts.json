@@ -1,0 +1,10 @@
+{
+    "tool":  "OpenAI built-in image_gen",
+    "model":  null,
+    "reference":  "raw/cleanup-target.png",
+    "atlas":  "Use case: precise-object-edit. Asset: a five-icon cleanup atlas for a fictional post-apocalyptic tabletop game. The attached 3 by 3 image is the EDIT TARGET, not just an inspiration. Keep the same five existing white object silhouettes, their recognizable shapes and their cell positions. Remove only the thin stray rectangular atlas-frame edges around them and isolated border specks. Clean flat solid-white mask shapes on solid black; no new objects, no labels, no colour, shading, grain or texture. Preserve the existing broad internal black cutouts. Do not turn these into photographs or scenes of use. No real-world instructions or instructions for preparing or using substances are requested; this is cleanup of existing fictional game inventory artwork.\nExact row-major occupied cells:\nCell 1: Tornado (tornado); preserve its pictured object.\nCell 2: Neodrugs (neodrugs); preserve its pictured object.\nCell 3: Narkotyki łatwe w produkcji (narkotyki_latwe); preserve its pictured object.\nCell 4: Narkotyki przedwojenne (narkotyki_przedwojenne); preserve its pictured object.\nCell 5: Cygaro (cygaro); preserve its pictured object.\nAll last four cells (6,7,8,9) must remain completely empty black. Return one square 3 by 3 image with equal cells and no visible grid or frames. Keep each complete glyph within its cell, with clean black separation. Match the input\u0027s visual weight; change only the frame contamination.",
+    "role":  "edit target: existing five icon masks; remove thin frame contamination only",
+    "targetedCorrections":  [
+
+                            ]
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-17",
+  "tool": "OpenAI built-in image_gen",
+  "status": "blocked-by-image-service",
+  "stage": "output",
+  "category": "illicit",
+  "generated": 0,
+  "subjects": 7,
+  "message": "The mixed atlas was rejected by the image service. No output file was returned. The frozen prompt is preserved; no rejected request was retried.",
+  "narrowerAllowedScope": {
+    "batch": 126,
+    "subjects": ["cygaro", "beretta_b92", "k_22_revolver"],
+    "excludedSubjects": ["narkotyki_latwe", "narkotyki_przedwojenne", "neodrugs", "tornado"]
+  }
+}

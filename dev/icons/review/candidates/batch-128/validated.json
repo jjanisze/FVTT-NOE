@@ -1,0 +1,16 @@
+{
+  "batch": 128,
+  "validatedMasks": 3,
+  "candidateHashes": {
+    "trucizna": "ed01197d75eaaa82df93980b03a7d5360e3da584b8b7e40cb2749dc2514e7bbc",
+    "beretta_b92": "2dd90da196b75f98e50b7fc0b660f4689275beb254cd8c1d09b3ef02d1d1cae7",
+    "k_22_revolver": "b11c1ae28fd14ab82dd48efccb733b947106254fbb938ceb9961dcbaaa268bc1"
+  },
+  "checks": [
+    "Exact poison pixels preserved outside the 25-pixel detached speck",
+    "Only the measured 99-pixel detached pistol artifact removed before normalization",
+    "Firearm silhouette preserved through existing safe-margin normalization",
+    "256 px white SVG/WEBP masks decode identically",
+    "Minimum 20 px safe margin"
+  ]
+}

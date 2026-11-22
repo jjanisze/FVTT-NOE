@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-17",
+  "previousProfile": "noe-m9-r07-v1",
+  "profile": "noe-m9-r07-v2",
+  "decision": "Use the proposed family treatments (Recommended)",
+  "previousProfileSha256": "c5c285ed77bffa450daabc607293b84fefb0bab8b8afa959d5320fa9965cc00d",
+  "proposedProfileSha256": "445f53c789b78eac75e50cfdf95b12dc33e518b6f05549f0fac9f3b4007ef691",
+  "approvedProfileSha256": "f7805d7c0e51c4672c05235637e12907e3a304fc6a3456619e15a4e2dcebe66e",
+  "scope": "Missing-family semantics and existing-colour treatments only. Full-library output pixels remain for review.",
+  "families": {
+    "creature": "generic ground",
+    "shared": "existing shared generic ground",
+    "devices": "existing tools tint",
+    "documents": "existing salvage tint"
+  }
+}

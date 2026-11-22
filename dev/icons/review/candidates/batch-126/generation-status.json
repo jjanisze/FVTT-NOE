@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-17",
+  "tool": "OpenAI built-in image_gen",
+  "status": "blocked-by-image-service",
+  "stage": "output",
+  "category": "illicit",
+  "generated": 0,
+  "subjects": ["cygaro", "beretta_b92", "k_22_revolver"],
+  "message": "The narrower non-drug atlas was also rejected by the image service. No output file was returned. No further generation attempts were made."
+}

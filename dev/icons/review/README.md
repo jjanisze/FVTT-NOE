@@ -63,6 +63,20 @@ writes feedback atomically.
 
 ## Browse all current icons
 
+For M9 coverage, run `node dev/icons/audit-m9-icons.mjs`, then open **M9 — braki ikon**
+on this same server. The read-only audit stages module packs, uses the browser's own
+catalog and saved decisions, and validates the white masks through the finish engine.
+It separates absent artwork from family assignments, planned finishes, intentional
+UI/canvas exceptions, edge-touching masters and library paths outside the static scan.
+Suggested finishes are CSS previews using existing glyphs and profile colours; they do
+not approve or install anything. Cards link back to this browser for actual style flags.
+World-only documents and dynamically constructed image paths are outside this audit.
+
+**M9 — wykończenia** (`m9-finishes.html`) serves the finish engine's actual full-library
+preview, with family and subject filters. The active v2 profile has approved family treatments;
+the complete output-pixel set remains a separate selection. Regenerate with the finish engine,
+then `node dev/icons/m9-pass/prepare-finish-review.mjs` freezes the source/profile/pixel hashes.
+
 Open **Browse all icons** in the review header, or `browser.html` on the same
 local server. The library scans `icons/**`, including older icons outside the
 generation queue. PNG/SVG/WEBP files with the same stem are grouped into one

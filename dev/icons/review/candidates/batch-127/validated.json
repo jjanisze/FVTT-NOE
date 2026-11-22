@@ -1,0 +1,12 @@
+{
+  "batch": 127,
+  "validatedMasks": 5,
+  "prospectiveDeliveryTargets": 10,
+  "candidateHashes": {
+    "tornado": "17285dc54846dd8db6068da2f3053ce56c4faeb23c5ad7030107b110ae0f4199",
+    "neodrugs": "190772c4a578c7126a8f698fb53bc9c940dd5de4db95fb308f003202f43cd520",
+    "narkotyki_latwe": "97aa060282c081c9bf7d8f0e4ac686c511ab75a2a996be974626f7ae7e0fbdc9",
+    "narkotyki_przedwojenne": "3551b6962a989f00c3de911b271ee4939fe8332b8054f326d487da003ff4bc6b",
+    "cygaro": "87c4ec46cd95268b81be1ad78780daf5fa1c398d5b8915096cf3329467bb9606"
+  }
+}

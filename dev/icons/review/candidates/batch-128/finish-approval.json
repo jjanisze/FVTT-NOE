@@ -1,0 +1,39 @@
+{
+  "schema": "noe-finish-approval-revision/v1",
+  "date": "2026-11-18",
+  "profile": "noe-m9-r07-v2",
+  "profileSha256": "f7805d7c0e51c4672c05235637e12907e3a304fc6a3456619e15a4e2dcebe66e",
+  "authorization": "dev/icons/review/candidates/batch-128/normalization-authorization.json",
+  "method": "GM-approved deterministic cleanup after image-service rejection",
+  "previousSnapshot": "dev/icons/review/candidates/batch-128/raw/finish-review-before.json",
+  "previousSnapshotSha256": "ccbb47494eedc938b2f68fd6f57b6c980c2ac9e0d2a2b7ac95c2a504f7ca53b0",
+  "earlierApprovalPreserved": "dev/icons/m9-pass/finish-approval.json",
+  "revisedSubjects": 3,
+  "unchangedSubjects": 779,
+  "entries": [
+    {
+      "id": "chemicals/trucizna",
+      "source": "icons/items/loot/trucizna.webp",
+      "output": "icons/finished/chemicals/trucizna.webp",
+      "sourceSha256": "cf9ed1cdfe1d0cc74c86f062976ad45d4c604e680ad5edd9867b4bdd29ffbd46",
+      "outputPixelSha256": "02d25b6d602ce140007481e2e9df71e35337ba6d64ec0a280d692f97e9de3759",
+      "recipeSha256": "f8c033a84f36ad2b6371ca4ce596fc14536ef3e026c7914c6e4179aa03943f5e"
+    },
+    {
+      "id": "weapon/beretta_b92",
+      "source": "icons/weapons/beretta_b92.webp",
+      "output": "icons/finished/weapon/beretta_b92.webp",
+      "sourceSha256": "66de3a69d08a0bc71255aa39f2a1e94204f5f6971dc24d052c5de9f02961466b",
+      "outputPixelSha256": "0c126bf30a13ee29f8d05172cb6869a70bb43c30f16b3055c3598ad8c0d306b4",
+      "recipeSha256": "d0083f3184dc850972c62330192d40a93e16c1250cff0c0f3fefc7818ee00e8f"
+    },
+    {
+      "id": "weapon/k_22_revolver",
+      "source": "icons/weapons/k_22_revolver.webp",
+      "output": "icons/finished/weapon/k_22_revolver.webp",
+      "sourceSha256": "0b6fb4727e1f7f6052eb7ec3678cca34f21032e0c07ff905ef1ff07477a7b6ac",
+      "outputPixelSha256": "60d597bcdcf178ab9bb1498870644e65667814e8eba10b4320be8fad6726c204",
+      "recipeSha256": "d0083f3184dc850972c62330192d40a93e16c1250cff0c0f3fefc7818ee00e8f"
+    }
+  ]
+}

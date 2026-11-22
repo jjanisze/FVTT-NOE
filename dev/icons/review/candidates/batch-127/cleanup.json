@@ -1,0 +1,51 @@
+{
+  "batch": 127,
+  "method": "GM-requested OpenAI image cleanup",
+  "subjects": [
+    {
+      "key": "tornado",
+      "method": "OpenAI built-in targeted frame cleanup, existing pipeline normalization",
+      "source": "icons/items/drugs/tornado.png",
+      "sourceSha256": "bd6516daadddb62aa065f5298c27914cde13a97f962cef2c164ec60008bacf75",
+      "outputPixelSha256": "a16fd1fd7d29be9f6b067374947b61bc0b25f600fdbf47ac9e310ed564d3ca80",
+      "webpSha256": "298527e0e61b336a731c2679ad6a00aa9e1b97d44b9dbdbc9a7d5291d6fc5949",
+      "svgSha256": "f5543e8ba993d921edc76cc70df00d067b5373dc5722b68d4d15129f6b531231"
+    },
+    {
+      "key": "neodrugs",
+      "method": "OpenAI built-in targeted frame cleanup, existing pipeline normalization",
+      "source": "icons/items/drugs/neodrugs.png",
+      "sourceSha256": "3f172bc9309677df8df4cdf9d11f005acab53dacd9a3854c9bf9448acafca55a",
+      "outputPixelSha256": "15e008f4d307f09b22c0f55d103d6761b8a2ba14ca8da0d05cfc2741f3f1c203",
+      "webpSha256": "8c8db9988499960a47e50eb6da0650bbc8e0b6d3d5045fc00cf4dca6ac9e28e7",
+      "svgSha256": "3e11c738217c57372e5d863bed3acbd0f1613a2e3604a86766894391bd6c4732"
+    },
+    {
+      "key": "narkotyki_latwe",
+      "method": "OpenAI built-in targeted frame cleanup, existing pipeline normalization",
+      "source": "icons/items/drugs/narkotyki_latwe.png",
+      "sourceSha256": "552bb4996d88e8bf1614ea0873c4dd94cb7455dde2f7eaa601d642c80039fc44",
+      "outputPixelSha256": "05f13851bbb6d67388566a35c295c71e0808073bb1f354e548676753a69e3dbf",
+      "webpSha256": "a84a19c742471ed0d7f93e756546e4b7fe9139e72511636c87584e3a65a062b7",
+      "svgSha256": "9484c098a0a7085f14845dac4bbb057f67c5186799dd0011bcd811f6d8a8fd2f"
+    },
+    {
+      "key": "narkotyki_przedwojenne",
+      "method": "OpenAI built-in targeted frame cleanup, existing pipeline normalization",
+      "source": "icons/items/drugs/narkotyki_przedwojenne.png",
+      "sourceSha256": "6798e08c31e736f41f58eb1626ee1086d2cb45d0172770e849f675598a0914ce",
+      "outputPixelSha256": "3164f37f81c19b0501caf10334aba5bc94aaa88a27b5190464e3decb451ff3df",
+      "webpSha256": "cca4126cbdc655195694bd69eea2cf22e4b17dbe1676df9f05a2ecd7420fa01b",
+      "svgSha256": "e11414164fce9c35acd9a80da4aec4130ed7d46af7aaefda6ad840299d219a1a"
+    },
+    {
+      "key": "cygaro",
+      "method": "OpenAI built-in targeted frame cleanup, existing pipeline normalization",
+      "source": "icons/items/drugs/cygaro.png",
+      "sourceSha256": "b52f99a0edec2469cfcc510e758af864d232549c48d2197d886706b964ba93d8",
+      "outputPixelSha256": "e25689edd35d9c74380a0f88d075527d856b17f0fd6a11890c6c49c7d3cc1413",
+      "webpSha256": "100d552066781269a15a9936ecb37f3ed17f4ef81c0f14208bc3548aa4e9b826",
+      "svgSha256": "44e8a414bee19bcfeda19d697649e99a192da337f65afe45b5bbcdba4d2ee364"
+    }
+  ]
+}

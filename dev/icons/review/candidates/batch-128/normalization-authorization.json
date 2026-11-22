@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-18",
+  "approved": true,
+  "method": "deterministic-speck-cleanup",
+  "question": "The image service rejected the cleanup atlas. May I use the existing Python normalizer to remove only detached specks from these three masks, preserving their object shapes? Your earlier 2 px border-crop fallback cannot reach the poison dot.",
+  "answer": "Yes, remove detached specks (Recommended)",
+  "scope": "Remove the measured external poison/pistol specks, preserving the object pixels; existing firearm safe-margin normalization preserves their shapes. No new artwork or recipe change."
+}

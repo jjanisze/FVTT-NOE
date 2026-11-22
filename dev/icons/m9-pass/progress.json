@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-17",
+  "generator": "OpenAI built-in image_gen",
+  "model": null,
+  "candidates": 9,
+  "preservedCards": 583,
+  "unchangedSourceVariants": 18,
+  "unchangedDecisionFiles": {
+    "dev/icons/review/feedback.json": "68792a1b023d78efb13e227b5c6013f28961e29c5496eb0eb5508258d08530a9",
+    "dev/icons/review/style-feedback.json": "f779b69589ec11c0d415a4d141ba7428763f7ded8a4f66f80ddbaab1499b964a"
+  },
+  "validation": {
+    "batch": 124,
+    "validatedMasks": 9,
+    "prospectiveDeliveryTargets": 18,
+    "candidateHashes": {
+      "helm": "40d7e8c3b308d7ba8f6e4ef3c56f5036c7970723ff6b191045054d653e652a16",
+      "ochraniacze-nog": "598f5905c788e1d9cade921ec7f1c4d92482a62fd71d507d9129505c275de139",
+      "ochraniacze-rak": "f2333be7f9e2636ea4409604ed5be4346c256d571d3c35033558d18848ead1b5",
+      "pancerz-stalowej-policji": "baf3ceb6455d8c1512b9510060d769bca37339d3dd582770d8233d2bcba4239f",
+      "pelna-zbroja-smieciowa": "aa14fec160e4789025e72f0b58f38b846fae18968b67b3411d82e40b31d9db5f",
+      "wojskowy-pancerz-hydrauliczny": "662c57673c240c5a4d779bd78dc91eef46c51363a00379c170e008cffadd82b0",
+      "alkohol_markowy": "f035d2b1a8b297f22b731b7d9a588f368e04aec387214632dd5278c0db8d1328",
+      "alkohol_tani": "aa23d841ea39563a651269ab58a37b25cf00f6c148318fb2e68012f5971f4690",
+      "anestix": "a64da9a8dcf3c24d342667f4245ff8079eaa70227983943499fd41b2616b5c01"
+    }
+  },
+  "pendingAfterServiceRejection": [
+    {
+      "key": "cygaro",
+      "target": "icons/items/drugs/cygaro.svg"
+    },
+    {
+      "key": "narkotyki_latwe",
+      "target": "icons/items/drugs/narkotyki_latwe.svg"
+    },
+    {
+      "key": "narkotyki_przedwojenne",
+      "target": "icons/items/drugs/narkotyki_przedwojenne.svg"
+    },
+    {
+      "key": "neodrugs",
+      "target": "icons/items/drugs/neodrugs.svg"
+    },
+    {
+      "key": "tornado",
+      "target": "icons/items/drugs/tornado.svg"
+    },
+    {
+      "key": "beretta_b92",
+      "target": "icons/weapons/beretta_b92.svg"
+    },
+    {
+      "key": "k_22_revolver",
+      "target": "icons/weapons/k_22_revolver.svg"
+    }
+  ],
+  "rejectedBatches": [
+    125,
+    126
+  ],
+  "servedRoutes": [
+    "/",
+    "/browser.html",
+    "/m9-audit.html",
+    "/m9-gap-audit.md",
+    "/icons/armor/helm.svg",
+    "/candidates/batch-124/helm.png",
+    "/icons/armor/ochraniacze-nog.svg",
+    "/candidates/batch-124/ochraniacze-nog.png",
+    "/icons/armor/ochraniacze-rak.svg",
+    "/candidates/batch-124/ochraniacze-rak.png",
+    "/icons/armor/pancerz-stalowej-policji.svg",
+    "/candidates/batch-124/pancerz-stalowej-policji.png",
+    "/icons/armor/pelna-zbroja-smieciowa.svg",
+    "/candidates/batch-124/pelna-zbroja-smieciowa.png",
+    "/icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+    "/candidates/batch-124/wojskowy-pancerz-hydrauliczny.png",
+    "/icons/items/drugs/alkohol_markowy.svg",
+    "/candidates/batch-124/alkohol_markowy.png",
+    "/icons/items/drugs/alkohol_tani.svg",
+    "/candidates/batch-124/alkohol_tani.png",
+    "/icons/items/drugs/anestix.svg",
+    "/candidates/batch-124/anestix.png"
+  ],
+  "visualInspection": "Candidate inventory sheet inspected at 64/32/24/16 px. Chrome unavailable; HTTP and script syntax checks do not establish browser rendering."
+}

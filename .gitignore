@@ -19,6 +19,8 @@ logs/poligon/
 logs/release/
 # scratch evidence from preview/recording sessions
 logs/recording-prep/
+# Local project hub job results (private paths and diagnostic details)
+logs/hub/
 
 # Icon review queue (dev/icons/review): the tool, its manifest, the GM's feedback and each
 # batch's prompts are tracked; generated candidate images (~60 MB — approved ones are copied
@@ -62,3 +64,16 @@ Thumbs.db
 # LevelDB compendium lock (bare filename, held by the process with the pack
 # open — Windows denies read access while FVTT is running). Not content.
 packs/*/LOCK
+
+# M9 finish engine preview (`npm run build:finish -- --preview`): regenerated on demand, ~10 MB of embedded PNGs
+dev/finish/preview/
+
+# M9 art review rounds (dev/art/m9): only the three banner masters `build:finish` reads are tracked
+# (provenance in CREDITS.md and dev/art/m9/HISTORIA.md); the other rounds' images stay local.
+dev/art/m9/**/*.png
+dev/art/m9/**/*.jpg
+dev/art/m9/**/*.webp
+dev/art/m9/**/*.pdf
+!dev/art/m9/r02/sources/field-kit.png
+!dev/art/m9/r02/sources/pittsburgh-usgs.jpg
+!dev/art/m9/sources/workshop-v1.png

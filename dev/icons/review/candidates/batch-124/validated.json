@@ -1,0 +1,16 @@
+{
+  "batch": 124,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 18,
+  "candidateHashes": {
+    "helm": "40d7e8c3b308d7ba8f6e4ef3c56f5036c7970723ff6b191045054d653e652a16",
+    "ochraniacze-nog": "598f5905c788e1d9cade921ec7f1c4d92482a62fd71d507d9129505c275de139",
+    "ochraniacze-rak": "f2333be7f9e2636ea4409604ed5be4346c256d571d3c35033558d18848ead1b5",
+    "pancerz-stalowej-policji": "baf3ceb6455d8c1512b9510060d769bca37339d3dd582770d8233d2bcba4239f",
+    "pelna-zbroja-smieciowa": "aa14fec160e4789025e72f0b58f38b846fae18968b67b3411d82e40b31d9db5f",
+    "wojskowy-pancerz-hydrauliczny": "662c57673c240c5a4d779bd78dc91eef46c51363a00379c170e008cffadd82b0",
+    "alkohol_markowy": "f035d2b1a8b297f22b731b7d9a588f368e04aec387214632dd5278c0db8d1328",
+    "alkohol_tani": "aa23d841ea39563a651269ab58a37b25cf00f6c148318fb2e68012f5971f4690",
+    "anestix": "a64da9a8dcf3c24d342667f4245ff8079eaa70227983943499fd41b2616b5c01"
+  }
+}

@@ -59,6 +59,7 @@ import { computeFovAngle } from "../../scripts/config/fov.mjs";
 import { szablonyTowarzyszy, klasaTowarzysza } from "./build-towarzysze.mjs";
 import { szablonyPojazdow } from "./build-pojazdy.mjs";
 import { budujTabele, bledyTabel, zapiszTabele } from "./tabele.mjs";
+import { finisher } from "../finish/lib/apply.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -67,6 +68,9 @@ const MODULE_ROOT = path.resolve(HERE, "../..");
 // disk (while it runs and holds `packs/` open) needs a second copy, not an overwrite.
 const OUT = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice("--out=".length);
 const PACKS_ROOT = OUT ? path.resolve(OUT) : path.join(MODULE_ROOT, "packs");
+
+/** Wykończone ikony z silnika (`npm run build:finish`, PLAN_m9 §7.5): manifest wskazuje dokumenty po id. */
+const FINISH = finisher();
 
 const FOUNDRY_NM = "C:/Program Files/Foundry Virtual Tabletop/resources/app/node_modules";
 const require = createRequire(import.meta.url);
@@ -2004,6 +2008,8 @@ async function writePack(name, docs, folders = []) {
   const batch = db.batch();
   let effectCount = 0;
   for (const doc of docs) {
+    // Temat z gotowym eksportem dostaje wykończoną ikonę; reszta zostaje na białym masterze.
+    FINISH.apply(name, doc);
     const { _key, effects = [], ...rest } = doc;
     batch.put(`!items!${doc._id}`, v14Doc({ ...rest, effects: effects.map(e => e._id) }));
     for (const eff of effects) {
@@ -2055,6 +2061,7 @@ async function writeActorPack(name, entries, folders = []) {
   for (const { actor, items } of entries) {
     batch.put(`!actors!${actor._id}`, v14Doc({ ...actor, prototypeToken: v14PrototypeToken(actor.prototypeToken) }));
     for (const item of items) {
+      FINISH.apply(name, item, { parentId: actor._id });
       const { effects = [], ...rest } = item;
       batch.put(`!actors.items!${actor._id}.${item._id}`, v14Doc({ ...rest, effects: effects.map(e => e._id) }));
       for (const eff of effects) {
@@ -2258,4 +2265,5 @@ const advCount = classDocs.reduce((n, d) => n + Object.keys(d.system.advancement
   + originDocs.reduce((n, d) => n + Object.keys(d.system.advancement).length, 0);
 console.log(`\n  advancements built: ${advCount}`);
 console.log("  dangling uuids    : none");
+console.log(`  finished icons    : ${FINISH.applied} (icons/finished/, PLAN_m9 §7.5)`);
 console.log("\nDone. Reload the world to see the packs.");

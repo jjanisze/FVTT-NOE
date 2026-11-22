@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "M7 · all ten approved status glyphs and primary-action reuse delivered",
-  "updated": "2026-11-01",
+  "title": "M9 · nine approved cleanup glyphs delivered",
+  "updated": "2026-11-17",
   "items": [
     {
       "id": "batch90-brutal",
@@ -17002,6 +17002,312 @@
       "status": "resolved",
       "sourceReviewItemId": "m7-status-akcja-bonusowa",
       "resolutionNote": "Explicit GM instruction in the bonus-action revision notes; no synthetic approval was added."
+    },
+    {
+      "id": "m9-cleanup-helm",
+      "name": "Hełm",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/helm.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/helm.svg",
+          "sourceSha256": "a987631b7cbc7a5fc8772bed145749975b26287daa855a581586d3fb50d4b468",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/helm.png",
+          "sourceSha256": "01f01615a1963b23192e2aec655ab036c4ca6d161663fe8353ef9e58bfb10958",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE complete modern military helmet in side view, with one simple chin strap and one broad ear-protection cut. No floating fragments above it.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/helm.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-helm",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/helm.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-ochraniacze-nog",
+      "name": "Ochraniacze nóg (para)",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/ochraniacze-nog.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/ochraniacze-nog.svg",
+          "sourceSha256": "a6e33eaa625d42eff15d435109ef285319ab1d956ea21003f71cb0fe1fd96344",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/ochraniacze-nog.png",
+          "sourceSha256": "f8c73293d23adb2a8de127464d5f7de337b5ce6dc32fc8772dae4fc26505c5b3",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "A PAIR of complete leg guards, each with a broad knee cup and a long shin plate. Two broad functional sections per guard, clearly legs rather than arms. No feet, straps floating above, rivets or fine seams.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/ochraniacze-nog.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-ochraniacze-nog",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/ochraniacze-nog.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-ochraniacze-rak",
+      "name": "Ochraniacze rąk (para)",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/ochraniacze-rak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/ochraniacze-rak.svg",
+          "sourceSha256": "0261a5affe67b65e5cf4a86e6afeec9d7c2f67be1cd58d154546212c490e43ed",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/ochraniacze-rak.png",
+          "sourceSha256": "991f367e83ff818099b7f7e2b4b361ca42dc384da9ac533c6c13f21054c31784",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "A PAIR of complete compact forearm-and-elbow guards. Broad elbow cap and tapered short forearm shell, without hands. Clearly shorter and wider than the leg guards. No floating pieces.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/ochraniacze-rak.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-ochraniacze-rak",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/ochraniacze-rak.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-pancerz-stalowej-policji",
+      "name": "Pancerz wspomagany Stalowej Policji",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/pancerz-stalowej-policji.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/pancerz-stalowej-policji.svg",
+          "sourceSha256": "8279bcd116dc5f7f62b15ed39d9e1934ab3f19d115ac27d2941fe47c834c4071",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/pancerz-stalowej-policji.png",
+          "sourceSha256": "224c5aaaccdf422fdd3d19007a28b1baf31d8da3eae34d844d5d17ab914afed1",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE complete sealed human-proportioned powered police armour suit, standing front-three-quarter view. Helmet with one broad black visor, angular chest shell, two strong shoulder plates, separate hands and feet. Restrained visible powered joints. Slimmer and more human-proportioned than the hydraulic suit in cell 6. No weapons, insignia or ornament.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/pancerz-stalowej-policji.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-pancerz-stalowej-policji",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/pancerz-stalowej-policji.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-pelna-zbroja-smieciowa",
+      "name": "Pełna zbroja śmieciowa",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/pelna-zbroja-smieciowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/pelna-zbroja-smieciowa.svg",
+          "sourceSha256": "4a7f4cdd45516cccfe1d4b588e10ace89ab73a5251199735aae13722c393eaa6",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/pelna-zbroja-smieciowa.png",
+          "sourceSha256": "8a9e9aae6537e5630d224697e4c38f5ec42eccf4b7cdfc8bc21b974bbc4966f6",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE complete standing suit of improvised SCRAP armour: mismatched broad salvaged sheet-metal plates over torso, arms and legs, a simple rough protective head shell. Uneven silhouette and only a few bold black separation cuts. Clearly improvised plates, NOT a powered robot or medieval knight. No spikes, bolts, tiny lines or weapons.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/pelna-zbroja-smieciowa.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-pelna-zbroja-smieciowa",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/pelna-zbroja-smieciowa.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-wojskowy-pancerz-hydrauliczny",
+      "name": "Wojskowy pancerz hydrauliczny",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+          "sourceSha256": "d74aed7d99998650727e3655475ec603e476aa48b83aa896bee105769f3db90b",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/armor/wojskowy-pancerz-hydrauliczny.png",
+          "sourceSha256": "982f075d1839dc55d7c7bb20c4483aef9370b224c75d3b244ba40adf67750e96",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE complete very heavy MILITARY HYDRAULIC armour suit, a stocky industrial colossus with a small closed helmet, huge broad shoulders, thick arm shells and wide feet. One stout simple hydraulic piston visible beside each lower leg. Clearly bulkier than cell 4. Four or five broad black joint gaps, no fine machinery, weapons, gears or spikes.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-wojskowy-pancerz-hydrauliczny",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/wojskowy-pancerz-hydrauliczny.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-alkohol_markowy",
+      "name": "Alkohol markowy",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/items/drugs/alkohol_markowy.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/alkohol_markowy.svg",
+          "sourceSha256": "611a41370442b27db3965d64f0b501f97ac486b42a10811e7d76302cd24aa013",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/alkohol_markowy.png",
+          "sourceSha256": "0c00892f1153e30c8ad940a73e5092b3ecb04b07493e2bb59f3d78f27badc2c0",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "TWO premium liquor bottles: a broad square decanter with a short stopper and a tall round-shouldered glass bottle with a small cap. Each has at most ONE broad plain black label cutout. Elegant but sober physical objects. No diamonds, words, ornamental facets, border or frame.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/items/drugs/alkohol_markowy.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-alkohol_markowy",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/alkohol_markowy.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-alkohol_tani",
+      "name": "Alkohol tani",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/items/drugs/alkohol_tani.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/alkohol_tani.svg",
+          "sourceSha256": "facce3f5c019e28bf44657eb2664cbc22a2b612448b9e5e8a264272b3e9a21cb",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/alkohol_tani.png",
+          "sourceSha256": "ad8d1f43a97ef6e40c6cc1c0a94f1ddb28b0cae6029e8e92efefae569a5de622",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE cheap squat reused plastic liquor bottle with a simple screw cap, broad shoulders and only TWO broad horizontal rib cuts. A little uneven and utilitarian; no fancy stopper, text or fine texture.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/items/drugs/alkohol_tani.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-alkohol_tani",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/alkohol_tani.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
+    },
+    {
+      "id": "m9-cleanup-anestix",
+      "name": "Anestix",
+      "tier": "M9 · cleanup · Batch 124",
+      "batch": 124,
+      "target": "icons/items/drugs/anestix.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/anestix.svg",
+          "sourceSha256": "d030a10c61306e52b936db319f95f1734816cba5e66175d0319703d35cc0f96b",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/anestix.png",
+          "sourceSha256": "f7ac8fae158ca7048dee10a51727e0cdb5f29de57c273f9128471337df88f578",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision.",
+      "request": "ONE compact rugged medical AUTOINJECTOR beside ONE small capped ampoule, both complete and clearly separated. Thick functional silhouettes and two broad black window cuts. No tick marks, measuring scale, tiny needle, words or medical cross.",
+      "status": "resolved",
+      "current": {
+        "src": "/icons/items/drugs/anestix.svg",
+        "note": "Existing master; inspected legacy artefacts. Candidate generation does not replace it."
+      },
+      "candidates": [
+        {
+          "id": "batch124-anestix",
+          "label": "M9 · Batch 124 · A",
+          "src": "candidates/batch-124/anestix.png",
+          "note": "New clean silhouette; inspect shape and spacing at 64/32/16 px."
+        }
+      ]
     }
   ]
 }

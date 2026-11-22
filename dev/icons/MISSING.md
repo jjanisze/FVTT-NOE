@@ -25,7 +25,25 @@ pack builds and campaign updates are separate integration work in
 [FINAL_HANDOFF.md](FINAL_HANDOFF.md).
 Only outstanding asset requests belong here; delivery history is kept in the handoff.
 
-**Next batch number: 124** (Batches 121–123 are delivered; no status glyphs await review).
+**Next batch number: 129** (M9 delivered 124, 127 and deterministic cleanup 128; attempted 125–126 remain reserved).
+
+## M9 — confirmed legacy cleanup, 2026-11-17
+
+Nine GM-approved replacements from Batch 124 are installed: six armour subjects, two alcohol
+glyphs and Anestix. Batch 127 successfully cleaned Neodrugs, Tornado, both Narkotyki glyphs
+and Cygaro with the OpenAI image edit tool, under the GM's explicit request. The crop fallback
+was not needed. Batch 128 closes the final poison-bottle speck and the two firearm cleanup
+requests with the GM-approved deterministic normalizer after another image-service rejection.
+The poison bottle's object pixels are unchanged; only its detached 25-pixel dot was removed.
+The pistol's detached 99-pixel artifact was removed and firearm masks received the existing
+safe-margin normalization. **No confirmed M9 artwork requests remain open.**
+Exact target paths, briefs, prompts, validation and service results:
+[m9-pass/README.md](m9-pass/README.md).
+
+M9 has zero assignment gaps and all 782 finishes are approved:
+[approval and exact corrected pixels](m9-pass/finish-approval.json),
+[final cleanup revision](review/candidates/batch-128/finish-approval.json),
+[current audit](review/m9-gap-audit.md).
 
 <!-- class-placeholder-audit:start -->
 <!-- class-placeholder-audit:end -->

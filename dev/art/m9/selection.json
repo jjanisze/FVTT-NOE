@@ -1,0 +1,17 @@
+{
+  "schema": "noe-m9-art-selection/v1",
+  "date": "2026-11-15",
+  "status": "approved-by-user",
+  "target": "main-character-sheet-background",
+  "assetId": "field-kit-original",
+  "label": "Original Field kit — physical nylon",
+  "master": "r02/sources/field-kit.png",
+  "originalGeneratedFilename": "exec-8ccae121-0700-4316-892a-2dd037b3a8df.png",
+  "masterSha256": "bf223634f0be028e6551c4f5b3c15117fab3eb159323f9789fa5d3230a99b731",
+  "size": [2172, 724],
+  "reviewWebp": "r02/field-kit-v1.webp",
+  "reviewWebpSha256": "a72c9919617397ba052f622e35354dcfe5b27117645bc288ef586c55a632a0b1",
+  "decision": "Use this exact original artwork as the background for the main character sheet. Later nylon variants are not selected for this target.",
+  "implementation": "Derive the delivered WEBP from the approved PNG master. Preserve artwork identity and aspect ratio; no regeneration, redrawing or substitution. Consumer crop, rendering and compression are integration work.",
+  "scope": "Main character sheet only. Other sheet families remain separate decisions. Workshop remains kept from the previous review."
+}

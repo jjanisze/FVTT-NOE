@@ -1,0 +1,7 @@
+{
+  "tool": "OpenAI built-in image edit",
+  "model": null,
+  "reference": "raw/cleanup-target.png",
+  "atlas": "Use case: precise-object-edit. Asset: an existing three-icon mask atlas for a fictional tabletop-game inventory. The supplied 3 by 3 image is the EDIT TARGET. Change only isolated stray marks outside the existing objects; retain the same recognizable silhouettes, scale, arrangement and broad internal cutouts. Flat solid-white objects on solid black, no shading, texture, labels, border or visible grid.\nRow-major order: cell 1 is the existing poison bottle with skull marking: remove the tiny isolated dot below and to the right of the bottle, keeping the bottle unchanged. Cell 2 is the existing side-view pistol inventory silhouette: remove tiny detached edge/border fragments and specks, preserving its pictured shape. Cell 3 is the existing side-view revolver inventory silhouette: remove tiny detached edge/border fragments and specks, preserving its pictured shape. No new objects, no scenes of use, no technical instructions. Cells 4 through 9 remain completely empty black. Return the same square 3 by 3 layout with clean black separation and no frame. These are cosmetic pixel-contamination corrections, not a request for new artwork.",
+  "invariants": "Existing object identity and style; only detached artifact cleanup"
+}

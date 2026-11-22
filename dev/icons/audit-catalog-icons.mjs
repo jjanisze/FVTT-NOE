@@ -8,7 +8,7 @@ import { CHEMIA } from "../../scripts/config/chemia-data.mjs";
 import { WEAPONS } from "../../scripts/config/weapons-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
 import { ARMORS } from "../../scripts/config/armor-data.mjs";
-import { TOOLKITS } from "../../scripts/config/toolkits-data.mjs";
+import { TOOLKITS, INSTRUMENTS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { REAL_GEAR, GEAR_PLACEHOLDERS } from "../../scripts/config/gear-data.mjs";
 import { PROWIANT_CATALOG, buildProwiantItemData } from "../../scripts/config/prowiant-data.mjs";
 import { ADDON_DEFS } from "../../scripts/config/addons-data.mjs";
@@ -41,7 +41,7 @@ function stringMap(name) {
 const rawIcons = stringMap("RAW_IKONY"), categoryIcons = stringMap("IKONA_KATEGORII");
 const byId = items => new Map(items.map(item => [item.id, item]));
 const weapon = byId(WEAPONS), ammo = byId(AMMO_CALIBERS), grenade = byId(GRENADE_TYPES);
-const armour = byId(ARMORS), toolkit = byId(TOOLKITS), gear = byId([...REAL_GEAR, ...GEAR_PLACEHOLDERS]);
+const armour = byId(ARMORS), toolkit = byId([...TOOLKITS, ...INSTRUMENTS]), gear = byId([...REAL_GEAR, ...GEAR_PLACEHOLDERS]);
 const magazine = byId(MAGAZINES);
 const production = new Map(Object.entries(PRODUCTION_GEAR).map(([id, item]) => [productionGearRef(id), item]));
 const special = {
@@ -62,7 +62,11 @@ function imageFor(item) {
   if (kind === "ammo") return {img: custom(`icons/ammo/${ammo.get(id)?.icon}`), basis:"ammo builder"};
   if (kind === "grenade") return {img: custom(`icons/weapons/${grenade.get(id)?.icon}`), basis:"grenade builder"};
   if (kind === "armor") return {img: custom(`icons/armor/${armour.get(id)?.id}.svg`), basis:"armour builder"};
-  if (kind === "toolkit") return {img: toolkit.get(id)?.iconReady ? custom(`icons/tools/${id}.svg`) : "icons/svg/item-bag.svg", basis:"toolkit readiness flag"};
+  if (kind === "toolkit") {
+    const kit = toolkit.get(id);
+    if (!kit) throw new Error(`Unknown toolkit or instrument: ${id}`);
+    return {img: buildToolkitItemData(kit).img, basis:"toolkit/instrument builder"};
+  }
   if (kind === "magazine") return {img: magIconPath(magazine.get(id)?.cls), basis:"magazine family builder"};
   if (kind === "prowiant") return {img: buildProwiantItemData(id).img, basis:"provisions builder"};
   if (kind === "addon") return {img: buildAddonLootItemData(ADDON_DEFS[id]).img, basis:"attachment builder"};
@@ -81,7 +85,8 @@ for (const item of KATALOG.values()) {
   const hash = relative && exists ? crypto.createHash("sha256").update(fs.readFileSync(path.join(root, relative))).digest("hex") : null;
   const stem = item.ref.split(":").slice(1).join(":");
   const aliases = item.ref === "item:medyk-refill" ? ["icons/items/loot/uzupelnienie_medyka.svg"] : [];
-  const candidates = [...aliases, ...[stem, stem.replaceAll("-", "_")].map(key => `icons/items/loot/${key}.svg`)].filter(file => fs.existsSync(path.join(root, file)));
+  const candidates = [...aliases, ...(item.ref.startsWith("toolkit:") ? [`icons/tools/${stem}.svg`] : []),
+    ...[stem, stem.replaceAll("-", "_")].map(key => `icons/items/loot/${key}.svg`)].filter(file => fs.existsSync(path.join(root, file)));
   audit.push({ref:item.ref, label:item.nazwa, category:item.kategoria, placeholder:!!item.zaslepka,
     ...result, relative, exists, iconSha256:hash, existingAlternative:candidates,
     status:result.error ? "unresolved" : relative ? (exists ? "module art" : "missing referenced file") : "core/fallback art",

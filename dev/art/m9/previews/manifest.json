@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-15",
+  "status": "art-study-only",
+  "scope": "Existing PC features/inventory; stock, neutral control, two proposed backgrounds. Art and base surface only; other controls remain existing UI. No actions or document writes.",
+  "records": [
+    {
+      "key": "stock-features",
+      "file": "stock-features.webp",
+      "mode": "stock",
+      "tab": "features",
+      "width": 1030,
+      "height": 851,
+      "filter": "sepia(0.15) contrast(1.05) brightness(0.85)",
+      "background": "existing-dnd5e",
+      "underlayOpacity": "0.5",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "plain-features",
+      "file": "plain-features.webp",
+      "mode": "plain",
+      "tab": "features",
+      "width": 1030,
+      "height": 851,
+      "filter": "none",
+      "background": "none",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "workshop-features",
+      "file": "workshop-features.webp",
+      "mode": "workshop",
+      "tab": "features",
+      "width": 1030,
+      "height": 851,
+      "filter": "none",
+      "background": "workshop-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "field-drawing-features",
+      "file": "field-drawing-features.webp",
+      "mode": "field-drawing",
+      "tab": "features",
+      "width": 1030,
+      "height": 851,
+      "filter": "none",
+      "background": "field-drawing-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "workshop-inventory",
+      "file": "workshop-inventory.webp",
+      "mode": "workshop",
+      "tab": "inventory",
+      "width": 1030,
+      "height": 851,
+      "filter": "none",
+      "background": "workshop-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "field-drawing-inventory",
+      "file": "field-drawing-inventory.webp",
+      "mode": "field-drawing",
+      "tab": "inventory",
+      "width": 1030,
+      "height": 851,
+      "filter": "none",
+      "background": "field-drawing-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "workshop-narrow",
+      "file": "workshop-narrow.webp",
+      "mode": "workshop",
+      "tab": "features",
+      "width": 820,
+      "height": 851,
+      "filter": "none",
+      "background": "workshop-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    },
+    {
+      "key": "field-drawing-narrow",
+      "file": "field-drawing-narrow.webp",
+      "mode": "field-drawing",
+      "tab": "features",
+      "width": 820,
+      "height": 851,
+      "filter": "none",
+      "background": "field-drawing-v1.webp (embedded for preview)",
+      "underlayOpacity": "1",
+      "underlayHeight": "300px"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "batch": 127,
+  "status": "succeeded",
+  "mode": "built-in OpenAI image edit tool",
+  "modelIdentifier": "Not exposed by the built-in tool",
+  "reference": "raw/cleanup-target.png",
+  "prompt": "prompts.json",
+  "rawOutput": "raw/batch-127-atlas-a.png",
+  "normalization": "Existing placeholder-pass processor, five subjects and four blank cells",
+  "fallbackUsed": false,
+  "installation": "installed.json"
+}

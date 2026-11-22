@@ -1,0 +1,10 @@
+{
+  "batch": 128,
+  "date": "2026-11-18",
+  "status": "rejected",
+  "mode": "built-in OpenAI image edit tool",
+  "prompt": "prompts.json",
+  "reference": "raw/cleanup-target.png",
+  "result": "No image returned. Service rejected the output with category illicit.",
+  "nextStep": "GM explicitly approved deterministic detached-speck cleanup; see normalization-authorization.json and cleanup.json."
+}

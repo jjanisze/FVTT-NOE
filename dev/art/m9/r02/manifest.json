@@ -1,0 +1,201 @@
+{
+  "id": "noe-m9-sheet-art-r02",
+  "date": "2026-11-15",
+  "status": "original-field-kit-selected-for-main-character-sheet",
+  "decisions": [
+    {
+      "id": "workshop",
+      "decision": "keep",
+      "by": "user",
+      "text": "Workshop can stay."
+    },
+    {
+      "id": "field-drawing-r01",
+      "decision": "reject",
+      "by": "user",
+      "reason": "Obvious AI-generated pseudo-drawing; formal drawings should use authentic existing sources with filters and composition."
+    },
+    {
+      "id": "field-kit",
+      "decision": "selected-for-main-character-sheet",
+      "by": "user",
+      "sourceFilename": "exec-8ccae121-0700-4316-892a-2dd037b3a8df.png",
+      "selection": "../selection.json"
+    }
+  ],
+  "rules": [
+    "No generated technical drawings, schematics, cartography or pseudo-lettering.",
+    "For formal linework, preserve authentic source geometry; crop, scale, invert, tint and compose deterministically.",
+    "Keep original source, attribution, rights statement and output hashes."
+  ],
+  "candidates": [
+    {
+      "id": "workshop",
+      "label": "Workshop",
+      "kind": "generated-material",
+      "file": "../workshop-v1.webp",
+      "status": "kept-by-user",
+      "description": "Worn graphite steel; retained from review 01.",
+      "outputSha256": "828dedd4edfd296ae7cd0e8a0cef23b6820773a211654df6ed4673b35815ea33",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 1379314
+    },
+    {
+      "id": "field-kit",
+      "label": "Field kit",
+      "kind": "generated-material",
+      "file": "field-kit-v1.webp",
+      "master": "sources/field-kit.png",
+      "status": "approved-for-main-character-sheet",
+      "description": "Canvas and webbing.",
+      "prompt": "Use case: photorealistic-natural. Asset: an actual UI background artwork, very wide horizontal 3:1 banner, 2172 x 724 or similar. NOE post-apocalyptic RPG character sheet. Photorealistic close-up, nearly flat straight-on view of a worn dark charcoal field-equipment bag: tightly woven faded canvas, one broad doubled fabric seam and a short length of utilitarian webbing concentrated in the far right third. Quiet fabric surface across the left two thirds for a white character name. Material should feel like durable late 20th century field gear, heavily handled, subtle dust and softened fibers, pragmatic and understated. Neutral graphite palette #191e23 to #394047, only extremely muted gray olive undertones. Soft flat light, low contrast, visible material but no cinematic highlights. It is a banner texture behind dense software UI, not a product beauty shot. No drawing, no schematic, no numbers or letters, no badges, no logo, no interface, no frame, no loose scattered props, no firearms, no characters. No bright green, brown leather, orange rust, or neon. Opaque image, no transparency.",
+      "treatment": "WEBP encoding only; source composition unchanged.",
+      "sourceSha256": "bf223634f0be028e6551c4f5b3c15117fab3eb159323f9789fa5d3230a99b731",
+      "outputSha256": "a72c9919617397ba052f622e35354dcfe5b27117645bc288ef586c55a632a0b1",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 545230
+    },
+    {
+      "id": "roadside",
+      "label": "Roadside",
+      "kind": "generated-material",
+      "file": "roadside-v1.webp",
+      "master": "sources/roadside.png",
+      "status": "review",
+      "description": "Weathered asphalt and faded road edge.",
+      "prompt": "Use case: photorealistic-natural. Asset: very wide 3:1 raster banner alone for the header background of the NOE post-apocalyptic RPG character sheet. A restrained, photographic straight-down view of old asphalt on a deserted road: fine aggregate, a few believable branching age cracks, soft accumulated dust, a single extremely faded fragment of a white road-edge line near the far right edge. Road texture feels grounded in a real abandoned landscape, late twentieth century American infrastructure, no cinematic fantasy. Left 65 percent calm and dark for white text and controls; right third carries the subtly more recognizable road markings and cracks. Neutral graphite black and slate gray, all low contrast around #191e23 to #46505a. Soft overcast light. No dramatic perspective, no horizon, no cars, no people, no weapon, no symbols, no letters, no numbers, no UI, no vignette frame, no orange, no yellow hazard stripes, no glow. The asphalt must remain subtle enough to sit behind a dense software interface. Opaque image, no transparency.",
+      "treatment": "WEBP encoding only; source composition unchanged.",
+      "sourceSha256": "6ef4b86f269a8fd2a69b5a014dd3dc3b9bfeddcc26b50cd84ff2c800a0b8a801",
+      "outputSha256": "d92d8dd1e4a831bfef5847bd58530ec2f52d98751febecdae52c7e007d87d833",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 419968
+    },
+    {
+      "id": "shelter",
+      "label": "Shelter",
+      "kind": "generated-material",
+      "file": "shelter-v1.webp",
+      "master": "sources/shelter.png",
+      "status": "review",
+      "description": "Matte shelter concrete.",
+      "prompt": "Use case: photorealistic-natural. Asset: a very wide 3:1 horizontal background banner artwork for dense utilitarian NOE post-apocalyptic RPG software. Flat straight-on close view of a dark, old cast-concrete shelter wall. Convincing fine pores, faint formwork impressions, a repaired horizontal seam and a very small area of chipped paint at the far right. Restrained weathering, dry matte surface, quiet broad gray planes. The left 65 percent is especially calm and uninterrupted for white character name and controls, visual identity is concentrated on the right third. Neutral graphite/slate gray, roughly #191e23 to #48515a, low contrast flat ambient lighting. Human-used and pragmatic, late 20th century civil shelter, without theatrical bunker clichés. No drawn lines, no schematic, no text, no stencils, no symbols, no doors or corridors, no perspective vanishing point, no UI controls, no exposed glowing equipment, no hazard stripes, no frame, no skull, no dramatic rust streaks. This is supporting background material behind real UI, not concept-art scenery. Opaque image.",
+      "treatment": "WEBP encoding only; source composition unchanged.",
+      "sourceSha256": "8a1810d8466bdb8e9f78f8766079314d0a2dadc7f2475289c1334ebf1bc05880",
+      "outputSha256": "05ec557de26c3a693b7bb022b06dc2c43ec9c6394efec4eec8531ada6f1b5dd5",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 280518
+    },
+    {
+      "id": "patent",
+      "label": "Motor plate",
+      "kind": "authentic-drawing-composition",
+      "file": "patent-v1.webp",
+      "master": "sources/tesla-plate-hires.png",
+      "status": "review",
+      "description": "Original motor drawing, tonal treatment on Workshop material; no generated linework.",
+      "source": "https://patents.google.com/patent/US381968A/en",
+      "download": "https://patentimages.storage.googleapis.com/c9/47/b2/d2a511b818d8a6/US381968.pdf",
+      "credit": "Nikola Tesla, Electro-magnetic motor, US381968, 1888, sheet 2 / figure 9. USPTO document, Google Patents scan.",
+      "rights": "Historical publication 1888; public domain in the United States. Patent expiration is not the basis of this copyright assessment.",
+      "crop": [
+        190,
+        670,
+        1680,
+        1420
+      ],
+      "composition": {
+        "x": 850,
+        "y": 5,
+        "width": 1322,
+        "height": 665,
+        "color": "#83939d",
+        "strength": 0.6
+      },
+      "treatment": "Extract original PDF scan; figure 9 crop, uniform scaling, invert ink to alpha, steel tint over retained Workshop. No linework or labels redrawn.",
+      "sourceSha256": "b4edc3e9ee766f21933f418091c4458095b402fd5c1cbafd3397ea8972bb88e4",
+      "outputSha256": "26e5f39f014e76bdd16179766e72c84452d5794dbc82dae3b68d0bdf787bd5f2",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 142994
+    },
+    {
+      "id": "survey",
+      "label": "Survey",
+      "kind": "authentic-map-composition",
+      "file": "survey-v1.webp",
+      "master": "sources/pittsburgh-usgs.jpg",
+      "status": "review",
+      "description": "Real contours and street plan; crop, inversion and graphite tint only.",
+      "source": "https://digital.libraries.psu.edu/digital/collection/maps1/id/868/",
+      "download": "https://digital.libraries.psu.edu/iiif/2/maps1:868/full/3000,/0/default.jpg",
+      "credit": "U.S. Geological Survey, Pittsburgh quadrangle, edition January 1907, reprinted 1937; Penn State University Libraries, LIAS2072698.",
+      "rights": "Catalog: No Copyright - United States. USGS historic map; https://www.usgs.gov/faqs/are-usgs-topographic-maps-copyrighted",
+      "crop": [
+        310,
+        350,
+        2730,
+        1160
+      ],
+      "composition": {
+        "color": "#7a929e",
+        "strengthLeft": 0.07,
+        "strengthRight": 0.65
+      },
+      "treatment": "Source crop, uniform cover scale, grayscale/tint and horizontal contrast ramp; original geometry preserved.",
+      "sourceSha256": "c4b2a495ae6c6c7e11d0182ffa1f68e296725c603f88766879d2c5d38aa32e78",
+      "outputSha256": "a530df8b474e9448cebf8fdd67e790efae840cff5bfac19b0046423aeb2514c5",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 191866
+    },
+    {
+      "id": "steel-town",
+      "label": "Steel town",
+      "kind": "authentic-photo-composition",
+      "file": "steel-town-v1.webp",
+      "master": "sources/bethlehem-evans.jpg",
+      "status": "review",
+      "description": "Actual industrial streetscape; grayscale tonal composition, original shapes preserved.",
+      "source": "https://commons.wikimedia.org/wiki/File:Bethlehem_Pa_1935_LOC_fsa_8c52905.jpg",
+      "download": "https://cdn.loc.gov/service/pnp/fsa/8c52000/8c52900/8c52905v.jpg",
+      "credit": "Walker Evans, Bethlehem houses and steel mill, Pennsylvania, November 1935. Library of Congress, FSA/OWI, fsa.8c52905.",
+      "rights": "U.S. federal government work; Commons file page marks public domain / PD-USGov.",
+      "crop": [
+        36,
+        100,
+        984,
+        432
+      ],
+      "composition": {
+        "color": "#7a8c98",
+        "strengthLeft": 0.1,
+        "strengthRight": 0.72
+      },
+      "treatment": "Source crop, uniform cover scale, grayscale/tint and horizontal contrast ramp; original geometry preserved.",
+      "sourceSha256": "7c47638f098d8fa402b944d10d523fed3f9600fd0bb69cfe5f5c2da858d6f0b6",
+      "outputSha256": "f1c6d28874892180d7d6a4d564082a78885030b54c2da83149729397db23c2d5",
+      "size": [
+        2172,
+        724
+      ],
+      "bytes": 51542
+    }
+  ],
+  "selection": "../selection.json"
+}

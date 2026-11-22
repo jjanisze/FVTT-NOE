@@ -1,0 +1,149 @@
+{
+  "batch": 125,
+  "date": "2026-11-17",
+  "purpose": "M9 legacy glyph cleanup",
+  "subjects": [
+    {
+      "key": "cygaro",
+      "name": "Cygaro",
+      "target": "icons/items/drugs/cygaro.svg",
+      "request": "ONE complete stout cigar, gently diagonal, with one broad plain band represented by a black gap and one blunt end. No smoke, burning particles, leaf veins, wrapper texture or small lines.",
+      "cell": 1,
+      "itemId": "m9-cleanup-cygaro",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/cygaro.svg",
+          "sourceSha256": "b8dabcc9c72811e2d575cef47b9fea9fb7066f23fee8a6fd6a485d8e28017f61",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/cygaro.png",
+          "sourceSha256": "b52f99a0edec2469cfcc510e758af864d232549c48d2197d886706b964ba93d8",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "narkotyki_latwe",
+      "name": "Narkotyki łatwe w produkcji",
+      "target": "icons/items/drugs/narkotyki_latwe.svg",
+      "request": "ONE loosely rolled local herbal drug bundle: a short stout rough cigarette with a clearly twisted end and one simple broad wrapper fold. Actual physical object; do NOT add a leaf emblem, fine crinkling, veins, sparks or smoke.",
+      "cell": 2,
+      "itemId": "m9-cleanup-narkotyki_latwe",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/narkotyki_latwe.svg",
+          "sourceSha256": "640958adbc55bd0862ecc7a2553f9112dbadce8d9f95710b078db5a88156af46",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/narkotyki_latwe.png",
+          "sourceSha256": "552bb4996d88e8bf1614ea0873c4dd94cb7455dde2f7eaa601d642c80039fc44",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "narkotyki_przedwojenne",
+      "name": "Narkotyki przedwojenne",
+      "target": "icons/items/drugs/narkotyki_przedwojenne.svg",
+      "request": "ONE complete sealed square pharmaceutical sachet, slightly tilted, with one broad black inset window and a stout simple top seal. Plain anonymous pre-war packaging; no lettering, zipper teeth, fine parallel seal lines, powder or floating dots.",
+      "cell": 3,
+      "itemId": "m9-cleanup-narkotyki_przedwojenne",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/narkotyki_przedwojenne.svg",
+          "sourceSha256": "c0c06c0e43898d87a8782dccf2ab8e6f982c132dff66347f834aa306a9ae7b6e",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/narkotyki_przedwojenne.png",
+          "sourceSha256": "6798e08c31e736f41f58eb1626ee1086d2cb45d0172770e849f675598a0914ce",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "neodrugs",
+      "name": "Neodrugs",
+      "target": "icons/items/drugs/neodrugs.svg",
+      "request": "ONE complete compact synthetic-drug inhaler dispenser with a tall rectangular cartridge and a short projecting mouthpiece at the bottom. ONE large black cartridge window. Strong simple L-shaped physical object; no text, graduations, texture or medicine cross.",
+      "cell": 4,
+      "itemId": "m9-cleanup-neodrugs",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/neodrugs.svg",
+          "sourceSha256": "ad688d2169f4e901a3aa822f9a873065708cb2f79726061ea2fdbf47b0936c66",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/neodrugs.png",
+          "sourceSha256": "3f172bc9309677df8df4cdf9d11f005acab53dacd9a3854c9bf9448acafca55a",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "tornado",
+      "name": "Tornado",
+      "target": "icons/items/drugs/tornado.svg",
+      "request": "A small cluster of exactly THREE chunky irregular synthetic-drug crystal pieces, each with ONE broad black facet cut. A compact sober pile of rough material; not cut gemstones, jewellery, diamonds or tiny fragments.",
+      "cell": 5,
+      "itemId": "m9-cleanup-tornado",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/tornado.svg",
+          "sourceSha256": "266594f1d24d5413ae938aca25df1bd24ced963b1561a78ee1b71e269667d53a",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/tornado.png",
+          "sourceSha256": "bd6516daadddb62aa065f5298c27914cde13a97f962cef2c164ec60008bacf75",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "beretta_b92",
+      "name": "Beretta B92",
+      "target": "icons/weapons/beretta_b92.svg",
+      "request": "ONE complete Beretta-92-style service PISTOL in clean side profile, muzzle pointing LEFT: long low open-top slide, rounded trigger guard with a broad empty opening, angled grip and short exposed hammer. At most THREE broad black structural cuts. No bullets, floating specks, weapon diagram, exploded parts, lettering or engraving.",
+      "cell": 6,
+      "itemId": "m9-cleanup-beretta_b92",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/beretta_b92.svg",
+          "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc",
+          "variant": "svg"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "k_22_revolver",
+      "name": "Rewolwer .22",
+      "target": "icons/weapons/k_22_revolver.svg",
+      "request": "ONE complete small .22-calibre REVOLVER in clean side profile, muzzle pointing LEFT: slim moderate barrel, unmistakable round cylinder, short hammer, a broad empty trigger-guard opening and gently curved grip. At most THREE broad black cuts. No bullets, specks, engraving, fine cylinder grooves, lettering or exploded parts.",
+      "cell": 7,
+      "itemId": "m9-cleanup-k_22_revolver",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/k_22_revolver.svg",
+          "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95",
+          "variant": "svg"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    8,
+    9
+  ]
+}

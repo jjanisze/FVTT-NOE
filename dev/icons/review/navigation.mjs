@@ -2,6 +2,9 @@
 const tabs=[
   ["/","Ikony — ocena"],
   ["/browser.html","Biblioteka ikon"],
+  ["/m9-audit.html","M9 — braki ikon"],
+  ["/m9-process.html","M9 — następny krok"],
+  ["/m9-finishes.html","M9 — wykończenia"],
   ["/creatures/","Portrety i żetony"],
   ["/dnd5e.html","Referencje 5e"],
   ["/overlays/water/preview.html","Zanurzenie"],

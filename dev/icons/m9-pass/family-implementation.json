@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-17",
+  "profile": "noe-m9-r07-v2",
+  "familyChoice": "applied",
+  "assignedSubjects": 782,
+  "families": 22,
+  "unresolvedAssignments": 0,
+  "missingReferencedFiles": 0,
+  "missingWhiteMasters": 0,
+  "explicitCanvasIllustrationExceptions": 2,
+  "packConsumersBoundByParentAndField": 1287,
+  "checks": {
+    "manifestCheck": "passed",
+    "finishEngineCheck": "passed",
+    "moduleStaticChecks": "passed",
+    "familyRoutingTests": { "passed": 6, "failed": 0 },
+    "graphicsReviewTests": { "passed": 20, "failed": 0 },
+    "freshStagedPackValidation": "passed"
+  },
+  "browser": {
+    "subjectsLoaded": 782,
+    "familyFiltersVerified": 22,
+    "brokenImages": 0,
+    "allImagesLoaded": true,
+    "horizontalOverflow": false,
+    "sharedGlyphSearch": ["creature/naprawianie", "utility/naprawianie"],
+    "screenshot": "Optional viewport capture did not complete; no screenshot file is claimed."
+  },
+  "pixelInspection": {
+    "source": "Actual rendered preview PNGs",
+    "contactSheet": "dev/finish/preview/family-samples.webp",
+    "families": 22,
+    "sizes": [64, 44, 32, 16]
+  },
+  "review": {
+    "snapshot": "dev/icons/m9-pass/finish-review.json",
+    "status": "pending-finish-review",
+    "plannedFullLibraryExportsStillAwaitSelection": true
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "batch": 127,
+  "purpose": "GM-requested source cleanup",
+  "date": "2026-11-17",
+  "subjects": [
+    {
+      "id": "tornado",
+      "key": "tornado",
+      "name": "Tornado",
+      "target": "icons/items/drugs/tornado.svg",
+      "cell": 1,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/tornado.svg",
+          "sourceSha256": "266594f1d24d5413ae938aca25df1bd24ced963b1561a78ee1b71e269667d53a"
+        },
+        {
+          "source": "icons/items/drugs/tornado.png",
+          "sourceSha256": "bd6516daadddb62aa065f5298c27914cde13a97f962cef2c164ec60008bacf75"
+        }
+      ],
+      "master": "icons/items/drugs/tornado.png"
+    },
+    {
+      "id": "neodrugs",
+      "key": "neodrugs",
+      "name": "Neodrugs",
+      "target": "icons/items/drugs/neodrugs.svg",
+      "cell": 2,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/neodrugs.svg",
+          "sourceSha256": "ad688d2169f4e901a3aa822f9a873065708cb2f79726061ea2fdbf47b0936c66"
+        },
+        {
+          "source": "icons/items/drugs/neodrugs.png",
+          "sourceSha256": "3f172bc9309677df8df4cdf9d11f005acab53dacd9a3854c9bf9448acafca55a"
+        }
+      ],
+      "master": "icons/items/drugs/neodrugs.png"
+    },
+    {
+      "id": "narkotykiLatwe",
+      "key": "narkotyki_latwe",
+      "name": "Narkotyki łatwe w produkcji",
+      "target": "icons/items/drugs/narkotyki_latwe.svg",
+      "cell": 3,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/narkotyki_latwe.svg",
+          "sourceSha256": "640958adbc55bd0862ecc7a2553f9112dbadce8d9f95710b078db5a88156af46"
+        },
+        {
+          "source": "icons/items/drugs/narkotyki_latwe.png",
+          "sourceSha256": "552bb4996d88e8bf1614ea0873c4dd94cb7455dde2f7eaa601d642c80039fc44"
+        }
+      ],
+      "master": "icons/items/drugs/narkotyki_latwe.png"
+    },
+    {
+      "id": "narkotykiPrzedwojenne",
+      "key": "narkotyki_przedwojenne",
+      "name": "Narkotyki przedwojenne",
+      "target": "icons/items/drugs/narkotyki_przedwojenne.svg",
+      "cell": 4,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/narkotyki_przedwojenne.svg",
+          "sourceSha256": "c0c06c0e43898d87a8782dccf2ab8e6f982c132dff66347f834aa306a9ae7b6e"
+        },
+        {
+          "source": "icons/items/drugs/narkotyki_przedwojenne.png",
+          "sourceSha256": "6798e08c31e736f41f58eb1626ee1086d2cb45d0172770e849f675598a0914ce"
+        }
+      ],
+      "master": "icons/items/drugs/narkotyki_przedwojenne.png"
+    },
+    {
+      "id": "cygaro",
+      "key": "cygaro",
+      "name": "Cygaro",
+      "target": "icons/items/drugs/cygaro.svg",
+      "cell": 5,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/cygaro.svg",
+          "sourceSha256": "b8dabcc9c72811e2d575cef47b9fea9fb7066f23fee8a6fd6a485d8e28017f61"
+        },
+        {
+          "source": "icons/items/drugs/cygaro.png",
+          "sourceSha256": "b52f99a0edec2469cfcc510e758af864d232549c48d2197d886706b964ba93d8"
+        }
+      ],
+      "master": "icons/items/drugs/cygaro.png"
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "fallback": {
+    "cropEachBorderPixels": 2,
+    "outputPixels": 256
+  },
+  "authorization": "GM requested Neodrugs, all narcotic icons and cigar to be fixed; if image generation fails, trim two pixels from each border and resize the existing image. Otherwise the full finish set is approved.",
+  "approvedSnapshot": "dev/icons/m9-pass/finish-review-before-corrections.json",
+  "approvedSnapshotSha256": "b1afe5aebb824c077d7f7468f3d4d273bf807c275976b069907f96570f9f78f5"
+}

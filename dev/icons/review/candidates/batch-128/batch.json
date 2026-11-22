@@ -1,0 +1,62 @@
+{
+  "batch": 128,
+  "date": "2026-11-18",
+  "subjects": [
+    {
+      "key": "trucizna",
+      "name": "trucizna",
+      "target": "icons/items/loot/trucizna.svg",
+      "master": "icons/items/loot/trucizna.png",
+      "cell": 1,
+      "deliveryTargets": [
+        {
+          "source": "icons/items/loot/trucizna.svg",
+          "sourceSha256": "3488a44ae07a0c9192ed2130195f8ed45d51fb4a9b106cc1505394fa19dec3b2"
+        },
+        {
+          "source": "icons/items/loot/trucizna.png",
+          "sourceSha256": "732d46a202fccf313fe8093a42626ab8674f90bb2e0af942a9b4617db34cb16c"
+        }
+      ],
+      "finishId": "chemicals/trucizna"
+    },
+    {
+      "key": "beretta_b92",
+      "name": "beretta_b92",
+      "target": "icons/weapons/beretta_b92.svg",
+      "master": "icons/weapons/beretta_b92.svg",
+      "cell": 2,
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/beretta_b92.svg",
+          "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc"
+        }
+      ],
+      "finishId": "weapon/beretta_b92"
+    },
+    {
+      "key": "k_22_revolver",
+      "name": "k_22_revolver",
+      "target": "icons/weapons/k_22_revolver.svg",
+      "master": "icons/weapons/k_22_revolver.svg",
+      "cell": 3,
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/k_22_revolver.svg",
+          "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95"
+        }
+      ],
+      "finishId": "weapon/k_22_revolver"
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "authorization": "GM reported the lower-right dot on chemicals/trucizna and requested closing remaining opens before an M9 coding handoff; this includes the two queued minor firearm artifacts."
+}

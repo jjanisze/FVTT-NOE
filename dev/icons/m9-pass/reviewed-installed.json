@@ -1,0 +1,315 @@
+{
+  "installedOn": "2026-11-17T21:45:20.679292+00:00",
+  "batch": 124,
+  "installed": [
+    {
+      "itemId": "m9-cleanup-helm",
+      "candidateId": "batch124-helm",
+      "source": "candidates/batch-124/helm.png",
+      "feedback": {
+        "itemId": "m9-cleanup-helm",
+        "decision": "approve",
+        "candidateId": "batch124-helm",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:25.695Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/helm.svg",
+          "sha256": "5a88011c07e308250c90827c863507502ed79d918f6fb7f234cc9e522defa62b"
+        },
+        {
+          "path": "icons/armor/helm.webp",
+          "sha256": "988fe825c81a70269dd1bfde0ee8695dc92f70e457baad2b3c24028d95dcd237"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/helm.svg",
+          "sha256": "a987631b7cbc7a5fc8772bed145749975b26287daa855a581586d3fb50d4b468",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/helm.svg"
+        },
+        {
+          "source": "icons/armor/helm.png",
+          "sha256": "01f01615a1963b23192e2aec655ab036c4ca6d161663fe8353ef9e58bfb10958",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/helm.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-ochraniacze-nog",
+      "candidateId": "batch124-ochraniacze-nog",
+      "source": "candidates/batch-124/ochraniacze-nog.png",
+      "feedback": {
+        "itemId": "m9-cleanup-ochraniacze-nog",
+        "decision": "approve",
+        "candidateId": "batch124-ochraniacze-nog",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:30.299Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/ochraniacze-nog.svg",
+          "sha256": "8ae28ab51352f5b980c273b9e1ea1685b0eade3ce394bbc3b7834181b8bf6a86"
+        },
+        {
+          "path": "icons/armor/ochraniacze-nog.webp",
+          "sha256": "6553dc9f7ec93e6f4df45797572f2f6697779d6866f37926c25f7f2a8c379b58"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/ochraniacze-nog.svg",
+          "sha256": "a6e33eaa625d42eff15d435109ef285319ab1d956ea21003f71cb0fe1fd96344",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/ochraniacze-nog.svg"
+        },
+        {
+          "source": "icons/armor/ochraniacze-nog.png",
+          "sha256": "f8c73293d23adb2a8de127464d5f7de337b5ce6dc32fc8772dae4fc26505c5b3",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/ochraniacze-nog.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-ochraniacze-rak",
+      "candidateId": "batch124-ochraniacze-rak",
+      "source": "candidates/batch-124/ochraniacze-rak.png",
+      "feedback": {
+        "itemId": "m9-cleanup-ochraniacze-rak",
+        "decision": "approve",
+        "candidateId": "batch124-ochraniacze-rak",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:37.151Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/ochraniacze-rak.svg",
+          "sha256": "8848a9ad993d8b663eb2f8acacafe8bba9ba71889c1f52398f2cae2ae4831188"
+        },
+        {
+          "path": "icons/armor/ochraniacze-rak.webp",
+          "sha256": "562d9279ef55e6295a0321a05e05d79b7008600e2b50fd0390b51bb1cbe73788"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/ochraniacze-rak.svg",
+          "sha256": "0261a5affe67b65e5cf4a86e6afeec9d7c2f67be1cd58d154546212c490e43ed",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/ochraniacze-rak.svg"
+        },
+        {
+          "source": "icons/armor/ochraniacze-rak.png",
+          "sha256": "991f367e83ff818099b7f7e2b4b361ca42dc384da9ac533c6c13f21054c31784",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/ochraniacze-rak.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-pancerz-stalowej-policji",
+      "candidateId": "batch124-pancerz-stalowej-policji",
+      "source": "candidates/batch-124/pancerz-stalowej-policji.png",
+      "feedback": {
+        "itemId": "m9-cleanup-pancerz-stalowej-policji",
+        "decision": "approve",
+        "candidateId": "batch124-pancerz-stalowej-policji",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:46.935Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/pancerz-stalowej-policji.svg",
+          "sha256": "05ea708747e1e3a1fb7e9a9abc005eb1a79a8fbe37bfb4ad6573857f264f155a"
+        },
+        {
+          "path": "icons/armor/pancerz-stalowej-policji.webp",
+          "sha256": "39b6b78372832b7ba8bcbbdca2b2e5cf50ddd283dfba102820a69aa2efc2885e"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/pancerz-stalowej-policji.svg",
+          "sha256": "8279bcd116dc5f7f62b15ed39d9e1934ab3f19d115ac27d2941fe47c834c4071",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/pancerz-stalowej-policji.svg"
+        },
+        {
+          "source": "icons/armor/pancerz-stalowej-policji.png",
+          "sha256": "224c5aaaccdf422fdd3d19007a28b1baf31d8da3eae34d844d5d17ab914afed1",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/pancerz-stalowej-policji.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-pelna-zbroja-smieciowa",
+      "candidateId": "batch124-pelna-zbroja-smieciowa",
+      "source": "candidates/batch-124/pelna-zbroja-smieciowa.png",
+      "feedback": {
+        "itemId": "m9-cleanup-pelna-zbroja-smieciowa",
+        "decision": "approve",
+        "candidateId": "batch124-pelna-zbroja-smieciowa",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:52.406Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/pelna-zbroja-smieciowa.svg",
+          "sha256": "46f29f6c9079ea5f82565004fcd5428447bff0fcb8a723f9666b99cf9fe0d725"
+        },
+        {
+          "path": "icons/armor/pelna-zbroja-smieciowa.webp",
+          "sha256": "7a263f43293b39c30cd31b0f44c57f66afa13c572a4596835147344797a3bcfb"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/pelna-zbroja-smieciowa.svg",
+          "sha256": "4a7f4cdd45516cccfe1d4b588e10ace89ab73a5251199735aae13722c393eaa6",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/pelna-zbroja-smieciowa.svg"
+        },
+        {
+          "source": "icons/armor/pelna-zbroja-smieciowa.png",
+          "sha256": "8a9e9aae6537e5630d224697e4c38f5ec42eccf4b7cdfc8bc21b974bbc4966f6",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/pelna-zbroja-smieciowa.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-wojskowy-pancerz-hydrauliczny",
+      "candidateId": "batch124-wojskowy-pancerz-hydrauliczny",
+      "source": "candidates/batch-124/wojskowy-pancerz-hydrauliczny.png",
+      "feedback": {
+        "itemId": "m9-cleanup-wojskowy-pancerz-hydrauliczny",
+        "decision": "approve",
+        "candidateId": "batch124-wojskowy-pancerz-hydrauliczny",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:36:58.716Z"
+      },
+      "files": [
+        {
+          "path": "icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+          "sha256": "1861ddd2b4d913deda4d95fbcd188bf26d024d97c8e1a220b7459e47c075b57c"
+        },
+        {
+          "path": "icons/armor/wojskowy-pancerz-hydrauliczny.webp",
+          "sha256": "a99022764099161fe432f7c1f647f1af994b28a40e57df7143b5182ac92fc32a"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/armor/wojskowy-pancerz-hydrauliczny.svg",
+          "sha256": "d74aed7d99998650727e3655475ec603e476aa48b83aa896bee105769f3db90b",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/wojskowy-pancerz-hydrauliczny.svg"
+        },
+        {
+          "source": "icons/armor/wojskowy-pancerz-hydrauliczny.png",
+          "sha256": "982f075d1839dc55d7c7bb20c4483aef9370b224c75d3b244ba40adf67750e96",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/wojskowy-pancerz-hydrauliczny.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-alkohol_markowy",
+      "candidateId": "batch124-alkohol_markowy",
+      "source": "candidates/batch-124/alkohol_markowy.png",
+      "feedback": {
+        "itemId": "m9-cleanup-alkohol_markowy",
+        "decision": "approve",
+        "candidateId": "batch124-alkohol_markowy",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:37:04.280Z"
+      },
+      "files": [
+        {
+          "path": "icons/items/drugs/alkohol_markowy.svg",
+          "sha256": "faa18793e56bea4ae6408d798d990589fa8539be234c92552c8e7dd19f72c066"
+        },
+        {
+          "path": "icons/items/drugs/alkohol_markowy.webp",
+          "sha256": "a1828822177335f677351adcc436fbdc03d8487f301f6e2dca1c706f3b137539"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/items/drugs/alkohol_markowy.svg",
+          "sha256": "611a41370442b27db3965d64f0b501f97ac486b42a10811e7d76302cd24aa013",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/alkohol_markowy.svg"
+        },
+        {
+          "source": "icons/items/drugs/alkohol_markowy.png",
+          "sha256": "0c00892f1153e30c8ad940a73e5092b3ecb04b07493e2bb59f3d78f27badc2c0",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/alkohol_markowy.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-alkohol_tani",
+      "candidateId": "batch124-alkohol_tani",
+      "source": "candidates/batch-124/alkohol_tani.png",
+      "feedback": {
+        "itemId": "m9-cleanup-alkohol_tani",
+        "decision": "approve",
+        "candidateId": "batch124-alkohol_tani",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:37:08.208Z"
+      },
+      "files": [
+        {
+          "path": "icons/items/drugs/alkohol_tani.svg",
+          "sha256": "b979dd022b6ee57c9964a229b508d8c502c16619d8ba1ef88e3ada4166f73586"
+        },
+        {
+          "path": "icons/items/drugs/alkohol_tani.webp",
+          "sha256": "529522251efe6b98111f0996f11dc46ac05078851f7d0a55dde1b9ef1b1eb8c0"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/items/drugs/alkohol_tani.svg",
+          "sha256": "facce3f5c019e28bf44657eb2664cbc22a2b612448b9e5e8a264272b3e9a21cb",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/alkohol_tani.svg"
+        },
+        {
+          "source": "icons/items/drugs/alkohol_tani.png",
+          "sha256": "ad8d1f43a97ef6e40c6cc1c0a94f1ddb28b0cae6029e8e92efefae569a5de622",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/alkohol_tani.png"
+        }
+      ]
+    },
+    {
+      "itemId": "m9-cleanup-anestix",
+      "candidateId": "batch124-anestix",
+      "source": "candidates/batch-124/anestix.png",
+      "feedback": {
+        "itemId": "m9-cleanup-anestix",
+        "decision": "approve",
+        "candidateId": "batch124-anestix",
+        "notes": "",
+        "updatedAt": "2026-11-17T21:37:12.656Z"
+      },
+      "files": [
+        {
+          "path": "icons/items/drugs/anestix.svg",
+          "sha256": "ba69900dda49c430b01b465b9439dc875c8311b9c6d7239a484addfe92ea31f6"
+        },
+        {
+          "path": "icons/items/drugs/anestix.webp",
+          "sha256": "14575174bcce31a59cf148eebbf7c3f309a107ae36bfd3763d4d2514482e7bd3"
+        }
+      ],
+      "archived": [
+        {
+          "source": "icons/items/drugs/anestix.svg",
+          "sha256": "d030a10c61306e52b936db319f95f1734816cba5e66175d0319703d35cc0f96b",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/anestix.svg"
+        },
+        {
+          "source": "icons/items/drugs/anestix.png",
+          "sha256": "f7ac8fae158ca7048dee10a51727e0cdb5f29de57c273f9128471337df88f578",
+          "archive": "dev/icons/review/candidates/batch-124/raw/installed-before/anestix.png"
+        }
+      ]
+    }
+  ],
+  "feedbackPreserved": true,
+  "feedbackSha256": "1aa71bfcfd92e4a61c665e5d1a777711f4e7a093331b638860edf7b74a772e93",
+  "shippedFormat": "SVG with embedded lossless WEBP and WEBP sidecar"
+}

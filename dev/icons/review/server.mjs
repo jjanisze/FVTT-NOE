@@ -76,6 +76,8 @@ const server = http.createServer(async (req, res) => {
       if (req.headers.origin && req.headers.origin !== `http://${HOST}:${req.socket.localPort}`) throw new Error("Invalid request origin");
     }
     if (req.method === "GET" && url.pathname === "/api/catalog") return json(res, 200, buildCatalog(moduleRoot, reviewRoot));
+    if (req.method === "GET" && url.pathname === "/m9-finishes.html") return sendFile(res, path.join(moduleRoot, "dev/finish/preview/index.html"));
+    if (req.method === "GET" && url.pathname.startsWith("/ui/noe/")) return sendFile(res, safePath(path.join(moduleRoot, "ui/noe"), decodeURIComponent(url.pathname.slice(8))));
     if (req.method === "GET" && url.pathname === "/api/dnd5e-reference") return json(res, 200, buildReferenceCatalog(getReferenceRoots()));
     if (req.method === "GET" && url.pathname.startsWith("/reference-assets/")) {
       const file = referenceAsset(decodeURIComponent(url.pathname.slice("/reference-assets/".length)), getReferenceRoots());

@@ -127,6 +127,16 @@ await step("generators", async () => {
     // OSD font atlas from the original Betaflight .mcm (fonts/osd/, D39 of PLAN_m3_towarzysze.md): --check writes nothing.
     const osd = run(PYTHON, ["dev/osd/gen_osd_font.py", "--check"]);
     checks.push({ name: "betaflight-default.webp", ok: osd.ok, stale: !osd.ok && /NIEZGODNY|brak/.test(osd.stdout.join(" ")), run: osd });
+    // M9 finish engine (PLAN_m9_style.md §7): tokens, UI signs, status numerals, finished icons and banners
+    // against the approved profile and the manifest — decoded pixels and text, never bytes. --check writes nothing.
+    const finish = node("dev/finish/build-finish.mjs", "--check");
+    checks.push({ name: "build:finish", ok: finish.ok, stale: !finish.ok, run: finish });
+    // The manifest's assignments come from the pack builder's output; staging packs needs Foundry's classic-level.
+    if (CI) checks.push({ name: "finish manifest", skipped: "--ci (staging packs needs the Foundry install)" });
+    else {
+      const manifest = node("dev/finish/build-manifest.mjs", "--check");
+      checks.push({ name: "finish manifest", ok: manifest.ok, stale: !manifest.ok, run: manifest });
+    }
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

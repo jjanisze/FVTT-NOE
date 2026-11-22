@@ -1,9 +1,8 @@
 {
   "schema": "noe-icon-style/v1",
-  "id": "noe-m9-r07-v1",
+  "id": "noe-m9-r07-v2",
   "status": "design-approved",
-  "approvedOn": "2026-11-15",
-  "approval": "GM explicitly locked review proposal 07 in the design conversation.",
+  "approval": "GM selected 'Use the proposed family treatments (Recommended)' in the M9 graphics workflow.",
   "plan": "PLAN_m9_style.md#locked-style",
   "previewSelection": {
     "sourcePalette": "bone",
@@ -41,35 +40,136 @@
     "accent": "#bdc6cd"
   },
   "sources": {
-    "brutal": {"accent": "#d57362", "ground": "#6d2623", "foreground": "#ffffff"},
-    "cwaniak": {"accent": "#ddc052", "ground": "#4f4100", "foreground": "#ffffff"},
-    "spec": {"accent": "#56c5ce", "ground": "#00484e", "foreground": "#ffffff"},
-    "twardziel": {"accent": "#7999ef", "ground": "#263574", "foreground": "#ffffff"},
-    "zlodziej": {"accent": "#bb85ea", "ground": "#4e2b6d", "foreground": "#ffffff"},
-    "zwiadowca": {"accent": "#9dc96a", "ground": "#28481e", "foreground": "#ffffff"},
-    "generic": {"accent": "#b8c1c9", "ground": "#383e45", "foreground": "#ffffff"},
-    "origin": {"accent": "#dfd1b1", "ground": "#dfd1b1", "foreground": "#161b20"}
+    "brutal": {
+      "accent": "#d57362",
+      "ground": "#6d2623",
+      "foreground": "#ffffff"
+    },
+    "cwaniak": {
+      "accent": "#ddc052",
+      "ground": "#4f4100",
+      "foreground": "#ffffff"
+    },
+    "spec": {
+      "accent": "#56c5ce",
+      "ground": "#00484e",
+      "foreground": "#ffffff"
+    },
+    "twardziel": {
+      "accent": "#7999ef",
+      "ground": "#263574",
+      "foreground": "#ffffff"
+    },
+    "zlodziej": {
+      "accent": "#bb85ea",
+      "ground": "#4e2b6d",
+      "foreground": "#ffffff"
+    },
+    "zwiadowca": {
+      "accent": "#9dc96a",
+      "ground": "#28481e",
+      "foreground": "#ffffff"
+    },
+    "generic": {
+      "accent": "#b8c1c9",
+      "ground": "#383e45",
+      "foreground": "#ffffff"
+    },
+    "origin": {
+      "accent": "#dfd1b1",
+      "ground": "#dfd1b1",
+      "foreground": "#161b20"
+    }
   },
   "contentFamilies": {
-    "brutal": {"role": "character", "source": "brutal"},
-    "cwaniak": {"role": "character", "source": "cwaniak"},
-    "spec": {"role": "character", "source": "spec"},
-    "twardziel": {"role": "character", "source": "twardziel"},
-    "zlodziej": {"role": "character", "source": "zlodziej"},
-    "zwiadowca": {"role": "character", "source": "zwiadowca"},
-    "origin": {"role": "character", "source": "origin"},
-    "feat": {"role": "character", "source": "generic"},
-    "shared": {"role": "character", "source": "generic"},
-    "weapon": {"role": "equipment", "accent": "#c3cbd2"},
-    "ammo": {"role": "equipment", "accent": "#d0b27a"},
-    "armor": {"role": "equipment", "accent": "#bdbaa5"},
-    "tools": {"role": "equipment", "accent": "#8cbbb2"},
-    "medical": {"role": "equipment", "accent": "#a7c6ad"},
-    "chemicals": {"role": "equipment", "accent": "#b8abc6"},
-    "explosives": {"role": "equipment", "accent": "#c99f6e"},
-    "survival": {"role": "equipment", "accent": "#c5b58e"},
-    "salvage": {"role": "equipment", "accent": "#b5b9b6"},
-    "utility": {"role": "operation", "ink": "theme-foreground"}
+    "brutal": {
+      "role": "character",
+      "source": "brutal"
+    },
+    "cwaniak": {
+      "role": "character",
+      "source": "cwaniak"
+    },
+    "spec": {
+      "role": "character",
+      "source": "spec"
+    },
+    "twardziel": {
+      "role": "character",
+      "source": "twardziel"
+    },
+    "zlodziej": {
+      "role": "character",
+      "source": "zlodziej"
+    },
+    "zwiadowca": {
+      "role": "character",
+      "source": "zwiadowca"
+    },
+    "origin": {
+      "role": "character",
+      "source": "origin"
+    },
+    "feat": {
+      "role": "character",
+      "source": "generic"
+    },
+    "shared": {
+      "role": "character",
+      "source": "generic"
+    },
+    "weapon": {
+      "role": "equipment",
+      "accent": "#c3cbd2"
+    },
+    "ammo": {
+      "role": "equipment",
+      "accent": "#d0b27a"
+    },
+    "armor": {
+      "role": "equipment",
+      "accent": "#bdbaa5"
+    },
+    "tools": {
+      "role": "equipment",
+      "accent": "#8cbbb2"
+    },
+    "medical": {
+      "role": "equipment",
+      "accent": "#a7c6ad"
+    },
+    "chemicals": {
+      "role": "equipment",
+      "accent": "#b8abc6"
+    },
+    "explosives": {
+      "role": "equipment",
+      "accent": "#c99f6e"
+    },
+    "survival": {
+      "role": "equipment",
+      "accent": "#c5b58e"
+    },
+    "salvage": {
+      "role": "equipment",
+      "accent": "#b5b9b6"
+    },
+    "utility": {
+      "role": "operation",
+      "ink": "theme-foreground"
+    },
+    "creature": {
+      "role": "character",
+      "source": "generic"
+    },
+    "devices": {
+      "role": "equipment",
+      "accent": "#8cbbb2"
+    },
+    "documents": {
+      "role": "equipment",
+      "accent": "#b5b9b6"
+    }
   },
   "treatments": {
     "character": "source-foreground-on-source-ground",
@@ -86,10 +186,22 @@
   "actionCosts": {
     "placement": "row-or-shortcut-label",
     "mode": "shape-color-and-letter",
-    "A": {"shape": "circle", "color": "#68c585"},
-    "B": {"shape": "triangle", "color": "#f5ad49"},
-    "R": {"shape": "four-point-star", "color": "#e3a0e9"},
-    "I": {"shape": "square", "color": "#83c8ed"}
+    "A": {
+      "shape": "circle",
+      "color": "#68c585"
+    },
+    "B": {
+      "shape": "triangle",
+      "color": "#f5ad49"
+    },
+    "R": {
+      "shape": "four-point-star",
+      "color": "#e3a0e9"
+    },
+    "I": {
+      "shape": "square",
+      "color": "#83c8ed"
+    }
   },
   "unavailability": {
     "marker": "diagonal-slash",
@@ -98,7 +210,11 @@
     "lightOuterEdge": false,
     "angleDegrees": -45,
     "lengthRatio": 1.12,
-    "thicknessCssPixels": {"ratio": 0.055, "min": 2, "max": 4},
+    "thicknessCssPixels": {
+      "ratio": 0.055,
+      "min": 2,
+      "max": 4
+    },
     "outlineCssPixels": 1,
     "glyphOpacity": 1,
     "budgetWarningAloneUsesSlash": false,
@@ -107,6 +223,8 @@
     "mixedFeatureMarkOperationOnly": true
   },
   "stateComposition": "live-overlay-costs-counts-and-state-not-baked-into-content-masters",
-  "implementationStatus": "planned-pipeline-and-consumer-audit-next",
-  "assetInstallationApprovedByThisProfile": false
+  "implementationStatus": "family-rules-approved-full-library-pixel-review-next",
+  "assetInstallationApprovedByThisProfile": false,
+  "basedOn": "noe-m9-r07-v1",
+  "approvedOn": "2026-11-17"
 }

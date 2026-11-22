@@ -4074,6 +4074,69 @@
       "candidateId": "batch123-wyciek",
       "notes": "More like a leaking, half-broken hydraulic line. This looks like a faucet.",
       "updatedAt": "2026-11-01T00:38:31.226Z"
+    },
+    "m9-cleanup-helm": {
+      "itemId": "m9-cleanup-helm",
+      "decision": "approve",
+      "candidateId": "batch124-helm",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:25.695Z"
+    },
+    "m9-cleanup-ochraniacze-nog": {
+      "itemId": "m9-cleanup-ochraniacze-nog",
+      "decision": "approve",
+      "candidateId": "batch124-ochraniacze-nog",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:30.299Z"
+    },
+    "m9-cleanup-ochraniacze-rak": {
+      "itemId": "m9-cleanup-ochraniacze-rak",
+      "decision": "approve",
+      "candidateId": "batch124-ochraniacze-rak",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:37.151Z"
+    },
+    "m9-cleanup-pancerz-stalowej-policji": {
+      "itemId": "m9-cleanup-pancerz-stalowej-policji",
+      "decision": "approve",
+      "candidateId": "batch124-pancerz-stalowej-policji",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:46.935Z"
+    },
+    "m9-cleanup-pelna-zbroja-smieciowa": {
+      "itemId": "m9-cleanup-pelna-zbroja-smieciowa",
+      "decision": "approve",
+      "candidateId": "batch124-pelna-zbroja-smieciowa",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:52.406Z"
+    },
+    "m9-cleanup-wojskowy-pancerz-hydrauliczny": {
+      "itemId": "m9-cleanup-wojskowy-pancerz-hydrauliczny",
+      "decision": "approve",
+      "candidateId": "batch124-wojskowy-pancerz-hydrauliczny",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:36:58.716Z"
+    },
+    "m9-cleanup-alkohol_markowy": {
+      "itemId": "m9-cleanup-alkohol_markowy",
+      "decision": "approve",
+      "candidateId": "batch124-alkohol_markowy",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:37:04.280Z"
+    },
+    "m9-cleanup-alkohol_tani": {
+      "itemId": "m9-cleanup-alkohol_tani",
+      "decision": "approve",
+      "candidateId": "batch124-alkohol_tani",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:37:08.208Z"
+    },
+    "m9-cleanup-anestix": {
+      "itemId": "m9-cleanup-anestix",
+      "decision": "approve",
+      "candidateId": "batch124-anestix",
+      "notes": "",
+      "updatedAt": "2026-11-17T21:37:12.656Z"
     }
   }
 }

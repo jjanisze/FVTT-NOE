@@ -1,0 +1,44 @@
+{
+  "id": "noe-m9-sheet-art-r01",
+  "date": "2026-11-15",
+  "status": "historical-review-see-r02",
+  "generation": "Built-in image_gen tool; original opaque raster generation",
+  "encoding": "Lossless WEBP; dimensions and pixels preserved from PNG masters",
+  "candidates": [
+    {
+      "id": "a-workshop",
+      "decision": "keep-by-user",
+      "label": "A — Grafitowa blacha",
+      "master": "sources/workshop-v1.png",
+      "delivery": "workshop-v1.webp",
+      "prompt": "Use case: stylized-concept. Asset type: production raster background banner for a dense post-apocalyptic tabletop RPG character sheet, NOE. Create one original very wide landscape banner, approximately 3:1, ideally 1536 x 512 pixels. Direction A: WORKSHOP / WORN GRAPHITE. An orthographic close-up of a flat, utilitarian graphite-painted steel equipment panel, aged through everyday handling: restrained rubbed paint, faint machining grain, occasional shallow scratches, subtle overlapping sheet-metal joins concentrated toward the far right and outermost edges. Modern pragmatic tactical software meets late-1990s post-apocalyptic equipment, materially convincing but very understated. Overall neutral dark graphite (#191e23, #293038, restrained highlights no brighter than #505960); no warm rust wash. The left 65 percent and center must be calm and mostly uninterrupted so white character names and tiny UI controls remain perfectly readable. Let the rightmost third have a little more material identity, without a focal illustration or high contrast object. Soft flat lighting, no dramatic shine, no vignette frame. This is the actual background artwork only: no interface, no buttons, no lettering, no numbers, no logos, no watermark, no border, no hazard stripes, no weapon, no skull, no skeleton, no dragon, no decorative fantasy filigree. The entire asset should be useful behind real UI text. Opaque background."
+    },
+    {
+      "id": "b-field-drawing",
+      "decision": "rejected-by-user-ai-pseudo-drawing-do-not-use",
+      "label": "B — Rysunek warsztatowy",
+      "master": "sources/field-drawing-v1.png",
+      "delivery": "field-drawing-v1.webp",
+      "prompt": "Use case: stylized-concept. Asset type: original raster background banner for the NOE post-apocalyptic RPG character sheet. Create a very wide horizontal banner approximately 3:1, ideally 1536 x 512 pixels. Direction B: FIELD ENGINEERING / SALVAGED MACHINE DRAWING. A worn graphite field-maintenance document rendered directly on a matte dark neutral steel surface, with a single ghosted technical contour drawing of a salvaged vehicle drivetrain: one large partial circular hub, belt pulley and a few pipe/engine outlines, concentrated in the rightmost 40 percent and cropped organically at the right edge. Sparse utilitarian drafting marks without letters or numerals. Tonal graphite-on-graphite etched / rubbed ink linework, subtle broken lines from wear, materially grounded, restrained and analog; post-apocalyptic field workshop rather than futuristic hologram. Flat orthographic composition. Left 60 percent is quiet open negative space for a white character name and small controls; lower half fades naturally to an almost plain graphite ground. Neutral colors near #191e23 and #293038, technical lines only around #46525d to #59636b, all low contrast. This replaces a fantasy skeletal dragon motif with pragmatic human-made machinery. Generate the background art alone: no mockup, no UI, no text, no digits, no labels, no logos, no border, no badges, no skulls, no bones, no dragons, no bright neon, no glowing interface, no hazard stripes. Opaque background. All detail must remain secondary to dense software UI."
+    }
+  ],
+  "target": "PC character background underlay; retain existing controls and text for comparison",
+  "fileMetadata": {
+  "workshop-v1": {
+    "width": 2172,
+    "height": 724,
+    "sourceBytes": 2131981,
+    "webpBytes": 1379314,
+    "sourceSha256": "c38e80047e0cf8521945fbb753b46396b20b92add0757cb9772a3b6d00dad424",
+    "webpSha256": "828dedd4edfd296ae7cd0e8a0cef23b6820773a211654df6ed4673b35815ea33"
+  },
+  "field-drawing-v1": {
+    "width": 2172,
+    "height": 724,
+    "sourceBytes": 2187047,
+    "webpBytes": 1411784,
+    "sourceSha256": "c09ac9b8ed2c6d418ce30cc9df23cac02c89c481fa649de062e0098c15233d83",
+    "webpSha256": "8378a3c59061317f6cd88be640610b169dbd34c6dd7eef5bc5f0021647340703"
+  }
+}
+}

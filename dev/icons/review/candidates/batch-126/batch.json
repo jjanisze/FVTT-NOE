@@ -1,0 +1,69 @@
+{
+  "batch": 126,
+  "date": "2026-11-17",
+  "subjects": [
+    {
+      "key": "cygaro",
+      "name": "Cygaro",
+      "target": "icons/items/drugs/cygaro.svg",
+      "request": "ONE complete stout cigar, gently diagonal, with one broad plain band represented by a black gap and one blunt end. No smoke, burning particles, leaf veins, wrapper texture or small lines.",
+      "cell": 1,
+      "itemId": "m9-cleanup-cygaro",
+      "deliveryTargets": [
+        {
+          "source": "icons/items/drugs/cygaro.svg",
+          "sourceSha256": "b8dabcc9c72811e2d575cef47b9fea9fb7066f23fee8a6fd6a485d8e28017f61",
+          "variant": "svg"
+        },
+        {
+          "source": "icons/items/drugs/cygaro.png",
+          "sourceSha256": "b52f99a0edec2469cfcc510e758af864d232549c48d2197d886706b964ba93d8",
+          "variant": "png"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "beretta_b92",
+      "name": "Beretta B92",
+      "target": "icons/weapons/beretta_b92.svg",
+      "request": "ONE complete Beretta-92-style service PISTOL in clean side profile, muzzle pointing LEFT: long low open-top slide, rounded trigger guard with a broad empty opening, angled grip and short exposed hammer. At most THREE broad black structural cuts. No bullets, floating specks, weapon diagram, exploded parts, lettering or engraving.",
+      "cell": 2,
+      "itemId": "m9-cleanup-beretta_b92",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/beretta_b92.svg",
+          "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc",
+          "variant": "svg"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    },
+    {
+      "key": "k_22_revolver",
+      "name": "Rewolwer .22",
+      "target": "icons/weapons/k_22_revolver.svg",
+      "request": "ONE complete small .22-calibre REVOLVER in clean side profile, muzzle pointing LEFT: slim moderate barrel, unmistakable round cylinder, short hammer, a broad empty trigger-guard opening and gently curved grip. At most THREE broad black cuts. No bullets, specks, engraving, fine cylinder grooves, lettering or exploded parts.",
+      "cell": 3,
+      "itemId": "m9-cleanup-k_22_revolver",
+      "deliveryTargets": [
+        {
+          "source": "icons/weapons/k_22_revolver.svg",
+          "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95",
+          "variant": "svg"
+        }
+      ],
+      "context": "M9 agent visual audit: legacy atlas fragments / grid-edge contamination or crowded internal detail; inspect physical subject at 64/32/16 px. A replacement candidate, not a saved GM redo decision."
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "purpose": "Allowed narrower scope: cigar and two weapon silhouettes only; excludes all four drug subjects from blocked Batch 125"
+}

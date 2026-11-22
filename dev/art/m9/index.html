@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOE M9 · nowe tła kart · przegląd 01</title>
+<style>
+  :root{color-scheme:dark;font:16px/1.5 system-ui,sans-serif;color:#edf0f2;background:#191e23}
+  *{box-sizing:border-box}body{margin:0}main{max-width:1360px;margin:auto;padding:28px}
+  h1{font-size:28px;line-height:1.2}h2{font-size:20px}p{max-width:95ch;color:#b2bdc6}
+  a{color:#83c8ed}button,select{font:inherit;color:inherit;border:1px solid #454f58;background:#293038;padding:9px 14px;border-radius:4px;cursor:pointer}
+  button[aria-pressed=true]{border-color:#bdc6cd;box-shadow:inset 0 -3px #bdc6cd;background:#36414b}
+  button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #83c8ed;outline-offset:3px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;position:sticky;top:0;background:#191e23;padding:12px 0;z-index:1}
+  label{display:flex;align-items:center;gap:10px}.note{font-size:14px}figure{margin:16px 0;background:#293038;border:1px solid #454f58;border-radius:4px;overflow:hidden}
+  img{display:block;width:100%;height:auto}figcaption{padding:12px 16px}.assets{display:grid;grid-template-columns:1fr 1fr;gap:20px}.assets figure{margin:0}.status{font-size:13px;letter-spacing:.06em;color:#b2bdc6}
+  @media(max-width:760px){main{padding:16px}.assets{grid-template-columns:1fr}h1{font-size:24px}.controls{position:static}}
+</style>
+<main>
+  <div class="status">HISTORYCZNY PRZEGLĄD 01 · Workshop zachowany · rysunek AI odrzucony · <a href="r02/index.html">Otwórz aktualny przegląd 02</a></div>
+  <h1>Nowa grafika karty NOE</h1>
+  <p>Dwa oryginalne tła zastępujące smoczy motyw 5e. <strong>A: grafitowa blacha</strong> — spokojny panel sprzętu.
+    <strong>B: rysunek warsztatowy</strong> — zarys mechanizmu na grafitowym podłożu. Oba mają zostawić miejsce dla nazwy i kontrolek.</p>
+  <p class="note">Poniżej rzeczywiste zrzuty z Chrome w piaskownicy. W A/B i próbie bez grafiki wyłączono filtr PC i ustawiono grafitowe podłoże.
+    Pozostała oprawa oraz ikony są obecne, sprzed M9. To przegląd tła, a nie gotowy projekt całej karty.</p>
+  <div class="controls" role="group" aria-label="Wariant tła">
+    <button type="button" data-mode="stock" aria-pressed="false">Obecne 5e</button>
+    <button type="button" data-mode="plain" aria-pressed="false">Grafit bez ilustracji</button>
+    <button type="button" data-mode="workshop" aria-pressed="true">A · Blacha</button>
+    <button type="button" data-mode="field-drawing" aria-pressed="false" disabled>B · Rysunek — odrzucony</button>
+    <label>Widok <select id="view"><option value="features">Zdolności · 1030 px</option><option value="inventory">Ekwipunek · 1030 px</option><option value="narrow">Zdolności · 820 px</option></select></label>
+  </div>
+  <figure><a id="full" href="previews/workshop-features.webp"><img id="sheet" src="previews/workshop-features.webp" alt="Rzeczywista karta PC z wariantem A — grafitowa blacha"></a><figcaption id="caption" aria-live="polite">A · Grafitowa blacha · Zdolności · 1030 px</figcaption></figure>
+  <p class="note">Kliknij zrzut, aby obejrzeć go w pełnym rozmiarze. Dla punktów odniesienia „Obecne 5e” i „Grafit bez ilustracji” dostępny jest widok zdolności.
+    <a href="previews/manifest.json">Parametry prób</a> · <a href="manifest.json">Pełne prompty i pochodzenie</a> · <a href="README.md">Zakres i dalsze grafiki</a></p>
+  <h2>Pliki grafiki bez interfejsu</h2>
+  <div class="assets">
+    <figure><a href="workshop-v1.webp"><img src="workshop-v1.webp" alt="Wariant A — ciemna grafitowa stal z oszczędnym zużyciem i łączeniem panelu po prawej"></a><figcaption><strong>A · Grafitowa blacha</strong><br><a href="workshop-v1.webp">WEBP</a> · <a href="sources/workshop-v1.png">Master PNG</a></figcaption></figure>
+    <figure><a href="field-drawing-v1.webp"><img src="field-drawing-v1.webp" alt="Wariant B — delikatny rysunek mechanizmu na grafitowym tle, prawa strona"></a><figcaption><strong>B · Rysunek warsztatowy</strong><br><a href="field-drawing-v1.webp">WEBP</a> · <a href="sources/field-drawing-v1.png">Master PNG</a></figcaption></figure>
+  </div>
+  <p class="note">Grafika wygenerowana narzędziem image_gen. Kandydaci nie są ustawieni jako motyw modułu.
+    Aktualne decyzje i nowe alternatywy są w przeglądzie 02; zatwierdzony profil ikon nie zmienia się.</p>
+</main>
+<script>
+  const buttons=[...document.querySelectorAll('[data-mode]')],view=document.querySelector('#view');let mode='workshop';
+  const labels={stock:'Obecne 5e',plain:'Grafit bez ilustracji',workshop:'A · Grafitowa blacha','field-drawing':'B · Rysunek warsztatowy'};
+  function render(){const reference=['stock','plain'].includes(mode);for(const option of view.options)option.disabled=reference&&option.value!=='features';if(reference)view.value='features';
+    const label=labels[mode]+' · '+view.selectedOptions[0].textContent,src='previews/'+mode+'-'+view.value+'.webp';
+    document.querySelector('#sheet').src=src;document.querySelector('#sheet').alt=label;document.querySelector('#full').href=src;document.querySelector('#caption').textContent=label;
+    for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.mode===mode));}
+  for(const button of buttons)button.addEventListener('click',()=>{mode=button.dataset.mode;render()});view.addEventListener('change',render);
+</script>
+</html>

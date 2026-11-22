@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-17",
+  "batch": 127,
+  "authorization": "GM requested Neodrugs, all narcotic icons and cigar to be fixed; if image generation fails, trim two pixels from each border and resize the existing image. Otherwise the full finish set is approved.",
+  "subjects": [
+    {
+      "key": "tornado",
+      "wrapper": "icons/items/drugs/tornado.svg",
+      "files": [
+        {
+          "path": "icons/items/drugs/tornado.svg",
+          "sha256": "f5543e8ba993d921edc76cc70df00d067b5373dc5722b68d4d15129f6b531231"
+        },
+        {
+          "path": "icons/items/drugs/tornado.webp",
+          "sha256": "298527e0e61b336a731c2679ad6a00aa9e1b97d44b9dbdbc9a7d5291d6fc5949"
+        }
+      ],
+      "archived": [
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/tornado.svg",
+          "sha256": "266594f1d24d5413ae938aca25df1bd24ced963b1561a78ee1b71e269667d53a"
+        },
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/tornado.png",
+          "sha256": "bd6516daadddb62aa065f5298c27914cde13a97f962cef2c164ec60008bacf75"
+        }
+      ]
+    },
+    {
+      "key": "neodrugs",
+      "wrapper": "icons/items/drugs/neodrugs.svg",
+      "files": [
+        {
+          "path": "icons/items/drugs/neodrugs.svg",
+          "sha256": "3e11c738217c57372e5d863bed3acbd0f1613a2e3604a86766894391bd6c4732"
+        },
+        {
+          "path": "icons/items/drugs/neodrugs.webp",
+          "sha256": "8c8db9988499960a47e50eb6da0650bbc8e0b6d3d5045fc00cf4dca6ac9e28e7"
+        }
+      ],
+      "archived": [
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/neodrugs.svg",
+          "sha256": "ad688d2169f4e901a3aa822f9a873065708cb2f79726061ea2fdbf47b0936c66"
+        },
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/neodrugs.png",
+          "sha256": "3f172bc9309677df8df4cdf9d11f005acab53dacd9a3854c9bf9448acafca55a"
+        }
+      ]
+    },
+    {
+      "key": "narkotyki_latwe",
+      "wrapper": "icons/items/drugs/narkotyki_latwe.svg",
+      "files": [
+        {
+          "path": "icons/items/drugs/narkotyki_latwe.svg",
+          "sha256": "9484c098a0a7085f14845dac4bbb057f67c5186799dd0011bcd811f6d8a8fd2f"
+        },
+        {
+          "path": "icons/items/drugs/narkotyki_latwe.webp",
+          "sha256": "a84a19c742471ed0d7f93e756546e4b7fe9139e72511636c87584e3a65a062b7"
+        }
+      ],
+      "archived": [
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/narkotyki_latwe.svg",
+          "sha256": "640958adbc55bd0862ecc7a2553f9112dbadce8d9f95710b078db5a88156af46"
+        },
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/narkotyki_latwe.png",
+          "sha256": "552bb4996d88e8bf1614ea0873c4dd94cb7455dde2f7eaa601d642c80039fc44"
+        }
+      ]
+    },
+    {
+      "key": "narkotyki_przedwojenne",
+      "wrapper": "icons/items/drugs/narkotyki_przedwojenne.svg",
+      "files": [
+        {
+          "path": "icons/items/drugs/narkotyki_przedwojenne.svg",
+          "sha256": "e11414164fce9c35acd9a80da4aec4130ed7d46af7aaefda6ad840299d219a1a"
+        },
+        {
+          "path": "icons/items/drugs/narkotyki_przedwojenne.webp",
+          "sha256": "cca4126cbdc655195694bd69eea2cf22e4b17dbe1676df9f05a2ecd7420fa01b"
+        }
+      ],
+      "archived": [
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/narkotyki_przedwojenne.svg",
+          "sha256": "c0c06c0e43898d87a8782dccf2ab8e6f982c132dff66347f834aa306a9ae7b6e"
+        },
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/narkotyki_przedwojenne.png",
+          "sha256": "6798e08c31e736f41f58eb1626ee1086d2cb45d0172770e849f675598a0914ce"
+        }
+      ]
+    },
+    {
+      "key": "cygaro",
+      "wrapper": "icons/items/drugs/cygaro.svg",
+      "files": [
+        {
+          "path": "icons/items/drugs/cygaro.svg",
+          "sha256": "44e8a414bee19bcfeda19d697649e99a192da337f65afe45b5bbcdba4d2ee364"
+        },
+        {
+          "path": "icons/items/drugs/cygaro.webp",
+          "sha256": "100d552066781269a15a9936ecb37f3ed17f4ef81c0f14208bc3548aa4e9b826"
+        }
+      ],
+      "archived": [
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/cygaro.svg",
+          "sha256": "b8dabcc9c72811e2d575cef47b9fea9fb7066f23fee8a6fd6a485d8e28017f61"
+        },
+        {
+          "path": "dev/icons/review/candidates/batch-127/raw/installed-before/cygaro.png",
+          "sha256": "b52f99a0edec2469cfcc510e758af864d232549c48d2197d886706b964ba93d8"
+        }
+      ]
+    }
+  ]
+}

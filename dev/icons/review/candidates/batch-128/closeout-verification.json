@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-18",
+  "status": "complete",
+  "method": "GM-approved deterministic Python cleanup; built-in OpenAI image edit returned no image",
+  "sourceDelivery": "installed.json",
+  "finishApproval": "finish-approval.json",
+  "revisedSubjects": 3,
+  "unchangedSubjects": 779,
+  "totalApprovedSubjects": 782,
+  "checks": {
+    "finishEngine": "passed; all 787 rasters and generated text outputs",
+    "manifest": "passed; zero assignment gaps",
+    "sourceMaskFailures": 0,
+    "edgeTouchingMasters": 0,
+    "stagedPacks": "passed; 19 packs, 1835 records",
+    "sandboxPacks": "bron and sprzet rebuilt and validated",
+    "campaignPacks": "bron and sprzet rebuilt and validated",
+    "routingTests": "12 passed",
+    "graphicsBrowserTests": "20 passed"
+  },
+  "liveSandbox": {
+    "images": ["chemicals/trucizna", "weapon/beretta_b92", "weapon/k_22_revolver"],
+    "correctPackBindings": 3,
+    "imagesDecodedAt128Pixels": 3,
+    "poisonDotRegion": "10 by 10 px at x=95,y=112 in the decoded 128 px export",
+    "poisonDotRegionAlphaSum": 0,
+    "worldDocumentsCreatedOrMigrated": false
+  },
+  "browser": {
+    "approvedCards": 782,
+    "poisonFilterResult": "chemicals/trucizna",
+    "brokenImages": 0,
+    "horizontalOverflow": false,
+    "preview": "raw/inventory-preview.webp",
+    "viewportScreenshot": "Capture did not finish; cancelled. No screenshot file is claimed."
+  },
+  "remainingConfirmedM9ArtworkRequests": 0,
+  "poligonRefreshed": false,
+  "codingContinuation": "HANDOFF_m9_graphics_to_code.md in the module repository"
+}

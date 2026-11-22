@@ -1,0 +1,110 @@
+[
+  {
+    "id": "chemicals/trucizna",
+    "kind": "icon",
+    "source": "icons/items/loot/trucizna.png",
+    "sourceSha256": "732d46a202fccf313fe8093a42626ab8674f90bb2e0af942a9b4617db34cb16c",
+    "wrapper": "icons/items/loot/trucizna.svg",
+    "family": "chemicals",
+    "role": "equipment",
+    "recipe": "noe-m9-r07-v2#equipment",
+    "outputs": [
+      {
+        "path": "icons/finished/chemicals/trucizna.webp",
+        "size": 128
+      }
+    ],
+    "consumers": [
+      {
+        "type": "pack",
+        "pack": "sprzet",
+        "via": "item.img",
+        "ids": [
+          "tmckbVp9vyu8me3z"
+        ]
+      }
+    ],
+    "review": {
+      "status": "approved",
+      "date": "2026-11-17",
+      "approval": "dev/icons/m9-pass/finish-approval.json",
+      "profileSha256": "f7805d7c0e51c4672c05235637e12907e3a304fc6a3456619e15a4e2dcebe66e",
+      "sourceSha256": "732d46a202fccf313fe8093a42626ab8674f90bb2e0af942a9b4617db34cb16c",
+      "recipeSha256": "f8c033a84f36ad2b6371ca4ce596fc14536ef3e026c7914c6e4179aa03943f5e",
+      "outputPixelSha256": "ca2f2ac4991ec558bc42c108e703600b1fa8221529e19de7d8a814a25bc739fb"
+    },
+    "outputPixelSha256": "ca2f2ac4991ec558bc42c108e703600b1fa8221529e19de7d8a814a25bc739fb"
+  },
+  {
+    "id": "weapon/beretta_b92",
+    "kind": "icon",
+    "source": "icons/weapons/beretta_b92.svg",
+    "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc",
+    "wrapper": "icons/weapons/beretta_b92.svg",
+    "family": "weapon",
+    "role": "equipment",
+    "recipe": "noe-m9-r07-v2#equipment",
+    "outputs": [
+      {
+        "path": "icons/finished/weapon/beretta_b92.webp",
+        "size": 128
+      }
+    ],
+    "consumers": [
+      {
+        "type": "pack",
+        "pack": "bron",
+        "via": "item.img",
+        "ids": [
+          "86SINerzss73EKZb"
+        ]
+      }
+    ],
+    "review": {
+      "status": "approved",
+      "date": "2026-11-17",
+      "approval": "dev/icons/m9-pass/finish-approval.json",
+      "profileSha256": "f7805d7c0e51c4672c05235637e12907e3a304fc6a3456619e15a4e2dcebe66e",
+      "sourceSha256": "be56dfd108ed1702772e32ab14360962d5afeeafbe0a572841b78294056f17cc",
+      "recipeSha256": "d0083f3184dc850972c62330192d40a93e16c1250cff0c0f3fefc7818ee00e8f",
+      "outputPixelSha256": "efa77751986969f7bb46a026e416d9d4e040b0a6eadb60a6382e5c2643038070"
+    },
+    "outputPixelSha256": "efa77751986969f7bb46a026e416d9d4e040b0a6eadb60a6382e5c2643038070"
+  },
+  {
+    "id": "weapon/k_22_revolver",
+    "kind": "icon",
+    "source": "icons/weapons/k_22_revolver.svg",
+    "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95",
+    "wrapper": "icons/weapons/k_22_revolver.svg",
+    "family": "weapon",
+    "role": "equipment",
+    "recipe": "noe-m9-r07-v2#equipment",
+    "outputs": [
+      {
+        "path": "icons/finished/weapon/k_22_revolver.webp",
+        "size": 128
+      }
+    ],
+    "consumers": [
+      {
+        "type": "pack",
+        "pack": "bron",
+        "via": "item.img",
+        "ids": [
+          "5km9QgVCXZCCfQmg"
+        ]
+      }
+    ],
+    "review": {
+      "status": "approved",
+      "date": "2026-11-17",
+      "approval": "dev/icons/m9-pass/finish-approval.json",
+      "profileSha256": "f7805d7c0e51c4672c05235637e12907e3a304fc6a3456619e15a4e2dcebe66e",
+      "sourceSha256": "08a56177968e9b6c89139950981e74a63fb64d0286c714ed8f45c60a793efb95",
+      "recipeSha256": "d0083f3184dc850972c62330192d40a93e16c1250cff0c0f3fefc7818ee00e8f",
+      "outputPixelSha256": "4787622a085aca55a3191c76644fe3f5b73ed13ee3f9a973713713cef6f509a2"
+    },
+    "outputPixelSha256": "4787622a085aca55a3191c76644fe3f5b73ed13ee3f9a973713713cef6f509a2"
+  }
+]
