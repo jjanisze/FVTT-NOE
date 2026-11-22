@@ -232,6 +232,13 @@ export async function cascadeWindows(browser, targetIds, area) {
     // A maximized or minimized window ignores position and size until it is normal again.
     await browser.send("Browser.setWindowBounds", { windowId, bounds: { windowState: "normal" } });
     await browser.send("Browser.setWindowBounds", { windowId, bounds: bounds[i] });
+    // FRAME is an estimate: Chrome 157 here took 129 px of chrome, leaving a 749 px viewport (2026-11-22).
+    const view = await evaluate(browser, targetId, "({ w: innerWidth, h: innerHeight })", { timeoutMs: 5000 }).catch(() => null);
+    const grow = view ? { width: Math.max(0, 1024 - view.w), height: Math.max(0, 768 - view.h) } : null;
+    if (grow && (grow.width || grow.height)) {
+      bounds[i] = { ...bounds[i], width: bounds[i].width + grow.width, height: bounds[i].height + grow.height };
+      await browser.send("Browser.setWindowBounds", { windowId, bounds: bounds[i] });
+    }
   }
   return bounds;
 }

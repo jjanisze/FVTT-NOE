@@ -320,20 +320,23 @@ async function openClients(ctx, browser, names, { trace = false } = {}) {
     const res = await loginInContext(ctx, browser, { userId: user.id, browserContextId: id, targetIds: inCtx.map(p => p.targetId), urls: inCtx.map(p => p.url) });
     const client = new Client(browser, { name, user: user.name, targetId: res.pages[0], trace, background });
     await client.attach();
-    // Runtime.enable replays the console of the document already loaded — the tab's earlier life, not this run.
-    client.drainErrors();
-    client.drainCompat();
-    // The working tree's current code, not whatever ES modules the tab cached earlier.
-    await client.reload();
     clients.set(name, client);
   }
   // No client window may sit fully covered by another — Chrome would throttle it as hidden (`cascadeWindows`).
+  // Sized before the reload: Foundry reports a viewport under 1024 × 768 once, at load, as a permanent error.
   try {
     const first = clients.values().next().value;
     const area = await first.eval(() => ({ left: screen.availLeft ?? 0, top: screen.availTop ?? 0, width: screen.availWidth, height: screen.availHeight }));
     await cascadeWindows(browser, [...clients.values()].map(c => c.targetId), area);
   } catch (err) {
     note(`client windows left as they opened: ${err.message}`);
+  }
+  for (const client of clients.values()) {
+    // Runtime.enable replays the console of the document already loaded — the tab's earlier life, not this run.
+    client.drainErrors();
+    client.drainCompat();
+    // The working tree's current code, not whatever ES modules the tab cached earlier.
+    await client.reload();
   }
   return clients;
 }

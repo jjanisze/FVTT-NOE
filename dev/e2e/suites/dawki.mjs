@@ -1,11 +1,12 @@
 /**
  * Suite — podanie leku innej postaci (PLAN_beta krok 8a, D18). GM i jeden gracz; każdy krok tak, jak przy stole.
  *
- *  - GM: PC Gracz 1 i PC Gracz 2 chorują na Niewydolność krążenia; PC Gracz 3 (dawca, gracz nieobecny — kieruje MG) ma
- *    Pana Plastra i dwie Aspiryny K.
+ *  - GM: PC Gracz 1 i Pacjent (gracz nieobecny) chorują na Niewydolność krążenia; PC Gracz 3 (dawca, gracz nieobecny —
+ *    kieruje MG) ma Pana Plastra i dwie Aspiryny K.
  *  - MG klika „Podaj” przy Aspirynie dawcy, wybiera PC Gracz 1 → u Gracza 1 okno „Lekarstwo” bez nazwy Sztuczki →
  *    Przyjmij → zapas dawcy 1,5 (pół dawki), PC Gracz 1 ma dzisiejszą dawkę, karta na czacie.
- *  - Ten sam lek dla PC Gracz 2 (gracz offline — okno dostaje MG) → Odmów → nic się nie zmienia.
+ *  - Ten sam lek dla Pacjenta (jego gracz nigdy się nie loguje — okno dostaje MG) → Odmów → nic się nie zmienia.
+ *    Nie PC Gracz 2: runner loguje sumę klientów wszystkich paczek, więc Gracz 2 bywa online.
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -15,7 +16,9 @@ async function przygotuj() {
   const MOD = "neuroshima-2026-overrides";
   if (game.messages.size) await ChatMessage.deleteDocuments(game.messages.map(m => m.id));
   const hp = await import(`/modules/${MOD}/scripts/actors/health-panel.mjs`);
-  const [p1, p2, p3] = ["PC Gracz 1", "PC Gracz 2", "PC Gracz 3"].map(n => game.actors.getName(n));
+  const [p1, p3] = ["PC Gracz 1", "PC Gracz 3"].map(n => game.actors.getName(n));
+  const nieobecny = game.users.getName("Gracz nieobecny") ?? await User.create({ name: "Gracz nieobecny", role: CONST.USER_ROLES.PLAYER });
+  const p2 = game.actors.getName("Pacjent dawki") ?? await Actor.create({ name: "Pacjent dawki", type: "character", ownership: { [nieobecny.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER } });
   for (const p of [p1, p2]) await hp.addDisease(p, "niewydolnoscKrazenia");
   const docs = async pack => game.packs.get(`${MOD}.${pack}`).getDocuments();
   const lek = (await docs("lekarstwa")).find(d => d.getFlag(MOD, "chemiaKey") === "aspirynaK");
@@ -93,7 +96,7 @@ export default {
       const wybor = t.gm.eval(podaj, { dawca: fx.dawca, itemId: fx.itemId, pacjent: "PC Gracz 1" });
       const okno = await p1.eval(odpowiedz, { przyjmij: true });
       const lista = await wybor;
-      t.assert(lista.opcje.some(o => o.startsWith("PC Gracz 1")) && lista.opcje.some(o => o.startsWith("PC Gracz 2")), "both patients offered", lista);
+      t.assert(lista.opcje.some(o => o.startsWith("PC Gracz 1")) && lista.opcje.some(o => o.startsWith("Pacjent dawki")), "both patients offered", lista);
       t.assert(okno.tresc.includes("PC Gracz 3") && okno.tresc.includes("Aspiryna"), "the dialog names giver and medicine", okno);
       t.assert(!/plaster/i.test(okno.tresc), "no mention of the Sztuczka", okno);
       const s = await t.waitFor(t.gm, a => {
@@ -106,12 +109,12 @@ export default {
       t.equal(po.dzis, true, "PC Gracz 1 dosed today");
     });
 
-    await t.step("Offer to PC Gracz 2 (player offline → the GM answers) → refuse → nothing changes", async () => {
-      const okno = await t.gm.eval(podaj, { dawca: fx.dawca, itemId: fx.itemId, pacjent: "PC Gracz 2", odpowiedzMG: false });
-      t.assert(okno.tresc?.includes("PC Gracz 2"), "the GM's dialog names the patient", okno);
-      const po = await t.gm.eval(stan, { dawca: fx.dawca, itemId: fx.itemId, pacjent: "PC Gracz 2" });
+    await t.step("Offer to Pacjent (his player never logs in → the GM answers) → refuse → nothing changes", async () => {
+      const okno = await t.gm.eval(podaj, { dawca: fx.dawca, itemId: fx.itemId, pacjent: "Pacjent dawki", odpowiedzMG: false });
+      t.assert(okno.tresc?.includes("Pacjent dawki"), "the GM's dialog names the patient", okno);
+      const po = await t.gm.eval(stan, { dawca: fx.dawca, itemId: fx.itemId, pacjent: "Pacjent dawki" });
       t.equal(po.zapas, 1.5, "stock unchanged");
-      t.equal(po.dzis, false, "PC Gracz 2 not dosed");
+      t.equal(po.dzis, false, "Pacjent not dosed");
       t.equal(po.karta, false, "no card");
     });
   }
