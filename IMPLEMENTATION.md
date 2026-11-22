@@ -1253,6 +1253,10 @@ Co zobaczy stół:
   w jednym stylu w kompendiach i na nowych przedmiotach. Pozostałe okna przechodzą na nowy język przed betą.
 - **Poprawka dnd5e:** `InventoryElement#_onResize` przełącza kolumny w następnej klatce — koniec błędu „ResizeObserver
   loop” przy każdym otwarciu karty postaci (`config/dnd5e-fixes.mjs`).
+- **Magazynki:** projekcje wszystkich broni przy starcie przelicza tylko aktywny MG — gracz po przeładowaniu w walce
+  dostawał „Nie możesz tak po prostu wcisnąć tego komuś!” przy cudzej broni bez projekcji (`weapons/magazine.mjs`).
+- **Bramka wydania:** okna e2e mają widok co najmniej 1024 × 768 (Chrome 157 ma wyższą ramkę), Quench idzie w czystym
+  świecie przed paczkami e2e, a `poligon` — na końcu; paczki nie zależą od poprzedniczek.
 
 ### M8 — M4 w ledgerze, migracja świata (E9) (2026-11-16)
 
