@@ -296,7 +296,10 @@ async function przygotujLalke() {
   ]);
   await lalka.place(a, a.items.get(pochwa.id), "melee.0", { quiet: true, involuntary: true });
   await lalka.place(a, a.items.get(plecak.id), "pack", { quiet: true, involuntary: true });
-  return { wolne: lalka.freeHands(a), pochwa: lalka.locationOf(a.items.get(pochwa.id))?.kind, plecak: lalka.locationOf(a.items.get(plecak.id))?.kind };
+  // The gate's slower world: the fresh items' create hooks may still be settling — wait, don't read a mid-step.
+  const loc = id => lalka.locationOf(a.items.get(id))?.kind;
+  await window.__e2e.until(() => (loc(pochwa.id) && loc(plecak.id) ? true : null), { message: "both daggers on the doll" }).catch(() => null);
+  return { wolne: lalka.freeHands(a), pochwa: loc(pochwa.id), plecak: loc(plecak.id), plecakIstnieje: !!a.items.get(plecak.id) };
 }
 
 /** Gracz 1: Pakowanie — sztylet z plecaka do ręki (przeniesienie na lalce; bez `quiet` — ciche niczego nie nalicza). */
@@ -647,7 +650,7 @@ export default {
       await t.waitFor(p1, () => (game.neuroshima.actions.stan(game.user.character)?.chwila.wlasna ? true : null), { message: "own turn again" });
       const fx = await t.gm.eval(przygotujLalke);
       t.equal(fx.wolne, 2, "both hands free");
-      t.equal(`${fx.pochwa}/${fx.plecak}`, "holster/pack", "dagger in a sheath, dagger in the pack");
+      t.equal(`${fx.pochwa}/${fx.plecak}`, "holster/pack", `dagger in a sheath, dagger in the pack: ${JSON.stringify(fx)}`);
       const s = await t.waitFor(p1, pulePC, { message: "pools" });
       t.equal(`${s.I}/${s.A}`, "1/1", "I and A untouched by the GM's involuntary moves");
     });

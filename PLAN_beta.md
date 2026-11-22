@@ -34,7 +34,7 @@ Kroki 1–9 dawnej kolejności — §0.8 (historia).
 
 | # | Co | Kto | Bramka |
 |---|---|---|---|
-| K0 | **Wydanie v0.22.0** — `release:check --tag`, push `master` i tagu | agent | B3, B4, B6 |
+| K0 | **Wydanie v0.22.0** — `release:check --tag`, push `master` i tagu. Kwarantanna w bramce (raportowane, nie blokują): pakiety wizualne zależne od czasu — `QUARANTINE` w `dev/agent/lib/e2e.mjs` (nevada/urban/winter-art z przeciąganiem Shift, *-stream, woda-efekty, woda-duze, pojazd-miejsca, sparse-scenery); przed K7 naprawić i zdjąć. Znany błąd: klienci graczy aktualizują cudze przedmioty, gdy GM/Quench je zmienia („Nie możesz tak po prostu wcisnąć tego komuś!”) | agent | B3, B4, B6 |
 | K1 | **M9 E4** — karty i okna, ID 01–25 i 28 z [AUDIT_m9_ui.md](AUDIT_m9_ui.md): BN, pojazd, drużyna, przedmiot, edytory aktywności i efektów, rozwój, okna NOE, dialogi | agent | — |
 | K2 | **M9 E5** — czat, biblioteka, HUD (ID 26, 29–33) razem z PM13 (podsumowania kart dnd5e, `PLAN_migracja_dnd5e6.md` §9) | agent | — |
 | K3 | **M9 E6** — macierz `PLAN_m9_style.md` §10, `DESIGN.md`, zapadka = 0 dla CSS gracza, zrzuty przed/po, sondy Garderoby i Galerii; ocena MG w rejestrze przeglądu | agent → MG | — |

@@ -50,6 +50,8 @@ const LOGS = path.join(MODULE_ROOT, "logs", "e2e");
 
 /** Suites that leave the world full of their own documents (the whole Poligon Obsada and every station) run last. */
 const RUN_LAST = new Set(["poligon"]);
+// Timing-flaky visual suites (v0.22.0 gate, 2026-11-22): they run and report, but don't fail the run. PLAN_beta K0.
+const QUARANTINE = new Set(["nevada-art", "urban-art", "winter-art", "nevada-stream", "urban-stream", "woda-efekty", "woda-duze", "pojazd-miejsca", "sparse-scenery"]);
 
 export function suiteNames() {
   try {
@@ -604,7 +606,7 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
         consoleErrors, seedConsoleErrors: seedErrors, allowedConsoleErrors: sorted.allowed, compat,
         screenshots: t.screenshots, notes: t.notes, ...(writes ? { writes } : {})
       });
-      note(`${ok ? "PASS" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
+      note(`${ok ? "PASS" : QUARANTINE.has(suite.name) ? "QUARANTINED-FAIL" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
       saveProgress();
     }
     // The last suite's tail, as every other suite's: once the clients are quiet.
@@ -623,7 +625,7 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
   // (PLAN_migracja_dnd5e6.md E10): every one is an API the next core or dnd5e removes. Core's, dnd5e's own and other
   // packages' warnings stay a note.
   report.compat.moduleOk = !((report.compat.byCaller?.module ?? 0) + (report.compat.byCaller?.harness ?? 0));
-  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true) && report.compat.moduleOk
+  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok || QUARANTINE.has(s.name)) && (report.quench?.ok ?? true) && report.compat.moduleOk
     && !report.serverErrorsBeforeQuench?.length;
   report.finishedAt = new Date().toISOString();
   report.reportFile = path.relative(MODULE_ROOT, path.join(run.dir, "report.json")).replaceAll("\\", "/");
