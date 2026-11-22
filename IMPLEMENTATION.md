@@ -10,6 +10,23 @@ handel, postój, pojazdy i pościgi czekają na pierwsze sesje (kampania testowa
 sprawdzana przy każdym wydaniu. M7 (zdolności poziomów 1–3) — zamknięte 2026-11-01. PM1 i PM7 odpadły 2026-11-02 (TT — D17 w
 `PLAN_tt.md`). Przed betą: ruch w turze ze skakaniem, style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
+**M9 — język wizualny (w toku, 2026-11-18):** silnik wykończeń `npm run build:finish` (tokeny z profilu, znaki UI, banery,
+782 zatwierdzone ikony w `icons/finished/`, 22 rodziny, zero luk, `--check` w `release:check`), manifest `dev/finish/`;
+`styles/noe/` (tokeny, komponenty K1–K18, most do dnd5e), wymuszony ciemny motyw okien NOE/dnd5e i kart czatu
+(`scripts/ui/theme.mjs`), wiersze kart z kosztem A/B/R/I, skosem i powodem (`scripts/ui/sheet-rows.mjs`), zapadka
+stylu w `npm test`, kontrakt stylu w Quench (`styl-m9`). Rama rdzenia bez zmian. Pozostałe powierzchnie (E4–E5)
+czekają na akceptację wycinka E3 przez MG — `PLAN_m9_style.md` §9.
+Pełny zestaw ikon zatwierdzony warunkowo z pięcioma poprawkami Batch 127 (Neodrugs, Tornado,
+oba Narkotyki i Cygaro); model obrazu wykonał poprawki, bez awaryjnego przycinania. Paczki
+piaskownicy i kampanii przebudowane i zwalidowane. Konteksty C4 / Detonuj, narzędzi / czynności
+medyka oraz Naprawiania / naprawy drona mają osobne rozstrzygnięcia; nowe przedmioty otrzymują
+wykończenia bez migracji istniejącego świata. Panele Zasobów wyświetlają rastry przez wspólny
+glif 44 px (`dnd5e-icon` obsługuje tylko SVG). [Weryfikacja i ograniczenie testu UI](dev/icons/m9-pass/rollout-verification.json).
+Końcowa poprawka Batch 128: kropka Trucizny i pozostałe poprawki broni zamknięte zatwierdzonym
+normalizerem po odrzuceniu usługi obrazu. Brak otwartych zleceń grafiki M9. Następny krok:
+wdrożenie stylu i aktualnych ścieżek obrazów do istniejących dokumentów Poligonu, bez resetu
+stanowisk; dalej E3–E6. [Handoff](HANDOFF_m9_graphics_to_code.md).
+
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
 

@@ -45,6 +45,7 @@ the campaign is the default profile again. Only the GM switches it.
 | `scripts/config/class-features-data.mjs`, `scripts/config/towarzysze-data.mjs` | `dev/classes/classes.json`, `professions.json`, `companions.json` (← `extract_classes.py`/`extract_professions.py`/`extract_companions.py` from NOE) | `npm run build:classes` |
 | Class/status placeholder icons, token templates | `dev/icons/gen_*` | `npm run build:icons`, `build:status-icons`, `build:token-templates`; real art requests go in `dev/icons/MISSING.md`; icon pipeline: `dev/icons/Pipeline.md` |
 | Scenes named `… (2026)` in the world | the Maps repo (Tiled) → `tools/push.py` → `game.neuroshima.maps.update()` | fix maps in Tiled; generated walls edited in Foundry are overwritten |
+| M9 finished assets: `styles/noe/tokens.generated.css`, `ui/noe/signs/`, `ui/noe/banners/`, `icons/finished/`, `scripts/config/finished-icons-data.mjs` | profile `dev/icons/finish/style-profile.json` (a visual change is a new profile version), white masters, art masters in `dev/art/m9/`, `scripts/config/state-colors.mjs`; assignments in `dev/finish/manifest.json` ← `node dev/finish/build-manifest.mjs` (families from pack data, gaps in `dev/finish/REPORT.md`) | `npm run build:finish [-- --only=… --ids=… --preview]`; `-- --check` in `release:check`. Then `fvtt packs` — the pack builder points documents at exported icons by id. Only `pilot`/`approved` subjects export. PLAN_m9_style.md §7 |
 | `fonts/osd/betaflight-default.webp` (drone camera OSD) | `fonts/osd/default.mcm` — the original Betaflight font, a separate GPL-3 asset (`fonts/osd/README.md`) | `python dev/osd/gen_osd_font.py` (`--check` compares) |
 | `module.zip` | `dev/release/build-zip.mjs` (the one include list) | `npm run release:check` |
 | Source map "class → file" for Foundry/dnd5e (campaign vault skills) | the installed sources | `node dev/agent/index-sources.mjs …` after a Foundry/dnd5e update |
@@ -71,6 +72,11 @@ the campaign is the default profile again. Only the GM switches it.
   adds or updates its station's probes (`dev/poligon/stations/`) and the hand-off names the station and
   probes for the GM (TESTING.md, Warstwa 7). Agents reseed a Poligon station only when the GM asks.
 - **Assets:** WEBP, not PNG, for anything shipped.
+- **UI style (M9):** player-visible CSS takes colours, typefaces, spacing and sizes only from the `--noe-*`
+  tokens in `styles/noe/` and signals (costs, counters, state badges, the unavailable slash) only from the
+  `noe-*` components and `scripts/ui/noe.mjs`. The style ratchet in `npm test` (`dev/style/ratchet.mjs`)
+  fails when a raw colour, typeface, unguarded animation or core-frame selector is added; exceptions go in
+  `dev/style/allowlist.json` with a reason. Rules: [PLAN_m9_style.md](PLAN_m9_style.md) §2–§4 (→ `DESIGN.md` after E3).
 - **Sandbox mirror:** the sandbox copy of this module junctions each top-level folder at `fvtt sandbox:init`; a new
   top-level folder (like `fonts/`) is served there only after another `fvtt sandbox:init` (it adds what is missing).
 

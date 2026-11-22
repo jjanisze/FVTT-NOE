@@ -615,11 +615,15 @@ lub używalny fallback, migracje i generatory są poprawne, a dokumentacja i Pol
 > **Zamknięte:** Bone Pochodzenia, Neutral graphite, colored ground dla zdolności/tożsamości, goły kolorowy sprzęt,
 > no housing, 44 px, informacja w wierszu, shapes (kształt/kolor/litera), czerwony skos niedostępności z ciemnym obrysem.
 > Specyfikacja: [M9 §0](PLAN_m9_style.md#locked-style), [profil](dev/icons/finish/style-profile.json).
+> **2026-11-16:** plan przebudowany na specyfikację wykonawczą (zasady, tokeny, komponenty K1–K18, zmiany per powierzchnia,
+> silnik `build:finish`, zapadka stylu). Decyzje D11–D20: rodzina Roboto (+ Roboto Mono), wymuszony ciemny motyw,
+> rdzeń Foundry poza zakresem, banery BN Field kit / pojazd i przedmioty Workshop / drużyna Survey, ikony jako WEBP 128/256,
+> płaskie tabliczki odczytu. Otwarte: dymki mowy (rdzeń) i wartości tokenów semantycznych.
 > E0 zakończone; E1 audyt konsumentów i E2 potok/pilot odblokowane. Następne przeglądy dotyczą jakości eksportów i integracji.
 > Wejścia: [PLAN_icon_design.md](PLAN_icon_design.md), PM13/D8 z migracji, braki grafiki, Garderoba i Galeria.
 > M8 pozostaje właścicielem mechaniki kosztów i budżetów. Kod stylów jest odblokowany od zamknięcia M7.
 
-**Gotowe gdy:** [macierz M9](PLAN_m9_style.md#7-macierz-odbioru-i-definicja-końca) ma dowody: zaakceptowany język,
+**Gotowe gdy:** [macierz M9](PLAN_m9_style.md#acceptance) ma dowody: zaakceptowany język,
 wdrożone powierzchnie kart i czatu, reprodukowalny potok ikon, testy sandbox/layer-6, sondy i odbiór MG.
 
 ---
