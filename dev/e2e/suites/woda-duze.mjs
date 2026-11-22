@@ -120,7 +120,17 @@ export default {
         const token=canvas.tokens.get(id);return token.neuroWieza?.mesh&&!token.neuroWieza.mesh.visible
           &&token.mesh.texture!==token.neuroWieza.kadlub&&token.mesh.filters.some(f=>f.token===token);
       },{args:[point.id],message:"water retained on native hover interior"});
-      const safe=await t.gm.eval(()=>canvas.stage.worldTransform.apply({x:1400,y:100}));
+      // An empty spot of the board itself: a fixed world point can land under the UI or on another token.
+      const safe=await t.gm.eval(()=>{
+        for(let y=120;y<innerHeight-220;y+=40)for(let x=220;x<innerWidth-360;x+=40){
+          const w=canvas.stage.worldTransform.applyInverse({x,y});
+          if(document.elementFromPoint(x,y)?.id!=="board")continue;
+          if(canvas.tokens.placeables.some(t=>t.bounds.pad(20).contains(w.x,w.y)))continue;
+          return{x,y};
+        }
+        return null;
+      });
+      t.assert(safe,"an empty spot on the board",safe);
       await t.gm.send("Input.dispatchMouseEvent",{type:"mouseMoved",x:safe.x,y:safe.y});
       await t.waitFor(t.gm,id=>canvas.tokens.get(id).neuroWieza.mesh.visible,{args:[point.id],message:"wet turret visible again"});
     });

@@ -25,7 +25,11 @@ async function przygotuj() {
   const plaster = (await docs("sztuczki")).find(d => d.getFlag(MOD, "sztuczka") === "panPlaster");
   const dane = game.items.fromCompendium(lek);
   dane.system.quantity = 2;
-  const [item] = await p3.createEmbeddedDocuments("Item", [dane, game.items.fromCompendium(plaster)]);
+  // Earlier suites may have left an Aspiryna on the giver: a new one would stack into it.
+  const stare = p3.items.filter(i => i.getFlag(MOD, "chemiaKey") === "aspirynaK" || i.getFlag(MOD, "sztuczka") === "panPlaster");
+  if (stare.length) await p3.deleteEmbeddedDocuments("Item", stare.map(i => i.id));
+  await p3.createEmbeddedDocuments("Item", [dane, game.items.fromCompendium(plaster)]);
+  const item = p3.items.find(i => i.getFlag(MOD, "chemiaKey") === "aspirynaK");
   return { dawca: p3.uuid, itemId: item.id, zapas: hp.dosesRemaining(p3.items.get(item.id)) };
 }
 

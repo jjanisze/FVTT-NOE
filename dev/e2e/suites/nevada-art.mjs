@@ -25,6 +25,11 @@ async function clickAt(client, point) {
 }
 
 async function drag(client, dx, dy, shift = false) {
+  // Grab the token where it is, not where a previous drag's animation still draws it.
+  await client.eval(async () => {
+    const token = canvas.tokens.placeables.find(t => t.name === "Pojazd 1");
+    for (let i = 0; i < 100 && token.animationContexts?.has(token.movementAnimationName); i++) await new Promise(r => setTimeout(r, 50));
+  });
   const points = await client.eval(({dx,dy}) => {
     const token = canvas.tokens.placeables.find(t => t.name === "Pojazd 1");
     const from = canvas.clientCoordinatesFromCanvas(token.center);
@@ -54,7 +59,9 @@ function overlap({opaque = true} = {}) {
   const front = canvas.primary.children.find(c => c.name === window.__bitmapArtPrefix+"-foreground");
   front.children[0].visible = false;
   const group = front.children[1];
-  const sign = window.__nevadaOverlapSprite ??= group.children.find(s => s.visible);
+  // The cached sprite belongs to this theme's live foreground only (a failed earlier suite leaves a destroyed one).
+  let sign = window.__nevadaOverlapSprite;
+  if (!sign || sign.destroyed || sign.parent !== group) sign = window.__nevadaOverlapSprite = group.children.find(s => s.visible);
   const frame = sign.texture.frame, cv = document.createElement("canvas");
   cv.width = Math.ceil(frame.width); cv.height = Math.ceil(frame.height);
   const ctx = cv.getContext("2d");

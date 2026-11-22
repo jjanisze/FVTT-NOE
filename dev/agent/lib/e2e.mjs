@@ -47,9 +47,13 @@ const MODULE_ROOT = path.resolve(HERE, "../../..");
 export const SUITES_DIR = path.join(MODULE_ROOT, "dev", "e2e", "suites");
 const LOGS = path.join(MODULE_ROOT, "logs", "e2e");
 
+/** Suites that leave the world full of their own documents (the whole Poligon Obsada and every station) run last. */
+const RUN_LAST = new Set(["poligon"]);
+
 export function suiteNames() {
   try {
-    return fs.readdirSync(SUITES_DIR).filter(f => f.endsWith(".mjs") && !f.startsWith("_")).map(f => f.slice(0, -4)).sort();
+    const names = fs.readdirSync(SUITES_DIR).filter(f => f.endsWith(".mjs") && !f.startsWith("_")).map(f => f.slice(0, -4)).sort();
+    return [...names.filter(n => !RUN_LAST.has(n)), ...names.filter(n => RUN_LAST.has(n))];
   } catch {
     return [];
   }
@@ -517,6 +521,22 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       report.boot = { ok: unexpected.length === 0, consoleErrors, allowedConsoleErrors: allowed, compat: drainAllCompat(clients, "boot") };
       if (unexpected.length) note(`FAIL boot: ${unexpected.length} console error(s) while the clients loaded`);
     }
+    if (quench) {
+      // The module's Quench batches (release gate: the "recommended" world), before the suites: their leftover
+      // actors and combats (Poligon personas, a running skirmish) are not part of what Quench tests (2026-11-22).
+      const t0 = Date.now();
+      try {
+        const r = await clients.get("gm").eval(() => game.neuroshima.tests.run());
+        report.quench = { ok: r.failed === 0, total: r.total, passed: r.passed, failed: r.failed, failures: r.failures.slice(0, 20), ms: Date.now() - t0 };
+      } catch (err) {
+        report.quench = { ok: false, error: err.message, ms: Date.now() - t0 };
+      }
+      // Quench provokes errors on purpose; its console is evidence, not a verdict.
+      report.quench.consoleErrors = drainAllErrors(clients);
+      report.quench.compat = drainAllCompat(clients, "quench");
+      note(`${report.quench.ok ? "PASS" : "FAIL"} quench ${report.quench.passed ?? "?"}/${report.quench.total ?? "?"}`);
+      saveProgress();
+    }
     for (const [i, suite] of loaded.entries()) {
       const t0 = Date.now();
       if (i > 0) {
@@ -581,20 +601,6 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       await quietAll(clients.values()).catch(() => null);
       chargeLate(report.suites.at(-1), loaded[report.suites.length - 1], drainAllErrors(clients), drainAllCompat(clients, "late"));
       saveProgress();
-    }
-    if (quench) {
-      // The module's Quench batches inside this world (release gate: the "recommended" world).
-      const t0 = Date.now();
-      try {
-        const r = await clients.get("gm").eval(() => game.neuroshima.tests.run());
-        report.quench = { ok: r.failed === 0, total: r.total, passed: r.passed, failed: r.failed, failures: r.failures.slice(0, 20), ms: Date.now() - t0 };
-      } catch (err) {
-        report.quench = { ok: false, error: err.message, ms: Date.now() - t0 };
-      }
-      // Quench provokes errors on purpose; its console is evidence, not a verdict.
-      report.quench.consoleErrors = drainAllErrors(clients);
-      report.quench.compat = drainAllCompat(clients, "quench");
-      note(`${report.quench.ok ? "PASS" : "FAIL"} quench ${report.quench.passed ?? "?"}/${report.quench.total ?? "?"}`);
     }
   } finally {
     browser.close();
