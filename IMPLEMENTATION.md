@@ -2,13 +2,15 @@
 
 ## Stan projektu
 
-**Etap: późna alfa** (v0.21.0, 2026-10-31 — Foundry 14.369, dnd5e 6.0.6). Zamknięte: M0, M1 (walka i powrót do
+**Etap: późna alfa** (v0.22.0, 2026-11-22 — Foundry 14.369, dnd5e 6.0.6). Zamknięte: M0, M1 (walka i powrót do
 zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5 (handel, szabrowanie, postój) —
 v0.19.0; migracja na dnd5e 6 — v0.20.0; M4 (pojazdy, pościgi, wierzchowce) i M6 (drobne zasady RAW z biegłościami
-profesji) — v0.21.0. Walka, ekwipunek, stany i przetrwanie grały się przy żywym stole; produkcja, towarzysze, drony,
-handel, postój, pojazdy i pościgi czekają na pierwsze sesje (kampania testowa w styczniu). Czysta instalacja (B6)
-sprawdzana przy każdym wydaniu. M7 (zdolności poziomów 1–3) — zamknięte 2026-11-01. PM1 i PM7 odpadły 2026-11-02 (TT — D17 w
-`PLAN_tt.md`). Przed betą: ruch w turze ze skakaniem, style, dokumentacja. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+profesji) — v0.21.0; M7 (zdolności poziomów 1–3) i M8 (ruch, skoki, ekonomia akcji, pasek walki) — v0.22.0. Walka,
+ekwipunek, stany i przetrwanie grały się przy żywym stole; produkcja, towarzysze, drony, handel, postój, pojazdy,
+pościgi i ekonomia tury czekają na pierwsze sesje (kampania testowa w styczniu). Czysta instalacja (B6) sprawdzana
+przy każdym wydaniu. Przed betą: M9 (wygląd, E4–E6), dokumentacja, kandydat. Przegląd ludzki całej treści —
+**[PLAN_przeglad.md](PLAN_przeglad.md)** (nie blokuje bety). Droga do bety, bramki i kolejność prac:
+**[PLAN_beta.md](PLAN_beta.md)**.
 
 **M9 — język wizualny (w toku, 2026-11-18):** silnik wykończeń `npm run build:finish` (tokeny z profilu, znaki UI, banery,
 782 zatwierdzone ikony w `icons/finished/`, 22 rodziny, zero luk, `--check` w `release:check`), manifest `dev/finish/`;
@@ -48,7 +50,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs`. Stany atakującego i celu w Teście Ataku i automatyczne TK ≤ 1,5 m — silnik okoliczności ataku (`config/okolicznosci-ataku.mjs`, `combat/okolicznosci.mjs`, M1 E3); Nieprzytomność z 0 PW kończy się przy leczeniu (E1) |
 | | Neutralizacja Stopnia Zranienia (Regeneracja, Pomoc medyczna), kalendarzyk zdrowia | ✅ | `actors/rekonwalescencja.mjs`, `config/rekonwalescencja-rules.mjs` — jedna droga na każdy DO (Gojenie / Pomoc medyczna / samoleczenie WKK) w oknie Długiego odpoczynku, karta RO dla właściciela, przerzut przelicza werdykt; kalendarzyk z panelu Stan. Wyczerpanie: reguły zdejmowania, kolejność DO, uporczywe w ramce — `PLAN_m1_walka.md` E5–E6, e2e `rekonwalescencja` (NOE i WKK), `docs/Umieranie-i-zdrowie.md` |
 | | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ✅ | `combat/umieranie.mjs`, `config/umieranie-rules.mjs`, `items/staza.mjs` — porażki przy 0 PW (wręcz: 2), czysta k20, karty „Umiera” / „Śmierć” (potwierdza MG) / „BN pada”, stabilizacja (Medycyna, mały medyk, staza, trzy sukcesy), 1 PW po 1k8 h na zegarze świata, DO przy 0 PW odmówiony — `PLAN_m1_walka.md` E1–E2, e2e `umieranie`. Istoty Bestiariusza ze STOPNIEM ZRANIENIA i towarzysze-istoty umierają jak BG (s. 205, M3); maszyny na 0 PW — Wyłączone (drony) |
-| | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ✅ | silnik okoliczności ataku (M1 E3–E4): domyślne Ułatwienie/Utrudnienie w oknie rzutu, jedna grupa plakietek z dymkiem; Bieganie i Unikanie — statusy z HUD żetonu i z panelu Stan w walce, zdejmowane na początku następnej tury. Przyspieszenie ruchu — informacyjnie (moduł nie pilnuje ruchu) |
+| | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ✅ | silnik okoliczności ataku (M1 E3–E4): domyślne Ułatwienie/Utrudnienie w oknie rzutu, jedna grupa plakietek z dymkiem; Bieganie i Unikanie — statusy z HUD żetonu i z panelu Stan w walce, zdejmowane na początku następnej tury. Przyspieszenie i Bieganie liczą się w budżecie ruchu M8 (wiersz „Ruch w turze”) |
 | | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` (Wytrącenie: przedmiot z ręki ląduje u stóp celu; Pochwycenie zajmuje rękę) |
 | | Broń palna jedną ręką, oburęczna/dwuręczna, atak drugą ręką; upuszczanie i podnoszenie [I] | ✅ | `combat/grip.mjs`, `actors/ground-items.mjs` — domyślne w oknie, pigułki na karcie |
 | Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
@@ -85,8 +87,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Latanie | ✅ | `actors/latanie.mjs` (M6 E5, e2e `latanie`) |
 | | Pływanie, walka pod wodą, wspinaczka | 🟡 | `scenes/woda.mjs`, `wspinaczka.mjs` (M6 E6, e2e `woda`), `docs/Ruch-i-teren.md`; w walce karty same, poza walką na żądanie MG (U15); Regiony wody z eksportu map — `TODO.md` repo map, dziś MG rysuje je ręcznie |
 | | Walka na wierzchowcu | ✅ | M4 część 3 (`PLAN_m4_pojazdy.md` §6.3, W0–W5): koń z Bestiariusza to nośnik jak pojazd — jeździec widoczny w siodle (`pojazdy/stan.mjs`, `jadacy.mjs`), Inicjatywa jeźdźca przez kotwicę tury (`combat/kotwica-tury.mjs`), akcje wierzchowca w palecie (`pojazdy/paleta.mjs`), utrzymanie się w siodle i atak z grzbietu (`jadacy.mjs`, `jazda.mjs`), Jeździec, Rodeo i Zawsze w siodle (`pojazdy/jezdziec.mjs`); stanowisko Poligonu Stajnia; e2e `wierzchowiec`. żetony koni z góry z siodłem na dwoje (2026-10-31); pościg konny — po becie (W-P1) |
-| | Ruch w turze i ekonomia akcji (M8) | 🟡 | Ledger walczącego: wspólne A/B/R/I, granty (Zryw, Szybkie ręce), zakazy (rany, Obezwładnienie, zmęczenie po Berserku), ruch z natywnej historii z Undo, Przyspieszenie/Bieganie/Unikanie/Odstąpienie/Padnij/Powstań z karty, ruch w Reakcji, linijka z budżetem, korekty — `config/ekonomia-data.mjs`, `combat/ekonomia*.mjs`, `actors/ekonomia-karta.mjs`, `actors/actions.mjs`. skok NOE (karta, Region, ruch „Skok”, lądowanie, Skok Gladiatora — `combat/skok.mjs`, `config/skok-data.mjs`), Pomaganie, Wyczekanie i Reakcja (`combat/pomaganie.mjs`, `actors/actions.mjs`), Atakowanie ze slotami i „Sposób ataku” (`combat/atakowanie.mjs`), panel gotowości z zegarem (`combat/gotowosc.mjs`). Zostaje: Nożownik bez celu, manewry w slocie, historia serii aktora, paleta i pasek — `PLAN_m8_ruch_i_ekonomia_akcji.md` §13 |
-| | Skakanie | ❌ | `PLAN_m8_ruch_i_ekonomia_akcji.md` (handoff do implementacji; Region `skok` już działa) |
+| | Ruch w turze i ekonomia akcji (M8) | ✅ | Ledger walczącego: wspólne A/B/R/I, granty (Zryw, Szybkie ręce), zakazy (rany, Obezwładnienie, zmęczenie po Berserku), ruch z natywnej historii z Undo, Przyspieszenie/Bieganie/Unikanie/Odstąpienie/Padnij/Powstań z karty, ruch w Reakcji, linijka z budżetem, korekty — `config/ekonomia-data.mjs`, `combat/ekonomia*.mjs`, `actors/ekonomia-karta.mjs`, `actors/actions.mjs`. skok NOE (karta, Region, ruch „Skok”, lądowanie, Skok Gladiatora — `combat/skok.mjs`, `config/skok-data.mjs`), Pomaganie, Wyczekanie i Reakcja (`combat/pomaganie.mjs`, `actors/actions.mjs`), Atakowanie ze slotami i „Sposób ataku” (`combat/atakowanie.mjs`), panel gotowości z zegarem (`combat/gotowosc.mjs`), szablony paska i palety Ruch/Więcej (`actors/pasek-szablony.mjs`). E0–E9 — `PLAN_m8_ruch_i_ekonomia_akcji.md` §13; macierz odbioru 42/46 automatycznie, 4 częściowo (reszta — Poligon `ruch`) |
+| | Skakanie | ✅ | `combat/skok.mjs`, `config/skok-data.mjs` (M8 E3): kalkulator NOE (w dal, wzwyż, rozbieg, Skoczek, Gladiator, stały skok istot), natywny ruch „Skok” z ostrzeżeniem zasięgu, lądowanie na trudnym terenie, Skok Gladiatora; Region `skok` na tym samym kalkulatorze; `docs/Ruch-i-teren.md` |
 | Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; Nevada i Ruiny Ameryki: strumieniowane katalogi po cztery drogi, cztery krajobrazy i 20 elementów pierwszego planu, nieprzezroczyste sylwetki pobocza, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik zależna od rozmiaru grafiki; `docs/Poscigi.md` |
 | | Pojazdy poza pościgiem (M4 część 1): katalog 14 pojazdów, karta, wsiadanie i miejsca, jadący na mapie z kropkami i prześwietleniem, obrys prostokątny, silnik (dym, drgania, światła, kluczyki, na krótko), jazda w walce (tura kierowcy, skręty, teren, potrącenia, bezruch), awarie k20 z zegarami i naprawami (dym awarii 5 — Region i Oślepienie zakrytych), wrak i wybuch baku, broń montowana (ręce w lalce), paleta kierowcy (akcje cech, bieg wsteczny), Wojownik autostrady; jadący rysowany jak na mapie, skala grafiki istot (ustawienie świata, f = 0,8) i pojazdy ×1,1 | ✅ | `scripts/pojazdy/*`, `scenes/skala-istot.mjs`, paczka `pojazdy`, `PLAN_m4_pojazdy.md` §11; stanowisko Poligonu Garaż; e2e `pojazd`, `pojazd-paleta`, `pojazd-prezentacja`, `garaz-grafika`. Grafika gotowa; 7 dźwięków do dostawy (MISSING §P) |
 | | Manewry pościgu, Test Pościgu, komplikacje k20, ataki i wypadanie na planszy | ✅ | M4 część 2 (`PLAN_m4_pojazdy.md` §6.2.5, P5–P6): tura pościgu z budżetem w znacznikach i zapasem, karta Testu Pościgu, komplikacje k20 z [Zastosuj], atak na kierowcę, RO pojazdu ze Slalomem, wręcz na znaczniku, dryf drogi, Za kierowcą, koniec pościgu i meta (`scenes/poscig-tura.mjs`, `poscig-zasady.mjs`), manewry w palecie kierowcy (`pojazdy/paleta.mjs`); stanowisko Poligonu Pościg (Start–meta); e2e `poscig-p5` |
@@ -1230,6 +1232,27 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.22.0 — Zdolności poziomów 1–3 (M7), ruch i ekonomia tury (M8), nowy wygląd w toku (M9) (2026-11-22)
+
+Wymaga **dnd5e 6.0.6** i Foundry **14.367+** (zweryfikowane na 14.369) — bez zmian względem v0.21.0. Przebieg i decyzje
+MG: `PLAN_m7_zdolnosci.md` §8, `PLAN_m8_ruch_i_ekonomia_akcji.md` §13, `PLAN_m9_style.md` §9; szczegóły — wpisy niżej.
+Testy przed wydaniem: Quench 1663/1663 w piaskownicy; bramka wydania — raport `logs/release/0.22.0-*.json`. Migracja
+świata M8 (`game.neuroshima.migracje.m8`) idzie sama przy starcie; drugi przebieg jest pusty.
+
+Co zobaczy stół:
+- **Zdolności (M7):** wszystkie zdolności poziomów 1–3 klas i profesji, wszystkie 53 Sztuczki i zdolności Pochodzeń
+  mają plakietkę pokrycia; przyciski „po rzucie”, wsparcie sojusznika, kości raz na turę, Przycelowanie, karty MG.
+  Pokrycie: klasowe 103/133 (48 pełnych), Sztuczki 53/53 (34), Pochodzenia 35/36 (21). `docs/Zdolnosci.md`.
+- **Ruch i ekonomia tury (M8):** licznik ruchu i A/B/R/I w panelu Stan, linijka z budżetem, przyczyny trudnego terenu
+  NOE (także bez Tiled), skoki wg NOE, Pomaganie, Wyczekanie, Reakcja, Zryw, ataki w slotach z „Sposobem ataku”,
+  plakietka kosztu na kartach, „Ułóż pasek”, panel gotowości do tury z zegarem. Liczniki ostrzegają, nie blokują.
+  `docs/Ruch-i-teren.md`, `docs/TT-i-reakcje.md`.
+- **Wygląd (M9, w toku):** ciemne okna NOE i dnd5e oraz karty czatu niezależnie od motywu Foundry, kroje Roboto,
+  nowa karta postaci (nagłówek, tabliczki, mierniki, wiersze z kosztem A/B/R/I i skosem niedostępności), 782 ikony
+  w jednym stylu w kompendiach i na nowych przedmiotach. Pozostałe okna przechodzą na nowy język przed betą.
+- **Poprawka dnd5e:** `InventoryElement#_onResize` przełącza kolumny w następnej klatce — koniec błędu „ResizeObserver
+  loop” przy każdym otwarciu karty postaci (`config/dnd5e-fixes.mjs`).
 
 ### M8 — M4 w ledgerze, migracja świata (E9) (2026-11-16)
 

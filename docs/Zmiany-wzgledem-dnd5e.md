@@ -110,7 +110,7 @@ moduł działa normalnie, po prostu bez tych efektów.
 
 ## Czego świadomie nie ma (jeszcze)
 
-Szabrowanie i bebeszenie, handel (dostępność, ceny regionalne, rzemieślnicy-NPC), towarzysze i drony, większość zasad pojazdów (jest plansza pościgu
-z torami, nie ma karty pojazdu, manewrów ani tabel awarii), Kolory Neuroshimy. Kolejność prac —
+Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom), pościg konny, pełna automatyka części zdolności (plakietka na
+zdolności mówi, co liczy moduł, a co zostaje przy stole) i tłumaczenie angielskie. Kolejność prac —
 `PLAN_beta.md`, stan — macierz na górze `IMPLEMENTATION.md`. To lista rzeczy poza zakresem
 obecnej wersji, nie ukryte błędy.
