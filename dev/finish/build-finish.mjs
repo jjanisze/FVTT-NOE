@@ -192,7 +192,7 @@ function raster() {
       if (result.size && (result.size[0] !== job.size || result.size[1] !== job.size)) problems.push(`${job.id}: rozmiar ${result.size.join("×")} zamiast ${job.size}`);
       if (checks.clipped && job.recipe.role !== "character") notes.push(`${job.id}: glif dotyka krawędzi mastera (margines 0) — do oceny w podglądzie`);
     }
-    if (result.sourceSha256 !== entry.sourceSha256) problems.push(`${job.id}: źródło ${job.source} zmieniło się od wpisu w manifeście (hash) — wymaga ponownej akceptacji`);
+    if (!sameFileHash(abs(job.source), entry.sourceSha256)) problems.push(`${job.id}: źródło ${job.source} zmieniło się od wpisu w manifeście (hash) — wymaga ponownej akceptacji`);
     if (job.kind === "banner" && entry.recipeSha256 && entry.recipeSha256 !== recipeSha(job) && (CHECK || DRY)) problems.push(`${job.id}: receptura kadru zmieniona bez eksportu`);
 
     if (CHECK || DRY) {
