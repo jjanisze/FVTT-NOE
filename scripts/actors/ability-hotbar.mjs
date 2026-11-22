@@ -145,6 +145,16 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
       occupied.delete(slot);
     }
 
+    // Keep each ability macro's picture in step with its item: the macro copies `img` once at creation,
+    // so a finished M9 icon (or the GM's own art) on the item would otherwise never reach the bar.
+    // Only the image — slot, name and command stay.
+    for (const [abilityId, slot] of owned) {
+      const img = wanted.get(abilityId)?.item?.img;
+      const macro = game.macros.get(slots[slot]);
+      if (!img || !isDocumentLive(macro) || macro.img === img || !macro.canUserModify(game.user, "update")) continue;
+      await macro.update({ img });
+    }
+
     // Add macros for newly-gained abilities, into the first free slot.
     for (const { abilityId, item, feature } of eligible) {
       if (!isDocumentLive(actor) || !isDocumentLive(item)) return;

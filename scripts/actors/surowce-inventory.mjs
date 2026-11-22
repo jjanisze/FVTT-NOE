@@ -1,6 +1,8 @@
 import { SUROWCE_TYPES, SUROWCE_ICON_DIR, getSurowiecType } from "../config/surowce-data.mjs";
 import { transferAllSurowce, giveManySurowce, gbOf } from "./surowce-store.mjs";
 
+import { inventoryIcon } from "../ui/noe.mjs";
+
 /**
  * Neuroshima 5e — Surowce inventory panel.
  *
@@ -134,8 +136,8 @@ function _onRenderActorSheetInjectSurowce(app, html) {
   // Section header.
   const panel = document.createElement("div");
   panel.innerHTML = `
-    <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#2a3326; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:1.6; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Surowce</h3>
+    <div class="items-header header flexrow noe-section-head" data-noe-family="salvage">
+      <h3 class="item-name" style="flex:1.6; padding-left:5px;">Surowce</h3>
       <div style="flex:2; text-align:left; padding-left:8px;">Zapas (waga)</div>
       <div style="flex:0 0 90px; text-align:center;">Ilość</div>
       <div style="flex:0 0 132px;"></div>
@@ -152,24 +154,24 @@ function _onRenderActorSheetInjectSurowce(app, html) {
 
   const addBtn = document.createElement("button");
   addBtn.type = "button";
-  addBtn.className = "neuro-add-surowce-btn";
+  addBtn.className = "neuro-add-surowce-btn noe-zasoby-add";
   addBtn.innerHTML = `<i class="fas fa-cubes"></i> DODAJ SUROWCE`;
-  addBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; background:rgba(42,51,38,0.35); border:1px solid #5f7d52; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; cursor:pointer;";
+  addBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; white-space:nowrap; cursor:pointer;";
   addBtn.addEventListener("click", ev => { ev.preventDefault(); oknoDodajSurowce(actor); });
 
   const transferBtn = document.createElement("button");
   transferBtn.type = "button";
-  transferBtn.className = "neuro-surowce-transfer-btn";
+  transferBtn.className = "neuro-surowce-transfer-btn noe-zasoby-add";
   transferBtn.title = "Przenieś surowce do zaznaczonego pojazdu (w zasięgu 5 m)";
   transferBtn.innerHTML = `<i class="fas fa-truck-ramp-box"></i> PRZEKAŻ DO POJAZDU`;
-  transferBtn.style.cssText = "flex:0 0 auto; text-align:left; padding:4px 12px; background:rgba(42,51,38,0.35); border:1px solid #5f7d52; color:var(--color-text-light-primary); white-space:nowrap; cursor:pointer;";
+  transferBtn.style.cssText = "flex:0 0 auto; text-align:left; padding:4px 12px; white-space:nowrap; cursor:pointer;";
   transferBtn.addEventListener("click", (ev) => { ev.preventDefault(); _transferToVehicle(actor); });
 
   const summary = document.createElement("div");
   summary.style.cssText = "flex:0 0 auto; display:flex; align-items:center; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   summary.innerHTML = `
     <span style="padding:0 10px;">Łącznie sztuk: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${grandQty}</strong></span>
-    <span style="display:inline-block; width:1px; height:16px; background:#5f7d52; margin:0;"></span>
+    <span class="noe-zasoby-sep" style="display:inline-block; width:1px; height:16px; margin:0;"></span>
     <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${_fmtWeight(grandKg)}</strong></span>
   `;
 
@@ -283,9 +285,9 @@ function _buildPoolRow(actor, pool, maxKg, { readOnly = false } = {}) {
   li.style.cssText = "list-style:none; margin:0;";
 
   li.innerHTML = `
-    <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#23271f; min-height:42px; border-bottom:1px dotted #3a4232; padding:4px 5px; color:#cacdd5; ${muted}">
+    <div class="item-row flexrow noe-zasoby-row" style="display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:4px 5px; ${muted}">
       <div class="surowiec-name flexrow" role="${interactive && item ? "button" : ""}" aria-label="${type.label}" title="${interactive && item ? "Kliknij: rozwiń opis | Shift+Klik: edytuj" : type.label}" style="flex:1.6; align-items:center; gap:8px; min-width:170px; ${interactive && item ? "cursor:pointer;" : ""}">
-        <dnd5e-icon draggable="false" src="${iconPath}" aria-label="${type.label}" class="item-image gold-icon" style="--icon-fill:${accent};"></dnd5e-icon>
+        ${inventoryIcon(iconPath, type.label, { fill: accent })}
         <div class="name name-stacked flexcol">
           <span class="title" style="color:#cacdd5; font-weight:500;">${type.label} <span style="color:#8a8f80; font-weight:400;">(${type.code})</span></span>
         </div>
@@ -317,9 +319,9 @@ function _buildItemSubRow(actor, type, item) {
   li.setAttribute("data-item-id", item.id);
   li.style.cssText = "list-style:none; margin:0;";
   li.innerHTML = `
-    <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#1d2019; min-height:38px; border-bottom:1px dotted #2f352a; padding:3px 5px 3px 22px; color:#aeb3a4; font-size:0.92em;">
+    <div class="item-row flexrow noe-zasoby-row is-sub" style="display:flex; align-items:center; justify-content:space-between; min-height:38px; padding:3px 5px 3px 22px; font-size:0.92em;">
       <div class="surowiec-name flexrow" role="button" aria-label="${item.name}" title="Kliknij: rozwiń opis | Shift+Klik: edytuj" style="flex:1.6; align-items:center; gap:8px; min-width:150px; cursor:pointer;">
-        <dnd5e-icon draggable="false" src="${item.img}" aria-label="${item.name}" class="item-image gold-icon" style="--icon-fill:${type.accent};"></dnd5e-icon>
+        ${inventoryIcon(item.img, item.name, { fill: type.accent })}
         <span class="title" style="color:#aeb3a4;">${item.name}</span>
       </div>
       <div class="item-detail" style="flex:2; text-align:right; padding-right:8px; font-variant-numeric:tabular-nums;">${_fmtWeight(kg)}</div>
@@ -431,8 +433,8 @@ async function _toggleDescription(li, item, type) {
   } catch (_err) { /* fall back to raw HTML */ }
 
   const desc = document.createElement("div");
-  desc.className = "surowiec-desc";
-  desc.style.cssText = `padding:6px 12px 8px 40px; background:#1b1e17; border-bottom:1px dotted #3a4232; border-left:3px solid ${type.accent}; color:#b6bbac; font-size:0.9em;`;
+  desc.className = "surowiec-desc noe-zasoby-row is-sub";
+  desc.style.cssText = `padding:6px 12px 8px 40px; border-left:3px solid ${type.accent}; font-size:0.9em;`;
   desc.innerHTML = content || `<em style="opacity:0.6;">Brak opisu.</em>`;
   li.appendChild(desc);
 }

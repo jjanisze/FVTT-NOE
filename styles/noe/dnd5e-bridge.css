@@ -1,0 +1,1108 @@
+/**
+ * NOE — most do dnd5e 6.0.6 (PLAN_m9_style.md §5.2).
+ *
+ * Okna dnd5e w zakresie `.noe` dostają tokeny NOE przez zmienne, których dnd5e i rdzeń same
+ * używają; selektory pojawiają się dopiero tam, gdzie zmiennej brakuje (kolejność D19:
+ * zmienna → selektor → hook). Mapa zmiennych pochodzi z `less/variables/dark.less` i `base.less`.
+ *
+ * Kaskada: style systemu trafiają do warstwy `system`, style modułu do `modules`, która leży
+ * dalej w kolejności rdzenia — reguła stąd wygrywa z każdą regułą dnd5e bez walki na
+ * specyficzność (poza `!important`). Przegrywa tylko z warstwą `exceptions` rdzenia.
+ *
+ * Adresy url(): względne, liczone od tego pliku. Zmiennych dnd5e z url() (banery) nie nadpisujemy
+ * adresem — przeglądarka rozwiązałaby go względem arkusza dnd5e — tylko malujemy tło wprost.
+ */
+
+/* ============================================= */
+/* 1. Zmienne dnd5e i rdzenia → tokeny NOE        */
+/* ============================================= */
+
+.noe.dnd5e2,
+.noe .dnd5e2,
+.noe.application,
+#tooltip.dnd5e2,
+.locked-tooltip.dnd5e2 {
+  /* ---- Paleta bazowa dnd5e (base.less): złoto i granaty znikają u źródła ---- */
+  --dnd5e-color-gold: var(--noe-accent);
+  --dnd5e-color-scrollbar: var(--noe-line);
+  --dnd5e-color-blue-white: var(--noe-text);
+  --dnd5e-color-blue-gray-1: var(--noe-line);
+  --dnd5e-color-blue-gray-2: var(--noe-panel);
+  --dnd5e-color-blue-gray-3: var(--noe-line);
+  --dnd5e-color-blue-gray-4: var(--noe-raised);
+  --dnd5e-color-dark-gray: var(--noe-inset);
+  --dnd5e-color-beige: var(--noe-text-muted);
+  --dnd5e-color-tan: var(--noe-text-muted);
+  --dnd5e-color-faint: var(--noe-text-muted);
+  --dnd5e-background-texture-denim: var(--noe-surface);
+  --dnd5e-sheet-background: var(--noe-surface);
+
+  /* ---- Powierzchnie ---- */
+  --dnd5e-application-background: var(--noe-surface);
+  --dnd5e-background-card: var(--noe-panel);
+  --dnd5e-background-parchment: var(--noe-panel);
+  --dnd5e-background-alt-1: var(--noe-inset);
+  --dnd5e-background-alt-2: var(--noe-panel);
+  --dnd5e-background-5: var(--noe-hover);
+  --dnd5e-chat-background: var(--noe-surface);
+  --dnd5e-chat-description-background: var(--noe-inset);
+  --dnd5e-journal-content-background: var(--noe-surface);
+  --dnd5e-journal-header-background: var(--noe-panel);
+  --item-summary-background: transparent;
+  --dnd5e-block-background: var(--noe-panel);
+  --dnd5e-block-border-color: var(--noe-line);
+  --dnd5e-quote-color: var(--noe-text);
+  --dnd5e-quote-background: var(--noe-inset);
+
+  /* ---- Nagłówki sekcji i tabel: bez bordowych gradientów ---- */
+  --dnd5e-card-header-1: var(--noe-panel);
+  --dnd5e-card-header-2: var(--noe-panel);
+  --dnd5e-card-header-disabled-1: var(--noe-panel);
+  --dnd5e-card-header-disabled-2: var(--noe-panel);
+  --dnd5e-color-table-header-1: var(--noe-panel);
+  --dnd5e-color-table-header-2: var(--noe-panel);
+  --dnd5e-color-table-row-odd: var(--noe-surface);
+  --dnd5e-color-table-row-even: var(--noe-surface);
+  --dnd5e-color-table-border: var(--noe-line);
+  --table-background-color: var(--noe-surface);
+
+  /* ---- Obrysy: brak obudowy ikon (no housing), linie 1 px ---- */
+  --dnd5e-gold-icon-background: transparent;
+  --dnd5e-border-gold: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-dotted: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-dashed: var(--noe-border) dashed var(--noe-line);
+  --dnd5e-border-dashed-faint: var(--noe-border) dashed var(--noe-line);
+  --dnd5e-border-dark: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-heading-3: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-separator-faint: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-separator-heavy: var(--noe-border) solid var(--noe-line);
+  --dnd5e-border-separator-warning: var(--noe-border) dashed var(--noe-warn);
+  --dnd5e-inventory-border: none;
+  --dnd5e-slot-border: var(--noe-border) solid var(--noe-line);
+  --dnd5e-slot-filter: none;
+  --color-fieldset-border: var(--noe-line);
+  --dnd5e-statblock-border: var(--noe-line);
+  --dnd5e-statblock-title-border: var(--noe-line);
+  --dnd5e-statblock-separator: var(--noe-line);
+  --dnd5e-statblock-scroll: var(--noe-line);
+  --dnd5e-statblock-ability-border: var(--noe-line);
+  --dnd5e-statblock-background-plain: var(--noe-inset);
+  --dnd5e-statblock-background-parchment: var(--noe-inset);
+  --dnd5e-statblock-ability-header-1st: var(--noe-panel);
+  --dnd5e-statblock-ability-header-2nd: var(--noe-panel);
+  --dnd5e-statblock-ability-stat-1st: var(--noe-raised);
+  --dnd5e-statblock-ability-stat-2nd: var(--noe-raised);
+  --dnd5e-habitat-treasure-color-background: var(--noe-panel);
+  --dnd5e-habitat-treasure-color-border: var(--noe-line);
+
+  /* ---- Tekst ---- */
+  --color-text-emphatic: var(--noe-text);
+  --color-text-primary: var(--noe-text);
+  --color-text-secondary: var(--noe-text-muted);
+  --color-text-tertiary: var(--noe-text-muted);
+  --color-text-inactive: var(--noe-text-disabled);
+  --color-text-title: var(--noe-text);
+  --color-text-light-0: var(--noe-text);
+  --color-text-light-6: var(--noe-text-muted);
+  --dnd5e-attribute-color: var(--noe-text-muted);
+  --dnd5e-ability-color: var(--noe-text-muted);
+  --dnd5e-ability-mod-color: var(--noe-text);
+  --dnd5e-heading-3-color: var(--noe-text-muted);
+  --dnd5e-statblock-text-header: var(--noe-text);
+  --dnd5e-statblock-text-primary: var(--noe-text);
+  --dnd5e-statblock-text-secondary: var(--noe-text-muted);
+  --advancement-summary-link-color: var(--noe-text-muted);
+  --sidebar-info-link-color: var(--noe-accent);
+
+  /* ---- Akcent zamiast złota ---- */
+  --activity-icon-color: var(--noe-text);
+  --damage-icon-color: var(--noe-text-muted);
+  --item-control-color: var(--noe-text-muted);
+  --item-control-interactive-color: var(--noe-text-muted);
+  --item-control-active-color: var(--noe-text);
+  --item-control-header-color: var(--noe-text-muted);
+  --item-state-toggle-active: var(--noe-text);
+  --filter-control-color: var(--noe-text-muted);
+  --filter-control-active-color: var(--noe-text);
+  --fieldset-legend-color: var(--noe-text-muted);
+  --control-button-text-color: var(--noe-text);
+  --hint-icon-color: var(--noe-text-muted);
+  --formula-input-icon-color: var(--noe-text-muted);
+  --npc-portrait-toggle-on: var(--noe-accent);
+  --slide-toggle-track-color-checked: var(--noe-accent);
+  --slide-toggle-track-color-unchecked: var(--noe-inset);
+  --icon-fill: var(--noe-text);
+
+  /* ---- Wiersze, listy, konteksty ---- */
+  --activity-row-border: var(--noe-border) solid var(--noe-line);
+  --activity-row-indent-color: var(--noe-line);
+  --separated-list-item-background-color: var(--noe-surface);
+  --separated-list-item-border-color: var(--noe-line);
+  --dnd5e-condition-hover: var(--noe-hover);
+  --context-entry-hover-background: var(--noe-raised);
+  --radio-list-hover: var(--noe-hover);
+  --drop-region-border-color: var(--noe-line);
+  --drop-region-text-color: var(--noe-text-muted);
+
+  /* ---- Pills i podkłady: płasko, bez mieszania warstw (K18, G5) ---- */
+  --pill-transparent-color: var(--noe-text);
+  --pill-border: var(--noe-border) solid var(--noe-line);
+  --pill-colored-border: var(--noe-border) solid var(--noe-line);
+  --pill-border-dotted: var(--noe-border) solid var(--noe-line);
+  --pill-underlay-opacity: 0;
+  --pill-underlay-blend-mode: normal;
+  --pill-background-color: var(--noe-panel);
+  --pill-background-blend-mode: normal;
+  --pill-background-green: color-mix(in srgb, var(--noe-ok) 18%, var(--noe-panel));
+  --pill-background-maroon: color-mix(in srgb, var(--noe-danger) 18%, var(--noe-panel));
+  --pill-colored-text-color: var(--noe-text);
+  --pill-empty-border: var(--noe-border) dashed var(--noe-line);
+  --pill-empty-text-color: var(--noe-text-muted);
+  --group-underlay-opacity: 0;
+  --group-underlay-filter: none;
+  --group-vitals-shadow: none;
+  --group-control-border: var(--noe-line);
+  --group-control-hover-border: var(--noe-accent);
+  --filigree-background-color: var(--noe-panel);
+  --filigree-border-color: var(--noe-line);
+  --multi-select-tag-background: var(--noe-panel);
+  --multi-select-tag-border: var(--noe-line);
+
+  /* ---- Filtry „czarny → złoty” wyłączone; ikony systemowe jasne na graficie ---- */
+  --advancement-icon-filter: invert(1);
+  --npc-ability-score-filter: none;
+  --dnd5e-roll-icon-filter: invert(1);
+  --dnd5e-notable-filter: none;
+  --dnd5e-chat-damage-filter: none;
+  --window-resize-handle-filter: invert(1);
+
+  /* ---- Mierniki (K11) ---- */
+  --meter-background: var(--noe-inset);
+  --dnd5e-color-hp-1: var(--noe-meter-pw);
+  --dnd5e-color-hp-2: var(--noe-meter-pw);
+  --dnd5e-color-hp-3: var(--noe-meter-pw);
+  --dnd5e-color-hd-1: var(--noe-meter-kw);
+  --dnd5e-color-hd-2: var(--noe-meter-kw);
+  --dnd5e-color-hd-3: var(--noe-meter-kw);
+  --dnd5e-capacity-container-background-color: var(--noe-inset);
+  --dnd5e-capacity-container-border-color: var(--noe-line);
+  --dnd5e-capacity-background-color: var(--noe-meter-neutral);
+  --dnd5e-capacity-border-color: var(--noe-accent);
+  --dnd5e-capacity-text-color: var(--noe-text);
+
+  /* ---- BN ---- */
+  --npc-header-input-background: var(--noe-inset);
+  --npc-cr-input-background: none;
+
+  /* ---- Czat ---- */
+  --dnd5e-chat-button-background: var(--noe-panel);
+  --dnd5e-chat-button-border: var(--noe-line);
+  --dnd5e-chat-color-die: var(--noe-text-muted);
+  --dnd5e-chat-breakdown-border: var(--noe-border) solid var(--noe-line);
+  --dnd5e-chat-status-success: var(--noe-ok);
+  --dnd5e-chat-status-failure: var(--noe-danger);
+  --dnd5e-color-success: var(--noe-ok);
+  --dnd5e-color-failure: var(--noe-danger);
+  --dnd5e-color-success-critical: var(--noe-ok);
+  --dnd5e-color-failure-critical: var(--noe-danger);
+  --dnd5e-color-success-background: color-mix(in srgb, var(--noe-ok) 14%, var(--noe-surface));
+  --dnd5e-color-failure-background: color-mix(in srgb, var(--noe-danger) 14%, var(--noe-surface));
+  --dnd5e-color-note-info: var(--noe-info);
+  --dnd5e-color-note-warn: var(--noe-warn);
+
+  /* ---- Kroje (D11): Roboto Slab, Modesto i szeryf rdzenia znikają z powierzchni w zakresie ---- */
+  --dnd5e-font-roboto: var(--noe-font-ui);
+  --dnd5e-font-roboto-condensed: var(--noe-font-label);
+  --dnd5e-font-roboto-slab: var(--noe-font-ui);
+  --dnd5e-font-modesto: var(--noe-font-label);
+  --dnd5e-block-header-font: var(--noe-font-label);
+  --font-primary: var(--noe-font-ui);
+  --font-body: var(--noe-font-ui);
+  --font-serif: var(--noe-font-ui);
+  --font-sans: var(--noe-font-ui);
+  --font-mono: var(--noe-font-num);
+  --font-h1: var(--noe-font-label);
+  --font-h2: var(--noe-font-label);
+  --font-h3: var(--noe-font-label);
+}
+
+/* Zmienne, które dnd5e deklaruje na zagnieżdżonych selektorach (dark.less) — te same miejsca. */
+.noe.dnd5e2 .items-section .item-name,
+.noe .dnd5e2 .items-section .item-name { --icon-fill: var(--noe-text); }
+
+.noe.dnd5e2 .items-section .item .tags,
+.noe .dnd5e2 .items-section .item .tags { --icon-fill: var(--noe-text-muted); }
+
+.noe.dnd5e2.roll-table-sheet table,
+.noe .dnd5e2.roll-table-sheet table { --icon-fill: var(--noe-text); }
+
+.noe.dnd5e2 button,
+.noe .dnd5e2 button {
+  --button-border-color: var(--noe-line);
+  --button-hover-border-color: var(--noe-accent);
+  --button-background-color: var(--noe-panel);
+  --button-hover-background-color: var(--noe-raised);
+  --button-text-color: var(--noe-text);
+  --button-hover-text-color: var(--noe-text);
+  --button-focus-outline-color: var(--noe-focus);
+  --button-toggle-depressed-color: var(--noe-raised);
+  --control-border-color: var(--noe-line);
+  --control-active-background-color: var(--noe-raised);
+}
+
+/* K13: pola przez zmienne rdzenia. */
+.noe.dnd5e2 :is(input, textarea, select, color-picker, file-picker, formula-input, document-tags, string-tags),
+.noe .dnd5e2 :is(input, textarea, select, color-picker, file-picker, formula-input, document-tags, string-tags) {
+  --input-background-color: var(--noe-inset);
+  --input-disabled-background-color: var(--noe-inset);
+  --input-border-color: var(--noe-line);
+  --input-hover-border-color: var(--noe-accent);
+  --input-focus-outline-color: var(--noe-focus);
+  --input-text-color: var(--noe-text);
+  --input-placeholder-color: var(--noe-text-disabled);
+}
+
+.noe.dnd5e2 :is(dnd5e-checkbox, input[type="checkbox"], input[type="radio"]),
+.noe .dnd5e2 :is(dnd5e-checkbox, input[type="checkbox"], input[type="radio"]) {
+  --checkbox-border-color: var(--noe-line);
+  --checkbox-empty-color: var(--noe-inset);
+  --checkbox-fill-color: var(--noe-accent);
+  --checkbox-icon-color: var(--noe-on-accent);
+  --checkbox-checked-color: var(--noe-accent);
+  --checkbox-background-color: var(--noe-inset);
+}
+
+.noe.dnd5e2 .prosemirror menu,
+.noe .dnd5e2 .prosemirror menu {
+  --color-hover-bg: var(--noe-raised);
+  --menu-background: var(--noe-panel);
+  --button-text-color: var(--noe-text-muted);
+  --color-form-label-hover: var(--noe-text);
+}
+
+.noe.dnd5e2.starting-equipment,
+.noe .dnd5e2.starting-equipment {
+  --background-depth-1: transparent;
+  --background-depth-2: var(--noe-hover);
+  --background-depth-3: var(--noe-raised);
+}
+
+/* ============================================= */
+/* 2. K1 — rama okna                              */
+/* ============================================= */
+
+.noe.application {
+  --color-border: var(--noe-line);
+  --background: var(--noe-surface);
+  --color-header-background: var(--noe-panel);
+  background: var(--noe-surface);
+  color: var(--noe-text);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: 0 0 0 var(--noe-border) var(--noe-inset);
+  font-family: var(--noe-font-ui);
+}
+
+.noe.application .window-header {
+  background: var(--noe-panel);
+  border-bottom: var(--noe-border) solid var(--noe-line);
+  color: var(--noe-text);
+  text-shadow: none;
+}
+
+.noe.application .window-header .window-title {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-14);
+  font-weight: 700;
+  color: var(--noe-text);
+}
+
+.noe.application .window-header .header-control { color: var(--noe-text-muted); }
+.noe.application .window-header .header-control:hover { color: var(--noe-text); }
+
+.noe.application .window-content {
+  color: var(--noe-text);
+  font-family: var(--noe-font-ui);
+}
+
+/* Karty z banerem rysują nagłówek okna na banerze: bez własnego tła i linii. */
+.noe.dnd5e2.sheet.actor .window-header,
+.noe.dnd5e2.sheet.item .window-header {
+  background: none;
+  border-bottom: 0;
+}
+
+/* Filtr całej karty PC (sepia/contrast/brightness) znika: powierzchnie pochodzą z tokenów. */
+.noe.dnd5e2.character { filter: none; }
+
+/* ============================================= */
+/* 3. Banery kart (D14)                           */
+/* ============================================= */
+
+/* Jedna maska dla wszystkich: pełne krycie do 36% wysokości, zanik do 100%. */
+.noe.dnd5e2.sheet.actor.character:not(.minimized) .window-content::before,
+.noe.dnd5e2.sheet.actor.npc:not(.minimized)::before,
+.noe.dnd5e2.sheet.actor.vehicle:not(.minimized)::before,
+.noe.dnd5e2.sheet.actor.group:not(.minimized)::before,
+.noe.dnd5e2.sheet.item:not(.minimized)::before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  filter: none;
+  mask-image: linear-gradient(to bottom, var(--noe-mask-on) 0, var(--noe-mask-on) 36%, transparent 100%);
+}
+
+/* PC — Field kit (wybór MG, §0.2): góra/środek, 300 px. */
+.noe.dnd5e2.sheet.actor.character:not(.minimized) .window-content::before {
+  background-image: url("../../ui/noe/banners/pc.webp");
+  background-position: top center;
+}
+
+/* BN — Field kit, osobny kadr. */
+.noe.dnd5e2.sheet.actor.npc:not(.minimized)::before {
+  background-image: url("../../ui/noe/banners/npc.webp");
+  background-position: top right;
+}
+
+/* Pojazd — Workshop. */
+.noe.dnd5e2.sheet.actor.vehicle:not(.minimized)::before {
+  background-image: url("../../ui/noe/banners/vehicle.webp");
+  background-position: bottom center;
+}
+
+/* Drużyna — Survey. */
+.noe.dnd5e2.sheet.actor.group:not(.minimized)::before {
+  background-image: url("../../ui/noe/banners/group.webp");
+  background-position: bottom right;
+}
+
+/* Przedmioty — Workshop. */
+.noe.dnd5e2.sheet.item:not(.minimized)::before {
+  background-image: url("../../ui/noe/banners/item.webp");
+  background-position: top center;
+}
+
+/* ============================================= */
+/* 4. K2 — nagłówek karty                         */
+/* ============================================= */
+
+.noe.dnd5e2.sheet.actor .sheet-header .document-name,
+.noe.dnd5e2.sheet.actor .sheet-header input.document-name {
+  font-family: var(--noe-font-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: none;
+  color: var(--noe-text);
+  border: 0;
+  border-bottom: var(--noe-border) solid var(--noe-source-accent);
+  border-radius: 0;
+}
+
+.noe.dnd5e2.sheet.actor .sheet-header .class,
+.noe.dnd5e2.sheet.actor .sheet-header .details,
+.noe.dnd5e2.sheet.actor .sheet-header .roboto-upper {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-13);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: none;
+  color: var(--noe-text-muted);
+}
+
+/* Portret bez złotej ramki. */
+.noe.dnd5e2.sheet.actor .sidebar .card,
+.noe.dnd5e2.sheet.actor .sidebar .card .portrait {
+  border-color: var(--noe-line);
+  box-shadow: none;
+}
+.noe.dnd5e2.sheet.actor .sidebar .card { background: var(--noe-panel); border: var(--noe-border) solid var(--noe-line); border-radius: var(--noe-r-panel); }
+.noe.dnd5e2.sheet.actor .sidebar .card .portrait { border-bottom: var(--noe-border) solid var(--noe-line); }
+.noe.dnd5e2.sheet.actor .sidebar .card .portrait > :is(img, video) { border: 0; border-radius: 0; box-shadow: none; }
+
+/*
+ * Karta PC: jedno wcięcie 8 px dla wszystkiego w ramce (MG 2026-11-17). Portret siedzi w ozdobnej
+ * ramce dnd5e (`::after`, stal 2 px), zamiast wystawać poza nią do krawędzi karty; tabliczki i paski
+ * PW/KW zaczynają się i kończą na tej samej linii; pod paskiem KW oddech.
+ */
+.noe.dnd5e2.sheet.actor.character .sidebar .card .portrait {
+  padding: var(--noe-sp-3) var(--noe-sp-3) 0;
+  border-bottom: 0;
+}
+.noe.dnd5e2.sheet.actor.character .sidebar .card .portrait::after {
+  inset: var(--noe-sp-3) var(--noe-sp-3) 0;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+}
+.noe.dnd5e2.sheet.actor.character .sidebar .card .stats { padding-bottom: var(--noe-sp-3); }
+.noe.dnd5e2.sheet.actor.character .sidebar .card .stats .meter-group { padding-inline: 0; }
+.noe.dnd5e2.sheet.actor.character .sidebar .card .stats .lozenges + .meter-group { margin-top: var(--noe-sp-2); }
+
+/* Typografia nagłówków sidebaru i sekcji tekstowych. */
+.noe.dnd5e2 :is(h1, h2, h3, h4) {
+  font-family: var(--noe-font-label);
+  text-shadow: none;
+}
+.noe.dnd5e2 .roboto-upper,
+.noe.dnd5e2 .roboto-condensed-upper {
+  font-family: var(--noe-font-num);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+}
+
+/* ============================================= */
+/* 5. K3 — tabliczki odczytu zamiast odznak (D18) */
+/* ============================================= */
+
+/* TT i poziom: prostokąt, liczba mono, etykieta nad wartością. Bez tarczy i wieńca. */
+.noe.dnd5e2 .badge {
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  filter: none;
+  font-family: var(--noe-font-num);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--noe-text);
+  text-shadow: none;
+}
+
+.noe.dnd5e2 .ac-badge,
+.noe.dnd5e2 .level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--noe-sp-1);
+  width: auto;
+  min-width: 56px;
+  height: auto;
+  min-height: 44px;
+  margin: 0;
+  padding: var(--noe-sp-2) var(--noe-sp-3);
+  background-image: none;
+  font-size: var(--noe-fs-20);
+  line-height: 1.1;
+}
+
+.noe.dnd5e2 .ac-badge::before,
+.noe.dnd5e2 .level-badge::before {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+}
+/* Poziom w nagłówku PC trzyma wymiar, wokół którego ułożono odpoczynki i Fuksa. */
+.noe.dnd5e2.sheet.actor.character .sheet-header > .right .level-badge {
+  width: var(--level-size);
+  min-width: var(--level-size);
+  height: var(--level-size);
+  min-height: 0;
+  margin-left: auto;
+  padding: var(--noe-sp-1);
+}
+.noe.dnd5e2 .ac-badge::before { content: "TT"; }
+.noe.dnd5e2 .level-badge::before { content: "Poziom"; }
+
+/*
+ * BN: portret i TT to jedna stalowa rama — dwa zrośnięte pęcherze (MG 2026-11-17; w dnd5e obwódka
+ * portretu i tarcza KP miały ten sam kolor). Rama: ui/noe/signs/npc-frame.svg z generatora
+ * (dev/finish/signs.mjs, NPC_FRAME — tam geometria). Pasek PW wychodzi spod małego pęcherza pod
+ * portretem, nie przez obraz. Pierścień rysuje rama, więc obwódka <img> zostaje przezroczysta
+ * (trzyma rozmiar obrazu).
+ */
+.noe.dnd5e2.sheet.actor.npc .sheet-header .portrait {
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+  z-index: auto;
+}
+.noe.dnd5e2.sheet.actor.npc .sheet-header .portrait > img {
+  border-color: transparent;
+  box-shadow: none;
+}
+/* Kość Inicjatywy (prawy górny róg portretu) nad ramą — inaczej przykrywa ją pierścień. */
+.noe.dnd5e2.sheet.actor.npc .sheet-header .portrait .initiative-wrapper { z-index: 3; }
+.noe.dnd5e2.sheet.actor.npc .sheet-header .portrait::after {
+  content: "";
+  position: absolute;
+  left: -6px;   /* NPC_FRAME.box */
+  top: -4px;
+  width: 192px;
+  height: 200px;
+  background: url("../../ui/noe/signs/npc-frame.svg") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+/* dnd5e powiększa wiersz o 10% transformacją — ta tworzy własną warstwę i chowa TT pod ramą. */
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals {
+  margin-top: 0;
+  transform: none;
+}
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals .right {
+  margin-left: -22px;
+  padding-top: 0;
+}
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals .meter.hit-points { block-size: 22px; }
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals :is(.meter.hit-dice, .meter.split) { block-size: 18px; }
+/* TT siedzi w studni małego pęcherza (NPC_FRAME.small: środek 28/157, studnia ⌀50). */
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals .ac-badge {
+  width: 50px;
+  min-width: 0;
+  height: 50px;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  translate: -3px -48px;
+  z-index: 3;
+}
+.noe.dnd5e2.sheet.actor.npc .sheet-header .vitals .ac-badge::before {
+  font-size: var(--noe-fs-10);
+  line-height: 1;
+}
+
+/*
+ * TT, Inicjatywa, Szybkość, Biegłość: jeden rząd czterech tabliczek (MG 2026-11-17 — TT sam w rzędzie
+ * zostawiał dwie puste połówki; tor Wyczerpania obok niego mieszka w panelu Stan). Rzędy dnd5e
+ * `.top` i `.lozenges` rozpuszczone w siatkę `.stats`; mierniki pod nimi na całą szerokość.
+ */
+.noe.dnd5e2.sheet.actor.character .sidebar .stats {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  column-gap: var(--noe-sp-2);
+  padding: var(--noe-sp-3) var(--noe-sp-3) 0;
+}
+.noe.dnd5e2.sheet.actor.character .sidebar .stats > :is(.top, .lozenges) { display: contents; }
+.noe.dnd5e2.sheet.actor.character .sidebar .stats > :not(.top, .lozenges) { grid-column: 1 / -1; }
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .top > .ac-badge {
+  align-self: stretch;
+  min-width: 36px;
+  min-height: 44px;
+  padding: var(--noe-sp-2) var(--noe-sp-1);
+}
+
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .lozenges .lozenge {
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: var(--noe-sp-1);
+  width: auto;
+  height: auto;
+  min-height: 44px;
+  margin: 0;
+  padding: var(--noe-sp-2) var(--noe-sp-1);
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  filter: none;
+}
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .lozenges .lozenge:nth-child(2) { margin-top: 0; }
+
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .lozenges .lozenge .value {
+  height: auto;
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-16);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--noe-text);
+  text-shadow: none;
+}
+
+/* Krój etykiet (wąski): INICJATYWA mieści się w ćwierci paska bocznego (50 px wobec 60 px w mono). */
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .lozenges .lozenge .label,
+.noe.dnd5e2.sheet.actor.character .sidebar .stats .ac-badge::before {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* 6. K4 — zakładki                               */
+/* ============================================= */
+
+/* Pionowa szyna karty: grafit, ikona muted; aktywna — tekst i pasek 2 px akcentu. */
+.noe.dnd5e2.sheet.vertical-tabs nav.tabs {
+  gap: 0;
+  padding: var(--noe-sp-2) 0;
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-left: 0;
+  border-radius: 0 var(--noe-r-panel) var(--noe-r-panel) 0;
+  box-shadow: none;
+}
+
+.noe.dnd5e2.sheet.vertical-tabs nav.tabs > .item {
+  --icon-fill: var(--noe-text-muted);
+  background: none;
+  border: 0;
+  border-left: var(--noe-border-select) solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--noe-text-muted);
+  filter: none;
+}
+.noe.dnd5e2.sheet.vertical-tabs nav.tabs > .item:hover { --icon-fill: var(--noe-text); color: var(--noe-text); }
+.noe.dnd5e2.sheet.vertical-tabs nav.tabs > .item.active {
+  --icon-fill: var(--noe-text);
+  background: var(--noe-raised);
+  border-left-color: var(--noe-accent);
+  color: var(--noe-text);
+}
+
+/* Poziome zakładki (ItemSheet, dialogi): tekst i podkreślenie 2 px. */
+.noe.dnd5e2:not(.vertical-tabs) nav.tabs,
+.noe .dnd5e2:not(.vertical-tabs) nav.tabs {
+  border-bottom: var(--noe-border) solid var(--noe-line);
+  border-top: 0;
+}
+.noe.dnd5e2:not(.vertical-tabs) nav.tabs > .item,
+.noe .dnd5e2:not(.vertical-tabs) nav.tabs > .item,
+.noe.dnd5e2:not(.vertical-tabs) nav.tabs > a,
+.noe .dnd5e2:not(.vertical-tabs) nav.tabs > a {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-13);
+  color: var(--noe-text-muted);
+  text-shadow: none;
+  border-bottom: var(--noe-border-select) solid transparent;
+}
+.noe.dnd5e2:not(.vertical-tabs) nav.tabs > .active,
+.noe .dnd5e2:not(.vertical-tabs) nav.tabs > .active {
+  color: var(--noe-text);
+  font-weight: 700;
+  border-bottom-color: var(--noe-accent);
+  text-shadow: none;
+}
+/* dnd5e podkreśla jeszcze napis aktywnej zakładki (3 px złota na span/label) — drugi pasek nad naszym. */
+.noe .dnd5e2 :is(nav.tabs, .sheet-tabs) [data-tab].active :is(span, label),
+.noe.dnd5e2 :is(nav.tabs, .sheet-tabs) [data-tab].active :is(span, label) {
+  border-bottom: 0;
+}
+
+/* ============================================= */
+/* 7. K5 — nagłówek sekcji                        */
+/* ============================================= */
+
+.noe.dnd5e2 .items-section,
+.noe .dnd5e2 .items-section {
+  background: var(--noe-surface);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/*
+ * Jeden nagłówek dla sekcji dnd5e i sekcji Zasobów modułu (`.noe-section-head`): uniesiony grafit,
+ * pasek 3 px i kreska u dołu w akcencie sekcji — klasa (data-noe-source), rodzina sprzętu
+ * (data-noe-family, components.css) albo neutralna stal. MG 2026-11-17: szary na szarym był za słaby,
+ * a Zasoby miały własne czerwone/zielone tła — teraz wszystkie sekcje mówią jednym językiem.
+ */
+.noe.dnd5e2 :is(.items-section .items-header, .items-header.noe-section-head),
+.noe .dnd5e2 :is(.items-section .items-header, .items-header.noe-section-head) {
+  min-height: var(--noe-control-h);
+  background: var(--noe-raised);
+  border: 0;
+  border-left: var(--noe-border-section) solid var(--noe-section-accent, var(--noe-accent));
+  border-radius: 0;
+  box-shadow: inset 0 calc(-1 * var(--noe-border)) 0 color-mix(in srgb, var(--noe-section-accent, var(--noe-accent)) 55%, transparent);
+  color: var(--noe-text);
+  text-shadow: none;
+}
+
+.noe.dnd5e2 :is(.items-section .items-header, .items-header.noe-section-head) h3.item-name,
+.noe .dnd5e2 :is(.items-section .items-header, .items-header.noe-section-head) h3.item-name {
+  margin: 0;
+  border: 0;
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-11);
+  font-weight: 700;
+  letter-spacing: var(--noe-track);
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--noe-text);
+}
+
+.noe.dnd5e2 .items-header.noe-section-head > :not(h3),
+.noe .dnd5e2 .items-header.noe-section-head > :not(h3),
+.noe.dnd5e2 .items-section .items-header .item-header,
+.noe .dnd5e2 .items-section .items-header .item-header {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+  border: 0;
+}
+
+/* Sekcja klasy i Pochodzenia: pasek 2 px w akcencie źródła. */
+.noe.dnd5e2 .items-section[data-noe-source],
+.noe .dnd5e2 .items-section[data-noe-source] { --noe-section-accent: var(--noe-source-accent); }
+
+/* ============================================= */
+/* 8. K6 — wiersz treści                          */
+/* ============================================= */
+
+.noe.dnd5e2 .items-section .item,
+.noe .dnd5e2 .items-section .item {
+  border-bottom: var(--noe-border) solid var(--noe-line);
+}
+
+.noe.dnd5e2 .items-section .item > .item-row,
+.noe .dnd5e2 .items-section .item > .item-row {
+  min-height: var(--noe-row-min);
+  transition: background-color var(--noe-t-fast);
+}
+.noe.dnd5e2 .items-section .item > .item-row:hover,
+.noe .dnd5e2 .items-section .item > .item-row:hover { background: var(--noe-hover); }
+
+/* Glif 44 px bez obudowy: żadnej ramki, tła, cienia ani zaokrąglenia nakładanego na rysunek. */
+.noe.dnd5e2 .gold-icon,
+.noe .dnd5e2 .gold-icon {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  object-fit: contain;
+  object-position: center;
+}
+
+.noe.dnd5e2 .items-section .item .item-name :is(.gold-icon, .item-image),
+.noe .dnd5e2 .items-section .item .item-name :is(.gold-icon, .item-image) {
+  --gold-icon-size: var(--noe-glyph-row);
+  --icon-size: var(--noe-glyph-row);
+  block-size: var(--noe-glyph-row);
+  inline-size: var(--noe-glyph-row);
+  flex: 0 0 var(--noe-glyph-row);
+}
+.noe.dnd5e2 .items-section .item .item-name .noe-glyph,
+.noe .dnd5e2 .items-section .item .item-name .noe-glyph { --noe-glyph-size: var(--noe-glyph-row); }
+.noe.dnd5e2 .items-section .item .item-name .noe-glyph > :is(.gold-icon, .item-image),
+.noe .dnd5e2 .items-section .item .item-name .noe-glyph > :is(.gold-icon, .item-image) { block-size: 100%; inline-size: 100%; }
+
+.noe.dnd5e2 .items-section .item .item-name,
+.noe .dnd5e2 .items-section .item .item-name { gap: var(--noe-sp-4); }
+
+.noe.dnd5e2 .name-stacked,
+.noe .dnd5e2 .name-stacked { gap: var(--noe-sp-1); line-height: 1.25; min-width: 0; }
+
+.noe.dnd5e2 .name-stacked .title,
+.noe .dnd5e2 .name-stacked .title {
+  display: flex;
+  align-items: center;
+  gap: var(--noe-sp-3);
+  line-height: 1.25;
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  font-weight: 700;
+  color: var(--noe-text);
+}
+
+.noe.dnd5e2 .name-stacked .subtitle,
+.noe .dnd5e2 .name-stacked .subtitle {
+  line-height: 1.25;
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-11);
+  font-weight: 400;
+  color: var(--noe-text-muted);
+}
+
+.noe.dnd5e2 .items-section .item .item-name.rollable:hover .title,
+.noe .dnd5e2 .items-section .item .item-name.rollable:hover .title { text-shadow: none; text-decoration: underline; text-decoration-color: var(--noe-line); text-underline-offset: 3px; }
+
+/* Kolumny: liczby mono, cyfry tabelaryczne (P7). */
+.noe.dnd5e2 .items-section .item .item-detail,
+.noe .dnd5e2 .items-section .item .item-detail {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-12);
+  font-variant-numeric: tabular-nums;
+  color: var(--noe-text);
+}
+.noe.dnd5e2 .items-section .item .item-detail :is(input, .value, .max, .formula),
+.noe .dnd5e2 .items-section .item .item-detail :is(input, .value, .max, .formula) {
+  font-family: var(--noe-font-num);
+  font-variant-numeric: tabular-nums;
+}
+.noe.dnd5e2 .items-section .item .item-detail .separator,
+.noe .dnd5e2 .items-section .item .item-detail .max,
+.noe.dnd5e2 .items-section .item .item-detail.empty,
+.noe .dnd5e2 .items-section .item .item-detail.empty { color: var(--noe-text-muted); }
+
+/* Stan operacji pod nazwą: plakietka K9 z powodem — widoczna bez hover. */
+.noe.dnd5e2 .name-stacked .noe-row-state,
+.noe .dnd5e2 .name-stacked .noe-row-state {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--noe-sp-1) var(--noe-sp-3);
+  margin-top: var(--noe-sp-1);
+}
+
+/* ============================================= */
+/* 9. K11 — mierniki                              */
+/* ============================================= */
+
+.noe.dnd5e2 .meter,
+.noe .dnd5e2 .meter {
+  background: var(--noe-inset);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  box-shadow: none;
+}
+
+.noe.dnd5e2 .meter .progress::before,
+.noe .dnd5e2 .meter .progress::before,
+.noe.dnd5e2 .meter.progress::before,
+.noe .dnd5e2 .meter.progress::before {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.noe.dnd5e2 .meter.hit-points .progress::before,
+.noe .dnd5e2 .meter.hit-points .progress::before { background: var(--noe-meter-pw); }
+.noe.dnd5e2 .meter.hit-dice.progress::before,
+.noe .dnd5e2 .meter.hit-dice.progress::before { background: var(--noe-meter-kw); }
+
+.noe.dnd5e2 .meter .label,
+.noe .dnd5e2 .meter .label {
+  font-family: var(--noe-font-num);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--noe-text);
+  text-shadow: none;
+}
+.noe.dnd5e2 .meter .label :is(.separator, .max),
+.noe .dnd5e2 .meter .label :is(.separator, .max) { font-weight: 400; color: var(--noe-text); opacity: 1; }
+
+/* Podpowiedź pustego pola (TYMCZ., +MAKS.) to etykieta, nie liczba: wąski krój 10 px mieści się
+   w 49 px pola PW tymczasowych (16 px liczby dawało „TYM(”). Wpisana wartość zostaje w rozmiarze miernika. */
+.noe.dnd5e2 :is(.meter-group, .meter) input::placeholder,
+.noe .dnd5e2 :is(.meter-group, .meter) input::placeholder {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+  opacity: 1;
+}
+
+.noe.dnd5e2 .meter-group > .label,
+.noe .dnd5e2 .meter-group > .label {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* 10. K12 — przyciski dnd5e                      */
+/* ============================================= */
+
+.noe.dnd5e2 .gold-button,
+.noe .dnd5e2 .gold-button {
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  box-shadow: none;
+  color: var(--noe-text);
+}
+.noe.dnd5e2 .gold-button:hover,
+.noe .dnd5e2 .gold-button:hover { background: var(--noe-raised); border-color: var(--noe-accent); box-shadow: none; }
+
+/* Przyciski akcji dnd5e (stopki okien, karty czatu): typografia K12. Własne mikrokontrolki NOE
+   (pipki, piki Fuksa, przyciski panelu Stan) mają swoje reguły i tu nie trafiają. */
+.noe.dnd5e2 :is(.form-footer, .dialog-buttons, .card-buttons, footer.sheet-footer) > button,
+.noe .dnd5e2 :is(.form-footer, .dialog-buttons, .card-buttons) > button,
+.noe.application :is(.form-footer, .dialog-buttons) > button {
+  min-height: var(--noe-control-h);
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-12);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: none;
+  box-shadow: none;
+  border-radius: var(--noe-r-chip);
+}
+
+/* ============================================= */
+/* 11. K17, K18 — pusty stan, pills               */
+/* ============================================= */
+
+.noe.dnd5e2 .favorites .drop,
+.noe.dnd5e2 .drop-region {
+  border: var(--noe-border) dashed var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-12);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--noe-text-muted);
+}
+
+.noe.dnd5e2 .pill,
+.noe .dnd5e2 .pill,
+.noe.dnd5e2 .pill-lg,
+.noe .dnd5e2 .pill-lg {
+  border-radius: var(--noe-r-chip);
+  box-shadow: none;
+}
+.noe.dnd5e2 .pill-lg > .underlay,
+.noe .dnd5e2 .pill-lg > .underlay { display: none; }
+
+/* Wyszukiwarka i filtry list. */
+.noe.dnd5e2 item-list-controls search,
+.noe .dnd5e2 item-list-controls search {
+  background: var(--noe-inset);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  box-shadow: none;
+}
+
+/* ============================================= */
+/* 12. Tooltipy i menu dnd5e (K14)                */
+/* ============================================= */
+
+#tooltip.dnd5e2,
+.locked-tooltip.dnd5e2 {
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: none;
+  color: var(--noe-text);
+  font-family: var(--noe-font-ui);
+}
+
+.noe #context-menu,
+.noe.dnd5e2 #context-menu,
+#context-menu.dnd5e2.themed.theme-dark {
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: none;
+  color: var(--noe-text);
+  font-family: var(--noe-font-ui);
+}
+
+/* ============================================= */
+/* 13. K16 — karta czatu                          */
+/* ============================================= */
+
+/* Wiadomość dnd5e to samodzielny ciemny blok (`li.chat-message.noe`, scripts/ui/theme.mjs);
+   dziennik, pole wpisywania i sidebar zostają rdzenia. Dolna krawędź szeptu, emotki i rzutu
+   ukrytego zostaje z dnd5e — to sygnał rdzenia, nie ozdoba. */
+.chat-message.noe.message {
+  background: var(--noe-surface);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: none;
+  font-family: var(--noe-font-ui);
+}
+.chat-message.noe.message.whisper,
+.chat-message.noe.message.blind,
+.chat-message.noe.message.emote { border-block-end-width: 3px; }
+
+.chat-message.noe .message-header .message-sender,
+.chat-message.noe .message-header .title,
+.chat-message.noe .card-header .title {
+  font-family: var(--noe-font-label);
+  font-weight: 700;
+  text-shadow: none;
+  color: var(--noe-text);
+}
+.chat-message.noe .message-header .subtitle,
+.chat-message.noe .card-header .subtitle,
+.chat-message.noe .flavor-text {
+  font-family: var(--noe-font-ui);
+  color: var(--noe-text-muted);
+}
+.chat-message.noe .message-metadata { font-family: var(--noe-font-num); color: var(--noe-text-muted); }
+
+/* Ikony nagłówka karty bez złotych ramek i poświaty. */
+.chat-message.noe :is(.gold-icon, .item-icon) {
+  border: 0;
+  box-shadow: none;
+  background: none;
+}
+.chat-message.noe .item-icon:hover { box-shadow: none; outline: var(--noe-border) solid var(--noe-accent); }
+
+/* Wynik: suma mono w prostokącie K3, bez złotych wąsów po bokach. */
+.chat-message.noe .dice-roll :is(.result, .dice-total) > .total {
+  min-inline-size: 32px;
+  padding: 0 var(--noe-sp-2);
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-16);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--noe-text);
+}
+.chat-message.noe .dice-roll :is(.result, .dice-total) > .total::before,
+.chat-message.noe .dice-roll :is(.result, .dice-total) > .total::after { content: none; }
+
+/* Sukces / porażka: słowo + kolor semantyczny (P4). dnd5e pisze stan klasą na rzucie. */
+.chat-message.noe .dice-roll :is(.success, .critical) > .total,
+.chat-message.noe .dice-total.success,
+.chat-message.noe .dice-total.critical { border-color: var(--noe-ok); color: var(--noe-ok); }
+.chat-message.noe .dice-roll :is(.failure, .fumble) > .total,
+.chat-message.noe .dice-total.failure,
+.chat-message.noe .dice-total.fumble { border-color: var(--noe-danger); color: var(--noe-danger); }
+
+.chat-message.noe :is(.dice-formula, .dice-rolls .roll, .tooltip-part .value, .roll-breakdown .total .value) {
+  font-family: var(--noe-font-num);
+  font-variant-numeric: tabular-nums;
+}
+
+.chat-message.noe .message-content :is(.roll-breakdown, .inline-roll.expanded > .dice-tooltip) {
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: none;
+}
+
+/* Przyciski karty: K12, bez złotej poświaty. */
+.chat-message.noe button {
+  --button-hover-border-color: var(--noe-accent);
+  font-family: var(--noe-font-label);
+}
+.chat-message.noe button:hover:not(:disabled),
+.chat-message.noe button:focus { box-shadow: none; }
+.chat-message.noe .card-buttons > button,
+.chat-message.noe .card-tray .apply-button {
+  min-height: var(--noe-control-h);
+  font-size: var(--noe-fs-12);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Tacka obrażeń: przez zmienne; akcent zamiast złota na pipkach i ikonach. */
+.chat-message.noe .card-tray > label > i:first-of-type,
+.chat-message.noe .card-tray > i:first-of-type { color: var(--noe-text-muted); }
+.chat-message.noe .card-tray :is(.multiplier-button, target-pill) { font-family: var(--noe-font-num); }
+
+/* Tagi (pills) w karcie: płaskie K18. */
+.chat-message.noe :is(.pill, .tag) {
+  background: none;
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  font-family: var(--noe-font-ui);
+  color: var(--noe-text);
+}

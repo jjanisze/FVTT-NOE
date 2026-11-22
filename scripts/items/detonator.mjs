@@ -1,3 +1,5 @@
+import { finishedIcon } from "../config/finished-icons.mjs";
+
 /**
  * Neuroshima 5e — Detonator radiowy i zapalniki (RAW, *Sprzęt* → Elektronika).
  *
@@ -121,7 +123,7 @@ export function buildDetonatorItemData({ kitId = null, kitNew = true } = {}) {
       _id: DETONATOR_ACTIVITY_ID,
       type: "utility",
       name: "Detonuj",
-      img: `modules/${MODULE_ID}/icons/weapons/c4_explosive.svg`,
+      img: finishedIcon(`modules/${MODULE_ID}/icons/weapons/c4_explosive.svg`, { family: "utility" }),
       activation: { type: "action", value: 1, condition: "Używanie" },
       consumption: { targets: [], scaling: { allowed: false } },
       range: { override: true, value: "200", units: "m", special: "" },

@@ -1,3 +1,5 @@
+import { inventoryIcon } from "../ui/noe.mjs";
+
 /**
  * Neuroshima 5e — Prowiant (food/water) inventory panel, in the Zasoby tab.
  *
@@ -107,8 +109,8 @@ function _onRenderActorSheetInjectProwiant(app, html) {
 
   const panel = document.createElement("div");
   panel.innerHTML = `
-    <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#242a33; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:1.8; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Prowiant</h3>
+    <div class="items-header header flexrow noe-section-head" data-noe-family="survival">
+      <h3 class="item-name" style="flex:1.8; padding-left:5px;">Prowiant</h3>
       <div style="flex:0 0 70px; text-align:center;">Cena</div>
       <div style="flex:0 0 70px; text-align:center;">Waga</div>
       <div style="flex:0 0 90px; text-align:center;">Ilość</div>
@@ -124,11 +126,11 @@ function _onRenderActorSheetInjectProwiant(app, html) {
   const addRow = document.createElement("div");
   addRow.style.cssText = "display:flex; align-items:center; margin-top:4px; gap:0; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   addRow.innerHTML = `
-    <button type="button" class="neuro-add-prowiant-btn" style="flex:1; text-align:left; padding:4px 12px; background:rgba(36,42,51,0.35); border:1px solid #556270; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; font-size:var(--font-size-13, 13px);">
+    <button type="button" class="neuro-add-prowiant-btn noe-zasoby-add" style="flex:1; text-align:left; padding:4px 12px; white-space:nowrap; font-size:var(--font-size-13, 13px);">
       <i class="fas fa-utensils"></i> DODAJ PROWIANT
     </button>
     <span style="padding:0 10px;">Cena: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
-    <span style="display:inline-block; width:1px; height:16px; background:#556270; margin:0;"></span>
+    <span class="noe-zasoby-sep" style="display:inline-block; width:1px; height:16px; margin:0;"></span>
     <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${totalKg < 1 ? Math.round(totalKg * 1000) + " g" : totalKg.toFixed(2) + " kg"}</strong></span>
   `;
   addRow.querySelector(".neuro-add-prowiant-btn").addEventListener("click", async ev => {
@@ -175,9 +177,9 @@ function _itemRow(item, cat) {
   li.setAttribute("data-item-id", item.id);
   li.style.cssText = "list-style:none; margin:0;";
   li.innerHTML = `
-    <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#20242c; min-height:42px; border-bottom:1px dotted #363c48; padding:4px 5px; color:#cacdd5;">
+    <div class="item-row flexrow noe-zasoby-row" style="display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:4px 5px;">
       <div class="item-name item-tooltip flexrow" style="flex:1.8; align-items:center; gap:8px; min-width:160px;">
-        <dnd5e-icon draggable="false" src="${item.img}" aria-label="${item.name}" class="item-image gold-icon" style="--icon-fill:${cat.accent}"></dnd5e-icon>
+        ${inventoryIcon(item.img, item.name, { fill: cat.accent })}
         <span class="title" style="color:#cacdd5; font-weight:500;">${item.name}</span>
       </div>
       <div class="item-detail" style="flex:0 0 70px; text-align:center;">${Math.round(price)} gb</div>
@@ -224,7 +226,7 @@ function _summaryRow(pool) {
   li.className = "item neuro-prowiant-summary";
   li.style.cssText = "list-style:none; margin:0;";
   li.innerHTML = `
-    <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#191d24; min-height:28px; border-bottom:1px solid #363c48; padding:2px 5px; color:#9096a3; font-size:0.85em;">
+    <div class="item-row flexrow noe-zasoby-row is-sub" style="display:flex; align-items:center; justify-content:space-between; min-height:28px; padding:2px 5px; font-size:0.85em;">
       <div style="flex:1.8; padding-left:34px;">
         <span style="color:${pool.cat.accent}; font-weight:600;">${pool.cat.label}</span> — razem
       </div>

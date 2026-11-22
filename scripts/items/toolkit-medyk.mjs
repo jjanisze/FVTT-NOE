@@ -1,3 +1,5 @@
+import { finishedIcon } from "../config/finished-icons.mjs";
+
 /**
  * Neuroshima 5e — Mały medyk (medic toolkit) "Przywracanie PW".
  *
@@ -151,7 +153,7 @@ async function _ensureMedykRefillActivitiesUnguarded(item) {
   if (!_getRefillActivity(item)) {
     await item.createActivity("utility", {
       name: "Uzupełnij zapas",
-      img: `modules/${MODULE_ID}/icons/tools/medyka.svg`,
+      img: finishedIcon(`modules/${MODULE_ID}/icons/tools/medyka.svg`, { family: "utility" }),
       activation: { type: "action" },
       visibility: { identifier: REFILL_USE_ID },
       description: { chatFlavor: "Uzupełnia zapas medykamentów Narzędzi małego medyka do pełna." }

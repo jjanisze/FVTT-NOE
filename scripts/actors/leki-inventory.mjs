@@ -16,6 +16,7 @@
  * merges into the existing stack by `chemiaKey`, the same way ammo and Prowiant do.
  */
 
+import { inventoryIcon } from "../ui/noe.mjs";
 import { handyToggleHtml, bindHandyToggle, registerHandyFamily } from "./handy-items.mjs";
 import { CHEMIA, CHEMIA_SUBTYPES, chemiaItemData } from "../config/chemia-data.mjs";
 import { lekNaChorobe, oknoPodajDawke } from "./podaj-dawke.mjs";
@@ -99,14 +100,14 @@ function _onRenderActorSheetInjectLeki(app, html) {
     const activity = item.system.activities?.contents?.[0] ?? [...(item.system.activities ?? [])][0];
     const useLabel = activity?.name || "Zażyj";
 
-    const iconHtml = `<dnd5e-icon draggable="false" src="${item.img}" aria-label="${item.name}" class="item-image gold-icon" style="--icon-fill:#9f9275"></dnd5e-icon>`;
+    const iconHtml = inventoryIcon(item.img, item.name);
 
     const li = document.createElement("li");
     li.className = "item";
     li.setAttribute("data-item-id", item.id);
     li.style.cssText = "list-style:none; margin-bottom:0;";
     li.innerHTML = `
-      <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#1f2a22; min-height:42px; border-bottom:1px dotted #3a4a3d; padding:4px 5px; color:#cacdd5;">
+      <div class="item-row flexrow noe-zasoby-row" style="display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:4px 5px;">
         <div class="item-name item-tooltip flexrow" style="flex:1.8; align-items:center; gap:8px; min-width:150px;">
           ${iconHtml}
           <div style="display:flex; flex-direction:column; line-height:1.2;">
@@ -169,8 +170,8 @@ function _onRenderActorSheetInjectLeki(app, html) {
 
   const panel = document.createElement("div");
   panel.innerHTML = `
-    <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#1f3324; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:1.8; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Leki</h3>
+    <div class="items-header header flexrow noe-section-head" data-noe-family="medical">
+      <h3 class="item-name" style="flex:1.8; padding-left:5px;">Leki</h3>
       <div style="flex:0 0 70px; text-align:center;">Cena</div>
       <div style="flex:0 0 70px; text-align:center;">Waga</div>
       <div style="flex:0 0 90px; text-align:center;">Ilość</div>
@@ -182,11 +183,11 @@ function _onRenderActorSheetInjectLeki(app, html) {
   const footer = document.createElement("div");
   footer.style.cssText = "display:flex; align-items:center; margin-top:4px; gap:0; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   footer.innerHTML = `
-    <button type="button" class="neuro-add-leki-btn" style="flex:1; text-align:left; padding:4px 12px; background:rgba(31,51,36,0.35); border:1px solid #3a4a3d; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; font-size:var(--font-size-13, 13px);">
+    <button type="button" class="neuro-add-leki-btn noe-zasoby-add" style="flex:1; text-align:left; padding:4px 12px; white-space:nowrap; font-size:var(--font-size-13, 13px);">
       <i class="fas fa-pills"></i> DODAJ LEK
     </button>
     <span style="padding:0 10px;">Cena: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
-    <span style="display:inline-block; width:1px; height:16px; background:#3a4a3d; margin:0;"></span>
+    <span class="noe-zasoby-sep" style="display:inline-block; width:1px; height:16px; margin:0;"></span>
     <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${totalWeight < 1 ? Math.round(totalWeight * 1000) + " g" : totalWeight.toFixed(2) + " kg"}</strong></span>
   `;
 

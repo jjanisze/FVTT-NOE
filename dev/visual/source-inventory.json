@@ -1,0 +1,2306 @@
+{
+  "date": "2026-11-15",
+  "method": "Lexical call-site inventory in modules reachable from scripts/main.mjs; test code excluded. Dialog aliases and DialogV2() wrapper included. Call sites do not equal unique visual designs. Template expressions and indirect factories may require manual review.",
+  "summary": {
+    "runtimeSourceFiles": 405,
+    "allNonTestSourceFiles": 407,
+    "templates": 25,
+    "customApplicationClasses": 11,
+    "dialogCallSites": 126,
+    "dialogSourceFiles": 67,
+    "dialogMethods": {
+      "wait": 60,
+      "prompt": 30,
+      "confirm": 36
+    },
+    "houseRuleDialogSites": 0,
+    "chatCreateSites": 232,
+    "chatCreateFiles": 97,
+    "chatRenderHooks": 52,
+    "chatHookFiles": 50,
+    "iconFiles": 1716,
+    "iconFilesByExtension": {
+      ".svg": 951,
+      ".webp": 345,
+      ".png": 420
+    },
+    "iconPathStems": 954
+  },
+  "applications": [
+    {
+      "file": "scripts/actors/doll-panel.mjs",
+      "line": 445,
+      "class": "DollPanel",
+      "base": "ApplicationV2"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 625,
+      "class": "KalendarzykZdrowia",
+      "base": "foundry.applications.api.ApplicationV2"
+    },
+    {
+      "file": "scripts/pojazdy/okno-miejsc.mjs",
+      "line": 28,
+      "class": "OknoMiejsc",
+      "base": "foundry.applications.api.ApplicationV2"
+    },
+    {
+      "file": "scripts/pojazdy/paleta.mjs",
+      "line": 682,
+      "class": "OknoPalety",
+      "base": "foundry.applications.api.ApplicationV2"
+    },
+    {
+      "file": "scripts/postoj/bebeszenie.mjs",
+      "line": 81,
+      "class": "BebeszenieOkno",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/cennik.mjs",
+      "line": 33,
+      "class": "CennikMG",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/doba-okno.mjs",
+      "line": 38,
+      "class": "DobaOkno",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/handel.mjs",
+      "line": 153,
+      "class": "HandelOkno",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/przeskok.mjs",
+      "line": 415,
+      "class": "PrzeskokOkno",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/stol-wymiany.mjs",
+      "line": 31,
+      "class": "StolWymiany",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    },
+    {
+      "file": "scripts/postoj/szabrowanie.mjs",
+      "line": 443,
+      "class": "SzabrowanieOkno",
+      "base": "HandlebarsApplicationMixin(ApplicationV2)"
+    }
+  ],
+  "dialogs": [
+    {
+      "file": "scripts/actors/addons-inventory.mjs",
+      "line": 100,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/addons-inventory.mjs",
+      "line": 109,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/addons-inventory.mjs",
+      "line": 176,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/ammo-inventory.mjs",
+      "line": 322,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/doll.mjs",
+      "line": 312,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/doll.mjs",
+      "line": 323,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/doll.mjs",
+      "line": 340,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/drony-naprawa.mjs",
+      "line": 108,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/drony-naprawa.mjs",
+      "line": 195,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/drony-sterowanie.mjs",
+      "line": 117,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/drony-sterowanie.mjs",
+      "line": 134,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/ekonomia-karta.mjs",
+      "line": 133,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/ekonomia-karta.mjs",
+      "line": 368,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/fuksy.mjs",
+      "line": 184,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/fuksy.mjs",
+      "line": 242,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 461,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 1288,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 101,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 245,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 437,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 868,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 1041,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/improwizacja.mjs",
+      "line": 320,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/leki-inventory.mjs",
+      "line": 264,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 644,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/magazine-inventory.mjs",
+      "line": 356,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-loot-lock.mjs",
+      "line": 113,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-loot-lock.mjs",
+      "line": 127,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-sheet.mjs",
+      "line": 194,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-supplies.mjs",
+      "line": 367,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-travel.mjs",
+      "line": 100,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-travel.mjs",
+      "line": 308,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/party-travel.mjs",
+      "line": 348,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/pasek-szablony.mjs",
+      "line": 197,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/pd-panel.mjs",
+      "line": 163,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/pd-panel.mjs",
+      "line": 176,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/placed-charges.mjs",
+      "line": 250,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/placed-charges.mjs",
+      "line": 427,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/podaj-dawke.mjs",
+      "line": 63,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/podaj-dawke.mjs",
+      "line": 85,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/prowiant-inventory.mjs",
+      "line": 264,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/surowce-inventory.mjs",
+      "line": 232,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 127,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 156,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 191,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 238,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 357,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 118,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 382,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 406,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/actors/zbrojownia-sync.mjs",
+      "line": 234,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/atakowanie.mjs",
+      "line": 415,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/cover.mjs",
+      "line": 728,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/falling.mjs",
+      "line": 175,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/falling.mjs",
+      "line": 221,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/knockout.mjs",
+      "line": 163,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/melee-maneuvers.mjs",
+      "line": 184,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/melee-maneuvers.mjs",
+      "line": 321,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/melee-maneuvers.mjs",
+      "line": 457,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/obalajaca.mjs",
+      "line": 105,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/przycelowanie.mjs",
+      "line": 222,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/rerolls.mjs",
+      "line": 197,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/rerolls.mjs",
+      "line": 262,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/skok.mjs",
+      "line": 277,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/sztuczki-walka.mjs",
+      "line": 198,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/weapon-save-properties.mjs",
+      "line": 267,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 116,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 159,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 487,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 63,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 106,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-po-rzucie.mjs",
+      "line": 68,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-po-rzucie.mjs",
+      "line": 381,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-trafienie.mjs",
+      "line": 297,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 149,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 542,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 624,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/items/fanty.mjs",
+      "line": 38,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/items/fanty.mjs",
+      "line": 120,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/items/toolkit-kowal.mjs",
+      "line": 139,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/pojazdy/jazda.mjs",
+      "line": 525,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/handel.mjs",
+      "line": 114,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/handel.mjs",
+      "line": 227,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/handlarz.mjs",
+      "line": 223,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/handlarz.mjs",
+      "line": 261,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/handlarz.mjs",
+      "line": 281,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/miejsce.mjs",
+      "line": 120,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/przeskok.mjs",
+      "line": 534,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/stol-wymiany.mjs",
+      "line": 244,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/szabrowanie.mjs",
+      "line": 209,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/zajecia.mjs",
+      "line": 529,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/zakladka-doba.mjs",
+      "line": 68,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/postoj/zakladka-doba.mjs",
+      "line": 84,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/naprawa.mjs",
+      "line": 311,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 123,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 179,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 204,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 232,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 261,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 334,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 378,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/olejek.mjs",
+      "line": 106,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/przenoszenie.mjs",
+      "line": 324,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 575,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 612,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 634,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/schematy.mjs",
+      "line": 67,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/production/zakladka.mjs",
+      "line": 423,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/fx-markers.mjs",
+      "line": 109,
+      "method": "confirm",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/obiekty.mjs",
+      "line": 150,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/obiekty.mjs",
+      "line": 398,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/poscig-ui.mjs",
+      "line": 109,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/poscig-ui.mjs",
+      "line": 186,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 187,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 214,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 280,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 315,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 334,
+      "method": "prompt",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 495,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 1871,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 316,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 345,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 921,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1024,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1092,
+      "method": "wait",
+      "houseRules": false
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1163,
+      "method": "wait",
+      "houseRules": false
+    }
+  ],
+  "chatCreates": [
+    {
+      "file": "scripts/actors/armor-rules.mjs",
+      "line": 328,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/class-resource-dice.mjs",
+      "line": 124,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/class-state.mjs",
+      "line": 138,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/class-state.mjs",
+      "line": 165,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/disease-effects.mjs",
+      "line": 146,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/disease-effects.mjs",
+      "line": 480,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/doll.mjs",
+      "line": 717,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-naprawa.mjs",
+      "line": 119,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-naprawa.mjs",
+      "line": 167,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-stan.mjs",
+      "line": 162,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-stan.mjs",
+      "line": 187,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-stan.mjs",
+      "line": 195,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony-sterowanie.mjs",
+      "line": 250,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/drony.mjs",
+      "line": 425,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/fuksy.mjs",
+      "line": 124,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 623,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 720,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 956,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 1493,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/ground-items.mjs",
+      "line": 398,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/ground-items.mjs",
+      "line": 459,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/ground-items.mjs",
+      "line": 497,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/ground-items.mjs",
+      "line": 614,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 223,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 232,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 507,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 654,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 702,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/health-panel.mjs",
+      "line": 973,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/improwizacja.mjs",
+      "line": 242,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/improwizacja.mjs",
+      "line": 250,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/improwizacja.mjs",
+      "line": 260,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 267,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 528,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 559,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 623,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/levelled-conditions.mjs",
+      "line": 669,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/molotov.mjs",
+      "line": 158,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/molotov.mjs",
+      "line": 229,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-loot-lock.mjs",
+      "line": 49,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-loot-lock.mjs",
+      "line": 62,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-supplies.mjs",
+      "line": 309,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-supplies.mjs",
+      "line": 404,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-supplies.mjs",
+      "line": 449,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/party-travel.mjs",
+      "line": 584,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/pd-panel.mjs",
+      "line": 98,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/placed-charges.mjs",
+      "line": 325,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/placed-charges.mjs",
+      "line": 468,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/podaj-dawke.mjs",
+      "line": 131,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 337,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 378,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 407,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 434,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/rest-activities.mjs",
+      "line": 223,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/surowce-inventory.mjs",
+      "line": 534,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/towarzysze-tworzenie.mjs",
+      "line": 108,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/tt.mjs",
+      "line": 232,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 97,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 164,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 241,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 246,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 268,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 293,
+      "method": "create"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 345,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/autodestrukcja.mjs",
+      "line": 148,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/bestiary-thresholds.mjs",
+      "line": 128,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/bestiary-thresholds.mjs",
+      "line": 197,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/bleeding.mjs",
+      "line": 143,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/bleeding.mjs",
+      "line": 262,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/bleeding.mjs",
+      "line": 505,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/crit-riders.mjs",
+      "line": 93,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/drop-on-fail.mjs",
+      "line": 67,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/falling.mjs",
+      "line": 156,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/knockout.mjs",
+      "line": 226,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/kotwica-tury.mjs",
+      "line": 172,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/maszyny.mjs",
+      "line": 83,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/maszyny.mjs",
+      "line": 113,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/maszyny.mjs",
+      "line": 247,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/melee-maneuvers.mjs",
+      "line": 301,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/obrona.mjs",
+      "line": 388,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/obrona.mjs",
+      "line": 686,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/podpalenie.mjs",
+      "line": 135,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/podpalenie.mjs",
+      "line": 237,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/podpalenie.mjs",
+      "line": 250,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/podpalenie.mjs",
+      "line": 295,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/pomaganie.mjs",
+      "line": 127,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/przycelowanie.mjs",
+      "line": 272,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/rerolls.mjs",
+      "line": 105,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/skok.mjs",
+      "line": 176,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/skok.mjs",
+      "line": 198,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sygnal-naruszenia.mjs",
+      "line": 38,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sztuczki-ataki.mjs",
+      "line": 130,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sztuczki-ataki.mjs",
+      "line": 161,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sztuczki-ataki.mjs",
+      "line": 260,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sztuczki-walka.mjs",
+      "line": 207,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/sztuczki-walka.mjs",
+      "line": 219,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/towarzysze-walka.mjs",
+      "line": 259,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/towarzysze-walka.mjs",
+      "line": 295,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 310,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 339,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 372,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 424,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 443,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 472,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 573,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 620,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 883,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 900,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/weapon-save-properties.mjs",
+      "line": 301,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/weapon-save-properties.mjs",
+      "line": 362,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/weapon-save-properties.mjs",
+      "line": 372,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 346,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 396,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 429,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 594,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 81,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 119,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 154,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 220,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 234,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 279,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 288,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 306,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-karty.mjs",
+      "line": 334,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-po-rzucie.mjs",
+      "line": 260,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-trafienie.mjs",
+      "line": 213,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 67,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 133,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 169,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 270,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 356,
+      "method": "create"
+    },
+    {
+      "file": "scripts/combat/zranienie.mjs",
+      "line": 259,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/dnd5e-settings.mjs",
+      "line": 84,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 274,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 309,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 347,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 468,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 577,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/exhaustion.mjs",
+      "line": 655,
+      "method": "create"
+    },
+    {
+      "file": "scripts/config/rest.mjs",
+      "line": 151,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/chemia.mjs",
+      "line": 602,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/chemia.mjs",
+      "line": 626,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/chemia.mjs",
+      "line": 657,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/gogle.mjs",
+      "line": 304,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/kolczatka.mjs",
+      "line": 123,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/latarka.mjs",
+      "line": 181,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/toolkit-kowal.mjs",
+      "line": 168,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/toolkit-medyk.mjs",
+      "line": 125,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/toolkit-medyk.mjs",
+      "line": 459,
+      "method": "create"
+    },
+    {
+      "file": "scripts/items/toolkit-medyk.mjs",
+      "line": 508,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/bebeszenie.mjs",
+      "line": 201,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/bebeszenie.mjs",
+      "line": 249,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/doba.mjs",
+      "line": 298,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/doba.mjs",
+      "line": 308,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/handel.mjs",
+      "line": 100,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/karty.mjs",
+      "line": 62,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/stol-wymiany.mjs",
+      "line": 261,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/szabrowanie.mjs",
+      "line": 189,
+      "method": "create"
+    },
+    {
+      "file": "scripts/postoj/szabrowanie.mjs",
+      "line": 399,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/naprawa.mjs",
+      "line": 244,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/naprawa.mjs",
+      "line": 279,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/naprawa.mjs",
+      "line": 355,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/okna.mjs",
+      "line": 362,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/olejek.mjs",
+      "line": 120,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/olejek.mjs",
+      "line": 142,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/przenoszenie.mjs",
+      "line": 102,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/przenoszenie.mjs",
+      "line": 117,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/przenoszenie.mjs",
+      "line": 278,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/przenoszenie.mjs",
+      "line": 303,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 107,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 550,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 587,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 644,
+      "method": "create"
+    },
+    {
+      "file": "scripts/production/szybka.mjs",
+      "line": 144,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/fx-markers.mjs",
+      "line": 149,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/obiekty.mjs",
+      "line": 280,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 204,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 544,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/woda.mjs",
+      "line": 148,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/woda.mjs",
+      "line": 175,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/woda.mjs",
+      "line": 256,
+      "method": "create"
+    },
+    {
+      "file": "scripts/scenes/wspinaczka.mjs",
+      "line": 55,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/addons.mjs",
+      "line": 237,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/addons.mjs",
+      "line": 353,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 93,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 180,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 181,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 219,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 224,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/emiter-emp.mjs",
+      "line": 144,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/emiter-emp.mjs",
+      "line": 162,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 366,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 400,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 716,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 757,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 764,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 1654,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 1662,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 2181,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 2190,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/fire-modes.mjs",
+      "line": 2205,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 95,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 114,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 139,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 157,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 173,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 227,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 286,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 338,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 356,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/jams.mjs",
+      "line": 543,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 784,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 972,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1052,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1323,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 1976,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 2006,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 2045,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 2138,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/magazine.mjs",
+      "line": 2233,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/melee-degradation.mjs",
+      "line": 110,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/melee-degradation.mjs",
+      "line": 145,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/npc-ammo.mjs",
+      "line": 56,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/thrown.mjs",
+      "line": 43,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/thrown.mjs",
+      "line": 58,
+      "method": "create"
+    },
+    {
+      "file": "scripts/weapons/wlasciwosci.mjs",
+      "line": 152,
+      "method": "create"
+    },
+    {
+      "file": "scripts/wkk/items/flara.mjs",
+      "line": 191,
+      "method": "create"
+    },
+    {
+      "file": "scripts/wkk/items/gadzety.mjs",
+      "line": 246,
+      "method": "create"
+    },
+    {
+      "file": "scripts/wkk/items/pistolet-na-race.mjs",
+      "line": 185,
+      "method": "create"
+    },
+    {
+      "file": "scripts/wkk/items/pistolet-na-race.mjs",
+      "line": 274,
+      "method": "create"
+    },
+    {
+      "file": "scripts/wkk/items/pochodnia.mjs",
+      "line": 188,
+      "method": "create"
+    },
+    {
+      "file": "scripts/world-clock.mjs",
+      "line": 46,
+      "method": "create"
+    }
+  ],
+  "chatHooks": [
+    {
+      "file": "scripts/actors/addons-inventory.mjs",
+      "line": 38,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/class-resource-dice.mjs",
+      "line": 226,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/disease-effects.mjs",
+      "line": 74,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/actors/disease-effects.mjs",
+      "line": 78,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/actors/drony-naprawa.mjs",
+      "line": 332,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/drony-stan.mjs",
+      "line": 272,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/drony-sterowanie.mjs",
+      "line": 321,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/grenade-inventory.mjs",
+      "line": 171,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/improwizacja.mjs",
+      "line": 416,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/placed-charges.mjs",
+      "line": 54,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/rekonwalescencja.mjs",
+      "line": 679,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/tool-availability.mjs",
+      "line": 28,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/actors/zagrozenia.mjs",
+      "line": 443,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/combat/atakowanie.mjs",
+      "line": 448,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/bestiary-thresholds.mjs",
+      "line": 216,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/bleeding.mjs",
+      "line": 557,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/combat/bleeding.mjs",
+      "line": 558,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/cover.mjs",
+      "line": 140,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/crit-riders.mjs",
+      "line": 178,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/drop-on-fail.mjs",
+      "line": 104,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/grip.mjs",
+      "line": 268,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/melee-maneuvers.mjs",
+      "line": 518,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/obalajaca.mjs",
+      "line": 23,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/obrona.mjs",
+      "line": 703,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/okolicznosci.mjs",
+      "line": 366,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/po-rzucie.mjs",
+      "line": 362,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/przycelowanie.mjs",
+      "line": 362,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/skok.mjs",
+      "line": 376,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/sztuczki-ataki.mjs",
+      "line": 297,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/sztuczki-walka.mjs",
+      "line": 376,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/towarzysze-walka.mjs",
+      "line": 351,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/combat/trafienie.mjs",
+      "line": 392,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/ulatwienia-testow.mjs",
+      "line": 182,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/umieranie.mjs",
+      "line": 103,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/combat/weapon-save-properties.mjs",
+      "line": 127,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-akcje.mjs",
+      "line": 694,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-trafienie.mjs",
+      "line": 343,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-walka.mjs",
+      "line": 398,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/combat/zdolnosci-wsparcie.mjs",
+      "line": 432,
+      "hook": "dnd5e.renderChatMessage"
+    },
+    {
+      "file": "scripts/config/validation.mjs",
+      "line": 63,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/items/chemia.mjs",
+      "line": 74,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/main.mjs",
+      "line": 528,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/postoj/karty.mjs",
+      "line": 104,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/production/robota.mjs",
+      "line": 690,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/scenes/obiekty.mjs",
+      "line": 444,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/scenes/transitions.mjs",
+      "line": 681,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/scenes/woda.mjs",
+      "line": 348,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/scenes/wspinaczka.mjs",
+      "line": 101,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/weapons/addons.mjs",
+      "line": 41,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/weapons/dozownik.mjs",
+      "line": 36,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/weapons/emiter-emp.mjs",
+      "line": 208,
+      "hook": "renderChatMessageHTML"
+    },
+    {
+      "file": "scripts/wkk/items/pistolet-na-race.mjs",
+      "line": 390,
+      "hook": "renderChatMessageHTML"
+    }
+  ],
+  "templates": [
+    "templates/party-header.hbs",
+    "templates/party-member.hbs",
+    "templates/party-members.hbs",
+    "templates/party-tab-postoj.hbs",
+    "templates/party-tab-zapasy.hbs",
+    "templates/pojazdy/zakladka.hbs",
+    "templates/postoj/bebeszenie.hbs",
+    "templates/postoj/cennik-form.hbs",
+    "templates/postoj/cennik-lista.hbs",
+    "templates/postoj/cennik-wiersz.hbs",
+    "templates/postoj/doba-form.hbs",
+    "templates/postoj/doba-naglowek.hbs",
+    "templates/postoj/doba-podsumowanie.hbs",
+    "templates/postoj/handel-okno.hbs",
+    "templates/postoj/handel-wyniki.hbs",
+    "templates/postoj/przeskok-form.hbs",
+    "templates/postoj/przeskok-podglad.hbs",
+    "templates/postoj/sekcja-baza.hbs",
+    "templates/postoj/sekcja-doba.hbs",
+    "templates/postoj/sekcja-handel.hbs",
+    "templates/postoj/stol-wymiany.hbs",
+    "templates/postoj/szabrowanie.hbs",
+    "templates/ruch/waypoint-label.hbs",
+    "templates/tab-produkcja.hbs",
+    "templates/tab-zasoby.hbs"
+  ]
+}

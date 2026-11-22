@@ -1,3 +1,5 @@
+import { finishedIcon } from "../config/finished-icons.mjs";
+
 /**
  * Neuroshima 5e — drony: model, produkcja, rozłożenie (PLAN_m3_towarzysze.md §7.9, U11, U12; E7a).
  *
@@ -164,7 +166,7 @@ function _aktywnosc(id, name, img, sort, chatFlavor) {
 
 /** Aktywności naprawy uchwytu (E9) — także dokładane do uchwytów sprzed E9 (`_synchronizuj`). */
 export function aktywnosciNaprawy() {
-  const a = _aktywnosc(AKT_NAPRAW_PW, "Napraw PW (1 h)", `modules/${MODULE_ID}/icons/abilities/naprawianie.svg`, 400000, "Godzina pracy przy dronie: 2k6 + mod. INT PW.");
+  const a = _aktywnosc(AKT_NAPRAW_PW, "Napraw PW (1 h)", finishedIcon(`modules/${MODULE_ID}/icons/abilities/naprawianie.svg`, { family: "utility" }), 400000, "Godzina pracy przy dronie: 2k6 + mod. INT PW.");
   a.activation = { type: "hour", value: 1, condition: "", override: false };
   return {
     [AKT_NAPRAW_PW]: a,

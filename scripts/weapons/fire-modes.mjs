@@ -20,6 +20,7 @@ import { szturmDziala } from "../config/sztuczki-walka.mjs";
 import { historiaSerii, naruszenieSerii } from "../config/ekonomia-data.mjs";
 import { sygnalNaruszenia } from "../combat/sygnal-naruszenia.mjs";
 import { zarejestrujOstrzezenieAtaku } from "../combat/atakowanie.mjs";
+import { finishedIcon } from "../config/finished-icons.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KS_ACTIVITY_TYPE = "neuroKs";
@@ -58,7 +59,10 @@ const OZ_SHAPES = Object.freeze([
   { key: "line", label: "Linia 6 m x 1,5 m", size: "6", width: "1.5" }
 ]);
 const BASE_ATTACK_LABEL = "Ogień pojedynczy";
-const BASE_ATTACK_IMG = "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg";
+/** Biały master: tak zapisały ikonę bronie sprzed wykończeń M9. Nadal poprawny — nie przepisujemy świata. */
+const BASE_ATTACK_IMG_MASTER = "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg";
+/** Wykończona ikona z silnika (`build:finish`), a bez eksportu — ten sam biały master. */
+const BASE_ATTACK_IMG = finishedIcon(BASE_ATTACK_IMG_MASTER);
 // Domyślny szkielet aktywności "attack" — używany do (a) odtworzenia trybu P, gdy
 // broń odzyskuje właściwość tryb_p, oraz (b) jako wzorzec dla builderów KS/DS/MS/OZ,
 // gdy broń w ogóle nie ma trybu P (np. Minigun ma tylko MS — patrz tryb_p gating niżej).
@@ -137,7 +141,7 @@ function registerShortBurstActivityType() {
       type: KS_ACTIVITY_TYPE,
       title: "Krótka seria",
       hint: "Neuroshima: 3 naboje, atak z utrudnieniem, osobna Akcja raz na rundę (druga — z ostrzeżeniem). Grad ołowiu: KS jest częścią Atakowania i zajmuje slot ataku.",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg")
     }, { inplace: false }));
 
     async use(usage = {}, dialog = {}, message = {}) {
@@ -254,7 +258,7 @@ function registerDubletActivityType() {
       type: DUBLET_ACTIVITY_TYPE,
       title: "Dublet",
       hint: "Neuroshima: oba naboje naraz, jeden Test Ataku, przy trafieniu podwójne kości obrażeń. Koszt: 2 naboje.",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg")
     }, { inplace: false }));
 
     async use(usage = {}, dialog = {}, message = {}) {
@@ -331,7 +335,7 @@ function registerLongBurstActivityType() {
       type: DS_ACTIVITY_TYPE,
       title: "Długa seria",
       hint: "Neuroshima: 10-30 naboi, linia 1,5 m x 36 m, RO Zręczność, raz na rundę.",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_long_burst.svg",
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_long_burst.svg"),
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -555,7 +559,7 @@ function registerSuppressiveFireActivityType() {
       type: OZ_ACTIVITY_TYPE,
       title: "Ogień zaporowy",
       hint: "Neuroshima: 6 naboi, linia lub strefa, RO Mądrość, blokada Akcji i BA.",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_suppressive_fire.svg",
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_suppressive_fire.svg"),
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -680,7 +684,7 @@ function registerCrushingBurstActivityType() {
       type: MS_ACTIVITY_TYPE,
       title: "Miażdżąca seria",
       hint: "Neuroshima: 50-200 naboi, linia 3 m x 150 m, RO Zręczność i Siła ST 15, raz na rundę.",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_crushing_burst.svg",
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_crushing_burst.svg"),
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -987,7 +991,8 @@ async function syncBaseAttackActivity(item) {
   }
 
   const needsName = existing.name !== BASE_ATTACK_LABEL;
-  const needsImg = existing.img !== BASE_ATTACK_IMG;
+  // Obie ikony są „nasze”: istniejące dokumenty zmienia dopiero migracja świata na polecenie MG (PLAN_m9 §7.5).
+  const needsImg = existing.img !== BASE_ATTACK_IMG && existing.img !== BASE_ATTACK_IMG_MASTER;
   const wantBonus = _catalogAttackBonus(item);
   const needsBonus = (wantBonus !== null) && (String(existing.attack?.bonus ?? "") !== wantBonus);
   if (!needsName && !needsImg && !needsBonus) return;

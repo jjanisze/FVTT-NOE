@@ -57,6 +57,7 @@ export default {
     return { osoby: Object.values(k.actors).length, chomik: chomik?.items.size ?? 0 };
   },
   proby: [
+    p("m9-finish-routing", "Wygląd M9", "Porównaj ikonę fizycznego C4 z czynnością Detonuj, narzędzia medyka z Uzupełnij zapas oraz cechę stworzenia Naprawianie z naprawą drona. Sprzęt ma kolor rodziny, czynność sprzętu jasny glif, cecha stworzenia neutralne tło. Neodrugs, Tornado, oba rodzaje Narkotyków i Cygaro bez linii brzegowej. Poprawki partii 128: Trucizna (chemia) bez kropki w prawym dolnym rogu; Beretta B92 i rewolwer .22 bez oderwanych pikseli, z marginesem jak reszta broni.", "Kompendia, nowo dodane przedmioty i przedmioty Poligonu po odświeżeniu ścieżek (`node dev/poligon/ikony-m9.mjs`); ikony 44 / 32 / 24 / 16 px. Galeria → strony „Rodzina · chemicals / weapon” i „Wspólne glify”."),
     p("lalka-dok", "Lalka", "Dokowanie panelu lalki przy 1366×768, 1920×1080, 2560×1440; dwie karty otwarte; mała i duża skala interfejsu; motyw jasny i ciemny", "Wariant → wygląd; zmieniaj rozmiar okna przeglądarki."),
     p("przeciaganie", "Lalka", "Przeciąganie plecak ↔ lalka ↔ pas ↔ ziemia — czy animacja wyparcia czyta się jak „to poszło tam”?", "Żołnierz w oporządzeniu; przeciągnij broń do ręki zajętej."),
     p("udzwig", "Ekwipunek", "Pasek Udźwigu i legenda u Chomika; kolejność i gęstość sekcji przy ~600 przedmiotach; przewijanie przy edycji ilości", "Karta Chomika, Zasoby; Liczniki → klatki."),
@@ -66,6 +67,12 @@ export default {
     p("opiekun", "Towarzysze", "Pasek towarzyszy z trzema (człowiek, pies, dron) — miejsce na karcie", "Karta Opiekuna."),
     p("pd-fuksy", "Karta", "PD, Fuksy, hotbar zdolności — czytelność i kliknięcia", "Karty typowych postaci klas."),
     p("hotbar-wlasnosc", "Karta", "Pasek MG i gracza ma własne makra; reset stanowiska lub utrata zdolności nie kasują skrótów drugiego użytkownika", "MG i Gracz 1 z Berserkiem; usuń zdolność u MG, potem resetuj stanowisko i sprawdź pasek gracza."),
+    // M9 E3 — pionowy wycinek języka wizualnego (PLAN_m9_style.md §9; makieta: dev/visual/m9-components/index.html).
+    p("m9-karta", "Wygląd M9", "Karta postaci w nowym języku: tło Field kit, imię z linią w kolorze klasy, tabliczki TT/Inicjatywa/Szybkość/Biegłość i Poziom zamiast tarcz i heksów, grafit bez złota. Czy karta wygląda jak NOE, a nie przemalowane 5e? Czy coś jest trudniej znaleźć niż wcześniej?", "Karty sześciu typowych postaci klas i Żołnierza; porównaj kolor linii pod imieniem między klasami."),
+    p("m9-wiersze", "Wygląd M9", "Wiersze zdolności i ekwipunku: ikona 44 px bez ramki, znak kosztu (zielone koło A, pomarańczowy trójkąt B, gwiazda R, kwadrat I) przed nazwą, podpis „Zdolność klasowa / Sztuczka / profesji”. Czy da się szybko znaleźć wszystko, co kosztuje B?", "Zakładka Zdolności i Ekwipunek dowolnej postaci klasy; Chomik — długa lista."),
+    p("m9-wyczerpane", "Wygląd M9", "Zdolność z 0 użyć: czerwony skos na ikonie i powód z terminem odnowienia pod nazwą — czytelne bez najeżdżania? Ikona nie jest przyciemniona.", "Użyj Kondychy (albo innej zdolności z użyciami) do zera; potem odpoczynek."),
+    p("m9-ciemny", "Wygląd M9", "Wymuszony ciemny motyw: przełącz w ustawieniach Foundry motyw aplikacji na jasny — karty, okna przedmiotów, rzutów i karty czatu zostają ciemne, a pasek boczny, dziennik czatu i pasek makr są jak w Foundry.", "Ustawienia → Interfejs → motyw aplikacji: jasny; potem wróć do ciemnego."),
+    p("m9-czat", "Wygląd M9", "Karty czatu ataku, obrażeń i testu: suma w ramce cyframi mono, przyciski Fuks/Forsuj/Motywacja jednym wyglądem; zwinięta karta zachowuje wynik i przyciski.", "Żołnierz: atak AK, obrażenia, test Medycyny; rozwiń i zwiń kartę."),
     p("kamizelka", "NOE / WKK", "Kamizelka taktyczna (+1 miejsce na pasie), Darmowe upuszczanie, wyłączenia pancerza wspomaganego (D23) — Hełm z plecaka Weterana na głowę", "Wariant NOE / WKK; Żołnierz i Weteran.", "WKK")
   ]
 };

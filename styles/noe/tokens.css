@@ -1,0 +1,116 @@
+/**
+ * NOE — tokeny pisane ręcznie (PLAN_m9_style.md §4.1).
+ *
+ * Wszystko, czego nie rozstrzyga profil ikon: typografia, odstępy, promienie, obrysy, rozmiary,
+ * ruch, powierzchnie pochodne i kolory semantyczne. Obok `tokens.generated.css` to jedyny plik,
+ * w którym wolno zapisać surowy kolor albo nazwę kroju — zapadka stylu (`npm test`) pilnuje reszty.
+ *
+ * Tokeny leżą na `:root`, bo sięgają po nie także HUD-y i kafle paska w elementach rdzenia.
+ * Niczego w rdzeniu nie zmieniają: to wyłącznie nazwy `--noe-*` (D13).
+ */
+
+/* Roboto Mono — liczby, liczniki, koszty, etykiety techniczne (D11). Roboto i Roboto Condensed
+   dostarcza dnd5e. Podzbiory latin + latin-ext pokrywają polskie znaki; fonts/roboto-mono/README.md. */
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../fonts/roboto-mono/roboto-mono-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../fonts/roboto-mono/roboto-mono-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../fonts/roboto-mono/roboto-mono-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../fonts/roboto-mono/roboto-mono-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---- Powierzchnie pochodne ---- */
+  --noe-raised: color-mix(in srgb, var(--noe-panel), var(--noe-accent) 10%);   /* hover, wybór */
+  --noe-inset: color-mix(in srgb, var(--noe-surface), #000000 30%);           /* pola, tory mierników */
+  --noe-hover: color-mix(in srgb, var(--noe-accent) 8%, transparent);          /* tło wiersza pod kursorem */
+  --noe-scrim: color-mix(in srgb, var(--noe-surface) 82%, transparent);        /* tekst nad banerem */
+  --noe-mask-on: #000000;                                                      /* pełne krycie w maskach zaniku */
+
+  /* ---- Tekst i akcent pochodny ---- */
+  --noe-text-disabled: color-mix(in srgb, var(--noe-text-muted), var(--noe-surface) 45%); /* tylko nieaktywne pola; nigdy glif */
+  --noe-focus: var(--noe-accent);
+  --noe-on-accent: var(--noe-surface);                                          /* tekst na przycisku podstawowym */
+
+  /* ---- Semantyczne (O2) ----
+     Zawsze z tekstem albo ikoną (P4). Dobrane tak, by nie mylić się z kosztami A/B/R/I
+     ani z czerwienią skosu; pomiary w dev/visual/m9-components/index.html. */
+  --noe-ok: #b5e48c;
+  --noe-warn: #ffe08a;
+  --noe-danger: #ff9e94;
+  --noe-info: #a9b8e8;
+
+  /* ---- Zasoby na miernikach (K11) ---- */
+  --noe-meter-pw: #4f9165;      /* Punkty Wytrzymałości */
+  --noe-meter-kw: #8a6f93;      /* Kości Wytrzymałości */
+  --noe-meter-temp: #5d86a8;    /* punkty tymczasowe */
+  --noe-meter-neutral: #7b8893; /* paliwo, ładownia, zapasy — bez własnego znaczenia barwy */
+
+  /* ---- Kroje (D11) ---- */
+  --noe-font-ui: Roboto, "Segoe UI", Arial, sans-serif;
+  --noe-font-label: "Roboto Condensed", "Arial Narrow", Roboto, sans-serif;
+  --noe-font-num: "Roboto Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* ---- Rozmiary tekstu — w rem, żeby skala czcionki Foundry działała; tylko wagi 400 i 700 ---- */
+  --noe-fs-10: 0.625rem;
+  --noe-fs-11: 0.6875rem;
+  --noe-fs-12: 0.75rem;
+  --noe-fs-13: 0.8125rem;
+  --noe-fs-14: 0.875rem;
+  --noe-fs-16: 1rem;
+  --noe-fs-20: 1.25rem;
+  --noe-fs-24: 1.5rem;
+  --noe-track: 1px;             /* rozstrzelenie etykiet technicznych */
+
+  /* ---- Odstępy — siatka 4 px ---- */
+  --noe-sp-1: 2px;
+  --noe-sp-2: 4px;
+  --noe-sp-3: 8px;
+  --noe-sp-4: 12px;
+  --noe-sp-5: 16px;
+  --noe-sp-6: 24px;
+
+  /* ---- Promienie (tło ikony `--noe-r-glyph` pochodzi z profilu) ---- */
+  --noe-r-chip: 2px;
+  --noe-r-panel: 4px;
+
+  /* ---- Obrysy ---- */
+  --noe-border: 1px;            /* linia */
+  --noe-border-select: 2px;     /* wybór, aktywna zakładka */
+  --noe-border-section: 3px;    /* pasek akcentu nagłówka sekcji (K5) */
+
+  /* ---- Rozmiary (wiersz 44 px: `--noe-glyph-row` z profilu) ---- */
+  --noe-glyph-id: 64px;         /* tożsamość, nagłówki */
+  --noe-row-min: 52px;
+  --noe-hit-min: 24px;
+  --noe-control-h: 28px;        /* przycisk, pole */
+  --noe-cost-sign: 12px;        /* figura kosztu */
+
+  /* ---- Ruch ---- */
+  --noe-t-fast: 120ms;          /* hover i focus; animacje tylko dla „działaj teraz” (P8) */
+}

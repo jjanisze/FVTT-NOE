@@ -1020,9 +1020,16 @@ function _injectTab(sheet) {
     });
   }
   if (btn.previousElementSibling !== nav) nav.after(btn);
-  const top = nav.offsetTop + nav.offsetHeight + 8;
-  Object.assign(btn.style, { top: `${top}px`, left: `${nav.offsetLeft}px`, width: `${nav.offsetWidth}px` });
-  btn.classList.toggle("is-compact", (nav.offsetParent?.clientHeight ?? 0) - top < 150);
+  const place = () => {
+    if (!btn.isConnected || !nav.isConnected) return;
+    const top = nav.offsetTop + nav.offsetHeight + 8;
+    Object.assign(btn.style, { top: `${top}px`, left: `${nav.offsetLeft}px`, width: `${nav.offsetWidth}px` });
+    btn.classList.toggle("is-compact", (nav.offsetParent?.clientHeight ?? 0) - top < 150);
+  };
+  place();
+  // Pierwszy render mierzy pasek, zanim okno dostanie zapamiętaną szerokość — przełącznik lądował
+  // wtedy w środku karty szerszej niż domyślna. Druga miara po ułożeniu okna.
+  root.ownerDocument.defaultView?.requestAnimationFrame(place);
   _syncTab(sheet);
 }
 

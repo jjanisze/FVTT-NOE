@@ -1,3 +1,5 @@
+import { inventoryIcon } from "../ui/noe.mjs";
+
 /**
  * Neuroshima 5e — grenade/explosive inventory UI, throw resolution, and battlefield markers.
  *
@@ -290,7 +292,7 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
     const save = def?.save ?? "—";
     const effect = def?.effect ?? "—";
 
-    const iconHtml = `<dnd5e-icon draggable="false" src="${item.img}" aria-label="${item.name}" class="item-image gold-icon" style="--icon-fill: #9f9275"></dnd5e-icon>`;
+    const iconHtml = inventoryIcon(item.img, item.name);
 
     // Koktajl: jeden przycisk, który zmienia się ze stanem butelki (`_primaryAction`), plus
     // odliczanie płonącej butelki — to ono ma przypominać, że rzut wciąż czeka.
@@ -314,7 +316,7 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
     // Obszar, RO i Działanie siedzą w podpisie pod nazwą, jak dawki w Lekach — jako osobne
     // kolumny potrzebowały ~800 px i przy minimalnej szerokości karty (wiersz 522 px) zawijały się.
     li.innerHTML = `
-      <div class="item-row flexrow" style="display:flex; flex-wrap:nowrap; align-items:center; justify-content:space-between; background-color:#2f2222; min-height:42px; border-bottom:1px dotted #4a3a3a; padding:4px 5px; color:#cacdd5;">
+      <div class="item-row flexrow noe-zasoby-row" style="display:flex; flex-wrap:nowrap; align-items:center; justify-content:space-between; min-height:42px; padding:4px 5px;">
         <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${item.name}" title="${primary.hint} | Shift+Klik: edytuj" style="flex:1; align-items:center; gap:8px; min-width:150px; cursor:pointer;">
           ${iconHtml}
           <div class="name name-stacked flexcol" style="line-height:1.2; min-width:0;">
@@ -384,8 +386,8 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
 
   const panel = document.createElement("div");
   panel.innerHTML = `
-    <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#4a1f1f; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:1; min-width:150px; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Materiały wybuchowe</h3>
+    <div class="items-header header flexrow noe-section-head" data-noe-family="explosives">
+      <h3 class="item-name" style="flex:1; min-width:150px; padding-left:5px;">Materiały wybuchowe</h3>
       <div style="flex:0 0 60px; text-align:center;">Cena</div>
       <div style="flex:0 0 60px; text-align:center;">Waga</div>
       <div style="flex:0 0 80px; text-align:center;">Ilość</div>
@@ -403,9 +405,9 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
 
   const footerBtn = document.createElement("button");
   footerBtn.type = "button";
-  footerBtn.className = "neuro-add-grenade-btn";
+  footerBtn.className = "neuro-add-grenade-btn noe-zasoby-add";
   footerBtn.innerHTML = `<i class="fas fa-bomb"></i> DODAJ ŁADUNEK`;
-  footerBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; background:rgba(72,45,45,0.25); border:1px solid #7d5f5f; color:var(--color-text-light-primary); white-space:nowrap;";
+  footerBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; white-space:nowrap;";
   footerBtn.addEventListener("click", (ev) => {
     ev.preventDefault();
     _showGrenadeDialog(actor);
@@ -415,7 +417,7 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
   summary.style.cssText = "flex:0 0 auto; display:flex; align-items:center; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   summary.innerHTML = `
     <span style="padding:0 10px; text-align:right;">Cena: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
-    <span style="display:inline-block; width:1px; height:16px; background:#7d5f5f; margin:0;"></span>
+    <span class="noe-zasoby-sep" style="display:inline-block; width:1px; height:16px; margin:0;"></span>
     <span style="padding:0 10px; text-align:right;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${totalWeightFooterStr}</strong></span>
   `;
 

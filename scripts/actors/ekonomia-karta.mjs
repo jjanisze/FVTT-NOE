@@ -20,6 +20,7 @@ import { oknoSkoku } from "../combat/skok.mjs";
 import { openManeuverDialog } from "../combat/melee-maneuvers.mjs";
 import { SKROTY, WARIANTY_SZYBKICH_NOG, SZABLONY } from "../config/pasek-data.mjs";
 import { makroSkrotu, ulozPasek, klasaSzablonu } from "./pasek-szablony.mjs";
+import { refreshRows } from "../ui/sheet-rows.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KLASA = "neuro-m8-panel";
@@ -302,6 +303,8 @@ export function odswiezPanele(actors = null) {
       const uuid = el.dataset.actorUuid;
       if (!wszystkie && !uuids.has(uuid)) continue;
       const actor = fromUuidSync(uuid);
+      // Wiersze karty pokazują ten sam budżet (ostrzeżenie, zakaz) — odświeżamy je razem z panelem.
+      if (actor) refreshRows(actor);
       const nowy = actor ? panelEkonomii(actor, actor.isOwner) : null;
       if (nowy) el.replaceWith(nowy);
       else el.remove();

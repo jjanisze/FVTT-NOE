@@ -44,7 +44,7 @@ In the GM's window: the flask button in the token controls (or **Ctrl+Shift+P**)
 | Garaż | P2 | M4 vehicles: a sedan with three riders (a Wojownik autostrady driving), motorcycle, bicycle, truck with a bed, fire engine, Hammer with a turret Browning, tank; dummies to run over, rubble (difficult terrain), a mechanic with tools. Probes for every decision D2–D18 of `PLAN_m4_pojazdy.md` and its own traits |
 | Poziomy | P2 | v14 Levels and the module's transitions: a three-level bunker (Góra / Środek / Dół) with stairs, a broken flight (`trudnePrzejscie`, the player rolls; DC 12 down, 16 up), a weight-tier shaft (the GM decides), a crawl duct (speed choice), a hole in the floor (dnd5e falling, "Opuść bezpiecznie"), radioactive sludge with the jump dialog and a footbridge tool, a machine to **Detonuj** and an ambush to **Odsłoń** (FX markers). Three seats at STR 15 / 13 / 10 — the jump thresholds over 4.5 m |
 | Pościg | P3 | the chase board from the `poscig` e2e fixture (art, sway, performance) and a folded-road board (`PLAN_m4_pojazdy.md` §6.2): catalog vehicles at true scale with crews — the players' sedan (driver, Minimi gunner with grenades), a raider Hammer and bus; a 1.5 m parking lot with a crewed buggy for Ctrl+X/Ctrl+V; a km region map. Probes for D21–D31 |
-| Galeria | P3 | every shipped icon per pack at 64/32/16 px on dark and light, placeholders framed red, status icons |
+| Galeria | P3 | every shipped icon per pack at 64/44/32/16 px on dark and light, placeholders framed red, unfinished M9 masters dashed; M9 coverage, one page per finish family, shared glyphs (one picture, several semantic finishes), status icons. **Odśwież galerię (M9)** rewrites the journal in place (same journal and page ids) |
 
 Each station's **Karta prób** lists what to judge and how, marked NOE / RAI / WKK / VETO; ✅ keeps, ❌
 and 💬 open an Uwaga with the probe attached. A verdict remembers the commit it was given on.
@@ -166,6 +166,28 @@ Końcowy komplet: E2E **6/6** z Sequencer/JB2A, bez błędów konsoli,
 próbek i dodano 25 w tej samej scenie; pozostałe 37 scen i 424 żetony bez zmian.
 Złomowisko: sonda `ilustracje-ruin` obejmuje teraz wszystkie siedem ruin,
 w tym magazyn i wrak zapakowane z istniejących źródeł MG.
+
+## M9: wykończone ikony w istniejących dokumentach
+
+Przebudowa paczek i przeładowanie CSS nie zmieniają dokumentów, które już są w świecie: przedmioty person,
+BN-ów, żetonów i **Poligon · Obsada** trzymają stare ścieżki białych masterów. Odświeża je:
+
+```sh
+npm run poligon:ikony                 # plan: nic nie zapisuje; raport logs/poligon/ikony-m9/<czas>-plan.md
+npm run poligon:ikony -- --apply      # zapis + dziennik zmian pole po polu i kopia stron Galerii (<czas>-apply.json)
+npm run poligon:ikony -- --undo=logs/poligon/ikony-m9/<czas>-apply.json
+```
+
+Najpierw pełna kopia zatrzymanego Poligonu: `npm run fvtt -- backup --profile=poligon --world=poligon`.
+Rozstrzyganie (`lib/ikony-m9-strona.mjs`): wiązanie z zatwierdzonego manifestu — pack, pole konsumenta,
+id dokumentu / rodzica / czynności (pochodzenie z `_stats.compendiumSource` przedmiotu albo aktora z paczki);
+potem reguła runtime modułu dla nowych przedmiotów; niejednoznaczne zostaje i trafia do raportu. Grafika
+własna, id, UUID, mechanika, własność, sceny i żetony bez zmian; tylko `img` i `system.activities.*.img`
+oraz `img` makr paska (makro kopiuje obraz raz, przy tworzeniu; makro zdolności idzie za przedmiotem swojego
+aktora — od 2026-11-18 robi to też sama synchronizacja paska w `scripts/actors/ability-hotbar.mjs`).
+Drugi `--apply` zmienia 0 pól. Tylko świat `poligon` — migracja kampanii to osobne polecenie MG.
+Pułapka v14: zapis pola przedmiotu w delcie żetonu równy wartości aktora bazowego jest po cichu odrzucany
+(serwer zwraca samo `_id`), więc delty idą przed aktorami bazowymi.
 
 ## Klon kampanii
 

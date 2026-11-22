@@ -1,3 +1,5 @@
+import { finishedIcon } from "../config/finished-icons.mjs";
+
 /**
  * Neuroshima 5e — Weapon addons core logic.
  *
@@ -509,7 +511,7 @@ async function _createAddonActivity(weapon, def) {
       name: "Bagnet",
       // Fixed (2026-09-06): pointed at icons/activities/ (only holds generic action-type icons —
       // this file never existed there), not icons/addons/ where the real bagnet.svg already is.
-      img: `modules/${MODULE_ID}/icons/addons/bagnet.svg`,
+      img: finishedIcon(`modules/${MODULE_ID}/icons/addons/bagnet.svg`, { family: "utility" }),
       damage: { includeBase: false, parts: [{ number: 1, denomination: 6, types: ["piercing"] }] },
       range: { override: true, value: 2, units: "m" },
       attack: { ability: "str", type: { value: "melee", classification: "weapon" } },
@@ -520,7 +522,7 @@ async function _createAddonActivity(weapon, def) {
       type: "attack",
       name: "Granatnik 40mm",
       // Fixed (2026-09-06): same icons/activities/ vs icons/addons/ mixup as Bagnet above.
-      img: `modules/${MODULE_ID}/icons/addons/granatnik.svg`,
+      img: finishedIcon(`modules/${MODULE_ID}/icons/addons/granatnik.svg`, { family: "utility" }),
       damage: { includeBase: false, parts: [{ number: 3, denomination: 6, types: ["bludgeoning"] }] },
       range: { override: true, value: 100, units: "m" },
       attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
@@ -532,7 +534,7 @@ async function _createAddonActivity(weapon, def) {
       name: "Śrutówka .12 Ga",
       // Fixed (2026-09-06): wrong directory (icons/activities/, same mixup as the two above) AND
       // wrong basename — the real file is srutowka-podlufowa.svg, matching def.id, not srutowka.svg.
-      img: `modules/${MODULE_ID}/icons/addons/srutowka-podlufowa.svg`,
+      img: finishedIcon(`modules/${MODULE_ID}/icons/addons/srutowka-podlufowa.svg`, { family: "utility" }),
       damage: { includeBase: false, parts: [{ number: 2, denomination: 6, types: ["bludgeoning"] }] },
       range: { override: true, value: 6, units: "m" },
       attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },

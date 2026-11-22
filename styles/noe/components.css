@@ -1,0 +1,784 @@
+/**
+ * NOE — komponenty języka wizualnego (PLAN_m9_style.md §4.2, K1–K18).
+ *
+ * Jeden komponent = jedna implementacja. Klasy `noe-*` działają pod zakresem `.noe`
+ * (okna NOE i dnd5e, karty czatu, HUD-y — D12/D13) i nie sięgają do ramy rdzenia.
+ * Znaczniki tych samych sygnałów w JS buduje `scripts/ui/noe.mjs` — nie lokalny HTML.
+ * Tylko tokeny `--noe-*`: żadnego surowego koloru ani nazwy kroju (zapadka stylu).
+ */
+
+/* ============================================= */
+/* Zakres i podstawy                              */
+/* ============================================= */
+
+.noe {
+  /* Akcent źródła (klasa, Pochodzenie); domyślnie neutralny akcent interfejsu. */
+  --noe-source-accent: var(--noe-accent);
+  color-scheme: dark;
+}
+
+.noe[data-noe-source="brutal"], .noe [data-noe-source="brutal"] { --noe-source-accent: var(--noe-src-brutal-accent); }
+.noe[data-noe-source="cwaniak"], .noe [data-noe-source="cwaniak"] { --noe-source-accent: var(--noe-src-cwaniak-accent); }
+.noe[data-noe-source="spec"], .noe [data-noe-source="spec"] { --noe-source-accent: var(--noe-src-spec-accent); }
+.noe[data-noe-source="twardziel"], .noe [data-noe-source="twardziel"] { --noe-source-accent: var(--noe-src-twardziel-accent); }
+.noe[data-noe-source="zlodziej"], .noe [data-noe-source="zlodziej"] { --noe-source-accent: var(--noe-src-zlodziej-accent); }
+.noe[data-noe-source="zwiadowca"], .noe [data-noe-source="zwiadowca"] { --noe-source-accent: var(--noe-src-zwiadowca-accent); }
+.noe[data-noe-source="pochodzenia"], .noe [data-noe-source="pochodzenia"] { --noe-source-accent: var(--noe-src-pochodzenia-accent); }
+.noe[data-noe-source="generic"], .noe [data-noe-source="generic"] { --noe-source-accent: var(--noe-src-generic-accent); }
+
+/* Rodzina sprzętu sekcji (K5): ten sam kolor, w którym rodzina nosi glif ikony — nagłówek „Amunicja”
+   i ikona naboju mówią tym samym kolorem. Tylko pasek i kreska nagłówka, nigdy wypełnienie. */
+.noe [data-noe-family="weapon"] { --noe-section-accent: var(--noe-eq-weapon); }
+.noe [data-noe-family="ammo"] { --noe-section-accent: var(--noe-eq-ammo); }
+.noe [data-noe-family="armor"] { --noe-section-accent: var(--noe-eq-armor); }
+.noe [data-noe-family="tools"] { --noe-section-accent: var(--noe-eq-tools); }
+.noe [data-noe-family="medical"] { --noe-section-accent: var(--noe-eq-medical); }
+.noe [data-noe-family="chemicals"] { --noe-section-accent: var(--noe-eq-chemicals); }
+.noe [data-noe-family="explosives"] { --noe-section-accent: var(--noe-eq-explosives); }
+.noe [data-noe-family="survival"] { --noe-section-accent: var(--noe-eq-survival); }
+.noe [data-noe-family="salvage"] { --noe-section-accent: var(--noe-eq-salvage); }
+
+/* Focus klawiatury: jeden wygląd na każdej kontrolce (P9). */
+.noe :focus-visible,
+.noe:focus-visible {
+  outline: var(--noe-border-select) solid var(--noe-focus);
+  outline-offset: 2px;
+}
+
+/* Liczby to narzędzie (P7). */
+.noe-num {
+  font-family: var(--noe-font-num);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* Etykieta techniczna: mono, wersaliki, rozstrzelenie. */
+.noe-label {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* K1 — rama okna                                 */
+/* ============================================= */
+
+.noe-window {
+  background: var(--noe-surface);
+  color: var(--noe-text);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+}
+
+.noe-window__header {
+  display: flex;
+  align-items: center;
+  gap: var(--noe-sp-3);
+  min-height: var(--noe-control-h);
+  padding: var(--noe-sp-2) var(--noe-sp-4);
+  background: var(--noe-panel);
+  border-bottom: var(--noe-border) solid var(--noe-line);
+}
+
+.noe-window__title {
+  flex: 1;
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-14);
+  font-weight: 700;
+  color: var(--noe-text);
+}
+
+/* Baner karty: materiał sprzętu w slocie nagłówka, wygaszany maską — nigdy tekstura całej karty.
+   `--noe-banner-image` niesie url() liczony od tego katalogu (styles/noe/): przeglądarka rozwiązuje
+   względny adres w zmiennej tam, gdzie zmienna jest użyta, nie tam, gdzie ją zadeklarowano. */
+.noe-banner {
+  position: relative;
+  isolation: isolate;
+}
+.noe-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--noe-banner-height, 300px);
+  z-index: -1;
+  background: var(--noe-banner-image, none) no-repeat var(--noe-banner-focus, top center) / cover;
+  mask-image: linear-gradient(to bottom, var(--noe-mask-on) 0, var(--noe-mask-on) var(--noe-banner-solid, 36%), transparent 100%);
+  pointer-events: none;
+}
+
+/* ============================================= */
+/* K2 — nagłówek karty                            */
+/* ============================================= */
+
+.noe-title {
+  margin: 0;
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-24);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--noe-text);
+  border: 0;
+  border-bottom: var(--noe-border) solid var(--noe-source-accent);
+  padding-bottom: var(--noe-sp-2);
+}
+
+.noe-subtitle {
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-13);
+  font-weight: 400;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* K3 — tabliczka odczytu (D18)                   */
+/* ============================================= */
+
+.noe-readout {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--noe-sp-1);
+  min-width: 56px;
+  padding: var(--noe-sp-2) var(--noe-sp-3);
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  color: var(--noe-text);
+  text-align: center;
+}
+
+.noe-readout__label {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+  white-space: nowrap;
+}
+
+.noe-readout__value {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-20);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--noe-text);
+}
+
+.noe-readout--sm .noe-readout__value { font-size: var(--noe-fs-16); }
+
+/* Wartość zmieniona efektem: znak ± przy liczbie, źródło w tooltipie. */
+.noe-readout.is-modified .noe-readout__value::after {
+  content: "±";
+  margin-left: var(--noe-sp-1);
+  font-size: var(--noe-fs-12);
+  color: var(--noe-info);
+}
+
+.noe-readout__unit {
+  font-size: var(--noe-fs-11);
+  font-weight: 400;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* K4 — zakładki                                  */
+/* ============================================= */
+
+.noe-tabs {
+  display: flex;
+  gap: var(--noe-sp-5);
+  border-bottom: var(--noe-border) solid var(--noe-line);
+}
+
+.noe-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--noe-sp-2);
+  min-height: var(--noe-control-h);
+  padding: var(--noe-sp-2) 0;
+  margin-bottom: calc(-1 * var(--noe-border));
+  background: none;
+  border: 0;
+  border-bottom: var(--noe-border-select) solid transparent;
+  border-radius: 0;
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-13);
+  font-weight: 400;
+  color: var(--noe-text-muted);
+  cursor: pointer;
+  transition: color var(--noe-t-fast), border-color var(--noe-t-fast);
+}
+.noe-tab:hover { color: var(--noe-text); }
+.noe-tab.is-active,
+.noe-tab.active {
+  color: var(--noe-text);
+  font-weight: 700;
+  border-bottom-color: var(--noe-accent);
+}
+
+/* Pionowa szyna zakładek karty. */
+.noe-tabs--rail {
+  flex-direction: column;
+  gap: 0;
+  padding: var(--noe-sp-2) 0;
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: 0 var(--noe-r-panel) var(--noe-r-panel) 0;
+}
+.noe-tabs--rail .noe-tab {
+  justify-content: center;
+  width: 36px;
+  min-height: 36px;
+  margin: 0;
+  border-bottom: 0;
+  border-left: var(--noe-border-select) solid transparent;
+}
+.noe-tabs--rail .noe-tab.is-active,
+.noe-tabs--rail .noe-tab.active { border-left-color: var(--noe-accent); }
+
+/* ============================================= */
+/* K5 — nagłówek sekcji                           */
+/* ============================================= */
+
+/* Uniesiony grafit, pasek 3 px i kreska u dołu w akcencie sekcji (klasa / rodzina / neutralny),
+   tytuł pełnym tekstem (MG 2026-11-17: szary na szarym był za słaby; bez powrotu do bieli na czerwieni). */
+.noe-section {
+  display: flex;
+  align-items: center;
+  gap: var(--noe-sp-3);
+  min-height: var(--noe-control-h);
+  padding: 0 var(--noe-sp-3);
+  background: var(--noe-raised);
+  border: 0;
+  border-left: var(--noe-border-section) solid var(--noe-section-accent, var(--noe-source-accent));
+  border-radius: 0;
+  box-shadow: inset 0 calc(-1 * var(--noe-border)) 0 color-mix(in srgb, var(--noe-section-accent, var(--noe-source-accent)) 55%, transparent);
+  color: var(--noe-text);
+}
+
+.noe-section__title {
+  flex: 1;
+  margin: 0;
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-11);
+  font-weight: 700;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text);
+  border: 0;
+}
+
+.noe-section__col {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  font-weight: 400;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+  text-align: right;
+}
+
+/* ============================================= */
+/* K10 — glif i skos niedostępności               */
+/* ============================================= */
+
+/* Opakowanie wokół <img>: ani <img>, ani <dnd5e-icon> nie mają pseudoelementów. */
+.noe-glyph {
+  --noe-glyph-size: var(--noe-glyph-row);
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: var(--noe-glyph-size);
+  height: var(--noe-glyph-size);
+  line-height: 0;
+}
+.noe-glyph--id { --noe-glyph-size: var(--noe-glyph-id); }
+.noe-glyph--sm { --noe-glyph-size: 32px; }
+.noe-glyph--chat { --noe-glyph-size: 36px; }
+
+.noe-glyph > img,
+.noe-glyph > dnd5e-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  /* Glif zachowuje pełną nieprzezroczystość w każdym stanie. */
+  opacity: 1;
+  filter: none;
+}
+
+.noe-glyph.is-unavailable::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--noe-unavail-length);
+  height: clamp(var(--noe-unavail-thickness-min), calc(var(--noe-glyph-size) * var(--noe-unavail-thickness-ratio)), var(--noe-unavail-thickness-max));
+  background: var(--noe-unavail);
+  box-shadow: 0 0 0 var(--noe-unavail-outline-width) var(--noe-unavail-outline);
+  transform: translate(-50%, -50%) rotate(var(--noe-unavail-angle));
+  pointer-events: none;
+}
+
+/* ============================================= */
+/* K7 — znak kosztu                               */
+/* ============================================= */
+
+.noe-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-11);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--noe-text);
+  white-space: nowrap;
+}
+.noe-cost::before {
+  content: "";
+  width: var(--noe-cost-sign);
+  height: var(--noe-cost-sign);
+  flex: none;
+  background: center / contain no-repeat;
+}
+.noe-cost[data-cost="a"]::before { background-image: url("../../ui/noe/signs/cost-a.svg"); }
+.noe-cost[data-cost="b"]::before { background-image: url("../../ui/noe/signs/cost-b.svg"); }
+.noe-cost[data-cost="r"]::before { background-image: url("../../ui/noe/signs/cost-r.svg"); }
+.noe-cost[data-cost="i"]::before { background-image: url("../../ui/noe/signs/cost-i.svg"); }
+/* Inny czas (minuta, wyzwalacz) — wypisany, bez figury. */
+.noe-cost[data-cost="other"]::before { content: none; }
+.noe-cost[data-cost="other"] { font-weight: 400; color: var(--noe-text-muted); }
+.noe-cost--lg { --noe-cost-sign: 16px; font-size: var(--noe-fs-13); }
+
+/* Budżet tury: znak + pozostałe/pula (panel M8, pasek). */
+.noe-cost__count {
+  margin-left: var(--noe-sp-1);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================= */
+/* K8 — licznik                                   */
+/* ============================================= */
+
+.noe-count {
+  display: inline-block;
+  min-width: 5ch;
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-13);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--noe-text);
+}
+.noe-count__max { font-weight: 400; color: var(--noe-text-muted); }
+.noe-count__unit { font-weight: 400; margin-left: var(--noe-sp-1); color: var(--noe-text-muted); }
+
+/* ============================================= */
+/* K9 — plakietka stanu                           */
+/* ============================================= */
+
+.noe-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--noe-sp-2);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-11);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--noe-text-muted);
+  white-space: nowrap;
+}
+.noe-badge > i { font-size: var(--noe-fs-10); }
+.noe-badge--on {
+  font-family: var(--noe-font-num);
+  font-weight: 700;
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text);
+}
+.noe-badge--warn { color: var(--noe-warn); }
+.noe-badge--danger,
+.noe-badge--ban { color: var(--noe-danger); }
+.noe-badge--ok { color: var(--noe-ok); }
+.noe-badge--info { color: var(--noe-info); }
+.noe-badge--cond { color: var(--noe-text-muted); }
+.noe-badge--unknown::before {
+  content: "";
+  width: var(--noe-cost-sign);
+  height: var(--noe-cost-sign);
+  background: url("../../ui/noe/signs/unknown.svg") center / contain no-repeat;
+}
+
+/* ============================================= */
+/* K6 — wiersz treści                             */
+/* ============================================= */
+
+.noe-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--noe-sp-4);
+  min-height: var(--noe-row-min);
+  padding: var(--noe-sp-2) var(--noe-sp-3);
+  border: var(--noe-border) solid transparent;
+  border-bottom-color: var(--noe-line);
+  color: var(--noe-text);
+  transition: background-color var(--noe-t-fast);
+}
+.noe-row:hover { background: var(--noe-hover); }
+.noe-row.is-selected { border-color: var(--noe-accent); background: var(--noe-raised); }
+
+.noe-row__body { min-width: 0; display: flex; flex-direction: column; gap: var(--noe-sp-1); }
+.noe-row__head { display: flex; align-items: center; gap: var(--noe-sp-3); min-width: 0; }
+
+.noe-row__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  font-weight: 700;
+  color: var(--noe-text);
+}
+
+.noe-row__caption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-11);
+  font-weight: 400;
+  color: var(--noe-text-muted);
+}
+
+.noe-row__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--noe-sp-1);
+  text-align: right;
+}
+
+/* Operacja zdolności mieszanej: własny koszt, licznik i dostępność pod rodzicem. */
+.noe-row--op {
+  min-height: 0;
+  padding-left: calc(var(--noe-glyph-row) + var(--noe-sp-4) + var(--noe-sp-3));
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+/* ============================================= */
+/* K11 — miernik i tor                            */
+/* ============================================= */
+
+.noe-meter {
+  --noe-meter-fill: var(--noe-meter-neutral);
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--noe-control-h);
+  overflow: hidden;
+  background: var(--noe-inset);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+}
+.noe-meter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--noe-meter-pct, 0%);
+  background: var(--noe-meter-fill);
+}
+.noe-meter__value {
+  position: relative;
+  padding: 0 var(--noe-sp-3);
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-14);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--noe-text);
+}
+.noe-meter__value .noe-count__max { color: var(--noe-text); opacity: 1; font-weight: 400; }
+.noe-meter--pw { --noe-meter-fill: var(--noe-meter-pw); }
+.noe-meter--kw { --noe-meter-fill: var(--noe-meter-kw); }
+.noe-meter--temp { --noe-meter-fill: var(--noe-meter-temp); }
+.noe-meter--thin { min-height: 6px; }
+
+/* ============================================= */
+/* K12 — przycisk                                 */
+/* ============================================= */
+
+.noe-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--noe-sp-2);
+  min-height: var(--noe-control-h);
+  padding: 0 var(--noe-sp-4);
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  box-shadow: none;
+  font-family: var(--noe-font-label);
+  font-size: var(--noe-fs-12);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--noe-text);
+  cursor: pointer;
+  transition: background-color var(--noe-t-fast), border-color var(--noe-t-fast);
+}
+.noe-btn:hover { background: var(--noe-raised); border-color: var(--noe-accent); }
+.noe-btn--primary { background: var(--noe-accent); border-color: var(--noe-accent); color: var(--noe-on-accent); }
+.noe-btn--primary:hover { background: var(--noe-text); border-color: var(--noe-text); }
+.noe-btn--danger { background: none; border-color: var(--noe-danger); color: var(--noe-danger); }
+.noe-btn--danger:hover { background: color-mix(in srgb, var(--noe-danger) 12%, transparent); border-color: var(--noe-danger); }
+.noe-btn--icon { width: var(--noe-control-h); padding: 0; }
+.noe-btn:disabled,
+.noe-btn.is-disabled {
+  background: none;
+  border-color: var(--noe-line);
+  color: var(--noe-text-disabled);
+  cursor: default;
+}
+
+/* Przełącznik trybu (Ułatwienie / Normalnie / Utrudnienie): grupa przycisków, jeden wciśnięty. */
+.noe-seg { display: inline-flex; }
+.noe-seg > .noe-btn { border-radius: 0; margin-left: calc(-1 * var(--noe-border)); }
+.noe-seg > .noe-btn:first-child { margin-left: 0; border-radius: var(--noe-r-chip) 0 0 var(--noe-r-chip); }
+.noe-seg > .noe-btn:last-child { border-radius: 0 var(--noe-r-chip) var(--noe-r-chip) 0; }
+.noe-seg > .noe-btn[aria-pressed="true"],
+.noe-seg > .noe-btn.is-active {
+  position: relative;
+  background: var(--noe-raised);
+  border-color: var(--noe-accent);
+  box-shadow: inset 0 calc(-1 * var(--noe-border-select)) 0 var(--noe-accent);
+}
+
+/* ============================================= */
+/* K13 — pola formularza                          */
+/* ============================================= */
+
+.noe-field { display: flex; flex-direction: column; gap: var(--noe-sp-2); }
+.noe-field > label { font-family: var(--noe-font-num); font-size: var(--noe-fs-10); letter-spacing: var(--noe-track); text-transform: uppercase; color: var(--noe-text-muted); }
+
+.noe-input {
+  min-height: var(--noe-control-h);
+  padding: 0 var(--noe-sp-3);
+  background: var(--noe-inset);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  color: var(--noe-text);
+}
+.noe-input:hover { border-color: var(--noe-accent); }
+.noe-input:disabled { color: var(--noe-text-disabled); }
+.noe-input--num { font-family: var(--noe-font-num); font-variant-numeric: tabular-nums; text-align: right; }
+
+.noe-fieldset {
+  margin: 0;
+  padding: var(--noe-sp-3) var(--noe-sp-4) var(--noe-sp-4);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+}
+.noe-fieldset > legend {
+  padding: 0 var(--noe-sp-2);
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-10);
+  letter-spacing: var(--noe-track);
+  text-transform: uppercase;
+  color: var(--noe-text-muted);
+}
+
+/* ============================================= */
+/* K14 — tooltip, popover, menu                   */
+/* ============================================= */
+
+.noe-tip {
+  max-width: 320px;
+  padding: var(--noe-sp-3) var(--noe-sp-4);
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  box-shadow: none;
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-12);
+  line-height: 1.4;
+  color: var(--noe-text);
+  text-align: left;
+}
+.noe-tip__title { margin: 0 0 var(--noe-sp-2); font-family: var(--noe-font-label); font-size: var(--noe-fs-13); font-weight: 700; }
+.noe-tip__row { display: flex; justify-content: space-between; gap: var(--noe-sp-5); }
+.noe-tip__row > :last-child { font-family: var(--noe-font-num); font-variant-numeric: tabular-nums; }
+
+.noe-menu {
+  min-width: 180px;
+  padding: var(--noe-sp-2) 0;
+  background: var(--noe-panel);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  color: var(--noe-text);
+}
+.noe-menu__item { display: flex; align-items: center; gap: var(--noe-sp-3); padding: var(--noe-sp-2) var(--noe-sp-4); cursor: pointer; }
+.noe-menu__item:hover { background: var(--noe-hover); }
+.noe-menu__item.is-danger { color: var(--noe-danger); }
+
+/* ============================================= */
+/* K15 — powłoka dialogu                          */
+/* ============================================= */
+
+.noe-dialog__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--noe-sp-4);
+  padding: var(--noe-sp-5);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  line-height: 1.45;
+  color: var(--noe-text);
+}
+.noe-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--noe-sp-3);
+  padding: var(--noe-sp-4) var(--noe-sp-5);
+  border-top: var(--noe-border) solid var(--noe-line);
+}
+.noe-summary { display: grid; grid-template-columns: 1fr auto; row-gap: var(--noe-sp-2); column-gap: var(--noe-sp-5); }
+.noe-summary > dt { color: var(--noe-text-muted); }
+.noe-summary > dd { margin: 0; font-family: var(--noe-font-num); font-variant-numeric: tabular-nums; text-align: right; }
+
+/* ============================================= */
+/* K16 — karta czatu                              */
+/* ============================================= */
+
+/* Samodzielny ciemny blok: log czatu zostaje rdzenia, karta jest nasza. */
+.noe-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--noe-surface);
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-13);
+  color: var(--noe-text);
+  overflow: hidden;
+}
+.noe-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--noe-sp-3);
+  padding: var(--noe-sp-3);
+  background: var(--noe-panel);
+  border-bottom: var(--noe-border) solid var(--noe-line);
+}
+.noe-card__title { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: var(--noe-sp-1); }
+.noe-card__name { font-family: var(--noe-font-label); font-size: var(--noe-fs-14); font-weight: 700; color: var(--noe-text); }
+.noe-card__caption { font-size: var(--noe-fs-11); color: var(--noe-text-muted); }
+.noe-card__body { padding: var(--noe-sp-3); line-height: 1.45; }
+.noe-card__result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--noe-sp-4);
+  padding: var(--noe-sp-3);
+  background: var(--noe-inset);
+  border-block: var(--noe-border) solid var(--noe-line);
+}
+.noe-card__total {
+  font-family: var(--noe-font-num);
+  font-size: var(--noe-fs-24);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--noe-text);
+}
+.noe-card__formula { font-family: var(--noe-font-num); font-size: var(--noe-fs-11); color: var(--noe-text-muted); }
+/* Wynik: słowo + kolor semantyczny (P4). */
+.noe-card__outcome { font-family: var(--noe-font-label); font-size: var(--noe-fs-14); font-weight: 700; text-transform: uppercase; }
+.noe-card__outcome.is-success { color: var(--noe-ok); }
+.noe-card__outcome.is-failure { color: var(--noe-danger); }
+.noe-card__actions { display: flex; flex-wrap: wrap; gap: var(--noe-sp-3); padding: var(--noe-sp-3); }
+.noe-card__actions > .noe-btn { flex: 1; }
+.noe-card__notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--noe-sp-2) var(--noe-sp-4);
+  padding: var(--noe-sp-2) var(--noe-sp-3);
+  border-top: var(--noe-border) solid var(--noe-line);
+}
+
+/* ============================================= */
+/* K17 — pusty stan, strefa upuszczania           */
+/* ============================================= */
+
+.noe-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--noe-sp-3);
+  min-height: calc(var(--noe-control-h) + var(--noe-sp-5));
+  padding: var(--noe-sp-3) var(--noe-sp-4);
+  border: var(--noe-border) dashed var(--noe-line);
+  border-radius: var(--noe-r-panel);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-12);
+  color: var(--noe-text-muted);
+  text-align: center;
+}
+.noe-empty.is-drop-target { border-color: var(--noe-accent); color: var(--noe-text); background: var(--noe-hover); }
+
+/* ============================================= */
+/* K18 — chip, pill, tag                          */
+/* ============================================= */
+
+.noe-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--noe-sp-2);
+  min-height: 20px;
+  padding: 0 var(--noe-sp-3);
+  background: none;
+  border: var(--noe-border) solid var(--noe-line);
+  border-radius: var(--noe-r-chip);
+  font-family: var(--noe-font-ui);
+  font-size: var(--noe-fs-11);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--noe-text);
+  white-space: nowrap;
+}
+.noe-chip--muted { color: var(--noe-text-muted); }
+.noe-chip--warn { border-color: var(--noe-warn); color: var(--noe-warn); }
+.noe-chip--danger { border-color: var(--noe-danger); color: var(--noe-danger); }
+.noe-chip--ok { border-color: var(--noe-ok); color: var(--noe-ok); }
+
+/* ============================================= */
+/* Ruch (P8)                                      */
+/* ============================================= */
+
+/* Jedyny ruch w języku: stan wymagający reakcji. Przejścia hover/focus trwają --noe-t-fast. */
+@media (prefers-reduced-motion: no-preference) {
+  .noe-pulse { animation: noe-pulse 1.6s ease-in-out infinite; }
+}
+@keyframes noe-pulse { 50% { opacity: 0.45; } }

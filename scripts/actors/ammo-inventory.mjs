@@ -75,6 +75,8 @@ function _normalizeAmmoName(str) {
     .replace(/[^a-z0-9]/g, "");
 }
 
+import { inventoryIcon } from "../ui/noe.mjs";
+
 /**
  * Match a free-typed item name against a known caliber by its short `id`
  * (e.g. "45acp", "12gab", "belt") rather than the full display label — ids are
@@ -153,7 +155,7 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
      const damage = caliberInfo?.formula ? caliberInfo.formula : "—";
 
      // Złota ikona dnd5e
-     const iconHtml = `<dnd5e-icon draggable="false" src="${am.img}" aria-label="${am.name}" class="item-image gold-icon" style="--icon-fill: #9f9275"></dnd5e-icon>`;
+     const iconHtml = inventoryIcon(am.img, am.name);
 
      // Stwórz wpis dla tej amunicji
      const li = document.createElement("li");
@@ -162,7 +164,7 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
      li.style.listStyle = "none";
      li.style.marginBottom = "0";
      li.innerHTML = `
-        <div class="item-row flexrow" style="display: flex; align-items: center; justify-content: space-between; background-color: #252830; height: 42px; border-bottom: 1px dotted #3B3D46; padding: 0 5px; color: #cacdd5;">
+        <div class="item-row flexrow noe-zasoby-row" style="display: flex; align-items: center; justify-content: space-between; height: 42px; padding: 0 5px;">
             <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${am.name}" style="flex: 2; min-width: 0; align-items: center; gap: 8px;">
                 ${iconHtml}
                 <div class="name name-stacked flexcol" style="min-width: 0;">
@@ -229,8 +231,8 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
   // Stwórz panel Ammo wzorowany na oryginalnym dnd5e
   const panel = document.createElement("div");
   panel.innerHTML = `
-     <div class="items-header header flexrow" style="display:flex; align-items: center; justify-content: space-between; background-color: #471d24; height: 30px; border-bottom: 2px solid #FFFFFF; color: #FFFFFF; font-size: 0.9em; font-weight: bold; padding: 0 5px;">
-        <h3 class="item-name" style="flex: 2; margin: 0; padding-left: 5px; color: #FFFFFF; font-size: 1.1em; text-decoration: none; border: none;">Amunicja</h3>
+     <div class="items-header header flexrow noe-section-head" data-noe-family="ammo">
+        <h3 class="item-name" style="flex: 2; padding-left: 5px;">Amunicja</h3>
         <div class="item-header item-price" data-column-id="price" style="flex: 0 0 80px; text-align: center;">Cena</div>
         <div class="item-header item-weight" data-column-id="weight" style="flex: 0 0 60px; text-align: center;">Waga</div>
         <div class="item-header item-quantity" data-column-id="quantity" style="flex: 0 0 70px; text-align: center;">Ilość</div>
@@ -250,9 +252,9 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
 
   const footerBtn = document.createElement("button");
   footerBtn.type = "button";
-  footerBtn.className = "neuro-add-ammo-btn";
+  footerBtn.className = "neuro-add-ammo-btn noe-zasoby-add";
   footerBtn.innerHTML = `<i class="fas fa-box-open"></i> DODAJ AMUNICJĘ`;
-  footerBtn.style.cssText = "flex: 1; text-align: left; padding: 4px 12px; background: rgba(45,55,72,0.2); border: 1px solid #556270; color: var(--color-text-light-primary); white-space: nowrap;";
+  footerBtn.style.cssText = "flex: 1; text-align: left; padding: 4px 12px; white-space: nowrap;";
   footerBtn.addEventListener("click", (ev) => {
     ev.preventDefault();
     _showAmmoDialog(actor);
@@ -263,7 +265,7 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
   summary.style.cssText = "flex: 0 0 auto; display: flex; align-items: center; font-size: 0.85em; color: var(--color-text-secondary, #aaa);";
   summary.innerHTML = `
     <span style="padding: 0 10px; text-align: right;">Cena: <strong style="color: var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
-    <span style="display: inline-block; width: 1px; height: 16px; background: #556270; margin: 0;"></span>
+    <span class="noe-zasoby-sep" style="display:inline-block; width:1px; height:16px; margin:0;"></span>
     <span style="padding: 0 10px; text-align: right;">Waga: <strong style="color: var(--color-text-light-primary, #e0e0e0);">${totalWeightFooterStr}</strong></span>
   `;
 

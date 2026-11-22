@@ -1,3 +1,5 @@
+import { finishedIcon } from "../config/finished-icons.mjs";
+
 /**
  * Neuroshima 5e — zakładka Produkcja na karcie BG (PLAN_produkcja §6, etap E2).
  *
@@ -36,7 +38,7 @@ import { oknoDodajSurowce } from "../actors/surowce-inventory.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
-const ROBOTA_BADGE = `modules/${MODULE_ID}/icons/items/loot/robota_nakladka.svg`;
+const ROBOTA_BADGE = finishedIcon(`modules/${MODULE_ID}/icons/items/loot/robota_nakladka.svg`, { family: "utility" });
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 
 /** Grupy wykonalności, w kolejności wyświetlania. */

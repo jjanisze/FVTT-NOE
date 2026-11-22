@@ -43,6 +43,7 @@ import {
 import { seqScrollText } from "./sequencer.mjs";
 import { tracerFire } from "./tracer-vfx.mjs";
 import { isHitForRolls } from "../combat/trafienie.mjs";
+import { finishedIcon } from "../config/finished-icons.mjs";
 import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
 import { isAtHand, provenanceBadge, clearBelt, registerHandyFamily } from "../actors/handy-items.mjs";
@@ -1501,7 +1502,7 @@ function registerReloadActivityType() {
     static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
       type: RELOAD_ACTIVITY_TYPE,
       title: "Przeładowanie",
-      img: "modules/neuroshima-2026-overrides/icons/activities/activity_reload.svg",
+      img: finishedIcon("modules/neuroshima-2026-overrides/icons/activities/activity_reload.svg"),
       hint: "Neuroshima: ręczne przeładowanie komory po strzale albo demonstracyjne przeładowanie z wyrzuceniem naboju."
     }, { inplace: false }));
 

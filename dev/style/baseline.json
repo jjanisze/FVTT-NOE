@@ -1,0 +1,122 @@
+{
+  "schema": "noe-style-ratchet/v1",
+  "totals": {
+    "color": 688,
+    "font": 18,
+    "motion": 8,
+    "core": 0,
+    "inline": 130
+  },
+  "files": {
+    "scripts/actors/abilities.mjs": {
+      "inline": 2
+    },
+    "scripts/actors/addons-inventory.mjs": {
+      "inline": 4
+    },
+    "scripts/actors/ammo-inventory.mjs": {
+      "inline": 8
+    },
+    "scripts/actors/class-state.mjs": {
+      "inline": 3
+    },
+    "scripts/actors/drony.mjs": {
+      "inline": 1
+    },
+    "scripts/actors/encumbrance-breakdown.mjs": {
+      "inline": 3
+    },
+    "scripts/actors/grenade-inventory.mjs": {
+      "inline": 16
+    },
+    "scripts/actors/health-panel.mjs": {
+      "inline": 2
+    },
+    "scripts/actors/leki-inventory.mjs": {
+      "inline": 9
+    },
+    "scripts/actors/levelled-conditions.mjs": {
+      "inline": 1
+    },
+    "scripts/actors/placed-charges.mjs": {
+      "inline": 5
+    },
+    "scripts/actors/prowiant-inventory.mjs": {
+      "inline": 9
+    },
+    "scripts/actors/surowce-inventory.mjs": {
+      "inline": 17
+    },
+    "scripts/actors/tool-availability.mjs": {
+      "inline": 1
+    },
+    "scripts/actors/zbrojownia-sync.mjs": {
+      "inline": 1
+    },
+    "scripts/combat/knockout.mjs": {
+      "inline": 3
+    },
+    "scripts/combat/melee-maneuvers.mjs": {
+      "inline": 2
+    },
+    "scripts/combat/obalajaca.mjs": {
+      "inline": 1
+    },
+    "scripts/combat/rerolls.mjs": {
+      "inline": 11
+    },
+    "scripts/combat/weapon-save-properties.mjs": {
+      "inline": 4
+    },
+    "scripts/combat/zdolnosci-wspolne.mjs": {
+      "inline": 3
+    },
+    "scripts/config/exhaustion.mjs": {
+      "inline": 1
+    },
+    "scripts/config/validation.mjs": {
+      "inline": 3
+    },
+    "scripts/items/power-source.mjs": {
+      "inline": 1
+    },
+    "scripts/items/toolkit-medyk.mjs": {
+      "inline": 1
+    },
+    "scripts/weapons/addons.mjs": {
+      "inline": 3
+    },
+    "scripts/weapons/dozownik.mjs": {
+      "inline": 3
+    },
+    "scripts/weapons/jams.mjs": {
+      "inline": 5
+    },
+    "scripts/weapons/magazine.mjs": {
+      "inline": 1
+    },
+    "scripts/weapons/melee-degradation.mjs": {
+      "inline": 3
+    },
+    "scripts/wkk/items/gadzety.mjs": {
+      "inline": 1
+    },
+    "scripts/world-clock.mjs": {
+      "inline": 1
+    },
+    "styles/neuroshima.css": {
+      "color": 581,
+      "font": 18,
+      "motion": 8
+    },
+    "styles/pojazdy.css": {
+      "color": 21
+    },
+    "styles/postoj.css": {
+      "color": 86
+    },
+    "templates/ruch/waypoint-label.hbs": {
+      "inline": 1
+    }
+  }
+}

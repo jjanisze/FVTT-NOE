@@ -89,6 +89,13 @@
 
   "DND5E": {
     "Details": "Szczegóły",
+    "FeaturesClass": "Zdolności klasowe — {class}",
+    "FeaturesBackground": "Pochodzenie",
+    "FeaturesOther": "Pozostałe zdolności",
+    "FeatureActive": "Zdolności aktywowane",
+    "FeaturePassive": "Korzyści stałe",
+    "Special": "Specjalna",
+    "ExhaustionLevel": "Wyczerpanie: poziom {n}",
     "InventorySearch": "Szukaj w ekwipunku",
     "Contents": "Zawartość",
     "Group": {

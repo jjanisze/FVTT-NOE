@@ -1,0 +1,506 @@
+{
+  "date": "2026-11-15",
+  "environment": "Existing agent sandbox; read-only app rendering, no actions submitted",
+  "runtime": {
+    "foundry": "14.369",
+    "system": "6.0.6",
+    "packs": [
+      {
+        "id": "klasy",
+        "document": "Item",
+        "count": 7
+      },
+      {
+        "id": "profesje",
+        "document": "Item",
+        "count": 18
+      },
+      {
+        "id": "zdolnosci-klasowe",
+        "document": "Item",
+        "count": 134
+      },
+      {
+        "id": "sztuczki",
+        "document": "Item",
+        "count": 53
+      },
+      {
+        "id": "pochodzenia",
+        "document": "Item",
+        "count": 12
+      },
+      {
+        "id": "zdolnosci-pochodzenia",
+        "document": "Item",
+        "count": 36
+      },
+      {
+        "id": "lekarstwa",
+        "document": "Item",
+        "count": 35
+      },
+      {
+        "id": "amunicja",
+        "document": "Item",
+        "count": 25
+      },
+      {
+        "id": "granaty",
+        "document": "Item",
+        "count": 13
+      },
+      {
+        "id": "narzedzia",
+        "document": "Item",
+        "count": 34
+      },
+      {
+        "id": "bron",
+        "document": "Item",
+        "count": 87
+      },
+      {
+        "id": "magazynki",
+        "document": "Item",
+        "count": 31
+      },
+      {
+        "id": "sprzet",
+        "document": "Item",
+        "count": 86
+      },
+      {
+        "id": "pancerze",
+        "document": "Item",
+        "count": 18
+      },
+      {
+        "id": "schematy",
+        "document": "Item",
+        "count": 247
+      },
+      {
+        "id": "bestiariusz",
+        "document": "Actor",
+        "count": 52
+      },
+      {
+        "id": "towarzysze",
+        "document": "Actor",
+        "count": 6
+      },
+      {
+        "id": "pojazdy",
+        "document": "Actor",
+        "count": 14
+      },
+      {
+        "id": "tabele",
+        "document": "RollTable",
+        "count": 26
+      }
+    ],
+    "topLevelRecords": 934,
+    "uniqueImages": 592,
+    "uniqueModuleIconReferences": 518,
+    "itemTypes": [
+      "background",
+      "class",
+      "consumable",
+      "equipment",
+      "feat",
+      "loot",
+      "subclass",
+      "tool",
+      "weapon"
+    ],
+    "actorSheets": {
+      "base": [],
+      "character": [
+        {
+          "class": "CharacterActorSheet",
+          "default": false,
+          "tabs": [
+            "details",
+            "inventory",
+            "features",
+            "spells",
+            "effects",
+            "biography",
+            "bastion",
+            "specialTraits"
+          ]
+        },
+        {
+          "class": "NeuroshimaCharacterSheet",
+          "default": true,
+          "tabs": [
+            "inventory",
+            "zasoby",
+            "produkcja",
+            "details",
+            "features",
+            "effects",
+            "biography",
+            "specialTraits"
+          ]
+        }
+      ],
+      "encounter": [
+        {
+          "class": "EncounterActorSheet",
+          "default": true,
+          "tabs": [
+            "members",
+            "inventory",
+            "description"
+          ]
+        }
+      ],
+      "group": [
+        {
+          "class": "GroupActorSheet",
+          "default": false,
+          "tabs": [
+            "members",
+            "inventory",
+            "effects",
+            "biography"
+          ]
+        },
+        {
+          "class": "NeuroshimaGroupSheet",
+          "default": true,
+          "tabs": [
+            "members",
+            "inventory",
+            "zapasy",
+            "postoj",
+            "biography"
+          ]
+        }
+      ],
+      "npc": [
+        {
+          "class": "NPCActorSheet",
+          "default": false,
+          "tabs": [
+            "features",
+            "inventory",
+            "spells",
+            "effects",
+            "biography",
+            "specialTraits"
+          ]
+        },
+        {
+          "class": "NeuroshimaNPCSheet",
+          "default": true,
+          "tabs": [
+            "features",
+            "inventory",
+            "zasoby",
+            "effects",
+            "biography",
+            "specialTraits"
+          ]
+        }
+      ],
+      "vehicle": [
+        {
+          "class": "VehicleActorSheet",
+          "default": false,
+          "tabs": [
+            "inventory",
+            "crew",
+            "effects",
+            "description"
+          ]
+        },
+        {
+          "class": "KartaPojazdu",
+          "default": true,
+          "tabs": [
+            "pojazd",
+            "zaloga",
+            "inventory",
+            "crew",
+            "uzbrojenie",
+            "awarie",
+            "effects",
+            "description"
+          ]
+        }
+      ]
+    },
+    "activityTypes": [
+      "attack",
+      "cast",
+      "check",
+      "damage",
+      "enchant",
+      "forward",
+      "heal",
+      "neuroDs",
+      "neuroDublet",
+      "neuroKs",
+      "neuroLoadOne",
+      "neuroMagSwap",
+      "neuroMs",
+      "neuroOz",
+      "neuroReload",
+      "neuroToolCheck",
+      "order",
+      "save",
+      "summon",
+      "teleport",
+      "transform",
+      "utility"
+    ]
+  },
+  "records": [
+    {
+      "key": "pc-inventory",
+      "file": "dev/visual/reference/2026-11-15/pc-inventory.webp",
+      "kind": "pc",
+      "class": "NeuroshimaCharacterSheet",
+      "tabs": [
+        "inventory",
+        "zasoby",
+        "produkcja",
+        "details",
+        "features",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "inventory",
+      "filter": "sepia(0.15) contrast(1.05) brightness(0.85)",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "ŻOŁNIERZ W OPORZĄDZENIU\nTWARDZIEL 5\nPAS\n3/4\n1\n5\n18\n+2\nINICJATYWA\n9\nSZYBKOŚĆ\n+3\nBIEGŁOŚĆ\nPUNKTY WYTRZYMAŁOŚCI\n37\n/\n37\nKOŚCI WYTRZYMAŁOŚCI\n5\n/\n5\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nPasek walki\nUŁÓŻ PASEK\nULUBIONE\nUPUŚĆ TU ULUBIONE\n41.9\n/\n160\nSIŁA\n16\nWAGA\nNormalna\nDO PRZECIĄŻENIA\n118.1 kg\nBez dna ×2\nBroń\nPancerz\nAmunicja\nMagazynki\nPirotechnika\nLeki\nReszta\n0\n/\n3\nBroń\nCENA\nWAGA\nILOŚĆ\nRZUT\nWZÓR\nŁADUNKI\nAK (Kałach)\nBroń palna pośrednia • Akcja\n70\n3\n+5\n2d8\n/\n31\nP\nOgień pojedynczy\nAkcja\n+5\n2d8\nW"
+    },
+    {
+      "key": "pc-features",
+      "file": "dev/visual/reference/2026-11-15/pc-features.webp",
+      "kind": "pc",
+      "class": "NeuroshimaCharacterSheet",
+      "tabs": [
+        "inventory",
+        "zasoby",
+        "produkcja",
+        "details",
+        "features",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "features",
+      "filter": "sepia(0.15) contrast(1.05) brightness(0.85)",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "ŻOŁNIERZ W OPORZĄDZENIU\nTWARDZIEL 5\nPAS\n3/4\n1\n5\n18\n+2\nINICJATYWA\n9\nSZYBKOŚĆ\n+3\nBIEGŁOŚĆ\nPUNKTY WYTRZYMAŁOŚCI\n37\n/\n37\nKOŚCI WYTRZYMAŁOŚCI\n5\n/\n5\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nPasek walki\nUŁÓŻ PASEK\nULUBIONE\nUPUŚĆ TU ULUBIONE\nTwardziel\nŻołnierz\n5\nTwardziel Features\nUŻYCIA\nODNOWIENIE\nWyjadacz\nKondycha\nAkcja dodatkowa\n/\n1\nLR\nKondycha\nAkcja dodatkowa\nUlubiona broń\nAkcja dodatkowa\nUlubiona broń\nAkcja dodatkowa\nObsługa pancerza\nPrzycelowanie\nAkcja dodatkowa\nPrzycelowanie\nAkcja dodatkowa\nZ"
+    },
+    {
+      "key": "pc-resources",
+      "file": "dev/visual/reference/2026-11-15/pc-resources.webp",
+      "kind": "pc",
+      "class": "NeuroshimaCharacterSheet",
+      "tabs": [
+        "inventory",
+        "zasoby",
+        "produkcja",
+        "details",
+        "features",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "zasoby",
+      "filter": "sepia(0.15) contrast(1.05) brightness(0.85)",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "ŻOŁNIERZ W OPORZĄDZENIU\nTWARDZIEL 5\nPAS\n3/4\n1\n5\n18\n+2\nINICJATYWA\n9\nSZYBKOŚĆ\n+3\nBIEGŁOŚĆ\nPUNKTY WYTRZYMAŁOŚCI\n37\n/\n37\nKOŚCI WYTRZYMAŁOŚCI\n5\n/\n5\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nPasek walki\nUŁÓŻ PASEK\nULUBIONE\nUPUŚĆ TU ULUBIONE\nAmunicja\nCena\nWaga\nIlość\nObrażenia\n7,62×39 mm AK\n4 gb\n960 g\n2d8\nDODAJ AMUNICJĘ\nCena: 240 gb\nWaga: 960 g\nMagazynki\n 3/4\nNaboje\nWaga\nDO AK\nMagazynek do AK\n29× 7,62×39 mm AK · w: AK (Kałach)\n29/30\n764 g\nKOLEJNOŚĆ WYSTRZAŁU:\n▸ 29× 7,62×39 mm AK\nMagazynek do AK\n30× 7"
+    },
+    {
+      "key": "npc-features",
+      "file": "dev/visual/reference/2026-11-15/npc-features.webp",
+      "kind": "npc",
+      "class": "NeuroshimaNPCSheet",
+      "tabs": [
+        "features",
+        "inventory",
+        "zasoby",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "features",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "11,500 XP\n+3\n13\n15\n60\n/\n60\nGANGUS KAPO (NOE)\nŚredni\n Człowiek\nBiegłość +3\n14\nSIŁ\n+2\n14\n+5\nZRC\n+3\n16\n+6\nKON\n+2\n15\n+2\nINT\n+0\n11\n+0\nMDR\n+0\n10\n+0\nCHA\n+1\n12\n+1\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nSZYBKOŚĆ\nSzybkość\n|\n9\nUMIEJĘTNOŚCI\nAtletyka | +6\nPojazdy | +5\nZastraszanie | +5\nZMYSŁY\nPasywna Percepcja\n|\n10\nZdolności\nODNOWIENIE\nUŻYCIA\nRZUT\nWZÓR\nOfiara\nAtak wielokrotny\nUZI długa seria (2/walkę)\nInitiative\n/\n2\nManewry\nAkcje\nODNOWIENIE\nUŻYCIA\nRZUT\nWZÓR\nBejsbol\nAkcja\n+5\n1d8 + 2\nBejsbol\nAkcja\n+5\n1d8"
+    },
+    {
+      "key": "vehicle-overview",
+      "file": "dev/visual/reference/2026-11-15/vehicle-overview.webp",
+      "kind": "vehicle",
+      "class": "KartaPojazdu",
+      "tabs": [
+        "pojazd",
+        "zaloga",
+        "inventory",
+        "crew",
+        "uzbrojenie",
+        "awarie",
+        "effects",
+        "description"
+      ],
+      "activeTab": "pojazd",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "Neuroshima RPG\n PORTRET\nCiężarówka\nLand Vehicle\nPUNKTY WYTRZYMAŁOŚCI\n150 / 150\nDT\n|\n5\nMishap\n|\n20\nPaliwo\n200 / 200 l\n30 l/100 km · zasięg 666.7 km · kanistry 0 l\nTANKUJ\nTRUDNOŚĆ TRAFIENIA\n10\nSZYBKOŚĆ\n24 m\nKOSZT\n1,300\nROZMIAR\nGigantyczny\nWAGA\n8,000 kg\nCARGO\n10,000 kg\nCREW\n3\nODPORNOŚCI\nPsychiczne\nOd trucizny\nChoroba\nbleeding\nNiedożywienie\nNieprzytomność\nObezwładnienie\nOdwodnienie\nOgłuchnięcie\nOgłuszenie\nOślepienie\nPochwycenie\nPrzerażenie\nSkażenie radioaktywne\nSparaliżowanie\nStopień Zranienia\nUdusz"
+    },
+    {
+      "key": "vehicle-repairs",
+      "file": "dev/visual/reference/2026-11-15/vehicle-repairs.webp",
+      "kind": "vehicle",
+      "class": "KartaPojazdu",
+      "tabs": [
+        "pojazd",
+        "zaloga",
+        "inventory",
+        "crew",
+        "uzbrojenie",
+        "awarie",
+        "effects",
+        "description"
+      ],
+      "activeTab": "awarie",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "Neuroshima RPG\n PORTRET\nCiężarówka\nLand Vehicle\nPUNKTY WYTRZYMAŁOŚCI\n150 / 150\nDT\n|\n5\nMishap\n|\n20\nPaliwo\n200 / 200 l\n30 l/100 km · zasięg 666.7 km · kanistry 0 l\nTANKUJ\nTRUDNOŚĆ TRAFIENIA\n10\nSZYBKOŚĆ\n24 m\nKOSZT\n1,300\nROZMIAR\nGigantyczny\nWAGA\n8,000 kg\nCARGO\n10,000 kg\nCREW\n3\nODPORNOŚCI\nPsychiczne\nOd trucizny\nChoroba\nbleeding\nNiedożywienie\nNieprzytomność\nObezwładnienie\nOdwodnienie\nOgłuchnięcie\nOgłuszenie\nOślepienie\nPochwycenie\nPrzerażenie\nSkażenie radioaktywne\nSparaliżowanie\nStopień Zranienia\nUdusz"
+    },
+    {
+      "key": "party-members",
+      "file": "dev/visual/reference/2026-11-15/party-members.webp",
+      "kind": "party",
+      "class": "NeuroshimaGroupSheet",
+      "tabs": [
+        "members",
+        "inventory",
+        "zapasy",
+        "postoj",
+        "biography"
+      ],
+      "activeTab": "members",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "DRUŻYNA POLIGONU\nPodróż pieszo powolnym tempem 8 h dziennie\nNA MINUTĘ\n50 m\nNA GODZINĘ\n3 km\nW 8 H\n24 km\nTRASA\nkm\nIDŹ!\nTRANSPORT\nPieszo\nWierzchowiec / rower\nPojazd mechaniczny\nTEMPO\nPowolne\nNormalne\nSzybkie\nBardzo szybkie\nBIOM\n— nie wybrano —\nBagna\nGóry\nLas\nMiasto\nNeodżungla\nPodziemia\nPreria\nPustynia\nRuiny\nTereny Maszyn\nTRUDNY TEREN\n8 H\n24 H\nW DRODZE\nWYRUSZ 8 H!\nUłatwienie w Testach Mądrości (Percepcja lub Survival)\n DRUŻYNA\nEKWIPUNEK\n ZAPASY\n POSTÓJ\n KRONIKA\nChory (szczurza gorączka, osteoporoza,"
+    },
+    {
+      "key": "party-downtime",
+      "file": "dev/visual/reference/2026-11-15/party-downtime.webp",
+      "kind": "party",
+      "class": "NeuroshimaGroupSheet",
+      "tabs": [
+        "members",
+        "inventory",
+        "zapasy",
+        "postoj",
+        "biography"
+      ],
+      "activeTab": "postoj",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "DRUŻYNA POLIGONU\nPodróż pieszo powolnym tempem 8 h dziennie\nNA MINUTĘ\n50 m\nNA GODZINĘ\n3 km\nW 8 H\n24 km\nTRASA\nkm\nIDŹ!\nTRANSPORT\nPieszo\nWierzchowiec / rower\nPojazd mechaniczny\nTEMPO\nPowolne\nNormalne\nSzybkie\nBardzo szybkie\nBIOM\n— nie wybrano —\nBagna\nGóry\nLas\nMiasto\nNeodżungla\nPodziemia\nPreria\nPustynia\nRuiny\nTereny Maszyn\nTRUDNY TEREN\n8 H\n24 H\nW DRODZE\nWYRUSZ 8 H!\nUłatwienie w Testach Mądrości (Percepcja lub Survival)\n DRUŻYNA\nEKWIPUNEK\n ZAPASY\n POSTÓJ\n KRONIKA\nMIEJSCE POSTOJU\n—\nUSTAW MIEJSCE\n\nMiejs"
+    },
+    {
+      "key": "drone-sheet",
+      "file": "dev/visual/reference/2026-11-15/drone-sheet.webp",
+      "kind": "drone",
+      "class": "NeuroshimaNPCSheet",
+      "tabs": [
+        "features",
+        "inventory",
+        "zasoby",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "features",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "10 XP\n+0\n10\n13\n10\n/\n10\nGARDEROBIANY\nDron kroczący · twórca Opiekun\nŚredni\n Maszyna\nBiegłość +2\n0\nSIŁ\n+2\n14\n+2\nZRC\n+2\n14\n+2\nKON\n+0\n10\n+0\nINT\n+0\n10\n+0\nMDR\n+0\n10\n+0\nCHA\n+0\n10\n+0\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nSZYBKOŚĆ\nSzybkość\n|\n9\nZMYSŁY\nWidzenie w ciemności\n|\n18\nPasywna Percepcja\n|\n10\nODPORNOŚCI\nPsychiczne\nOd trucizny\nPrzerażenie\nZatrucie\nZauroczenie\nZdolności\nODNOWIENIE\nUŻYCIA\nRZUT\nWZÓR\nModyfikacje\nUdźwig\nAtak"
+    },
+    {
+      "key": "mount-sheet",
+      "file": "dev/visual/reference/2026-11-15/mount-sheet.webp",
+      "kind": "mount",
+      "class": "NeuroshimaNPCSheet",
+      "tabs": [
+        "features",
+        "inventory",
+        "zasoby",
+        "effects",
+        "biography",
+        "specialTraits"
+      ],
+      "activeTab": "features",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "450 XP\n-2\n8\n10\n32\n/\n32\nKOŃ (ZDROWY)\nDuży\n Zwierzę\nBiegłość +2\n2\nSIŁ\n+3\n16\n+3\nZRC\n+0\n10\n+0\nKON\n+2\n14\n+2\nINT\n-2\n6\n-2\nMDR\n+1\n12\n+1\nCHA\n-1\n8\n-1\nSTAN\nWYCZERPANIE\nZRANIENIE\nUPOJENIE\nSKAŻENIE\nSZYBKOŚĆ\nSzybkość\n|\n24\nUMIEJĘTNOŚCI\nAtletyka | +5\nZMYSŁY\nPasywna Percepcja\n|\n11\nZdolności\nODNOWIENIE\nUŻYCIA\nRZUT\nWZÓR\nWymagania\nAkcje\nODNOWIENIE\nUŻYCIA\nRZUT\nWZÓR\nKopyta\nAkcja\n+5\n1d8 + 3\nKopyta\nAkcja\n+5\n1d8 + 3"
+    },
+    {
+      "key": "weapon-sheet",
+      "file": "dev/visual/reference/2026-11-15/weapon-sheet.webp",
+      "kind": "weapon",
+      "class": "ItemSheet5e",
+      "tabs": [
+        "description",
+        "details",
+        "activities",
+        "effects",
+        "advancement"
+      ],
+      "activeTab": "description",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "Neuroshima RPG\nAK (Kałach)\nBroń\nBroń palna pośrednia\n×\n1\n3\n70\nOPIS\nSZCZEGÓŁY\nAKTYWNOŚCI\nEFEKTY\nTRAFIENIE\n+5\n2d8\nOpis\n\nObrażenia: 2k8 kłute\n\nZasięg: 75/300 m\n\nZasilanie: Magazynek 30\n\nNabój: 7,62×39 mm AK\n\nDostępność: 10%\n\nOpis przed identyfikacją\nOpis na czacie\nAkcja\n75/300 m\nBiegłość"
+    },
+    {
+      "key": "feature-sheet",
+      "file": "dev/visual/reference/2026-11-15/feature-sheet.webp",
+      "kind": "feature",
+      "class": "ItemSheet5e",
+      "tabs": [
+        "description",
+        "details",
+        "activities",
+        "effects",
+        "advancement"
+      ],
+      "activeTab": "description",
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "Neuroshima RPG\nWyjadacz\nPassive\nTwardziel 1\nOPIS\nSZCZEGÓŁY\nAKTYWNOŚCI\nEFEKTY\nROZWÓJ\nOpis\n\nTwardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do"
+    },
+    {
+      "key": "activity-editor",
+      "file": "dev/visual/reference/2026-11-15/activity-editor.webp",
+      "kind": "activity",
+      "class": "AttackSheet",
+      "tabs": [],
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "Ogień pojedynczy\n IDENTITY\n ACTIVATION\n EFFECT\nACTIVITY\nName\nIcon\nChat Flavor\n\nAdditional text displayed in the activation chat message.\n\nFormat\n\n\n\n\nATAK\nAttack Type\nDefault (dystansowy)\nWręcz\nDystansowy\n\nIs this a melee or ranged attack?\n\nAttack Classification\nDefault (broń)\nBroń\nZaklęcie\nBez broni\n\nIs this an unarmed, weapon, or spell attack?\n\nBEHAVIOR\nMeasured Template Prompt\n\nShould the player be prompted to place a measured template? Players will still be able to place templates from the ch"
+    },
+    {
+      "key": "action-use-dialog",
+      "file": "dev/visual/reference/2026-11-15/action-use-dialog.webp",
+      "kind": "usage",
+      "class": "ActivityUsageDialog",
+      "tabs": [],
+      "filter": "none",
+      "font": "Signika, ui-sans-serif, sans-serif",
+      "text": "AK (Kałach)\nOgień pojedynczy\nUSE ABILITY"
+    }
+  ]
+}

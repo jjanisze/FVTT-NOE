@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOE M9 · tokeny i komponenty K1–K18</title>
+<!-- Piktogramy: przez serwer Foundry — Font Awesome rdzenia; z dysku — kopia z sieci. Bez obu znikają tylko piktogramy. -->
+<link rel="stylesheet" href="../../../../../fonts/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" media="print" onload="if(location.protocol==='file:')this.media='all'">
+<style>
+/* Roboto i Roboto Condensed dostarcza dnd5e; w standardowym układzie Data/ ścieżka względna trafia w jego czcionki
+   (z dysku i przez serwer Foundry). Bez nich strona używa krojów zastępczych — układ pozostaje ten sam. */
+@font-face{font-family:Roboto;font-weight:400;src:local("Roboto"),url("../../../../../systems/dnd5e/fonts/roboto/Roboto-Regular.woff2") format("woff2")}
+@font-face{font-family:Roboto;font-weight:700;src:local("Roboto Bold"),url("../../../../../systems/dnd5e/fonts/roboto/Roboto-Bold.woff2") format("woff2")}
+@font-face{font-family:"Roboto Condensed";font-weight:400;src:local("Roboto Condensed"),url("../../../../../systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Regular.woff2") format("woff2")}
+@font-face{font-family:"Roboto Condensed";font-weight:700;src:local("Roboto Condensed Bold"),url("../../../../../systems/dnd5e/fonts/roboto-condensed/RobotoCondensed-Bold.woff2") format("woff2")}
+</style>
+<link rel="stylesheet" href="../../../styles/noe/tokens.generated.css">
+<link rel="stylesheet" href="../../../styles/noe/tokens.css">
+<link rel="stylesheet" href="../../../styles/noe/components.css">
+<style>
+/* Tylko układ tej strony. Wygląd komponentów pochodzi z arkuszy powyżej.
+   Uwaga: url() w zmiennej CSS przeglądarka rozwiązuje względem arkusza, który zmiennej UŻYWA —
+   --noe-banner-image liczymy więc od styles/noe/ (components.css), nie od tej strony. */
+html{font-size:16px}
+body{margin:0;background:var(--noe-surface);color:var(--noe-text);font:var(--noe-fs-13)/1.5 var(--noe-font-ui)}
+body.gray main{filter:grayscale(1)}
+main{max-width:1280px;margin:auto;padding:28px 28px 80px}
+h1{font:700 var(--noe-fs-24)/1.2 var(--noe-font-label);text-transform:uppercase;margin:0 0 6px}
+h2{font:700 var(--noe-fs-20)/1.2 var(--noe-font-label);margin:44px 0 6px;padding-bottom:6px;border-bottom:1px solid var(--noe-line)}
+h3{font:700 var(--noe-fs-14)/1.2 var(--noe-font-label);margin:0}
+h3 span{font-family:var(--noe-font-num);color:var(--noe-text-muted);margin-right:6px}
+p{max-width:96ch;color:var(--noe-text-muted);margin:6px 0}
+p strong,li strong{color:var(--noe-text)}
+code{font:var(--noe-fs-11) var(--noe-font-num);color:var(--noe-text-muted)}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;padding:8px 28px;background:var(--noe-panel);border-bottom:1px solid var(--noe-line)}
+.bar nav{display:flex;gap:14px;flex-wrap:wrap;flex:1;font:var(--noe-fs-12) var(--noe-font-label)}
+.bar a{color:var(--noe-text-muted);text-decoration:none}.bar a:hover{color:var(--noe-text)}
+.decide{border:1px solid var(--noe-line);border-left:2px solid var(--noe-warn);background:var(--noe-panel);padding:12px 16px;margin:16px 0;border-radius:var(--noe-r-panel)}
+.decide ol{margin:6px 0 0;padding-left:20px;color:var(--noe-text-muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px 20px;margin:10px 0}
+.sw{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:2px 10px;padding:3px 0}
+.sw__chip{display:inline-block;width:28px;height:18px;border:1px solid var(--noe-line);border-radius:2px;vertical-align:middle}
+.sw__val{font:var(--noe-fs-11) var(--noe-font-num)}
+.sw__note{grid-column:2/4;font-size:var(--noe-fs-11);color:var(--noe-text-muted)}
+.srcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px 20px;margin:10px 0}
+.src{display:grid;grid-template-columns:44px 1fr;gap:2px 12px;align-items:center}
+.src__ground{grid-row:1/3;width:44px;height:44px;border-radius:var(--noe-r-glyph);display:grid;place-items:center;font:700 16px var(--noe-font-label)}
+.src__name{font:700 var(--noe-fs-13) var(--noe-font-ui)}
+.src__bar{display:none}
+.src code{grid-column:2}
+.src::after{content:"";grid-column:1/3;height:1px;background:var(--noe-source-accent)}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:var(--noe-fs-12)}
+th,td{padding:5px 8px;border-bottom:1px solid var(--noe-line);text-align:left;vertical-align:middle}
+th{font:400 var(--noe-fs-10) var(--noe-font-num);letter-spacing:1px;text-transform:uppercase;color:var(--noe-text-muted)}
+tr.grp th{color:var(--noe-text);background:var(--noe-panel);font-size:var(--noe-fs-11)}
+td.num{font-family:var(--noe-font-num);text-align:right;font-variant-numeric:tabular-nums}
+td.low{color:var(--noe-danger);font-weight:700}
+.type td:first-child{white-space:nowrap}
+.k{border:1px solid var(--noe-line);border-radius:var(--noe-r-panel);margin:14px 0;overflow:hidden}
+.k>header{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:8px 12px;background:var(--noe-panel);border-bottom:1px solid var(--noe-line)}
+.k>header p{margin:0;font-size:var(--noe-fs-11)}
+.k__body{padding:14px;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start}
+.k__body>.wide{flex:1 1 100%}
+.stack{display:flex;flex-direction:column;gap:8px}
+.inline{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.cap{font:var(--noe-fs-10) var(--noe-font-num);letter-spacing:1px;text-transform:uppercase;color:var(--noe-text-muted);margin:0 0 4px}
+.case{flex:1 1 100%;border-top:1px dashed var(--noe-line);padding-top:6px}
+.case:first-child{border-top:0;padding-top:0}
+.case__t{font:var(--noe-fs-10) var(--noe-font-num);letter-spacing:1px;text-transform:uppercase;margin:0 0 2px}
+.on-panel{background:var(--noe-panel);padding:10px;border-radius:var(--noe-r-panel)}
+.mock{display:grid;grid-template-columns:230px 1fr 38px;border:1px solid var(--noe-line);border-radius:var(--noe-r-panel);overflow:hidden;--noe-banner-image:url("../../ui/noe/banners/pc.webp")}
+.mock__head{grid-column:1/4;padding:16px 18px 14px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start;min-height:128px}
+.mock__side{padding:12px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--noe-line);background:var(--noe-scrim)}
+.mock__main{padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0;background:var(--noe-scrim)}
+.mock__portrait{aspect-ratio:1;background:var(--noe-inset);border:1px solid var(--noe-line);display:grid;place-items:center;color:var(--noe-text-muted)}
+.budget{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.budget>span{padding:5px 9px;border:1px solid var(--noe-line);border-radius:var(--noe-r-chip);background:var(--noe-panel)}
+.chatlog{width:300px;background:var(--noe-inset);padding:8px;border:1px dashed var(--noe-line)}
+.chatlog>p{margin:0 0 6px}
+.dlg{width:420px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+footer{margin-top:50px;color:var(--noe-text-muted);font-size:var(--noe-fs-11)}
+@media (max-width:900px){.mock{grid-template-columns:1fr}.mock__head,.mock__side{grid-column:1}.mock>nav{display:none}}
+</style>
+</head>
+<body class="noe">
+<div class="bar"><nav><a href="#tokeny">Tokeny</a><a href="#o2">O2 · semantyczne</a><a href="#typografia">Typografia</a><a href="#komponenty">K1–K18</a><a href="#przypadki">Przypadki §3</a><a href="#karta">Makieta karty</a><a href="#czat">Czat i dialog</a></nav>
+<button class="noe-btn" type="button" onclick="document.body.classList.toggle('gray');this.setAttribute('aria-pressed',document.body.classList.contains('gray'))">Skala szarości</button></div>
+<main>
+<h1>NOE M9 · tokeny i komponenty</h1>
+<p>Etap <strong>E1b</strong> planu M9. Strona ładuje prawdziwe arkusze <code>styles/noe/tokens.generated.css</code>, <code>tokens.css</code> i <code>components.css</code>
+oraz składa znaczniki pomocnikami <code>scripts/ui/noe.mjs</code> — to nie rysunek, tylko te same reguły, które dostanie Foundry. Profil <code>noe-m9-r07-v1</code> bez zmian.
+Przełącznik „Skala szarości” sprawdza zasadę P4: znaczenie ma przetrwać bez koloru.</p>
+
+<div class="decide"><strong>Do decyzji MG (warunek przejścia E1b):</strong>
+<ol>
+<li><strong>O2 — kolory semantyczne</strong> ok / warn / danger / info: propozycja kontra punkt wyjścia M8, z pomiarem odległości od A/B/R/I i od czerwieni skosu (<a href="#o2">tabela</a>).</li>
+<li><strong>Kolory mierników</strong> PW / KW / tymczasowe — nowe wartości spoza profilu (<a href="#k11">K11</a>).</li>
+<li><strong>Powierzchnie pochodne</strong> <code>--noe-raised</code> i <code>--noe-inset</code> (<a href="#tokeny">tokeny</a>) oraz wygląd komponentów K1–K18.</li>
+</ol></div>
+
+<h2 id="tokeny">Tokeny</h2>
+<p class="cap">Powierzchnie, tekst, linie — profil + pochodne</p>
+<div class="grid">
+<div class="sw"><span class="sw__chip" style="background:var(--noe-surface)"></span><code>--noe-surface</code><span class="sw__val">#191e23</span><span class="sw__note">powierzchnia okna</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-panel)"></span><code>--noe-panel</code><span class="sw__val">#293038</span><span class="sw__note">panel, nagłówek sekcji</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-raised)"></span><code>--noe-raised</code><span class="sw__val">color-mix(panel, accent 10%)</span><span class="sw__note">hover, wybór — pochodny</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-inset)"></span><code>--noe-inset</code><span class="sw__val">color-mix(surface, czerń 30%)</span><span class="sw__note">pola, tory mierników — pochodny</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-text)"></span><code>--noe-text</code><span class="sw__val">#edf0f2</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-text-muted)"></span><code>--noe-text-muted</code><span class="sw__val">#b2bdc6</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-text-disabled)"></span><code>--noe-text-disabled</code><span class="sw__val">color-mix(muted, surface 45%)</span><span class="sw__note">tylko nieaktywne pola; nigdy glif</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-line)"></span><code>--noe-line</code><span class="sw__val">#454f58</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-accent)"></span><code>--noe-accent</code><span class="sw__val">#bdc6cd</span><span class="sw__note">akcent interfejsu = focus</span></div>
+</div>
+<p class="cap">Osiem źródeł — tło ikony · glif · akcent (linia pod próbką)</p>
+<div class="srcs">
+<div class="src" data-noe-source="brutal">
+  <span class="src__ground" style="background:var(--noe-src-brutal-ground);color:var(--noe-src-brutal-glyph)">Aa</span>
+  <span class="src__name">Brutal</span>
+  <span class="src__bar"></span>
+  <code>#6d2623 · #ffffff · #d57362</code>
+</div>
+<div class="src" data-noe-source="cwaniak">
+  <span class="src__ground" style="background:var(--noe-src-cwaniak-ground);color:var(--noe-src-cwaniak-glyph)">Aa</span>
+  <span class="src__name">Cwaniak</span>
+  <span class="src__bar"></span>
+  <code>#4f4100 · #ffffff · #ddc052</code>
+</div>
+<div class="src" data-noe-source="spec">
+  <span class="src__ground" style="background:var(--noe-src-spec-ground);color:var(--noe-src-spec-glyph)">Aa</span>
+  <span class="src__name">Spec</span>
+  <span class="src__bar"></span>
+  <code>#00484e · #ffffff · #56c5ce</code>
+</div>
+<div class="src" data-noe-source="twardziel">
+  <span class="src__ground" style="background:var(--noe-src-twardziel-ground);color:var(--noe-src-twardziel-glyph)">Aa</span>
+  <span class="src__name">Twardziel</span>
+  <span class="src__bar"></span>
+  <code>#263574 · #ffffff · #7999ef</code>
+</div>
+<div class="src" data-noe-source="zlodziej">
+  <span class="src__ground" style="background:var(--noe-src-zlodziej-ground);color:var(--noe-src-zlodziej-glyph)">Aa</span>
+  <span class="src__name">Złodziej</span>
+  <span class="src__bar"></span>
+  <code>#4e2b6d · #ffffff · #bb85ea</code>
+</div>
+<div class="src" data-noe-source="zwiadowca">
+  <span class="src__ground" style="background:var(--noe-src-zwiadowca-ground);color:var(--noe-src-zwiadowca-glyph)">Aa</span>
+  <span class="src__name">Zwiadowca</span>
+  <span class="src__bar"></span>
+  <code>#28481e · #ffffff · #9dc96a</code>
+</div>
+<div class="src" data-noe-source="generic">
+  <span class="src__ground" style="background:var(--noe-src-generic-ground);color:var(--noe-src-generic-glyph)">Aa</span>
+  <span class="src__name">Generic</span>
+  <span class="src__bar"></span>
+  <code>#383e45 · #ffffff · #b8c1c9</code>
+</div>
+<div class="src" data-noe-source="pochodzenia">
+  <span class="src__ground" style="background:var(--noe-src-pochodzenia-ground);color:var(--noe-src-pochodzenia-glyph)">Aa</span>
+  <span class="src__name">Pochodzenia</span>
+  <span class="src__bar"></span>
+  <code>#dfd1b1 · #161b20 · #dfd1b1</code>
+</div>
+</div>
+<p class="cap">Sprzęt — kolor gołego glifu rodziny</p>
+<div class="grid">
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-weapon)"></span><code>--noe-eq-weapon</code><span class="sw__val">#c3cbd2</span><span class="sw__note">Broń</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-ammo)"></span><code>--noe-eq-ammo</code><span class="sw__val">#d0b27a</span><span class="sw__note">Amunicja</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-armor)"></span><code>--noe-eq-armor</code><span class="sw__val">#bdbaa5</span><span class="sw__note">Pancerze</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-tools)"></span><code>--noe-eq-tools</code><span class="sw__val">#8cbbb2</span><span class="sw__note">Narzędzia</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-medical)"></span><code>--noe-eq-medical</code><span class="sw__val">#a7c6ad</span><span class="sw__note">Medycyna</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-chemicals)"></span><code>--noe-eq-chemicals</code><span class="sw__val">#b8abc6</span><span class="sw__note">Chemia</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-explosives)"></span><code>--noe-eq-explosives</code><span class="sw__val">#c99f6e</span><span class="sw__note">Wybuchowe / paliwo</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-survival)"></span><code>--noe-eq-survival</code><span class="sw__val">#c5b58e</span><span class="sw__note">Żywność / woda</span></div>
+<div class="sw"><span class="sw__chip" style="background:var(--noe-eq-salvage)"></span><code>--noe-eq-salvage</code><span class="sw__val">#b5b9b6</span><span class="sw__note">Fanty / wartościowe</span></div>
+</div>
+<p class="cap">Koszty i niedostępność</p>
+<div class="inline" style="margin:8px 0 4px">
+<span class="noe-cost noe-cost--lg" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> <span class="noe-cost noe-cost--lg" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span> <span class="noe-cost noe-cost--lg" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span> <span class="noe-cost noe-cost--lg" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span>
+<span style="width:24px"></span>
+<span class="noe-glyph noe-glyph--id is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/origin/asgard.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span> <span class="noe-glyph noe-glyph--sm is-unavailable"><img src="../../../icons/finished/brutal/brutal.webp" loading="lazy"></span>
+<code>skos #ff554d · obrys #10161b · -45° · 112% · clamp(2px, 5,5%, 4px)</code>
+</div>
+
+<h2 id="o2">O2 — kolory semantyczne</h2>
+<p>Semantyczne zawsze idą z tekstem albo ikoną i nie zastępują kosztów: zielone koło A nie znaczy „gotowe”.
+Tabela mierzy różnicę barwy ΔE (CIEDE2000; poniżej 10 — łatwo pomylić, zaznaczone) względem figur kosztów, czerwieni skosu i tekstu drugorzędnego
+oraz kontrast tekstu na <code>surface</code> i <code>panel</code>. Punkt wyjścia M8: zieleń 7 od koła A, czerwień 7 od skosu, „informacja” 3,5 od zwykłego tekstu muted.
+Propozycja przesuwa „ok” ku żółtozielonemu, „danger” ku jasnemu koralowi, „info” ku niebieskofioletowemu; ostrzeżenie zostaje jasnożółte.</p>
+<table>
+<tr><th>Wartość</th><th>Wariant</th><th>ΔE A</th><th>ΔE B</th><th>ΔE R</th><th>ΔE I</th><th>ΔE skos</th><th>ΔE tekst muted</th><th>min ΔE</th><th>kontrast surface</th><th>kontrast panel</th><th>Próbka</th></tr>
+<tr class="grp"><th colspan="12">ok — sukces, mieści się, gotowe</th></tr>
+<tr><td><span class="sw__chip" style="background:#7fe08f"></span> <code>#7fe08f</code></td><td>punkt wyjścia (M8)</td><td class="num low">7.1</td><td class="num">38.9</td><td class="num">46.4</td><td class="num">38.3</td><td class="num">69.5</td><td class="num">29.2</td><td class="num low">7.1</td><td class="num">10.4</td><td class="num">8.2</td><td><span style="color:#7fe08f">Sukces · mieści się</span></td></tr>
+<tr><td><span class="sw__chip" style="background:#b5e48c"></span> <code>#b5e48c</code></td><td><strong>propozycja</strong></td><td class="num">12.9</td><td class="num">32.3</td><td class="num">63.8</td><td class="num">41.5</td><td class="num">61.9</td><td class="num">29.9</td><td class="num">12.9</td><td class="num">11.5</td><td class="num">9.2</td><td><span style="color:#b5e48c">Sukces · mieści się</span></td></tr>
+<tr class="grp"><th colspan="12">warn — ostrzeżenie (budżet M8)</th></tr>
+<tr><td><span class="sw__chip" style="background:#f3d98b"></span> <code>#f3d98b</code></td><td>punkt wyjścia (M8)</td><td class="num">27.1</td><td class="num">14.8</td><td class="num">51.5</td><td class="num">42.3</td><td class="num">42.5</td><td class="num">29.3</td><td class="num">14.8</td><td class="num">12.1</td><td class="num">9.6</td><td><span style="color:#f3d98b">Ostrzeżenie · możesz użyć</span></td></tr>
+<tr><td><span class="sw__chip" style="background:#ffe08a"></span> <code>#ffe08a</code></td><td><strong>propozycja</strong></td><td class="num">29.1</td><td class="num">14.9</td><td class="num">52.8</td><td class="num">43.9</td><td class="num">43.4</td><td class="num">31.0</td><td class="num">14.9</td><td class="num">13.0</td><td class="num">10.3</td><td><span style="color:#ffe08a">Ostrzeżenie · możesz użyć</span></td></tr>
+<tr class="grp"><th colspan="12">danger — porażka, zakaz, zagrożenie</th></tr>
+<tr><td><span class="sw__chip" style="background:#ff7b6e"></span> <code>#ff7b6e</code></td><td>punkt wyjścia (M8)</td><td class="num">60.8</td><td class="num">28.0</td><td class="num">29.1</td><td class="num">49.4</td><td class="num low">7.2</td><td class="num">32.5</td><td class="num low">7.2</td><td class="num">6.6</td><td class="num">5.3</td><td><span style="color:#ff7b6e">Porażka · zakaz</span></td></tr>
+<tr><td><span class="sw__chip" style="background:#ff9e94"></span> <code>#ff9e94</code></td><td><strong>propozycja</strong></td><td class="num">54.4</td><td class="num">25.7</td><td class="num">25.1</td><td class="num">44.4</td><td class="num">15.2</td><td class="num">29.2</td><td class="num">15.2</td><td class="num">8.4</td><td class="num">6.7</td><td><span style="color:#ff9e94">Porażka · zakaz</span></td></tr>
+<tr class="grp"><th colspan="12">info — informacja, wartość zmieniona</th></tr>
+<tr><td><span class="sw__chip" style="background:#b9c7d6"></span> <code>#b9c7d6</code></td><td>punkt wyjścia (M8)</td><td class="num">29.5</td><td class="num">33.9</td><td class="num">19.0</td><td class="num">12.0</td><td class="num">38.9</td><td class="num low">3.6</td><td class="num low">3.6</td><td class="num">9.8</td><td class="num">7.8</td><td><span style="color:#b9c7d6">Zmienione przez efekt</span></td></tr>
+<tr><td><span class="sw__chip" style="background:#a9b8e8"></span> <code>#a9b8e8</code></td><td><strong>propozycja</strong></td><td class="num">38.0</td><td class="num">43.0</td><td class="num">18.9</td><td class="num">14.4</td><td class="num">40.3</td><td class="num">12.7</td><td class="num">12.7</td><td class="num">8.6</td><td class="num">6.8</td><td><span style="color:#a9b8e8">Zmienione przez efekt</span></td></tr>
+</table>
+<div class="inline on-panel"><span class="noe-badge noe-badge--ok"><i class="fa-solid fa-check" inert></i>Gotowe</span> <span class="noe-badge noe-badge--warn"><i class="fa-solid fa-triangle-exclamation" inert></i>Ostrzeżenie · możesz użyć</span> <span class="noe-badge noe-badge--ban"><i class="fa-solid fa-ban" inert></i>Zakaz · jesteś w zwarciu</span> <span class="noe-badge noe-badge--info"><i class="fa-solid fa-circle-info" inert></i>Zmienione przez efekt</span> <span style="width:18px"></span> <span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> <span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span> <span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span> <span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span> <span class="noe-glyph noe-glyph--sm is-unavailable"><img src="../../../icons/finished/feat/gunfight.webp" loading="lazy"></span></div>
+
+<h2 id="typografia">Typografia (D11)</h2>
+<table class="type">
+<tr><th>Rola</th><th>Krój · rozmiar / waga</th><th>Próbka</th></tr>
+<tr><td>Imię postaci, tytuł karty</td><td><code>Roboto Condensed 24/700, wersaliki</code></td><td><span class="noe-title" style="display:inline-block">Żołnierz w oporządzeniu</span></td></tr>
+<tr><td>Tytuł okna i dialogu</td><td><code>Roboto Condensed 14/700</code></td><td><span class="noe-window__title">Strzał pojedynczy — AK (Kałach)</span></td></tr>
+<tr><td>Podtytuł</td><td><code>Roboto Condensed 13/400, muted</code></td><td><span class="noe-subtitle">Twardziel 5 · Żołnierz · Nowy Jork</span></td></tr>
+<tr><td>Etykieta sekcji i kolumny</td><td><code>Roboto Mono 10–11/400, wersaliki, +1 px</code></td><td><span class="noe-label">Zdolności klasowe · użycia · odnowienie</span></td></tr>
+<tr><td>Nazwa w wierszu</td><td><code>Roboto 13/700</code></td><td><span class="noe-row__name">Zażółć gęślą jaźń — Łowca Mutantów</span></td></tr>
+<tr><td>Podpis wiersza</td><td><code>Roboto 11/400, muted</code></td><td><span class="noe-row__caption">Zdolność klasowa · Zwiadowca</span></td></tr>
+<tr><td>Liczby, liczniki, koszty</td><td><code>Roboto Mono 11–20/700, tabelaryczne</code></td><td><span class="noe-num" style="font-size:var(--noe-fs-20)">37/37</span> &nbsp; <span class="noe-num">1 240 szt. · 9 m · +3 · k20 = 17</span></td></tr>
+<tr><td>Tekst opisu</td><td><code>Roboto 13/400</code></td><td>Po trafieniu bronią białą możesz wytrącić przeciwnikowi broń z ręki.</td></tr>
+<tr><td>Przycisk</td><td><code>Roboto Condensed 12/700, wersaliki</code></td><td><button type="button" class="noe-btn">Rzuć obrażenia</button></td></tr>
+</table>
+<p class="cap">Odstępy 2 · 4 · 8 · 12 · 16 · 24 px — promienie 2 (chip) · 3 (tło ikony) · 4 (panel) — linia 1 px, wybór 2 px — wiersz 52 px z glifem 44 px — cel kliknięcia ≥ 24 px — przycisk i pole 28 px</p>
+
+<h2 id="komponenty">Komponenty K1–K18</h2>
+
+<section class="k" id="k1"><header><h3><span>K1</span> Rama okna</h3><p>Zastępuje: denim, pergamin, banery ui/official/*</p></header><div class="k__body"><div class="noe-window" style="width:420px"><div class="noe-window__header"><span class="noe-window__title">AK (Kałach)</span><button type="button" class="noe-btn noe-btn--icon" data-tooltip="Zamknij" aria-label="Zamknij"><i class="fa-solid fa-xmark" inert></i></button></div><div class="noe-dialog__body"><span class="noe-subtitle">Broń · palna pośrednia</span>Okno NOE: grafit, linia 1 px, bez złota i cienia. Baner tylko na kartach (D14).</div></div>
+<div class="noe-window noe-banner" style="width:520px;--noe-banner-image:url('../../ui/noe/banners/item.webp');--noe-banner-height:150px"><div class="noe-dialog__body" style="min-height:118px"><div class="inline"><span class="noe-glyph noe-glyph--id"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="stack"><span class="noe-title" style="font-size:var(--noe-fs-20)">AK (Kałach)</span><span class="noe-subtitle">Broń · palna pośrednia · 7,62×39 mm</span></div></div></div></div></div></section>
+
+<section class="k" id="k2"><header><h3><span>K2</span> Nagłówek karty</h3><p>Zastępuje: czerwona kreska pod imieniem, złote ramki</p></header><div class="k__body"><div class="stack" data-noe-source="twardziel" style="min-width:340px"><h1 class="noe-title">Żołnierz w oporządzeniu</h1><span class="noe-subtitle">Twardziel 5 · Żołnierz</span></div>
+<div class="stack" data-noe-source="zwiadowca" style="min-width:340px"><h1 class="noe-title">Łowca Mutantów z bardzo długim imieniem</h1><span class="noe-subtitle">Zwiadowca 12 · Łowca Mutantów</span></div>
+<div class="stack" style="min-width:240px"><h1 class="noe-title">Gangus Kapo</h1><span class="noe-subtitle">BN · neutralny akcent</span></div></div></section>
+
+<section class="k" id="k3"><header><h3><span>K3</span> Tabliczka odczytu (D18)</h3><p>Zastępuje: tarcza TT, heksy inicjatywy / szybkości / biegłości, pierścień poziomu</p></header><div class="k__body"><div class="noe-readout"><span class="noe-readout__label">TT</span><span class="noe-readout__value">18</span></div> <div class="noe-readout"><span class="noe-readout__label">Inicjatywa</span><span class="noe-readout__value">+2</span></div> <div class="noe-readout"><span class="noe-readout__label">Szybkość</span><span class="noe-readout__value">9<span class="noe-readout__unit"> m</span></span></div> <div class="noe-readout"><span class="noe-readout__label">Biegłość</span><span class="noe-readout__value">+3</span></div> <div class="noe-readout"><span class="noe-readout__label">Poziom</span><span class="noe-readout__value">5</span></div> <div class="noe-readout is-modified" data-tooltip="Kamizelka taktyczna +2"><span class="noe-readout__label">TT</span><span class="noe-readout__value">20</span></div> <div class="noe-readout noe-readout--sm"><span class="noe-readout__label">SW</span><span class="noe-readout__value">1/2</span></div> <div class="noe-readout noe-readout--sm"><span class="noe-readout__label">PD</span><span class="noe-readout__value">6 500</span></div>
+<p class="wide">Wartość zmieniona efektem dostaje znak ± przy liczbie; źródło w tooltipie. Edycja jak dziś.</p></div></section>
+
+<section class="k" id="k4"><header><h3><span>K4</span> Zakładki</h3><p>Zastępuje: złote i pergaminowe zakładki</p></header><div class="k__body"><nav class="noe-tabs" style="min-width:380px"><a class="noe-tab is-active">Opis</a><a class="noe-tab">Szczegóły</a><a class="noe-tab">Aktywności</a><a class="noe-tab">Efekty</a></nav>
+<nav class="noe-tabs noe-tabs--rail"><a class="noe-tab"><i class="fa-solid fa-suitcase"></i></a><a class="noe-tab"><i class="fa-solid fa-boxes-stacked"></i></a><a class="noe-tab is-active"><i class="fa-solid fa-list"></i></a><a class="noe-tab"><i class="fa-solid fa-bolt"></i></a><a class="noe-tab"><i class="fa-solid fa-feather"></i></a></nav></div></section>
+
+<section class="k" id="k5"><header><h3><span>K5</span> Nagłówek sekcji</h3><p>Zastępuje: bordowe belki --dnd5e-card-header-*</p></header><div class="k__body"><div class="stack wide"><div class="noe-section" data-noe-source="twardziel"><h3 class="noe-section__title">Zdolności klasowe — Twardziel</h3><span class="noe-section__col" style="width:70px">Użycia</span><span class="noe-section__col" style="width:96px">Odnowienie</span></div>
+<div class="noe-section" data-noe-source="pochodzenia"><h3 class="noe-section__title">Pochodzenie — Nowy Jork</h3><span class="noe-section__col" style="width:70px">Użycia</span><span class="noe-section__col" style="width:96px">Odnowienie</span></div>
+<div class="noe-section"><h3 class="noe-section__title">Broń</h3><span class="noe-section__col" style="width:70px">Waga</span><span class="noe-section__col" style="width:96px">Ilość</span></div></div></div></section>
+
+<section class="k" id="k6"><header><h3><span>K6</span> Wiersz treści</h3><p>Zastępuje: wiersze z gold-icon</p></header><div class="k__body"><div class="wide"><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/twardziel/kondycha.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Kondycha</span></div><span class="noe-row__caption">Twardziel · zdolność klasowa</span></div><div class="noe-row__meta"><span class="noe-count">1<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--ok">Gotowe</span></div></div><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">AK (Kałach)</span></div><span class="noe-row__caption">Broń · palna pośrednia</span></div><div class="noe-row__meta"><span class="noe-count">24<span class="noe-count__max">/30</span></span><span class="noe-badge">Magazynek</span></div></div><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/utility/activity_single_fire.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span><span class="noe-row__name">Strzał pojedynczy</span></div><span class="noe-row__caption">Czynność broni</span></div><div class="noe-row__meta"><span class="noe-badge noe-badge--ok">Gotowe</span></div></div></div>
+<p class="wide">Glif 44 px bez obudowy · znaki kosztu przed nazwą · nazwa i podpis · po prawej licznik i powód/stan. Hover: tło akcentu 8%; wybór: obrys 1 px akcentu. Wszystkie stany — <a href="#przypadki" style="color:var(--noe-info)">przypadki §3</a>.</p></div></section>
+
+<section class="k" id="k7"><header><h3><span>K7</span> Znak kosztu</h3><p>Zastępuje: tekst „Akcja dodatkowa” w podpisie</p></header><div class="k__body"><div class="inline"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> <span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span> <span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span> <span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span> <span class="noe-cost" data-cost="other" data-tooltip="1 min" aria-label="1 min">1 min</span> <span class="noe-cost" data-cost="other" data-tooltip="wyzwalacz" aria-label="wyzwalacz">wyzwalacz</span></div>
+<div class="inline"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja 1/1">A<span class="noe-cost__count">1/1</span></span> <span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa 0/1">B<span class="noe-cost__count">0/1</span></span> <span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja 1/1">R<span class="noe-cost__count">1/1</span></span> <span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja 0/1">I<span class="noe-cost__count">0/1</span></span> <span class="noe-badge">I 0/1 → kolejne Używanie kosztuje A</span></div>
+<div class="inline on-panel"><span class="noe-cost noe-cost--lg" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> <span class="noe-cost noe-cost--lg" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span> <span class="noe-cost noe-cost--lg" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span> <span class="noe-cost noe-cost--lg" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span></div></div></section>
+
+<section class="k" id="k8"><header><h3><span>K8</span> Licznik</h3><p>Zastępuje: kolumna „Użycia”</p></header><div class="k__body"><div class="stack" style="align-items:flex-end"><span class="noe-count">1<span class="noe-count__max">/1</span></span><span class="noe-count">0<span class="noe-count__max">/3</span></span><span class="noe-count">24<span class="noe-count__max">/30</span></span><span class="noe-count">1240<span class="noe-count__unit">szt.</span></span><span class="noe-count">6/9<span class="noe-count__unit">m</span></span></div>
+<p>Mono, cyfry tabelaryczne, wyrównanie do prawej, min. 5 znaków. Zero zawsze z powodem obok (K9).</p></div></section>
+
+<section class="k" id="k9"><header><h3><span>K9</span> Plakietka stanu</h3><p>Zastępuje: — (nowy komponent)</p></header><div class="k__body"><div class="stack"><span class="noe-badge noe-badge--on">WŁ.</span><span class="noe-badge noe-badge--warn"><i class="fa-solid fa-triangle-exclamation" inert></i>Ostrzeżenie · możesz użyć</span><span class="noe-badge noe-badge--cond"><i class="fa-solid fa-link-slash" inert></i>Warunek · brak wyzwalacza</span><span class="noe-badge noe-badge--ban"><i class="fa-solid fa-ban" inert></i>Zakaz · jesteś w zwarciu</span><span class="noe-badge noe-badge--unknown">Nieznany stan</span><span class="noe-badge noe-badge--ok"><i class="fa-solid fa-check" inert></i>Gotowe</span></div>
+<p>Tekst + ikona. WŁ. = działający efekt, niezależny od gotowości kolejnego użycia. Ostrzeżenie budżetu M8 nigdy nie dostaje skosu i niczego nie blokuje.</p></div></section>
+
+<section class="k" id="k10"><header><h3><span>K10</span> Skos niedostępności</h3><p>Zastępuje: opacity i filtry na glifie</p></header><div class="k__body"><div class="inline"><span class="noe-glyph noe-glyph--id is-unavailable"><img src="../../../icons/finished/twardziel/twardziel.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/origin/nowy-jork.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/feat/aramis.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/medical/medpak.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/utility/activity_reload.webp" loading="lazy"></span> <span class="noe-glyph noe-glyph--sm is-unavailable"><img src="../../../icons/finished/brutal/wsciekly-cios.webp" loading="lazy"></span></div>
+<div class="inline on-panel"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/origin/nowy-jork.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span> <span class="noe-glyph is-unavailable"><img src="../../../icons/finished/ammo/ammo_9_mm.webp" loading="lazy"></span></div>
+<p class="wide">Glif zachowuje pełną nieprzezroczystość. Skos to <code>::after</code> na opakowaniu <code>.noe-glyph</code>: −45°, 112% boku, grubość clamp(2 px, 5,5%, 4 px), obrys 1 px.</p></div></section>
+
+<section class="k" id="k11"><header><h3><span>K11</span> Miernik i tor</h3><p>Zastępuje: kapsuły PW/KW, --dnd5e-color-hp-*</p></header><div class="k__body"><div class="stack" style="width:230px"><span class="noe-label">Punkty Wytrzymałości</span><div class="noe-meter noe-meter--pw" role="meter" aria-valuemin="0" aria-valuemax="37" aria-valuenow="37" style="--noe-meter-pct:100.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">37<span class="noe-count__max">/37</span></span></div><div class="noe-meter noe-meter--pw" role="meter" aria-valuemin="0" aria-valuemax="37" aria-valuenow="12" style="--noe-meter-pct:32.4%"><span class="noe-meter__fill"></span><span class="noe-meter__value">12<span class="noe-count__max">/37</span></span></div><span class="noe-label">Kości Wytrzymałości</span><div class="noe-meter noe-meter--kw" role="meter" aria-valuemin="0" aria-valuemax="5" aria-valuenow="5" style="--noe-meter-pct:100.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">5<span class="noe-count__max">/5</span></span></div><div class="noe-meter noe-meter--kw" role="meter" aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" style="--noe-meter-pct:40.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">2<span class="noe-count__max">/5</span></span></div><span class="noe-label">Tymczasowe</span><div class="noe-meter noe-meter--temp" role="meter" aria-valuemin="0" aria-valuemax="10" aria-valuenow="6" style="--noe-meter-pct:60.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">6<span class="noe-count__max">/10</span></span></div></div>
+<div class="stack" style="width:230px"><span class="noe-label">Paliwo</span><div class="noe-meter" role="meter" aria-valuemin="0" aria-valuemax="60" aria-valuenow="34" style="--noe-meter-pct:56.7%"><span class="noe-meter__fill"></span><span class="noe-meter__value">34<span class="noe-count__max">/60</span></span></div><span class="noe-label">Ładownia</span><div class="noe-meter" role="meter" aria-valuemin="0" aria-valuemax="800" aria-valuenow="412" style="--noe-meter-pct:51.5%"><span class="noe-meter__fill"></span><span class="noe-meter__value">412<span class="noe-count__max">/800</span></span></div><span class="noe-label">Udźwig</span><div class="noe-meter noe-meter--thin" role="meter" aria-valuemin="0" aria-valuemax="60" aria-valuenow="55" style="--noe-meter-pct:91.7%"><span class="noe-meter__fill"></span></div></div>
+<div class="grid" style="flex:1 1 260px"><div class="sw"><span class="sw__chip" style="background:var(--noe-meter-pw)"></span><code>--noe-meter-pw</code><span class="sw__val">#4f9165</span><span class="sw__note">Punkty Wytrzymałości</span></div><div class="sw"><span class="sw__chip" style="background:var(--noe-meter-kw)"></span><code>--noe-meter-kw</code><span class="sw__val">#8a6f93</span><span class="sw__note">Kości Wytrzymałości</span></div><div class="sw"><span class="sw__chip" style="background:var(--noe-meter-temp)"></span><code>--noe-meter-temp</code><span class="sw__val">#5d86a8</span><span class="sw__note">punkty tymczasowe</span></div><div class="sw"><span class="sw__chip" style="background:var(--noe-meter-neutral)"></span><code>--noe-meter-neutral</code><span class="sw__val">#7b8893</span><span class="sw__note">paliwo, ładownia, zapasy</span></div></div>
+<p class="wide">Tor <code>--noe-inset</code>, płaskie wypełnienie, liczba mono; bez gradientów. Pipki panelu Stan zachowują <code>--neuro-color-*</code>.</p></div></section>
+
+<section class="k" id="k12"><header><h3><span>K12</span> Przycisk</h3><p>Zastępuje: złote przyciski czatu, --control-button-text-color</p></header><div class="k__body"><div class="inline"><button type="button" class="noe-btn noe-btn--primary"><i class="fa-solid fa-dice-d20" inert></i>Rzuć atak</button> <button type="button" class="noe-btn">Obrażenia</button> <button type="button" class="noe-btn noe-btn--danger"><i class="fa-solid fa-trash" inert></i>Usuń przedmiot</button> <button type="button" class="noe-btn noe-btn--icon" data-tooltip="Edytuj" aria-label="Edytuj"><i class="fa-solid fa-pen" inert></i></button> <button type="button" class="noe-btn" disabled data-tooltip="Najpierw rzut ataku">Rzuć obrażenia</button></div>
+<div class="noe-seg"><button class="noe-btn" type="button">Ułatwienie</button><button class="noe-btn is-active" type="button" aria-pressed="true">Normalnie</button><button class="noe-btn" type="button">Utrudnienie</button></div>
+<p class="wide">Podstawowy (akcent), drugorzędny (panel + linia), niebezpieczny (obrys i tekst danger), ikonowy. Wysokość 28 px. Nieaktywny: tekst disabled i powód w tooltipie.</p></div></section>
+
+<section class="k" id="k13"><header><h3><span>K13</span> Pola formularza</h3><p>Zastępuje: złoty slide-toggle i legendy</p></header><div class="k__body"><fieldset class="noe-fieldset" style="width:340px"><legend>Zużycie</legend><div class="stack"><div class="noe-field"><label>Amunicja</label><select class="noe-input"><option>7,62×39 mm AK — 24 szt.</option></select></div><div class="two"><div class="noe-field"><label>Premia sytuacyjna</label><input class="noe-input noe-input--num" value="+2"></div><div class="noe-field"><label>Zablokowane</label><input class="noe-input noe-input--num" value="—" disabled></div></div><label class="inline"><input type="checkbox" checked style="accent-color:var(--noe-accent)"> Zużyj akcję bonusową</label></div></fieldset>
+<p>W Foundry pola pochodzą z rdzenia i dnd5e — most przypisuje tokeny do <code>--input-*</code>, <code>--checkbox-*</code>, <code>--slide-toggle-*</code>.</p></div></section>
+
+<section class="k" id="k14"><header><h3><span>K14</span> Tooltip, popover, menu</h3><p>Zastępuje: pergaminowe tooltipy dnd5e</p></header><div class="k__body"><div class="noe-tip"><p class="noe-tip__title">TT 20</p><div class="noe-tip__row"><span>Podstawa</span><span>10</span></div><div class="noe-tip__row"><span>Zręczność</span><span>+2</span></div><div class="noe-tip__row"><span>Plate carrier typ II</span><span>+6</span></div><div class="noe-tip__row"><span>Kamizelka taktyczna</span><span>+2</span></div></div>
+<div class="noe-tip">Zakaz: jesteś w zwarciu z Gangusem Kapo. Odstąp albo wygraj zwarcie, zanim sięgniesz po medpak.</div>
+<div class="noe-menu"><div class="noe-menu__item"><i class="fa-solid fa-pen"></i>Edytuj</div><div class="noe-menu__item"><i class="fa-solid fa-copy"></i>Duplikuj</div><div class="noe-menu__item is-danger"><i class="fa-solid fa-trash"></i>Usuń</div></div></div></section>
+
+<section class="k" id="k15"><header><h3><span>K15</span> Powłoka dialogu</h3><p>Zastępuje: 126 wywołań DialogV2 z różną oprawą</p></header><div class="k__body"><div class="noe-window dlg"><div class="noe-window__header"><span class="noe-window__title">Wyrzucić granat?</span></div><div class="noe-dialog__body">Granat odłamkowy zostanie zużyty. Tej czynności nie da się cofnąć.<dl class="noe-summary"><dt>Zasięg</dt><dd>9/18 m</dd><dt>Zostanie</dt><dd>1 szt.</dd></dl></div><div class="noe-dialog__footer"><button type="button" class="noe-btn">Anuluj</button><button type="button" class="noe-btn noe-btn--danger">Rzuć granat</button></div></div></div></section>
+
+<section class="k" id="k16"><header><h3><span>K16</span> Karta czatu</h3><p>Zastępuje: denim, bordowe nagłówki, złote przyciski</p></header><div class="k__body"><p class="wide">Pełne karty — w sekcji <a href="#czat" style="color:var(--noe-info)">Czat i dialog</a>.</p></div></section>
+
+<section class="k" id="k17"><header><h3><span>K17</span> Pusty stan / strefa upuszczania</h3><p>Zastępuje: „UPUŚĆ TU ULUBIONE”</p></header><div class="k__body"><div style="width:230px"><div class="noe-empty"><i class="fa-solid fa-bookmark" inert></i><span>Przeciągnij tu ulubione</span></div></div><div style="width:230px"><div class="noe-empty is-drop-target"><i class="fa-solid fa-bookmark"></i><span>Upuść, aby dodać</span></div></div><div style="width:300px"><div class="noe-empty"><i class="fa-solid fa-inbox" inert></i><span>Brak zdolności z tej kategorii</span></div></div></div></section>
+
+<section class="k" id="k18"><header><h3><span>K18</span> Chip, pill, tag</h3><p>Zastępuje: pills z --pill-underlay-*</p></header><div class="k__body"><div class="inline"><span class="noe-chip">Palna pośrednia</span> <span class="noe-chip">7,62×39 mm</span> <span class="noe-chip noe-chip--muted">Seria</span> <span class="noe-chip noe-chip--danger">Zacięta</span> <span class="noe-chip noe-chip--warn">Do konserwacji</span> <span class="noe-chip noe-chip--ok">Zakonserwowana</span></div></div></section>
+
+<h2 id="przypadki">Przypadki obowiązkowe (§3)</h2>
+<p>Niezależne przykłady stanów — każdy wiersz to osobna sytuacja, nie tura jednej postaci.</p>
+<section class="k"><div class="k__body">
+<div class="case"><p class="case__t">Gotowe — akcja bonusowa z licznikiem</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/twardziel/kondycha.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Kondycha</span></div><span class="noe-row__caption">Twardziel · zdolność klasowa</span></div><div class="noe-row__meta"><span class="noe-count">1<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--ok">Gotowe</span></div></div></div>
+<div class="case"><p class="case__t">Aramis: korzyści stałe + operacja Wytrącenie [B] — koszt przy operacji, nie przy rodzicu</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/feat/aramis.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">Aramis</span></div><span class="noe-row__caption">Sztuczka · korzyści stałe + 1 operacja</span></div><div class="noe-row__meta"><span class="noe-badge">Stałe działają</span></div></div><div class="noe-row noe-row--op"><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Wytrącenie</span></div><span class="noe-row__caption">po trafieniu bronią białą</span></div><div class="noe-row__meta"><span class="noe-badge noe-badge--ok">Gotowe</span></div></div></div>
+<div class="case"><p class="case__t">Wyzwalacz bez prostej litery akcji</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/brutal/wsciekly-cios.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="other" data-tooltip="raz na turę · po trafieniu" aria-label="raz na turę · po trafieniu">raz na turę · po trafieniu</span><span class="noe-row__name">Wściekły cios</span></div><span class="noe-row__caption">Brutal · zdolność klasowa</span></div><div class="noe-row__meta"><span class="noe-count">k6</span><span class="noe-badge">Dolicz po trafieniu</span></div></div></div>
+<div class="case"><p class="case__t">Kilka aktywności o różnych kosztach — znak przy każdej operacji</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">AK (Kałach)</span></div><span class="noe-row__caption">Broń · palna pośrednia</span></div><div class="noe-row__meta"><span class="noe-count">24<span class="noe-count__max">/30</span></span><span class="noe-badge">Magazynek</span></div></div><div class="noe-row noe-row--op"><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span><span class="noe-row__name">Strzał pojedynczy</span></div></div><div class="noe-row__meta"><span class="noe-badge noe-badge--ok">Gotowe</span></div></div><div class="noe-row noe-row--op"><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span><span class="noe-row__name">Wymień magazynek</span></div></div><div class="noe-row__meta"><span class="noe-badge">Kolejne użycie: A</span></div></div></div>
+<div class="case"><p class="case__t">Brak aktywności — korzyść stała; pasywności nie zgadujemy z braku kosztu</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/origin/gambling-we-krwi.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">Gambling we krwi</span></div><span class="noe-row__caption">Pochodzenie · Nowy Jork</span></div><div class="noe-row__meta"><span class="noe-badge">Korzyść stała</span></div></div></div>
+<div class="case"><p class="case__t">Nieznany stan — znak zapytania, bez skosu</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/utility/activity_reload.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja">I</span><span class="noe-row__name">Interakcja z przedmiotem</span></div><span class="noe-row__caption">Czynność · brak danych budżetu</span></div><div class="noe-row__meta"><span class="noe-count">?<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--unknown">Nieznany stan</span></div></div></div>
+<div class="case"><p class="case__t">0 użyć — skos + powód w wierszu</p><div class="noe-row"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span><span class="noe-row__name">Inteligentna obrona</span></div><span class="noe-row__caption">Spec · zdolność klasowa</span></div><div class="noe-row__meta"><span class="noe-count">0<span class="noe-count__max">/3</span></span><span class="noe-badge noe-badge--ban"><i class="fa-solid fa-hourglass-end" inert></i>Brak użyć · długi odpoczynek</span></div></div></div>
+<div class="case"><p class="case__t">Duża liczba użyć nie łamie wiersza</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/ammo/ammo_9_mm.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">9 mm</span></div><span class="noe-row__caption">Amunicja · luzem</span></div><div class="noe-row__meta"><span class="noe-count">1240<span class="noe-count__unit">szt.</span></span><span class="noe-badge">W ekwipunku</span></div></div></div>
+<div class="case"><p class="case__t">Aktywne i zarazem wyczerpane: WŁ. zostaje, skos dotyczy kolejnego użycia</p><div class="noe-row"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/feat/wrestler.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span><span class="noe-row__name">Unik w zwarciu</span></div><span class="noe-row__caption">Sztuczka · efekt do końca tury</span></div><div class="noe-row__meta"><span class="noe-count">0<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--on">WŁ.</span> <span class="noe-badge noe-badge--ban">Kolejne użycie: brak</span></div></div></div>
+<div class="case"><p class="case__t">Zakaz mimo niewydanej puli</p><div class="noe-row"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/medical/medpak.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span><span class="noe-row__name">Medpak</span></div><span class="noe-row__caption">Medycyna · zestaw</span></div><div class="noe-row__meta"><span class="noe-count">2<span class="noe-count__max">/2</span></span><span class="noe-badge noe-badge--ban"><i class="fa-solid fa-ban" inert></i>Zakaz · jesteś w zwarciu</span></div></div></div>
+<div class="case"><p class="case__t">Brak warunku</p><div class="noe-row"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/feat/gunfight.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Gunfight</span></div><span class="noe-row__caption">Sztuczka</span></div><div class="noe-row__meta"><span class="noe-badge noe-badge--cond"><i class="fa-solid fa-link-slash" inert></i>Warunek · potrzebna broń krótka w ręce</span></div></div></div>
+<div class="case"><p class="case__t">Ostrzeżenie M8 mimo pozostałych użyć — ostrzega, nie blokuje, bez skosu</p><div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/twardziel/zolnierz.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa 0/1">B<span class="noe-cost__count">0/1</span></span><span class="noe-row__name">Przycelowanie</span></div><span class="noe-row__caption">Czynność · Akcja Bonusowa</span></div><div class="noe-row__meta"><span class="noe-count">2<span class="noe-count__max">/3</span></span><span class="noe-badge noe-badge--warn"><i class="fa-solid fa-triangle-exclamation" inert></i>Ostrzeżenie · możesz użyć</span></div></div></div>
+<div class="case"><p class="case__t">Zaznaczony wiersz (wybór ≠ aktywny efekt)</p><div class="noe-row is-selected"><span class="noe-glyph"><img src="../../../icons/finished/armor/kamizelka-taktyczna.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">Kamizelka taktyczna</span></div><span class="noe-row__caption">Pancerz lekki · założona</span></div><div class="noe-row__meta"><span class="noe-count">1<span class="noe-count__unit">szt.</span></span><span class="noe-badge">TT +2</span></div></div></div>
+</div></section>
+
+<h2 id="karta">Makieta karty — jeden spójny budżet tury</h2>
+<p>Układ koncepcyjny, nie zrzut z Foundry: nagłówek K2 nad banerem Field kit, tabliczki K3, mierniki K11, szyna K4, sekcja K5 z akcentem klasy, wiersze K6–K10.
+Tura: A 1/1, B 1/1, R 0/1 (wydana), I 1/1, ruch 6/9 m.</p>
+<div class="mock noe-banner" data-noe-source="twardziel">
+  <div class="mock__head"><div class="stack"><h1 class="noe-title">Żołnierz w oporządzeniu</h1><span class="noe-subtitle">Twardziel 5 · Żołnierz · Nowy Jork</span></div><div class="inline"><div class="noe-readout noe-readout--sm"><span class="noe-readout__label">Poziom</span><span class="noe-readout__value">5</span></div><div class="noe-readout noe-readout--sm"><span class="noe-readout__label">Fuksy</span><span class="noe-readout__value">2/3</span></div></div></div>
+  <aside class="mock__side"><div class="mock__portrait"><i class="fa-solid fa-user fa-3x"></i></div><div class="inline"><div class="noe-readout"><span class="noe-readout__label">TT</span><span class="noe-readout__value">18</span></div><div class="noe-readout"><span class="noe-readout__label">Inicj.</span><span class="noe-readout__value">+2</span></div><div class="noe-readout"><span class="noe-readout__label">Szybk.</span><span class="noe-readout__value">9<span class="noe-readout__unit"> m</span></span></div></div><span class="noe-label">Punkty Wytrzymałości</span><div class="noe-meter noe-meter--pw" role="meter" aria-valuemin="0" aria-valuemax="37" aria-valuenow="37" style="--noe-meter-pct:100.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">37<span class="noe-count__max">/37</span></span></div><span class="noe-label">Kości Wytrzymałości</span><div class="noe-meter noe-meter--kw" role="meter" aria-valuemin="0" aria-valuemax="5" aria-valuenow="5" style="--noe-meter-pct:100.0%"><span class="noe-meter__fill"></span><span class="noe-meter__value">5<span class="noe-count__max">/5</span></span></div><div class="noe-empty"><i class="fa-solid fa-bookmark" inert></i><span>Przeciągnij tu ulubione</span></div></aside>
+  <div class="mock__main"><div class="budget"><span><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja 1/1">A<span class="noe-cost__count">1/1</span></span></span><span><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa 1/1">B<span class="noe-cost__count">1/1</span></span></span><span><span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja 0/1">R<span class="noe-cost__count">0/1</span></span></span><span><span class="noe-cost" data-cost="i" data-tooltip="Interakcja" aria-label="Interakcja 1/1">I<span class="noe-cost__count">1/1</span></span></span><span class="noe-num">Ruch 6/9 m</span></div>
+  <div class="noe-section"><h3 class="noe-section__title">Zdolności klasowe — Twardziel</h3><span class="noe-section__col">Użycia · stan</span></div>
+<div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/twardziel/kondycha.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Kondycha</span></div><span class="noe-row__caption">Twardziel · zdolność klasowa</span></div><div class="noe-row__meta"><span class="noe-count">1<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--ok">Gotowe</span></div></div>
+<div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/twardziel/zolnierz.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Przycelowanie</span></div><span class="noe-row__caption">Czynność · Akcja Bonusowa</span></div><div class="noe-row__meta"><span class="noe-badge noe-badge--ok">Gotowe</span></div></div>
+<div class="noe-row"><span class="noe-glyph is-unavailable"><img src="../../../icons/finished/spec/inteligentna-obrona.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="r" data-tooltip="Reakcja" aria-label="Reakcja">R</span><span class="noe-row__name">Stalowe jaja</span></div><span class="noe-row__caption">Twardziel · reakcja na trafienie</span></div><div class="noe-row__meta"><span class="noe-count">0<span class="noe-count__max">/1</span></span><span class="noe-badge noe-badge--ban"><i class="fa-solid fa-hourglass-end" inert></i>Brak użyć · krótki odpoczynek</span></div></div>
+<div class="noe-row"><span class="noe-glyph"><img src="../../../icons/finished/feat/aramis.webp" loading="lazy"></span><div class="noe-row__body"><div class="noe-row__head"><span class="noe-row__name">Aramis</span></div><span class="noe-row__caption">Sztuczka · korzyści stałe + 1 operacja</span></div><div class="noe-row__meta"><span class="noe-badge">Stałe działają</span></div></div>
+<div class="noe-row noe-row--op"><div class="noe-row__body"><div class="noe-row__head"><span class="noe-cost" data-cost="b" data-tooltip="Akcja Bonusowa" aria-label="Akcja Bonusowa">B</span><span class="noe-row__name">Wytrącenie</span></div><span class="noe-row__caption">po trafieniu bronią białą</span></div><div class="noe-row__meta"><span class="noe-badge noe-badge--ok">Gotowe</span></div></div>
+  </div>
+  <nav class="noe-tabs noe-tabs--rail" style="border-radius:0;border-width:0 0 0 1px"><a class="noe-tab"><i class="fa-solid fa-suitcase"></i></a><a class="noe-tab"><i class="fa-solid fa-boxes-stacked"></i></a><a class="noe-tab"><i class="fa-solid fa-hammer"></i></a><a class="noe-tab"><i class="fa-solid fa-gear"></i></a><a class="noe-tab is-active"><i class="fa-solid fa-list"></i></a><a class="noe-tab"><i class="fa-solid fa-bolt"></i></a></nav>
+</div>
+
+<h2 id="czat">Czat i dialog użycia</h2>
+<div class="k__body" style="padding:14px 0">
+<div class="chatlog"><p class="cap">Pełna karta — atak</p>
+<div class="noe-card"><div class="noe-card__header"><span class="noe-glyph noe-glyph--chat"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="noe-card__title"><span class="noe-card__name">AK (Kałach)</span><span class="noe-card__caption"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> Strzał pojedynczy · 7,62×39 mm</span></div></div>
+<div class="noe-card__result"><div class="stack"><span class="noe-card__total">19</span><span class="noe-card__formula">k20 (14) + 5</span></div><span class="noe-card__outcome is-success">Trafienie</span></div>
+<div class="noe-card__notes"><span class="noe-badge noe-badge--info"><i class="fa-solid fa-circle-info" inert></i>Ułatwienie: Przycelowanie</span> <span class="noe-badge noe-badge--on"><i class="fa-solid fa-clover" inert></i>Fuks 2/3</span></div>
+<div class="noe-card__actions"><button type="button" class="noe-btn noe-btn--primary">Obrażenia</button><button type="button" class="noe-btn">Przerzut (Fuks)</button></div></div></div>
+
+<div class="chatlog"><p class="cap">Porażka + Forsowanie</p>
+<div class="noe-card"><div class="noe-card__header"><span class="noe-glyph noe-glyph--chat"><img src="../../../icons/finished/medical/medpak.webp" loading="lazy"></span><div class="noe-card__title"><span class="noe-card__name">Pierwsza pomoc</span><span class="noe-card__caption"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja">A</span> Test Medycyny · ST 15</span></div></div>
+<div class="noe-card__result"><div class="stack"><span class="noe-card__total">11</span><span class="noe-card__formula">k20 (8) + 3</span></div><span class="noe-card__outcome is-failure">Porażka</span></div>
+<div class="noe-card__notes"><span class="noe-badge noe-badge--warn"><i class="fa-solid fa-triangle-exclamation" inert></i>Forsowanie: 1 poziom Wyczerpania</span></div>
+<div class="noe-card__actions"><button type="button" class="noe-btn">Forsuj</button></div></div></div>
+
+<div class="chatlog"><p class="cap">Zwinięta — wynik i adnotacje zostają (PM13)</p>
+<div class="noe-card"><div class="noe-card__header"><span class="noe-glyph noe-glyph--sm"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="noe-card__title"><span class="noe-card__name">AK (Kałach) — obrażenia</span></div><span class="noe-card__total" style="font-size:var(--noe-fs-16)">14</span></div>
+<div class="noe-card__notes"><span class="noe-chip">przebijające</span> <span class="noe-badge noe-badge--on"><i class="fa-solid fa-clover" inert></i>Fuks 2/3</span></div></div>
+<p class="cap" style="margin-top:10px">Pusty magazynek → plakietka, nie pasek</p>
+<div class="noe-card"><div class="noe-card__header"><span class="noe-glyph noe-glyph--sm is-unavailable"><img src="../../../icons/finished/utility/activity_reload.webp" loading="lazy"></span><div class="noe-card__title"><span class="noe-card__name">AK (Kałach)</span><span class="noe-card__caption">Strzał pojedynczy</span></div></div><div class="noe-card__notes"><span class="noe-badge noe-badge--ban"><i class="fa-solid fa-circle-exclamation" inert></i>Pusty magazynek · wymień [I]</span></div></div></div>
+
+<div class="noe-window dlg"><div class="noe-window__header"><span class="noe-window__title">Strzał pojedynczy — AK (Kałach)</span><button type="button" class="noe-btn noe-btn--icon" data-tooltip="Zamknij" aria-label="Zamknij"><i class="fa-solid fa-xmark" inert></i></button></div>
+<div class="noe-dialog__body"><div class="inline"><span class="noe-glyph"><img src="../../../icons/finished/weapon/ak_47.webp" loading="lazy"></span><div class="stack"><span class="noe-row__name">AK (Kałach)</span><span class="noe-row__caption"><span class="noe-cost" data-cost="a" data-tooltip="Akcja" aria-label="Akcja 1/1">A<span class="noe-cost__count">1/1</span></span> &nbsp; Magazynek <span class="noe-count">24<span class="noe-count__max">/30</span></span></span></div></div>
+<fieldset class="noe-fieldset"><legend>Rzut</legend><div class="stack"><div class="noe-seg"><button class="noe-btn" type="button">Ułatwienie</button><button class="noe-btn is-active" type="button" aria-pressed="true">Normalnie</button><button class="noe-btn" type="button">Utrudnienie</button></div><div class="noe-field"><label>Premia sytuacyjna</label><input class="noe-input noe-input--num" value="+0"></div></div></fieldset>
+<dl class="noe-summary"><dt>Formuła</dt><dd>k20 + 5</dd><dt>Zasięg</dt><dd>30/90 m</dd><dt>Zużyje</dt><dd>1 × 7,62×39 mm</dd></dl></div>
+<div class="noe-dialog__footer"><button type="button" class="noe-btn">Anuluj</button><button type="button" class="noe-btn noe-btn--primary"><i class="fa-solid fa-dice-d20" inert></i>Rzuć atak</button></div></div>
+</div>
+
+<footer>Generowane przez <code>node dev/visual/build-components.mjs</code>. Ikony: rzeczywiste eksporty pilota E2 z <code>icons/finished/</code>; banery z <code>ui/noe/banners/</code>.
+Piktogramy Font Awesome: przez serwer Foundry z rdzenia, z dysku — z sieci; bez nich znikają same piktogramy, układ i teksty zostają.</footer>
+</main>
+</body>
+</html>

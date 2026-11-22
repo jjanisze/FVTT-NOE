@@ -298,8 +298,9 @@ function _onDeleteMessage(message) {
   }
 }
 
-const STYL_PASKA = { display: "flex", gap: "6px", marginTop: "6px", justifyContent: "center", alignItems: "center", flexWrap: "wrap" };
-const STYL_PRZYCISKU = { fontSize: "11px", padding: "2px 8px", borderRadius: "3px", fontWeight: "normal", lineHeight: "1.4" };
+// Wygląd paska i przycisków: `.neuroshima-reroll-bar` + przycisk K12 (`noe-btn`) w arkuszach — bez stylów
+// inline i bez własnego koloru na źródło (PLAN_m9 P3: jeden sygnał, jedno znaczenie). Pola `styl`/`stylSzary`
+// w rejestrze źródeł nie są już czytane; zdolność rozpoznaje się po etykiecie, niedostępną — po powodzie w dymku.
 
 function _onRenderMessage(message, html) {
   if (html.querySelector(".neuroshima-reroll-bar")) return;
@@ -313,7 +314,6 @@ function _onRenderMessage(message, html) {
     if (ctx.typ !== "attack") {
       const note = document.createElement("div");
       note.className = "neuro-po-rzucie-zastapiona";
-      Object.assign(note.style, { fontSize: "11px", opacity: "0.7", marginTop: "4px", textAlign: "center" });
       note.textContent = `Zastąpione — ${_zrodla.get(nastepca.zrodlo)?.label ?? nastepca.zrodlo} na nowszej karcie.`;
       content.appendChild(note);
     }
@@ -322,7 +322,6 @@ function _onRenderMessage(message, html) {
 
   const bar = document.createElement("div");
   bar.classList.add("neuroshima-reroll-bar");
-  Object.assign(bar.style, STYL_PASKA);
   for (const row of _wKolejnosci()) {
     if (typeof row.auto === "function") continue;   // bez przycisku — odpala samo (Fart)
     let ocena;
@@ -334,10 +333,10 @@ function _onRenderMessage(message, html) {
     if (st.stan === "ukryty") continue;
     const btn = document.createElement("button");
     btn.type = "button";
+    btn.classList.add("noe-btn");
     if (row.klasa) btn.classList.add(row.klasa);
     btn.dataset.neuroPoRzucie = row.id;
     btn.dataset.messageId = message.id;
-    Object.assign(btn.style, STYL_PRZYCISKU, st.stan === "szary" ? (row.stylSzary ?? {}) : (row.styl ?? {}));
     btn.textContent = ocena?.etykieta ?? row.label;
     if (st.stan === "szary") btn.disabled = true;
     if (st.powod) btn.dataset.tooltip = st.powod;

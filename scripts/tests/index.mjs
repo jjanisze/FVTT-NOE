@@ -23,6 +23,7 @@ import { registerZdolnosciDataTests } from "./zdolnosci-dane.test.mjs";
 import { registerPrzebicieTests } from "./przebicie.test.mjs";
 import { registerTTTests } from "./tt.test.mjs";
 import { registerTTKartaTests } from "./tt-karta.test.mjs";
+import { registerStylM9Tests } from "./styl-m9.test.mjs";
 import { registerObronaTests } from "./obrona.test.mjs";
 import { registerUmieranieTests } from "./umieranie.test.mjs";
 import { registerRekonwalescencjaTests } from "./rekonwalescencja.test.mjs";
@@ -121,6 +122,7 @@ export function registerQuenchTests() {
     registerPrzebicieTests(quench);
     registerTTTests(quench);
     registerTTKartaTests(quench);
+    registerStylM9Tests(quench);
     registerObronaTests(quench);
     registerUmieranieTests(quench);
     registerRekonwalescencjaTests(quench);

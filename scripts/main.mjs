@@ -27,6 +27,9 @@ import { registerConditions } from "./config/conditions.mjs";
 import { registerSpadanie } from "./config/spadanie.mjs";
 import { registerLatanie, latanieApi } from "./actors/latanie.mjs";
 import { registerStateColors } from "./config/state-colors.mjs";
+import { registerNoeTheme } from "./ui/theme.mjs";
+import { registerSheetRows } from "./ui/sheet-rows.mjs";
+import { registerFinishedItemIcons } from "./config/finished-icons.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
 import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
 import { registerRestOverrides } from "./config/rest.mjs";
@@ -286,6 +289,10 @@ Hooks.once("init", () => {
   registerLatanie();
   // Przed pierwszym renderem czegokolwiek, bo arkusz czyta te zmienne bez wartosci zapasowych.
   registerStateColors();
+  // M9: zakres `.noe` i wymuszony ciemny motyw okien NOE/dnd5e oraz kart czatu (PLAN_m9 §5.2).
+  registerNoeTheme();
+  registerSheetRows();
+  registerFinishedItemIcons();
   registerExhaustion();
   registerLevelledConditions();
   registerRestOverrides();

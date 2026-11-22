@@ -1,3 +1,5 @@
+import { inventoryIcon } from "../ui/noe.mjs";
+
 /**
  * Neuroshima 5e — sekcja „Magazynki" w ekwipunku.
  *
@@ -179,8 +181,7 @@ function _buildRow(actor, mag, def, rounds, { weight, inCombat, loadedInto }) {
   li.innerHTML = `
     <div class="item-row flexrow neuro-magazine-row">
       <div class="item-name flexrow">
-        <dnd5e-icon draggable="false" src="${mag.img || magIconPath(def?.cls)}" aria-label="${mag.name}"
-                    class="item-image gold-icon"></dnd5e-icon>
+        ${inventoryIcon(mag.img || magIconPath(def?.cls), mag.name)}
         <div class="name name-stacked flexcol">
           <span class="title">${mag.name}</span>
           <span class="subtitle">${contents}${whereNote ? ` · ${whereNote}` : ""}</span>
@@ -267,7 +268,8 @@ function _buildHeader(actor) {
   const used = handyCount(actor);
   const limit = handyLimit(actor);
   const header = document.createElement("div");
-  header.className = "items-header header flexrow neuro-magazine-header";
+  header.className = "items-header header flexrow neuro-magazine-header noe-section-head";
+  header.dataset.noeFamily = "ammo";
   header.innerHTML = `
     <h3 class="item-name">Magazynki</h3>
     <span class="neuro-handy-counter ${used >= limit ? "is-full" : ""}"

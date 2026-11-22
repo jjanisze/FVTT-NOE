@@ -1,0 +1,73 @@
+/**
+ * NOE — tokeny z profilu noe-m9-r07-v2 (zatwierdzony 2026-11-17).
+ * Generowane przez `npm run build:finish -- --only=tokens` — nie edytuj ręcznie.
+ * Zmiana wyglądu = nowa wersja profilu dev/icons/finish/style-profile.json.
+ */
+:root {
+  /* Motyw: Neutral graphite */
+  --noe-surface: #191e23;
+  --noe-panel: #293038;
+  --noe-text: #edf0f2;
+  --noe-text-muted: #b2bdc6;
+  --noe-line: #454f58;
+  --noe-accent: #bdc6cd;
+
+  /* Źródła — tło ikony, glif, akcent (klasa; profesja dziedziczy klasę) */
+  --noe-src-brutal-ground: #6d2623;
+  --noe-src-brutal-glyph: #ffffff;
+  --noe-src-brutal-accent: #d57362;
+  --noe-src-cwaniak-ground: #4f4100;
+  --noe-src-cwaniak-glyph: #ffffff;
+  --noe-src-cwaniak-accent: #ddc052;
+  --noe-src-spec-ground: #00484e;
+  --noe-src-spec-glyph: #ffffff;
+  --noe-src-spec-accent: #56c5ce;
+  --noe-src-twardziel-ground: #263574;
+  --noe-src-twardziel-glyph: #ffffff;
+  --noe-src-twardziel-accent: #7999ef;
+  --noe-src-zlodziej-ground: #4e2b6d;
+  --noe-src-zlodziej-glyph: #ffffff;
+  --noe-src-zlodziej-accent: #bb85ea;
+  --noe-src-zwiadowca-ground: #28481e;
+  --noe-src-zwiadowca-glyph: #ffffff;
+  --noe-src-zwiadowca-accent: #9dc96a;
+  --noe-src-generic-ground: #383e45;
+  --noe-src-generic-glyph: #ffffff;
+  --noe-src-generic-accent: #b8c1c9;
+  --noe-src-pochodzenia-ground: #dfd1b1;
+  --noe-src-pochodzenia-glyph: #161b20;
+  --noe-src-pochodzenia-accent: #dfd1b1;
+
+  /* Sprzęt — kolor gołego glifu rodziny */
+  --noe-eq-weapon: #c3cbd2;
+  --noe-eq-ammo: #d0b27a;
+  --noe-eq-armor: #bdbaa5;
+  --noe-eq-tools: #8cbbb2;
+  --noe-eq-medical: #a7c6ad;
+  --noe-eq-chemicals: #b8abc6;
+  --noe-eq-explosives: #c99f6e;
+  --noe-eq-survival: #c5b58e;
+  --noe-eq-salvage: #b5b9b6;
+  --noe-eq-devices: #8cbbb2;
+  --noe-eq-documents: #b5b9b6;
+
+  /* Koszty akcji — kształt + kolor + litera */
+  --noe-cost-a: #68c585; /* circle */
+  --noe-cost-b: #f5ad49; /* triangle */
+  --noe-cost-r: #e3a0e9; /* four-point-star */
+  --noe-cost-i: #83c8ed; /* square */
+
+  /* Niedostępność — czerwony skos na glifie */
+  --noe-unavail: #ff554d;
+  --noe-unavail-outline: #10161b;
+  --noe-unavail-angle: -45deg;
+  --noe-unavail-length: 112%;
+  --noe-unavail-thickness-ratio: 0.055; /* część boku ikony */
+  --noe-unavail-thickness-min: 2px;
+  --noe-unavail-thickness-max: 4px;
+  --noe-unavail-outline-width: 1px;
+
+  /* Geometria ikon */
+  --noe-glyph-row: 44px;
+  --noe-r-glyph: 3px; /* tło ikony przy 44 px */
+}

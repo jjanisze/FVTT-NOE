@@ -202,7 +202,15 @@
     }
   },
   "esmodules": ["scripts/main.mjs"],
-  "styles": ["styles/neuroshima.css", "styles/postoj.css", "styles/pojazdy.css"],
+  "styles": [
+    "styles/noe/tokens.generated.css",
+    "styles/noe/tokens.css",
+    "styles/noe/components.css",
+    "styles/noe/dnd5e-bridge.css",
+    "styles/neuroshima.css",
+    "styles/postoj.css",
+    "styles/pojazdy.css"
+  ],
   "languages": [
     {
       "lang": "en",

@@ -1,0 +1,19 @@
+{
+  "schema": "noe-style-allowlist/v1",
+  "about": "Wyjątki od zapadki stylu (PLAN_m9_style.md §8.2). Każdy wpis ma powód. `files` zwalnia cały plik (rysunek canvas/PIXI, OSD drona, panele debug i Poligonu) — wpis, który nie pasuje do żadnego pliku z licznikami, jest błędem. `coreSelectors` zwalnia nazwany korzeń ramy rdzenia (D13).",
+  "files": [],
+  "coreSelectors": [
+    {
+      "selector": "#pause",
+      "reason": "Ekran pauzy NOE (config/pause-screen.mjs) to własna grafika modułu w elemencie rdzenia; napis „CZAS STOP” nie ma polskich liter i zostaje w kroju rdzenia."
+    },
+    {
+      "selector": ".waypoint-label",
+      "reason": "Linijka ruchu M8 dopisuje resztę budżetu do etykiety punktu trasy rdzenia (templates/ruch/waypoint-label.hbs) — ID 28, konsument M9 bez zmiany zachowania."
+    },
+    {
+      "selector": "#hotbar",
+      "reason": "Pasek zdolności NOE (actors/ability-hotbar.mjs) rysuje swoje kafle w slotach paska makr rdzenia — ID 28; reguły dotyczą wyłącznie slotów z klasą neuro-ability."
+    }
+  ]
+}
