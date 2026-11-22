@@ -457,11 +457,14 @@ export function registerMagazines() {
  * wpiętego magazynka jako przedmiotu, edycja jego zawartości z karty przedmiotu, migracja.
  */
 async function reprojectAllMagazineState() {
+  const gm = game.users.activeGM;
   for (const actor of game.actors ?? []) {
     if (!inMagazineSystem(actor)) continue;
     for (const item of actor.items ?? []) {
       if (item.type !== "weapon") continue;
       if (!weaponEntry(item)?.mag) continue;
+      // A player's client must not write someone else's weapon (e2e 2026-11-22: a reload mid-combat).
+      if (gm ? !gm.isSelf : !item.isOwner) continue;
       await projectMagazineState(item);
     }
   }
