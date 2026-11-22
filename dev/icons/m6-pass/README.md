@@ -15,7 +15,7 @@ under the assets-only instruction. [Integration tasks](../FINAL_HANDOFF.md).
 `scripts/scenes/woda-efekty.mjs`. After the low-contrast first proposal, `vfx/water-surface.webp`
 reuses the original RGBA painting unchanged, with stronger contrast and motion in the shader.
 Default strength is 80%, default water muddy. Review the implementation in **Poligon → Arena →
-Karta prób → Grafika: Zanurzenie**. [Usage and validation](../../../HANDOFF_m6_zanurzenie.md).
+Karta prób → Grafika: Zanurzenie**. [Usage and validation](../../../archive/HANDOFF_m6_zanurzenie.md).
 The original review cards, files and saved decisions remain intact; glyph installation is separate.
 
 ## Review

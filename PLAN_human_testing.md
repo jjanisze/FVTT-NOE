@@ -8,7 +8,7 @@
 > Recommended answers to §10 adopted provisionally, GM may veto. Benchmark: **M3 (companions and drones) is the first
 > station** (§5.0). Campaign cleanup done 2026-10-11 (§8).
 > Code: `dev/poligon/` (README there), `fvtt poligon:*` (`dev/agent/lib/poligon.mjs`), e2e suite `poligon`.
-> Sibling of [PLAN_agentic_improvements.md](PLAN_agentic_improvements.md): layers 1–6 are the agents'
+> Sibling of [PLAN_agentic_improvements.md](archive/PLAN_agentic_improvements.md): layers 1–6 are the agents'
 > tools, this is the human's. It reuses that plan's CLI (`fvtt`), sandbox data-path machinery,
 > fixtures, guards and the closets' scene plumbing (`scripts/dev/test-scenes.mjs`).
 > Scope: this repo (`dev/poligon/`, `dev/agent/`, `scripts/dev/test-scenes.mjs`, `TESTING.md`), the

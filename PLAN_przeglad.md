@@ -207,7 +207,7 @@ zostaną zaimportowane.
 | Quench `produkcja` oczekiwał ikony SVG, a paczki dają wykończenie WEBP | poprawione |
 | `lang/pl.json`: `SizeHuge` „Ogromny”, `SizeGargantuan` „Gigantyczny” — NOE i tabele modułu mówią Wielki / Ogromny | kandydat (PLAN_beta §0, K5) |
 | Komentarz `tokens/aliases.json` („aliases win”) przeczy budowniczemu; martwe aliasy | kandydat (K5) |
-| Ścieżki osobiste w publicznym repo: `dev/icons/gen_status_numerals.mjs` (ścieżka profilu użytkownika), odnośnik do vaultu w `PLAN_toolkits.md` | kandydat (K5, B8) — historia zostaje, poprawiamy na przyszłość |
+| Ścieżki osobiste w publicznym repo: `dev/icons/gen_status_numerals.mjs` (ścieżka profilu użytkownika); odnośnik do vaultu w `PLAN_toolkits.md` | odnośnik usunięty przy archiwizacji 2026-11-22; skrypt — kandydat (K5, B8); historia zostaje, poprawiamy na przyszłość |
 | Brak dokumentu gracza o pojazdach poza pościgiem, wierzchowcach i mechanice pościgu | kandydat (K4, B7) |
 | Dwie uwagi Poligonu z 2026-10-12 naprawione, a otwarte | R2 |
 

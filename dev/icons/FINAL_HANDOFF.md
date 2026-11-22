@@ -133,7 +133,7 @@ renderer zachowuje jej grzbiety i zmienną alfę, z mocniejszym kontrastem i ruc
 Domyślnie siła 80% i mętna woda; Region „Woda” wybiera profil mętna / ścieki / czysta.
 Obrót pionka nie obraca wody. Podgląd: **Poligon → Arena → Karta prób → Grafika: Zanurzenie**.
 Ikony z B119–120 nadal korzystają z własnej kolejki ocen; ich zapisów nie zmieniano.
-[Obsługa i testy](../../HANDOFF_m6_zanurzenie.md).
+[Obsługa i testy](../../archive/HANDOFF_m6_zanurzenie.md).
 
 **Instrumenty i woda — kandydaci do oceny, 2026-10-29:** zgodnie z potwierdzonym zakresem
 przygotowano 12 instrumentów, dwa stany i nakładkę zanurzenia. Batches 119–120: 14 białych

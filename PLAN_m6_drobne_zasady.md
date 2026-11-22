@@ -455,7 +455,7 @@ Poligon: **Arena → Karta prób → Grafika: Zanurzenie**, sonda `grafika-zanur
 Galeria jest częścią generatora Areny i przy ponownym otwarciu zachowuje ręczne ustawienia;
 instalacja w istniejącym Poligonie dodaje ją bez resetu Areny.
 Pomiar renderowania ma charakter orientacyjny, nie jest gwarancją FPS.
-[Obsługa i dowody testów](HANDOFF_m6_zanurzenie.md).
+[Obsługa i dowody testów](archive/HANDOFF_m6_zanurzenie.md).
 
 **Korekta wizualna po ocenie MG, 2026-10-29:** pierwszy renderer był znacznie mniej czytelny
 od pierwotnej grafiki (czysta 2/5, brudna/ścieki 0,25/5). Odrzucono płaski, mało kontrastowy

@@ -4,8 +4,9 @@ For any agent harness (Claude Code, Copilot, Codex, …). This repo is the Found
 **Neuroshima: Ostatnia Era** (dnd5e 6.0 overrides) and it is **public** — see "Rules" before
 writing anything. Deep docs: [DEV_GUIDE.md](DEV_GUIDE.md) (dnd5e integration),
 [ARCHITECTURE.md](ARCHITECTURE.md), [TESTING.md](TESTING.md), [IMPLEMENTATION.md](IMPLEMENTATION.md)
-(status matrix + changelog), [RELEASING.md](RELEASING.md); topic plans `PLAN_*.md`; check for a
-`HANDOFF_*.md` before starting module work.
+(status matrix + changelog), [RELEASING.md](RELEASING.md); topic plans `PLAN_*.md` (finished ones in `archive/`);
+the road to beta is [PLAN_beta.md](PLAN_beta.md) §0, the GM's human review [PLAN_przeglad.md](PLAN_przeglad.md);
+check for a `HANDOFF_*.md` before starting module work.
 
 ## Start here
 

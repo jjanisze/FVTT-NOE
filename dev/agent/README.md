@@ -1,7 +1,7 @@
 # `fvtt` — the agent's handle on FoundryVTT
 
 Harness-neutral CLI (Claude Code, Copilot, Codex: anything that runs a shell). Design and decisions:
-[`PLAN_agentic_improvements.md`](../../PLAN_agentic_improvements.md) — §4 safety model, §8 decisions.
+[`PLAN_agentic_improvements.md`](../../archive/PLAN_agentic_improvements.md) — §4 safety model, §8 decisions.
 
 ```sh
 npm run fvtt -- doctor                      # start here: what is up, what is wrong, what to do

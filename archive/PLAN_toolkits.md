@@ -7,14 +7,14 @@ Replace the plain `loot` "Mały X" items (currently on GMT400 etc.) with properl
 integrated **dnd5e `tool` items** that:
 1. Expose a **generic use action** = native Test Cechy z narzędziem (tool check, no DC).
 2. Expose the per-toolkit **"Używanie" actions as Check activities** with the ST (DC)
-   taken from [Tabele/Narzedzia.md](../../../../../Git/Neuroshima/neuro5e/Neuro%205e/Tabele/Narzedzia.md).
+   taken from `Tabele/Narzedzia.md` in the campaign vault.
 3. Special-case **Mały medyk** = tiered healing (table) + 5-use resource + refill.
 
 Single source of truth for stats/ST/abilities: **`Tabele/Narzedzia.md`**.
 
 ## Current state (live world, verified via CDP)
 - `CONFIG.DND5E.tools` already defines 22 keys (`aptekarza`…`tatuazysty`) with a
-  default ability — see [scripts/config/tools.mjs](scripts/config/tools.mjs).
+  default ability — see [scripts/config/tools.mjs](../scripts/config/tools.mjs).
 - GMT400 (`Wke8ursIGVbKLMUF`, vehicle) carries toolkits as **`loot`** items with no
   mechanics: "Mały Rzeźnik", "Mały Stolarz", "Mały Rusznikarz", "Mały Kłusownik".
 - No `tool`-type items exist in the world yet.

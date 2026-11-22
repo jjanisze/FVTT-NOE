@@ -1,17 +1,11 @@
 # PLAN — Droga do wczesnej bety
 
-> Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
-> M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją; **v0.20.0
-> 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**; **v0.21.0 2026-10-31 — M4 (pojazdy,
-> pościgi, wierzchowce) i M6 wydane**; przegląd 2026-10-31 — §0.1; **2026-11-01 — M7 (automatyka zdolności poziomów
-> 1–3) zamknięte, w `master` bez wydania**). Etap bieżący: **późna alfa** — każdy rozdział RAW ma narzędzia w Foundry;
-> przed betą zostają ruch w turze ze skakaniem, style i dokumentacja (PM1 i PM7 odpadły 2026-11-02). Bramki spełnione: B3, B4, B5, B6 — bramka wydania v0.21.0 zielona na `5ac17bb` (e2e 44/44 w świecie
-> gołym i zalecanym, Quench 1385/1385, 0 ostrzeżeń zgodności z naszego kodu). Otwarte: B1 (Skakanie), B2 (zamrożenie
-> przy kandydacie), B7 (dokumentacja dla graczy pojazdów i pościgu), B8 (przegląd przy kandydacie) — §0.1.
-> **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12; weto M3 i M5: MG przeszedł je slice po
-> slice'ie przy wdrażaniu, formalne przejście sond odłożone; weto M4 (Garaż, Pościg, Stajnia) czeka.
-> Kolejność do bety — **§0**. **Cel (2026-10-18): beta i zwiastun przed świętami, w styczniu kampania testowa** —
-> jesteśmy przed harmonogramem (§0.1).
+> Status: **AKTYWNY — lista kandydata** (od 2026-11-22). Historia: plan z 2026-09-26 (v0.16.0); v0.18.0 — M0–M2;
+> v0.19.0 — M3 i M5; v0.20.0 — migracja na Foundry 14.369 i dnd5e 6.0.6; v0.21.0 — M4 i M6; **v0.22.0 (2026-11-22) —
+> M7, M8 i M9 w toku**. Etap: **późna alfa** — każdy rozdział RAW ma narzędzia w Foundry. Przed betą zostają M9
+> (E4–E6), dokumentacja i kandydat — **§0, lista K0–K9**. Przegląd ludzki całej treści:
+> [PLAN_przeglad.md](PLAN_przeglad.md) — biegnie obok i **nie blokuje bety** (MG, 2026-11-22). **Cel: kandydat na
+> początku grudnia, beta i zwiastun w połowie grudnia, w styczniu kampania testowa „Za garść gambli”.**
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem
@@ -24,7 +18,60 @@
 
 ---
 
-## 0. Kolejność do bety (od 2026-10-18; przegląd 2026-10-31)
+## 0. Do kandydata i bety (od 2026-11-22)
+
+**Decyzje MG 2026-11-22** (synteza przed betą; pełna lista — `PLAN_przeglad.md` §1): termin bez zmian — kandydat na
+początku grudnia, beta w połowie grudnia, **tniemy zakres, nie termin**; przegląd ludzki nie blokuje bety, kandydat
+publikuje listę pozycji nieprzejrzanych; **M9 w całości (33 rodziny UI) przed betą**, E4–E5 nie czekają na podpis E3,
+drobne decyzje — domyślne agenta (`PLAN_przeglad.md` §7); v0.22.0 wydane z całą bieżącą pracą; zakończone plany
+idą do `archive/`.
+
+**Stan 2026-11-22:** M8 zamknięte (E0–E9, macierz odbioru 42/46 automatycznie, 4 częściowo — reszta na Poligonie
+`ruch`), w `master`. M9: E0–E2 i wycinek E3 zrobione, E4–E6 przed nami. Quench 1663/1663 w czystej piaskownicy.
+Kroki 1–9 dawnej kolejności — §0.8 (historia).
+
+### Lista kandydata
+
+| # | Co | Kto | Bramka |
+|---|---|---|---|
+| K0 | **Wydanie v0.22.0** — `release:check --tag`, push `master` i tagu | agent | B3, B4, B6 |
+| K1 | **M9 E4** — karty i okna, ID 01–25 i 28 z [AUDIT_m9_ui.md](AUDIT_m9_ui.md): BN, pojazd, drużyna, przedmiot, edytory aktywności i efektów, rozwój, okna NOE, dialogi | agent | — |
+| K2 | **M9 E5** — czat, biblioteka, HUD (ID 26, 29–33) razem z PM13 (podsumowania kart dnd5e, `PLAN_migracja_dnd5e6.md` §9) | agent | — |
+| K3 | **M9 E6** — macierz `PLAN_m9_style.md` §10, `DESIGN.md`, zapadka = 0 dla CSS gracza, zrzuty przed/po, sondy Garderoby i Galerii; ocena MG w rejestrze przeglądu | agent → MG | — |
+| K4 | **Dokumentacja** — `docs/Pojazdy-i-wierzchowce.md` (pojazdy poza pościgiem, jazda w turze, awarie, naprawy, wraki, wierzchowce, mechanika pościgu; `docs/Poscigi.md` opisuje tylko planszę), nowy wygląd w `docs/` (wymuszony ciemny motyw — D12 M9), krótkie noty wydań dla graczy obok macierzy | agent | B7 |
+| K5 | **Spójność** — rozmiary w `lang/pl.json` wg NOE (`huge` Wielki, `grg` Ogromny); `tokens/aliases.json`: komentarz („aliases win” przeczy budowniczemu) i 14 martwych aliasów (każda istota ma już własny żeton); ścieżka osobista w `dev/icons/gen_status_numerals.mjs` (odnośnik do vaultu w `archive/PLAN_toolkits.md` usunięty 2026-11-22); 15 obrazów bez eksportu M9 (`PLAN_przeglad.md` §7) | agent | B7, B8 |
+| K6 | **Rejestr przeglądu** R0–R2 (`PLAN_przeglad.md` §6) — przed pierwszą sesją fali A | agent | — |
+| K7 | **Kandydat** — zamrożenie modeli (B2), pełna bramka (B3, B4, B6), przegląd B8, `docs/Stan-przegladu.md` (R3), `resync` kampanii za zgodą MG; numer wersji bety — MG | agent + MG | B1–B8 |
+| K8 | **Zwiastun** — sceny Poligonu pod ujęcia z konspektu (vault kampanii), zdjęcia po K3 | MG + agent | — |
+| K9 | **Styczeń** — świat „Za garść gambli”, HTTPS, hasło na każdym koncie, testerzy jako Gracz, przekierowany **tylko** port kampanii, `fvtt` w trybie `runtime` na czas sesji, jedna próbna sesja z jednym testerem (szczegóły — §0.8 krok 11) | MG + agent | — |
+
+Przegląd ludzki — fala A (`PLAN_przeglad.md` §4: tworzenie postaci, walka, handel i postój, wygląd gracza) — biegnie
+obok K1–K7 w budżecie MG poniżej 5 h tygodniowo.
+
+**Harmonogram (cele kalendarzowe):** K0 — do 2026-11-24; K1, K2, K4, K5, K6 równolegle — 2026-11-24 → 12-05; K3 i
+start K7 — 12-05 → 12-08; bramka kandydata, poprawki, beta i K8 — 12-08 → 12-15; zapas do świąt. **Gdy termin
+zagrożony** (propozycja agenta, do decyzji MG): najpierw okna tylko dla MG zostają na wspólnym moście dnd5e bez
+własnego układu (decyzja zapisana w macierzy M9), potem zwiastun przesuwa się za betę; data bety stoi.
+
+**Bramki (2026-11-22):**
+
+| # | Stan | Co zostaje |
+|---|:-:|---|
+| B1 | ✅ | Macierz bez ❌ poza §4 (Kolory Neuroshimy); Skakanie i wiersz M8 poprawione 2026-11-22 |
+| B2 | ⏳ | Modele M8 gotowe i zmigrowane (`game.neuroshima.migracje.m8`, 2026-11-16); M9 nie zmienia modeli (ścieżki obrazów nowych przedmiotów); zamrożenie — K7 |
+| B3 | ⏳ | K0, potem K7 |
+| B4 | ⏳ | Quench 1663/1663 w czystej piaskownicy (2026-11-22); pełna bramka — K0, K7 |
+| B5 | ✅ | Plakietka na każdej zdolności; pokrycie: klasowe 103/133 (48 pełnych), Sztuczki 53/53 (34), Pochodzenia 35/36 (21) |
+| B6 | ⏳ | K0, K7 |
+| B7 | 🟡 | K4; `docs/FAQ.md` i „Zmiany względem dnd5e” poprawione 2026-11-22 |
+| B8 | ⏳ | K5, K7 |
+
+Przegląd ludzki nie jest bramką (P-D2); bramką jest tylko publikacja listy nieprzejrzanych przy kandydacie (R3).
+
+### 0.8 Historia: kolejność do bety (2026-10-18 → 2026-11-16)
+
+Kroki 1–9 niżej są zrobione albo przeszły do listy kandydata: 1–5 wydane w v0.19.1–v0.21.0, 6 odpadł (D17 w
+`PLAN_tt.md`), 7 (M8) i 8 (M7 z 8a–8c) wydane w v0.22.0, 9 (M9) — K1–K3, 10 — K7, 11 — K9.
 
 **Cel (MG, 2026-10-18): beta i zwiastun przed świętami; w styczniu krótka kampania testowa „Za garść gambli”**
 (scenariusz wprowadzający NOE) — testy przy stole i materiały promocyjne. Nazwa wydania jest drugorzędna; bramki
@@ -164,7 +211,7 @@ plikowi — `dev/packs/build-packs.mjs`, `tokenArtFor`); etykieta rozmiaru `huge
 `tokens/aliases.json` — licencja na odwołanie pozwala, więc to nie blokuje bety; własne żetony, jeśli MG chce
 kompletu do zwiastuna.
 
-### 0.1 Przegląd 2026-10-31 — sesje od 2026-10-18, bramki, harmonogram (uzupełniony 2026-11-02 po M7)
+### 0.9 Historia: przegląd 2026-10-31 — sesje od 2026-10-18, bramki, harmonogram (uzupełniony 2026-11-02 po M7)
 
 **Sesje agentów od poprzedniego przeglądu** (Claude — kod i wydania; Codex — grafika, audyty i wybrane poprawki;
 Copilot — projekty planów). Dwa wydania, trzy kamienie (migracja, M4, M6), ok. 200 commitów; Quench 1211 → 1385,
@@ -567,7 +614,10 @@ poprawione — w drużynie kampanii nie ma już żadnej zdolności „brak”; k
   krwi, Jest zajebiście, Plug & Play (2026-11-02; Sztuczki 53/53 — 29 pełnych)
 - Zdolności częściowe z powodu ekonomii akcji i ruchu — do zakresu M8 (niżej)
 
-### M8 — Ruch, ekonomia akcji i pasek walki — handoff do implementacji
+### M8 — Ruch, ekonomia akcji i pasek walki — ZROBIONE 2026-11-16, wydane w v0.22.0
+
+> *2026-11-22:* E0–E9 w `master`, wydane w v0.22.0. Zostaje ocena MG na Poligonie `ruch` (39 prób, w tym
+> `szablon-paska`) — w rejestrze przeglądu (`PLAN_przeglad.md`, fala A).
 
 > **Aktualny plan: [PLAN_m8_ruch_i_ekonomia_akcji.md](PLAN_m8_ruch_i_ekonomia_akcji.md), 2026-11-15.**
 > Pełny zakres zatwierdzony przez MG; nie oznacza wdrożenia. Dowody i historia korekt:
@@ -607,7 +657,7 @@ są dowodem wdrożenia M8. Wcześniejszy szacunek movement-only nie wycenia peł
 [macierz odbioru](PLAN_m8_ruch_i_ekonomia_akcji.md#acceptance) mają dowody, każda pozycja inwentarza ma automatykę
 lub używalny fallback, migracje i generatory są poprawne, a dokumentacja i Poligon opisują dostarczony rezultat.
 
-### M9 — Przebudowa wizualna NOE — projekt zatwierdzony, implementacja przed nami
+### M9 — Przebudowa wizualna NOE — w toku (E0–E2 i wycinek E3 zrobione; E4–E6 — §0 K1–K3)
 
 > **Plan: [PLAN_m9_style.md](PLAN_m9_style.md), 2026-11-15 — wybory proposal 07 zamknięte przez MG, bez wdrożenia.** Kierunek MG: użytkowy
 > charakter JA2 ze współczesnymi affordancjami, grafit/metal blisko obecnej karty. Przed betą własna oprawa NOE:
@@ -636,8 +686,8 @@ przegród z encji CDDA, M6 P5); tu zostaje krótka lista bez projektu.
 | Pozycja | Dlaczego później |
 |---|---|
 | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem. Brać wersję z października: krwawienie tamuje Pomaganie + INT (Medycyna) ST 10 |
-| Pełna automatyka reszty — po M7 bez automatyki zostają 33 zdolności klasowe, 12 Sztuczek i 2 zdolności Pochodzeń; częściowe do pełnych; 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
-| Własne żetony sześciu istot Bestiariusza (dziś pożyczone z dnd5e przez `tokens/aliases.json`; 46 ma własne od 2026-10-31), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
+| Pełna automatyka reszty — bez automatyki zostaje 30 zdolności klasowych i 1 zdolność Pochodzenia; częściowe do pełnych (55 klasowych, 19 Sztuczek, 14 Pochodzeń); 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
+| Kalibracja skali żetonów, pozostałe ikony poza M9 | Grafika, nie mechanika |
 | Screen shake DS/MS, iskry i krew trafienia | Oprawa |
 | Zorganizowane grupy, Front | Treść świata, brak mechaniki |
 | Tłumaczenie EN | Brak oficjalnego wydania EN |
