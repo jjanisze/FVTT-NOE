@@ -17,6 +17,7 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 
 | Command | What it does |
 |---|---|
+| `hub [--registry=<private JSON file>] [--stop]` | independent local project desk: campaign/Poligon access, existing graphics reviewer, galleries, saved reports and explicit doctor/findings actions. Starts/reuses one local service and returns its runtime URL; `--stop` closes only that hub when idle. Private registry stays outside the repo. [Details](../hub/README.md) |
 | `doctor [--since=<min>]` | config, mode, freeze, the Foundry version and each data path's installed dnd5e and module against module.json's requirements, secret (checked against `Config/admin.txt` offline), every server, package locks, held LevelDBs (holders named only when a server is down and something still holds one; idle foundry-mcp processes are just counted), mutex, Chrome + Foundry tabs — **a user logged in from two tabs is a problem** (every active-GM automation runs twice), `python`, dirty files by folder + the newest ten |
 | `status` | one profile: `/api/status`, server processes, held LevelDBs, mutex |
 | `start [--world=<id>] [--headless]` | desktop app (D3) behind the LevelDB interlock; waits for the world |

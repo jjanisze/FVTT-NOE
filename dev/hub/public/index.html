@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Your local Neuroshima project desk: campaign, Poligon, artwork, diagnostics and test evidence.">
+  <title>Neuroshima · Project desk</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workspace</a>
+  <aside class="rail" aria-label="Project navigation">
+    <a href="#main" class="brand" aria-label="Neuroshima project desk">N<span>26</span></a>
+    <nav><a href="#main" aria-label="Workspace"><span aria-hidden="true">⌂</span><small>DESK</small></a><a href="#galleries" aria-label="Galleries"><span aria-hidden="true">▧</span><small>ART</small></a><a href="#evidence" aria-label="Test evidence"><span aria-hidden="true">≡</span><small>CHECKS</small></a><a href="#diagnostics" aria-label="Diagnostics"><span aria-hidden="true">⌁</span><small>TOOLS</small></a></nav>
+    <span class="rail-footer">LOCAL<br>WORKSPACE</span>
+  </aside>
+  <main id="main">
+    <header class="page-header">
+      <div><p class="eyebrow">NEUROSHIMA <span>/</span> PROJECT WORKSPACE</p><h1>Project desk<span class="accent">.</span></h1><p id="subtitle" class="subtitle">Campaign, workshop and development. Everything within reach.</p></div>
+      <div class="header-meta"><span id="today"></span><span id="mode" class="badge">Connecting</span><small id="last-update">Reading local services…</small></div>
+    </header>
+    <div id="notice" role="status" aria-live="polite" hidden></div>
+    <section class="launch-section" aria-labelledby="launch-title">
+      <div class="section-heading"><h2 id="launch-title">Pick up where you left off</h2><span class="section-note">WORLD & WORKSHOP</span></div>
+      <div class="launch-grid">
+        <article class="launch-card campaign"><div class="card-top"><span class="card-number">01 / PLAY</span><span id="campaign-state" class="badge">Checking</span></div><h3>Campaign</h3><p id="campaign-description">Your live campaign world.</p><div class="card-bottom" id="campaign-controls"></div></article>
+        <article class="launch-card poligon"><div class="card-top"><span class="card-number">02 / EXPLORE</span><span id="poligon-state" class="badge">Checking</span></div><h3>Poligon</h3><p id="poligon-description">Stations, personas and room to experiment.</p><div class="card-bottom"><label class="sr-only" for="seat">Poligon seat</label><select id="seat"><option>Gamemaster</option><option>Gracz 1</option><option>Gracz 2</option><option>Gracz 3</option><option>Gracz 4</option><option>Gracz 5</option></select><button id="poligon-open" data-action="poligon-open">Open seat <span aria-hidden="true">↗</span></button></div></article>
+        <article class="launch-card artwork"><div class="card-top"><span class="card-number">03 / BROWSE</span><span class="card-symbol" aria-hidden="true">▦</span></div><h3>Icon library</h3><p>Find an icon. Inspect its style, variants and notes.</p><div class="card-bottom"><button data-action="graphics-start" data-target="browser.html">Browse icons <span aria-hidden="true">↗</span></button></div></article>
+        <article class="launch-card artwork"><div class="card-top"><span class="card-number">04 / REVIEW</span><span class="card-symbol" aria-hidden="true">◈</span></div><h3>Graphics workshop</h3><p>Artwork, portraits, tokens and the review queue.</p><div class="card-bottom"><button data-action="graphics-start" data-target="">Open workshop <span aria-hidden="true">↗</span></button></div></article>
+      </div>
+      <div id="service-strip" class="service-strip" aria-label="Development service status"></div>
+    </section>
+    <div class="workspace-grid">
+      <section id="galleries" class="panel" aria-labelledby="gallery-title">
+        <div class="section-heading"><div><p class="eyebrow">THE WORKBENCH</p><h2 id="gallery-title">Galleries & references</h2></div><span id="gallery-count" class="counter"></span></div>
+        <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search galleries and references</span><input id="search" type="search" placeholder="Find a preview, gallery or guide…" autocomplete="off"></label>
+        <div id="destination-list" class="destination-list"><p class="empty">Loading your workspace…</p></div>
+      </section>
+      <section id="evidence" class="panel" aria-labelledby="evidence-title">
+        <div class="section-heading"><div><p class="eyebrow">RECORDED EVIDENCE</p><h2 id="evidence-title">Recent checks</h2></div><label class="sr-only" for="report-filter">Report type</label><select id="report-filter"><option value="recent">Latest</option><option value="e2e">E2E history</option><option value="release">Release history</option><option value="findings">Poligon findings</option></select></div>
+        <p class="section-description">Results belong to the recorded run and its scope.</p><div id="report-list"><p class="empty">Looking for saved reports…</p></div>
+        <div class="findings-action"><span>Notes from the testing ground</span><button class="text-button" data-action="poligon-findings">Export open findings <span aria-hidden="true">↗</span></button></div>
+      </section>
+    </div>
+    <section id="diagnostics" class="panel diagnostics" aria-labelledby="doctor-title"><div class="section-heading"><div><p class="eyebrow">LOCAL TOOLS</p><h2 id="doctor-title">FVTT doctor</h2></div><button class="secondary" data-action="doctor">Refresh diagnostics <span aria-hidden="true">↻</span></button></div><div id="doctor-content"><p class="empty">Check Foundry, Chrome, installed versions and anything that needs attention.</p></div></section>
+    <section class="panel operations" aria-labelledby="operations-title"><div class="section-heading"><h2 id="operations-title">Operations</h2><span class="section-note">RECENT ACTIVITY</span></div><div id="jobs"><p class="empty">No operations from this desk yet.</p></div></section>
+    <footer><span>NEUROSHIMA <b> / </b> PROJECT DESK</span><span id="footer-state">Local files. Existing tools. Your workspace.</span></footer>
+  </main>
+  <dialog id="detail"><div class="dialog-header"><p class="eyebrow" id="detail-kind">EVIDENCE</p><button id="close-detail" class="icon-button" aria-label="Close details">×</button></div><div id="detail-content"></div></dialog>
+</body>
+</html>

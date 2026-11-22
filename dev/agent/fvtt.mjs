@@ -1122,6 +1122,13 @@ command("poligon:findings", "Findings (Uwagi) from the Poligon journal → JSON;
   }
 });
 
+command("hub", "Open/reuse the independent local project hub. [--registry=<private JSON file>] [--stop] (stops only the hub, never Foundry or Chrome)", async opts => {
+  const { ensureHub } = await import("../hub/runtime.mjs");
+  let registryFile = typeof opts.registry === "string" ? opts.registry : undefined;
+  if (!registryFile) { try { registryFile = loadConfig().hub?.registry; } catch { /* The local desk can still show saved evidence without a configured Foundry. */ } }
+  return ensureHub({ moduleRoot: MODULE_ROOT, registryFile, stop: Boolean(opts.stop) });
+});
+
 command("help", "This list.", async () => ({ ok: true, usage: "npm run fvtt -- <command> [--profile=campaign|sandbox|release|poligon] [--key=value]", commands: HELP }));
 
 /* ------------------------------------------------------------------------------------ */

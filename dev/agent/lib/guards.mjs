@@ -13,7 +13,7 @@ import { refuse } from "./output.mjs";
  *  - lifecycle: stops/starts servers, rewrites packs, creates/deletes worlds
  */
 export const COMMAND_CLASS = {
-  help: "read", init: "read", status: "read", doctor: "read", logs: "read", mode: "read", users: "read", "wait-ready": "read",
+  help: "read", hub: "read", init: "read", status: "read", doctor: "read", logs: "read", mode: "read", users: "read", "wait-ready": "read",
   "world:list": "read",
   login: "login",
   // eval runs arbitrary code in a live client — it can write, so it is testing, not read.
