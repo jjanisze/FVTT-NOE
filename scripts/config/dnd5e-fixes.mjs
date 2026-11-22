@@ -16,3 +16,20 @@
  */
 
 globalThis.Infinite ??= Infinity;
+
+/*
+ * ## Inventory columns toggled inside the ResizeObserver callback (dnd5e 6.0.6)
+ *
+ * `InventoryElement#_onResize` (`module/applications/components/inventory.mjs:662`) toggles `.hidden-width` on
+ * columns from inside the observer callback. On a narrow sheet that re-wraps the rows, the list's height changes in the
+ * same frame and the browser raises "ResizeObserver loop completed with undelivered notifications" as a window error
+ * on every character sheet render (Quench fails the running test on it). Toggling in the next frame gives the same
+ * columns without the error.
+ */
+const InventoryElement = customElements.get("dnd5e-inventory");
+if (InventoryElement) {
+  const onResize = InventoryElement.prototype._onResize;
+  InventoryElement.prototype._onResize = function(entries) {
+    (this.ownerDocument?.defaultView ?? window).requestAnimationFrame(() => onResize.call(this, entries));
+  };
+}

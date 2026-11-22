@@ -753,7 +753,7 @@ export function registerProdukcjaTests(quench) {
       it("ikony wierszy biorą się z paczek, nie z worka zastępczego", async function () {
         this.timeout(10000);
         await przygotujIkony();
-        expect(ikonaPrzepisu(przepis("std/chemia:papieros"))).to.include("papieros.svg");
+        expect(ikonaPrzepisu(przepis("std/chemia:papieros"))).to.match(/\/papieros\.(svg|webp)$/);
         expect(ikonaPrzepisu(przepis("std/grenade:grenade-molotov"))).to.not.equal("icons/svg/item-bag.svg");
       });
     });
