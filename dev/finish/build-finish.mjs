@@ -21,7 +21,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { MODULE_ROOT, abs, loadManifest, loadProfile, recipeFor, rel, sameText, sha256, sha256File, MANIFEST_PATH } from "./lib/profile.mjs";
+import { MODULE_ROOT, abs, loadManifest, loadProfile, recipeFor, rel, sameFileHash, sameText, sha256, sha256File, MANIFEST_PATH } from "./lib/profile.mjs";
 import * as tokens from "./tokens.mjs";
 import * as signs from "./signs.mjs";
 import { buildPreview } from "./preview.mjs";
@@ -138,7 +138,7 @@ function rasterJobs() {
       if (IDS && !IDS.includes(entry.id)) continue;
       const job = { id: entry.id, kind: "banner", source: entry.source, output: entry.outputs[0].path, recipe: entry.banner };
       // Lossy output: re-encode only when the master or the recipe moved since the recorded export.
-      if (entry.recipeSha256 === recipeSha(job) && entry.sourceSha256 === sha256File(abs(entry.source))) job.currentPixels = entry.outputPixelSha256;
+      if (entry.recipeSha256 === recipeSha(job) && sameFileHash(abs(entry.source), entry.sourceSha256)) job.currentPixels = entry.outputPixelSha256;
       jobs.push(job);
     }
   }
@@ -164,13 +164,13 @@ function raster() {
   const jobs = rasterJobs();
   if (!jobs.length) return [];
   // Approval binds the source, profile and recipe before any output can be replaced.
-  const profileHash = sha256File(abs("dev/icons/finish/style-profile.json"));
+  const profileFile = abs("dev/icons/finish/style-profile.json");
   for (const job of jobs.filter(j => j.kind === "icon")) {
     const entry = manifest.entries.find(e => e.id === job.id);
-    if (sha256File(abs(job.source)) !== entry.sourceSha256) problems.push(`${job.id}: stale source hash`);
+    if (!sameFileHash(abs(job.source), entry.sourceSha256)) problems.push(`${job.id}: stale source hash`);
     if (entry.review?.status === "approved") {
       const review = entry.review;
-      if (review.profileSha256 !== profileHash || review.sourceSha256 !== entry.sourceSha256 || review.recipeSha256 !== recipeSha(job) || !review.outputPixelSha256) problems.push(`${job.id}: stale finish approval`);
+      if (!sameFileHash(profileFile, review.profileSha256) || review.sourceSha256 !== entry.sourceSha256 || review.recipeSha256 !== recipeSha(job) || !review.outputPixelSha256) problems.push(`${job.id}: stale finish approval`);
       job.approvedPixels = review.outputPixelSha256;
     }
   }

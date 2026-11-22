@@ -16,6 +16,18 @@ export const rel = p => path.relative(MODULE_ROOT, p).replaceAll("\\", "/");
 export const abs = p => path.join(MODULE_ROOT, p);
 export const sha256 = data => createHash("sha256").update(data).digest("hex");
 export const sha256File = file => sha256(fs.readFileSync(file));
+const TEXT_FILE = /\.(svg|json|css|txt|md)$/i;
+/**
+ * A recorded hash still holds when a Windows checkout only changed a text file's line endings: receipts were taken on
+ * whichever bytes the file had then (tool-written LF or checked-out CRLF), and they stay immutable.
+ */
+export function sameFileHash(file, expected) {
+  const data = fs.readFileSync(file);
+  if (sha256(data) === expected) return true;
+  if (!TEXT_FILE.test(file)) return false;
+  const lf = data.toString("utf8").replaceAll("\r\n", "\n");
+  return sha256(lf) === expected || sha256(lf.replaceAll("\n", "\r\n")) === expected;
+}
 /** Generators write LF; a Windows checkout may hold CRLF — compare text, never bytes. */
 export const sameText = (a, b) => a.replaceAll("\r\n", "\n") === b.replaceAll("\r\n", "\n");
 
